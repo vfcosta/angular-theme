@@ -56,7 +56,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe(cssFilter.restore)
     .pipe(assets.restore())
     .pipe($.useref())
-    .pipe($.revReplace())
+    .pipe($.revReplace({prefix: "/designs/themes/angular/dist/"}))
     .pipe(htmlFilter)
     .pipe($.minifyHtml({
       empty: true,
