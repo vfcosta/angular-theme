@@ -22,7 +22,7 @@
     return directive;
 
     /** @ngInject */
-    function LinkListBlockController(moment) {
+    function LinkListBlockController() {
       var vm = this;
       vm.links = vm.block.settings.links;
     }

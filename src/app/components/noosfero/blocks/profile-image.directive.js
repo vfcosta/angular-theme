@@ -22,7 +22,7 @@
     return directive;
 
     /** @ngInject */
-    function ProfileImageBlockController(moment) {
+    function ProfileImageBlockController() {
       var vm = this;
       vm.profile = vm.owner;
     }
