@@ -11,7 +11,8 @@
       restrict: 'E',
       templateUrl: 'app/components/noosfero/blocks/link-list.html',
       scope: {
-          block: '='
+          block: '=',
+          owner: '='
       },
       controller: LinkListBlockController,
       controllerAs: 'vm',

@@ -10,11 +10,12 @@
     var directive = {
       restrict: 'E',
       scope: {
-          block: '='
+          block: '=',
+          owner: '='
       },
       link: function(scope, element, attrs) {
         var blockName = scope.block.type.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-        element.replaceWith($compile('<noosfero-'+blockName+' block="block"></noosfero-'+blockName+'>')(scope));
+        element.replaceWith($compile('<noosfero-'+blockName+' block="block" owner="owner"></noosfero-'+blockName+'>')(scope));
       }
     };
     return directive;

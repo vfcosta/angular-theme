@@ -11,7 +11,8 @@
       restrict: 'E',
       templateUrl: 'app/components/noosfero/blocks/profile-image.html',
       scope: {
-          block: '='
+          block: '=',
+          owner: '='
       },
       controller: ProfileImageBlockController,
       controllerAs: 'vm',
@@ -23,7 +24,7 @@
     /** @ngInject */
     function ProfileImageBlockController(moment) {
       var vm = this;
-      vm.links = vm.block.settings.links;
+      vm.profile = vm.owner;
     }
   }
 

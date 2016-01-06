@@ -14,7 +14,7 @@
     function activate() {
       noosfero.communities().get({id: 67, private_token: '1b00325e5f769a0c38550bd35b3f1d64'}).$promise.then(function (profile) {
         $log.log(profile);
-        vm.boxes = profile.community.boxes;
+        vm.owner = profile.community;
       });
     }
   }

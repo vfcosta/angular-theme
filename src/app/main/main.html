@@ -5,7 +5,7 @@
   </div>
 
   <div class="row">
-    <ng-include ng-repeat="box in main.boxes | orderBy: 'position'" src="'app/views/profile/box.html'"></ng-include>
+    <ng-include ng-repeat="box in main.owner.boxes | orderBy: 'position'" src="'app/views/profile/box.html'"></ng-include>
   </div>
 
 </div>
