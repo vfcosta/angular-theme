@@ -17,5 +17,10 @@
         vm.owner = profile.community;
       });
     }
+
+    vm.boxesOrder = function(box) {
+      if(box.position==2) return 0;
+      return box.position;
+    }
   }
 })();
