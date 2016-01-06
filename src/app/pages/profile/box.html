@@ -1,0 +1,4 @@
+<div class="col-sm-6 col-md-4" ng-repeat="box in main.boxes | orderBy: 'position'">
+  Box {{box.id}}->{{box.position}}
+  <ng-include ng-repeat="block in box.blocks | orderBy: 'position'" src="'app/views/profile/block.html'"></ng-include>
+</div>

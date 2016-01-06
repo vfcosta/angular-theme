@@ -6,16 +6,16 @@
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout, noosfero, toastr) {
+  function MainController($timeout, noosfero, $log) {
     var vm = this;
     vm.boxes = [];
     activate();
 
     function activate() {
-      var profile = noosfero.communities().get({id: 67, private_token: '1b00325e5f769a0c38550bd35b3f1d64'}, function () {
-        console.log(profile);
+      noosfero.communities().get({id: 67, private_token: '1b00325e5f769a0c38550bd35b3f1d64'}).$promise.then(function (profile) {
+        $log.log(profile);
+        vm.boxes = profile.community.boxes;
       });
-      // vm.boxes = noosfero.getBoxes();
     }
   }
 })();
