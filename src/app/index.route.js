@@ -7,7 +7,7 @@
 
   function routeConfig($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/:profile', {
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
