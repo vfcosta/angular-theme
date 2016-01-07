@@ -3,11 +3,11 @@
 
   angular
     .module('angular')
-    .controller('MainController', MainController);
+    .controller('ProfileController', ProfileController);
 
 
   /** @ngInject */
-  function MainController($timeout, noosfero, $log, $routeParams) {
+  function ProfileController($timeout, noosfero, $log, $routeParams) {
     var vm = this;
     vm.boxes = [];
     activate();

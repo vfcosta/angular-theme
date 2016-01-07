@@ -8,9 +8,9 @@
   function routeConfig($routeProvider) {
     $routeProvider
       .when('/:profile', {
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        templateUrl: 'app/profile/profile.html',
+        controller: 'ProfileController',
+        controllerAs: 'vm'
       })
       .when('/profile/:profile', {
         redirectTo: '/:profile'
