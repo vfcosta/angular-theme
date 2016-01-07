@@ -1,1 +1,5 @@
-../dist/index.html
+<% if params[:angular_theme_old] || request.fullpath.start_with?('/myprofile') %>
+  <%= from_theme_include("angular", "application-ng") %>
+<% else %>
+  <%= from_theme_include("angular", "index") %>
+<% end %>
