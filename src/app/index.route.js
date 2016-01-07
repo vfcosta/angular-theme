@@ -12,6 +12,11 @@
         controller: 'ProfileController',
         controllerAs: 'vm'
       })
+      .when('/:profile/:page*', {
+        templateUrl: 'app/content-viewer/page.html',
+        controller: 'ContentViewerController',
+        controllerAs: 'vm'
+      })
       .when('/profile/:profile', {
         redirectTo: '/:profile'
       })
