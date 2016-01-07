@@ -3,18 +3,18 @@
 
   angular
     .module('angular')
-    .directive('noosferoLinkListBlock', noosferoLinkListBlock);
+    .directive('noosferoProfileImageBlock', noosferoProfileImageBlock);
 
   /** @ngInject */
-  function noosferoLinkListBlock() {
+  function noosferoProfileImageBlock() {
     var directive = {
       restrict: 'E',
-      templateUrl: 'app/components/noosfero/blocks/link-list.html',
+      templateUrl: 'app/components/noosfero-blocks/profile-image/profile-image.html',
       scope: {
           block: '=',
           owner: '='
       },
-      controller: LinkListBlockController,
+      controller: ProfileImageBlockController,
       controllerAs: 'vm',
       bindToController: true
     };
@@ -22,9 +22,9 @@
     return directive;
 
     /** @ngInject */
-    function LinkListBlockController() {
+    function ProfileImageBlockController() {
       var vm = this;
-      vm.links = vm.block.settings.links;
+      vm.profile = vm.owner;
     }
   }
 
