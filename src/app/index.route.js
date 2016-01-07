@@ -12,6 +12,9 @@
         controller: 'MainController',
         controllerAs: 'main'
       })
+      .when('/profile/:profile', {
+        redirectTo: '/:profile'
+      })
       .otherwise({
         redirectTo: '/'
       });
