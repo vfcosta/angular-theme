@@ -7,7 +7,7 @@
 
 
   /** @ngInject */
-  function ProfileController(noosfero, $log, $stateParams, $state) {
+  function ProfileController(noosfero, $log, $stateParams) {
     var vm = this;
     vm.boxes = [];
     activate();

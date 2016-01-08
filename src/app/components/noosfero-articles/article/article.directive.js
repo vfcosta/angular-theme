@@ -29,8 +29,7 @@
     return directive;
 
     /** @ngInject */
-    function ArticleController($injector, $compile, $scope) {
-      var vm = this;
+    function ArticleController() {
     }
   }
 

@@ -23,7 +23,6 @@
 
     /** @ngInject */
     function BlogController() {
-      var vm = this;
     }
   }
 
