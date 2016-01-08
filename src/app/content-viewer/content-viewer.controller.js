@@ -14,8 +14,7 @@
 
     function activate() {
       noosfero.communities.one($scope.vm.owner.id).one('articles').get({path: $stateParams.page}).then(function(articles) {
-        $log.log(articles);
-        vm.content = articles.article;
+        vm.article = articles.article;
       });
     }
   }
