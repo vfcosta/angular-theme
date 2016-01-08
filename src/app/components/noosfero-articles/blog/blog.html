@@ -4,7 +4,9 @@
 
 <div>
   <div ng-repeat="child in vm.article.children">
-    <a ng-href="/{{vm.profile.identifier}}/{{child.path}}"><h4 ng-bind="child.title"></h4></a>
-    <div ng-bind-html="child.body | limitTo: 500"></div>
+    <div class="page-header">
+      <a ng-href="/{{vm.profile.identifier}}/{{child.path}}"><h4 ng-bind="child.title"></h4></a>
+      <div ng-bind-html="child.body | limitTo: 500"></div>
+    </div>
   </div>
 </div>
