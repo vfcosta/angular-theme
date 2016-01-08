@@ -6,7 +6,7 @@
     .directive('noosferoMainBlock', noosferoMainBlock);
 
   /** @ngInject */
-  function noosferoMainBlock($log, $stateParams, noosfero) {
+  function noosferoMainBlock() {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/noosfero-blocks/main-block/main-block.html',
@@ -23,7 +23,6 @@
 
     /** @ngInject */
     function MainBlockController() {
-      var vm = this;
     }
   }
 
