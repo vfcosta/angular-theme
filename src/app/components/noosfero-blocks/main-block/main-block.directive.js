@@ -6,7 +6,7 @@
     .directive('noosferoMainBlock', noosferoMainBlock);
 
   /** @ngInject */
-  function noosferoMainBlock($log, $routeParams, noosfero) {
+  function noosferoMainBlock($log, $stateParams, noosfero) {
     var directive = {
       restrict: 'E',
       templateUrl: 'app/components/noosfero-blocks/main-block/main-block.html',
@@ -24,8 +24,8 @@
     /** @ngInject */
     function MainBlockController() {
       var vm = this;
-      $log.log($routeParams.page);
-      noosfero.articles().get({path: $routeParams.page, private_token: '1b00325e5f769a0c38550bd35b3f1d64'}).$promise.then(function (article) {
+      $log.log($stateParams.page);
+      noosfero.articles().get({path: $stateParams.page, private_token: '1b00325e5f769a0c38550bd35b3f1d64'}).$promise.then(function (article) {
         //FIXME
         vm.article = article.articles[0];
         $log.log(vm.article);
