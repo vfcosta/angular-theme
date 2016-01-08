@@ -6,40 +6,23 @@
     .config(routeConfig);
 
   function routeConfig($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('/profile/:profile', '/:profile');
+
     $stateProvider
       .state('profile', {
         url: '/:profile',
         templateUrl: 'app/profile/profile.html',
         controller: 'ProfileController',
         controllerAs: 'vm'
-      });
-
-    $urlRouterProvider.otherwise('/');
-
-    /*
-    var profileController = {
-      templateUrl: 'app/profile/profile.html',
-      controller: 'ProfileController',
-      controllerAs: 'vm'
-    };
-    $routeProvider
-      .when('/profile/:profile', {
-        redirectTo: '/:profile'
       })
-      .when('/:profile', {
-        templateUrl: 'app/profile/profile.html',
-        controller: 'ProfileController',
-        controllerAs: 'vm'
-      })
-      .when('/:profile/:page*', {
+      .state('profile.page', {
+        url: '/{page:.*}',
         templateUrl: 'app/content-viewer/page.html',
         controller: 'ContentViewerController',
         controllerAs: 'vm'
-      })
-      .otherwise({
-        redirectTo: '/'
       });
-      */
+
+    $urlRouterProvider.otherwise('/');
   }
 
 })();
