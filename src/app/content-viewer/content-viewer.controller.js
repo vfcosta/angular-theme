@@ -7,13 +7,14 @@
 
 
   /** @ngInject */
-  function ContentViewerController(noosfero, $log, $stateParams, Restangular, $state) {
+  function ContentViewerController(noosfero, $log, $stateParams, $state) {
     var vm = this;
     vm.article = null;
     activate();
 
     function activate() {
-      Restangular.one('communities', $state.current.data.profile.id).one('articles').get({path: $stateParams.page}).then(function(articles) {
+      console.log($state.current.data);
+      noosfero.communities.one($state.current.data.profile.id).one('articles').get({path: $stateParams.page}).then(function(articles) {
         $log.log(articles);
         vm.content = articles.article;
       });

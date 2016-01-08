@@ -1,16 +1,9 @@
 (function() {
   'use strict';
   
-  angular.module('angular').service('noosfero', noosfero);
-  
-  function noosfero() {
-    this.communities = communities;
-    this.articles = articles;
-    function communities() {
-      // return $resource('/api/v1/communities/:id');
+  angular.module('angular').factory('noosfero', function(Restangular) {
+    return {
+      communities: Restangular.service('communities')
     }
-    function articles() {
-      // return $resource('/api/v1/articles/:id');
-    }
-  }
+  });
 })();
