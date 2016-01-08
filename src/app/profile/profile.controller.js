@@ -7,15 +7,16 @@
 
 
   /** @ngInject */
-  function ProfileController(noosfero, $log, $stateParams) {
+  function ProfileController(noosfero, $log, $stateParams, $state, Restangular) {
     var vm = this;
     vm.boxes = [];
     activate();
 
     function activate() {
-      noosfero.communities().get({identifier: $stateParams.profile, private_token: '1b00325e5f769a0c38550bd35b3f1d64'}).$promise.then(function (profile) {
-        $log.log(profile);
-        vm.owner = profile.communities[0];
+      Restangular.one('communities').get({private_token: '1b00325e5f769a0c38550bd35b3f1d64', identifier: $stateParams.profile}).then(function(communities) {
+        $log.log(communities);
+        vm.owner = communities.communities[0];
+        $state.current.data.profile = vm.owner;
       });
     }
 

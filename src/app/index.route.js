@@ -13,7 +13,10 @@
         url: '/:profile',
         templateUrl: 'app/profile/profile.html',
         controller: 'ProfileController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        data: {
+          profile: null
+        }
       })
       .state('profile.page', {
         url: '/{page:.*}',
