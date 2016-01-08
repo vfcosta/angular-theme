@@ -12,7 +12,7 @@
       templateUrl: 'app/components/noosfero-articles/blog/blog.html',
       scope: {
           article: '=',
-          owner: '='
+          profile: '='
       },
       controller: BlogController,
       controllerAs: 'vm',
