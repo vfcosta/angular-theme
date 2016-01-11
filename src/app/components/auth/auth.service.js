@@ -7,7 +7,7 @@
     .factory('AuthService', AuthService);
 
   /** @ngInject */
-  function AuthService($q, $http, $rootScope, Session, $log) {
+  function AuthService($q, $http, $rootScope, Session, $log, AUTH_EVENTS) {
 
     function login (credentials) {
       var url = '/api/v1/login';
@@ -24,13 +24,13 @@
       $log.debug('AuthService.login [SUCCESS] response', response);
       var currentUser = Session.create(response.data);
       $rootScope.currentUser = currentUser;
-      $rootScope.$broadcast('login-success', currentUser);
+      $rootScope.$broadcast(AUTH_EVENTS.loginSuccess, currentUser);
       return currentUser;
     }
     
     function loginFailedCallback(response) {
       $log.debug('AuthService.login [FAIL] response', response);
-      $rootScope.$broadcast('login-failed');
+      $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
       // return $q.reject(response);
       return null;
     }
@@ -38,7 +38,7 @@
     function logout () {
       Session.destroy();
       $rootScope.currentUser = undefined;
-      $rootScope.$broadcast('logout-success');
+      $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
     }
 
     function isAuthenticated () {
