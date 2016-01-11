@@ -2,6 +2,6 @@
   'use strict';
 
   angular
-    .module('angular', ['ngAnimate', 'ngCookies', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'restangular', 'ui.router', 'ui.bootstrap', 'toastr']);
+    .module('angular', ['ngAnimate', 'ngCookies', 'ngStorage', 'ngTouch', 'ngSanitize', 'ngMessages', 'ngAria', 'restangular', 'ui.router', 'ui.bootstrap', 'toastr']);
 
 })();

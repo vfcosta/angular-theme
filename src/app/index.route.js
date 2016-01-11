@@ -13,7 +13,12 @@
         url: '/:profile',
         templateUrl: 'app/profile/profile.html',
         controller: 'ProfileController',
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          currentUser: function(AuthService) {
+            return AuthService.loginFromCookie();
+          }
+        }
       })
       .state('profile.page', {
         url: '/{page:.*}',

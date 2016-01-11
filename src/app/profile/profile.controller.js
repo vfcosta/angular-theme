@@ -7,13 +7,13 @@
 
 
   /** @ngInject */
-  function ProfileController(noosfero, $log, $stateParams) {
+  function ProfileController(noosfero, $log, $stateParams, $http) {
     var vm = this;
     vm.boxes = [];
     activate();
 
     function activate() {
-      noosfero.communities.one().get({private_token: '1b00325e5f769a0c38550bd35b3f1d64', identifier: $stateParams.profile}).then(function(communities) {
+      noosfero.communities.one().get({identifier: $stateParams.profile}).then(function(communities) {
         vm.owner = communities.communities[0];
       });
     }
