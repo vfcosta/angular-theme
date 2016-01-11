@@ -5,21 +5,25 @@
     @media (max-width: 978px) {
       padding: 0 2%;
     }
-  }
 
-  .noosfero-logo img {
-    height: 35px;
-  }
+    .navbar-brand {
+      padding: 9px 15px;
 
-  .navbar-nav {
-    .profile-menu .profile-image {
-      height: 30px;
-      width: 30px;
-      @extend .img-circle;
+      .noosfero-logo img {
+        height: 35px;
+      }
     }
 
-    .profile-menu a {
-      padding: 10px 15px;
+    .navbar-nav {
+      .profile-menu .profile-image {
+        height: 30px;
+        width: 30px;
+        @extend .img-circle;
+      }
+
+      .profile-menu a {
+        padding: 10px 15px;
+      }
     }
   }
 }
