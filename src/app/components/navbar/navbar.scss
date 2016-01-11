@@ -1,3 +1,18 @@
-.noosfero-logo img {
-  height: 35px;
+.navbar {
+
+  .noosfero-logo img {
+    height: 35px;
+  }
+
+  .navbar-nav {
+    .profile-menu .profile-image {
+      height: 30px;
+      width: 30px;
+      @extend .img-circle;
+    }
+
+    .profile-menu a {
+      padding: 10px 15px;
+    }
+  }
 }
