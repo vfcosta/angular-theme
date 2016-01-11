@@ -30,6 +30,23 @@ $fa-font-path: "../../bower_components/font-awesome/fonts";
   }
 }
 
+//FIXME move to a separated file
+.icon-event {
+  @extend .fa-calendar;
+}
+.icon-photos {
+  @extend .fa-photo;
+}
+.icon-edit {
+  @extend .fa-edit;
+}
+.icon-ok {
+  @extend .fa-check;
+}
+.icon-send {
+  @extend .fa-send-o;
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically

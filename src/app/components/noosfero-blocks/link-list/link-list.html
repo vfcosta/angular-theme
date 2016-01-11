@@ -1,3 +1,5 @@
 <div ng-repeat="link in vm.links">
-  <a class="icon-{{link.icon}}" ng-href="{{link.address | noosferoTemplateFilter:{profile: vm.owner.identifier} }}">{{link.name}}</a>
+  <a ng-href="{{link.address | noosferoTemplateFilter:{profile: vm.owner.identifier} }}">
+    <i class="fa fa-fw icon-{{link.icon}}"></i> <span>{{link.name}}</span>
+  </a>
 </div>
