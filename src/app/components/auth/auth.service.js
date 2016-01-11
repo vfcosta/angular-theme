@@ -31,7 +31,8 @@
     function loginFailedCallback(response) {
       $log.debug('AuthService.login [FAIL] response', response);
       $rootScope.$broadcast('login-failed');
-      return $q.reject(response);
+      // return $q.reject(response);
+      return null;
     }
 
     function logout () {
