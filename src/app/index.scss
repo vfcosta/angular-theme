@@ -30,21 +30,13 @@ $fa-font-path: "../../bower_components/font-awesome/fonts";
   }
 }
 
-//FIXME move to a separated file
-.icon-event {
-  @extend .fa-calendar;
+.col-md-2-5 {
+  @extend .col-md-3;
+  width: 20.83%;
 }
-.icon-photos {
-  @extend .fa-photo;
-}
-.icon-edit {
-  @extend .fa-edit;
-}
-.icon-ok {
-  @extend .fa-check;
-}
-.icon-send {
-  @extend .fa-send-o;
+
+body {
+  background-color: #f5f8fa;
 }
 
 /**
