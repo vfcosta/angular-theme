@@ -1,4 +1,9 @@
-<div class="page-header">
+<div class="blog-cover" ng-show="vm.article.image">
+  <img ng-src="{{vm.article.image.url}}" class="img-responsive">
+  <h3 ng-bind="vm.article.title"></h3>
+</div>
+
+<div class="page-header" ng-show="!vm.article.image">
   <h3 ng-bind="vm.article.title"></h3>
 </div>
 

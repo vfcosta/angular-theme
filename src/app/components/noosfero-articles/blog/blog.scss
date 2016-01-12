@@ -1,0 +1,13 @@
+.blog-cover {
+  margin: -15px;
+  position: relative;
+  h3 {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    padding: 10px 20px;
+    margin: 0;
+    width: 100%;
+  }
+}
