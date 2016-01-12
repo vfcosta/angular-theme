@@ -2,11 +2,17 @@
  *  If you want to override some bootstrap variables, you have to change values here.
  *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
  */
-$navbar-inverse-link-color: #5AADBB;
 $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
 
 $fa-font-path: "../../bower_components/font-awesome/fonts";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
+
+$navbar-height: 50px;
+$brand-success: #039BE5;
+$link-color: #007EBB;
+$body-bg: #f5f8fa;
+$page-header-border-color: #eee;
+@import "../../bower_components/bootswatch/flatly/_variables.scss";
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
@@ -35,13 +41,11 @@ $fa-font-path: "../../bower_components/font-awesome/fonts";
   width: 20.83%;
 }
 
-body {
-  background-color: #f5f8fa;
-}
-
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
  */
 // injector
 // endinjector
+
+@import "../../bower_components/bootswatch/flatly/_bootswatch.scss";
