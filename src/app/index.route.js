@@ -9,10 +9,10 @@
     $urlRouterProvider.when('/profile/:profile', '/:profile');
 
     $stateProvider
-      .state('profile', {
-        url: '/:profile',
-        templateUrl: 'app/profile/profile.html',
-        controller: 'ProfileController',
+      .state('main', {
+        url: '/',
+        templateUrl: 'app/main/main.html',
+        controller: 'MainController',
         controllerAs: 'vm',
         resolve: {
           currentUser: function(AuthService) {
@@ -20,7 +20,13 @@
           }
         }
       })
-      .state('profile.page', {
+      .state('main.profile', {
+        url: ':profile',
+        templateUrl: 'app/profile/profile.html',
+        controller: 'ProfileController',
+        controllerAs: 'vm'
+      })
+      .state('main.profile.page', {
         url: '/{page:.*}',
         templateUrl: 'app/content-viewer/page.html',
         controller: 'ContentViewerController',
