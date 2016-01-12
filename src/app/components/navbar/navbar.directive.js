@@ -27,21 +27,29 @@
       // "vm.creation" is avaible by directive option "bindToController: true"
       vm.relativeDate = moment(vm.creationDate).fromNow();
       vm.currentUser = Session.getCurrentUser();
+      vm.modalInstance = null;
 
       vm.openLogin = function() {
-        var modalInstance = $modal.open({
+        vm.modalInstance = $modal.open({
           templateUrl: 'app/components/auth/login.html',
           controller: 'AuthController',
           controllerAs: 'vm',
           bindToController: true
         });
-        $scope.$on(AUTH_EVENTS.loginSuccess, function() {
-          modalInstance.close();
-        });
       };
       vm.logout = function() {
         AuthService.logout();
       };
+      $scope.$on(AUTH_EVENTS.loginSuccess, function() {
+        if(vm.modalInstance) {
+          vm.modalInstance.close();
+          vm.modalInstance = null;
+        }
+        vm.currentUser = Session.getCurrentUser();
+      });
+      $scope.$on(AUTH_EVENTS.logoutSuccess, function() {
+        vm.currentUser = Session.getCurrentUser();
+      });
     }
   }
 
