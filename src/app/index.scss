@@ -38,7 +38,9 @@ $page-header-border-color: #eee;
 
 .col-md-2-5 {
   @extend .col-md-3;
-  width: 20.83%;
+  @media (min-width: @screen-sm-min) {
+    width: 20.83%;
+  }
 }
 
 /**
