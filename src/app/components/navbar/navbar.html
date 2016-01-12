@@ -29,10 +29,10 @@
           </a>
           <ul class="dropdown-menu" dropdown-menu>
               <li>
-                  <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                  <a ng-href="/{{vm.currentUser.person.identifier}}"><i class="fa fa-fw fa-user"></i> Profile</a>
               </li>
               <li>
-                  <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                  <a target="_self" ng-href="/myprofile/{{vm.currentUser.person.identifier}}"><i class="fa fa-fw fa-gear"></i> Settings</a>
               </li>
               <li class="divider"></li>
               <li>
