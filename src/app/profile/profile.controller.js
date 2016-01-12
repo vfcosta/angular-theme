@@ -15,6 +15,9 @@
     function activate() {
       noosfero.communities.one().get({identifier: $stateParams.profile}).then(function(communities) {
         vm.owner = communities.communities[0];
+        return noosfero.boxes(vm.owner.id).one().get();
+      }).then(function(response) {
+        vm.boxes = response.boxes;
       });
     }
 
