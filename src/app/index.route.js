@@ -6,6 +6,7 @@
     .config(routeConfig);
 
   function routeConfig($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.when('/:profile', '/profile/:profile');
     $stateProvider
       .state('main', {
         url: '/',
