@@ -1,0 +1,19 @@
+<div class="timeline-badge success"><i class="fa fa-file-text"></i></div>
+<div class="timeline-panel">
+  <div class="timeline-heading">
+    <h4 class="timeline-title">
+      <strong ng-bind="vm.activity.user.name"></strong> has published on community <strong ng-bind="vm.activity.target.article.profile.name"></strong>
+    </h4>
+    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="vm.activity.created_at"></span></small></p>
+  </div>
+  <div class="timeline-body">
+    <div class="article">
+      <div class="title">
+        <a ng-href="/{{vm.activity.target.article.profile.identifier}}/{{vm.activity.target.article.path}}">{{vm.activity.target.article.title}}</a>
+      </div>
+      <div class="lead small">
+        <div ng-bind-html="vm.activity.target.article.body | limitTo: 50"></div>
+      </div>
+    </div>
+  </div>
+</div>
