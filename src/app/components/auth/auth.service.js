@@ -36,10 +36,10 @@
     }
 
     function logout () {
-      $http.jsonp('/account/logout'); //FIXME logout from noosfero to sync login state
       Session.destroy();
       $rootScope.currentUser = undefined;
       $rootScope.$broadcast(AUTH_EVENTS.logoutSuccess);
+      $http.jsonp('/account/logout'); //FIXME logout from noosfero to sync login state
     }
 
     function isAuthenticated () {
