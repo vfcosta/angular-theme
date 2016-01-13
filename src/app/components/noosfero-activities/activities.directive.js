@@ -6,11 +6,11 @@
     .directive('noosferoActivities', noosferoActivities);
 
   /** @ngInject */
-  function noosferoActivities($compile) {
+  function noosferoActivities() {
     var directive = {
       restrict: 'E',
       scope: {
-          activities: '=',
+          activities: '='
       },
       templateUrl: 'app/components/noosfero-activities/activities.html'
     };
