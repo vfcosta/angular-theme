@@ -1,7 +1,9 @@
 <div class="center-block text-center">
   <div class="profile-image">
-    <img ng-show="{{vm.owner.image}}" src="{{vm.owner.image.url}}" class="img-responsive">
-    <i ng-show="{{!vm.owner.image}}" class="fa fa-users fa-5x"></i>
+    <a ng-href="/{{vm.owner.identifier}}">
+      <img ng-show="{{vm.owner.image}}" src="{{vm.owner.image.url}}" class="img-responsive">
+      <i ng-show="{{!vm.owner.image}}" class="fa fa-users fa-5x"></i>
+    </a>
   </div>
   <div class='admin-link'>
     <a target="_self" ng-href="/myprofile/{{vm.owner.identifier}}">Control panel</a>
