@@ -11,7 +11,7 @@
   <div ng-repeat="child in vm.article.children | orderBy: 'created_at':true">
     <div class="page-header">
       <a ng-href="/{{vm.profile.identifier}}/{{child.path}}"><h4 ng-bind="child.title"></h4></a>
-      <div ng-bind-html="child.body | limitTo: 500"></div>
+      <div ng-bind-html="child.body | truncate: 500: '...'"></div>
     </div>
   </div>
 </div>
