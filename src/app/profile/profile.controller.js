@@ -14,16 +14,11 @@
 
     function activate() {
       noosfero.profiles.one().get({identifier: $stateParams.profile}).then(function(profiles) {
-        vm.owner = profiles[0];
-        return noosfero.boxes(vm.owner.id).one().get();
+        vm.profile = profiles[0];
+        return noosfero.boxes(vm.profile.id).one().get();
       }).then(function(response) {
         vm.boxes = response.boxes;
       });
-    }
-
-    vm.boxesOrder = function(box) {
-      if(box.position==2) return 0;
-      return box.position;
     }
   }
 })();

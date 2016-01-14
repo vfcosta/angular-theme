@@ -36,13 +36,6 @@ $page-header-border-color: #eee;
   }
 }
 
-.col-md-2-5 {
-  @extend .col-md-3;
-  @media (min-width: 920px) {
-    width: 20.83%;
-  }
-}
-
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
