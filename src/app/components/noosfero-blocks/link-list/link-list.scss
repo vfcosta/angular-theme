@@ -25,3 +25,10 @@
 .icon-save {
   @extend .fa-save;
 }
+
+.link-list-block {
+  a i {
+    line-height: 25px;
+    color: #949494;
+  }
+}

@@ -1,5 +1,7 @@
-<div ng-repeat="link in vm.links">
-  <a ng-href="{{link.address | noosferoTemplateFilter:{profile: vm.owner.identifier} }}">
-    <i class="fa fa-fw icon-{{link.icon}}"></i> <span>{{link.name}}</span>
-  </a>
+<div class="link-list-block">
+  <div ng-repeat="link in vm.links">
+    <a ng-href="{{link.address | noosferoTemplateFilter:{profile: vm.owner.identifier} }}">
+      <i class="fa fa-fw icon-{{link.icon}}"></i> <span>{{link.name}}</span>
+    </a>
+  </div>
 </div>

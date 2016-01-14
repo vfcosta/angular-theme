@@ -1,10 +1,6 @@
-<div class="center-block text-center">
-  <div class="profile-image">
-    <a ui-sref="main.profile.info({profile: vm.owner.identifier})">
-      <noosfero-profile-image profile="vm.owner"></noosfero-profile-image>
-    </a>
-  </div>
-  <div class='admin-link'>
-    <a target="_self" ui-sref="main.profile.settings({profile: vm.owner.identifier})">Control panel</a>
-  </div>
+<div class="center-block text-center profile-image-block">
+  <a ui-sref="main.profile.info({profile: vm.owner.identifier})">
+    <noosfero-profile-image profile="vm.owner"></noosfero-profile-image>
+  </a>
+  <a class="settings-link" target="_self" ui-sref="main.profile.settings({profile: vm.owner.identifier})">Control panel</a>
 </div>

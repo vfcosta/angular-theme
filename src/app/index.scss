@@ -9,6 +9,8 @@ $fa-font-path: "../../bower_components/font-awesome/fonts";
 
 $navbar-height: 50px;
 $brand-success: #1E96D0;
+$text-color: #676767;
+$panel-default-text: rgb(44, 62, 80);
 $link-color: #007EBB;
 $body-bg: #f5f8fa;
 $page-header-border-color: #eee;
@@ -34,6 +36,10 @@ $page-header-border-color: #eee;
   img.pull-right {
     width: 50px;
   }
+}
+
+h1, h2, h3, h4, h5 {
+  color: #237394;
 }
 
 /**
