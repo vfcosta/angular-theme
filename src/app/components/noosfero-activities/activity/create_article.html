@@ -2,7 +2,11 @@
 <div class="timeline-panel">
   <div class="timeline-heading">
     <h4 class="timeline-title">
-      <strong ng-bind="vm.activity.user.name"></strong> has published on community <strong ng-bind="vm.activity.target.article.profile.name"></strong>
+      <a ui-sref="main.profile({profile: vm.activity.user.identifier})"><strong ng-bind="vm.activity.user.name"></strong></a>
+      <span> has published on </span>
+      <a ui-sref="main.profile({profile: vm.activity.target.article.profile.identifier})">
+        <strong ng-bind="vm.activity.target.article.profile.name"></strong></span>
+      </a>
     </h4>
     <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="vm.activity.created_at"></span></small></p>
   </div>
