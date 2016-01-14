@@ -1,0 +1,16 @@
+<div class="timeline-badge info"><i class="fa fa-user-plus"></i></div>
+<div class="timeline-panel">
+  <div class="timeline-heading">
+    <h4 class="timeline-title">
+      <a ui-sref="main.profile.info({profile: vm.activity.user.identifier})"><strong ng-bind="vm.activity.user.name"></strong></a>
+      <span> has made <span ng-bind="vm.activity.params.friend_name.length"></span> new friend(s): </span>
+      <span class="comma-separated">
+        <a class="separated-item" ui-sref="main.profile.info({profile: vm.activity.params.friend_url[$index].profile})" ng-repeat="friend in vm.activity.params.friend_name">
+          <strong ng-bind="friend"></strong>
+        </a>
+      </span>
+    </h4>
+    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="vm.activity.created_at"></span></small></p>
+  </div>
+  <div class="timeline-body"></div>
+</div>

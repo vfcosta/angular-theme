@@ -184,3 +184,15 @@
     }
   }
 }
+
+.comma-separated {
+  .separated-item {
+    &:after {
+      content: ", ";
+      margin-left: -3px;
+    }
+    &:last-child:after {
+      content: "";
+    }
+  }
+}
