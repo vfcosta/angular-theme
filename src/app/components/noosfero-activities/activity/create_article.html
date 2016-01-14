@@ -9,7 +9,8 @@
   <div class="timeline-body">
     <div class="article">
       <div class="title">
-        <a ng-href="/{{vm.activity.target.article.profile.identifier}}/{{vm.activity.target.article.path}}">{{vm.activity.target.article.title}}</a>
+        <a ui-sref="main.profile.page({profile: vm.activity.target.article.profile.identifier, page: vm.activity.target.article.path})"
+           ng-bind="vm.activity.target.article.title"></a>
       </div>
       <div class="lead small">
         <div ng-bind-html="vm.activity.target.article.body | stripTags | truncate: 100 : '...'"></div>

@@ -32,10 +32,13 @@
         controllerAs: 'vm'
       })
       .state('main.profile.page', {
-        url: '/{page:.*}',
+        url: '/{page:any}',
         templateUrl: 'app/content-viewer/page.html',
         controller: 'ContentViewerController',
         controllerAs: 'vm'
+      })
+      .state('main.profile.settings', {
+        url: '^/myprofile/:profile'
       });
 
     $urlRouterProvider.otherwise('/');

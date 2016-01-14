@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" ng-href="/">
+      <a class="navbar-brand" ui-sref="main">
         <span class="noosfero-logo"><img src="assets/images/logo-noosfero.png"></span> Noosfero
       </a>
     </div>
@@ -31,7 +31,7 @@
                   <a ui-sref="main.profile.info({profile: vm.currentUser.person.identifier})"><i class="fa fa-fw fa-user"></i> Profile</a>
               </li>
               <li>
-                  <a target="_self" ng-href="/myprofile/{{vm.currentUser.person.identifier}}"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                  <a target="_self" ui-sref="main.profile.settings({profile: vm.currentUser.person.identifier})"><i class="fa fa-fw fa-gear"></i> Settings</a>
               </li>
               <li class="divider"></li>
               <li>
