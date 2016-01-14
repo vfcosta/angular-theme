@@ -1,2 +1,4 @@
-<img ng-if="vm.profile.image" ng-src="{{vm.profile.image.url}}" class="img-responsive profile-image">
-<i ng-if="!vm.profile.image" class="fa {{vm.defaultIcon}} fa-5x profile-image"></i>
+<span title="{{vm.profile.name}}">
+  <img ng-if="vm.profile.image" ng-src="{{vm.profile.image.url}}" class="img-responsive profile-image">
+  <i ng-if="!vm.profile.image" class="fa {{vm.defaultIcon}} fa-5x profile-image"></i>
+</span>
