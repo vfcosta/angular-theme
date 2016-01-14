@@ -23,13 +23,12 @@
 
         <li class="dropdown profile-menu" ng-show="vm.currentUser" dropdown>
           <a href="#" class="dropdown-toggle" aria-expanded="false" dropdown-toggle>
-            <i ng-if="!vm.currentUser.person.image" class="fa fa-user"></i>
-            <img ng-if="vm.currentUser.person.image" ng-src="{{vm.currentUser.person.image.url}}" class="profile-image">
+            <noosfero-profile-image profile="vm.currentUser.person" class="profile-image"></noosfero-profile-image>
             <span ng-bind="vm.currentUser.person.name"></span> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu" dropdown-menu>
               <li>
-                  <a ng-href="/{{vm.currentUser.person.identifier}}"><i class="fa fa-fw fa-user"></i> Profile</a>
+                  <a ui-sref="main.profile.info({profile: vm.currentUser.person.identifier})"><i class="fa fa-fw fa-user"></i> Profile</a>
               </li>
               <li>
                   <a target="_self" ng-href="/myprofile/{{vm.currentUser.person.identifier}}"><i class="fa fa-fw fa-gear"></i> Settings</a>

@@ -1,8 +1,7 @@
 <div class="center-block text-center">
   <div class="profile-image">
-    <a ng-href="/{{vm.owner.identifier}}">
-      <img ng-show="{{vm.owner.image}}" src="{{vm.owner.image.url}}" class="img-responsive">
-      <i ng-show="{{!vm.owner.image}}" class="fa fa-users fa-5x"></i>
+    <a ui-sref="main.profile.info({profile: vm.owner.identifier})">
+      <noosfero-profile-image profile="vm.owner"></noosfero-profile-image>
     </a>
   </div>
   <div class='admin-link'>

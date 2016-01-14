@@ -16,9 +16,15 @@
 
     .navbar-nav {
       .profile-menu .profile-image {
-        height: 30px;
-        width: 30px;
-        @extend .img-circle;
+        img {
+          height: 30px;
+          width: 30px;
+          display: inline-block;
+          @extend .img-circle;
+        }
+        i {
+          font-size: 1.7em;
+        }
       }
 
       .profile-menu a {
