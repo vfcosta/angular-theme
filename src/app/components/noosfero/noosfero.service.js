@@ -4,6 +4,9 @@
   angular.module('angular').factory('noosfero', function(Restangular) {
     return {
       profiles: Restangular.service('profiles'),
+      profile: function(profileId) {
+        return Restangular.one('profiles', profileId);
+      },
       members: function(profile) {
         return Restangular.service('members', profile);
       },

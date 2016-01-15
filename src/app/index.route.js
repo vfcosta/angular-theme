@@ -6,10 +6,9 @@
     .config(routeConfig);
 
   function routeConfig($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.when('/:profile', '/profile/:profile');
     $stateProvider
       .state('main', {
-        url: '/',
+        url: '',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'vm',
@@ -20,9 +19,15 @@
         }
       })
       .state('main.profile', {
-        url: ':profile',
+        url: '/:profile',
         templateUrl: 'app/profile/profile.html',
         controller: 'ProfileController',
+        controllerAs: 'vm',
+        abstract: true
+      })
+      .state('main.profile.home', {
+        url: '',
+        controller: 'ProfileHomeController',
         controllerAs: 'vm'
       })
       .state('main.profile.info', {
