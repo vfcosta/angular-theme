@@ -24,7 +24,7 @@
     function ProfileImageController() {
       var vm = this;
       vm.defaultIcon = 'fa-users';
-      if(vm.profile.type==='Person') vm.defaultIcon = 'fa-user';
+      if(vm.profile && vm.profile.type==='Person') vm.defaultIcon = 'fa-user';
     }
   }
 
