@@ -48,7 +48,10 @@
         vm.currentUser = Session.getCurrentUser();
       });
 
-      if(!vm.currentUser) vm.openLogin();
+      vm.activate = function() {
+        if(!vm.currentUser) vm.openLogin();
+      }
+      vm.activate();
     }
   }
 
