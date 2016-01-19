@@ -1,15 +1,17 @@
-<div class="timeline-badge success"><i class="fa fa-file-text"></i></div>
-<div class="timeline-panel">
-  <div class="timeline-heading">
+<timeline-badge class="success">
+  <i class="fa fa-file-text"></i>
+</timeline-badge>
+<timeline-panel>
+  <timeline-heading>
     <h4 class="timeline-title">
-      <a ui-sref="main.profile({profile: vm.activity.user.identifier})"><strong ng-bind="vm.activity.user.name"></strong></a>
+      <a ui-sref="main.profile.info({profile: vm.activity.user.identifier})"><strong ng-bind="vm.activity.user.name"></strong></a>
       <span> has published on </span>
-      <a ui-sref="main.profile({profile: vm.activity.target.article.profile.identifier})">
+      <a ui-sref="main.profile.info({profile: vm.activity.target.article.profile.identifier})">
         <strong ng-bind="vm.activity.target.article.profile.name"></strong></span>
       </a>
     </h4>
     <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="vm.activity.created_at"></span></small></p>
-  </div>
+  </timeline-heading>
   <div class="timeline-body">
     <div class="article">
       <div class="title">
@@ -21,4 +23,4 @@
       </div>
     </div>
   </div>
-</div>
+</timeline-panel>
