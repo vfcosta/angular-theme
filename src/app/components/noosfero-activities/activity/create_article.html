@@ -19,7 +19,7 @@
            ng-bind="vm.activity.target.article.title"></a>
       </div>
       <div class="lead small">
-        <div ng-bind-html="vm.activity.target.article.body | stripTags | truncate: 100 : '...'"></div>
+        <div ng-bind-html="vm.activity.target.article.body | stripTags | truncate: 100 : '...': true"></div>
       </div>
     </div>
   </div>
