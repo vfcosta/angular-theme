@@ -22,13 +22,24 @@
     return directive;
 
     /** @ngInject */
-    function BlogController(noosfero) {
+    function BlogController(noosfero, Restangular) {
       var vm = this;
       vm.posts = [];
+      vm.perPage = 3;
+      vm.currentPage = 1;
 
-      noosfero.articles.one(vm.article.id).customGET('children', {content_type: 'TinyMceArticle'}).then(function(result) {
-        vm.posts = result.articles;
-      });
+      vm.loadPage = function() {
+        Restangular.setFullResponse(true);
+        noosfero.articles.one(vm.article.id).customGET('children', {
+          content_type: 'TinyMceArticle',
+          per_page: vm.perPage,
+          page: vm.currentPage
+        }).then(function(result) {
+          vm.totalPosts = result.headers('total');
+          vm.posts = result.data.articles;
+        });
+      }
+      vm.loadPage();
     }
   }
 

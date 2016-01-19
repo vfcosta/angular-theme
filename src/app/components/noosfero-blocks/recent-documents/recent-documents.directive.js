@@ -31,8 +31,9 @@
         $state.go("main.profile.page", {page: article.path, profile: article.profile.identifier}); 
       }
 
+      var limit = vm.block.settings.limit || 5;
       //FIXME get all text articles
-      noosfero.profiles.one(vm.profile.id).one('articles').get({content_type: 'TinyMceArticle'}).then(function(result) {
+      noosfero.profiles.one(vm.profile.id).one('articles').get({content_type: 'TinyMceArticle', per_page: limit}).then(function(result) {
         vm.documents = result.articles;
       });
     }

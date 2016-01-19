@@ -16,4 +16,9 @@
       </div>
     </div>
   </div>
+
+  <pagination ng-model="vm.currentPage" total-items="vm.totalPosts" class="pagination-sm center-block"
+    boundary-links="true" items-per-page="vm.perPage" ng-change="vm.loadPage()"
+    first-text="«" last-text="»" previous-text="‹" next-text="›">
+  </pagination>
 </div>
