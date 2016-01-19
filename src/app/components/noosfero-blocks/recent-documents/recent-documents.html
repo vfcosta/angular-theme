@@ -1,0 +1,19 @@
+<div deckgrid source="vm.documents" class="deckgrid">
+  <div class="a-card panel media" ng-click="mother.vm.openDocument(card);">
+      <div class="author media-left" ng-show="card.author.image">
+        <img ng-src="{{card.author.image.url}}" class="img-circle">
+      </div>
+      <div class="header media-body">
+        <h5 class="title media-heading" ng-bind="card.title"></h5>
+
+        <div class="subheader">
+          <span class="time">
+            <i class="fa fa-clock-o"></i> <span am-time-ago="card.created_at"></span>
+          </span>
+        </div>
+      </div>
+
+      <img ng-if="card.image" ng-src="card.image.url">
+      <div class="post-lead" ng-bind-html="card.body | stripTags | truncate: 100: '...'"></div>
+  </div>
+</div>
