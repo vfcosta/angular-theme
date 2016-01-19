@@ -22,7 +22,13 @@
     return directive;
 
     /** @ngInject */
-    function BlogController() {
+    function BlogController(noosfero) {
+      var vm = this;
+      vm.posts = [];
+
+      noosfero.articles.one(vm.article.id).customGET('children', {content_type: 'TinyMceArticle'}).then(function(result) {
+        vm.posts = result.articles;
+      });
     }
   }
 
