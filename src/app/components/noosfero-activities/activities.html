@@ -1,6 +1,5 @@
 <timeline>
-  <timeline-event ng-repeat="activity in activities | orderBy: 'created_at':true" 
-      when-visible="animateElementIn" when-not-visible="animateElementOut">
+  <timeline-event ng-repeat="activity in activities | orderBy: 'created_at':true">
     <noosfero-activity activity="activity"></noosfero-activity>
   </timeline-event>
 </timeline>
