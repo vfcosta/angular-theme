@@ -22,21 +22,20 @@
     return directive;
 
     /** @ngInject */
-    function BlogController(noosfero, Restangular) {
+    function BlogController(noosfero) {
       var vm = this;
       vm.posts = [];
       vm.perPage = 3;
       vm.currentPage = 1;
 
       vm.loadPage = function() {
-        Restangular.setFullResponse(true);
         noosfero.articles.one(vm.article.id).customGET('children', {
           content_type: 'TinyMceArticle',
           per_page: vm.perPage,
           page: vm.currentPage
-        }).then(function(result) {
-          vm.totalPosts = result.headers('total');
-          vm.posts = result.data.articles;
+        }).then(function(response) {
+          vm.totalPosts = response.headers('total');
+          vm.posts = response.data.articles;
         });
       }
       vm.loadPage();

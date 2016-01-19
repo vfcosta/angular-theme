@@ -26,8 +26,8 @@
       var vm = this;
       vm.members = [];
 
-      noosfero.members(noosfero.profiles.one(vm.owner.id)).one().get({per_page: 6}).then(function(result) {
-        vm.members = result.people;
+      noosfero.members(noosfero.profiles.one(vm.owner.id)).one().get({per_page: 6}).then(function(response) {
+        vm.members = response.data.people;
       });
     }
   }

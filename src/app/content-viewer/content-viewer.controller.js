@@ -15,8 +15,8 @@
 
     function activate() {
       vm.profile = $scope.vm.owner;
-      noosfero.profiles.one(vm.profile.id).one('articles').get({path: $stateParams.page}).then(function(articles) {
-        vm.article = articles.article;
+      noosfero.profiles.one(vm.profile.id).one('articles').get({path: $stateParams.page}).then(function(response) {
+        vm.article = response.data.article;
       });
     }
   }

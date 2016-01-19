@@ -13,11 +13,11 @@
     activate();
 
     function activate() {
-      noosfero.profiles.one().get({identifier: $stateParams.profile}).then(function(profiles) {
-        vm.profile = profiles[0];
+      noosfero.profiles.one().get({identifier: $stateParams.profile}).then(function(response) {
+        vm.profile = response.data[0];
         return noosfero.boxes(vm.profile.id).one().get();
       }).then(function(response) {
-        vm.boxes = response.boxes;
+        vm.boxes = response.data.boxes;
       });
     }
   }
