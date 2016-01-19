@@ -12,8 +12,7 @@
           </span>
         </div>
       </div>
-
-      <img ng-if="card.image" ng-src="card.image.url">
+      <img ng-show="card.image" ng-src="{{card.image.url}}" class="img-responsive article-image">
       <div class="post-lead" ng-bind-html="card.body | stripTags | truncate: 100: '...'"></div>
   </div>
 </div>
