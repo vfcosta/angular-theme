@@ -7,7 +7,7 @@
 
 
   /** @ngInject */
-  function ProfileInfoController(noosfero, $log, $stateParams, $scope) {
+  function ProfileInfoController(noosfero) {
     var vm = this;
     vm.profile = null;
     vm.activities = [];
