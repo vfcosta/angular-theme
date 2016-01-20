@@ -8,7 +8,7 @@
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('main', {
-        url: '',
+        url: '/',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'vm',
@@ -32,7 +32,7 @@
         url: '^/myprofile/:profile'
       })
       .state('main.profile', {
-        url: '/:profile',
+        url: '^/:profile',
         abstract: true,
         views: {
           'content': {
