@@ -14,7 +14,7 @@
     activate();
 
     function activate() {
-      vm.profile = $scope.vm.owner;
+      vm.profile = noosfero.currentProfile;
       noosfero.profiles.one(vm.profile.id).one('activities').get().then(function(response) {
         vm.activities = response.data.activities;
       });
