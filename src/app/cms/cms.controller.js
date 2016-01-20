@@ -7,7 +7,7 @@
 
 
   /** @ngInject */
-  function CmsController(noosfero, $stateParams, $httpParamSerializer, $state) {
+  function CmsController(noosfero, $stateParams, $httpParamSerializer, $state, SweetAlert) {
     var vm = this;
     vm.article = {};
     vm.profile = null;
@@ -25,6 +25,12 @@
         {'Content-Type':'application/json'}
       ).then(function(response) {
         $state.transitionTo('main.profile.page', {page: response.data.article.path, profile: vm.profile.identifier});
+        SweetAlert.swal({
+          title: "Good job!",
+          text: "Article saved!",
+          type: "success",
+          timer: 1000
+        });
       });
     }
     
