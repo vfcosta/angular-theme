@@ -7,14 +7,18 @@
 
 
   /** @ngInject */
-  function ContentViewerActionsController(noosfero) {
+  function ContentViewerActionsController(noosfero, $scope) {
     var vm = this;
     vm.article = null;
     vm.profile = null;
     activate();
 
     function activate() {
-      vm.profile = noosfero.currentProfile;
+      $scope.$watch(function() { return noosfero.currentProfile },
+        function() {
+          vm.profile = noosfero.currentProfile;
+        }
+      );
     }
   }
 })();
