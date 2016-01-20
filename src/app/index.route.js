@@ -20,27 +20,46 @@
       })
       .state('main.profile', {
         url: '/:profile',
-        templateUrl: 'app/profile/profile.html',
-        controller: 'ProfileController',
-        controllerAs: 'vm',
-        abstract: true
+        abstract: true,
+        views: {
+          'content': {
+            templateUrl: 'app/profile/profile.html',
+            controller: 'ProfileController',
+            controllerAs: 'vm'
+          }
+        }
       })
       .state('main.profile.home', {
         url: '',
-        controller: 'ProfileHomeController',
-        controllerAs: 'vm'
+        views: {
+          'mainBlockContent': {
+            controller: 'ProfileHomeController',
+            controllerAs: 'vm'
+          }
+        }
       })
       .state('main.profile.info', {
         url: '^/profile/:profile',
-        templateUrl: 'app/profile-info/profile-info.html',
-        controller: 'ProfileInfoController',
-        controllerAs: 'vm'
+        views: {
+          'mainBlockContent': {
+            templateUrl: 'app/profile-info/profile-info.html',
+            controller: 'ProfileInfoController',
+            controllerAs: 'vm'
+          }
+        }
       })
       .state('main.profile.page', {
         url: '/{page:any}',
-        templateUrl: 'app/content-viewer/page.html',
-        controller: 'ContentViewerController',
-        controllerAs: 'vm'
+        views: {
+          'actions@main': {
+            templateUrl: 'app/content-viewer/navbar-actions.html'
+          },
+          'mainBlockContent': {
+            templateUrl: 'app/content-viewer/page.html',
+            controller: 'ContentViewerController',
+            controllerAs: 'vm'
+          }
+        }
       })
       .state('main.profile.settings', {
         url: '^/myprofile/:profile'

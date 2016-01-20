@@ -1,14 +1,14 @@
 .navbar {
 
   .container-fluid {
-    padding: 0 12%;
+    padding-right: 12%;
+    padding-left: 12%;
     @media (max-width: 978px) {
-      padding: 0 2%;
+      padding-right: 2%;
+      padding-left: 2%;
     }
 
     .navbar-brand {
-      padding: 9px 15px;
-
       .noosfero-logo img {
         height: 35px;
       }
@@ -25,10 +25,6 @@
         i {
           font-size: 1.7em;
         }
-      }
-
-      .profile-menu a {
-        padding: 10px 15px;
       }
     }
   }
