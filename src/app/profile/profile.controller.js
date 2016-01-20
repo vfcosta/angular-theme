@@ -15,7 +15,7 @@
     function activate() {
       noosfero.profiles.one().get({identifier: $stateParams.profile}).then(function(response) {
         vm.profile = response.data[0];
-        noosfero.currentProfile = vm.profile;
+        noosfero.setCurrentProfile(vm.profile);
         return noosfero.boxes(vm.profile.id).one().get();
       }).then(function(response) {
         vm.boxes = response.data.boxes;

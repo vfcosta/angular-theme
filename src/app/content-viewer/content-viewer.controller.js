@@ -14,8 +14,10 @@
     activate();
 
     function activate() {
-      vm.profile = noosfero.currentProfile;
-      noosfero.profiles.one(vm.profile.id).one('articles').get({path: $stateParams.page}).then(function(response) {
+      noosfero.currentProfile.then(function(profile) {
+        vm.profile = profile;
+        return noosfero.profiles.one(vm.profile.id).one('articles').get({path: $stateParams.page});
+      }).then(function(response) {
         vm.article = response.data.article;
       });
     }

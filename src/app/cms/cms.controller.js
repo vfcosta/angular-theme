@@ -11,20 +11,17 @@
     var vm = this;
     vm.article = {};
     vm.profile = null;
-    activate();
-
-    function activate() {
-      vm.profile = noosfero.currentProfile;
-    }
 
     vm.save = function() {
-      noosfero.profiles.one(vm.profile.id).customPOST(
-        {article: vm.article},
-        'articles',
-        {},
-        {'Content-Type':'application/json'}
-      ).then(function(response) {
-        $state.transitionTo('main.profile.page', {page: response.data.article.path, profile: vm.profile.identifier});
+      noosfero.currentProfile.then(function(profile) {
+        return noosfero.profiles.one(profile.id).customPOST(
+          {article: vm.article},
+          'articles',
+          {},
+          {'Content-Type':'application/json'}
+        )
+      }).then(function(response) {
+        $state.transitionTo('main.profile.page', {page: response.data.article.path, profile: response.data.article.profile.identifier});
         SweetAlert.swal({
           title: "Good job!",
           text: "Article saved!",

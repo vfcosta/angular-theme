@@ -1,11 +1,12 @@
 (function() {
   'use strict';
   
-  angular.module('angular').factory('noosfero', function(Restangular) {
-    var currentProfile;
+  angular.module('angular').factory('noosfero', function(Restangular, $q) {
+    var currentProfile = $q.defer();
 
     return {
-      currentProfile: currentProfile,
+      currentProfile: currentProfile.promise,
+      setCurrentProfile: function(profile) { currentProfile.resolve(profile) },
       profiles: Restangular.service('profiles'),
       articles: Restangular.service('articles'),
       profile: function(profileId) {

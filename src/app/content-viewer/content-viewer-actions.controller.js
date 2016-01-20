@@ -14,11 +14,9 @@
     activate();
 
     function activate() {
-      $scope.$watch(function() { return noosfero.currentProfile },
-        function() {
-          vm.profile = noosfero.currentProfile;
-        }
-      );
+      noosfero.currentProfile.then(function(profile) {
+        vm.profile = profile;
+      });
     }
   }
 })();
