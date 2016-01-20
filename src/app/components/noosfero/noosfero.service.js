@@ -2,7 +2,10 @@
   'use strict';
   
   angular.module('angular').factory('noosfero', function(Restangular) {
+    var currentProfile;
+
     return {
+      currentProfile: currentProfile,
       profiles: Restangular.service('profiles'),
       articles: Restangular.service('articles'),
       profile: function(profileId) {

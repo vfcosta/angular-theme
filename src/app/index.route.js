@@ -18,6 +18,19 @@
           }
         }
       })
+      .state('main.profile.cms', {
+        url: '^/myprofile/:profile/cms',
+        views: {
+          'mainBlockContent': {
+            templateUrl: 'app/cms/cms.html',
+            controller: 'CmsController',
+            controllerAs: 'vm'
+          }
+        }
+      })
+      .state('main.profile.settings', {
+        url: '^/myprofile/:profile'
+      })
       .state('main.profile', {
         url: '/:profile',
         abstract: true,
@@ -51,18 +64,17 @@
       .state('main.profile.page', {
         url: '/{page:any}',
         views: {
-          'actions@main': {
-            templateUrl: 'app/content-viewer/navbar-actions.html'
-          },
           'mainBlockContent': {
             templateUrl: 'app/content-viewer/page.html',
             controller: 'ContentViewerController',
             controllerAs: 'vm'
+          },
+          'actions@main': {
+            templateUrl: 'app/content-viewer/navbar-actions.html',
+            controller: 'ContentViewerActionsController',
+            controllerAs: 'vm'
           }
         }
-      })
-      .state('main.profile.settings', {
-        url: '^/myprofile/:profile'
       });
 
     $urlRouterProvider.otherwise('/');
