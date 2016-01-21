@@ -7,7 +7,7 @@
 
 
   /** @ngInject */
-  function ContentViewerActionsController(noosfero, $scope) {
+  function ContentViewerActionsController(noosfero) {
     var vm = this;
     vm.article = null;
     vm.profile = null;
