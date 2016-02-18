@@ -10,8 +10,8 @@
     var directive = {
       restrict: 'E',
       scope: {
-          block: '=',
-          owner: '='
+          block: '<',
+          owner: '<'
       },
       link: function(scope, element) {
         var blockName = scope.block.type.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();

@@ -11,8 +11,8 @@
       restrict: 'E',
       templateUrl: 'app/components/noosfero-articles/article/article.html',
       scope: {
-          article: '=',
-          profile: '='
+          article: '<',
+          profile: '<'
       },
       controller: ArticleController,
       controllerAs: 'vm',
