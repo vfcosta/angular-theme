@@ -4,7 +4,7 @@ import {noosferoModuleConfig} from "./index.config";
 import {noosferoAngularRunBlock} from "./index.run";
 import {routeConfig} from "./index.route";
 import {ContentViewerController} from "./content-viewer/content-viewer.controller";
-import {Main} from "./main/main.controller";
+import {Main} from "./main/main.component";
 import {bootstrap, bundle} from 'ng-forward';
 
 declare var moment: any;
@@ -59,4 +59,4 @@ require("./profile/profile.controller.js");
 
 // NoosferoApp.addController("ContentViewerController", ContentViewerController);
 
-// NoosferoApp.addConfig(routeConfig);
+NoosferoApp.addConfig(routeConfig);
