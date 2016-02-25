@@ -10,7 +10,7 @@ export class MainContent {
 
 @Component({
     selector: 'main',
-    template: `aaaa <ui-view></ui-view>`
+    template: '<div ng-view></div>'
 })
 @StateConfig([
     {
