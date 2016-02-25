@@ -59,4 +59,4 @@ require("./profile/profile.controller.js");
 
 // NoosferoApp.addController("ContentViewerController", ContentViewerController);
 
-// NoosferoApp.addConfig(routeConfig);
+NoosferoApp.addConfig(routeConfig);

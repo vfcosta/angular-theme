@@ -1,10 +1,10 @@
 import {bundle, Component, StateConfig} from 'ng-forward';
 
 @Component({
-    selector: 'main2',
-    template: `test main2`
+    selector: 'main-content',
+    templateUrl: "app/main/main.html",
 })
-export class Main2 {
+export class MainContent {
 
 }
 
@@ -15,14 +15,13 @@ export class Main2 {
 @StateConfig([
     {
         url: '/',
-        component: Main2,
-        // templateUrl: "app/main/main.html",
+        component: MainContent,
         name: 'main',
-        // resolve: {
-        // currentUser: function(AuthService) {
-        // return AuthService.loginFromCookie();
-        // }
-        // }
+        resolve: {
+            currentUser: function(AuthService) {
+                return AuthService.loginFromCookie();
+            }
+        }
     }
 ])
 export class Main {
