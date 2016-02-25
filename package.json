@@ -11,6 +11,7 @@
     "browser-sync": "~2.9.11",
     "browser-sync-spa": "~1.0.3",
     "chalk": "~1.1.1",
+    "concurrently": "^2.0.0",
     "del": "~2.0.2",
     "eslint-plugin-angular": "~0.12.0",
     "estraverse": "~4.1.0",
@@ -55,7 +56,8 @@
     "uglify-save-license": "~0.4.1",
     "webpack": "^1.12.14",
     "wiredep": "~2.2.2",
-    "wrench": "~1.5.8"
+    "wrench": "~1.5.8",
+    "yargs": "^4.2.0"
   },
   "engines": {
     "node": ">=0.10.0"
