@@ -1,10 +1,14 @@
-import {bundle, Component, StateConfig} from 'ng-forward';
+import {Component, StateConfig} from 'ng-forward';
+import {Profile} from '../profile/profile.component';
 
 @Component({
     selector: 'main-content',
     templateUrl: "app/main/main.html",
 })
 export class MainContent {
+    constructor() {
+        console.log("MAIN");
+    }
 
 }
 
@@ -20,6 +24,17 @@ export class MainContent {
         resolve: {
             currentUser: function(AuthService) {
                 return AuthService.loginFromCookie();
+            }
+        }
+    },
+    {
+        url: "^/:profile",
+        // abstract: true,
+        component: Profile,
+        name: 'main.profile',
+        views: {
+            "content": {
+                templateUrl: "app/profile/profile.html",
             }
         }
     }
