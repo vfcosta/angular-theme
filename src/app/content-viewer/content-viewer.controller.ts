@@ -1,18 +1,34 @@
+
+import * as noosfero from "../models/interfaces";
+
 import {ArticleDirective, ArticleView} from "../components/noosfero-articles/article/article.directive";
+import {Input, Component, StateConfig} from "ng-forward";
 
-/** @ngInject */
-export function ContentViewerController(noosfero, $log, $stateParams) {
-    var vm = this;
-    vm.article = null;
-    vm.profile = null;
-    activate();
+@Component({
+    selector: "content-viewer",
+    template: "",
+    providers: [
+        "noosferoService", "$log", "$stateParams"
+    ]
+})
+export class ContentViewerController {
 
-    function activate() {
-        noosfero.currentProfile.then(function(profile) {
-            vm.profile = profile;
-            return noosfero.profiles.one(vm.profile.id).one('articles').get({ path: $stateParams.page });
+    @Input()
+    article: noosfero.Article = null;
+
+    @Input()
+    profile: noosfero.Profile = null;
+
+    constructor(private noosfero: any, private $log: ng.ILogService, private $stateParams: angular.ui.IStateParamsService) {
+        this.activate();
+    }
+
+    activate() {
+        this.noosfero.currentProfile.then(function(profile) {
+            this.profile = profile;
+            return this.noosfero.profiles.one(this.profile.id).one("articles").get({ path: this.$stateParams.page });
         }).then(function(response) {
-            vm.article = response.data.article;
+            this.article = response.data.article;
         });
     }
 }
