@@ -22,6 +22,10 @@ export class NoosferoApp {
         angular.module(NoosferoApp.appName).service(serviceName, value);
     }
 
+    static addController(controllerName: string, value: any) {
+        angular.module(NoosferoApp.appName).controller(controllerName, value);
+    }
+
     static run(runFunction: Function) {
         angular.module(NoosferoApp.appName).run(runFunction);
     }
