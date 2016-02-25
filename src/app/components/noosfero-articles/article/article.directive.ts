@@ -1,4 +1,4 @@
-import { Input, Inject, Component, Directive } from 'ng-forward';
+import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
 
 @Component({
     selector: 'noosfero-default-article',
@@ -40,6 +40,6 @@ export class ArticleDirective {
             //TODO
         }
     }
-
-
 }
+
+bundle('noosferoApp', ArticleDirective).publish();

@@ -3,7 +3,7 @@
 /** @ngInject */
 export function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state("main", {
+        /*.state("main", {
             url: "/",
             templateUrl: "app/main/main.html",
             controller: "MainController",
@@ -13,7 +13,7 @@ export function routeConfig($stateProvider, $urlRouterProvider) {
                     return AuthService.loginFromCookie();
                 }
             }
-        })
+        })*/
         .state("main.profile.cms", {
             url: "^/myprofile/:profile/cms",
             views: {
