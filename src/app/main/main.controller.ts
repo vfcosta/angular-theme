@@ -28,6 +28,3 @@ export class Main2 {
 export class Main {
 
 }
-
-// bundle('noosferoApp', Main2).publish();
-// bundle('noosferoApp', Main).publish(); 
