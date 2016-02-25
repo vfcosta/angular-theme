@@ -19,8 +19,7 @@ NoosferoApp.addConfig(noosferoModuleConfig);
 
 NoosferoApp.run(noosferoAngularRunBlock);
 
-declare function require(module): any;
-
+require("./main/main.controller.js");
 require("./cms/cms.controller.js");
 require("./components/auth/auth.controller.js");
 require("./components/auth/auth.service.js");
@@ -41,7 +40,6 @@ require("./components/noosfero/noosfero.service.js");
 require("./components/noosfero/profile-image/profile-image.component.js");
 require("./content-viewer/content-viewer-actions.controller.js");
 require("./content-viewer/content-viewer.controller.js");
-require("./main/main.controller.js");
 require("./profile-info/profile-info.controller.js");
 require("./profile/profile-home.controller.js");
 require("./profile/profile.controller.js");

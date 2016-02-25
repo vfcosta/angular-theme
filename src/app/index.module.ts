@@ -26,4 +26,3 @@ export class NoosferoApp {
         angular.module(NoosferoApp.appName).run(runFunction);
     }
 }
-
