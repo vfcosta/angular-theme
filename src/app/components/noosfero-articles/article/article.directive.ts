@@ -6,7 +6,9 @@ import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
     providers: ['$injector', '$compile']
 })
 export class ArticleView {
-
+    constructor() {
+        console.log("ARTICLE VIEW");
+    }
 }
 
 /**
@@ -14,24 +16,19 @@ export class ArticleView {
 *
 *
 */
-@Directive({
-    selector: 'noosfero-article',
-    providers: ['$injector', '$compile'],
 
+@Directive({
+    selector: '[noosfero-article]',
+    providers: []
 })
-@Inject('$element')
-@Inject('$scope')
+@Inject("$element")
+@Inject("$scope")
+@Inject("$injector")
+@Inject("$compile")
 export class ArticleDirective {
 
-    @Input("article")
-    article: any;
-
-    @Input("profile")
-    profile: any;
-
     constructor($element: any, $scope: ng.IScope, private $injector: ng.auto.IInjectorService, private $compile: ng.ICompileService) {
-        console.log('ARTICLE DIRECTIVE');
-        var specificDirective = 'noosfero' + this.article.type;
+        var specificDirective = 'noosfero' + $scope["vm"].article.type;
         if ($injector.has(specificDirective + 'Directive')) {
             var directiveName = specificDirective.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
             $element.replaceWith($compile('<' + directiveName + ' article="vm.article" profile="vm.profile"></' + directiveName + '>')($scope));
@@ -42,4 +39,4 @@ export class ArticleDirective {
     }
 }
 
-bundle('noosferoApp', ArticleDirective).publish();
+//bundle('noosferoApp', ArticleDirective).publish();
