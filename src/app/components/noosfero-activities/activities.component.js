@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angular')
+    .module('noosferoApp')
     .component('noosferoActivities', {
       restrict: 'E',
       bindings: {

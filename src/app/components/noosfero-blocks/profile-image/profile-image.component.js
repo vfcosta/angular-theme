@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angular')
+    .module('noosferoApp')
     .component('noosferoProfileImageBlock', {
       restrict: 'E',
       templateUrl: 'app/components/noosfero-blocks/profile-image/profile-image.html',

@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angular')
+    .module('noosferoApp')
     .directive('noosferoArticle', noosferoArticle);
 
   /** @ngInject */

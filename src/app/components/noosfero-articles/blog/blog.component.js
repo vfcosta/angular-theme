@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angular')
+    .module('noosferoApp')
     .component('noosferoBlog', {
       restrict: 'E',
       templateUrl: 'app/components/noosfero-articles/blog/blog.html',

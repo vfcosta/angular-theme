@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angular')
+    .module('noosferoApp')
     .component('noosferoRecentDocumentsBlock', {
       restrict: 'E',
       templateUrl: 'app/components/noosfero-blocks/recent-documents/recent-documents.html',

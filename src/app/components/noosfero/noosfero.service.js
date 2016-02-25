@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  angular.module('angular').factory('noosfero', function(Restangular, $q) {
+  angular.module('noosferoApp').factory('noosfero', function(Restangular, $q) {
     var currentProfile = $q.defer();
 
     return {

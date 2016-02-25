@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular
-    .module("angular")
+    .module("noosferoApp")
     .filter("noosferoTemplateFilter", function() {
       return function(text, options) {
         for(var option in options) {

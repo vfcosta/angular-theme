@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angular')
+    .module('noosferoApp')
     .component('noosferoLinkListBlock', {
       restrict: 'E',
       templateUrl: 'app/components/noosfero-blocks/link-list/link-list.html',

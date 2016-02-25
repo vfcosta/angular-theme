@@ -1,27 +1,29 @@
-"use strict";
-var NoosferoApp = (function () {
-    function NoosferoApp() {
-    }
-    NoosferoApp.init = function () {
+export class NoosferoApp {
+
+    static appName: string = "noosferoApp";
+
+    static init() {
         angular.module(NoosferoApp.appName, ["ngAnimate", "ngCookies", "ngStorage", "ngTouch",
             "ngSanitize", "ngMessages", "ngAria", "restangular",
             "ui.router", "ui.bootstrap", "toastr",
             "angularMoment", "angular.filter", "akoenig.deckgrid",
             "angular-timeline", "duScroll", "oitozero.ngSweetAlert"]);
-    };
-    NoosferoApp.addConfig = function (configFunc) {
+    }
+
+    static addConfig(configFunc: Function) {
         angular.module(NoosferoApp.appName).config(configFunc);
-    };
-    NoosferoApp.addConstants = function (constantName, value) {
+    }
+
+    static addConstants(constantName: string, value: any) {
         angular.module(NoosferoApp.appName).constant(constantName, value);
-    };
-    NoosferoApp.addService = function (serviceName, value) {
+    }
+
+    static addService(serviceName: string, value: any) {
         angular.module(NoosferoApp.appName).service(serviceName, value);
-    };
-    NoosferoApp.run = function (runFunction) {
+    }
+
+    static run(runFunction: Function) {
         angular.module(NoosferoApp.appName).run(runFunction);
-    };
-    NoosferoApp.appName = "noosferoApp";
-    return NoosferoApp;
-}());
-exports.NoosferoApp = NoosferoApp;
+    }
+}
+

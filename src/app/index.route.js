@@ -1,83 +1,76 @@
-(function() {
-  'use strict';
-
-  angular
-    .module('angular')
-    .config(routeConfig);
-
-  function routeConfig($stateProvider, $urlRouterProvider) {
+"use strict";
+/** @ngInject */
+function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('main', {
-        url: '/',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'vm',
+        .state("main", {
+        url: "/",
+        templateUrl: "app/main/main.html",
+        controller: "MainController",
+        controllerAs: "vm",
         resolve: {
-          currentUser: function(AuthService) {
-            return AuthService.loginFromCookie();
-          }
+            currentUser: function (AuthService) {
+                return AuthService.loginFromCookie();
+            }
         }
-      })
-      .state('main.profile.cms', {
-        url: '^/myprofile/:profile/cms',
+    })
+        .state("main.profile.cms", {
+        url: "^/myprofile/:profile/cms",
         views: {
-          'mainBlockContent': {
-            templateUrl: 'app/cms/cms.html',
-            controller: 'CmsController',
-            controllerAs: 'vm'
-          }
+            "mainBlockContent": {
+                templateUrl: "app/cms/cms.html",
+                controller: "CmsController",
+                controllerAs: "vm"
+            }
         }
-      })
-      .state('main.profile.settings', {
-        url: '^/myprofile/:profile'
-      })
-      .state('main.profile', {
-        url: '^/:profile',
+    })
+        .state("main.profile.settings", {
+        url: "^/myprofile/:profile"
+    })
+        .state("main.profile", {
+        url: "^/:profile",
         abstract: true,
         views: {
-          'content': {
-            templateUrl: 'app/profile/profile.html',
-            controller: 'ProfileController',
-            controllerAs: 'vm'
-          }
+            "content": {
+                templateUrl: "app/profile/profile.html",
+                controller: "ProfileController",
+                controllerAs: "vm"
+            }
         }
-      })
-      .state('main.profile.home', {
-        url: '',
+    })
+        .state("main.profile.home", {
+        url: "",
         views: {
-          'mainBlockContent': {
-            controller: 'ProfileHomeController',
-            controllerAs: 'vm'
-          }
+            "mainBlockContent": {
+                controller: "ProfileHomeController",
+                controllerAs: "vm"
+            }
         }
-      })
-      .state('main.profile.info', {
-        url: '^/profile/:profile',
+    })
+        .state("main.profile.info", {
+        url: "^/profile/:profile",
         views: {
-          'mainBlockContent': {
-            templateUrl: 'app/profile-info/profile-info.html',
-            controller: 'ProfileInfoController',
-            controllerAs: 'vm'
-          }
+            "mainBlockContent": {
+                templateUrl: "app/profile-info/profile-info.html",
+                controller: "ProfileInfoController",
+                controllerAs: "vm"
+            }
         }
-      })
-      .state('main.profile.page', {
-        url: '/{page:any}',
+    })
+        .state("main.profile.page", {
+        url: "/{page:any}",
         views: {
-          'mainBlockContent': {
-            templateUrl: 'app/content-viewer/page.html',
-            controller: 'ContentViewerController',
-            controllerAs: 'vm'
-          },
-          'actions@main': {
-            templateUrl: 'app/content-viewer/navbar-actions.html',
-            controller: 'ContentViewerActionsController',
-            controllerAs: 'vm'
-          }
+            "mainBlockContent": {
+                templateUrl: "app/content-viewer/page.html",
+                controller: "ContentViewerController",
+                controllerAs: "vm"
+            },
+            "actions@main": {
+                templateUrl: "app/content-viewer/navbar-actions.html",
+                controller: "ContentViewerActionsController",
+                controllerAs: "vm"
+            }
         }
-      });
-
-    $urlRouterProvider.otherwise('/');
-  }
-
-})();
+    });
+    $urlRouterProvider.otherwise("/");
+}
+exports.routeConfig = routeConfig;

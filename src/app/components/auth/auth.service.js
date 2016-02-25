@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('angular')
+    .module('noosferoApp')
     .factory('Session', Session)
     .factory('AuthService', AuthService);
 
