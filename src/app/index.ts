@@ -5,23 +5,35 @@ import {noosferoAngularRunBlock} from "./index.run";
 import {routeConfig} from "./index.route";
 import {ContentViewerController} from "./content-viewer/content-viewer.controller";
 import {Main} from "./main/main.controller";
-import {bootstrap} from 'ng-forward';
+import {bootstrap, bundle} from 'ng-forward';
 
 declare var moment: any;
 
-// NoosferoApp.init();
+let noosferoApp: any = bundle("noosferoApp", Main, ["ngAnimate", "ngCookies", "ngStorage", "ngTouch",
+    "ngSanitize", "ngMessages", "ngAria", "restangular",
+    "ui.router", "ui.bootstrap", "toastr",
+    "angularMoment", "angular.filter", "akoenig.deckgrid",
+    "angular-timeline", "duScroll", "oitozero.ngSweetAlert"]).publish();
+console.log(noosferoApp);
+// bootstrap(Main, noosferoApp.requires);
+
+NoosferoApp.angularModule = noosferoApp;
 // 
-// NoosferoApp.addConstants("moment", moment);
-// NoosferoApp.addConstants("AUTH_EVENTS", {
-//     loginSuccess: "auth-login-success",
-//     loginFailed: "auth-login-failed",
-//     logoutSuccess: "auth-logout-success"
-// });
+NoosferoApp.addConstants("moment", moment);
+NoosferoApp.addConstants("AUTH_EVENTS", {
+    loginSuccess: "auth-login-success",
+    loginFailed: "auth-login-failed",
+    logoutSuccess: "auth-logout-success"
+});
 // 
 // 
-// NoosferoApp.addConfig(noosferoModuleConfig);
+NoosferoApp.addConfig(noosferoModuleConfig);
 // 
-// NoosferoApp.run(noosferoAngularRunBlock);
+NoosferoApp.run(noosferoAngularRunBlock);
+
+noosferoApp.run(() => {
+    console.log("RUN!");
+});
 
 // // require("./main/main.controller.js");
 // require("./cms/cms.controller.js");
@@ -51,4 +63,6 @@ declare var moment: any;
 
 // NoosferoApp.addConfig(routeConfig);
 
-console.log(bootstrap(Main, ['ui.router']));
+
+
+//bootstrap(Main, ['ui.router']);

@@ -1,4 +1,4 @@
-import {Component, StateConfig} from 'ng-forward';
+import {bundle, Component, StateConfig} from 'ng-forward';
 
 @Component({
     selector: 'main2',
@@ -10,7 +10,7 @@ export class Main2 {
 
 @Component({
     selector: 'main',
-    template: `aaaa <div ui-view></div>`
+    template: `aaaa <ui-view></ui-view>`
 })
 @StateConfig([
     {
@@ -28,3 +28,6 @@ export class Main2 {
 export class Main {
 
 }
+
+// bundle('noosferoApp', Main2).publish();
+// bundle('noosferoApp', Main).publish(); 
