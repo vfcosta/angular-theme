@@ -1,6 +1,8 @@
+import {Main} from "./main/main.controller";
+
 export class NoosferoApp {
 
-    static appName: string = "noosferoApp";
+    static appName: string = (<any>Main).name;
 
     static init() {
         angular.module(NoosferoApp.appName, ["ngAnimate", "ngCookies", "ngStorage", "ngTouch",

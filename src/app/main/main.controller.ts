@@ -1,6 +1,14 @@
 import {Component, StateConfig} from 'ng-forward';
 
 @Component({
+    selector: 'main2',
+    template: `test main2`
+})
+export class Main2 {
+
+}
+
+@Component({
     selector: 'main',
     template: `aaaa <div ui-view></div>`
 })
@@ -9,7 +17,7 @@ import {Component, StateConfig} from 'ng-forward';
         url: '/',
         component: Main2,
         // templateUrl: "app/main/main.html",
-        name: 'main2',
+        name: 'main',
         // resolve: {
         // currentUser: function(AuthService) {
         // return AuthService.loginFromCookie();
@@ -18,13 +26,5 @@ import {Component, StateConfig} from 'ng-forward';
     }
 ])
 export class Main {
-
-}
-
-@Component({
-    selector: 'Main2',
-    template: `test main2`
-})
-export class Main2 {
 
 }

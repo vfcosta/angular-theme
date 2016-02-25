@@ -51,4 +51,4 @@ declare var moment: any;
 
 // NoosferoApp.addConfig(routeConfig);
 
-bootstrap(Main, ['ui.router']);
+console.log(bootstrap(Main, ['ui.router']));
