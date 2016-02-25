@@ -26,16 +26,9 @@ NoosferoApp.addConstants("AUTH_EVENTS", {
     logoutSuccess: "auth-logout-success"
 });
 
-
 NoosferoApp.addConfig(noosferoModuleConfig);
-
 NoosferoApp.run(noosferoAngularRunBlock);
 
-noosferoApp.run(() => {
-    console.log("RUN!");
-});
-
-// require("./main/main.controller.js");
 require("./cms/cms.controller.js");
 require("./components/auth/auth.controller.js");
 require("./components/auth/auth.service.js");
@@ -60,7 +53,6 @@ require("./content-viewer/content-viewer-actions.controller.js");
 // require("./content-viewer/content-viewer.controller.js");
 require("./profile-info/profile-info.controller.js");
 require("./profile/profile-home.controller.js");
-require("./profile/profile.controller.js");
 
 NoosferoApp.addController("ContentViewerController", noosferoContentViewer);
 
