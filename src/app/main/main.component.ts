@@ -10,9 +10,6 @@ import {Profile} from "../profile/profile.component";
     templateUrl: "app/main/main.html",
 })
 export class MainContent {
-    constructor() {
-        console.log("MAIN");
-    }
 
 }
 
@@ -40,6 +37,8 @@ export class MainContent {
         views: {
             "content": {
                 templateUrl: "app/profile/profile.html",
+                controller: "ProfileController",
+                controllerAs: "vm"
             }
         }
     }

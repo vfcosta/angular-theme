@@ -5,6 +5,7 @@ import {noosferoAngularRunBlock} from "./index.run";
 import {routeConfig} from "./index.route";
 
 import {ContentViewer as noosferoContentViewer} from "./content-viewer/content-viewer.component";
+import {Profile as noosferoProfile} from "./profile/profile.component";
 
 import {Main} from "./main/main.component";
 import {bootstrap, bundle} from "ng-forward";
@@ -55,5 +56,6 @@ require("./profile-info/profile-info.controller.js");
 require("./profile/profile-home.controller.js");
 
 NoosferoApp.addController("ContentViewerController", noosferoContentViewer);
+NoosferoApp.addController("ProfileController", noosferoProfile);
 
 NoosferoApp.addConfig(routeConfig);
