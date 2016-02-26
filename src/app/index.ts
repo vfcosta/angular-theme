@@ -6,6 +6,7 @@ import {routeConfig} from "./index.route";
 
 import {ContentViewer as noosferoContentViewer} from "./content-viewer/content-viewer.component";
 import {Profile as noosferoProfile} from "./profile/profile.component";
+import {ProfileInfo as noosferoProfileInfo} from "./profile-info/profile-info.component";
 
 import {Main} from "./main/main.component";
 import {bootstrap, bundle} from "ng-forward";
@@ -52,10 +53,10 @@ require("./components/noosfero/noosfero.service.js");
 require("./components/noosfero/profile-image/profile-image.component.js");
 require("./content-viewer/content-viewer-actions.controller.js");
 // require("./content-viewer/content-viewer.controller.js");
-require("./profile-info/profile-info.controller.js");
 require("./profile/profile-home.controller.js");
 
 NoosferoApp.addController("ContentViewerController", noosferoContentViewer);
 NoosferoApp.addController("ProfileController", noosferoProfile);
+NoosferoApp.addController("ProfileInfoController", noosferoProfileInfo);
 
 NoosferoApp.addConfig(routeConfig);

@@ -25,16 +25,6 @@ export function routeConfig($stateProvider, $urlRouterProvider) {
                 }
             }
         })
-        .state("main.profile.info", {
-            url: "^/profile/:profile",
-            views: {
-                "mainBlockContent": {
-                    templateUrl: "app/profile-info/profile-info.html",
-                    controller: "ProfileInfoController",
-                    controllerAs: "vm"
-                }
-            }
-        })
         .state("main.profile.page", {
             url: "/{page:any}",
             views: {

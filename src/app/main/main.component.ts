@@ -31,7 +31,7 @@ export class MainContent {
     },
     {
         url: "^/:profile",
-        // abstract: true,
+        abstract: true,
         component: Profile,
         name: 'main.profile',
         views: {

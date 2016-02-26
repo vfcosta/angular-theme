@@ -1,9 +1,24 @@
-import {Component, Inject} from 'ng-forward';
+import {StateConfig, Component, Inject} from 'ng-forward';
+import {ProfileInfo} from '../profile-info/profile-info.component'
 
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html"
 })
+@StateConfig([
+    {
+        url: "^/profile/:profile",
+        component: ProfileInfo,
+        name: 'main.profile.info',
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/profile-info/profile-info.html",
+                controller: "ProfileInfoController",
+                controllerAs: "vm"
+            }
+        }
+    }
+])
 @Inject("noosfero", "$log", "$stateParams")
 export class Profile {
 
