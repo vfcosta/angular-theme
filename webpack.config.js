@@ -1,5 +1,9 @@
+/* global __dirname */
+
 var argv = require("yargs").argv;
 var path = require("path");
+var glob = require("glob");
+
 
 var extension = ".js";
 if (argv.production) {
@@ -13,9 +17,12 @@ var uglifyLoaderConfig = {
   loader: "uglify"
 };
 
+var testingFiles = glob.sync("./src/app/**/*.[sS]pec.ts");
+
 var webpackConfig = {
   entry: {
-    noosfero: './src/app/index.ts'
+    noosfero: './src/app/index.ts',
+    'noosfero-testing': testingFiles
   },
 
 

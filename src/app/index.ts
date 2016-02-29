@@ -1,3 +1,4 @@
+
 import "reflect-metadata";
 import {NoosferoApp} from "./index.module";
 import {noosferoModuleConfig} from "./index.config";
@@ -11,7 +12,9 @@ import {ProfileInfo as noosferoProfileInfo} from "./profile-info/profile-info.co
 import {Main} from "./main/main.component";
 import {bootstrap, bundle} from "ng-forward";
 
-declare var moment: any;
+
+
+declare var moment: any; 
 
 let noosferoApp: any = bundle("noosferoApp", Main, ["ngAnimate", "ngCookies", "ngStorage", "ngTouch",
     "ngSanitize", "ngMessages", "ngAria", "restangular",
