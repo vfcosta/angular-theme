@@ -12,7 +12,7 @@ export class NoosferoArticleBlog {
     @Input() profile;
 
     private posts: any[];
-    private perPage: number;
+    private perPage: number = 3;
     private currentPage: number;
     private totalPosts: number = 0;
 
@@ -20,6 +20,10 @@ export class NoosferoArticleBlog {
     }
 
     ngOnInit() {
+        this.loadPage();
+    }
+
+    loadPage() {
         this.noosfero.articles.one(this.article.id).customGET("children", {
             content_type: "TinyMceArticle",
             per_page: this.perPage,
