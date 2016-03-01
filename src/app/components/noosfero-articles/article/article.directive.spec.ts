@@ -1,16 +1,16 @@
-let oldDefine = Object.defineProperties;
-
-Object.defineProperties = function(object, properties){
-    let filteredProps = {};
-    let currentProperties = Object.getOwnPropertyNames(object);
-    for (let i = 0; i < currentProperties.length; i++) {
-        let prop = currentProperties[i];
-        if(currentProperties.indexOf(prop) < 0){
-            filteredProps[prop] = properties[prop];
-        }
-    }
-    oldDefine(object, <any>filteredProps);
-};
+// let oldDefine = Object.defineProperties;
+// 
+// Object.defineProperties = function(object, properties){
+//     let filteredProps = {};
+//     let currentProperties = Object.getOwnPropertyNames(object);
+//     for (let i = 0; i < currentProperties.length; i++) {
+//         let prop = currentProperties[i];
+//         if(currentProperties.indexOf(prop) < 0){
+//             filteredProps[prop] = properties[prop];
+//         }
+//     }
+//     oldDefine(object, <any>filteredProps);
+// };
 
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Input, provide, Component} from 'ng-forward';

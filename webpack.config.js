@@ -3,7 +3,7 @@
 var argv = require("yargs").argv;
 var path = require("path");
 var glob = require("glob");
-
+var webpack = require("webpack");
 
 var extension = ".js";
 if (argv.production) {
@@ -22,7 +22,7 @@ var testingFiles = glob.sync("./src/app/**/*.[sS]pec.ts");
 var webpackConfig = {
   entry: {
     noosfero: './src/app/index.ts',
-    'noosfero-testing': testingFiles
+    'test': './src/test.ts'
   },
 
 
@@ -30,6 +30,9 @@ var webpackConfig = {
     path: path.join(__dirname, "src"),
     filename: "[name]" + extension,
   },
+  
+  /*plugins: [ new webpack.optimize.CommonsChunkPlugin("common.js") ],*/
+  
   resolve: {
     // Add `.ts` and `.tsx` as a resolvable extension.
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
