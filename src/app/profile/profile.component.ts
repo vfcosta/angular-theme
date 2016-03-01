@@ -1,5 +1,6 @@
 import {StateConfig, Component, Inject} from 'ng-forward';
 import {ProfileInfo} from '../profile-info/profile-info.component'
+import {ProfileHome} from '../profile/profile-home.component'
 import {Cms} from '../cms/cms.component'
 
 @Component({
@@ -27,6 +28,17 @@ import {Cms} from '../cms/cms.component'
             "mainBlockContent": {
                 templateUrl: "app/cms/cms.html",
                 controller: "CmsController",
+                controllerAs: "vm"
+            }
+        }
+    },
+    {
+        name: 'main.profile.home',
+        url: "",
+        component: ProfileHome,
+        views: {
+            "mainBlockContent": {
+                controller: "ProfileHomeController",
                 controllerAs: "vm"
             }
         }

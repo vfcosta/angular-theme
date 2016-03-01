@@ -6,15 +6,6 @@ export function routeConfig($stateProvider, $urlRouterProvider) {
         .state("main.profile.settings", {
             url: "^/myprofile/:profile"
         })
-        .state("main.profile.home", {
-            url: "",
-            views: {
-                "mainBlockContent": {
-                    controller: "ProfileHomeController",
-                    controllerAs: "vm"
-                }
-            }
-        })
         .state("main.profile.page", {
             url: "/{page:any}",
             views: {
