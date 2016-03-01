@@ -7,7 +7,7 @@ import {NoosferoArticleBlog} from "../blog/blog.component";
     directives: [NoosferoArticleBlog]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
-export class ArticleDirective {
+export class ArticleComponent {
 
     @Input() article: any;
     @Input() profile: any;

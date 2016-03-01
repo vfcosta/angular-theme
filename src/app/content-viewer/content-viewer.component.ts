@@ -1,6 +1,6 @@
 import * as noosfero from "../models/interfaces";
 
-import {ArticleDirective} from "../components/noosfero-articles/article/article.directive";
+import {ArticleComponent} from "../components/noosfero-articles/article/article.component";
 import {Input, Component, StateConfig, Inject} from "ng-forward";
 
 import {NoosferoArticleBlog} from "./../components/noosfero-articles/blog/blog.component";
@@ -8,7 +8,7 @@ import {NoosferoArticleBlog} from "./../components/noosfero-articles/blog/blog.c
 @Component({
     selector: "content-viewer",
     templateUrl: "app/content-viewer/page.html",
-    directives: [NoosferoArticleBlog, ArticleDirective]
+    directives: [NoosferoArticleBlog, ArticleComponent]
 })
 @Inject("noosfero", "$log", "$stateParams")
 export class ContentViewer {

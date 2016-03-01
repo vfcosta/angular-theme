@@ -1,7 +1,7 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Input, provide, Component} from 'ng-forward';
 
-import {ArticleDirective} from './article.directive';
+import {ArticleComponent} from './article.component';
 
 // Instantiate the Builder, this part is different than ng2.
 // In ng2 you inject tcb.
@@ -11,19 +11,19 @@ const tcb = new TestComponentBuilder();
 const htmlTemplate: string = '<noosfero-article [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-article>';
 
 
-describe("Article Directive", () => {
+describe("Article Component", () => {
 
     // the karma preprocessor html2js transform the templates html into js files which put
     // the templates to the templateCache into the module templates
     // we need to load the module templates here as the template for the 
-    // component NoosferoArtileDirective will be load on our tests
+    // component NoosferoArtileComponent will be load on our tests
     beforeEach(angular.mock.module("templates"));
 
     it("receives the article and profile as inputs", done => {
 
         // Creating a container component (ArticleContainerComponent) to include 
-        // the component under test (ArticleDirective)  
-        @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [ArticleDirective] })
+        // the component under test (ArticleComponent)  
+        @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [ArticleComponent] })
         class ArticleContainerComponent {
             article = { type: 'anyArticleType' };
             profile = { name: 'profile-name' };
@@ -35,9 +35,9 @@ describe("Article Directive", () => {
         tcb
             .createAsync(ArticleContainerComponent).then(fixture => {
                 // and here we can inspect and run the test assertions 
-                let myComponent: ArticleDirective = fixture.componentInstance;
+                let myComponent: ArticleComponent = fixture.componentInstance;
 
-                // assure the article object inside the ArticleDirective matches
+                // assure the article object inside the ArticleComponent matches
                 // the provided through the parent component
                 expect(myComponent.article.type).toEqual("anyArticleType");
                 expect(myComponent.profile.name).toEqual("profile-name");
@@ -51,9 +51,9 @@ describe("Article Directive", () => {
     });
 
 
-    it("renders a directive which matches to the article type", done => {
+    it("renders a component which matches to the article type", done => {
         // NoosferoTinyMceArticle component created to check if it will be used
-        // when a article with type 'TinyMceArticle' is provided to the noosfero-article (ArticleDirective)
+        // when a article with type 'TinyMceArticle' is provided to the noosfero-article (ArticleComponent)
         // *** Important *** - the selector is what ng-forward uses to define the name of the directive provider
         @Component({ selector: 'noosfero-tiny-mce-article', template: "<h1>TinyMceArticle</h1>" })
         class NoosferoTinyMceArticle {
@@ -62,7 +62,7 @@ describe("Article Directive", () => {
         }
 
         // Creating a container component (ArticleContainerComponent) to include our NoosferoTinyMceArticle
-        @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [ArticleDirective, NoosferoTinyMceArticle] })
+        @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [ArticleComponent, NoosferoTinyMceArticle] })
         class CustomArticleType {
             article = { type: 'TinyMceArticle' };
             profile = { name: 'profile-name' };
