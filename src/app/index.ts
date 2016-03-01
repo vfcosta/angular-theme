@@ -7,6 +7,7 @@ import {noosferoAngularRunBlock} from "./index.run";
 import {routeConfig} from "./index.route";
 
 import {ContentViewer as noosferoContentViewer} from "./content-viewer/content-viewer.component";
+import {ContentViewerActions as noosferoContentViewerActions} from "./content-viewer/content-viewer-actions.component";
 import {Profile as noosferoProfile} from "./profile/profile.component";
 import {ProfileInfo as noosferoProfileInfo} from "./profile-info/profile-info.component";
 import {ProfileHome as noosferoProfileHome} from "./profile/profile-home.component";
@@ -52,9 +53,9 @@ require("./components/noosfero-boxes/boxes.component.js");
 require("./components/noosfero/noosfero-template.filter.js");
 require("./components/noosfero/noosfero.service.js");
 require("./components/noosfero/profile-image/profile-image.component.js");
-require("./content-viewer/content-viewer-actions.controller.js");
 
 NoosferoApp.addController("ContentViewerController", noosferoContentViewer);
+NoosferoApp.addController("ContentViewerActionsController", noosferoContentViewerActions);
 NoosferoApp.addController("ProfileController", noosferoProfile);
 NoosferoApp.addController("ProfileHomeController", noosferoProfileHome);
 NoosferoApp.addController("ProfileInfoController", noosferoProfileInfo);

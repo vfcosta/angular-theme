@@ -2,6 +2,7 @@ import {StateConfig, Component, Inject} from 'ng-forward';
 import {ProfileInfo} from '../profile-info/profile-info.component'
 import {ProfileHome} from '../profile/profile-home.component'
 import {Cms} from '../cms/cms.component'
+import {ContentViewer} from "../content-viewer/content-viewer.component";
 
 @Component({
     selector: 'profile',
@@ -43,6 +44,23 @@ import {Cms} from '../cms/cms.component'
             }
         }
     },
+    {
+        name: 'main.profile.page',
+        url: "/{page:any}",
+        component: ContentViewer,
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/content-viewer/page.html",
+                controller: "ContentViewerController",
+                controllerAs: "vm"
+            },
+            "actions@main": {
+                templateUrl: "app/content-viewer/navbar-actions.html",
+                controller: "ContentViewerActionsController",
+                controllerAs: "vm"
+            }
+        }
+    }
 ])
 @Inject("noosfero", "$log", "$stateParams")
 export class Profile {
