@@ -23,6 +23,8 @@ function listFiles() {
 
     var patterns = [].concat(wiredep(wiredepOptions).js)
         .concat([
+            './src/commons.js',
+            './src/noosfero.js',
             './src/noosfero-specs.js'
             ]
             //[
@@ -124,7 +126,8 @@ module.exports = function (config) {
     // It was not possible to do it there because karma doesn't let us now if we are
     // running a single test or not
      configuration.preprocessors = {
-         'src/**/*.js': ['sourcemap']
+         'src/**/*.js': ['sourcemap'],
+         'src/**/*.ts': ['sourcemap']
      };
     //     'src/**/*.js': ['sourcemap'],
     //     'src/**/*.[sS]pec.ts': ['sourcemap']

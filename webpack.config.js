@@ -3,7 +3,8 @@
 var argv = require("yargs").argv;
 var path = require("path");
 var glob = require("glob");
-var webpack = require("webpack");
+
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
 var extension = ".js";
 if (argv.production) {
@@ -27,6 +28,7 @@ var webpackConfig = {
     'noosfero-specs': './src/spec.ts'
   },
 
+  plugins: [  new CommonsChunkPlugin("commons.js")],
 
   output: {
     path: path.join(__dirname, "src"),

@@ -1,4 +1,5 @@
 
+import "core-js/shim";
 import "reflect-metadata";
 import {NoosferoApp} from "./index.module";
 import {noosferoModuleConfig} from "./index.config";
