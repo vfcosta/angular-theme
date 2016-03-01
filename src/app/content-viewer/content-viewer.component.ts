@@ -1,19 +1,16 @@
-
 import * as noosfero from "../models/interfaces";
 
 import {ArticleDirective, ArticleView} from "../components/noosfero-articles/article/article.directive";
-import {Input, Component, StateConfig} from "ng-forward";
+import {Input, Component, StateConfig, Inject} from "ng-forward";
 
 import {NoosferoArticleBlog} from "./../components/noosfero-articles/blog/blog.component";
 
 @Component({
     selector: "content-viewer",
     templateUrl: "app/content-viewer/page.html",
-    providers: [
-        "noosferoService", "$log", "$stateParams"
-    ],
     directives: [NoosferoArticleBlog, ArticleView, ArticleDirective]
 })
+@Inject("noosfero", "$log", "$stateParams")
 export class ContentViewer {
 
     @Input()

@@ -6,4 +6,6 @@ coverage/
 .tmp/
 dist/
 src/noosfero.js*
+src/commons.js
+src/noosfero-specs.js
 typings
