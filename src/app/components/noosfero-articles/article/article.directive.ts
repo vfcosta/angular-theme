@@ -10,14 +10,11 @@ export class ArticleView {
     @Input() article: any;
     @Input() profile: any;
 
-    constructor() {
-
-    }
 }
 
 @Component({
     selector: 'noosfero-article',
-    template: '<div></div>',
+    template: 'not-used',
     directives: [ArticleView, NoosferoArticleBlog]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
@@ -36,7 +33,11 @@ export class ArticleDirective {
         this.$element.replaceWith(this.$compile('<' + this.directiveName + ' [article]="ctrl.article" [profile]="ctrl.profile"></' + this.directiveName + '>')(this.$scope));
     }
 
-    constructor(private $element: any, private $scope: ng.IScope, private $injector: ng.auto.IInjectorService, private $compile: ng.ICompileService) {
+    constructor(
+        private $element: any,
+        private $scope: ng.IScope,
+        private $injector: ng.auto.IInjectorService,
+        private $compile: ng.ICompileService) {
 
     }
 }

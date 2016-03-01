@@ -12,7 +12,8 @@ const htmlTemplate: string = '<noosfero-article [article]="ctrl.article" [profil
 
 
 describe("Article Directive", () => {
-
+    
+    
     // the karma preprocessor html2js transform the templates html into js files which put
     // the templates to the templateCache into the module templates
     // we need to load the module templates here as the template for the 
@@ -32,22 +33,26 @@ describe("Article Directive", () => {
         }
 
         // uses the TestComponentBuilder instance to initialize the component
-        tcb
-            .createAsync(ArticleContainerComponent).then(fixture => {
-                // and here we can inspect and run the test assertions 
-                let myComponent: ArticleDirective = fixture.componentInstance;
+        tcb.createAsync(ArticleContainerComponent).then((fixture) => {
+            // and here we can inspect and run the test assertions 
+            let myComponent: ArticleContainerComponent = fixture.componentInstance;
 
-                // assure the article object inside the ArticleDirective matches
-                // the provided through the parent component
-                expect(myComponent.article.type).toEqual("anyArticleType");
-                expect(myComponent.profile.name).toEqual("profile-name");
+            console.log(myComponent);
 
-                // done needs to be called (it isn't really needed, as we can read in
-                // here (https://github.com/ngUpgraders/ng-forward/blob/master/API.md#createasync)
-                // because createAsync in ng-forward is not really async, but as the intention 
-                // here is write tests in angular 2 ways, this is recommended
+            // assure the article object inside the ArticleDirective matches
+            // the provided through the parent component
+            expect(myComponent.article.type).toEqual("anyArticleType");
+            expect(myComponent.profile.name).toEqual("profile-name");
+
+            myComponent.metodoAsync(() => {
                 done();
             });
+            // done needs to be called (it isn't really needed, as we can read in
+            // here (https://github.com/ngUpgraders/ng-forward/blob/master/API.md#createasync)
+            // because createAsync in ng-forward is not really async, but as the intention 
+            // here is write tests in angular 2 ways, this is recommended
+            done();
+        });
     });
 
 
@@ -69,13 +74,12 @@ describe("Article Directive", () => {
             constructor() {
             }
         }
-        tcb
-            .createAsync(CustomArticleType).then(fixture => {
-                let myComponent: CustomArticleType = fixture.componentInstance;
-                expect(myComponent.article.type).toEqual("TinyMceArticle");
-                expect(fixture.debugElement.componentViewChildren[0].text()).toEqual("TinyMceArticle");
-                done();
-            });
+        tcb.createAsync(CustomArticleType).then(fixture => {
+            let myComponent: CustomArticleType = fixture.componentInstance;
+            expect(myComponent.article.type).toEqual("TinyMceArticle");
+            expect(fixture.debugElement.componentViewChildren[0].text()).toEqual("TinyMceArticle");
+            done();
+        });
     });
 
 });

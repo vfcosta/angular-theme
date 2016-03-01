@@ -15,7 +15,7 @@ export class MainContent {
 
 @Component({
     selector: 'main',
-    template: '<div ng-view></div>',
+    template: 'not-used',
     directives: [NoosferoArticleBlog, ArticleDirective, Boxes, Block]
 })
 @StateConfig([

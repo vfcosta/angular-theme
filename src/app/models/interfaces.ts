@@ -21,3 +21,15 @@ export interface TynyMceArticle extends Article {
 export interface Blog extends Article {
     id: number;
 }
+
+export interface Credentials {
+    username: string;
+    password: string;
+}
+
+export interface User {
+    id: number;
+    login: string;
+    email: string;
+    person: Person;
+}
