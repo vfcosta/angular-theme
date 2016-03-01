@@ -25,7 +25,7 @@ var testingFiles = glob.sync("./src/app/**/*.[sS]pec.ts");
 var webpackConfig = {
   entry: {
     noosfero: './src/app/index.ts',
-    'noosfero-specs': './src/spec.ts'
+    'noosfero-specs': './src/specs.ts'
   },
 
   plugins: [  new CommonsChunkPlugin("commons.js")],
