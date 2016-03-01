@@ -3,12 +3,15 @@
 var argv = require("yargs").argv;
 var path = require("path");
 var glob = require("glob");
-var webpack = require("webpack");
+
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
 var extension = ".js";
 if (argv.production) {
   extension = ".min.js"
 }
+
+var testFiles = glob.sync("./src/**/*.[sS]pec.ts");
 
 var uglifyLoaderConfig = {
   // I want to uglify with mangling only app files, not thirdparty libs
@@ -22,9 +25,10 @@ var testingFiles = glob.sync("./src/app/**/*.[sS]pec.ts");
 var webpackConfig = {
   entry: {
     noosfero: './src/app/index.ts',
-    'test': './src/test.ts'
+    'noosfero-specs': './src/spec.ts'
   },
 
+  plugins: [  new CommonsChunkPlugin("commons.js")],
 
   output: {
     path: path.join(__dirname, "src"),
@@ -38,7 +42,7 @@ var webpackConfig = {
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
   // Source maps support (or 'inline-source-map' also works)
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   module: {
     loaders: [{
