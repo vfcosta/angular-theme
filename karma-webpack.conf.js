@@ -12,9 +12,6 @@ var pathSrcHtml = [
     path.join(conf.paths.src, '/**/*.html')
 ];
 
-var glob = require("glob");
-var testFiles = glob.sync("./src/**/*.[sS]pec.ts");
-
 function listFiles() {
     var wiredepOptions = _.extend({}, conf.wiredep, {
         dependencies: true,
@@ -23,18 +20,8 @@ function listFiles() {
 
     var patterns = [].concat(wiredep(wiredepOptions).js)
         .concat([
-            './src/noosfero-specs.js'
+            './src/spec.ts'
             ]
-            //[
-             //path.join(conf.paths.src, 'common.js'),
-             //, path.join(conf.paths.src, 'index.ts')
-             //path.join(conf.paths.src, 'test.js')
-            // path.join(conf.paths.src, '/app/**/*.module.js'),
-            // path.join(conf.paths.src, '/app/**/*.js'),
-            // path.join(conf.paths.src, '/**/*.spec.js'),
-            // path.join(conf.paths.src, '/**/*.mock.js')
-            
-        //]
         )
         .concat(pathSrcHtml);
 
@@ -48,11 +35,6 @@ function listFiles() {
         included: false,
         served: true,
         watched: false
-    });
-    files.push({
-        pattern: path.join(conf.paths.src, '/test.js.map'),
-        included: false,
-        served: true
     });
     return files;
 }
@@ -85,16 +67,15 @@ module.exports = function (config) {
 
         browsers: ['PhantomJS'],
 
-       /* webpack: _.merge({
+        webpack: _.merge({
             
         }, webpackConfig, {
             devtool: 'inline-source-map'
         }),
         webpackServer: {
             quite: true
-        },*/
+        },
         plugins: [
-//            require('karma-webpack'),
             'karma-chrome-launcher',
             'karma-phantomjs-launcher',
             'karma-angular-filesort',
@@ -124,11 +105,8 @@ module.exports = function (config) {
     // It was not possible to do it there because karma doesn't let us now if we are
     // running a single test or not
      configuration.preprocessors = {
-         'src/**/*.js': ['sourcemap']
+         'src/**/*.ts': ['webpack','sourcemap']
      };
-    //     'src/**/*.js': ['sourcemap'],
-    //     'src/**/*.[sS]pec.ts': ['sourcemap']
-    // };
 
     pathSrcHtml.forEach(function (path) {
         configuration.preprocessors[path] = ['ng-html2js'];

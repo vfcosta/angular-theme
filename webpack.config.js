@@ -10,6 +10,8 @@ if (argv.production) {
   extension = ".min.js"
 }
 
+var testFiles = glob.sync("./src/**/*.[sS]pec.ts");
+
 var uglifyLoaderConfig = {
   // I want to uglify with mangling only app files, not thirdparty libs
   test: /\.js$/,
@@ -22,7 +24,7 @@ var testingFiles = glob.sync("./src/app/**/*.[sS]pec.ts");
 var webpackConfig = {
   entry: {
     noosfero: './src/app/index.ts',
-    'test': './src/test.ts'
+    'noosfero-specs': './src/spec.ts'
   },
 
 
@@ -38,7 +40,7 @@ var webpackConfig = {
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
   // Source maps support (or 'inline-source-map' also works)
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   module: {
     loaders: [{

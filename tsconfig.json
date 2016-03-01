@@ -3,13 +3,14 @@
         "module": "commonjs",
         "target": "es5",
         "noImplicitAny": false,
-        "sourceMap": false,
+        "sourceMap": true,
         "experimentalDecorators": true
     },
     "exclude": [
         "node_modules",
         "typings/main",
-        "typings/main.d.ts"
+        "typings/main.d.ts",
+        "node_modules/ng-forward/cjs/util/jqlite-extensions.d.ts"
     ],
     "compileOnSave": false,
     "atom": {
