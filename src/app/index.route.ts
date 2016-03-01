@@ -3,16 +3,6 @@
 /** @ngInject */
 export function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state("main.profile.cms", {
-            url: "^/myprofile/:profile/cms",
-            views: {
-                "mainBlockContent": {
-                    templateUrl: "app/cms/cms.html",
-                    controller: "CmsController",
-                    controllerAs: "vm"
-                }
-            }
-        })
         .state("main.profile.settings", {
             url: "^/myprofile/:profile"
         })

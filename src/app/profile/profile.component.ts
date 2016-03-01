@@ -1,5 +1,6 @@
 import {StateConfig, Component, Inject} from 'ng-forward';
 import {ProfileInfo} from '../profile-info/profile-info.component'
+import {Cms} from '../cms/cms.component'
 
 @Component({
     selector: 'profile',
@@ -7,9 +8,9 @@ import {ProfileInfo} from '../profile-info/profile-info.component'
 })
 @StateConfig([
     {
+        name: 'main.profile.info',
         url: "^/profile/:profile",
         component: ProfileInfo,
-        name: 'main.profile.info',
         views: {
             "mainBlockContent": {
                 templateUrl: "app/profile-info/profile-info.html",
@@ -17,7 +18,19 @@ import {ProfileInfo} from '../profile-info/profile-info.component'
                 controllerAs: "vm"
             }
         }
-    }
+    },
+    {
+        name: 'main.profile.cms',
+        url: "^/myprofile/:profile/cms",
+        component: Cms,
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/cms/cms.html",
+                controller: "CmsController",
+                controllerAs: "vm"
+            }
+        }
+    },
 ])
 @Inject("noosfero", "$log", "$stateParams")
 export class Profile {
