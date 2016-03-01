@@ -7,7 +7,7 @@
     "moment": "^2.11.2"
   },
   "scripts": {
-    "test": "webpack -w & karma start",
+    "test": "concurrently \"webpack -w\" \"karma start\"",
     "postinstall": "npm install -g bower && bower install",
     "start": "concurrently \"webpack -w\" \"gulp serve\""
   },

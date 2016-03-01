@@ -9,7 +9,7 @@ var _ = require('lodash');
 var wiredep = require('wiredep');
 
 var pathSrcHtml = [
-    path.join(conf.paths.src, '/**/*.html')
+    path.join('./src/app/**/*.html')
 ];
 
 var glob = require("glob");
@@ -75,7 +75,7 @@ module.exports = function (config) {
 
         ngHtml2JsPreprocessor: {
             stripPrefix: conf.paths.src + '/',
-            moduleName: 'angular'
+            moduleName: 'templates'
         },
 
 
@@ -132,7 +132,7 @@ module.exports = function (config) {
     //     'src/**/*.js': ['sourcemap'],
     //     'src/**/*.[sS]pec.ts': ['sourcemap']
     // };
-
+    
     pathSrcHtml.forEach(function (path) {
         configuration.preprocessors[path] = ['ng-html2js'];
     });

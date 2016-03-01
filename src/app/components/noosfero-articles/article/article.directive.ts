@@ -11,7 +11,7 @@ export class ArticleView {
     @Input() profile: any;
 
     constructor() {
-        console.log("ARTICLE VIEW");
+
     }
 }
 
