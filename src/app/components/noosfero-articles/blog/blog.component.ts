@@ -1,5 +1,6 @@
 import {Component, Input, Inject} from "ng-forward";
 
+import {Article, Profile} from "./../../../models/interfaces";
 
 @Component({
     selector: "noosfero-blog",
@@ -8,15 +9,15 @@ import {Component, Input, Inject} from "ng-forward";
 @Inject("noosfero", "$scope")
 export class NoosferoArticleBlog {
 
-    @Input() article;
-    @Input() profile;
+    @Input() article: Article;
+    @Input() profile: Profile;
 
     private posts: any[];
     private perPage: number = 3;
     private currentPage: number;
     private totalPosts: number = 0;
 
-    constructor(private noosfero: any, private $scope) {
+    constructor(private noosfero: any, private $scope: ng.IScope) {
     }
 
     ngOnInit() {
@@ -28,8 +29,8 @@ export class NoosferoArticleBlog {
             content_type: "TinyMceArticle",
             per_page: this.perPage,
             page: this.currentPage
-        }).then((response) => {
-            this.totalPosts = response.headers("total");
+        }).then((response: restangular.IResponse) => {
+            this.totalPosts = <number>(<any>response.headers("total"));
             this.posts = response.data.articles;
         });
     }

@@ -1,11 +1,12 @@
+import {Session} from "./components/auth/session";
 
 /** @ngInject */
-export function noosferoAngularRunBlock($log, Restangular, Session) {
-    Restangular.addFullRequestInterceptor(function(element, operation, route, url, headers) {
+export function noosferoAngularRunBlock($log: ng.ILogService, Restangular: restangular.IService, Session: Session) {
+    Restangular.addFullRequestInterceptor((element: any, operation: string, route: string, url: string, headers: string)  => {
         if (Session.getCurrentUser()) {
-            headers["Private-Token"] = Session.getCurrentUser().private_token;
+            (<any>headers)["Private-Token"] = Session.getCurrentUser().private_token;
         }
-        return { headers: headers };
+        return <any>{ headers: <any>headers };
     });
 }
 

@@ -1,6 +1,7 @@
 import * as noosfero from "../models/interfaces";
 
-import {ArticleComponent} from "../components/noosfero-articles/article/article.component";
+
+import {ArticleView} from "../components/noosfero-articles/article/article_view";
 import {Input, Component, StateConfig, Inject} from "ng-forward";
 
 import {NoosferoArticleBlog} from "./../components/noosfero-articles/blog/blog.component";
@@ -8,7 +9,7 @@ import {NoosferoArticleBlog} from "./../components/noosfero-articles/blog/blog.c
 @Component({
     selector: "content-viewer",
     templateUrl: "app/content-viewer/page.html",
-    directives: [NoosferoArticleBlog, ArticleComponent]
+    directives: [NoosferoArticleBlog, ArticleView]
 })
 @Inject("noosfero", "$log", "$stateParams")
 export class ContentViewer {
@@ -24,11 +25,10 @@ export class ContentViewer {
     }
 
     activate() {
-        console.log("HERE CONTENT VIEWER");
-        this.noosfero.currentProfile.then((profile) => {
+        this.noosfero.currentProfile.then((profile: noosfero.Profile) => {
             this.profile = profile;
             return this.noosfero.profiles.one(this.profile.id).one("articles").get({ path: this.$stateParams["page"] });
-        }).then((response) => {
+        }).then((response: restangular.IResponse) => {
             this.article = response.data.article;
         });
     }

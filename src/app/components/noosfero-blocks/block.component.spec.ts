@@ -73,8 +73,8 @@ describe("Block Component", () => {
     it("renders the default block when hasn't defined a block type", done => {
         @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [Block] })
         class CustomBlockType {
-            block = { type: null };
-            owner = { name: 'profile-name' };
+            block: any = { type: null };
+            owner: any = { name: 'profile-name' };
             constructor() {
             }
         }
