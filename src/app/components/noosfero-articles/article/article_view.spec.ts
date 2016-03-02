@@ -1,11 +1,8 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Input, provide, Component} from 'ng-forward';
 
+import {Input, provide, Component} from 'ng-forward';
 import {ArticleView, ArticleDefaultView} from './article_view';
 
-// Instantiate the Builder, this part is different than ng2.
-// In ng2 you inject tcb.
-const tcb = new TestComponentBuilder();
+import {createComponentFromClass, quickCreateComponent} from "../../../../spec/helpers.ts";
 
 // this htmlTemplate will be re-used between the container components in this spec file 
 const htmlTemplate: string = '<noosfero-article [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-article>';
@@ -30,8 +27,7 @@ describe("ArticleView Component", () => {
             }
         }
 
-        // uses the TestComponentBuilder instance to initialize the component
-        tcb.createAsync(ArticleContainerComponent).then((fixture) => {
+        createComponentFromClass(ArticleContainerComponent).then((fixture) => {
             // and here we can inspect and run the test assertions
 
             // gets the children component of ArticleContainerComponent 
@@ -46,6 +42,7 @@ describe("ArticleView Component", () => {
             // here is write tests in angular 2 ways, this is recommended
             done();
         });
+
     });
 
     it("receives the article and profile as inputs", (done: Function) => {
@@ -61,7 +58,7 @@ describe("ArticleView Component", () => {
         }
 
         // uses the TestComponentBuilder instance to initialize the component
-        tcb.createAsync(ArticleContainerComponent).then((fixture) => {
+        createComponentFromClass(ArticleContainerComponent).then((fixture) => {
             // and here we can inspect and run the test assertions 
             let articleView: ArticleView = fixture.debugElement.componentViewChildren[0].componentInstance;
 
@@ -97,7 +94,7 @@ describe("ArticleView Component", () => {
             constructor() {
             }
         }
-        tcb.createAsync(CustomArticleType).then(fixture => {
+        createComponentFromClass(CustomArticleType).then(fixture => {
             let myComponent: CustomArticleType = fixture.componentInstance;
             expect(myComponent.article.type).toEqual("TinyMceArticle");
             expect(fixture.debugElement.componentViewChildren[0].text()).toEqual("TinyMceArticle");
