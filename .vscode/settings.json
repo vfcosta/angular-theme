@@ -4,5 +4,7 @@
         "**/.git": true,
         "**/.DS_Store": true,
         "src/app/*.js": false
-    }
+    },
+    "editor.fontSize": 14,
+    "typescript.useCodeSnippetsOnMethodSuggest": true
 }

@@ -1,5 +1,4 @@
-module NgNoosferoAPI {
-    
+namespace NgNoosferoAPI {
 
     // The following class represents the provider
     export class NoosferoHttpServiceConfigProvider implements ng.IServiceProvider {
@@ -12,19 +11,19 @@ module NgNoosferoAPI {
             contentTypeHeader: "application/json",
             textEncoding: "UTF-8"
         };
-    
- 
+
+
         // Configuration function
         public setConfig(config: NoosferoHttpServiceConfig) {
             this.config = config;
         }
- 
+
         // Provider's factory function
         public $get(): NoosferoHttpServiceConfig {
             return this.config;
         }
     }
-    
+
     ngModule.provider("NoosferoHttpServiceConfig", NoosferoHttpServiceConfigProvider);
 
 }

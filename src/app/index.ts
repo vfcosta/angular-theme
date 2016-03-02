@@ -17,6 +17,7 @@ import {Main} from "./main/main.component";
 import {bootstrap, bundle} from "ng-forward";
 
 import {AUTH_EVENTS} from "./components/auth/auth_events";
+import {AuthController} from "./components/auth/auth_controller";
 
 declare var moment: any;
 
@@ -35,8 +36,11 @@ NoosferoApp.addConstants("AUTH_EVENTS", AUTH_EVENTS);
 NoosferoApp.addConfig(noosferoModuleConfig);
 NoosferoApp.run(noosferoAngularRunBlock);
 
-require("./components/auth/auth.controller.js");
-require("./components/auth/auth.service.js");
+// NoosferoApp.addService("Session", Session);
+// NoosferoApp.addService("AuthService", AuthService);
+NoosferoApp.addController("AuthController", AuthController);
+
+
 require("./components/navbar/navbar.directive.js");
 require("./components/noosfero-activities/activities.component.js");
 require("./components/noosfero-activities/activity/activity.component.js");

@@ -5,7 +5,7 @@ import {NoosferoArticleBlog} from "../blog/blog.component";
     selector: 'noosfero-default-article',
     templateUrl: 'app/components/noosfero-articles/article/article.html'
 })
-export class ArticleView {
+export class ArticleDefaultView {
 
     @Input() article: any;
     @Input() profile: any;
@@ -15,10 +15,10 @@ export class ArticleView {
 @Component({
     selector: 'noosfero-article',
     template: 'not-used',
-    directives: [ArticleView, NoosferoArticleBlog]
+    directives: [ArticleDefaultView, NoosferoArticleBlog]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
-export class ArticleDirective {
+export class ArticleView {
 
     @Input() article: any;
     @Input() profile: any;

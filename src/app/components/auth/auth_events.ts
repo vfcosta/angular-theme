@@ -1,5 +1,3 @@
-
-
 export interface IAuthEvents {
     loginSuccess: string;
     loginFailed: string;
