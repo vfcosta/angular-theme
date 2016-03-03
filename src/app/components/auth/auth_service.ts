@@ -32,7 +32,7 @@ export class AuthService {
         return currentUser;
     }
 
-    login(credentials: Credentials) {
+    login(credentials: Credentials): ng.IPromise<User> {
         let url = '/api/v1/login';
         let encodedData = 'login=' + credentials.username + '&password=' + credentials.password;
         return this.$http.post(url, encodedData).then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
