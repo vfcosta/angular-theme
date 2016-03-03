@@ -47,7 +47,6 @@ require("./components/noosfero-activities/activities.component.js");
 require("./components/noosfero-activities/activity/activity.component.js");
 require("./components/noosfero-blocks/members-block/members-block.component.js");
 require("./components/noosfero-blocks/profile-image/profile-image.component.js");
-require("./components/noosfero-blocks/recent-documents/recent-documents.component.js");
 require("./components/noosfero/noosfero-template.filter.js");
 require("./components/noosfero/noosfero.service.js");
 require("./components/noosfero/profile-image/profile-image.component.js");
