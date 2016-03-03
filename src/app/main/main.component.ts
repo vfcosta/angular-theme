@@ -6,6 +6,7 @@ import {ArticleView} from "../components/noosfero-articles/article/article_view"
 import {Profile} from "../profile/profile.component";
 import {Boxes} from "../components/noosfero-boxes/boxes.component";
 import {Block} from "../components/noosfero-blocks/block.component";
+import {LinkListBlock} from "../components/noosfero-blocks/link-list/link-list.component";
 
 
 import {AuthService} from "./../components/auth/auth_service";
@@ -23,7 +24,7 @@ export class MainContent {
 @Component({
     selector: 'main',
     template: '<div ng-view></div>',
-    directives: [NoosferoArticleBlog, ArticleView, Boxes, Block],
+    directives: [NoosferoArticleBlog, ArticleView, Boxes, Block, LinkListBlock],
     providers: [AuthService, Session]
 })
 @StateConfig([

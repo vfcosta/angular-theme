@@ -1,6 +1,6 @@
 <div class="link-list-block">
-  <div ng-repeat="link in $ctrl.links">
-    <a ng-href="{{link.address | noosferoTemplateFilter:{profile: $ctrl.owner.identifier} }}">
+  <div ng-repeat="link in ctrl.links">
+    <a ng-href="{{link.address | noosferoTemplateFilter:{profile: ctrl.owner.identifier} }}">
       <i class="fa fa-fw icon-{{link.icon}}"></i> <span>{{link.name}}</span>
     </a>
   </div>
