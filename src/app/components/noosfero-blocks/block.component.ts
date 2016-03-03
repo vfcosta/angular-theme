@@ -12,7 +12,7 @@ export class Block {
 
     ngOnInit() {
         let blockName = this.block.type ? this.block.type.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase() : "default-block";
-        this.$element.replaceWith(this.$compile('<noosfero-' + blockName + ' block="ctrl.block" owner="ctrl.owner"></noosfero-' + blockName + '>')(this.$scope));
+        this.$element.replaceWith(this.$compile('<noosfero-' + blockName + ' [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-' + blockName + '>')(this.$scope));
     }
 
     constructor(private $element: any, private $scope: ng.IScope, private $injector: ng.auto.IInjectorService, private $compile: ng.ICompileService) {
