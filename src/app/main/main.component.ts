@@ -12,6 +12,8 @@ import {LinkListBlock} from "../components/noosfero-blocks/link-list/link-list.c
 import {AuthService} from "./../components/auth/auth_service";
 import {Session} from "./../components/auth/session";
 
+import {MainBlock} from "../components/noosfero-blocks/main-block/main-block.component";
+
 @Component({
     selector: 'main-content',
     templateUrl: "app/main/main.html",
@@ -24,7 +26,7 @@ export class MainContent {
 @Component({
     selector: 'main',
     template: '<div ng-view></div>',
-    directives: [NoosferoArticleBlog, ArticleView, Boxes, Block, LinkListBlock],
+    directives: [NoosferoArticleBlog, ArticleView, Boxes, Block, LinkListBlock, MainBlock],
     providers: [AuthService, Session]
 })
 @StateConfig([
