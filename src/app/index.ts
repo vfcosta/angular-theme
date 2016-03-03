@@ -19,6 +19,8 @@ import {bootstrap, bundle} from "ng-forward";
 import {AUTH_EVENTS} from "./components/auth/auth_events";
 import {AuthController} from "./components/auth/auth_controller";
 
+import {Navbar} from "./components/navbar";
+
 declare var moment: any;
 
 let noosferoApp: any = bundle("noosferoApp", Main, ["ngAnimate", "ngCookies", "ngStorage", "ngTouch",
@@ -41,7 +43,6 @@ NoosferoApp.run(noosferoAngularRunBlock);
 NoosferoApp.addController("AuthController", AuthController);
 
 
-require("./components/navbar/navbar.directive.js");
 require("./components/noosfero-activities/activities.component.js");
 require("./components/noosfero-activities/activity/activity.component.js");
 require("./components/noosfero-blocks/main-block/main-block.component.js");
