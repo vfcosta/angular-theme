@@ -110,8 +110,10 @@ module.exports = function (config) {
         ],
 
         coverageReporter: {
-            type: 'html',
-            dir: 'coverage/'
+            reporters:[
+                {type: 'html', dir:'coverage/'},
+                {type: 'text-summary'}
+            ]
         },
 
         reporters: ['spec', "coverage"],
@@ -126,8 +128,7 @@ module.exports = function (config) {
     // It was not possible to do it there because karma doesn't let us now if we are
     // running a single test or not
      configuration.preprocessors = {
-         'src/**/*.js': ['sourcemap'],
-         'src/**/*.ts': ['sourcemap']
+         'src/noosfero.js': ['sourcemap', 'coverage']
      };
     //     'src/**/*.js': ['sourcemap'],
     //     'src/**/*.[sS]pec.ts': ['sourcemap']
