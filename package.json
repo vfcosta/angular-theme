@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "concurrently \"webpack -w\" \"karma start\"",
-    "postinstall": "npm install -g bower && bower install",
+    "postinstall": "npm install -g bower && bower install && typings install",
     "start": "concurrently \"webpack -w\" \"gulp serve\"",
     "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts"
   },

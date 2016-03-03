@@ -11,7 +11,7 @@ export class Block {
     @Input() owner: any;
 
     ngOnInit() {
-        let blockName = this.block.type ? this.block.type.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase() : "default-block";
+        let blockName = (this.block && this.block.type) ? this.block.type.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase() : "default-block";
         this.$element.replaceWith(this.$compile('<noosfero-' + blockName + ' [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-' + blockName + '>')(this.$scope));
     }
 

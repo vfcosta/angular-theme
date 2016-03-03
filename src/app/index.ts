@@ -45,7 +45,6 @@ NoosferoApp.addController("AuthController", AuthController);
 
 require("./components/noosfero-activities/activities.component.js");
 require("./components/noosfero-activities/activity/activity.component.js");
-require("./components/noosfero-blocks/main-block/main-block.component.js");
 require("./components/noosfero-blocks/members-block/members-block.component.js");
 require("./components/noosfero-blocks/profile-image/profile-image.component.js");
 require("./components/noosfero-blocks/recent-documents/recent-documents.component.js");
