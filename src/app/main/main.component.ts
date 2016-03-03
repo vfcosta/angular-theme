@@ -9,6 +9,7 @@ import {Block} from "../components/noosfero-blocks/block.component";
 import {LinkListBlock} from "../components/noosfero-blocks/link-list/link-list.component";
 import {RecentDocumentsBlock} from "../components/noosfero-blocks/recent-documents/recent-documents.component";
 import {ProfileImageBlock} from "../components/noosfero-blocks/profile-image/profile-image.component";
+import {MembersBlock} from "../components/noosfero-blocks/members-block/members-block.component";
 
 
 import {AuthService} from "./../components/auth/auth_service";
@@ -32,7 +33,10 @@ export class MainContent {
 @Component({
     selector: 'main',
     template: '<div ng-view></div>',
-    directives: [NoosferoArticleBlog, ArticleView, Boxes, Block, LinkListBlock, MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock],
+    directives: [
+        NoosferoArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
+        MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock, MembersBlock
+    ],
     providers: [AuthService, Session]
 })
 @StateConfig([
