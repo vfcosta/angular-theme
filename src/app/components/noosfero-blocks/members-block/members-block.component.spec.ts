@@ -34,15 +34,14 @@ describe("Members Block Component", () => {
 
     it("get members of the block owner", done => {
         tcb.createAsync(BlockContainerComponent).then(fixture => {
-            let recentDocumentsBlock: MembersBlock = fixture.debugElement.componentViewChildren[0].componentInstance;
-            expect(recentDocumentsBlock.members).toEqual([{ identifier: "person1" }]);
+            let block: MembersBlock = fixture.debugElement.componentViewChildren[0].componentInstance;
+            expect(block.members).toEqual([{ identifier: "person1" }]);
             done();
         });
     });
 
     it("render the profile image for each member", done => {
         tcb.createAsync(BlockContainerComponent).then(fixture => {
-            let recentDocumentsBlock: MembersBlock = fixture.debugElement.componentViewChildren[0].componentInstance;
             fixture.debugElement.getLocal("$rootScope").$apply();
             expect(fixture.debugElement.queryAll("noosfero-profile-image").length).toEqual(1);
             done();
