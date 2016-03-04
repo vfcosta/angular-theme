@@ -1,5 +1,6 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Pipe, Input, provide, Component} from 'ng-forward';
+import {provideFilters} from '../../../../spec/helpers';
 
 import {LinkListBlock} from './link-list.component';
 
@@ -41,21 +42,17 @@ describe("Link List Block Component", () => {
 
     it("display links stored in block settings", done => {
 
-        @Pipe('noosferoTemplateFilter')
-        class NoosferoTemplateFilter {
-            transform(input: any, changeTo: any) {
-                return input;
-            }
-        }
-
-        @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [LinkListBlock] })
+        @Component({
+            selector: 'test-container-component',
+            template: htmlTemplate,
+            directives: [LinkListBlock],
+            providers: provideFilters("noosferoTemplateFilter")
+        })
         class CustomBlockType {
             block: any = { settings: { links: [{ name: 'link1', address: 'address1' }, { name: 'link2', address: 'address2' }] } };
             owner: any = { name: 'profile-name' };
-            constructor() {
-            }
         }
-        tcb.overrideView(LinkListBlock, { templateUrl: "app/components/noosfero-blocks/link-list/link-list.html", pipes: [NoosferoTemplateFilter] }).createAsync(CustomBlockType).then(fixture => {
+        tcb.createAsync(CustomBlockType).then(fixture => {
             expect(fixture.debugElement.queryAll(".link-list-block a").length).toEqual(2);
             done();
         });

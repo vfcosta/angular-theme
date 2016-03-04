@@ -1,7 +1,7 @@
 
 import {ngClass, TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {quickFixture} from 'ng-forward/cjs/tests/utils';
-import {Input, provide, Component} from 'ng-forward';
+import {Provider, Input, provide, Component} from 'ng-forward';
 
 
 
@@ -29,3 +29,10 @@ export function createComponentFromClass(yourClass: ngClass) {
     return tcb.createAsync(yourClass);
 }
 
+export function provideFilters(...filters: string[]) {
+    let providers: Provider[] = [];
+    for (var filter of filters) {
+        providers.push(new Provider(filter, { useValue: () => { } }));
+    }
+    return providers;
+}
