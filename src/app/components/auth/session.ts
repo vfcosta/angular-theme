@@ -20,7 +20,7 @@ export class Session {
         this.$log.debug('User session destroyed.');
     };
 
-    getCurrentUser(): User {
+    currentUser(): User {
         return this.$localStorage.currentUser;
     };
 

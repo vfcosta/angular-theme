@@ -57,11 +57,21 @@ describe("Auth Service", () => {
 
             expect(eventEmmited).toBeTruthy(AUTH_EVENTS.loginSuccess + " was not emmited!");
         });
+        
+        it("should return the current logged in user", () => {
+           authService.login(credentials);
+           $httpBackend.flush();
+           let actual: User = authService.currentUser();           
+           expect(actual).toEqual(user, "The returned user must be present");                                  
+        });
 
+        it("should not return the current user after logout", () => {            
+           authService.logout();           
+           let actual: any = authService.currentUser();           
+           expect(actual).toEqual(undefined, "The returned user must not be defined");                                  
+        });
     });
-
-
-
+    
 
 });
     
