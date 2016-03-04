@@ -13,6 +13,8 @@ export class RecentDocumentsBlock {
 
     profile: any;
     documents: any;
+    
+    documentsLoaded: boolean = false;
 
     constructor(private ArticleService: ArticleService, private $state: any) {
     }
@@ -25,6 +27,7 @@ export class RecentDocumentsBlock {
         //FIXME get all text articles
         this.ArticleService.getByProfile(this.profile.id, { content_type: 'TinyMceArticle', per_page: limit }).then((response: any) => {
             this.documents = response.data.articles;
+            this.documentsLoaded = true;
         });
     }
 
@@ -33,3 +36,4 @@ export class RecentDocumentsBlock {
     }
 
 }
+

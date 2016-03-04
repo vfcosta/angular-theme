@@ -1,28 +1,33 @@
 import {AuthController} from "./auth_controller";
 import {AuthService} from "./auth_service";
 
-describe("AuthController", () => {
+describe("Controllers", () => {
 
-    it("calls authenticate on AuthService when login called", () => {
 
-        // creating a Mock AuthService
-        let AuthServiceMock: AuthService = jasmine.createSpyObj("AuthService", ["login"]);
+    describe("AuthController", () => {
 
-        // pass AuthServiceMock into the constructor
-        let authController = new AuthController(null, null, null, AuthServiceMock);
+        it("calls authenticate on AuthService when login called", () => {
 
-        // setup of authController -> set the credentials instance property
-        let credentials = { username: "username", password: "password" };
+            // creating a Mock AuthService
+            let AuthServiceMock: AuthService = jasmine.createSpyObj("AuthService", ["login"]);
 
-        authController.credentials = credentials;
+            // pass AuthServiceMock into the constructor
+            let authController = new AuthController(null, null, null, AuthServiceMock);
 
-        // calls the authController login method
-        authController.login();
+            // setup of authController -> set the credentials instance property
+            let credentials = { username: "username", password: "password" };
 
-        // checks if the method login of the injected AuthService has been called
-        expect(AuthServiceMock.login).toHaveBeenCalledWith(credentials);
+            authController.credentials = credentials;
+
+            // calls the authController login method
+            authController.login();
+
+            // checks if the method login of the injected AuthService has been called
+            expect(AuthServiceMock.login).toHaveBeenCalledWith(credentials);
+
+        });
+
+
 
     });
-    
-
 });

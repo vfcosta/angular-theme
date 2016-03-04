@@ -55,7 +55,7 @@ export class AuthService {
     public isAuthenticated() {
         return !!this.session.currentUser();
     }
-    
+
     public currentUser(): User {
         return this.session.currentUser();
     }
