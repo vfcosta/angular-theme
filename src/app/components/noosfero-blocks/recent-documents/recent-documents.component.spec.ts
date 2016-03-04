@@ -1,6 +1,6 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Provider, Input, provide, Component} from 'ng-forward';
-
+import {provideFilters} from '../../../../spec/helpers';
 import {RecentDocumentsBlock} from './recent-documents.component';
 
 const htmlTemplate: string = '<noosfero-recent-documents-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-recent-documents-block>';
@@ -13,8 +13,6 @@ describe("Recent Documents Block Component", () => {
 
     let state = jasmine.createSpyObj("state", ["go"]);
     let providers = [
-        new Provider('truncateFilter', { useValue: () => { } }),
-        new Provider('stripTagsFilter', { useValue: () => { } }),
         new Provider('$state', { useValue: state }),
         new Provider('ArticleService', {
             useValue: {
@@ -23,7 +21,8 @@ describe("Recent Documents Block Component", () => {
                 }
             }
         }),
-    ];
+    ].concat(provideFilters("truncateFilter", "stripTagsFilter"));
+
     @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [RecentDocumentsBlock], providers: providers })
     class BlockContainerComponent {
         block = { type: 'Block', settings: {} };
