@@ -4,6 +4,44 @@
 var path = require('path');
 var conf = require('./gulp/conf');
 
+var argv = require("yargs").argv;
+
+var singleRun = false;
+
+if (argv.singleRun) {
+    singleRun = true;
+}
+
+var projectFiles = [
+    './src/commons.js',
+    './src/noosfero.js',
+    './src/noosfero-specs.js'
+];
+
+var karmaPlugins = [
+    'karma-chrome-launcher',
+    'karma-phantomjs-launcher',
+    'karma-angular-filesort',
+    'karma-phantomjs-shim',
+    'karma-jasmine',
+    'karma-spec-reporter',
+    'karma-ng-html2js-preprocessor',
+    'karma-sourcemap-loader'
+];
+
+
+var karmaReporters = ['spec'];
+
+if (argv.coverage) {
+    //projectFiles = ['./src/shim.ts', './src/app/index.ts', './src/**/*.spec.ts'];
+    singleRun = true;
+
+    karmaPlugins.push('karma-coverage');
+    //karmaPlugins.push('karma-webpack');
+    
+    karmaReporters.push('coverage');
+}
+
 
 var _ = require('lodash');
 var wiredep = require('wiredep');
@@ -13,7 +51,7 @@ var pathSrcHtml = [
 ];
 
 var glob = require("glob");
-var testFiles = glob.sync("./src/**/*.[sS]pec.ts");
+//var testFiles = glob.sync("./src/**/*.[sS]pec.ts");
 
 function listFiles() {
     var wiredepOptions = _.extend({}, conf.wiredep, {
@@ -22,22 +60,7 @@ function listFiles() {
     });
 
     var patterns = [].concat(wiredep(wiredepOptions).js)
-        .concat([
-            './src/commons.js',
-            './src/noosfero.js',
-            './src/noosfero-specs.js'
-            ]
-            //[
-             //path.join(conf.paths.src, 'common.js'),
-             //, path.join(conf.paths.src, 'index.ts')
-             //path.join(conf.paths.src, 'test.js')
-            // path.join(conf.paths.src, '/app/**/*.module.js'),
-            // path.join(conf.paths.src, '/app/**/*.js'),
-            // path.join(conf.paths.src, '/**/*.spec.js'),
-            // path.join(conf.paths.src, '/**/*.mock.js')
-            
-        //]
-        )
+        .concat(projectFiles)
         .concat(pathSrcHtml);
 
     var files = patterns.map(function (pattern) {
@@ -51,11 +74,11 @@ function listFiles() {
         served: true,
         watched: false
     });
-    files.push({
-        pattern: path.join(conf.paths.src, '/test.js.map'),
-        included: false,
-        served: true
-    });
+    // files.push({
+    //     pattern: path.join(conf.paths.src, '/test.js.map'),
+    //     included: false,
+    //     served: true
+    // });
     return files;
 }
 
@@ -64,9 +87,11 @@ var webpackConfig = require("./webpack.config.js");
 module.exports = function (config) {
 
     var configuration = {
+        basePath: '../angular-theme',
+        
         files: listFiles(),
 
-        singleRun: false,
+        singleRun: singleRun,
 
         autoWatch: true,
         colors: true,
@@ -87,48 +112,71 @@ module.exports = function (config) {
 
         browsers: ['PhantomJS'],
 
-       /* webpack: _.merge({
-            
-        }, webpackConfig, {
-            devtool: 'inline-source-map'
-        }),
-        webpackServer: {
-            quite: true
-        },*/
-        plugins: [
-//            require('karma-webpack'),
-            'karma-chrome-launcher',
-            'karma-phantomjs-launcher',
-            'karma-angular-filesort',
-            'karma-webpack',
-            'karma-phantomjs-shim',
-            'karma-coverage',
-            'karma-jasmine',
-            'karma-spec-reporter',
-            'karma-ng-html2js-preprocessor',
-            'karma-sourcemap-loader'
-        ],
 
-        coverageReporter: {
-            type: 'html',
-            dir: 'coverage/'
-        },
+        plugins: karmaPlugins,
 
-        reporters: ['spec', "coverage"],
+
+
+        reporters: karmaReporters,
 
         proxies: {
             '/assets/': path.join('/base/', conf.paths.src, '/assets/')
         }
     };
 
-    // This is the default preprocessors configuration for a usage with Karma cli
-    // The coverage preprocessor is added in gulp/unit-test.js only for single tests
-    // It was not possible to do it there because karma doesn't let us now if we are
-    // running a single test or not
-     configuration.preprocessors = {
-         'src/**/*.js': ['sourcemap'],
-         'src/**/*.ts': ['sourcemap']
-     };
+    if (argv.coverage) {
+
+        /*configuration.webpack = {
+            module: {
+                loaders: [
+                    {
+                        test: /\.tsx?$/,
+                        loader: 'ts-loader'
+                    }
+                ]
+            },
+            resolve: {
+                extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
+                modulesDirectories: ['node_modules'],
+                root: path.resolve(__dirname)
+            }
+        };*/
+        /*configuration.webpack = _.merge({
+             
+         }, webpackConfig, {
+             devtool: 'source-map'
+         }),
+         configuration.webpackServer = {
+             quite: true
+         };*/
+        
+        // This is the default preprocessors configuration for a usage with Karma cli
+        // The coverage preprocessor is added in gulp/unit-test.js only for single tests
+        // It was not possible to do it there because karma doesn't let us now if we are
+        // running a single test or not
+        configuration.preprocessors = {
+            'src/noosfero.js': ['sourcemap', 'coverage']
+        };
+
+        configuration.coverageReporter = {
+            dir: 'coverage/',
+            reporters: [
+                /*{ type: 'html' },*/
+                { type: 'json', file: 'coverage-final.json' },
+                { type: 'text-summary' }
+            ]
+        };
+    } else {
+        // This is the default preprocessors configuration for a usage with Karma cli
+        // The coverage preprocessor is added in gulp/unit-test.js only for single tests
+        // It was not possible to do it there because karma doesn't let us now if we are
+        // running a single test or not
+        configuration.preprocessors = {
+            'src/noosfero.js': ['sourcemap'],
+            'src/**/*.ts': ['sourcemap']
+        };
+    }
+    
     //     'src/**/*.js': ['sourcemap'],
     //     'src/**/*.[sS]pec.ts': ['sourcemap']
     // };

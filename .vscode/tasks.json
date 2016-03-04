@@ -18,8 +18,10 @@
             ]
         },
         {
+            "taskName": "coverage"    
+        },
+        {
             "taskName": "test",
-            "args": ["test"],
             "isTestCommand": true
         }
     ]

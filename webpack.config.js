@@ -42,7 +42,7 @@ var webpackConfig = {
     extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
   },
   // Source maps support (or 'inline-source-map' also works)
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
 
   module: {
     loaders: [{
