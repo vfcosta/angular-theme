@@ -6,7 +6,9 @@ var conf = require('./gulp/conf');
 
 var argv = require("yargs").argv;
 
-var singleRun = false;
+var singleRun = (argv.singleRun !== undefined && argv.singleRun);
+var coverage  = (argv.coverage === undefined || argv.coverage);
+ 
 
 if (argv.singleRun) {
     singleRun = true;
@@ -32,15 +34,13 @@ var karmaPlugins = [
 
 var karmaReporters = ['spec'];
 
-if (argv.coverage) {
-    //projectFiles = ['./src/shim.ts', './src/app/index.ts', './src/**/*.spec.ts'];
-    singleRun = true;
 
-    karmaPlugins.push('karma-coverage');
-    //karmaPlugins.push('karma-webpack');
-    
+
+if (coverage) {
+    karmaPlugins.push('karma-coverage'); 
     karmaReporters.push('coverage');
 }
+
 
 
 var _ = require('lodash');
@@ -124,7 +124,7 @@ module.exports = function (config) {
     };
 
 
-    if (argv.coverage) {
+    if (coverage) {
 
         /*configuration.webpack = {
             module: {

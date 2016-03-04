@@ -7,10 +7,11 @@
     "moment": "^2.11.2"
   },
   "scripts": {
-    "coverage": "karma start --coverage & npm run remap-coverage",
+    "coverage": "karma start --single-run & npm run remap-coverage",
     "remap-coverage": "ts-node --project ./dev-scripts ./dev-scripts/remapCoverage.ts",
-    "test-single": "webpack && karma start --single-run",
-    "test": "concurrently \"webpack -w\" \"karma start\"",
+    "test-single": "karma start --single-run",
+    "test-and-coverage": "karma start & npm run remap-coverage",
+    "test": "webpack -w --test",
     "postinstall": "npm install -g bower && bower install && typings install",
     "start": "concurrently \"webpack -w\" \"gulp serve\"",
     "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts"
@@ -66,6 +67,7 @@
     "lodash": "~3.10.1",
     "main-bower-files": "~2.9.0",
     "ng-forward": "0.0.1-alpha.12",
+    "on-build-webpack": "^0.1.0",
     "phantomjs": "~1.9.18",
     "phantomjs-polyfill": "0.0.2",
     "reflect-metadata": "^0.1.3",
