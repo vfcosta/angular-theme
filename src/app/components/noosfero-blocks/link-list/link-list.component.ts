@@ -12,7 +12,9 @@ export class LinkListBlock {
     links: any;
 
     ngOnInit() {
-        this.links = this.block.settings.links;
+        if (this.block && this.block.settings) {
+            this.links = this.block.settings.links;
+        }
     }
 
 }

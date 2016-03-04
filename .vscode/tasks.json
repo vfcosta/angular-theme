@@ -23,6 +23,10 @@
         {
             "taskName": "test",
             "isTestCommand": true
+        },
+        {
+            "taskName": "generate-indexes",
+            "args": []
         }
     ]
 }

@@ -112,7 +112,6 @@ module.exports = function (config) {
 
         browsers: ['PhantomJS'],
 
-
         plugins: karmaPlugins,
 
 
@@ -123,6 +122,7 @@ module.exports = function (config) {
             '/assets/': path.join('/base/', conf.paths.src, '/assets/')
         }
     };
+
 
     if (argv.coverage) {
 
@@ -177,9 +177,6 @@ module.exports = function (config) {
         };
     }
     
-    //     'src/**/*.js': ['sourcemap'],
-    //     'src/**/*.[sS]pec.ts': ['sourcemap']
-    // };
     
     pathSrcHtml.forEach(function (path) {
         configuration.preprocessors[path] = ['ng-html2js'];
