@@ -26,7 +26,7 @@ export class Navbar {
         private AUTH_EVENTS: IAuthEvents
     ) {
 
-        this.currentUser = session.getCurrentUser();
+        this.currentUser = session.currentUser();
 
         $scope.$on(AUTH_EVENTS.loginSuccess, function() {
             if (this.modalInstance) {
@@ -38,7 +38,7 @@ export class Navbar {
         });
 
         $scope.$on(AUTH_EVENTS.logoutSuccess, () => {
-            this.currentUser = this.session.getCurrentUser();
+            this.currentUser = this.session.currentUser();
         });
 
     }

@@ -68,38 +68,47 @@ if (argv.production) {
     webpackConfig.module.loaders.push(uglifyLoaderConfig);
 }
 
+
+// if webpack executed with --test argument, this code bellow will add a post-compilation
+// code which will run the Tests + Coverage (npm run coverage)
 var testProcess = null;
 var child_process = require("child_process");
 var count = 0;
 var stdinPatched = false;
+
+
 if (argv.test) {
-    webpackConfig.plugins.push(
-        new WebpackOnBuildPlugin(function (stats) {
-            // webpack in watch mode call this twice for just one compilation
-            if (!stdinPatched) {
-                process.stdin.on('data', function (info) {
-                    if (info == '\n') {
-                        if (!testProcess) {
-                            testProcess = child_process.spawn("npm", ["run", "coverage"], { stdio: 'inherit' });
-                            testProcess.on('exit', function () { testProcess = null });
-                        }
-                    }
-                });
-                stdinPatched = true;
-            }
-            
-            // so, here we are checking if the process is still running before trigger another test execution
-            if (testProcess == null) {
-                console.log("Starting tests execution...");
-                testProcess = child_process.spawn("npm", ["run", "coverage"], { stdio: 'inherit' });
+    function spawnChildProcessTest() {
+        if (!testProcess) {
+            testProcess = child_process.spawn("npm", ["run", "coverage"], { stdio: 'inherit' });
+            testProcess.on('exit', function () { testProcess = null });
+        }
+    }
+    // configure the webPackOnBuildPlugin with our post-compilation function as argument
+    var onBuildPluginConfigured = new WebpackOnBuildPlugin(function (stats) {
 
-                testProcess.on('exit', function () { testProcess = null });
-            } else {
-                console.log("Test still running... Sorry webpack!! :)");
-            }
+        // here we are patching the stdin to allow trigger tests when pressing 'Enter'
+        // on terminal
+        if (!stdinPatched) {
+            process.stdin.on('data', function (info) {
+                if (info == '\n') {
+                    spawnChildProcessTest();
+                }
+            });
+            stdinPatched = true;
+        }
+        
+        // webpack in watch mode call this twice for just one compilation    
+        // so, here we are checking if the process is still running before trigger another test execution
+        if (testProcess == null) {
+            console.log("Starting tests execution...");
+            spawnChildProcessTest();
+        } else {
+            console.log("Test still running... Sorry webpack!! :)");
+        }
 
-        })
-        );
+    });
+    webpackConfig.plugins.push(onBuildPluginConfigured);
 }
 
 module.exports = webpackConfig;
