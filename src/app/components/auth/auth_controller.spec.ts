@@ -23,5 +23,6 @@ describe("AuthController", () => {
         expect(AuthServiceMock.login).toHaveBeenCalledWith(credentials);
 
     });
+    
 
 });

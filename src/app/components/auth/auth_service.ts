@@ -53,13 +53,17 @@ export class AuthService {
     }
 
     public isAuthenticated() {
-        return !!this.session.getCurrentUser();
+        return !!this.session.currentUser();
+    }
+    
+    public currentUser(): User {
+        return this.session.currentUser();
     }
 
     public isAuthorized(authorizedRoles: string | string[]) {
         if (!angular.isArray(authorizedRoles)) {
             authorizedRoles = [<string>authorizedRoles];
         }
-        return (this.isAuthenticated() && authorizedRoles.indexOf(this.session.getCurrentUser().userRole) !== -1);
+        return (this.isAuthenticated() && authorizedRoles.indexOf(this.session.currentUser().userRole) !== -1);
     }
 }

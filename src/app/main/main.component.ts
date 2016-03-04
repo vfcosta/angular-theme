@@ -45,8 +45,9 @@ export class MainContent {
         component: MainContent,
         name: 'main',
         resolve: {
-            currentUser: function(AuthService: AuthService) {
-                return AuthService.loginFromCookie();
+            currentUser: function(AuthService: AuthService, $log: ng.ILogService) {
+                $log.debug("Main URL service...");
+                return AuthService.currentUser();
             }
         }
     },
