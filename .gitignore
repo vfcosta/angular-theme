@@ -6,6 +6,7 @@ coverage/
 .tmp/
 dist/
 src/noosfero.js*
-src/commons.js
-src/noosfero-specs.js
+src/commons.js*
+src/noosfero-specs.js*
 typings
+npm-debug.log
