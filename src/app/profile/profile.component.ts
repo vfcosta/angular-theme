@@ -4,6 +4,7 @@ import {ProfileHome} from '../profile/profile-home.component';
 import {Cms} from '../cms/cms.component';
 import {ContentViewer} from "../content-viewer/content-viewer.component";
 import {NoosferoActivities} from "../components/noosfero-activities/activities.component";
+import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 
 import * as noosferoModels from "./../models/interfaces";
 
@@ -66,17 +67,17 @@ import * as noosferoModels from "./../models/interfaces";
         }
     }
 ])
-@Inject("noosfero", "$log", "$stateParams")
+@Inject(ProfileService, "noosfero", "$log", "$stateParams")
 export class Profile {
 
     boxes: noosferoModels.Box[];
     profile: noosferoModels.Profile;
 
-    constructor(noosfero: any, $log: ng.ILogService, $stateParams: ng.ui.IStateParamsService) {
-        noosfero.profiles.one().get({ identifier: $stateParams["profile"] }).then((response: restangular.IResponse) => {
+    constructor(ProfileService: ProfileService, noosfero: any, $log: ng.ILogService, $stateParams: ng.ui.IStateParamsService) {
+        ProfileService.getByIdentifier($stateParams["profile"]).then((response: restangular.IResponse) => {
             this.profile = response.data[0];
             noosfero.setCurrentProfile(this.profile);
-            return noosfero.boxes(this.profile.id).one().get();
+            return ProfileService.getBoxes(this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         });

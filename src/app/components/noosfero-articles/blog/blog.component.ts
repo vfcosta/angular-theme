@@ -1,12 +1,13 @@
 import {Component, Input, Inject} from "ng-forward";
 
 import {Article, Profile} from "./../../../models/interfaces";
+import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
     selector: "noosfero-blog",
     templateUrl: "app/components/noosfero-articles/blog/blog.html"
 })
-@Inject("noosfero", "$scope")
+@Inject(ArticleService, "$scope")
 export class NoosferoArticleBlog {
 
     @Input() article: Article;
@@ -17,7 +18,7 @@ export class NoosferoArticleBlog {
     private currentPage: number;
     private totalPosts: number = 0;
 
-    constructor(private noosfero: any, private $scope: ng.IScope) {
+    constructor(private ArticleService: ArticleService, private $scope: ng.IScope) {
     }
 
     ngOnInit() {
@@ -25,7 +26,7 @@ export class NoosferoArticleBlog {
     }
 
     loadPage() {
-        this.noosfero.articles.one(this.article.id).customGET("children", {
+        this.ArticleService.getChildren(this.article.id, {
             content_type: "TinyMceArticle",
             per_page: this.perPage,
             page: this.currentPage
