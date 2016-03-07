@@ -3,12 +3,14 @@ import {ProfileInfo} from '../profile-info/profile-info.component';
 import {ProfileHome} from '../profile/profile-home.component';
 import {Cms} from '../cms/cms.component';
 import {ContentViewer} from "../content-viewer/content-viewer.component";
+import {NoosferoActivities} from "../components/noosfero-activities/activities.component";
 
 import * as noosferoModels from "./../models/interfaces";
 
 @Component({
     selector: 'profile',
-    templateUrl: "app/profile/profile.html"
+    templateUrl: "app/profile/profile.html",
+    directives: [NoosferoActivities]
 })
 @StateConfig([
     {
