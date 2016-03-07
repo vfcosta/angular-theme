@@ -5,9 +5,7 @@ import {Article} from "../../../app/models/interfaces";
 @Inject("Restangular")
 export class ArticleService {
 
-    constructor(private Restangular: any) {
-
-    }
+    constructor(private Restangular: any) { }
 
     create(profileId: number, article: Article) {
         return this.Restangular.one('profiles', profileId).customPOST(

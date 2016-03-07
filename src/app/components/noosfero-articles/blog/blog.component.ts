@@ -7,8 +7,8 @@ import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.servi
     selector: "noosfero-blog",
     templateUrl: "app/components/noosfero-articles/blog/blog.html"
 })
-@Inject(ArticleService, "$scope")
-export class NoosferoArticleBlog {
+@Inject(ArticleService)
+export class ArticleBlog {
 
     @Input() article: Article;
     @Input() profile: Profile;
@@ -18,22 +18,25 @@ export class NoosferoArticleBlog {
     private currentPage: number;
     private totalPosts: number = 0;
 
-    constructor(private ArticleService: ArticleService, private $scope: ng.IScope) {
-    }
+    constructor(private articleService: ArticleService) { }
 
     ngOnInit() {
         this.loadPage();
     }
 
     loadPage() {
-        this.ArticleService.getChildren(this.article.id, {
+        let filters = {
             content_type: "TinyMceArticle",
             per_page: this.perPage,
             page: this.currentPage
-        }).then((response: restangular.IResponse) => {
-            this.totalPosts = <number>(<any>response.headers("total"));
-            this.posts = response.data.articles;
-        });
+        };
+
+        this.articleService
+            .getChildren(this.article.id, filters)
+            .then((response: restangular.IResponse) => {
+                this.totalPosts = <number>(<any>response.headers("total"));
+                this.posts = response.data.articles;
+            });
     }
 
 }

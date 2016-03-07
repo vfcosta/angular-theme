@@ -1,18 +1,18 @@
 /**
  * @script remap-coverage.ts
- * 
+ *
  * Esse script serve para transformar as informações de cobertura geradas pelo karma-coverage
  * e que originalmente é construída apontando para os arquivos javascript (já que os testes são executados em javascript)
  * para a informação de cobertura apontando para os arquivos Typescript, utilizando os source maps gerados pelo compilador
  * typescript
  * @author: Abner Oliveira
- * 
+ *
  * Examplo de uso:
- * 
+ *
  * Na linha de comando, na pasta raiz do projeto, digite:
- * 
+ *
  * ts-node dev-scripts/remap-coverage.ts
- * 
+ *
  * Observação: O karma já deve ter sido executado antes, e a pasta de coverage deve ser "./coverage"
  */
 
@@ -26,10 +26,10 @@ let coveragePath = path.join(__dirname, "..", "coverage");
 
 // o pré-processador "coverage" do runner de tests "karma" gera uma pasta
 // de coverage para cada browser em que os testes foram executados
-// iteraremos arqui então entre essas pastas para realizar o remap de cada uma  
+// iteraremos arqui então entre essas pastas para realizar o remap de cada uma
 
 console.log("COVERAGE PATH:", coveragePath);
-// lendo o diretório coveragePath   
+// lendo o diretório coveragePath
 fs.readdir(coveragePath, (err, directories) => {
     if (err) {
         console.error(err.message);
@@ -57,17 +57,17 @@ fs.readdir(coveragePath, (err, directories) => {
         // gerando dois reports: JSON e HTML
         // remapIstanbul(coverageFile,
         //     {
-        //         "exclude": 
+        //         "exclude":
         //         "json": path.join(coverageFolder, "coverage-final-remaped.json")
         //     });
-        
+
         // replace({
         //     regex: "src/webpack:/",
         //     replacement: "",
         //     paths: [coverageFile],
         //     sillent: true
         // });
-        
+
         let loadCoverage = require('remap-istanbul/lib/loadCoverage');
         let remap = require('remap-istanbul/lib/remap');
         let writeReport = require('remap-istanbul/lib/writeReport');
@@ -90,9 +90,7 @@ fs.readdir(coveragePath, (err, directories) => {
         let store = Store.create("fslookup");
         store.get = function(key) {
             let pathNormalized = key.replace("src/webpack:/", "");
-            console.error("PATH >>> ", pathNormalized);
             pathNormalized = pathNormalized.replace(/\.ts\?(\w+)/, ".ts");
-            console.log("my store got called!", key, pathNormalized);
             return fs.readFileSync(pathNormalized, 'utf8');
         }
         writeReport(collector, 'html', coverageFolder, store);
