@@ -4,15 +4,15 @@
 <timeline-panel>
   <timeline-heading>
     <h4 class="timeline-title">
-      <a ui-sref="main.profile.info({profile: $ctrl.activity.user.identifier})"><strong ng-bind="$ctrl.activity.user.name"></strong></a>
-      <span> has made <span ng-bind="$ctrl.activity.params.friend_name.length"></span> new friend(s): </span>
+      <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})"><strong ng-bind="ctrl.activity.user.name"></strong></a>
+      <span> has made <span ng-bind="ctrl.activity.params.friend_name.length"></span> new friend(s): </span>
       <span class="comma-separated">
-        <a class="separated-item" ui-sref="main.profile.info({profile: $ctrl.activity.params.friend_url[$index].profile})" ng-repeat="friend in $ctrl.activity.params.friend_name">
+        <a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.friend_url[$index].profile})" ng-repeat="friend in ctrl.activity.params.friend_name">
           <strong ng-bind="friend"></strong>
         </a>
       </span>
     </h4>
-    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="$ctrl.activity.created_at"></span></small></p>
+    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.activity.created_at"></span></small></p>
   </timeline-heading>
   <div class="timeline-body"></div>
 </timeline-panel>

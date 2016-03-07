@@ -10,3 +10,4 @@ src/commons.js*
 src/noosfero-specs.js*
 typings
 npm-debug.log
+src/vendor.bundle.js*

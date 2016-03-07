@@ -1,13 +1,14 @@
-(function() {
-  'use strict';
+import {Component, Input} from "ng-forward";
+import {NoosferoActivity} from "./activity/activity.component";
+import {Activity} from "../../models/interfaces";
 
-  angular
-    .module('noosferoApp')
-    .component('noosferoActivities', {
-      bindings: {
-          activities: '<'
-      },
-      templateUrl: 'app/components/noosfero-activities/activities.html'
-    });
+@Component({
+    selector: "noosfero-activities",
+    templateUrl: 'app/components/noosfero-activities/activities.html',
+    directives: [NoosferoActivity]
+})
+export class NoosferoActivities {
 
-})();
+    @Input() activities: Activity[];
+
+}

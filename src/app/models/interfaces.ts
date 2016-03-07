@@ -51,6 +51,10 @@ export interface Box {
     position: number;
 }
 
+export interface Activity {
+    verb: string;
+}
+
 export interface INoosferoLocalStorage extends angular.storage.ILocalStorageService {
     currentUser: User;
 }
