@@ -68,14 +68,14 @@ fs.readdir(coveragePath, (err, directories) => {
         //     sillent: true
         // });
         
-        var loadCoverage = require('remap-istanbul/lib/loadCoverage');
-        var remap = require('remap-istanbul/lib/remap');
-        var writeReport = require('remap-istanbul/lib/writeReport');
+        let loadCoverage = require('remap-istanbul/lib/loadCoverage');
+        let remap = require('remap-istanbul/lib/remap');
+        let writeReport = require('remap-istanbul/lib/writeReport');
 
-        var collector = remap(loadCoverage(coverageFile), {
-            exclude: 'Reflect',
-            /*readFile: function(filePath): any {
-                var pathNormalized = filePath.replace("webpack:///./src/", "");
+        let collector = remap(loadCoverage(coverageFile), {
+            /*exclude: 'Reflect',
+            readFile: function(filePath): any {
+                let pathNormalized = filePath.replace("webpack:///./src/", "");
                 pathNormalized = pathNormalized.replace(/\.ts\?(\w+)"/, ".ts\"");
                 console.log("FILE PATH: ", pathNormalized);
                 if (!fs.existsSync(pathNormalized)) {
@@ -85,21 +85,18 @@ fs.readdir(coveragePath, (err, directories) => {
                 return fs.readFileSync(pathNormalized);
             }*/
         });
-        
-        var Store = require("istanbul").Store;
-        var store = Store.create("fslookup");
-        store.get = function (key) {
-           var pathNormalized = key.replace("src/webpack:/", "");
-           console.error("PATH >>> ", pathNormalized);
+
+        let Store = require("istanbul").Store;
+        let store = Store.create("fslookup");
+        store.get = function(key) {
+            let pathNormalized = key.replace("src/webpack:/", "");
+            console.error("PATH >>> ", pathNormalized);
             pathNormalized = pathNormalized.replace(/\.ts\?(\w+)/, ".ts");
             console.log("my store got called!", key, pathNormalized);
             return fs.readFileSync(pathNormalized, 'utf8');
         }
         writeReport(collector, 'html', coverageFolder, store);
-        writeReport(collector, 'json', path.join(coverageFolder, 'coverage-final-remaped.json'), store).then(function() {
-        
-            /* do something else now */
-        });
+        writeReport(collector, 'json', path.join(coverageFolder, 'coverage-final-remaped.json'), store);
     });
 
 });

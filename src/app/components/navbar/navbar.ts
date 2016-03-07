@@ -28,7 +28,7 @@ export class Navbar {
 
         this.currentUser = session.currentUser();
 
-        $scope.$on(AUTH_EVENTS.loginSuccess, function() {
+        $scope.$on(AUTH_EVENTS.loginSuccess, () => {
             if (this.modalInstance) {
                 this.modalInstance.close();
                 this.modalInstance = null;
