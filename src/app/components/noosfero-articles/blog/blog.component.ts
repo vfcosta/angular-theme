@@ -1,13 +1,14 @@
 import {Component, Input, Inject} from "ng-forward";
 
 import {Article, Profile} from "./../../../models/interfaces";
+import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
     selector: "noosfero-blog",
     templateUrl: "app/components/noosfero-articles/blog/blog.html"
 })
-@Inject("noosfero", "$scope")
-export class NoosferoArticleBlog {
+@Inject(ArticleService)
+export class ArticleBlog {
 
     @Input() article: Article;
     @Input() profile: Profile;
@@ -17,22 +18,25 @@ export class NoosferoArticleBlog {
     private currentPage: number;
     private totalPosts: number = 0;
 
-    constructor(private noosfero: any, private $scope: ng.IScope) {
-    }
+    constructor(private articleService: ArticleService) { }
 
     ngOnInit() {
         this.loadPage();
     }
 
     loadPage() {
-        this.noosfero.articles.one(this.article.id).customGET("children", {
+        let filters = {
             content_type: "TinyMceArticle",
             per_page: this.perPage,
             page: this.currentPage
-        }).then((response: restangular.IResponse) => {
-            this.totalPosts = <number>(<any>response.headers("total"));
-            this.posts = response.data.articles;
-        });
+        };
+
+        this.articleService
+            .getChildren(this.article.id, filters)
+            .then((response: restangular.IResponse) => {
+                this.totalPosts = <number>(<any>response.headers("total"));
+                this.posts = response.data.articles;
+            });
     }
 
 }
