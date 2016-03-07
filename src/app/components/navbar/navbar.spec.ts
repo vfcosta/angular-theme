@@ -30,6 +30,43 @@ describe("Components", () => {
             login: "user"
         };
 
+
+        let scope = {
+            eventCalledHook: () => { },
+            $on: (eventName: string, func: Function) => {
+                this.eventCalledHook = func;
+            }
+        }
+
+        let modalInstance = {
+            close: () => { }
+        }
+
+        let $modal = {
+            open: (args: {}) => {
+                return modalInstance;
+            }
+        }
+
+        let authService = {
+            logout: () => { }
+        }
+
+        let stateService = jasmine.createSpyObj("$state", ["go"]);
+        let providers = [
+            new Provider('moment', { useValue: {} }),
+            new Provider('$modal', { useValue: $modal }),
+            new Provider('AuthService', { useValue: authService }),
+            new Provider('Session', {
+                useValue: {
+                    currentUser: () => { return user }
+                }
+            }),
+            new Provider('$scope', { useValue: scope }),
+            new Provider('$state', { useValue: stateService }),
+            new Provider('AUTH_EVENTS', { useValue: { AUTH_EVENTS } })
+        ];
+
         beforeEach(angular.mock.module("templates"));
 
         // beforeEach(inject((_$rootScope_: ng.IRootScopeService) => {
@@ -72,41 +109,6 @@ describe("Components", () => {
         });
 
         it('It should open on click', (done: Function) => {
-
-            let scope = {
-                eventCalledHook: () => { },
-                $on: (eventName: string, func: Function) => {
-                    console.log("ON Called!");
-                    this.eventCalledHook = func;
-                }
-            }
-
-            let modalInstance = {
-                close: () => {
-                    console.log("CLOSE Called!");
-                }
-            }
-
-            let $modal = {
-                open: (args: {}) => {
-                    return modalInstance;
-                }
-            }
-
-            let stateService = jasmine.createSpyObj("$state", ["go"]);
-            let providers = [
-                new Provider('moment', { useValue: {} }),
-                new Provider('$modal', { useValue: $modal }),
-                new Provider('AuthService', { useValue: {} }),
-                new Provider('Session', {
-                    useValue: {
-                        currentUser: () => { return user }
-                    }
-                }),
-                new Provider('$scope', { useValue: scope }),
-                new Provider('$state', { useValue: stateService }),
-                new Provider('AUTH_EVENTS', { useValue: { AUTH_EVENTS } })
-            ];
             quickCreateComponent({
                 providers: providers,
                 template: "<acme-navbar></acme-navbar>",
@@ -126,6 +128,22 @@ describe("Components", () => {
                     done();
                 })
         });
+
+        it('It should logout', (done: Function) => {
+            quickCreateComponent({
+                providers: providers,
+                template: "<acme-navbar></acme-navbar>",
+                directives: [Navbar]
+            })
+                .then(fixture => {
+                    let navbarComp: Navbar = <Navbar>fixture.debugElement.componentViewChildren[0].componentInstance;
+                    spyOn(authService, "logout");
+                    navbarComp.logout();
+                    expect(authService.logout).toHaveBeenCalled();
+                    done();
+                })
+        });
+
 
 
         // it('closes the modal the login', (done: Function) => {
