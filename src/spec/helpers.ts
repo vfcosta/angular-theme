@@ -1,6 +1,6 @@
 
 import {ngClass, TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider, Input, provide, Component} from 'ng-forward';
+import {Injectable, Inject, Provider, Input, provide, Component} from 'ng-forward';
 import {User, Person} from "./../app/models/interfaces";
 
 
@@ -46,6 +46,28 @@ export function provideFilters(...filters: string[]) {
         providers.push(new Provider(filter, { useValue: () => { } }));
     }
     return providers;
+}
+
+/**
+ * This help function allows get angular services to be used in integration tests
+ * i.e: '$http', '$q', '$location', etc...
+ */
+export function getAngularService<T>(angularService: string) {
+    let tcb: TestComponentBuilder = new TestComponentBuilder();
+
+    @Component({
+        selector: 'helper_get_angular_service',
+        template: 'not-used',
+        providers: []
+    })
+    class AnyService {
+        constructor() {
+
+        }
+    }
+
+    let fixture: ComponentFixture = (<any>tcb)["create"](AnyService);
+    return fixture.debugElement.getLocal(angularService);
 }
 
 export var fixtures = {

@@ -1,14 +1,27 @@
+import {
+    Input,
+    provide,
+    Component
+} from 'ng-forward';
+import {
+    ArticleBlog
+} from './blog.component';
 
-import {Input, provide, Component} from 'ng-forward';
-import {ArticleBlog} from './blog.component';
-
-import {createComponentFromClass, quickCreateComponent, provideEmptyObjects, createProviderToValue} from "../../../../spec/helpers.ts";
+import {
+    createComponentFromClass,
+    quickCreateComponent,
+    provideEmptyObjects,
+    createProviderToValue,
+    getAngularService
+} from "../../../../spec/helpers.ts";
 
 
 // this htmlTemplate will be re-used between the container components in this spec file
 const htmlTemplate: string = '<noosfero-blog [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-blog>';
 
-let articleService: { getChildren: Function } = <any>{};
+let articleService: {
+    getChildren: Function
+} = < any > {};
 
 describe("Blog Component", () => {
 
@@ -18,7 +31,7 @@ describe("Blog Component", () => {
     // component Noosfero ArtileView will be load on our tests
     beforeEach(angular.mock.module("templates"));
 
-    function promiseResultTemplate(response?: {}) {
+    function promiseResultTemplate(response ? : {}) {
         let thenFuncEmpty = (func: Function) => {
             // does nothing
         };
@@ -57,8 +70,12 @@ describe("Blog Component", () => {
             providers: [provideEmptyObjects('Restangular'), createProviderToValue('ArticleService', articleService)]
         })
         class BlogContainerComponent {
-            article = { type: 'anyArticleType' };
-            profile = { name: 'profile-name' };
+            article = {
+                type: 'anyArticleType'
+            };
+            profile = {
+                name: 'profile-name'
+            };
         }
 
         createComponentFromClass(BlogContainerComponent).then((fixture) => {
@@ -72,18 +89,23 @@ describe("Blog Component", () => {
 
     });
 
+    it("get $q service", () => {
+        let $q = getAngularService<ng.IQService>("$q");
+        console.log($q);
+    });
+
     it("verify the blog data", (done: Function) => {
 
         // defining a mock result to articleService.getChildren method
         articleService.getChildren = (article_id: number, filters: {}) => {
             return promiseResultTemplate({
-                    headers: (headerName: string) => {
-                        return 1;
-                    },
-                    data: <any>{
-                        articles: []
-                    }
-                });
+                headers: (headerName: string) => {
+                    return 1;
+                },
+                data: < any > {
+                    articles: []
+                }
+            });
         };
 
         @Component({
@@ -93,8 +115,12 @@ describe("Blog Component", () => {
             providers: [provideEmptyObjects('Restangular'), createProviderToValue('ArticleService', articleService)]
         })
         class BlogContainerComponent {
-            article = { type: 'anyArticleType' };
-            profile = { name: 'profile-name' };
+            article = {
+                type: 'anyArticleType'
+            };
+            profile = {
+                name: 'profile-name'
+            };
         }
 
         createComponentFromClass(BlogContainerComponent).then((fixture) => {
@@ -103,8 +129,8 @@ describe("Blog Component", () => {
             let articleBlog: BlogContainerComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
 
             // check if the component property are the provided by the mocked articleService 
-            expect((<any>articleBlog)["posts"]).toEqual([]);
-            expect((<any>articleBlog)["totalPosts"]).toEqual(1);
+            expect(( < any > articleBlog)["posts"]).toEqual([]);
+            expect(( < any > articleBlog)["totalPosts"]).toEqual(1);
 
 
             // done needs to be called (it isn't really needed, as we can read in
