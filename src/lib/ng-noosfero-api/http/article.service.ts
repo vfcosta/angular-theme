@@ -9,7 +9,7 @@ export class ArticleService {
     }
 
     getByProfile(profileId: number, filters: any) {
-        return this.Restangular.service('profiles').one(profileId).one('articles').get(filters);
+        return this.Restangular.one('profiles', profileId).customGET('articles', filters);
     }
 
 }
