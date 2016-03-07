@@ -1,6 +1,5 @@
 
-import "core-js/shim";
-import "reflect-metadata";
+
 import {NoosferoApp} from "./index.module";
 import {noosferoModuleConfig} from "./index.config";
 import {noosferoAngularRunBlock} from "./index.run";
@@ -19,7 +18,7 @@ import {bootstrap, bundle} from "ng-forward";
 import {AUTH_EVENTS} from "./components/auth/auth_events";
 import {AuthController} from "./components/auth/auth_controller";
 
-import {Navbar} from "./components/navbar";
+import {Navbar} from "./components/navbar/navbar";
 
 declare var moment: any;
 

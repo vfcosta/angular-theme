@@ -7,8 +7,8 @@ var conf = require('./gulp/conf');
 var argv = require("yargs").argv;
 
 var singleRun = (argv.singleRun !== undefined && argv.singleRun);
-var coverage  = (argv.coverage === undefined || argv.coverage);
- 
+var coverage = (argv.coverage === undefined || argv.coverage);
+
 
 if (argv.singleRun) {
     singleRun = true;
@@ -16,6 +16,7 @@ if (argv.singleRun) {
 
 var projectFiles = [
     './src/commons.js',
+    './src/vendor.bundle.js',
     './src/noosfero.js',
     './src/noosfero-specs.js'
 ];
@@ -28,18 +29,19 @@ var karmaPlugins = [
     'karma-jasmine',
     'karma-spec-reporter',
     'karma-ng-html2js-preprocessor',
-    'karma-sourcemap-loader'
+    'karma-sourcemap-loader',
+    'karma-coverage'
 ];
 
 
-var karmaReporters = ['spec'];
+var karmaReporters = ['spec', 'coverage'];
 
 
 
-if (coverage) {
-    karmaPlugins.push('karma-coverage'); 
-    karmaReporters.push('coverage');
-}
+// if (coverage) {
+//     karmaPlugins.push('karma-coverage');
+//     karmaReporters.push('coverage');
+// }
 
 
 
@@ -88,7 +90,7 @@ module.exports = function (config) {
 
     var configuration = {
         basePath: '../angular-theme',
-        
+
         files: listFiles(),
 
         singleRun: singleRun,
@@ -155,13 +157,15 @@ module.exports = function (config) {
         // It was not possible to do it there because karma doesn't let us now if we are
         // running a single test or not
         configuration.preprocessors = {
-            'src/noosfero.js': ['sourcemap', 'coverage']
+            'src/noosfero.js': ['sourcemap', 'coverage'],
+            'src/**/*.ts': ['sourcemap']
+
         };
 
         configuration.coverageReporter = {
             dir: 'coverage/',
             reporters: [
-                /*{ type: 'html' },*/
+                { type: 'html' },
                 { type: 'json', file: 'coverage-final.json' },
                 { type: 'text-summary' }
             ]
@@ -172,12 +176,21 @@ module.exports = function (config) {
         // It was not possible to do it there because karma doesn't let us now if we are
         // running a single test or not
         configuration.preprocessors = {
-            'src/noosfero.js': ['sourcemap'],
+            'src/noosfero': ['coverage', 'sourcemap'],
             'src/**/*.ts': ['sourcemap']
         };
+
+        configuration.coverageReporter = {
+            dir: 'coverage/',
+            reporters: [
+                { type: 'html' },
+                { type: 'json', file: 'coverage-final.json' },
+                { type: 'text-summary' }
+            ]
+        };
     }
-    
-    
+
+
     pathSrcHtml.forEach(function (path) {
         configuration.preprocessors[path] = ['ng-html2js'];
     });

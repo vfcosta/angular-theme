@@ -13,7 +13,7 @@ if (argv.production) {
     extension = ".min.js"
 }
 
-var testFiles = glob.sync("./src/**/*.[sS]pec.ts");
+var testFiles = glob.sync("./src/**/**/*.[sS]pec.ts");
 
 var uglifyLoaderConfig = {
     // I want to uglify with mangling only app files, not thirdparty libs
@@ -22,16 +22,27 @@ var uglifyLoaderConfig = {
     loader: "uglify"
 };
 
-var testingFiles = glob.sync("./src/app/**/*.[sS]pec.ts");
+var testingFiles = glob.sync("./src/app/**/**/*.[sS]pec.ts");
 
+
+var entries = {
+    noosfero: './src/app/index.ts',
+    'noosfero-specs':  testFiles,// './src/specs.ts',
+    'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng-forward/cjs/testing/test-component-builder']
+};
+
+
+// if (argv.test) {
+//     entries = {
+//         'noosfero-src': './src/app/index.ts',
+//         'noosfero-specs':  testFiles,// './src/specs.ts',
+//         'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng-forward/cjs/testing/test-component-builder']
+//     };
+// }
 var webpackConfig = {
-    watchDelay: 300,
-    entry: {
-        noosfero: './src/app/index.ts',
-        'noosfero-specs': './src/specs.ts'
-    },
+    entry: entries,
 
-    plugins: [new CommonsChunkPlugin("commons.js")],
+    plugins: [new CommonsChunkPlugin("commons", "commons.js")],
 
     output: {
         path: path.join(__dirname, "src"),

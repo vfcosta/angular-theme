@@ -46,21 +46,60 @@ fs.readdir(coveragePath, (err, directories) => {
 
         let absoluteProjectPath = path.join(__dirname, "../");
 
-        replace({
-            regex: absoluteProjectPath,
-            replacement: "",
-            paths: [coverageFile],
-            sillent: true
-        });
+        // replace({
+        //     regex: absoluteProjectPath,
+        //     replacement: "",
+        //     paths: [coverageFile],
+        //     sillent: true
+        // });
         // para cada pasta executa o remap do coverage que está apontando para os arquivos js
         // para apontar para os arquivos Typecript
         // gerando dois reports: JSON e HTML
-        remapIstanbul(coverageFile,
-            {
-                "basePath": "./src/",
-                "json": path.join(coverageFolder, "coverage-final-remaped.json"),
-                "html": path.join(coverageFolder)
-            });
+        // remapIstanbul(coverageFile,
+        //     {
+        //         "exclude": 
+        //         "json": path.join(coverageFolder, "coverage-final-remaped.json")
+        //     });
+        
+        // replace({
+        //     regex: "src/webpack:/",
+        //     replacement: "",
+        //     paths: [coverageFile],
+        //     sillent: true
+        // });
+        
+        var loadCoverage = require('remap-istanbul/lib/loadCoverage');
+        var remap = require('remap-istanbul/lib/remap');
+        var writeReport = require('remap-istanbul/lib/writeReport');
+
+        var collector = remap(loadCoverage(coverageFile), {
+            exclude: 'Reflect',
+            /*readFile: function(filePath): any {
+                var pathNormalized = filePath.replace("webpack:///./src/", "");
+                pathNormalized = pathNormalized.replace(/\.ts\?(\w+)"/, ".ts\"");
+                console.log("FILE PATH: ", pathNormalized);
+                if (!fs.existsSync(pathNormalized)) {
+                    console.warn(new Error('Could not find file: "' + pathNormalized + '"'));
+                    return '';
+                }
+                return fs.readFileSync(pathNormalized);
+            }*/
+        });
+        
+        var Store = require("istanbul").Store;
+        var store = Store.create("fslookup");
+        store.get = function (key) {
+           var pathNormalized = key.replace("src/webpack:/", "");
+           console.error("PATH >>> ", pathNormalized);
+            pathNormalized = pathNormalized.replace(/\.ts\?(\w+)/, ".ts");
+            console.log("my store got called!", key, pathNormalized);
+            return fs.readFileSync(pathNormalized, 'utf8');
+        }
+        writeReport(collector, 'html', coverageFolder, store);
+        writeReport(collector, 'json', path.join(coverageFolder, 'coverage-final-remaped.json'), store).then(function() {
+        
+            /* do something else now */
+        });
     });
 
 });

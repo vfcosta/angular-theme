@@ -5,7 +5,7 @@ provideEmptyObjects
 } from "./../../../spec/helpers";
 import {
 Navbar
-} from "./";
+} from "./navbar";
 import {
 AUTH_EVENTS
 } from "./../auth";

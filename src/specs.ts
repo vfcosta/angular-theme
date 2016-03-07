@@ -1,7 +1,7 @@
 
-require("core-js/shim");
-require("reflect-metadata");
-require("ng-forward");
+// require("core-js/shim");
+// require("reflect-metadata");
+// require("ng-forward");
 
 
 // require all spec files 

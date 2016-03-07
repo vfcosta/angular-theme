@@ -1,5 +1,5 @@
 import {bundle, Component, StateConfig} from "ng-forward";
-import {NoosferoArticleBlog} from "./../components/noosfero-articles/blog/blog.component.ts";
+import {NoosferoArticleBlog} from "./../components/noosfero-articles/blog/blog.component";
 
 import {ArticleView} from "../components/noosfero-articles/article/article_view";
 
@@ -16,7 +16,7 @@ import {AuthService} from "./../components/auth/auth_service";
 import {Session} from "./../components/auth/session";
 
 
-import {Navbar} from "../components/navbar";
+import {Navbar} from "../components/navbar/navbar";
 
 import {MainBlock} from "../components/noosfero-blocks/main-block/main-block.component";
 

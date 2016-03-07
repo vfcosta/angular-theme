@@ -2,7 +2,7 @@
 import {Input, provide, Component} from 'ng-forward';
 import {ArticleView, ArticleDefaultView} from './article_view';
 
-import {createComponentFromClass, quickCreateComponent} from "../../../../spec/helpers.ts";
+import {createComponentFromClass, quickCreateComponent} from "../../../../spec/helpers";
 
 // this htmlTemplate will be re-used between the container components in this spec file 
 const htmlTemplate: string = '<noosfero-article [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-article>';
