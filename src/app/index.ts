@@ -1,16 +1,7 @@
-
-
 import {NoosferoApp} from "./index.module";
 import {noosferoModuleConfig} from "./index.config";
 import {noosferoAngularRunBlock} from "./index.run";
 import {routeConfig} from "./index.route";
-
-import {ContentViewer as noosferoContentViewer} from "./content-viewer/content-viewer.component";
-import {ContentViewerActions as noosferoContentViewerActions} from "./content-viewer/content-viewer-actions.component";
-import {Profile as noosferoProfile} from "./profile/profile.component";
-import {ProfileInfo as noosferoProfileInfo} from "./profile-info/profile-info.component";
-import {ProfileHome as noosferoProfileHome} from "./profile/profile-home.component";
-import {Cms as noosferoCms} from "./cms/cms.component";
 
 import {Main} from "./main/main.component";
 import {bootstrap, bundle} from "ng-forward";
@@ -41,15 +32,7 @@ NoosferoApp.run(noosferoAngularRunBlock);
 // NoosferoApp.addService("AuthService", AuthService);
 NoosferoApp.addController("AuthController", AuthController);
 
-
 require("./components/noosfero/noosfero.service.js");
 require("./components/noosfero/profile-image/profile-image.component.js");
-
-NoosferoApp.addController("ContentViewerController", noosferoContentViewer);
-NoosferoApp.addController("ContentViewerActionsController", noosferoContentViewerActions);
-NoosferoApp.addController("ProfileController", noosferoProfile);
-NoosferoApp.addController("ProfileHomeController", noosferoProfileHome);
-NoosferoApp.addController("ProfileInfoController", noosferoProfileInfo);
-NoosferoApp.addController("CmsController", noosferoCms);
 
 NoosferoApp.addConfig(routeConfig);

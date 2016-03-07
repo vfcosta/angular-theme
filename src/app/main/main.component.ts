@@ -60,7 +60,7 @@ export class MainContent {
         views: {
             "content": {
                 templateUrl: "app/profile/profile.html",
-                controller: "ProfileController",
+                controller: Profile,
                 controllerAs: "vm"
             }
         }
