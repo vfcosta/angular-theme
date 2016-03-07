@@ -89,7 +89,7 @@ var webpackConfig = require("./webpack.config.js");
 module.exports = function (config) {
 
     var configuration = {
-        basePath: '../angular-theme',
+        basePath: './',
 
         files: listFiles(),
 
@@ -144,14 +144,14 @@ module.exports = function (config) {
             }
         };*/
         /*configuration.webpack = _.merge({
-             
+
          }, webpackConfig, {
              devtool: 'source-map'
          }),
          configuration.webpackServer = {
              quite: true
          };*/
-        
+
         // This is the default preprocessors configuration for a usage with Karma cli
         // The coverage preprocessor is added in gulp/unit-test.js only for single tests
         // It was not possible to do it there because karma doesn't let us now if we are
