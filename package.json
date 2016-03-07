@@ -7,7 +7,7 @@
     "moment": "^2.11.2"
   },
   "scripts": {
-    "coverage": "karma start --single-run && npm run remap-coverage",
+    "coverage": "karma start --single-run; npm run remap-coverage",
     "remap-coverage": "ts-node --project ./dev-scripts ./dev-scripts/remapCoverage.ts",
     "test-single": "karma start --single-run",
     "test-and-coverage": "karma start & npm run remap-coverage",
