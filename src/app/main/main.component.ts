@@ -1,5 +1,5 @@
 import {bundle, Component, StateConfig} from "ng-forward";
-import {NoosferoArticleBlog} from "./../components/noosfero-articles/blog/blog.component";
+import {ArticleBlog} from "./../components/noosfero-articles/blog/blog.component";
 
 import {ArticleView} from "../components/noosfero-articles/article/article_view";
 
@@ -34,7 +34,7 @@ export class MainContent {
     selector: 'main',
     template: '<div ng-view></div>',
     directives: [
-        NoosferoArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
+        ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
         MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock, MembersBlock
     ],
     providers: [AuthService, Session]
