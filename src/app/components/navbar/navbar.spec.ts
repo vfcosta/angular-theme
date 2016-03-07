@@ -113,10 +113,8 @@ describe("Components", () => {
                 directives: [Navbar]
             })
                 .then(fixture => {
-                    console.log("entrou no .then")
                     let navbarComp: Navbar = <Navbar>fixture.debugElement.componentViewChildren[0].componentInstance;
                     spyOn($modal, "open");
-                    //navbarComp.activate();
                     navbarComp.openLogin();
                     expect($modal.open).toHaveBeenCalled();
                     expect($modal.open).toHaveBeenCalledWith({
