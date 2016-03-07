@@ -1,7 +1,7 @@
 import {Component, Inject} from "ng-forward";
 
 
-import {Session, AuthService, IAuthEvents} from "./../auth";
+import {Session, AuthService, AuthController, IAuthEvents} from "./../auth";
 import {User} from "./../../models/interfaces";
 
 @Component({
@@ -46,7 +46,7 @@ export class Navbar {
     openLogin() {
         this.modalInstance = this.$modal.open({
             templateUrl: 'app/components/auth/login.html',
-            controller: 'AuthController',
+            controller: AuthController,
             controllerAs: 'vm',
             bindToController: true
         });

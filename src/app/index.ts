@@ -28,10 +28,6 @@ NoosferoApp.addConstants("AUTH_EVENTS", AUTH_EVENTS);
 NoosferoApp.addConfig(noosferoModuleConfig);
 NoosferoApp.run(noosferoAngularRunBlock);
 
-// NoosferoApp.addService("Session", Session);
-// NoosferoApp.addService("AuthService", AuthService);
-NoosferoApp.addController("AuthController", AuthController);
-
 require("./components/noosfero/noosfero.service.js");
 require("./components/noosfero/profile-image/profile-image.component.js");
 
