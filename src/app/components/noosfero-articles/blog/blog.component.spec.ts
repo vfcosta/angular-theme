@@ -7,7 +7,8 @@ import {createComponentFromClass, quickCreateComponent, provideEmptyObjects, cre
 
 // this htmlTemplate will be re-used between the container components in this spec file
 const htmlTemplate: string = '<noosfero-blog [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-blog>';
-let articleService = {};
+
+let articleService: { getChildren: Function } = <any>{};
 
 describe("Blog Component", () => {
 
@@ -17,19 +18,22 @@ describe("Blog Component", () => {
     // component Noosfero ArtileView will be load on our tests
     beforeEach(angular.mock.module("templates"));
 
-    function promiseResultTemplate(thenFunc: Function) {
+    function promiseResultTemplate(response?: {}) {
         let thenFuncEmpty = (func: Function) => {
             // does nothing
-            //func()
         };
-        if (thenFunc) {
+        if (response) {
             return {
-                then: thenFunc
-            }
+                then: (func: (response: any) => void) => {
+                    func(response);
+                }
+            };
         } else {
             return {
-                then: thenFuncEmpty
-            }
+                then: (func: (response: any) => void) => {
+                    // does nothing
+                }
+            };
         }
     }
 
@@ -37,7 +41,7 @@ describe("Blog Component", () => {
         // creating mock for articleService
         articleService = {
             getChildren: (article_id: number, filters: {}) => {
-                return promiseResultTemplate();
+                return promiseResultTemplate(null);
             }
         };
     });
@@ -64,51 +68,52 @@ describe("Blog Component", () => {
             done();
         });
 
-        it("verify the blog data", (done: Function) => {
 
-            articleService.getChildren = (article_id: number, filters: {}) => {
-                return promiseResultTemplate(() => {
-                  return {
-                    headers: {
-                      total: 1
+
+    });
+
+    it("verify the blog data", (done: Function) => {
+
+        // defining a mock result to articleService.getChildren method
+        articleService.getChildren = (article_id: number, filters: {}) => {
+            return promiseResultTemplate({
+                    headers: (headerName: string) => {
+                        return 1;
                     },
-                    data: {
-                      articles: [
-                      ]
+                    data: <any>{
+                        articles: []
                     }
-                  }
                 });
-            }
-            @Component({
-                selector: 'test-container-component',
-                template: htmlTemplate,
-                directives: [ArticleBlog],
-                providers: [provideEmptyObjects('Restangular'), createProviderToValue('ArticleService', articleService)]
-            })
-            class BlogContainerComponent {
-                article = { type: 'anyArticleType' };
-                profile = { name: 'profile-name' };
-            }
+        };
 
-            createComponentFromClass(BlogContainerComponent).then((fixture) => {
-                // and here we can inspect and run the test assertions
+        @Component({
+            selector: 'test-container-component',
+            template: htmlTemplate,
+            directives: [ArticleBlog],
+            providers: [provideEmptyObjects('Restangular'), createProviderToValue('ArticleService', articleService)]
+        })
+        class BlogContainerComponent {
+            article = { type: 'anyArticleType' };
+            profile = { name: 'profile-name' };
+        }
 
-                // gets the children component of ArticleContainerComponent
-                let articleBlog: BlogContainerComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+        createComponentFromClass(BlogContainerComponent).then((fixture) => {
 
-                // and checks if the article View rendered was the Default Article View
-                //expect(articleView.constructor.prototype).toEqual(ArticleDefaultView.prototype);
-                expect(articleBlog["posts"]).toEqual([]);
-                expect(articleBlog["totalPosts"]).toEqual(1);
+            // gets the children component of BlogContainerComponent
+            let articleBlog: BlogContainerComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+
+            // check if the component property are the provided by the mocked articleService 
+            expect((<any>articleBlog)["posts"]).toEqual([]);
+            expect((<any>articleBlog)["totalPosts"]).toEqual(1);
 
 
-                // done needs to be called (it isn't really needed, as we can read in
-                // here (https://github.com/ngUpgraders/ng-forward/blob/master/API.md#createasync)
-                // because createAsync in ng-forward is not really async, but as the intention
-                // here is write tests in angular 2 ways, this is recommended
-                done();
-            });
-
+            // done needs to be called (it isn't really needed, as we can read in
+            // here (https://github.com/ngUpgraders/ng-forward/blob/master/API.md#createasync)
+            // because createAsync in ng-forward is not really async, but as the intention
+            // here is write tests in angular 2 ways, this is recommended
+            done();
         });
 
     });
+
+});
