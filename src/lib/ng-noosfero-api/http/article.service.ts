@@ -16,16 +16,16 @@ export class ArticleService {
         );
     }
 
-    get(articleId: number) {
+    getByProfile(profileId: number, params?: any) {
+        return this.Restangular.one('profiles', profileId).customGET('articles', params);
+    }
+
+    getChildren(articleId: number, params?: any) {
+        return this.get(articleId).customGET('children', params);
+    }
+
+    private get(articleId: number) {
         return this.Restangular.one('articles', articleId);
-    }
-
-    getByProfile(profileId: number, filters: any) {
-        return this.Restangular.one('profiles', profileId).customGET('articles', filters);
-    }
-
-    getChildren(articleId: number, options: any = {}) {
-        return this.get(articleId).customGET('children', options);
     }
 
 }
