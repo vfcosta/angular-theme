@@ -70,6 +70,16 @@ describe("Services", () => {
                 $rootScope.$apply();
             });
 
+            it("should return the profile home page", (done) => {
+                let profileId = 1;
+                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/home_page`).respond(200, { article: { path: "/something" } });
+                profileService.getHomePage(profileId).then((response: restangular.IResponse) => {
+                    expect(response.data.article).toEqual({ path: "/something" });
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
         });
 
 

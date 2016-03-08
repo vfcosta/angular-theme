@@ -19,6 +19,10 @@ export class ProfileService {
         this._currentProfilePromise.resolve(profile);
     }
 
+    getHomePage(profileId: number, params?: any) {
+        return this.get(profileId).customGET("home_page", params);
+    }
+
     getByIdentifier(identifier: string): restangular.IPromise<any> {
         return this.restangular.one('profiles').get({ identifier: identifier });
     }
