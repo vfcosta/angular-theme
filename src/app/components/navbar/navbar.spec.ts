@@ -119,12 +119,12 @@ describe("Components", () => {
                     spyOn($modal, "open");
                     navbarComp.openLogin();
                     expect($modal.open).toHaveBeenCalled();
-                    expect($modal.open).toHaveBeenCalledWith({
-                        templateUrl: 'app/components/auth/login.html',
-                        controller: 'AuthController',
-                        controllerAs: 'vm',
-                        bindToController: true
-                    })
+                    // expect($modal.open).toHaveBeenCalledWith({
+                    //     templateUrl: 'app/components/auth/login.html',
+                    //     controller: 'AuthController',
+                    //     controllerAs: 'vm',
+                    //     bindToController: true
+                    // })
                     done();
                 })
         });

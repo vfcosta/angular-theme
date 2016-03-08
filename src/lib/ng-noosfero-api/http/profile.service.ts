@@ -4,26 +4,26 @@ import { Injectable, Inject } from "ng-forward";
 @Inject("Restangular")
 export class ProfileService {
 
-    constructor(private Restangular: any) { }
+    constructor(private restangular: restangular.IService) { }
 
-    getByIdentifier(identifier: string) {
-        return this.Restangular.one('profiles').get({ identifier: identifier });
+    getByIdentifier(identifier: string): restangular.IPromise<any> {
+        return this.restangular.one('profiles').get({ identifier: identifier });
     }
 
-    getProfileMembers(profileId: number, params?: any) {
+    getProfileMembers(profileId: number, params?: any): restangular.IPromise<any> {
         return this.get(profileId).customGET("members", params);
     }
 
-    getBoxes(profileId: number) {
+    getBoxes(profileId: number): restangular.IPromise<any> {
         return this.get(profileId).customGET('boxes');
     }
 
-    getActivities(profileId: number, params?: any) {
+    getActivities(profileId: number, params?: any): restangular.IPromise<any> {
         return this.get(profileId).customGET("activities", params);
     }
 
-    private get(profileId: number) {
-        return this.Restangular.one('profiles', profileId);
+    get(profileId: number): restangular.IElement {
+        return this.restangular.one('profiles', profileId);
     }
 
 }
