@@ -48,27 +48,61 @@ export function provideFilters(...filters: string[]) {
     return providers;
 }
 
+
+@Component({
+    selector: 'helper_get_angular_service',
+    template: 'not-used',
+    providers: []
+})
+class AngularServiceHookComponent {
+    constructor() {
+
+    }
+}
+
+class AngularServiceFactory {
+    fixtureComponentHookPoint: ComponentFixture;
+    tcb: TestComponentBuilder = new TestComponentBuilder();
+
+    constructor() {
+        this.fixtureComponentHookPoint = (<any>this.tcb)["create"](AngularServiceHookComponent);
+    }
+
+    getAngularService<T>(angularService: string) {
+        return this.fixtureComponentHookPoint.debugElement.getLocal(angularService);
+    }
+
+    getQService(): ng.IQService {
+        return this.getAngularService<ng.IQService>("$q");
+    }
+
+    getHttpBackendService(): ng.IHttpBackendService {
+        return this.getAngularService<ng.IHttpBackendService>("$httpBackend");
+    }
+}
+
+export var angularServiceFactory = new AngularServiceFactory();
 /**
  * This help function allows get angular services to be used in integration tests
  * i.e: '$http', '$q', '$location', etc...
  */
 export function getAngularService<T>(angularService: string) {
-    let tcb: TestComponentBuilder = new TestComponentBuilder();
-
-    @Component({
-        selector: 'helper_get_angular_service',
-        template: 'not-used',
-        providers: []
-    })
-    class AnyService {
-        constructor() {
-
-        }
-    }
-
-    let fixture: ComponentFixture = (<any>tcb)["create"](AnyService);
-    return fixture.debugElement.getLocal(angularService);
+    return angularServiceFactory.getAngularService(angularService);
 }
+
+export function getQService(): ng.IQService {
+    return angularServiceFactory.getQService();
+}
+
+export function getHttpBackendService(): ng.IHttpBackendService {
+    return angularServiceFactory.getHttpBackendService();
+}
+
+// export function getResolvablePromise() {
+//     let $q = getQService();
+//
+//     return null;
+// }
 
 export var fixtures = {
     user: {

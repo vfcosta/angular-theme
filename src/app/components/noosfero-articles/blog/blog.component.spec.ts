@@ -12,7 +12,7 @@ import {
     quickCreateComponent,
     provideEmptyObjects,
     createProviderToValue,
-    getAngularService
+    getQService
 } from "../../../../spec/helpers.ts";
 
 
@@ -21,7 +21,7 @@ const htmlTemplate: string = '<noosfero-blog [article]="ctrl.article" [profile]=
 
 let articleService: {
     getChildren: Function
-} = < any > {};
+} = <any>{};
 
 describe("Blog Component", () => {
 
@@ -31,7 +31,7 @@ describe("Blog Component", () => {
     // component Noosfero ArtileView will be load on our tests
     beforeEach(angular.mock.module("templates"));
 
-    function promiseResultTemplate(response ? : {}) {
+    function promiseResultTemplate(response?: {}) {
         let thenFuncEmpty = (func: Function) => {
             // does nothing
         };
@@ -90,7 +90,7 @@ describe("Blog Component", () => {
     });
 
     it("get $q service", () => {
-        let $q = getAngularService<ng.IQService>("$q");
+        let $q: ng.IQService = getQService();
         console.log($q);
     });
 
@@ -102,7 +102,7 @@ describe("Blog Component", () => {
                 headers: (headerName: string) => {
                     return 1;
                 },
-                data: < any > {
+                data: <any>{
                     articles: []
                 }
             });
@@ -128,9 +128,9 @@ describe("Blog Component", () => {
             // gets the children component of BlogContainerComponent
             let articleBlog: BlogContainerComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
 
-            // check if the component property are the provided by the mocked articleService 
-            expect(( < any > articleBlog)["posts"]).toEqual([]);
-            expect(( < any > articleBlog)["totalPosts"]).toEqual(1);
+            // check if the component property are the provided by the mocked articleService
+            expect((<any>articleBlog)["posts"]).toEqual([]);
+            expect((<any>articleBlog)["totalPosts"]).toEqual(1);
 
 
             // done needs to be called (it isn't really needed, as we can read in
