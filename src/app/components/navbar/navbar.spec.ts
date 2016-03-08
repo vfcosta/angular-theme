@@ -18,54 +18,55 @@ import {
     provide
 } from "ng-forward";
 
+import {Session, AuthService, AuthController, IAuthEvents} from "./../auth";
 
 describe("Components", () => {
 
-
     describe("Navbar Component", () => {
 
-        let $rootScope: ng.IRootScopeService;
-        let user = <User>{
-            id: 1,
-            login: "user"
-        };
+            let $rootScope: ng.IRootScopeService;
+            
+            let user = <User>{
+                id: 1,
+                login: "user"
+            };
 
-
-        let scope = {
-            eventCalledHook: () => { },
-            $on: (eventName: string, func: Function) => {
-                this.eventCalledHook = func;
-            }
-        }
-
-        let modalInstance = {
-            close: () => { }
-        }
-
-        let $modal = {
-            open: (args: {}) => {
-                return modalInstance;
-            }
-        }
-
-        let authService = {
-            logout: () => { }
-        }
-
-        let stateService = jasmine.createSpyObj("$state", ["go"]);
-        let providers = [
-            new Provider('moment', { useValue: {} }),
-            new Provider('$modal', { useValue: $modal }),
-            new Provider('AuthService', { useValue: authService }),
-            new Provider('Session', {
-                useValue: {
-                    currentUser: () => { return user }
+            let scope = {
+                eventCalledHook: () => { },
+                $on: (eventName: string, func: Function) => {
+                    this.eventCalledHook = func;
                 }
-            }),
-            new Provider('$scope', { useValue: scope }),
-            new Provider('$state', { useValue: stateService }),
-            new Provider('AUTH_EVENTS', { useValue: { AUTH_EVENTS } })
-        ];
+            }
+
+            let modalInstance = {
+                close: () => { }
+            }
+
+            let $modal = {
+                open: (args: {}) => {
+                    return modalInstance;
+                }
+            }
+
+            let authService = {
+                logout: () => { }
+            }
+
+            let stateService = jasmine.createSpyObj("$state", ["go"]);
+            let providers = [
+                new Provider('moment', { useValue: {} }),
+                new Provider('$modal', { useValue: $modal }),
+                new Provider('AuthService', { useValue: authService }),
+                new Provider('Session', {
+                    useValue: {
+                        currentUser: () => { return user }
+                    }
+                }),
+                new Provider('$scope', { useValue: scope }),
+                new Provider('$state', { useValue: stateService }),
+                new Provider('AUTH_EVENTS', { useValue: { AUTH_EVENTS } })
+            ];
+        
 
         beforeEach(angular.mock.module("templates"));
 
@@ -76,7 +77,6 @@ describe("Components", () => {
         it('should get the loggedIn user', (done: Function) => {
 
             let scope = jasmine.createSpyObj("scope", ["$on"]);
-
             let providers = [
                 provideEmptyObjects('moment', '$modal', 'AuthService', '$state'),
                 new Provider('Session', {
@@ -108,7 +108,8 @@ describe("Components", () => {
             });
         });
 
-        it('It should open on click', (done: Function) => {
+        it('should open on click', (done: Function) => {
+
             quickCreateComponent({
                 providers: providers,
                 template: "<acme-navbar></acme-navbar>",
@@ -119,17 +120,18 @@ describe("Components", () => {
                     spyOn($modal, "open");
                     navbarComp.openLogin();
                     expect($modal.open).toHaveBeenCalled();
-                    // expect($modal.open).toHaveBeenCalledWith({
-                    //     templateUrl: 'app/components/auth/login.html',
-                    //     controller: 'AuthController',
-                    //     controllerAs: 'vm',
-                    //     bindToController: true
-                    // })
+                    expect($modal.open).toHaveBeenCalledWith({
+                        templateUrl: 'app/components/auth/login.html',
+                        controller: AuthController,
+                        controllerAs: 'vm',
+                        bindToController: true                        
+                     })
                     done();
                 })
         });
 
-        it('It should logout', (done: Function) => {
+        it('should logout', (done: Function) => {
+
             quickCreateComponent({
                 providers: providers,
                 template: "<acme-navbar></acme-navbar>",
@@ -145,6 +147,38 @@ describe("Components", () => {
         });
 
 
+        it('should not activate user when logged in',  (done: Function) => {
+            quickCreateComponent({
+                providers: providers,
+                template: "<acme-navbar></acme-navbar>",
+                directives: [Navbar]
+            })
+                .then(fixture => {
+                    let navbarComp: Navbar = <Navbar>fixture.debugElement.componentViewChildren[0].componentInstance;
+                    spyOn(navbarComp, "openLogin");
+                    navbarComp.activate();
+                    expect(navbarComp.openLogin.calls.count()).toBe(0);
+                    done();
+               })
+
+        });            
+
+        it('should activate when user not logged in',  (done: Function) => {
+            user = null;
+            quickCreateComponent({
+                providers: providers,
+                template: "<acme-navbar></acme-navbar>",
+                directives: [Navbar]
+            })
+                .then(fixture => {
+                    let navbarComp: Navbar = <Navbar>fixture.debugElement.componentViewChildren[0].componentInstance;
+                    spyOn(navbarComp, "openLogin");
+                    navbarComp.activate();
+                    expect(navbarComp.openLogin).toHaveBeenCalled();
+                    done();
+                })
+        });
+        
 
         // it('closes the modal the login', (done: Function) => {
         //     let scope = {
