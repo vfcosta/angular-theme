@@ -13,12 +13,12 @@ export class MembersBlock {
 
     members: any = [];
 
-    constructor(private ProfileService: ProfileService) {
+    constructor(private profileService: ProfileService) {
 
     }
 
     ngOnInit() {
-        this.ProfileService.getProfileMembers(this.owner.id, { per_page: 6 }).then((response: any) => {
+        this.profileService.getProfileMembers(this.owner.id, { per_page: 6 }).then((response: any) => {
             this.members = response.data.people;
         });
     }

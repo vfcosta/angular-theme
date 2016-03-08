@@ -13,10 +13,10 @@ export class RecentDocumentsBlock {
 
     profile: any;
     documents: any;
-    
+
     documentsLoaded: boolean = false;
 
-    constructor(private ArticleService: ArticleService, private $state: any) {
+    constructor(private articleService: ArticleService, private $state: any) {
     }
 
     ngOnInit() {
@@ -25,7 +25,7 @@ export class RecentDocumentsBlock {
 
         var limit = (this.block && this.block.settings) ? this.block.settings.limit : null || 5;
         //FIXME get all text articles
-        this.ArticleService.getByProfile(this.profile.id, { content_type: 'TinyMceArticle', per_page: limit }).then((response: any) => {
+        this.articleService.getByProfile(this.profile.id, { content_type: 'TinyMceArticle', per_page: limit }).then((response: any) => {
             this.documents = response.data.articles;
             this.documentsLoaded = true;
         });
@@ -36,4 +36,3 @@ export class RecentDocumentsBlock {
     }
 
 }
-
