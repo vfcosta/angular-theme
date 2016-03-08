@@ -3,7 +3,7 @@ import {AuthService} from "./auth_service";
 
 export class AuthController {
 
-    static $inject = ["noosfero", "$log", "$stateParams", "AuthService"];
+    static $inject = ["$log", "$stateParams", "AuthService"];
 
     constructor(
         private noosfero: any,

@@ -1,31 +1,46 @@
 import { Injectable, Inject } from "ng-forward";
+import {Profile} from "../../../app/models/interfaces";
 
 @Injectable()
-@Inject("Restangular")
+@Inject("Restangular", "$q")
 export class ProfileService {
 
-    constructor(private Restangular: any) {
+    private _currentProfilePromise: ng.IDeferred<Profile>;
 
+    constructor(private restangular: restangular.IService, $q: ng.IQService) {
+        this._currentProfilePromise = $q.defer();
     }
 
-    getActivities(profileId: number, options: any = {}) {
-        return this.get(profileId).customGET("activities", options);
+    getCurrentProfile(): ng.IPromise<Profile> {
+        return this._currentProfilePromise.promise;
     }
 
-    get(profileId: number) {
-        return this.Restangular.one('profiles', profileId);
+    setCurrentProfile(profile: Profile) {
+        this._currentProfilePromise.resolve(profile);
     }
 
-    getProfileMembers(profileId: number, filters: any) {
-        return this.get(profileId).customGET("members", filters);
+    getHomePage(profileId: number, params?: any) {
+        return this.get(profileId).customGET("home_page", params);
     }
 
-    getByIdentifier(identifier: string) {
-        return this.Restangular.one('profiles').get({ identifier: identifier });
+    getByIdentifier(identifier: string): restangular.IPromise<any> {
+        return this.restangular.one('profiles').get({ identifier: identifier });
     }
 
-    getBoxes(profileId: number) {
+    getProfileMembers(profileId: number, params?: any): restangular.IPromise<any> {
+        return this.get(profileId).customGET("members", params);
+    }
+
+    getBoxes(profileId: number): restangular.IPromise<any> {
         return this.get(profileId).customGET('boxes');
+    }
+
+    getActivities(profileId: number, params?: any): restangular.IPromise<any> {
+        return this.get(profileId).customGET("activities", params);
+    }
+
+    get(profileId: number): restangular.IElement {
+        return this.restangular.one('profiles', profileId);
     }
 
 }

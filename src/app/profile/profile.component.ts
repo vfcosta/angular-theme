@@ -1,4 +1,4 @@
-import {StateConfig, Component, Inject} from 'ng-forward';
+import {StateConfig, Component, Inject, provide} from 'ng-forward';
 import {ProfileInfo} from '../profile-info/profile-info.component';
 import {ProfileHome} from '../profile/profile-home.component';
 import {Cms} from '../cms/cms.component';
@@ -12,7 +12,8 @@ import * as noosferoModels from "./../models/interfaces";
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html",
-    directives: [NoosferoActivities]
+    directives: [NoosferoActivities],
+    providers: [provide('profileService', { useClass: ProfileService })]
 })
 @StateConfig([
     {
@@ -68,17 +69,17 @@ import * as noosferoModels from "./../models/interfaces";
         }
     }
 ])
-@Inject(ProfileService, "noosfero", "$log", "$stateParams")
+@Inject(ProfileService, "$stateParams")
 export class Profile {
 
     boxes: noosferoModels.Box[];
     profile: noosferoModels.Profile;
 
-    constructor(ProfileService: ProfileService, noosfero: any, $log: ng.ILogService, $stateParams: ng.ui.IStateParamsService) {
-        ProfileService.getByIdentifier($stateParams["profile"]).then((response: restangular.IResponse) => {
+    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService) {
+        profileService.getByIdentifier($stateParams["profile"]).then((response: restangular.IResponse) => {
             this.profile = response.data[0];
-            noosfero.setCurrentProfile(this.profile);
-            return ProfileService.getBoxes(this.profile.id);
+            profileService.setCurrentProfile(this.profile);
+            return profileService.getBoxes(this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         });

@@ -10,7 +10,7 @@ export interface ComponentFixtureTemplate {
     template?: string;
 }
 
-let tcb: TestComponentBuilder = new TestComponentBuilder();
+export let tcb: TestComponentBuilder = new TestComponentBuilder();
 
 export function quickCreateComponent({
     providers = [],

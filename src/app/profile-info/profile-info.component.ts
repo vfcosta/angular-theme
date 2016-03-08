@@ -1,26 +1,27 @@
-import {StateConfig, Component, Inject} from 'ng-forward';
+import {StateConfig, Component, Inject, provide} from 'ng-forward';
 
 import {Profile} from "./../models/interfaces";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
     selector: 'profile',
-    templateUrl: "app/profile-info/profile-info.html"
+    templateUrl: "app/profile-info/profile-info.html",
+    providers: [provide('profileService', { useClass: ProfileService })]
 })
-@Inject(ProfileService, "noosfero")
+@Inject(ProfileService)
 export class ProfileInfo {
 
     activities: any
     profile: any
 
-    constructor(private ProfileService: ProfileService, private noosfero: any) {
+    constructor(private profileService: ProfileService) {
         this.activate();
     }
 
     activate() {
-        this.noosfero.currentProfile.then((profile: Profile) => {
+        this.profileService.getCurrentProfile().then((profile: Profile) => {
             this.profile = profile;
-            return this.ProfileService.getActivities(this.profile.id);
+            return this.profileService.getActivities(this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.activities = response.data.activities;
         });
