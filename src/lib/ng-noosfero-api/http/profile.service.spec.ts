@@ -1,6 +1,6 @@
 import {Profile} from "../../../app/models/interfaces";
 import {ProfileService} from "./profile.service";
-
+import {getAngularService} from "../../../spec/helpers";
 
 describe("Services", () => {
 
@@ -8,14 +8,15 @@ describe("Services", () => {
 
         let $httpBackend: ng.IHttpBackendService;
         let profileService: ProfileService;
+        let $rootScope: ng.IRootScopeService;
 
         beforeEach(angular.mock.module("noosferoApp"));
 
-        beforeEach(inject((_$httpBackend_: ng.IHttpBackendService, _ProfileService_: ProfileService) => {
+        beforeEach(inject((_$httpBackend_: ng.IHttpBackendService, _ProfileService_: ProfileService, _$rootScope_: ng.IRootScopeService) => {
             $httpBackend = _$httpBackend_;
             profileService = _ProfileService_;
+            $rootScope = _$rootScope_;
         }));
-
 
         describe("Succesfull requests", () => {
 
@@ -58,6 +59,17 @@ describe("Services", () => {
                 });
                 $httpBackend.flush();
             });
+
+            it("should resolve the current profile", (done) => {
+                let profile: Profile = { id: 1, identifier: "profile1" };
+                profileService.getCurrentProfile().then((currentProfile: Profile) => {
+                    expect(currentProfile).toEqual(currentProfile);
+                    done();
+                });
+                profileService.setCurrentProfile(profile);
+                $rootScope.$apply();
+            });
+
         });
 
 
