@@ -15,7 +15,6 @@ import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 export class Cms {
 
     article: any = {};
-    profile: any;
 
     constructor(private articleService: ArticleService,
         private profileService: ProfileService,
