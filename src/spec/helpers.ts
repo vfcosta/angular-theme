@@ -62,10 +62,10 @@ class AngularServiceHookComponent {
 
 class AngularServiceFactory {
     fixtureComponentHookPoint: ComponentFixture;
-    tcb: TestComponentBuilder = new TestComponentBuilder();
+    // tcb: TestComponentBuilder = new TestComponentBuilder();
 
     constructor() {
-        this.fixtureComponentHookPoint = (<any>this.tcb)["create"](AngularServiceHookComponent);
+        this.fixtureComponentHookPoint = (<any>tcb)["create"](AngularServiceHookComponent);
     }
 
     getAngularService<T>(angularService: string) {
@@ -81,21 +81,23 @@ class AngularServiceFactory {
     }
 }
 
-export var angularServiceFactory = new AngularServiceFactory();
+export function getAngularServiceFactory() {
+    return new AngularServiceFactory();
+}
 /**
  * This help function allows get angular services to be used in integration tests
  * i.e: '$http', '$q', '$location', etc...
  */
 export function getAngularService<T>(angularService: string) {
-    return angularServiceFactory.getAngularService(angularService);
+    return getAngularServiceFactory().getAngularService(angularService);
 }
 
 export function getQService(): ng.IQService {
-    return angularServiceFactory.getQService();
+    return getAngularServiceFactory().getQService();
 }
 
 export function getHttpBackendService(): ng.IHttpBackendService {
-    return angularServiceFactory.getHttpBackendService();
+    return getAngularServiceFactory().getHttpBackendService();
 }
 
 // export function getResolvablePromise() {
