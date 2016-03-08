@@ -8,13 +8,13 @@ import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
     template: "<div></div>",
     providers: [provide('profileService', { useClass: ProfileService })]
 })
-@Inject(ProfileService, "noosfero", "$log", "$stateParams", "$scope", "$state")
+@Inject(ProfileService, "$log", "$stateParams", "$scope", "$state")
 export class ProfileHome {
 
     profile: Profile;
 
-    constructor(profileService: ProfileService, noosfero: any, $log: ng.ILogService, $stateParams: ng.ui.IStateParamsService, $scope: ng.IScope, $state: ng.ui.IStateService) {
-        noosfero.currentProfile.then((profile: Profile) => {
+    constructor(profileService: ProfileService, $log: ng.ILogService, $stateParams: ng.ui.IStateParamsService, $scope: ng.IScope, $state: ng.ui.IStateService) {
+        profileService.getCurrentProfile().then((profile: Profile) => {
             this.profile = profile;
             return profileService.get(this.profile.id).customGET('home_page', { fields: 'path' });
         }).then((response: restangular.IResponse) => {

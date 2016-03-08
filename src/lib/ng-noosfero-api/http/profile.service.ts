@@ -1,10 +1,23 @@
 import { Injectable, Inject } from "ng-forward";
+import {Profile} from "../../../app/models/interfaces";
 
 @Injectable()
-@Inject("Restangular")
+@Inject("Restangular", "$q")
 export class ProfileService {
 
-    constructor(private restangular: restangular.IService) { }
+    private _currentProfilePromise: ng.IDeferred<Profile>;
+
+    constructor(private restangular: restangular.IService, $q: ng.IQService) {
+        this._currentProfilePromise = $q.defer();
+    }
+
+    getCurrentProfile(): ng.IPromise<Profile> {
+        return this._currentProfilePromise.promise;
+    }
+
+    setCurrentProfile(profile: Profile) {
+        this._currentProfilePromise.resolve(profile);
+    }
 
     getByIdentifier(identifier: string): restangular.IPromise<any> {
         return this.restangular.one('profiles').get({ identifier: identifier });

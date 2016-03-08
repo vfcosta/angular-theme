@@ -8,18 +8,18 @@ import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
     templateUrl: "app/profile-info/profile-info.html",
     providers: [provide('profileService', { useClass: ProfileService })]
 })
-@Inject(ProfileService, "noosfero")
+@Inject(ProfileService)
 export class ProfileInfo {
 
     activities: any
     profile: any
 
-    constructor(private profileService: ProfileService, private noosfero: any) {
+    constructor(private profileService: ProfileService) {
         this.activate();
     }
 
     activate() {
-        this.noosfero.currentProfile.then((profile: Profile) => {
+        this.profileService.getCurrentProfile().then((profile: Profile) => {
             this.profile = profile;
             return this.profileService.getActivities(this.profile.id);
         }).then((response: restangular.IResponse) => {
