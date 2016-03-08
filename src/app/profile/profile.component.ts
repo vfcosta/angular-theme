@@ -69,13 +69,13 @@ import * as noosferoModels from "./../models/interfaces";
         }
     }
 ])
-@Inject(ProfileService, "$log", "$stateParams")
+@Inject(ProfileService, "$stateParams")
 export class Profile {
 
     boxes: noosferoModels.Box[];
     profile: noosferoModels.Profile;
 
-    constructor(profileService: ProfileService, $log: ng.ILogService, $stateParams: ng.ui.IStateParamsService) {
+    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService) {
         profileService.getByIdentifier($stateParams["profile"]).then((response: restangular.IResponse) => {
             this.profile = response.data[0];
             profileService.setCurrentProfile(this.profile);
