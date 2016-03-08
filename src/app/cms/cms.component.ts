@@ -11,7 +11,7 @@ import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
         provide('profileService', { useClass: ProfileService })
     ]
 })
-@Inject(ArticleService, ProfileService, "$stateParams", "$httpParamSerializer", "$state", "SweetAlert")
+@Inject(ArticleService, ProfileService, "$state", "SweetAlert")
 export class Cms {
 
     article: any = {};
@@ -19,8 +19,6 @@ export class Cms {
 
     constructor(private articleService: ArticleService,
         private profileService: ProfileService,
-        private $stateParams: ng.ui.IStateParamsService,
-        private $httpParamSerializer: any,
         private $state: ng.ui.IStateService, private SweetAlert: any) { }
 
     save() {
