@@ -1,6 +1,7 @@
+import {providers} from 'ng-forward/cjs/testing/providers';
+
 import {
     Input,
-    provide,
     Component
 } from 'ng-forward';
 import {
@@ -12,26 +13,16 @@ import {
     quickCreateComponent,
     provideEmptyObjects,
     createProviderToValue,
-    getAngularService
+    getAngularService,
+    provideFilters
 } from "../../../../spec/helpers.ts";
-
 
 // this htmlTemplate will be re-used between the container components in this spec file
 const htmlTemplate: string = '<noosfero-blog [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-blog>';
 
-let articleService: {
-    getChildren: Function
-} = < any > {};
-
 describe("Blog Component", () => {
-
-    // the karma preprocessor html2js transform the templates html into js files which put
-    // the templates to the templateCache into the module templates
-    // we need to load the module templates here as the template for the
-    // component Noosfero ArtileView will be load on our tests
-    beforeEach(angular.mock.module("templates"));
-
-    function promiseResultTemplate(response ? : {}) {
+  
+    function promiseResultTemplate(response?: {}) {
         let thenFuncEmpty = (func: Function) => {
             // does nothing
         };
@@ -50,33 +41,47 @@ describe("Blog Component", () => {
         }
     }
 
-    beforeAll(() => {
-        // creating mock for articleService
-        articleService = {
-            getChildren: (article_id: number, filters: {}) => {
-                return promiseResultTemplate(null);
-            }
+    let articleService = {
+        getChildren: (article_id: number, filters: {}) => {
+            return promiseResultTemplate(null);
+        }
+    };
+
+    @Component({
+        selector: 'test-container-component',
+        template: htmlTemplate,
+        directives: [ArticleBlog],
+        providers: [
+            provideEmptyObjects('Restangular'),
+            createProviderToValue('ArticleService', articleService),
+            provideFilters('truncateFilter')
+        ]
+    })
+    class BlogContainerComponent {
+        article = {
+            type: 'anyArticleType'
         };
+        profile = {
+            name: 'profile-name'
+        };
+    }
+
+    beforeEach(() => {
+
+        // the karma preprocessor html2js transform the templates html into js files which put
+        // the templates to the templateCache into the module templates
+        // we need to load the module templates here as the template for the
+        // component Noosfero ArtileView will be load on our tests
+        angular.mock.module("templates")
+
+        providers((provide: any) => {
+            return <any>[
+                provide('ArticleService', { useValue: articleService })
+            ]
+        });
     });
 
     it("renders the blog content", (done: Function) => {
-
-        // Creating a container component (ArticleContainerComponent) to include
-        // the component under test (ArticleView)
-        @Component({
-            selector: 'test-container-component',
-            template: htmlTemplate,
-            directives: [ArticleBlog],
-            providers: [provideEmptyObjects('Restangular'), createProviderToValue('ArticleService', articleService)]
-        })
-        class BlogContainerComponent {
-            article = {
-                type: 'anyArticleType'
-            };
-            profile = {
-                name: 'profile-name'
-            };
-        }
 
         createComponentFromClass(BlogContainerComponent).then((fixture) => {
 
@@ -84,14 +89,6 @@ describe("Blog Component", () => {
 
             done();
         });
-
-
-
-    });
-
-    it("get $q service", () => {
-        let $q = getAngularService<ng.IQService>("$q");
-        console.log($q);
     });
 
     it("verify the blog data", (done: Function) => {
@@ -102,41 +99,28 @@ describe("Blog Component", () => {
                 headers: (headerName: string) => {
                     return 1;
                 },
-                data: < any > {
-                    articles: []
+                data: <any>{
+                    articles: [{
+                        id: 1,
+                        title: 'The article test'
+                    }]
                 }
             });
         };
-
-        @Component({
-            selector: 'test-container-component',
-            template: htmlTemplate,
-            directives: [ArticleBlog],
-            providers: [provideEmptyObjects('Restangular'), createProviderToValue('ArticleService', articleService)]
-        })
-        class BlogContainerComponent {
-            article = {
-                type: 'anyArticleType'
-            };
-            profile = {
-                name: 'profile-name'
-            };
-        }
 
         createComponentFromClass(BlogContainerComponent).then((fixture) => {
 
             // gets the children component of BlogContainerComponent
             let articleBlog: BlogContainerComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
 
-            // check if the component property are the provided by the mocked articleService 
-            expect(( < any > articleBlog)["posts"]).toEqual([]);
-            expect(( < any > articleBlog)["totalPosts"]).toEqual(1);
+            // check if the component property are the provided by the mocked articleService
+            var post = {
+                id: 1,
+                title: 'The article test'
+            };
+            expect((<any>articleBlog)["posts"][0]).toEqual(jasmine.objectContaining(post));
+            expect((<any>articleBlog)["totalPosts"]).toEqual(1);
 
-
-            // done needs to be called (it isn't really needed, as we can read in
-            // here (https://github.com/ngUpgraders/ng-forward/blob/master/API.md#createasync)
-            // because createAsync in ng-forward is not really async, but as the intention
-            // here is write tests in angular 2 ways, this is recommended
             done();
         });
 
