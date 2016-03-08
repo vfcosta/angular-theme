@@ -6,7 +6,6 @@ import {ContentViewer} from "../content-viewer/content-viewer.component";
 import {ContentViewerActions} from "../content-viewer/content-viewer-actions.component";
 import {NoosferoActivities} from "../components/noosfero-activities/activities.component";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
-import {NoosferoService} from "../components/noosfero/noosfero.service";
 
 import * as noosferoModels from "./../models/interfaces";
 
