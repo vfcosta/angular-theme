@@ -13,6 +13,7 @@ export interface Article {
 export interface Profile {
     id: number;
     identifier: string;
+    type: string;
 }
 
 export interface Person extends Profile {

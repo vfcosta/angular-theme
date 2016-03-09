@@ -1,55 +1,26 @@
 import {TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {Pipe, Input, provide, Component} from 'ng-forward';
 
-import {ProfileImageBlock} from './profile-image.component';
-
-import {ProfileService} from "./../../../../lib/ng-noosfero-api/http/profile.service";
+import {ProfileImageBlock} from './profile-image-block.component';
 
 import * as helpers from "./../../../../spec/helpers";
 
 const tcb = new TestComponentBuilder();
 
-const htmlTemplate: string = '<noosfero-profile-image-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-profile-image-block>';
-
-
-
+const htmlTemplate: string = '<noosfero-profile-image-block  [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-profile-image-block>';
 
 describe("Components", () => {
+        
     describe("Profile Image Block Component", () => {
 
         beforeEach(angular.mock.module("templates"));
         
-        //beforeEach(angular.mock.module("restangular"));
-        
-        function buildServiceMock() {
-            let profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["getActivities"]);
-
-            let thenObj = jasmine.createSpyObj("thenObj", ["then"]);
-
-            thenObj.then = (func: Function) => {
-                func({
-                    data: {
-                        image: {
-                            name: 'some-thing',
-                            url: 'http://image.com'
-                        }
-                    }
-                })
-            }
-
-            profileServiceMock.getActivities = jasmine.createSpy("getActivities").and.returnValue(thenObj);
-
-            return profileServiceMock;
-        }
-
         @Component(
             {
                 selector: 'test-container-component',
                 template: htmlTemplate,
-                directives: [ProfileImageBlock],
-                providers: [helpers.createProviderToValue("ProfileService", buildServiceMock())]
-
-            })
+                directives: [ProfileImageBlock]
+            })                    
         class BlockContainerComponent {
             block = { type: 'Block' };
             owner = { name: 'profile-name' };
@@ -60,7 +31,6 @@ describe("Components", () => {
         
 
         it("show image if present", () => {
-            let profileServiceMock = buildServiceMock();
             helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
                 var elProfile = fixture.debugElement.componentViewChildren[0];
                 expect(elProfile.query('div.profile-image-block').length).toEqual(1);
@@ -86,7 +56,7 @@ describe("Components", () => {
             profileImageBlock.ngOnInit();
             expect(profileServiceMock.getActivities).toHaveBeenCalled();
             expect(profileImageBlock.image.name).toEqual("some-thing");
-        })
+        });
 
         //         it("render the profile image", done => {
         //             tcb.createAsync(BlockContainerComponent).then(fixture => {
@@ -102,5 +72,11 @@ describe("Components", () => {
         //             });
         //         });
 
+        it("test dependency", done => {
+           tcb.createAsync(BlockContainerComponent).then(fixture => {
+               //let service = mock(Service)
+               done();
+           });
+        });
     });
 });
