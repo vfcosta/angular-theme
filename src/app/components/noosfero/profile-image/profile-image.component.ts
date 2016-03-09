@@ -8,11 +8,10 @@ import {Profile} from "./../../../models/interfaces";
 export class ProfileImage {
 
     @Input() profile: Profile;
-    defaultIcon: any;
+    defaultIcon: string;
     
     ngOnInit() {
         this.defaultIcon = 'fa-users';
-        console.debug("On ProfileImage ngOnInit. Profile: " + this.profile)
         if (this.profile && this.profile.type === 'Person') {
             this.defaultIcon = 'fa-user';
         }
