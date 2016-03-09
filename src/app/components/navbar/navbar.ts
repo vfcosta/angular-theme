@@ -1,14 +1,15 @@
 import {Component, Inject} from "ng-forward";
 
 
-import {Session, AuthService, AuthController, IAuthEvents} from "./../auth";
+import {Session, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} from "./../auth";
 import {User} from "./../../models/interfaces";
 
 @Component({
     selector: "acme-navbar",
-    templateUrl: "app/components/navbar/navbar.html"
+    templateUrl: "app/components/navbar/navbar.html",
+    providers: [AuthService, Session]
 })
-@Inject("moment", "$modal", "AuthService", "Session", "$scope", "$state", "AUTH_EVENTS")
+@Inject("$modal", AuthService, "Session", "$scope", "$state")
 export class Navbar {
 
     private currentUser: User;
@@ -17,30 +18,26 @@ export class Navbar {
      *
      */
     constructor(
-        private moment: moment.MomentStatic,
         private $modal: any,
         private authService: AuthService,
         private session: Session,
         private $scope: ng.IScope,
-        private $state: ng.ui.IStateService,
-        private AUTH_EVENTS: IAuthEvents
+        private $state: ng.ui.IStateService
     ) {
+        this.currentUser = this.session.currentUser();
 
-        this.currentUser = session.currentUser();
-
-        $scope.$on(AUTH_EVENTS.loginSuccess, () => {
+        this.$scope.$on(AUTH_EVENTS.loginSuccess, () => {
             if (this.modalInstance) {
                 this.modalInstance.close();
                 this.modalInstance = null;
             }
 
-            this.$state.go(this.$state.current, {}, { reload: true }); //TODO move to auth
+            this.$state.go(this.$state.current, {}, { reload: true }); // TODO move to auth
         });
 
-        $scope.$on(AUTH_EVENTS.logoutSuccess, () => {
+        this.$scope.$on(AUTH_EVENTS.logoutSuccess, () => {
             this.currentUser = this.session.currentUser();
         });
-
     }
 
     openLogin() {
@@ -54,7 +51,7 @@ export class Navbar {
 
     logout() {
         this.authService.logout();
-        this.$state.go(this.$state.current, {}, { reload: true });  //TODO move to auth
+        this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
     };
 
 

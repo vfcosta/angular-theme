@@ -1,8 +1,15 @@
 
 import {ngClass, TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
+import {providers} from  'ng-forward/cjs/testing/providers';
 import {Injectable, Inject, Provider, Input, provide, Component} from 'ng-forward';
 import {User, Person} from "./../app/models/interfaces";
 
+
+export var ngforward = {
+  providers: providers,
+  TestComponentBuilder: TestComponentBuilder,
+  ComponentFixture: ComponentFixture
+};
 
 export interface ComponentFixtureTemplate {
     providers?: any[];
@@ -60,11 +67,13 @@ class AngularServiceHookComponent {
     }
 }
 
+/**
+ * This helper class allows get angular services to be used in integration tests
+ * i.e: '$http', '$q', '$location', etc...
+ */
 class AngularServiceFactory {
-    fixtureComponentHookPoint: ComponentFixture;
-    // tcb: TestComponentBuilder = new TestComponentBuilder();
 
-    constructor() {
+    constructor(private fixtureComponentHookPoint: ComponentFixture) {
         this.fixtureComponentHookPoint = (<any>tcb)["create"](AngularServiceHookComponent);
     }
 
@@ -81,30 +90,11 @@ class AngularServiceFactory {
     }
 }
 
-export function getAngularServiceFactory() {
-    return new AngularServiceFactory();
-}
-/**
- * This help function allows get angular services to be used in integration tests
- * i.e: '$http', '$q', '$location', etc...
- */
-export function getAngularService<T>(angularService: string) {
-    return getAngularServiceFactory().getAngularService(angularService);
+export function getAngularServiceFactory(fixture: ComponentFixture) {
+    return new AngularServiceFactory(fixture);
 }
 
-export function getQService(): ng.IQService {
-    return getAngularServiceFactory().getQService();
-}
-
-export function getHttpBackendService(): ng.IHttpBackendService {
-    return getAngularServiceFactory().getHttpBackendService();
-}
-
-// export function getResolvablePromise() {
-//     let $q = getQService();
-//
-//     return null;
-// }
+export {mocks} from "./mocks";
 
 export var fixtures = {
     user: {

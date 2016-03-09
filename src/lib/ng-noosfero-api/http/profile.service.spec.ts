@@ -1,6 +1,5 @@
 import {Profile} from "../../../app/models/interfaces";
 import {ProfileService} from "./profile.service";
-import {getAngularService} from "../../../spec/helpers";
 
 describe("Services", () => {
 

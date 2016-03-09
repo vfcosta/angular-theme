@@ -15,7 +15,6 @@ import {
     quickCreateComponent,
     provideEmptyObjects,
     createProviderToValue,
-    getAngularService,
     provideFilters
 } from "../../../../spec/helpers.ts";
 
