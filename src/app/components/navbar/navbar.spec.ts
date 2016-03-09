@@ -21,7 +21,7 @@ describe("Components", () => {
         let $modal: any;
         let authService: any;
         let stateService: any;
-        let sessionService: any;
+        let sessionService: Session;
 
         let provideFunc = provide;
 
@@ -36,7 +36,7 @@ describe("Components", () => {
             $modal = helpers.mocks.$modal;
             authService = helpers.mocks.authService;
             stateService = jasmine.createSpyObj("$state", ["go"]);
-            sessionService = helpers.mocks.sessionWithCurrentUser(user);
+            sessionService = <any>helpers.mocks.sessionWithCurrentUser(user);
         });
 
 
@@ -155,18 +155,28 @@ describe("Components", () => {
                 let navbarComp: Navbar = <Navbar>fixture.debugElement.componentViewChildren[0].componentInstance;
                 let localScope: ng.IScope = navbarComp["$scope"];
 
-
                 navbarComp.openLogin();
-
-                localScope.$on(AUTH_EVENTS.loginSuccess, () => {
-                    expect(modalInstance.close).toHaveBeenCalled();
-                    done();
-                });
-
                 localScope.$emit(AUTH_EVENTS.loginSuccess);
-                fixture.detectChanges();
+                expect(modalInstance.close).toHaveBeenCalled();
+                done();
+            });
+        });
 
+        it('updates current user on logout', (done: Function) => {
+            buildComponent().then((fixture: ComponentFixture) => {
+                let navbarComp: Navbar = <Navbar>fixture.debugElement.componentViewChildren[0].componentInstance;
+                let localScope: ng.IScope = navbarComp["$scope"];
 
+                // init navbar  currentUser with some user
+                navbarComp["currentUser"] = user;
+
+                // changes the current User to return null,
+                // and emmit the 'logoutSuccess' event
+                // just what happens when user logsout
+                sessionService.currentUser = () => { return null; };
+                localScope.$emit(AUTH_EVENTS.logoutSuccess);
+                expect(navbarComp["currentUser"]).toBeNull();
+                done();
             });
         });
 
