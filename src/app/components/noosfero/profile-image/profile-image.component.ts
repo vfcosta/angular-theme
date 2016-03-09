@@ -1,21 +1,20 @@
-(function() {
-  'use strict';
+import {Inject, Input, Component} from "ng-forward";
+import {Profile} from "./../../../models/interfaces";
 
-  angular
-    .module('noosferoApp')
-    .component('noosferoProfileImage', {
-      templateUrl: 'app/components/noosfero/profile-image/profile-image.html',
-      bindings: {
-        profile: '<'
-      },
-      controller: ProfileImageController
-    });
+@Component({
+    selector: "noosfero-profile-image",
+    templateUrl: 'app/components/noosfero/profile-image/profile-image.html',
+})
+export class ProfileImage {
 
-  /** @ngInject */
-  function ProfileImageController() {
-    var vm = this;
-    vm.defaultIcon = 'fa-users';
-    if(vm.profile && vm.profile.type==='Person') vm.defaultIcon = 'fa-user';
-  }
+    @Input() profile: Profile;
+    defaultIcon: string;
+    
+    ngOnInit() {
+        this.defaultIcon = 'fa-users';
+        if (this.profile && this.profile.type === 'Person') {
+            this.defaultIcon = 'fa-user';
+        }
+    }
+}
 
-})();

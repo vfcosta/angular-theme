@@ -60,12 +60,12 @@ describe("Services", () => {
             });
 
             it("should resolve the current profile", (done) => {
-                let profile: Profile = { id: 1, identifier: "profile1" };
+                let profile = { id: 1, identifier: "profile1" };
                 profileService.getCurrentProfile().then((currentProfile: Profile) => {
                     expect(currentProfile).toEqual(currentProfile);
                     done();
                 });
-                profileService.setCurrentProfile(profile);
+                profileService.setCurrentProfile(<Profile>profile);
                 $rootScope.$apply();
             });
 

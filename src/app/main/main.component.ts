@@ -8,7 +8,8 @@ import {Boxes} from "../components/noosfero-boxes/boxes.component";
 import {Block} from "../components/noosfero-blocks/block.component";
 import {LinkListBlock} from "../components/noosfero-blocks/link-list/link-list.component";
 import {RecentDocumentsBlock} from "../components/noosfero-blocks/recent-documents/recent-documents.component";
-import {ProfileImageBlock} from "../components/noosfero-blocks/profile-image/profile-image.component";
+import {ProfileImageBlock} from "../components/noosfero-blocks/profile-image-block/profile-image-block.component";
+
 import {MembersBlock} from "../components/noosfero-blocks/members-block/members-block.component";
 import {NoosferoTemplate} from "../components/noosfero/noosfero-template.filter";
 
