@@ -46,37 +46,5 @@ describe("Components", () => {
            
         });
 
-        it("get activitities from profileService", () => {
-
-
-            let profileServiceMock = buildServiceMock();
-            
-            let profileImageBlock = new ProfileImageBlock(<any>profileServiceMock);
-
-            profileImageBlock.ngOnInit();
-            expect(profileServiceMock.getActivities).toHaveBeenCalled();
-            expect(profileImageBlock.image.name).toEqual("some-thing");
-        });
-
-        //         it("render the profile image", done => {
-        //             tcb.createAsync(BlockContainerComponent).then(fixture => {
-        //                 expect(fixture.debugElement.queryAll("noosfero-profile-image").length).toEqual(1);
-        //                 done();
-        //             });
-        //         });
-        // 
-        //         it("render the settings link", done => {
-        //             tcb.createAsync(BlockContainerComponent).then(fixture => {
-        //                 expect(fixture.debugElement.queryAll(".settings-link").length).toEqual(1);
-        //                 done();
-        //             });
-        //         });
-
-        it("test dependency", done => {
-           tcb.createAsync(BlockContainerComponent).then(fixture => {
-               //let service = mock(Service)
-               done();
-           });
-        });
     });
 });
