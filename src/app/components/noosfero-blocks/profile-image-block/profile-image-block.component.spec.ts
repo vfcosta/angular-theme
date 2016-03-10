@@ -15,20 +15,17 @@ describe("Components", () => {
 
         beforeEach(angular.mock.module("templates"));
         
-        @Component(
-            {
-                selector: 'test-container-component',
-                template: htmlTemplate,
-                directives: [ProfileImageBlock]
-            })                    
+        @Component({
+            selector: 'test-container-component',
+            template: htmlTemplate,
+            directives: [ProfileImageBlock]
+        })                    
         class BlockContainerComponent {
             block = { type: 'Block' };
             owner = { name: 'profile-name' };
             constructor() {
             }
-        }
-        
-        
+        }        
 
         it("show image if present", () => {
             helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
@@ -37,14 +34,12 @@ describe("Components", () => {
             });
         });
         
-        //TODO
-        it("not show image if image is missing", () => {
-           
+        it("has link to the profile", () => {
+            helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
+                var elProfile = fixture.debugElement.componentViewChildren[0];
+                expect(elProfile.query('a.settings-link').length).toEqual(1);
+            });           
         });
         
-        it("has link to the profile", () => {
-           
-        });
-
     });
 });
