@@ -5,7 +5,8 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
     RestangularProvider: restangular.IProvider,
     $httpProvider: ng.IHttpProvider,
     $provide: ng.auto.IProvideService,
-    $translateProvider: angular.translate.ITranslateProvider) {
+    $translateProvider: angular.translate.ITranslateProvider,
+    tmhDynamicLocaleProvider: any) {
 
     $logProvider.debugEnabled(true);
     $locationProvider.html5Mode({ enabled: true });
@@ -20,10 +21,10 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
             $document.scrollToElementAnimated(uiViewElement);
         };
     });
-    configTranslation($translateProvider);
+    configTranslation($translateProvider, tmhDynamicLocaleProvider);
 }
 
-function configTranslation($translateProvider: angular.translate.ITranslateProvider) {
+function configTranslation($translateProvider: angular.translate.ITranslateProvider, tmhDynamicLocaleProvider: any) {
     $translateProvider.useStaticFilesLoader({
         prefix: '/languages/',
         suffix: '.json'
@@ -31,4 +32,7 @@ function configTranslation($translateProvider: angular.translate.ITranslateProvi
     $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.preferredLanguage('en');
     $translateProvider.useSanitizeValueStrategy('escape');
+    //FIXME fix location pattern
+    tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
+    tmhDynamicLocaleProvider.useCookieStorage();
 }

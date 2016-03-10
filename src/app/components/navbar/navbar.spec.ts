@@ -74,6 +74,9 @@ describe("Components", () => {
                     }),
                     provide('$translate', {
                         useValue: helpers.mocks.$translate
+                    }),
+                    provide('tmhDynamicLocale', {
+                        useValue: helpers.mocks.tmhDynamicLocale
                     })
                 ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],

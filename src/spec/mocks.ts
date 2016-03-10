@@ -50,5 +50,9 @@ export var mocks = {
             }
         },
         instant: () => { }
+    },
+    tmhDynamicLocale: {
+        get: () => { },
+        set: (lang: string) => { }
     }
 };

@@ -22,13 +22,16 @@ describe("Components", () => {
             providers: [
                 provide('$translate', {
                     useValue: helpers.mocks.$translate
+                }),
+                provide('tmhDynamicLocale', {
+                    useValue: helpers.mocks.tmhDynamicLocale
                 })
             ].concat(helpers.provideFilters("translateFilter"))
         })
         class BlockContainerComponent { }
 
         it("set available languages when change language", () => {
-            let component: LanguageSelector = new LanguageSelector(<any>helpers.mocks.$translate);
+            let component: LanguageSelector = new LanguageSelector(<any>helpers.mocks.$translate, <any>helpers.mocks.tmhDynamicLocale);
             component.availableLanguages = null;
             expect(component.availableLanguages).toBeNull();
             component.changeLanguage('en');

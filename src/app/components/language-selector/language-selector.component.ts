@@ -4,13 +4,13 @@ import {Component, Inject} from "ng-forward";
     selector: "language-selector",
     templateUrl: "app/components/language-selector/language-selector.html"
 })
-@Inject("$translate")
+@Inject("$translate", "tmhDynamicLocale")
 export class LanguageSelector {
 
     availableLanguages: any;
 
-    constructor(private $translate: angular.translate.ITranslateService) {
-        this.changeLanguage($translate.use());
+    constructor(private $translate: angular.translate.ITranslateService, private tmhDynamicLocale: any) {
+        this.changeLanguage(tmhDynamicLocale.get() || $translate.use());
     }
 
     currentLanguage() {
@@ -18,6 +18,7 @@ export class LanguageSelector {
     }
 
     changeLanguage(language: string) {
+        this.tmhDynamicLocale.set(language);
         this.$translate.use(language).then((lang) => {
             this.availableLanguages = {
                 "en": this.$translate.instant("language.en"),
