@@ -23,7 +23,7 @@
 
         <li class="dropdown profile-menu" ng-show="ctrl.currentUser" dropdown>
           <a href="#" class="dropdown-toggle" aria-expanded="false" dropdown-toggle>
-            <noosfero-profile-image profile="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>
+            <noosfero-profile-image [profile]="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>
             <span ng-bind="ctrl.currentUser.person.name"></span> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu" dropdown-menu>
