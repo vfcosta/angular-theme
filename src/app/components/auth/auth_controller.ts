@@ -6,7 +6,6 @@ export class AuthController {
     static $inject = ["$log", "$stateParams", "AuthService"];
 
     constructor(
-        private noosfero: any,
         private $log: ng.ILogService,
         private $stateParams: any,
         private AuthService: AuthService

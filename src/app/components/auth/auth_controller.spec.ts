@@ -12,7 +12,7 @@ describe("Controllers", () => {
             let AuthServiceMock: AuthService = jasmine.createSpyObj("AuthService", ["login"]);
 
             // pass AuthServiceMock into the constructor
-            let authController = new AuthController(null, null, null, AuthServiceMock);
+            let authController = new AuthController(null, null, AuthServiceMock);
 
             // setup of authController -> set the credentials instance property
             let credentials = { username: "username", password: "password" };
