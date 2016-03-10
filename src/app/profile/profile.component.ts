@@ -76,6 +76,7 @@ export class Profile {
     profile: noosferoModels.Profile;
 
     constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService) {
+        profileService.resetCurrentProfile();
         profileService.getByIdentifier($stateParams["profile"]).then((response: restangular.IResponse) => {
             this.profile = response.data[0];
             profileService.setCurrentProfile(this.profile);

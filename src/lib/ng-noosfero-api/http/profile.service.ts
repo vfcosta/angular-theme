@@ -7,8 +7,12 @@ export class ProfileService {
 
     private _currentProfilePromise: ng.IDeferred<Profile>;
 
-    constructor(private restangular: restangular.IService, $q: ng.IQService) {
-        this._currentProfilePromise = $q.defer();
+    constructor(private restangular: restangular.IService, private $q: ng.IQService) {
+        this.resetCurrentProfile();
+    }
+
+    resetCurrentProfile() {
+        this._currentProfilePromise = this.$q.defer();
     }
 
     getCurrentProfile(): ng.IPromise<Profile> {
