@@ -1,0 +1,8 @@
+{  
+  "noosfero.name" : "Noosfero",
+  "blocks.profile_image.control_panel": "Painel de Controle",
+  "navbar.profile": "Perfil",
+  "navbar.settings": "Configurações",
+  "navbar.logout": "Sair",
+  "navbar.login": "Login"
+}

@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" ui-sref="main">
-        <span class="noosfero-logo"><img src="assets/images/logo-noosfero.png"></span> Noosfero
+        <span class="noosfero-logo"><img src="assets/images/logo-noosfero.png"></span> {{"noosfero.name" | translate}}
       </a>
     </div>
 
@@ -18,7 +18,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li ng-show="!ctrl.currentUser">
-          <a ng-href="#" ng-click="ctrl.openLogin()">Login</a>
+          <a ng-href="#" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
         </li>
 
         <li class="dropdown profile-menu" ng-show="ctrl.currentUser" dropdown>
@@ -28,14 +28,14 @@
           </a>
           <ul class="dropdown-menu" dropdown-menu>
               <li>
-                  <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-user"></i> Profile</a>
+                  <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-user"></i> {{"navbar.profile" | translate}}</a>
               </li>
               <li>
-                  <a target="_self" ui-sref="main.profile.settings({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                  <a target="_self" ui-sref="main.profile.settings({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-gear"></i> {{"navbar.settings" | translate}}</a>
               </li>
               <li class="divider"></li>
               <li>
-                  <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                  <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
               </li>
           </ul>
         </li>
