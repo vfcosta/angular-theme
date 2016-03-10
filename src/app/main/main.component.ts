@@ -12,6 +12,7 @@ import {ProfileImageBlock} from "../components/noosfero-blocks/profile-image-blo
 
 import {MembersBlock} from "../components/noosfero-blocks/members-block/members-block.component";
 import {NoosferoTemplate} from "../components/noosfero/noosfero-template.filter";
+import {DateFormat} from "../components/noosfero/date-format/date-format.filter";
 
 import {AuthService} from "./../components/auth/auth_service";
 import {Session} from "./../components/auth/session";
@@ -37,7 +38,7 @@ export class MainContent {
     directives: [
         ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
         MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock,
-        MembersBlock, NoosferoTemplate
+        MembersBlock, NoosferoTemplate, DateFormat
     ],
     providers: [AuthService, Session]
 })

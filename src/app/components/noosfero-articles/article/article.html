@@ -6,7 +6,7 @@
   <div class="sub-header clearfix">
     <div class="page-info pull-right small text-muted">
       <span class="time">
-        <i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.article.created_at"></span>
+        <i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.article.created_at | dateFormat"></span>
       </span>
       <span class="author" ng-if="ctrl.article.author">
         <i class="fa fa-user"></i>
