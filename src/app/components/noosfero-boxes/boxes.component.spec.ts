@@ -1,6 +1,4 @@
-import {providers} from 'ng-forward/cjs/testing/providers';
-
-import {Input, Component} from 'ng-forward';
+import {Component} from 'ng-forward';
 
 import {Box, Profile} from "../../models/interfaces";
 import {Boxes} from './boxes.component';
