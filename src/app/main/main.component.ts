@@ -47,12 +47,6 @@ export class MainContent {
         url: '/',
         component: MainContent,
         name: 'main',
-        resolve: {
-            currentUser: function(AuthService: AuthService, $log: ng.ILogService) {
-                $log.debug("Main URL service...");
-                return AuthService.currentUser();
-            }
-        }
     },
     {
         url: "^/:profile",
