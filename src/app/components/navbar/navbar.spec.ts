@@ -72,7 +72,7 @@ describe("Components", () => {
                             AUTH_EVENTS
                         }
                     })
-                ],
+                ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],
                 template: '<acme-navbar></acme-navbar>'
             });
