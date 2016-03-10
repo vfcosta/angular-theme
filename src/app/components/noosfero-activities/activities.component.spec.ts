@@ -19,7 +19,7 @@ describe("Components", () => {
             selector: 'test-container-component',
             template: htmlTemplate,
             directives: [NoosferoActivities],
-            providers: provideFilters("truncateFilter", "stripTagsFilter")
+            providers: provideFilters("truncateFilter", "stripTagsFilter", "translateFilter")
         })
         class BlockContainerComponent {
             activities = [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }];

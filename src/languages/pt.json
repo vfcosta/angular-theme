@@ -7,5 +7,8 @@
   "navbar.login": "Login",
   "language.en": "Inglês",
   "language.pt": "Português",
-  "language.selector": "Idioma"
+  "language.selector": "Idioma",
+  "profile.wall": "Mural do Perfil",
+  "activities.create_article.description": "publicou em",
+  "activities.add_member_in_community.description": "entrou na comunidade"
 }

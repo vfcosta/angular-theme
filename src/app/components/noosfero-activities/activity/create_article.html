@@ -5,7 +5,7 @@
   <timeline-heading>
     <h4 class="timeline-title">
       <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})"><strong ng-bind="ctrl.activity.user.name"></strong></a>
-      <span> has published on </span>
+      <span> {{"activities.create_article.description" | translate}} </span>
       <a ui-sref="main.profile.info({profile: ctrl.activity.target.article.profile.identifier})">
         <strong ng-bind="ctrl.activity.target.article.profile.name"></strong></span>
       </a>

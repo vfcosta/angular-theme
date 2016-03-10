@@ -5,7 +5,7 @@
   <timeline-heading>
     <h4 class="timeline-title">
       <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})"><strong ng-bind="ctrl.activity.user.name"></strong></a>
-      <span> has joined the community</span>
+      <span> {{"activities.add_member_in_community.description" | translate}}</span>
     </h4>
     <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.activity.created_at | dateFormat"></span></small></p>
   </timeline-heading>
