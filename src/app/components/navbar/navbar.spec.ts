@@ -71,6 +71,9 @@ describe("Components", () => {
                         useValue: {
                             AUTH_EVENTS
                         }
+                    }),
+                    provide('$translate', {
+                        useValue: helpers.mocks.$translate
                     })
                 ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],

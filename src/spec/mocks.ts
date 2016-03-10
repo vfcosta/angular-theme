@@ -1,6 +1,6 @@
 
 class ScopeWithEvents {
-    listeners =  {};
+    listeners = {};
     constructor() {
 
     }
@@ -17,9 +17,9 @@ class ScopeWithEvents {
 
     public $emit(message: string, arg?: any) {
         console.log("Emitted " + message);
-        if ( (<any>this.listeners)[message]) {
+        if ((<any>this.listeners)[message]) {
             console.log("LISTENERS:", (<any>this.listeners)[message]);
-             (<any>this.listeners)[message].forEach((f: Function) => {
+            (<any>this.listeners)[message].forEach((f: Function) => {
                 f(arg);
             });
         }
@@ -42,6 +42,13 @@ export var mocks = {
         return {
             currentUser: () => { return user; }
         };
+    },
+    $translate: {
+        use: (lang?: string) => {
+            return {
+                then: (func?: any) => { if (func) func() }
+            }
+        },
+        instant: () => { }
     }
-
 };

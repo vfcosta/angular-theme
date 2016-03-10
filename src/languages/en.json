@@ -4,5 +4,8 @@
   "navbar.profile": "Profile",
   "navbar.settings": "Settings",
   "navbar.logout": "Log Out",
-  "navbar.login": "Login"
+  "navbar.login": "Login",
+  "language.en": "English",
+  "language.pt": "Portuguese",
+  "language.selector": "Language"
 }
