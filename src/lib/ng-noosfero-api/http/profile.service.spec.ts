@@ -79,6 +79,18 @@ describe("Services", () => {
                 $httpBackend.flush();
             });
 
+            it("should find the profile by identifier, set and resolve the current profile", (done) => {
+                let identifier = 'profile1';
+                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, [{ name: "profile1" }]);
+                profileService.setCurrentProfileByIdentifier(identifier).then((profile: Profile) => {
+                    expect(profile).toEqual({ name: "profile1" });
+                    profileService.getCurrentProfile().then((profile: Profile) => {
+                        expect(profile).toEqual({ name: "profile1" });
+                        done();
+                    });
+                });
+                $httpBackend.flush();
+            });
         });
 
 

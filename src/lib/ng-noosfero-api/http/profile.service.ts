@@ -23,6 +23,14 @@ export class ProfileService {
         this._currentProfilePromise.resolve(profile);
     }
 
+    setCurrentProfileByIdentifier(identifier: string) {
+        this.resetCurrentProfile();
+        return this.getByIdentifier(identifier).then((response: restangular.IResponse) => {
+            this.setCurrentProfile(response.data[0]);
+            return this.getCurrentProfile();
+        });
+    }
+
     getHomePage(profileId: number, params?: any) {
         return this.get(profileId).customGET("home_page", params);
     }
