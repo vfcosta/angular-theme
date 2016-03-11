@@ -32,11 +32,14 @@
     <!-- run `gulp inject` to automatically populate bower script dependencies -->
     <!-- endbower -->
     <!-- endbuild -->
-
+    
+    <!-- build:js({.tmp/serve,.tmp/partials,src}) scripts/app.js -->
     <script src="commons.js"></script>
     <script src="vendor.bundle.js"></script>
-    
     <script src="noosfero.js"></script>
+    <!-- endinject -->
+
+    
     <!-- inject:partials -->
     <!-- angular templates will be automatically converted in js and inserted here -->
     <!-- endinject -->

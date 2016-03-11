@@ -19,8 +19,6 @@ gulp.task('scripts', function() {
 });
 
 function buildScripts() {
-  return gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
-    .pipe($.eslint())
-    .pipe($.eslint.format())
+  return gulp.src(path.join(conf.paths.src, '/**/*.js'))
     .pipe($.size())
 };
