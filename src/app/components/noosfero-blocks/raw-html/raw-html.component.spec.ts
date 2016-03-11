@@ -5,16 +5,14 @@ import {RawHTMLBlock} from './raw-html.component';
 
 const tcb = new TestComponentBuilder();
 
-const htmlTemplate: string = '<noosfero-raw-html-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-raw-html-block>';
+const htmlTemplate: string = '<noosfero-raw-htmlblock [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-raw-htmlblock>';
 
 describe("Components", () => {
 
     describe("Raw Html Block Component", () => {
 
         beforeEach(angular.mock.module("templates"));
-        beforeEach(angular.mock.module("noosferoApp", ($translateProvider: angular.translate.ITranslateProvider) => {
-            $translateProvider.translations('en', {});
-        }));
+        beforeEach(angular.mock.module("ngSanitize"));
 
         it("display html stored in block settings", done => {
 
