@@ -1,7 +1,7 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Component} from 'ng-forward';
 
-import {RawHtmlBlock} from './raw-html.component';
+import {RawHTMLBlock} from './raw-html.component';
 
 const tcb = new TestComponentBuilder();
 
@@ -21,10 +21,10 @@ describe("Components", () => {
             @Component({
                 selector: 'test-container-component',
                 template: htmlTemplate,
-                directives: [RawHtmlBlock],
+                directives: [RawHTMLBlock],
             })
             class CustomBlockType {
-            block: any = { settings: { html: '<em>block content</em>' } };
+                block: any = { settings: { html: '<em>block content</em>' } };
                 owner: any = { name: 'profile-name' };
             }
             tcb.createAsync(CustomBlockType).then(fixture => {

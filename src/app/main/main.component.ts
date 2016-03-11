@@ -9,6 +9,7 @@ import {Block} from "../components/noosfero-blocks/block.component";
 import {LinkListBlock} from "../components/noosfero-blocks/link-list/link-list.component";
 import {RecentDocumentsBlock} from "../components/noosfero-blocks/recent-documents/recent-documents.component";
 import {ProfileImageBlock} from "../components/noosfero-blocks/profile-image-block/profile-image-block.component";
+import {RawHTMLBlock} from "../components/noosfero-blocks/raw-html/raw-html.component";
 
 import {MembersBlock} from "../components/noosfero-blocks/members-block/members-block.component";
 import {NoosferoTemplate} from "../components/noosfero/noosfero-template.filter";
@@ -38,7 +39,7 @@ export class MainContent {
     directives: [
         ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
         MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock,
-        MembersBlock, NoosferoTemplate, DateFormat
+        MembersBlock, NoosferoTemplate, DateFormat, RawHTMLBlock
     ],
     providers: [AuthService, Session]
 })

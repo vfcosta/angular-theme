@@ -1,11 +1,11 @@
 import {Component, Input} from "ng-forward";
 
 @Component({
-    selector: "noosfero-raw-html-block",
+    selector: "noosfero-raw-htmlblock",
     templateUrl: 'app/components/noosfero-blocks/raw-html/raw-html.html'
 })
 
-export class RawHtmlBlock {
+export class RawHTMLBlock {
 
     @Input() block: any;
     @Input() owner: any;
