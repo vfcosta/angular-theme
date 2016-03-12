@@ -23,8 +23,10 @@ export class RecentDocumentsBlock {
         this.profile = this.owner;
         this.documents = [];
 
-        var limit = (this.block && this.block.settings) ? this.block.settings.limit : null || 5;
-        //FIXME get all text articles
+        let limit = (this.block && this.block.settings) ? this.block.settings.limit : null || 5;
+        // FIXME get all text articles
+        // FIXME make the getByProfile a generic method where we tell the type passing a class TinyMceArticle
+        //       and the promise should be of type TinyMceArticle[], per example
         this.articleService.getByProfile(this.profile.id, { content_type: 'TinyMceArticle', per_page: limit }).then((response: any) => {
             this.documents = response.data.articles;
             this.documentsLoaded = true;
