@@ -27,18 +27,10 @@ var testingFiles = glob.sync("./src/app/**/**/*.[sS]pec.ts");
 
 var entries = {
     noosfero: './src/app/index.ts',
-    'noosfero-specs':  testFiles,// './src/specs.ts',
+    'noosfero-specs': testFiles, // './src/specs.ts',
     'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng-forward/cjs/testing/test-component-builder']
 };
 
-
-// if (argv.test) {
-//     entries = {
-//         'noosfero-src': './src/app/index.ts',
-//         'noosfero-specs':  testFiles,// './src/specs.ts',
-//         'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng-forward/cjs/testing/test-component-builder']
-//     };
-// }
 var webpackConfig = {
     entry: entries,
 
@@ -48,8 +40,6 @@ var webpackConfig = {
         path: path.join(__dirname, "src"),
         filename: "[name]" + extension,
     },
-  
-    /*plugins: [ new webpack.optimize.CommonsChunkPlugin("common.js") ],*/
 
     resolve: {
         // Add `.ts` and `.tsx` as a resolvable extension.
@@ -63,15 +53,18 @@ var webpackConfig = {
             test: /\.css$/,
             loader: "style!css"
         }, {
-                test: /\.scss$/,
-                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
-            }, {
-                test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
-                loader: 'url-loader?limit=100000'
-            }, {
-                test: /\.tsx?$/,
-                loader: 'ts-loader'
-            }]
+            test: /\.scss$/,
+            loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+        }, {
+            test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
+            loader: 'url-loader?limit=100000'
+        }, {
+            test: /\.tsx?$/,
+            loader: 'ts-loader'
+        }, {
+            test: /\.ts?$/,
+            loader: "tslint"
+        }]
     }
 };
 
@@ -91,24 +84,28 @@ var stdinPatched = false;
 if (argv.test) {
     function spawnChildProcessTest() {
         if (!testProcess) {
-            testProcess = child_process.spawn("npm", ["run", "coverage"], { stdio: 'inherit' });
-            testProcess.on('exit', function () { testProcess = null });
+            testProcess = child_process.spawn("npm", ["run", "coverage"], {
+                stdio: 'inherit'
+            });
+            testProcess.on('exit', function() {
+                testProcess = null
+            });
         }
     }
     // configure the webPackOnBuildPlugin with our post-compilation function as argument
-    var onBuildPluginConfigured = new WebpackOnBuildPlugin(function (stats) {
+    var onBuildPluginConfigured = new WebpackOnBuildPlugin(function(stats) {
 
         // here we are patching the stdin to allow trigger tests when pressing 'Enter'
         // on terminal
         if (!stdinPatched) {
-            process.stdin.on('data', function (info) {
+            process.stdin.on('data', function(info) {
                 if (info == '\n') {
                     spawnChildProcessTest();
                 }
             });
             stdinPatched = true;
         }
-        
+
         // webpack in watch mode call this twice for just one compilation    
         // so, here we are checking if the process is still running before trigger another test execution
         if (testProcess == null) {
