@@ -17,11 +17,11 @@ export class ArticleService extends RestangularWrapperService<noosfero.Article> 
         return {
             singular: 'article',
             plural: 'articles'
-        }
+        };
     }
 
     create(profileId: number, article: noosfero.Article): ng.IPromise<noosfero.Article> {
-        return this.post(this.Restangular.one('profiles', profileId), article);
+        return this.post<noosfero.Article>(this.Restangular.one('profiles', profileId), article);
     }
 
     //     // TODO create a handle ErrorFactory too and move handleSuccessFactory and handleErrorFactory

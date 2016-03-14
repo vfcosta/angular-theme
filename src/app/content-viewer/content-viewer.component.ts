@@ -1,6 +1,3 @@
-import * as noosfero from "../models/interfaces";
-
-
 import {ArticleView} from "../components/noosfero-articles/article/article_view";
 import {Input, Component, StateConfig, Inject, provide} from "ng-forward";
 
@@ -34,8 +31,8 @@ export class ContentViewer {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
             return this.articleService.getByProfile(this.profile.id, { path: this.$stateParams["page"] });
-        }).then((response: restangular.IResponse) => {
-            this.article = response.data.article;
+        }).then((result: noosfero.ArticleResult) => {
+            this.article = result.article;
         });
     }
 }

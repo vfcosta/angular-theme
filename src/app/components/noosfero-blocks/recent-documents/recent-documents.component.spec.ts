@@ -18,7 +18,7 @@ describe("Components", () => {
             new Provider('ArticleService', {
                 useValue: {
                     getByProfile: (profileId: number, filters: any): any => {
-                        return Promise.resolve({ data: { articles: [{ name: "article1" }] } });
+                        return Promise.resolve({ articles: [{ name: "article1" }] });
                     }
                 }
             }),

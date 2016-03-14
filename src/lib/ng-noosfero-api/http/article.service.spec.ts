@@ -64,8 +64,8 @@ describe("Services", () => {
             it("should create an article in a profile", (done) => {
                 let profileId = 1;
                 let article: noosfero.Article = <any>{ id: null};
-                $httpBackend.expectPOST(`/api/v1/profiles/${profileId}/articles`, { article: article }).respond(200, {  id: 2  });
-                articleService.create(profileId, article).then((result: noosfero.Article) => {
+                $httpBackend.expectPOST(`/api/v1/profiles/${profileId}/articles`, { article: article }).respond(200, {article: {  id: 2  }});
+                articleService.create(profileId, article).then((article: noosfero.Article) => {
                     expect(article).toEqual({ id: 2 });
                     done();
                 });

@@ -13,16 +13,19 @@ export abstract class RestangularWrapperService<T> {
         return this.Restangular.one(this.getPath(), id);
     }
 
-    protected post(elementRoot: restangular.IElement, element?: any, path?: string, params?: any, headers?: any): ng.IPromise<T> {
+    protected post<T>(elementRoot: restangular.IElement, element?: any, path?: string, params?: any, headers?: any): ng.IPromise<T> {
         let deferred = this.$q.defer<T>();
+
+        let postData = <any>{};
+        postData[this.getDataKeys().singular] = element;
 
         this.customPOST(
             elementRoot,
-            element,
+            postData,
             this.getPath(),
             {}
         )
-            .then(this.getHandleSuccessFunction(deferred))
+            .then(this.getPostSuccessHandleFunction(deferred))
             .catch(this.getHandleErrorFunction(deferred));
 
         return deferred.promise;
@@ -63,6 +66,23 @@ export abstract class RestangularWrapperService<T> {
             result[dataKey] = data;
             result.headers = response.headers;
             deferred.resolve(result);
+        };
+        return successFunction;
+    }
+
+    getPostSuccessHandleFunction<T>(deferred: ng.IDeferred<T>): (response: restangular.IResponse) => void {
+        let self = this;
+        let successFunction = (response: restangular.IResponse): void => {
+            if (self.$log) {
+                self.$log.debug("Post successfully executed", self, response);
+            }
+            let data = response.data;
+
+            if ((<Object>data).hasOwnProperty(self.getDataKeys().singular)) {
+                deferred.resolve(data[self.getDataKeys().singular]);
+            } else {
+                deferred.resolve(data);
+            }
         };
         return successFunction;
     }
