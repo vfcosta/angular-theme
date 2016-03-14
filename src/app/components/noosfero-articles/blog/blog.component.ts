@@ -33,9 +33,9 @@ export class ArticleBlog {
 
         this.articleService
             .getChildren(this.article.id, filters)
-            .then((response: restangular.IResponse) => {
-                this.totalPosts = <number>(<any>response.headers("total"));
-                this.posts = response.data.articles;
+            .then((articles: noosfero.Article[]) => {
+                this.totalPosts = <number>(<any>articles)["_headers"]["total"];
+                this.posts = articles;
             });
     }
 

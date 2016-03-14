@@ -1,6 +1,8 @@
 
 namespace noosfero {
-    interface Article {
+    export interface Article {
         id: number;
+        path: string;
+        profile: Profile;
     }
 }

@@ -26,7 +26,7 @@ describe("Components", () => {
             getCurrentProfileResponse.resolve({ id: 1 });
 
             let articleCreate = $q.defer();
-            articleCreate.resolve({ data: { article: { path: "path", profile: { identifier: "profile" } } } });
+            articleCreate.resolve({ path: "path", profile: { identifier: "profile" }  });
 
             profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(getCurrentProfileResponse.promise);
             articleServiceMock.create = jasmine.createSpy("create").and.returnValue(articleCreate.promise);

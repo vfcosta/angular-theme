@@ -23,8 +23,8 @@ export class Cms {
     save() {
         this.profileService.getCurrentProfile().then((profile: Profile) => {
             return this.articleService.create(profile.id, this.article);
-        }).then((response: restangular.IResponse) => {
-            this.$state.transitionTo('main.profile.page', { page: response.data.article.path, profile: response.data.article.profile.identifier });
+        }).then((article: noosfero.Article) => {
+            this.$state.transitionTo('main.profile.page', { page: article.path, profile: article.profile.identifier });
             this.SweetAlert.swal({
                 title: "Good job!",
                 text: "Article saved!",

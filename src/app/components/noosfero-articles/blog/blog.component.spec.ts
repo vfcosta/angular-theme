@@ -1,21 +1,21 @@
 import {
-    providers
+providers
 } from 'ng-forward/cjs/testing/providers';
 
 import {
-    Input,
-    Component
+Input,
+Component
 } from 'ng-forward';
 import {
-    ArticleBlog
+ArticleBlog
 } from './blog.component';
 
 import {
-    createComponentFromClass,
-    quickCreateComponent,
-    provideEmptyObjects,
-    createProviderToValue,
-    provideFilters
+createComponentFromClass,
+quickCreateComponent,
+provideEmptyObjects,
+createProviderToValue,
+provideFilters
 } from "../../../../spec/helpers.ts";
 
 // this htmlTemplate will be re-used between the container components in this spec file
@@ -23,7 +23,7 @@ const htmlTemplate: string = '<noosfero-blog [article]="ctrl.article" [profile]=
 
 describe("Blog Component", () => {
 
-    function promiseResultTemplate(response ? : {}) {
+    function promiseResultTemplate(response?: {}) {
         let thenFuncEmpty = (func: Function) => {
             // does nothing
         };
@@ -76,7 +76,7 @@ describe("Blog Component", () => {
         angular.mock.module("templates")
 
         providers((provide: any) => {
-            return <any > [
+            return <any>[
                 provide('ArticleService', {
                     useValue: articleService
                 })
@@ -96,19 +96,16 @@ describe("Blog Component", () => {
 
     it("verify the blog data", (done: Function) => {
 
+        let articles = [{
+            id: 1,
+            title: 'The article test'
+        }];
+
+        (<any>articles)['_headers'] = { total: 1 };
+
         // defining a mock result to articleService.getChildren method
         articleService.getChildren = (article_id: number, filters: {}) => {
-            return promiseResultTemplate({
-                headers: (headerName: string) => {
-                    return 1;
-                },
-                data: < any > {
-                    articles: [{
-                        id: 1,
-                        title: 'The article test'
-                    }]
-                }
-            });
+            return promiseResultTemplate(articles);
         };
 
         createComponentFromClass(BlogContainerComponent).then((fixture) => {
@@ -121,8 +118,8 @@ describe("Blog Component", () => {
                 id: 1,
                 title: 'The article test'
             };
-            expect(( < any > articleBlog)["posts"][0]).toEqual(jasmine.objectContaining(post));
-            expect(( < any > articleBlog)["totalPosts"]).toEqual(1);
+            expect((<any>articleBlog)["posts"][0]).toEqual(jasmine.objectContaining(post));
+            expect((<any>articleBlog)["totalPosts"]).toEqual(1);
 
             done();
         });
