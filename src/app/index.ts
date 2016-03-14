@@ -18,7 +18,7 @@ let noosferoApp: any = bundle("noosferoApp", Main, ["ngAnimate", "ngCookies", "n
     "ui.router", "ui.bootstrap", "toastr",
     "angularMoment", "angular.filter", "akoenig.deckgrid",
     "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
-    "pascalprecht.translate", "tmh.dynamicLocale"]).publish();
+    "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad"]).publish();
 
 NoosferoApp.angularModule = noosferoApp;
 
