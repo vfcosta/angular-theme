@@ -1,15 +1,15 @@
 import { Injectable, Inject } from "ng-forward";
-import {RestangularWrapperService} from "./restangular_wrapper_service";
+import {RestangularService} from "./restangular_service";
 @Injectable()
 @Inject("Restangular", "$q")
 
-export class ArticleService extends RestangularWrapperService<noosfero.Article> {
+export class ArticleService extends RestangularService<noosfero.Article> {
 
     constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
         super(Restangular, $q, $log);
     }
 
-    getPath() {
+    getResourcePath() {
         return "articles";
     }
 
@@ -20,8 +20,18 @@ export class ArticleService extends RestangularWrapperService<noosfero.Article> 
         };
     }
 
-    create(profileId: number, article: noosfero.Article): ng.IPromise<noosfero.Article> {
-        return this.post<noosfero.Article>(this.Restangular.one('profiles', profileId), article);
+
+    createInProfile(profile: noosfero.Profile, article: noosfero.Article): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        return this.create(article, profile);
+    }
+
+
+    getAsCollectionChildrenOf<C>(rootElement: noosfero.Environment | noosfero.Article | noosfero.Profile, path: string, queryParams?: any, headers?: any): restangular.ICollectionPromise<C> {
+        return rootElement.getList<C>(path, queryParams, headers);
+    }
+
+    getAsElementChildrenOf<C>(rootElement: noosfero.Environment | noosfero.Article | noosfero.Profile, path: string, id: number, queryParams?: any, headers?: any) {
+        return rootElement.one(path, id).get<C>(queryParams, headers);
     }
 
     //     // TODO create a handle ErrorFactory too and move handleSuccessFactory and handleErrorFactory
@@ -46,22 +56,12 @@ export class ArticleService extends RestangularWrapperService<noosfero.Article> 
 
     // TODO -> change all Restangular services to this approach "Return promise to a specific type"
     //          it makes easy consume the service
-    getByProfile<T>(profileId: number, params?: any): ng.IPromise<T> {
-        let deferred = this.$q.defer<T>();
-        this.Restangular.one('profiles', profileId).customGET('articles', params)
-            .then(this.getHandleSuccessFunction<T>(deferred, 'articles'))
-            .catch(this.getHandleErrorFunction(deferred));
-        return deferred.promise;
+    getByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        return this.list(profile);
     }
 
-    getChildren<T>(articleId: number, params?: any): ng.IPromise<T> {
-        let deferred = this.$q.defer<T>();
-
-        this.get(articleId).customGET('children', params)
-            .then(this.getHandleSuccessFunction<T>(deferred, 'articles').bind(this))
-            .catch(this.getHandleErrorFunction(deferred));
-
-        return deferred.promise;
+    getChildren<T>(article: noosfero.Article, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        return this.listSubElements(article, "children", params);
     }
 
 

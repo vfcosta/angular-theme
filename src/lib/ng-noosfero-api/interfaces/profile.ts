@@ -1,7 +1,6 @@
 
 namespace noosfero {
-    export interface Profile {
-        id: number;
+    export interface Profile  extends RestModel {
         identifier: string;
         type: string;
     }

@@ -27,8 +27,9 @@ export class RecentDocumentsBlock {
         // FIXME get all text articles
         // FIXME make the getByProfile a generic method where we tell the type passing a class TinyMceArticle
         //       and the promise should be of type TinyMceArticle[], per example
-        this.articleService.getByProfile(this.profile.id, { content_type: 'TinyMceArticle', per_page: limit }).then((result: noosfero.ArticlesResult) => {
-            this.documents = result.articles;
+        this.articleService.getByProfile(this.profile, { content_type: 'TinyMceArticle', per_page: limit })
+        .then((result: noosfero.RestResult<noosfero.Article>) => {
+            this.documents = <noosfero.Article[]>result.data;
             this.documentsLoaded = true;
         });
     }

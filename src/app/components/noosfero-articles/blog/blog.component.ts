@@ -10,7 +10,7 @@ import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.servi
 @Inject(ArticleService)
 export class ArticleBlog {
 
-    @Input() article: Article;
+    @Input() article: noosfero.Article;
     @Input() profile: Profile;
 
     private posts: any[];
@@ -32,10 +32,10 @@ export class ArticleBlog {
         };
 
         this.articleService
-            .getChildren(this.article.id, filters)
-            .then((articles: noosfero.Article[]) => {
-                this.totalPosts = <number>(<any>articles)["_headers"]["total"];
-                this.posts = articles;
+            .getChildren(this.article, filters)
+            .then((result: noosfero.RestResult<noosfero.Article>) => {
+                this.totalPosts = <number>(<any>result.data)["_headers"]["total"];
+                this.posts = <noosfero.Article[]> result.data;
             });
     }
 
