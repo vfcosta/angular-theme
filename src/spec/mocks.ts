@@ -45,9 +45,7 @@ export var mocks = {
     },
     $translate: {
         use: (lang?: string) => {
-            return {
-                then: (func?: any) => { if (func) func() }
-            }
+            return lang ? Promise.resolve(lang) : "en";
         },
         instant: () => { }
     },
@@ -60,9 +58,7 @@ export var mocks = {
     },
     angularLoad: {
         loadScript: (script?: string) => {
-            return {
-                then: (func?: any) => { if (func) func() }
-            }
+            return Promise.resolve();
         }
     }
 };

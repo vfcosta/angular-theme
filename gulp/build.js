@@ -48,6 +48,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.replace('/languages/', noosferoThemePrefix + 'languages/'))
     .pipe($.replace('bower_components/angular-i18n/', noosferoThemePrefix + 'locale/angular-i18n/'))
     .pipe($.replace('bower_components/moment/', noosferoThemePrefix + 'locale/moment/'))
+    .pipe($.replace('bower_components/messageformat/', noosferoThemePrefix + 'locale/messageformat/'))
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
@@ -88,6 +89,7 @@ gulp.task('locale', function () {
   return gulp.src([
     path.join("bower_components/angular-i18n", '*.js'),
     path.join("bower_components/moment/locale", '*.js'),
+    path.join("bower_components/messageformat/locale", '*.js'),
   ], {base: 'bower_components/'})
     .pipe(gulp.dest(path.join(conf.paths.dist, '/locale/')));
 });

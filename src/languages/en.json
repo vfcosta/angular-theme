@@ -12,7 +12,7 @@
   "profile.wall": "Profile Wall",
   "activities.create_article.description": "has published on",
   "activities.add_member_in_community.description": "has joined the community",
-  "activities.new_friendship.description": "has made {{friends}} new friend(s):",
+  "activities.new_friendship.description": "has made {friends, plural, one{one new friend} other{# new friends}}:",
   "auth.title": "Login",
   "auth.form.login": "Login / Email address",
   "auth.form.password": "Password",
