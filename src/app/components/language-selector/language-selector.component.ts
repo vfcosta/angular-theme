@@ -4,12 +4,16 @@ import {Component, Inject} from "ng-forward";
     selector: "language-selector",
     templateUrl: "app/components/language-selector/language-selector.html"
 })
-@Inject("$translate", "tmhDynamicLocale")
+@Inject("$translate", "tmhDynamicLocale", "amMoment", "angularLoad")
 export class LanguageSelector {
 
     availableLanguages: any;
 
-    constructor(private $translate: angular.translate.ITranslateService, private tmhDynamicLocale: any) {
+    constructor(private $translate: angular.translate.ITranslateService,
+        private tmhDynamicLocale: any,
+        private amMoment: any,
+        private angularLoad: any) {
+
         this.changeLanguage(tmhDynamicLocale.get() || $translate.use());
     }
 
@@ -18,6 +22,7 @@ export class LanguageSelector {
     }
 
     changeLanguage(language: string) {
+        this.changeMomentLocale(language);
         this.tmhDynamicLocale.set(language);
         this.$translate.use(language).then((lang) => {
             this.availableLanguages = {
@@ -27,4 +32,13 @@ export class LanguageSelector {
         });
     }
 
+    private changeMomentLocale(language: string) {
+        let localePromise = Promise.resolve();
+        if (language != "en") {
+            localePromise = this.angularLoad.loadScript(`/bower_components/moment/locale/${language}.js`);
+        }
+        localePromise.then(() => {
+            this.amMoment.changeLocale(language);
+        });
+    }
 }

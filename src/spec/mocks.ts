@@ -54,5 +54,15 @@ export var mocks = {
     tmhDynamicLocale: {
         get: () => { },
         set: (lang: string) => { }
+    },
+    amMoment: {
+        changeLocale: () => { }
+    },
+    angularLoad: {
+        loadScript: (script?: string) => {
+            return {
+                then: (func?: any) => { if (func) func() }
+            }
+        }
     }
 };

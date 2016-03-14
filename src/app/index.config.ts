@@ -32,7 +32,6 @@ function configTranslation($translateProvider: angular.translate.ITranslateProvi
     $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.preferredLanguage('en');
     $translateProvider.useSanitizeValueStrategy('escape');
-    //FIXME fix location pattern
     tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
     tmhDynamicLocaleProvider.useCookieStorage();
 }

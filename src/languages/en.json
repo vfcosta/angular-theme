@@ -5,10 +5,17 @@
   "navbar.settings": "Settings",
   "navbar.logout": "Log Out",
   "navbar.login": "Login",
+  "navbar.toggle_menu": "Toggle navigation",
   "language.en": "English",
   "language.pt": "Portuguese",
   "language.selector": "Language",
   "profile.wall": "Profile Wall",
   "activities.create_article.description": "has published on",
-  "activities.add_member_in_community.description": "has joined the community"
+  "activities.add_member_in_community.description": "has joined the community",
+  "activities.new_friendship.description": "has made {{friends}} new friend(s):",
+  "auth.title": "Login",
+  "auth.form.login": "Login / Email address",
+  "auth.form.password": "Password",
+  "auth.form.login_button": "Login",
+  "navbar.content_viewer_actions.new_post": "New Post"
 }

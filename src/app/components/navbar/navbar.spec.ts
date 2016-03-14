@@ -77,6 +77,12 @@ describe("Components", () => {
                     }),
                     provide('tmhDynamicLocale', {
                         useValue: helpers.mocks.tmhDynamicLocale
+                    }),
+                    provide('amMoment', {
+                        useValue: helpers.mocks.amMoment
+                    }),
+                    provide('angularLoad', {
+                        useValue: helpers.mocks.angularLoad
                     })
                 ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],
