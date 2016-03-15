@@ -101,11 +101,11 @@ describe("Blog Component", () => {
             title: 'The article test'
         }];
 
-        (<any>articles)['_headers'] = { total: 1 };
+        let result = { data: articles, headers: (name: string) => { return 1; } };
 
         // defining a mock result to articleService.getChildren method
         articleService.getChildren = (article_id: number, filters: {}) => {
-            return promiseResultTemplate(articles);
+            return promiseResultTemplate(result);
         };
 
         createComponentFromClass(BlogContainerComponent).then((fixture) => {

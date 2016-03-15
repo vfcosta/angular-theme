@@ -34,7 +34,7 @@ export class ArticleBlog {
         this.articleService
             .getChildren(this.article, filters)
             .then((result: noosfero.RestResult<noosfero.Article>) => {
-                this.totalPosts = <number>(<any>result.data)["_headers"]["total"];
+                this.totalPosts = <number>result.headers("total");
                 this.posts = <noosfero.Article[]> result.data;
             });
     }

@@ -10,6 +10,7 @@ describe("Components", () => {
         let profileServiceMock: any;
         let $state: any;
         let sweetAlert: any;
+        let profile = { id: 1 };
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;
@@ -23,10 +24,10 @@ describe("Components", () => {
             articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["create"]);
 
             let getCurrentProfileResponse = $q.defer();
-            getCurrentProfileResponse.resolve({ id: 1 });
+            getCurrentProfileResponse.resolve(profile);
 
             let articleCreate = $q.defer();
-            articleCreate.resolve({ path: "path", profile: { identifier: "profile" }  });
+            articleCreate.resolve({ data: { path: "path", profile: { identifier: "profile" }  }});
 
             profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(getCurrentProfileResponse.promise);
             articleServiceMock.create = jasmine.createSpy("create").and.returnValue(articleCreate.promise);
@@ -37,7 +38,7 @@ describe("Components", () => {
             component.save();
             $rootScope.$apply();
             expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
-            expect(articleServiceMock.create).toHaveBeenCalledWith(1, component.article);
+            expect(articleServiceMock.create).toHaveBeenCalledWith(component.article, profile);
             done();
         });
 

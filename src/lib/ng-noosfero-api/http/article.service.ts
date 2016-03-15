@@ -1,11 +1,13 @@
 import { Injectable, Inject } from "ng-forward";
 import {RestangularService} from "./restangular_service";
+import {ProfileService} from "./profile.service";
+
 @Injectable()
-@Inject("Restangular", "$q")
+@Inject("Restangular", "$q", "$log", ProfileService)
 
 export class ArticleService extends RestangularService<noosfero.Article> {
 
-    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
+    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected profileService: ProfileService) {
         super(Restangular, $q, $log);
     }
 
@@ -57,7 +59,8 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     // TODO -> change all Restangular services to this approach "Return promise to a specific type"
     //          it makes easy consume the service
     getByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
-        return this.list(profile);
+        let profileElement = this.profileService.get(<number>profile.id);
+        return this.list(profileElement, params);
     }
 
     getChildren<T>(article: noosfero.Article, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {

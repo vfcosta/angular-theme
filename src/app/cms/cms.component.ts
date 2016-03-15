@@ -24,6 +24,7 @@ export class Cms {
         this.profileService.getCurrentProfile().then((profile: Profile) => {
             return this.articleService.create(this.article, <any>profile);
         }).then((result: noosfero.RestResult<noosfero.Article>) => {
+            console.log('RESULT', result);
             let resultData: noosfero.Article = <noosfero.Article>result.data;
             this.$state.transitionTo('main.profile.page', { page: resultData.path, profile: resultData.profile.identifier });
             this.SweetAlert.swal({
