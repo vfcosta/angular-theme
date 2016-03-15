@@ -140,12 +140,22 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * Removes the object provided from the resource collection,
      * calls DELETE /resourcepath/:resourceId
      */
-    public remove(obj: T, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public remove(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+        let restangularObj: restangular.IElement;
+
+
+
+        if (rootElement) {
+            restangularObj = rootElement.one(this.getResourcePath(), <string>obj.id);
+        } else {
+            restangularObj = this.restangularService.one(this.getResourcePath(), <string>obj.id);
+        }
+
         let deferred = this.$q.defer<noosfero.RestResult<T>>();
 
         let restRequest: ng.IPromise<noosfero.RestResult<T>>;
 
-        restRequest = obj.remove(queryParams, headers);
+        restRequest = restangularObj.remove(queryParams, headers);
 
         restRequest
             .then(this.getHandleSuccessFunction(deferred))
@@ -158,12 +168,20 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * Updates the object into the resource collection
      * calls PUT /resourcePath/:resourceId   {object}
      */
-    public update(obj: T, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public update(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
         let deferred = this.$q.defer<noosfero.RestResult<T>>();
 
         let restRequest: ng.IPromise<noosfero.RestResult<T>>;
 
-        restRequest = obj.put(queryParams, headers);
+        let restangularObj: restangular.IElement;
+
+        if (rootElement) {
+            restangularObj = rootElement.one(this.getResourcePath(), <string>obj.id);
+        } else {
+            restangularObj = this.restangularService.one(this.getResourcePath(), <string>obj.id);
+        }
+
+        restRequest = restangularObj.put(queryParams, headers);
 
         restRequest.then(this.getHandleSuccessFunction(deferred))
             .catch(this.getHandleErrorFunction(deferred));
@@ -195,11 +213,11 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     /**
      * Returns a Restangular IElement representing the 
      */
-    protected getElement(id: number, rootElement?: noosfero.RestModel): restangular.IElement {
+    public getElement(id: number, rootElement?: noosfero.RestModel): noosfero.RestModel {
         if (rootElement) {
-            return rootElement.one(this.getResourcePath(), id);
+            return <noosfero.RestModel>rootElement.one(this.getResourcePath(), id);
         } else {
-            return this.restangularService.one(this.getResourcePath(), id);
+            return <noosfero.RestModel>this.restangularService.one(this.getResourcePath(), id);
         }
     }
 
