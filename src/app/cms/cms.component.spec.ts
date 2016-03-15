@@ -9,7 +9,7 @@ describe("Components", () => {
         let articleServiceMock: any;
         let profileServiceMock: any;
         let $state: any;
-        let sweetAlert: any;
+        let notification: any;
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;
@@ -18,7 +18,7 @@ describe("Components", () => {
 
         beforeEach(() => {
             $state = jasmine.createSpyObj("$state", ["transitionTo"]);
-            sweetAlert = jasmine.createSpyObj("SweetAlert", ["swal"]);
+            notification = jasmine.createSpyObj("notification", ["success"]);
             profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["getCurrentProfile"]);
             articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["create"]);
 
@@ -33,7 +33,7 @@ describe("Components", () => {
         });
 
         it("create an article in the current profile when save", done => {
-            let component: Cms = new Cms(articleServiceMock, profileServiceMock, $state, sweetAlert);
+            let component: Cms = new Cms(articleServiceMock, profileServiceMock, $state, notification);
             component.save();
             $rootScope.$apply();
             expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
@@ -42,11 +42,11 @@ describe("Components", () => {
         });
 
         it("got to the new article page and display an alert when saving sucessfully", done => {
-            let component: Cms = new Cms(articleServiceMock, profileServiceMock, $state, sweetAlert);
+            let component: Cms = new Cms(articleServiceMock, profileServiceMock, $state, notification);
             component.save();
             $rootScope.$apply();
             expect($state.transitionTo).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "profile" });
-            expect(sweetAlert.swal).toHaveBeenCalled();
+            expect(notification.success).toHaveBeenCalled();
             done();
         });
 

@@ -25,8 +25,8 @@ export class ProfileService {
 
     setCurrentProfileByIdentifier(identifier: string) {
         this.resetCurrentProfile();
-        return this.getByIdentifier(identifier).then((response: restangular.IResponse) => {
-            this.setCurrentProfile(response.data[0]);
+        return this.getByIdentifier(identifier).then((profile: Profile) => {
+            this.setCurrentProfile(profile);
             return this.getCurrentProfile();
         });
     }
@@ -35,8 +35,14 @@ export class ProfileService {
         return this.get(profileId).customGET("home_page", params);
     }
 
-    getByIdentifier(identifier: string): restangular.IPromise<any> {
-        return this.restangular.one('profiles').get({ identifier: identifier });
+    getByIdentifier(identifier: string): ng.IPromise<any> {
+        let p = this.restangular.one('profiles').get({ identifier: identifier });
+        return p.then((response: restangular.IResponse) => {
+            if (response.data.length == 0) {
+                return this.$q.reject(p);
+            }
+            return response.data[0];
+        });
     }
 
     getProfileMembers(profileId: number, params?: any): restangular.IPromise<any> {

@@ -60,5 +60,8 @@ export var mocks = {
         loadScript: (script?: string) => {
             return Promise.resolve();
         }
+    },
+    $log: {
+        debug: () => { }
     }
 };
