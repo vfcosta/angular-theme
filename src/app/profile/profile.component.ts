@@ -86,7 +86,7 @@ export class Profile {
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
-            notification.httpError(404, { message: "Profile not found!" });
+            notification.error("notification.profile.not_found");
         });
     }
 }

@@ -20,7 +20,7 @@ describe("Components", () => {
             let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.$translate);
             component.httpError(500, {});
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
-                text: Notification.DEFAULT_HTTP_ERROR_MESSAGE,
+                text: Notification.DEFAULT_ERROR_MESSAGE,
                 type: "error"
             }));
             done();
@@ -33,7 +33,7 @@ describe("Components", () => {
             let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.$translate);
             component.httpError(500, null);
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
-                text: Notification.DEFAULT_HTTP_ERROR_MESSAGE,
+                text: Notification.DEFAULT_ERROR_MESSAGE,
                 type: "error"
             }));
             done();

@@ -10,19 +10,22 @@ export class Notification {
         private $translate: angular.translate.ITranslateService
     ) { }
 
-    public static DEFAULT_HTTP_ERROR_TITLE = "notification.http-error.default.title";
-    public static DEFAULT_HTTP_ERROR_MESSAGE = "notification.http-error.default.message";
+    public static DEFAULT_ERROR_TITLE = "notification.error.default.title";
+    public static DEFAULT_ERROR_MESSAGE = "notification.error.default.message";
     public static DEFAULT_SUCCESS_TIMER = 1000;
 
-    httpError(status: number, data: any): boolean {
-        this.$log.debug(status, data);
-
-        let message = (data || {}).message || Notification.DEFAULT_HTTP_ERROR_MESSAGE;
+    error(message: string = Notification.DEFAULT_ERROR_MESSAGE, title: string = Notification.DEFAULT_ERROR_TITLE) {
+        this.$log.debug("Notification error:", title, message);
         this.SweetAlert.swal({
-            title: this.$translate.instant(Notification.DEFAULT_HTTP_ERROR_TITLE),
+            title: this.$translate.instant(title),
             text: this.$translate.instant(message),
             type: "error"
         });
+    }
+
+    httpError(status: number, data: any): boolean {
+        let message = (data || {}).message || Notification.DEFAULT_ERROR_MESSAGE;
+        this.error(`notification.http_error.${status}.message`);
         return true; // return true to indicate that the error was already handled
     }
 
