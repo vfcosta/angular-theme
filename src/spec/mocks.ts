@@ -38,6 +38,32 @@ export var mocks = {
     authService: {
         logout: () => { }
     },
+    articleService: {
+        getByProfile: (profileId: number, params?: any) => {
+            return {
+                then: (func?: Function) => {
+                    if (func) func({
+                        data: {
+                            article: null
+                        }
+                    });
+                }
+            };
+        },
+        getChildren: (articleId: number, params?: any) => {
+            return {
+                then: (func?: Function) => { if (func) func(); }
+            };
+        }
+    },
+    profileService: {
+        getCurrentProfile: (profile: any) => {
+            return mocks.promiseResultTemplate({
+                profile: profile
+            });
+        },
+        instant: () => { }
+    },
     sessionWithCurrentUser: (user: any) => {
         return {
             currentUser: () => { return user; }
@@ -60,6 +86,14 @@ export var mocks = {
         loadScript: (script?: string) => {
             return Promise.resolve();
         }
+    },
+    promiseResultTemplate: (response?: {}) => {
+
+        return {
+            then: (func?: (response: any) => void) => {
+                if (func) { return func(response); }
+            }
+        };
     },
     $log: {
         debug: () => { }

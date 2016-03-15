@@ -26,11 +26,9 @@ export class ContentViewer {
     @Input()
     profile: noosfero.Profile = null;
 
-    constructor(private articleService: ArticleService, private profileService: ProfileService, private $log: ng.ILogService, private $stateParams: angular.ui.IStateParamsService) {
-        this.activate();
-    }
+    constructor(private articleService: ArticleService, private profileService: ProfileService, private $log: ng.ILogService, private $stateParams: angular.ui.IStateParamsService) { }
 
-    activate() {
+    ngOnInit() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
             return this.articleService.getByProfile(this.profile.id, { path: this.$stateParams["page"] });
