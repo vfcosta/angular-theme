@@ -73,7 +73,7 @@ export var mocks = {
         use: (lang?: string) => {
             return lang ? Promise.resolve(lang) : "en";
         },
-        instant: () => { }
+        instant: (text: string) => { return text }
     },
     tmhDynamicLocale: {
         get: () => { },

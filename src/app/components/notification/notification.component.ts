@@ -1,12 +1,17 @@
 import {Injectable, Inject} from "ng-forward";
 
 @Injectable()
-@Inject("$log", "SweetAlert")
+@Inject("$log", "SweetAlert", "$translate")
 export class Notification {
 
-    constructor(private $log: ng.ILogService, private SweetAlert: any) { }
+    constructor(
+        private $log: ng.ILogService,
+        private SweetAlert: any,
+        private $translate: angular.translate.ITranslateService
+    ) { }
 
-    public static DEFAULT_HTTP_ERROR_MESSAGE = "Something went wrong!";
+    public static DEFAULT_HTTP_ERROR_TITLE = "notification.http-error.default.title";
+    public static DEFAULT_HTTP_ERROR_MESSAGE = "notification.http-error.default.message";
     public static DEFAULT_SUCCESS_TIMER = 1000;
 
     httpError(status: number, data: any): boolean {
@@ -14,8 +19,8 @@ export class Notification {
 
         let message = (data || {}).message || Notification.DEFAULT_HTTP_ERROR_MESSAGE;
         this.SweetAlert.swal({
-            title: "Oops...",
-            text: message,
+            title: this.$translate.instant(Notification.DEFAULT_HTTP_ERROR_TITLE),
+            text: this.$translate.instant(message),
             type: "error"
         });
         return true; // return true to indicate that the error was already handled
