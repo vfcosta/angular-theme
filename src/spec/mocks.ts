@@ -93,6 +93,6 @@ export var mocks = {
             then: (func?: (response: any) => void) => {
                 if (func) { return func(response); }
             }
-        }
+        };
     }
 };
