@@ -16,7 +16,7 @@ import {Notification} from "../components/notification/notification.component";
 @Inject(ArticleService, ProfileService, "$state", Notification)
 export class Cms {
 
-    article: any = {};
+    article: noosfero.Article = <noosfero.Article>{};
 
     constructor(private articleService: ArticleService,
         private profileService: ProfileService,
