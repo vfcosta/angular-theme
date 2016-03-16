@@ -72,17 +72,8 @@ describe("Components", () => {
                             AUTH_EVENTS
                         }
                     }),
-                    provide('$translate', {
-                        useValue: helpers.mocks.$translate
-                    }),
-                    provide('tmhDynamicLocale', {
-                        useValue: helpers.mocks.tmhDynamicLocale
-                    }),
-                    provide('amMoment', {
-                        useValue: helpers.mocks.amMoment
-                    }),
-                    provide('angularLoad', {
-                        useValue: helpers.mocks.angularLoad
+                    provide('LanguageService', {
+                        useValue: helpers.mocks.languageService
                     })
                 ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],

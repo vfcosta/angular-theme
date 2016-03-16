@@ -3,7 +3,7 @@
     <span>{{"language.selector" | translate}}</span> <b class="caret"></b>
   </a>
   <ul class="dropdown-menu" dropdown-menu>
-    <li ng-repeat="(language, description) in ctrl.availableLanguages"
+    <li ng-repeat="(language, description) in ctrl.availableLanguages()"
       class="language language-{{language}}" ng-class="{'active': language==ctrl.currentLanguage()}">
       <a href="#" ng-click="ctrl.changeLanguage(language)">
         {{description}}

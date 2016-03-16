@@ -18,7 +18,7 @@ describe("Components", () => {
         beforeEach(() => {
             $stateParams = jasmine.createSpyObj("$stateParams", ["profile"]);
             profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier", "getBoxes"]);
-            notificationMock = jasmine.createSpyObj("notificationMock", ["httpError"]);
+            notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
 
             let profileResponse = $q.defer();
             profileResponse.resolve({ id: 1 });
@@ -54,7 +54,7 @@ describe("Components", () => {
             $rootScope.$apply();
 
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
-            expect(notificationMock.httpError).toHaveBeenCalled();
+            expect(notificationMock.error).toHaveBeenCalled();
             expect(component.profile).toBeUndefined();
             done();
         });

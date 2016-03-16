@@ -6,13 +6,11 @@ class ScopeWithEvents {
     }
 
     public $on(eventName: string, func: Function) {
-        console.log(this.listeners);
         if ((<any>this.listeners)[eventName]) {
             (<any>this.listeners)[eventName].push(func);
         } else {
             (<any>this.listeners)[eventName] = [func];
         }
-        console.log(this.listeners);
     }
 
     public $emit(message: string, arg?: any) {
@@ -108,5 +106,10 @@ export var mocks = {
     },
     $log: {
         debug: () => { }
+    },
+    languageService: {
+        currentLanguage: () => { },
+        changeLanguage: (lang: string) => { },
+        translate: (text: string) => { return text; }
     }
 };

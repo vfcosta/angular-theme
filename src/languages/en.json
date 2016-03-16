@@ -18,6 +18,8 @@
   "auth.form.password": "Password",
   "auth.form.login_button": "Login",
   "navbar.content_viewer_actions.new_post": "New Post",
-  "notification.http-error.default.message": "Something went wrong!",
-  "notification.http-error.default.title": "Oops..."
+  "notification.error.default.message": "Something went wrong!",
+  "notification.error.default.title": "Oops...",
+  "notification.profile.not_found": "Profile not found",
+  "notification.http_error.401.message": "Unauthorized"
 }
