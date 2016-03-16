@@ -17,14 +17,18 @@ describe("Services", () => {
             $q = _$q_;
         }));
 
-        it("set available languages when change language", (done) => {
-            let component: TranslatorService = new TranslatorService(
+        function createComponent() {
+            return new TranslatorService(
                 <any>helpers.mocks.$translate,
                 <any>helpers.mocks.tmhDynamicLocale,
                 <any>helpers.mocks.amMoment,
                 <any>helpers.mocks.angularLoad,
-                helpers.mocks.scopeWithEvents
+                $rootScope
             );
+        }
+
+        it("set available languages when change language", (done) => {
+            let component: TranslatorService = createComponent();
             component.availableLanguages = null;
             expect(component.availableLanguages).toBeNull();
             component.changeLanguage('en');
@@ -33,13 +37,7 @@ describe("Services", () => {
         });
 
         it("change the language", (done) => {
-            let component: TranslatorService = new TranslatorService(
-                <any>helpers.mocks.$translate,
-                <any>helpers.mocks.tmhDynamicLocale,
-                <any>helpers.mocks.amMoment,
-                <any>helpers.mocks.angularLoad,
-                helpers.mocks.scopeWithEvents
-            );
+            let component: TranslatorService = createComponent();
             let loadScripPromise = $q.defer();
             loadScripPromise.resolve();
             component["angularLoad"].loadScript = jasmine.createSpy("loadScript").and.returnValue(loadScripPromise.promise);
@@ -57,5 +55,54 @@ describe("Services", () => {
             done();
         });
 
+        it("do nothing when call change language with null", (done) => {
+            let component: TranslatorService = createComponent();
+            component["angularLoad"].loadScript = jasmine.createSpy("loadScript");
+            component["tmhDynamicLocale"].set = jasmine.createSpy("set");
+            component["$translate"].use = jasmine.createSpy("use");
+
+            component.changeLanguage(null);
+
+            expect(component["angularLoad"].loadScript).not.toHaveBeenCalled();
+            expect(component["tmhDynamicLocale"].set).not.toHaveBeenCalled();
+            expect(component["$translate"].use).not.toHaveBeenCalled();
+            done();
+        });
+
+        it("return the current language used by the translator", (done) => {
+            let component: TranslatorService = createComponent();
+            component["$translate"].use = jasmine.createSpy("use").and.returnValue("en");
+            expect(component.currentLanguage()).toEqual("en");
+            expect(component["$translate"].use).toHaveBeenCalled();
+            done();
+        });
+
+        it("call translate service when translate a text", (done) => {
+            let component: TranslatorService = createComponent();
+            component["$translate"].instant = jasmine.createSpy("instant");
+            component.translate("text");
+            expect(component["$translate"].instant).toHaveBeenCalledWith("text");
+            done();
+        });
+
+        it("change the language when receive an event", (done) => {
+            let component: TranslatorService = createComponent();
+            component.changeLanguage = jasmine.createSpy("changeLanguage");
+            $rootScope.$emit("$localeChangeSuccess");
+            expect(component.changeLanguage).toHaveBeenCalled();
+            done();
+        });
+
+        it("use the translate language when receive a change language event and there is no language previously selected", (done) => {
+            let component: TranslatorService = createComponent();
+            component.changeLanguage = jasmine.createSpy("changeLanguage");
+            component["tmhDynamicLocale"].get = jasmine.createSpy("get").and.returnValue(null);
+            component["$translate"].use = jasmine.createSpy("use").and.returnValue("en");
+
+            $rootScope.$emit("$localeChangeSuccess");
+            expect(component["$translate"].use).toHaveBeenCalled();
+            expect(component.changeLanguage).toHaveBeenCalledWith("en");
+            done();
+        });
     });
 });
