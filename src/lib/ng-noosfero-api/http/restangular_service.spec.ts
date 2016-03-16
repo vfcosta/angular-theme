@@ -19,7 +19,7 @@ describe("Restangular Service - base Class", () => {
             return {
                 singular: "object",
                 plural: "objects"
-            }
+            };
         }
 
         public getResourcePath() {
@@ -32,7 +32,7 @@ describe("Restangular Service - base Class", () => {
             return {
                 singular: "rootObject",
                 plural: "rootObjects"
-            }
+            };
         }
 
         public getResourcePath() {
@@ -59,7 +59,7 @@ describe("Restangular Service - base Class", () => {
     it("list() calls GET /objects", (done) => {
         $httpBackend.expectGET("/api/v1/objects").respond(200, { objects: [{ id: 1 }, { id: 2 }] });
 
-        objectRestService.list().then((result: noosfero.RestResult<ObjectModel>) => {
+        objectRestService.list().then((result: noosfero.RestResult<ObjectModel[]>) => {
             expect(result.data).toBeDefined();
             expect((<ObjectModel[]>result.data).length).toEqual(2);
             done();
@@ -75,7 +75,7 @@ describe("Restangular Service - base Class", () => {
         $httpBackend.expectGET("/api/v1/rootObjects/1/objects").respond(200, { objects: [{ id: 1 }, { id: 2 }] });
         let rootObj: RootObjectModel = rootObjectRestService.getElement(1);
 
-        objectRestService.list(rootObj).then((result: noosfero.RestResult<ObjectModel>) => {
+        objectRestService.list(rootObj).then((result: noosfero.RestResult<ObjectModel[]>) => {
             expect(result.data).toBeDefined();
             expect((<ObjectModel[]>result.data).length).toEqual(2);
             done();

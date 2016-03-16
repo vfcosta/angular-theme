@@ -9,7 +9,7 @@ export class ProfileImage {
 
     @Input() profile: Profile;
     defaultIcon: string;
-    
+
     ngOnInit() {
         this.defaultIcon = 'fa-users';
         if (this.profile && this.profile.type === 'Person') {

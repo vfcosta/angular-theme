@@ -28,14 +28,13 @@ describe("Components", () => {
             // uses the TestComponentBuilder instance to initialize the component
             tcb.createAsync(BlockContainerComponent).then(fixture => {
                 // and here we can inspect and run the test assertions
-                //let myComponent: MainBlock = fixture.componentInstance;
+                // let myComponent: MainBlock = fixture.componentInstance;
 
                 // assure the block object inside the Block matches
                 // the provided through the parent component
-                expect(fixture.debugElement.queryAll('[ui-view="mainBlockContent"]').length).toEqual(1)
+                expect(fixture.debugElement.queryAll('[ui-view="mainBlockContent"]').length).toEqual(1);
                 done();
             });
         });
-        
     });
 });

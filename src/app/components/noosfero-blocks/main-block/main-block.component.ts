@@ -1,4 +1,4 @@
-import {Component, Input} from 'ng-forward'
+import {Component, Input} from 'ng-forward';
 import {Block} from '../block.component';
 
 @Component({

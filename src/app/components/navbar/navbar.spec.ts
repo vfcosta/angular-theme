@@ -88,7 +88,7 @@ describe("Components", () => {
                 directives: [Navbar],
                 template: '<acme-navbar></acme-navbar>'
             });
-        }
+        };
 
 
         it('should get the loggedIn user', (done: Function) => {

@@ -30,7 +30,7 @@ export class ContentViewer {
     activate() {
        this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-            return this.articleService.getByProfile(<any>this.profile, { path: this.$stateParams["page"] });
+            return this.articleService.getOneByProfile(<any>this.profile, { path: this.$stateParams["page"] });
         }).then((result: noosfero.RestResult<noosfero.Article>) => {
             this.article = <noosfero.Article>result.data;
         });

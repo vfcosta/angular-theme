@@ -1,7 +1,7 @@
 
 namespace noosfero {
     export interface RestResult<T> {
-        data: T | T[];
+        data: T;
         headers: Function;
     }
 }

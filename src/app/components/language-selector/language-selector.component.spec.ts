@@ -30,7 +30,7 @@ describe("Components", () => {
                     })
                 ].concat(helpers.provideFilters("translateFilter"))
             });
-        }
+        };
 
         it("set available languages when change language", (done) => {
             let component: LanguageSelector = new LanguageSelector(

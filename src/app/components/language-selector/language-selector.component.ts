@@ -41,7 +41,7 @@ export class LanguageSelector {
 
     private changeMomentLocale(language: string) {
         let localePromise = Promise.resolve();
-        if (language != "en") {
+        if (language !== "en") {
             localePromise = this.angularLoad.loadScript(`/bower_components/moment/locale/${language}.js`);
         }
         localePromise.then(() => {

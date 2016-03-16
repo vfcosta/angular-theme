@@ -55,7 +55,7 @@ describe("Services", () => {
                 let eventEmmited: boolean = false;
                 $rootScope.$on(AUTH_EVENTS.loginSuccess, (event: ng.IAngularEvent, userThroughEvent: User) => {
                     eventEmmited = true;
-                    expect(userThroughEvent).toEqual(user)
+                    expect(userThroughEvent).toEqual(user);
                 });
 
                 $httpBackend.flush();

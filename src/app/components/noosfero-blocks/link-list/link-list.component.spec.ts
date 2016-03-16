@@ -28,7 +28,7 @@ describe("Components", () => {
             }
 
             // uses the TestComponentBuilder instance to initialize the component
-            //.overrideView(LinkListBlock, { template: 'asdasdasd', pipes: [NoosferoTemplate] })
+            // .overrideView(LinkListBlock, { template: 'asdasdasd', pipes: [NoosferoTemplate] })
             tcb.createAsync(BlockContainerComponent).then(fixture => {
                 // and here we can inspect and run the test assertions
                 let myComponent: LinkListBlock = fixture.componentInstance;

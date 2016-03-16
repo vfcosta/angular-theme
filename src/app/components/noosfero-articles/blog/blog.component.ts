@@ -13,7 +13,7 @@ export class ArticleBlog {
     @Input() article: noosfero.Article;
     @Input() profile: Profile;
 
-    private posts: any[];
+    private posts: noosfero.Article[];
     private perPage: number = 3;
     private currentPage: number;
     private totalPosts: number = 0;
@@ -33,9 +33,9 @@ export class ArticleBlog {
 
         this.articleService
             .getChildren(this.article, filters)
-            .then((result: noosfero.RestResult<noosfero.Article>) => {
+            .then((result: noosfero.RestResult<noosfero.Article[]>) => {
                 this.totalPosts = <number>result.headers("total");
-                this.posts = <noosfero.Article[]> result.data;
+                this.posts = result.data;
             });
     }
 

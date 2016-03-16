@@ -4,20 +4,22 @@
   "dependencies": {
     "angular": "^1.5.0",
     "angular-mock": "^1.0.0",
-    "moment": "^2.11.2"
+    "moment": "^2.11.2",
+    "ng-forward": "0.0.1-alpha.12"
   },
   "scripts": {
     "build": "webpack; gulp build",
     "webpack": "webpack",
-    "karma": "karma",
+    "karma": "concurrently \"webpack -w\" \"karma start\"",
     "coverage": "karma start --single-run; npm run remap-coverage",
     "remap-coverage": "ts-node --project ./dev-scripts ./dev-scripts/remapCoverage.ts",
     "test-single": "karma start --single-run",
     "test-and-coverage": "karma start & npm run remap-coverage",
     "test": "webpack -w --test",
-    "postinstall": "npm install -g bower && bower install && typings install && cd dev-scripts && typings install",
+    "postinstall": "npm install -g bower; bower install; typings install; npm run fix-jqlite; cd dev-scripts; typings install",
     "start": "concurrently \"webpack -w\" \"gulp serve\"",
-    "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts"
+    "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts",
+    "fix-jqlite": "ts-node --project ./dev-scripts dev-scripts/fix-jqlite.ts"
   },
   "devDependencies": {
     "browser-sync": "~2.9.11",

@@ -10,5 +10,5 @@ export class ProfileImageBlock {
 
     @Input() block: any;
     @Input() owner: any;
-    
+
 }

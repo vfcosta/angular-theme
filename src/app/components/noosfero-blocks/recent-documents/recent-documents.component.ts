@@ -23,12 +23,12 @@ export class RecentDocumentsBlock {
         this.profile = this.owner;
         this.documents = [];
 
-        let limit = (this.block && this.block.settings) ? this.block.settings.limit : null || 5;
+        let limit = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 5;
         // FIXME get all text articles
         // FIXME make the getByProfile a generic method where we tell the type passing a class TinyMceArticle
         //       and the promise should be of type TinyMceArticle[], per example
         this.articleService.getByProfile(this.profile, { content_type: 'TinyMceArticle', per_page: limit })
-        .then((result: noosfero.RestResult<noosfero.Article>) => {
+        .then((result: noosfero.RestResult<noosfero.Article[]>) => {
             this.documents = <noosfero.Article[]>result.data;
             this.documentsLoaded = true;
         });

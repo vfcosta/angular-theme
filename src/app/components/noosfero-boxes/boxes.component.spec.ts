@@ -19,8 +19,8 @@ const htmlTemplate: string = '<noosfero-boxes [boxes]="ctrl.boxes" [owner]="ctrl
 describe("Boxes Component", () => {
 
     beforeEach(() => {
-        angular.mock.module("templates")
-    })
+        angular.mock.module("templates");
+    });
 
     @Component({
         selector: 'test-container-component',
@@ -43,8 +43,7 @@ describe("Boxes Component", () => {
 
     it("renders boxes into a container", (done: Function) => {
         createComponentFromClass(BoxesContainerComponent).then((fixture) => {
-
-            var boxesHtml = fixture.debugElement;
+            let boxesHtml = fixture.debugElement;
             expect(boxesHtml.query('div.col-md-7').length).toEqual(1);
             expect(boxesHtml.query('div.col-md-2-5').length).toEqual(1);
 

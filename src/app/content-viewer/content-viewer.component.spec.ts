@@ -14,7 +14,7 @@ describe('Content Viewer Component', () => {
 
     let stateParamsService: any;
 
-    //loading the templates
+    // loading the templates
     beforeEach(() => {
         angular.mock.module("templates");
 
@@ -32,7 +32,7 @@ describe('Content Viewer Component', () => {
                 provide('$stateParams', {
                     useValue: stateParamsService
                 })
-            ]
+            ];
         });
     });
 
@@ -51,7 +51,7 @@ describe('Content Viewer Component', () => {
             expect(fixture.debugElement.query('content-viewer').length).toEqual(1);
 
             done();
-        })
+        });
     });
 
     it('check if article was loaded', (done: Function) => {
@@ -69,7 +69,7 @@ describe('Content Viewer Component', () => {
             return helpers.mocks.promiseResultTemplate(profile);
         };
 
-        helpers.mocks.articleService.getByProfile = (id: number, params: any) => {
+        helpers.mocks.articleService.getOneByProfile = (id: number, params: any) => {
             return helpers.mocks.promiseResultTemplate({
                 data:  article
             });

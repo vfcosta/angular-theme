@@ -50,6 +50,17 @@ export var mocks = {
                 }
             };
         },
+        getOneByProfile: (profileId: number, params?: any) => {
+            return {
+                then: (func?: Function) => {
+                    if (func) func({
+                        data: {
+                            article: null
+                        }
+                    });
+                }
+            };
+        },
         getChildren: (articleId: number, params?: any) => {
             return {
                 then: (func?: Function) => { if (func) func(); }
@@ -73,7 +84,7 @@ export var mocks = {
         use: (lang?: string) => {
             return lang ? Promise.resolve(lang) : "en";
         },
-        instant: (text: string) => { return text }
+        instant: (text: string) => { return text; }
     },
     tmhDynamicLocale: {
         get: () => { },

@@ -73,14 +73,14 @@ describe("Blog Component", () => {
         // the templates to the templateCache into the module templates
         // we need to load the module templates here as the template for the
         // component Noosfero ArtileView will be load on our tests
-        angular.mock.module("templates")
+        angular.mock.module("templates");
 
         providers((provide: any) => {
             return <any>[
                 provide('ArticleService', {
                     useValue: articleService
                 })
-            ]
+            ];
         });
     });
 

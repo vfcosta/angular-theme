@@ -4,7 +4,7 @@ import {Pipe} from "ng-forward";
 export class NoosferoTemplate {
 
     transform(text: string, options: any) {
-        for (var option in options) {
+        for (let option in options) {
             text = text.replace('{' + option + '}', options[option]);
         }
         return text;

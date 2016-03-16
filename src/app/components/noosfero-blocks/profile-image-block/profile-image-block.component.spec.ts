@@ -30,14 +30,14 @@ describe("Components", () => {
 
         it("show image if present", () => {
             helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
-                var elProfile = fixture.debugElement.componentViewChildren[0];
+                let elProfile = fixture.debugElement.componentViewChildren[0];
                 expect(elProfile.query('div.profile-image-block').length).toEqual(1);
             });
         });
 
         it("has link to the profile", () => {
             helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
-                var elProfile = fixture.debugElement.componentViewChildren[0];
+                let elProfile = fixture.debugElement.componentViewChildren[0];
                 expect(elProfile.query('a.settings-link').length).toEqual(1);
             });
         });
