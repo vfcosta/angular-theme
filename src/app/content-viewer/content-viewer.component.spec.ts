@@ -55,11 +55,11 @@ describe('Content Viewer Component', () => {
     });
 
     it('check if article was loaded', (done: Function) => {
-        var article: any = {
+        let article: any = {
             id: 1,
             title: 'The article test'
         };
-        var profile: any = {
+        let profile: any = {
             id: 1,
             identifier: 'the-profile-test',
             type: 'Person'
@@ -71,9 +71,7 @@ describe('Content Viewer Component', () => {
 
         helpers.mocks.articleService.getByProfile = (id: number, params: any) => {
             return helpers.mocks.promiseResultTemplate({
-                data: {
-                    article: article
-                }
+                data:  article
             });
         };
 
@@ -81,8 +79,8 @@ describe('Content Viewer Component', () => {
         buildComponent().then((fixture: ComponentFixture) => {
             let contentViewerComp: ContentViewer = fixture.debugElement.componentViewChildren[0].componentInstance;
 
-            expect(contentViewerComp.profile).toEqual(jasmine.objectContaining(profile));
-            expect(contentViewerComp.article).toEqual(jasmine.objectContaining(article));
+            expect(contentViewerComp.profile).toEqual(profile);
+            expect(contentViewerComp.article).toEqual(article);
 
             done();
         });

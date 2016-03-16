@@ -26,8 +26,9 @@ export class Cms {
     save() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             return this.articleService.create(this.article, profile);
-        }).then((response: restangular.IResponse) => {
-            this.$state.transitionTo('main.profile.page', { page: response.data.article.path, profile: response.data.article.profile.identifier });
+        }).then((response: noosfero.RestResult<noosfero.Article>) => {
+            let article = (<noosfero.Article>response.data);
+            this.$state.transitionTo('main.profile.page', { page: article.path, profile: article.profile.identifier });
             this.notification.success("Good job!", "Article saved!");
         });
     }
