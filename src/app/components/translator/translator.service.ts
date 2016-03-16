@@ -2,7 +2,7 @@ import {Injectable, Inject} from "ng-forward";
 
 @Injectable()
 @Inject("$translate", "tmhDynamicLocale", "amMoment", "angularLoad", "$rootScope")
-export class LanguageService {
+export class TranslatorService {
 
     availableLanguages: any;
 

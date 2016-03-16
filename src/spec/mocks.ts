@@ -96,7 +96,7 @@ export var mocks = {
     $log: {
         debug: () => { }
     },
-    languageService: {
+    translatorService: {
         currentLanguage: () => { },
         changeLanguage: (lang: string) => { },
         translate: (text: string) => { return text }

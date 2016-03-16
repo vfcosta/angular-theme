@@ -1,13 +1,13 @@
 import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {provide} from 'ng-forward';
 
-import {LanguageService} from './language.service';
+import {TranslatorService} from './translator.service';
 
 import * as helpers from "../../../spec/helpers";
 
 describe("Services", () => {
 
-    describe("Language Service", () => {
+    describe("Translator Service", () => {
 
         let $rootScope: ng.IScope;
         let $q: ng.IQService;
@@ -18,7 +18,7 @@ describe("Services", () => {
         }));
 
         it("set available languages when change language", (done) => {
-            let component: LanguageService = new LanguageService(
+            let component: TranslatorService = new TranslatorService(
                 <any>helpers.mocks.$translate,
                 <any>helpers.mocks.tmhDynamicLocale,
                 <any>helpers.mocks.amMoment,
@@ -33,7 +33,7 @@ describe("Services", () => {
         });
 
         it("change the language", (done) => {
-            let component: LanguageService = new LanguageService(
+            let component: TranslatorService = new TranslatorService(
                 <any>helpers.mocks.$translate,
                 <any>helpers.mocks.tmhDynamicLocale,
                 <any>helpers.mocks.amMoment,

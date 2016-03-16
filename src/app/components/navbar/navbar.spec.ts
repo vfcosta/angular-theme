@@ -72,8 +72,8 @@ describe("Components", () => {
                             AUTH_EVENTS
                         }
                     }),
-                    provide('LanguageService', {
-                        useValue: helpers.mocks.languageService
+                    provide('TranslatorService', {
+                        useValue: helpers.mocks.translatorService
                     })
                 ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],

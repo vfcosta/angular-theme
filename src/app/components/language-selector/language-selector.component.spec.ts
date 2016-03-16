@@ -11,16 +11,16 @@ describe("Components", () => {
 
         beforeEach(angular.mock.module("templates"));
 
-        let languageService: any;
+        let translatorService: any;
 
         let buildComponent = (): Promise<ComponentFixture> => {
-            languageService = jasmine.createSpyObj("languageService", ["availableLanguages", "currentLanguage"])
+            translatorService = jasmine.createSpyObj("translatorService", ["availableLanguages", "currentLanguage"])
             return helpers.quickCreateComponent({
                 template: "<language-selector></language-selector>",
                 directives: [LanguageSelector],
                 providers: [
-                    provide('LanguageService', {
-                        useValue: languageService
+                    provide('TranslatorService', {
+                        useValue: translatorService
                     })
                 ].concat(helpers.provideFilters("translateFilter"))
             });
