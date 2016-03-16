@@ -10,6 +10,12 @@ import {Notification} from "../components/notification/notification.component";
 
 import * as noosferoModels from "./../models/interfaces";
 
+/**
+ * @ngdoc controller
+ * @name profile.Profile
+ * @description
+ *  This is the profile controller. It provide routes to supported Noosfero Profiles.
+ */
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html",

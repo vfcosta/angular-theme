@@ -2,6 +2,13 @@ import {Component, Input} from "ng-forward";
 import {NoosferoActivity} from "./activity/activity.component";
 import {Activity} from "../../models/interfaces";
 
+/**
+ * @ngdoc controller
+ * @name NoosferoActivities
+ * @description
+ *  The controller responsible to retreive profile activities.
+ */
+
 @Component({
     selector: "noosfero-activities",
     templateUrl: 'app/components/noosfero-activities/activities.html',
@@ -9,6 +16,12 @@ import {Activity} from "../../models/interfaces";
 })
 export class NoosferoActivities {
 
+    /**
+     * @ngdoc property
+     * @propertyOf NoosferoActivities
+     * @name activities
+     * @returns {Activity[]} An array of {@link Activity}.
+     */
     @Input() activities: Activity[];
 
 }
