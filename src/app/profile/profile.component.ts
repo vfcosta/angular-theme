@@ -8,6 +8,14 @@ import {NoosferoActivities} from "../components/noosfero-activities/activities.c
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 import {Notification} from "../components/notification/notification.component";
 
+
+/**
+ * @ngdoc controller
+ * @name profile.Profile
+ * @description
+ *  This is the profile controller. It provide routes to supported Noosfero Profiles.
+ */
+
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html",

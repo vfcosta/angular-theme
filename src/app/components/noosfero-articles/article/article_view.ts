@@ -1,6 +1,13 @@
 import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
 import {ArticleBlog} from "../blog/blog.component";
 
+/**
+ * @ngdoc controller
+ * @name ArticleDefaultView
+ * @description
+ *  A default view for Noosfero Articles. If the specific article view is
+ * not implemented, then this view is used.
+ */
 @Component({
     selector: 'noosfero-default-article',
     templateUrl: 'app/components/noosfero-articles/article/article.html'
@@ -12,6 +19,13 @@ export class ArticleDefaultView {
 
 }
 
+/**
+ * @ngdoc controller
+ * @name ArticleView
+ * @description
+ *  A dynamic view for articles. It uses the article type to replace
+ * the default template with the custom article directive.
+ */
 @Component({
     selector: 'noosfero-article',
     template: 'not-used',

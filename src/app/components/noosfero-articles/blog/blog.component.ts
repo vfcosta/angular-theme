@@ -2,6 +2,12 @@ import {Component, Input, Inject} from "ng-forward";
 
 import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
 
+/**
+ * @ngdoc controller
+ * @name ArticleBlog
+ * @description
+ *  An specific {@link ArticleView} for Blog articles.
+ */
 @Component({
     selector: "noosfero-blog",
     templateUrl: "app/components/noosfero-articles/blog/blog.html"
