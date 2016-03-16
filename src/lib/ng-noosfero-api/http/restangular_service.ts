@@ -10,6 +10,7 @@
  */
 export abstract class RestangularService<T extends noosfero.RestModel> {
 
+    private baseResource: restangular.IElement;
     /**
      * Creates an instance of RestangularService.
      * 
@@ -18,16 +19,17 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * @param {ng.ILogService} $log (description)
      */
     constructor(protected restangularService: restangular.IService, protected $q: ng.IQService, protected $log: ng.ILogService) {
+        this.baseResource = restangularService.all(this.getResourcePath());
         // TODO 
-        this.restangularService.setResponseInterceptor((data, operation, what, url, response, deferred) => {
-            let transformedData: any = data;
-            if (operation === "getList" && url.endsWith("/" + this.getDataKeys().plural)) {
-                transformedData = data[this.getDataKeys()["plural"]];
-                return transformedData;
-            } else {
-                return data;
-            }
-        });
+        // this.restangularService.setResponseInterceptor((data, operation, what, url, response, deferred) => {
+        //     let transformedData: any = data;
+        //     if (operation === "getList" && url.endsWith("/" + this.getDataKeys().plural)) {
+        //         transformedData = data[this.getDataKeys()["plural"]];
+        //         return transformedData;
+        //     } else {
+        //         return data;
+        //     }
+        // });
     }
 
     protected extractData(response: restangular.IResponse): noosfero.RestResult<T> {
@@ -115,7 +117,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         if (rootElement) {
             restRequest = rootElement.customGET(this.getResourcePath(), queryParams, headers);
         } else {
-            restRequest = this.restangularService.all(this.getResourcePath()).customGET("", queryParams, headers);
+            restRequest = this.baseResource.customGET("", queryParams, headers);
         }
 
 
@@ -130,7 +132,8 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     public listSubElements<C>(obj: T, subElement: string, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<C>> {
         let deferred = this.$q.defer<noosfero.RestResult<C>>();
         let restRequest: ng.IPromise<noosfero.RestResult<T>>;
-        restRequest = obj.all(subElement).get(queryParams, headers);
+        let objElement = this.getElement(obj.id);
+        restRequest = objElement.all(subElement).get(queryParams, headers);
         restRequest.then(this.getHandleSuccessFunction(deferred))
             .catch(this.getHandleErrorFunction(deferred));
         return deferred.promise;
@@ -201,7 +204,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         if (rootElement) {
             restRequest = rootElement.all(this.getResourcePath()).post(obj, queryParams, headers);
         } else {
-            restRequest = this.restangularService.all(this.getResourcePath()).post(obj, queryParams, headers);
+            restRequest = this.baseResource.post(obj, queryParams, headers);
         }
 
         restRequest.then(this.getHandleSuccessFunction(deferred))

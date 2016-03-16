@@ -1,6 +1,5 @@
 import {Component, Input} from "ng-forward";
 import {NoosferoActivity} from "./activity/activity.component";
-import {Activity} from "../../models/interfaces";
 
 @Component({
     selector: "noosfero-activities",
@@ -9,6 +8,6 @@ import {Activity} from "../../models/interfaces";
 })
 export class NoosferoActivities {
 
-    @Input() activities: Activity[];
+    @Input() activities: noosfero.Activity[];
 
 }

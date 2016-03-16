@@ -1,5 +1,4 @@
 import {Inject, Input, Component} from "ng-forward";
-import {Profile} from "./../../../models/interfaces";
 
 @Component({
     selector: "noosfero-profile-image",
@@ -7,7 +6,7 @@ import {Profile} from "./../../../models/interfaces";
 })
 export class ProfileImage {
 
-    @Input() profile: Profile;
+    @Input() profile: noosfero.Profile;
     defaultIcon: string;
 
     ngOnInit() {

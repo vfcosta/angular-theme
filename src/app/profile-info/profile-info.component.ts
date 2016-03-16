@@ -1,6 +1,4 @@
 import {StateConfig, Component, Inject, provide} from 'ng-forward';
-
-import {Profile} from "./../models/interfaces";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({

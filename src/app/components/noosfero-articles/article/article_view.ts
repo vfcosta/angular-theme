@@ -7,8 +7,8 @@ import {ArticleBlog} from "../blog/blog.component";
 })
 export class ArticleDefaultView {
 
-    @Input() article: any;
-    @Input() profile: any;
+    @Input() article: noosfero.Article;
+    @Input() profile: noosfero.Profile;
 
 }
 
@@ -20,8 +20,8 @@ export class ArticleDefaultView {
 @Inject("$element", "$scope", "$injector", "$compile")
 export class ArticleView {
 
-    @Input() article: any;
-    @Input() profile: any;
+    @Input() article: noosfero.Article;
+    @Input() profile: noosfero.Profile;
     directiveName: string;
 
     ngOnInit() {

@@ -1,6 +1,5 @@
 import {Component} from 'ng-forward';
 
-import {Box, Profile} from "../../models/interfaces";
 import {Boxes} from './boxes.component';
 
 import {
@@ -29,12 +28,12 @@ describe("Boxes Component", () => {
         providers: []
     })
     class BoxesContainerComponent {
-        boxes: Box[] = [
+        boxes: noosfero.Box[] = [
             { id: 1, position: 1 },
             { id: 2, position: 2 }
         ];
 
-        owner: Profile = {
+        owner: noosfero.Profile =  <noosfero.Profile> {
             id: 1,
             identifier: 'profile-name',
             type: 'Person'

@@ -1,5 +1,4 @@
 import {Input, Inject, Component} from 'ng-forward';
-import {Box, Profile} from "./../../models/interfaces";
 
 @Component({
     selector: "noosfero-boxes",
@@ -7,10 +6,10 @@ import {Box, Profile} from "./../../models/interfaces";
 })
 export class Boxes {
 
-    @Input() boxes: Box[];
-    @Input() owner: Profile;
+    @Input() boxes: noosfero.Box[];
+    @Input() owner: noosfero.Profile;
 
-    boxesOrder(box: Box) {
+    boxesOrder(box: noosfero.Box) {
         if (box.position === 2) return 0;
         return box.position;
     }

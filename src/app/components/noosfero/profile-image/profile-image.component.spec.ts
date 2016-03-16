@@ -17,7 +17,7 @@ describe("Components", () => {
         it("show community users image if profile is not Person", done => {
             helpers.tcb.createAsync(ProfileImage).then(fixture => {
                 let profileImageComponent: ProfileImage = fixture.componentInstance;
-                let profile = { id: 1, identifier: "myprofile", type: "Community" };
+                let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
                 profileImageComponent.profile = profile;
                 profileImageComponent.ngOnInit();
 
@@ -32,7 +32,7 @@ describe("Components", () => {
         it("show Person image if profile is Person", done => {
             tcb.createAsync(ProfileImage).then(fixture => {
                 let profileImageComponent: ProfileImage = fixture.componentInstance;
-                let profile = { id: 1, identifier: "myprofile", type: "Person" };
+                let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Person" };
                 profileImageComponent.profile = profile;
                 profileImageComponent.ngOnInit();
                 // Check the attribute

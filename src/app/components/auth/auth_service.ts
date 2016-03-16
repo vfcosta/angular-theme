@@ -1,6 +1,6 @@
 import {Injectable, Inject} from "ng-forward";
 
-import {Credentials, NoosferoRootScope, User, UserResponse} from "./../../models/interfaces";
+import {NoosferoRootScope, UserResponse} from "./../../models/interfaces";
 import {Session} from "./session";
 
 import {AUTH_EVENTS, IAuthEvents} from "./auth_events";
@@ -26,13 +26,13 @@ export class AuthService {
 
     private loginSuccessCallback(response: ng.IHttpPromiseCallbackArg<UserResponse>) {
         this.$log.debug('AuthService.login [SUCCESS] response', response);
-        let currentUser: User = this.session.create(response.data);
+        let currentUser: noosfero.User = this.session.create(response.data);
         this.$rootScope.currentUser = currentUser;
         this.$rootScope.$broadcast(this.auth_events.loginSuccess, currentUser);
         return currentUser;
     }
 
-    login(credentials: Credentials): ng.IPromise<User> {
+    login(credentials: noosfero.Credentials): ng.IPromise<noosfero.User> {
         let url = '/api/v1/login';
         let encodedData = 'login=' + credentials.username + '&password=' + credentials.password;
         return this.$http.post(url, encodedData).then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
@@ -56,7 +56,7 @@ export class AuthService {
         return !!this.session.currentUser();
     }
 
-    public currentUser(): User {
+    public currentUser(): noosfero.User {
         return this.session.currentUser();
     }
 

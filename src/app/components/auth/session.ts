@@ -1,5 +1,5 @@
 import {Injectable, Inject} from "ng-forward";
-import {UserResponse, User, INoosferoLocalStorage} from "./../../models/interfaces";
+import {UserResponse, INoosferoLocalStorage} from "./../../models/interfaces";
 
 @Injectable()
 @Inject("$localStorage", "$log")
@@ -9,7 +9,7 @@ export class Session {
 
     }
 
-    create(data: UserResponse): User {
+    create(data: UserResponse): noosfero.User {
         this.$localStorage.currentUser = data.user;
         this.$log.debug('User session created.', this.$localStorage.currentUser);
         return this.$localStorage.currentUser;
@@ -20,7 +20,7 @@ export class Session {
         this.$log.debug('User session destroyed.');
     };
 
-    currentUser(): User {
+    currentUser(): noosfero.User {
         return this.$localStorage.currentUser;
     };
 

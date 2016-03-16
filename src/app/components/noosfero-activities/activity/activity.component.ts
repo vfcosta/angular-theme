@@ -1,5 +1,4 @@
 import {Component, Input} from "ng-forward";
-import {Activity} from "../../../models/interfaces";
 
 @Component({
     selector: "noosfero-activity",
@@ -7,7 +6,7 @@ import {Activity} from "../../../models/interfaces";
 })
 export class NoosferoActivity {
 
-    @Input() activity: Activity;
+    @Input() activity: noosfero.Activity;
 
     getActivityTemplate() {
         return 'app/components/noosfero-activities/activity/' + this.activity.verb + '.html';

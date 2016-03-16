@@ -1,4 +1,3 @@
-import {Credentials} from "./../../models/interfaces";
 import {AuthService} from "./auth_service";
 
 export class AuthController {
@@ -13,7 +12,7 @@ export class AuthController {
 
     }
 
-    credentials: Credentials;
+    credentials: noosfero.Credentials;
 
     login() {
         this.AuthService.login(this.credentials);

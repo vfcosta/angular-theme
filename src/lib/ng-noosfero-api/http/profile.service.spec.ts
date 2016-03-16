@@ -1,4 +1,3 @@
-import {Profile} from "../../../app/models/interfaces";
 import {ProfileService} from "./profile.service";
 
 describe("Services", () => {

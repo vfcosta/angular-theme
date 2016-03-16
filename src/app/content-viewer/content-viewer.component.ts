@@ -4,7 +4,7 @@ import {Input, Component, StateConfig, Inject, provide} from "ng-forward";
 import {ArticleBlog} from "./../components/noosfero-articles/blog/blog.component";
 import {ArticleService} from "../../lib/ng-noosfero-api/http/article.service";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
-import {Profile} from "../models/interfaces";
+
 @Component({
     selector: "content-viewer",
     templateUrl: "app/content-viewer/page.html",

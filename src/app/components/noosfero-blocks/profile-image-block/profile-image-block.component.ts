@@ -8,7 +8,7 @@ import {ProfileImage} from "./../../../components/noosfero/profile-image/profile
 })
 export class ProfileImageBlock {
 
-    @Input() block: any;
-    @Input() owner: any;
+    @Input() block: noosfero.Block;
+    @Input() owner: noosfero.Profile;
 
 }

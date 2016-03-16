@@ -1,5 +1,4 @@
 import { Injectable, Inject } from "ng-forward";
-import {Profile} from "../../../app/models/interfaces";
 
 @Injectable()
 @Inject("Restangular", "$q")

@@ -1,7 +1,7 @@
 import {Component} from "ng-forward";
 import {Session} from "./";
 import {fixtures, createComponentFromClass, createProviderToValue} from "./../../../spec/helpers";
-import {UserResponse, User, INoosferoLocalStorage} from "./../../models/interfaces";
+import {UserResponse, INoosferoLocalStorage} from "./../../models/interfaces";
 
 
 describe("Services", () => {

@@ -1,6 +1,5 @@
 import {Component, Input, Inject} from "ng-forward";
 
-import {Article, Profile} from "./../../../models/interfaces";
 import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
@@ -11,7 +10,7 @@ import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.servi
 export class ArticleBlog {
 
     @Input() article: noosfero.Article;
-    @Input() profile: Profile;
+    @Input() profile: noosfero.Profile;
 
     private posts: noosfero.Article[];
     private perPage: number = 3;

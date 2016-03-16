@@ -1,5 +1,4 @@
 import {StateConfig, Component, Inject, provide} from 'ng-forward';
-import {Profile} from "./../models/interfaces";
 import {ArticleService} from "../../lib/ng-noosfero-api/http/article.service";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 import {Notification} from "../components/notification/notification.component";

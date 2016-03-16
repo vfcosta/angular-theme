@@ -8,8 +8,8 @@ import {ProfileService} from "../../../../lib/ng-noosfero-api/http/profile.servi
 @Inject(ProfileService)
 export class MembersBlock {
 
-    @Input() block: any;
-    @Input() owner: any;
+    @Input() block: noosfero.Block;
+    @Input() owner: noosfero.Profile;
 
     members: any = [];
 

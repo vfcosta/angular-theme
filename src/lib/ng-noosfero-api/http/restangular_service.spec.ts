@@ -7,12 +7,7 @@ interface RootObjectModel extends noosfero.RestModel {
 
 }
 
-
-
-
 describe("Restangular Service - base Class", () => {
-
-
 
     class ObjectRestService extends RestangularService<ObjectModel> {
         public getDataKeys() {
@@ -211,9 +206,5 @@ describe("Restangular Service - base Class", () => {
         });
         $httpBackend.flush();
     });
-
-
-
-
 
 });

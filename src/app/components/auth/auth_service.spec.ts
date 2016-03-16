@@ -1,7 +1,6 @@
 
 
 import {AuthService, AUTH_EVENTS} from "./";
-import {User, Credentials} from "./../../models/interfaces";
 
 describe("Services", () => {
 
@@ -10,9 +9,9 @@ describe("Services", () => {
 
         let $httpBackend: ng.IHttpBackendService;
         let authService: AuthService;
-        let credentials: Credentials;
+        let credentials: noosfero.Credentials;
         let $rootScope: ng.IRootScopeService;
-        let user: User;
+        let user: noosfero.User;
 
         beforeEach(angular.mock.module("noosferoApp", ($translateProvider: angular.translate.ITranslateProvider) => {
             $translateProvider.translations('en', {});
@@ -23,7 +22,7 @@ describe("Services", () => {
             authService = _AuthService_;
             $rootScope = _$rootScope_;
 
-            user = <User>{
+            user = <noosfero.User>{
                 id: 1,
                 login: "user"
             };
@@ -53,7 +52,7 @@ describe("Services", () => {
                 authService.login(credentials);
 
                 let eventEmmited: boolean = false;
-                $rootScope.$on(AUTH_EVENTS.loginSuccess, (event: ng.IAngularEvent, userThroughEvent: User) => {
+                $rootScope.$on(AUTH_EVENTS.loginSuccess, (event: ng.IAngularEvent, userThroughEvent: noosfero.User) => {
                     eventEmmited = true;
                     expect(userThroughEvent).toEqual(user);
                 });
@@ -66,7 +65,7 @@ describe("Services", () => {
             it("should return the current logged in user", () => {
                 authService.login(credentials);
                 $httpBackend.flush();
-                let actual: User = authService.currentUser();
+                let actual: noosfero.User = authService.currentUser();
                 expect(actual).toEqual(user, "The returned user must be present");
             });
 

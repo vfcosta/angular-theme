@@ -3,7 +3,6 @@ import {LanguageSelector} from "../language-selector/language-selector.component
 
 
 import {Session, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} from "./../auth";
-import {User} from "./../../models/interfaces";
 
 @Component({
     selector: "acme-navbar",
@@ -14,7 +13,7 @@ import {User} from "./../../models/interfaces";
 @Inject("$modal", AuthService, "Session", "$scope", "$state")
 export class Navbar {
 
-    private currentUser: User;
+    private currentUser: noosfero.User;
     private modalInstance: any = null;
     /**
      *

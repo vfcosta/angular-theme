@@ -1,7 +1,6 @@
 import * as helpers from "./../../../spec/helpers";
 import {Navbar} from "./navbar";
 import {AUTH_EVENTS} from "./../auth";
-import {User} from "./../../models/interfaces";
 import {Injectable, Provider, provide} from "ng-forward";
 
 import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
@@ -13,7 +12,7 @@ describe("Components", () => {
 
     describe("Navbar Component", () => {
 
-        let user: User = null;
+        let user: noosfero.User = null;
         let scope: any;
         let $rootScope: ng.IRootScopeService;
 
@@ -27,7 +26,7 @@ describe("Components", () => {
 
         // before Each -> loading mocks on locals variables 
         beforeEach(() => {
-            user = <User>{
+            user = <noosfero.User>{
                 id: 1,
                 login: "user"
             };
