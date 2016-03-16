@@ -9,6 +9,7 @@ import {Block} from "../components/noosfero-blocks/block.component";
 import {LinkListBlock} from "../components/noosfero-blocks/link-list/link-list.component";
 import {RecentDocumentsBlock} from "../components/noosfero-blocks/recent-documents/recent-documents.component";
 import {ProfileImageBlock} from "../components/noosfero-blocks/profile-image-block/profile-image-block.component";
+import {RawHTMLBlock} from "../components/noosfero-blocks/raw-html/raw-html.component";
 
 import {MembersBlock} from "../components/noosfero-blocks/members-block/members-block.component";
 import {NoosferoTemplate} from "../components/noosfero/noosfero-template.filter";
@@ -16,6 +17,7 @@ import {DateFormat} from "../components/noosfero/date-format/date-format.filter"
 
 import {AuthService} from "./../components/auth/auth_service";
 import {Session} from "./../components/auth/session";
+import {Notification} from "./../components/notification/notification.component";
 
 
 import {Navbar} from "../components/navbar/navbar";
@@ -38,9 +40,9 @@ export class MainContent {
     directives: [
         ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
         MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock,
-        MembersBlock, NoosferoTemplate, DateFormat
+        MembersBlock, NoosferoTemplate, DateFormat, RawHTMLBlock
     ],
-    providers: [AuthService, Session]
+    providers: [AuthService, Session, Notification]
 })
 @StateConfig([
     {

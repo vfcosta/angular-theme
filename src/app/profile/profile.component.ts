@@ -6,6 +6,7 @@ import {ContentViewer} from "../content-viewer/content-viewer.component";
 import {ContentViewerActions} from "../content-viewer/content-viewer-actions.component";
 import {NoosferoActivities} from "../components/noosfero-activities/activities.component";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
+import {Notification} from "../components/notification/notification.component";
 
 import * as noosferoModels from "./../models/interfaces";
 
@@ -13,7 +14,10 @@ import * as noosferoModels from "./../models/interfaces";
     selector: 'profile',
     templateUrl: "app/profile/profile.html",
     directives: [NoosferoActivities],
-    providers: [provide('profileService', { useClass: ProfileService })]
+    providers: [
+        provide('profileService', { useClass: ProfileService }),
+        provide('notification', { useClass: Notification })
+    ]
 })
 @StateConfig([
     {
@@ -75,12 +79,14 @@ export class Profile {
     boxes: noosferoModels.Box[];
     profile: noosferoModels.Profile;
 
-    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService) {
+    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, notification: Notification) {
         profileService.setCurrentProfileByIdentifier($stateParams["profile"]).then((profile: noosferoModels.Profile) => {
             this.profile = profile;
             return profileService.getBoxes(this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
+        }).catch(() => {
+            notification.error("notification.profile.not_found");
         });
     }
 }

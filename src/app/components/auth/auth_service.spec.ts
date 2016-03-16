@@ -14,7 +14,9 @@ describe("Services", () => {
         let $rootScope: ng.IRootScopeService;
         let user: User;
 
-        beforeEach(angular.mock.module("noosferoApp"));
+        beforeEach(angular.mock.module("noosferoApp", ($translateProvider: angular.translate.ITranslateProvider) => {
+            $translateProvider.translations('en', {});
+        }));
 
         beforeEach(inject((_$httpBackend_: ng.IHttpBackendService, _$rootScope_: ng.IRootScopeService, _AuthService_: AuthService) => {
             $httpBackend = _$httpBackend_;

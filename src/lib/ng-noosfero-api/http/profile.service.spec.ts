@@ -9,7 +9,9 @@ describe("Services", () => {
         let profileService: ProfileService;
         let $rootScope: ng.IRootScopeService;
 
-        beforeEach(angular.mock.module("noosferoApp"));
+        beforeEach(angular.mock.module("noosferoApp", ($translateProvider: angular.translate.ITranslateProvider) => {
+            $translateProvider.translations('en', {});
+        }));
 
         beforeEach(inject((_$httpBackend_: ng.IHttpBackendService, _ProfileService_: ProfileService, _$rootScope_: ng.IRootScopeService) => {
             $httpBackend = _$httpBackend_;
@@ -22,8 +24,17 @@ describe("Services", () => {
             it("should return profile by its identifier", (done) => {
                 let identifier = 'profile1';
                 $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, [{ name: "profile1" }]);
-                profileService.getByIdentifier(identifier).then((response: restangular.IResponse) => {
-                    expect(response.data[0]).toEqual({ name: "profile1" });
+                profileService.getByIdentifier(identifier).then((profile: Profile) => {
+                    expect(profile).toEqual({ name: "profile1" });
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should reject the promise if the profile wasn't found", (done) => {
+                let identifier = 'profile1';
+                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, []);
+                profileService.getByIdentifier(identifier).catch(() => {
                     done();
                 });
                 $httpBackend.flush();

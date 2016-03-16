@@ -71,8 +71,11 @@ describe("Components", () => {
                         useValue: {
                             AUTH_EVENTS
                         }
+                    }),
+                    provide('LanguageService', {
+                        useValue: helpers.mocks.languageService
                     })
-                ],
+                ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],
                 template: '<acme-navbar></acme-navbar>'
             });

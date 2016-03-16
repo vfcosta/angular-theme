@@ -45,6 +45,10 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.replace('assets/images/', noosferoThemePrefix + 'assets/images/'))
+    .pipe($.replace('/languages/', noosferoThemePrefix + 'languages/'))
+    .pipe($.replace('bower_components/angular-i18n/', noosferoThemePrefix + 'locale/angular-i18n/'))
+    .pipe($.replace('bower_components/moment/', noosferoThemePrefix + 'locale/moment/'))
+    .pipe($.replace('bower_components/messageformat/', noosferoThemePrefix + 'locale/messageformat/'))
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
@@ -81,6 +85,15 @@ gulp.task('fonts', function () {
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
 });
 
+gulp.task('locale', function () {
+  return gulp.src([
+    path.join("bower_components/angular-i18n", '*.js'),
+    path.join("bower_components/moment/locale", '*.js'),
+    path.join("bower_components/messageformat/locale", '*.js'),
+  ], {base: 'bower_components/'})
+    .pipe(gulp.dest(path.join(conf.paths.dist, '/locale/')));
+});
+
 gulp.task('other', function () {
   var fileFilter = $.filter(function (file) {
     return file.stat.isFile();
@@ -88,7 +101,7 @@ gulp.task('other', function () {
 
   return gulp.src([
     path.join(conf.paths.src, '/**/*'),
-    path.join('!' + conf.paths.src, '/**/*.{html,css,js,scss}')
+    path.join('!' + conf.paths.src, '/**/*.{map,ts,html,css,js,scss}')
   ])
     .pipe(fileFilter)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
@@ -102,4 +115,4 @@ gulp.task('clean-docs', [], function() {
     return $.del([path.join(conf.paths.docs, '/')]);    
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build', ['html', 'fonts', 'other', 'locale']);
