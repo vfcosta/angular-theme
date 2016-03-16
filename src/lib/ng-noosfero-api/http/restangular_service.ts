@@ -111,9 +111,6 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
         let restRequest: ng.IPromise<any>;
 
-        debugger;
-
-
         if (rootElement) {
             restRequest = rootElement.customGET(this.getResourcePath(), queryParams, headers);
         } else {
@@ -133,7 +130,8 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         let deferred = this.$q.defer<noosfero.RestResult<C>>();
         let restRequest: ng.IPromise<noosfero.RestResult<T>>;
         let objElement = this.getElement(obj.id);
-        restRequest = objElement.all(subElement).get(queryParams, headers);
+        objElement.id = obj.id;
+        restRequest = objElement.customGET(subElement, queryParams, headers);
         restRequest.then(this.getHandleSuccessFunction(deferred))
             .catch(this.getHandleErrorFunction(deferred));
         return deferred.promise;
