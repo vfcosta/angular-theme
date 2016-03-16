@@ -24,8 +24,17 @@ describe("Services", () => {
             it("should return profile by its identifier", (done) => {
                 let identifier = 'profile1';
                 $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, [{ name: "profile1" }]);
-                profileService.getByIdentifier(identifier).then((response: restangular.IResponse) => {
-                    expect(response.data[0]).toEqual({ name: "profile1" });
+                profileService.getByIdentifier(identifier).then((profile: noosfero.Profile) => {
+                    expect(profile).toEqual({ name: "profile1" });
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should reject the promise if the profile wasn't found", (done) => {
+                let identifier = 'profile1';
+                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, []);
+                profileService.getByIdentifier(identifier).catch(() => {
                     done();
                 });
                 $httpBackend.flush();
@@ -63,11 +72,11 @@ describe("Services", () => {
 
             it("should resolve the current profile", (done) => {
                 let profile = { id: 1, identifier: "profile1" };
-                profileService.getCurrentProfile().then((currentProfile: Profile) => {
+                profileService.getCurrentProfile().then((currentProfile: noosfero.Profile) => {
                     expect(currentProfile).toEqual(currentProfile);
                     done();
                 });
-                profileService.setCurrentProfile(<Profile>profile);
+                profileService.setCurrentProfile(<any>profile);
                 $rootScope.$apply();
             });
 
@@ -84,9 +93,9 @@ describe("Services", () => {
             it("should find the profile by identifier, set and resolve the current profile", (done) => {
                 let identifier = 'profile1';
                 $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, [{ name: "profile1" }]);
-                profileService.setCurrentProfileByIdentifier(identifier).then((profile: Profile) => {
+                profileService.setCurrentProfileByIdentifier(identifier).then((profile: noosfero.Profile) => {
                     expect(profile).toEqual({ name: "profile1" });
-                    profileService.getCurrentProfile().then((profile: Profile) => {
+                    profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
                         expect(profile).toEqual({ name: "profile1" });
                         done();
                     });

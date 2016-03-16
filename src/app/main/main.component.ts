@@ -17,6 +17,7 @@ import {DateFormat} from "../components/noosfero/date-format/date-format.filter"
 
 import {AuthService} from "./../components/auth/auth_service";
 import {Session} from "./../components/auth/session";
+import {Notification} from "./../components/notification/notification.component";
 
 
 import {Navbar} from "../components/navbar/navbar";
@@ -41,7 +42,7 @@ export class MainContent {
         MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock,
         MembersBlock, NoosferoTemplate, DateFormat, RawHTMLBlock
     ],
-    providers: [AuthService, Session]
+    providers: [AuthService, Session, Notification]
 })
 @StateConfig([
     {

@@ -38,6 +38,32 @@ export var mocks = {
     authService: {
         logout: () => { }
     },
+    articleService: {
+        getByProfile: (profileId: number, params?: any) => {
+            return {
+                then: (func?: Function) => {
+                    if (func) func({
+                        data: {
+                            article: null
+                        }
+                    });
+                }
+            };
+        },
+        getChildren: (articleId: number, params?: any) => {
+            return {
+                then: (func?: Function) => { if (func) func(); }
+            };
+        }
+    },
+    profileService: {
+        getCurrentProfile: (profile: any) => {
+            return mocks.promiseResultTemplate({
+                profile: profile
+            });
+        },
+        instant: () => { }
+    },
     sessionWithCurrentUser: (user: any) => {
         return {
             currentUser: () => { return user; }
@@ -45,11 +71,9 @@ export var mocks = {
     },
     $translate: {
         use: (lang?: string) => {
-            return {
-                then: (func?: any) => { if (func) func() }
-            }
+            return lang ? Promise.resolve(lang) : "en";
         },
-        instant: () => { }
+        instant: (text: string) => { return text }
     },
     tmhDynamicLocale: {
         get: () => { },
@@ -60,9 +84,18 @@ export var mocks = {
     },
     angularLoad: {
         loadScript: (script?: string) => {
-            return {
-                then: (func?: any) => { if (func) func() }
-            }
+            return Promise.resolve();
         }
+    },
+    promiseResultTemplate: (response?: {}) => {
+
+        return {
+            then: (func?: (response: any) => void) => {
+                if (func) { return func(response); }
+            }
+        };
+    },
+    $log: {
+        debug: () => { }
     }
 };

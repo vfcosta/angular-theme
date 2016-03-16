@@ -14,6 +14,7 @@ export class LanguageSelector {
         private amMoment: any,
         private angularLoad: any) {
 
+        this.configAvailableLanguages();
         this.changeLanguage(tmhDynamicLocale.get() || $translate.use());
     }
 
@@ -24,12 +25,18 @@ export class LanguageSelector {
     changeLanguage(language: string) {
         this.changeMomentLocale(language);
         this.tmhDynamicLocale.set(language);
-        this.$translate.use(language).then((lang) => {
-            this.availableLanguages = {
-                "en": this.$translate.instant("language.en"),
-                "pt": this.$translate.instant("language.pt")
-            };
+        this.angularLoad.loadScript(`/bower_components/messageformat/locale/${language}.js`).then(() => {
+            return this.$translate.use(language);
+        }).then(() => {
+            this.configAvailableLanguages();
         });
+    }
+
+    private configAvailableLanguages() {
+        this.availableLanguages = {
+            "en": this.$translate.instant("language.en"),
+            "pt": this.$translate.instant("language.pt")
+        };
     }
 
     private changeMomentLocale(language: string) {

@@ -29,6 +29,7 @@ function configTranslation($translateProvider: angular.translate.ITranslateProvi
         prefix: '/languages/',
         suffix: '.json'
     });
+    $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
     $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.preferredLanguage('en');
     $translateProvider.useSanitizeValueStrategy('escape');

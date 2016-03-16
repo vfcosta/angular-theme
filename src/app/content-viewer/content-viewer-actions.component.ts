@@ -1,8 +1,6 @@
 import {Component, Inject, provide} from "ng-forward";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 
-import {Profile} from "./../models/interfaces";
-
 @Component({
     selector: "content-viewer-actions",
     templateUrl: "app/content-viewer/navbar-actions.html",
@@ -11,11 +9,11 @@ import {Profile} from "./../models/interfaces";
 @Inject(ProfileService)
 export class ContentViewerActions {
 
-    article: any;
-    profile: any;
+    article: noosfero.Article;
+    profile: noosfero.Profile;
 
     constructor(profileService: ProfileService) {
-        profileService.getCurrentProfile().then((profile: Profile) => {
+        profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
         });
     }
