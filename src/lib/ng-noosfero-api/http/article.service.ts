@@ -36,28 +36,6 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         return rootElement.one(path, id).get<C>(queryParams, headers);
     }
 
-    //     // TODO create a handle ErrorFactory too and move handleSuccessFactory and handleErrorFactory
-    //     // to a base class (of course we will have to creates a base class too)
-    //     handleSuccessFactory<T>(deferred: ng.IDeferred<T>): (response: restangular.IResponse) => void {
-    //         let self = this;
-    //         let successFunction = (response: restangular.IResponse): void => {
-    //             this.$log.debug("Request successfull executed", self, response);
-    //             deferred.resolve(response.data);
-    //         };
-    //         return successFunction;
-    //     }
-    // 
-    //     handleErrorFactory<T>(deferred: ng.IDeferred<T>): (response: restangular.IResponse) => void {
-    //         let self = this;
-    //         let successFunction = (response: restangular.IResponse): void => {
-    //             this.$log.error("Error executing request", self, response);
-    //             deferred.reject(response.data);
-    //         };
-    //         return successFunction;
-    //     }
-
-    // TODO -> change all Restangular services to this approach "Return promise to a specific type"
-    //          it makes easy consume the service
     getByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
         let profileElement = this.profileService.get(<number>profile.id);
         return this.list(profileElement, params);

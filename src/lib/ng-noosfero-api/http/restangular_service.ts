@@ -221,70 +221,6 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         }
     }
 
-    // /**
-    //  * (description)
-    //  * 
-    //  * @protected
-    //  * @template T
-    //  * @param {restangular.IElement} elementRoot (description)
-    //  * @param {*} [element] (description)
-    //  * @param {string} [path] (description)
-    //  * @param {*} [params] (description)
-    //  * @param {*} [headers] (description)
-    //  * @returns {ng.IPromise<T>} (description)
-    //  */
-    // protected post<T>(elementRoot: restangular.IElement, element?: any, path?: string, params?: any, headers?: any): ng.IPromise<T> {
-    //     let deferred = this.$q.defer<T>();
-
-    //     let postData = <any>{};
-    //     postData[this.getDataKeys().singular] = element;
-
-    //     this.customPOST(
-    //         elementRoot,
-    //         postData,
-    //         this.getResourcePath(),
-    //         {}
-    //     )
-    //         .then(this.getPostSuccessHandleFunction(deferred))
-    //         .catch(this.getHandleErrorFunction(deferred));
-
-    //     return deferred.promise;
-    // }
-
-
-    // protected customGET<C>(elementRoot: restangular.IElement, path?: string, params?: any, headers?: any): ng.IPromise<C> {
-    //     let deferred = this.$q.defer<C>();
-    //     if (headers) {
-    //         headers['Content-Type'] = 'application/json';
-    //     } else {
-    //         headers = { 'Content-Type': 'application/json' };
-    //     }
-    //     elementRoot.customGET(path, params, headers)
-    //         .then(this.getHandleSuccessFunction<C>(deferred))
-    //         .catch(this.getHandleErrorFunction<C>(deferred));
-    //     return deferred.promise;
-    // }
-
-    // /**
-    //  * (description)
-    //  * 
-    //  * @protected
-    //  * @param {restangular.IElement} elementRoot (description)
-    //  * @param {*} [elem] (description)
-    //  * @param {string} [path] (description)
-    //  * @param {*} [params] (description)
-    //  * @param {*} [headers] (description)
-    //  * @returns (description)
-    //  */
-    // protected customPOST(elementRoot: restangular.IElement, elem?: any, path?: string, params?: any, headers?: any) {
-    //     if (headers) {
-    //         headers['Content-Type'] = 'application/json';
-    //     } else {
-    //         headers = { 'Content-Type': 'application/json' };
-    //     }
-    //     return elementRoot.customPOST(elem, path, params, headers);
-    // }
-
     /** HANDLERS */
     protected getHandleSuccessFunction<C>(deferred: ng.IDeferred<noosfero.RestResult<C | T | any>>, responseKey?: string): (response: restangular.IResponse) => void {
         let self = this;
@@ -327,34 +263,5 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         return successFunction;
     }
     /** END HANDLERS */
-
-    //     /**
-    //      * (description)
-    //      * 
-    //      * @template T
-    //      * @param {ng.IDeferred<T>} deferred (description)
-    //      * @returns {(response: restangular.IResponse) => void} (description)
-    //      */
-    //     protected getPostSuccessHandleFunction<T>(deferred: ng.IDeferred<T>): (response: restangular.IResponse) => void {
-    //         let self = this;
-    //         /**
-    //          * (description)
-    //          * 
-    //          * @param {restangular.IResponse} response (description)
-    //          */
-    //         let successFunction = (response: restangular.IResponse): void => {
-    //             if (self.$log) {
-    //                 self.$log.debug("Post successfully executed", self, response);
-    //             }
-    //             let data = response.data;
-    // 
-    //             if ((<Object>data).hasOwnProperty(self.getDataKeys().singular)) {
-    //                 deferred.resolve(data[self.getDataKeys().singular]);
-    //             } else {
-    //                 deferred.resolve(data);
-    //             }
-    //         };
-    //         return successFunction;
-    //     }
 
 }
