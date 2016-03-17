@@ -22,7 +22,7 @@ describe("Components", () => {
             $state = jasmine.createSpyObj("$state", ["transitionTo"]);
             notification = jasmine.createSpyObj("notification", ["success"]);
             profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["getCurrentProfile"]);
-            articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["create"]);
+            articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["createInProfile"]);
 
             let getCurrentProfileResponse = $q.defer();
             getCurrentProfileResponse.resolve(profile);
@@ -31,7 +31,7 @@ describe("Components", () => {
             articleCreate.resolve({ data: { path: "path", profile: { identifier: "profile" }  }});
 
             profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(getCurrentProfileResponse.promise);
-            articleServiceMock.create = jasmine.createSpy("create").and.returnValue(articleCreate.promise);
+            articleServiceMock.createInProfile = jasmine.createSpy("createInProfile").and.returnValue(articleCreate.promise);
         });
 
         it("create an article in the current profile when save", done => {
@@ -39,7 +39,7 @@ describe("Components", () => {
             component.save();
             $rootScope.$apply();
             expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
-            expect(articleServiceMock.create).toHaveBeenCalledWith(component.article, profile);
+            expect(articleServiceMock.createInProfile).toHaveBeenCalledWith(profile, component.article);
             done();
         });
 

@@ -26,8 +26,10 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     createInProfile(profile: noosfero.Profile, article: noosfero.Article): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
         let profileElement = this.profileService.get(<number>profile.id);
         (<any>profileElement).id = profile.id;
-        debugger;
-        return this.create(article, <noosfero.RestModel>profileElement);
+        let headers = {
+            'Content-Type': 'application/json'
+        }
+        return this.create(article, <noosfero.RestModel>profileElement, null, headers);
     }
 
 

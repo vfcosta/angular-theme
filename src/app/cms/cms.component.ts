@@ -24,7 +24,7 @@ export class Cms {
 
     save() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
-            return this.articleService.create(this.article, profile);
+            return this.articleService.createInProfile(profile, this.article);
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
             this.$state.transitionTo('main.profile.page', { page: article.path, profile: article.profile.identifier });
