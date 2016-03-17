@@ -125,7 +125,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
         return deferred.promise;
     }
-    
+
     /**
      * Do a HTTP GET call to the resource collection represented
      * 
@@ -226,10 +226,13 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
         let restRequest: ng.IPromise<noosfero.RestResult<T>>;
 
+        let data = <any>{ };
+        data[this.getDataKeys().singular] = obj;
+
         if (rootElement) {
-            restRequest = rootElement.all(this.getResourcePath()).post(obj, queryParams, headers);
+            restRequest = rootElement.all(this.getResourcePath()).post(data, queryParams, headers);
         } else {
-            restRequest = this.baseResource.post(obj, queryParams, headers);
+            restRequest = this.baseResource.post(data, queryParams, headers);
         }
 
         restRequest.then(this.getHandleSuccessFunction(deferred))
