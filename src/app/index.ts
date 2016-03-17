@@ -1,7 +1,6 @@
 import {NoosferoApp} from "./index.module";
 import {noosferoModuleConfig} from "./index.config";
 import {noosferoAngularRunBlock} from "./index.run";
-import {routeConfig} from "./index.route";
 
 import {Main} from "./main/main.component";
 import {bootstrap, bundle} from "ng-forward";
@@ -28,5 +27,3 @@ NoosferoApp.addConstants("AUTH_EVENTS", AUTH_EVENTS);
 
 NoosferoApp.addConfig(noosferoModuleConfig);
 NoosferoApp.run(noosferoAngularRunBlock);
-
-NoosferoApp.addConfig(routeConfig);

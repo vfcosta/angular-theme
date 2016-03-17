@@ -13,11 +13,25 @@ describe("Components", () => {
 
         beforeEach(angular.mock.module("templates"));
 
+        it("display an error message when notify an error", done => {
+            let sweetAlert = jasmine.createSpyObj("sweetAlert", ["swal"]);
+            sweetAlert.swal = jasmine.createSpy("swal");
+
+            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
+            component.error("message", "title");
+            expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
+                text: "message",
+                title: "title",
+                type: "error"
+            }));
+            done();
+        });
+
         it("use the default message when call notification component without a message", done => {
             let sweetAlert = jasmine.createSpyObj("sweetAlert", ["swal"]);
             sweetAlert.swal = jasmine.createSpy("swal");
 
-            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.languageService);
+            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
             component.error();
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 text: Notification.DEFAULT_ERROR_MESSAGE,
@@ -30,7 +44,7 @@ describe("Components", () => {
             let sweetAlert = jasmine.createSpyObj("sweetAlert", ["swal"]);
             sweetAlert.swal = jasmine.createSpy("swal");
 
-            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.languageService);
+            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
             component.success("title", "message", 1000);
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 type: "success"
@@ -42,7 +56,7 @@ describe("Components", () => {
             let sweetAlert = jasmine.createSpyObj("sweetAlert", ["swal"]);
             sweetAlert.swal = jasmine.createSpy("swal");
 
-            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.languageService);
+            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
             component.httpError(500, {});
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 text: "notification.http_error.500.message"
@@ -54,7 +68,7 @@ describe("Components", () => {
             let sweetAlert = jasmine.createSpyObj("sweetAlert", ["swal"]);
             sweetAlert.swal = jasmine.createSpy("swal");
 
-            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.languageService);
+            let component: Notification = new Notification(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
             component.success("title", "message");
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 type: "success",

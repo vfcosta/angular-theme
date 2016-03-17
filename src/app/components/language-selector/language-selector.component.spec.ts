@@ -11,16 +11,16 @@ describe("Components", () => {
 
         beforeEach(angular.mock.module("templates"));
 
-        let languageService: any;
+        let translatorService: any;
 
         let buildComponent = (): Promise<ComponentFixture> => {
-            languageService = jasmine.createSpyObj("languageService", ["availableLanguages", "currentLanguage"]);
+            translatorService = jasmine.createSpyObj("translatorService", ["availableLanguages", "currentLanguage"])
             return helpers.quickCreateComponent({
                 template: "<language-selector></language-selector>",
                 directives: [LanguageSelector],
                 providers: [
-                    provide('LanguageService', {
-                        useValue: languageService
+                    provide('TranslatorService', {
+                        useValue: translatorService
                     })
                 ].concat(helpers.provideFilters("translateFilter"))
             });
@@ -32,6 +32,14 @@ describe("Components", () => {
                 expect(fixture.debugElement.queryAll('li.language').length).toEqual(2);
                 done();
             });
+        });
+
+        it("call the translator service when change the language", (done) => {
+            let translatorService = jasmine.createSpyObj("translatorService", ["changeLanguage"]);
+            let languageSelector = new LanguageSelector(<any>translatorService);
+            languageSelector.changeLanguage("en");
+            expect(translatorService.changeLanguage).toHaveBeenCalledWith("en");
+            done();
         });
 
     });

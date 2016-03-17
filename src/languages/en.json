@@ -20,6 +20,6 @@
   "navbar.content_viewer_actions.new_post": "New Post",
   "notification.error.default.message": "Something went wrong!",
   "notification.error.default.title": "Oops...",
-  "notification.profile.not_found": "Profile not found",
+  "notification.profile.not_found": "Page not found",
   "notification.http_error.401.message": "Unauthorized"
 }

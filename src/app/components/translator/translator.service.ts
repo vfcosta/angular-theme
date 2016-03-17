@@ -2,7 +2,7 @@ import {Injectable, Inject} from "ng-forward";
 
 @Injectable()
 @Inject("$translate", "tmhDynamicLocale", "amMoment", "angularLoad", "$rootScope")
-export class LanguageService {
+export class TranslatorService {
 
     availableLanguages: any;
 
@@ -12,9 +12,11 @@ export class LanguageService {
         private angularLoad: any,
         private $rootScope: any) {
 
-        this.configAvailableLanguages();
         this.$rootScope.$on("$localeChangeSuccess", () => {
             this.changeLanguage(tmhDynamicLocale.get() || $translate.use());
+        });
+        this.$rootScope.$on("$translateChangeSuccess", () => {
+            this.configAvailableLanguages();
         });
     }
 
@@ -31,8 +33,6 @@ export class LanguageService {
         this.tmhDynamicLocale.set(language);
         this.angularLoad.loadScript(`/bower_components/messageformat/locale/${language}.js`).then(() => {
             return this.$translate.use(language);
-        }).then(() => {
-            this.configAvailableLanguages();
         });
     }
 
