@@ -34,5 +34,13 @@ describe("Components", () => {
             });
         });
 
+        it("call the translator service when change the language", (done) => {
+            let translatorService = jasmine.createSpyObj("translatorService", ["changeLanguage"]);
+            let languageSelector = new LanguageSelector(<any>translatorService);
+            languageSelector.changeLanguage("en");
+            expect(translatorService.changeLanguage).toHaveBeenCalledWith("en");
+            done();
+        });
+
     });
 });
