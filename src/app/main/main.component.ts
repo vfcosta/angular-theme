@@ -25,6 +25,16 @@ import {Navbar} from "../components/navbar/navbar";
 import {MainBlock} from "../components/noosfero-blocks/main-block/main-block.component";
 
 
+/**
+ * @ngdoc controller
+ * @name main.MainContent
+ * @requires AuthService, Session
+ * @descrition
+ *  This controller actually contains the main content of Noosfero Angular Theme:
+ *  - the navbar
+ *  - the {@link Main} view content
+ * 
+ */
 @Component({
     selector: 'main-content',
     templateUrl: "app/main/main.html",
@@ -34,6 +44,20 @@ export class MainContent {
 
 }
 
+/**
+ * @ngdoc controller
+ * @name main.Main
+ * @requires AuthService, Session, Notification, ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
+ * MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock, MembersBlock,
+ * NoosferoTemplate, DateFormat, RawHTMLBlock
+ * @description
+ *  The Main controller for the Noosfero Angular Theme application.
+ * 
+ *  The main route '/' is defined as the URL for this controller, which routes
+ * requests to the {@link main.MainContent} controller and also, the '/profile' route,
+ * which routes requests to the {@link profile.Profile} controller. See {@link profile.Profile} 
+ * for more details on how various Noosfero profiles are rendered.  
+ */
 @Component({
     selector: 'main',
     template: '<div ng-view></div>',

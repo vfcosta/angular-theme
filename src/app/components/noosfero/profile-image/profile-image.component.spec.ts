@@ -1,3 +1,9 @@
+/**
+ * @ngdoc overview
+ * @name components.noosfero.profile-image.ProfileImageSpec
+ * @description
+ *  This file contains the tests for the {@link components.noosfero.profile-image.ProfileImage} component.
+ */
 
 import {TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {Pipe, Input, provide, Component} from 'ng-forward';
