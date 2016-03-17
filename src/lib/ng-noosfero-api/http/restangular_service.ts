@@ -125,6 +125,33 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
         return deferred.promise;
     }
+    
+    /**
+     * Do a HTTP GET call to the resource collection represented
+     * 
+     * @protected
+     * @param {number} id (description)
+     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type 
+     */
+    public getSub(rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+        let deferred = this.$q.defer<noosfero.RestResult<T>>();
+
+        let restRequest: ng.IPromise<any>;
+
+        if (rootElement) {
+            restRequest = rootElement.customGET(this.getResourcePath(), queryParams, headers);
+        } else {
+            restRequest = this.baseResource.customGET("", queryParams, headers);
+        }
+
+
+        restRequest
+            .then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+
+
+        return deferred.promise;
+    }
 
     public listSubElements<C>(obj: T, subElement: string, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<C>> {
         let deferred = this.$q.defer<noosfero.RestResult<C>>();

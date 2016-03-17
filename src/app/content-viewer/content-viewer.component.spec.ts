@@ -69,7 +69,7 @@ describe('Content Viewer Component', () => {
             return helpers.mocks.promiseResultTemplate(profile);
         };
 
-        helpers.mocks.articleService.getOneByProfile = (id: number, params: any) => {
+        helpers.mocks.articleService.getArticleByProfileAndPath = (profile: noosfero.Profile, path: string) => {
             return helpers.mocks.promiseResultTemplate({
                 data:  article
             });

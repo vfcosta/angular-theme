@@ -44,9 +44,28 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         return this.list(profileElement, params);
     }
 
+    getArticleByProfileAndPath(profile: noosfero.Profile, path: string): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
+        let profileElement = this.profileService.get(<number>profile.id);
+
+        let restRequest: ng.IPromise<any>;
+
+        let params = { path: path };
+
+        restRequest = profileElement.customGET(this.getResourcePath(), params);
+
+
+        restRequest
+            .then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+
+
+        return deferred.promise;
+    }
+
     getOneByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
         let profileElement = this.profileService.get(<number>profile.id);
-        return this.get(profile.id, params);
+        return this.getSub(profileElement, params);;
     }
 
     getChildren<T>(article: noosfero.Article, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {

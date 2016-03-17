@@ -48,7 +48,7 @@ export var mocks = {
                 }
             };
         },
-        getOneByProfile: (profileId: number, params?: any) => {
+        getArticleByProfileAndPath: (profile: noosfero.Profile, path: string) => {
             return {
                 then: (func?: Function) => {
                     if (func) func({
