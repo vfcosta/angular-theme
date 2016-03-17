@@ -14,7 +14,7 @@ describe("Components", () => {
         let translatorService: any;
 
         let buildComponent = (): Promise<ComponentFixture> => {
-            translatorService = jasmine.createSpyObj("translatorService", ["availableLanguages", "currentLanguage"])
+            translatorService = jasmine.createSpyObj("translatorService", ["availableLanguages", "currentLanguage"]);
             return helpers.quickCreateComponent({
                 template: "<language-selector></language-selector>",
                 directives: [LanguageSelector],

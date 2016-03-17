@@ -28,7 +28,7 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         (<any>profileElement).id = profile.id;
         let headers = {
             'Content-Type': 'application/json'
-        }
+        };
         return this.create(article, <noosfero.RestModel>profileElement, null, headers);
     }
 
@@ -67,7 +67,7 @@ export class ArticleService extends RestangularService<noosfero.Article> {
 
     getOneByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
         let profileElement = this.profileService.get(<number>profile.id);
-        return this.getSub(profileElement, params);;
+        return this.getSub(profileElement, params);
     }
 
     getChildren<T>(article: noosfero.Article, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {

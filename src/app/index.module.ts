@@ -15,13 +15,13 @@ export class NoosferoApp {
      * @returns {string} the name of this application ('noosferoApp')
      */
     static appName: string = "noosferoApp";
-    
+
     /**
      * @ngdoc property
      * @name angularModule
      * @propertyOf NoosferoApp
      * @returns {any} all the modules installed for this application
-     */    
+     */
     static angularModule: any;
 
     /**
