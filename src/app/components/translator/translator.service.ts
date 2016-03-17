@@ -12,9 +12,11 @@ export class TranslatorService {
         private angularLoad: any,
         private $rootScope: any) {
 
-        this.configAvailableLanguages();
         this.$rootScope.$on("$localeChangeSuccess", () => {
             this.changeLanguage(tmhDynamicLocale.get() || $translate.use());
+        });
+        this.$rootScope.$on("$translateChangeSuccess", () => {
+            this.configAvailableLanguages();
         });
     }
 
@@ -31,8 +33,6 @@ export class TranslatorService {
         this.tmhDynamicLocale.set(language);
         this.angularLoad.loadScript(`/bower_components/messageformat/locale/${language}.js`).then(() => {
             return this.$translate.use(language);
-        }).then(() => {
-            this.configAvailableLanguages();
         });
     }
 

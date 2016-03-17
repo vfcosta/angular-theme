@@ -31,8 +31,8 @@ describe("Services", () => {
             let component: TranslatorService = createComponent();
             component.availableLanguages = null;
             expect(component.availableLanguages).toBeNull();
-            component.changeLanguage('en');
-            expect(component.availableLanguages).toBeDefined();
+            $rootScope.$emit("$translateChangeSuccess");
+            expect(component.availableLanguages).not.toBeNull();
             done();
         });
 
@@ -52,6 +52,14 @@ describe("Services", () => {
             expect(component["angularLoad"].loadScript).toHaveBeenCalledWith("/bower_components/messageformat/locale/pt.js");
             expect(component["tmhDynamicLocale"].set).toHaveBeenCalledWith("pt");
             expect(component["$translate"].use).toHaveBeenCalledWith("pt");
+            done();
+        });
+
+        it("do not load moment locale when change the language to english", (done) => {
+            let component: TranslatorService = createComponent();
+            component["angularLoad"].loadScript = jasmine.createSpy("loadScript").and.returnValue($q.defer().promise);
+            component.changeLanguage('en');
+            expect(component["angularLoad"].loadScript).not.toHaveBeenCalledWith("/bower_components/moment/locale/pt.js");
             done();
         });
 
