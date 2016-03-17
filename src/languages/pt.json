@@ -20,6 +20,6 @@
   "navbar.content_viewer_actions.new_post": "Novo Artigo",
   "notification.error.default.message": "Algo deu errado!",
   "notification.error.default.title": "Oops...",
-  "notification.profile.not_found": "Perfil não encontrado",
+  "notification.profile.not_found": "Página não encontrada",
   "notification.http_error.401.message": "Não autorizado"
 }
