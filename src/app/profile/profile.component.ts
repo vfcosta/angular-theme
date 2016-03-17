@@ -7,6 +7,7 @@ import {ContentViewerActions} from "../content-viewer/content-viewer-actions.com
 import {NoosferoActivities} from "../components/noosfero-activities/activities.component";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 import {Notification} from "../components/notification/notification.component";
+import {MyProfile} from "./myprofile.component";
 
 import * as noosferoModels from "./../models/interfaces";
 
@@ -37,6 +38,11 @@ import * as noosferoModels from "./../models/interfaces";
                 controllerAs: "vm"
             }
         }
+    },
+    {
+        name: 'main.profile.settings',
+        url: "^/myprofile/:profile",
+        component: MyProfile
     },
     {
         name: 'main.profile.cms',
