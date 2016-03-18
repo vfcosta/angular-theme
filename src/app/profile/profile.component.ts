@@ -1,12 +1,12 @@
 import {StateConfig, Component, Inject, provide} from 'ng-forward';
-import {ProfileInfo} from '../profile-info/profile-info.component';
-import {ProfileHome} from '../profile/profile-home.component';
-import {Cms} from '../cms/cms.component';
-import {ContentViewer} from "../content-viewer/content-viewer.component";
-import {ContentViewerActions} from "../content-viewer/content-viewer-actions.component";
-import {NoosferoActivities} from "../components/noosfero-activities/activities.component";
+import {ProfileInfoComponent} from './info/profile-info.component';
+import {ProfileHome} from './profile-home.component';
+import {BasicEditorComponent} from '../article/basic-editor.component';
+import {ContentViewerComponent} from "../article/content-viewer/content-viewer.component";
+import {ContentViewerActions} from "../article/content-viewer/content-viewer-actions.component";
+import {ActivitiesComponent} from "./activities/activities.component";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
-import {Notification} from "../components/notification/notification.component";
+import {NotificationService} from "../shared/services/notification.service";
 import {MyProfile} from "./myprofile.component";
 
 
@@ -20,21 +20,21 @@ import {MyProfile} from "./myprofile.component";
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html",
-    directives: [NoosferoActivities],
+    directives: [ActivitiesComponent],
     providers: [
         provide('profileService', { useClass: ProfileService }),
-        provide('notification', { useClass: Notification })
+        provide('notificationService', { useClass: NotificationService })
     ]
 })
 @StateConfig([
     {
         name: 'main.profile.info',
         url: "^/profile/:profile",
-        component: ProfileInfo,
+        component: ProfileInfoComponent,
         views: {
             "mainBlockContent": {
                 templateUrl: "app/profile-info/profile-info.html",
-                controller: ProfileInfo,
+                controller: ProfileInfoComponent,
                 controllerAs: "vm"
             }
         }
@@ -47,11 +47,11 @@ import {MyProfile} from "./myprofile.component";
     {
         name: 'main.profile.cms',
         url: "^/myprofile/:profile/cms",
-        component: Cms,
+        component: BasicEditorComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/cms/cms.html",
-                controller: Cms,
+                templateUrl: "app/article/basic-editor.html",
+                controller: BasicEditorComponent,
                 controllerAs: "vm"
             }
         }
@@ -70,11 +70,11 @@ import {MyProfile} from "./myprofile.component";
     {
         name: 'main.profile.page',
         url: "/{page:any}",
-        component: ContentViewer,
+        component: ContentViewerComponent,
         views: {
             "mainBlockContent": {
                 templateUrl: "app/content-viewer/page.html",
-                controller: ContentViewer,
+                controller: ContentViewerComponent,
                 controllerAs: "vm"
             },
             "actions@main": {
@@ -86,19 +86,19 @@ import {MyProfile} from "./myprofile.component";
     }
 ])
 @Inject(ProfileService, "$stateParams")
-export class Profile {
+export class ProfileComponent {
 
     boxes: noosfero.Box[];
     profile: noosfero.Profile;
 
-    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, notification: Notification) {
+    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, notificationService: NotificationService) {
         profileService.setCurrentProfileByIdentifier($stateParams["profile"]).then((profile: noosfero.Profile) => {
             this.profile = profile;
             return profileService.getBoxes(<number>this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
-            notification.error("notification.profile.not_found");
+            notificationService.error("notification.profile.not_found");
         });
     }
 }

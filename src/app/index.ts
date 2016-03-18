@@ -5,10 +5,10 @@ import {noosferoAngularRunBlock} from "./index.run";
 import {Main} from "./main/main.component";
 import {bootstrap, bundle} from "ng-forward";
 
-import {AUTH_EVENTS} from "./components/auth/auth_events";
-import {AuthController} from "./components/auth/auth_controller";
+import {AUTH_EVENTS} from "./login/auth-events";
+import {AuthController} from "./login/auth.controller";
 
-import {Navbar} from "./components/navbar/navbar";
+import {Navbar} from "./layout/navbar/navbar";
 
 declare var moment: any;
 
