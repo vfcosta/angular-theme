@@ -3,7 +3,7 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
 
 @Component({
     selector: 'profile',
-    templateUrl: "app/profile-info/profile-info.html",
+    templateUrl: "app/profile/info/profile-info.html",
     providers: [provide('profileService', { useClass: ProfileService })]
 })
 @Inject(ProfileService)

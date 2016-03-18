@@ -33,7 +33,7 @@ import {MyProfile} from "./myprofile.component";
         component: ProfileInfoComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/profile-info/profile-info.html",
+                templateUrl: "app/profile/info/profile-info.html",
                 controller: ProfileInfoComponent,
                 controllerAs: "vm"
             }
@@ -73,12 +73,12 @@ import {MyProfile} from "./myprofile.component";
         component: ContentViewerComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/content-viewer/page.html",
+                templateUrl: "app/article/content-viewer/page.html",
                 controller: ContentViewerComponent,
                 controllerAs: "vm"
             },
             "actions@main": {
-                templateUrl: "app/content-viewer/navbar-actions.html",
+                templateUrl: "app/article/content-viewer/navbar-actions.html",
                 controller: ContentViewerActions,
                 controllerAs: "vm"
             }
