@@ -1,8 +1,8 @@
-<li class="dropdown profile-menu" dropdown>
-  <a href="#" class="dropdown-toggle" aria-expanded="false" dropdown-toggle>
+<li class="dropdown profile-menu" uib-dropdown>
+  <a href="#" class="dropdown-toggle" aria-expanded="false" uib-dropdown-toggle>
     <span>{{"language.selector" | translate}}</span> <b class="caret"></b>
   </a>
-  <ul class="dropdown-menu" dropdown-menu>
+  <ul class="dropdown-menu" uib-dropdown-menu>
     <li ng-repeat="(language, description) in ctrl.availableLanguages()"
       class="language language-{{language}}" ng-class="{'active': language==ctrl.currentLanguage()}">
       <a href="#" ng-click="ctrl.changeLanguage(language)">

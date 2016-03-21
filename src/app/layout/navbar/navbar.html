@@ -21,12 +21,12 @@
           <a ng-href="#" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
         </li>
 
-        <li class="dropdown profile-menu" ng-show="ctrl.currentUser" dropdown>
-          <a href="#" class="dropdown-toggle" aria-expanded="false" dropdown-toggle>
+        <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
+          <a href="#" class="dropdown-toggle" aria-expanded="false" uib-dropdown-toggle>
             <noosfero-profile-image [profile]="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>
             <span ng-bind="ctrl.currentUser.person.name"></span> <b class="caret"></b>
           </a>
-          <ul class="dropdown-menu" dropdown-menu>
+          <ul class="dropdown-menu" uib-dropdown-menu>
               <li>
                   <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-user"></i> {{"navbar.profile" | translate}}</a>
               </li>
