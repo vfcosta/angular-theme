@@ -28,7 +28,7 @@ export class BasicEditorComponent {
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
             this.$state.transitionTo('main.profile.page', { page: article.path, profile: article.profile.identifier });
-            this.notification.success("Good job!", "Article saved!");
+            this.notification.success({ title: "Good job!", message: "Article saved!" });
         });
     }
 
