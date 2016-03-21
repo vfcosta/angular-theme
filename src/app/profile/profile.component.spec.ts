@@ -9,6 +9,7 @@ describe("Components", () => {
         let profileServiceMock: any;
         let notificationMock: any;
         let $stateParams: any;
+        let $state: any;
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;
@@ -16,6 +17,7 @@ describe("Components", () => {
         }));
 
         beforeEach(() => {
+            $state = jasmine.createSpyObj("$state", ["transitionTo"]);
             $stateParams = jasmine.createSpyObj("$stateParams", ["profile"]);
             profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier", "getBoxes"]);
             notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
@@ -30,7 +32,7 @@ describe("Components", () => {
         });
 
         it("get the profile and store in profile service", done => {
-            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, notificationMock);
+            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock);
             $rootScope.$apply();
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
             expect(component.profile).toEqual({ id: 1 });
@@ -38,7 +40,7 @@ describe("Components", () => {
         });
 
         it("get the profile boxes", done => {
-            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, notificationMock);
+            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock);
             $rootScope.$apply();
             expect(profileServiceMock.getBoxes).toHaveBeenCalled();
             expect(component.boxes).toEqual([{ id: 2 }]);
@@ -50,7 +52,7 @@ describe("Components", () => {
             profileResponse.reject();
             profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profileResponse.promise);
 
-            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, notificationMock);
+            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock);
             $rootScope.$apply();
 
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();

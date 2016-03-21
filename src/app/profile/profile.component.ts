@@ -85,19 +85,20 @@ import {MyProfileComponent} from "./myprofile.component";
         }
     }
 ])
-@Inject(ProfileService, "$stateParams")
+@Inject(ProfileService, "$stateParams", "$state")
 export class ProfileComponent {
 
     boxes: noosfero.Box[];
     profile: noosfero.Profile;
 
-    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, notificationService: NotificationService) {
+    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, $state: ng.ui.IStateService, notificationService: NotificationService) {
         profileService.setCurrentProfileByIdentifier($stateParams["profile"]).then((profile: noosfero.Profile) => {
             this.profile = profile;
             return profileService.getBoxes(<number>this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
+            $state.transitionTo('main');
             notificationService.error({ message: "notification.profile.not_found" });
         });
     }
