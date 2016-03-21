@@ -1,5 +1,5 @@
 import {quickCreateComponent} from "../../spec/helpers";
-import {ProfileHome} from "./profile-home.component";
+import {ProfileHomeComponent} from "./profile-home.component";
 
 describe("Components", () => {
     describe("Profile Home Component", () => {
@@ -30,7 +30,7 @@ describe("Components", () => {
         it("transition to profile homepage when there is a homepage setted", done => {
             homePageResponse.resolve({ data: { article: { path: "something" } } });
 
-            let component: ProfileHome = new ProfileHome(profileServiceMock, $state);
+            let component: ProfileHomeComponent = new ProfileHomeComponent(profileServiceMock, $state);
             $rootScope.$apply();
             expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
             expect(profileServiceMock.getHomePage).toHaveBeenCalled();
@@ -44,7 +44,7 @@ describe("Components", () => {
         it("transition to profile info page when there is no homepage setted", done => {
             homePageResponse.resolve({ data: {} });
 
-            let component: ProfileHome = new ProfileHome(profileServiceMock, $state);
+            let component: ProfileHomeComponent = new ProfileHomeComponent(profileServiceMock, $state);
             $rootScope.$apply();
             expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
             expect(profileServiceMock.getHomePage).toHaveBeenCalled();
