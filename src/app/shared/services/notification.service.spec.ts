@@ -18,7 +18,7 @@ describe("Components", () => {
             sweetAlert.swal = jasmine.createSpy("swal");
 
             let component: NotificationService = new NotificationService(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
-            component.error("message", "title");
+            component.error({ message: "message", title: "title" });
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 text: "message",
                 title: "title",
@@ -45,7 +45,7 @@ describe("Components", () => {
             sweetAlert.swal = jasmine.createSpy("swal");
 
             let component: NotificationService = new NotificationService(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
-            component.success("title", "message", 1000);
+            component.success({ title: "title", message: "message", timer: 1000 });
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 type: "success"
             }));
@@ -69,7 +69,7 @@ describe("Components", () => {
             sweetAlert.swal = jasmine.createSpy("swal");
 
             let component: NotificationService = new NotificationService(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
-            component.success("title", "message");
+            component.success({ title: "title", message: "message" });
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 type: "success",
                 timer: NotificationService.DEFAULT_SUCCESS_TIMER

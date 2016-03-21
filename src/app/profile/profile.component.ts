@@ -98,7 +98,7 @@ export class ProfileComponent {
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
-            notificationService.error("notification.profile.not_found");
+            notificationService.error({ message: "notification.profile.not_found" });
         });
     }
 }

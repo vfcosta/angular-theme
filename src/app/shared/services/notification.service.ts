@@ -15,24 +15,33 @@ export class NotificationService {
     public static DEFAULT_ERROR_MESSAGE = "notification.error.default.message";
     public static DEFAULT_SUCCESS_TIMER = 1000;
 
-    error(message: string = NotificationService.DEFAULT_ERROR_MESSAGE, title: string = NotificationService.DEFAULT_ERROR_TITLE) {
+    error({
+        message = NotificationService.DEFAULT_ERROR_MESSAGE,
+        title = NotificationService.DEFAULT_ERROR_TITLE,
+        showConfirmButton = true
+    } = {}) {
         this.$log.debug("Notification error:", title, message, this.translatorService.currentLanguage());
         this.SweetAlert.swal({
             title: this.translatorService.translate(title),
             text: this.translatorService.translate(message),
-            type: "error"
+            type: "error",
+            showConfirmButton: showConfirmButton
         });
     }
 
     httpError(status: number, data: any): boolean {
-        this.error(`notification.http_error.${status}.message`);
+        this.error({ message: `notification.http_error.${status}.message` });
         return true; // return true to indicate that the error was already handled
     }
 
-    success(title: string, text: string, timer: number = NotificationService.DEFAULT_SUCCESS_TIMER) {
+    success({
+        title,
+        message,
+        timer = NotificationService.DEFAULT_SUCCESS_TIMER
+    }) {
         this.SweetAlert.swal({
             title: title,
-            text: text,
+            text: message,
             type: "success",
             timer: timer
         });
