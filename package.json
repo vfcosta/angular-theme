@@ -24,6 +24,7 @@
     "fix-jqlite": "ts-node --project ./dev-scripts dev-scripts/fix-jqlite.ts"
   },
   "devDependencies": {
+    "bower": "^1.7.7",
     "browser-sync": "~2.9.11",
     "browser-sync-spa": "~1.0.3",
     "chalk": "~1.1.1",
