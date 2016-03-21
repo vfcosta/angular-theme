@@ -18,7 +18,7 @@
     "test-and-coverage": "karma start & npm run remap-coverage",
     "test": "webpack -w --test",
     "jenkins": "webpack && npm run coverage",
-    "postinstall": "npm install -g bower; bower install; typings install; npm run fix-jqlite; cd dev-scripts; typings install",
+    "postinstall": "bower install; typings install; cd dev-scripts; typings install; cd ../; npm run fix-jqlite",
     "start": "concurrently \"webpack -w\" \"gulp serve\"",
     "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts",
     "fix-jqlite": "ts-node --project ./dev-scripts dev-scripts/fix-jqlite.ts"
