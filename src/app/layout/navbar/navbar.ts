@@ -10,7 +10,7 @@ import {SessionService, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} f
     directives: [LanguageSelectorComponent],
     providers: [AuthService, SessionService]
 })
-@Inject("$modal", AuthService, "SessionService", "$scope", "$state")
+@Inject("$uibModal", AuthService, "SessionService", "$scope", "$state")
 export class Navbar {
 
     private currentUser: noosfero.User;
@@ -19,7 +19,7 @@ export class Navbar {
      *
      */
     constructor(
-        private $modal: any,
+        private $uibModal: any,
         private authService: AuthService,
         private session: SessionService,
         private $scope: ng.IScope,
@@ -42,7 +42,7 @@ export class Navbar {
     }
 
     openLogin() {
-        this.modalInstance = this.$modal.open({
+        this.modalInstance = this.$uibModal.open({
             templateUrl: 'app/login/login.html',
             controller: AuthController,
             controllerAs: 'vm',
