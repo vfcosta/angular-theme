@@ -1,5 +1,5 @@
 import {Component, Inject} from "ng-forward";
-import {LanguageSelectorService} from "../language-selector/language-selector.component";
+import {LanguageSelectorComponent} from "../language-selector/language-selector.component";
 
 
 import {SessionService, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} from "./../../login";
@@ -7,7 +7,7 @@ import {SessionService, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} f
 @Component({
     selector: "acme-navbar",
     templateUrl: "app/layout/navbar/navbar.html",
-    directives: [LanguageSelectorService],
+    directives: [LanguageSelectorComponent],
     providers: [AuthService, SessionService]
 })
 @Inject("$modal", AuthService, "SessionService", "$scope", "$state")

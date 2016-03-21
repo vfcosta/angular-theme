@@ -4,6 +4,6 @@ import {Component} from "ng-forward";
     selector: 'profile',
     templateUrl: "app/profile/profile.html",
 })
-export class MyProfile {
+export class MyProfileComponent {
 
 }

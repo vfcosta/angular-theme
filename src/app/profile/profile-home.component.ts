@@ -8,7 +8,7 @@ import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
     providers: [provide('profileService', { useClass: ProfileService })]
 })
 @Inject(ProfileService, "$state")
-export class ProfileHome {
+export class ProfileHomeComponent {
 
     profile: noosfero.Profile;
 

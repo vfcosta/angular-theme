@@ -1,7 +1,7 @@
 import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {provide} from 'ng-forward';
 
-import {LanguageSelectorService} from './language-selector.component';
+import {LanguageSelectorComponent} from './language-selector.component';
 
 import * as helpers from "../../../spec/helpers";
 
@@ -17,7 +17,7 @@ describe("Components", () => {
             translatorService = jasmine.createSpyObj("translatorService", ["availableLanguages", "currentLanguage"]);
             return helpers.quickCreateComponent({
                 template: "<language-selector></language-selector>",
-                directives: [LanguageSelectorService],
+                directives: [LanguageSelectorComponent],
                 providers: [
                     provide('TranslatorService', {
                         useValue: translatorService
@@ -36,7 +36,7 @@ describe("Components", () => {
 
         it("call the translator service when change the language", (done) => {
             let translatorService = jasmine.createSpyObj("translatorService", ["changeLanguage"]);
-            let languageSelector = new LanguageSelectorService(<any>translatorService);
+            let languageSelector = new LanguageSelectorComponent(<any>translatorService);
             languageSelector.changeLanguage("en");
             expect(translatorService.changeLanguage).toHaveBeenCalledWith("en");
             done();

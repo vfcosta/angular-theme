@@ -1,13 +1,13 @@
 import {StateConfig, Component, Inject, provide} from 'ng-forward';
 import {ProfileInfoComponent} from './info/profile-info.component';
-import {ProfileHome} from './profile-home.component';
+import {ProfileHomeComponent} from './profile-home.component';
 import {BasicEditorComponent} from '../article/basic-editor.component';
 import {ContentViewerComponent} from "../article/content-viewer/content-viewer.component";
-import {ContentViewerActions} from "../article/content-viewer/content-viewer-actions.component";
+import {ContentViewerActionsComponent} from "../article/content-viewer/content-viewer-actions.component";
 import {ActivitiesComponent} from "./activities/activities.component";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 import {NotificationService} from "../shared/services/notification.service";
-import {MyProfile} from "./myprofile.component";
+import {MyProfileComponent} from "./myprofile.component";
 
 
 /**
@@ -42,7 +42,7 @@ import {MyProfile} from "./myprofile.component";
     {
         name: 'main.profile.settings',
         url: "^/myprofile/:profile",
-        component: MyProfile
+        component: MyProfileComponent
     },
     {
         name: 'main.profile.cms',
@@ -59,10 +59,10 @@ import {MyProfile} from "./myprofile.component";
     {
         name: 'main.profile.home',
         url: "",
-        component: ProfileHome,
+        component: ProfileHomeComponent,
         views: {
             "mainBlockContent": {
-                controller: ProfileHome,
+                controller: ProfileHomeComponent,
                 controllerAs: "vm"
             }
         }
@@ -79,7 +79,7 @@ import {MyProfile} from "./myprofile.component";
             },
             "actions@main": {
                 templateUrl: "app/article/content-viewer/navbar-actions.html",
-                controller: ContentViewerActions,
+                controller: ContentViewerActionsComponent,
                 controllerAs: "vm"
             }
         }

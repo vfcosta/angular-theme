@@ -5,7 +5,7 @@ import {Input, Component, provide} from 'ng-forward';
 import * as helpers from "../../../spec/helpers";
 
 import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-import {ContentViewerActions} from './content-viewer-actions.component';
+import {ContentViewerActionsComponent} from './content-viewer-actions.component';
 
 // this htmlTemplate will be re-used between the container components in this spec file
 const htmlTemplate: string = '<content-viewer-actions [article]="ctrl.article" [profile]="ctrl.profile"></content-viewer-actions>';
@@ -31,7 +31,7 @@ describe('Content Viewer Actions Component', () => {
                 helpers.provideEmptyObjects('Restangular'),
                 helpers.provideFilters('translateFilter')
             ],
-            directives: [ContentViewerActions],
+            directives: [ContentViewerActionsComponent],
             template: htmlTemplate
         });
     };
@@ -56,7 +56,7 @@ describe('Content Viewer Actions Component', () => {
         };
 
         buildComponent().then((fixture: ComponentFixture) => {
-            let contentViewerComp: ContentViewerActions = fixture.debugElement.componentViewChildren[0].componentInstance;
+            let contentViewerComp: ContentViewerActionsComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
 
             expect(contentViewerComp.profile).toEqual(jasmine.objectContaining(profile));
 

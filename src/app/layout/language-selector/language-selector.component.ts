@@ -6,7 +6,7 @@ import {TranslatorService} from "../../shared/services/translator.service";
     templateUrl: "app/layout/language-selector/language-selector.html"
 })
 @Inject(TranslatorService)
-export class LanguageSelectorService {
+export class LanguageSelectorComponent {
 
     constructor(private translatorService: TranslatorService) { }
 

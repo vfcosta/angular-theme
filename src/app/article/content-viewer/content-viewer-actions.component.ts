@@ -7,7 +7,7 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
     providers: [provide('profileService', { useClass: ProfileService })]
 })
 @Inject(ProfileService)
-export class ContentViewerActions {
+export class ContentViewerActionsComponent {
 
     article: noosfero.Article;
     profile: noosfero.Profile;

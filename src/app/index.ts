@@ -2,7 +2,7 @@ import {NoosferoApp} from "./index.module";
 import {noosferoModuleConfig} from "./index.config";
 import {noosferoAngularRunBlock} from "./index.run";
 
-import {Main} from "./main/main.component";
+import {MainComponent} from "./main/main.component";
 import {bootstrap, bundle} from "ng-forward";
 
 import {AUTH_EVENTS} from "./login/auth-events";
@@ -12,7 +12,7 @@ import {Navbar} from "./layout/navbar/navbar";
 
 declare var moment: any;
 
-let noosferoApp: any = bundle("noosferoApp", Main, ["ngAnimate", "ngCookies", "ngStorage", "ngTouch",
+let noosferoApp: any = bundle("noosferoApp", MainComponent, ["ngAnimate", "ngCookies", "ngStorage", "ngTouch",
     "ngSanitize", "ngMessages", "ngAria", "restangular",
     "ui.router", "ui.bootstrap", "toastr",
     "angularMoment", "angular.filter", "akoenig.deckgrid",

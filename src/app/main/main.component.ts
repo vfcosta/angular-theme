@@ -28,7 +28,7 @@ import {MainBlockComponent} from "../layout/blocks/main-block/main-block.compone
 
 /**
  * @ngdoc controller
- * @name main.MainContent
+ * @name main.MainContentComponent
  * @requires AuthService, Session
  * @descrition
  *  This controller actually contains the main content of Noosfero Angular Theme:
@@ -41,7 +41,7 @@ import {MainBlockComponent} from "../layout/blocks/main-block/main-block.compone
     templateUrl: "app/main/main.html",
     providers: [AuthService, SessionService]
 })
-export class MainContent {
+export class MainContentComponent {
 
 }
 
@@ -55,7 +55,7 @@ export class MainContent {
  *  The Main controller for the Noosfero Angular Theme application.
  * 
  *  The main route '/' is defined as the URL for this controller, which routes
- * requests to the {@link main.MainContent} controller and also, the '/profile' route,
+ * requests to the {@link main.MainContentComponent} controller and also, the '/profile' route,
  * which routes requests to the {@link profile.Profile} controller. See {@link profile.Profile} 
  * for more details on how various Noosfero profiles are rendered.  
  */
@@ -72,7 +72,7 @@ export class MainContent {
 @StateConfig([
     {
         url: '/',
-        component: MainContent,
+        component: MainContentComponent,
         name: 'main',
     },
     {
@@ -89,6 +89,6 @@ export class MainContent {
         }
     }
 ])
-export class Main {
+export class MainComponent {
 
 }
