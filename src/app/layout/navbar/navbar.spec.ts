@@ -24,7 +24,7 @@ describe("Components", () => {
 
         let provideFunc = provide;
 
-        // before Each -> loading mocks on locals variables 
+        // before Each -> loading mocks on locals variables
         beforeEach(() => {
             user = <noosfero.User>{
                 id: 1,
@@ -46,7 +46,7 @@ describe("Components", () => {
         // this function allow build the fixture of the container component
         // and is reused in each test
         // The main idea behing not prebuild it on a general beforeEach block is
-        // to allow tests configure the mock services accordilly their own needs   
+        // to allow tests configure the mock services accordilly their own needs
         let buildComponent = (): Promise<ComponentFixture> => {
             return helpers.quickCreateComponent({
                 providers: [
@@ -97,7 +97,7 @@ describe("Components", () => {
                 navbarComp.openLogin();
                 expect($modal.open).toHaveBeenCalled();
                 expect($modal.open).toHaveBeenCalledWith({
-                    templateUrl: 'app/components/auth/login.html',
+                    templateUrl: 'app/login/login.html',
                     controller: AuthController,
                     controllerAs: 'vm',
                     bindToController: true

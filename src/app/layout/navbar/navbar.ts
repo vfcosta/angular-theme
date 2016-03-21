@@ -43,7 +43,7 @@ export class Navbar {
 
     openLogin() {
         this.modalInstance = this.$modal.open({
-            templateUrl: 'app/components/auth/login.html',
+            templateUrl: 'app/login/login.html',
             controller: AuthController,
             controllerAs: 'vm',
             bindToController: true

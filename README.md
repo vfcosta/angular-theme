@@ -20,10 +20,10 @@ Just set the profile theme to `angular-theme`.
 The folder structure of this project was sorted by feature.
 See some important folders bellow:
 
-- Directives for blocks: `src/app/components/noosfero-blocks`
-- Directives for articles: `src/app/components/noosfero-articles`
-- Directives for activities: `src/app/components/noosfero-activities`
-- Service to connect with Noosfero API: `src/app/components/noosfero`
-- Content viewer controller: `src/app/content-viewer`
-- Profile controller: `src/app/profile`
-- Profile info controller: `src/app/profile-info`
+- Directives for blocks: `src/app/layout/blocks`
+- Directives for articles: `src/app/article`
+- Directives for activities: `src/app/profile/activities`
+- Service to connect with Noosfero API: `src/lib/ng-noosfero-api`
+- Content viewer component: `src/app/article/content-viewer`
+- Profile component: `src/app/profile`
+- Profile Info component: `src/app/profile/info`
