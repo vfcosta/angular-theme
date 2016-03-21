@@ -1,0 +1,7 @@
+<div class="comments">
+  <post-comment [article]="ctrl.article"></post-comment>
+  
+  <div class="comments-list">
+    <comment ng-repeat="comment in ctrl.comments" [comment]="comment" [article]="ctrl.article"></comment>
+  </div>
+</div>

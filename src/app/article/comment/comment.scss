@@ -1,0 +1,32 @@
+.comments {
+  .comment {
+    margin: 20px;
+    .date {
+      @extend .text-muted;
+      @extend .small;
+      margin-left: 8px;
+    }
+    .title {
+      font-weight: bold;
+    }
+    .media-left {
+      min-width: 40px;
+    }
+    .media-body {
+      background-color: #F9F9F9;
+      padding: 10px;
+    }
+    noosfero-profile-image {
+      img {
+        height: 30px;
+        width: 30px;
+        max-width: 30px;
+        display: inline-block;
+        @extend .img-circle;
+      }
+      i {
+        font-size: 1.7em;
+      }
+    }
+  }
+}

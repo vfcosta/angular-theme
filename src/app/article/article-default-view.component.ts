@@ -1,5 +1,6 @@
 import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
 import {ArticleBlogComponent} from "./types/blog/blog.component";
+import {CommentsComponent} from "./comment/comments.component";
 
 /**
  * @ngdoc controller
@@ -29,7 +30,7 @@ export class ArticleDefaultViewComponent {
 @Component({
     selector: 'noosfero-article',
     template: 'not-used',
-    directives: [ArticleDefaultViewComponent, ArticleBlogComponent]
+    directives: [ArticleDefaultViewComponent, ArticleBlogComponent, CommentsComponent]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class ArticleViewComponent {

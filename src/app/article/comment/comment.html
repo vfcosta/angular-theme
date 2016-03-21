@@ -1,0 +1,25 @@
+<div class="comment media">
+  <div class="media-left">
+    <a ui-sref="main.profile.home({profile: ctrl.comment.author.identifier})">
+      <noosfero-profile-image [profile]="ctrl.comment.author"></noosfero-profile-image>
+    </a>
+  </div>
+  <div class="media-body">
+    <div class="heading clearfix">
+      <a class="pull-left" ui-sref="main.profile.home({profile: ctrl.comment.author.identifier})">
+        <h4 class="media-heading">{{ctrl.comment.author.name}}</h4>
+      </a>
+      <span class="date" am-time-ago="ctrl.comment.created_at | dateFormat"></span>
+      <a href="#" (click)="ctrl.reply()">
+        <span class="pull-right small text-muted">
+          {{"comment.reply" | translate}}
+        </span>
+      </a>
+    </div>
+    <div class="title">{{ctrl.comment.title}}</div>
+    <div class="body">{{ctrl.comment.body}}</div>
+  </div>
+
+  <post-comment ng-if="ctrl.showReply" [article]="ctrl.article" [reply-of]="ctrl.comment"></post-comment>
+
+</div>
