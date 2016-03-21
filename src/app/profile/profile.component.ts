@@ -1,15 +1,14 @@
 import {StateConfig, Component, Inject, provide} from 'ng-forward';
-import {ProfileInfo} from '../profile-info/profile-info.component';
-import {ProfileHome} from '../profile/profile-home.component';
-import {Cms} from '../cms/cms.component';
-import {ContentViewer} from "../content-viewer/content-viewer.component";
-import {ContentViewerActions} from "../content-viewer/content-viewer-actions.component";
-import {NoosferoActivities} from "../components/noosfero-activities/activities.component";
+import {ProfileInfoComponent} from './info/profile-info.component';
+import {ProfileHome} from './profile-home.component';
+import {BasicEditorComponent} from '../article/basic-editor.component';
+import {ContentViewerComponent} from "../article/content-viewer/content-viewer.component";
+import {ContentViewerActions} from "../article/content-viewer/content-viewer-actions.component";
+import {ActivitiesComponent} from "./activities/activities.component";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
-import {Notification} from "../components/notification/notification.component";
+import {NotificationService} from "../shared/services/notification.service";
 import {MyProfile} from "./myprofile.component";
 
-import * as noosferoModels from "./../models/interfaces";
 
 /**
  * @ngdoc controller
@@ -17,24 +16,25 @@ import * as noosferoModels from "./../models/interfaces";
  * @description
  *  This is the profile controller. It provide routes to supported Noosfero Profiles.
  */
+
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html",
-    directives: [NoosferoActivities],
+    directives: [ActivitiesComponent],
     providers: [
         provide('profileService', { useClass: ProfileService }),
-        provide('notification', { useClass: Notification })
+        provide('notificationService', { useClass: NotificationService })
     ]
 })
 @StateConfig([
     {
         name: 'main.profile.info',
         url: "^/profile/:profile",
-        component: ProfileInfo,
+        component: ProfileInfoComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/profile-info/profile-info.html",
-                controller: ProfileInfo,
+                templateUrl: "app/profile/info/profile-info.html",
+                controller: ProfileInfoComponent,
                 controllerAs: "vm"
             }
         }
@@ -47,11 +47,11 @@ import * as noosferoModels from "./../models/interfaces";
     {
         name: 'main.profile.cms',
         url: "^/myprofile/:profile/cms",
-        component: Cms,
+        component: BasicEditorComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/cms/cms.html",
-                controller: Cms,
+                templateUrl: "app/article/basic-editor.html",
+                controller: BasicEditorComponent,
                 controllerAs: "vm"
             }
         }
@@ -70,15 +70,15 @@ import * as noosferoModels from "./../models/interfaces";
     {
         name: 'main.profile.page',
         url: "/{page:any}",
-        component: ContentViewer,
+        component: ContentViewerComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/content-viewer/page.html",
-                controller: ContentViewer,
+                templateUrl: "app/article/content-viewer/page.html",
+                controller: ContentViewerComponent,
                 controllerAs: "vm"
             },
             "actions@main": {
-                templateUrl: "app/content-viewer/navbar-actions.html",
+                templateUrl: "app/article/content-viewer/navbar-actions.html",
                 controller: ContentViewerActions,
                 controllerAs: "vm"
             }
@@ -86,19 +86,19 @@ import * as noosferoModels from "./../models/interfaces";
     }
 ])
 @Inject(ProfileService, "$stateParams")
-export class Profile {
+export class ProfileComponent {
 
-    boxes: noosferoModels.Box[];
-    profile: noosferoModels.Profile;
+    boxes: noosfero.Box[];
+    profile: noosfero.Profile;
 
-    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, notification: Notification) {
-        profileService.setCurrentProfileByIdentifier($stateParams["profile"]).then((profile: noosferoModels.Profile) => {
+    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, notificationService: NotificationService) {
+        profileService.setCurrentProfileByIdentifier($stateParams["profile"]).then((profile: noosfero.Profile) => {
             this.profile = profile;
-            return profileService.getBoxes(this.profile.id);
+            return profileService.getBoxes(<number>this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
-            notification.error("notification.profile.not_found");
+            notificationService.error("notification.profile.not_found");
         });
     }
 }

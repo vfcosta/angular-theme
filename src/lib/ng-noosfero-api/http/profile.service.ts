@@ -1,11 +1,10 @@
 import { Injectable, Inject } from "ng-forward";
-import {Profile} from "../../../app/models/interfaces";
 
 @Injectable()
 @Inject("Restangular", "$q")
 export class ProfileService {
 
-    private _currentProfilePromise: ng.IDeferred<Profile>;
+    private _currentProfilePromise: ng.IDeferred<noosfero.Profile>;
 
     constructor(private restangular: restangular.IService, private $q: ng.IQService) {
         this.resetCurrentProfile();
@@ -15,17 +14,17 @@ export class ProfileService {
         this._currentProfilePromise = this.$q.defer();
     }
 
-    getCurrentProfile(): ng.IPromise<Profile> {
+    getCurrentProfile(): ng.IPromise<noosfero.Profile> {
         return this._currentProfilePromise.promise;
     }
 
-    setCurrentProfile(profile: Profile) {
+    setCurrentProfile(profile: noosfero.Profile) {
         this._currentProfilePromise.resolve(profile);
     }
 
     setCurrentProfileByIdentifier(identifier: string) {
         this.resetCurrentProfile();
-        return this.getByIdentifier(identifier).then((profile: Profile) => {
+        return this.getByIdentifier(identifier).then((profile: noosfero.Profile) => {
             this.setCurrentProfile(profile);
             return this.getCurrentProfile();
         });
@@ -35,10 +34,10 @@ export class ProfileService {
         return this.get(profileId).customGET("home_page", params);
     }
 
-    getByIdentifier(identifier: string): ng.IPromise<any> {
+    getByIdentifier(identifier: string): ng.IPromise<noosfero.Profile> {
         let p = this.restangular.one('profiles').get({ identifier: identifier });
         return p.then((response: restangular.IResponse) => {
-            if (response.data.length == 0) {
+            if (response.data.length === 0) {
                 return this.$q.reject(p);
             }
             return response.data[0];

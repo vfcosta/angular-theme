@@ -1,28 +1,29 @@
 import {bundle, Component, StateConfig} from "ng-forward";
-import {ArticleBlog} from "./../components/noosfero-articles/blog/blog.component";
+import {ArticleBlogComponent} from "./../article/types/blog/blog.component";
 
-import {ArticleView} from "../components/noosfero-articles/article/article_view";
+import {ArticleViewComponent} from "./../article/article-default-view.component";
 
-import {Profile} from "../profile/profile.component";
-import {Boxes} from "../components/noosfero-boxes/boxes.component";
-import {Block} from "../components/noosfero-blocks/block.component";
-import {LinkListBlock} from "../components/noosfero-blocks/link-list/link-list.component";
-import {RecentDocumentsBlock} from "../components/noosfero-blocks/recent-documents/recent-documents.component";
-import {ProfileImageBlock} from "../components/noosfero-blocks/profile-image-block/profile-image-block.component";
-import {RawHTMLBlock} from "../components/noosfero-blocks/raw-html/raw-html.component";
+import {ProfileComponent} from "../profile/profile.component";
+import {BoxesComponent} from "../layout/boxes/boxes.component";
+import {BlockComponent} from "../layout/blocks/block.component";
+import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list.component";
+import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents.component";
+import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/profile-image-block.component";
+import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html.component";
 
-import {MembersBlock} from "../components/noosfero-blocks/members-block/members-block.component";
-import {NoosferoTemplate} from "../components/noosfero/noosfero-template.filter";
-import {DateFormat} from "../components/noosfero/date-format/date-format.filter";
+import {MembersBlockComponent} from "./../layout/blocks/members-block/members-block.component";
+import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
+import {DateFormat} from "../shared/pipes/date-format.filter";
 
-import {AuthService} from "./../components/auth/auth_service";
-import {Session} from "./../components/auth/session";
-import {Notification} from "./../components/notification/notification.component";
+import {AuthService} from "../login/auth.service";
+import {SessionService} from "../login/session.service";
+
+import {NotificationService} from "../shared/services/notification.service";
 
 
-import {Navbar} from "../components/navbar/navbar";
+import {Navbar} from "../layout/navbar/navbar";
 
-import {MainBlock} from "../components/noosfero-blocks/main-block/main-block.component";
+import {MainBlockComponent} from "../layout/blocks/main-block/main-block.component";
 
 
 /**
@@ -38,7 +39,7 @@ import {MainBlock} from "../components/noosfero-blocks/main-block/main-block.com
 @Component({
     selector: 'main-content',
     templateUrl: "app/main/main.html",
-    providers: [AuthService, Session]
+    providers: [AuthService, SessionService]
 })
 export class MainContent {
 
@@ -62,11 +63,11 @@ export class MainContent {
     selector: 'main',
     template: '<div ng-view></div>',
     directives: [
-        ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
-        MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock,
-        MembersBlock, NoosferoTemplate, DateFormat, RawHTMLBlock
+        ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent, LinkListBlockComponent,
+        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
+        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
     ],
-    providers: [AuthService, Session, Notification]
+    providers: [AuthService, SessionService, NotificationService]
 })
 @StateConfig([
     {
@@ -77,12 +78,12 @@ export class MainContent {
     {
         url: "^/:profile",
         abstract: true,
-        component: Profile,
+        component: ProfileComponent,
         name: 'main.profile',
         views: {
             "content": {
                 templateUrl: "app/profile/profile.html",
-                controller: Profile,
+                controller: ProfileComponent,
                 controllerAs: "vm"
             }
         }

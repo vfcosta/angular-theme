@@ -1,31 +1,81 @@
 import { Injectable, Inject } from "ng-forward";
-import {Article} from "../../../app/models/interfaces";
+import {RestangularService} from "./restangular_service";
+import {ProfileService} from "./profile.service";
 
 @Injectable()
-@Inject("Restangular")
-export class ArticleService {
+@Inject("Restangular", "$q", "$log", ProfileService)
 
-    constructor(private Restangular: any) { }
+export class ArticleService extends RestangularService<noosfero.Article> {
 
-    create(profileId: number, article: Article) {
-        return this.Restangular.one('profiles', profileId).customPOST(
-            { article: article },
-            'articles',
-            {},
-            { 'Content-Type': 'application/json' }
-        );
+    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected profileService: ProfileService) {
+        super(Restangular, $q, $log);
     }
 
-    getByProfile(profileId: number, params?: any) {
-        return this.Restangular.one('profiles', profileId).customGET('articles', params);
+    getResourcePath() {
+        return "articles";
     }
 
-    getChildren(articleId: number, params?: any) {
-        return this.get(articleId).customGET('children', params);
+    getDataKeys() {
+        return {
+            singular: 'article',
+            plural: 'articles'
+        };
     }
 
-    private get(articleId: number) {
-        return this.Restangular.one('articles', articleId);
+
+    createInProfile(profile: noosfero.Profile, article: noosfero.Article): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        let profileElement = this.profileService.get(<number>profile.id);
+        (<any>profileElement).id = profile.id;
+        let headers = {
+            'Content-Type': 'application/json'
+        };
+        return this.create(article, <noosfero.RestModel>profileElement, null, headers);
     }
+
+
+    getAsCollectionChildrenOf<C>(rootElement: noosfero.Environment | noosfero.Article | noosfero.Profile, path: string, queryParams?: any, headers?: any): restangular.ICollectionPromise<C> {
+        return rootElement.getList<C>(path, queryParams, headers);
+    }
+
+    getAsElementChildrenOf<C>(rootElement: noosfero.Environment | noosfero.Article | noosfero.Profile, path: string, id: number, queryParams?: any, headers?: any) {
+        return rootElement.one(path, id).get<C>(queryParams, headers);
+    }
+
+    getByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {
+        let profileElement = this.profileService.get(<number>profile.id);
+        return this.list(profileElement, params);
+    }
+
+    getArticleByProfileAndPath(profile: noosfero.Profile, path: string): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
+        let profileElement = this.profileService.get(<number>profile.id);
+
+        let restRequest: ng.IPromise<any>;
+
+        let params = { path: path };
+
+        restRequest = profileElement.customGET(this.getResourcePath(), params);
+
+
+        restRequest
+            .then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+
+
+        return deferred.promise;
+    }
+
+    getOneByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        let profileElement = this.profileService.get(<number>profile.id);
+        return this.getSub(profileElement, params);
+    }
+
+    getChildren<T>(article: noosfero.Article, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {
+        let articleElement = this.getElement(article.id);
+        articleElement.id = article.id;
+        return this.listSubElements(<noosfero.Article>articleElement, "children", params);
+    }
+
+
 
 }

@@ -1,5 +1,5 @@
 import {quickCreateComponent} from "../../spec/helpers";
-import {Profile} from "./profile.component";
+import {ProfileComponent} from "./profile.component";
 
 describe("Components", () => {
     describe("Profile Component", () => {
@@ -30,7 +30,7 @@ describe("Components", () => {
         });
 
         it("get the profile and store in profile service", done => {
-            let component: Profile = new Profile(profileServiceMock, $stateParams, notificationMock);
+            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, notificationMock);
             $rootScope.$apply();
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
             expect(component.profile).toEqual({ id: 1 });
@@ -38,7 +38,7 @@ describe("Components", () => {
         });
 
         it("get the profile boxes", done => {
-            let component: Profile = new Profile(profileServiceMock, $stateParams, notificationMock);
+            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, notificationMock);
             $rootScope.$apply();
             expect(profileServiceMock.getBoxes).toHaveBeenCalled();
             expect(component.boxes).toEqual([{ id: 2 }]);
@@ -50,7 +50,7 @@ describe("Components", () => {
             profileResponse.reject();
             profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profileResponse.promise);
 
-            let component: Profile = new Profile(profileServiceMock, $stateParams, notificationMock);
+            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, notificationMock);
             $rootScope.$apply();
 
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();

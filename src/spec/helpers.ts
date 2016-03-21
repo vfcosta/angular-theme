@@ -2,7 +2,6 @@
 import {ngClass, TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {providers} from  'ng-forward/cjs/testing/providers';
 import {Injectable, Inject, Provider, Input, provide, Component} from 'ng-forward';
-import {User, Person} from "./../app/models/interfaces";
 
 
 export var ngforward = {
@@ -101,7 +100,7 @@ export var fixtures = {
         id: 1,
         login: 'user',
         email: 'user@company.com',
-        person: <Person>{
+        person: <noosfero.Person>{
             id: 1,
             identifier: 'user'
         },

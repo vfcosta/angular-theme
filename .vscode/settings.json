@@ -3,7 +3,9 @@
     "files.exclude": {
         "**/.git": true,
         "**/.DS_Store": true,
-        "src/app/*.js": false
+        "src/**/*.js": true,
+        "src/**/*.js.map": true,
+        "coverage": true
     },
     "editor.fontSize": 14,
     "typescript.useCodeSnippetsOnMethodSuggest": true
