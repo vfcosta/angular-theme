@@ -1,8 +1,7 @@
-
 import {Input, provide, Component} from 'ng-forward';
 import {ArticleViewComponent, ArticleDefaultViewComponent} from './article-default-view.component';
 
-import {createComponentFromClass, quickCreateComponent} from "../../spec/helpers";
+import * as helpers from "../../spec/helpers";
 
 // this htmlTemplate will be re-used between the container components in this spec file 
 const htmlTemplate: string = '<noosfero-article [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-article>';
@@ -21,15 +20,22 @@ describe("Components", () => {
         it("renders the default component when no specific component is found", (done: Function) => {
             // Creating a container component (ArticleContainerComponent) to include 
             // the component under test (ArticleView)  
-            @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [ArticleViewComponent] })
+            @Component({
+                selector: 'test-container-component',
+                template: htmlTemplate,
+                directives: [ArticleViewComponent],
+                providers: [
+                    helpers.createProviderToValue('CommentService', helpers.mocks.commentService),
+                    helpers.provideFilters("translateFilter"),
+                    helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
+                ]
+            })
             class ArticleContainerComponent {
                 article = { type: 'anyArticleType' };
                 profile = { name: 'profile-name' };
-                constructor() {
-                }
             }
 
-            createComponentFromClass(ArticleContainerComponent).then((fixture) => {
+            helpers.createComponentFromClass(ArticleContainerComponent).then((fixture) => {
                 // and here we can inspect and run the test assertions
 
                 // gets the children component of ArticleContainerComponent 
@@ -51,16 +57,23 @@ describe("Components", () => {
 
             // Creating a container component (ArticleContainerComponent) to include 
             // the component under test (ArticleView)  
-            @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [ArticleViewComponent] })
+            @Component({
+                selector: 'test-container-component',
+                template: htmlTemplate,
+                directives: [ArticleViewComponent],
+                providers: [
+                    helpers.createProviderToValue('CommentService', helpers.mocks.commentService),
+                    helpers.provideFilters("translateFilter"),
+                    helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
+                ]
+            })
             class ArticleContainerComponent {
                 article = { type: 'anyArticleType' };
                 profile = { name: 'profile-name' };
-                constructor() {
-                }
             }
 
             // uses the TestComponentBuilder instance to initialize the component
-            createComponentFromClass(ArticleContainerComponent).then((fixture) => {
+            helpers.createComponentFromClass(ArticleContainerComponent).then((fixture) => {
                 // and here we can inspect and run the test assertions 
                 let articleView: ArticleViewComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
 
@@ -93,10 +106,8 @@ describe("Components", () => {
             class CustomArticleType {
                 article = { type: 'TinyMceArticle' };
                 profile = { name: 'profile-name' };
-                constructor() {
-                }
             }
-            createComponentFromClass(CustomArticleType).then(fixture => {
+            helpers.createComponentFromClass(CustomArticleType).then(fixture => {
                 let myComponent: CustomArticleType = fixture.componentInstance;
                 expect(myComponent.article.type).toEqual("TinyMceArticle");
                 expect(fixture.debugElement.componentViewChildren[0].text()).toEqual("TinyMceArticle");

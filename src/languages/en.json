@@ -22,5 +22,7 @@
   "notification.error.default.title": "Oops...",
   "notification.profile.not_found": "Page not found",
   "notification.http_error.401.message": "Unauthorized",
-  "notification.http_error.500.message": "Server error"
+  "notification.http_error.500.message": "Server error",
+  "comment.post": "Post",
+  "comment.reply": "reply"
 }
