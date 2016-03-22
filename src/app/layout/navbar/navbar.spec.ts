@@ -50,7 +50,7 @@ describe("Components", () => {
         let buildComponent = (): Promise<ComponentFixture> => {
             return helpers.quickCreateComponent({
                 providers: [
-                    provide('$modal', {
+                    provide('$uibModal', {
                         useValue: $modal
                     }),
                     provide('AuthService', {
