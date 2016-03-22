@@ -75,7 +75,7 @@ export var mocks = {
     },
     commentService: {
         getByArticle: (article: noosfero.Article) => {
-            return Promise.resolve();
+            return Promise.resolve({data: {}});
         }
     },
     sessionWithCurrentUser: (user: any) => {
