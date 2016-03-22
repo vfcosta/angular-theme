@@ -20,8 +20,8 @@ export class PostCommentComponent {
         if (this.replyOf) {
             this.comment.reply_of_id = this.replyOf.id;
         }
-        this.commentService.createInArticle(this.article, this.comment).then(() => {
-            this.$rootScope.$emit("comment.received", this.comment);
+        this.commentService.createInArticle(this.article, this.comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
+            this.$rootScope.$emit("comment.received", result.data);
             this.notificationService.success({ title: "Good job!", message: "Comment saved!" });
         });
     }

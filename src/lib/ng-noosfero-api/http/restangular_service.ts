@@ -221,13 +221,17 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * Creates a new Resource into the resource collection
      * calls POST /resourcePath
      */
-    public create(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public create(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any, isSub: boolean = true): ng.IPromise<noosfero.RestResult<T>> {
         let deferred = this.$q.defer<noosfero.RestResult<T>>();
 
         let restRequest: ng.IPromise<noosfero.RestResult<T>>;
 
-        let data = <any>{ };
-        data[this.getDataKeys().singular] = obj;
+        let data = <any>{};
+        if (isSub) {
+            data[this.getDataKeys().singular] = obj;
+        } else {
+            data = obj;
+        }
 
         if (rootElement) {
             restRequest = rootElement.all(this.getResourcePath()).post(data, queryParams, headers);

@@ -28,6 +28,6 @@ export class CommentService extends RestangularService<noosfero.Comment> {
 
     createInArticle(article: noosfero.Article, comment: noosfero.Comment): ng.IPromise<noosfero.RestResult<noosfero.Comment>> {
         let articleElement = this.articleService.getElement(<number>article.id);
-        return articleElement.customPOST(comment, this.getResourcePath(), {}, { 'Content-Type': 'application/json' });
+        return this.create(comment, articleElement, null, { 'Content-Type': 'application/json' }, false);
     }
 }
