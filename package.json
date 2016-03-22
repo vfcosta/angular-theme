@@ -8,7 +8,7 @@
     "ng-forward": "0.0.1-alpha.12"
   },
   "scripts": {
-    "build": "webpack; gulp build",
+    "build": "webpack; gulp clean && gulp build",
     "webpack": "webpack",
     "karma": "concurrently \"webpack -w\" \"karma start\"",
     "docs": "gulp ngdocs; static-server docs",
