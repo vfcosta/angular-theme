@@ -4,7 +4,7 @@ import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.servic
 import { CommentComponent } from "./comment.component";
 
 @Component({
-    selector: 'comments',
+    selector: 'noosfero-comments',
     templateUrl: 'app/article/comment/comments.html',
     directives: [PostCommentComponent, CommentComponent]
 })

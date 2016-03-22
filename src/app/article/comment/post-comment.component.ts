@@ -3,7 +3,7 @@ import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.servic
 import { NotificationService } from "../../shared/services/notification.service";
 
 @Component({
-    selector: 'post-comment',
+    selector: 'noosfero-post-comment',
     templateUrl: 'app/article/comment/post-comment.html'
 })
 @Inject(CommentService, NotificationService, "$rootScope")

@@ -1,7 +1,7 @@
 import { Input, Component } from 'ng-forward';
 
 @Component({
-    selector: 'comment',
+    selector: 'noosfero-comment',
     templateUrl: 'app/article/comment/comment.html'
 })
 export class CommentComponent {

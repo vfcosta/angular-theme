@@ -1,7 +1,7 @@
 <div class="comments">
-  <post-comment [article]="ctrl.article"></post-comment>
+  <noosfero-post-comment [article]="ctrl.article"></noosfero-post-comment>
   
   <div class="comments-list">
-    <comment ng-repeat="comment in ctrl.comments" [comment]="comment" [article]="ctrl.article"></comment>
+    <noosfero-comment ng-repeat="comment in ctrl.comments" [comment]="comment" [article]="ctrl.article"></noosfero-comment>
   </div>
 </div>
