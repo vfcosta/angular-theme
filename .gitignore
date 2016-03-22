@@ -5,7 +5,6 @@ docs/
 .sass-cache/
 .idea/
 .tmp/
-dist/
 src/noosfero.js*
 src/commons.js*
 src/noosfero-specs.js*
