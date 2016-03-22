@@ -8,13 +8,17 @@ import { CommentComponent } from "./comment.component";
     templateUrl: 'app/article/comment/comments.html',
     directives: [PostCommentComponent, CommentComponent]
 })
-@Inject(CommentService)
+@Inject(CommentService, "$rootScope")
 export class CommentsComponent {
 
-    comments: noosfero.Comment[];
+    comments: noosfero.Comment[] = [];
     @Input() article: noosfero.Article;
 
-    constructor(private commentService: CommentService) { }
+    constructor(private commentService: CommentService, private $rootScope: ng.IScope) {
+        $rootScope.$on("comment.received", (event: ng.IAngularEvent, comment: noosfero.Comment) => {
+            this.comments.push(comment);
+        });
+    }
 
     ngOnInit() {
         this.commentService.getByArticle(this.article).then((result: noosfero.RestResult<noosfero.Comment[]>) => {

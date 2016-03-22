@@ -6,7 +6,7 @@ import { NotificationService } from "../../shared/services/notification.service"
     selector: 'post-comment',
     templateUrl: 'app/article/comment/post-comment.html'
 })
-@Inject(CommentService, NotificationService)
+@Inject(CommentService, NotificationService, "$rootScope")
 export class PostCommentComponent {
 
     @Input() article: noosfero.Article;
@@ -14,13 +14,14 @@ export class PostCommentComponent {
 
     @Input() replyOf: noosfero.Comment;
 
-    constructor(private commentService: CommentService, private notificationService: NotificationService) { }
+    constructor(private commentService: CommentService, private notificationService: NotificationService, private $rootScope: ng.IScope) { }
 
     save() {
         if (this.replyOf) {
             this.comment.reply_of_id = this.replyOf.id;
         }
         this.commentService.createInArticle(this.article, this.comment).then(() => {
+            this.$rootScope.$emit("comment.received", this.comment);
             this.notificationService.success({ title: "Good job!", message: "Comment saved!" });
         });
     }
