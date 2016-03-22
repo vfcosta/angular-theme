@@ -15,7 +15,7 @@ export class CommentsComponent {
     @Input() article: noosfero.Article;
 
     constructor(private commentService: CommentService, private $rootScope: ng.IScope) {
-        $rootScope.$on("comment.received", (event: ng.IAngularEvent, comment: noosfero.Comment) => {
+        $rootScope.$on(PostCommentComponent.EVENT_COMMENT_RECEIVED, (event: ng.IAngularEvent, comment: noosfero.Comment) => {
             this.comments.push(comment);
         });
     }

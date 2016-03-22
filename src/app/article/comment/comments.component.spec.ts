@@ -2,6 +2,7 @@ import {Provider, provide, Component} from 'ng-forward';
 import * as helpers from "../../../spec/helpers";
 
 import {CommentsComponent} from './comments.component';
+import {PostCommentComponent} from "./post-comment.component";
 
 const htmlTemplate: string = '<noosfero-comments [article]="ctrl.article"></noosfero-comments>';
 
@@ -42,8 +43,9 @@ describe("Components", () => {
 
         it("update comments list when receive an event", done => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
-              fixture.debugElement.getLocal("$rootScope").$emit("comment.received", {});
-                expect(fixture.debugElement.queryAll("noosfero-post-comment").length).toEqual(1);
+                fixture.debugElement.getLocal("$rootScope").$emit(PostCommentComponent.EVENT_COMMENT_RECEIVED, { id: 1 });
+                fixture.debugElement.getLocal("$rootScope").$apply();
+                expect(fixture.debugElement.queryAll("noosfero-comment").length).toEqual(3);
                 done();
             });
         });

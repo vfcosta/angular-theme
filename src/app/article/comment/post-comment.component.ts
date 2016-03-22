@@ -9,6 +9,8 @@ import { NotificationService } from "../../shared/services/notification.service"
 @Inject(CommentService, NotificationService, "$rootScope")
 export class PostCommentComponent {
 
+    public static EVENT_COMMENT_RECEIVED = "comment.received";
+
     @Input() article: noosfero.Article;
     comment: noosfero.Comment;
 
@@ -21,7 +23,7 @@ export class PostCommentComponent {
             this.comment.reply_of_id = this.replyOf.id;
         }
         this.commentService.createInArticle(this.article, this.comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
-            this.$rootScope.$emit("comment.received", result.data);
+            this.$rootScope.$emit(PostCommentComponent.EVENT_COMMENT_RECEIVED, result.data);
             this.notificationService.success({ title: "Good job!", message: "Comment saved!" });
         });
     }
