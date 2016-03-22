@@ -12,14 +12,14 @@ export class PostCommentComponent {
     public static EVENT_COMMENT_RECEIVED = "comment.received";
 
     @Input() article: noosfero.Article;
-    comment: noosfero.Comment;
-
     @Input() replyOf: noosfero.Comment;
+
+    comment: noosfero.Comment;
 
     constructor(private commentService: CommentService, private notificationService: NotificationService, private $rootScope: ng.IScope) { }
 
     save() {
-        if (this.replyOf) {
+        if (this.replyOf && this.comment) {
             this.comment.reply_of_id = this.replyOf.id;
         }
         this.commentService.createInArticle(this.article, this.comment).then((result: noosfero.RestResult<noosfero.Comment>) => {

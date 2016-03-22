@@ -75,7 +75,7 @@ export var mocks = {
     },
     commentService: {
         getByArticle: (article: noosfero.Article) => {
-            return Promise.resolve({data: {}});
+            return Promise.resolve({ data: {} });
         }
     },
     sessionWithCurrentUser: (user: any) => {
@@ -118,6 +118,6 @@ export var mocks = {
         translate: (text: string) => { return text; }
     },
     notificationService: {
-
+        success: () => { }
     }
 };
