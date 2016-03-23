@@ -17,7 +17,7 @@
     "test-single": "karma start --single-run",
     "test-and-coverage": "karma start & npm run remap-coverage",
     "test": "webpack -w --test",
-    "jenkins": "webpack && npm run coverage",
+    "jenkins": "webpack && karma start --single-run",
     "postinstall": "bower install; typings install; cd dev-scripts; typings install; cd ../; npm run fix-jqlite",
     "start": "concurrently \"webpack -w\" \"gulp serve\"",
     "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts",
