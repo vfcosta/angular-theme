@@ -12,6 +12,7 @@ import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/p
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html.component";
 
 import {MembersBlockComponent} from "./../layout/blocks/members-block/members-block.component";
+import {CommunitiesBlockComponent} from "./../layout/blocks/communities-block/communities-block.component";
 import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
 import {DateFormat} from "../shared/pipes/date-format.filter";
 
@@ -69,7 +70,7 @@ export class MainContentComponent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent, LinkListBlockComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
+        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, CommunitiesBlockComponent
     ],
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
