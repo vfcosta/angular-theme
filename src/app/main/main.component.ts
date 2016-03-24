@@ -6,12 +6,16 @@ import {ArticleViewComponent} from "./../article/article-default-view.component"
 import {ProfileComponent} from "../profile/profile.component";
 import {BoxesComponent} from "../layout/boxes/boxes.component";
 import {BlockComponent} from "../layout/blocks/block.component";
+import {EnvironmentComponent} from "../environment/environment.component";
+import {EnvironmentHomeComponent} from "../environment/environment-home.component";
+
 import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list.component";
 import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents.component";
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/profile-image-block.component";
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html.component";
 
 import {MembersBlockComponent} from "./../layout/blocks/members-block/members-block.component";
+import {PeopleBlockComponent} from "./../layout/blocks/people-block/people-block.component";
 import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
 import {DateFormat} from "../shared/pipes/date-format.filter";
 
@@ -35,7 +39,7 @@ import {MainBlockComponent} from "../layout/blocks/main-block/main-block.compone
  *  This controller actually contains the main content of Noosfero Angular Theme:
  *  - the navbar
  *  - the {@link Main} view content
- * 
+ *
  */
 @Component({
     selector: 'main-content',
@@ -47,6 +51,15 @@ export class MainContentComponent {
     constructor(private bodyStateClassesService: BodyStateClassesService) {
         bodyStateClassesService.start();
     }
+}
+
+@Component({
+    selector: 'environment-content',
+    templateUrl: "app/main/main.html",
+    providers: [AuthService, SessionService]
+})
+export class EnvironmentContent {
+
 }
 
 /**
@@ -67,17 +80,33 @@ export class MainContentComponent {
     selector: 'main',
     template: '<div ng-view></div>',
     directives: [
-        ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent, LinkListBlockComponent,
+        ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
+        EnvironmentComponent,
+        LinkListBlockComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
+        MembersBlockComponent, PeopleBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
     ],
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
 @StateConfig([
     {
-        url: '/',
-        component: MainContentComponent,
+        url: '',
+        component: MainContentComponent,        
+        abstract: true,
         name: 'main',
+    },
+    {
+        url: '/',
+        component: EnvironmentComponent,
+        name: 'main.environment',
+        abstract: true,
+        views: {
+            "content": {
+                templateUrl: "app/environment/environment.html",
+                controller: EnvironmentComponent,
+                controllerAs: "vm"
+            }
+        }
     },
     {
         url: "^/:profile",
