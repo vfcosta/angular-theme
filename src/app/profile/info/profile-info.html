@@ -5,8 +5,9 @@
       <header class="main-box-header clearfix">
         <h2>{{vm.profile.name}}</h2>
       </header>
-      <div class="main-box-body clearfix">
+      <div id="profile-left" class="main-box-body clearfix">
         <noosfero-profile-image [profile]="vm.profile" class="img-responsive center-block"></noosfero-profile-image>
+        <span class="label" ng-class="{'label-danger': vm.profile.type == 'Community', 'label-info': vm.profile.type == 'Person'}">{{vm.profile | translateProfile}}</span>
         <div class="profile-since">
           {{"profile.member_since" | translate}}: {{vm.profile.created_at | amDateFormat:'MMMM YYYY'}}
         </div>
@@ -21,7 +22,7 @@
           <noosfero-activities [activities]="vm.activities"></noosfero-activities>
         </uib-tab>
         <uib-tab index="0" heading="{{ 'profile.about' | translate }}">
-          <!-- Profile data here -->
+          <profile-data [profile]="vm.profile"></profile-data>
         </uib-tab>
       </uib-tabset>
     </div>
