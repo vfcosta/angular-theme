@@ -1,3 +1,10 @@
+const DEBUG = false;
+
+let log = (message: string, ...args:  any[]) => {
+    if (DEBUG) {
+        console.log(message);
+    }
+};
 
 class ScopeWithEvents {
     listeners = {};
@@ -13,18 +20,18 @@ class ScopeWithEvents {
         }
     }
 
-    public $emit(message: string, arg?: any) {
-        console.log("Emitted " + message);
+    public $emit(message: string, ...args: any[]) {
+        log("Emitted " + message);
         if ((<any>this.listeners)[message]) {
-            console.log("LISTENERS:", (<any>this.listeners)[message]);
+            log("LISTENERS:", (<any>this.listeners)[message]);
             (<any>this.listeners)[message].forEach((f: Function) => {
-                f(arg);
+                f.apply(this, args);
             });
         }
     }
 }
 export var mocks = {
-    scopeWithEvents: new ScopeWithEvents(),
+    scopeWithEvents: (): ScopeWithEvents => new ScopeWithEvents(),
     modalInstance: {
         close: () => { }
     },
