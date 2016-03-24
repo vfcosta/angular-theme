@@ -38,13 +38,10 @@ export class EnvironmentComponent {
     environment: noosfero.Environment;
 
     constructor(environmentService: EnvironmentService, $state: ng.ui.IStateService, notificationService: NotificationService) {
-        //console.debug("Creating EnvironmentComponent...");
         let boxesPromisse = environmentService.getByIdentifier("default").then((environment: noosfero.Environment) => {
-            //console.debug("Set current environment by identifier callback.: ", environment);
             this.environment = environment;
             return environmentService.getBoxes(this.environment.id);
         }).then((boxes: noosfero.Box[]) => {
-            //console.debug("Set environment boxes in callback: ", boxes);
             this.boxes = boxes;
         }).catch(() => {
             $state.transitionTo('main');
