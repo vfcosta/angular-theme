@@ -7,12 +7,13 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
     providers: [provide('profileService', { useClass: ProfileService })]
 })
 @Inject(ProfileService)
+@Inject("amDateFormatFilter")
 export class ProfileInfoComponent {
 
     activities: any;
     profile: noosfero.Profile;
 
-    constructor(private profileService: ProfileService) {
+    constructor(private profileService: ProfileService, private amDateFormatFilter: any) {
         this.activate();
     }
 
