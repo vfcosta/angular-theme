@@ -1,0 +1,103 @@
+/* TABLES */
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+	background-color: $default-bg-hover-color;
+}
+.table {
+	thead > tr {
+		> th {
+			border-bottom: 2px solid $main-bg-color;
+			text-transform: uppercase;
+			font-size: 0.875em;
+
+			> a span {
+				color: $text-color;
+			}
+		}
+	}
+	tbody > tr {
+		> td {
+			font-size: 0.875em;
+			vertical-align: middle;
+			border-top: 1px solid $main-bg-color;
+			padding: 12px 8px;
+
+			&:first-child {
+				font-size: 1.125em;
+				font-weight: bold;
+			}
+		}
+		td {
+			.call-type {
+				display: block;
+				font-size: 0.75em;
+				text-align: center;
+			}
+			.first-line {
+				line-height: 1.5;
+				font-weight: 400;
+				font-size: 1.125em;
+
+				span {
+					font-size: 0.875em;
+					color: #969696;
+					font-weight: 300;
+				}
+			}
+			.second-line {
+				font-size: 0.875em;
+				line-height: 1.2;
+			}
+		}
+		&.table-line-fb > td {
+			background-color: #9daccb;
+			color: #262525;
+		}
+		&.table-line-twitter > td {
+			background-color: #9fccff;
+			color: #262525;
+		}
+		&.table-line-plus > td {
+			background-color: #eea59c;
+			color: #262525;
+		}
+	}
+
+	a {
+		&.table-link {
+			margin: 0 5px;
+			font-size: 1.125em;
+
+			&:hover {
+				text-decoration: none;
+				color: #2980b9;
+			}
+			&.danger {
+				color: $red-color;
+
+				&:hover {
+					color: $red-color-dark;
+				}
+			}
+		}
+	}
+
+	&.table-condensed {
+		tbody > tr {
+			> td {
+				padding: 8px 5px;
+			}
+		}
+	}
+}
+
+.table-striped {
+  tbody > tr {
+  	> td {
+      width: 50%;
+  		background: none;
+  		border: none;
+  		border-bottom: 1px solid #ebebeb;
+    }
+  }
+}

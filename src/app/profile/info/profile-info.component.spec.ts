@@ -8,6 +8,7 @@ describe("Components", () => {
         let $q: ng.IQService;
         let profileServiceMock: any;
         let $stateParams: any;
+        let amDateFormatMock: any;
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;
@@ -17,6 +18,7 @@ describe("Components", () => {
         beforeEach(() => {
             $stateParams = jasmine.createSpyObj("$stateParams", ["profile"]);
             profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["getCurrentProfile", "getActivities"]);
+            amDateFormatMock = jasmine.createSpyObj("amDateFormatMock", ["transform"]);
 
             let getCurrentProfileResponse = $q.defer();
             getCurrentProfileResponse.resolve({ id: 1 });
@@ -29,7 +31,7 @@ describe("Components", () => {
         });
 
         it("get the profile activities", done => {
-            let component: ProfileInfoComponent = new ProfileInfoComponent(profileServiceMock);
+            let component: ProfileInfoComponent = new ProfileInfoComponent(profileServiceMock, amDateFormatMock);
             $rootScope.$apply();
             expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
             expect(profileServiceMock.getActivities).toHaveBeenCalled();
