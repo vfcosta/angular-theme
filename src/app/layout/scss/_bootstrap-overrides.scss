@@ -1,0 +1,94 @@
+/* MAINBOX */
+.main-box {
+		border: 1px solid #e7ebee;
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.1);
+    margin-bottom: 16px;
+    /* overflow: hidden; */
+    @include border-radius($border-radius-base);
+
+	@media (max-width: $break-xs-max) {
+		margin-bottom: 10px;
+	}
+
+	h2 {
+	    font-size: 1.3em;
+	    line-height: 29px;
+	    margin: 0;
+	    padding: 0;
+
+		@media (max-width: $break-xxs-max) {
+			margin-bottom: 5px;
+		}
+	}
+	&.no-header {
+		padding-top: 20px;
+	}
+	.main-box-header {
+	    min-height: 50px;
+	    padding: 10px 20px;
+
+		&.with-border {
+			border-bottom: 1px solid #ecf0f1;
+		}
+	}
+	.main-box-body {
+		padding: 0 20px 20px 20px;
+	}
+}
+
+/* TABS */
+.nav-tabs {
+	background: #f9f9f9;
+	border-color: transparent;
+	margin-bottom: 15px;
+	@include border-radius(3px 3px 0 0);
+
+	> li > a {
+		@include border-radius(0);
+		font-size: 1.125em;
+		font-weight: 300;
+		outline: none;
+		color: #555;
+		margin-right: 3px;
+	}
+	> li > a:hover,
+	> li > a:focus {
+		border-color: transparent;
+		@include border-radius(3px 3px 0 0);
+		color: #555;
+		border-bottom: 0;
+		background: rgba(219, 221, 223, 0.46);
+	}
+	> li.active > a,
+	> li.active > a:hover,
+	> li.active > a:focus {
+		@include border-radius(3px 3px 0 0);
+		border-left: 0;
+		border-top: 2px solid #03a9f4;
+		border-right: 0;
+		background: #fff;
+	}
+}
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+	border-color: $main-bg-color;
+}
+.nav .caret {
+	border-bottom-color: $primary-color;
+	border-top-color: $primary-color;
+}
+.main-box .tabs-header {
+	min-height: 50px;
+	padding: 10px 20px;
+}
+.main-box .tab-content-body {
+	padding: 0 20px 20px 20px;
+	margin-bottom: 0;
+}
+.main-box .tab-content {
+	padding: 0 10px;
+}
+.tabs-wrapper.tabs-no-header .tab-content {
+	padding: 0 20px 20px;
+}

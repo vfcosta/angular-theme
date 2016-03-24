@@ -27,7 +27,8 @@ var buildStyles = function() {
 
   var injectFiles = gulp.src([
     path.join(conf.paths.src, '/app/**/*.scss'),
-    path.join('!' + conf.paths.src, '/app/index.scss')
+    path.join('!' + conf.paths.src, '/app/index.scss'),
+    path.join('!' + conf.paths.src, '/app/layout/scss/*.scss')
   ], { read: false });
 
   var injectOptions = {
