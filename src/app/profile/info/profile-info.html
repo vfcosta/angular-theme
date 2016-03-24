@@ -8,7 +8,7 @@
       <div class="main-box-body clearfix">
         <noosfero-profile-image [profile]="vm.profile" class="img-responsive center-block"></noosfero-profile-image>
         <div class="profile-since">
-          {{"profile.member_since" | translate}}: {{vm.profile.created_at}}
+          {{"profile.member_since" | translate}}: {{vm.profile.created_at | amDateFormat:'MMMM YYYY'}}
         </div>
       </div>
     </div>
