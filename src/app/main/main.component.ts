@@ -15,7 +15,6 @@ import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/p
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html.component";
 
 import {MembersBlockComponent} from "./../layout/blocks/members-block/members-block.component";
-import {PeopleBlockComponent} from "./../layout/blocks/people-block/people-block.component";
 import {CommunitiesBlockComponent} from "./../layout/blocks/communities-block/communities-block.component";
 import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
 import {DateFormat} from "../shared/pipes/date-format.filter";
@@ -83,16 +82,16 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
         EnvironmentComponent,
-        LinkListBlockComponent, CommunitiesBlockComponent
+        LinkListBlockComponent, CommunitiesBlockComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
-        MembersBlockComponent, PeopleBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
+        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
     ],
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
 @StateConfig([
     {
         url: '',
-        component: MainContentComponent,        
+        component: MainContentComponent,
         abstract: true,
         name: 'main',
     },
