@@ -1,4 +1,4 @@
-import {bundle, Component, StateConfig} from "ng-forward";
+import {bundle, Component, StateConfig, Inject} from "ng-forward";
 import {ArticleBlogComponent} from "./../article/types/blog/blog.component";
 
 import {ArticleViewComponent} from "./../article/article-default-view.component";
@@ -20,6 +20,7 @@ import {SessionService} from "../login/session.service";
 
 import {NotificationService} from "../shared/services/notification.service";
 
+import {BodyStateClassesService} from "./../layout/services/body-state-classes.service";
 
 import {Navbar} from "../layout/navbar/navbar";
 
@@ -41,8 +42,11 @@ import {MainBlockComponent} from "../layout/blocks/main-block/main-block.compone
     templateUrl: "app/main/main.html",
     providers: [AuthService, SessionService]
 })
+@Inject(BodyStateClassesService)
 export class MainContentComponent {
-
+    constructor(private bodyStateClassesService: BodyStateClassesService) {
+        bodyStateClassesService.start();
+    }
 }
 
 /**
@@ -67,7 +71,7 @@ export class MainContentComponent {
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
     ],
-    providers: [AuthService, SessionService, NotificationService]
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
 @StateConfig([
     {
@@ -90,5 +94,4 @@ export class MainContentComponent {
     }
 ])
 export class MainComponent {
-
 }
