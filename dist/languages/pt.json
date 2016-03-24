@@ -1,4 +1,4 @@
-{  
+{
   "noosfero.name" : "Noosfero",
   "blocks.profile_image.control_panel": "Painel de Controle",
   "navbar.profile": "Perfil",
@@ -10,6 +10,9 @@
   "language.pt": "Português",
   "language.selector": "Idioma",
   "profile.wall": "Mural do Perfil",
+  "profile.member_since": "Membro desde",
+  "profile.about": "Meus dados",
+  "activities.title": "Atividades",
   "activities.create_article.description": "publicou em",
   "activities.add_member_in_community.description": "entrou na comunidade",
   "activities.new_friendship.description": "fez {friends, plural, one{um novo amigo} other{# novos amigos}}:",
@@ -22,7 +25,5 @@
   "notification.error.default.title": "Oops...",
   "notification.profile.not_found": "Página não encontrada",
   "notification.http_error.401.message": "Não autorizado",
-  "notification.http_error.500.message": "Erro no servidor",
-  "comment.post": "Postar",
-  "comment.reply": "responder"
+  "notification.http_error.500.message": "Erro no servidor"
 }
