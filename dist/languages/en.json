@@ -1,4 +1,4 @@
-{  
+{
   "noosfero.name" : "Noosfero",
   "blocks.profile_image.control_panel": "Control Panel",
   "navbar.profile": "Profile",
@@ -9,7 +9,9 @@
   "language.en": "English",
   "language.pt": "Portuguese",
   "language.selector": "Language",
-  "profile.wall": "Profile Wall",
+  "profile.member_since": "Member since",
+  "profile.about": "About me",
+  "activities.title": "Activities",
   "activities.create_article.description": "has published on",
   "activities.add_member_in_community.description": "has joined the community",
   "activities.new_friendship.description": "has made {friends, plural, one{one new friend} other{# new friends}}:",
@@ -22,7 +24,5 @@
   "notification.error.default.title": "Oops...",
   "notification.profile.not_found": "Page not found",
   "notification.http_error.401.message": "Unauthorized",
-  "notification.http_error.500.message": "Server error",
-  "comment.post": "Post",
-  "comment.reply": "reply"
+  "notification.http_error.500.message": "Server error"
 }

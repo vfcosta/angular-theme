@@ -1,5 +1,3 @@
-
-
 import {AuthService, AUTH_EVENTS} from "./";
 
 describe("Services", () => {
