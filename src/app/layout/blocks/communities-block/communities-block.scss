@@ -1,0 +1,16 @@
+.communities-block {
+  .profile {
+    margin: 10px;
+    img, i.profile-image {
+      width: 60px;
+    }
+    img {
+      display: inline-block;
+      vertical-align: top;
+    }
+    i.profile-image {
+        text-align: center;
+        font-size: 4.5em;
+    }
+  }
+}

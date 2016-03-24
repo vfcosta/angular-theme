@@ -1,0 +1,5 @@
+<div class="communities-block">
+  <a ng-repeat="profile in ctrl.profiles" ui-sref="main.profile.home({profile: profile.identifier})" class="profile">
+    <noosfero-profile-image [profile]="profile"></noosfero-profile-image>
+  </a>
+</div>
