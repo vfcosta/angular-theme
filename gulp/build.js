@@ -52,7 +52,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
     // TODO - check how to make uglify work with ngforward
-    .pipe($.uglify({ preserveComments: $.uglifySaveLicense, mangle: false, output: { beautify: false} })).on('error', conf.errorHandler('Uglify'))
+    .pipe($.uglify({ preserveComments: $.uglifySaveLicense, mangle: true, output: { beautify: false} })).on('error', conf.errorHandler('Uglify'))
     .pipe($.sourcemaps.write('maps'))
     .pipe(jsFilter.restore)
     .pipe(cssFilter)
