@@ -19,10 +19,7 @@ export class EnvironmentService {
     }
 
     getByIdentifier(identifier: string): ng.IPromise<noosfero.Environment> {
-        console.debug("Getting the current environment by identifier in service: " + identifier);
         let p = this.restangular.one('environment').customGET(identifier);
-        console.debug("Return promise: ", p);
-                
         let deferred = this.$q.defer<noosfero.Environment>();
         p.then(this.getHandleSuccessFunction<noosfero.Environment>(deferred));
         p.catch(this.getHandleErrorFunction<noosfero.Environment>(deferred));
@@ -30,10 +27,7 @@ export class EnvironmentService {
     }
     
     getBoxes(id: number) {
-        console.debug("Getting the environment [${id}] boxes in service", id);
         let p = this.restangular.one('environments', id).customGET("boxes");
-        console.debug("Return boxes promise in service: ", p);
-                
         let deferred = this.$q.defer<noosfero.Box[]>();
         p.then(this.getHandleSuccessFunctionKeyArray<noosfero.Box[]>("boxes", deferred));
         p.catch(this.getHandleErrorFunction<noosfero.Box[]>(deferred));
