@@ -1,0 +1,17 @@
+.members-block {
+  .member {
+    img, i.profile-image {
+      width: 60px;
+    }
+    img {
+      display: inline-block;
+      vertical-align: top;
+    }
+    i.profile-image {
+        text-align: center;
+        background-color: #889DB1;
+        color: #F1F1F1;
+        font-size: 4.5em;
+    }
+  }
+}
