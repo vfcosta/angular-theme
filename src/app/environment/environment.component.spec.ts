@@ -25,10 +25,10 @@ describe("Components", () => {
             let getBoxesResponse = $q.defer();
             getBoxesResponse.resolve({ data: { boxes: [{ id: 2 }] } });
 
-            environmentServiceMock.getByIdentifier('default').and.returnValue(environmentResponse.promise);
+            environmentServiceMock.getByIdentifier = jasmine.createSpy('getByIdentifier').and.returnValue(environmentResponse.promise);
             environmentServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);
         });
-        
+
         it("get the default environment", done => {
             let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
             $rootScope.$apply();
@@ -40,13 +40,15 @@ describe("Components", () => {
             let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
             $rootScope.$apply();
             expect(environmentServiceMock.getBoxes).toHaveBeenCalled();
-            expect(component.boxes).toEqual([{ id: 3 }]);
+            expect(component.boxes).toEqual({ data: { boxes: [{ id: 2 }] } });
             done();
         });
 
         it("display notification error when the environment wasn't found", done => {
             let environmentResponse = $q.defer();
             environmentResponse.reject();
+
+            environmentServiceMock.getByIdentifier = jasmine.createSpy('getByIdentifier').and.returnValue(environmentResponse.promise);
 
             let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
             $rootScope.$apply();

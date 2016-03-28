@@ -29,7 +29,7 @@ import {EnvironmentHomeComponent} from "./environment-home.component";
                 controllerAs: "vm"
             }
         }
-    }   
+    }
 ])
 @Inject(EnvironmentService, "$state")
 export class EnvironmentComponent {

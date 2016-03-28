@@ -17,10 +17,10 @@ describe("Components", () => {
             new Provider('truncateFilter', { useValue: () => { } }),
             new Provider('stripTagsFilter', { useValue: () => { } }),
             new Provider('$state', { useValue: state }),
-            new Provider('ProfileService', {
+            new Provider('EnvironmentService', {
                 useValue: {
-                    getProfileMembers: (profileId: number, filters: any): any => {
-                        return Promise.resolve({ data: { people: [{ identifier: "person1" }] } });
+                    getEnvironmentPeople: (filters: any): any => {
+                        return Promise.resolve([{ identifier: "person1" }]);
                     }
                 }
             }),

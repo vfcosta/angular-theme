@@ -17,6 +17,8 @@ import {HtmlUtils} from "../html-utils";
 @Inject("$rootScope", "$document", "$state", AuthService)
 export class BodyStateClassesService {
 
+    private started: boolean = false;
+
     public static get USER_LOGGED_CLASSNAME(): string { return "noosfero-user-logged"; }
     public static get ROUTE_STATE_CLASSNAME_PREFIX(): string { return "noosfero-route-"; }
 
@@ -32,18 +34,21 @@ export class BodyStateClassesService {
     }
 
     start() {
-        this.setupUserLoggedClassToggle();
-        this.setupStateClassToggle();
+        if (!this.started) {
+            this.setupUserLoggedClassToggle();
+            this.setupStateClassToggle();
+            this.started = true;
+        }
     }
 
-    getStateChangeSuccessHandlerFunction(bodyElement: ng.IAugmentedJQuery): (event: ng.IAngularEvent, toState: ng.ui.IState) => void {
+    private getStateChangeSuccessHandlerFunction(bodyElement: ng.IAugmentedJQuery): (event: ng.IAngularEvent, toState: ng.ui.IState) => void {
         let self = this;
         return (event: ng.IAngularEvent, toState: ng.ui.IState) => {
-            self.switchStateClasses(bodyElement, BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX);
+            self.switchStateClasses(bodyElement, toState);
         };
     }
 
-    switchStateClasses(bodyElement: ng.IAugmentedJQuery, state: ng.ui.IState) {
+    private switchStateClasses(bodyElement: ng.IAugmentedJQuery, state: ng.ui.IState) {
         HtmlUtils.removeCssClassByPrefix(bodyElement[0], BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX);
         bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + state.name);
     }
