@@ -17,8 +17,7 @@ export class CommunitiesBlockComponent {
 
     ngOnInit() {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 5;
-
-        this.communityService.list(null, { limit: limit }).then((result: noosfero.RestResult<noosfero.Community[]>) => {
+        this.communityService.getByOwner(this.owner, { limit: limit }).then((result: noosfero.RestResult<noosfero.Community[]>) => {
             this.profiles = result.data;
         });
     }

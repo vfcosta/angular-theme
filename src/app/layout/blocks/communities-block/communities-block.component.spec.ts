@@ -19,7 +19,7 @@ describe("Components", () => {
             new Provider('$state', { useValue: state }),
             new Provider('CommunityService', {
                 useValue: {
-                    list: (profileId: number, params: any): any => {
+                    getByOwner: (owner: any, params: any): any => {
                         return Promise.resolve({ data: [{ identifier: "community1" }] });
                     }
                 }

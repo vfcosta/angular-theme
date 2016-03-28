@@ -19,10 +19,38 @@ describe("Services", () => {
 
         describe("Succesfull requests", () => {
 
-            it("should list communities", (done) => {
+            it("should list environment communities", (done) => {
                 $httpBackend.expectGET(`/api/v1/communities`).respond(200, { communities: [{ name: "community1" }] });
-                communityService.list().then((result: noosfero.RestResult<noosfero.Community[]>) => {
+                communityService.getByEnvironment().then((result: noosfero.RestResult<noosfero.Community[]>) => {
                     expect(result.data).toEqual([{ name: "community1" }]);
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should list person communities", (done) => {
+                $httpBackend.expectGET(`/api/v1/people/1/communities`).respond(200, { communities: [{ name: "community1" }] });
+                let person = <any>{ id: 1 };
+                communityService.getByPerson(person).then((result: noosfero.RestResult<noosfero.Community[]>) => {
+                    expect(result.data).toEqual([{ name: "community1" }]);
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should list owner communities when it is an environment", (done) => {
+                $httpBackend.expectGET(`/api/v1/communities`).respond(200, { communities: [{ name: "community1" }] });
+                let owner = <any>{ id: 1 };
+                communityService.getByOwner(owner).then((result: noosfero.RestResult<noosfero.Community[]>) => {
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should list owner communities when it is an person", (done) => {
+                $httpBackend.expectGET(`/api/v1/people/1/communities`).respond(200, { communities: [{ name: "community1" }] });
+                let owner = <any>{ id: 1, type: "Person" };
+                communityService.getByOwner(owner).then((result: noosfero.RestResult<noosfero.Community[]>) => {
                     done();
                 });
                 $httpBackend.flush();
