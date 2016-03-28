@@ -113,7 +113,7 @@ describe("BodyStateClasses Service", () => {
         $rootScope = <any>helpers.mocks.scopeWithEvents();
         bodyElJq.addClass = (className: string) => {
             bodyEl.className = className;
-        }
+        };
         bodyElJq.removeClass = jasmine.createSpy("removeClass");
 
         let service = getService();

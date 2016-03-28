@@ -7,15 +7,15 @@ export class EnvironmentService {
     private _currentEnvironmentPromise: ng.IDeferred<noosfero.Environment>;
 
     constructor(private restangular: restangular.IService, private $q: ng.IQService) {
-        
+
     }
 
-    getEnvironmentPeople(params: any) : ng.IPromise<noosfero.Person[]> {
+    getEnvironmentPeople(params: any): ng.IPromise<noosfero.Person[]> {
         let p = this.restangular.one('people').get(params);
         let deferred = this.$q.defer<noosfero.Person[]>();
         p.then(this.getHandleSuccessFunctionKeyArray<noosfero.Person[]>("people", deferred));
         p.catch(this.getHandleErrorFunction<noosfero.Person[]>(deferred));
-        return deferred.promise;        
+        return deferred.promise;
     }
 
     getByIdentifier(identifier: string): ng.IPromise<noosfero.Environment> {
@@ -25,7 +25,7 @@ export class EnvironmentService {
         p.catch(this.getHandleErrorFunction<noosfero.Environment>(deferred));
         return deferred.promise;
     }
-    
+
     getBoxes(id: number) {
         let p = this.restangular.one('environments', id).customGET("boxes");
         let deferred = this.$q.defer<noosfero.Box[]>();
@@ -33,7 +33,7 @@ export class EnvironmentService {
         p.catch(this.getHandleErrorFunction<noosfero.Box[]>(deferred));
         return deferred.promise;
     }
-    
+
     /** TODO - Please, use the base class RestangularService
      * (description)
      * 
@@ -66,12 +66,12 @@ export class EnvironmentService {
          * @param {restangular.IResponse} response (description)
          */
         let successFunction = (response: restangular.IResponse): void => {
-            let data = this.restangular.stripRestangular(response.data)
+            let data = this.restangular.stripRestangular(response.data);
             deferred.resolve(data);
         };
         return successFunction;
     }
-    
+
     /**
      * TODO - use restangular service as base class, and this will not be necessary here anymore
      */
@@ -88,5 +88,5 @@ export class EnvironmentService {
             deferred.resolve(data);
         };
         return successFunction;
-    }    
+    }
 }

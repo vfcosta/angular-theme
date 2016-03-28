@@ -18,18 +18,18 @@ import {NotificationService} from "../shared/services/notification.service";
 })
 @Inject(EnvironmentService, "$log", "$sce")
 export class EnvironmentHomeComponent {
-    
+
     environment: noosfero.Environment;
-    
+
     constructor(private environmentService: EnvironmentService, private $sce: ng.ISCEService) {
         environmentService.getByIdentifier("default").then((result: noosfero.Environment) => {
             this.environment = result;
         });
     }
-    
+
     getEnvironmentDescription() {
-        if(this.environment && this.environment.settings && this.environment.settings.description){
-            return this.$sce.trustAsHtml(this.environment.settings.description);    
+        if (this.environment && this.environment.settings && this.environment.settings.description) {
+            return this.$sce.trustAsHtml(this.environment.settings.description);
         }
         else {
             return "";

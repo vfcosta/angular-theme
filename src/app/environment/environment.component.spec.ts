@@ -28,7 +28,7 @@ describe("Components", () => {
             environmentServiceMock.getByIdentifier('default').and.returnValue(environmentResponse.promise);
             environmentServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);
         });
-        
+
         it("get the default environment", done => {
             let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
             $rootScope.$apply();
