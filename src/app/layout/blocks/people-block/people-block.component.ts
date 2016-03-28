@@ -14,12 +14,10 @@ export class PeopleBlockComponent {
     people: noosfero.Person[] = [];
 
     constructor(private environmentService: EnvironmentService) {
-        console.debug("Created PeopleBlockComponent");
     }
 
     ngOnInit() {
         this.environmentService.getEnvironmentPeople({ limit: '6' }).then((people: noosfero.Person[]) => {
-            console.debug("People returned in PeopleBlockComponent: ", people);
             this.people = people;
         });
     }
