@@ -23,7 +23,7 @@ export class CommunityService extends RestangularService<noosfero.Community> {
 
     getByOwner(owner: any, params?: any) {
         // TODO see a better way to verify the owner type
-        if (owner.type == "Person") {
+        if (owner.type === "Person") {
             return this.getByPerson(owner, params);
         } else {
             return this.getByEnvironment(params);
