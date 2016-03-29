@@ -49,7 +49,6 @@ describe("Services", () => {
             $rootScope.$digest();
 
             expect(component["angularLoad"].loadScript).toHaveBeenCalledWith("/bower_components/moment/locale/pt.js");
-            expect(component["angularLoad"].loadScript).toHaveBeenCalledWith("/bower_components/messageformat/locale/pt.js");
             expect(component["tmhDynamicLocale"].set).toHaveBeenCalledWith("pt");
             expect(component["$translate"].use).toHaveBeenCalledWith("pt");
             done();

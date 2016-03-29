@@ -31,9 +31,7 @@ export class TranslatorService {
         }
         this.changeMomentLocale(language);
         this.tmhDynamicLocale.set(language);
-        this.angularLoad.loadScript(`/bower_components/messageformat/locale/${language}.js`).then(() => {
-            return this.$translate.use(language);
-        });
+        return this.$translate.use(language);
     }
 
     translate(text: string) {
