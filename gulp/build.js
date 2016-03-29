@@ -3,7 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
-var noosferoThemePrefix = "/designs/themes/angular-theme/dist/";
+var noosferoThemePrefix = path.join("/designs/themes/angular-theme", conf.paths.dist, '/');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
