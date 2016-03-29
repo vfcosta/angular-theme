@@ -27,3 +27,13 @@ See some important folders bellow:
 - Content viewer component: `src/app/article/content-viewer`
 - Profile component: `src/app/profile`
 - Profile Info component: `src/app/profile/info`
+
+
+## Change theme
+
+1. Create the theme folder inside themes
+1. Configure application to use the new theme, e.g.:
+`npm config set angular-theme:theme custom-theme`
+1. Create an app folder inside custom-theme and add your custom scss files
+1. Put the templates that you want to override in the same structure from the main application source, e.g.:
+`src/app/profile/profile.html` will be overriden by `themes/custom-theme/app/profile/profile.html`
