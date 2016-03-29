@@ -31,6 +31,20 @@ namespace noosfero {
          */
         type: string;
 
+        /**
+         * @ngdoc property
+         * @name name
+         * @propertyOf noofero.Profile
+         * @returns {string} The name of Profile (e.g.: "Mr. Janson", etc.)
+         */
         name: string;
+
+        /**
+         * @ngdoc property
+         * @name additional_data
+         * @propertyOf noofero.Profile
+         * @returns {string} A key => value custom fields data of Profile (e.g.: "{'Address':'Street A, Number 102...'}")
+         */
+        additional_data?: any;
     }
 }

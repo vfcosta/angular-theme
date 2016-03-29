@@ -5,9 +5,9 @@ import {Injectable, Inject, Provider, Input, provide, Component} from 'ng-forwar
 
 
 export var ngforward = {
-  providers: providers,
-  TestComponentBuilder: TestComponentBuilder,
-  ComponentFixture: ComponentFixture
+    providers: providers,
+    TestComponentBuilder: TestComponentBuilder,
+    ComponentFixture: ComponentFixture
 };
 
 export interface ComponentFixtureTemplate {
@@ -21,11 +21,19 @@ export let tcb: TestComponentBuilder = new TestComponentBuilder();
 export function quickCreateComponent({
     providers = [],
     directives = [],
-    template = '<div></div>'
+    template = '<div></div>',
+    properties = {},
 }): Promise<ComponentFixture> {
 
     @Component({ selector: 'test', template, directives, providers })
-    class Test { }
+    class Test {
+
+        constructor() {
+            Object.keys(properties).forEach((key) => {
+                this[key] = properties[key];
+            });
+        }
+    }
 
     return tcb.createAsync(Test);
 }
