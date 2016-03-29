@@ -46,7 +46,11 @@ browserSync.use(browserSyncSpa({
 }));
 
 gulp.task('serve', ['watch'], function () {
-  browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
+  var srcPaths = [path.join(conf.paths.tmp, '/serve')];
+  conf.paths.allSources.reverse().forEach(function(src) {
+    srcPaths.push(src);
+  });
+  browserSyncInit(srcPaths);
 });
 
 gulp.task('serve:dist', ['build'], function () {

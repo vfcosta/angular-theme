@@ -10,10 +10,11 @@ var $ = require('gulp-load-plugins')({
 });
 
 gulp.task('partials', function () {
-  return gulp.src([
-    path.join(conf.paths.src, '/app/**/*.html'),
-    path.join(conf.paths.tmp, '/serve/app/**/*.html')
-  ])
+  var srcPaths = [path.join(conf.paths.tmp, '/serve/app/**/*.html')];
+  conf.paths.allSources.forEach(function(src) {
+    srcPaths.push(path.join(src, '/app/**/*.html'));
+  });
+  return gulp.src(srcPaths)
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
