@@ -2,7 +2,9 @@
 
 var path = require('path');
 var gulp = require('gulp');
+var rename = require('gulp-rename');
 var conf = require('./conf');
+
 var noosferoThemePrefix = path.join("/designs/themes/angular-theme", conf.paths.dist, '/');
 
 var $ = require('gulp-load-plugins')({
@@ -117,4 +119,14 @@ gulp.task('clean-docs', [], function() {
     return $.del([path.join(conf.paths.docs, '/')]);    
 });
 
-gulp.task('build', ['html', 'fonts', 'other', 'locale']);
+gulp.task('noosfero', ['html'], function () {
+    gulp.src('layouts/**/*')
+      .pipe(gulp.dest(path.join(conf.paths.dist, "layouts")));
+    gulp.src('theme.yml')
+      .pipe(gulp.dest(conf.paths.dist));
+    return gulp.src(path.join(conf.paths.dist, 'index.html'))
+      .pipe(rename('index.html.erb'))
+      .pipe(gulp.dest(conf.paths.dist));
+});
+
+gulp.task('build', ['html', 'fonts', 'other', 'locale', 'noosfero']);
