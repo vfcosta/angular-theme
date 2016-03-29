@@ -19,12 +19,14 @@ exports.paths = {
   tmp: '.tmp',
   e2e: 'e2e',
   docs: 'docs',
-  theme: argv.theme ? path.join('themes', argv.theme) : null
+  themes: 'themes'
 };
-exports.paths.allSources = [exports.paths.src];
-if(exports.paths.theme) {
-  exports.paths.allSources.push(exports.paths.theme);
+exports.configTheme = function(theme) {
+  exports.paths.theme = path.join(exports.paths.themes, theme || "default");
+  exports.paths.allSources = [exports.paths.src, exports.paths.theme];
+  exports.paths.dist = path.join("dist", exports.paths.theme);
 }
+exports.configTheme(argv.theme);
 
 /**
  *  Wiredep is the lib which inject bower dependencies in your project

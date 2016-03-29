@@ -7,8 +7,12 @@
     "moment": "^2.11.2",
     "ng-forward": "0.0.1-alpha.12"
   },
+  "config": {
+    "theme": "default"
+  },
   "scripts": {
     "build": "webpack; gulp clean && gulp --theme=$npm_package_config_theme build",
+    "build-all": "gulp clean && for d in ./themes/* ; do (gulp --theme=`basename $d` build); done",
     "webpack": "webpack",
     "karma": "concurrently \"webpack -w\" \"karma start\"",
     "docs": "gulp ngdocs; static-server docs",
