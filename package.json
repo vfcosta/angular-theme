@@ -8,7 +8,7 @@
     "ng-forward": "0.0.1-alpha.12"
   },
   "scripts": {
-    "build": "webpack; gulp clean && gulp build",
+    "build": "webpack; gulp clean && gulp --theme=$npm_package_config_theme build",
     "webpack": "webpack",
     "karma": "concurrently \"webpack -w\" \"karma start\"",
     "docs": "gulp ngdocs; static-server docs",
@@ -19,7 +19,7 @@
     "test": "webpack -w --test",
     "jenkins": "webpack && karma start --single-run",
     "postinstall": "bower install; typings install; cd dev-scripts; typings install; cd ../; npm run fix-jqlite",
-    "start": "concurrently \"webpack -w\" \"gulp serve\"",
+    "start": "concurrently \"webpack -w\" \"gulp --theme=$npm_package_config_theme serve\"",
     "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts",
     "fix-jqlite": "ts-node --project ./dev-scripts dev-scripts/fix-jqlite.ts"
   },

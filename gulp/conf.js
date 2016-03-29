@@ -6,7 +6,9 @@
  *  of the tasks
  */
 
+var argv = require('minimist')(process.argv.slice(2));
 var gutil = require('gulp-util');
+var path = require('path');
 
 /**
  *  The main paths of your project handle these with care
@@ -16,8 +18,13 @@ exports.paths = {
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
-  docs: 'docs'
+  docs: 'docs',
+  theme: argv.theme ? path.join('themes', argv.theme) : null
 };
+exports.paths.allSources = [exports.paths.src];
+if(exports.paths.theme) {
+  exports.paths.allSources.push(exports.paths.theme);
+}
 
 /**
  *  Wiredep is the lib which inject bower dependencies in your project

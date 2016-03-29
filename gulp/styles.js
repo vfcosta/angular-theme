@@ -25,11 +25,14 @@ var buildStyles = function() {
     style: 'expanded'
   };
 
-  var injectFiles = gulp.src([
-    path.join(conf.paths.src, '/app/**/*.scss'),
+  var srcPaths = [
     path.join('!' + conf.paths.src, '/app/index.scss'),
     path.join('!' + conf.paths.src, '/app/layout/scss/*.scss')
-  ], { read: false });
+  ];
+  conf.paths.allSources.forEach(function(src) {
+    srcPaths.push(path.join(src, '/app/**/*.scss'));
+  });
+  var injectFiles = gulp.src(srcPaths, { read: false });
 
   var injectOptions = {
     transform: function(filePath) {
