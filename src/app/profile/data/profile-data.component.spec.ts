@@ -52,11 +52,10 @@ describe('Profile data component', () => {
         profileMock.additional_data = {
             'Address': 'Street A, Number 102'
         };
+        
         buildComponent().then((fixture: ComponentFixture) => {
             let profileData: ProfileDataComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
             profileData.profile = profileMock;
-
-            expect(profileData.hasCustomFields()).toBeTruthy();
             expect(fixture.debugElement.query('div.profile-custom-fields').length).toEqual(1);
         });
     });
