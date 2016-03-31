@@ -29,5 +29,7 @@
   "notification.error.default.title": "Oops...",
   "notification.profile.not_found": "Página não encontrada",
   "notification.http_error.401.message": "Não autorizado",
-  "notification.http_error.500.message": "Erro no servidor"
+  "notification.http_error.500.message": "Erro no servidor",
+  "comment.post": "Commentar",
+  "comment.reply": "responder"
 }

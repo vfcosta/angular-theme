@@ -1,5 +1,5 @@
 import { Inject, Input, Component, provide } from 'ng-forward';
-import { PostCommentComponent } from "./post-comment.component";
+import { PostCommentComponent } from "./post-comment/post-comment.component";
 import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
 import { CommentComponent } from "./comment.component";
 

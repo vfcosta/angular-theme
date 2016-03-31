@@ -1,5 +1,5 @@
 import {Provider, provide, Component} from 'ng-forward';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from "../../../../spec/helpers";
 
 import {PostCommentComponent} from './post-comment.component';
 
