@@ -22,15 +22,15 @@ export function quickCreateComponent({
     providers = [],
     directives = [],
     template = '<div></div>',
-    properties = {},
+    properties = <any>{},
 }): Promise<ComponentFixture> {
 
     @Component({ selector: 'test', template, directives, providers })
     class Test {
 
         constructor() {
-            Object.keys(properties).forEach((key) => {
-                this[key] = properties[key];
+            Object.keys(properties).forEach((key: any) => {
+                (<any>this)[key] = <any>properties[key];
             });
         }
     }
