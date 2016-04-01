@@ -22,33 +22,39 @@ describe("Components", () => {
             new Provider('NotificationService', { useValue: helpers.mocks.notificationService })
         ].concat(helpers.provideFilters("translateFilter"));
 
-        @Component({ selector: 'test-container-component', directives: [CommentsComponent], template: htmlTemplate, providers: providers })
-        class ContainerComponent {
-            article = { id: 1 };
+        let properties = { article: { id: 1 }, parent: null };
+        function createComponent() {
+            return helpers.quickCreateComponent({
+                providers: providers,
+                directives: [CommentsComponent],
+                template: htmlTemplate,
+                properties: properties
+            });
         }
 
+
         it("render comments associated to an article", done => {
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
+            createComponent().then(fixture => {
                 expect(fixture.debugElement.queryAll("noosfero-comment").length).toEqual(2);
                 done();
             });
         });
 
         it("render a post comment tag", done => {
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
+            createComponent().then(fixture => {
                 expect(fixture.debugElement.queryAll("noosfero-post-comment").length).toEqual(1);
                 done();
             });
         });
 
-        it("update comments list when receive an event", done => {
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
-                fixture.debugElement.getLocal("$rootScope").$emit(PostCommentComponent.EVENT_COMMENT_RECEIVED, { id: 1 });
+        it("update comments list when receive an reply", done => {
+            properties.parent = { id: 2 };
+            createComponent().then(fixture => {
+                fixture.debugElement.getLocal("$rootScope").$emit(PostCommentComponent.EVENT_COMMENT_RECEIVED, { id: 1, reply_of: properties.parent });
                 fixture.debugElement.getLocal("$rootScope").$apply();
                 expect(fixture.debugElement.queryAll("noosfero-comment").length).toEqual(3);
                 done();
             });
         });
-
     });
 });

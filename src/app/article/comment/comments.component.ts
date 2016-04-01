@@ -12,17 +12,26 @@ import { CommentComponent } from "./comment.component";
 export class CommentsComponent {
 
     comments: noosfero.Comment[] = [];
+    @Input() showForm = true;
     @Input() article: noosfero.Article;
+    @Input() parent: noosfero.Comment;
 
     constructor(private commentService: CommentService, private $rootScope: ng.IScope) {
         $rootScope.$on(PostCommentComponent.EVENT_COMMENT_RECEIVED, (event: ng.IAngularEvent, comment: noosfero.Comment) => {
-            this.comments.push(comment);
+            if ((!this.parent && !comment.reply_of) || (comment.reply_of && this.parent && comment.reply_of.id === this.parent.id)) {
+                if (!this.comments) this.comments = [];
+                this.comments.push(comment);
+            }
         });
     }
 
     ngOnInit() {
-        this.commentService.getByArticle(this.article).then((result: noosfero.RestResult<noosfero.Comment[]>) => {
-            this.comments = result.data;
-        });
+        if (this.parent) {
+            this.comments = this.parent.replies;
+        } else {
+            this.commentService.getByArticle(this.article).then((result: noosfero.RestResult<noosfero.Comment[]>) => {
+                this.comments = result.data;
+            });
+        }
     }
 }

@@ -19,7 +19,5 @@
     <div class="title">{{ctrl.comment.title}}</div>
     <div class="body">{{ctrl.comment.body}}</div>
   </div>
-
-  <noosfero-post-comment ng-if="ctrl.showReply" [article]="ctrl.article" [reply-of]="ctrl.comment"></noosfero-post-comment>
-
+  <noosfero-comments [show-form]="ctrl.showReply" [article]="ctrl.article" [parent]="ctrl.comment"></noosfero-comments>
 </div>

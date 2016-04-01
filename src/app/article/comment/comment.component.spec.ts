@@ -30,12 +30,11 @@ describe("Components", () => {
             });
         });
 
-        it("render a post comment tag when click in reply", done => {
+        it("set show reply to true when click reply", done => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
                 let component: CommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
                 component.reply();
-                fixture.debugElement.getLocal("$rootScope").$apply();
-                expect(fixture.debugElement.queryAll("noosfero-post-comment").length).toEqual(1);
+                expect(component.showReply).toBeTruthy(1);
                 done();
             });
         });

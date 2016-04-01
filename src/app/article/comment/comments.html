@@ -1,5 +1,5 @@
 <div class="comments">
-  <noosfero-post-comment [article]="ctrl.article"></noosfero-post-comment>
+  <noosfero-post-comment ng-if="ctrl.showForm" [article]="ctrl.article" [parent]="ctrl.parent"></noosfero-post-comment>
   
   <div class="comments-list">
     <noosfero-comment ng-repeat="comment in ctrl.comments" [comment]="comment" [article]="ctrl.article"></noosfero-comment>

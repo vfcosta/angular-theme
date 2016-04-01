@@ -33,9 +33,9 @@ describe("Components", () => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
                 let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
                 commentService.createInArticle = jasmine.createSpy("createInArticle").and.returnValue(helpers.mocks.promiseResultTemplate({ data: {} }));
-                component["$rootScope"].$emit = jasmine.createSpy("$emit");
+                component["$scope"].$emit = jasmine.createSpy("$emit");
                 component.save();
-                expect(component["$rootScope"].$emit).toHaveBeenCalledWith(PostCommentComponent.EVENT_COMMENT_RECEIVED, jasmine.any(Object));
+                expect(component["$scope"].$emit).toHaveBeenCalledWith(PostCommentComponent.EVENT_COMMENT_RECEIVED, jasmine.any(Object));
                 done();
             });
         });
@@ -55,9 +55,9 @@ describe("Components", () => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
                 let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
                 component.comment = <any>{ reply_of_id: null };
-                component.replyOf = <any>{ id: 10 };
+                component.parent = <any>{ id: 10 };
                 component.save();
-                expect(component.comment.reply_of_id).toEqual(component.replyOf.id);
+                expect(component.comment.reply_of_id).toEqual(component.parent.id);
                 done();
             });
         });
