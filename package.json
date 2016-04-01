@@ -7,8 +7,12 @@
     "moment": "^2.11.2",
     "ng-forward": "0.0.1-alpha.12"
   },
+  "config": {
+    "theme": "default"
+  },
   "scripts": {
-    "build": "webpack; gulp clean && gulp build",
+    "build": "webpack; gulp clean && gulp --theme=$npm_package_config_theme build",
+    "build-all": "gulp clean && for d in ./themes/* ; do (gulp --theme=`basename $d` build); done",
     "webpack": "webpack",
     "karma": "concurrently \"webpack -w\" \"karma start\"",
     "docs": "gulp ngdocs; static-server docs",
@@ -19,7 +23,7 @@
     "test": "webpack -w --test",
     "jenkins": "webpack && karma start --single-run",
     "postinstall": "bower install; typings install; cd dev-scripts; typings install; cd ../; npm run fix-jqlite",
-    "start": "concurrently \"webpack -w\" \"gulp serve\"",
+    "start": "concurrently \"webpack -w\" \"gulp --theme=$npm_package_config_theme serve\"",
     "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts",
     "fix-jqlite": "ts-node --project ./dev-scripts dev-scripts/fix-jqlite.ts"
   },
@@ -35,7 +39,7 @@
     "estraverse": "~4.1.0",
     "expose-loader": "^0.7.1",
     "glob": "^7.0.0",
-    "gulp": "~3.9.0",
+    "gulp": "^3.9.1",
     "gulp-angular-filesort": "~1.1.1",
     "gulp-angular-templatecache": "~1.8.0",
     "gulp-autoprefixer": "~3.0.2",
@@ -75,6 +79,7 @@
     "karma-webpack": "^1.7.0",
     "lodash": "~3.10.1",
     "main-bower-files": "~2.9.0",
+    "merge-stream": "^1.0.0",
     "on-build-webpack": "^0.1.0",
     "phantomjs": "~1.9.18",
     "phantomjs-polyfill": "0.0.2",

@@ -2,18 +2,22 @@
 
 var path = require('path');
 var gulp = require('gulp');
+var rename = require('gulp-rename');
+var merge = require('merge-stream');
 var conf = require('./conf');
-var noosferoThemePrefix = "/designs/themes/angular-theme/dist/";
+
+var noosferoThemePrefix = path.join("/designs/themes/angular-theme", conf.paths.dist, '/');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
 gulp.task('partials', function () {
-  return gulp.src([
-    path.join(conf.paths.src, '/app/**/*.html'),
-    path.join(conf.paths.tmp, '/serve/app/**/*.html')
-  ])
+  var srcPaths = [path.join(conf.paths.tmp, '/serve/app/**/*.html')];
+  conf.paths.allSources.forEach(function(src) {
+    srcPaths.push(path.join(src, '/app/**/*.html'));
+  });
+  return gulp.src(srcPaths)
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -100,10 +104,11 @@ gulp.task('other', function () {
     return file.stat.isFile();
   });
 
-  return gulp.src([
-    path.join(conf.paths.src, '/**/*'),
-    path.join('!' + conf.paths.src, '/**/*.{map,ts,html,css,js,scss}')
-  ])
+  var srcPaths = [path.join('!' + conf.paths.src, '/**/*.{map,ts,html,css,js,scss}')];
+  conf.paths.allSources.forEach(function(src) {
+    srcPaths.push(path.join(src, '/**/*'));
+  });
+  return gulp.src(srcPaths)
     .pipe(fileFilter)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
@@ -116,4 +121,15 @@ gulp.task('clean-docs', [], function() {
     return $.del([path.join(conf.paths.docs, '/')]);    
 });
 
-gulp.task('build', ['html', 'fonts', 'other', 'locale']);
+gulp.task('noosfero', ['html'], function () {
+    var layouts = gulp.src('layouts/**/*')
+      .pipe(gulp.dest(path.join(conf.paths.dist, "layouts")));
+    var theme = gulp.src('theme.yml')
+      .pipe(gulp.dest(conf.paths.dist));
+    var index = gulp.src(path.join(conf.paths.dist, 'index.html'))
+      .pipe(rename('index.html.erb'))
+      .pipe(gulp.dest(conf.paths.dist));
+    return merge(layouts, theme, index);
+});
+
+gulp.task('build', ['html', 'fonts', 'other', 'locale', 'noosfero']);
