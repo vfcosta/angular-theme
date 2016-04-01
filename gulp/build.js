@@ -104,10 +104,11 @@ gulp.task('other', function () {
     return file.stat.isFile();
   });
 
-  return gulp.src([
-    path.join(conf.paths.src, '/**/*'),
-    path.join('!' + conf.paths.src, '/**/*.{map,ts,html,css,js,scss}')
-  ])
+  var srcPaths = [path.join('!' + conf.paths.src, '/**/*.{map,ts,html,css,js,scss}')];
+  conf.paths.allSources.forEach(function(src) {
+    srcPaths.push(path.join(src, '/**/*'));
+  });
+  return gulp.src(srcPaths)
     .pipe(fileFilter)
     .pipe(gulp.dest(path.join(conf.paths.dist, '/')));
 });
