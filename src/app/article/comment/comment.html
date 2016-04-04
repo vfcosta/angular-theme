@@ -10,14 +10,12 @@
         <h4 class="media-heading">{{ctrl.comment.author.name}}</h4>
       </a>
       <span class="date" am-time-ago="ctrl.comment.created_at | dateFormat"></span>
-      <a href="#" (click)="ctrl.reply()">
-        <span class="pull-right small text-muted">
-          {{"comment.reply" | translate}}
-        </span>
-      </a>
     </div>
     <div class="title">{{ctrl.comment.title}}</div>
     <div class="body">{{ctrl.comment.body}}</div>
+    <a href="#" (click)="ctrl.reply()" class="small text-muted">
+      {{"comment.reply" | translate}}
+    </a>
   </div>
   <noosfero-comments [show-form]="ctrl.showReply" [article]="ctrl.article" [parent]="ctrl.comment"></noosfero-comments>
 </div>
