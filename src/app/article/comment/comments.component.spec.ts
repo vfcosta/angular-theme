@@ -18,11 +18,12 @@ describe("Components", () => {
             .and.returnValue(helpers.mocks.promiseResultTemplate({ data: comments }));
 
         let providers = [
-            new Provider('CommentService', { useValue: commentService }),
-            new Provider('NotificationService', { useValue: helpers.mocks.notificationService })
+            helpers.createProviderToValue('CommentService', commentService),
+            helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
+            helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
         ].concat(helpers.provideFilters("translateFilter"));
 
-        let properties = { article: { id: 1 }, parent: null };
+        let properties = { article: { id: 1 }, parent: <any>null };
         function createComponent() {
             return helpers.quickCreateComponent({
                 providers: providers,
