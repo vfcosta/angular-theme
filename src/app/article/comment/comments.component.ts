@@ -15,6 +15,8 @@ export class CommentsComponent {
     @Input() showForm = true;
     @Input() article: noosfero.Article;
     @Input() parent: noosfero.Comment;
+    private page = 1;
+    private perPage = 5;
 
     constructor(private commentService: CommentService, private $rootScope: ng.IScope) {
         $rootScope.$on(PostCommentComponent.EVENT_COMMENT_RECEIVED, (event: ng.IAngularEvent, comment: noosfero.Comment) => {
@@ -29,9 +31,14 @@ export class CommentsComponent {
         if (this.parent) {
             this.comments = this.parent.replies;
         } else {
-            this.commentService.getByArticle(this.article).then((result: noosfero.RestResult<noosfero.Comment[]>) => {
-                this.comments = result.data;
-            });
+            this.loadNextPage();
         }
+    }
+
+    loadNextPage() {
+        this.commentService.getByArticle(this.article, { page: this.page, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Comment[]>) => {
+            this.comments = this.comments.concat(result.data);
+            this.page++;
+        });
     }
 }

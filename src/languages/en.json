@@ -32,5 +32,6 @@
   "notification.http_error.500.message": "Server error",
   "comment.post": "Post a comment",
   "comment.post.placeholder": "Join the discussion...",
+  "comment.pagination.more": "More",
   "comment.reply": "reply"
 }
