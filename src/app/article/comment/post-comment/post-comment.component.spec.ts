@@ -11,9 +11,11 @@ describe("Components", () => {
         beforeEach(angular.mock.module("templates"));
 
         let commentService = jasmine.createSpyObj("commentService", ["createInArticle"]);
+        let user = {};
         let providers = [
             new Provider('CommentService', { useValue: commentService }),
-            new Provider('NotificationService', { useValue: helpers.mocks.notificationService })
+            new Provider('NotificationService', { useValue: helpers.mocks.notificationService }),
+            new Provider('SessionService', { useValue: helpers.mocks.sessionWithCurrentUser(user) })
         ].concat(helpers.provideFilters("translateFilter"));
 
         @Component({ selector: 'test-container-component', directives: [PostCommentComponent], template: htmlTemplate, providers: providers })

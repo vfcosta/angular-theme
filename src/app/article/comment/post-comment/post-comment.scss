@@ -1,0 +1,22 @@
+.comments {
+  .post-comment {
+    .media {
+      border-top: 2px solid #F3F3F3;
+      .media-left {
+        padding: 10px 0;
+      }
+      .media-body {
+        background-color: transparent;
+      }
+      button {
+        margin-top: 10px;
+        &.ng-hide-add {
+          animation: 0.5s lightSpeedOut ease;
+        }
+        &.ng-hide-remove {
+          animation: 0.5s lightSpeedIn ease;
+        }
+      }
+    }
+  }
+}
