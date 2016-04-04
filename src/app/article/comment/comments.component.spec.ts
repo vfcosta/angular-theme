@@ -57,5 +57,17 @@ describe("Components", () => {
                 done();
             });
         });
+
+        it("load comments for next page", done => {
+            createComponent().then(fixture => {
+                commentService.getByArticle = jasmine.createSpy("getByArticle")
+                    .and.returnValue(helpers.mocks.promiseResultTemplate({ data: { id: 4 } }));
+                let component: CommentsComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component.loadNextPage();
+                expect(component['page']).toEqual(3);
+                expect(component.comments.length).toEqual(3);
+                done();
+            });
+        });
     });
 });

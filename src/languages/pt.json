@@ -32,5 +32,6 @@
   "notification.http_error.500.message": "Erro no servidor",
   "comment.post": "Commentar",
   "comment.post.placeholder": "Participe da discussão...",
+  "comment.pagination.more": "Mais",
   "comment.reply": "responder"
 }
