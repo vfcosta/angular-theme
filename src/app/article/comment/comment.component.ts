@@ -20,6 +20,6 @@ export class CommentComponent {
     }
 
     reply() {
-        this.showReply = true;
+        this.showReply = !this.showReply;
     }
 }
