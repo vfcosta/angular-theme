@@ -15,11 +15,11 @@ export class CommentsComponent {
     @Input() showForm = true;
     @Input() article: noosfero.Article;
     @Input() parent: noosfero.Comment;
-    private page = 1;
-    private perPage = 5;
-    private total = 0;
+    protected page = 1;
+    protected perPage = 5;
+    protected total = 0;
 
-    constructor(private commentService: CommentService, private $rootScope: ng.IScope) {
+    constructor(protected commentService: CommentService, protected $rootScope: ng.IScope) {
         $rootScope.$on(PostCommentComponent.EVENT_COMMENT_RECEIVED, (event: ng.IAngularEvent, comment: noosfero.Comment) => {
             if ((!this.parent && !comment.reply_of) || (comment.reply_of && this.parent && comment.reply_of.id === this.parent.id)) {
                 if (!this.comments) this.comments = [];
@@ -36,8 +36,12 @@ export class CommentsComponent {
         }
     }
 
+    loadComments() {
+        return this.commentService.getByArticle(this.article, { page: this.page, per_page: this.perPage });
+    }
+
     loadNextPage() {
-        this.commentService.getByArticle(this.article, { page: this.page, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Comment[]>) => {
+        this.loadComments().then((result: noosfero.RestResult<noosfero.Comment[]>) => {
             this.comments = this.comments.concat(result.data);
             this.total = result.headers ? result.headers("total") : this.comments.length;
             this.page++;
