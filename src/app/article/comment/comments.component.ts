@@ -17,6 +17,7 @@ export class CommentsComponent {
     @Input() parent: noosfero.Comment;
     private page = 1;
     private perPage = 5;
+    private total = 0;
 
     constructor(private commentService: CommentService, private $rootScope: ng.IScope) {
         $rootScope.$on(PostCommentComponent.EVENT_COMMENT_RECEIVED, (event: ng.IAngularEvent, comment: noosfero.Comment) => {
@@ -38,7 +39,13 @@ export class CommentsComponent {
     loadNextPage() {
         this.commentService.getByArticle(this.article, { page: this.page, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Comment[]>) => {
             this.comments = this.comments.concat(result.data);
+            this.total = result.headers ? result.headers("total") : this.comments.length;
             this.page++;
         });
+    }
+
+    displayMore() {
+        let pages = Math.ceil(this.total / this.perPage);
+        return !this.parent && pages >= this.page;
     }
 }
