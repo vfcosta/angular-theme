@@ -33,6 +33,7 @@ import {SidebarComponent} from "../layout/sidebar/sidebar.component";
 import {MainBlockComponent} from "../layout/blocks/main-block/main-block.component";
 import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.component";
 
+import * as plugins from "../../plugins";
 
 /**
  * @ngdoc controller
@@ -93,7 +94,7 @@ export class EnvironmentContent {
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
-    ],
+    ].concat(plugins.mainComponents),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
 @StateConfig([
