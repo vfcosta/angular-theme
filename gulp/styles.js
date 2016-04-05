@@ -31,6 +31,7 @@ var buildStyles = function() {
   ];
   conf.paths.allSources.forEach(function(src) {
     srcPaths.push(path.join(src, '/app/**/*.scss'));
+    srcPaths.push(path.join(src, conf.paths.plugins, '/**/*.scss'));
   });
   var injectFiles = gulp.src(srcPaths, { read: false });
 

@@ -15,6 +15,7 @@ var path = require('path');
  */
 exports.paths = {
   src: 'src',
+  plugins: 'plugins',
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
