@@ -1,3 +1,3 @@
-import {AllowComment} from "./allow-comment/allow-comment.component";
+import {AllowCommentComponent} from "./allow-comment/allow-comment.component";
 
-export let mainComponents: any = [AllowComment];
+export let mainComponents: any = [AllowCommentComponent];
