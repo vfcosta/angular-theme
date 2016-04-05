@@ -1,0 +1,14 @@
+comment-paragraph-plugin-allow-comment {
+  .paragraph-content {
+    width: 94%;
+    display: inline-block;
+  }
+  .actions {
+    width: 4%;
+    display: inline-block;
+    vertical-align: top;
+    .popover {
+      width: 100%;
+    }
+  }
+}
