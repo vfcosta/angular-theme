@@ -60,14 +60,27 @@ describe("Components", () => {
 
         it("load comments for next page", done => {
             createComponent().then(fixture => {
+                let headers = jasmine.createSpy("headers").and.returnValue(3);
                 commentService.getByArticle = jasmine.createSpy("getByArticle")
-                    .and.returnValue(helpers.mocks.promiseResultTemplate({ data: { id: 4 } }));
+                    .and.returnValue(helpers.mocks.promiseResultTemplate({ data: { id: 4 }, headers: headers }));
                 let component: CommentsComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
                 component.loadNextPage();
                 expect(component['page']).toEqual(3);
                 expect(component.comments.length).toEqual(3);
+                expect(component['total']).toEqual(3);
                 done();
             });
         });
+
+        it("not display more when there is no more comments to load", done => {
+            createComponent().then(fixture => {
+                let component: CommentsComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component['total'] = 0;
+                component.parent = null;
+                expect(component.displayMore()).toBeFalsy();
+                done();
+            });
+        });
+
     });
 });
