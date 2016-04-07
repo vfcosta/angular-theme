@@ -72,6 +72,13 @@ export var mocks = {
             };
         }
     },
+    environmentService: {
+        getEnvironmentPeople: (params: any) => {
+            return mocks.promiseResultTemplate({
+                people: {}
+            });
+        }
+    },
     profileService: {
         getCurrentProfile: (profile: any) => {
             return mocks.promiseResultTemplate({

@@ -10,6 +10,7 @@ export class PeopleBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Environment;
+    private type: string = "people";
 
     people: noosfero.Person[] = [];
 
@@ -21,4 +22,5 @@ export class PeopleBlockComponent {
             this.people = people;
         });
     }
+
 }

@@ -52,7 +52,7 @@ describe('Profile data component', () => {
         profileMock.additional_data = {
             'Address': 'Street A, Number 102'
         };
-        
+
         buildComponent().then((fixture: ComponentFixture) => {
             let profileData: ProfileDataComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
             profileData.profile = profileMock;

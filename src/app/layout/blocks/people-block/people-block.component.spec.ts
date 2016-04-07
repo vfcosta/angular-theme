@@ -1,53 +1,69 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider, Input, provide, Component} from 'ng-forward';
-
+import {Provider, provide} from 'ng-forward';
+import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
+import {providers} from 'ng-forward/cjs/testing/providers';
 import {PeopleBlockComponent} from './people-block.component';
+
+import { INgForwardJQuery } from "ng-forward/cjs/util/jqlite-extensions";
 
 const htmlTemplate: string = '<noosfero-people-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-people-block>';
 
-const tcb = new TestComponentBuilder();
-
 describe("Components", () => {
+
     describe("People Block Component", () => {
-
-        beforeEach(angular.mock.module("templates"));
-
-        let state = jasmine.createSpyObj("state", ["go"]);
-        let providers = [
-            new Provider('truncateFilter', { useValue: () => { } }),
-            new Provider('stripTagsFilter', { useValue: () => { } }),
-            new Provider('$state', { useValue: state }),
-            new Provider('EnvironmentService', {
-                useValue: {
+        let serviceMock = {
                     getEnvironmentPeople: (filters: any): any => {
                         return Promise.resolve([{ identifier: "person1" }]);
                     }
-                }
-            }),
-        ];
-        @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [PeopleBlockComponent], providers: providers })
-        class BlockContainerComponent {
-            block = { type: 'Block', settings: {} };
-            owner = { name: 'profile-name' };
-            constructor() {
-            }
-        }
+                };
+        let providers = [new Provider('EnvironmentService', { useValue: serviceMock })];
 
-        it("get people of the block owner", done => {
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let block: PeopleBlockComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(block.people).toEqual([{ identifier: "person1" }]);
-                done();
-            });
+        let helper: ComponentTestHelper;
+
+        beforeEach( angular.mock.module("templates") );
+
+        /**
+         * The beforeEach procedure will initialize the helper and parse
+         * the component according to the given providers. Unfortunetly, in
+         * this mode, the providers and properties given to the construtor
+         * can't be overriden.
+        */
+        beforeEach( (done) => {
+            // Create the component bed for the test. Optionally, this could be done
+            // in each test if one needs customization of these parameters per test
+            let cls = createClass(htmlTemplate, [PeopleBlockComponent], providers, {});
+            helper = new ComponentTestHelper(cls, done);
         });
 
-        it("render the profile image for each person", done => {
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                fixture.debugElement.getLocal("$rootScope").$apply();
-                expect(fixture.debugElement.queryAll("noosfero-profile-image").length).toEqual(1);
-                done();
-            });
+        /**
+         * By default the helper will have the component, with all properties 
+         * ready to be used. Here the mock provider 'EnvironmentService' will 
+         * return the given array with one person.
+         */
+        it("get block with one people", () => {
+            expect(helper.component.people[0].identifier).toEqual("person1");
         });
 
+        /**
+         * There are helper functions to access the JQuery DOM like this.
+         */
+        it("render the profile image for each person", () => {
+            expect(helper.all("noosfero-profile-image").length).toEqual(1);
+        });
+
+        /**
+         * The main debugElement element is also available
+         */
+        it("render the main noosfero people block", () => {
+            expect(helper.debugElement.children().length).toEqual(1, "The people-block should have a div children");
+        });
+
+        /**
+         * Just another example of a JQuery DOM helper function
+         */
+        it("render the noosfero people block div", () => {
+            let div = helper.findChildren("noosfero-people-block", "div");
+            expect(div.className).toBe('people-block', "The class should be people-block");
+        });
     });
 });
