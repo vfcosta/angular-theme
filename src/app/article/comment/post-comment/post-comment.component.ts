@@ -29,7 +29,7 @@ export class PostCommentComponent {
         this.commentService.createInArticle(this.article, this.comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
             this.$scope.$emit(PostCommentComponent.EVENT_COMMENT_RECEIVED, result.data);
             this.comment.body = "";
-            this.notificationService.success({ title: "Good job!", message: "Comment saved!" });
+            this.notificationService.success({ title: "comment.post.success.title", message: "comment.post.success.message" });
         });
     }
 }
