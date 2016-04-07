@@ -33,5 +33,7 @@
   "comment.post": "Commentar",
   "comment.post.placeholder": "Participe da discussão...",
   "comment.pagination.more": "Mais",
+  "comment.post.success.title": "Bom trabalho!",
+  "comment.post.success.message": "Comentário salvo com sucesso!",
   "comment.reply": "responder"
 }

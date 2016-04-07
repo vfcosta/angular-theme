@@ -20,13 +20,7 @@ export class NotificationService {
         title = NotificationService.DEFAULT_ERROR_TITLE,
         showConfirmButton = true
     } = {}) {
-        this.$log.debug("Notification error:", title, message, this.translatorService.currentLanguage());
-        this.SweetAlert.swal({
-            title: this.translatorService.translate(title),
-            text: this.translatorService.translate(message),
-            type: "error",
-            showConfirmButton: showConfirmButton
-        });
+        this.showMessage({ title: title, text: message, showConfirmButton: showConfirmButton, type: "error" });
     }
 
     httpError(status: number, data: any): boolean {
@@ -39,11 +33,17 @@ export class NotificationService {
         message,
         timer = NotificationService.DEFAULT_SUCCESS_TIMER
     }) {
+        this.showMessage({ title: title, text: message, timer: timer });
+    }
+
+    private showMessage({title, text, type = "success", timer = null, showConfirmButton = true}) {
+        this.$log.debug("Notification message:", title, text, type, this.translatorService.currentLanguage());
         this.SweetAlert.swal({
-            title: title,
-            text: message,
-            type: "success",
-            timer: timer
+            title: this.translatorService.translate(title),
+            text: this.translatorService.translate(text),
+            type: type,
+            timer: timer,
+            showConfirmButton: showConfirmButton
         });
     }
 
