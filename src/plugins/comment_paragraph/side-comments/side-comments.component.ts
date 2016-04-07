@@ -1,9 +1,23 @@
-import {Component} from "ng-forward";
+import {Component, Inject, Input} from "ng-forward";
+import {CommentsComponent} from "../../../app/article/comment/comments.component";
+import {CommentService} from "../../../lib/ng-noosfero-api/http/comment.service";
+import {CommentParagraphService} from "../http/comment-paragraph.service";
 
 @Component({
     selector: "comment-paragraph-side-comments",
-    templateUrl: "plugins/comment_paragraph/side-comments/side-comments.html"
+    templateUrl: 'app/article/comment/comments.html',
 })
-export class SideCommentsComponent {
+@Inject(CommentService, "$rootScope", CommentParagraphService)
+export class SideCommentsComponent extends CommentsComponent {
 
+    @Input() article: noosfero.Article;
+    @Input() paragraphUuid: string;
+
+    constructor(commentService: CommentService, $rootScope: ng.IScope, private commentParagraphService: CommentParagraphService) {
+        super(commentService, $rootScope);
+    }
+
+    loadComments() {
+        return this.commentParagraphService.getByArticle(this.article, { page: this.page, per_page: this.perPage, paragraph_uuid: this.paragraphUuid });
+    }
 }
