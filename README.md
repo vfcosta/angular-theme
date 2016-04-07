@@ -4,12 +4,25 @@ The Noosfero theme that uses the API to create a totally new client-side fronten
 
 ## Getting started
 
+### If you use Vagrant
+Use our [VirtualBox](https://atlas.hashicorp.com/paulohtfs/boxes/noosfero-dev) with everything setup.
+Run: 
+``` 
+    vagrant init paulohtfs/noosfero-dev
+    vagrant up --provider virtualbox 
+    vagrant ssh
+```
+This box provides Noosfero and the Angular base theme repositories.
+We've also set up vim and tmux to make the work easier.
+
 ### How to Install
 1. Install [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/)
 1. Install [Bower](http://bower.io/): `npm install -g bower`
+1. Install [Gulp](http://gulpjs.com/): `npm install -g gulp`
 1. Install Node.js dependencies: `npm install`
 1. Install bower dependencies: `bower install`
-1. Build the project: `gulp build`
+1. Build the project: `npm run build`
+1. Run project tests: `npm run test`
 
 ### How to Use
 
