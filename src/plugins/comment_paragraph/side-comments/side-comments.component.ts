@@ -1,4 +1,4 @@
-import {Component, Inject, Input} from "ng-forward";
+import {Component, Inject, Input, Output} from "ng-forward";
 import {CommentsComponent} from "../../../app/article/comment/comments.component";
 import {CommentService} from "../../../lib/ng-noosfero-api/http/comment.service";
 import {CommentParagraphService} from "../http/comment-paragraph.service";

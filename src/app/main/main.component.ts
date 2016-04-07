@@ -1,3 +1,4 @@
+import * as plugins from "../../plugins";
 import {bundle, Component, StateConfig, Inject} from "ng-forward";
 import {ArticleBlogComponent} from "./../article/types/blog/blog.component";
 
@@ -30,7 +31,6 @@ import {Navbar} from "../layout/navbar/navbar";
 
 import {MainBlockComponent} from "../layout/blocks/main-block/main-block.component";
 
-import * as plugins from "../../plugins";
 
 /**
  * @ngdoc controller
@@ -86,7 +86,7 @@ export class EnvironmentContent {
         LinkListBlockComponent, CommunitiesBlockComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
-    ].concat(plugins.mainComponents),
+    ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
 @StateConfig([

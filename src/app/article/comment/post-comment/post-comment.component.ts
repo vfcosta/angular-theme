@@ -2,10 +2,12 @@ import { Inject, Input, Component } from 'ng-forward';
 import { CommentService } from "../../../../lib/ng-noosfero-api/http/comment.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { SessionService } from "../../../login";
+import { CommentFormHotspotComponent } from "../../../hotspot/comment-form-hotspot.component";
 
 @Component({
     selector: 'noosfero-post-comment',
-    templateUrl: 'app/article/comment/post-comment/post-comment.html'
+    templateUrl: 'app/article/comment/post-comment/post-comment.html',
+    directives: [CommentFormHotspotComponent]
 })
 @Inject(CommentService, NotificationService, "$scope", SessionService)
 export class PostCommentComponent {
