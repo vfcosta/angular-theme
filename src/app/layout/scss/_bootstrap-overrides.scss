@@ -54,3 +54,19 @@
 .tabs-wrapper.tabs-no-header .tab-content {
 	padding: 0 20px 20px;
 }
+
+/* LABELS */
+.label {
+	@include border-radius($border-radius-base);
+	font-size: 0.875em;
+	font-weight: 600;
+}
+.label-default,
+.label.label-large {
+	font-size: 1em;
+	padding: 0.4em 0.8em 0.5em;
+}
+.label.label-circle {
+	@include border-radius(50%);
+	padding: 4px !important;
+}

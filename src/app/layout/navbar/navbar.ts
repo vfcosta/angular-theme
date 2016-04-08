@@ -1,16 +1,15 @@
-import {Component, Inject} from "ng-forward";
+import {Component, Inject, EventEmitter, Input} from "ng-forward";
 import {LanguageSelectorComponent} from "../language-selector/language-selector.component";
-
-
 import {SessionService, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} from "./../../login";
+import {SidebarNotificationService} from "../sidebar/sidebar.notification.service";
 
 @Component({
     selector: "acme-navbar",
     templateUrl: "app/layout/navbar/navbar.html",
     directives: [LanguageSelectorComponent],
-    providers: [AuthService, SessionService]
+    providers: [AuthService, SessionService, SidebarNotificationService]
 })
-@Inject("$uibModal", AuthService, "SessionService", "$scope", "$state")
+@Inject("$uibModal", AuthService, "SessionService", "$scope", "$state", SidebarNotificationService)
 export class Navbar {
 
     private currentUser: noosfero.User;
@@ -23,7 +22,8 @@ export class Navbar {
         private authService: AuthService,
         private session: SessionService,
         private $scope: ng.IScope,
-        private $state: ng.ui.IStateService
+        private $state: ng.ui.IStateService,
+        private sidebarNotificationService: SidebarNotificationService
     ) {
         this.currentUser = this.session.currentUser();
 
@@ -39,6 +39,11 @@ export class Navbar {
         this.$scope.$on(AUTH_EVENTS.logoutSuccess, () => {
             this.currentUser = this.session.currentUser();
         });
+
+    }
+
+    public toggleCollapse() {
+        this.sidebarNotificationService.alternateVisibility();
     }
 
     openLogin() {
