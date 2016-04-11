@@ -1,4 +1,4 @@
 <div class="paragraph-content" ng-bind-html="ctrl.content"></div>
-<div class="actions">
+<div ng-if="ctrl.isActivated()" class="actions">
   <a href="#" popover-placement="bottom" popover-trigger="outsideClick" uib-popover-template="'plugins/comment_paragraph/allow-comment/popover.html'" ng-click="ctrl.loadComments()"><i class="fa fa-fw fa-comments"></i></a>
 </div>

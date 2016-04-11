@@ -11,4 +11,8 @@ export class AllowCommentComponent {
     @Input() content: string;
     @Input() paragraphUuid: string;
     @Input() article: noosfero.Article;
+
+    isActivated() {
+        return this.article.setting.comment_paragraph_plugin_activate;
+    }
 }

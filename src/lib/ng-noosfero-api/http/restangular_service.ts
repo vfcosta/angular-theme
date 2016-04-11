@@ -245,6 +245,22 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         return deferred.promise;
     }
 
+
+    public post(path: string, rootElement?: restangular.IElement, data?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+        let deferred = this.$q.defer<noosfero.RestResult<T>>();
+        let restRequest: ng.IPromise<any>;
+
+        if (rootElement) {
+            restRequest = rootElement.customPOST(data, path, headers);
+        } else {
+            restRequest = this.baseResource.customPOST(data, path, headers);
+        }
+        restRequest
+            .then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
+
     /**
      * Returns a Restangular IElement representing the 
      */

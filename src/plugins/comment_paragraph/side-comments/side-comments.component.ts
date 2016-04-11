@@ -19,7 +19,7 @@ export class SideCommentsComponent extends CommentsComponent {
 
     ngOnInit() {
         super.ngOnInit();
-        this.newComment['paragraph_uuid'] = this.paragraphUuid;
+        (<any>this.newComment).paragraph_uuid = this.paragraphUuid;
     }
 
     loadComments() {

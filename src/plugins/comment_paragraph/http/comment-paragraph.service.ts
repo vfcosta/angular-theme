@@ -31,4 +31,14 @@ export class CommentParagraphService extends RestangularService<noosfero.Comment
         let articleElement = this.articleService.getElement(<number>article.id);
         return this.create(comment, articleElement, null, { 'Content-Type': 'application/json' }, false);
     }
+
+    activateCommentParagraph(article: noosfero.Article) {
+        let articleElement = this.articleService.getElement(<number>article.id);
+        return this.articleService.post("comment_paragraph_plugin/activate", articleElement);
+    }
+
+    deactivateCommentParagraph(article: noosfero.Article) {
+        let articleElement = this.articleService.getElement(<number>article.id);
+        return this.articleService.post("comment_paragraph_plugin/deactivate", articleElement);
+    }
 }
