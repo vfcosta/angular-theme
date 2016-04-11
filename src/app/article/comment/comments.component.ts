@@ -19,6 +19,8 @@ export class CommentsComponent {
     protected perPage = 5;
     protected total = 0;
 
+    newComment = <noosfero.Comment>{};
+
     constructor(protected commentService: CommentService, protected $rootScope: ng.IScope) {
         $rootScope.$on(PostCommentComponent.EVENT_COMMENT_RECEIVED, (event: ng.IAngularEvent, comment: noosfero.Comment) => {
             if ((!this.parent && !comment.reply_of) || (comment.reply_of && this.parent && comment.reply_of.id === this.parent.id)) {
