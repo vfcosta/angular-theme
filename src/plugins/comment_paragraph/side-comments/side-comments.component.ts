@@ -17,6 +17,11 @@ export class SideCommentsComponent extends CommentsComponent {
         super(commentService, $rootScope);
     }
 
+    ngOnInit() {
+        super.ngOnInit();
+        this.newComment['paragraph_uuid'] = this.paragraphUuid;
+    }
+
     loadComments() {
         return this.commentParagraphService.getByArticle(this.article, { page: this.page, per_page: this.perPage, paragraph_uuid: this.paragraphUuid });
     }

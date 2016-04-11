@@ -17,8 +17,7 @@ export class PostCommentComponent {
 
     @Input() article: noosfero.Article;
     @Input() parent: noosfero.Comment;
-
-    comment = <noosfero.Comment>{};
+    @Input() comment = <noosfero.Comment>{};
     private currentUser: noosfero.User;
 
     constructor(private commentService: CommentService,
