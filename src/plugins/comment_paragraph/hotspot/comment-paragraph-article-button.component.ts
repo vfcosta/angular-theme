@@ -18,14 +18,19 @@ export class CommentParagraphArticleButtonHotspotComponent {
         private commentParagraphEventService: CommentParagraphEventService) { }
 
     deactivateCommentParagraph() {
-        this.commentParagraphService.deactivateCommentParagraph(this.article).then((result: noosfero.RestResult<noosfero.Article>) => {
-            this.article = result.data;
-            this.commentParagraphEventService.toggleCommentParagraph(this.article);
-        });
+        this.toggleCommentParagraph(this.commentParagraphService.deactivateCommentParagraph(this.article));
     }
 
     activateCommentParagraph() {
-        this.commentParagraphService.activateCommentParagraph(this.article).then((result: noosfero.RestResult<noosfero.Article>) => {
+        this.toggleCommentParagraph(this.commentParagraphService.activateCommentParagraph(this.article));
+    }
+
+    isActivated() {
+        return this.article && this.article.setting && this.article.setting.comment_paragraph_plugin_activate;
+    }
+
+    private toggleCommentParagraph(promise: ng.IPromise<noosfero.RestResult<noosfero.Article>>) {
+        promise.then((result: noosfero.RestResult<noosfero.Article>) => {
             this.article = result.data;
             this.commentParagraphEventService.toggleCommentParagraph(this.article);
         });

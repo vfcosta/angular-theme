@@ -68,6 +68,8 @@ export class ComponentTestHelper<T extends any> {
         this.init(done);
     }
 
+    fixture: any;
+
     /**
      * @ngdoc method
      * @name init
@@ -79,7 +81,8 @@ export class ComponentTestHelper<T extends any> {
         let promisse = this.tcb.createAsync(this.mockComponent) as Promise<ComponentFixture>;
         return promisse.then((fixture: any) => {
             // Fire all angular events and parsing
-            fixture.detectChanges();
+            this.fixture = fixture;
+            this.detectChanges();
             // The main debug element
             this.debugElement = fixture.debugElement;
             this.component = <T>this.debugElement.componentViewChildren[0].componentInstance;
@@ -92,6 +95,17 @@ export class ComponentTestHelper<T extends any> {
             // Force the resolution of components and sync
             done();
         });
+    }
+
+    /**
+     * @ngdoc method
+     * @name detectChanges
+     * @methodOf spec.ComponentTestHelper
+     * @description
+     *  Detect changes in component
+     */
+    detectChanges() {
+        this.fixture.detectChanges();
     }
 
     /**
