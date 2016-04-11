@@ -3,6 +3,7 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var languages = require('./languages');
 
 var browserSync = require('browser-sync');
 
@@ -32,6 +33,10 @@ gulp.task('watch', ['inject'], function () {
     } else {
       gulp.start('inject-reload');
     }
+  });
+
+  gulp.watch(path.join(conf.paths.src, '**', conf.paths.languages, '*.json'), function(event) {
+      languages.pluginLanguage(event.path, path.join(conf.paths.tmp, '/serve'));
   });
 
   var watchPaths = [];
