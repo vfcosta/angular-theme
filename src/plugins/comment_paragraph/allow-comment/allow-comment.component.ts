@@ -26,13 +26,13 @@ export class AllowCommentComponent {
             this.article = article;
             this.$scope.$apply();
         });
-        this.commentParagraphService.commentParagraphCount(this.article, this.paragraphUuid).then((count: any) => {
+        this.commentParagraphService.commentParagraphCount(this.article, this.paragraphUuid).then((count: number) => {
             this.commentsCount = count;
         });
     }
 
     isActivated() {
-        return this.article.setting.comment_paragraph_plugin_activate;
+        return this.article && this.article.setting && this.article.setting.comment_paragraph_plugin_activate;
     }
 
     showParagraphComments() {
