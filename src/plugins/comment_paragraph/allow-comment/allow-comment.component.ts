@@ -15,6 +15,7 @@ export class AllowCommentComponent {
     @Input() paragraphUuid: string;
     @Input() article: noosfero.Article;
     commentsCount: number;
+    display = false;
 
     constructor(private $scope: ng.IScope,
         private commentParagraphEventService: CommentParagraphEventService,
@@ -34,4 +35,11 @@ export class AllowCommentComponent {
         return this.article.setting.comment_paragraph_plugin_activate;
     }
 
+    showParagraphComments() {
+        this.display = true;
+    }
+
+    hideParagraphComments() {
+        this.display = false;
+    }
 }
