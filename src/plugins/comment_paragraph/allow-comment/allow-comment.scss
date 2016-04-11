@@ -1,19 +1,62 @@
+$balloon-selected-color: #50BF68;
+$balloon-color: #c4c4c4;
+
 comment-paragraph-plugin-allow-comment {
-  .paragraph-content {
-    width: 94%;
-    display: inline-block;
-  }
-  .actions {
-    width: 4%;
-    display: inline-block;
-    vertical-align: top;
-    .popover {
-      width: 100%;
+  .paragraph {
+    width: 100%;
+    &.active {
+      width: 80%;
     }
-    .count {
-      font-size: 14px;
-      font-weight: bold;
-      color: rgb(99, 170, 204);
+    .popover {
+      &.right > .arrow {
+      }
+    }
+    .paragraph-content {
+      width: 95%;
+      display: inline-block;
+    }
+    .actions {
+      width: 3%;
+      display: inline-block;
+      vertical-align: top;
+      margin-left: 10px;
+      .popover {
+        width: 100%;
+        max-width: 330px;
+      }
+      .count {
+        font-size: 14px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        width: 100%;
+        display: inline-block;
+      }
+      .arrow_box {
+        position: relative;
+        background: $balloon-color;
+        margin-top: 5px;
+        width: 25px;
+        border-radius: 2px;
+        &:after {
+          top: 100%;
+          left: 50%;
+          border: solid transparent;
+          content: " ";
+          position: absolute;
+          pointer-events: none;
+          border-color: rgba(196, 196, 196, 0);
+          border-top-color: $balloon-color;
+          border-width: 6px;
+          margin-left: -6px;
+        }
+        &:hover, &.active {
+          background: $balloon-selected-color;
+          &:after {
+            border-top-color: $balloon-selected-color;
+          }
+        }
+      }
     }
   }
 }
