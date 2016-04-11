@@ -20,7 +20,8 @@ exports.paths = {
   tmp: '.tmp',
   e2e: 'e2e',
   docs: 'docs',
-  themes: 'themes'
+  themes: 'themes',
+  languages: 'languages'
 };
 exports.configTheme = function(theme) {
   exports.paths.theme = theme || "angular-default";

@@ -45,7 +45,7 @@ browserSync.use(browserSyncSpa({
   selector: '[ng-app]'// Only needed for angular apps
 }));
 
-gulp.task('serve', ['watch'], function () {
+gulp.task('serve', ['serve-languages', 'watch'], function () {
   var srcPaths = [path.join(conf.paths.tmp, '/serve')];
   conf.paths.allSources.reverse().forEach(function(src) {
     srcPaths.push(src);

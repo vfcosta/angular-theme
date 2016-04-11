@@ -6,6 +6,7 @@ var rename = require('gulp-rename');
 var insert = require('gulp-insert');
 var merge = require('merge-stream');
 var conf = require('./conf');
+var languages = require('./languages');
 
 var themeName = conf.paths.theme.replace('-', ' ');
 themeName = themeName.charAt(0).toUpperCase() + themeName.slice(1);
@@ -130,6 +131,10 @@ gulp.task('clean-docs', [], function() {
     return $.del([path.join(conf.paths.docs, '/')]);
 });
 
+gulp.task('plugin-languages', ['locale'], function() {
+  return languages.pluginLanguages(conf.paths.dist);
+});
+
 gulp.task('noosfero', ['html'], function () {
     var layouts = gulp.src('layouts/**/*')
       .pipe(gulp.dest(path.join(conf.paths.dist, "layouts")));
@@ -142,4 +147,4 @@ gulp.task('noosfero', ['html'], function () {
     return merge(layouts, theme, index);
 });
 
-gulp.task('build', ['html', 'fonts', 'other', 'locale', 'noosfero']);
+gulp.task('build', ['html', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero']);
