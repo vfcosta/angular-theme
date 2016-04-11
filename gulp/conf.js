@@ -22,7 +22,7 @@ exports.paths = {
   themes: 'themes'
 };
 exports.configTheme = function(theme) {
-  exports.paths.theme = path.join(exports.paths.themes, theme || "default");
+  exports.paths.theme = theme || "angular-default";
   exports.paths.allSources = [exports.paths.src, exports.paths.theme];
   exports.paths.dist = path.join("dist", exports.paths.theme);
 }

@@ -8,7 +8,7 @@
     "ng-forward": "0.0.1-alpha.12"
   },
   "config": {
-    "theme": "default"
+    "theme": "angular-default"
   },
   "scripts": {
     "build": "webpack; gulp clean && gulp --theme=$npm_package_config_theme build",
@@ -46,6 +46,7 @@
     "gulp-eslint": "~1.0.0",
     "gulp-filter": "~3.0.1",
     "gulp-flatten": "~0.2.0",
+    "gulp-insert": "^0.5.0",
     "gulp-inject": "~3.0.0",
     "gulp-load-plugins": "~0.10.0",
     "gulp-minify-css": "~1.2.1",

@@ -3,10 +3,13 @@
 var path = require('path');
 var gulp = require('gulp');
 var rename = require('gulp-rename');
+var insert = require('gulp-insert');
 var merge = require('merge-stream');
 var conf = require('./conf');
 
-var noosferoThemePrefix = path.join("/designs/themes/angular-theme", conf.paths.dist, '/');
+var themeName = conf.paths.theme.replace('-', ' ');
+themeName = themeName.charAt(0).toUpperCase() + themeName.slice(1);
+var noosferoThemePrefix = path.join("/designs/themes/", conf.paths.theme, '/');
 
 var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
@@ -114,17 +117,18 @@ gulp.task('other', function () {
 });
 
 gulp.task('clean', function () {
-  return $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')]);
+  return $.del(["dist", path.join(conf.paths.tmp, '/')]);
 });
 
 gulp.task('clean-docs', [], function() {
-    return $.del([path.join(conf.paths.docs, '/')]);    
+    return $.del([path.join(conf.paths.docs, '/')]);
 });
 
 gulp.task('noosfero', ['html'], function () {
     var layouts = gulp.src('layouts/**/*')
       .pipe(gulp.dest(path.join(conf.paths.dist, "layouts")));
     var theme = gulp.src('theme.yml')
+      .pipe(insert.prepend('name: "' + themeName + '"\n'))
       .pipe(gulp.dest(conf.paths.dist));
     var index = gulp.src(path.join(conf.paths.dist, 'index.html'))
       .pipe(rename('index.html.erb'))
