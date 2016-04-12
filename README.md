@@ -6,11 +6,10 @@ The Noosfero theme that uses the API to create a totally new client-side fronten
 
 ### If you use Vagrant
 Use our [VirtualBox](https://atlas.hashicorp.com/paulohtfs/boxes/noosfero-dev) with everything setup.
-Run: 
-``` 
-    vagrant init paulohtfs/noosfero-dev
-    vagrant up --provider virtualbox 
-    vagrant ssh
+Run:
+```
+vagrant up
+vagrant ssh
 ```
 This box provides Noosfero and the Angular base theme repositories.
 We've also set up vim and tmux to make the work easier.
@@ -22,12 +21,13 @@ We've also set up vim and tmux to make the work easier.
 1. Install Node.js dependencies: `npm install`
 1. Install bower dependencies: `bower install`
 1. Build the project: `npm run build`
+1. Build multiple themes: `npm run build-all`
 1. Run project tests: `npm run test`
 
 ### How to Use
 
-Just set the profile theme to `angular-theme`.
-
+Copy the desired theme from the `dist` folder into
+noosfero `public/design/themes`.
 
 ## Project Structure
 The folder structure of this project was sorted by feature.
