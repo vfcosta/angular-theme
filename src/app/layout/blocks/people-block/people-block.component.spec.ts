@@ -1,10 +1,8 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider, provide} from 'ng-forward';
+import {Provider} from 'ng-forward';
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import {providers} from 'ng-forward/cjs/testing/providers';
 import {PeopleBlockComponent} from './people-block.component';
-
-import { INgForwardJQuery } from "ng-forward/cjs/util/jqlite-extensions";
 
 const htmlTemplate: string = '<noosfero-people-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-people-block>';
 
@@ -31,7 +29,12 @@ describe("Components", () => {
         beforeEach( (done) => {
             // Create the component bed for the test. Optionally, this could be done
             // in each test if one needs customization of these parameters per test
-            let cls = createClass(htmlTemplate, [PeopleBlockComponent], providers, {});
+            let cls = createClass({
+                template: htmlTemplate,
+                directives: [PeopleBlockComponent],
+                providers: providers,
+                properties: {}
+            });
             helper = new ComponentTestHelper(cls, done);
         });
 

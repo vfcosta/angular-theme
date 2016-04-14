@@ -28,7 +28,12 @@ describe("Components", () => {
             // Custom properties for the component
             let properties = { owner: { id: 1 } };
             // Create the component bed for the test.
-            let cls = createClass(htmlTemplate, [MembersBlockComponent], providers, properties);
+            let cls = createClass({
+                template: htmlTemplate,
+                directives: [MembersBlockComponent],
+                providers: providers,
+                properties: properties
+            });
             helper = new ComponentTestHelper(cls, done);
         });
 
