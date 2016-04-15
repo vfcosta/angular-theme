@@ -2,13 +2,14 @@ import { Inject, Input, Component, provide } from 'ng-forward';
 import { PostCommentComponent } from "./post-comment/post-comment.component";
 import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
 import { CommentComponent } from "./comment.component";
+import { PostCommentEventService } from "./post-comment/post-comment-event.service";
 
 @Component({
     selector: 'noosfero-comments',
     templateUrl: 'app/article/comment/comments.html',
     directives: [PostCommentComponent, CommentComponent]
 })
-@Inject(CommentService, "$rootScope")
+@Inject(CommentService, PostCommentEventService, "$scope")
 export class CommentsComponent {
 
     comments: noosfero.Comment[] = [];
@@ -19,14 +20,7 @@ export class CommentsComponent {
     protected perPage = 5;
     protected total = 0;
 
-    constructor(protected commentService: CommentService, protected $rootScope: ng.IScope) {
-        $rootScope.$on(PostCommentComponent.EVENT_COMMENT_RECEIVED, (event: ng.IAngularEvent, comment: noosfero.Comment) => {
-            if ((!this.parent && !comment.reply_of) || (comment.reply_of && this.parent && comment.reply_of.id === this.parent.id)) {
-                if (!this.comments) this.comments = [];
-                this.comments.push(comment);
-            }
-        });
-    }
+    constructor(protected commentService: CommentService, private postCommentEventService: PostCommentEventService, private $scope: ng.IScope) { }
 
     ngOnInit() {
         if (this.parent) {
@@ -34,6 +28,13 @@ export class CommentsComponent {
         } else {
             this.loadNextPage();
         }
+        this.postCommentEventService.subscribe((comment: noosfero.Comment) => {
+            if ((!this.parent && !comment.reply_of) || (comment.reply_of && this.parent && comment.reply_of.id === this.parent.id)) {
+                if (!this.comments) this.comments = [];
+                this.comments.push(comment);
+                this.$scope.$apply();
+            }
+        });
     }
 
     loadComments() {

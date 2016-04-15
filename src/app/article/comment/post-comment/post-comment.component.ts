@@ -2,12 +2,13 @@ import { Inject, Input, Component } from 'ng-forward';
 import { CommentService } from "../../../../lib/ng-noosfero-api/http/comment.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { SessionService } from "../../../login";
+import { PostCommentEventService } from "./post-comment-event.service";
 
 @Component({
     selector: 'noosfero-post-comment',
     templateUrl: 'app/article/comment/post-comment/post-comment.html'
 })
-@Inject(CommentService, NotificationService, "$scope", SessionService)
+@Inject(CommentService, NotificationService, SessionService, PostCommentEventService)
 export class PostCommentComponent {
 
     public static EVENT_COMMENT_RECEIVED = "comment.received";
@@ -18,7 +19,10 @@ export class PostCommentComponent {
     comment = <noosfero.Comment>{};
     private currentUser: noosfero.User;
 
-    constructor(private commentService: CommentService, private notificationService: NotificationService, private $scope: ng.IScope, private session: SessionService) {
+    constructor(private commentService: CommentService,
+        private notificationService: NotificationService,
+        private session: SessionService,
+        private postCommentEventService: PostCommentEventService) {
         this.currentUser = this.session.currentUser();
     }
 
@@ -27,7 +31,7 @@ export class PostCommentComponent {
             this.comment.reply_of_id = this.parent.id;
         }
         this.commentService.createInArticle(this.article, this.comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
-            this.$scope.$emit(PostCommentComponent.EVENT_COMMENT_RECEIVED, result.data);
+            this.postCommentEventService.emit(result.data);
             this.comment.body = "";
             this.notificationService.success({ title: "comment.post.success.title", message: "comment.post.success.message" });
         });

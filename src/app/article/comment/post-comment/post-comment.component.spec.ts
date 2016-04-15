@@ -11,11 +11,13 @@ describe("Components", () => {
         beforeEach(angular.mock.module("templates"));
 
         let commentService = jasmine.createSpyObj("commentService", ["createInArticle"]);
+        let postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["emit"]);
         let user = {};
         let providers = [
             new Provider('CommentService', { useValue: commentService }),
             new Provider('NotificationService', { useValue: helpers.mocks.notificationService }),
-            new Provider('SessionService', { useValue: helpers.mocks.sessionWithCurrentUser(user) })
+            new Provider('SessionService', { useValue: helpers.mocks.sessionWithCurrentUser(user) }),
+            new Provider('PostCommentEventService', { useValue: postCommentEventService })
         ].concat(helpers.provideFilters("translateFilter"));
 
         @Component({ selector: 'test-container-component', directives: [PostCommentComponent], template: htmlTemplate, providers: providers })
@@ -35,9 +37,8 @@ describe("Components", () => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
                 let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
                 commentService.createInArticle = jasmine.createSpy("createInArticle").and.returnValue(helpers.mocks.promiseResultTemplate({ data: {} }));
-                component["$scope"].$emit = jasmine.createSpy("$emit");
                 component.save();
-                expect(component["$scope"].$emit).toHaveBeenCalledWith(PostCommentComponent.EVENT_COMMENT_RECEIVED, jasmine.any(Object));
+                expect(postCommentEventService.emit).toHaveBeenCalled();
                 done();
             });
         });

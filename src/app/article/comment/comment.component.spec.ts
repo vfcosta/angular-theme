@@ -11,8 +11,12 @@ describe("Components", () => {
 
         beforeEach(angular.mock.module("templates"));
 
+        let postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["subscribe"]);
+
         function createComponent() {
-            let providers = helpers.provideFilters("translateFilter");
+            let providers = [
+                new Provider('PostCommentEventService', { useValue: postCommentEventService })
+            ].concat(helpers.provideFilters("translateFilter"));
 
             @Component({ selector: 'test-container-component', directives: [CommentComponent], template: htmlTemplate, providers: providers })
             class ContainerComponent {
@@ -46,10 +50,14 @@ describe("Components", () => {
         });
 
         it("close form when receive a reply", done => {
+            let func: Function;
+            postCommentEventService.subscribe = (fn: Function) => {
+                func = fn;
+            };
             createComponent().then(fixture => {
                 let component = fixture.debugElement.componentViewChildren[0];
                 component.componentInstance.showReply = true;
-                fixture.debugElement.getLocal("$rootScope").$broadcast(PostCommentComponent.EVENT_COMMENT_RECEIVED, {});
+                func(<noosfero.Comment>{});
                 expect(component.componentInstance.showReply).toEqual(false);
                 done();
             });
