@@ -2,9 +2,11 @@ node_modules/
 bower_components/
 coverage/
 docs/
+dist/
 .sass-cache/
 .idea/
 .tmp/
+.vscode/
 src/noosfero.js*
 src/commons.js*
 src/noosfero-specs.js*

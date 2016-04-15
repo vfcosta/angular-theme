@@ -8,10 +8,11 @@ describe("Filters", () => {
         beforeEach(angular.mock.module("angularMoment"));
 
         it("convert date from the format returned by noosfero api to an ISO format", done => {
-            let date = "2016/03/10 10:46:47";
-            let htmlTemplate = `{{ '${date}' | dateFormat }}`;
+            let dateString = '2016/03/10 10:46:47';
+            let date = new Date(dateString);
+            let htmlTemplate = `{{ '${dateString}' | dateFormat }}`;
             quickCreateComponent({ providers: [DateFormat], template: htmlTemplate }).then(fixture => {
-                expect(fixture.debugElement.text()).toEqual('2016-03-10T13:46:47.000Z');
+                expect(fixture.debugElement.text()).toEqual(date.toISOString());
                 done();
             });
         });
