@@ -11,6 +11,7 @@ import {PluginHotspot} from "./plugin-hotspot";
 export class CommentFormHotspotComponent extends PluginHotspot {
 
     @Input() comment: noosfero.Comment;
+    @Input() parent: noosfero.Comment;
 
     constructor(
         private $element: any,
@@ -20,6 +21,6 @@ export class CommentFormHotspotComponent extends PluginHotspot {
     }
 
     addHotspot(directiveName: string) {
-        this.$element.append(this.$compile('<' + directiveName + ' [comment]="ctrl.comment"></' + directiveName + '>')(this.$scope));
+        this.$element.append(this.$compile('<' + directiveName + ' [comment]="ctrl.comment" [parent]="ctrl.parent"></' + directiveName + '>')(this.$scope));
     }
 }
