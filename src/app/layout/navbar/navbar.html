@@ -1,12 +1,12 @@
 <nav class="navbar navbar-static-top navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" (click)="ctrl.toggleCollapse()">
+      <button type="button" class="navbar-toggle collapsed" (click)="ctrl.toggleCollapse()" ng-show="ctrl.showHamburguer">
         <span class="sr-only">{{"navbar.toggle_menu" | translate}}</span>
         <i class="fa fa-bars"></i>
       </button>
       <a class="navbar-brand" ui-sref="main.environment.home">
-        <span class="noosfero-logo"> </span> 
+        <span class="noosfero-logo"> </span>
         <span class="noosfero-name">{{"noosfero.name" | translate}}</span>
       </a>
     </div>

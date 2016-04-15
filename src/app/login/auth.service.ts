@@ -1,20 +1,22 @@
-import {Injectable, Inject} from "ng-forward";
+import {Injectable, Inject, EventEmitter} from "ng-forward";
 
 import {NoosferoRootScope, UserResponse} from "./../shared/models/interfaces";
 import {SessionService} from "./session.service";
 
-import {AUTH_EVENTS, IAuthEvents} from "./auth-events";
+import {AuthEvents} from "./auth-events";
 
 @Injectable()
-@Inject("$q", "$http", "$rootScope", "SessionService", "$log", "AUTH_EVENTS")
+@Inject("$q", "$http", "SessionService", "$log")
 export class AuthService {
+
+    public loginSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
+    private loginFailed: EventEmitter<ng.IHttpPromiseCallbackArg<any>> = new EventEmitter<ng.IHttpPromiseCallbackArg<any>>();
+    private logoutSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
 
     constructor(private $q: ng.IQService,
         private $http: ng.IHttpService,
-        private $rootScope: NoosferoRootScope,
         private sessionService: SessionService,
-        private $log: ng.ILogService,
-        private auth_events: IAuthEvents) {
+        private $log: ng.ILogService) {
 
     }
 
@@ -27,8 +29,8 @@ export class AuthService {
     private loginSuccessCallback(response: ng.IHttpPromiseCallbackArg<UserResponse>) {
         this.$log.debug('AuthService.login [SUCCESS] response', response);
         let currentUser: noosfero.User = this.sessionService.create(response.data);
-        this.$rootScope.currentUser = currentUser;
-        this.$rootScope.$broadcast(this.auth_events.loginSuccess, currentUser);
+        this.loginSuccess.next(currentUser);
+
         return currentUser;
     }
 
@@ -40,15 +42,16 @@ export class AuthService {
 
     private loginFailedCallback(response: ng.IHttpPromiseCallbackArg<any>): any {
         this.$log.debug('AuthService.login [FAIL] response', response);
-        this.$rootScope.$broadcast(this.auth_events.loginFailed);
+        this.loginFailed.next(response);
         // return $q.reject(response);
         return null;
     }
 
     public logout() {
+        let user: noosfero.User = this.sessionService.currentUser();
         this.sessionService.destroy();
-        this.$rootScope.currentUser = undefined;
-        this.$rootScope.$broadcast(this.auth_events.logoutSuccess);
+
+        this.logoutSuccess.next(user);
         this.$http.jsonp('/account/logout'); // FIXME logout from noosfero to sync login state
     }
 
@@ -65,5 +68,14 @@ export class AuthService {
             authorizedRoles = [<string>authorizedRoles];
         }
         return (this.isAuthenticated() && authorizedRoles.indexOf(this.sessionService.currentUser().userRole) !== -1);
+    }
+
+    subscribe(eventName: string, fn: Function) {
+
+        if (this[eventName]) {
+            this[eventName].subscribe(fn);
+        } else {
+            throw new Error(`The event: ${eventName} not exists`);
+        }
     }
 }

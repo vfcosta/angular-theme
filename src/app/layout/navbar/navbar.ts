@@ -1,6 +1,6 @@
 import {Component, Inject, EventEmitter, Input} from "ng-forward";
 import {LanguageSelectorComponent} from "../language-selector/language-selector.component";
-import {SessionService, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} from "./../../login";
+import {SessionService, AuthService, AuthController, AuthEvents} from "./../../login";
 import {SidebarNotificationService} from "../sidebar/sidebar.notification.service";
 
 @Component({
@@ -9,11 +9,14 @@ import {SidebarNotificationService} from "../sidebar/sidebar.notification.servic
     directives: [LanguageSelectorComponent],
     providers: [AuthService, SessionService, SidebarNotificationService]
 })
-@Inject("$uibModal", AuthService, "SessionService", "$scope", "$state", SidebarNotificationService)
+@Inject("$uibModal", AuthService, "SessionService", "$state", SidebarNotificationService)
 export class Navbar {
 
     private currentUser: noosfero.User;
     private modalInstance: any = null;
+
+    public showHamburguer: boolean = false;
+
     /**
      *
      */
@@ -21,22 +24,26 @@ export class Navbar {
         private $uibModal: any,
         private authService: AuthService,
         private session: SessionService,
-        private $scope: ng.IScope,
         private $state: ng.ui.IStateService,
         private sidebarNotificationService: SidebarNotificationService
     ) {
         this.currentUser = this.session.currentUser();
 
-        this.$scope.$on(AUTH_EVENTS.loginSuccess, () => {
+        this.showHamburguer = this.authService.isAuthenticated();
+
+        this.authService.loginSuccess.subscribe(() => {
             if (this.modalInstance) {
                 this.modalInstance.close();
                 this.modalInstance = null;
             }
 
-            this.$state.go(this.$state.current, {}, { reload: true }); // TODO move to auth
+            this.currentUser = this.session.currentUser();
+            this.showHamburguer = true;
+
+            this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
         });
 
-        this.$scope.$on(AUTH_EVENTS.logoutSuccess, () => {
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.currentUser = this.session.currentUser();
         });
 
@@ -59,8 +66,6 @@ export class Navbar {
         this.authService.logout();
         this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
     };
-
-
 
     activate() {
         if (!this.currentUser) {

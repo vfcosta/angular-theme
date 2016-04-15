@@ -1,5 +1,5 @@
 import {Directive, Inject, Injectable} from "ng-forward";
-import {AUTH_EVENTS} from "./../../login/auth-events";
+import {AuthEvents} from "./../../login/auth-events";
 import {AuthService} from "./../../login/auth.service";
 import {HtmlUtils} from "../html-utils";
 
@@ -9,7 +9,7 @@ import {HtmlUtils} from "../html-utils";
  * eg:
  *    User Logged:
  *         - noosfero-user-logged
- *    Route States: 
+ *    Route States:
  *         - noosfero-route-main
  *         - noosfero-route-main.profile.info
  */
@@ -65,7 +65,7 @@ export class BodyStateClassesService {
 
     /**
      * Setup the initial state of the user-logged css class
-     * and adds events handlers to switch this class when the login events happens 
+     * and adds events handlers to switch this class when the login events happens
      */
     private setupUserLoggedClassToggle() {
         let bodyElement = this.getBodyElement();
@@ -76,18 +76,18 @@ export class BodyStateClassesService {
             bodyElement.addClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         }
 
-        // listen to the AUTH_EVENTS.loginSuccess and AUTH_EVENTS.logoutSuccess
-        // to switch the css class which indicates user logged in 
-        this.$rootScope.$on(AUTH_EVENTS.loginSuccess, () => {
+        // to switch the css class which indicates user logged in
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             bodyElement.addClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         });
-        this.$rootScope.$on(AUTH_EVENTS.logoutSuccess, () => {
+
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             bodyElement.removeClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
-        });
+        })
     }
 
     /**
-     * Returns the user 'body' html Element  
+     * Returns the user 'body' html Element
      */
     private getBodyElement(): ng.IAugmentedJQuery {
         if (this.bodyElement === null) {
