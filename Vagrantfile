@@ -17,6 +17,10 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   config.vm.network "private_network", ip: "10.0.0.15"
 
+  # Shared folder
+  config.vm.synced_folder '.', '/vagrant', disabled: true
+  config.vm.synced_folder ".", "/home/vagrant/angular-theme"
+
   # Change according to you hardware
   config.vm.provider "virtualbox" do |vm|
     vm.memory = 512;
