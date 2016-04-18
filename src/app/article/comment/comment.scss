@@ -39,8 +39,24 @@
         font-size: 1.7em;
       }
     }
+    // Limit identation of replies
     .comments {
       margin-left: 30px;
+      .comments .comments {
+        margin-left: 0px;
+        .comment {
+          margin-left: 0px;
+        }
+      }
+    }
+    .tooltip-inner {
+      max-width: 350px;
+      text-align: left;
+      .reply-tooltip {
+        .comment {
+          margin: 5px;
+        }
+      }
     }
   }
 }

@@ -9,6 +9,8 @@ export class CommentComponent {
 
     @Input() comment: noosfero.CommentViewModel;
     @Input() article: noosfero.Article;
+    @Input() displayActions = true;
+    @Input() displayReplies = true;
 
     showReply() {
         return this.comment && this.comment.__show_reply === true;
