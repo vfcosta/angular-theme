@@ -17,21 +17,13 @@ describe("Components", () => {
         commentService.getByArticle = jasmine.createSpy("getByArticle")
             .and.returnValue(helpers.mocks.promiseResultTemplate({ data: comments }));
 
-        let emitEvent: Function;
-        let postCommentEventService = {
-            subscribe: (fn: Function) => {
-                emitEvent = fn;
-            }
-        };
-
         let properties = { article: { id: 1 }, parent: <any>null };
         function createComponent() {
             // postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["subscribe"]);
             let providers = [
                 helpers.createProviderToValue('CommentService', commentService),
                 helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
-                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
-                new Provider('PostCommentEventService', { useValue: postCommentEventService })
+                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
             ].concat(helpers.provideFilters("translateFilter"));
 
             return helpers.quickCreateComponent({
@@ -60,7 +52,8 @@ describe("Components", () => {
         it("update comments list when receive an reply", done => {
             properties.parent = { id: 3 };
             createComponent().then(fixture => {
-                emitEvent(<noosfero.Comment>{ id: 1, reply_of: { id: 3 } });
+                (<CommentsComponent>fixture.debugElement.componentViewChildren[0].componentInstance).commentAdded(<noosfero.Comment>{ id: 1, reply_of: { id: 3 } });
+                fixture.detectChanges();
                 expect(fixture.debugElement.queryAll("noosfero-comment").length).toEqual(3);
                 done();
             });

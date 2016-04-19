@@ -1,8 +1,6 @@
 import {Provider, provide, Component} from 'ng-forward';
 import * as helpers from "../../../spec/helpers";
-
 import {CommentComponent} from './comment.component';
-import {PostCommentComponent} from './post-comment/post-comment.component';
 
 const htmlTemplate: string = '<noosfero-comment [article]="ctrl.article" [comment]="ctrl.comment"></noosfero-comment>';
 
@@ -11,12 +9,9 @@ describe("Components", () => {
 
         beforeEach(angular.mock.module("templates"));
 
-        let postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["subscribe"]);
 
         function createComponent() {
-            let providers = [
-                new Provider('PostCommentEventService', { useValue: postCommentEventService })
-            ].concat(helpers.provideFilters("translateFilter"));
+            let providers = helpers.provideFilters("translateFilter");
 
             @Component({ selector: 'test-container-component', directives: [CommentComponent], template: htmlTemplate, providers: providers })
             class ContainerComponent {
@@ -44,21 +39,16 @@ describe("Components", () => {
             createComponent().then(fixture => {
                 let component: CommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
                 component.reply();
-                expect(component.showReply).toBeTruthy(1);
+                expect(component.showReply()).toBeTruthy("Reply was expected to be true");
                 done();
             });
         });
 
-        it("close form when receive a reply", done => {
-            let func: Function;
-            postCommentEventService.subscribe = (fn: Function) => {
-                func = fn;
-            };
+        it("show reply relies on current comment __showReply attribute", done => {
             createComponent().then(fixture => {
                 let component = fixture.debugElement.componentViewChildren[0];
-                component.componentInstance.showReply = true;
-                func(<noosfero.Comment>{});
-                expect(component.componentInstance.showReply).toEqual(false);
+                component.componentInstance.comment.__showReply = false;
+                expect(component.componentInstance.showReply()).toEqual(false);
                 done();
             });
         });

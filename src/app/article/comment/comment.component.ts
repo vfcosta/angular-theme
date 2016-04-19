@@ -1,27 +1,24 @@
-import { Inject, Input, Component } from 'ng-forward';
+import { Inject, Input, Component, Output, EventEmitter } from 'ng-forward';
 import { PostCommentComponent } from "./post-comment/post-comment.component";
-import { PostCommentEventService } from "./post-comment/post-comment-event.service";
 
 @Component({
     selector: 'noosfero-comment',
     templateUrl: 'app/article/comment/comment.html'
 })
-@Inject(PostCommentEventService, "$scope")
 export class CommentComponent {
 
-    @Input() comment: noosfero.Comment;
+    @Input() comment: noosfero.CommentViewModel;
     @Input() article: noosfero.Article;
 
-    showReply: boolean = false;
-
-    constructor(postCommentEventService: PostCommentEventService, private $scope: ng.IScope) {
-        postCommentEventService.subscribe((comment: noosfero.Comment) => {
-            this.showReply = false;
-            this.$scope.$apply();
-        });
+    showReply() {
+        return this.comment && this.comment.__show_reply === true;
     }
 
+    constructor() {
+    }
+
+
     reply() {
-        this.showReply = !this.showReply;
+        this.comment.__show_reply = !this.comment.__show_reply;
     }
 }

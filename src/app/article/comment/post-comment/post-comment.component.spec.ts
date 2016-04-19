@@ -1,6 +1,5 @@
 import {Provider, provide, Component} from 'ng-forward';
 import * as helpers from "../../../../spec/helpers";
-
 import {PostCommentComponent} from './post-comment.component';
 
 const htmlTemplate: string = '<noosfero-post-comment [article]="ctrl.article" [reply-of]="ctrl.comment"></noosfero-post-comment>';
@@ -11,13 +10,11 @@ describe("Components", () => {
         beforeEach(angular.mock.module("templates"));
 
         let commentService = jasmine.createSpyObj("commentService", ["createInArticle"]);
-        let postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["emit"]);
         let user = {};
         let providers = [
             new Provider('CommentService', { useValue: commentService }),
             new Provider('NotificationService', { useValue: helpers.mocks.notificationService }),
-            new Provider('SessionService', { useValue: helpers.mocks.sessionWithCurrentUser(user) }),
-            new Provider('PostCommentEventService', { useValue: postCommentEventService })
+            new Provider('SessionService', { useValue: helpers.mocks.sessionWithCurrentUser(user) })
         ].concat(helpers.provideFilters("translateFilter"));
 
         @Component({ selector: 'test-container-component', directives: [PostCommentComponent], template: htmlTemplate, providers: providers })
@@ -36,9 +33,10 @@ describe("Components", () => {
         it("emit an event when create comment", done => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
                 let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component.commentSaved.next = jasmine.createSpy("next");
                 commentService.createInArticle = jasmine.createSpy("createInArticle").and.returnValue(helpers.mocks.promiseResultTemplate({ data: {} }));
                 component.save();
-                expect(postCommentEventService.emit).toHaveBeenCalled();
+                expect(component.commentSaved.next).toHaveBeenCalled();
                 done();
             });
         });

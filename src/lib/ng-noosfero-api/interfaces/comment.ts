@@ -5,4 +5,8 @@ namespace noosfero {
         replies: Comment[];
         body: string;
     }
+
+    export interface CommentViewModel extends Comment {
+        __show_reply?: boolean;
+    }
 }

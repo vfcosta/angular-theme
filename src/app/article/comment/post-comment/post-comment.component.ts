@@ -1,28 +1,26 @@
-import { Inject, Input, Component } from 'ng-forward';
+import { Inject, Input, Output, EventEmitter, Component } from 'ng-forward';
 import { CommentService } from "../../../../lib/ng-noosfero-api/http/comment.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { SessionService } from "../../../login";
-import { PostCommentEventService } from "./post-comment-event.service";
 
 @Component({
     selector: 'noosfero-post-comment',
-    templateUrl: 'app/article/comment/post-comment/post-comment.html'
+    templateUrl: 'app/article/comment/post-comment/post-comment.html',
+    outputs: ['commentSaved']
 })
-@Inject(CommentService, NotificationService, SessionService, PostCommentEventService)
+@Inject(CommentService, NotificationService, SessionService)
 export class PostCommentComponent {
-
-    public static EVENT_COMMENT_RECEIVED = "comment.received";
 
     @Input() article: noosfero.Article;
     @Input() parent: noosfero.Comment;
+    @Output() commentSaved: EventEmitter<Comment> = new EventEmitter<Comment>();
 
     comment = <noosfero.Comment>{};
     private currentUser: noosfero.User;
 
     constructor(private commentService: CommentService,
         private notificationService: NotificationService,
-        private session: SessionService,
-        private postCommentEventService: PostCommentEventService) {
+        private session: SessionService) {
         this.currentUser = this.session.currentUser();
     }
 
@@ -31,7 +29,7 @@ export class PostCommentComponent {
             this.comment.reply_of_id = this.parent.id;
         }
         this.commentService.createInArticle(this.article, this.comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
-            this.postCommentEventService.emit(result.data);
+            this.commentSaved.next(result.data);
             this.comment.body = "";
             this.notificationService.success({ title: "comment.post.success.title", message: "comment.post.success.message" });
         });
