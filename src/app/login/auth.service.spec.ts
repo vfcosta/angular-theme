@@ -1,4 +1,9 @@
-import {AuthService, AUTH_EVENTS} from "./";
+import {AuthService, AuthEvents} from "./";
+
+import {Injectable, Provider, provide, EventEmitter} from "ng-forward";
+import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
+
+import {getAngularServiceFactory, AngularServiceFactory} from "../../spec/helpers";
 
 describe("Services", () => {
 
@@ -15,23 +20,26 @@ describe("Services", () => {
             $translateProvider.translations('en', {});
         }));
 
-        beforeEach(inject((_$httpBackend_: ng.IHttpBackendService, _$rootScope_: ng.IRootScopeService, _AuthService_: AuthService) => {
-            $httpBackend = _$httpBackend_;
-            authService = _AuthService_;
-            $rootScope = _$rootScope_;
+        beforeEach(() => {
 
             user = <noosfero.User>{
                 id: 1,
                 login: "user"
             };
-        }));
-
+        });
 
         describe("Succesffull login", () => {
 
+            let factory: AngularServiceFactory;
+            let authService: AuthService;
+            let $log: ng.ILogService;
+            let $http: ng.IHttpBackendService;
+
             beforeEach(() => {
                 credentials = { username: "user", password: "password" };
-
+                factory = getAngularServiceFactory();
+                authService = factory.getAngularService("AuthService");
+                $httpBackend = factory.getHttpBackendService();
                 $httpBackend.expectPOST("/api/v1/login", "login=user&password=password").respond(200, { user: user });
             });
 
@@ -44,20 +52,15 @@ describe("Services", () => {
                 expect($httpBackend.verifyNoOutstandingRequest());
             });
 
-
-            it("should emit event loggin successful with user logged data", () => {
-
-                authService.login(credentials);
-
-                let eventEmmited: boolean = false;
-                $rootScope.$on(AUTH_EVENTS.loginSuccess, (event: ng.IAngularEvent, userThroughEvent: noosfero.User) => {
-                    eventEmmited = true;
+            it("should emit event loggin successful with user logged data", (done: Function) => {
+                let successEvent: any = AuthEvents[AuthEvents.loginSuccess];
+                (<any>authService)[successEvent].subscribe((userThroughEvent: noosfero.User): any => {
                     expect(userThroughEvent).toEqual(user);
+                    done();
                 });
-
+                authService.login(credentials);
                 $httpBackend.flush();
 
-                expect(eventEmmited).toBeTruthy(AUTH_EVENTS.loginSuccess + " was not emmited!");
             });
 
             it("should return the current logged in user", () => {
@@ -73,7 +76,6 @@ describe("Services", () => {
                 expect(actual).toEqual(undefined, "The returned user must not be defined");
             });
         });
-
 
     });
 });

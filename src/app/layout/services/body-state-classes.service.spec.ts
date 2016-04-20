@@ -1,9 +1,13 @@
 import * as helpers from '../../../spec/helpers';
 import {BodyStateClassesService} from "./body-state-classes.service";
 import {AuthService} from "./../../login/auth.service";
-import {AUTH_EVENTS} from "./../../login/auth-events";
+import {AuthEvents} from "./../../login/auth-events";
+
+import {EventEmitter} from 'ng-forward';
+
 
 describe("BodyStateClasses Service", () => {
+
     let currentStateName = "main";
     let bodyStateClasseService: BodyStateClassesService;
     let $rootScope: ng.IRootScopeService = <any>{},
@@ -13,17 +17,15 @@ describe("BodyStateClasses Service", () => {
                 name: currentStateName
             }
         },
-        authService: AuthService,
+        authService: any = helpers.mocks.authService,
         bodyEl: { className: string },
         bodyElJq: any;
-
 
     let getService = (): BodyStateClassesService => {
         return new BodyStateClassesService($rootScope, $document, $state, authService);
     };
 
     beforeEach(() => {
-        authService = <any>{};
         authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
         bodyEl = { className: "" };
         bodyElJq = [bodyEl];
@@ -58,8 +60,9 @@ describe("BodyStateClasses Service", () => {
 
     it("should capture loginSuccess event and add noosfero-user-logged class to the body element", () => {
         let userLoggedClassName = BodyStateClassesService.USER_LOGGED_CLASSNAME;
-        $rootScope = <any>helpers.mocks.scopeWithEvents();
+
         bodyElJq.addClass = jasmine.createSpy("addClass");
+        bodyElJq.removeClass = jasmine.createSpy("removeClass");
         authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(false);
         let service = getService();
 
@@ -68,11 +71,11 @@ describe("BodyStateClasses Service", () => {
         // triggers the service start
         service.start();
         // check if the the body element addClass was not called yet,
-        // because the user is not authenticated  
+        // because the user is not authenticated
         expect(bodyElJq.addClass).not.toHaveBeenCalledWith(userLoggedClassName);
 
         // emit the event loginSuccess
-        $rootScope.$emit(AUTH_EVENTS.loginSuccess);
+        authService.loginSuccess.next(null);
 
         // and check now if the addClass was called passing the userLogged class
         // to the body Element
@@ -83,7 +86,6 @@ describe("BodyStateClasses Service", () => {
         let userLoggedClassName = BodyStateClassesService.USER_LOGGED_CLASSNAME;
 
         authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
-        $rootScope = <any>helpers.mocks.scopeWithEvents();
 
         bodyElJq.addClass = jasmine.createSpy("addClass");
         bodyElJq.removeClass = jasmine.createSpy("removeClass");
@@ -95,11 +97,11 @@ describe("BodyStateClasses Service", () => {
         service.start();
 
         // check if the the body element addClass was called
-        // because the user is already authenticated  
+        // because the user is already authenticated
         expect(bodyElJq.addClass).toHaveBeenCalledWith(userLoggedClassName);
 
         // emit the event logoutSuccess
-        $rootScope.$emit(AUTH_EVENTS.logoutSuccess);
+        authService.logoutSuccess.next(null);
 
         // and check now if the removeClass was called passing the userLogged class
         // to the body Element
@@ -126,7 +128,7 @@ describe("BodyStateClasses Service", () => {
         expect(bodyEl.className).toEqual(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + currentStateName);
 
         // emit the event $stateChangeSuccess
-        $rootScope.$emit("$stateChangeSuccess", null, {name: "new-route"});
+        $rootScope.$emit("$stateChangeSuccess", null, { name: "new-route" });
 
         // and check now if the bodyEl has a class indicating the new state route
         expect(bodyEl.className).toEqual(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + "new-route");

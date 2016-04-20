@@ -22,7 +22,7 @@ export class Navbar {
      */
     constructor(
         private $uibModal: any,
-        private authService: AuthService,
+        public authService: AuthService,
         private session: SessionService,
         private $state: ng.ui.IStateService,
         private sidebarNotificationService: SidebarNotificationService
@@ -31,7 +31,7 @@ export class Navbar {
 
         this.showHamburguer = this.authService.isAuthenticated();
 
-        this.authService.loginSuccess.subscribe(() => {
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             if (this.modalInstance) {
                 this.modalInstance.close();
                 this.modalInstance = null;

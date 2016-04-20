@@ -6,18 +6,16 @@ import {SessionService} from "./session.service";
 import {AuthEvents} from "./auth-events";
 
 @Injectable()
-@Inject("$q", "$http", "SessionService", "$log")
+@Inject("$http", "SessionService", "$log")
 export class AuthService {
 
     public loginSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
-    private loginFailed: EventEmitter<ng.IHttpPromiseCallbackArg<any>> = new EventEmitter<ng.IHttpPromiseCallbackArg<any>>();
-    private logoutSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
+    public loginFailed: EventEmitter<ng.IHttpPromiseCallbackArg<any>> = new EventEmitter<ng.IHttpPromiseCallbackArg<any>>();
+    public logoutSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
 
-    constructor(private $q: ng.IQService,
-        private $http: ng.IHttpService,
+    constructor(private $http: ng.IHttpService,
         private sessionService: SessionService,
         private $log: ng.ILogService) {
-
     }
 
     loginFromCookie() {
@@ -43,7 +41,6 @@ export class AuthService {
     private loginFailedCallback(response: ng.IHttpPromiseCallbackArg<any>): any {
         this.$log.debug('AuthService.login [FAIL] response', response);
         this.loginFailed.next(response);
-        // return $q.reject(response);
         return null;
     }
 
@@ -72,8 +69,9 @@ export class AuthService {
 
     subscribe(eventName: string, fn: Function) {
 
-        if (this[eventName]) {
-            this[eventName].subscribe(fn);
+        let event: EventEmitter<any> = <EventEmitter<any>>(<any>this)[eventName];
+        if (event) {
+            event.subscribe(fn);
         } else {
             throw new Error(`The event: ${eventName} not exists`);
         }

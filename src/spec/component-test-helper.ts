@@ -6,12 +6,12 @@ import { ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder'
 /**
  * @ngdoc object
  * @name spec.ComponentTestHelper
- * @description
- *
+ * @description 
+ * 
  * Helper class for creating tests. It encapsulates the TestComponentBuilder initialization,
  * allowing the test to be DRY. To use, one must declare a beforeEach function in the
  * test, and inside construct this object like:
- *
+ * 
  * <pre>
  * let helper = let helper : ComponentTestHelper;
  * beforeEach( (done) => {
@@ -35,7 +35,7 @@ export class ComponentTestHelper<T extends any> {
      * @propertyOf spec.ComponentTestHelper
      * @description
      *  The NgForward TestComponentBuilder
-     */
+     */    
     tcb: TestComponentBuilder;
     /**
      * @ngdoc property
@@ -52,7 +52,7 @@ export class ComponentTestHelper<T extends any> {
      * @description
      *  The debugElement representing a JQuery element attached to the component
      * on mock page.
-     */
+     */    
     debugElement: INgForwardJQuery;
 
     /**
@@ -145,3 +145,4 @@ export function createClass({
     }
     return Test;
 }
+

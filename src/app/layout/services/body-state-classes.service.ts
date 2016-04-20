@@ -83,7 +83,7 @@ export class BodyStateClassesService {
 
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             bodyElement.removeClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
-        })
+        });
     }
 
     /**

@@ -7,7 +7,6 @@ import {
     quickCreateComponent,
     provideEmptyObjects,
     createProviderToValue,
-    getAngularServiceFactory,
     provideFilters
 } from "../../../spec/helpers";
 

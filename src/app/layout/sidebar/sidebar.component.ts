@@ -18,6 +18,6 @@ export class SidebarComponent {
         this.notificationService.setVisibility(this.isVisible);
         this.notificationService.subscribe((visible) => {
             this.isVisible = visible;
-        })
+        });
     }
 }
