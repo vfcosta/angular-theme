@@ -1,7 +1,7 @@
 
 import {ngClass, TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {providers} from  'ng-forward/cjs/testing/providers';
-import {Injectable, Inject, Provider, Input, provide, Component} from 'ng-forward';
+import {Injectable, Inject, Provider, Input, Output, EventEmitter, provide, Component} from 'ng-forward';
 
 
 export var ngforward = {
@@ -62,7 +62,6 @@ export function provideFilters(...filters: string[]) {
     return providers;
 }
 
-
 @Component({
     selector: 'helper_get_angular_service',
     template: 'not-used',
@@ -78,11 +77,14 @@ class AngularServiceHookComponent {
  * This helper class allows get angular services to be used in integration tests
  * i.e: '$http', '$q', '$location', etc...
  */
-class AngularServiceFactory {
+export class AngularServiceFactory {
 
-    constructor(private fixtureComponentHookPoint: ComponentFixture) {
-        this.fixtureComponentHookPoint = (<any>tcb)["create"](AngularServiceHookComponent);
+    private fixtureComponentHookPoint: ComponentFixture;
+
+    constructor() {
+        this.fixtureComponentHookPoint = (<any>tcb)["create"](ComponentWithOutputCall);
     }
+
 
     getAngularService<T>(angularService: string) {
         return this.fixtureComponentHookPoint.debugElement.getLocal(angularService);
@@ -97,8 +99,8 @@ class AngularServiceFactory {
     }
 }
 
-export function getAngularServiceFactory(fixture: ComponentFixture) {
-    return new AngularServiceFactory(fixture);
+export function getAngularServiceFactory() {
+    return new AngularServiceFactory();
 }
 
 export {mocks} from "./mocks";

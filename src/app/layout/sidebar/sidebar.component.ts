@@ -1,23 +1,38 @@
 import {Component, Inject, Input} from "ng-forward";
 import {SidebarNotificationService} from "./sidebar.notification.service";
+import {SessionService} from '../../login/session.service';
 
 @Component({
     selector: 'sidebar',
     templateUrl: 'app/layout/sidebar/sidebar.html'
 })
-@Inject(SidebarNotificationService)
+@Inject(SidebarNotificationService, SessionService)
 export class SidebarComponent {
 
-    @Input('visible')
-    private isVisible: boolean = false;
+    @Input()
+    private visible: boolean = false;
 
-    constructor(private notificationService: SidebarNotificationService) { }
+    @Input()
+    public user: { name: string } = {
+        name: ''
+    };
+
+    constructor(private notificationService: SidebarNotificationService, private session: SessionService) { }
 
     ngOnInit() {
 
-        this.notificationService.setVisibility(this.isVisible);
-        this.notificationService.subscribe((visible) => {
-            this.isVisible = visible;
+        let userData: any = this.session.currentUser();
+        if (userData) {
+            this.user = userData.person;
+        }
+
+        this.notificationService.setVisibility(this.visible);
+        this.notificationService.subscribe((visible: boolean) => {
+            this.visible = visible;
         });
+    }
+
+    isVisible(): boolean {
+        return <boolean>this.visible;
     }
 }
