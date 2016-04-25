@@ -46,7 +46,7 @@ import {MyProfileComponent} from "./myprofile.component";
     },
     {
         name: 'main.profile.cms',
-        url: "^/myprofile/:profile/cms",
+        url: "^/myprofile/:profile/cms?parent_id",
         component: BasicEditorComponent,
         views: {
             "mainBlockContent": {

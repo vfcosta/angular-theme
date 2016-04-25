@@ -9,6 +9,7 @@ describe("Article BasicEditor", () => {
     let articleServiceMock: any;
     let profileServiceMock: any;
     let $state: any;
+    let $stateParams: any;
     let profile = { id: 1 };
     let notification: any;
 
@@ -20,9 +21,10 @@ describe("Article BasicEditor", () => {
 
     beforeEach(() => {
         $state = jasmine.createSpyObj("$state", ["transitionTo"]);
+        $stateParams = jasmine.createSpyObj("$stateParams", ["parent_id"]);
         notification = jasmine.createSpyObj("notification", ["success"]);
         profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["getCurrentProfile"]);
-        articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["createInProfile"]);
+        articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["createInParent"]);
 
         let getCurrentProfileResponse = $q.defer();
         getCurrentProfileResponse.resolve(profile);
@@ -31,20 +33,20 @@ describe("Article BasicEditor", () => {
         articleCreate.resolve({ data: { path: "path", profile: { identifier: "profile" } } });
 
         profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(getCurrentProfileResponse.promise);
-        articleServiceMock.createInProfile = jasmine.createSpy("createInProfile").and.returnValue(articleCreate.promise);
+        articleServiceMock.createInParent = jasmine.createSpy("createInParent").and.returnValue(articleCreate.promise);
     });
 
     it("create an article in the current profile when save", done => {
-        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification);
+        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams);
         component.save();
         $rootScope.$apply();
         expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
-        expect(articleServiceMock.createInProfile).toHaveBeenCalledWith(profile, component.article);
+        expect(articleServiceMock.createInParent).toHaveBeenCalledWith($stateParams.parent_id, component.article);
         done();
     });
 
     it("got to the new article page and display an alert when saving sucessfully", done => {
-        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification);
+        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams);
         component.save();
         $rootScope.$apply();
         expect($state.transitionTo).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "profile" });

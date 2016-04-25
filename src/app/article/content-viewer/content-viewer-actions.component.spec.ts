@@ -20,6 +20,9 @@ describe('Content Viewer Actions Component', () => {
             return <any>[
                 provide('ProfileService', {
                     useValue: helpers.mocks.profileService
+                }),
+                provide('ArticleService', {
+                    useValue: helpers.mocks.articleService
                 })
             ];
         });
@@ -40,6 +43,33 @@ describe('Content Viewer Actions Component', () => {
         buildComponent().then((fixture: ComponentFixture) => {
             expect(fixture.debugElement.query('content-viewer-actions').length).toEqual(1);
 
+            done();
+        });
+    });
+
+    it('return article parent as container when it is not a folder', (done: Function) => {
+        buildComponent().then((fixture: ComponentFixture) => {
+            let component = fixture.debugElement.componentViewChildren[0].componentInstance;
+            let article = <noosfero.Article>({ id: 1, type: 'TextArticle', parent: { id: 2 } });
+            expect(component.getArticleContainer(article)).toEqual(2);
+            done();
+        });
+    });
+
+    it('return article as container when it is a folder', (done: Function) => {
+        buildComponent().then((fixture: ComponentFixture) => {
+            let component = fixture.debugElement.componentViewChildren[0].componentInstance;
+            let article = <noosfero.Article>({ id: 1, type: 'Folder' });
+            expect(component.getArticleContainer(article)).toEqual(1);
+            done();
+        });
+    });
+
+    it('return article as container when it is a blog', (done: Function) => {
+        buildComponent().then((fixture: ComponentFixture) => {
+            let component = fixture.debugElement.componentViewChildren[0].componentInstance;
+            let article = <noosfero.Article>({ id: 1, type: 'Blog' });
+            expect(component.getArticleContainer(article)).toEqual(1);
             done();
         });
     });

@@ -32,6 +32,14 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         return this.create(article, <noosfero.RestModel>profileElement, null, headers);
     }
 
+    createInParent(parentId: number, article: noosfero.Article): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        let headers = {
+            'Content-Type': 'application/json'
+        };
+
+        let parent = this.getElement(parentId);
+        return this.create(article, parent, null, headers, true, "children");
+    }
 
     getAsCollectionChildrenOf<C>(rootElement: noosfero.Environment | noosfero.Article | noosfero.Profile, path: string, queryParams?: any, headers?: any): restangular.ICollectionPromise<C> {
         return rootElement.getList<C>(path, queryParams, headers);

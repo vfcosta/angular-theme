@@ -12,19 +12,25 @@ import {NotificationService} from "../shared/services/notification.service.ts";
         provide('notification', { useClass: NotificationService })
     ]
 })
-@Inject(ArticleService, ProfileService, "$state", NotificationService)
+@Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams")
 export class BasicEditorComponent {
 
     article: noosfero.Article = <noosfero.Article>{};
+    parentId: number;
+
+    editorOptions = {};
 
     constructor(private articleService: ArticleService,
         private profileService: ProfileService,
         private $state: ng.ui.IStateService,
-        private notification: NotificationService) { }
+        private notification: NotificationService,
+        private $stateParams: ng.ui.IStateParamsService) {
+        this.parentId = this.$stateParams['parent_id'];
+    }
 
     save() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
-            return this.articleService.createInProfile(profile, this.article);
+            return this.articleService.createInParent(this.parentId, this.article);
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
             this.$state.transitionTo('main.profile.page', { page: article.path, profile: article.profile.identifier });
