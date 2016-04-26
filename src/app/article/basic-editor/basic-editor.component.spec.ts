@@ -20,11 +20,13 @@ describe("Article BasicEditor", () => {
     }));
 
     beforeEach(() => {
-        $state = jasmine.createSpyObj("$state", ["transitionTo"]);
-        $stateParams = jasmine.createSpyObj("$stateParams", ["parent_id"]);
+        $state = jasmine.createSpyObj("$state", ["go"]);
+        $stateParams = jasmine.createSpyObj("$stateParams", ["parent_id", "profile"]);
         notification = jasmine.createSpyObj("notification", ["success"]);
         profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier"]);
-        articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["createInParent"]);
+        articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["createInParent", "get"]);
+
+        $stateParams.profile = jasmine.createSpy("profile").and.returnValue("profile");
 
         let setCurrentProfileByIdentifierResponse = $q.defer();
         setCurrentProfileByIdentifierResponse.resolve(profile);
@@ -32,8 +34,12 @@ describe("Article BasicEditor", () => {
         let articleCreate = $q.defer();
         articleCreate.resolve({ data: { path: "path", profile: { identifier: "profile" } } });
 
+        let articleGet = $q.defer();
+        articleGet.resolve({ data: { path: "parent-path", profile: { identifier: "profile" } } });
+
         profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(setCurrentProfileByIdentifierResponse.promise);
         articleServiceMock.createInParent = jasmine.createSpy("createInParent").and.returnValue(articleCreate.promise);
+        articleServiceMock.get = jasmine.createSpy("get").and.returnValue(articleGet.promise);
     });
 
     it("create an article in the current profile when save", done => {
@@ -49,9 +55,23 @@ describe("Article BasicEditor", () => {
         let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams);
         component.save();
         $rootScope.$apply();
-        expect($state.transitionTo).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "profile" });
+        expect($state.go).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "profile" });
         expect(notification.success).toHaveBeenCalled();
         done();
     });
 
+    it("got to the parent article page when cancelled", done => {
+        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams);
+        $rootScope.$apply();
+        component.cancel();
+        expect($state.go).toHaveBeenCalledWith("main.profile.page", { page: "parent-path", profile: $stateParams.profile });
+        done();
+    });
+
+    it("got to the profile home when cancelled and parent was not defined", done => {
+        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams);
+        component.cancel();
+        expect($state.go).toHaveBeenCalledWith("main.profile.home", { profile: $stateParams.profile });
+        done();
+    });
 });

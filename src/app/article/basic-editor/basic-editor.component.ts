@@ -16,8 +16,9 @@ import {NotificationService} from "../../shared/services/notification.service.ts
 export class BasicEditorComponent {
 
     article: noosfero.Article = <noosfero.Article>{};
+    parent: noosfero.Article = <noosfero.Article>{};
     parentId: number;
-
+    profileIdentifier: string;
     editorOptions = {};
 
     constructor(private articleService: ArticleService,
@@ -25,17 +26,30 @@ export class BasicEditorComponent {
         private $state: ng.ui.IStateService,
         private notification: NotificationService,
         private $stateParams: ng.ui.IStateParamsService) {
+
         this.parentId = this.$stateParams['parent_id'];
+        this.profileIdentifier = this.$stateParams["profile"];
+        this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
+            this.parent = result.data;
+        });
     }
 
     save() {
-        this.profileService.setCurrentProfileByIdentifier(this.$stateParams["profile"]).then((profile: noosfero.Profile) => {
+        this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
             return this.articleService.createInParent(this.parentId, this.article);
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
-            this.$state.transitionTo('main.profile.page', { page: article.path, profile: article.profile.identifier });
+            this.$state.go('main.profile.page', { page: article.path, profile: article.profile.identifier });
             this.notification.success({ title: "Good job!", message: "Article saved!" });
         });
+    }
+
+    cancel() {
+        if (this.parent && this.parent.path) {
+            this.$state.go('main.profile.page', { page: this.parent.path, profile: this.profileIdentifier });
+        } else {
+            this.$state.go('main.profile.home', { profile: this.profileIdentifier });
+        }
     }
 
 }
