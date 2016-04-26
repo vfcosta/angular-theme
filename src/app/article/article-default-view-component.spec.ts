@@ -27,7 +27,8 @@ describe("Components", () => {
                 providers: [
                     helpers.createProviderToValue('CommentService', helpers.mocks.commentService),
                     helpers.provideFilters("translateFilter"),
-                    helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
+                    helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
+                    helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
                 ]
             })
             class ArticleContainerComponent {
@@ -64,7 +65,8 @@ describe("Components", () => {
                 providers: [
                     helpers.createProviderToValue('CommentService', helpers.mocks.commentService),
                     helpers.provideFilters("translateFilter"),
-                    helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
+                    helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
+                    helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
                 ]
             })
             class ArticleContainerComponent {
