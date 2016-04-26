@@ -1,7 +1,7 @@
 import {StateConfig, Component, Inject, provide} from 'ng-forward';
 import {ProfileInfoComponent} from './info/profile-info.component';
 import {ProfileHomeComponent} from './profile-home.component';
-import {BasicEditorComponent} from '../article/basic-editor.component';
+import {BasicEditorComponent} from '../article/basic-editor/basic-editor.component';
 import {ContentViewerComponent} from "../article/content-viewer/content-viewer.component";
 import {ContentViewerActionsComponent} from "../article/content-viewer/content-viewer-actions.component";
 import {ActivitiesComponent} from "./activities/activities.component";
@@ -45,12 +45,12 @@ import {MyProfileComponent} from "./myprofile.component";
         component: MyProfileComponent
     },
     {
-        name: 'main.profile.cms',
+        name: 'main.cms',
         url: "^/myprofile/:profile/cms?parent_id",
         component: BasicEditorComponent,
         views: {
-            "mainBlockContent": {
-                templateUrl: "app/article/basic-editor.html",
+            "content": {
+                templateUrl: "app/article/basic-editor/basic-editor.html",
                 controller: BasicEditorComponent,
                 controllerAs: "vm"
             }

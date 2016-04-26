@@ -1,11 +1,11 @@
 import {StateConfig, Component, Inject, provide} from 'ng-forward';
-import {ArticleService} from "../../lib/ng-noosfero-api/http/article.service";
-import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
-import {NotificationService} from "../shared/services/notification.service.ts";
+import {ArticleService} from "../../../lib/ng-noosfero-api/http/article.service";
+import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service";
+import {NotificationService} from "../../shared/services/notification.service.ts";
 
 @Component({
     selector: 'article-basic-editor',
-    templateUrl: "app/article/basic-editor.html",
+    templateUrl: "app/article/basic-editor/basic-editor.html",
     providers: [
         provide('articleService', { useClass: ArticleService }),
         provide('profileService', { useClass: ProfileService }),
@@ -29,7 +29,7 @@ export class BasicEditorComponent {
     }
 
     save() {
-        this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
+        this.profileService.setCurrentProfileByIdentifier(this.$stateParams["profile"]).then((profile: noosfero.Profile) => {
             return this.articleService.createInParent(this.parentId, this.article);
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);

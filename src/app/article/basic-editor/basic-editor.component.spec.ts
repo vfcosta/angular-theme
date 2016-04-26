@@ -1,4 +1,4 @@
-import {quickCreateComponent} from "../../spec/helpers";
+import {quickCreateComponent} from "../../../spec/helpers";
 import {BasicEditorComponent} from "./basic-editor.component";
 
 
@@ -23,16 +23,16 @@ describe("Article BasicEditor", () => {
         $state = jasmine.createSpyObj("$state", ["transitionTo"]);
         $stateParams = jasmine.createSpyObj("$stateParams", ["parent_id"]);
         notification = jasmine.createSpyObj("notification", ["success"]);
-        profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["getCurrentProfile"]);
+        profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier"]);
         articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["createInParent"]);
 
-        let getCurrentProfileResponse = $q.defer();
-        getCurrentProfileResponse.resolve(profile);
+        let setCurrentProfileByIdentifierResponse = $q.defer();
+        setCurrentProfileByIdentifierResponse.resolve(profile);
 
         let articleCreate = $q.defer();
         articleCreate.resolve({ data: { path: "path", profile: { identifier: "profile" } } });
 
-        profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(getCurrentProfileResponse.promise);
+        profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(setCurrentProfileByIdentifierResponse.promise);
         articleServiceMock.createInParent = jasmine.createSpy("createInParent").and.returnValue(articleCreate.promise);
     });
 
@@ -40,7 +40,7 @@ describe("Article BasicEditor", () => {
         let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams);
         component.save();
         $rootScope.$apply();
-        expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
+        expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
         expect(articleServiceMock.createInParent).toHaveBeenCalledWith($stateParams.parent_id, component.article);
         done();
     });
