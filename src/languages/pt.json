@@ -35,5 +35,11 @@
   "comment.pagination.more": "Mais",
   "comment.post.success.title": "Bom trabalho!",
   "comment.post.success.message": "Comentário salvo com sucesso!",
-  "comment.reply": "responder"
+  "comment.reply": "responder",
+  "article.basic_editor.title": "Título",
+  "article.basic_editor.body": "Corpo",
+  "article.basic_editor.save": "Salvar",
+  "article.basic_editor.cancel": "Cancelar",
+  "article.basic_editor.success.title": "Bom trabalho!",
+  "article.basic_editor.success.message": "Artigo salvo com sucesso!"
 }

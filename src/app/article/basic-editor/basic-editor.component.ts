@@ -40,7 +40,7 @@ export class BasicEditorComponent {
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
             this.$state.go('main.profile.page', { page: article.path, profile: article.profile.identifier });
-            this.notification.success({ title: "Good job!", message: "Article saved!" });
+            this.notification.success({ title: "article.basic_editor.success.title", message: "article.basic_editor.success.message" });
         });
     }
 
