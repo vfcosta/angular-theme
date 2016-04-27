@@ -16,50 +16,15 @@
                 <li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
               </ul>
             </span>
-            <span class="status">
-              <i class="fa fa-circle"></i> Online
+            <span class="status" ng-show="ctrl.showStatus">
+              <i class="fa fa-circle"></i> {{ctrl.user.status}}
             </span>
           </div>
         </div>
 
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
-            <ul class="nav nav-pills nav-stacked">
-              <li class="nav-header nav-header-first hidden-sm hidden-xs">
-                Navigation
-              </li>
-              <li class="active">
-                <a href="index.html">
-                  <i class="fa fa-dashboard"></i>
-                  <span>Dashboard</span>
-                  <span class="label label-primary label-circle pull-right">28</span>
-                </a>
-              </li>
-              <li ng-click="widgetExpanded = !widgetExpanded">
-                  <a href="#" class="dropdown-toggle">
-                    <i class="fa fa-table"></i>
-                    <span>Tables</span>
-                    <i class="fa fa-angle-right drop-icon"></i>
-                  </a>
-                  <ul class="submenu" ng-show="widgetExpanded">
-                    <li>
-                      <a href="tables.html">
-                        Simple
-                      </a>
-                    </li>
-                    <li>
-                      <a href="tables-advanced.html">
-                        Advanced
-                      </a>
-                    </li>
-                    <li>
-                      <a href="users.html">
-                        Users
-                      </a>
-                    </li>
-                  </ul>
-              </li>
-            </ul>
-          </div>
+            <sidebar-sections></sidebar-sections>
+        </div>
       </div>
     </section>
   </div>

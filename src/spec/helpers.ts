@@ -73,6 +73,7 @@ class AngularServiceHookComponent {
     }
 }
 
+
 /**
  * This helper class allows get angular services to be used in integration tests
  * i.e: '$http', '$q', '$location', etc...
@@ -82,9 +83,8 @@ export class AngularServiceFactory {
     private fixtureComponentHookPoint: ComponentFixture;
 
     constructor() {
-        this.fixtureComponentHookPoint = (<any>tcb)["create"](ComponentWithOutputCall);
+        this.fixtureComponentHookPoint = (<any>tcb)["create"](AngularServiceHookComponent);
     }
-
 
     getAngularService<T>(angularService: string) {
         return this.fixtureComponentHookPoint.debugElement.getLocal(angularService);
