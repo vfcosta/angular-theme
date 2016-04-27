@@ -21,6 +21,8 @@
 	position: absolute;
 	background: #2c3e50;
 	width: 220px;
+  border-right: 2px solid #e7ebee;
+  height: 200%;
 
 	@media (max-width: $break-sm-max) {
 		position: relative;
@@ -288,4 +290,18 @@
 	background-color: darken(#2c3e50, 4%);
 	color: #fff;
 	border-left-color: $primary-color;
+}
+
+#user-left-box {
+  .profile-image-wrap {
+    float:left;
+    width: 70px;
+    height: 70px;
+  }
+  i.profile-image {
+    border-radius: 18%;
+    border: 3px solid #fff;
+    background-color: #fff;
+    text-align: center;
+  }
 }

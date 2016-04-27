@@ -19,7 +19,9 @@ describe("BodyStateClasses Service", () => {
         },
         authService: any = helpers.mocks.authService,
         bodyEl: { className: string },
-        bodyElJq: any;
+        bodyElJq: any,
+        contentWrapperEl: { className: string },
+        contentWrapperElJq: any;
 
     let getService = (): BodyStateClassesService => {
         return new BodyStateClassesService($rootScope, $document, $state, authService);
@@ -29,6 +31,9 @@ describe("BodyStateClasses Service", () => {
         authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
         bodyEl = { className: "" };
         bodyElJq = [bodyEl];
+
+        contentWrapperEl = { className: "" };
+        contentWrapperElJq = [contentWrapperEl];
     });
 
     it("should add the class noosfero-user-logged to the body element if the user is authenticated", () => {
@@ -132,5 +137,44 @@ describe("BodyStateClasses Service", () => {
 
         // and check now if the bodyEl has a class indicating the new state route
         expect(bodyEl.className).toEqual(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + "new-route");
+    });
+
+    it("add a css class theme skin to body element", () => {
+        let service = getService();
+        let skinClass: string = 'skin-test';
+
+        bodyElJq.addClass = jasmine.createSpy("addClass");
+        bodyElJq.removeClass = jasmine.createSpy("removeClass");
+        service["bodyElement"] = bodyElJq;
+
+        service.start({
+            skin: skinClass
+        });
+
+        expect(bodyElJq.addClass).toHaveBeenCalledWith(skinClass);
+    });
+
+    it("add a css class to content wrapper element", () => {
+        let service = getService();
+
+        contentWrapperElJq.addClass = jasmine.createSpy("addClass");
+        contentWrapperElJq.removeClass = jasmine.createSpy("removeClass");
+
+        service["contentWrapperElement"] = contentWrapperElJq;
+        service.addContentClass(true);
+
+        expect(contentWrapperElJq.addClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
+    });
+
+    it("remove a css class from content wrapper element", () => {
+        let service = getService();
+
+        contentWrapperElJq.addClass = jasmine.createSpy("addClass");
+        contentWrapperElJq.removeClass = jasmine.createSpy("removeClass");
+
+        service["contentWrapperElement"] = contentWrapperElJq;
+        service.addContentClass(false);
+
+        expect(contentWrapperElJq.removeClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
     });
 });

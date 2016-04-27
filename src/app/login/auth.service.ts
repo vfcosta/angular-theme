@@ -6,7 +6,7 @@ import {SessionService} from "./session.service";
 import {AuthEvents} from "./auth-events";
 
 @Injectable()
-@Inject("$http", "SessionService", "$log")
+@Inject("$http", SessionService, "$log")
 export class AuthService {
 
     public loginSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();

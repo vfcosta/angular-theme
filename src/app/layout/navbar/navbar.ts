@@ -2,6 +2,7 @@ import {Component, Inject, EventEmitter, Input} from "ng-forward";
 import {LanguageSelectorComponent} from "../language-selector/language-selector.component";
 import {SessionService, AuthService, AuthController, AuthEvents} from "./../../login";
 import {SidebarNotificationService} from "../sidebar/sidebar.notification.service";
+import {BodyStateClassesService} from '../services/body-state-classes.service';
 
 @Component({
     selector: "acme-navbar",
@@ -9,7 +10,7 @@ import {SidebarNotificationService} from "../sidebar/sidebar.notification.servic
     directives: [LanguageSelectorComponent],
     providers: [AuthService, SessionService, SidebarNotificationService]
 })
-@Inject("$uibModal", AuthService, "SessionService", "$state", SidebarNotificationService)
+@Inject("$uibModal", AuthService, "SessionService", "$state", SidebarNotificationService, BodyStateClassesService)
 export class Navbar {
 
     private currentUser: noosfero.User;
@@ -25,11 +26,13 @@ export class Navbar {
         public authService: AuthService,
         private session: SessionService,
         private $state: ng.ui.IStateService,
-        private sidebarNotificationService: SidebarNotificationService
+        private sidebarNotificationService: SidebarNotificationService,
+        private bodyStateService: BodyStateClassesService
     ) {
         this.currentUser = this.session.currentUser();
 
         this.showHamburguer = this.authService.isAuthenticated();
+        this.bodyStateService.addContentClass(!this.sidebarNotificationService.sidebarVisible);
 
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             if (this.modalInstance) {
@@ -51,6 +54,8 @@ export class Navbar {
 
     public toggleCollapse() {
         this.sidebarNotificationService.alternateVisibility();
+
+        this.bodyStateService.addContentClass(!this.sidebarNotificationService.sidebarVisible);
     }
 
     openLogin() {

@@ -1,4 +1,5 @@
 import {AuthService, AuthEvents} from "./";
+import {SessionService} from './session.service';
 
 import {Injectable, Provider, provide, EventEmitter} from "ng-forward";
 import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';

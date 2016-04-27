@@ -51,8 +51,13 @@ import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.
 })
 @Inject(BodyStateClassesService)
 export class MainContentComponent {
+
+    public themeSkin: string = 'skin-whbl';
+
     constructor(private bodyStateClassesService: BodyStateClassesService) {
-        bodyStateClassesService.start();
+        bodyStateClassesService.start({
+            skin: this.themeSkin
+        });
     }
 }
 

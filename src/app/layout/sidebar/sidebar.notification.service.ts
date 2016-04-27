@@ -4,7 +4,7 @@ import {Injectable, EventEmitter} from "ng-forward";
 @Injectable()
 export class SidebarNotificationService {
     private alternateVisibilityEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
-    private sidebarVisible: boolean = false;
+    public sidebarVisible: boolean = false;
 
     getCurrentVisibility() {
         return this.sidebarVisible;

@@ -2,6 +2,7 @@ import {provide} from 'ng-forward';
 import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 import {providers} from 'ng-forward/cjs/testing/providers';
 import {SidebarComponent} from './sidebar.component';
+import * as helpers from '../../../spec/helpers';
 
 const htmlTemplate: string = '<sidebar [visible]="false"></sidebar>';
 
