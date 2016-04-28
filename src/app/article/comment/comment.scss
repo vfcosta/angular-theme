@@ -13,8 +13,7 @@
       min-width: 40px;
     }
     .media-body {
-      background-color: #F9F9F9;
-      padding: 10px;
+      padding: 0 10px 10px 10px;
     }
     noosfero-profile-image {
       img {
@@ -27,6 +26,9 @@
       i {
         font-size: 1.7em;
       }
+    }
+    .comments {
+      margin-left: 30px;
     }
   }
 }

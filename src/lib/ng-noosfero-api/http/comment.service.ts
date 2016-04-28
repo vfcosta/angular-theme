@@ -21,9 +21,10 @@ export class CommentService extends RestangularService<noosfero.Comment> {
         };
     }
 
-    getByArticle(article: noosfero.Article, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Comment[]>> {
+    getByArticle(article: noosfero.Article, params: any = {}): ng.IPromise<noosfero.RestResult<noosfero.Comment[]>> {
+        params['without_reply'] = true;
         let articleElement = this.articleService.getElement(<number>article.id);
-        return this.list(articleElement);
+        return this.list(articleElement, params);
     }
 
     createInArticle(article: noosfero.Article, comment: noosfero.Comment): ng.IPromise<noosfero.RestResult<noosfero.Comment>> {

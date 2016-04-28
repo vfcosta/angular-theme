@@ -1,6 +1,5 @@
 import {Provider, provide, Component} from 'ng-forward';
 import * as helpers from "../../../../spec/helpers";
-
 import {PostCommentComponent} from './post-comment.component';
 
 const htmlTemplate: string = '<noosfero-post-comment [article]="ctrl.article" [reply-of]="ctrl.comment"></noosfero-post-comment>';
@@ -11,9 +10,11 @@ describe("Components", () => {
         beforeEach(angular.mock.module("templates"));
 
         let commentService = jasmine.createSpyObj("commentService", ["createInArticle"]);
+        let user = {};
         let providers = [
             new Provider('CommentService', { useValue: commentService }),
-            new Provider('NotificationService', { useValue: helpers.mocks.notificationService })
+            new Provider('NotificationService', { useValue: helpers.mocks.notificationService }),
+            new Provider('SessionService', { useValue: helpers.mocks.sessionWithCurrentUser(user) })
         ].concat(helpers.provideFilters("translateFilter"));
 
         @Component({ selector: 'test-container-component', directives: [PostCommentComponent], template: htmlTemplate, providers: providers })
@@ -32,10 +33,10 @@ describe("Components", () => {
         it("emit an event when create comment", done => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
                 let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component.commentSaved.next = jasmine.createSpy("next");
                 commentService.createInArticle = jasmine.createSpy("createInArticle").and.returnValue(helpers.mocks.promiseResultTemplate({ data: {} }));
-                component["$rootScope"].$emit = jasmine.createSpy("$emit");
                 component.save();
-                expect(component["$rootScope"].$emit).toHaveBeenCalledWith(PostCommentComponent.EVENT_COMMENT_RECEIVED, jasmine.any(Object));
+                expect(component.commentSaved.next).toHaveBeenCalled();
                 done();
             });
         });
@@ -55,9 +56,9 @@ describe("Components", () => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
                 let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
                 component.comment = <any>{ reply_of_id: null };
-                component.replyOf = <any>{ id: 10 };
+                component.parent = <any>{ id: 10 };
                 component.save();
-                expect(component.comment.reply_of_id).toEqual(component.replyOf.id);
+                expect(component.comment.reply_of_id).toEqual(component.parent.id);
                 done();
             });
         });

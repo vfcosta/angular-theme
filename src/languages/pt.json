@@ -31,5 +31,9 @@
   "notification.http_error.401.message": "Não autorizado",
   "notification.http_error.500.message": "Erro no servidor",
   "comment.post": "Commentar",
+  "comment.post.placeholder": "Participe da discussão...",
+  "comment.pagination.more": "Mais",
+  "comment.post.success.title": "Bom trabalho!",
+  "comment.post.success.message": "Comentário salvo com sucesso!",
   "comment.reply": "responder"
 }
