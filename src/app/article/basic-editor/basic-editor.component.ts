@@ -21,7 +21,6 @@ export class BasicEditorComponent {
     id: number;
     parentId: number;
     profileIdentifier: string;
-    editorOptions = {};
 
     constructor(private articleService: ArticleService,
         private profileService: ProfileService,
