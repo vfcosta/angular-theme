@@ -5,5 +5,8 @@ namespace noosfero {
         profile: Profile;
         type: string;
         parent: Article;
+        body: string;
+        title: string;
+        name: string;
     }
 }

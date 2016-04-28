@@ -12,11 +12,13 @@ import {NotificationService} from "../../shared/services/notification.service.ts
         provide('notification', { useClass: NotificationService })
     ]
 })
-@Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams")
+@Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams", "$window")
 export class BasicEditorComponent {
 
-    article: noosfero.Article = <noosfero.Article>{};
+    article: noosfero.Article = <noosfero.Article>{ type: "TextArticle" };
     parent: noosfero.Article = <noosfero.Article>{};
+
+    id: number;
     parentId: number;
     profileIdentifier: string;
     editorOptions = {};
@@ -25,18 +27,33 @@ export class BasicEditorComponent {
         private profileService: ProfileService,
         private $state: ng.ui.IStateService,
         private notification: NotificationService,
-        private $stateParams: ng.ui.IStateParamsService) {
+        private $stateParams: ng.ui.IStateParamsService,
+        private $window: ng.IWindowService) {
 
         this.parentId = this.$stateParams['parent_id'];
         this.profileIdentifier = this.$stateParams["profile"];
-        this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
-            this.parent = result.data;
-        });
+        this.id = this.$stateParams['id'];
+
+        if (this.parentId) {
+            this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
+                this.parent = result.data;
+            });
+        }
+        if (this.id) {
+            this.articleService.get(this.id).then((result: noosfero.RestResult<noosfero.Article>) => {
+                this.article = result.data;
+                this.article.name = this.article.title; // FIXME
+            });
+        }
     }
 
     save() {
         this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
-            return this.articleService.createInParent(this.parentId, this.article);
+            if (this.id) {
+                return this.articleService.updateArticle(this.article);
+            } else {
+                return this.articleService.createInParent(this.parentId, this.article);
+            }
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
             this.$state.go('main.profile.page', { page: article.path, profile: article.profile.identifier });
@@ -45,11 +62,7 @@ export class BasicEditorComponent {
     }
 
     cancel() {
-        if (this.parent && this.parent.path) {
-            this.$state.go('main.profile.page', { page: this.parent.path, profile: this.profileIdentifier });
-        } else {
-            this.$state.go('main.profile.home', { profile: this.profileIdentifier });
-        }
+        this.$window.history.back();
     }
 
 }

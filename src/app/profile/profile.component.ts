@@ -57,6 +57,18 @@ import {MyProfileComponent} from "./myprofile.component";
         }
     },
     {
+        name: 'main.cmsEdit',
+        url: "^/myprofile/:profile/cms/edit/:id",
+        component: BasicEditorComponent,
+        views: {
+            "content": {
+                templateUrl: "app/article/basic-editor/basic-editor.html",
+                controller: BasicEditorComponent,
+                controllerAs: "vm"
+            }
+        }
+    },
+    {
         name: 'main.profile.home',
         url: "",
         component: ProfileHomeComponent,
