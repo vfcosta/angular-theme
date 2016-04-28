@@ -6,12 +6,12 @@ import { ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder'
 /**
  * @ngdoc object
  * @name spec.ComponentTestHelper
- * @description 
- * 
+ * @description
+ *
  * Helper class for creating tests. It encapsulates the TestComponentBuilder initialization,
  * allowing the test to be DRY. To use, one must declare a beforeEach function in the
  * test, and inside construct this object like:
- * 
+ *
  * <pre>
  * let helper = let helper : ComponentTestHelper;
  * beforeEach( (done) => {
@@ -19,7 +19,7 @@ import { ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder'
  * }
  * </pre>
  */
-export class ComponentTestHelper {
+export class ComponentTestHelper<T extends any> {
 
     /**
      * @ngdoc property
@@ -35,7 +35,7 @@ export class ComponentTestHelper {
      * @propertyOf spec.ComponentTestHelper
      * @description
      *  The NgForward TestComponentBuilder
-     */    
+     */
     tcb: TestComponentBuilder;
     /**
      * @ngdoc property
@@ -43,8 +43,8 @@ export class ComponentTestHelper {
      * @propertyOf spec.ComponentTestHelper
      * @description
      *  The parsed component instance
-     */    
-    component: any;
+     */
+    component: T;
     /**
      * @ngdoc property
      * @name debugElement
@@ -52,7 +52,7 @@ export class ComponentTestHelper {
      * @description
      *  The debugElement representing a JQuery element attached to the component
      * on mock page.
-     */    
+     */
     debugElement: INgForwardJQuery;
 
     /**
@@ -62,7 +62,7 @@ export class ComponentTestHelper {
      * @description
      *  The constructor for this component.
      */
-    constructor(mockComponent: any, done: Function) {
+    constructor(mockComponent: ngClass, done: Function) {
         this.mockComponent = mockComponent;
         this.tcb = new TestComponentBuilder();
         this.init(done);
@@ -82,7 +82,12 @@ export class ComponentTestHelper {
             fixture.detectChanges();
             // The main debug element
             this.debugElement = fixture.debugElement;
-            this.component = this.debugElement.componentViewChildren[0].componentInstance;
+            this.component = <T>this.debugElement.componentViewChildren[0].componentInstance;
+            let mockObj = new this.mockComponent();
+            Object.keys(mockObj).forEach((key: any) => {
+                (<any>this.component)[key] = <any>mockObj[key];
+            });
+
         }).then(() => {
             // Force the resolution of components and sync
             done();
@@ -126,8 +131,8 @@ export class ComponentTestHelper {
 
 export function createClass({
     template = '<div></div>',
-    directives = [],
-    providers = [],
+    directives = <any[]>[],
+    providers = <any[]>[],
     properties = <any>{}
 }): any {
     @Component({ selector: 'component-test-helper-container', template, directives, providers })
@@ -140,4 +145,3 @@ export function createClass({
     }
     return Test;
 }
-
