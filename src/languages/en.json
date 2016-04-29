@@ -36,6 +36,7 @@
   "comment.post.success.title": "Good job!",
   "comment.post.success.message": "Comment saved!",
   "comment.reply": "reply",
+  "article.actions.edit": "Edit",
   "article.basic_editor.title": "Title",
   "article.basic_editor.body": "Body",
   "article.basic_editor.save": "Save",
