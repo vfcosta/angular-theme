@@ -8,5 +8,6 @@ namespace noosfero {
         body: string;
         title: string;
         name: string;
+        published: boolean;
     }
 }

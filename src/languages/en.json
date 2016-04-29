@@ -42,5 +42,8 @@
   "article.basic_editor.save": "Save",
   "article.basic_editor.cancel": "Cancel",
   "article.basic_editor.success.title": "Good job!",
-  "article.basic_editor.success.message": "Article saved!"
+  "article.basic_editor.success.message": "Article saved!",
+  "article.basic_editor.visibility": "Visibility",
+  "article.basic_editor.visibility.public": "Public",
+  "article.basic_editor.visibility.private": "Private"
 }
