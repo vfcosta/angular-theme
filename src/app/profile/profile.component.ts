@@ -110,7 +110,7 @@ export class ProfileComponent {
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
-            $state.transitionTo('main');
+            $state.transitionTo('main.environment.home');
             notificationService.error({ message: "notification.profile.not_found" });
         });
     }

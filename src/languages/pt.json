@@ -40,6 +40,7 @@
   "article.basic_editor.title": "Título",
   "article.basic_editor.body": "Corpo",
   "article.basic_editor.save": "Salvar",
+  "article.basic_editor.save.failed": "O artigo não pode ser salvo",
   "article.basic_editor.cancel": "Cancelar",
   "article.basic_editor.success.title": "Bom trabalho!",
   "article.basic_editor.success.message": "Artigo salvo com sucesso!",

@@ -25,7 +25,7 @@ export class NotificationService {
 
     httpError(status: number, data: any): boolean {
         this.error({ message: `notification.http_error.${status}.message` });
-        return true; // return true to indicate that the error was already handled
+        return false; // return true to indicate that the error was already handled
     }
 
     success({
