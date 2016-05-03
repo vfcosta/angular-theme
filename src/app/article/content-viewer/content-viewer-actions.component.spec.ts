@@ -1,10 +1,7 @@
-import {providers} from 'ng-forward/cjs/testing/providers';
-
 import {Input, Component, provide} from 'ng-forward';
 
 import * as helpers from "../../../spec/helpers";
-
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
+import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 import {ContentViewerActionsComponent} from './content-viewer-actions.component';
 
 // this htmlTemplate will be re-used between the container components in this spec file
@@ -12,86 +9,57 @@ const htmlTemplate: string = '<content-viewer-actions [article]="ctrl.article" [
 
 describe('Content Viewer Actions Component', () => {
 
-    beforeEach(() => {
+    let helper: ComponentTestHelper<ContentViewerActionsComponent>;
 
-        angular.mock.module("templates");
+    beforeEach(angular.mock.module("templates"));
 
-        providers((provide: any) => {
-            return <any>[
-                provide('ProfileService', {
-                    useValue: helpers.mocks.profileService
-                }),
-                provide('ArticleService', {
-                    useValue: helpers.mocks.articleService
-                })
-            ];
-        });
-    });
+    let providers = [
+        provide('ProfileService', {
+            useValue: helpers.mocks.profileService
+        }),
+        provide('ArticleService', {
+            useValue: helpers.mocks.articleService
+        })
+    ].concat(helpers.provideFilters("translateFilter"));
 
-    let buildComponent = (): Promise<ComponentFixture> => {
-        return helpers.quickCreateComponent({
-            providers: [
-                helpers.provideEmptyObjects('Restangular'),
-                helpers.provideFilters('translateFilter')
-            ],
+    beforeEach((done) => {
+        let cls = createClass({
+            template: htmlTemplate,
             directives: [ContentViewerActionsComponent],
-            template: htmlTemplate
+            providers: providers
         });
-    };
-
-    it('renders content viewer actions directive', (done: Function) => {
-        buildComponent().then((fixture: ComponentFixture) => {
-            expect(fixture.debugElement.query('content-viewer-actions').length).toEqual(1);
-
-            done();
-        });
+        helper = new ComponentTestHelper<ContentViewerActionsComponent>(cls, done);
     });
 
-    it('return article parent as container when it is not a folder', (done: Function) => {
-        buildComponent().then((fixture: ComponentFixture) => {
-            let component = fixture.debugElement.componentViewChildren[0].componentInstance;
-            let article = <noosfero.Article>({ id: 1, type: 'TextArticle', parent: { id: 2 } });
-            expect(component.getArticleContainer(article)).toEqual(2);
-            done();
-        });
+    it('renders content viewer actions directive', () => {
+        expect(helper.all("content-viewer-actions").length).toEqual(1);
     });
 
-    it('return article as container when it is a folder', (done: Function) => {
-        buildComponent().then((fixture: ComponentFixture) => {
-            let component = fixture.debugElement.componentViewChildren[0].componentInstance;
-            let article = <noosfero.Article>({ id: 1, type: 'Folder' });
-            expect(component.getArticleContainer(article)).toEqual(1);
-            done();
-        });
+    it('return article parent as container when it is not a folder', () => {
+        let article = <noosfero.Article>({ id: 1, type: 'TextArticle', parent: { id: 2 } });
+        expect(helper.component.getArticleContainer(article)).toEqual(2);
     });
 
-    it('return article as container when it is a blog', (done: Function) => {
-        buildComponent().then((fixture: ComponentFixture) => {
-            let component = fixture.debugElement.componentViewChildren[0].componentInstance;
-            let article = <noosfero.Article>({ id: 1, type: 'Blog' });
-            expect(component.getArticleContainer(article)).toEqual(1);
-            done();
-        });
+    it('return article as container when it is a folder', () => {
+        let article = <noosfero.Article>({ id: 1, type: 'Folder' });
+        expect(helper.component.getArticleContainer(article)).toEqual(1);
     });
 
-    it('check if profile was loaded', (done: Function) => {
+    it('return article as container when it is a blog', () => {
+        let article = <noosfero.Article>({ id: 1, type: 'Blog' });
+        expect(helper.component.getArticleContainer(article)).toEqual(1);
+    });
+
+    it('check if profile was loaded', () => {
         let profile: any = {
             id: 1,
             identifier: 'the-profile-test',
             type: 'Person'
         };
-
         helpers.mocks.profileService.getCurrentProfile = () => {
             return helpers.mocks.promiseResultTemplate(profile);
         };
-
-        buildComponent().then((fixture: ComponentFixture) => {
-            let contentViewerComp: ContentViewerActionsComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-
-            expect(contentViewerComp.profile).toEqual(jasmine.objectContaining(profile));
-
-            done();
-        });
+        let component = new ContentViewerActionsComponent(<any>helpers.mocks.profileService, <any>helpers.mocks.articleService);
+        expect(component.profile).toEqual(jasmine.objectContaining(profile));
     });
-
 });
