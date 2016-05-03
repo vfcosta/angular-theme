@@ -41,6 +41,7 @@ export class LoginBlockComponent {
 
         this.$scope.$on(AUTH_EVENTS.loginSuccess, () => {
             this.currentUser = this.session.currentUser();
+            console.debug("User: ", this.currentUser);
         });
 
         this.$scope.$on(AUTH_EVENTS.logoutSuccess, () => {
