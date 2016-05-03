@@ -9,6 +9,7 @@ import {BlockComponent} from "../layout/blocks/block.component";
 import {EnvironmentComponent} from "../environment/environment.component";
 import {EnvironmentHomeComponent} from "../environment/environment-home.component";
 import {PeopleBlockComponent} from "../layout/blocks/people-block/people-block.component";
+import {LoginBlockComponent} from "../layout/blocks/login-block/login-block.component";
 import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list.component";
 import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents.component";
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/profile-image-block.component";
@@ -81,7 +82,7 @@ export class EnvironmentContent {
     template: '<div ng-view></div>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
-        EnvironmentComponent, PeopleBlockComponent,
+        EnvironmentComponent, PeopleBlockComponent, LoginBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent

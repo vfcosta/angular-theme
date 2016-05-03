@@ -11,13 +11,11 @@ export class SessionService {
 
     create(data: UserResponse): noosfero.User {
         this.$localStorage.currentUser = data.user;
-        this.$log.debug('User session created.', this.$localStorage.currentUser);
         return this.$localStorage.currentUser;
     };
 
     destroy() {
         delete this.$localStorage.currentUser;
-        this.$log.debug('User session destroyed.');
     };
 
     currentUser(): noosfero.User {

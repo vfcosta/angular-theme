@@ -41,7 +41,8 @@ export var mocks = {
         }
     },
     authService: {
-        logout: () => { }
+        logout: () => { },
+        login: () => { }
     },
     articleService: {
         getByProfile: (profileId: number, params?: any) => {
