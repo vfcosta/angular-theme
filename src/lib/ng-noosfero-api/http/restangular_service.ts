@@ -11,6 +11,8 @@
 export abstract class RestangularService<T extends noosfero.RestModel> {
 
     private baseResource: restangular.IElement;
+    private currentPromise: ng.IDeferred<T>;
+
     /**
      * Creates an instance of RestangularService.
      * 
@@ -20,6 +22,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      */
     constructor(protected restangularService: restangular.IService, protected $q: ng.IQService, protected $log: ng.ILogService) {
         this.baseResource = restangularService.all(this.getResourcePath());
+        this.resetCurrent();
         // TODO 
         // this.restangularService.setResponseInterceptor((data, operation, what, url, response, deferred) => {
         //     let transformedData: any = data;
@@ -30,6 +33,18 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         //         return data;
         //     }
         // });
+    }
+
+    public resetCurrent() {
+        this.currentPromise = this.$q.defer();
+    }
+
+    public getCurrent(): ng.IPromise<T> {
+        return this.currentPromise.promise;
+    }
+
+    public setCurrent(object: T) {
+        this.currentPromise.resolve(object);
     }
 
     protected extractData(response: restangular.IResponse): noosfero.RestResult<T> {
@@ -221,7 +236,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * Creates a new Resource into the resource collection
      * calls POST /resourcePath
      */
-    public create(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any, isSub: boolean = true): ng.IPromise<noosfero.RestResult<T>> {
+    public create(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any, isSub: boolean = true, path?: string): ng.IPromise<noosfero.RestResult<T>> {
         let deferred = this.$q.defer<noosfero.RestResult<T>>();
 
         let restRequest: ng.IPromise<noosfero.RestResult<T>>;
@@ -233,8 +248,9 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
             data = obj;
         }
 
+        let subpath = path || this.getResourcePath();
         if (rootElement) {
-            restRequest = rootElement.all(this.getResourcePath()).post(data, queryParams, headers);
+            restRequest = rootElement.all(subpath).post(data, queryParams, headers);
         } else {
             restRequest = this.baseResource.post(data, queryParams, headers);
         }

@@ -28,11 +28,12 @@ export class ContentViewerComponent {
     }
 
     activate() {
-       this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
+        this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
             return this.articleService.getArticleByProfileAndPath(this.profile, this.$stateParams["page"]);
         }).then((result: noosfero.RestResult<any>) => {
             this.article = <noosfero.Article>result.data;
+            this.articleService.setCurrent(this.article);
         });
     }
 }

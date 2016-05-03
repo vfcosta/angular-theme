@@ -14,7 +14,7 @@ declare var moment: any;
 
 let noosferoApp: any = bundle("noosferoApp", MainComponent, ["ngAnimate", "ngCookies", "ngStorage", "ngTouch",
     "ngSanitize", "ngMessages", "ngAria", "restangular",
-    "ui.router", "ui.bootstrap", "toastr",
+    "ui.router", "ui.bootstrap", "toastr", "ngCkeditor",
     "angularMoment", "angular.filter", "akoenig.deckgrid",
     "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
     "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad"]).publish();

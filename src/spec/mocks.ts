@@ -1,6 +1,6 @@
 const DEBUG = false;
 
-let log = (message: string, ...args:  any[]) => {
+let log = (message: string, ...args: any[]) => {
     if (DEBUG) {
         console.log(message);
     }
@@ -70,7 +70,9 @@ export var mocks = {
             return {
                 then: (func?: Function) => { if (func) func(); }
             };
-        }
+        },
+        setCurrent: (article: noosfero.Article) => { },
+        getCurrent: () => { return Promise.resolve({}); }
     },
     environmentService: {
         getEnvironmentPeople: (params: any) => {

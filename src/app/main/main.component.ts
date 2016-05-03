@@ -29,6 +29,7 @@ import {BodyStateClassesService} from "./../layout/services/body-state-classes.s
 import {Navbar} from "../layout/navbar/navbar";
 
 import {MainBlockComponent} from "../layout/blocks/main-block/main-block.component";
+import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.component";
 
 
 /**
@@ -82,7 +83,7 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
         EnvironmentComponent, PeopleBlockComponent,
-        LinkListBlockComponent, CommunitiesBlockComponent,
+        LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
     ],
