@@ -10,15 +10,15 @@ describe("Components", () => {
 
     describe("People Block Component", () => {
         let serviceMock = {
-                    getEnvironmentPeople: (filters: any): any => {
-                        return Promise.resolve([{ identifier: "person1" }]);
-                    }
-                };
+            getEnvironmentPeople: (filters: any): any => {
+                return Promise.resolve([{ identifier: "person1" }]);
+            }
+        };
         let providers = [new Provider('EnvironmentService', { useValue: serviceMock })];
 
-        let helper: ComponentTestHelper;
+        let helper: ComponentTestHelper<PeopleBlockComponent>;
 
-        beforeEach( angular.mock.module("templates") );
+        beforeEach(angular.mock.module("templates"));
 
         /**
          * The beforeEach procedure will initialize the helper and parse
@@ -26,7 +26,7 @@ describe("Components", () => {
          * this mode, the providers and properties given to the construtor
          * can't be overriden.
         */
-        beforeEach( (done) => {
+        beforeEach((done) => {
             // Create the component bed for the test. Optionally, this could be done
             // in each test if one needs customization of these parameters per test
             let cls = createClass({
@@ -35,7 +35,7 @@ describe("Components", () => {
                 providers: providers,
                 properties: {}
             });
-            helper = new ComponentTestHelper(cls, done);
+            helper = new ComponentTestHelper<PeopleBlockComponent>(cls, done);
         });
 
         /**

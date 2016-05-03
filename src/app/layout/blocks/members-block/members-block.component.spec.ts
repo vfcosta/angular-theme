@@ -10,7 +10,7 @@ const tcb = new TestComponentBuilder();
 describe("Components", () => {
     describe("Members Block Component", () => {
 
-        let helper: ComponentTestHelper;
+        let helper: ComponentTestHelper<MembersBlockComponent>;
 
         let providers = [
             new Provider('ProfileService', {
@@ -24,7 +24,7 @@ describe("Components", () => {
 
         beforeEach(angular.mock.module("templates"));
 
-        beforeEach( (done) => {
+        beforeEach((done) => {
             // Custom properties for the component
             let properties = { owner: { id: 1 } };
             // Create the component bed for the test.
@@ -34,7 +34,7 @@ describe("Components", () => {
                 providers: providers,
                 properties: properties
             });
-            helper = new ComponentTestHelper(cls, done);
+            helper = new ComponentTestHelper<MembersBlockComponent>(cls, done);
         });
 
         it("get members of the block owner", () => {
