@@ -72,7 +72,7 @@ describe("Components", () => {
             expect(authService.logout).toHaveBeenCalled();
             // After the component logout method execution, fire the
             // AuthService event
-            simulateLogout();
+            simulateLogoutEvent();
         }
 
         /**
@@ -85,13 +85,13 @@ describe("Components", () => {
             expect(authService.login).toHaveBeenCalled();
             // After the component login method execution, fire the
             // AuthService event
-            simulateLogin();
+            simulateLoginEvent();
         }
 
         /**
          * Simulate the AuthService loginSuccess event
          */
-        function simulateLogin() {
+        function simulateLoginEvent() {
             let localScope: ng.IScope = helper.component["$scope"];
             localScope.$emit(AUTH_EVENTS.loginSuccess);
         }
@@ -99,7 +99,7 @@ describe("Components", () => {
         /**
          * Simulate the AuthService logoutSuccess event
          */
-        function simulateLogout() {
+        function simulateLogoutEvent() {
             let localScope: ng.IScope = helper.component["$scope"];
             localScope.$emit(AUTH_EVENTS.logoutSuccess);
         }
