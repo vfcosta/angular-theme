@@ -1,0 +1,56 @@
+<div class="register-page">
+  <div class="welcome-message">
+    <h1>{{"account.register.welcomeMessage" | translate }}</h1>
+    <p>
+      "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+      "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."
+    </p>
+    <p>{{"account.register.seeMoreMessage" | translate}}<a href="#">{{"account.register.informationsMessage" | translate}}</a></p>
+  </div>
+  <form>
+    <div class="row">
+      <div class="col-md-6 register-field">
+        <label for="name">{{"account.register.firstNameLabel" | translate }}</label>
+        <input type="text" class="form-control" id="name" placeholder="joao" ng-model="ctrl.account.name">
+      </div>
+
+      <div class="col-md-6 register-field">
+        <label for="lastName">{{"account.register.lastNameLabel" | translate }}</label>
+        <input type="text" class="form-control" id="lastName" placeholder="silva" ng-model="ctrl.account.lastName">
+      </div>
+
+      <div class="col-md-12 register-field">
+        <label for="login">{{"account.register.usernameLabel" | translate }}</label>
+        <input type="text" class="form-control" id="login" placeholder="username" ng-model="ctrl.account.login">
+        <p class="light-text">ex: ola.coop.br/joaosilva</p>
+      </div>
+
+      <div class="col-md-12 register-field">
+        <label for="email">{{"account.register.emailLabel" | translate }}</label>
+        <input type="text" class="form-control" id="email" placeholder="Email" ng-model="ctrl.account.email">
+      </div>
+
+      <div class="col-md-6 register-field">
+        <label for="password">{{"account.register.passwordLabel" | translate }}</label>
+        <input type="password" class="form-control" id="password" placeholder="Password" ng-model="ctrl.account.password">
+      </div>
+
+      <div class="col-md-6 register-field">
+        <label for="password-confirmation">{{"account.register.passwordConfirmationLabel" | translate}}</label>
+        <input type="password" class="form-control" id="passwordConfirmation" placeholder="Password Confirmation" ng-model="ctrl.account.passwordConfirmation">
+      </div>
+
+      <div class="col-md-12">
+        <p class="terms-info">{{"account.register.accountCreatingMessage" | translate}} <a href="#">{{"account.register.termsOfUseMessage" | translate}}</a>.</p>
+      </div>
+
+      <div class="col-md-12">
+        <button type="submit" class="btn btn-default" ng-click="ctrl.signup(ctrl.account)">{{"account.register.signupMessage" | translate}}</button>
+      </div>
+
+    </div>
+  </form>
+
+  <p class="already-registered-message">{{"account.register.haveAccountMessage" | translate}}</p>
+
+</div>
