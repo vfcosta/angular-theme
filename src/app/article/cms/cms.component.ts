@@ -2,20 +2,23 @@ import {StateConfig, Component, Inject, provide} from 'ng-forward';
 import {ArticleService} from "../../../lib/ng-noosfero-api/http/article.service";
 import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service";
 import {NotificationService} from "../../shared/services/notification.service.ts";
+import {BasicOptionsComponent} from './basic-options/basic-options.component';
+import {BasicEditorComponent} from './basic-editor/basic-editor.component';
 
 @Component({
-    selector: 'article-basic-editor',
-    templateUrl: "app/article/basic-editor/basic-editor.html",
+    selector: 'article-cms',
+    templateUrl: "app/article/cms/cms.html",
     providers: [
         provide('articleService', { useClass: ArticleService }),
         provide('profileService', { useClass: ProfileService }),
         provide('notification', { useClass: NotificationService })
-    ]
+    ],
+    directives: [BasicOptionsComponent, BasicEditorComponent]
 })
 @Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams", "$window")
-export class BasicEditorComponent {
+export class CmsComponent {
 
-    article: noosfero.Article = <noosfero.Article>{ type: "TextArticle" };
+    article: noosfero.Article;
     parent: noosfero.Article = <noosfero.Article>{};
 
     id: number;
@@ -34,6 +37,7 @@ export class BasicEditorComponent {
         this.id = this.$stateParams['id'];
 
         if (this.parentId) {
+            this.article = <noosfero.Article>{ type: this.$stateParams['type'] || "TextArticle", published: true };
             this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
                 this.parent = result.data;
             });

@@ -1,0 +1,10 @@
+<form>
+  <div class="form-group">
+    <label for="titleInput">{{"article.basic_editor.title" | translate}}</label>
+    <input type="text" class="form-control" id="titleInput" placeholder="{{'article.basic_editor.title' | translate}}" ng-model="ctrl.article.name">
+  </div>
+  <div class="form-group">
+    <label for="bodyInput">{{"article.basic_editor.body" | translate}}</label>
+    <html-editor [(value)]="ctrl.article.body"></html-editor>
+  </div>
+</form>

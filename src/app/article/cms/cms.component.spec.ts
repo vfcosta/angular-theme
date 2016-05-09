@@ -1,8 +1,8 @@
 import {quickCreateComponent} from "../../../spec/helpers";
-import {BasicEditorComponent} from "./basic-editor.component";
+import {CmsComponent} from "./cms.component";
 
 
-describe("Article BasicEditor", () => {
+describe("Article Cms", () => {
 
     let $rootScope: ng.IRootScopeService;
     let $q: ng.IQService;
@@ -46,7 +46,7 @@ describe("Article BasicEditor", () => {
 
     it("create an article in the current profile when save", done => {
         $stateParams['parent_id'] = 1;
-        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
         component.save();
         $rootScope.$apply();
         expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
@@ -55,7 +55,7 @@ describe("Article BasicEditor", () => {
     });
 
     it("got to the new article page and display an alert when saving sucessfully", done => {
-        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
         component.save();
         $rootScope.$apply();
         expect($state.go).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "profile" });
@@ -64,7 +64,7 @@ describe("Article BasicEditor", () => {
     });
 
     it("go back when cancel article edition", done => {
-        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
         $window.history = { back: jasmine.createSpy('back') };
         component.cancel();
         expect($window.history.back).toHaveBeenCalled();
@@ -74,7 +74,7 @@ describe("Article BasicEditor", () => {
     it("edit existing article when save", done => {
         $stateParams['parent_id'] = null;
         $stateParams['id'] = 2;
-        let component: BasicEditorComponent = new BasicEditorComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
         component.save();
         $rootScope.$apply();
         expect(articleServiceMock.updateArticle).toHaveBeenCalledWith(component.article);
