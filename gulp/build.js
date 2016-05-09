@@ -6,6 +6,7 @@ var rename = require('gulp-rename');
 var insert = require('gulp-insert');
 var merge = require('merge-stream');
 var conf = require('./conf');
+var languages = require('./languages');
 
 var themeName = conf.paths.theme.replace('-', ' ');
 themeName = themeName.charAt(0).toUpperCase() + themeName.slice(1);
@@ -16,25 +17,31 @@ var $ = require('gulp-load-plugins')({
 });
 
 gulp.task('partials', function () {
-  var srcPaths = [path.join(conf.paths.tmp, '/serve/app/**/*.html')];
-  conf.paths.allSources.forEach(function(src) {
-    srcPaths.push(path.join(src, '/app/**/*.html'));
+  var merged = merge();
+  ['app', conf.paths.plugins].forEach(function(partialPath) {
+    var srcPaths = [path.join(conf.paths.tmp, '/serve/app/**/*.html')];
+    conf.paths.allSources.forEach(function(src) {
+      srcPaths.push(path.join(src, partialPath, '/**/*.html'));
+    });
+    merged.add(gulp.src(srcPaths)
+      .pipe($.minifyHtml({
+        empty: true,
+        spare: true,
+        quotes: true
+      }))
+      .pipe($.angularTemplatecache('templateCacheHtml-'+partialPath+'.js', {
+        module: 'noosferoApp',
+        root: partialPath
+      }))
+      .pipe(gulp.dest(conf.paths.tmp + '/partials/')));
   });
-  return gulp.src(srcPaths)
-    .pipe($.minifyHtml({
-      empty: true,
-      spare: true,
-      quotes: true
-    }))
-    .pipe($.angularTemplatecache('templateCacheHtml.js', {
-      module: 'noosferoApp',
-      root: 'app'
-    }))
-    .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
+  return merged;
 });
 
 gulp.task('html', ['inject', 'partials'], function () {
-  var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), { read: false });
+  var partialsInjectFile = gulp.src([
+    path.join(conf.paths.tmp, '/partials/templateCacheHtml-app.js'),
+    path.join(conf.paths.tmp, '/partials/templateCacheHtml-plugins.js')], { read: false });
   var partialsInjectOptions = {
     starttag: '<!-- inject:partials -->',
     ignorePath: path.join(conf.paths.tmp, '/partials'),
@@ -124,6 +131,10 @@ gulp.task('clean-docs', [], function() {
     return $.del([path.join(conf.paths.docs, '/')]);
 });
 
+gulp.task('plugin-languages', ['locale'], function() {
+  return languages.pluginLanguages(conf.paths.dist);
+});
+
 gulp.task('noosfero', ['html'], function () {
     var layouts = gulp.src('layouts/**/*')
       .pipe(gulp.dest(path.join(conf.paths.dist, "layouts")));
@@ -136,4 +147,4 @@ gulp.task('noosfero', ['html'], function () {
     return merge(layouts, theme, index);
 });
 
-gulp.task('build', ['html', 'fonts', 'other', 'locale', 'noosfero']);
+gulp.task('build', ['html', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero']);

@@ -1,3 +1,4 @@
+import * as plugins from "../../plugins";
 import {bundle, Component, StateConfig, Inject} from "ng-forward";
 import {ArticleBlogComponent} from "./../article/types/blog/blog.component";
 
@@ -93,7 +94,7 @@ export class EnvironmentContent {
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
-    ],
+    ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
 @StateConfig([

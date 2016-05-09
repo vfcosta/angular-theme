@@ -1,6 +1,8 @@
 import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
 import {ArticleBlogComponent} from "./types/blog/blog.component";
 import {CommentsComponent} from "./comment/comments.component";
+import {MacroDirective} from "./macro/macro.directive";
+import {ArticleToolbarHotspotComponent} from "../hotspot/article-toolbar-hotspot.component";
 
 /**
  * @ngdoc controller
@@ -30,7 +32,8 @@ export class ArticleDefaultViewComponent {
 @Component({
     selector: 'noosfero-article',
     template: 'not-used',
-    directives: [ArticleDefaultViewComponent, ArticleBlogComponent, CommentsComponent]
+    directives: [ArticleDefaultViewComponent, ArticleBlogComponent,
+        CommentsComponent, MacroDirective, ArticleToolbarHotspotComponent]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class ArticleViewComponent {
@@ -53,6 +56,5 @@ export class ArticleViewComponent {
         private $scope: ng.IScope,
         private $injector: ng.auto.IInjectorService,
         private $compile: ng.ICompileService) {
-
     }
 }

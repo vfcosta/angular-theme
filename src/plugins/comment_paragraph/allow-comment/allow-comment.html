@@ -1,0 +1,12 @@
+<div class="paragraph" ng-class="{'active' : ctrl.display}">
+  <div class="paragraph-content" ng-bind-html="ctrl.content" ng-class="{'active' : ctrl.display}"></div>
+  <div ng-if="ctrl.isActivated()" class="actions">
+    <a href="#" popover-placement="right-top" popover-trigger="none"
+      uib-popover-template="'plugins/comment_paragraph/allow-comment/popover.html'"
+      (click)="ctrl.showParagraphComments()" popover-is-open="ctrl.display">
+      <div class="arrow_box" ng-class="{'active' : ctrl.display}">
+        <span class="count">{{ctrl.commentsCount > 0 ? ctrl.commentsCount : '+'}}</span>
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+comment-paragraph-side-comments {
+  .comments {
+    .comment {
+      margin: 0;
+      &.media {
+        border-top: 0;  
+      }
+      .comments {
+        margin-left: 0;
+      }
+    }
+  }
+}

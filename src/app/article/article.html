@@ -4,9 +4,7 @@
   </div>
 
   <div class="sub-header clearfix">
-    <a href="#" class="btn btn-default btn-xs" ui-sref="main.cmsEdit({profile: ctrl.profile.identifier, id: ctrl.article.id})">
-      <i class="fa fa-pencil-square-o fa-fw fa-lg"></i> {{"article.actions.edit" | translate}}
-    </a>
+    <noosfero-hotspot-article-toolbar [article]="ctrl.article"></noosfero-hotspot-article-toolbar>
     <div class="page-info pull-right small text-muted">
       <span class="time">
         <i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.article.created_at | dateFormat"></span>
@@ -21,7 +19,7 @@
   </div>
 
   <div class="page-body">
-    <div ng-bind-html="ctrl.article.body"></div>
+    <div bind-html-compile="ctrl.article.body"></div>
   </div>
 
   <noosfero-comments [article]="ctrl.article"></noosfero-comments>

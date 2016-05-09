@@ -207,4 +207,27 @@ describe("Restangular Service - base Class", () => {
         $httpBackend.flush();
     });
 
+    it("post('customPath', rootObject) calls POST /rootObjects/1/customPath", (done) => {
+        let rootObj: RootObjectModel = rootObjectRestService.getElement(1);
+        $httpBackend.expectPOST("/api/v1/rootObjects/1/customPath").respond(201, { object: { attr: 1, rootId: 1 } });
+        objectRestService.post('customPath', rootObj).then((result: noosfero.RestResult<ObjectModel>) => {
+            expect(result.data).toBeDefined();
+            expect((<any>result.data).attr).toEqual(1);
+            expect((<any>result.data).rootId).toEqual(1);
+            done();
+        });
+        $httpBackend.flush();
+    });
+
+    it("post('customPath') calls POST /objects/customPath", (done) => {
+        $httpBackend.expectPOST("/api/v1/objects/customPath").respond(201, { object: { attr: 1, rootId: 1 } });
+        objectRestService.post('customPath').then((result: noosfero.RestResult<ObjectModel>) => {
+            expect(result.data).toBeDefined();
+            expect((<any>result.data).attr).toEqual(1);
+            expect((<any>result.data).rootId).toEqual(1);
+            done();
+        });
+        $httpBackend.flush();
+    });
+
 });

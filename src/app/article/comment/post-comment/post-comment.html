@@ -8,6 +8,7 @@
       </div>
       <div class="media-body">
         <textarea class="form-control custom-control" rows="1" ng-model="ctrl.comment.body" placeholder="{{'comment.post.placeholder' | translate}}"></textarea>
+        <noosfero-hotspot-comment-form [comment]="ctrl.comment" [parent]="ctrl.parent"></noosfero-hotspot-comment-form>
         <button ng-show="ctrl.comment.body" type="submit" class="btn btn-default pull-right ng-hide" ng-click="ctrl.save()">{{"comment.post" | translate}}</button>
       </div>
     </div>
