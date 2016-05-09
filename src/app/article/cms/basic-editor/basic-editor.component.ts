@@ -7,5 +7,4 @@ import {Component, Input} from 'ng-forward';
 export class BasicEditorComponent {
 
     @Input() article: noosfero.Article;
-
 }

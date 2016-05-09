@@ -4,6 +4,7 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
 import {NotificationService} from "../../shared/services/notification.service.ts";
 import {BasicOptionsComponent} from './basic-options/basic-options.component';
 import {BasicEditorComponent} from './basic-editor/basic-editor.component';
+import {ArticleEditorComponent} from './article-editor/article-editor.component';
 
 @Component({
     selector: 'article-cms',
@@ -13,7 +14,7 @@ import {BasicEditorComponent} from './basic-editor/basic-editor.component';
         provide('profileService', { useClass: ProfileService }),
         provide('notification', { useClass: NotificationService })
     ],
-    directives: [BasicOptionsComponent, BasicEditorComponent]
+    directives: [ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent]
 })
 @Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams", "$window")
 export class CmsComponent {
