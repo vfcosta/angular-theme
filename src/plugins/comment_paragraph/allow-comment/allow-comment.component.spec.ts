@@ -26,7 +26,7 @@ describe("Components", () => {
             new Provider('CommentParagraphService', { useValue: serviceMock }),
             new Provider('CommentParagraphEventService', { useValue: eventServiceMock })
         ];
-        let helper: ComponentTestHelper;
+        let helper: ComponentTestHelper<AllowCommentComponent>;
 
         beforeEach(angular.mock.module("templates"));
 
@@ -45,7 +45,7 @@ describe("Components", () => {
                     }
                 }
             });
-            helper = new ComponentTestHelper(cls, done);
+            helper = new ComponentTestHelper<AllowCommentComponent>(cls, done);
         });
 
         it('update comments count', () => {

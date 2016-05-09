@@ -2,27 +2,27 @@ import { Inject, Input, Component, provide } from 'ng-forward';
 import { PostCommentComponent } from "./post-comment/post-comment.component";
 import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
 import { CommentComponent } from "./comment.component";
-import { PostCommentEventService } from "./post-comment/post-comment-event.service";
 
 @Component({
     selector: 'noosfero-comments',
     templateUrl: 'app/article/comment/comments.html',
-    directives: [PostCommentComponent, CommentComponent]
+    directives: [PostCommentComponent, CommentComponent],
+    outputs: ['commentAdded']
 })
-@Inject(CommentService, PostCommentEventService, "$scope")
+@Inject(CommentService, "$element")
 export class CommentsComponent {
 
-    comments: noosfero.Comment[] = [];
+    comments: noosfero.CommentViewModel[] = [];
     @Input() showForm = true;
     @Input() article: noosfero.Article;
-    @Input() parent: noosfero.Comment;
+    @Input() parent: noosfero.CommentViewModel;
     protected page = 1;
     protected perPage = 5;
     protected total = 0;
 
     newComment = <noosfero.Comment>{};
 
-    constructor(protected commentService: CommentService, private postCommentEventService: PostCommentEventService, private $scope: ng.IScope) { }
+    constructor(protected commentService: CommentService, private $scope: ng.IScope) { }
 
     ngOnInit() {
         if (this.parent) {
@@ -30,13 +30,20 @@ export class CommentsComponent {
         } else {
             this.loadNextPage();
         }
-        this.postCommentEventService.subscribe((comment: noosfero.Comment) => {
-            if ((!this.parent && !comment.reply_of) || (comment.reply_of && this.parent && comment.reply_of.id === this.parent.id)) {
-                if (!this.comments) this.comments = [];
-                this.comments.push(comment);
-                this.$scope.$apply();
-            }
+    }
+
+    commentAdded(comment: noosfero.Comment): void {
+        this.comments.push(comment);
+        this.resetShowReply();
+    }
+
+    private resetShowReply() {
+        this.comments.forEach((comment: noosfero.CommentViewModel) => {
+            comment.__show_reply = false;
         });
+        if (this.parent) {
+            this.parent.__show_reply = false;
+        }
     }
 
     loadComments() {

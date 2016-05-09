@@ -16,7 +16,7 @@ describe("Components", () => {
             new Provider('CommentParagraphService', { useValue: serviceMock }),
             new Provider('CommentParagraphEventService', { useValue: eventServiceMock })
         ].concat(helpers.provideFilters('translateFilter'));
-        let helper: ComponentTestHelper;
+        let helper: ComponentTestHelper<CommentParagraphArticleButtonHotspotComponent>;
 
         beforeEach(angular.mock.module("templates"));
 
@@ -29,7 +29,7 @@ describe("Components", () => {
                     article: {}
                 }
             });
-            helper = new ComponentTestHelper(cls, done);
+            helper = new ComponentTestHelper<CommentParagraphArticleButtonHotspotComponent>(cls, done);
         });
 
         it('emit event when deactivate comment paragraph in an article', () => {
@@ -55,7 +55,7 @@ describe("Components", () => {
         });
 
         it('return true when comment paragraph is active', () => {
-            helper.component.article = { setting: { comment_paragraph_plugin_activate: true } };
+            helper.component.article = <noosfero.Article>{ setting: { comment_paragraph_plugin_activate: true } };
             helper.detectChanges();
             expect(helper.component.isActivated()).toBeTruthy();
         });
@@ -65,7 +65,7 @@ describe("Components", () => {
         });
 
         it('return false when article has no setting attribute', () => {
-            helper.component.article = {};
+            helper.component.article = <noosfero.Article>{};
             helper.detectChanges();
             expect(helper.component.isActivated()).toBeFalsy();
         });
@@ -76,7 +76,7 @@ describe("Components", () => {
         });
 
         it('display deactivate button when comment paragraph is active', () => {
-            helper.component.article = { setting: { comment_paragraph_plugin_activate: true } };
+            helper.component.article = <noosfero.Article>{ setting: { comment_paragraph_plugin_activate: true } };
             helper.detectChanges();
             expect(helper.all('.comment-paragraph-deactivate').length).toEqual(1);
             expect(helper.all('.comment-paragraph-activate').length).toEqual(0);

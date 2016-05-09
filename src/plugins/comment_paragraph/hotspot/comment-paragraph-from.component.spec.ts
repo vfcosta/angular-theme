@@ -8,7 +8,7 @@ let htmlTemplate = '<comment-paragraph-form-hotspot [comment]="ctrl.comment" [pa
 describe("Components", () => {
     describe("Comment Paragraph Form Hotspot Component", () => {
 
-        let helper: ComponentTestHelper;
+        let helper: ComponentTestHelper<CommentParagraphFormHotspotComponent>;
 
         beforeEach(angular.mock.module("templates"));
 
@@ -21,7 +21,7 @@ describe("Components", () => {
                     comment: {}
                 }
             });
-            helper = new ComponentTestHelper(cls, done);
+            helper = new ComponentTestHelper<CommentParagraphFormHotspotComponent>(cls, done);
         });
 
         it('set paragraph uuid when parent has it setted', () => {

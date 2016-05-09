@@ -21,7 +21,7 @@ describe("Components", () => {
             new Provider('CommentService', { useValue: commentServiceMock }),
             new Provider('PostCommentEventService', { useValue: postCommentEventService })
         ];
-        let helper: ComponentTestHelper;
+        let helper: ComponentTestHelper<SideCommentsComponent>;
 
         beforeEach(angular.mock.module("templates"));
 
@@ -35,7 +35,7 @@ describe("Components", () => {
                     article: {}
                 }
             });
-            helper = new ComponentTestHelper(cls, done);
+            helper = new ComponentTestHelper<SideCommentsComponent>(cls, done);
         });
 
         it('call service to load paragraph comments', () => {
