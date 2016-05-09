@@ -25,7 +25,7 @@ describe("Components", () => {
         });
 
         it('set paragraph uuid when parent has it setted', () => {
-            helper.component.parent = { paragraph_uuid: 'uuid' };
+            helper.component.parent = <any>{ paragraph_uuid: 'uuid' };
             helper.detectChanges();
             expect((<any>helper.component.comment).paragraph_uuid).toEqual('uuid');
         });

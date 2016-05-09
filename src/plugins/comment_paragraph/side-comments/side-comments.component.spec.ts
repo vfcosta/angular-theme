@@ -44,7 +44,8 @@ describe("Components", () => {
         });
 
         it('set paragraph uuid in new comment object', () => {
-            expect(helper.component.newComment['paragraph_uuid']).toEqual('uuid');
+            let comment = <any>helper.component.newComment;
+            expect(comment['paragraph_uuid']).toEqual('uuid');
         });
     });
 });
