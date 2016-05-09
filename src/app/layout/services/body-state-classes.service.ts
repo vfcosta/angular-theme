@@ -17,6 +17,9 @@ export interface StartParams {
  *    Route States:
  *         - noosfero-route-main
  *         - noosfero-route-main.profile.info
+ *
+ *    Show the all content in full mode:
+ *         - full-content
  */
 @Injectable()
 @Inject("$rootScope", "$document", "$state", AuthService)

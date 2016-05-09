@@ -7,14 +7,7 @@
             <span class="name">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 {{ctrl.user.name}}
-                <i class="fa fa-angle-down"></i>
               </a>
-              <ul class="dropdown-menu">
-                <li><a href="user-profile.html"><i class="fa fa-user"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
-                <li><a href="#"><i class="fa fa-envelope-o"></i>Messages</a></li>
-                <li><a href="#"><i class="fa fa-power-off"></i>Logout</a></li>
-              </ul>
             </span>
             <span class="status" ng-show="ctrl.showStatus">
               <i class="fa fa-circle"></i> {{ctrl.user.status}}
@@ -23,7 +16,7 @@
         </div>
 
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="sidebar-nav">
-            <sidebar-sections></sidebar-sections>
+            <sidebar-section [name]='Navigation'></sidebar-section>
         </div>
       </div>
     </section>

@@ -2,7 +2,7 @@ import {provide} from 'ng-forward';
 import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 import {providers} from 'ng-forward/cjs/testing/providers';
 import {SidebarComponent} from './sidebar.component';
-import {SidebarSectionsComponent} from './sidebar-sections.component';
+import {SidebarSectionComponent} from './sidebar-section.component';
 import * as helpers from '../../../spec/helpers';
 
 const htmlTemplate: string = '<sidebar [visible]="false"></sidebar>';
@@ -43,8 +43,8 @@ describe('Sidebar Component', () => {
                 provide('SessionService', {
                     useValue: sessionService
                 }),
-                provide('SidebarSectionsComponent', {
-                    useValue: SidebarSectionsComponent
+                provide('SidebarSectionComponent', {
+                    useValue: SidebarSectionComponent
                 })
             ];
         });
@@ -81,7 +81,6 @@ describe('Sidebar Component', () => {
 
         notifyService.setVisibility(true);
         expect(helper.debugElement.query('li.active a span').text()).toMatch('Friends');
-        expect(helper.debugElement.query('li.active .submenu li a').text()).toMatch('Example');
     });
 
 });
