@@ -39,8 +39,8 @@ describe("Components", () => {
         });
 
         /**
-         * By default the helper will have the component, with all properties 
-         * ready to be used. Here the mock provider 'EnvironmentService' will 
+         * By default the helper will have the component, with all properties
+         * ready to be used. Here the mock provider 'EnvironmentService' will
          * return the given array with one person.
          */
         it("get block with one people", () => {

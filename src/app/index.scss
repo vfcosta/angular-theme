@@ -28,12 +28,16 @@ $primary-color-dark: #0288d1;
 $default-bg-hover-color: #f8f8f8;
 $red-color: #e84e40;
 $red-color-dark: #dd191d;
+$green-color: #8bc34a;
+$green-color-dark: #689f38;
 
 //GRID - media queries breakpoints
 $break-xxs-min: 420px;
 $break-xs-min: 768px;
+$break-sm-min: 992px;
 
 $break-xxs-max: ($break-xxs-min - 1);
+$break-sm-max: ($break-sm-min - 1);
 $break-xs-max: ($break-xs-min - 1);
 
 
@@ -76,4 +80,5 @@ h1, h2, h3, h4, h5 {
 @import "layout/scss/mixins";
 @import "layout/scss/bootstrap-overrides";
 @import "layout/scss/layout";
+@import "layout/scss/sidebar";
 @import "layout/scss/tables";

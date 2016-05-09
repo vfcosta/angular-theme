@@ -73,6 +73,7 @@ class AngularServiceHookComponent {
     }
 }
 
+
 /**
  * This helper class allows get angular services to be used in integration tests
  * i.e: '$http', '$q', '$location', etc...

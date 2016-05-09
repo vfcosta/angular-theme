@@ -28,6 +28,8 @@ import {BodyStateClassesService} from "./../layout/services/body-state-classes.s
 
 import {Navbar} from "../layout/navbar/navbar";
 
+import {SidebarComponent} from "../layout/sidebar/sidebar.component";
+
 import {MainBlockComponent} from "../layout/blocks/main-block/main-block.component";
 import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.component";
 
@@ -49,8 +51,13 @@ import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.
 })
 @Inject(BodyStateClassesService)
 export class MainContentComponent {
+
+    public themeSkin: string = 'skin-whbl';
+
     constructor(private bodyStateClassesService: BodyStateClassesService) {
-        bodyStateClassesService.start();
+        bodyStateClassesService.start({
+            skin: this.themeSkin
+        });
     }
 }
 
@@ -84,7 +91,7 @@ export class EnvironmentContent {
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
         EnvironmentComponent, PeopleBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
-        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
+        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
     ],
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]

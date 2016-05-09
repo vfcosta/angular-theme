@@ -1,11 +1,3 @@
-export interface IAuthEvents {
-    loginSuccess: string;
-    loginFailed: string;
-    logoutSuccess: string;
+export enum AuthEvents {
+    loginSuccess, loginFailed, logoutSuccess
 }
-
-export const AUTH_EVENTS: IAuthEvents = {
-    loginSuccess: "auth-login-success",
-    loginFailed: "auth-login-failed",
-    logoutSuccess: "auth-logout-success"
-};
