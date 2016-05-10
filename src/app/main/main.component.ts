@@ -14,9 +14,12 @@ import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list-blo
 import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents-block.component";
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image/profile-image-block.component";
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html-block.component";
+import {StatisticsBlockComponent} from "../layout/blocks/statistics/statistics-block.component";
 
 import {MembersBlockComponent} from "./../layout/blocks/members/members-block.component";
 import {CommunitiesBlockComponent} from "./../layout/blocks/communities/communities-block.component";
+
+
 import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
 import {DateFormat} from "../shared/pipes/date-format.filter";
 
@@ -93,8 +96,9 @@ export class EnvironmentContent {
         EnvironmentComponent, PeopleBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
+        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
+
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
 @StateConfig([

@@ -46,5 +46,13 @@
   "article.basic_editor.success.message": "Article saved!",
   "article.basic_editor.visibility": "Visibility",
   "article.basic_editor.visibility.public": "Public",
-  "article.basic_editor.visibility.private": "Private"
+  "article.basic_editor.visibility.private": "Private",
+  "statistics.users": "Users",
+  "statistics.enterprises": "Enterprises",
+  "statistics.products": "Products",
+  "statistics.communities": "Communities",
+  "statistics.categories": "Categories",
+  "statistics.tags": "Tags",
+  "statistics.comments": "Comments",
+  "statistics.hits": "Hits"
 }
