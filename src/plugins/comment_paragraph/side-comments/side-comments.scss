@@ -1,5 +1,7 @@
 comment-paragraph-side-comments {
   .comments {
+    min-height: 20px;
+    border-top: 0;
     .comment {
       margin: 0;
       &.media {
