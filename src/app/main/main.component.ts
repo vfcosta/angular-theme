@@ -31,7 +31,7 @@ import {Navbar} from "../layout/navbar/navbar";
 
 import {SidebarComponent} from "../layout/sidebar/sidebar.component";
 
-import {MainBlockComponent} from "../layout/blocks/main-block/main-block.component";
+import {MainBlockComponent} from "../layout/blocks/main/main-block.component";
 import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.component";
 
 

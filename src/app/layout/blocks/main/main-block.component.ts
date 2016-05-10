@@ -3,7 +3,7 @@ import {BlockComponent} from '../block.component';
 
 @Component({
     selector: 'noosfero-main-block',
-    templateUrl: 'app/layout/blocks/main-block/main-block.html'
+    templateUrl: 'app/layout/blocks/main/main-block.html'
 })
 export class MainBlockComponent {
 
