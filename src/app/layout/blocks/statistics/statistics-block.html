@@ -1,7 +1,7 @@
 <div class="statistics-block">
   <ul class="list-group">
-    <li  ng-repeat="counter in ctrl.counters" class="list-group-item {{counter.name}}"  ng-show="counter.should_display" >
-      <span class="badge {{counter.name}}">{{counter.value}}</span>
+    <li  ng-repeat="counter in ctrl.block.statistics" class="list-group-item statistic {{counter.name}}"  ng-if="counter.display" >
+      <span class="badge {{counter.name}}">{{counter.quantity}}</span>
       {{"statistics." + counter.name | translate}}
     </li>
 
