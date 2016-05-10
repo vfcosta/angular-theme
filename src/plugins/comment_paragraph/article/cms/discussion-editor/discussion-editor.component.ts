@@ -18,22 +18,22 @@ export class DiscussionEditorComponent {
 
     convertDate(attributeName: string) {
         this.$scope.$watch(() => {
-            return this[attributeName];
+            return (<any>this)[attributeName];
         }, () => {
-            if (this[attributeName]) {
-                this.article[attributeName] = this[attributeName].toISOString();
+            if ((<any>this)[attributeName]) {
+                (<any>this.article)[attributeName] = (<any>this)[attributeName].toISOString();
             }
         });
     }
 
     ngOnInit() {
-        if (this.article['start_date']) {
-            this.start_date = new Date(this.article['start_date']);
+        if (this.article.start_date) {
+            this.start_date = new Date(this.article.start_date);
         } else {
             this.start_date = moment().toDate();
         }
-        if (this.article['end_date']) {
-            this.end_date = new Date(this.article['end_date']);
+        if (this.article.end_date) {
+            this.end_date = new Date(this.article.end_date);
         }
     }
 }
