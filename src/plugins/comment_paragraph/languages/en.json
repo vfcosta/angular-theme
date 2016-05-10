@@ -1,3 +1,6 @@
 {
-  "comment-paragraph-plugin.title": "Paragraph Comments"
+  "comment-paragraph-plugin.title": "Paragraph Comments",
+  "comment-paragraph-plugin.discussion.editor.start_date.label": "From",
+  "comment-paragraph-plugin.discussion.editor.end_date.label": "To",
+  "comment-paragraph-plugin.discussion.header": "Open for comments"
 }

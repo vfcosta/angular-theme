@@ -1,3 +1,6 @@
 {
-  "comment-paragraph-plugin.title": "Comentários por Parágrafo"
+  "comment-paragraph-plugin.title": "Comentários por Parágrafo",
+  "comment-paragraph-plugin.discussion.editor.start_date.label": "De",
+  "comment-paragraph-plugin.discussion.editor.end_date.label": "Até",
+  "comment-paragraph-plugin.discussion.header": "Aberto para comentários"
 }

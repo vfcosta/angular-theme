@@ -18,7 +18,7 @@
     <div class="title">{{ctrl.comment.title}}</div>
     <div class="body">{{ctrl.comment.body}}</div>
     <div class="actions" ng-if="ctrl.displayActions">
-      <a href="#" (click)="ctrl.reply()" class="small text-muted">
+      <a href="#" (click)="ctrl.reply()" class="small text-muted" ng-if="ctrl.article.accept_comments">
         {{"comment.reply" | translate}}
       </a>
     </div>
