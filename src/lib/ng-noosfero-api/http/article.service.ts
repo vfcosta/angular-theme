@@ -27,7 +27,13 @@ export class ArticleService extends RestangularService<noosfero.Article> {
             'Content-Type': 'application/json'
         };
         let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
-        let attributesToUpdate: any = { article: { name: article.name, body: article.body, published: article.published } };
+        // TODO dynamically copy the selected attributes to update
+        let attributesToUpdate: any = {
+            article: {
+                name: article.name, body: article.body, published: article.published,
+                start_date: article['start_date'], end_date: article['end_date']
+            }
+        };
         let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Article>> = this.getElement(article.id).customPOST(attributesToUpdate, null, null, headers);
         restRequest.then(this.getHandleSuccessFunction(deferred))
             .catch(this.getHandleErrorFunction(deferred));

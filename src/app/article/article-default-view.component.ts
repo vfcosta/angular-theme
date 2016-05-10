@@ -43,7 +43,8 @@ export class ArticleViewComponent {
     directiveName: string;
 
     ngOnInit() {
-        let specificDirective = 'noosfero' + this.article.type;
+        let articleType = this.article.type.replace(/::/, '');
+        let specificDirective = 'noosfero' + articleType;
         this.directiveName = "noosfero-default-article";
         if (this.$injector.has(specificDirective + 'Directive')) {
             this.directiveName = specificDirective.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();

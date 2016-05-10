@@ -16,8 +16,7 @@ export class ArticleEditorComponent {
         private $compile: ng.ICompileService) { }
 
     ngOnInit() {
-        let articleType = this.article.type;
-        articleType = articleType.replace(/::/, '');
+        let articleType = this.article.type.replace(/::/, '');
         let specificDirective = `${articleType.charAt(0).toLowerCase()}${articleType.substring(1)}Editor`;
         let directiveName = "article-basic-editor";
         if (this.$injector.has(specificDirective + 'Directive')) {
