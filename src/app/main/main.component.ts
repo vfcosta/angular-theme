@@ -15,7 +15,7 @@ import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/r
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/profile-image-block.component";
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html.component";
 
-import {MembersBlockComponent} from "./../layout/blocks/members-block/members-block.component";
+import {MembersBlockComponent} from "./../layout/blocks/members/members-block.component";
 import {CommunitiesBlockComponent} from "./../layout/blocks/communities/communities-block.component";
 import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
 import {DateFormat} from "../shared/pipes/date-format.filter";

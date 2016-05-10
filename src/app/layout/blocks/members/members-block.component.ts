@@ -3,7 +3,7 @@ import {ProfileService} from "../../../../lib/ng-noosfero-api/http/profile.servi
 
 @Component({
     selector: "noosfero-members-block",
-    templateUrl: 'app/layout/blocks/members-block/members-block.html',
+    templateUrl: 'app/layout/blocks/members/members-block.html',
 })
 @Inject(ProfileService)
 export class MembersBlockComponent {
