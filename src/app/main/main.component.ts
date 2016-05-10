@@ -11,7 +11,7 @@ import {EnvironmentComponent} from "../environment/environment.component";
 import {EnvironmentHomeComponent} from "../environment/environment-home.component";
 import {PeopleBlockComponent} from "../layout/blocks/people/people-block.component";
 import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list-block.component";
-import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents.component";
+import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents-block.component";
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image/profile-image-block.component";
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html-block.component";
 

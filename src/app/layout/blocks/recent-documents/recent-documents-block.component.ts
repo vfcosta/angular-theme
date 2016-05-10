@@ -3,7 +3,7 @@ import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.servi
 
 @Component({
     selector: "noosfero-recent-documents-block",
-    templateUrl: 'app/layout/blocks/recent-documents/recent-documents.html'
+    templateUrl: 'app/layout/blocks/recent-documents/recent-documents-block.html'
 })
 @Inject(ArticleService, "$state")
 export class RecentDocumentsBlockComponent {

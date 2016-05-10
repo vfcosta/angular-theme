@@ -1,7 +1,7 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Provider, Input, provide, Component} from 'ng-forward';
 import {provideFilters} from '../../../../spec/helpers';
-import {RecentDocumentsBlockComponent} from './recent-documents.component';
+import {RecentDocumentsBlockComponent} from './recent-documents-block.component';
 
 const htmlTemplate: string = '<noosfero-recent-documents-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-recent-documents-block>';
 
