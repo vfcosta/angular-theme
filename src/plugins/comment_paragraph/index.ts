@@ -3,6 +3,7 @@ import {CommentParagraphArticleButtonHotspotComponent} from "./hotspot/comment-p
 import {CommentParagraphFormHotspotComponent} from "./hotspot/comment-paragraph-form.component";
 import {DiscussionEditorComponent} from "./article/cms/discussion-editor/discussion-editor.component";
 import {CommentParagraphArticleContentHotspotComponent} from "./hotspot/article-content/article-content.component";
+import {DiscussionBlockComponent} from "./block/discussion/discussion-block.component";
 
-export let mainComponents: any = [AllowCommentComponent, DiscussionEditorComponent];
+export let mainComponents: any = [AllowCommentComponent, DiscussionEditorComponent, DiscussionBlockComponent];
 export let hotspots: any = [CommentParagraphArticleButtonHotspotComponent, CommentParagraphFormHotspotComponent, CommentParagraphArticleContentHotspotComponent];
