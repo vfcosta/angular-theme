@@ -3,6 +3,7 @@ import {ArticleBlogComponent} from "./types/blog/blog.component";
 import {CommentsComponent} from "./comment/comments.component";
 import {MacroDirective} from "./macro/macro.directive";
 import {ArticleToolbarHotspotComponent} from "../hotspot/article-toolbar-hotspot.component";
+import {ArticleContentHotspotComponent} from "../hotspot/article-content-hotspot.component";
 
 /**
  * @ngdoc controller
@@ -33,7 +34,8 @@ export class ArticleDefaultViewComponent {
     selector: 'noosfero-article',
     template: 'not-used',
     directives: [ArticleDefaultViewComponent, ArticleBlogComponent,
-        CommentsComponent, MacroDirective, ArticleToolbarHotspotComponent]
+        CommentsComponent, MacroDirective, ArticleToolbarHotspotComponent,
+        ArticleContentHotspotComponent]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class ArticleViewComponent {
