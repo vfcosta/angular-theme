@@ -78,40 +78,39 @@ describe("Components", () => {
             expect(helper.find('.list-group-item.users').length).toEqual(1, "The statistics-block should have a list item with users class");
         });
 
+        it("should render the enterprise count information", () => {
+            expect(helper.find('.list-group-item.enterprises').length).toEqual(1, "The statistics-block should have a list item with enterprises class");
+        });
+
+        it("should render the product count information", () => {
+            expect(helper.find('.list-group-item.products').length).toEqual(1, "The statistics-block should have a list item with products class");
+        });
+
+        it("should render the community count information", () => {
+            expect(helper.find('.list-group-item.communities').length).toEqual(1, "The statistics-block should have a list item with communities class");
+        });
+
+        it("should render the category count information", () => {
+            expect(helper.find('.list-group-item.categories').length).toEqual(1, "The statistics-block should have a list item with categories class");
+        });
+
+        it("should render the tag count information", () => {
+            expect(helper.find('.list-group-item.tags').length).toEqual(1, "The statistics-block should have a list item with tags class");
+        });
+
+        it("should render the comment count information", () => {
+            expect(helper.find('.list-group-item.comments').length).toEqual(1, "The statistics-block should have a list item with comments class");
+        });
+
+        it("should render the hit count information", () => {
+            expect(helper.find('.list-group-item.hits').length).toEqual(1, "The statistics-block should have a list item with hits class");
+        });
 
         // it("should not render user count information if has no configuration on block", () => {
-        //     helper.component.counters.forEach((obj: any) => { delete obj.$$hashKey });
-        //     expect(helper.component.counters).toContain({ 'should_display': 1, 'value': 30, 'name': 'enterprises' });
+        //     helper.component.counters.forEach((obj: any) => { delete obj.$$hashKey; });
+        //     expect(helper.component.counters).toContain({ 'should_display': 0, 'value': 0, 'name': 'users' });
+        //     expect(helper.find('.list-group-item.users').length).toEqual(0, "The statistics-block should not have a list item with users class");
         // });
 
-        // this.counters.push({ 'should_display': this.block.enterprise_counter, 'value': this.block.enterprises, 'name': 'enterprises' })
-        // this.counters.push({ 'should_display': this.block.product_counter, 'value': this.block.products, 'name': 'products' })
-        // this.counters.push({ 'should_display': this.block.community_counter, 'value': this.block.communities, 'name': 'communities' })
-        // this.counters.push({ 'should_display': this.block.category_counter, 'value': this.block.categories, 'name': 'categories' })
-        // this.counters.push({ 'should_display': this.block.tag_counter, 'value': this.block.tags, 'name': 'tags' })
-        // this.counters.push({ 'should_display': this.block.comment_counter, 'value': this.block.comments, 'name': 'comments' })
-        // this.counters.push({ 'should_display': this.block.hit_counter, 'value': this.block.hits, 'name': 'hits' })
-
-        /**
-         * There are helper functions to access the JQuery DOM like this.
-         */
-        // it("render the profile image for each person", () => {
-        //     expect(helper.all("list-group-item").length).toEqual(3);
-        // });
-
-        /**
-         * The main debugElement element is also available
-         */
-        // it("render the main noosfero people block", () => {
-        //    expect(helper.debugElement.children().length).toEqual(1, "The people-block should have a div children");
-        // });
-
-        /**
-         * Just another example of a JQuery DOM helper function
-         */
-        //  it("render the noosfero people block div", () => {
-        //        let div = helper.findChildren("noosfero-people-block", "div");
-        //          expect(div.className).toBe('people-block', "The class should be people-block");
-        //        });
     });
 });
