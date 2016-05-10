@@ -3,7 +3,7 @@ import {CommunityService} from "../../../../lib/ng-noosfero-api/http/community.s
 
 @Component({
     selector: "noosfero-communities-block",
-    templateUrl: 'app/layout/blocks/communities-block/communities-block.html',
+    templateUrl: 'app/layout/blocks/communities/communities-block.html',
 })
 @Inject(CommunityService)
 export class CommunitiesBlockComponent {

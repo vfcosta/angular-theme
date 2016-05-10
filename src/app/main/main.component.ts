@@ -16,7 +16,7 @@ import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/p
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html.component";
 
 import {MembersBlockComponent} from "./../layout/blocks/members-block/members-block.component";
-import {CommunitiesBlockComponent} from "./../layout/blocks/communities-block/communities-block.component";
+import {CommunitiesBlockComponent} from "./../layout/blocks/communities/communities-block.component";
 import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
 import {DateFormat} from "../shared/pipes/date-format.filter";
 
@@ -79,11 +79,11 @@ export class EnvironmentContent {
  * NoosferoTemplate, DateFormat, RawHTMLBlock
  * @description
  *  The Main controller for the Noosfero Angular Theme application.
- * 
+ *
  *  The main route '/' is defined as the URL for this controller, which routes
  * requests to the {@link main.MainContentComponent} controller and also, the '/profile' route,
- * which routes requests to the {@link profile.Profile} controller. See {@link profile.Profile} 
- * for more details on how various Noosfero profiles are rendered.  
+ * which routes requests to the {@link profile.Profile} controller. See {@link profile.Profile}
+ * for more details on how various Noosfero profiles are rendered.
  */
 @Component({
     selector: 'main',
