@@ -3,7 +3,7 @@ import {EnvironmentService} from "../../../../lib/ng-noosfero-api/http/environme
 
 @Component({
     selector: "noosfero-people-block",
-    templateUrl: 'app/layout/blocks/people-block/people-block.html',
+    templateUrl: 'app/layout/blocks/people/people-block.html',
 })
 @Inject(EnvironmentService)
 export class PeopleBlockComponent {

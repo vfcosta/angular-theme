@@ -9,7 +9,7 @@ import {BoxesComponent} from "../layout/boxes/boxes.component";
 import {BlockComponent} from "../layout/blocks/block.component";
 import {EnvironmentComponent} from "../environment/environment.component";
 import {EnvironmentHomeComponent} from "../environment/environment-home.component";
-import {PeopleBlockComponent} from "../layout/blocks/people-block/people-block.component";
+import {PeopleBlockComponent} from "../layout/blocks/people/people-block.component";
 import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list-block.component";
 import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents.component";
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/profile-image-block.component";
