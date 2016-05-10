@@ -1,4 +1,4 @@
-import {Component, Input} from "ng-forward";
+import {Input, Inject, Component} from "ng-forward";
 
 @Component({
     selector: "noosfero-statistics-block",
@@ -7,12 +7,20 @@ import {Component, Input} from "ng-forward";
 
 export class StatisticsBlockComponent {
 
-    @Input() block: any;
+    @Input() block: noosfero.StatisticsBlock;
     @Input() owner: any;
 
-    html: string;
+    counters: any = [];
 
     ngOnInit() {
-        this.html = this.block.settings.user_counter;
+        this.counters.push({ 'should_display': this.block.user_counter, 'value': this.block.users, 'name': 'users' });
+        this.counters.push({ 'should_display': this.block.enterprise_counter, 'value': this.block.enterprises, 'name': 'enterprises' });
+        this.counters.push({ 'should_display': this.block.product_counter, 'value': this.block.products, 'name': 'products' });
+        this.counters.push({ 'should_display': this.block.community_counter, 'value': this.block.communities, 'name': 'communities' });
+        this.counters.push({ 'should_display': this.block.category_counter, 'value': this.block.categories, 'name': 'categories' });
+        this.counters.push({ 'should_display': this.block.tag_counter, 'value': this.block.tags, 'name': 'tags' });
+        this.counters.push({ 'should_display': this.block.comment_counter, 'value': this.block.comments, 'name': 'comments' });
+        this.counters.push({ 'should_display': this.block.hit_counter, 'value': this.block.hits, 'name': 'hits' });
+
     }
 }
