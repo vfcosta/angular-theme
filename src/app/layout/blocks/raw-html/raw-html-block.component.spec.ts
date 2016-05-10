@@ -1,11 +1,11 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Component} from 'ng-forward';
 
-import {RawHTMLBlockComponent} from './raw-html.component';
+import {RawHTMLBlockComponent} from './raw-html-block.component';
 
 const tcb = new TestComponentBuilder();
 
-const htmlTemplate: string = '<noosfero-raw-htmlblock [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-raw-htmlblock>';
+const htmlTemplate: string = '<noosfero-raw-html-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-raw-html-block>';
 
 describe("Components", () => {
 

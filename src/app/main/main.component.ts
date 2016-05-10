@@ -13,7 +13,7 @@ import {PeopleBlockComponent} from "../layout/blocks/people/people-block.compone
 import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list-block.component";
 import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents.component";
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image/profile-image-block.component";
-import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html.component";
+import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html-block.component";
 
 import {MembersBlockComponent} from "./../layout/blocks/members/members-block.component";
 import {CommunitiesBlockComponent} from "./../layout/blocks/communities/communities-block.component";

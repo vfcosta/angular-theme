@@ -1,8 +1,8 @@
 import {Component, Input} from "ng-forward";
 
 @Component({
-    selector: "noosfero-raw-htmlblock",
-    templateUrl: 'app/layout/blocks/raw-html/raw-html.html'
+    selector: "noosfero-raw-html-block",
+    templateUrl: 'app/layout/blocks/raw-html/raw-html-block.html'
 })
 
 export class RawHTMLBlockComponent {
