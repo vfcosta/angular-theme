@@ -2,7 +2,7 @@ import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builde
 import {Pipe, Input, provide, Component} from 'ng-forward';
 import {provideFilters} from '../../../../spec/helpers';
 
-import {LinkListBlockComponent} from './link-list.component';
+import {LinkListBlockComponent} from './link-list-block.component';
 
 const tcb = new TestComponentBuilder();
 
