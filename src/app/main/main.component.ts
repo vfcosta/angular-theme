@@ -95,16 +95,10 @@ export class EnvironmentContent {
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
         EnvironmentComponent, PeopleBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
-<<<<<<< HEAD
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent
+        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-=======
-        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent,
-        StatisticsBlockComponent
-    ],
->>>>>>> adding basic information of statisticst block
+
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
 })
 @StateConfig([
