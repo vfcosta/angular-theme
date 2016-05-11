@@ -9,4 +9,8 @@ import {Hotspot} from "../../../../app/hotspot/hotspot.decorator";
 export class CommentParagraphArticleContentHotspotComponent {
 
     @Input() article: noosfero.Article;
+
+    isDiscussion() {
+        return this.article.type === "CommentParagraphPlugin::Discussion";
+    }
 }

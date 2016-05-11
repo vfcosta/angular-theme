@@ -1,4 +1,4 @@
-<div class="discussion-header">
+<div class="discussion-header" ng-if="ctrl.isDiscussion()">
   <span class="description">{{"comment-paragraph-plugin.discussion.header" | translate}}</span>
   <span class="start-date date" ng-if="ctrl.article.start_date">
     <span class="description">{{"comment-paragraph-plugin.discussion.editor.start_date.label" | translate}}</span>

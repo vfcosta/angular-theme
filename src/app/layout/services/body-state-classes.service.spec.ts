@@ -152,7 +152,7 @@ describe("BodyStateClasses Service", () => {
     it("add a css class to content wrapper element", () => {
         let service = getService();
 
-        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"])
+        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"]);
         service["getContentWrapper"] = jasmine.createSpy("getContentWrapper").and.returnValue(contentWrapperMock);
         service.addContentClass(true);
 
@@ -162,7 +162,7 @@ describe("BodyStateClasses Service", () => {
     it("remove a css class from content wrapper element", () => {
         let service = getService();
 
-        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"])
+        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"]);
         service["getContentWrapper"] = jasmine.createSpy("getContentWrapper").and.returnValue(contentWrapperMock);
         service.addContentClass(false);
 
