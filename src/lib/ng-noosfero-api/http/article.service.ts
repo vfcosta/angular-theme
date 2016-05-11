@@ -22,6 +22,23 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         };
     }
 
+    updateArticle(article: noosfero.Article) {
+        let headers = {
+            'Content-Type': 'application/json'
+        };
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
+        // TODO dynamically copy the selected attributes to update
+        let attributesToUpdate: any = {
+            article: {
+                name: article.name, body: article.body, published: article.published,
+                start_date: article['start_date'], end_date: article['end_date']
+            }
+        };
+        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Article>> = this.getElement(article.id).customPOST(attributesToUpdate, null, null, headers);
+        restRequest.then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
 
     createInProfile(profile: noosfero.Profile, article: noosfero.Article): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
         let profileElement = this.profileService.get(<number>profile.id);
@@ -32,6 +49,14 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         return this.create(article, <noosfero.RestModel>profileElement, null, headers);
     }
 
+    createInParent(parentId: number, article: noosfero.Article): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
+        let headers = {
+            'Content-Type': 'application/json'
+        };
+
+        let parent = this.getElement(parentId);
+        return this.create(article, parent, null, headers, true, "children");
+    }
 
     getAsCollectionChildrenOf<C>(rootElement: noosfero.Environment | noosfero.Article | noosfero.Profile, path: string, queryParams?: any, headers?: any): restangular.ICollectionPromise<C> {
         return rootElement.getList<C>(path, queryParams, headers);
@@ -75,7 +100,6 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         articleElement.id = article.id;
         return this.listSubElements(<noosfero.Article>articleElement, "children", params);
     }
-
 
 
 }

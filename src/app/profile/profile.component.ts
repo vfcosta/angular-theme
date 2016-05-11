@@ -1,7 +1,8 @@
 import {StateConfig, Component, Inject, provide} from 'ng-forward';
 import {ProfileInfoComponent} from './info/profile-info.component';
 import {ProfileHomeComponent} from './profile-home.component';
-import {BasicEditorComponent} from '../article/basic-editor.component';
+import {BasicEditorComponent} from '../article/cms/basic-editor/basic-editor.component';
+import {CmsComponent} from '../article/cms/cms.component';
 import {ContentViewerComponent} from "../article/content-viewer/content-viewer.component";
 import {ContentViewerActionsComponent} from "../article/content-viewer/content-viewer-actions.component";
 import {ActivitiesComponent} from "./activities/activities.component";
@@ -45,13 +46,25 @@ import {MyProfileComponent} from "./myprofile.component";
         component: MyProfileComponent
     },
     {
-        name: 'main.profile.cms',
-        url: "^/myprofile/:profile/cms",
-        component: BasicEditorComponent,
+        name: 'main.cms',
+        url: "^/myprofile/:profile/cms?parent_id&type",
+        component: CmsComponent,
         views: {
-            "mainBlockContent": {
-                templateUrl: "app/article/basic-editor.html",
-                controller: BasicEditorComponent,
+            "content": {
+                templateUrl: "app/article/cms/cms.html",
+                controller: CmsComponent,
+                controllerAs: "vm"
+            }
+        }
+    },
+    {
+        name: 'main.cmsEdit',
+        url: "^/myprofile/:profile/cms/edit/:id",
+        component: CmsComponent,
+        views: {
+            "content": {
+                templateUrl: "app/article/cms/cms.html",
+                controller: CmsComponent,
                 controllerAs: "vm"
             }
         }
@@ -98,7 +111,7 @@ export class ProfileComponent {
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
-            $state.transitionTo('main');
+            $state.transitionTo('main.environment.home');
             notificationService.error({ message: "notification.profile.not_found" });
         });
     }

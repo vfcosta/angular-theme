@@ -1,0 +1,35 @@
+<form>
+  <div class="form-group">
+    <label for="titleInput">{{"article.basic_editor.title" | translate}}</label>
+    <input type="text" class="form-control" id="titleInput" placeholder="{{'article.basic_editor.title' | translate}}" ng-model="ctrl.article.name">
+  </div>
+  <div class="form-group">
+  
+    <div class="form-inline">
+      <span class="start-date discussion-date">
+        <label for="startDateInput">{{"comment-paragraph-plugin.discussion.editor.start_date.label" | translate}}</label>
+        <input id="startDateInput" type="text" class="form-control" uib-datepicker-popup ng-model="ctrl.start_date" 
+          is-open="startDateOpened" ng-required="true" close-text="Close" />
+        <span class="input-group-btn date-popup-button">
+          <button type="button" class="btn btn-default" ng-click="startDateOpened = true">
+            <i class="fa fa-calendar fa-fw"></i>
+          </button>
+        </span>
+      </span>
+      <span class="end-date discussion-date">
+        <label for="endDateInput">{{"comment-paragraph-plugin.discussion.editor.end_date.label" | translate}}</label>
+        <input id="endDateInput" type="text" class="form-control" uib-datepicker-popup ng-model="ctrl.end_date" 
+          is-open="endDateOpened" ng-required="true" close-text="Close" />
+        <span class="date-popup-button">
+          <button type="button" class="btn btn-default" ng-click="endDateOpened = true">
+            <i class="fa fa-calendar fa-fw"></i>
+          </button>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="bodyInput">{{"article.basic_editor.body" | translate}}</label>
+    <html-editor [(value)]="ctrl.article.body"></html-editor>
+  </div>
+</form>

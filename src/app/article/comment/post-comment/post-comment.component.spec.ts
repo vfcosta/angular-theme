@@ -7,6 +7,8 @@ const htmlTemplate: string = '<noosfero-post-comment [article]="ctrl.article" [r
 describe("Components", () => {
     describe("Post Comment Component", () => {
 
+        let properties = { article: { id: 1, accept_comments: true } };
+
         beforeEach(angular.mock.module("templates"));
 
         let commentService = jasmine.createSpyObj("commentService", ["createInArticle"]);
@@ -19,13 +21,21 @@ describe("Components", () => {
 
         @Component({ selector: 'test-container-component', directives: [PostCommentComponent], template: htmlTemplate, providers: providers })
         class ContainerComponent {
-            article = { id: 1 };
+            article = properties['article'];
             comment = { id: 2 };
         }
 
         it("render the post comment form", done => {
             helpers.createComponentFromClass(ContainerComponent).then(fixture => {
                 expect(fixture.debugElement.queryAll("form").length).toEqual(1);
+                done();
+            });
+        });
+
+        it("not render the post comment form when article doesn't accept comments", done => {
+            properties['article'].accept_comments = false;
+            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
+                expect(fixture.debugElement.queryAll("form").length).toEqual(0);
                 done();
             });
         });

@@ -1,12 +1,13 @@
 import * as helpers from "./../../../spec/helpers";
 import {Navbar} from "./navbar";
 
-import {Injectable, Provider, provide} from "ng-forward";
+import {Injectable, Provider, provide, EventEmitter} from "ng-forward";
 
 import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 
-import {SessionService, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} from "./../../login";
+import {SessionService, AuthService, AuthController, AuthEvents} from "./../../login";
 
+import events from 'ng-forward/cjs/events/events';
 
 describe("Components", () => {
 
@@ -53,22 +54,19 @@ describe("Components", () => {
                     provide('$uibModal', {
                         useValue: $modal
                     }),
-                    provide('AuthService', {
+                    provide(AuthService, {
                         useValue: authService
                     }),
                     helpers.provideEmptyObjects('moment'),
                     provide('$state', {
                         useValue: stateService
                     }),
-                    provide("$scope", {
-                        useValue: scope
-                    }),
                     provide('SessionService', {
                         useValue: sessionService
                     }),
-                    provide('AUTH_EVENTS', {
+                    provide('AuthEvents', {
                         useValue: {
-                            AUTH_EVENTS
+                            AuthEvents
                         }
                     }),
                     provide('TranslatorService', {
@@ -146,7 +144,7 @@ describe("Components", () => {
 
 
         it('closes the modal after login', (done: Function) => {
-            modalInstance = jasmine.createSpyObj("modalInstance", ["close"]);
+            modalInstance = {};
             modalInstance.close = jasmine.createSpy("close");
 
             $modal.open = () => {
@@ -155,19 +153,21 @@ describe("Components", () => {
 
             buildComponent().then((fixture: ComponentFixture) => {
                 let navbarComp: Navbar = <Navbar>fixture.debugElement.componentViewChildren[0].componentInstance;
-                let localScope: ng.IScope = navbarComp["$scope"];
 
                 navbarComp.openLogin();
-                localScope.$emit(AUTH_EVENTS.loginSuccess);
+                let successEvent: string = AuthEvents[AuthEvents.loginSuccess];
+
+                (<any>navbarComp.authService)[successEvent].next(user);
+
                 expect(modalInstance.close).toHaveBeenCalled();
                 done();
             });
+
         });
 
         it('updates current user on logout', (done: Function) => {
             buildComponent().then((fixture: ComponentFixture) => {
                 let navbarComp: Navbar = <Navbar>fixture.debugElement.componentViewChildren[0].componentInstance;
-                let localScope: ng.IScope = navbarComp["$scope"];
 
                 // init navbar  currentUser with some user
                 navbarComp["currentUser"] = user;
@@ -176,12 +176,14 @@ describe("Components", () => {
                 // and emmit the 'logoutSuccess' event
                 // just what happens when user logsout
                 sessionService.currentUser = () => { return null; };
-                localScope.$emit(AUTH_EVENTS.logoutSuccess);
-                expect(navbarComp["currentUser"]).toBeNull();
+                let successEvent: string = AuthEvents[AuthEvents.logoutSuccess];
+
+                (<any>navbarComp.authService)[successEvent].next(user);
+
                 done();
+                expect(navbarComp["currentUser"]).toBeNull();
+
             });
         });
-
-
     });
 });

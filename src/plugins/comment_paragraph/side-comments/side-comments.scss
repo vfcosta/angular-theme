@@ -1,0 +1,15 @@
+comment-paragraph-side-comments {
+  .comments {
+    min-height: 20px;
+    border-top: 0;
+    .comment {
+      margin: 0;
+      &.media {
+        border-top: 0;  
+      }
+      .comments {
+        margin-left: 0;
+      }
+    }
+  }
+}

@@ -1,7 +1,4 @@
-import { Inject, Input, Output, Component, provide, EventEmitter } from 'ng-forward';
-import {INgForwardJQuery} from "ng-forward/cjs/util/jqlite-extensions";
-
-
+import { Inject, Input, Component, provide } from 'ng-forward';
 import { PostCommentComponent } from "./post-comment/post-comment.component";
 import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
 import { CommentComponent } from "./comment.component";
@@ -19,12 +16,13 @@ export class CommentsComponent {
     @Input() showForm = true;
     @Input() article: noosfero.Article;
     @Input() parent: noosfero.CommentViewModel;
-
     protected page = 1;
     protected perPage = 5;
     protected total = 0;
 
-    constructor(protected commentService: CommentService) { }
+    newComment = <noosfero.Comment>{};
+
+    constructor(protected commentService: CommentService, private $scope: ng.IScope) { }
 
     ngOnInit() {
         if (this.parent) {
@@ -43,7 +41,7 @@ export class CommentsComponent {
         this.comments.forEach((comment: noosfero.CommentViewModel) => {
             comment.__show_reply = false;
         });
-        if  (this.parent) {
+        if (this.parent) {
             this.parent.__show_reply = false;
         }
     }

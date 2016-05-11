@@ -1,0 +1,68 @@
+.block {
+    noosfero-comment-paragraph-plugin-discussion-block {
+    .deckgrid[deckgrid]::before {
+      content: '4 .column.column-1-4';
+      font-size: 0;
+      visibility: hidden;
+    }
+    .author {
+      img {
+        width: 30px;
+        height: 30px;
+      }
+    }
+    .header {
+      .subheader {
+        color: #C1C1C1;
+        font-size: 10px;
+      }
+    }
+    .post-lead {
+      color: #8E8E8E;
+      font-size: 14px;
+    }
+    .article-image {
+      margin: 10px 0;
+    }
+  }
+
+  .col-md-2-5 {
+    .deckgrid[deckgrid]::before {
+      content: '1 .deck-column';
+    }
+  }
+
+  .col-md-7 {
+    .block.recentdocumentsblock {
+      background-color: transparent;
+      border: 0;
+
+      .deckgrid[deckgrid]::before {
+          content: '3 .deck-column';
+      }
+
+      .panel-heading {
+        display: none;
+      }
+      .panel-body {
+        padding: 0;
+      }
+
+      .deckgrid {
+        .column {
+          float: left;
+        }
+
+        .deck-column {
+          @extend .col-md-4;
+          padding: 0;
+
+          .a-card {
+            padding: 10px;
+            margin: 3px;
+          }
+        }
+      }
+    }
+  }
+}

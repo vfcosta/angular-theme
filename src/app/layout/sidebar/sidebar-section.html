@@ -1,0 +1,21 @@
+<ul class="nav nav-pills nav-stacked">
+    <li class="nav-header nav-header-first hidden-sm hidden-xs">
+      {{ctrl.name}}
+    </li>
+
+    <li ng-click="widgetExpanded = !widgetExpanded" ng-repeat="item in ctrl.items" class="{{item.className}}">
+      <a href="{{item.url}}" class="dropdown-toggle">
+        <i class="fa {{item.icon}}"></i>
+        <span>{{item.title}}</span>
+        <span class="label label-primary label-circle pull-right" ng-class="{'submenu-count': item.subitems}" ng-show="item.count != undefined">{{item.count}}</span>
+        <i class="fa fa-angle-right drop-icon" ng-show="item.subitems"></i>
+      </a>
+      <ul class="submenu" ng-show="widgetExpanded && item.subitems">
+        <li ng-repeat="subitem in item.subitems">
+          <a href="{{subitem.url}}">
+            {{subitem.title}}
+          </a>
+        </li>
+      </ul>
+    </li>
+</ul>

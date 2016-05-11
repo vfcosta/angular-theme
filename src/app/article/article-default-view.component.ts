@@ -1,6 +1,9 @@
 import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
 import {ArticleBlogComponent} from "./types/blog/blog.component";
 import {CommentsComponent} from "./comment/comments.component";
+import {MacroDirective} from "./macro/macro.directive";
+import {ArticleToolbarHotspotComponent} from "../hotspot/article-toolbar-hotspot.component";
+import {ArticleContentHotspotComponent} from "../hotspot/article-content-hotspot.component";
 
 /**
  * @ngdoc controller
@@ -30,7 +33,9 @@ export class ArticleDefaultViewComponent {
 @Component({
     selector: 'noosfero-article',
     template: 'not-used',
-    directives: [ArticleDefaultViewComponent, ArticleBlogComponent, CommentsComponent]
+    directives: [ArticleDefaultViewComponent, ArticleBlogComponent,
+        CommentsComponent, MacroDirective, ArticleToolbarHotspotComponent,
+        ArticleContentHotspotComponent]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class ArticleViewComponent {
@@ -40,7 +45,8 @@ export class ArticleViewComponent {
     directiveName: string;
 
     ngOnInit() {
-        let specificDirective = 'noosfero' + this.article.type;
+        let articleType = this.article.type.replace(/::/, '');
+        let specificDirective = 'noosfero' + articleType;
         this.directiveName = "noosfero-default-article";
         if (this.$injector.has(specificDirective + 'Directive')) {
             this.directiveName = specificDirective.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
@@ -53,6 +59,5 @@ export class ArticleViewComponent {
         private $scope: ng.IScope,
         private $injector: ng.auto.IInjectorService,
         private $compile: ng.ICompileService) {
-
     }
 }

@@ -1,44 +1,61 @@
-import {Component, Inject} from "ng-forward";
+import {Component, Inject, EventEmitter, Input} from "ng-forward";
 import {LanguageSelectorComponent} from "../language-selector/language-selector.component";
-
-
-import {SessionService, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} from "./../../login";
+import {SessionService, AuthService, AuthController, AuthEvents} from "./../../login";
+import {SidebarNotificationService} from "../sidebar/sidebar.notification.service";
+import {BodyStateClassesService} from '../services/body-state-classes.service';
 
 @Component({
     selector: "acme-navbar",
     templateUrl: "app/layout/navbar/navbar.html",
     directives: [LanguageSelectorComponent],
-    providers: [AuthService, SessionService]
+    providers: [AuthService, SessionService, SidebarNotificationService]
 })
-@Inject("$uibModal", AuthService, "SessionService", "$scope", "$state")
+@Inject("$uibModal", AuthService, "SessionService", "$state", SidebarNotificationService, BodyStateClassesService)
 export class Navbar {
 
     private currentUser: noosfero.User;
     private modalInstance: any = null;
+
+    public showHamburguer: boolean = false;
+
     /**
      *
      */
     constructor(
         private $uibModal: any,
-        private authService: AuthService,
+        public authService: AuthService,
         private session: SessionService,
-        private $scope: ng.IScope,
-        private $state: ng.ui.IStateService
+        private $state: ng.ui.IStateService,
+        private sidebarNotificationService: SidebarNotificationService,
+        private bodyStateService: BodyStateClassesService
     ) {
         this.currentUser = this.session.currentUser();
 
-        this.$scope.$on(AUTH_EVENTS.loginSuccess, () => {
+        this.showHamburguer = this.authService.isAuthenticated();
+        this.bodyStateService.addContentClass(!this.sidebarNotificationService.sidebarVisible);
+
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             if (this.modalInstance) {
                 this.modalInstance.close();
                 this.modalInstance = null;
             }
 
-            this.$state.go(this.$state.current, {}, { reload: true }); // TODO move to auth
+            this.currentUser = this.session.currentUser();
+            this.showHamburguer = true;
+
+            this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
         });
 
-        this.$scope.$on(AUTH_EVENTS.logoutSuccess, () => {
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.currentUser = this.session.currentUser();
         });
+
+    }
+
+    public toggleCollapse() {
+        this.sidebarNotificationService.alternateVisibility();
+
+        this.bodyStateService.addContentClass(!this.sidebarNotificationService.sidebarVisible);
     }
 
     openLogin() {
@@ -54,8 +71,6 @@ export class Navbar {
         this.authService.logout();
         this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
     };
-
-
 
     activate() {
         if (!this.currentUser) {

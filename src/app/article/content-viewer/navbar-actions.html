@@ -1,6 +1,11 @@
 <ul class="nav navbar-nav">
   <li ng-show="vm.profile">
-    <a href="#" role="button" ui-sref="main.profile.cms({profile: vm.profile.identifier})">
+    <a ng-show="vm.parentId" href="#" role="button" ui-sref="main.cms({profile: vm.profile.identifier, parent_id: vm.parentId})">
+      <i class="fa fa-file fa-fw fa-lg"></i> {{"navbar.content_viewer_actions.new_post" | translate}}
+    </a>
+  </li>
+  <li ng-show="vm.profile">
+    <a href="#" role="button" ui-sref="main.cms({profile: vm.profile.identifier, parent_id: vm.parentId, type: 'CommentParagraphPlugin::Discussion'})">
       <i class="fa fa-file fa-fw fa-lg"></i> {{"navbar.content_viewer_actions.new_post" | translate}}
     </a>
   </li>

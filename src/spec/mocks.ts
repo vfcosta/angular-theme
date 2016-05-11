@@ -1,6 +1,6 @@
 const DEBUG = false;
 
-let log = (message: string, ...args:  any[]) => {
+let log = (message: string, ...args: any[]) => {
     if (DEBUG) {
         console.log(message);
     }
@@ -30,7 +30,7 @@ class ScopeWithEvents {
         }
     }
 }
-export var mocks = {
+export var mocks: any = {
     scopeWithEvents: (): ScopeWithEvents => new ScopeWithEvents(),
     modalInstance: {
         close: () => { }
@@ -41,8 +41,38 @@ export var mocks = {
         }
     },
     authService: {
+        loginSuccess: {
+            event: Function,
+            subscribe: (fn: Function) => {
+                mocks.authService['loginSuccess'].event = fn;
+            },
+            next: (param: any) => {
+                mocks.authService['loginSuccess'].event(param);
+            }
+        },
+        loginFailed: {
+            event: Function,
+            subscribe: (fn: Function) => {
+                mocks.authService['loginFailed'].event = fn;
+            },
+            next: (param: any) => {
+                mocks.authService['loginFailed'].event(param);
+            }
+        },
+        logoutSuccess: {
+            event: Function,
+            subscribe: (fn: Function) => {
+                mocks.authService['logoutSuccess'].event = fn;
+            },
+            next: (param: any) => {
+                mocks.authService['logoutSuccess'].event(param);
+            }
+        },
         logout: () => { },
-        login: () => { }
+        subscribe: (eventName: string, fn: Function) => {
+            mocks.authService[eventName].subscribe(fn);
+        },
+        isAuthenticated: () => { }
     },
     articleService: {
         getByProfile: (profileId: number, params?: any) => {
@@ -71,7 +101,9 @@ export var mocks = {
             return {
                 then: (func?: Function) => { if (func) func(); }
             };
-        }
+        },
+        setCurrent: (article: noosfero.Article) => { },
+        getCurrent: () => { return Promise.resolve({}); }
     },
     environmentService: {
         getEnvironmentPeople: (params: any) => {

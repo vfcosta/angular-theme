@@ -1,2 +1,2 @@
 /* Module Index Entry - generated using the script npm run generate-index */
-export * from "./recent-documents.component";
+export * from "./recent-documents-block.component";

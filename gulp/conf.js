@@ -15,11 +15,13 @@ var path = require('path');
  */
 exports.paths = {
   src: 'src',
+  plugins: 'plugins',
   dist: 'dist',
   tmp: '.tmp',
   e2e: 'e2e',
   docs: 'docs',
-  themes: 'themes'
+  themes: 'themes',
+  languages: 'languages'
 };
 exports.configTheme = function(theme) {
   exports.paths.theme = theme || "angular-default";
@@ -34,7 +36,7 @@ exports.configTheme(argv.theme);
  *  to inject css preprocessor deps and js files in karma
  */
 exports.wiredep = {
-  exclude: [/jquery/, /\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/bootstrap\.css/],
+  exclude: [/jquery/, /\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/bootstrap\.css/, /ckeditor/],
   directory: 'bower_components'
 };
 

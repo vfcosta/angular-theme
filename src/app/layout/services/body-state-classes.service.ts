@@ -1,7 +1,12 @@
 import {Directive, Inject, Injectable} from "ng-forward";
-import {AUTH_EVENTS} from "./../../login/auth-events";
+import {AuthEvents} from "./../../login/auth-events";
 import {AuthService} from "./../../login/auth.service";
 import {HtmlUtils} from "../html-utils";
+import {INgForwardJQuery} from 'ng-forward/cjs/util/jqlite-extensions';
+
+export interface StartParams {
+    skin?: string;
+}
 
 /**
  * This is a service which adds classes to the body element
@@ -9,18 +14,23 @@ import {HtmlUtils} from "../html-utils";
  * eg:
  *    User Logged:
  *         - noosfero-user-logged
- *    Route States: 
+ *    Route States:
  *         - noosfero-route-main
  *         - noosfero-route-main.profile.info
+ *
+ *    Show the all content in full mode:
+ *         - full-content
  */
 @Injectable()
 @Inject("$rootScope", "$document", "$state", AuthService)
 export class BodyStateClassesService {
 
     private started: boolean = false;
+    private skin: string;
 
     public static get USER_LOGGED_CLASSNAME(): string { return "noosfero-user-logged"; }
     public static get ROUTE_STATE_CLASSNAME_PREFIX(): string { return "noosfero-route-"; }
+    public static get CONTENT_WRAPPER_FULL(): string { return "full-content"; }
 
     private bodyElement: ng.IAugmentedJQuery = null;
 
@@ -33,12 +43,35 @@ export class BodyStateClassesService {
 
     }
 
-    start() {
+    start(config?: StartParams) {
         if (!this.started) {
             this.setupUserLoggedClassToggle();
             this.setupStateClassToggle();
+
+            if (config) {
+                this.setThemeSkin(config.skin);
+            }
             this.started = true;
         }
+    }
+
+    setThemeSkin(skin: string) {
+        this.getBodyElement().addClass(skin);
+    }
+
+    addContentClass(addClass: boolean, className?: string): BodyStateClassesService {
+
+        let fullContentClass: string = className || BodyStateClassesService.CONTENT_WRAPPER_FULL;
+        let contentWrapper = this.getContentWrapper();
+
+        if (contentWrapper) {
+            if (addClass) {
+                contentWrapper.addClass(fullContentClass);
+            } else {
+                contentWrapper.removeClass(fullContentClass);
+            }
+        }
+        return this;
     }
 
     private getStateChangeSuccessHandlerFunction(bodyElement: ng.IAugmentedJQuery): (event: ng.IAngularEvent, toState: ng.ui.IState) => void {
@@ -65,7 +98,7 @@ export class BodyStateClassesService {
 
     /**
      * Setup the initial state of the user-logged css class
-     * and adds events handlers to switch this class when the login events happens 
+     * and adds events handlers to switch this class when the login events happens
      */
     private setupUserLoggedClassToggle() {
         let bodyElement = this.getBodyElement();
@@ -76,23 +109,28 @@ export class BodyStateClassesService {
             bodyElement.addClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         }
 
-        // listen to the AUTH_EVENTS.loginSuccess and AUTH_EVENTS.logoutSuccess
-        // to switch the css class which indicates user logged in 
-        this.$rootScope.$on(AUTH_EVENTS.loginSuccess, () => {
+        // to switch the css class which indicates user logged in
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             bodyElement.addClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         });
-        this.$rootScope.$on(AUTH_EVENTS.logoutSuccess, () => {
+
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             bodyElement.removeClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         });
     }
 
     /**
-     * Returns the user 'body' html Element  
+     * Returns the user 'body' html Element
      */
     private getBodyElement(): ng.IAugmentedJQuery {
         if (this.bodyElement === null) {
             this.bodyElement = angular.element(this.$document.find("body"));
         }
         return this.bodyElement;
+    }
+
+    private getContentWrapper(selector?: string): INgForwardJQuery {
+        let doc = <INgForwardJQuery>angular.element(this.$document);
+        return doc.query(selector || '.content-wrapper');
     }
 }

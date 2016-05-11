@@ -49,7 +49,7 @@ var _ = require('lodash');
 var wiredep = require('wiredep');
 
 var pathSrcHtml = [
-    path.join('./src/app/**/*.html')
+    path.join('./src/**/*.html')
 ];
 
 var glob = require("glob");
