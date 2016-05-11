@@ -80,8 +80,8 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.useref())
     .pipe($.revReplace({prefix: noosferoThemePrefix}))
     .pipe(htmlFilter)
-    .pipe($.replace('/ng-ckeditor/libs/ckeditor/', noosferoThemePrefix + 'ng-ckeditor/libs/ckeditor/'))
-    .pipe($.replace('/ng-ckeditor/ng-ckeditor.min.js', noosferoThemePrefix + 'ng-ckeditor/ng-ckeditor.min.js'))
+    .pipe($.replace('/bower_components/ng-ckeditor/libs/ckeditor/', noosferoThemePrefix + 'ng-ckeditor/libs/ckeditor/'))
+    .pipe($.replace('/bower_components/ng-ckeditor/ng-ckeditor.min.js', noosferoThemePrefix + 'ng-ckeditor/ng-ckeditor.min.js'))
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
