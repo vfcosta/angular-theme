@@ -103,6 +103,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('ckeditor', function () {
+  conf.wiredep.exclude.push(/ckeditor/); // exclude ckeditor from build to improve performance
   return gulp.src(['bower_components/ng-ckeditor/**/*']).pipe(gulp.dest(path.join(conf.paths.dist, '/ng-ckeditor')));
 });
 
@@ -153,4 +154,4 @@ gulp.task('noosfero', ['html'], function () {
     return merge(layouts, theme, index);
 });
 
-gulp.task('build', ['html', 'fonts', 'other', 'locale', 'ckeditor', 'plugin-languages', 'noosfero']);
+gulp.task('build', ['ckeditor', 'html', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero']);
