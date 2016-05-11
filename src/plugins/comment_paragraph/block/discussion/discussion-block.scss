@@ -1,6 +1,7 @@
 .block {
     noosfero-comment-paragraph-plugin-discussion-block {
     .deckgrid[deckgrid]::before {
+      content: '4 .column.column-1-4';
       font-size: 0;
       visibility: hidden;
     }
