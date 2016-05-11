@@ -80,6 +80,8 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.useref())
     .pipe($.revReplace({prefix: noosferoThemePrefix}))
     .pipe(htmlFilter)
+    .pipe($.replace('/ng-ckeditor/libs/ckeditor/', noosferoThemePrefix + 'ng-ckeditor/libs/ckeditor/'))
+    .pipe($.replace('/ng-ckeditor/ng-ckeditor.min.js', noosferoThemePrefix + 'ng-ckeditor/ng-ckeditor.min.js'))
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -98,6 +100,10 @@ gulp.task('fonts', function () {
     .pipe($.filter('**/*.{eot,svg,ttf,woff,woff2}'))
     .pipe($.flatten())
     .pipe(gulp.dest(path.join(conf.paths.dist, '/fonts/')));
+});
+
+gulp.task('ckeditor', function () {
+  return gulp.src(['bower_components/ng-ckeditor/**/*']).pipe(gulp.dest(path.join(conf.paths.dist, '/ng-ckeditor')));
 });
 
 gulp.task('locale', function () {
@@ -147,4 +153,4 @@ gulp.task('noosfero', ['html'], function () {
     return merge(layouts, theme, index);
 });
 
-gulp.task('build', ['html', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero']);
+gulp.task('build', ['html', 'fonts', 'other', 'locale', 'ckeditor', 'plugin-languages', 'noosfero']);
