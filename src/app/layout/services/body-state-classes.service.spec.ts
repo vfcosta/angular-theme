@@ -19,9 +19,7 @@ describe("BodyStateClasses Service", () => {
         },
         authService: any = helpers.mocks.authService,
         bodyEl: { className: string },
-        bodyElJq: any,
-        contentWrapperEl: { className: string },
-        contentWrapperElJq: any;
+        bodyElJq: any;
 
     let getService = (): BodyStateClassesService => {
         return new BodyStateClassesService($rootScope, $document, $state, authService);
@@ -31,9 +29,6 @@ describe("BodyStateClasses Service", () => {
         authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
         bodyEl = { className: "" };
         bodyElJq = [bodyEl];
-
-        contentWrapperEl = { className: "" };
-        contentWrapperElJq = [contentWrapperEl];
     });
 
     it("should add the class noosfero-user-logged to the body element if the user is authenticated", () => {
@@ -157,24 +152,20 @@ describe("BodyStateClasses Service", () => {
     it("add a css class to content wrapper element", () => {
         let service = getService();
 
-        contentWrapperElJq.addClass = jasmine.createSpy("addClass");
-        contentWrapperElJq.removeClass = jasmine.createSpy("removeClass");
-
-        service["contentWrapperElement"] = contentWrapperElJq;
+        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"])
+        service["getContentWrapper"] = jasmine.createSpy("getContentWrapper").and.returnValue(contentWrapperMock);
         service.addContentClass(true);
 
-        expect(contentWrapperElJq.addClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
+        expect(contentWrapperMock.addClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
     });
 
     it("remove a css class from content wrapper element", () => {
         let service = getService();
 
-        contentWrapperElJq.addClass = jasmine.createSpy("addClass");
-        contentWrapperElJq.removeClass = jasmine.createSpy("removeClass");
-
-        service["contentWrapperElement"] = contentWrapperElJq;
+        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"])
+        service["getContentWrapper"] = jasmine.createSpy("getContentWrapper").and.returnValue(contentWrapperMock);
         service.addContentClass(false);
 
-        expect(contentWrapperElJq.removeClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
+        expect(contentWrapperMock.removeClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
     });
 });

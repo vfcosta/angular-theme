@@ -33,7 +33,6 @@ export class BodyStateClassesService {
     public static get CONTENT_WRAPPER_FULL(): string { return "full-content"; }
 
     private bodyElement: ng.IAugmentedJQuery = null;
-    private contentWrapperElement: INgForwardJQuery = null;
 
     constructor(
         private $rootScope: ng.IRootScopeService,
@@ -131,13 +130,7 @@ export class BodyStateClassesService {
     }
 
     private getContentWrapper(selector?: string): INgForwardJQuery {
-
-        if (this.contentWrapperElement === null) {
-
-            let doc = <INgForwardJQuery>angular.element(this.$document);
-            this.contentWrapperElement = doc.query(selector || '.content-wrapper');
-        }
-
-        return this.contentWrapperElement;
+        let doc = <INgForwardJQuery>angular.element(this.$document);
+        return doc.query(selector || '.content-wrapper');
     }
 }
