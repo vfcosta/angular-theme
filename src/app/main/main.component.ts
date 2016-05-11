@@ -9,18 +9,16 @@ import {BoxesComponent} from "../layout/boxes/boxes.component";
 import {BlockComponent} from "../layout/blocks/block.component";
 import {EnvironmentComponent} from "../environment/environment.component";
 import {EnvironmentHomeComponent} from "../environment/environment-home.component";
-import {PeopleBlockComponent} from "../layout/blocks/people/people-block.component";
-import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list-block.component";
-import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents-block.component";
-import {ProfileImageBlockComponent} from "../layout/blocks/profile-image/profile-image-block.component";
-import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html-block.component";
+import {PeopleBlockComponent} from "../layout/blocks/people-block/people-block.component";
+import {DisplayContentBlockComponent} from "../layout/blocks/display-content/display-content-block.component";
+import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list.component";
+import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents.component";
+import {ProfileImageBlockComponent} from "../layout/blocks/profile-image-block/profile-image-block.component";
+import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html.component";
 import {StatisticsBlockComponent} from "../layout/blocks/statistics/statistics-block.component";
 
-import {MembersBlockComponent} from "./../layout/blocks/members/members-block.component";
-import {CommunitiesBlockComponent} from "./../layout/blocks/communities/communities-block.component";
-
-import {LoginBlockComponent} from "../layout/blocks/login-block/login-block.component";
-
+import {MembersBlockComponent} from "./../layout/blocks/members-block/members-block.component";
+import {CommunitiesBlockComponent} from "./../layout/blocks/communities-block/communities-block.component";
 import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
 import {DateFormat} from "../shared/pipes/date-format.filter";
 
@@ -83,7 +81,7 @@ export class EnvironmentContent {
  * NoosferoTemplate, DateFormat, RawHTMLBlock
  * @description
  *  The Main controller for the Noosfero Angular Theme application.
- *
+ * 
  *  The main route '/' is defined as the URL for this controller, which routes
  * requests to the {@link main.MainContentComponent} controller and also, the '/profile' route,
  * which routes requests to the {@link profile.Profile} controller. See {@link profile.Profile}
@@ -94,7 +92,7 @@ export class EnvironmentContent {
     template: '<div ng-view></div>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
-        EnvironmentComponent, PeopleBlockComponent,
+        EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,

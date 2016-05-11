@@ -1,7 +1,8 @@
 namespace noosfero {
     export interface Block extends RestModel {
         id: number;
-        settings: any;
+        settings: Settings;
+        limit: number;
         api_content: any;
     }
 }

@@ -1,6 +1,7 @@
 
 namespace noosfero {
     export interface Article extends RestModel {
+        abstract: string;
         path: string;
         profile: Profile;
         type: string;
