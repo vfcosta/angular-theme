@@ -6,9 +6,7 @@ html, body {
   height:100%;
 }
 
-.skin-whbl  .membersblock > .panel-heading{
-  background: #DAE1C4 url("../assets/images/participa-consulta/pessoas.png") no-repeat 15px center;
-  background-size: 30px 30px;
+.box-default{
   border: none;
   border-radius: 3px 3px 0 0;
   font-family: "Ubuntu Mediun";
@@ -18,4 +16,10 @@ html, body {
   line-height: 30px;
   padding: 15px 15px 15px 55px;
   text-transform: capitalize;
+}
+
+.skin-whbl  .membersblock > .panel-heading{
+  @extend .box-default;
+  background: #DAE1C4 url("../assets/images/participa-consulta/pessoas.png") no-repeat 15px center;
+  background-size: 30px 30px;
 }
