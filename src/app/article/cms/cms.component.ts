@@ -38,7 +38,6 @@ export class CmsComponent {
         this.id = this.$stateParams['id'];
 
         if (this.parentId) {
-            this.article = <noosfero.Article>{ type: this.$stateParams['type'] || "TextArticle", published: true };
             this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
                 this.parent = result.data;
             });
@@ -48,6 +47,8 @@ export class CmsComponent {
                 this.article = result.data;
                 this.article.name = this.article.title; // FIXME
             });
+        } else {
+            this.article = <noosfero.Article>{ type: this.$stateParams['type'] || "TextArticle", published: true };
         }
     }
 
@@ -55,8 +56,10 @@ export class CmsComponent {
         this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
             if (this.id) {
                 return this.articleService.updateArticle(this.article);
-            } else {
+            } else if (this.parentId) {
                 return this.articleService.createInParent(this.parentId, this.article);
+            } else {
+                return this.articleService.createInProfile(profile, this.article);
             }
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
