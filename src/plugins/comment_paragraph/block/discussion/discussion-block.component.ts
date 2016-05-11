@@ -23,7 +23,7 @@ export class DiscussionBlockComponent {
         this.documents = [];
 
         let limit = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 50;
-        let params = { content_type: 'CommentParagraphPlugin::Discussion', per_page: limit, order: 'start_date DESC' };
+        let params: any = { content_type: 'CommentParagraphPlugin::Discussion', per_page: limit, order: 'start_date DESC' };
         let now = new Date().toISOString();
         switch (this.block.settings['discussion_status']) {
             case 0:
