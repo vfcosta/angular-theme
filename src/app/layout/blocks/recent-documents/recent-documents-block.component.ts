@@ -1,11 +1,11 @@
 import {Component, Inject, Input} from "ng-forward";
-import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
+import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
 
 @Component({
     selector: "noosfero-recent-documents-block",
     templateUrl: 'app/layout/blocks/recent-documents/recent-documents-block.html'
 })
-@Inject(ArticleService, "$state")
+@Inject(BlockService, "$state")
 export class RecentDocumentsBlockComponent {
 
     @Input() block: any;
@@ -13,23 +13,15 @@ export class RecentDocumentsBlockComponent {
 
     profile: any;
     documents: any;
-
     documentsLoaded: boolean = false;
 
-    constructor(private articleService: ArticleService, private $state: any) {
-    }
+    constructor(private blockService: BlockService, private $state: any) { }
 
     ngOnInit() {
         this.profile = this.owner;
         this.documents = [];
-
-        let limit = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 5;
-        // FIXME get all text articles
-        // FIXME make the getByProfile a generic method where we tell the type passing a class TinyMceArticle
-        //       and the promise should be of type TinyMceArticle[], per example
-        this.articleService.getByProfile(this.profile, { content_type: 'TinyMceArticle', per_page: limit })
-        .then((result: noosfero.RestResult<noosfero.Article[]>) => {
-            this.documents = <noosfero.Article[]>result.data;
+        this.blockService.getApiContent(this.block).then((content: any) => {
+            this.documents = content.articles;
             this.documentsLoaded = true;
         });
     }
