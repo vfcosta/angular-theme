@@ -16,20 +16,50 @@ html, body {
   line-height: 30px;
   padding: 15px 15px 15px 55px;
   text-transform: capitalize;
+  background-size: 30px 30px;
 }
 
 .skin-whbl .membersblock > .panel-heading{
   @extend .box-default;
   background: #DAE1C4 url("../assets/images/participa-consulta/pessoas.png") no-repeat 15px center;
-  background-size: 30px 30px;
   color: #4F9CAC;
 }
 
 .skin-whbl .statisticsblock > .panel-heading{
   @extend .box-default;
   background: #69677C url("../assets/images/participa-consulta/indicadores.png") no-repeat 15px center;
-  background-size: 30px 30px;
   color: #DAE1C4;
+}
+
+.link-list-block{
+  width: 900px; //Apagar depois!!!!
+  font-family: "Ubuntu";
+  font-size: 12px;
+  background: #69677C;
+  border-radius: 0 0 3px 3px;
+  margin-bottom: 30px;
+  padding: 20px;
+  margin: 0 0 30px 0;
+  position: relative;
+}
+
+.link-list-block div, .link-list-block  a{
+  display: inline-block;
+  background: #69677C;
+  border-radius: 0;
+  color: #FFF;
+  font-family: "Ubuntu Mediun";
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+
+.link-list-block div:first-child{
+  padding: 15px 15px 15px 55px;
+  background: #69677C url("../assets/images/participa-consulta/home.png") no-repeat 15px center;
+  color: #FFF;
+  background-size: 30px 30px;
 }
 
 .profile-header{
