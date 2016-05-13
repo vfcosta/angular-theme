@@ -1,5 +1,5 @@
 import {Input, Inject, Component} from "ng-forward";
-import {SessionService, AuthService, IAuthEvents, AUTH_EVENTS} from "./../../../login";
+import {SessionService, AuthService, AuthEvents} from "./../../../login";
 
 /**
  * @ngdoc controller
@@ -35,15 +35,15 @@ export class LoginBlockComponent {
     constructor(
         private session: SessionService,
         private $state: ng.ui.IStateService,
-        private authService: AuthService,
+        public authService: AuthService,
         private $scope: ng.IScope) {
         this.currentUser = this.session.currentUser();
 
-        this.$scope.$on(AUTH_EVENTS.loginSuccess, () => {
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             this.currentUser = this.session.currentUser();
         });
 
-        this.$scope.$on(AUTH_EVENTS.logoutSuccess, () => {
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.currentUser = this.session.currentUser();
         });
 

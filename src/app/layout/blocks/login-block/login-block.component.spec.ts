@@ -5,7 +5,7 @@ import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {providers} from 'ng-forward/cjs/testing/providers';
 import {LoginBlockComponent} from './login-block.component';
 import * as helpers from "./../../../../spec/helpers";
-import {SessionService, AuthService, AuthController, IAuthEvents, AUTH_EVENTS} from "./../../../login";
+import {SessionService, AuthService, AuthController, AuthEvents} from "./../../../login";
 
 const htmlTemplate: string = '<noosfero-login-block></noosfero-login-block>';
 
@@ -92,16 +92,18 @@ describe("Components", () => {
          * Simulate the AuthService loginSuccess event
          */
         function simulateLoginEvent() {
-            let localScope: ng.IScope = helper.component["$scope"];
-            localScope.$emit(AUTH_EVENTS.loginSuccess);
+            let successEvent: string = AuthEvents[AuthEvents.loginSuccess];
+
+            (<any>helper.component.authService)[successEvent].next(user);
         }
 
         /**
          * Simulate the AuthService logoutSuccess event
          */
         function simulateLogoutEvent() {
-            let localScope: ng.IScope = helper.component["$scope"];
-            localScope.$emit(AUTH_EVENTS.logoutSuccess);
+            let successEvent: string = AuthEvents[AuthEvents.logoutSuccess];
+
+            (<any>helper.component.authService)[successEvent].next(user);
         }
     });
 
