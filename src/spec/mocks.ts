@@ -68,6 +68,7 @@ export var mocks: any = {
                 mocks.authService['logoutSuccess'].event(param);
             }
         },
+        login: () => { },
         logout: () => { },
         subscribe: (eventName: string, fn: Function) => {
             mocks.authService[eventName].subscribe(fn);

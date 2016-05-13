@@ -22,6 +22,14 @@ namespace noosfero {
          * @returns {string} The unque identifier for the Profile
          */
         identifier: string;
+        
+        /**
+         * @ngdoc property
+         * @name created_at
+         * @propertyOf noofero.Profile
+         * @returns {string} The timestamp this object was created
+         */        
+        created_at: string;
 
         /**
          * @ngdoc property

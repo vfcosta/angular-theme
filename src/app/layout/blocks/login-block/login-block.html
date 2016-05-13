@@ -1,0 +1,27 @@
+<div class="logged-user-info" ng-show="ctrl.currentUser">
+    <h4>Logged in as {{ctrl.currentUser.person.identifier}}</h4>
+    <ul>
+        <li>User since 
+            <span class="time">
+                <span am-time-ago="ctrl.currentUser.person.created_at | dateFormat"></span>
+            </span>        
+        </li>
+      <li><a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})">Profile Homepage</a></li>
+    </ul>
+    <div class="user-actions">
+      <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
+    </div>    
+</div>
+<div class="logged-user-info" ng-show="!ctrl.currentUser">
+  <form>
+    <div class="form-group">
+      <label for="exampleInputEmail1">{{"auth.form.login" | translate}}</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Login / Email" ng-model="ctrl.credentials.username">
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1">{{"auth.form.password" | translate}}</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="ctrl.credentials.password">
+    </div>
+    <button type="submit" class="btn btn-default" ng-click="ctrl.login()">{{"auth.form.login_button" | translate}}</button>
+  </form>
+</div>

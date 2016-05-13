@@ -19,6 +19,7 @@ import {StatisticsBlockComponent} from "../layout/blocks/statistics/statistics-b
 import {MembersBlockComponent} from "./../layout/blocks/members/members-block.component";
 import {CommunitiesBlockComponent} from "./../layout/blocks/communities/communities-block.component";
 
+import {LoginBlockComponent} from "../layout/blocks/login-block/login-block.component";
 
 import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
 import {DateFormat} from "../shared/pipes/date-format.filter";
@@ -96,7 +97,8 @@ export class EnvironmentContent {
         EnvironmentComponent, PeopleBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent
+        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
+        LoginBlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
 
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]

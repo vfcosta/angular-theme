@@ -2,6 +2,7 @@ import { Component } from "ng-forward";
 import { TestComponentBuilder, ngClass } from 'ng-forward/cjs/testing/test-component-builder';
 import { INgForwardJQuery } from "ng-forward/cjs/util/jqlite-extensions";
 import { ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder';
+import * as helpers from './helpers';
 
 /**
  * @ngdoc object
@@ -149,6 +150,7 @@ export function createClass({
     providers = <any[]>[],
     properties = <any>{}
 }): any {
+    providers = providers.concat(helpers.provideFilters("translateFilter"));
     @Component({ selector: 'component-test-helper-container', template, directives, providers })
     class Test {
         constructor() {
