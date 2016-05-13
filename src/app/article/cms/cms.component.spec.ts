@@ -55,6 +55,7 @@ describe("Article Cms", () => {
     });
 
     it("got to the new article page and display an alert when saving sucessfully", done => {
+        $stateParams['parent_id'] = 1;
         let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
         component.save();
         $rootScope.$apply();
