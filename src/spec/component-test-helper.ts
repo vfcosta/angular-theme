@@ -88,10 +88,11 @@ export class ComponentTestHelper<T extends any> {
             this.debugElement = fixture.debugElement;
             this.component = <T>this.debugElement.componentViewChildren[0].componentInstance;
             let mockObj = new this.mockComponent();
-            Object.keys(mockObj).forEach((key: any) => {
-                (<any>this.component)[key] = <any>mockObj[key];
-            });
-
+            if (this.component) {
+                Object.keys(mockObj).forEach((key: any) => {
+                    (<any>this.component)[key] = <any>mockObj[key];
+                });
+            }
         }).then(() => {
             // Force the resolution of components and sync
             done();
@@ -99,9 +100,9 @@ export class ComponentTestHelper<T extends any> {
     }
 
     changeProperties(properties: any) {
-      Object.keys(properties).forEach((key: any) => {
-          this.component[key] = properties[key];
-      });
+        Object.keys(properties).forEach((key: any) => {
+            this.component[key] = properties[key];
+        });
     }
 
     /**

@@ -16,10 +16,10 @@ export class ArticleEditorComponent {
         private $compile: ng.ICompileService) { }
 
     ngOnInit() {
-        let articleType = this.article.type.replace(/::/, '');
+        let articleType = this.article && this.article.type ? this.article.type.replace(/::/, '') : "TextArticle";
         let specificDirective = `${articleType.charAt(0).toLowerCase()}${articleType.substring(1)}Editor`;
         let directiveName = "article-basic-editor";
-        if (this.$injector.has(specificDirective + 'Directive')) {
+        if (specificDirective !== "articleEditor" && this.$injector.has(specificDirective + 'Directive')) {
             directiveName = specificDirective.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
         }
         this.$element.replaceWith(this.$compile('<' + directiveName + ' [article]="ctrl.article"></' + directiveName + '>')(this.$scope));
