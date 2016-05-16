@@ -17,16 +17,7 @@ export class DisplayContentBlockComponent {
 
     documentsLoaded: boolean = false;
 
-    /**
-     * This configuration doesn't exists on Noosfero. Statically typing here.
-     */
-    private addDefaultSections() {
-        let author: noosfero.Section = <noosfero.Section>{ value: 'author', checked: 'author' };
-        this.sections.push(author);
-    }
-
-    constructor(private articleService: ArticleService, private $state: ng.ui.IStateService) {
-    }
+    constructor(private articleService: ArticleService, private $state: ng.ui.IStateService) {}
 
     ngOnInit() {
         this.profile = this.owner;
@@ -42,8 +33,16 @@ export class DisplayContentBlockComponent {
     }
 
     /**
+     * This configuration doesn't exists on Noosfero. Statically typing here.
+     */
+    private addDefaultSections() {
+        let author: noosfero.Section = <noosfero.Section>{ value: 'author', checked: 'author' };
+        this.sections.push(author);
+    }
+
+    /**
      * Returns whether a settings section should be displayed.
-     * 
+     *
      */
     private display(section_name: string): boolean {
         let section: noosfero.Section = this.sections.find( function(section: noosfero.Section) {
@@ -51,5 +50,5 @@ export class DisplayContentBlockComponent {
         });
         return section !== undefined && section.checked !== undefined;
     }
-}
 
+}
