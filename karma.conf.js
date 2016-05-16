@@ -126,6 +126,10 @@ module.exports = function (config) {
     };
 
 
+    if(config.grep) {
+      configuration.client = { args: ['--grep', config.grep] };
+    }
+
     if (coverage) {
 
         /*configuration.webpack = {
