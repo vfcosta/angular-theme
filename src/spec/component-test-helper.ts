@@ -98,6 +98,12 @@ export class ComponentTestHelper<T extends any> {
         });
     }
 
+    changeProperties(properties: any) {
+      Object.keys(properties).forEach((key: any) => {
+          this.component[key] = properties[key];
+      });
+    }
+
     /**
      * @ngdoc method
      * @name detectChanges
