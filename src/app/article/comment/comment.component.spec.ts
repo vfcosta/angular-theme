@@ -7,16 +7,23 @@ const htmlTemplate: string = '<noosfero-comment [article]="ctrl.article" [commen
 describe("Components", () => {
     describe("Comment Component", () => {
 
-        beforeEach(angular.mock.module("templates"));
+        let properties: any;
 
+        beforeEach(angular.mock.module("templates"));
+        beforeEach(() => {
+            properties = {
+                article: { id: 1, accept_comments: true },
+                comment: { title: "title", body: "body" }
+            };
+        });
 
         function createComponent() {
             let providers = helpers.provideFilters("translateFilter");
 
             @Component({ selector: 'test-container-component', directives: [CommentComponent], template: htmlTemplate, providers: providers })
             class ContainerComponent {
-                article = { id: 1 };
-                comment = { title: "title", body: "body" };
+                article = properties['article'];
+                comment = properties['comment'];
             }
             return helpers.createComponentFromClass(ContainerComponent);
         }
@@ -49,6 +56,21 @@ describe("Components", () => {
                 let component = fixture.debugElement.componentViewChildren[0];
                 component.componentInstance.comment.__showReply = false;
                 expect(component.componentInstance.showReply()).toEqual(false);
+                done();
+            });
+        });
+
+        it("display reply button", done => {
+            createComponent().then(fixture => {
+                expect(fixture.debugElement.queryAll(".comment .actions .reply").length).toEqual(1);
+                done();
+            });
+        });
+
+        it("not display reply button when accept_comments is false", done => {
+            properties['article']['accept_comments'] = false;
+            createComponent().then(fixture => {
+                expect(fixture.debugElement.queryAll(".comment .actions .reply").length).toEqual(0);
                 done();
             });
         });
