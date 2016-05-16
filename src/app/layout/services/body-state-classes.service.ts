@@ -1,5 +1,5 @@
 import {Directive, Inject, Injectable} from "ng-forward";
-import {AuthEvents} from "./../../login/auth-events";
+import {AuthEvents} from "../../login/auth-events";
 import {AuthService} from "./../../login/auth.service";
 import {HtmlUtils} from "../html-utils";
 import {INgForwardJQuery} from 'ng-forward/cjs/util/jqlite-extensions';

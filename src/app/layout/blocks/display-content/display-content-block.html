@@ -1,0 +1,46 @@
+<div class="{{ctrl.type}}-block">
+  <div ng-repeat="article in ctrl.articles" ui-sref="main.profile.page({profile: ctrl.profile.identifier, page: article.path})"" class="article">
+    <!-- Article Title -->
+    <div class="page-header" ng-if="ctrl.display('title')">
+        <h5 class="title media-heading" ng-bind="article.title"></h3>
+    </div>
+
+    <div class="sub-header clearfix">
+        <!-- Article Abstract and Read More Link -->
+        <div class="post-lead" ng-if="ctrl.display('abstract')">
+            <div ng-bind-html="article.abstract"></div>
+            <a href="#" ui-sref="main.profile.page({profile: ctrl.profile.identifier, page: article.path})">
+                <i class="fa fa-pencil-square-o fa-fw fa-lg"></i> {{"article.actions.read_more" | translate}}
+            </a>
+        </div>
+        <div class="page-info pull-right small text-muted" ng-if="ctrl.display('publish_date')">
+            <!-- Article Published Date -->
+            <span class="time">
+                <i class="fa fa-clock-o"></i> <span am-time-ago="article.created_at | dateFormat"></span>
+            </span>
+            <!-- Article Author -->
+            <span class="author" ng-if="ctrl.display('author')">
+                <i class="fa fa-user"></i>
+                <a ui-sref="main.profile.home({profile: article.author.identifier})" ng-if="article.author">
+                    <span class="author-name" ng-bind="article.author.name"></span>
+                </a>
+            </span>
+        </div>
+    </div>
+
+    <div class="post-lead">
+        <!-- Article Image -->
+        <img ng-show="ctrl.display('image')" ng-src="{{article.image.url}}" class="img-responsive article-image">
+        <!-- Article Body -->
+        <div ng-bind-html="article.body" ng-show="ctrl.display('body')"></div>
+    </div>
+
+    <!-- Article Tags -->
+    <div ng-if="ctrl.display('tags')" class="post-lead">
+        <div class="label" ng-repeat="tag in article.tag_list">
+            <span class="badge" ng-bind="tag"></span>
+        </div>
+    </div>
+
+  </div>
+</div>

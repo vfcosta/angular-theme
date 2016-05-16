@@ -10,14 +10,15 @@ import {BlockComponent} from "../layout/blocks/block.component";
 import {EnvironmentComponent} from "../environment/environment.component";
 import {EnvironmentHomeComponent} from "../environment/environment-home.component";
 import {PeopleBlockComponent} from "../layout/blocks/people/people-block.component";
-import {LinkListBlockComponent} from "./../layout/blocks/link-list/link-list-block.component";
+import {DisplayContentBlockComponent} from "../layout/blocks/display-content/display-content-block.component";
+import {LinkListBlockComponent} from "../layout/blocks/link-list/link-list-block.component";
 import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents-block.component";
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image/profile-image-block.component";
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html-block.component";
 import {StatisticsBlockComponent} from "../layout/blocks/statistics/statistics-block.component";
 
-import {MembersBlockComponent} from "./../layout/blocks/members/members-block.component";
-import {CommunitiesBlockComponent} from "./../layout/blocks/communities/communities-block.component";
+import {MembersBlockComponent} from "../layout/blocks/members/members-block.component";
+import {CommunitiesBlockComponent} from "../layout/blocks/communities/communities-block.component";
 
 import {LoginBlockComponent} from "../layout/blocks/login-block/login-block.component";
 
@@ -94,7 +95,7 @@ export class EnvironmentContent {
     template: '<div ng-view></div>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
-        EnvironmentComponent, PeopleBlockComponent,
+        EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
