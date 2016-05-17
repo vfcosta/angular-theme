@@ -1,11 +1,21 @@
 <div class="discussion-header" ng-if="ctrl.isDiscussion()">
-  <span class="description">{{"comment-paragraph-plugin.discussion.header" | translate}}</span>
-  <span class="start-date date" ng-if="ctrl.article.start_date">
-    <span class="description">{{"comment-paragraph-plugin.discussion.editor.start_date.label" | translate}}</span>
-    <span class="value">{{ctrl.article.start_date | amDateFormat:'DD/MM/YYYY'}}</span>
-  </span>
-  <span class="end-date date" ng-if="ctrl.article.end_date">
-    <span class="description">{{"comment-paragraph-plugin.discussion.editor.end_date.label" | translate}}</span>
-    <span class="value">{{ctrl.article.end_date | amDateFormat:'DD/MM/YYYY'}}</span>
-  </span>
+  <div class="icon">
+    <i class="fa fa-calendar fa-fw fa-lg"></i>
+  </div>
+  <div class="period">
+    <div ng-if="ctrl.notOpened()" class="description">
+      {{"comment-paragraph-plugin.discussion.notOpened.header" | translate:{date: (ctrl.article.start_date | dateFormat | amTimeAgo)} }}
+    </div>
+    <div ng-if="ctrl.available()" class="description">
+      <div ng-if="ctrl.article.end_date">
+        {{"comment-paragraph-plugin.discussion.available.header" | translate:{date: (ctrl.article.end_date | dateFormat | amTimeAgo)} }}
+      </div>
+      <div ng-if="!ctrl.article.end_date" class="description">
+        {{"comment-paragraph-plugin.discussion.available.without-end.header" | translate}}
+      </div>
+    </div>
+    <div ng-if="ctrl.closed()" class="description">
+      {{"comment-paragraph-plugin.discussion.closed.header" | translate:{date: (ctrl.article.end_date | dateFormat | amTimeAgo)} }}
+    </div>
+  </div>
 </div>
