@@ -1,20 +1,15 @@
 .discussion-header {
   @extend .pull-right;
   margin-bottom: 20px;
-  .date {
-    text-transform: lowercase;
-    font-size: 16px;
+  .period {
+    @extend .pull-right;
     .description {
       font-weight: bold;
-      color: #BFBFBF;
-    }
-    .value {
-      font-size: 15px;
-      color: #969696;
+      color: #A2A2A2;
     }
   }
-  .description {
-    font-weight: bold;
-    color: #BFBFBF;
+  .icon {
+    @extend .pull-right;
+    margin-left: 8px;
   }
 }
