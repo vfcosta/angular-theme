@@ -1,5 +1,5 @@
 <div ng-class="{'col-md-2-5': box.position!=1, 'col-md-7': box.position==1}">
-  <div ng-repeat="block in box.blocks | orderBy: 'position'" class="panel panel-default block {{block.type | lowercase}}" >
+  <div ng-repeat="block in box.blocks | displayBlocks:ctrl.isHomepage:ctrl.currentUser  | orderBy: 'position'" class="panel panel-default block {{block.type | lowercase}}" >
     <div class="panel-heading" ng-show="block.title">
       <h3 class="panel-title">{{block.title}}</h3>
     </div>

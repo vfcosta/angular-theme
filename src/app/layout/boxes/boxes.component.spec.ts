@@ -1,14 +1,7 @@
 import {Component} from 'ng-forward';
-
 import {BoxesComponent} from './boxes.component';
-
-import {
-    createComponentFromClass,
-    quickCreateComponent,
-    provideEmptyObjects,
-    createProviderToValue,
-    provideFilters
-} from "../../../spec/helpers";
+import * as helpers from "../../../spec/helpers";
+import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 
 // this htmlTemplate will be re-used between the container components in this spec file
 const htmlTemplate: string = '<noosfero-boxes [boxes]="ctrl.boxes" [owner]="ctrl.profile"></noosfero-blog>';
@@ -16,49 +9,63 @@ const htmlTemplate: string = '<noosfero-boxes [boxes]="ctrl.boxes" [owner]="ctrl
 
 describe("Boxes Component", () => {
 
+    let helper: ComponentTestHelper<BoxesComponent>;
     beforeEach(() => {
         angular.mock.module("templates");
     });
 
-    @Component({
-        selector: 'test-container-component',
-        template: htmlTemplate,
-        directives: [BoxesComponent],
-        providers: []
-    })
-    class BoxesContainerComponent {
-        boxes: noosfero.Box[] = [
+    let properties = {
+        boxes: [
             { id: 1, position: 1 },
             { id: 2, position: 2 }
-        ];
-
-        owner: noosfero.Profile =  <noosfero.Profile> {
+        ],
+        owner: {
             id: 1,
             identifier: 'profile-name',
             type: 'Person'
-        };
-    }
-
-    it("renders boxes into a container", (done: Function) => {
-        createComponentFromClass(BoxesContainerComponent).then((fixture) => {
-            let boxesHtml = fixture.debugElement;
-            expect(boxesHtml.query('div.col-md-7').length).toEqual(1);
-            expect(boxesHtml.query('div.col-md-2-5').length).toEqual(1);
-
-            done();
+        }
+    };
+    beforeEach((done) => {
+        let cls = createClass({
+            template: htmlTemplate,
+            directives: [BoxesComponent],
+            properties: properties,
+            providers: [
+                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
+                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
+                helpers.createProviderToValue('$state', state)
+            ]
         });
+        helper = new ComponentTestHelper<BoxesComponent>(cls, done);
     });
 
-    it("check the boxes order", (done: Function) => {
-        createComponentFromClass(BoxesContainerComponent).then((fixture) => {
+    let state = jasmine.createSpyObj("state", ["current"]);
+    state.current = { name: "" };
 
-            let boxesComponent: BoxesComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-            let boxesContainer: BoxesContainerComponent = fixture.componentInstance;
+    it("renders boxes into a container", () => {
+        expect(helper.find('div.col-md-7').length).toEqual(1);
+        expect(helper.find('div.col-md-2-5').length).toEqual(1);
+    });
 
-            expect(boxesComponent.boxesOrder(boxesContainer.boxes[0])).toEqual(1);
-            expect(boxesComponent.boxesOrder(boxesContainer.boxes[1])).toEqual(0);
+    it("check the boxes order", () => {
+        expect(helper.component.boxesOrder(properties['boxes'][0])).toEqual(1);
+        expect(helper.component.boxesOrder(properties['boxes'][1])).toEqual(0);
+    });
 
-            done();
-        });
+    it("set isHomepage as false by default", () => {
+        expect(helper.component.isHomepage).toBeFalsy();
+    });
+
+    it("set isHomepage as true when in profile home page", () => {
+        state.current = { name: "main.profile.home" };
+        helper.component.ngOnInit();
+        expect(helper.component.isHomepage).toBeTruthy();
+    });
+
+    it("set isHomepage as true when in environment home page", () => {
+        state.current = { name: "main.environment.home" };
+        helper.component.owner = <noosfero.Environment>{};
+        helper.component.ngOnInit();
+        expect(helper.component.isHomepage).toBeTruthy();
     });
 });
