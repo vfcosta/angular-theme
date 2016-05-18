@@ -18,8 +18,10 @@ export class ProfileHomeComponent {
             return profileService.getHomePage(<number>this.profile.id, { fields: 'path' });
         }).then((response: restangular.IResponse) => {
             if (response.data.article) {
+                this.profile.homepage = response.data.article.path;
                 $state.transitionTo('main.profile.page', { page: response.data.article.path, profile: this.profile.identifier }, { location: false });
             } else {
+                this.profile.homepage = null;
                 $state.transitionTo('main.profile.info', { profile: this.profile.identifier }, { location: false });
             }
         });

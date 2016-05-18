@@ -22,13 +22,13 @@ namespace noosfero {
          * @returns {string} The unque identifier for the Profile
          */
         identifier: string;
-        
+
         /**
          * @ngdoc property
          * @name created_at
          * @propertyOf noofero.Profile
          * @returns {string} The timestamp this object was created
-         */        
+         */
         created_at: string;
 
         /**
@@ -54,5 +54,13 @@ namespace noosfero {
          * @returns {string} A key => value custom fields data of Profile (e.g.: "{'Address':'Street A, Number 102...'}")
          */
         additional_data?: any;
+
+        /**
+         * @ngdoc property
+         * @name homepage
+         * @propertyOf noofero.Profile
+         * @returns {string} The Profile homepage
+         */
+        homepage: string;
     }
 }

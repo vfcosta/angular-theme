@@ -7,7 +7,7 @@ import {DisplayBlocks} from "./display-blocks.filter";
     templateUrl: "app/layout/boxes/boxes.html",
     directives: [DisplayBlocks]
 })
-@Inject("SessionService", 'AuthService', "$state")
+@Inject("SessionService", 'AuthService', "$state", "$rootScope")
 export class BoxesComponent {
 
     @Input() boxes: noosfero.Box[];
@@ -16,13 +16,22 @@ export class BoxesComponent {
     currentUser: noosfero.User;
     isHomepage = true;
 
-    constructor(private session: SessionService, private authService: AuthService, private $state: ng.ui.IStateService) {
+    constructor(private session: SessionService,
+        private authService: AuthService,
+        private $state: ng.ui.IStateService,
+        private $rootScope: ng.IRootScopeService) {
+
         this.currentUser = this.session.currentUser();
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             this.currentUser = this.session.currentUser();
+            this.verifyHomepage();
         });
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.currentUser = this.session.currentUser();
+            this.verifyHomepage();
+        });
+        this.$rootScope.$on("$stateChangeSuccess", (event: ng.IAngularEvent, toState: ng.ui.IState) => {
+            this.verifyHomepage();
         });
     }
 
@@ -37,7 +46,14 @@ export class BoxesComponent {
 
     private verifyHomepage() {
         if (this.owner && ["Profile", "Community", "Person"].indexOf((<any>this.owner)['type']) >= 0) {
+            let profile = <noosfero.Profile>this.owner;
             this.isHomepage = this.$state.current.name === "main.profile.home";
+            if (profile.homepage) {
+                this.isHomepage = this.isHomepage ||
+                    (this.$state.current.name === "main.profile.page" && profile.homepage === this.$state.params['page']);
+            } else {
+                this.isHomepage = this.isHomepage || this.$state.current.name === "main.profile.info";
+            }
         } else {
             this.isHomepage = this.$state.current.name === "main.environment.home";
         }

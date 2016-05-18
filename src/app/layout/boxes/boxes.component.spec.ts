@@ -62,6 +62,20 @@ describe("Boxes Component", () => {
         expect(helper.component.isHomepage).toBeTruthy();
     });
 
+    it("set isHomepage as true when in profile info page", () => {
+        state.current = { name: "main.profile.info" };
+        helper.component.ngOnInit();
+        expect(helper.component.isHomepage).toBeTruthy();
+    });
+
+    it("set isHomepage as true when in profile page", () => {
+        state.current = { name: "main.profile.page" };
+        state.params = { page: "/page" };
+        (<noosfero.Profile>helper.component.owner).homepage = '/page';
+        helper.component.ngOnInit();
+        expect(helper.component.isHomepage).toBeTruthy();
+    });
+
     it("set isHomepage as true when in environment home page", () => {
         state.current = { name: "main.environment.home" };
         helper.component.owner = <noosfero.Environment>{};
