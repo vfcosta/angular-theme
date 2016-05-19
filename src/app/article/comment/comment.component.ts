@@ -5,6 +5,7 @@ import { NotificationService } from "../../shared/services/notification.service"
 
 @Component({
     selector: 'noosfero-comment',
+    outputs: ['commentRemoved'],
     templateUrl: 'app/article/comment/comment.html'
 })
 @Inject(CommentService, NotificationService)
@@ -14,6 +15,7 @@ export class CommentComponent {
     @Input() article: noosfero.Article;
     @Input() displayActions = true;
     @Input() displayReplies = true;
+    @Output() commentRemoved: EventEmitter<Comment> = new EventEmitter<Comment>();
 
     showReply() {
         return this.comment && this.comment.__show_reply === true;
@@ -33,7 +35,7 @@ export class CommentComponent {
     remove() {
         this.notificationService.confirmation({ title: "comment.remove.confirmation.title", message: "comment.remove.confirmation.message" }, () => {
             this.commentService.removeFromArticle(this.article, this.comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
-                // FIXME send event
+                this.commentRemoved.next(this.comment);
                 this.notificationService.success({ title: "comment.remove.success.title", message: "comment.remove.success.message" });
             });
         });
