@@ -33,12 +33,14 @@ describe("Boxes Component", () => {
             providers: [
                 helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
                 helpers.createProviderToValue('AuthService', helpers.mocks.authService),
-                helpers.createProviderToValue('$state', state)
+                helpers.createProviderToValue('$state', state),
+                helpers.createProviderToValue('TranslatorService', translatorService)
             ]
         });
         helper = new ComponentTestHelper<BoxesComponent>(cls, done);
     });
 
+    let translatorService = jasmine.createSpyObj("translatorService", ["currentLanguage"]);
     let state = jasmine.createSpyObj("state", ["current"]);
     state.current = { name: "" };
 
