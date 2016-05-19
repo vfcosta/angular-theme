@@ -20,10 +20,10 @@ describe("Components", () => {
             let component: NotificationService = new NotificationService(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
             component.error({ message: "message", title: "title" });
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
-                text: "message",
                 title: "title",
+                text: "message",
                 type: "error"
-            }));
+            }), null);
             done();
         });
 
@@ -36,7 +36,7 @@ describe("Components", () => {
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 text: NotificationService.DEFAULT_ERROR_MESSAGE,
                 type: "error"
-            }));
+            }), null);
             done();
         });
 
@@ -48,7 +48,7 @@ describe("Components", () => {
             component.success({ title: "title", message: "message", timer: 1000 });
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 type: "success"
-            }));
+            }), null);
             done();
         });
 
@@ -60,7 +60,7 @@ describe("Components", () => {
             component.httpError(500, {});
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 text: "notification.http_error.500.message"
-            }));
+            }), null);
             done();
         });
 
@@ -73,7 +73,22 @@ describe("Components", () => {
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
                 type: "success",
                 timer: NotificationService.DEFAULT_SUCCESS_TIMER
-            }));
+            }), null);
+            done();
+        });
+
+        it("display a confirmation dialog when call confirmation method", done => {
+            let sweetAlert = jasmine.createSpyObj("sweetAlert", ["swal"]);
+            sweetAlert.swal = jasmine.createSpy("swal");
+
+            let component: NotificationService = new NotificationService(<any>helpers.mocks.$log, <any>sweetAlert, <any>helpers.mocks.translatorService);
+            let func = () => { };
+            component.confirmation({ title: "title", message: "message" }, func);
+            expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
+                title: "title",
+                text: "message",
+                type: "warning"
+            }), jasmine.any(Function));
             done();
         });
     });

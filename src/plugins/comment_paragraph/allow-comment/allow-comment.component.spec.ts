@@ -57,7 +57,7 @@ describe("Components", () => {
         });
 
         it('display button to side comments', () => {
-            expect(helper.all(".paragraph .actions a").length).toEqual(1);
+            expect(helper.all(".paragraph .paragraph-actions a").length).toEqual(1);
         });
 
         it('set display to true when click in show paragraph', () => {

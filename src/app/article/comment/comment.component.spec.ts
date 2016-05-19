@@ -18,7 +18,11 @@ describe("Components", () => {
         });
 
         function createComponent() {
-            let providers = helpers.provideFilters("translateFilter");
+            let commentService = jasmine.createSpyObj("commentService", ["removeFromArticle"]);
+            let providers = [
+                helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
+                helpers.createProviderToValue("CommentService", commentService)
+            ].concat(helpers.provideFilters("translateFilter"));
 
             @Component({ selector: 'test-container-component', directives: [CommentComponent], template: htmlTemplate, providers: providers })
             class ContainerComponent {

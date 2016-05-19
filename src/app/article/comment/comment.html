@@ -18,8 +18,13 @@
     <div class="title">{{ctrl.comment.title}}</div>
     <div class="body">{{ctrl.comment.body}}</div>
     <div class="actions" ng-if="ctrl.displayActions">
-      <a href="#" (click)="ctrl.reply()" class="small text-muted reply" ng-if="ctrl.article.accept_comments">
+      <a href="#" (click)="ctrl.reply()" class="action small text-muted reply" ng-if="ctrl.article.accept_comments">
+        <span class="bullet-separator">•</span>
         {{"comment.reply" | translate}}
+      </a>
+      <a href="#" (click)="ctrl.remove()" class="action small text-muted remove" ng-if="ctrl.allowRemove()">
+        <span class="bullet-separator">•</span>
+        {{"comment.remove" | translate}}
       </a>
     </div>
   </div>

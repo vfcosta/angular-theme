@@ -10,6 +10,22 @@
     .title {
       font-weight: bold;
     }
+    .actions {
+      .action {
+        text-decoration: none;
+        &:first-child {
+          .bullet-separator {
+            display: none;
+          }
+        }
+        .bullet-separator {
+          font-size: 8px;
+          vertical-align: middle;
+          margin: 3px;
+          color: #B6C2CA;
+        }
+      }
+    }
     .media-left {
       min-width: 40px;
     }

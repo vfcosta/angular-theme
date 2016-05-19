@@ -36,15 +36,23 @@ export class NotificationService {
         this.showMessage({ title: title, text: message, timer: timer });
     }
 
-    private showMessage({title, text, type = "success", timer = null, showConfirmButton = true}) {
+    confirmation({title, message, showCancelButton = true, type = "warning"}, confirmationFunction: Function) {
+        this.showMessage({ title: title, text: message, showCancelButton: showCancelButton, type: type, closeOnConfirm: false }, confirmationFunction);
+    }
+
+    private showMessage({title, text, type = "success", timer = null, showConfirmButton = true, showCancelButton = false, closeOnConfirm = true}, confirmationFunction: Function = null) {
         this.$log.debug("Notification message:", title, text, type, this.translatorService.currentLanguage());
         this.SweetAlert.swal({
             title: this.translatorService.translate(title),
             text: this.translatorService.translate(text),
             type: type,
             timer: timer,
-            showConfirmButton: showConfirmButton
-        });
+            showConfirmButton: showConfirmButton,
+            showCancelButton: showCancelButton,
+            closeOnConfirm: closeOnConfirm
+        }, confirmationFunction ? (isConfirm: boolean) => {
+            if (isConfirm) confirmationFunction();
+        } : null);
     }
 
 }
