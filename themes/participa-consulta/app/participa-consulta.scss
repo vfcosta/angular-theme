@@ -1,0 +1,35 @@
+@font-face {
+  font-family: 'Ubuntu';
+  font-weight: 300;
+  font-style: normal;
+  src: url('../assets/fonts/participa-consulta/Ubuntu-R.ttf');
+}
+
+@font-face {
+  font-family: 'Ubuntu Medium';
+  font-weight: 300;
+  font-style: normal;
+  src: url('../assets/fonts/participa-consulta/Ubuntu-M.ttf');
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-weight: 300;
+  font-style: italic;
+  src: url('../assets/fonts/participa-consulta/Ubuntu-RI.ttf');
+}
+
+.skin-whbl .notifications-list .item-footer {
+  background: #DAE1C4;
+  color: #4F9CAC;
+}
+
+.profile-header, .profile-footer{
+  text-align: center;
+}
+
+.container-fluid .navbar-header .navbar-toggle{
+  &:hover, &:focus {
+    background-color: #7E7E7E;
+  }
+}

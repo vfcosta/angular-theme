@@ -1,0 +1,25 @@
+.navbar {
+  min-height: 123px;
+  background-color: #f9c404;
+  background-image: -moz-radial-gradient(center, ellipse cover, #fcdd4e 1%, #f9c404 100%);
+  background-image: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%, #fcdd4e), color-stop(100%, #f9c404));
+  background-image: -webkit-radial-gradient(center, ellipse cover, #fcdd4e 1%, #f9c404 100%);
+  background-image: -o-radial-gradient(center, ellipse cover, #fcdd4e 1%, #f9c404 100%);
+  background-image: -ms-radial-gradient(center, ellipse cover, #fcdd4e 1%, #f9c404 100%);
+  background-image: radial-gradient(ellipse at center, #fcdd4e 1%, #f9c404 100%);
+
+  .container-fluid {
+    .navbar-brand {
+      .noosfero-logo {
+        display: none;
+      }
+      .noosfero-name {
+        color: #03316f;
+        font-size: 40px;
+        font-weight: 800;
+        line-height: 1em;
+        letter-spacing: -0.05em;
+      }
+    }
+  }
+}
