@@ -12,7 +12,8 @@ export class DisplayBlocks {
         blocks = blocks || [];
         for (let block of blocks) {
             if (this.visible(block, isHomepage) && this.displayToUser(block, currentUser) &&
-                this.displayOnLanguage(block, this.translatorService.currentLanguage())) {
+                this.displayOnLanguage(block, this.translatorService.currentLanguage())
+                && !block.hide) {
                 selected.push(block);
             }
         }
