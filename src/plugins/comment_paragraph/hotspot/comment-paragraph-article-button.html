@@ -1,8 +1,0 @@
-<a href='#' class="btn btn-default btn-xs comment-paragraph-activate" (click)="ctrl.activateCommentParagraph()"
-  ng-if="!ctrl.article.setting.comment_paragraph_plugin_activate">
-  <i class="fa fa-fw fa-plus"></i> {{"comment-paragraph-plugin.title" | translate}}
-</a>
-<a href='#' class="btn btn-default btn-xs comment-paragraph-deactivate" (click)="ctrl.deactivateCommentParagraph()"
-  ng-if="ctrl.article.setting.comment_paragraph_plugin_activate">
-  <i class="fa fa-fw fa-minus"></i> {{"comment-paragraph-plugin.title" | translate}}
-</a>
