@@ -37,6 +37,7 @@
   "comment.post.success.message": "Comentário salvo com sucesso!",
   "comment.reply": "responder",
   "article.actions.edit": "Editar",
+  "article.actions.delete": "Excluir",
   "article.actions.read_more": "Ler mais",
   "article.basic_editor.title": "Título",
   "article.basic_editor.body": "Corpo",

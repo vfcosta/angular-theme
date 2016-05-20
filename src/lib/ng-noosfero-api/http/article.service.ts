@@ -1,14 +1,22 @@
-import { Injectable, Inject } from "ng-forward";
+import { Injectable, Inject, EventEmitter } from "ng-forward";
 import {RestangularService} from "./restangular_service";
 import {ProfileService} from "./profile.service";
+import {NoosferoRootScope} from "./../../../app/shared/models/interfaces";
+import {ModelEvent, ArticleEventType} from "./../../../app/shared/models/events";
+import {HashMap} from "./../../../app/shared/utils/hashmap";
 
 @Injectable()
 @Inject("Restangular", "$q", "$log", ProfileService)
-
 export class ArticleService extends RestangularService<noosfero.Article> {
+
+    private events: HashMap<ModelEvent, EventEmitter<noosfero.Article>> = new HashMap<ModelEvent, EventEmitter<noosfero.Article>>();
+
+    // This event is not tyed to any specific model element.
+    private removed: ModelEvent = ModelEvent.event(ArticleEventType.removed);
 
     constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected profileService: ProfileService) {
         super(Restangular, $q, $log);
+        this.events.put(this.removed, new EventEmitter<noosfero.Article>());
     }
 
     getResourcePath() {
@@ -20,6 +28,36 @@ export class ArticleService extends RestangularService<noosfero.Article> {
             singular: 'article',
             plural: 'articles'
         };
+    }
+
+    removeArticle(article: noosfero.Article) {
+        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Article>> = this.remove(article);
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
+        restRequest.then((result: any) => {
+            this.notifyArticleRemovedListeners(article);
+        }).catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
+
+    /**
+     * Notify listeners that this article has been removed
+     */
+    notifyArticleRemovedListeners(article: noosfero.Article) {
+        let listener = this.events.get(this.removed);
+        listener.next(article);
+    }
+
+    /**
+    * Subscribe a listener a given article event
+    */
+    subscribe(eventToSubscribe: ModelEvent, fn: Function) {
+        // Find the requested event in map
+        let event: EventEmitter<noosfero.Article> = this.events.get(eventToSubscribe);
+        if (event) {
+            event.subscribe(fn);
+        } else {
+            throw new Error(`The event: ${eventToSubscribe} not exists`);
+        }
     }
 
     updateArticle(article: noosfero.Article) {
@@ -103,3 +141,4 @@ export class ArticleService extends RestangularService<noosfero.Article> {
 
 
 }
+

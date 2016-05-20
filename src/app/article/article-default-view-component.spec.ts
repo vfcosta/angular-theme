@@ -1,5 +1,7 @@
 import {Input, provide, Component} from 'ng-forward';
 import {ArticleViewComponent, ArticleDefaultViewComponent} from './article-default-view.component';
+import {ComponentTestHelper, createClass} from './../../spec/component-test-helper';
+import {ModelEvent, ArticleEventType} from "./../shared/models/events";
 
 import * as helpers from "../../spec/helpers";
 
@@ -9,113 +11,83 @@ const htmlTemplate: string = '<noosfero-article [article]="ctrl.article" [profil
 
 describe("Components", () => {
 
-    describe("ArticleView Component", () => {
+    // the karma preprocessor html2js transform the templates html into js files which put
+    // the templates to the templateCache into the module templates
+    // we need to load the module templates here as the template for the 
+    // component Noosfero ArtileView will be load on our tests
+    beforeEach(angular.mock.module("templates"));
 
-        // the karma preprocessor html2js transform the templates html into js files which put
-        // the templates to the templateCache into the module templates
-        // we need to load the module templates here as the template for the 
-        // component Noosfero ArtileView will be load on our tests
-        beforeEach(angular.mock.module("templates"));
-
-        it("renders the default component when no specific component is found", (done: Function) => {
-            // Creating a container component (ArticleContainerComponent) to include 
-            // the component under test (ArticleView)  
-            @Component({
-                selector: 'test-container-component',
-                template: htmlTemplate,
-                directives: [ArticleViewComponent],
-                providers: [
-                    helpers.createProviderToValue('CommentService', helpers.mocks.commentService),
-                    helpers.provideFilters("translateFilter"),
-                    helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
-                    helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
-                ]
-            })
-            class ArticleContainerComponent {
-                article = { type: 'anyArticleType' };
-                profile = { name: 'profile-name' };
+    describe("Article Default View Component", () => {
+        let helper: ComponentTestHelper<ArticleDefaultViewComponent>;
+        const defaultViewTemplate: string = '<noosfero-default-article [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-default-article>';
+        let articleService: any = helpers.mocks.articleService;
+        let article = <noosfero.Article>{
+            id: 1,
+            profile: {
+                identifier: "1"
             }
+        };
+        let state = <ng.ui.IStateService>jasmine.createSpyObj("state", ["go", "transitionTo"]);
+        let providers = [
+            provide('$state', { useValue: state }),
+            provide('ArticleService', { useValue: articleService })
+        ].concat(helpers.provideFilters("translateFilter"));
 
-            helpers.createComponentFromClass(ArticleContainerComponent).then((fixture) => {
-                // and here we can inspect and run the test assertions
-
-                // gets the children component of ArticleContainerComponent 
-                let articleView: ArticleViewComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-
-                // and checks if the article View rendered was the Default Article View
-                expect(articleView.constructor.prototype).toEqual(ArticleDefaultViewComponent.prototype);
-
-                // done needs to be called (it isn't really needed, as we can read in
-                // here (https://github.com/ngUpgraders/ng-forward/blob/master/API.md#createasync)
-                // because createAsync in ng-forward is not really async, but as the intention 
-                // here is write tests in angular 2 ways, this is recommended
-                done();
+        /**
+         * The beforeEach procedure will initialize the helper and parse
+         * the component according to the given providers. Unfortunetly, in
+         * this mode, the providers and properties given to the construtor
+         * can't be overriden.
+        */
+        beforeEach((done) => {
+            // Create the component bed for the test. Optionally, this could be done
+            // in each test if one needs customization of these parameters per test
+            let cls = createClass({
+                template: defaultViewTemplate,
+                directives: [ArticleDefaultViewComponent],
+                providers: providers,
+                properties: {
+                    article: article
+                }
             });
-
+            helper = new ComponentTestHelper<ArticleDefaultViewComponent>(cls, done);
         });
 
-        it("receives the article and profile as inputs", (done: Function) => {
+        function getArticle() {
+            return this.article;
+        }
 
-            // Creating a container component (ArticleContainerComponent) to include 
-            // the component under test (ArticleView)  
-            @Component({
-                selector: 'test-container-component',
-                template: htmlTemplate,
-                directives: [ArticleViewComponent],
-                providers: [
-                    helpers.createProviderToValue('CommentService', helpers.mocks.commentService),
-                    helpers.provideFilters("translateFilter"),
-                    helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
-                    helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
-                ]
-            })
-            class ArticleContainerComponent {
-                article = { type: 'anyArticleType' };
-                profile = { name: 'profile-name' };
-            }
-
-            // uses the TestComponentBuilder instance to initialize the component
-            helpers.createComponentFromClass(ArticleContainerComponent).then((fixture) => {
-                // and here we can inspect and run the test assertions 
-                let articleView: ArticleViewComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-
-                // assure the article object inside the ArticleView matches
-                // the provided through the parent component
-                expect(articleView.article.type).toEqual("anyArticleType");
-                expect(articleView.profile.name).toEqual("profile-name");
-
-                // done needs to be called (it isn't really needed, as we can read in
-                // here (https://github.com/ngUpgraders/ng-forward/blob/master/API.md#createasync)
-                // because createAsync in ng-forward is not really async, but as the intention 
-                // here is write tests in angular 2 ways, this is recommended
-                done();
-            });
+        it("it should delete article when delete is activated", () => {
+            expect(helper.component.article).toEqual(article);
+            // Spy the state service
+            doDeleteArticle();
+            expect(state.transitionTo).toHaveBeenCalled();
         });
 
-
-        it("renders a article view which matches to the article type", done => {
-            // NoosferoTinyMceArticle component created to check if it will be used
-            // when a article with type 'TinyMceArticle' is provided to the noosfero-article (ArticleView)
-            // *** Important *** - the selector is what ng-forward uses to define the name of the directive provider
-            @Component({ selector: 'noosfero-tiny-mce-article', template: "<h1>TinyMceArticle</h1>" })
-            class TinyMceArticleView {
-                @Input() article: any;
-                @Input() profile: any;
-            }
-
-            // Creating a container component (ArticleContainerComponent) to include our NoosferoTinyMceArticle
-            @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [ArticleViewComponent, TinyMceArticleView] })
-            class CustomArticleType {
-                article = { type: 'TinyMceArticle' };
-                profile = { name: 'profile-name' };
-            }
-            helpers.createComponentFromClass(CustomArticleType).then(fixture => {
-                let myComponent: CustomArticleType = fixture.componentInstance;
-                expect(myComponent.article.type).toEqual("TinyMceArticle");
-                expect(fixture.debugElement.componentViewChildren[0].text()).toEqual("TinyMceArticle");
-                done();
+        /**
+         * Execute the delete method on the target component
+         */
+        function doDeleteArticle() {
+            // Create a mock for the ArticleService removeArticle method
+            spyOn(helper.component.articleService, 'removeArticle').and.callFake(function(param: noosfero.Article) {
+                return {
+                    catch: () => {}
+                };
             });
-        });
+            helper.component.delete();
+            expect(articleService.removeArticle).toHaveBeenCalled();
+            // After the component delete method execution, fire the
+            // ArticleEvent.removed event
+            simulateRemovedEvent();
+        }
 
+        /**
+         * Simulate the ArticleService ArticleEvent.removed event
+         */
+        function simulateRemovedEvent() {
+            let event: ModelEvent = ModelEvent.event(ArticleEventType.removed);
+            helper.component.articleService.notifyArticleRemovedListeners(article);
+        }
     });
+
 });

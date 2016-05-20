@@ -7,6 +7,9 @@
     <a href="#" class="btn btn-default btn-xs" ui-sref="main.cmsEdit({profile: ctrl.profile.identifier, id: ctrl.article.id})">
       <i class="fa fa-pencil-square-o fa-fw fa-lg"></i> {{"article.actions.edit" | translate}}
     </a>
+    <a href="#" class="btn btn-default btn-xs" ng-click="ctrl.delete()">
+      <i class="fa fa-trash-o fa-fw fa-lg" ng-click="ctrl.delete()"></i> {{"article.actions.delete" | translate}}
+    </a>    
     <noosfero-hotspot-article-toolbar [article]="ctrl.article"></noosfero-hotspot-article-toolbar>
     <div class="page-info pull-right small text-muted">
       <span class="time">

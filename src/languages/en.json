@@ -37,6 +37,7 @@
   "comment.post.success.message": "Comment saved!",
   "comment.reply": "reply",
   "article.actions.edit": "Edit",
+  "article.actions.delete": "Delete",
   "article.actions.read_more": "Read More",
   "article.basic_editor.title": "Title",
   "article.basic_editor.body": "Body",
