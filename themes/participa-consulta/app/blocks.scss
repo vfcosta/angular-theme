@@ -1,0 +1,70 @@
+.block-head-with-icon {
+  padding: 15px 15px 15px 55px;
+}
+
+.content-wrapper .block {
+  .panel-heading {
+    border: none;
+    border-radius: 3px 3px 0 0;
+    font-family: "Ubuntu Medium";
+    font-size: 15px;
+    font-variant: normal;
+    font-weight: normal;
+    line-height: 30px;
+    padding: 15px 15px 15px 15px;
+    text-transform: capitalize;
+    background-size: 30px 30px;
+    background: #DAE1C4;
+    color: #4F9CAC;
+  }
+
+  &.membersblock {
+    .panel-heading {
+      @extend .block-head-with-icon;
+      background: #DAE1C4 url("../assets/icons/participa-consulta/pessoas.png") no-repeat 15px center;
+      color: #4F9CAC;
+    }
+  }
+
+  &.statisticsblock {
+    .panel-heading {
+      @extend .block-head-with-icon;
+      background: #69677C url("../assets/icons/participa-consulta/indicadores.png") no-repeat 15px center;
+      color: #DAE1C4;
+    }
+  }
+}
+
+.col-md-7 {
+  .panel-body.linklistblock {
+    padding: 0px;
+  }
+
+  .link-list-block {
+    font-family: "Ubuntu";
+    font-size: 12px;
+    background: #69677C;
+    border-radius: 0 0 3px 3px;
+    padding: 4px 10px;
+    position: relative;
+
+    div, a {
+      display: inline-block;
+      background: #69677C;
+      border-radius: 0;
+      color: #FFF;
+      font-family: "Ubuntu Medium";
+      font-size: 16px;
+      margin: 0;
+      padding-right: 15px;
+      font-weight: bold;
+    }
+
+    div:first-child {
+      padding: 15px 5px 15px 50px;
+      background: #69677C url("../assets/icons/participa-consulta/home.png") no-repeat 7px center;
+      color: #FFF;
+      background-size: 30px 30px;
+    }
+  }
+}

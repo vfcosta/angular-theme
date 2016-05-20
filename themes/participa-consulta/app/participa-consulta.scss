@@ -1,94 +1,35 @@
-body > .ng-scope {
-  min-height: 100%;
-}
-
-html, body {
-  height:100%;
-}
-
-@font-face{
+@font-face {
   font-family: 'Ubuntu';
   font-weight: 300;
   font-style: normal;
   src: url('../assets/fonts/participa-consulta/Ubuntu-R.ttf');
 }
 
-@font-face{
-  font-family: 'Ubuntu Mediun';
+@font-face {
+  font-family: 'Ubuntu Medium';
   font-weight: 300;
   font-style: normal;
   src: url('../assets/fonts/participa-consulta/Ubuntu-M.ttf');
 }
 
-@font-face{
+@font-face {
   font-family: 'Ubuntu';
   font-weight: 300;
   font-style: italic;
   src: url('../assets/fonts/participa-consulta/Ubuntu-RI.ttf');
 }
 
-.box-default{
-  border: none;
-  border-radius: 3px 3px 0 0;
-  font-family: "Ubuntu Mediun";
-  font-size: 15px;
-  font-variant: normal;
-  font-weight: normal;
-  line-height: 30px;
-  padding: 15px 15px 15px 55px;
-  text-transform: capitalize;
-  background-size: 30px 30px;
-}
-
-.skin-whbl .panel-default > .panel-heading, .skin-whbl .notifications-list .item-footer {
+.skin-whbl .notifications-list .item-footer {
   background: #DAE1C4;
   color: #4F9CAC;
 }
 
-.panel-body.linklistblock{
-  padding: 0px;
-}
-
-.skin-whbl .membersblock > .panel-heading{
-  @extend .box-default;
-  background: #DAE1C4 url("../assets/icons/participa-consulta/pessoas.png") no-repeat 15px center;
-  color: #4F9CAC;
-}
-
-.skin-whbl .statisticsblock > .panel-heading{
-  @extend .box-default;
-  background: #69677C url("../assets/icons/participa-consulta/indicadores.png") no-repeat 15px center;
-  color: #DAE1C4;
-}
-
-.link-list-block{
-  font-family: "Ubuntu";
-  font-size: 12px;
-  background: #69677C;
-  border-radius: 0 0 3px 3px;
-  padding: 20px;
-  position: relative;
-}
-
-.link-list-block div, .link-list-block  a{
-  display: inline-block;
-  background: #69677C;
-  border-radius: 0;
-  color: #FFF;
-  font-family: "Ubuntu Mediun";
-  font-size: 16px;
-  margin: 0;
-  padding-right: 15px;
-  font-weight: bold;
-}
-
-.link-list-block div:first-child{
-  padding: 15px 15px 15px 55px;
-  background: #69677C url("../assets/icons/participa-consulta/home.png") no-repeat 15px center;
-  color: #FFF;
-  background-size: 30px 30px;
-}
-
-.profile-header{
+.profile-header, .profile-footer{
   text-align: center;
+}
+
+.container-fluid .navbar-header .navbar-toggle{
+  &:hover, &:focus {
+    background-color: #7E7E7E;
+  }
 }
