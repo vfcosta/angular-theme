@@ -4,5 +4,6 @@ namespace noosfero {
         settings: Settings;
         limit: number;
         api_content: any;
+        hide: boolean;
     }
 }

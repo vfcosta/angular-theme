@@ -14,7 +14,7 @@ describe("Components", () => {
         let helper: ComponentTestHelper<DiscussionBlockComponent>;
         let settingsObj = {};
         let mockedBlockService = {
-            getApiContent: (block: noosfero.Block): any => {
+            getApiContent: (content: any): any => {
                 return Promise.resolve({ articles: [{ name: "article1" }], headers: (name: string) => { return name; } });
             }
         };
@@ -36,13 +36,14 @@ describe("Components", () => {
                 template: htmlTemplate,
                 directives: [DiscussionBlockComponent],
                 providers: providers,
-                properties: {}
+                properties: { block: {} }
             });
             helper = new ComponentTestHelper<DiscussionBlockComponent>(cls, done);
         });
 
         it("get discussions from the block service", () => {
             expect(helper.component.documents).toEqual([{ name: "article1" }]);
+            expect(helper.component.block.hide).toEqual(false);
         });
 
         it("go to article page when open a document", () => {
