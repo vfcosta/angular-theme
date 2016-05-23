@@ -2,21 +2,15 @@ import { Injectable, Inject, EventEmitter } from "ng-forward";
 import {RestangularService} from "./restangular_service";
 import {ProfileService} from "./profile.service";
 import {NoosferoRootScope} from "./../../../app/shared/models/interfaces";
-import {ModelEvent, ArticleEventType} from "./../../../app/shared/models/events";
-import {HashMap} from "./../../../app/shared/utils/hashmap";
 
 @Injectable()
 @Inject("Restangular", "$q", "$log", ProfileService)
 export class ArticleService extends RestangularService<noosfero.Article> {
 
-    private events: HashMap<ModelEvent, EventEmitter<noosfero.Article>> = new HashMap<ModelEvent, EventEmitter<noosfero.Article>>();
-
-    // This event is not tyed to any specific model element.
-    private removed: ModelEvent = ModelEvent.event(ArticleEventType.removed);
+    private articleRemoved: EventEmitter<noosfero.Article> = new EventEmitter<noosfero.Article>();
 
     constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected profileService: ProfileService) {
         super(Restangular, $q, $log);
-        this.events.put(this.removed, new EventEmitter<noosfero.Article>());
     }
 
     getResourcePath() {
@@ -42,22 +36,17 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     /**
      * Notify listeners that this article has been removed
      */
-    notifyArticleRemovedListeners(article: noosfero.Article) {
-        let listener = this.events.get(this.removed);
-        listener.next(article);
+    private notifyArticleRemovedListeners(article: noosfero.Article) {
+        // let listener = this.events.get(this.removed);
+        // listener.next(article);
+        this.articleRemoved.next(article);
     }
 
     /**
-    * Subscribe a listener a given article event
-    */
-    subscribe(eventToSubscribe: ModelEvent, fn: Function) {
-        // Find the requested event in map
-        let event: EventEmitter<noosfero.Article> = this.events.get(eventToSubscribe);
-        if (event) {
-            event.subscribe(fn);
-        } else {
-            throw new Error(`The event: ${eventToSubscribe} not exists`);
-        }
+     * subscribes to the ArticleRemoved event emitter
+     */
+    subscribeToArticleRemoved(fn: Function) {
+        this.articleRemoved.subscribe(fn);
     }
 
     updateArticle(article: noosfero.Article) {

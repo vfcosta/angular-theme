@@ -25,6 +25,7 @@ describe("Services", () => {
                 $httpBackend.expectDELETE(`/api/v1/articles/${articleId}`).respond(200, { success: "true" });
                 articleService.removeArticle(<noosfero.Article>{id: articleId});
                 $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingExpectation();
                 done();
             });
 

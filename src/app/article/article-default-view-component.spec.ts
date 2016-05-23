@@ -1,7 +1,6 @@
 import {Input, provide, Component} from 'ng-forward';
 import {ArticleViewComponent, ArticleDefaultViewComponent} from './article-default-view.component';
 import {ComponentTestHelper, createClass} from './../../spec/component-test-helper';
-import {ModelEvent, ArticleEventType} from "./../shared/models/events";
 
 import * as helpers from "../../spec/helpers";
 
@@ -85,8 +84,7 @@ describe("Components", () => {
          * Simulate the ArticleService ArticleEvent.removed event
          */
         function simulateRemovedEvent() {
-            let event: ModelEvent = ModelEvent.event(ArticleEventType.removed);
-            helper.component.articleService.notifyArticleRemovedListeners(article);
+            helper.component.articleService["notifyArticleRemovedListeners"](article);
         }
     });
 

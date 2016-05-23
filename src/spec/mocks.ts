@@ -76,17 +76,20 @@ export var mocks: any = {
         isAuthenticated: () => { }
     },
     articleService: {
-        events: [
+        articleRemovedFn: null,
+        subscribeToArticleRemoved: (fn: Function) => {
+            mocks.articleService.articleRemovedFn = fn;
+        },
+        articleRemoved:
             {
-                event: Function,
                 subscribe: (fn: Function) => {
-                    mocks.articleService.events[0].event = fn;
+                    mocks.articleService.articleRemovedFn = fn;
                 },
                 next: (param: any) => {
-                    mocks.articleService.events[0].event(param);
+                    mocks.articleService.articleRemovedFn(param);
                 }
             }
-        ],
+        ,
         removeArticle: (article: noosfero.Article) => {
             return {
                 catch: (func?: Function) => {
@@ -94,10 +97,10 @@ export var mocks: any = {
             };
         },
         notifyArticleRemovedListeners: (article: noosfero.Article) => {
-            mocks.articleService.events[0].next(article);
+            mocks.articleService.articleRemoved.next(article);
         },
         subscribe: (eventType: any, fn: Function) => {
-            mocks.articleService.events[0].subscribe(fn);
+            mocks.articleService.articleRemoved.subscribe(fn);
         },
         getByProfile: (profileId: number, params?: any) => {
             return {

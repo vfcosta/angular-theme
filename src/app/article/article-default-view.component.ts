@@ -5,7 +5,6 @@ import {MacroDirective} from "./macro/macro.directive";
 import {ArticleToolbarHotspotComponent} from "../hotspot/article-toolbar-hotspot.component";
 import {ArticleContentHotspotComponent} from "../hotspot/article-content-hotspot.component";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
-import {ModelEvent, ArticleEventType} from "./../shared/models/events";
 
 /**
  * @ngdoc controller
@@ -26,8 +25,7 @@ export class ArticleDefaultViewComponent {
 
     constructor(private $state: ng.ui.IStateService, public articleService: ArticleService) {
         // Subscribe to the Article Removed Event
-        let event = ModelEvent.event(ArticleEventType.removed);
-        this.articleService.subscribe(event, (article: noosfero.Article) => {
+        this.articleService.subscribeToArticleRemoved((article: noosfero.Article) => {
             if (this.article.parent) {
                 this.$state.transitionTo('main.profile.page', { page: this.article.parent.path, profile: this.article.profile.identifier });
             } else {
