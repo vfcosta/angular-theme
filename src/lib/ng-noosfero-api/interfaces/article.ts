@@ -13,5 +13,6 @@ namespace noosfero {
         setting: any;
         start_date: string;
         end_date: string;
+        accept_comments: boolean;
     }
 }
