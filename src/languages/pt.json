@@ -63,5 +63,10 @@
   "statistics.categories": "Categorias",
   "statistics.tags": "Tags",
   "statistics.comments": "Comentários",
-  "statistics.hits": "Acessos"
+  "statistics.hits": "Acessos",
+  "profile.content.success.title": "Bom trabalho!",
+  "profile.content.success.message": "Perfil salvo!",
+  "custom_content.title": "Editar conteúdo",
+  "profile.custom_header.label": "Cabeçalho",
+  "profile.custom_footer.label": "Rodapé"
 }

@@ -60,4 +60,8 @@ export class ProfileService {
         return this.restangular.one('profiles', profileId);
     }
 
+    update(profile: noosfero.Profile) {
+        let headers = { 'Content-Type': 'application/json' };
+        return this.get(profile.id).customPOST({ profile: profile }, null, null, headers);
+    }
 }
