@@ -32,7 +32,9 @@ export class AllowCommentComponent {
     }
 
     isActivated() {
-        return this.article && this.article.setting && this.article.setting.comment_paragraph_plugin_activate;
+        return this.article && this.article.setting &&
+            this.article.setting.comment_paragraph_plugin_activate &&
+            (this.article.accept_comments || this.commentsCount > 0);
     }
 
     showParagraphComments() {

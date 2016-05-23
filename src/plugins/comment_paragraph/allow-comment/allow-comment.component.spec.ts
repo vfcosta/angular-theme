@@ -74,5 +74,17 @@ describe("Components", () => {
             functionToggleCommentParagraph({ id: 2 });
             expect(helper.component.article.id).toEqual(2);
         });
+
+        it('not display button to side comments when comments was closed and there is no comment paragraph', () => {
+            helper.component.article.accept_comments = false;
+            helper.component.commentsCount = 0;
+            expect(helper.component.isActivated()).toBeFalsy();
+        });
+
+        it('display button to side comments when comments was closed and there is some comments to display', () => {
+            helper.component.article.accept_comments = false;
+            helper.component.commentsCount = 2;
+            expect(helper.component.isActivated()).toBeTruthy();
+        });
     });
 });
