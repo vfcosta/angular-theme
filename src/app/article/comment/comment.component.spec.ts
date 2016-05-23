@@ -80,6 +80,26 @@ describe("Components", () => {
             });
         });
 
+        it("does not show the Remove button if user is not allowed to remove", done => {
+            createComponent().then(fixture => {
+                let component: CommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component.allowRemove = () => false;
+                fixture.detectChanges();
+                expect(fixture.debugElement.queryAll("a.action.remove").length).toEqual(0);
+                done();
+            });
+        });
+
+        it("shows the Remove button if user is allowed to remove", done => {
+            createComponent().then(fixture => {
+                let component: CommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component.allowRemove = () => true;
+                fixture.detectChanges();
+                expect(fixture.debugElement.queryAll("a.action.remove").length).toEqual(1);
+                done();
+            });
+        });
+
         it("call comment service to remove comment", done => {
             notificationService.confirmation = (params: any, func: Function) => { func(); };
             commentService.removeFromArticle = jasmine.createSpy("removeFromArticle").and.returnValue(Promise.resolve());
