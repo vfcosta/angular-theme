@@ -20,6 +20,7 @@ export class DiscussionBlockComponent {
         this.profile = this.owner;
         this.blockService.getApiContent(this.block).then((content: any) => {
             this.documents = content.articles;
+            this.block.hide = !this.documents || this.documents.length === 0;
         });
     }
 

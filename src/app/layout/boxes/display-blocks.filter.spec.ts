@@ -82,5 +82,19 @@ describe("Filters", () => {
             expect(filter.transform(<any>blocks, true, <noosfero.User>{})).toEqual([]);
             done();
         });
+
+        it("filter blocks when hide is true", done => {
+            let blocks = [{ hide: true }];
+            let filter = new DisplayBlocks(translatorService);
+            expect(filter.transform(<any>blocks, true, null)).toEqual([]);
+            done();
+        });
+
+        it("not filter blocks when hide is not true", done => {
+            let blocks = [{ id: 1, hide: false }, { id: 2 }];
+            let filter = new DisplayBlocks(translatorService);
+            expect(filter.transform(<any>blocks, true, null)).toEqual(blocks);
+            done();
+        });
     });
 });
