@@ -1,11 +1,13 @@
-import { Injectable, Inject } from "ng-forward";
+import { Injectable, Inject, EventEmitter } from "ng-forward";
 import {RestangularService} from "./restangular_service";
 import {ProfileService} from "./profile.service";
+import {NoosferoRootScope} from "./../../../app/shared/models/interfaces";
 
 @Injectable()
 @Inject("Restangular", "$q", "$log", ProfileService)
-
 export class ArticleService extends RestangularService<noosfero.Article> {
+
+    private articleRemoved: EventEmitter<noosfero.Article> = new EventEmitter<noosfero.Article>();
 
     constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected profileService: ProfileService) {
         super(Restangular, $q, $log);
@@ -20,6 +22,31 @@ export class ArticleService extends RestangularService<noosfero.Article> {
             singular: 'article',
             plural: 'articles'
         };
+    }
+
+    removeArticle(article: noosfero.Article) {
+        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Article>> = this.remove(article);
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
+        restRequest.then((result: any) => {
+            this.notifyArticleRemovedListeners(article);
+        }).catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
+
+    /**
+     * Notify listeners that this article has been removed
+     */
+    private notifyArticleRemovedListeners(article: noosfero.Article) {
+        // let listener = this.events.get(this.removed);
+        // listener.next(article);
+        this.articleRemoved.next(article);
+    }
+
+    /**
+     * subscribes to the ArticleRemoved event emitter
+     */
+    subscribeToArticleRemoved(fn: Function) {
+        this.articleRemoved.subscribe(fn);
     }
 
     updateArticle(article: noosfero.Article) {
@@ -103,3 +130,4 @@ export class ArticleService extends RestangularService<noosfero.Article> {
 
 
 }
+

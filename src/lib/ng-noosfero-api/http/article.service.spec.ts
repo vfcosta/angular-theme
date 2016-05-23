@@ -20,6 +20,15 @@ describe("Services", () => {
 
         describe("Succesfull requests", () => {
 
+            it("should remove article", (done) => {
+                let articleId = 1;
+                $httpBackend.expectDELETE(`/api/v1/articles/${articleId}`).respond(200, { success: "true" });
+                articleService.removeArticle(<noosfero.Article>{id: articleId});
+                $httpBackend.flush();
+                $httpBackend.verifyNoOutstandingExpectation();
+                done();
+            });
+
             it("should return article children", (done) => {
                 let articleId = 1;
                 $httpBackend.expectGET(`/api/v1/articles/${articleId}/children`).respond(200, { articles: [{ name: "article1" }] });
