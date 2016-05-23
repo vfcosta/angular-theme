@@ -31,4 +31,9 @@ export class CommentService extends RestangularService<noosfero.Comment> {
         let articleElement = this.articleService.getElement(<number>article.id);
         return this.create(comment, articleElement, null, { 'Content-Type': 'application/json' }, false);
     }
+
+    removeFromArticle(article: noosfero.Article, comment: noosfero.Comment): ng.IPromise<noosfero.RestResult<noosfero.Comment>> {
+        let articleElement = this.articleService.getElement(<number>article.id);
+        return this.remove(comment, articleElement);
+    }
 }

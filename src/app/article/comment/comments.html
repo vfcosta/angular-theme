@@ -2,7 +2,7 @@
   <noosfero-post-comment (comment-saved)="ctrl.commentAdded($event.detail)" ng-if="ctrl.showForm" [article]="ctrl.article" [parent]="ctrl.parent" [comment]="ctrl.newComment"></noosfero-post-comment>
   
   <div class="comments-list">
-    <noosfero-comment ng-repeat="comment in ctrl.comments | orderBy: 'created_at':true" [comment]="comment" [article]="ctrl.article"></noosfero-comment>
+    <noosfero-comment (comment-removed)="ctrl.commentRemoved($event.detail)" ng-repeat="comment in ctrl.comments | orderBy: 'created_at':true" [comment]="comment" [article]="ctrl.article"></noosfero-comment>
   </div>
   <button type="button" ng-if="ctrl.displayMore()" class="more-comments btn btn-default btn-block" ng-click="ctrl.loadNextPage()">{{"comment.pagination.more" | translate}}</button>
 </div>

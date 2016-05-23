@@ -8,6 +8,8 @@ describe("Components", () => {
     describe("Comment Component", () => {
 
         let properties: any;
+        let notificationService = helpers.mocks.notificationService;
+        let commentService = jasmine.createSpyObj("commentService", ["removeFromArticle"]);
 
         beforeEach(angular.mock.module("templates"));
         beforeEach(() => {
@@ -18,7 +20,10 @@ describe("Components", () => {
         });
 
         function createComponent() {
-            let providers = helpers.provideFilters("translateFilter");
+            let providers = [
+                helpers.createProviderToValue('NotificationService', notificationService),
+                helpers.createProviderToValue("CommentService", commentService)
+            ].concat(helpers.provideFilters("translateFilter"));
 
             @Component({ selector: 'test-container-component', directives: [CommentComponent], template: htmlTemplate, providers: providers })
             class ContainerComponent {
@@ -71,6 +76,37 @@ describe("Components", () => {
             properties['article']['accept_comments'] = false;
             createComponent().then(fixture => {
                 expect(fixture.debugElement.queryAll(".comment .actions .reply").length).toEqual(0);
+                done();
+            });
+        });
+
+        it("does not show the Remove button if user is not allowed to remove", done => {
+            createComponent().then(fixture => {
+                let component: CommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component.allowRemove = () => false;
+                fixture.detectChanges();
+                expect(fixture.debugElement.queryAll("a.action.remove").length).toEqual(0);
+                done();
+            });
+        });
+
+        it("shows the Remove button if user is allowed to remove", done => {
+            createComponent().then(fixture => {
+                let component: CommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component.allowRemove = () => true;
+                fixture.detectChanges();
+                expect(fixture.debugElement.queryAll("a.action.remove").length).toEqual(1);
+                done();
+            });
+        });
+
+        it("call comment service to remove comment", done => {
+            notificationService.confirmation = (params: any, func: Function) => { func(); };
+            commentService.removeFromArticle = jasmine.createSpy("removeFromArticle").and.returnValue(Promise.resolve());
+            createComponent().then(fixture => {
+                let component = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component.remove();
+                expect(commentService.removeFromArticle).toHaveBeenCalled();
                 done();
             });
         });

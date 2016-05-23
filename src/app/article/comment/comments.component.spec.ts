@@ -83,5 +83,26 @@ describe("Components", () => {
             });
         });
 
+        it("remove comment when calling commentRemoved", done => {
+            createComponent().then(fixture => {
+                let component: CommentsComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                let comment = { id: 1 };
+                component.comments = <any>[comment];
+                component.commentRemoved(<any>comment);
+                expect(component.comments).toEqual([]);
+                done();
+            });
+        });
+
+        it("do nothing when call commentRemoved with a comment that doesn't belongs to the comments list", done => {
+            createComponent().then(fixture => {
+                let component: CommentsComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                let comment = { id: 1 };
+                component.comments = <any>[comment];
+                component.commentRemoved(<any>{ id: 2 });
+                expect(component.comments).toEqual([comment]);
+                done();
+            });
+        });
     });
 });

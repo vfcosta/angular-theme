@@ -37,6 +37,13 @@ export class CommentsComponent {
         this.resetShowReply();
     }
 
+    commentRemoved(comment: noosfero.Comment): void {
+        let index = this.comments.indexOf(comment, 0);
+        if (index >= 0) {
+            this.comments.splice(index, 1);
+        }
+    }
+
     private resetShowReply() {
         this.comments.forEach((comment: noosfero.CommentViewModel) => {
             comment.__show_reply = false;
