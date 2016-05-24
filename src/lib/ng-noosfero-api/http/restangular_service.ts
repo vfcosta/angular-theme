@@ -1,3 +1,4 @@
+import {EventEmitter} from "ng-forward";
 /**
  * @name RestangularService
  * Base class to be extended by classes which will provide access
@@ -12,6 +13,11 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
     private baseResource: restangular.IElement;
     private currentPromise: ng.IDeferred<T>;
+
+    protected modelFoundEventEmitter: EventEmitter<T> = new EventEmitter<any>();
+    protected modelAddedEventEmitter: EventEmitter<T> = new EventEmitter<any>();
+    protected modelRemovedEventEmitter: EventEmitter<T> = new EventEmitter<any>();
+    protected modelUpdatedEventEmitter: EventEmitter<T> = new EventEmitter<any>();
 
     /**
      * Creates an instance of RestangularService.
@@ -33,6 +39,22 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         //         return data;
         //     }
         // });
+    }
+
+    subscribeToModelRemoved(fn: ((model: T) => void)) {
+        this.modelRemovedEventEmitter.subscribe(fn);
+    }
+
+    subscribeToModelAdded(fn: ((model: T) => void)) {
+        this.modelAddedEventEmitter.subscribe(fn);
+    }
+
+    subscribeToModelUpdated(fn: ((model: T) => void)) {
+        this.modelUpdatedEventEmitter.subscribe(fn);
+    }
+
+    subscribeToModelFound(fn: ((model: T) => void)) {
+        this.modelFoundEventEmitter.subscribe(fn);
     }
 
     public resetCurrent() {
@@ -107,7 +129,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
             restRequest = this.restangularService.one(this.getResourcePath(), id).get(queryParams, headers);
         }
 
-        restRequest.then(this.getHandleSuccessFunction(deferred))
+        restRequest.then(this.getHandleSuccessFunction(deferred, this.modelFoundEventEmitter))
             .catch(this.getHandleErrorFunction(deferred));
 
 
@@ -201,7 +223,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         restRequest = restangularObj.remove(queryParams, headers);
 
         restRequest
-            .then(this.getHandleSuccessFunction(deferred))
+            .then(this.getHandleSuccessFunction(deferred, this.modelRemovedEventEmitter))
             .catch(this.getHandleErrorFunction(deferred));
 
         return deferred.promise;
@@ -226,7 +248,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
         restRequest = restangularObj.put(queryParams, headers);
 
-        restRequest.then(this.getHandleSuccessFunction(deferred))
+        restRequest.then(this.getHandleSuccessFunction(deferred, this.modelUpdatedEventEmitter))
             .catch(this.getHandleErrorFunction(deferred));
 
         return deferred.promise;
@@ -255,7 +277,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
             restRequest = this.baseResource.post(data, queryParams, headers);
         }
 
-        restRequest.then(this.getHandleSuccessFunction(deferred))
+        restRequest.then(this.getHandleSuccessFunction(deferred, this.modelAddedEventEmitter))
             .catch(this.getHandleErrorFunction(deferred));
 
         return deferred.promise;
@@ -289,7 +311,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     }
 
     /** HANDLERS */
-    protected getHandleSuccessFunction<C>(deferred: ng.IDeferred<noosfero.RestResult<C | T | any>>, responseKey?: string): (response: restangular.IResponse) => void {
+    protected getHandleSuccessFunction<C>(deferred: ng.IDeferred<noosfero.RestResult<C | T | any>>, successEmitter: EventEmitter<T> = null): (response: restangular.IResponse) => void {
         let self = this;
 
         /**
@@ -301,7 +323,13 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
             if (self.$log) {
                 self.$log.debug("Request successfull executed", response.data, self, response);
             }
-            deferred.resolve(<any>this.extractData(response));
+            let resultModel: noosfero.RestResult<T> = <any>this.extractData(response);
+            // resolve the promise with the model returned from the Noosfero API
+            deferred.resolve(resultModel);
+            // emits the event if a successEmiter was provided in the successEmitter parameter
+            if (successEmitter !== null) {
+                successEmitter.next(resultModel);
+            }
         };
         return successFunction;
     }
