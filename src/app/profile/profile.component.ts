@@ -9,7 +9,7 @@ import {ActivitiesComponent} from "./activities/activities.component";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 import {NotificationService} from "../shared/services/notification.service";
 import {MyProfileComponent} from "./myprofile.component";
-
+import {ProfileActionsComponent} from "./profile-actions.component";
 
 /**
  * @ngdoc controller
@@ -37,13 +37,25 @@ import {MyProfileComponent} from "./myprofile.component";
                 templateUrl: "app/profile/info/profile-info.html",
                 controller: ProfileInfoComponent,
                 controllerAs: "vm"
+            },
+            "actions@main": {
+                templateUrl: "app/profile/navbar-actions.html",
+                controller: ProfileActionsComponent,
+                controllerAs: "vm"
             }
         }
     },
     {
         name: 'main.profile.settings',
         url: "^/myprofile/:profile",
-        component: MyProfileComponent
+        component: MyProfileComponent,
+        views: {
+            "actions@main": {
+                templateUrl: "app/profile/navbar-actions.html",
+                controller: ProfileActionsComponent,
+                controllerAs: "vm"
+            }
+        }
     },
     {
         name: 'main.cms',
