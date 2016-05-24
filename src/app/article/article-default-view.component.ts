@@ -5,6 +5,7 @@ import {MacroDirective} from "./macro/macro.directive";
 import {ArticleToolbarHotspotComponent} from "../hotspot/article-toolbar-hotspot.component";
 import {ArticleContentHotspotComponent} from "../hotspot/article-content-hotspot.component";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
+import { NotificationService } from "./../shared/services/notification.service";
 
 /**
  * @ngdoc controller
@@ -17,13 +18,13 @@ import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
     selector: 'noosfero-default-article',
     templateUrl: 'app/article/article.html'
 })
-@Inject("$state", ArticleService)
+@Inject("$state", ArticleService, NotificationService)
 export class ArticleDefaultViewComponent {
 
     @Input() article: noosfero.Article;
     @Input() profile: noosfero.Profile;
 
-    constructor(private $state: ng.ui.IStateService, public articleService: ArticleService) {
+    constructor(private $state: ng.ui.IStateService, public articleService: ArticleService, public notificationService: NotificationService) {
         // Subscribe to the Article Removed Event
         this.articleService.subscribeToArticleRemoved((article: noosfero.Article) => {
             if (this.article.parent) {
@@ -31,15 +32,21 @@ export class ArticleDefaultViewComponent {
             } else {
                 this.$state.transitionTo('main.profile.info', { profile: this.article.profile.identifier });
             }
+            this.notificationService.success({ title: "article.remove.success.title", message: "article.remove.success.message" });
         });
     }
 
     delete() {
-        this.articleService.removeArticle(this.article).catch((cause: any) => {
-            throw new Error(`Problem removing the article: ${cause}`);
+        this.notificationService.confirmation({ title: "article.remove.confirmation.title", message: "article.remove.confirmation.message" }, () => {
+            this.doDelete();
         });
     }
 
+    doDelete() {
+        this.articleService.removeArticle(this.article).catch((cause: any) => {
+                throw new Error(`Problem removing the article: ${cause}`);
+        });        
+    }
 }
 
 /**
