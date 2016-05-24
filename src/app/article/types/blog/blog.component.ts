@@ -31,7 +31,7 @@ export class ArticleBlogComponent {
 
     loadPage() {
         let filters = {
-            content_type: "TinyMceArticle",
+            content_type: "TextArticle",
             per_page: this.perPage,
             page: this.currentPage
         };
