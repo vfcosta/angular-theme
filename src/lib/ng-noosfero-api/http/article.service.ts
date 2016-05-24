@@ -37,8 +37,6 @@ export class ArticleService extends RestangularService<noosfero.Article> {
      * Notify listeners that this article has been removed
      */
     private notifyArticleRemovedListeners(article: noosfero.Article) {
-        // let listener = this.events.get(this.removed);
-        // listener.next(article);
         this.articleRemoved.next(article);
     }
 
