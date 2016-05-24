@@ -110,6 +110,11 @@ export class EnvironmentContent {
         component: MainContentComponent,
         abstract: true,
         name: 'main',
+        resolve: {
+            currentUser: function(AuthService: AuthService) {
+                return AuthService.loginFromCookie();
+            }
+        }
     },
     {
         url: '/',
