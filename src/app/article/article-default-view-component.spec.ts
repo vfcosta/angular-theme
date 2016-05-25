@@ -19,6 +19,7 @@ describe("Components", () => {
     describe("Article Default View Component", () => {
         let helper: ComponentTestHelper<ArticleDefaultViewComponent>;
         const defaultViewTemplate: string = '<noosfero-default-article [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-default-article>';
+        let notificationService = helpers.mocks.notificationService;
         let articleService: any = helpers.mocks.articleService;
         let article = <noosfero.Article>{
             id: 1,
@@ -29,7 +30,8 @@ describe("Components", () => {
         let state = <ng.ui.IStateService>jasmine.createSpyObj("state", ["go", "transitionTo"]);
         let providers = [
             provide('$state', { useValue: state }),
-            provide('ArticleService', { useValue: articleService })
+            provide('ArticleService', { useValue: articleService }),
+            helpers.createProviderToValue('NotificationService', notificationService),
         ].concat(helpers.provideFilters("translateFilter"));
 
         /**
@@ -67,23 +69,33 @@ describe("Components", () => {
          * Execute the delete method on the target component
          */
         function doDeleteArticle() {
+            // Create a mock for the notification service confirmation
+            spyOn(helper.component.notificationService, 'confirmation').and.callFake(function (params: Function) {
+
+            });
             // Create a mock for the ArticleService removeArticle method
-            spyOn(helper.component.articleService, 'remove').and.callFake(function(param: noosfero.Article) {
+            spyOn(helper.component.articleService, 'remove').and.callFake(function (param: noosfero.Article) {
+
                 return {
-                    catch: () => {}
+                    catch: () => { }
                 };
             });
             helper.component.delete();
+            expect(notificationService.confirmation).toHaveBeenCalled();
+            helper.component.doDelete();
             expect(articleService.remove).toHaveBeenCalled();
+
             // After the component delete method execution, fire the
             // ArticleEvent.removed event
             simulateRemovedEvent();
         }
 
         /**
-         * Simulate the ArticleService ArticleEvent.removed event
+         * Simulate the Notification Service confirmation and ArticleService 
+         * notifyArticleRemovedListeners event
          */
         function simulateRemovedEvent() {
+            helper.component.notificationService["confirmation"]({ title: "Title", message: "Message" }, () => { });
             helper.component.articleService["modelRemovedEventEmitter"].next(article);
         }
     });

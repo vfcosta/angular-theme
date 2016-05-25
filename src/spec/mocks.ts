@@ -200,6 +200,7 @@ export var mocks: any = {
         translate: (text: string) => { return text; }
     },
     notificationService: {
-        success: () => { }
+        success: () => { },
+        confirmation: () => { }
     }
 };
