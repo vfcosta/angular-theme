@@ -1,5 +1,6 @@
 namespace noosfero {
     export interface Comment extends RestModel {
+        source_id: number;
         reply_of_id: number;
         reply_of: Comment;
         replies: Comment[];

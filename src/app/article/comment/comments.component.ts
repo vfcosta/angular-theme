@@ -9,7 +9,7 @@ import { CommentComponent } from "./comment.component";
     directives: [PostCommentComponent, CommentComponent],
     outputs: ['commentAdded']
 })
-@Inject(CommentService, "$element")
+@Inject(CommentService, "$scope")
 export class CommentsComponent {
 
     comments: noosfero.CommentViewModel[] = [];
@@ -30,11 +30,23 @@ export class CommentsComponent {
         } else {
             this.loadNextPage();
         }
+        this.commentService.subscribeToModelAdded((comment: noosfero.Comment) => {
+            if (comment.source_id === this.article.id) {
+                this.commentAdded(comment);
+            }
+        });
+        this.commentService.subscribeToModelRemoved((comment: noosfero.Comment) => {
+            if (comment.source_id === this.article.id) {
+                this.commentRemoved(comment);
+            }
+        });
     }
 
-    commentAdded(comment: noosfero.Comment): void {
+    commentAdded(comment: noosfero.CommentViewModel): void {
+        comment.__show_reply = false;
         this.comments.push(comment);
         this.resetShowReply();
+        this.$scope.$apply();
     }
 
     commentRemoved(comment: noosfero.Comment): void {
@@ -51,6 +63,7 @@ export class CommentsComponent {
         if (this.parent) {
             this.parent.__show_reply = false;
         }
+
     }
 
     loadComments() {

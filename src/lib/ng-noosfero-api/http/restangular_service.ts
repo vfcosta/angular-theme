@@ -328,7 +328,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
             deferred.resolve(resultModel);
             // emits the event if a successEmiter was provided in the successEmitter parameter
             if (successEmitter !== null) {
-                successEmitter.next(resultModel);
+                successEmitter.next(resultModel.data);
             }
         };
         return successFunction;
