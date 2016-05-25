@@ -1,7 +1,7 @@
 <div class="profile-container">
-  <div class="profile-header" ng-bind-html="vm.profile.custom_header"></div>
+  <custom-content class="profile-header" [label]="'profile.custom_header.label'" [attribute]="'custom_header'" [profile]="vm.profile"></custom-content>
   <div class="row">
     <noosfero-boxes ng-if="vm.boxes" [boxes]="vm.boxes" [owner]="vm.profile"></noosfero-boxes>
   </div>
-  <div class="profile-footer" ng-bind-html="vm.profile.custom_footer"></div>
+  <custom-content class="profile-footer" [label]="'profile.custom_footer.label'" [attribute]="'custom_footer'" [profile]="vm.profile"></custom-content>
 </div>

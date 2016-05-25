@@ -62,5 +62,21 @@ namespace noosfero {
          * @returns {string} The Profile homepage
          */
         homepage: string;
+
+        /**
+         * @ngdoc property
+         * @name custom_header
+         * @propertyOf noofero.Profile
+         * @returns {string} The Profile header
+         */
+        custom_header: string;
+
+        /**
+         * @ngdoc property
+         * @name custom_footer
+         * @propertyOf noofero.Profile
+         * @returns {string} The Profile footer
+         */
+        custom_footer: string;
     }
 }

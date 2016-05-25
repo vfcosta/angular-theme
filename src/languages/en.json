@@ -66,5 +66,10 @@
   "statistics.categories": "Categories",
   "statistics.tags": "Tags",
   "statistics.comments": "Comments",
-  "statistics.hits": "Hits"
+  "statistics.hits": "Hits",
+  "profile.content.success.title": "Good job!",
+  "profile.content.success.message": "Profile saved!",
+  "custom_content.title": "Edit content",
+  "profile.custom_header.label": "Header",
+  "profile.custom_footer.label": "Footer"
 }

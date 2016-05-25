@@ -101,6 +101,16 @@ describe("Services", () => {
                 });
                 $httpBackend.flush();
             });
+
+            it("should update the profile attributes", (done) => {
+                let profileId = 1;
+                $httpBackend.expectPOST(`/api/v1/profiles/${profileId}`).respond(200, { profile: { custom_header: "something" } });
+                profileService.update(<any>{ id: profileId, custom_header: "something" }).then((response: restangular.IResponse) => {
+                    expect(response.data.profile.custom_header).toEqual("something");
+                    done();
+                });
+                $httpBackend.flush();
+            });
         });
 
 
