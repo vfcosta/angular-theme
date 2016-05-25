@@ -2,6 +2,7 @@ import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builde
 import {Provider, Input, provide, Component} from 'ng-forward';
 import {provideFilters} from '../../../../spec/helpers';
 import {RecentDocumentsBlockComponent} from './recent-documents-block.component';
+import * as helpers from "./../../../../spec/helpers";
 
 const htmlTemplate: string = '<noosfero-recent-documents-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-recent-documents-block>';
 
@@ -11,11 +12,13 @@ describe("Components", () => {
     describe("Recent Documents Block Component", () => {
 
         let settingsObj = {};
+        let article = <noosfero.Article>{ name: "article1" };
         let mockedBlockService = {
             getApiContent: (block: noosfero.Block): any => {
-                return Promise.resolve({ articles: [{ name: "article1" }], headers: (name: string) => { return name; } });
+                return Promise.resolve({ articles: [article], headers: (name: string) => { return name; } });
             }
         };
+        let articleService: any = helpers.mocks.articleService;
         let profile = { name: 'profile-name' };
         beforeEach(angular.mock.module("templates"));
 
@@ -28,6 +31,7 @@ describe("Components", () => {
                 new Provider('BlockService', {
                     useValue: mockedBlockService
                 }),
+                new Provider('ArticleService', { useValue: articleService })
             ].concat(provideFilters("truncateFilter", "stripTagsFilter"));
         }
         let componentClass: any = null;
@@ -47,7 +51,7 @@ describe("Components", () => {
         it("get recent documents from the block service", done => {
             tcb.createAsync(getComponent()).then(fixture => {
                 let recentDocumentsBlock: RecentDocumentsBlockComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(recentDocumentsBlock.documents).toEqual([{ name: "article1" }]);
+                expect(recentDocumentsBlock.documents).toEqual([article]);
                 done();
             });
         });
@@ -60,6 +64,23 @@ describe("Components", () => {
                 done();
             });
         });
+
+        it("verify removed article has been removed from list", done => {
+            tcb.createAsync(getComponent()).then(fixture => {
+                let recentDocumentsBlock: RecentDocumentsBlockComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                expect(recentDocumentsBlock.documents.length).toEqual(1);
+                simulateRemovedEvent(recentDocumentsBlock);
+                expect(recentDocumentsBlock.documents.length).toEqual(0);
+                done();
+            });
+        });
+
+        /**
+         * Simulate the ArticleService ArticleEvent.removed event
+         */
+        function simulateRemovedEvent(recentDocumentsBlock: RecentDocumentsBlockComponent) {
+            recentDocumentsBlock.articleService["modelRemovedEventEmitter"].next(article);
+        }
 
     });
 });

@@ -3,6 +3,7 @@ import {Provider, Input, provide, Component} from 'ng-forward';
 import {provideFilters} from '../../../../spec/helpers';
 import {DiscussionBlockComponent} from './discussion-block.component';
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
+import * as helpers from "./../../../../spec/helpers";
 
 const htmlTemplate: string = '<noosfero-comment-paragraph-plugin-discussion-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-comment-paragraph-plugin-discussion-block>';
 
@@ -13,11 +14,13 @@ describe("Components", () => {
 
         let helper: ComponentTestHelper<DiscussionBlockComponent>;
         let settingsObj = {};
+        let article = <noosfero.Article>{ name: "article1" };
         let mockedBlockService = {
             getApiContent: (content: any): any => {
-                return Promise.resolve({ articles: [{ name: "article1" }], headers: (name: string) => { return name; } });
+                return Promise.resolve({ articles: [article], headers: (name: string) => { return name; } });
             }
         };
+        let articleService: any = helpers.mocks.articleService;
         let profile = { name: 'profile-name' };
 
         let state = jasmine.createSpyObj("state", ["go"]);
@@ -27,6 +30,7 @@ describe("Components", () => {
             new Provider('BlockService', {
                 useValue: mockedBlockService
             }),
+            new Provider('ArticleService', { useValue: articleService })
         ].concat(provideFilters("truncateFilter", "stripTagsFilter", "translateFilter", "amDateFormatFilter"));
 
         beforeEach(angular.mock.module("templates"));
@@ -51,5 +55,17 @@ describe("Components", () => {
             block.openDocument({ path: "path", profile: { identifier: "identifier" } });
             expect(state.go).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "identifier" });
         });
+
+        it("verify removed article has been removed from list", () => {
+            expect(helper.component.documents.length).toEqual(1);
+            simulateRemovedEvent();
+            expect(helper.component.documents.length).toEqual(0);
+        });
+        /**
+         * Simulate the ArticleService ArticleEvent.removed event
+         */
+        function simulateRemovedEvent() {
+            helper.component.articleService["modelRemovedEventEmitter"].next(article);
+        }
     });
 });

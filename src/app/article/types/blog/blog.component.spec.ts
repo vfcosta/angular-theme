@@ -1,22 +1,11 @@
-import {
-providers
-} from 'ng-forward/cjs/testing/providers';
+import {providers} from 'ng-forward/cjs/testing/providers';
 
-import {
-Input,
-Component
-} from 'ng-forward';
-import {
-ArticleBlogComponent
-} from './blog.component';
+import {Input, provide, Component} from 'ng-forward';
+import {ArticleBlogComponent} from './blog.component';
 
-import {
-createComponentFromClass,
-quickCreateComponent,
-provideEmptyObjects,
-createProviderToValue,
-provideFilters
-} from "../../../../spec/helpers.ts";
+import {createComponentFromClass, quickCreateComponent, provideEmptyObjects, createProviderToValue, provideFilters} from "../../../../spec/helpers.ts";
+
+import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 
 // this htmlTemplate will be re-used between the container components in this spec file
 const htmlTemplate: string = '<noosfero-blog [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-blog>';
@@ -42,38 +31,30 @@ describe("Blog Component", () => {
         }
     }
 
+    let article1 = <noosfero.Article>{
+        id: 1,
+        title: 'The article test'
+    };
+
+    let article2 = <noosfero.Article>{
+        id: 1,
+        title: 'The article test'
+    };
+
+    let articles = [ article1, article2 ];
+
     let articleService = {
         getChildren: (article_id: number, filters: {}) => {
             return promiseResultTemplate(null);
-        }
+        },
+        subscribeToArticleRemoved: (fn: Function) => {}
     };
 
-    @Component({
-        selector: 'test-container-component',
-        template: htmlTemplate,
-        directives: [ArticleBlogComponent],
-        providers: [
-            provideEmptyObjects('Restangular'),
-            createProviderToValue('ArticleService', articleService),
-            provideFilters('truncateFilter')
-        ]
-    })
-    class BlogContainerComponent {
-        article = {
-            type: 'anyArticleType'
-        };
-        profile = {
-            name: 'profile-name'
-        };
-    }
+    let helper: ComponentTestHelper<ArticleBlogComponent>;
 
-    beforeEach(() => {
+    beforeEach(angular.mock.module("templates"));
 
-        // the karma preprocessor html2js transform the templates html into js files which put
-        // the templates to the templateCache into the module templates
-        // we need to load the module templates here as the template for the
-        // component Noosfero ArtileView will be load on our tests
-        angular.mock.module("templates");
+    beforeEach((done) => {
 
         providers((provide: any) => {
             return <any>[
@@ -82,48 +63,26 @@ describe("Blog Component", () => {
                 })
             ];
         });
+        let providersHelper = [
+            provide('ArticleService', { useValue: articleService })
+        ];
+        let cls = createClass({
+            template: htmlTemplate,
+            directives: [ArticleBlogComponent],
+            providers: providersHelper,
+            properties: {
+                posts: articles
+            }
+        });
+        helper = new ComponentTestHelper<ArticleBlogComponent>(cls, done);
     });
 
-    it("renders the blog content", (done: Function) => {
-
-        createComponentFromClass(BlogContainerComponent).then((fixture) => {
-
-            expect(fixture.debugElement.query('div.blog').length).toEqual(1);
-
-            done();
-        });
+    it("renders the blog content", () => {
+        expect(helper.debugElement.query('div.blog').length).toEqual(1);
     });
 
-    it("verify the blog data", (done: Function) => {
-
-        let articles = [{
-            id: 1,
-            title: 'The article test'
-        }];
-
-        let result = { data: articles, headers: (name: string) => { return 1; } };
-
-        // defining a mock result to articleService.getChildren method
-        articleService.getChildren = (article_id: number, filters: {}) => {
-            return promiseResultTemplate(result);
-        };
-
-        createComponentFromClass(BlogContainerComponent).then((fixture) => {
-
-            // gets the children component of BlogContainerComponent
-            let articleBlog: BlogContainerComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-
-            // check if the component property are the provided by the mocked articleService
-            let post = {
-                id: 1,
-                title: 'The article test'
-            };
-            expect((<any>articleBlog)["posts"][0]).toEqual(jasmine.objectContaining(post));
-            expect((<any>articleBlog)["totalPosts"]).toEqual(1);
-
-            done();
-        });
-
+    it("verify the blog data", () => {
+        expect(helper.component["posts"][0]).toEqual(jasmine.objectContaining(article1));
     });
 
 });

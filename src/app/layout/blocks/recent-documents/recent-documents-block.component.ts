@@ -1,11 +1,13 @@
 import {Component, Inject, Input} from "ng-forward";
 import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
+import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
+import {Arrays} from "./../../../../lib/util/arrays";
 
 @Component({
     selector: "noosfero-recent-documents-block",
     templateUrl: 'app/layout/blocks/recent-documents/recent-documents-block.html'
 })
-@Inject(BlockService, "$state")
+@Inject(BlockService, "$state", ArticleService)
 export class RecentDocumentsBlockComponent {
 
     @Input() block: any;
@@ -15,7 +17,7 @@ export class RecentDocumentsBlockComponent {
     documents: any;
     documentsLoaded: boolean = false;
 
-    constructor(private blockService: BlockService, private $state: any) { }
+    constructor(private blockService: BlockService, private $state: any, public articleService: ArticleService) { }
 
     ngOnInit() {
         this.profile = this.owner;
@@ -23,6 +25,13 @@ export class RecentDocumentsBlockComponent {
         this.blockService.getApiContent(this.block).then((content: any) => {
             this.documents = content.articles;
             this.documentsLoaded = true;
+        });
+        this.watchArticles();
+    }
+
+    watchArticles() {
+        this.articleService.subscribeToModelRemoved((article: noosfero.Article) => {
+            Arrays.remove(this.documents, article);
         });
     }
 

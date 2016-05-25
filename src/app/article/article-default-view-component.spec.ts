@@ -68,13 +68,13 @@ describe("Components", () => {
          */
         function doDeleteArticle() {
             // Create a mock for the ArticleService removeArticle method
-            spyOn(helper.component.articleService, 'removeArticle').and.callFake(function(param: noosfero.Article) {
+            spyOn(helper.component.articleService, 'remove').and.callFake(function(param: noosfero.Article) {
                 return {
                     catch: () => {}
                 };
             });
             helper.component.delete();
-            expect(articleService.removeArticle).toHaveBeenCalled();
+            expect(articleService.remove).toHaveBeenCalled();
             // After the component delete method execution, fire the
             // ArticleEvent.removed event
             simulateRemovedEvent();
@@ -84,7 +84,7 @@ describe("Components", () => {
          * Simulate the ArticleService ArticleEvent.removed event
          */
         function simulateRemovedEvent() {
-            helper.component.articleService["notifyArticleRemovedListeners"](article);
+            helper.component.articleService["modelRemovedEventEmitter"].next(article);
         }
     });
 

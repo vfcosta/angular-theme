@@ -37,4 +37,14 @@ export class BlockService extends RestangularService<noosfero.Block> {
         return apiContentPromise.promise;
     }
 
+    getBlock<T extends noosfero.Block>(blockId: number): ng.IPromise<T> {
+        let deferred = this.$q.defer<T>();
+        this.get(blockId)
+            .then((result: noosfero.RestResult<T>) => {
+                deferred.resolve(result.data);
+            })
+            .catch(reason => deferred.reject(reason));
+        return deferred.promise;
+    }
+
 }
