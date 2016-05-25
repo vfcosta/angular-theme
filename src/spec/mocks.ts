@@ -77,10 +77,14 @@ export var mocks: any = {
     },
     articleService: {
         articleRemovedFn: null,
-        subscribeToArticleRemoved: (fn: Function) => {
+        articleAddedFn: null,
+        subscribeToModelRemoved: (fn: Function) => {
             mocks.articleService.articleRemovedFn = fn;
         },
-        articleRemoved:
+        subscribeToModelAdded: (fn: Function) => {
+            mocks.articleService.articleAddedFn = fn;
+        },
+        modelRemovedEventEmitter:
             {
                 subscribe: (fn: Function) => {
                     mocks.articleService.articleRemovedFn = fn;
@@ -90,17 +94,21 @@ export var mocks: any = {
                 }
             }
         ,
-        removeArticle: (article: noosfero.Article) => {
+        modelAddedEventEmitter:
+            {
+                subscribe: (fn: Function) => {
+                    mocks.articleService.articleAddedFn = fn;
+                },
+                next: (param: any) => {
+                    mocks.articleService.articleAddedFn(param);
+                }
+            }
+        ,
+        remove: (article: noosfero.Article) => {
             return {
                 catch: (func?: Function) => {
                 }
             };
-        },
-        notifyArticleRemovedListeners: (article: noosfero.Article) => {
-            mocks.articleService.articleRemoved.next(article);
-        },
-        subscribe: (eventType: any, fn: Function) => {
-            mocks.articleService.articleRemoved.subscribe(fn);
         },
         getByProfile: (profileId: number, params?: any) => {
             return {

@@ -15,7 +15,7 @@ describe("Components", () => {
         let article = <noosfero.Article>{ name: "article1" };
         let mockedBlockService = {
             getApiContent: (block: noosfero.Block): any => {
-                return Promise.resolve({ articles: [ article ], headers: (name: string) => { return name; } });
+                return Promise.resolve({ articles: [article], headers: (name: string) => { return name; } });
             }
         };
         let articleService: any = helpers.mocks.articleService;
@@ -51,7 +51,7 @@ describe("Components", () => {
         it("get recent documents from the block service", done => {
             tcb.createAsync(getComponent()).then(fixture => {
                 let recentDocumentsBlock: RecentDocumentsBlockComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(recentDocumentsBlock.documents).toEqual([ article ]);
+                expect(recentDocumentsBlock.documents).toEqual([article]);
                 done();
             });
         });
@@ -71,16 +71,16 @@ describe("Components", () => {
                 expect(recentDocumentsBlock.documents.length).toEqual(1);
                 simulateRemovedEvent(recentDocumentsBlock);
                 expect(recentDocumentsBlock.documents.length).toEqual(0);
-                done();                
-            })
+                done();
+            });
         });
-        
+
         /**
          * Simulate the ArticleService ArticleEvent.removed event
          */
         function simulateRemovedEvent(recentDocumentsBlock: RecentDocumentsBlockComponent) {
-            recentDocumentsBlock.articleService["notifyArticleRemovedListeners"](article);
+            recentDocumentsBlock.articleService["modelRemovedEventEmitter"].next(article);
         }
-        
+
     });
 });

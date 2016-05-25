@@ -30,7 +30,7 @@ export class RecentDocumentsBlockComponent {
     }
 
     watchArticles() {
-        this.articleService.subscribeToArticleRemoved((article: noosfero.Article) => {
+        this.articleService.subscribeToModelRemoved((article: noosfero.Article) => {
             Arrays.remove(this.documents, article);
         });
     }

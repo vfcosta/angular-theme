@@ -1,8 +1,10 @@
+import {provide} from 'ng-forward';
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import {StatisticsBlockComponent} from './statistics-block.component';
 import * as helpers from "../../../../spec/helpers";
 
 const htmlTemplate: string = '<noosfero-statistics-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-statistics-block>';
+
 
 describe("Components", () => {
 
@@ -11,10 +13,15 @@ describe("Components", () => {
         beforeEach(angular.mock.module("templates"));
 
         beforeEach((done) => {
+            let articleService: any = helpers.mocks.articleService;
+            let blockService: any = jasmine.createSpyObj("blockService", ["getBlock"]);
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [StatisticsBlockComponent],
-                providers: helpers.provideFilters("translateFilter"),
+                providers: [
+                   provide('ArticleService', { useValue: articleService }),
+                   provide('BlockService', { useValue: blockService })
+                ].concat(helpers.provideFilters("translateFilter")),
                 properties: {
                     block: {
                         statistics: [

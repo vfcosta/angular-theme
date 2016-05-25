@@ -17,13 +17,13 @@ import {NotificationService} from "./../shared/services/notification.service";
     selector: 'noosfero-default-article',
     templateUrl: 'app/article/article.html'
 })
-@Inject("$state", ArticleService, NotificationService)
+@Inject("$state", ArticleService)
 export class ArticleDefaultViewComponent {
 
     @Input() article: noosfero.Article;
     @Input() profile: noosfero.Profile;
 
-    constructor(private $state: ng.ui.IStateService, public articleService: ArticleService, protected notificationService: NotificationService) {
+    constructor(private $state: ng.ui.IStateService, public articleService: ArticleService) {
         // Subscribe to the Article Removed Event
         this.articleService.subscribeToModelRemoved((article: noosfero.Article) => {
             if (this.article.parent) {

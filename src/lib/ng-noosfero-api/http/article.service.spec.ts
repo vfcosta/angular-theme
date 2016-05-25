@@ -23,7 +23,7 @@ describe("Services", () => {
             it("should remove article", (done) => {
                 let articleId = 1;
                 $httpBackend.expectDELETE(`/api/v1/articles/${articleId}`).respond(200, { success: "true" });
-                articleService.removeArticle(<noosfero.Article>{id: articleId});
+                articleService.remove(<noosfero.Article>{id: articleId});
                 $httpBackend.flush();
                 $httpBackend.verifyNoOutstandingExpectation();
                 done();

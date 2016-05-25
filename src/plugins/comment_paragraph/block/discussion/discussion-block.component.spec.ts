@@ -17,7 +17,7 @@ describe("Components", () => {
         let article = <noosfero.Article>{ name: "article1" };
         let mockedBlockService = {
             getApiContent: (content: any): any => {
-                return Promise.resolve({ articles: [ article ], headers: (name: string) => { return name; } });
+                return Promise.resolve({ articles: [article], headers: (name: string) => { return name; } });
             }
         };
         let articleService: any = helpers.mocks.articleService;
@@ -55,7 +55,7 @@ describe("Components", () => {
             block.openDocument({ path: "path", profile: { identifier: "identifier" } });
             expect(state.go).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "identifier" });
         });
-        
+
         it("verify removed article has been removed from list", () => {
             expect(helper.component.documents.length).toEqual(1);
             simulateRemovedEvent();
@@ -65,7 +65,7 @@ describe("Components", () => {
          * Simulate the ArticleService ArticleEvent.removed event
          */
         function simulateRemovedEvent() {
-            helper.component.articleService["notifyArticleRemovedListeners"](article);
-        }        
+            helper.component.articleService["modelRemovedEventEmitter"].next(article);
+        }
     });
 });

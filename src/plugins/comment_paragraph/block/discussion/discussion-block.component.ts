@@ -1,7 +1,7 @@
 import {Component, Inject, Input} from "ng-forward";
 import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service"
-import {Arrays} from "./../../../../lib/util/arrays"
+import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
+import {Arrays} from "./../../../../lib/util/arrays";
 
 @Component({
     selector: "noosfero-comment-paragraph-plugin-discussion-block",
@@ -26,9 +26,9 @@ export class DiscussionBlockComponent {
         });
         this.watchArticles();
     }
-    
+
     watchArticles() {
-        this.articleService.subscribeToArticleRemoved((article: noosfero.Article) => {
+        this.articleService.subscribeToModelRemoved((article: noosfero.Article) => {
             Arrays.remove(this.documents, article);
         });
     }
