@@ -71,12 +71,12 @@ describe("Components", () => {
         function doDeleteArticle() {
             // Create a mock for the notification service confirmation
             spyOn(helper.component.notificationService, 'confirmation').and.callFake(function (params: Function) {
-               
+
             });
             // Create a mock for the ArticleService removeArticle method
-            spyOn(helper.component.articleService, 'removeArticle').and.callFake(function(param: noosfero.Article) {
+            spyOn(helper.component.articleService, 'removeArticle').and.callFake(function (param: noosfero.Article) {
                 return {
-                    catch: () => {}
+                    catch: () => { }
                 };
             });
             helper.component.delete();
@@ -93,7 +93,7 @@ describe("Components", () => {
          * notifyArticleRemovedListeners event
          */
         function simulateRemovedEvent() {
-            helper.component.notificationService["confirmation"]( { title: "Title", message: "Message" }, () =>{});
+            helper.component.notificationService["confirmation"]({ title: "Title", message: "Message" }, () => { });
             helper.component.articleService["notifyArticleRemovedListeners"](article);
         }
     });
