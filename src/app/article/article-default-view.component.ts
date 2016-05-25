@@ -35,10 +35,7 @@ export class ArticleDefaultViewComponent {
     }
 
     delete() {
-        this.articleService.remove(this.article).catch((cause: any) => {
-            // TODO - Montar mensagem de erro com a causa 
-            this.notificationService.error({ message: "article.default_view.remove.failed"});
-        });
+        this.articleService.remove(this.article);
     }
 
 }
