@@ -30,16 +30,6 @@ export class CommentsComponent {
         } else {
             this.loadNextPage();
         }
-        this.commentService.subscribeToModelAdded((comment: noosfero.Comment) => {
-            if (comment.source_id === this.article.id) {
-                this.commentAdded(comment);
-            }
-        });
-        this.commentService.subscribeToModelRemoved((comment: noosfero.Comment) => {
-            if (comment.source_id === this.article.id) {
-                this.commentRemoved(comment);
-            }
-        });
     }
 
     commentAdded(comment: noosfero.CommentViewModel): void {
