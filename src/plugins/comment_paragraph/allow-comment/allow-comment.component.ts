@@ -36,14 +36,12 @@ export class AllowCommentComponent {
         this.commentService.subscribeToModelAdded((comment: noosfero.CommentParagraph) => {
             if (comment.paragraph_uuid === this.paragraphUuid) {
                 this.commentsCount += 1;
-                this.$scope.$apply();
             };
         });
 
         this.commentService.subscribeToModelRemoved((comment: noosfero.CommentParagraph) => {
             if (comment.paragraph_uuid === this.paragraphUuid) {
-                this.commentsCount -= 1;
-                this.$scope.$apply();
+                this.commentsCount -= (comment.replies) ? 1 + comment.replies.length : 1;
             };
         });
     }
