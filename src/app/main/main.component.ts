@@ -21,6 +21,7 @@ import {PersonTagsPluginInterestsBlockComponent} from "../layout/blocks/person-t
 import {TagsBlockComponent} from "../layout/blocks/tags/tags-block.component";
 import {CustomContentComponent} from "../profile/custom-content/custom-content.component";
 import {RecentActivitiesPluginActivitiesBlockComponent} from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
+import {RegisterComponent} from "../account/register.component";
 
 import {MembersBlockComponent} from "../layout/blocks/members/members-block.component";
 import {CommunitiesBlockComponent} from "../layout/blocks/communities/communities-block.component";
@@ -34,6 +35,7 @@ import {AuthService} from "../login/auth.service";
 import {SessionService} from "../login/session.service";
 import {EnvironmentService} from "./../../lib/ng-noosfero-api/http/environment.service";
 import {NotificationService} from "../shared/services/notification.service";
+import {RegisterService} from "./../../lib/ng-noosfero-api/http/register.service";
 
 import {BodyStateClassesService} from "./../layout/services/body-state-classes.service";
 

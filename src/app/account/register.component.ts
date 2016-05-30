@@ -1,18 +1,25 @@
-import { Inject, Input, Component, Output, EventEmitter } from 'ng-forward';
-import { RegisterService } from './register.service';
+import { Inject, Input, Component, Output, EventEmitter, provide } from 'ng-forward';
+import {RegisterService} from "./../../lib/ng-noosfero-api/http/register.service";
 
 @Component({
     selector: 'noosfero-register',
-    templateUrl: 'app/account/register-component.html'
+    templateUrl: 'app/account/register-component.html',
+    providers: [
+        provide('registerService', { useClass: RegisterService })
+    ]
 })
 
-@Inject(RegisterService)
+@Inject("$state", RegisterService)
 export class RegisterComponent {
-    constructor(private registerService: RegisterService) { }
+    @Input() account: any;
 
-    signup (account: any) {
-        if (account.password === account.passwordConfirmation) {
-            this.registerService.createAccount(account);
+    constructor(private $state: ng.ui.IStateService, public registerService: RegisterService) {
+      this.account = {};
+    }
+
+    signup() {
+        if (this.account.password === this.account.password_confirmation) {
+            this.registerService.createAccount(this.account);
         } else {
             alert("Wrong password confirmation.");
         }
