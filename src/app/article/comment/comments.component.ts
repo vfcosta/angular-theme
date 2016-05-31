@@ -9,7 +9,7 @@ import { CommentComponent } from "./comment.component";
     directives: [PostCommentComponent, CommentComponent],
     outputs: ['commentAdded']
 })
-@Inject(CommentService, "$element")
+@Inject(CommentService, "$scope")
 export class CommentsComponent {
 
     comments: noosfero.CommentViewModel[] = [];
@@ -32,9 +32,22 @@ export class CommentsComponent {
         }
     }
 
-    commentAdded(comment: noosfero.Comment): void {
+    commentAdded(comment: noosfero.CommentViewModel): void {
+        comment.__show_reply = false;
+        if (comment.reply_of) {
+            this.comments.forEach((commentOnList) => {
+                if (commentOnList.id == comment.reply_of.id) {
+                    if (commentOnList.replies) {
+                        commentOnList.replies.push(comment);
+                    } else {
+                        commentOnList.replies = [comment];
+                    }
+                }
+            });
+        }
         this.comments.push(comment);
         this.resetShowReply();
+        this.$scope.$apply();
     }
 
     commentRemoved(comment: noosfero.Comment): void {
@@ -51,6 +64,7 @@ export class CommentsComponent {
         if (this.parent) {
             this.parent.__show_reply = false;
         }
+
     }
 
     loadComments() {
