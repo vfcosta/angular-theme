@@ -36,7 +36,7 @@ export class CommentsComponent {
         comment.__show_reply = false;
         if (comment.reply_of) {
             this.comments.forEach((commentOnList) => {
-                if (commentOnList.id == comment.reply_of.id) {
+                if (commentOnList.id === comment.reply_of.id) {
                     if (commentOnList.replies) {
                         commentOnList.replies.push(comment);
                     } else {

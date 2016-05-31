@@ -69,6 +69,11 @@ describe("Components", () => {
                             AuthEvents
                         }
                     }),
+                    provide('EnvironmentService', {
+                        useValue: {
+                            getCurrentEnviroment: () => { return { id: 1, name: 'Nosofero' }; }
+                        }
+                    }),
                     provide('TranslatorService', {
                         useValue: helpers.mocks.translatorService
                     })

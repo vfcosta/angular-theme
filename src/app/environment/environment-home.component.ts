@@ -22,7 +22,7 @@ export class EnvironmentHomeComponent {
     environment: noosfero.Environment;
 
     constructor(private environmentService: EnvironmentService, private $sce: ng.ISCEService) {
-        environmentService.getByIdentifier("default").then((result: noosfero.Environment) => {
+        environmentService.get().then((result: noosfero.Environment) => {
             this.environment = result;
         });
     }
