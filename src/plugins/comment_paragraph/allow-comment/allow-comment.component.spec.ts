@@ -3,7 +3,6 @@ import {ComponentTestHelper, createClass} from '../../../spec/component-test-hel
 import * as helpers from "../../../spec/helpers";
 import {Provider} from 'ng-forward';
 import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-
 let htmlTemplate = '<comment-paragraph-plugin-allow-comment [content]="ctrl.content" [paragraph-uuid]="ctrl.paragraphUuid" [article]="ctrl.article"></comment-paragraph-plugin-allow-comment>';
 
 describe("Components", () => {
@@ -23,6 +22,7 @@ describe("Components", () => {
         };
 
         let providers = [
+            new Provider('CommentService', { useValue: helpers.mocks.commentService } ),
             new Provider('CommentParagraphService', { useValue: serviceMock }),
             new Provider('CommentParagraphEventService', { useValue: eventServiceMock })
         ];

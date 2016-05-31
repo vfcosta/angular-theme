@@ -85,24 +85,24 @@ export var mocks: any = {
             mocks.articleService.articleAddedFn = fn;
         },
         modelRemovedEventEmitter:
-            {
-                subscribe: (fn: Function) => {
-                    mocks.articleService.articleRemovedFn = fn;
-                },
-                next: (param: any) => {
-                    mocks.articleService.articleRemovedFn(param);
-                }
+        {
+            subscribe: (fn: Function) => {
+                mocks.articleService.articleRemovedFn = fn;
+            },
+            next: (param: any) => {
+                mocks.articleService.articleRemovedFn(param);
             }
+        }
         ,
         modelAddedEventEmitter:
-            {
-                subscribe: (fn: Function) => {
-                    mocks.articleService.articleAddedFn = fn;
-                },
-                next: (param: any) => {
-                    mocks.articleService.articleAddedFn(param);
-                }
+        {
+            subscribe: (fn: Function) => {
+                mocks.articleService.articleAddedFn = fn;
+            },
+            next: (param: any) => {
+                mocks.articleService.articleAddedFn(param);
             }
+        }
         ,
         remove: (article: noosfero.Article) => {
             return {
@@ -156,6 +156,34 @@ export var mocks: any = {
         instant: () => { }
     },
     commentService: {
+        commentRemovedFn: null,
+        commentAddedFn: null,
+        subscribeToModelRemoved: (fn: Function) => {
+            mocks.commentService.commentRemovedFn = fn;
+        },
+        subscribeToModelAdded: (fn: Function) => {
+            mocks.commentService.commentAddedFn = fn;
+        },
+        modelRemovedEventEmitter:
+        {
+            subscribe: (fn: Function) => {
+                mocks.commentService.commentRemovedFn = fn;
+            },
+            next: (param: any) => {
+                mocks.commentService.commentRemovedFn(param);
+            }
+        }
+        ,
+        modelAddedEventEmitter:
+        {
+            subscribe: (fn: Function) => {
+                mocks.articleService.commentAddedFn = fn;
+            },
+            next: (param: any) => {
+                mocks.articleService.commentAddedFn(param);
+            }
+        }
+        ,
         getByArticle: (article: noosfero.Article) => {
             return Promise.resolve({ data: {} });
         }
