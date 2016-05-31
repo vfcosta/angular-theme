@@ -19,7 +19,6 @@ describe("Components", () => {
 
         let properties = { article: { id: 1 }, parent: <any>null };
         function createComponent() {
-            // postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["subscribe"]);
             let providers = [
                 helpers.createProviderToValue('CommentService', commentService),
                 helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),

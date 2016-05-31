@@ -223,7 +223,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         restRequest = restangularObj.remove(queryParams, headers);
 
         restRequest
-            .then(this.getHandleSuccessFunction(deferred, this.modelRemovedEventEmitter))
+            .then(this.getHandleSuccessFunction(deferred, this.modelRemovedEventEmitter, obj))
             .catch(this.getHandleErrorFunction(deferred));
 
         return deferred.promise;
@@ -311,7 +311,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     }
 
     /** HANDLERS */
-    protected getHandleSuccessFunction<C>(deferred: ng.IDeferred<noosfero.RestResult<C | T | any>>, successEmitter: EventEmitter<T> = null): (response: restangular.IResponse) => void {
+    protected getHandleSuccessFunction<C>(deferred: ng.IDeferred<noosfero.RestResult<C | T | any>>, successEmitter: EventEmitter<T> = null, currentModel: T = null): (response: restangular.IResponse) => void {
         let self = this;
 
         /**
@@ -328,7 +328,11 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
             deferred.resolve(resultModel);
             // emits the event if a successEmiter was provided in the successEmitter parameter
             if (successEmitter !== null) {
-                successEmitter.next(resultModel);
+                if (successEmitter !== this.modelRemovedEventEmitter) {
+                    successEmitter.next(resultModel.data);
+                } else {
+                    successEmitter.next(currentModel !== null ? currentModel : resultModel.data);
+                }
             }
         };
         return successFunction;
