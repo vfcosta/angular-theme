@@ -1,0 +1,30 @@
+.search-results {
+  .summary {
+    color: #bbbbbb;
+    font-size: 13px;
+    border-top: 1px solid #ececec;
+  }
+  .result {
+    margin: 25px 0;
+    
+    .title {
+      h4 {
+        margin: 0;
+      }
+    }
+    .info {
+      .profile {
+        color: #6e9e7b;
+      }
+      .time {
+        color: #6e9e7b;
+        font-size: 12px;
+      }
+      .bullet-separator {
+        margin: 0 2px;
+        font-size: 10px;
+        color: #afd6ba;
+      }
+    }    
+  }
+}

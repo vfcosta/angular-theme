@@ -2,6 +2,7 @@ import {StateConfig, Component, Inject, provide} from 'ng-forward';
 import {EnvironmentService} from "../../lib/ng-noosfero-api/http/environment.service";
 import {NotificationService} from "../shared/services/notification.service";
 import {EnvironmentHomeComponent} from "./environment-home.component";
+import {SearchComponent} from "../search/search.component";
 
 /**
  * @ngdoc controller
@@ -27,6 +28,18 @@ import {EnvironmentHomeComponent} from "./environment-home.component";
                 templateUrl: "app/environment/environment-home.html",
                 controller: EnvironmentHomeComponent,
                 controllerAs: "vm"
+            }
+        }
+    },
+    {
+        url: '^/search?query',
+        component: SearchComponent,
+        name: 'main.environment.search',
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/search/search.html",
+                controller: SearchComponent,
+                controllerAs: "ctrl"
             }
         }
     }

@@ -74,5 +74,6 @@
   "profile.content.success.message": "Perfil salvo!",
   "custom_content.title": "Editar conteúdo",
   "profile.custom_header.label": "Cabeçalho",
-  "profile.custom_footer.label": "Rodapé"
+  "profile.custom_footer.label": "Rodapé",
+  "search.results.summary": "{results, plural, one{result} other{# resultados}}"
 }

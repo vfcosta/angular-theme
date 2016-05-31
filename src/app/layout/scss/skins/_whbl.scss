@@ -180,27 +180,19 @@ $whbl-font-color: #16191c;
 	}
 	.pagination {
 		> li {
-			> a,
-			> span,
-			> a:hover,
-			> span:hover,
-			> a:focus,
-			> span:focus,
-			> a:active,
-			> span:active {
-				color: $whbl-primary-color;
+			&.active {
+				a {
+					background-color: $whbl-primary-color;
+					color: #FFF;
+				}
 			}
-		}
-		> .active {
-			> a,
-			> span,
-			> a:hover,
-			> span:hover,
-			> a:focus,
-			> span:focus {
-				background-color: $whbl-primary-color;
-				border-color: $whbl-primary-color;
-				color: #fff;
+			> a {
+				&:hover {
+					background-color: $whbl-primary-color;
+					color: #FFF;
+				}
+				background-color: #FFF;
+				color: $whbl-primary-color;
 			}
 		}
 	}
