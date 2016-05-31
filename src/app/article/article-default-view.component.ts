@@ -6,6 +6,7 @@ import {ArticleToolbarHotspotComponent} from "../hotspot/article-toolbar-hotspot
 import {ArticleContentHotspotComponent} from "../hotspot/article-content-hotspot.component";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 import { NotificationService } from "./../shared/services/notification.service";
+import {PermissionDirective} from '../shared/components/permission/permission.directive';
 
 /**
  * @ngdoc controller
@@ -16,7 +17,8 @@ import { NotificationService } from "./../shared/services/notification.service";
  */
 @Component({
     selector: 'noosfero-default-article',
-    templateUrl: 'app/article/article.html'
+    templateUrl: 'app/article/article.html',
+    directives: [PermissionDirective]
 })
 @Inject("$state", ArticleService, NotificationService)
 export class ArticleDefaultViewComponent {
