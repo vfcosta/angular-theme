@@ -8,10 +8,11 @@
     "ng-forward": "0.0.1-alpha.12"
   },
   "config": {
-    "theme": "angular-default"
+    "theme": "angular-default",
+    "skin": "skin-whbl"
   },
   "scripts": {
-    "build": "webpack; gulp clean && gulp --theme=$npm_package_config_theme build",
+    "build": "webpack; gulp clean && gulp --theme=$npm_package_config_theme --skin=$npm_package_config_skin build",
     "build-all": "gulp clean && for d in ./themes/* ; do (gulp --theme=`basename $d` build); done",
     "webpack": "webpack",
     "karma": "concurrently \"webpack -w\" \"karma start\"",
@@ -23,7 +24,7 @@
     "test": "webpack -w --test",
     "jenkins": "webpack && karma start --single-run",
     "postinstall": "bower install; typings install; cd dev-scripts; typings install; cd ../; npm run fix-jqlite",
-    "start": "concurrently \"webpack -w\" \"gulp --theme=$npm_package_config_theme serve\"",
+    "start": "concurrently \"webpack -w\" \"gulp --theme=$npm_package_config_theme --skin=$npm_package_config_skin serve\"",
     "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts",
     "fix-jqlite": "ts-node --project ./dev-scripts dev-scripts/fix-jqlite.ts"
   },
@@ -46,8 +47,8 @@
     "gulp-eslint": "~1.0.0",
     "gulp-filter": "~3.0.1",
     "gulp-flatten": "~0.2.0",
-    "gulp-insert": "^0.5.0",
     "gulp-inject": "~3.0.0",
+    "gulp-insert": "^0.5.0",
     "gulp-load-plugins": "~0.10.0",
     "gulp-merge-json": "^0.4.0",
     "gulp-minify-css": "~1.2.1",
@@ -81,6 +82,7 @@
     "karma-webpack": "^1.7.0",
     "lodash": "~3.10.1",
     "main-bower-files": "~2.9.0",
+    "map-stream": "0.0.6",
     "merge-stream": "^1.0.0",
     "on-build-webpack": "^0.1.0",
     "phantomjs": "~1.9.18",
@@ -96,6 +98,7 @@
     "typescript": "^1.8.10",
     "typings": "^0.6.8",
     "uglify-save-license": "~0.4.1",
+    "vinyl-transform": "^1.0.0",
     "webpack": "^1.12.14",
     "wiredep": "~2.2.2",
     "wrench": "~1.5.8",

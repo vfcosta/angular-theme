@@ -3,6 +3,8 @@
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
+var map  = require('map-stream');
+var transform = require('vinyl-transform');
 
 var $ = require('gulp-load-plugins')();
 
@@ -39,4 +41,35 @@ gulp.task('inject', ['scripts', 'styles'], function () {
     .pipe($.inject(injectScripts, injectOptions))
     .pipe(wiredep(_.extend({}, conf.wiredep)))
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
+});
+
+/**
+* Replace the default theme skin to a npm config
+*
+* Uses "vinyl-transform" + "map-stream" to open the
+* js file and rewrite the source file into the same
+* destination
+*
+* @see https://www.npmjs.com/package/vinyl-transform
+* @see https://www.npmjs.com/package/map-stream
+*/
+gulp.task('inject-skin', function () {
+
+  if(conf.paths.skin) {
+
+    $.util.log('Configured theme skin:', conf.paths.skin);
+
+    var replaceSkin = transform(function(filename) {
+      return map(function(file, next) {
+        var contents = file.toString();
+        contents = contents.replace('skin-whbl', conf.paths.skin);
+        return next(null, contents);
+      });
+    });
+
+    gulp.src(path.join(conf.paths.src,'./noosfero.js'))
+        .pipe(replaceSkin)
+        .pipe(gulp.dest(conf.paths.src));
+  }
+
 });
