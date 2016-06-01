@@ -113,11 +113,9 @@ export class EnvironmentContent {
         name: 'main',
         resolve: {
             currentUser: function(AuthService: AuthService) {
-                console.log("RESOLVING USER...");
                 return AuthService.loginFromCookie();
             },
             currentEnvironment: function(EnvironmentService: EnvironmentService) {
-                console.log("RESOLVING ENVIRONMENT...");
                 return EnvironmentService.get();
             }
         }
