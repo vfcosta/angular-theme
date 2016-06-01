@@ -17,7 +17,6 @@ describe("Services", () => {
             articleService = _ArticleService_;
         }));
 
-
         describe("Succesfull requests", () => {
 
             it("should remove article", (done) => {
@@ -91,7 +90,6 @@ describe("Services", () => {
                 $httpBackend.flush();
             });
         });
-
 
     });
 });

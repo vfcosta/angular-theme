@@ -9,6 +9,6 @@ export class RegisterService {
     }
 
     createAccount(user: noosfero.User): ng.IPromise<noosfero.RestResult<noosfero.User>> {
-        return this.Restangular.all('').customPOST(user, "register", user);
+        return this.Restangular.all("").customPOST(user, "register", user);
     }
 }

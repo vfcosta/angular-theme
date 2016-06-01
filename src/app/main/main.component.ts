@@ -145,7 +145,6 @@ export class EnvironmentContent {
         url: '/',
         component: EnvironmentComponent,
         name: 'main.environment',
-        abstract: true,
         views: {
             "content": {
                 templateUrl: "app/environment/environment.html",
