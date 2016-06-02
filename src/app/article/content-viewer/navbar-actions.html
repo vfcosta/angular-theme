@@ -5,7 +5,7 @@
             <i class="fa fa-caret-down"></i>
         </a>
         <ul class="dropdown-menu" uib-dropdown-menu ng-show="vm.profile">
-            <li ng-show="vm.parentId">
+            <li>
                 <a href="#" ui-sref="main.cms({profile: vm.profile.identifier, parent_id: vm.parentId})">
                     <i class="fa fa-file fa-fw fa-lg"></i> {{"navbar.content_viewer_actions.new_post" | translate}}
                 </a>
@@ -17,5 +17,4 @@
             </li>
         </ul>
     </li>
-   
 </ul>
