@@ -1,10 +1,12 @@
 import {Component, Input, Inject} from 'ng-forward';
 import {ProfileService} from '../../../lib/ng-noosfero-api/http/profile.service';
 import {NotificationService} from '../../shared/services/notification.service';
+import {PermissionDirective} from '../../shared/components/permission/permission.directive';
 
 @Component({
     selector: 'custom-content',
     templateUrl: "app/profile/custom-content/custom-content.html",
+    directives: [PermissionDirective]
 })
 @Inject("$uibModal", "$scope", ProfileService, NotificationService)
 export class CustomContentComponent {

@@ -73,5 +73,16 @@ describe("Components", () => {
             helper.component.save();
             expect(helper.component['notificationService'].success).toHaveBeenCalled();
         });
+
+        it("hide button to edit content when user doesn't have the permission", () => {
+            helper.detectChanges();
+            expect(helper.find(".actions").attr('style')).toEqual('display: none; ');
+        });
+
+        it("show button to edit content when user has the permission", () => {
+            (<any>helper.component['profile'])['permissions'] = ['allow_edit'];
+            helper.detectChanges();
+            expect(helper.find(".actions").attr('style')).toEqual('');
+        });
     });
 });

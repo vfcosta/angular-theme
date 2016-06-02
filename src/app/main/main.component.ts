@@ -39,7 +39,7 @@ import {SidebarComponent} from "../layout/sidebar/sidebar.component";
 
 import {MainBlockComponent} from "../layout/blocks/main/main-block.component";
 import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.component";
-
+import {PermissionDirective} from "../shared/components/permission/permission.directive";
 
 /**
  * @ngdoc controller
@@ -100,7 +100,7 @@ export class EnvironmentContent {
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
-        LoginBlockComponent, CustomContentComponent
+        LoginBlockComponent, CustomContentComponent, PermissionDirective
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
 
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]

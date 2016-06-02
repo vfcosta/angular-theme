@@ -65,16 +65,36 @@ describe("Components", () => {
             expect(state.transitionTo).toHaveBeenCalled();
         });
 
+        it("hide button to delete article when user doesn't have permission", () => {
+            expect(helper.find(".article-toolbar .delete-article").attr('style')).toEqual("display: none; ");
+        });
+
+        it("hide button to edit article when user doesn't have permission", () => {
+            expect(helper.find(".article-toolbar .edit-article").attr('style')).toEqual("display: none; ");
+        });
+
+        it("show button to edit article when user has permission", () => {
+            (<any>helper.component['article'])['permissions'] = ['allow_edit'];
+            helper.detectChanges();
+            expect(helper.find(".article-toolbar .edit-article").attr('style')).toEqual('');
+        });
+
+        it("show button to delete article when user has permission", () => {
+            (<any>helper.component['article'])['permissions'] = ['allow_delete'];
+            helper.detectChanges();
+            expect(helper.find(".article-toolbar .delete-article").attr('style')).toEqual('');
+        });
+
         /**
          * Execute the delete method on the target component
          */
         function doDeleteArticle() {
             // Create a mock for the notification service confirmation
-            spyOn(helper.component.notificationService, 'confirmation').and.callFake(function (params: Function) {
+            spyOn(helper.component.notificationService, 'confirmation').and.callFake(function(params: Function) {
 
             });
             // Create a mock for the ArticleService removeArticle method
-            spyOn(helper.component.articleService, 'remove').and.callFake(function (param: noosfero.Article) {
+            spyOn(helper.component.articleService, 'remove').and.callFake(function(param: noosfero.Article) {
 
                 return {
                     catch: () => { }
