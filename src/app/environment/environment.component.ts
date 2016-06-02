@@ -31,21 +31,23 @@ import {EnvironmentHomeComponent} from "./environment-home.component";
         }
     }
 ])
-@Inject(EnvironmentService, "$state")
+@Inject(EnvironmentService, "$state", "currentEnvironment")
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];
     environment: noosfero.Environment;
 
-    constructor(environmentService: EnvironmentService, $state: ng.ui.IStateService, notificationService: NotificationService) {
-        let boxesPromisse = environmentService.getByIdentifier("default").then((environment: noosfero.Environment) => {
-            this.environment = environment;
-            return environmentService.getBoxes(this.environment.id);
-        }).then((boxes: noosfero.Box[]) => {
-            this.boxes = boxes;
-        }).catch(() => {
-            $state.transitionTo('main');
-            notificationService.error({ message: "notification.environment.not_found" });
-        });
+    constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService, currentEnvironment: noosfero.Environment) {
+        this.environment = currentEnvironment;
+
+        this.environmentService.getBoxes(this.environment.id)
+            .then((boxes: noosfero.Box[]) => {
+                this.boxes = boxes;
+            }).catch(() => {
+                this.$state.transitionTo('main');
+                this.notificationService.error({ message: "notification.environment.not_found" });
+            });
+
     }
+
 }

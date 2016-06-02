@@ -28,7 +28,7 @@ import {DateFormat} from "../shared/pipes/date-format.filter";
 
 import {AuthService} from "../login/auth.service";
 import {SessionService} from "../login/session.service";
-
+import {EnvironmentService} from "./../../lib/ng-noosfero-api/http/environment.service";
 import {NotificationService} from "../shared/services/notification.service";
 
 import {BodyStateClassesService} from "./../layout/services/body-state-classes.service";
@@ -114,6 +114,9 @@ export class EnvironmentContent {
         resolve: {
             currentUser: function(AuthService: AuthService) {
                 return AuthService.loginFromCookie();
+            },
+            currentEnvironment: function(EnvironmentService: EnvironmentService) {
+                return EnvironmentService.get();
             }
         }
     },

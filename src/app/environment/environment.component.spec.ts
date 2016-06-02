@@ -9,6 +9,7 @@ describe("Components", () => {
         let environmentServiceMock: any;
         let notificationMock: any;
         let $state: any;
+        let defaultEnvironment = <any> {id: 1, name: 'Noosfero' };
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;
@@ -17,44 +18,40 @@ describe("Components", () => {
 
         beforeEach(() => {
             $state = jasmine.createSpyObj("$state", ["transitionTo"]);
-            environmentServiceMock = jasmine.createSpyObj("environmentServiceMock", ["getByIdentifier", "getBoxes"]);
+            environmentServiceMock = jasmine.createSpyObj("environmentServiceMock", ["get", "getBoxes"]);
             notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
 
-            let environmentResponse = $q.defer();
-            environmentResponse.resolve({ id: 1 });
             let getBoxesResponse = $q.defer();
             getBoxesResponse.resolve({ data: { boxes: [{ id: 2 }] } });
 
-            environmentServiceMock.getByIdentifier = jasmine.createSpy('getByIdentifier').and.returnValue(environmentResponse.promise);
             environmentServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);
         });
 
         it("get the default environment", done => {
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, defaultEnvironment);
             $rootScope.$apply();
-            expect(component.environment).toEqual({ id: 1 });
+            expect(component.environment).toEqual({ id: 1, name: 'Noosfero' });
             done();
         });
 
         it("get the environment boxes", done => {
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, defaultEnvironment);
             $rootScope.$apply();
             expect(environmentServiceMock.getBoxes).toHaveBeenCalled();
             expect(component.boxes).toEqual({ data: { boxes: [{ id: 2 }] } });
             done();
         });
 
-        it("display notification error when the environment wasn't found", done => {
+        it("display notification error when does not find boxes to the environment", done => {
             let environmentResponse = $q.defer();
             environmentResponse.reject();
 
-            environmentServiceMock.getByIdentifier = jasmine.createSpy('getByIdentifier').and.returnValue(environmentResponse.promise);
+            environmentServiceMock.getBoxes = jasmine.createSpy('getBoxes').and.returnValue(environmentResponse.promise);
 
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, defaultEnvironment);
             $rootScope.$apply();
 
             expect(notificationMock.error).toHaveBeenCalled();
-            expect(component.environment).toBeUndefined();
             done();
         });
 

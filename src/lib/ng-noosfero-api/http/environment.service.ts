@@ -4,10 +4,14 @@ import { Injectable, Inject } from "ng-forward";
 @Inject("Restangular", "$q")
 export class EnvironmentService {
 
-    private _currentEnvironmentPromise: ng.IDeferred<noosfero.Environment>;
 
+    private currentEnvironment: noosfero.Environment = null;
     constructor(private restangular: restangular.IService, private $q: ng.IQService) {
 
+    }
+
+    getCurrentEnviroment(): noosfero.Environment {
+        return this.currentEnvironment;
     }
 
     getEnvironmentPeople(params: any): ng.IPromise<noosfero.Person[]> {
@@ -18,10 +22,19 @@ export class EnvironmentService {
         return deferred.promise;
     }
 
-    getByIdentifier(identifier: string): ng.IPromise<noosfero.Environment> {
+    get(identifier: string = 'default'): ng.IPromise<noosfero.Environment> {
         let p = this.restangular.one('environment').customGET(identifier);
         let deferred = this.$q.defer<noosfero.Environment>();
-        p.then(this.getHandleSuccessFunction<noosfero.Environment>(deferred));
+        if (identifier === 'default') {
+            p.then((response) => {
+                let data = this.restangular.stripRestangular(response.data);
+                this.currentEnvironment = data;
+                this.getHandleSuccessFunction<noosfero.Environment>(deferred).bind(this)(response);
+            });
+        } else {
+            p.then(this.getHandleSuccessFunction<noosfero.Environment>(deferred));
+        }
+
         p.catch(this.getHandleErrorFunction<noosfero.Environment>(deferred));
         return deferred.promise;
     }
@@ -37,7 +50,7 @@ export class EnvironmentService {
     /** TODO - Please, use the base class RestangularService
      * (description)
      * 
-     * @template T
+     * @template T_currentEnvironmentPromise
      * @param {ng.IDeferred<T>} deferred (description)
      * @returns {(response: restangular.IResponse) => void} (description)
      */
