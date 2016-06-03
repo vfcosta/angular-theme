@@ -93,17 +93,23 @@ export class EnvironmentContent {
  */
 @Component({
     selector: 'main',
-    template: '<div ng-view></div>',
+    template: '<ui-view></ui-view>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
         EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
-        LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent,
+        LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService]
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
+        "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
+        "ngSanitize", "ngMessages", "ngAria", "restangular",
+        "ui.router", "ui.bootstrap", "toastr", "ngCkeditor",
+        "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
+        "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
+        "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
+        "angular-click-outside", "noosfero.init"]
 })
 @StateConfig([
     {
@@ -147,5 +153,4 @@ export class EnvironmentContent {
         }
     }
 ])
-export class MainComponent {
-}
+export class MainComponent { }

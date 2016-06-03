@@ -40,7 +40,7 @@ describe("Restangular Service - base Class", () => {
     let objectRestService: ObjectRestService;
     let rootObjectRestService: RootObjectRestService;
 
-    beforeEach(angular.mock.module("noosferoApp", ($translateProvider: angular.translate.ITranslateProvider) => {
+    beforeEach(angular.mock.module("main", ($translateProvider: angular.translate.ITranslateProvider) => {
         $translateProvider.translations('en', {});
     }));
 
