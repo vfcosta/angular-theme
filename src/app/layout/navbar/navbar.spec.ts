@@ -71,7 +71,7 @@ describe("Components", () => {
                     }),
                     provide('EnvironmentService', {
                         useValue: {
-                            getCurrentEnviroment: () => { return { id: 1, name: 'Nosofero' }; }
+                            getCurrentEnvironment: () => { return { id: 1, name: 'Nosofero' }; }
                         }
                     }),
                     provide('TranslatorService', {
