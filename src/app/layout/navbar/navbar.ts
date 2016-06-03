@@ -16,7 +16,7 @@ export class Navbar {
 
     private currentUser: noosfero.User;
     private modalInstance: any = null;
-    public showHamburguer: boolean = false;
+    public showHamburger: boolean = false;
     public currentEnvironment: noosfero.Environment = <any>{ name: '' };
 
     /**
@@ -32,9 +32,9 @@ export class Navbar {
         private environmentService: EnvironmentService
     ) {
         this.currentUser = this.session.currentUser();
-        this.currentEnvironment = environmentService.getCurrentEnviroment();
+        this.currentEnvironment = environmentService.getCurrentEnvironment();
 
-        this.showHamburguer = this.authService.isAuthenticated();
+        this.showHamburger = this.authService.isAuthenticated();
         this.bodyStateService.addContentClass(!this.sidebarNotificationService.sidebarVisible);
 
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
@@ -44,7 +44,7 @@ export class Navbar {
             }
 
             this.currentUser = this.session.currentUser();
-            this.showHamburguer = true;
+            this.showHamburger = true;
 
             this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
         });

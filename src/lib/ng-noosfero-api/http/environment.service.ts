@@ -10,9 +10,10 @@ export class EnvironmentService {
 
     }
 
-    getCurrentEnviroment(): noosfero.Environment {
+    getCurrentEnvironment(): noosfero.Environment {
         return this.currentEnvironment;
     }
+
 
     getEnvironmentPeople(params: any): ng.IPromise<noosfero.Person[]> {
         let p = this.restangular.one('people').get(params);
@@ -49,7 +50,7 @@ export class EnvironmentService {
 
     /** TODO - Please, use the base class RestangularService
      * (description)
-     * 
+     *
      * @template T_currentEnvironmentPromise
      * @param {ng.IDeferred<T>} deferred (description)
      * @returns {(response: restangular.IResponse) => void} (description)
@@ -58,7 +59,7 @@ export class EnvironmentService {
         let self = this;
         /**
          * (description)
-         * 
+         *
          * @param {restangular.IResponse} response (description)
          */
         let errorFunction = (response: restangular.IResponse): void => {
@@ -75,7 +76,7 @@ export class EnvironmentService {
 
         /**
          * (description)
-         * 
+         *
          * @param {restangular.IResponse} response (description)
          */
         let successFunction = (response: restangular.IResponse): void => {
@@ -93,7 +94,7 @@ export class EnvironmentService {
 
         /**
          * (description)
-         * 
+         *
          * @param {restangular.IResponse} response (description)
          */
         let successFunction = (response: restangular.IResponse): void => {
