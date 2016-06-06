@@ -1,6 +1,7 @@
-
-    <span class="design-toggler-label" ng-bind="'designMode.label' | translate"></span>
-    <div class="btn-group design-toggler">
-        <button ng-click="ctrl.toggleDesignModeOff()" ng-class="{active: !ctrl.inDesignMode}" class="btn btn-xs btn-warning" ng-bind="'designMode.toggle.OFF' | translate"></button>
-        <button ng-click="ctrl.toggleDesignModeOn()" ng-class="{active: ctrl.inDesignMode}" class="btn btn-xs btn-warning" ng-bind="'designMode.toggle.ON' | translate "></button>
-    </div>
+<toggle-switch
+    html="true"
+    ng-model="ctrl.inDesignMode"
+    on-label="{{'designMode.toggle.ON' | translate}}"
+    off-label="{{'designMode.toggle.OFF' | translate}}"
+    knob-label="{{'designMode.label' | translate}}">
+</toggle-switch>

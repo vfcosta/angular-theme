@@ -7,27 +7,18 @@ import {DesignModeService} from './designMode.service';
 @Inject(DesignModeService, '$scope')
 export class DesignModeTogglerComponent {
 
-    inDesignMode: boolean = false;
 
     constructor(private designModeService: DesignModeService, private $scope: ng.IScope) {
     }
 
-    ngOnInit() {
-        this.designModeService.onToggle.subscribe((editOnOrFalse: boolean) => {
-            this.inDesignMode = editOnOrFalse;
-            this.$scope.$apply();
-        });
-    }
+    private _inDesignMode: boolean = false;
 
-    toggleDesignModeOn() {
-        if (!this.inDesignMode) {
-            this.designModeService.toggle();
-        }
-    }
+    get inDesignMode(): boolean {
+        return this.designModeService.isInDesignMode();
+    };
 
-    toggleDesignModeOff() {
-        if (this.inDesignMode) {
-            this.designModeService.toggle();
-        }
-    }
+    set inDesignMode(value: boolean) {
+        this.designModeService.setInDesignMode(value);
+    };
+
 }

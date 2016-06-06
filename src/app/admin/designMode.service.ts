@@ -7,11 +7,15 @@ export class DesignModeService {
 
     private designModeOn: boolean = false;
 
-    constructor() {
+    isInDesignMode(): boolean {
+        return this.designModeOn;
     }
 
-    toggle() {
-        this.designModeOn = !this.designModeOn;
+    setInDesignMode(value: boolean) {
+        this.designModeOn = value;
         this.onToggle.next(this.designModeOn);
+    }
+
+    constructor() {
     }
 }
