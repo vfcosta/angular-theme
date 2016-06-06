@@ -4,11 +4,12 @@ import {SessionService, AuthService, AuthController, AuthEvents} from "./../../l
 import {EnvironmentService} from "./../../../lib/ng-noosfero-api/http/environment.service";
 import {SidebarNotificationService} from "../sidebar/sidebar.notification.service";
 import {BodyStateClassesService} from '../services/body-state-classes.service';
+import {DesignModeTogglerComponent} from './../../admin/designModeToggler.component';
 
 @Component({
     selector: "acme-navbar",
     templateUrl: "app/layout/navbar/navbar.html",
-    directives: [LanguageSelectorComponent],
+    directives: [LanguageSelectorComponent, DesignModeTogglerComponent],
     providers: [AuthService, SessionService, SidebarNotificationService, EnvironmentService]
 })
 @Inject("$uibModal", AuthService, "SessionService", "$state", SidebarNotificationService, BodyStateClassesService, EnvironmentService)
