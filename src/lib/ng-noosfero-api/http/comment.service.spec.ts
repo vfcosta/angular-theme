@@ -8,7 +8,7 @@ describe("Services", () => {
         let $httpBackend: ng.IHttpBackendService;
         let commentService: CommentService;
 
-        beforeEach(angular.mock.module("noosferoApp", ($translateProvider: angular.translate.ITranslateProvider) => {
+        beforeEach(angular.mock.module("main", ($translateProvider: angular.translate.ITranslateProvider) => {
             $translateProvider.translations('en', {});
         }));
 

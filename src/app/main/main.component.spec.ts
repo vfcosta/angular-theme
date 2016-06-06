@@ -1,20 +1,24 @@
-
 import { provide, Component, componentStore, bundleStore } from "ng-forward";
 import {MainComponent} from "./main.component";
 import {TestComponentBuilder, ComponentFixture} from "ng-forward/cjs/testing/test-component-builder";
 
-import {quickCreateComponent} from "./../../spec/helpers";
+import {quickCreateComponent} from "../../spec/helpers";
+import {getAngularServiceFactory} from "../../spec/helpers";
 
-describe("MainComponent", function () {
+describe("MainComponent", function() {
 
     let localFixture: ComponentFixture;
     let $state: angular.ui.IStateService;
     let $q: ng.IQService;
-    let authService: any = jasmine.createSpyObj("authService", ["loginFromCookie"]);
-    let environmentService: any = jasmine.createSpyObj("environmentService", ["get"]);
+    let $httpBackend: ng.IHttpBackendService;
+    let authService: any = jasmine.createSpyObj("authService", ["loginFromCookie", "isAuthenticated", "subscribe"]);
+    let environmentService: any = jasmine.createSpyObj("environmentService", ["get", "getCurrentEnvironment"]);
 
     beforeEach(angular.mock.module("ui.router"));
     beforeEach(angular.mock.module("templates"));
+    beforeEach(angular.mock.module("pascalprecht.translate", ($translateProvider: angular.translate.ITranslateProvider) => {
+        $translateProvider.translations('en', {});
+    }));
 
     @Component({
         selector: "parent",
@@ -46,6 +50,7 @@ describe("MainComponent", function () {
     it("renders the main component only when the login and environment were resolved", (done) => {
         quickCreateComponent({ directives: [MainComponentParent], template: "<parent></parent>" })
             .then((fixture) => {
+                fixture.debugElement.getLocal("$httpBackend").expectGET("/api/v1/environments/1/boxes").respond(200, {});
                 localFixture = fixture;
                 // get the $state service to navigate between routes
                 $state = fixture.debugElement.getLocal("$state");

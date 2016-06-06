@@ -8,7 +8,7 @@ describe("Services", () => {
         let profileService: ProfileService;
         let $rootScope: ng.IRootScopeService;
 
-        beforeEach(angular.mock.module("noosferoApp", ($translateProvider: angular.translate.ITranslateProvider) => {
+        beforeEach(angular.mock.module("main", ($translateProvider: angular.translate.ITranslateProvider) => {
             $translateProvider.translations('en', {});
         }));
 

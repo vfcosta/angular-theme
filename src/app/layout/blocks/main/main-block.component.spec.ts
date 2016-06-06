@@ -1,8 +1,7 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Input, provide, Component, StateConfig} from 'ng-forward';
-
 import {MainBlockComponent} from './main-block.component';
-import {NoosferoApp} from '../../../index.module';
+
 
 const tcb = new TestComponentBuilder();
 
