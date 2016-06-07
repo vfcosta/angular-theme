@@ -289,6 +289,31 @@ $whbl-font-color: #16191c;
 	.pace .pace-progress {
 		background-color: #fff;
 	}
+
+	noosfero-design-toggler .ats-switch .knob i {
+		color: #999999;
+	}
+
+	.ats-switch .knob {
+		padding-right: 15px;
+	}
+
+	.ats-switch .glyphicon {
+		top: 2px;
+	}
+
+	.ats-switch .switch-left {
+		background-color: #41b941;
+		font-weight: bold;
+		color: white;
+	}
+
+	.ats-switch .switch-right {
+		background-color: #ce3b3b;
+		font-weight: bold;
+		color: white;
+	}
+
 }
 .rtl.skin-whbl #content-wrapper {
 	border-left: 0;

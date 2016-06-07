@@ -4,11 +4,12 @@ import {DesignModeService} from './designMode.service';
     selector: 'noosfero-design-toggler',
     templateUrl: 'app/admin/designModeToggler.html'
 })
-@Inject(DesignModeService, '$scope')
+@Inject(DesignModeService)
 export class DesignModeTogglerComponent {
 
+    icon: string = "&nbsp;<i class='glyphicon glyphicon-wrench'></i>&nbsp;";
 
-    constructor(private designModeService: DesignModeService, private $scope: ng.IScope) {
+    constructor(private designModeService: DesignModeService) {
     }
 
     private _inDesignMode: boolean = false;
@@ -20,5 +21,4 @@ export class DesignModeTogglerComponent {
     set inDesignMode(value: boolean) {
         this.designModeService.setInDesignMode(value);
     };
-
 }

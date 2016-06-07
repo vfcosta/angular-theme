@@ -12,8 +12,10 @@ export class DesignModeService {
     }
 
     setInDesignMode(value: boolean) {
-        this.designModeOn = value;
-        this.onToggle.next(this.designModeOn);
+        if (this.designModeOn !== value) {
+            this.designModeOn = value;
+            this.onToggle.next(this.designModeOn);
+        }
     }
 
     constructor() {
