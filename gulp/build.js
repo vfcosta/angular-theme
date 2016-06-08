@@ -30,7 +30,8 @@ gulp.task('partials', function () {
         quotes: true
       }))
       .pipe($.angularTemplatecache('templateCacheHtml-'+partialPath+'.js', {
-        module: 'noosferoApp',
+        module: 'noosfero.templates.' + partialPath,
+        standalone: true,
         root: partialPath
       }))
       .pipe(gulp.dest(conf.paths.tmp + '/partials/')));
@@ -81,7 +82,6 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.revReplace({prefix: noosferoThemePrefix}))
     .pipe(htmlFilter)
     .pipe($.replace('/bower_components/ng-ckeditor/libs/ckeditor/', noosferoThemePrefix + 'ng-ckeditor/libs/ckeditor/'))
-    .pipe($.replace('/bower_components/ng-ckeditor/ng-ckeditor.min.js', noosferoThemePrefix + 'ng-ckeditor/ng-ckeditor.min.js'))
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -103,7 +103,7 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('ckeditor', function () {
-  conf.wiredep.exclude.push(/ckeditor/); // exclude ckeditor from build to improve performance
+  conf.wiredep.exclude.push(/bower_components\/ng-ckeditor\/libs\/ckeditor/); // exclude ckeditor from build to improve performance
   return gulp.src(['bower_components/ng-ckeditor/**/*']).pipe(gulp.dest(path.join(conf.paths.dist, '/ng-ckeditor')));
 });
 

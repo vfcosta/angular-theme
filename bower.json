@@ -47,9 +47,7 @@
     "ng-ckeditor": {
       "main": [
         "ng-ckeditor.js",
-        "libs/ckeditor/lang",
-        "libs/ckeditor/ckeditor.js",
-        "libs/ckeditor/config.js"
+        "libs/ckeditor/ckeditor.js"
       ]
     },
     "bootstrap-sass": {
