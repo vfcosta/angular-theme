@@ -14,5 +14,7 @@ namespace noosfero {
         start_date: string;
         end_date: string;
         accept_comments: boolean;
+
+        permissions: string[];
     }
 }

@@ -4,7 +4,7 @@ import {AuthService} from "./../../login/auth.service";
 import {AuthEvents} from "./../../login/auth-events";
 
 import {EventEmitter} from 'ng-forward';
-import {DesignModeService} from './../../admin/designMode.service';
+import {DesignModeService} from './../../admin/layout-edit/designMode.service';
 
 describe("BodyStateClasses Service", () => {
 

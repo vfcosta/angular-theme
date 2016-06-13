@@ -78,5 +78,7 @@ namespace noosfero {
          * @returns {string} The Profile footer
          */
         custom_footer: string;
+
+        permissions: string[];
     }
 }

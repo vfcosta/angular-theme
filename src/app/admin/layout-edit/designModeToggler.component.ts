@@ -2,7 +2,7 @@ import {Component, Inject} from 'ng-forward';
 import {DesignModeService} from './designMode.service';
 @Component({
     selector: 'noosfero-design-toggler',
-    templateUrl: 'app/admin/designModeToggler.html'
+    templateUrl: 'app/admin/layout-edit/designModeToggler.html'
 })
 @Inject(DesignModeService)
 export class DesignModeTogglerComponent {

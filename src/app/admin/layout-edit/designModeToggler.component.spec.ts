@@ -1,5 +1,5 @@
-import {ComponentTestHelper, createClass} from './../../spec/component-test-helper';
-import * as helpers from './../../spec/helpers';
+import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
+import * as helpers from '../../../spec/helpers';
 import {DesignModeTogglerComponent} from './designModeToggler.component';
 import {DesignModeService} from './designMode.service';
 

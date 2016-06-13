@@ -6,7 +6,7 @@ import {Directive, Inject, Input} from "ng-forward";
 @Inject('$attrs', '$scope', '$element')
 export class PermissionDirective {
 
-    constructor($attrs: ng.IAttributes, $scope: ng.IScope, $element: any) {
+    constructor($attrs: ng.IAttributes, $scope: ng.IScope, $element: ng.IAugmentedJQuery) {
         $scope.$watch($attrs['permission'], () => {
             let permissions = $scope.$eval($attrs['permission']);
             let permissionAction = $attrs['permissionAction'];
