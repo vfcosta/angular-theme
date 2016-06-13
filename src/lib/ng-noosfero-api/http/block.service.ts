@@ -47,4 +47,12 @@ export class BlockService extends RestangularService<noosfero.Block> {
         return deferred.promise;
     }
 
+    update(block: noosfero.Block) {
+        let element = this.getElement(block.id);
+        let headers = {
+            'Content-Type': 'application/json'
+        };
+        return this.post(null, element, { block: block }, headers);
+    }
+
 }

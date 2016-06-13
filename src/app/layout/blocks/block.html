@@ -1,0 +1,13 @@
+<div class="noosfero-block" ng-mouseover="displayActions = true" ng-mouseleave="displayActions = false">
+  <div ng-show="displayActions" class="actions" permission="ctrl.block.permissions" permission-action="allow_edit">
+    <button type="submit" class="btn btn-xs btn-default" ng-click="ctrl.openEdit()"><i class="fa fa-edit fa-fw"></i></button>
+  </div>
+  <div class="panel panel-default block {{ctrl.block.type | lowercase}}" >
+    <div class="panel-heading" ng-show="ctrl.block.title">
+      <h3 class="panel-title">{{ctrl.block.title}}</h3>
+    </div>
+    <div class="panel-body {{ctrl.block.type | lowercase}}" >
+      <noosfero-block-content [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-content>
+    </div>
+  </div>
+</div>

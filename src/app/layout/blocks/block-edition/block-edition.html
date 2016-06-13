@@ -1,0 +1,34 @@
+<div class="edit-block">
+  <h3>{{"block.edition.title" | translate}}</h3>
+
+  <form class="options">
+    <div class="title block-option">
+      <label for="titleInput">{{"block.edition.title.label" | translate}}</label>
+      <input type="text" id="titleInput" ng-model="ctrl.block.title" class="block-input">
+    </div>
+    <div class="display block-option">
+      <label for="displayInput">{{"block.edition.display.label" | translate}}</label>
+      <select id="displayInput" ng-model="ctrl.block.settings.display" class="block-input">
+        <option ng-repeat="option in modal.displayOptions" value="{{option}}">{{"block.edition.display." + option | translate}}</option>
+      </select>
+    </div>
+    <div class="displayUser block-option">
+      <label for="displayUserInput">{{"block.edition.display_user.label" | translate}}</label>
+      <select id="displayUserInput" ng-model="ctrl.block.settings.display_user" class="block-input">
+        <option ng-repeat="option in modal.displayUserOptions" value="{{option}}">{{"block.edition.display_user." + option | translate}}</option>
+      </select>
+    </div>
+    <div class="language block-option">
+      <label for="languageInput">{{"block.edition.language.label" | translate}}</label>
+      <select id="languageInput" ng-model="ctrl.block.settings.language" class="block-input">
+        <option ng-repeat="option in modal.languageOptions" value="{{option}}">{{"language." + option | translate}}</option>
+      </select>
+    </div>
+  </form>
+
+  <div class="actions">
+    <button type="submit" class="btn btn-default" ng-click="ctrl.save()">Save</button>
+    <button type="submit" class="btn btn-warning" ng-click="ctrl.preview()">Preview</button>
+    <button type="submit" class="btn btn-danger" ng-click="ctrl.cancel()">Cancel</button>
+  </div>
+</div>
