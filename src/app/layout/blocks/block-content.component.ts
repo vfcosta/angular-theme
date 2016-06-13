@@ -1,11 +1,11 @@
 import { Input, Inject, Component } from 'ng-forward';
 
 @Component({
-    selector: 'noosfero-block',
+    selector: 'noosfero-block-content',
     template: '<div></div>'
 })
 @Inject("$element", "$scope", "$injector", "$compile")
-export class BlockComponent {
+export class BlockContentComponent {
 
     @Input() block: any;
     @Input() owner: any;
