@@ -15,12 +15,12 @@
 <div class="logged-user-info" ng-show="!ctrl.currentUser">
   <form>
     <div class="form-group">
-      <label for="exampleInputEmail1">{{"auth.form.login" | translate}}</label>
-      <input type="text" class="form-control" id="exampleInputEmail1" placeholder="Login / Email" ng-model="ctrl.credentials.username">
+      <label for="email">{{"auth.form.login" | translate}}</label>
+      <input type="text" class="form-control" id="email" placeholder="{{'auth.form.login' | translate}}" ng-model="ctrl.credentials.username">
     </div>
     <div class="form-group">
-      <label for="exampleInputPassword1">{{"auth.form.password" | translate}}</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" ng-model="ctrl.credentials.password">
+      <label for="passwd">{{"auth.form.password" | translate}}</label>
+      <input type="password" class="form-control" id="passwd" placeholder="{{'auth.form.password' | translate}}" ng-model="ctrl.credentials.password">
     </div>
     <button type="submit" class="btn btn-default" ng-click="ctrl.login()">{{"auth.form.login_button" | translate}}</button>
   </form>
