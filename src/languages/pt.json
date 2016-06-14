@@ -75,5 +75,7 @@
   "custom_content.title": "Editar conteúdo",
   "profile.custom_header.label": "Cabeçalho",
   "profile.custom_footer.label": "Rodapé",
-  "search.results.summary": "{results, plural, one{resultado} other{# resultados}}"
+  "search.results.summary": "{results, plural, one{# resultado} other{# resultados}}",
+  "search.results.query.label": "Buscar:",
+  "search.results.query.placeholder": "Informe aqui sua busca"
 }

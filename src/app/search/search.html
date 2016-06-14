@@ -1,5 +1,7 @@
-<h2>Search</h2>
-
+<form ng-submit="ctrl.search()">
+<label for="query" ng-bind-html="'search.results.query.label' | translate"></label>
+<input id="query" placeholder="{{'search.results.query.placeholder' | translate}}" type="search" class="search-box-title" ng-model="ctrl.query">
+</form>
 <div class="search-results">
   <div class="summary">
     {{"search.results.summary" | translate:{results: ctrl.totalResults}:"messageformat"}}

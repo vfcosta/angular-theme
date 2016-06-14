@@ -1,11 +1,14 @@
 import {Component, Inject} from "ng-forward";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 
+import {SearchFormComponent} from "./search-form/search-form.component";
+
 @Component({
     selector: 'search',
-    templateUrl: 'app/search/search.html'
+    templateUrl: 'app/search/search.html',
+    directives: [SearchFormComponent]
 })
-@Inject(ArticleService, "$stateParams")
+@Inject(ArticleService, "$stateParams", "$state")
 export class SearchComponent {
 
     articles: noosfero.Article[];
@@ -14,9 +17,13 @@ export class SearchComponent {
     perPage = 10;
     currentPage: number = 0;
 
-    constructor(private articleService: ArticleService, private $stateParams: ng.ui.IStateParamsService) {
+    constructor(private articleService: ArticleService, private $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService) {
         this.query = this.$stateParams['query'];
         this.loadPage();
+    }
+
+    search() {
+         this.$state.go('main.environment.search', { query: this.query });
     }
 
     loadPage() {
