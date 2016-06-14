@@ -50,3 +50,16 @@ See some important folders bellow:
 1. Create an app folder inside custom-theme and add your custom scss files
 1. Put the templates that you want to override in the same structure from the main application source, e.g.:
 `src/app/profile/profile.html` will be overriden by `themes/custom-theme/app/profile/profile.html`
+
+## Development environment
+
+## Known Issues
+
+### Message Translation: angular-i18n 
+
+ - Plural  Interpolation only working when current language is En (English)
+
+ `Plural Function not found for locale`
+
+ For some reason the messageformat installed on bower_component directory was an older version. Removing the bower_components directory
+and runing `bower install` solved the problem
