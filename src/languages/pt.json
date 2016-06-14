@@ -58,7 +58,7 @@
   "article.remove.success.title": "Bom trabalho!",
   "article.remove.success.message": "Artigo removido!",
   "article.remove.confirmation.title": "Tem certeza?",
-  "article.remove.confirmation.message": "Não será possível recuperar este artigo!",  
+  "article.remove.confirmation.message": "Não será possível recuperar este artigo!",
   "article.basic_editor.visibility": "Visibilidade",
   "article.basic_editor.visibility.public": "Público",
   "article.basic_editor.visibility.private": "Privado",
@@ -75,5 +75,5 @@
   "custom_content.title": "Editar conteúdo",
   "profile.custom_header.label": "Cabeçalho",
   "profile.custom_footer.label": "Rodapé",
-  "search.results.summary": "{results, plural, one{result} other{# resultados}}"
+  "search.results.summary": "{results, plural, one{resultado} other{# resultados}}"
 }
