@@ -1,4 +1,4 @@
-<div class="noosfero-block" ng-mouseover="displayActions = true" ng-mouseleave="displayActions = false">
+<div ng-show="ctrl.canDisplay() || ctrl.editionMode" ng-class="{'invisible-block': !ctrl.canDisplay()}" class="noosfero-block" ng-mouseover="displayActions = true" ng-mouseleave="displayActions = false">
   <div ng-show="displayActions" class="actions" permission="ctrl.block.permissions" permission-action="allow_edit">
     <button type="submit" class="btn btn-xs btn-default" ng-click="ctrl.openEdit()"><i class="fa fa-edit fa-fw"></i></button>
   </div>

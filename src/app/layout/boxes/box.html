@@ -1,3 +1,3 @@
 <div ng-class="{'col-md-2-5': box.position!=1, 'col-md-7': box.position==1}">
-  <noosfero-block ng-repeat="block in box.blocks | displayBlocks:ctrl.isHomepage:ctrl.currentUser  | orderBy: 'position'" [block]="block" [owner]="ctrl.owner"></noosfero-block>
+  <noosfero-block ng-repeat="block in box.blocks | orderBy: 'position'" [block]="block" [owner]="ctrl.owner"></noosfero-block>
 </div>
