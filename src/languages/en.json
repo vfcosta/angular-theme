@@ -74,5 +74,8 @@
   "profile.content.success.message": "Profile saved!",
   "custom_content.title": "Edit content",
   "profile.custom_header.label": "Header",
-  "profile.custom_footer.label": "Footer"
+  "profile.custom_footer.label": "Footer",
+  "search.results.summary": "{results, plural, one{result} other{# results}}",
+  "search.results.query.label": "Search for:",
+  "search.results.query.placeholder": "Search"
 }
