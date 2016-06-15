@@ -4,13 +4,14 @@ import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService, SessionService, AuthEvents } from "../../login";
 import { TranslatorService } from "../../shared/services/translator.service";
+import { DesignModeService } from "../../admin/layout-edit/designMode.service";
 
 @Component({
     selector: 'noosfero-block',
     templateUrl: 'app/layout/blocks/block.html',
     directives: [BlockEditionComponent]
 })
-@Inject("$uibModal", "$scope", "$state", "$rootScope", BlockService, NotificationService, AuthService, SessionService, TranslatorService)
+@Inject("$uibModal", "$scope", "$state", "$rootScope", BlockService, NotificationService, AuthService, SessionService, TranslatorService, DesignModeService)
 export class BlockComponent {
 
     @Input() block: noosfero.Block;
@@ -31,7 +32,8 @@ export class BlockComponent {
         private notificationService: NotificationService,
         private authService: AuthService,
         private session: SessionService,
-        private translatorService: TranslatorService) {
+        private translatorService: TranslatorService,
+        private designModeService: DesignModeService) {
 
         this.currentUser = this.session.currentUser();
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
@@ -44,6 +46,10 @@ export class BlockComponent {
         });
         this.$rootScope.$on("$stateChangeSuccess", (event: ng.IAngularEvent, toState: ng.ui.IState) => {
             this.verifyHomepage();
+        });
+        this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            this.editionMode = designModeOn;
+            this.$scope.$apply();
         });
     }
 
