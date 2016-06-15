@@ -1,4 +1,9 @@
 <div class="noosfero-main-toolbar" permission="vm.profile.permissions" permission-action="allow_edit">
-    <noosfero-design-toggler class="pull-right"></noosfero-design-toggler>
+    <noosfero-design-toggler
+       [icon-class]="'glyphicon glyphicon-wrench'"
+       [knob-label]="'designMode.label'     | translate"
+       [on-label]="'designMode.toggle.ON'   | translate"
+       [off-label]="'designMode.toggle.OFF' | translate"
+       class="pull-right"></noosfero-design-toggler>
 
 </div>

@@ -6,18 +6,34 @@ import {AuthService, AuthEvents} from '../../login';
     selector: 'noosfero-design-toggler',
     templateUrl: 'app/admin/layout-edit/designModeToggler.html'
 })
-@Inject(DesignModeService, AuthService)
+@Inject(DesignModeService)
 export class DesignModeTogglerComponent {
 
-    icon: string = "&nbsp;<i class='glyphicon glyphicon-wrench'></i>&nbsp;";
+    @Input() iconClass: string = '';
+    @Input() knobLabel: string = '';
+    @Input() offLabel: string = '';
+    @Input() onLabel: string = '';
 
-    constructor(private designModeService: DesignModeService, private authService: AuthService) {
+	private _inDesignMode: boolean = false;
+
+    constructor(private designModeService: DesignModeService, private authService: AuthService,  private $sce: ng.ISCEService) {
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.designModeService.destroy();
         });
     }
 
-    private _inDesignMode: boolean = false;
+    get icon(): string {
+        if (this.iconClass && this.iconClass.trim().length > 0 ) {
+            return '<i class=\'design-toggle-icon ' + this.iconClass + '\'></i>';
+        }
+        else {
+            return '';
+        }
+    }
+
+    getKnobLabel(): string {
+        return this.$sce.trustAsHtml(this.icon + this.knobLabel);
+    }
 
     get inDesignMode(): boolean {
         return this.designModeService.isInDesignMode();
