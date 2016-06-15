@@ -12,6 +12,7 @@ describe("Components", () => {
         let articleService = jasmine.createSpyObj("ArticleService", ["search"]);
         let result = Promise.resolve({ data: [{ id: 1 }], headers: (param: string) => { return 1; } });
         articleService.search = jasmine.createSpy("search").and.returnValue(result);
+        let stateMock = jasmine.createSpyObj("$state", ["go"]);
 
         beforeEach(angular.mock.module("templates"));
 
@@ -21,7 +22,8 @@ describe("Components", () => {
                 directives: [SearchComponent],
                 providers: [
                     helpers.createProviderToValue("$stateParams", stateParams),
-                    helpers.createProviderToValue("ArticleService", articleService)
+                    helpers.createProviderToValue("ArticleService", articleService),
+                    helpers.createProviderToValue("$state", stateMock),
                 ].concat(helpers.provideFilters("truncateFilter", "stripTagsFilter"))
             });
             helper = new ComponentTestHelper<SearchComponent>(cls, done);

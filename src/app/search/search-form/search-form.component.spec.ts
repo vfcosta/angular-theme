@@ -8,7 +8,7 @@ describe("Components", () => {
     describe("Search Form Component", () => {
 
         let helper: ComponentTestHelper<SearchFormComponent>;
-        let stateMock = jasmine.createSpyObj("$state", ["go"]);
+        let stateMock = jasmine.createSpyObj("$state", ["go", "params", "current"]);
 
         beforeEach(angular.mock.module("templates"));
 
