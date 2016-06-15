@@ -17,16 +17,16 @@ export interface BootstrapSwitcherItem {
              </button>
         </div>
     `,
-    inputs: ['label', 'options', 'defaultOption'],
+    inputs: ['activeClass', 'defaultClass', 'label', 'options', 'defaultOption'],
     outputs: ['onSwitch']
 })
 export class BootstrapSwitcherComponent {
-    @Input('activeClass') activeClass: string = 'active btn-danger';
-    @Input('defaultClass') defaultClass: string = 'btn-default';
-    @Input('label') label: string;
-    @Input('options') options: BootstrapSwitcherItem[];
-    @Input('defaultOption') defaultOption: BootstrapSwitcherItem;
-    @Output('onSwitch') onSwitch: EventEmitter<BootstrapSwitcherItem> = new EventEmitter<BootstrapSwitcherItem>();
+    @Input() activeClass: string = 'active btn-danger';
+    @Input() defaultClass: string = 'btn-default';
+    @Input() label: string;
+    @Input() options: BootstrapSwitcherItem[];
+    @Input() defaultOption: BootstrapSwitcherItem;
+    @Output() onSwitch: EventEmitter<BootstrapSwitcherItem> = new EventEmitter<BootstrapSwitcherItem>();
 
     selectedOption: BootstrapSwitcherItem = null;
 

@@ -6,7 +6,7 @@ import {AuthEvents} from "./login/auth-events";
 
 declare var moment: any;
 
-//FIXME see a better way to declare template modules for dev mode
+// FIXME see a better way to declare template modules for dev mode
 try {
     angular.module('noosfero.templates.app');
 } catch (error) {

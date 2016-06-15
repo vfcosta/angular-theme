@@ -3,7 +3,7 @@ $whbl-sidebar-linkColor: #484848;
 $whbl-primary-color: #1E96D0; //blue
 $whbl-font-color: #16191c;
 
-.skin-whbl {
+%skin-base {
 	#header-navbar {
 		background-color: $whbl-primary-color;
 	}
@@ -180,27 +180,19 @@ $whbl-font-color: #16191c;
 	}
 	.pagination {
 		> li {
-			> a,
-			> span,
-			> a:hover,
-			> span:hover,
-			> a:focus,
-			> span:focus,
-			> a:active,
-			> span:active {
-				color: $whbl-primary-color;
+			&.active {
+				a {
+					background-color: $whbl-primary-color;
+					color: #FFF;
+				}
 			}
-		}
-		> .active {
-			> a,
-			> span,
-			> a:hover,
-			> span:hover,
-			> a:focus,
-			> span:focus {
-				background-color: $whbl-primary-color;
-				border-color: $whbl-primary-color;
-				color: #fff;
+			> a {
+				&:hover {
+					background-color: $whbl-primary-color;
+					color: #FFF;
+				}
+				background-color: #FFF;
+				color: $whbl-primary-color;
 			}
 		}
 	}
@@ -321,7 +313,7 @@ $whbl-font-color: #16191c;
 }
 
 @media (max-width: $break-sm-max) {
-	.skin-whbl {
+	%skin-base {
 		#logo.navbar-brand > img.normal-logo.logo-white {
 			display: block;
 		}
@@ -332,4 +324,8 @@ $whbl-font-color: #16191c;
 			background-color: $whbl-primary-color;
 		}
 	}
+}
+
+.skin-whbl {
+	@extend %skin-base;
 }

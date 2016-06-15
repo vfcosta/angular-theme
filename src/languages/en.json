@@ -77,5 +77,8 @@
   "profile.custom_footer.label": "Footer",
   "designMode.label": "In Design",
   "designMode.toggle.ON": "ON",
-  "designMode.toggle.OFF": "OFF"
+  "designMode.toggle.OFF": "OFF",
+  "search.results.summary": "{results, plural, one{result} other{# results}}",
+  "search.results.query.label": "Search for:",
+  "search.results.query.placeholder": "Search"
 }

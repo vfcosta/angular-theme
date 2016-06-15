@@ -40,6 +40,8 @@ import {SidebarComponent} from "../layout/sidebar/sidebar.component";
 import {MainBlockComponent} from "../layout/blocks/main/main-block.component";
 import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.component";
 import {PermissionDirective} from "../shared/components/permission/permission.directive";
+import {SearchComponent} from "../search/search.component";
+import {SearchFormComponent} from "../search/search-form/search-form.component";
 
 /**
  * @ngdoc controller
@@ -100,7 +102,7 @@ export class EnvironmentContent {
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
-        LoginBlockComponent, CustomContentComponent, PermissionDirective
+        LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
