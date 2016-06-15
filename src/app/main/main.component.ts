@@ -6,6 +6,7 @@ import {ArticleViewComponent} from "./../article/article-default-view.component"
 
 import {ProfileComponent} from "../profile/profile.component";
 import {BoxesComponent} from "../layout/boxes/boxes.component";
+import {BlockContentComponent} from "../layout/blocks/block-content.component";
 import {BlockComponent} from "../layout/blocks/block.component";
 import {EnvironmentComponent} from "../environment/environment.component";
 import {EnvironmentHomeComponent} from "../environment/environment-home.component";
@@ -97,12 +98,13 @@ export class EnvironmentContent {
     selector: 'main',
     template: '<ui-view></ui-view>',
     directives: [
-        ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
+        ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
-        LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent
+        LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
+        BlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
