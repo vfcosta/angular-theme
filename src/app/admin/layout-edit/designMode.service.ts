@@ -1,5 +1,4 @@
-import {Component, Injectable, Output, EventEmitter} from 'ng-forward';
-import {BodyStateClassesService} from '../../layout/services/body-state-classes.service';
+import {Injectable, Output, EventEmitter} from 'ng-forward';
 
 @Injectable()
 export class DesignModeService {
