@@ -23,6 +23,7 @@ export class BlockComponent {
     currentUser: noosfero.User;
     isHomepage = true;
     editionMode = false;
+    designMode = false;
 
     constructor(private $uibModal: any,
         private $scope: ng.IScope,
@@ -49,6 +50,7 @@ export class BlockComponent {
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.editionMode = designModeOn;
+            this.designMode = designModeOn;
             this.$scope.$apply();
         });
     }
