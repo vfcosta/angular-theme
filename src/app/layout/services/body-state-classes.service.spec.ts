@@ -4,7 +4,7 @@ import {AuthService} from "./../../login/auth.service";
 import {AuthEvents} from "./../../login/auth-events";
 
 import {EventEmitter} from 'ng-forward';
-
+import {DesignModeService} from './../../admin/layout-edit/designMode.service';
 
 describe("BodyStateClasses Service", () => {
 
@@ -19,10 +19,13 @@ describe("BodyStateClasses Service", () => {
         },
         authService: any = helpers.mocks.authService,
         bodyEl: { className: string },
-        bodyElJq: any;
+        bodyElJq: any,
+        designModeService = new DesignModeService();
+
+
 
     let getService = (): BodyStateClassesService => {
-        return new BodyStateClassesService($rootScope, $document, $state, authService);
+        return new BodyStateClassesService($rootScope, $document, $state, authService, designModeService);
     };
 
     beforeEach(() => {
@@ -167,5 +170,31 @@ describe("BodyStateClasses Service", () => {
         service.addContentClass(false);
 
         expect(contentWrapperMock.removeClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
+    });
+
+    it("should add the class noosfero-design-on when designMode is changed to true", () => {
+        let fnOnToggle: Function = null;
+        designModeService.onToggle = <any> {
+            subscribe: (fn: Function) => {
+                fnOnToggle = fn;
+            },
+            next: (value: boolean) => {
+                fnOnToggle.apply(designModeService, [value]);
+            }
+        };
+
+        let service = getService();
+
+        bodyElJq.addClass = jasmine.createSpy("addClass");
+        bodyElJq.removeClass = jasmine.createSpy("removeClass");
+        service["bodyElement"] = bodyElJq;
+
+        service.start();
+
+        debugger;
+        designModeService.setInDesignMode(true);
+
+
+        expect(bodyElJq.addClass).toHaveBeenCalledWith(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
     });
 });

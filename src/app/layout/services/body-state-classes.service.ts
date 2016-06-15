@@ -3,6 +3,7 @@ import {AuthEvents} from "../../login/auth-events";
 import {AuthService} from "./../../login/auth.service";
 import {HtmlUtils} from "../html-utils";
 import {INgForwardJQuery} from 'ng-forward/cjs/util/jqlite-extensions';
+import {DesignModeService} from './../../admin/layout-edit/designMode.service';
 
 export interface StartParams {
     skin?: string;
@@ -22,12 +23,13 @@ export interface StartParams {
  *         - full-content
  */
 @Injectable()
-@Inject("$rootScope", "$document", "$state", AuthService)
+@Inject("$rootScope", "$document", "$state", AuthService, DesignModeService)
 export class BodyStateClassesService {
 
     private started: boolean = false;
     private skin: string;
 
+    public static get DESIGN_MODE_ON_CLASSNAME(): string { return "noosfero-design-on"; }
     public static get USER_LOGGED_CLASSNAME(): string { return "noosfero-user-logged"; }
     public static get ROUTE_STATE_CLASSNAME_PREFIX(): string { return "noosfero-route-"; }
     public static get CONTENT_WRAPPER_FULL(): string { return "full-content"; }
@@ -38,16 +40,16 @@ export class BodyStateClassesService {
         private $rootScope: ng.IRootScopeService,
         private $document: ng.IDocumentService,
         private $state: ng.ui.IStateService,
-        private authService: AuthService
+        private authService: AuthService,
+        private designModeService: DesignModeService
     ) {
-
     }
 
     start(config?: StartParams) {
         if (!this.started) {
             this.setupUserLoggedClassToggle();
             this.setupStateClassToggle();
-
+            this.setupDesignModeClassToggle();
             if (config) {
                 this.setThemeSkin(config.skin);
             }
@@ -87,9 +89,19 @@ export class BodyStateClassesService {
     }
 
     /**
-     * Setup the initial class name on body element indicating the current route
-     * and adds event handler to swith this class when the current page/state changes
+     * setup the listeners to the desigModeService to add class on the Body Element
+     * indicating the user activated the designMode
      */
+    private setupDesignModeClassToggle() {
+        this.designModeService.onToggle.subscribe((designOn: boolean) => {
+            if (designOn) {
+                this.getBodyElement().addClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+            } else {
+                this.getBodyElement().removeClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+            }
+        });
+    }
+
     private setupStateClassToggle() {
         let bodyElement = this.getBodyElement();
         bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + this.$state.current.name);

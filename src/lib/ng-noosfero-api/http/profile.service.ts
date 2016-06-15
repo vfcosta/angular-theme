@@ -22,7 +22,7 @@ export class ProfileService {
         this._currentProfilePromise.resolve(profile);
     }
 
-    setCurrentProfileByIdentifier(identifier: string) {
+    setCurrentProfileByIdentifier(identifier: string): ng.IPromise<noosfero.Profile> {
         this.resetCurrentProfile();
         return this.getByIdentifier(identifier).then((profile: noosfero.Profile) => {
             this.setCurrentProfile(profile);
