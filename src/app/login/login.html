@@ -12,9 +12,10 @@
       <input type="password" class="form-control" id="passwd" placeholder="{{'auth.form.password' | translate}}" ng-model="vm.credentials.password">
     </div>
     <div class="form-inline">
-      <div class="checkbox">
-        <label>
-          <input type="checkbox" > {{"auth.form.keepLoggedIn" | translate}}
+      <div class="checkbox-nice">
+        <input type="checkbox" id="keep-logged">
+        <label for="keep-logged">
+          {{"auth.form.keepLoggedIn" | translate}}
         </label>
       </div>
     </div>

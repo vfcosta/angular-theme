@@ -1,0 +1,36 @@
+label {
+  cursor: pointer;
+}
+
+.checkbox-nice {
+	position: relative;
+	padding-left: 15px;
+
+	input[type=checkbox] {
+		visibility: hidden;
+	}
+	label {
+		padding-top: 3px;
+	}
+	&.checkbox-inline > label {
+		margin-left: 16px;
+	}
+	label:before {
+    @include checkbox-mark(22px, 22px, 1px, 1px, #ffffff, 2px solid $main-bg-color);
+		@include border-radius(3px);
+	}
+	label:after {
+    @include checkbox-mark(12px, 7px, 7px, 6px, transparent, 3px solid #000);
+		@include opacity(0);
+
+		border-top: none;
+		border-right: none;
+		transform: rotate(-45deg);
+	}
+	label:hover::after {
+		@include opacity(0.3);
+	}
+	input[type=checkbox]:checked + label:after {
+		@include opacity(1);
+	}
+}
