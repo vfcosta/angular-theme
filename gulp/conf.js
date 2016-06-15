@@ -27,6 +27,10 @@ exports.configTheme = function(theme) {
   exports.paths.theme = theme || "angular-default";
   exports.paths.allSources = [exports.paths.src, path.join(exports.paths.themes, exports.paths.theme)];
   exports.paths.dist = path.join("dist", exports.paths.theme);
+
+  if(argv.skin) {
+    exports.paths.skin = argv.skin;
+  }
 }
 exports.configTheme(argv.theme);
 

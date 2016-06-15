@@ -51,11 +51,26 @@ See some important folders bellow:
 1. Put the templates that you want to override in the same structure from the main application source, e.g.:
 `src/app/profile/profile.html` will be overriden by `themes/custom-theme/app/profile/profile.html`
 
+## Change skin
+
+- Create a any scss file into your theme folder structure
+- Extend your skin css class from `%skin-base` scss placeholder selector. Something like this:
+
+```sass
+.skin-custom {
+  @extend %skin-base
+}
+```
+- Configure application to use the new theme, e.g.:
+`npm config set angular-theme:skin custom-skin`
+
+- Start the application with `npm start` scripts ou make a build
+
 ## Development environment
 
 ## Known Issues
 
-### Message Translation: angular-i18n 
+### Message Translation: angular-i18n
 
  - Plural  Interpolation only working when current language is En (English)
 
