@@ -289,7 +289,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         let restRequest: ng.IPromise<any>;
 
         if (rootElement) {
-            restRequest = rootElement.customPOST(data, path, headers);
+            restRequest = rootElement.customPOST(data, path, null, headers);
         } else {
             restRequest = this.baseResource.customPOST(data, path, headers);
         }

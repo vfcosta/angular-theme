@@ -1,91 +1,135 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Input, provide, Component} from 'ng-forward';
-
+import {Component} from 'ng-forward';
 import {BlockComponent} from './block.component';
+import * as helpers from "../../../spec/helpers";
+import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 
-const tcb = new TestComponentBuilder();
+const htmlTemplate: string = '<noosfero-block [block]="ctrl.block" [owner]="ctrl.profile"></noosfero-block>';
 
-const htmlTemplate: string = '<noosfero-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block>';
+describe("Boxes Component", () => {
 
-describe("Components", () => {
-    describe("Block Component", () => {
-
-        // the karma preprocessor html2js transform the templates html into js files which put
-        // the templates to the templateCache into the module templates
-        // we need to load the module templates here as the template for the 
-        // component Block will be load on our tests
-        beforeEach(angular.mock.module("templates"));
-
-        it("receives the block and the owner as inputs", done => {
-
-            // Creating a container component (BlockContainerComponent) to include 
-            // the component under test (Block)  
-            @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [BlockComponent] })
-            class BlockContainerComponent {
-                block = { type: 'Block' };
-                owner = { name: 'profile-name' };
-                constructor() {
-                }
-            }
-
-            // uses the TestComponentBuilder instance to initialize the component
-            tcb
-                .createAsync(BlockContainerComponent).then(fixture => {
-                    // and here we can inspect and run the test assertions 
-                    let myComponent: BlockComponent = fixture.componentInstance;
-
-                    // assure the block object inside the Block matches
-                    // the provided through the parent component
-                    expect(myComponent.block.type).toEqual("Block");
-                    expect(myComponent.owner.name).toEqual("profile-name");
-                    done();
-                });
-        });
-
-
-        it("renders a component which matches to the block type", done => {
-            // CustomBlock component created to check if it will be used
-            // when a block with type 'CustomBlock' is provided to the noosfero-block (Block)
-            // *** Important *** - the selector is what ng-forward uses to define the name of the directive provider
-            @Component({ selector: 'noosfero-custom-block', template: "<h1>My Custom Block</h1>" })
-            class CustomBlock {
-                @Input() block: any;
-                @Input() owner: any;
-            }
-
-            @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [BlockComponent, CustomBlock] })
-            class CustomBlockType {
-                block = { type: 'CustomBlock' };
-                owner = { name: 'profile-name' };
-                constructor() {
-                }
-            }
-            tcb
-                .createAsync(CustomBlockType).then(fixture => {
-                    let myComponent: CustomBlockType = fixture.componentInstance;
-                    expect(myComponent.block.type).toEqual("CustomBlock");
-                    expect(fixture.debugElement.componentViewChildren[0].text()).toEqual("My Custom Block");
-                    done();
-                });
-        });
-
-
-        it("renders the default block when hasn't defined a block type", done => {
-            @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [BlockComponent] })
-            class CustomBlockType {
-                block: any = { type: null };
-                owner: any = { name: 'profile-name' };
-                constructor() {
-                }
-            }
-            tcb
-                .createAsync(CustomBlockType).then(fixture => {
-                    let myComponent: CustomBlockType = fixture.componentInstance;
-                    expect(myComponent.block.type).toBeNull();
-                    expect(!!fixture.debugElement.nativeElement.querySelector("noosfero-default-block")).toBeTruthy();
-                    done();
-                });
-        });
-
+    let helper: ComponentTestHelper<BlockComponent>;
+    beforeEach(() => {
+        angular.mock.module("templates");
     });
+
+    let properties = {
+        block: { id: 1 },
+        owner: {
+            id: 1,
+            identifier: 'profile-name',
+            type: 'Person'
+        }
+    };
+    beforeEach((done) => {
+        let cls = createClass({
+            template: htmlTemplate,
+            directives: [BlockComponent],
+            properties: properties,
+            providers: [
+                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
+                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
+                helpers.createProviderToValue('$state', state),
+                helpers.createProviderToValue('TranslatorService', translatorService),
+                helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
+                helpers.createProviderToValue('BlockService', blockService),
+                helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
+            ]
+        });
+        helper = new ComponentTestHelper<BlockComponent>(cls, done);
+    });
+
+    let translatorService = jasmine.createSpyObj("translatorService", ["currentLanguage"]);
+    let blockService = jasmine.createSpyObj("blockService", ["update"]);
+    let state = jasmine.createSpyObj("state", ["current"]);
+    state.current = { name: "" };
+
+    it("set isHomepage as false by default", () => {
+        expect(helper.component.isHomepage).toBeFalsy();
+    });
+
+    it("set isHomepage as true when in profile home page", () => {
+        state.current = { name: "main.profile.home" };
+        helper.component.ngOnInit();
+        expect(helper.component.isHomepage).toBeTruthy();
+    });
+
+    it("set isHomepage as true when in profile info page", () => {
+        state.current = { name: "main.profile.info" };
+        helper.component.ngOnInit();
+        expect(helper.component.isHomepage).toBeTruthy();
+    });
+
+    it("set isHomepage as true when in profile page", () => {
+        state.current = { name: "main.profile.page" };
+        state.params = { page: "/page" };
+        (<noosfero.Profile>helper.component.owner).homepage = '/page';
+        helper.component.ngOnInit();
+        expect(helper.component.isHomepage).toBeTruthy();
+    });
+
+    it("set isHomepage as true when in environment home page", () => {
+        state.current = { name: "main.environment.home" };
+        helper.component.owner = <noosfero.Environment>{};
+        helper.component.ngOnInit();
+        expect(helper.component.isHomepage).toBeTruthy();
+    });
+
+    it("return true in canDisplay when no display option is setted", () => {
+        helper.component.block = <any>{};
+        expect(helper.component.canDisplay()).toEqual(true);
+    });
+
+    it("return false in canDisplay for an invisible block", () => {
+        helper.component.block = <any>{ settings: { display: "never" } };
+        expect(helper.component.canDisplay()).toEqual(false);
+    });
+
+    it("return false in canDisplay with except_home_page in homepage", () => {
+        helper.component.block = <any>{ settings: { display_user: "except_home_page" } };
+        expect(helper.component.canDisplay()).toEqual(false);
+    });
+
+    it("return false in canDisplay with home_page_only outside homepage", () => {
+        helper.component.block = <any>{ settings: { display_user: "home_page_only" } };
+        expect(helper.component.canDisplay()).toEqual(false);
+    });
+
+    it("return true in canDisplay when display_user is all for logged user", () => {
+        helper.component.block = <any>{ settings: { display_user: "all" } };
+        expect(helper.component.canDisplay()).toEqual(true);
+    });
+
+    it("return true in canDisplay when display_user is all for not logged user", () => {
+        helper.component.currentUser = null;
+        helper.component.block = <any>{ settings: { display_user: "all" } };
+        expect(helper.component.canDisplay()).toEqual(true);
+    });
+
+    it("return false in canDisplay when display_user is logged for not logged user", () => {
+        helper.component.currentUser = null;
+        helper.component.block = <any>{ settings: { display_user: "logged" } };
+        expect(helper.component.canDisplay()).toEqual(false);
+    });
+
+    it("return false in canDisplay when display_user is not_logged for logged user", () => {
+        helper.component.block = <any>{ settings: { display_user: "not_logged" } };
+        expect(helper.component.canDisplay()).toEqual(false);
+    });
+
+    it("return false in canDisplay when current language is not equal to language in block settings", () => {
+        helper.component['translatorService'].currentLanguage = jasmine.createSpy("currentLanguage").and.returnValue("pt");
+        helper.component.block = <any>{ settings: { language: "en" } };
+        expect(helper.component.canDisplay()).toEqual(false);
+    });
+
+    it("return false in canDisplay when hide is true", () => {
+        helper.component.block = <any>{ id: 1, hide: true };
+        expect(helper.component.canDisplay()).toEqual(false);
+    });
+
+    it("return true in canDisplay when hide is not true", () => {
+        helper.component.block = <any>{ id: 1, hide: false };
+        expect(helper.component.canDisplay()).toEqual(true);
+    });
+
 });
