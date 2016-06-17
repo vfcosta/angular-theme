@@ -16,6 +16,7 @@ import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/r
 import {ProfileImageBlockComponent} from "../layout/blocks/profile-image/profile-image-block.component";
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html-block.component";
 import {StatisticsBlockComponent} from "../layout/blocks/statistics/statistics-block.component";
+import {PersonTagsPluginInterestsBlockComponent} from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
 import {CustomContentComponent} from "../profile/custom-content/custom-content.component";
 
 import {MembersBlockComponent} from "../layout/blocks/members/members-block.component";
@@ -82,7 +83,7 @@ export class EnvironmentContent {
  * @name main.Main
  * @requires AuthService, Session, Notification, ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
  * MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock, MembersBlock,
- * NoosferoTemplate, DateFormat, RawHTMLBlock
+ * NoosferoTemplate, DateFormat, RawHTMLBlock, PersonTagsPluginInterestsBlock
  * @description
  *  The Main controller for the Noosfero Angular Theme application.
  *
@@ -100,7 +101,7 @@ export class EnvironmentContent {
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
-        LoginBlockComponent, CustomContentComponent, PermissionDirective
+        LoginBlockComponent, PersonTagsPluginInterestsBlockComponent, CustomContentComponent, PermissionDirective
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",

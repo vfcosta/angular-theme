@@ -79,7 +79,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
             }
         }
         return {
-            data: response.data[dataKey],
+            data: (response.data[dataKey] || response.data),
             headers: response.headers
         };
     };
