@@ -1,0 +1,14 @@
+.edit-block {
+  margin: 20px;
+
+  .options {
+    margin-bottom: 20px;
+
+    .block-option {
+      @extend .form-group;
+      .block-input {
+        @extend .form-control;
+      }
+    }
+  }
+}

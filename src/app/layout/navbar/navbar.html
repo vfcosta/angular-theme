@@ -26,23 +26,29 @@
             <span ng-bind="ctrl.currentUser.person.name"></span> <b class="caret"></b>
           </a>
           <ul class="dropdown-menu" uib-dropdown-menu>
-              <li>
-                  <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-user"></i> {{"navbar.profile" | translate}}</a>
-              </li>
-              <li>
-                  <a target="_self" ui-sref="main.profile.settings({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-gear"></i> {{"navbar.settings" | translate}}</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                  <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
-              </li>
+            <li>
+              <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-user"></i> {{"navbar.profile" | translate}}</a>
+            </li>
+            <li>
+              <a target="_self" ui-sref="main.profile.settings({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-gear"></i> {{"navbar.settings" | translate}}</a>
+            </li>
+            <li class="divider"></li>
+            <li>
+              <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
+            </li>
           </ul>
         </li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
         <language-selector class="nav navbar-nav navbar-right"></language-selector>
       </ul>
       <div ui-view="actions"></div>
+      <div class="nav navbar-nav search navbar-right">
+        <search-form></search-form>
+      </div>
     </div>
   </div>
 </nav>
+<div ui-view="toolbar">
+</div>

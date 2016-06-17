@@ -53,35 +53,4 @@ describe("Boxes Component", () => {
         expect(helper.component.boxesOrder(properties['boxes'][0])).toEqual(1);
         expect(helper.component.boxesOrder(properties['boxes'][1])).toEqual(0);
     });
-
-    it("set isHomepage as false by default", () => {
-        expect(helper.component.isHomepage).toBeFalsy();
-    });
-
-    it("set isHomepage as true when in profile home page", () => {
-        state.current = { name: "main.profile.home" };
-        helper.component.ngOnInit();
-        expect(helper.component.isHomepage).toBeTruthy();
-    });
-
-    it("set isHomepage as true when in profile info page", () => {
-        state.current = { name: "main.profile.info" };
-        helper.component.ngOnInit();
-        expect(helper.component.isHomepage).toBeTruthy();
-    });
-
-    it("set isHomepage as true when in profile page", () => {
-        state.current = { name: "main.profile.page" };
-        state.params = { page: "/page" };
-        (<noosfero.Profile>helper.component.owner).homepage = '/page';
-        helper.component.ngOnInit();
-        expect(helper.component.isHomepage).toBeTruthy();
-    });
-
-    it("set isHomepage as true when in environment home page", () => {
-        state.current = { name: "main.environment.home" };
-        helper.component.owner = <noosfero.Environment>{};
-        helper.component.ngOnInit();
-        expect(helper.component.isHomepage).toBeTruthy();
-    });
 });

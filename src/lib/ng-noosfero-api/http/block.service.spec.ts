@@ -29,6 +29,16 @@ describe("Services", () => {
                 });
                 $httpBackend.flush();
             });
+
+            it("update block settings", (done) => {
+                let blockId = 1;
+                $httpBackend.expectPOST(`/api/v1/blocks/${blockId}`).respond(200, { block: { id: blockId } });
+                blockService.update(<any>{ id: blockId, display: 'never' }).then((result: noosfero.RestResult<noosfero.Block>) => {
+                    expect(result.data).toEqual({ id: blockId });
+                    done();
+                });
+                $httpBackend.flush();
+            });
         });
 
 

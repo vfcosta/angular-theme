@@ -6,6 +6,7 @@ import {ArticleViewComponent} from "./../article/article-default-view.component"
 
 import {ProfileComponent} from "../profile/profile.component";
 import {BoxesComponent} from "../layout/boxes/boxes.component";
+import {BlockContentComponent} from "../layout/blocks/block-content.component";
 import {BlockComponent} from "../layout/blocks/block.component";
 import {EnvironmentComponent} from "../environment/environment.component";
 import {EnvironmentHomeComponent} from "../environment/environment-home.component";
@@ -41,6 +42,8 @@ import {SidebarComponent} from "../layout/sidebar/sidebar.component";
 import {MainBlockComponent} from "../layout/blocks/main/main-block.component";
 import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.component";
 import {PermissionDirective} from "../shared/components/permission/permission.directive";
+import {SearchComponent} from "../search/search.component";
+import {SearchFormComponent} from "../search/search-form/search-form.component";
 
 /**
  * @ngdoc controller
@@ -96,12 +99,13 @@ export class EnvironmentContent {
     selector: 'main',
     template: '<ui-view></ui-view>',
     directives: [
-        ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockComponent,
+        ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
-        LoginBlockComponent, PersonTagsPluginInterestsBlockComponent, CustomContentComponent, PermissionDirective
+        LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
+        PersonTagsPluginInterestsBlockComponent, BlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
@@ -110,7 +114,7 @@ export class EnvironmentContent {
         "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
         "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
-        "angular-click-outside", "noosfero.init"]
+        "angular-click-outside", "toggle-switch", "noosfero.init"]
 })
 @StateConfig([
     {

@@ -2,14 +2,17 @@ import {Component, Input, Inject} from 'ng-forward';
 import {ProfileService} from '../../../lib/ng-noosfero-api/http/profile.service';
 import {NotificationService} from '../../shared/services/notification.service';
 import {PermissionDirective} from '../../shared/components/permission/permission.directive';
+import {DesignModeService} from '../../admin/layout-edit/designMode.service';
 
 @Component({
     selector: 'custom-content',
     templateUrl: "app/profile/custom-content/custom-content.html",
     directives: [PermissionDirective]
 })
-@Inject("$uibModal", "$scope", ProfileService, NotificationService)
+@Inject("$uibModal", "$scope", ProfileService, NotificationService, DesignModeService)
 export class CustomContentComponent {
+
+    static $inject = ["DesignModeService"]; // @Inject doesn't works with uibModal.open
 
     @Input() attribute: string;
     @Input() profile: noosfero.Profile;
@@ -17,18 +20,23 @@ export class CustomContentComponent {
 
     content: string;
     originalContent: string;
+    editionMode = false;
     private modalInstance: any = null;
 
     constructor(private $uibModal: any,
         private $scope: ng.IScope,
         private profileService: ProfileService,
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService,
+        private designModeService: DesignModeService) { }
 
     ngOnInit() {
         this.$scope.$watch(() => {
             return this.profile ? (<any>this.profile)[this.attribute] : null;
         }, () => {
             if (this.profile) this.content = (<any>this.profile)[this.attribute];
+        });
+        this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            this.editionMode = designModeOn;
         });
     }
 

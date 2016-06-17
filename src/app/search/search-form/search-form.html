@@ -1,0 +1,8 @@
+<form class="navbar-form search-form" role="search" ng-if="!ctrl.isSearchPage()">
+  <div class="input-group">
+    <input type="text" class="search-input form-control" placeholder="Search" name="q" ng-model="ctrl.query">
+    <div class="input-group-btn">
+      <button class="btn btn-default" type="submit" (click)="ctrl.search()"><i class="fa fa-search fa-fw"></i></button>
+    </div>
+  </div>
+</form>

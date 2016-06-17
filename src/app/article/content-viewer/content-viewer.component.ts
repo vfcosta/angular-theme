@@ -14,7 +14,7 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
         provide('profileService', { useClass: ProfileService })
     ]
 })
-@Inject(ArticleService, ProfileService, "$log", "$stateParams")
+@Inject(ArticleService, ProfileService, "$stateParams")
 export class ContentViewerComponent {
 
     @Input()
@@ -23,7 +23,10 @@ export class ContentViewerComponent {
     @Input()
     profile: noosfero.Profile = null;
 
-    constructor(private articleService: ArticleService, private profileService: ProfileService, private $log: ng.ILogService, private $stateParams: angular.ui.IStateParamsService) {
+    constructor(
+        private articleService: ArticleService,
+        private profileService: ProfileService,
+        private $stateParams: angular.ui.IStateParamsService) {
         this.activate();
     }
 

@@ -118,6 +118,11 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         return this.listSubElements(<noosfero.Article>articleElement, "children", params);
     }
 
+    search(params: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article[]>>();
+        let restRequest = this.restangularService.all("search").customGET('article', params);
+        restRequest.then(this.getHandleSuccessFunction(deferred)).catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
 
 }
-
