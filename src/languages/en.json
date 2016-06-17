@@ -28,6 +28,7 @@
   "auth.form.password": "Password",
   "auth.form.keepLoggedIn": "Keep me logged in",
   "auth.form.login_button": "Login",
+  "auth.createAccount": "Create account",
   "navbar.content_viewer_actions.new_item": "New Item",
   "navbar.profile_actions.new_item": "New Item",
   "account.register.welcomeMessage": "Nice to have you there!",

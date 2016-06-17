@@ -1,5 +1,6 @@
 import { Inject, Input, Component, Output, EventEmitter, provide } from 'ng-forward';
-import {RegisterService} from "./../../lib/ng-noosfero-api/http/register.service";
+import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
+import { NotificationService } from "./../shared/services/notification.service";
 
 @Component({
     selector: 'noosfero-register',
@@ -9,11 +10,11 @@ import {RegisterService} from "./../../lib/ng-noosfero-api/http/register.service
     ]
 })
 
-@Inject("$state", RegisterService)
+@Inject("$state", RegisterService, NotificationService)
 export class RegisterComponent {
     @Input() account: any;
 
-    constructor(private $state: ng.ui.IStateService, public registerService: RegisterService) {
+    constructor(private $state: ng.ui.IStateService, public registerService: RegisterService, private notificationService: NotificationService) {
         this.account = {};
     }
 
@@ -22,13 +23,13 @@ export class RegisterComponent {
             this.registerService.createAccount(this.account).then((response) => {
                 if (response.status === 201) {
                     this.$state.transitionTo('main.environment');
+                    this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
                 } else {
                     throw new Error('Invalid attributes');
                 }
             });
         } else {
-            alert("Wrong password confirmation.");
+            this.notificationService.error({ message: "account.register.passwordConfirmation.failed" });
         }
     }
-
 }
