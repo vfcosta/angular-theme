@@ -45,12 +45,7 @@ describe("Boxes Component", () => {
     state.current = { name: "" };
 
     it("renders boxes into a container", () => {
-        expect(helper.find('div.col-md-7').length).toEqual(1);
-        expect(helper.find('div.col-md-2-5').length).toEqual(1);
-    });
-
-    it("check the boxes order", () => {
-        expect(helper.component.boxesOrder(properties['boxes'][0])).toEqual(1);
-        expect(helper.component.boxesOrder(properties['boxes'][1])).toEqual(0);
+        expect(helper.find('div.col-md-6').length).toEqual(1);
+        expect(helper.find('div.col-md-3').length).toEqual(1);
     });
 });
