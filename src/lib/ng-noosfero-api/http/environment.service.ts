@@ -68,6 +68,14 @@ export class EnvironmentService {
         return errorFunction;
     }
 
+    getTags(): ng.IPromise<{}> {
+        let p = this.restangular.one('environment').customGET('tags');
+        let deferred = this.$q.defer<{}>();
+        p.then(this.getHandleSuccessFunction<{}>(deferred));
+        p.catch(this.getHandleErrorFunction<{}>(deferred));
+        return deferred.promise;
+    }
+
     /**
      * TODO - use restangular service as base class, and this will not be necessary here anymore
      */

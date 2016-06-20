@@ -18,6 +18,7 @@ import {ProfileImageBlockComponent} from "../layout/blocks/profile-image/profile
 import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html-block.component";
 import {StatisticsBlockComponent} from "../layout/blocks/statistics/statistics-block.component";
 import {PersonTagsPluginInterestsBlockComponent} from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
+import {TagsBlockComponent} from "../layout/blocks/tags/tags-block.component";
 import {CustomContentComponent} from "../profile/custom-content/custom-content.component";
 
 import {MembersBlockComponent} from "../layout/blocks/members/members-block.component";
@@ -105,7 +106,7 @@ export class EnvironmentContent {
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
-        PersonTagsPluginInterestsBlockComponent, BlockComponent
+        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, BlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
@@ -114,7 +115,7 @@ export class EnvironmentContent {
         "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
         "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
-        "angular-click-outside", "toggle-switch", "noosfero.init"]
+        "angular-click-outside", "toggle-switch", "ngTagCloud", "noosfero.init"]
 })
 @StateConfig([
     {

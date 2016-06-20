@@ -10,6 +10,7 @@ var $ = require('gulp-load-plugins')();
 
 var wiredep = require('wiredep').stream;
 var _ = require('lodash');
+var importCss = require('gulp-import-css');
 
 gulp.task('styles-reload', ['styles'], function() {
   return buildStyles()
@@ -55,5 +56,6 @@ var buildStyles = function() {
     .pipe($.sass(sassOptions)).on('error', conf.errorHandler('Sass'))
     .pipe($.autoprefixer()).on('error', conf.errorHandler('Autoprefixer'))
     .pipe($.sourcemaps.write())
+    .pipe(importCss())
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve/app/')));
 };
