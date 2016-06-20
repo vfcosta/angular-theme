@@ -1,0 +1,43 @@
+.modal-content {
+  padding: 40px;
+  .modal-header {
+    border-bottom: 0;
+    text-align: center;
+  }
+  form {
+    margin-bottom: 30px;
+    button {
+      margin-top: 20px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.strike {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 25px 0;
+  > span {
+    position: relative;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+  > span:before, > span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 9999px;
+    height: 1px;
+    background: black;
+  }
+  > span:before {
+    right: 100%;
+    margin-right: 15px;
+  }
+  > span:after {
+    left: 100%;
+    margin-left: 15px;
+  }
+}

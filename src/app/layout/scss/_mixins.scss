@@ -3,3 +3,15 @@
 	border-radius: $radius;
 	background-clip: padding-box; /* stops bg color from leaking outside the border: */
 }
+
+@mixin checkbox-mark($width, $height, $top, $left, $bg, $border, $content: "", $cursor: pointer, $position: absolute) {
+	width: $width;
+	height: $height;
+	cursor: $cursor;
+	position: $position;
+	left: $left;
+	top: $top;
+	background: $bg;
+	content: $content;
+	border: $border;
+}

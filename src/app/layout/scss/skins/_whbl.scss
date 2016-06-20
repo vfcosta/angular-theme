@@ -306,6 +306,13 @@ $whbl-font-color: #16191c;
 		color: white;
 	}
 
+	/* Form overrides */
+	.checkbox-nice {
+		label:after {
+			border-color: $whbl-primary-color;
+		}
+	}
+
 }
 .rtl.skin-whbl #content-wrapper {
 	border-left: 0;
