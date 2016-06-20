@@ -9,6 +9,7 @@
 var argv = require('minimist')(process.argv.slice(2));
 var gutil = require('gulp-util');
 var path = require('path');
+var fs = require('fs');
 
 /**
  *  The main paths of your project handle these with care
@@ -23,12 +24,54 @@ exports.paths = {
   themes: 'themes',
   languages: 'languages'
 };
+
+/**
+* Check if theme folder exists on "themes" directory
+*
+* @param path The string relative path of the theme
+*/
+exports.themeExists = function (path) {
+  try {
+    fs.statSync(path);
+  } catch (e) {
+    throw new Error('The theme "'+exports.paths.theme+ ' on path "'+path+'" was not found');
+  }
+};
+
+/**
+* Check if skin file exists on "{theme}/app/layout/skins" directory
+*
+* @param skin The skin name passed by arg to gulp task
+*/
+exports.skinExists = function (skin) {
+  var skinFile = skin+'.scss';
+  if(/skin-/.test(skin)){
+     skinFile = skin.replace('skin-','_')+'.scss';
+  }
+  
+  var skinPath = path.join(exports.paths.themes, exports.paths.theme, '/app/layout/skins/', skinFile);
+
+  try {
+    fs.statSync(skinPath);
+  }catch(e) {
+    throw new Error('The skin "'+skin+'" on path "'+skinPath+'" was not found');
+  }
+};
+
 exports.configTheme = function(theme) {
+
   exports.paths.theme = theme || "angular-default";
-  exports.paths.allSources = [exports.paths.src, path.join(exports.paths.themes, exports.paths.theme)];
+  var themePath = path.join(exports.paths.themes, exports.paths.theme);
+
+  exports.paths.allSources = [exports.paths.src, themePath];
+
+
+  exports.themeExists(themePath);
   exports.paths.dist = path.join("dist", exports.paths.theme);
 
   if(argv.skin) {
+    exports.skinExists(argv.skin);
+
     exports.paths.skin = argv.skin;
   }
 }

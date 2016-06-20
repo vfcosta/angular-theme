@@ -21,53 +21,6 @@ $selected-color: #f6c445;
   src: url('../assets/fonts/participa-consulta/Ubuntu-RI.ttf');
 }
 
-.skin-yellow {
-  @extend %skin-base;
-
-  .notifications-list .item-footer {
-    background: #DAE1C4;
-    color: #4F9CAC;
-  }
-
-  .navbar-nav .open > a,
-  .navbar-nav .open > a:hover,
-  .navbar-nav .open > a:focus {
-    background-color: $selected-color;
-    color: #000;
-  }
-
-  .nav .open > a,
-  .nav .open > a:hover,
-  .nav .open > a:focus {
-    border: none;
-  }
-
-  .dropdown-menu {
-     li > a:hover {
-      color: #555;
-      background-color: #F7F7F7;
-    }
-
-    .active > a,
-    .active > a:hover,
-    .active > a:focus {
-      color: #000;
-      background-color: #CCC;
-    }
-  }
-
-  .nav .caret {
-    border-bottom-color: #fff !important;
-    border-top-color: #fff !important;
-  }
-
-  .nav .open .caret {
-    border-bottom-color: #000 !important;
-    border-top-color: #000 !important;
-  }
-
-}
-
 .profile-header, .profile-footer{
   text-align: center;
 }
