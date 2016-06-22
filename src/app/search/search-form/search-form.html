@@ -1,8 +1,13 @@
-<form class="navbar-form search-form" role="search" ng-if="!ctrl.isSearchPage()">
-  <div class="input-group">
-    <input type="text" class="search-input form-control" placeholder="Search" name="q" ng-model="ctrl.query">
-    <div class="input-group-btn">
-      <button class="btn btn-default" type="submit" (click)="ctrl.search()"><i class="fa fa-search fa-fw"></i></button>
+<a class="btn btn-nav" ng-click="showSearch = !showSearch">
+  <i class="fa fa-search btn-search-nav" aria-hidden="true"></i>
+</a>
+<form class="navbar-form search-form" role="search">
+  <div class="ng-scope" ng-class="{'top-search-wrap': !showSearch, 'top-search-toggled': showSearch}">
+    <div class="tsw-inner">
+      <i id="top-search-close" class="fa fa-chevron-left" aria-hidden="true" ng-click="showSearch = false"></i>
+      <input type="text" placeholder="{{ 'search.label' | translate }}" name="q" ng-model="ctrl.query">
+      <i class="fa fa-search btn-search" aria-hidden="true" (click)="ctrl.search()"></i>
+      <button type="submit" (click)="ctrl.search()"></i>
     </div>
   </div>
 </form>

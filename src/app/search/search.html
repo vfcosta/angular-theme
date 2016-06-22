@@ -1,6 +1,6 @@
 <form ng-submit="ctrl.search()">
 <label for="query" ng-bind-html="'search.results.query.label' | translate"></label>
-<input id="query" placeholder="{{'search.results.query.placeholder' | translate}}" type="search" class="search-box-title" ng-model="ctrl.query">
+<h3 id="query" class="search-box-title">{{ctrl.query}}</h3>
 </form>
 <div class="search-results">
   <div class="summary">

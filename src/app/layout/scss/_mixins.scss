@@ -15,3 +15,36 @@
 	content: $content;
 	border: $border;
 }
+
+@mixin opacity($opacity) {
+	/* Netscape */
+  -moz-opacity: $opacity;
+
+  /* Safari 1.x */
+  -khtml-opacity: $opacity;
+
+  /* Good browsers */
+	opacity: $opacity;
+}
+
+@mixin transition($args...) {
+
+	$duration: 300ms;
+	$keys: keywords($args);
+	@if map-has-key($keys, duration) {
+		$duration: map-get($keys, duration);
+	}
+
+	-webkit-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+  -webkit-transition-duration: $duration;
+  transition-duration: $duration;
+}
+
+@mixin outline($style: none, $width: 0px) {
+	&:focus {
+		outline-style: $style;
+		outline-width: $width;
+	}
+}

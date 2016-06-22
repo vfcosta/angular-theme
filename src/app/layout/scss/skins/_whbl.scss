@@ -7,6 +7,15 @@ $whbl-font-color: #16191c;
 	#header-navbar {
 		background-color: $whbl-primary-color;
 	}
+
+	.navbar {
+		.btn-nav {
+			&:hover {
+	      background-color: #1b86ba;
+	    }
+		}
+	}
+
 	.navbar > .container .navbar-brand {
 		background-color: transparent;
 		width: 221px;

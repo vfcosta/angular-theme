@@ -23,7 +23,7 @@ export class SearchComponent {
     }
 
     search() {
-         this.$state.go('main.environment.search', { query: this.query });
+        this.$state.go('main.environment.search', { query: this.query });
     }
 
     loadPage() {
