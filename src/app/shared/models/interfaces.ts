@@ -8,4 +8,5 @@ export interface UserResponse {
 
 export interface INoosferoLocalStorage extends angular.storage.ILocalStorageService {
     currentUser: noosfero.User;
+    settings: any;
 }

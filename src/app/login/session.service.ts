@@ -16,6 +16,7 @@ export class SessionService {
 
     destroy() {
         delete this.$localStorage.currentUser;
+        delete this.$localStorage.settings;
     };
 
     currentUser(): noosfero.User {
