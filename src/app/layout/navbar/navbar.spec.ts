@@ -9,6 +9,8 @@ import {SessionService, AuthService, AuthController, AuthEvents} from "./../../l
 
 import events from 'ng-forward/cjs/events/events';
 
+import {DesignModeService} from '../../admin/layout-edit/designMode.service';
+
 describe("Components", () => {
 
     describe("Navbar Component", () => {
@@ -22,6 +24,7 @@ describe("Components", () => {
         let authService: any;
         let stateService: any;
         let sessionService: SessionService;
+        let designModeService: DesignModeService;
 
         let provideFunc = provide;
 
@@ -37,6 +40,7 @@ describe("Components", () => {
             authService = helpers.mocks.authService;
             stateService = jasmine.createSpyObj("$state", ["go"]);
             sessionService = <any>helpers.mocks.sessionWithCurrentUser(user);
+            designModeService = helpers.mocks.designModeService;
         });
 
 
@@ -76,6 +80,9 @@ describe("Components", () => {
                     }),
                     provide('TranslatorService', {
                         useValue: helpers.mocks.translatorService
+                    }),
+                    provide('DesignModeService', {
+                        useValue: helpers.mocks.designModeService
                     })
                 ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],

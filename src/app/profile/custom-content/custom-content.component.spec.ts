@@ -1,6 +1,7 @@
 import {CustomContentComponent} from './custom-content.component';
 import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 import * as helpers from "../../../spec/helpers";
+import {DesignModeService} from '../../admin/layout-edit/designMode.service';
 
 const htmlTemplate: string = '<custom-content [attribute]="\'custom_footer\'" [profile]="ctrl.profile"></custom-content>';
 
@@ -22,7 +23,8 @@ describe("Components", () => {
                 providers: [
                     helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
                     helpers.createProviderToValue("ProfileService", profileService),
-                    helpers.createProviderToValue("NotificationService", notificationService)
+                    helpers.createProviderToValue("NotificationService", notificationService),
+                    helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService)
                 ]
             });
             helper = new ComponentTestHelper<CustomContentComponent>(cls, done);

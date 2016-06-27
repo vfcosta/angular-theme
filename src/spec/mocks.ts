@@ -193,6 +193,17 @@ export var mocks: any = {
             currentUser: () => { return user; }
         };
     },
+    designModeService: {
+        modeFn: null,
+        onToggle: {
+            subscribe: (fn: Function) => {
+                mocks.designModeService.modeFn = fn;
+            },
+            next: (param: any) => {
+                mocks.designModeService.modeFn(param);
+            }
+        }
+    },
     $translate: {
         use: (lang?: string) => {
             return lang ? Promise.resolve(lang) : "en";
