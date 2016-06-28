@@ -11,6 +11,7 @@ export class DesignModeService {
     }
     
     destroy() {
+        delete this.$localStorage.settings;
         this.$localStorage.settings = {};
     }
 
