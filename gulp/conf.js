@@ -48,13 +48,13 @@ exports.skinExists = function (skin) {
   if(/skin-/.test(skin)){
      skinFile = skin.replace('skin-','_')+'.scss';
   }
-  
+
   var skinPath = path.join(exports.paths.themes, exports.paths.theme, '/app/layout/skins/', skinFile);
 
   try {
     fs.statSync(skinPath);
   }catch(e) {
-    throw new Error('The skin "'+skin+'" on path "'+skinPath+'" was not found');
+    throw new Error('The skin "'+skin+'" was not found in "'+skinPath+'"');
   }
 };
 
