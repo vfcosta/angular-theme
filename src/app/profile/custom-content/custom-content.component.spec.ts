@@ -15,6 +15,7 @@ describe("Components", () => {
         beforeEach((done) => {
             let profileService = jasmine.createSpyObj("profileService", ["update"]);
             let notificationService = jasmine.createSpyObj("notificationService", ["success"]);
+            let designModeService = {  isInDesignMode: () => { return true; }};
             let properties = { profile: { custom_footer: "footer" } };
             let cls = createClass({
                 template: htmlTemplate,
@@ -24,7 +25,8 @@ describe("Components", () => {
                     helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
                     helpers.createProviderToValue("ProfileService", profileService),
                     helpers.createProviderToValue("NotificationService", notificationService),
-                    helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService)
+                    //helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService)
+                    helpers.createProviderToValue("DesignModeService", designModeService)
                 ]
             });
             helper = new ComponentTestHelper<CustomContentComponent>(cls, done);
