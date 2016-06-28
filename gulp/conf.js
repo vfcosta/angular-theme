@@ -44,18 +44,34 @@ exports.themeExists = function (path) {
 * @param skin The skin name passed by arg to gulp task
 */
 exports.skinExists = function (skin) {
-  var skinFile = skin+'.scss';
-  if(/skin-/.test(skin)){
-     skinFile = skin.replace('skin-','_')+'.scss';
-  }
 
-  var skinPath = path.join(exports.paths.themes, exports.paths.theme, '/app/layout/skins/', skinFile);
+    var skinPath, prefixPath = '';
+    var skinFile = skin+'.scss';
+    if (/skin-/.test(skin)) {
+       skinFile = skin.replace('skin-','_')+'.scss';
+    }
 
-  try {
-    fs.statSync(skinPath);
-  }catch(e) {
-    throw new Error('The skin "'+skin+'" was not found in "'+skinPath+'"');
-  }
+    if (/-default$/.test(exports.paths.theme)) {
+      prefixPath = exports.paths.src;
+    }else {
+      prefixPath = path.join(exports.paths.themes, exports.paths.theme);
+    }
+
+    skinPath = path.join(prefixPath, '/app/layout/scss/skins/', skinFile);
+
+    try {
+      fs.statSync(skinPath);
+    } catch(e) {
+      throw new Error('The skin file "'+skinPath+'" was not found');
+    }
+
+    var content = fs.readFileSync(skinPath, {encoding: 'utf8'});
+    if(content.search(skin) == -1) {
+      throw new Error('The skin css selector ".'+skin+'" was not found in "'+skinPath+'" file');
+    }else if (content.search('@extend %skin-base') == -1) {
+      throw new Error('The skin css selector ".'+skin+'" needs inherit from %skin-base sass placeholder');
+    }
+
 };
 
 exports.configTheme = function(theme) {
