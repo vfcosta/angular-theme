@@ -53,18 +53,31 @@ See some important folders bellow:
 
 ## Change skin
 
-- Create a any scss file into your theme folder structure
+- Create an any scss file into: `app/layout/skins/`
+  > **Suggestion:** Create a `sass` file partial. Something like: **`_mycustom.scss`**.
+
 - Extend your skin css class from `%skin-base` scss placeholder selector. Something like this:
+  > **Suggestion:** Use the prefix **`skin-`** to the css class
 
 ```sass
-.skin-custom {
+.skin-mycustom {
   @extend %skin-base
 }
 ```
 - Configure application to use the new theme, e.g.:
-`npm config set angular-theme:skin custom-skin`
+`npm config set angular-theme:skin skin-mycustom`
 
-- Start the application with `npm start` scripts ou make a build
+**N.B.**
+
+1-The full name of the scss class should be used as the parameter for the command `npm config set angular-theme:`, like in _skin-mycustom_. DO NOT use the file name of the skin as the parameter.
+
+2-The skin's file should be the named as the scss class without the word `skin`, preceded by an underline. Otherwise it will raise an error during `npm install`.
+
+Example: _mycustom.
+
+
+- Start the application with `npm start` scripts or make a build
+  > **PS:** If the configured skin is invalid, an error message is showed in the terminal.
 
 ## Development environment
 
