@@ -22,7 +22,8 @@ describe('DesignModeToggler Component', () => {
             template: htmlTemplate,
             directives: [DesignModeTogglerComponent],
             providers: [
-                helpers.createProviderToValue('DesignModeService', designModeService)
+                helpers.createProviderToValue('DesignModeService', designModeService),
+                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
             ]
         });
         helper = new ComponentTestHelper<DesignModeTogglerComponent>(cls, done);

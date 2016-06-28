@@ -6,10 +6,12 @@ import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
 export class DesignModeService {
     @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-    //private designModeOn: boolean = false;
-
     isInDesignMode(): boolean {
         return this.$localStorage.settings.designModeOn;
+    }
+    
+    destroy() {
+        this.$localStorage.settings = {};
     }
 
     setInDesignMode(value: boolean) {

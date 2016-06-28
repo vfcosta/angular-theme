@@ -25,7 +25,6 @@ describe("Components", () => {
                     helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
                     helpers.createProviderToValue("ProfileService", profileService),
                     helpers.createProviderToValue("NotificationService", notificationService),
-                    //helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService)
                     helpers.createProviderToValue("DesignModeService", designModeService)
                 ]
             });
