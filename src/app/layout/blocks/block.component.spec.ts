@@ -2,6 +2,7 @@ import {Component} from 'ng-forward';
 import {BlockComponent} from './block.component';
 import * as helpers from "../../../spec/helpers";
 import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
+import {DesignModeService} from '../../admin/layout-edit/designMode.service';
 
 const htmlTemplate: string = '<noosfero-block [block]="ctrl.block" [owner]="ctrl.profile"></noosfero-block>';
 
@@ -32,16 +33,17 @@ describe("Boxes Component", () => {
                 helpers.createProviderToValue('TranslatorService', translatorService),
                 helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
                 helpers.createProviderToValue('BlockService', blockService),
-                helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
+                helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
+                helpers.createProviderToValue('DesignModeService', helpers.mocks.designModeService)
             ]
         });
         helper = new ComponentTestHelper<BlockComponent>(cls, done);
     });
-
     let translatorService = jasmine.createSpyObj("translatorService", ["currentLanguage"]);
     let blockService = jasmine.createSpyObj("blockService", ["update"]);
     let state = jasmine.createSpyObj("state", ["current"]);
     state.current = { name: "" };
+    
 
     it("set isHomepage as false by default", () => {
         expect(helper.component.isHomepage).toBeFalsy();

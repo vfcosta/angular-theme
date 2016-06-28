@@ -13,7 +13,7 @@ describe("Services", () => {
         let $log: any;
 
         beforeEach(() => {
-            $localStorage = <INoosferoLocalStorage>{ currentUser: null };
+            $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: null };
             $log = jasmine.createSpyObj('$log', ['debug']);
         });
 

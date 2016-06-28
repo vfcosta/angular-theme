@@ -2,6 +2,7 @@ import {ComponentTestHelper, createClass} from '../../../spec/component-test-hel
 import * as helpers from '../../../spec/helpers';
 import {DesignModeTogglerComponent} from './designModeToggler.component';
 import {DesignModeService} from './designMode.service';
+import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
 
 describe('DesignModeToggler Component', () => {
     const htmlTemplate: string = '<noosfero-design-toggler></noosfero-design-toggler>';
@@ -14,13 +15,15 @@ describe('DesignModeToggler Component', () => {
     });
 
     let designModeService: DesignModeService;
+    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
     beforeEach((done) => {
-        designModeService = new DesignModeService();
+        designModeService = new DesignModeService($localStorage);
         let cls = createClass({
             template: htmlTemplate,
             directives: [DesignModeTogglerComponent],
             providers: [
-                helpers.createProviderToValue('DesignModeService', designModeService)
+                helpers.createProviderToValue('DesignModeService', designModeService),
+                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
             ]
         });
         helper = new ComponentTestHelper<DesignModeTogglerComponent>(cls, done);
@@ -36,6 +39,7 @@ describe('DesignModeToggler Component', () => {
     });
 
     it('emits event with value "true" when changing inDesignMode to On', (done) => {
+        designModeService.setInDesignMode(false);
         designModeService.onToggle.subscribe((designModeOn: boolean) => {
             expect(designModeOn).toBeTruthy();
             done();

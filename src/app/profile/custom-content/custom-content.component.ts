@@ -20,7 +20,6 @@ export class CustomContentComponent {
 
     content: string;
     originalContent: string;
-    editionMode = false;
     private modalInstance: any = null;
 
     constructor(private $uibModal: any,
@@ -35,9 +34,10 @@ export class CustomContentComponent {
         }, () => {
             if (this.profile) this.content = (<any>this.profile)[this.attribute];
         });
-        this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
-            this.editionMode = designModeOn;
-        });
+    }
+    
+    inEditMode() {
+        return this.designModeService.isInDesignMode();
     }
 
     openEdit() {

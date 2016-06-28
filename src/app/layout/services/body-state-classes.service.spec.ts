@@ -5,11 +5,13 @@ import {AuthEvents} from "./../../login/auth-events";
 
 import {EventEmitter} from 'ng-forward';
 import {DesignModeService} from './../../admin/layout-edit/designMode.service';
+import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
 
 describe("BodyStateClasses Service", () => {
 
     let currentStateName = "main";
     let bodyStateClasseService: BodyStateClassesService;
+    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
     let $rootScope: ng.IRootScopeService = <any>{},
         $document: ng.IDocumentService = <any>{},
         $state: ng.ui.IStateService = <any>{
@@ -20,7 +22,8 @@ describe("BodyStateClasses Service", () => {
         authService: any = helpers.mocks.authService,
         bodyEl: { className: string },
         bodyElJq: any,
-        designModeService = new DesignModeService();
+        
+        designModeService = new DesignModeService($localStorage);
 
 
 
