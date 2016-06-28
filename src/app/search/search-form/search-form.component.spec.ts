@@ -21,8 +21,8 @@ describe("Components", () => {
             helper = new ComponentTestHelper<SearchFormComponent>(cls, done);
         });
 
-        it("render a input for search query", () => {
-            expect(helper.find(".search-input").length).toEqual(1);
+        it("render a button that open a search query field", () => {
+            expect(helper.find(".btn-search-nav").length).toEqual(1);
         });
 
         it("go to search page when click on search button", () => {

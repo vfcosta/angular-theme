@@ -1,0 +1,107 @@
+/**
+* TODO: Remove the temporary reimport mixins
+*       Maybe the cause for this is in gulp/styles.js
+*       task on compile sass order.
+*/
+@import "../../layout/scss/mixins";
+
+@mixin search-wrap-btn {
+  @include border-radius(2px 0px 0px 2px);
+  @content;
+  font-size: 23px;
+  font-style: normal;
+  width: 45px;
+  text-align: center;
+  cursor: pointer;
+  height: 40px;
+  padding-top: 9px;
+
+  background-color: #e3e3e3;
+  &:hover {
+    background-color: #D1D1D1;
+  }
+
+  @include outline(none);
+}
+
+.top-search-wrap {
+  @include opacity(0);
+  @include transition(all);
+
+  position: absolute;
+  top: -65px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: #fff;
+  z-index: 10;
+
+  .tsw-inner {
+    position: relative;
+    padding: 15px;
+    max-width: 700px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  #top-search-close {
+    @include border-radius(2px 0px 0px 2px);
+    @include search-wrap-btn {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+    }
+
+    @include outline(none);
+  }
+
+  .btn-search {
+    display: inline;
+    float: right;
+
+    @include search-wrap-btn {
+      position: relative;
+      top: -40px;
+      left: 0px;
+    }
+
+  }
+
+  input[type="text"] {
+    @include border-radius(2px);
+    border: 0;
+    height: 40px;
+    padding: 0 10px 0 55px;
+    font-size: 18px;
+    width: 500px;
+    background-color: #efefef;
+    width: 100%;
+
+    @include outline(none);
+  }
+
+}
+
+.top-search-toggled {
+    @extend .top-search-wrap;
+    @include opacity(1);
+    position: fixed;
+    top: 0;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.btn-nav {
+  .btn-search-nav {
+    font-size: 25px;
+    color: #FFF;
+    cursor: pointer;
+    padding: 1px;
+  }
+}
+
+
+.search-form {
+  button[type="submit"] {
+    visibility: hidden;
+  }
+}
