@@ -11,8 +11,8 @@ import { DesignModeService } from "../../admin/layout-edit/designMode.service";
     templateUrl: 'app/layout/blocks/block.html',
     directives: [BlockEditionComponent]
 })
-@Inject("$uibModal", "$scope", "$state", "$rootScope", BlockService, NotificationService, 
-AuthService, SessionService, TranslatorService, DesignModeService)
+@Inject("$uibModal", "$scope", "$state", "$rootScope", BlockService, NotificationService,
+    AuthService, SessionService, TranslatorService, DesignModeService)
 export class BlockComponent {
 
     @Input() block: noosfero.Block;

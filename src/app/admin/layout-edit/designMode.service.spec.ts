@@ -3,8 +3,7 @@ import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
 
 describe('DesignMode Service', () => {
     let service: DesignModeService;
-
-    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };    
+    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
     beforeEach(() => {
         service = new DesignModeService($localStorage);
     });

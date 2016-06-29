@@ -12,7 +12,8 @@ import {DesignModeService} from '../../admin/layout-edit/designMode.service';
 @Inject("$uibModal", "$scope", ProfileService, NotificationService, DesignModeService)
 export class CustomContentComponent {
 
-    static $inject = ["DesignModeService"]; // @Inject doesn't works with uibModal.open
+    // @Inject doesn't works with uibModal.open
+    static $inject = ["DesignModeService"];
 
     @Input() attribute: string;
     @Input() profile: noosfero.Profile;
@@ -35,7 +36,7 @@ export class CustomContentComponent {
             if (this.profile) this.content = (<any>this.profile)[this.attribute];
         });
     }
-    
+
     inEditMode() {
         return this.designModeService.isInDesignMode();
     }

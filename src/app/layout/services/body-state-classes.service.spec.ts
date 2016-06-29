@@ -22,7 +22,6 @@ describe("BodyStateClasses Service", () => {
         authService: any = helpers.mocks.authService,
         bodyEl: { className: string },
         bodyElJq: any,
-        
         designModeService = new DesignModeService($localStorage);
 
 
@@ -177,7 +176,7 @@ describe("BodyStateClasses Service", () => {
 
     it("should add the class noosfero-design-on when designMode is changed to true", () => {
         let fnOnToggle: Function = null;
-        designModeService.onToggle = <any> {
+        designModeService.onToggle = <any>{
             subscribe: (fn: Function) => {
                 fnOnToggle = fn;
             },

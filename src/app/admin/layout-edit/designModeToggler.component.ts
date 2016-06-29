@@ -1,6 +1,6 @@
 import {Component, Inject} from 'ng-forward';
 import {DesignModeService} from './designMode.service';
-import {AuthService, AuthEvents} from '../../login'
+import {AuthService, AuthEvents} from '../../login';
 
 @Component({
     selector: 'noosfero-design-toggler',

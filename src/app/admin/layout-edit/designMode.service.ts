@@ -4,12 +4,13 @@ import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
 @Injectable()
 @Inject("$localStorage")
 export class DesignModeService {
+
     @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     isInDesignMode(): boolean {
         return this.$localStorage.settings.designModeOn;
     }
-    
+
     destroy() {
         delete this.$localStorage.settings;
         this.$localStorage.settings = {};

@@ -43,7 +43,6 @@ describe("Boxes Component", () => {
     let blockService = jasmine.createSpyObj("blockService", ["update"]);
     let state = jasmine.createSpyObj("state", ["current"]);
     state.current = { name: "" };
-    
 
     it("set isHomepage as false by default", () => {
         expect(helper.component.isHomepage).toBeFalsy();
