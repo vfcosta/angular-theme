@@ -53,4 +53,12 @@
     }
   }
 
+  .navbar {
+		.navbar-nav .btn-nav {
+			&:hover {
+	      background-color: $selected-color;
+	    }
+		}
+  }
+
 }
