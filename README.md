@@ -69,9 +69,9 @@ See some important folders bellow:
 
 **N.B.**
 
-1-The full name of the scss class should be used as the parameter for the command `npm config set angular-theme:`, like in _skin-mycustom_. DO NOT use the file name of the skin as the parameter.
+1. The full name of the scss class should be used as the parameter for the command `npm config set angular-theme:`, like in _skin-mycustom_. DO NOT use the file name of the skin as the parameter.
 
-2-The skin's file should be the named as the scss class without the word `skin`, preceded by an underline. Otherwise it will raise an error during `npm install`.
+2. The skin's file should be the named as the scss class without the word `skin`, preceded by an underline. Otherwise, it will raise an error during `npm install`.
 
 Example: _mycustom.
 
