@@ -1,0 +1,14 @@
+{
+  "name": "angular-participa-consulta",
+  "version": "1.0.0",
+  "description": "The theme for 'Consulta publica' community specific colors and UI changes",
+  "config": {
+    "theme": "angular-participa-consulta",
+    "skin": "skin-yellow"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

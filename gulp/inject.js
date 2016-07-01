@@ -57,7 +57,12 @@ gulp.task('inject-skin', function () {
 
   if(conf.paths.skin) {
 
-    $.util.log('Configured theme skin:', conf.paths.skin);
+    var jsPaths = {
+      src: path.join(conf.paths.src,'./noosfero.js'),
+      dest: conf.paths.src,
+    };
+
+    $.util.log('Configuring theme skin:', conf.paths.skin, '...');
 
     var replaceSkin = transform(function(filename) {
       return map(function(file, next) {
@@ -67,9 +72,14 @@ gulp.task('inject-skin', function () {
       });
     });
 
-    gulp.src(path.join(conf.paths.src,'./noosfero.js'))
+    if (conf.isBuild()) {
+      jsPaths.src = path.join(conf.paths.dist, 'scripts', 'app-*.js');
+      jsPaths.dest = path.join(conf.paths.dist, 'scripts');
+    }
+
+    gulp.src(jsPaths.src)
         .pipe(replaceSkin)
-        .pipe(gulp.dest(conf.paths.src));
+        .pipe(gulp.dest(jsPaths.dest));
   }
 
 });

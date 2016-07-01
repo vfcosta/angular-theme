@@ -53,7 +53,7 @@ See some important folders bellow:
 
 ## Change skin
 
-- Create an any scss file into: `app/layout/skins/`
+- Create an any scss file into: `app/layout/scss/skins/`
   > **Suggestion:** Create a `sass` file partial. Something like: **`_mycustom.scss`**.
 
 - Extend your skin css class from `%skin-base` scss placeholder selector. Something like this:
@@ -66,6 +66,14 @@ See some important folders bellow:
 ```
 - Configure application to use the new theme, e.g.:
 `npm config set angular-theme:skin skin-mycustom`
+OR add the default skin property to a specific `package.json` file (ONLY PERFORM A BUILD), like this:
+
+```json
+"config": {
+  "skin": "skin-yellow"
+}
+```
+
 
 **N.B.**
 
