@@ -20,6 +20,7 @@ import {StatisticsBlockComponent} from "../layout/blocks/statistics/statistics-b
 import {PersonTagsPluginInterestsBlockComponent} from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
 import {TagsBlockComponent} from "../layout/blocks/tags/tags-block.component";
 import {CustomContentComponent} from "../profile/custom-content/custom-content.component";
+import {RecentActivitiesPluginActivitiesBlockComponent} from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
 
 import {MembersBlockComponent} from "../layout/blocks/members/members-block.component";
 import {CommunitiesBlockComponent} from "../layout/blocks/communities/communities-block.component";
@@ -87,7 +88,7 @@ export class EnvironmentContent {
  * @name main.Main
  * @requires AuthService, Session, Notification, ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
  * MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock, MembersBlock,
- * NoosferoTemplate, DateFormat, RawHTMLBlock, PersonTagsPluginInterestsBlock
+ * NoosferoTemplate, DateFormat, RawHTMLBlock, PersonTagsPluginInterestsBlock, RecentActivitiesPluginActivitiesBlock,
  * @description
  *  The Main controller for the Noosfero Angular Theme application.
  *
@@ -106,7 +107,7 @@ export class EnvironmentContent {
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
-        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, BlockComponent
+        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent, BlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
