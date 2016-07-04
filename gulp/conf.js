@@ -55,12 +55,7 @@ exports.themeExists = function (path) {
 * @param skin The skin name passed by arg to gulp task
 */
 exports.skinExists = function (skin) {
-
-    //Skip skin verification on 'build' task
-    // if(exports.isBuild()){
-    //   return;
-    // }
-
+  
     var skinPath, prefixPath = '';
     var skinFile = skin+'.scss';
     if (/skin-/.test(skin)) {
