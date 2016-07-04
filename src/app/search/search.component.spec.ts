@@ -8,7 +8,7 @@ describe("Components", () => {
     describe("Search Component", () => {
 
         let helper: ComponentTestHelper<SearchComponent>;
-        let stateParams = { query: 'query' };
+        let stateParams = { query: 'query', per_page: 20 };
         let articleService = jasmine.createSpyObj("ArticleService", ["search"]);
         let result = Promise.resolve({ data: [{ id: 1 }], headers: (param: string) => { return 1; } });
         articleService.search = jasmine.createSpy("search").and.returnValue(result);
@@ -30,7 +30,7 @@ describe("Components", () => {
         });
 
         it("load first page with search results", () => {
-            expect(articleService.search).toHaveBeenCalledWith({ query: 'query', per_page: 10, page: 0 });
+            expect(articleService.search).toHaveBeenCalledWith({ query: 'query', per_page: 20, page: 0 });
         });
 
         it("display search results", () => {
