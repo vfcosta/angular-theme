@@ -1,3 +1,5 @@
+$green-color: #6e9e7b;
+
 .search-results {
   .summary {
     color: #bbbbbb;
@@ -13,10 +15,10 @@
     }
     .info {
       .profile {
-        color: #6e9e7b;
+        color: $green-color;
       }
       .time {
-        color: #6e9e7b;
+        color: $green-color;
         font-size: 12px;
       }
       .bullet-separator {
