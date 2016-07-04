@@ -154,4 +154,8 @@ gulp.task('noosfero', ['html'], function () {
     return merge(layouts, theme, index);
 });
 
-gulp.task('build', ['ckeditor', 'html', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero']);
+gulp.task('inject-skin-build', ['html'], function () {
+  gulp.start('inject-skin');
+});
+
+gulp.task('build', ['ckeditor', 'html', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero', 'inject-skin-build']);
