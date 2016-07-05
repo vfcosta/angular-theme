@@ -1,4 +1,4 @@
-import {Component, Inject} from 'ng-forward';
+import {Component, Inject, Input} from 'ng-forward';
 import {DesignModeService} from './designMode.service';
 import {AuthService, AuthEvents} from '../../login';
 
@@ -6,7 +6,7 @@ import {AuthService, AuthEvents} from '../../login';
     selector: 'noosfero-design-toggler',
     templateUrl: 'app/admin/layout-edit/designModeToggler.html'
 })
-@Inject(DesignModeService)
+@Inject(DesignModeService, AuthService, '$sce')
 export class DesignModeTogglerComponent {
 
     @Input() iconClass: string = '';
@@ -14,16 +14,16 @@ export class DesignModeTogglerComponent {
     @Input() offLabel: string = '';
     @Input() onLabel: string = '';
 
-	private _inDesignMode: boolean = false;
+    private _inDesignMode: boolean = false;
 
-    constructor(private designModeService: DesignModeService, private authService: AuthService,  private $sce: ng.ISCEService) {
+    constructor(private designModeService: DesignModeService, private authService: AuthService, private $sce: ng.ISCEService) {
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.designModeService.destroy();
         });
     }
 
     get icon(): string {
-        if (this.iconClass && this.iconClass.trim().length > 0 ) {
+        if (this.iconClass && this.iconClass.trim().length > 0) {
             return '<i class=\'design-toggle-icon ' + this.iconClass + '\'></i>';
         }
         else {
