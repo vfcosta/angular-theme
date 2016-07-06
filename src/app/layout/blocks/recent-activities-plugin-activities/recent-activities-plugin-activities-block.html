@@ -1,13 +1,14 @@
-<div deckgrid source="ctrl.activities" class="deckgrid">
-  <div class="a-card panel media">
-      <div class="header media-body">
-        <h5 class="title media-heading" ng-bind="card.description"></h5>
-
-        <div class="subheader">
-          <span class="time">
-            <i class="fa fa-clock-o"></i> <span am-time-ago="card.created_at | dateFormat"></span>
-          </span>
-        </div>
-      </div>
+<div class="deckgrid recent-activities-block">
+  <div ng-repeat="activity in ctrl.activities" class="a-card panel media">
+    <div class="header media-body">
+      <h5 class="title media-heading">
+        <a ng-href="/{{activity.user.identifier}}">{{activity.user.name}}</a>&nbsp;<ng-include src="ctrl.getActivityTemplate(activity)"></ng-include>
+      </h5>
+    </div>
+    <div class="subheader">
+      <span class="time">
+        <i class="fa fa-clock-o"></i> <span am-time-ago="activity.created_at | dateFormat"></span>
+      </span>
+    </div>
   </div>
 </div>

@@ -17,16 +17,27 @@ export class RecentActivitiesPluginActivitiesBlockComponent {
 
     constructor(private blockService: BlockService, private $state: any) { }
 
+    getActivityTemplate(activity: any) {
+        return 'app/layout/blocks/recent-activities-plugin-activities/activities/' + activity.verb + '.html';
+    }
+
+    urlFor(params: any) {
+        let url = '//' + params.host;
+        if (params.port) {
+              url += ':' + params.port;
+        }
+        url += '/' + params.profile + '/';
+        if (params.page) {
+            url += params.page.join('/');
+        }
+        return url;
+    }
+
     ngOnInit() {
         this.profile = this.owner;
         this.activities = [];
         this.blockService.getApiContent(this.block).then((content: any) => {
-            let activities: any = [];
-            for (let i = 0; i < content.activities.length; i++) {
-                let activity = content.activities[i];
-                activities.push({ created_at: activity.created_at, description: 'TODO' });
-            }
-            this.activities = activities.slice();
+            this.activities = content.activities;
         });
     }
 }
