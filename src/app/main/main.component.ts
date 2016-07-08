@@ -115,7 +115,7 @@ export class EnvironmentContent {
         "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
         "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
-        "angular-click-outside", "toggle-switch", "ngTagCloud", "noosfero.init"]
+        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch"]
 })
 @StateConfig([
     {

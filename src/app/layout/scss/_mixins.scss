@@ -4,6 +4,12 @@
 	background-clip: padding-box; /* stops bg color from leaking outside the border: */
 }
 
+@mixin box-shadow($args...) {
+	-webkit-box-shadow: $args;
+	-moz-box-shadow: $args;
+	box-shadow: $args;
+}
+
 @mixin checkbox-mark($width, $height, $top, $left, $bg, $border, $content: "", $cursor: pointer, $position: absolute) {
 	width: $width;
 	height: $height;
@@ -47,6 +53,16 @@
 		outline-style: $style;
 		outline-width: $width;
 	}
+}
+
+@mixin not-select() {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
 }
 
 @mixin keyframes($animation-name) {

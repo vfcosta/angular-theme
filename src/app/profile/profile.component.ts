@@ -10,7 +10,7 @@ import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 import {NotificationService} from "../shared/services/notification.service";
 import {MyProfileComponent} from "./myprofile.component";
 import {ProfileActionsComponent} from "./profile-actions.component";
-import {ProfileToolbarComponent} from "./profile-toolbar.component";
+import {ConfigBarComponent} from "./config-bar.component";
 /**
  * @ngdoc controller
  * @name profile.Profile
@@ -44,8 +44,8 @@ import {ProfileToolbarComponent} from "./profile-toolbar.component";
                 controllerAs: "vm"
             },
             "toolbar@main": {
-                templateUrl: "app/profile/toolbar.html",
-                controller: ProfileToolbarComponent,
+                templateUrl: "app/profile/configbar.html",
+                controller: ConfigBarComponent,
                 controllerAs: "vm"
             }
         }
@@ -61,8 +61,8 @@ import {ProfileToolbarComponent} from "./profile-toolbar.component";
                 controllerAs: "vm"
             },
             "toolbar@main": {
-                templateUrl: "app/profile/toolbar.html",
-                controller: ProfileToolbarComponent,
+                templateUrl: "app/profile/configbar.html",
+                controller: ConfigBarComponent,
                 controllerAs: "vm"
             }
         }
@@ -118,8 +118,8 @@ import {ProfileToolbarComponent} from "./profile-toolbar.component";
                 controllerAs: "vm"
             },
             "toolbar@main": {
-                templateUrl: "app/profile/toolbar.html",
-                controller: ProfileToolbarComponent,
+                templateUrl: "app/profile/configbar.html",
+                controller: ConfigBarComponent,
                 controllerAs: "vm"
             }
         }
