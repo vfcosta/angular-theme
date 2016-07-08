@@ -22,7 +22,7 @@
         <span class="bullet-separator">•</span>
         {{"comment.reply" | translate}}
       </a>
-      <a href="#" (click)="ctrl.remove()" class="action small text-muted remove" ng-if="ctrl.allowRemove()">
+      <a permission="ctrl.comment.permissions" permission-action="allow_destroy" href="#" (click)="ctrl.remove()" class="action small text-muted remove" ng-if="ctrl.allowRemove()">
         <span class="bullet-separator">•</span>
         {{"comment.remove" | translate}}
       </a>
