@@ -80,5 +80,13 @@ namespace noosfero {
         custom_footer: string;
 
         permissions: string[];
+
+        /**
+         * @ngdoc property
+         * @name layout_template
+         * @propertyOf noofero.Profile
+         * @returns {string} The Profile layout template (e.g.: "rightbar", "default")
+         */
+        layout_template: string;
     }
 }

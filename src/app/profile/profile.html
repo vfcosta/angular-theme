@@ -1,7 +1,13 @@
 <div class="profile-container">
-  <custom-content class="profile-header" [label]="'profile.custom_header.label'" [attribute]="'custom_header'" [profile]="vm.profile"></custom-content>
-  <div class="row">
-    <noosfero-boxes ng-if="vm.boxes" [boxes]="vm.boxes" [owner]="vm.profile"></noosfero-boxes>
-  </div>
+  <custom-content class="profile-header"
+                  [label]="'profile.custom_header.label'"
+                  [attribute]="'custom_header'"
+                  [profile]="vm.profile">
+  </custom-content>
+  <noosfero-boxes ng-if="vm.boxes"
+                  [layout]="vm.profile.layout_template"
+                  [boxes]="vm.boxes"
+                  [owner]="vm.profile" class="row">
+  </noosfero-boxes>
   <custom-content class="profile-footer" [label]="'profile.custom_footer.label'" [attribute]="'custom_footer'" [profile]="vm.profile"></custom-content>
 </div>

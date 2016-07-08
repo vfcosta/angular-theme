@@ -15,5 +15,14 @@ namespace noosfero {
          */
         id: number;
         settings: any
+
+        /**
+         * @ngdoc property
+         * @name layout_template
+         * @propertyOf noofero.Environment
+         * @returns {string} The Environment layout (e.g. default, rightbar)
+         */
+        layout_template: string;
     }
 }
+
