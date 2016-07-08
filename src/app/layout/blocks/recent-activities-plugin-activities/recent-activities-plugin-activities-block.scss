@@ -3,10 +3,21 @@
 }
 
 .recent-activities-block {
-  img {
+  img, .upimg {
     padding: 1px;
     border: 1px solid #ccc;
     margin-right: 2px;
     margin-top: 2px;
+  }
+
+  .upimg {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+
+    span {
+      display: none;
+    }
   }
 }
