@@ -1,23 +1,21 @@
-import {Component, Inject} from 'ng-forward';
+import {Component, Inject, Input} from 'ng-forward';
 import {DesignModeService} from './designMode.service';
 import {AuthService, AuthEvents} from '../../login';
 
 @Component({
-    selector: 'noosfero-design-toggler',
+    selector: 'design-toggler',
     templateUrl: 'app/admin/layout-edit/designModeToggler.html'
 })
-@Inject(DesignModeService, AuthService)
+@Inject(DesignModeService, AuthService, '$sce')
 export class DesignModeTogglerComponent {
 
-    icon: string = "&nbsp;<i class='glyphicon glyphicon-wrench'></i>&nbsp;";
+    private _inDesignMode: boolean = false;
 
-    constructor(private designModeService: DesignModeService, private authService: AuthService) {
+    constructor(private designModeService: DesignModeService, private authService: AuthService, private $sce: ng.ISCEService) {
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.designModeService.destroy();
         });
     }
-
-    private _inDesignMode: boolean = false;
 
     get inDesignMode(): boolean {
         return this.designModeService.isInDesignMode();

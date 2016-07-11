@@ -1,8 +1,1 @@
-<toggle-switch
-    html="true"
-    ng-model="ctrl.inDesignMode"
-    on-label="{{'designMode.toggle.ON' | translate}}"
-    off-label="{{'designMode.toggle.OFF' | translate}}"
-    class="switch-small"
-    knob-label="{{ ctrl.icon + ('designMode.label' | translate) }}">
-</toggle-switch>
+<switch id="enabled" name="enabled" ng-model="ctrl.inDesignMode" on="ON" off="OFF" class="green"></switch>

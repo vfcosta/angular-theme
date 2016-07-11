@@ -1,17 +1,18 @@
 import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
+import {INgForwardJQuery} from 'ng-forward/cjs/util/jqlite-extensions';
 import * as helpers from '../../../spec/helpers';
 import {DesignModeTogglerComponent} from './designModeToggler.component';
 import {DesignModeService} from './designMode.service';
 import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
 
 describe('DesignModeToggler Component', () => {
-    const htmlTemplate: string = '<noosfero-design-toggler></noosfero-design-toggler>';
+    const htmlTemplate: string = '<design-toggler></design-toggler>';
 
     let helper: ComponentTestHelper<DesignModeTogglerComponent>;
     beforeEach(() => {
         angular.mock.module('templates');
         angular.mock.module('ngSanitize');
-        angular.mock.module('toggle-switch');
+        angular.mock.module('uiSwitch');
     });
 
     let designModeService: DesignModeService;
@@ -30,12 +31,12 @@ describe('DesignModeToggler Component', () => {
     });
 
     it('changes css classes representing the switch is on or off', () => {
-        expect(helper.debugElement.query('div.switch-animate').hasClass('switch-off')).toBeTruthy();
-        expect(helper.debugElement.query('div.switch-animate').hasClass('switch-on')).toBeFalsy();
+        let switchEl: INgForwardJQuery = helper.debugElement.query('span.switch');
+
+        expect(switchEl.hasClass('checked')).toBeFalsy();
         helper.component.inDesignMode = true;
         helper.detectChanges();
-        expect(helper.debugElement.query('div.switch-animate').hasClass('switch-on')).toBeTruthy();
-        expect(helper.debugElement.query('div.switch-animate').hasClass('switch-off')).toBeFalsy();
+        expect(switchEl.hasClass('checked')).toBeTruthy();
     });
 
     it('emits event with value "true" when changing inDesignMode to On', (done) => {

@@ -1,0 +1,55 @@
+$off-text: #949494;
+$off-color: #EFEFEF;
+$blue-color: #36B4F6;
+$red-color: #DF3B3A;
+
+body.noosfero-design-on {
+
+    div.content-wrapper {
+        opacity: 0.5;
+    }
+}
+
+.switch {
+  @include not-select();
+  background-color: $off-color;
+
+  &[on][off] {
+    width: 60px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.checked small {
+      left: initial;
+      right: 0px;
+  }
+
+  &.blue.checked {
+    background: $blue-color;
+    border-color: $blue-color;
+  }
+
+  &.red.checked {
+    background: $red-color;
+    border-color: $red-color;
+  }
+
+  %switch-label {
+    font-weight: bold;
+  }
+
+  .on {
+    @extend %switch-label;
+  }
+
+  .off {
+      @extend %switch-label;
+      right: 2px;
+      top: 25%;
+      color: $off-text;
+      text-align: center;
+  }
+}

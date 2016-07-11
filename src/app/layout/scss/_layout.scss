@@ -35,16 +35,3 @@
 		padding: 0 20px 20px 20px;
 	}
 }
-
-ul.nav > li.toggler-container {
-	position: relative;
-	padding-top: 12px;
-}
-
-.noosfero-main-toolbar {
-	padding: 5px;
-	@include make-row();
-	margin-left: 0px;
-	margin-right: 0px;
-	background-color: #edecec;
-}

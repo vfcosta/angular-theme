@@ -2,14 +2,14 @@ import {Component, Inject, provide} from "ng-forward";
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
-    selector: "profile-toolbar",
-    templateUrl: "app/profile/toolbar.html",
+    selector: "configbar",
+    templateUrl: "app/profile/configbar.html",
     providers: [
         provide('profileService', { useClass: ProfileService })
     ]
 })
 @Inject(ProfileService)
-export class ProfileToolbarComponent {
+export class ConfigBarComponent {
     profile: noosfero.Profile;
     parentId: number;
 
