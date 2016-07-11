@@ -193,7 +193,6 @@ describe("BodyStateClasses Service", () => {
 
         service.start();
 
-        debugger;
         designModeService.setInDesignMode(true);
 
 
