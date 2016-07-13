@@ -15,11 +15,18 @@ describe("Components", () => {
 
         beforeEach(angular.mock.module("templates"));
 
+        let profileService = jasmine.createSpyObj("ProfileService", ["isMember", "addMember", "removeMember"]);
+        profileService.isMember = jasmine.createSpy("isMember").and.returnValue(Promise.resolve(false));
+
         @Component({
             selector: 'test-container-component',
             template: htmlTemplate,
             directives: [ProfileImageBlockComponent],
-            providers: helpers.provideFilters("translateFilter")
+            providers: [
+                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
+                helpers.createProviderToValue('ProfileService', profileService),
+                helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
+            ].concat(helpers.provideFilters("translateFilter"))
         })
         class BlockContainerComponent {
             block = { type: 'Block' };
@@ -42,5 +49,42 @@ describe("Components", () => {
             });
         });
 
+        it("display button to join community", (done: Function) => {
+            helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
+                let elProfile = fixture.debugElement.componentViewChildren[0];
+                expect(elProfile.query('.actions .join').length).toEqual(1);
+                done();
+            });
+        });
+
+        it("display button to leave community", (done: Function) => {
+            helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
+                let elProfile = fixture.debugElement.componentViewChildren[0];
+                elProfile.componentInstance['isMember'] = true;
+                fixture.detectChanges();
+                expect(elProfile.query('.actions .leave').length).toEqual(1);
+                done();
+            });
+        });
+
+        it("join community", (done: Function) => {
+            helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
+                let elProfile = fixture.debugElement.componentViewChildren[0];
+                profileService.addMember = jasmine.createSpy("addMember").and.returnValue(Promise.resolve({ data: {} }));
+                elProfile.componentInstance.join();
+                expect(profileService.addMember).toHaveBeenCalled();
+                done();
+            });
+        });
+
+        it("leave community", (done: Function) => {
+            helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
+                let elProfile = fixture.debugElement.componentViewChildren[0];
+                profileService.removeMember = jasmine.createSpy("removeMember").and.returnValue(Promise.resolve({ data: {} }));
+                elProfile.componentInstance.leave();
+                expect(profileService.removeMember).toHaveBeenCalled();
+                done();
+            });
+        });
     });
 });

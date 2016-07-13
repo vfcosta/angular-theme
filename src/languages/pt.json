@@ -1,6 +1,10 @@
 {
   "noosfero.name" : "Noosfero",
   "blocks.profile_image.control_panel": "Painel de Controle",
+  "blocks.profile_image.join": "Entrar na comunidade",
+  "blocks.profile_image.leave": "Sair da comunidade",
+  "blocks.profile_image.join.moderation.title": "Bom trabalho!",
+  "blocks.profile_image.join.moderation.message": "Sua participação está pendente de aprovação",
   "navbar.profile": "Perfil",
   "navbar.settings": "Configurações",
   "navbar.logout": "Sair",
