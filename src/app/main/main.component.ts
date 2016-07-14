@@ -47,6 +47,8 @@ import {PermissionDirective} from "../shared/components/permission/permission.di
 import {SearchComponent} from "../search/search.component";
 import {SearchFormComponent} from "../search/search-form/search-form.component";
 
+import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../shared/services/events-hub.service";
+import { NoosferoEventsHubKnownEventNames } from "../events-hub-known-events";
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
@@ -62,12 +64,20 @@ import {SearchFormComponent} from "../search/search-form/search-form.component";
     templateUrl: "app/main/main.html",
     providers: [AuthService, SessionService]
 })
-@Inject(BodyStateClassesService)
+@Inject(BodyStateClassesService, EVENTS_HUB_KNOW_EVENT_NAMES)
 export class MainContentComponent {
 
     public themeSkin: string = 'skin-whbl';
 
-    constructor(private bodyStateClassesService: BodyStateClassesService) {
+    constructor(
+        private bodyStateClassesService: BodyStateClassesService,
+        eventsNames: NoosferoEventsHubKnownEventNames,
+        eventsHubService: EventsHubService
+        ) {
+        try {
+            console.log('Events Names', eventsNames);
+            eventsHubService.subscribeToEvent(eventsNames.IMAGE_PROFILE_UPDATED, () => console.log('Event ImageProfileUpdate emitted!'));
+        } catch (e) { }
         bodyStateClassesService.start({
             skin: this.themeSkin
         });

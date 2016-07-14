@@ -1,14 +1,20 @@
 import { Injectable, Inject, OpaqueToken, EventEmitter } from 'ng-forward';
 
-export const EVENTS_HUB_KNOWN_LIST = new OpaqueToken('EVENTS_HUB_KNOWN_LIST');
+export const EVENTS_HUB_KNOW_EVENT_NAMES = new OpaqueToken('EVENTS_HUB_KNOW_EVENT_NAMES');
+
+export interface EventsHubKnownEventNames {
+    getNames(): string[];
+}
 
 @Injectable()
-@Inject(EVENTS_HUB_KNOWN_LIST)
+@Inject(EVENTS_HUB_KNOW_EVENT_NAMES)
 export class EventsHubService {
 
     private emitters: Map<string, EventEmitter<any>>;
+    private knownEvents: string[] = [];
 
-    constructor(private knownEvents: string[]) {
+    constructor(private eventsHubKnownEventNames: EventsHubKnownEventNames) {
+        this.knownEvents = eventsHubKnownEventNames.getNames();
         this.emitters = new Map<string, EventEmitter<any>>();
         this.setupEmitters();
     }

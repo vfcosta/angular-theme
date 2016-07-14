@@ -24,11 +24,11 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     constant("AuthEvents", AuthEvents);
 
 
-import { EVENTS_HUB_KNOWN_LIST } from './shared/services/events-hub.service';
-import { EVENTS_HUB_KNOWN_EVENTS_NAMES } from './events-hub-known-events.constants';
+import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
+import { NoosferoEventsHubKnownEventNames } from './events-hub-known-events';
 
 bootstrap(MainComponent,
     [
-        provide(EVENTS_HUB_KNOWN_LIST, { useConstant: Object.getOwnPropertyNames(EVENTS_HUB_KNOWN_EVENTS_NAMES) })
+        provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoEventsHubKnownEventNames })
     ]
 );
