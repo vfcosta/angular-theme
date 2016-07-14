@@ -25,10 +25,10 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
 
 
 import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
-import { NoosferoEventsHubKnownEventNames } from './events-hub-known-events';
+import { NoosferoKnownEvents } from './known-events';
 
 bootstrap(MainComponent,
     [
-        provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoEventsHubKnownEventNames })
+        provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
     ]
 );

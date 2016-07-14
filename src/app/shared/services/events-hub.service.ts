@@ -6,6 +6,10 @@ export interface EventsHubKnownEventNames {
     getNames(): string[];
 }
 
+function isEventsHubKnownEventNames(object: any): object is EventsHubKnownEventNames {
+    return 'getNames' in object;
+}
+
 @Injectable()
 @Inject(EVENTS_HUB_KNOW_EVENT_NAMES)
 export class EventsHubService {
@@ -13,8 +17,13 @@ export class EventsHubService {
     private emitters: Map<string, EventEmitter<any>>;
     private knownEvents: string[] = [];
 
-    constructor(private eventsHubKnownEventNames: EventsHubKnownEventNames) {
-        this.knownEvents = eventsHubKnownEventNames.getNames();
+    constructor(private eventsHubKnownEventNames: EventsHubKnownEventNames | string[]) {
+        if (isEventsHubKnownEventNames(eventsHubKnownEventNames)) {
+            this.knownEvents = eventsHubKnownEventNames.getNames();
+        } else if (Array.isArray(eventsHubKnownEventNames)) {
+            this.knownEvents = eventsHubKnownEventNames;
+        }
+
         this.emitters = new Map<string, EventEmitter<any>>();
         this.setupEmitters();
     }
