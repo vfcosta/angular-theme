@@ -4,8 +4,9 @@ import {TestComponentBuilder, ComponentFixture} from "ng-forward/cjs/testing/tes
 
 import {quickCreateComponent} from "../../spec/helpers";
 import {getAngularServiceFactory} from "../../spec/helpers";
+import { EVENTS_HUB_KNOW_EVENT_NAMES } from "../shared/services/events-hub.service";
 
-describe("MainComponent", function() {
+describe("MainComponent", function () {
 
     let localFixture: ComponentFixture;
     let $state: angular.ui.IStateService;
@@ -34,6 +35,14 @@ describe("MainComponent", function() {
                 {
                     useValue: environmentService
                 }),
+            provide(EVENTS_HUB_KNOW_EVENT_NAMES,
+                {
+                    useValue: [
+                        'IMAGE_PROFILE_UPDATED',
+                        'PROFILE_INFO_UPDATED',
+                        'ARTICLE_UPDATED'
+                    ]
+                }),
         ]
     })
     class MainComponentParent {
@@ -57,7 +66,7 @@ describe("MainComponent", function() {
                 // navigates to the environment home
                 $state.go("main.environment.home");
                 localFixture.detectChanges();
-                // after changes were detected it checks the current $state route 
+                // after changes were detected it checks the current $state route
                 expect($state.current.name).toEqual("main.environment.home");
                 done();
             });
