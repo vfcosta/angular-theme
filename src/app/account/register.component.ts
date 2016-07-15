@@ -1,6 +1,7 @@
 import { Inject, Input, Component, Output, EventEmitter, provide } from 'ng-forward';
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 import { NotificationService } from "./../shared/services/notification.service";
+import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
 
 @Component({
     selector: 'noosfero-register',
@@ -10,12 +11,19 @@ import { NotificationService } from "./../shared/services/notification.service";
     ]
 })
 
-@Inject("$state", RegisterService, NotificationService)
+@Inject("$state", RegisterService, NotificationService, EnvironmentService)
 export class RegisterComponent {
     @Input() account: any;
+    environment: noosfero.Environment;
 
-    constructor(private $state: ng.ui.IStateService, public registerService: RegisterService, private notificationService: NotificationService) {
+    constructor(
+        private $state: ng.ui.IStateService,
+        public registerService: RegisterService,
+        private notificationService: NotificationService,
+        private environmentService: EnvironmentService
+    ) {
         this.account = {};
+        this.environment = environmentService.getCurrentEnvironment();
     }
 
     signup() {

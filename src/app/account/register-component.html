@@ -1,40 +1,51 @@
 <div class="register-page">
   <div class="welcome-message">
     <h1>{{"account.register.welcomeMessageTitle" | translate }}</h1>
-    <p>{{"account.register.welcomeMessage" | translate }}</p>
-    <p>{{"account.register.seeMoreMessage" | translate}}<a href="#">{{"account.register.informationsMessage" | translate}}</a></p>
+    <div class="environment-signup-intro" ng-bind-html="ctrl.environment.signup_intro"></div>
+    <p>{{"account.register.seeMoreMessage" | translate}} <a href="#">{{"account.register.informationsMessage" | translate}} </a></p>
   </div>
   <form>
     <div class="row">
       <div class="col-md-6 register-field">
-        <label for="name">{{"account.register.firstNameLabel" | translate }}</label>
-        <input type="text" class="form-control" id="name" placeholder="joao" ng-model="ctrl.account.name">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-male"></i><i class="fa fa-female"></i></span>
+          <input type="text" class="form-control" id="name" placeholder="{{'account.register.firstNameLabel' | translate }}" ng-model="ctrl.account.name">
+        </div>
       </div>
 
       <div class="col-md-6 register-field">
-        <label for="lastName">{{"account.register.lastNameLabel" | translate }}</label>
-        <input type="text" class="form-control" id="lastName" placeholder="silva" ng-model="ctrl.account.lastName">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-male"></i><i class="fa fa-female"></i></span>
+          <input type="text" class="form-control" id="lastName" placeholder="{{'account.register.lastNameLabel' | translate }}" ng-model="ctrl.account.lastName">
+        </div>
       </div>
 
       <div class="col-md-12 register-field">
-        <label for="login">{{"account.register.usernameLabel" | translate }}</label>
-        <input type="text" class="form-control" id="login" placeholder="username" ng-model="ctrl.account.login">
-        <p class="light-text">ex: ola.coop.br/joaosilva</p>
+        <div class="input-group">
+          <span class="input-group-addon" style="font-weight: bold;"><i class="fa fa-globe"></i>&nbsp;http://ola.coop.br/</span>
+          <input type="text" class="form-control" id="login" placeholder="{{'account.register.usernameLabel' | translate }}" ng-model="ctrl.account.login">
+        </div>
       </div>
 
       <div class="col-md-12 register-field">
-        <label for="email">{{"account.register.emailLabel" | translate }}</label>
-        <input type="text" class="form-control" id="email" placeholder="Email" ng-model="ctrl.account.email">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+          <input type="text" class="form-control" id="email" placeholder="{{'account.register.emailLabel' | translate }}" ng-model="ctrl.account.email">
+        </div>
       </div>
 
       <div class="col-md-6 register-field">
-        <label for="password">{{"account.register.passwordLabel" | translate }}</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" ng-model="ctrl.account.password">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+          <input type="password" class="form-control" id="password" placeholder="{{'account.register.passwordLabel' | translate }}" ng-model="ctrl.account.password">
+        </div>
       </div>
 
       <div class="col-md-6 register-field">
-        <label for="password-confirmation">{{"account.register.passwordConfirmationLabel" | translate}}</label>
-        <input type="password" class="form-control" id="passwordConfirmation" placeholder="Password Confirmation" ng-model="ctrl.account.password_confirmation">
+        <div class="input-group">
+          <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+          <input type="password" class="form-control" id="passwordConfirmation" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" ng-model="ctrl.account.password_confirmation">
+        </div>
       </div>
 
       <div class="col-md-12">
