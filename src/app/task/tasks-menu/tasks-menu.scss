@@ -1,0 +1,32 @@
+.tasks-menu {
+  position: relative;
+  margin-right: 0;
+  .badge {
+    position: absolute;
+    top: 1px;
+    right: 8px;
+    border-radius: 6px;
+  }
+  i {
+    color: #FFF;
+  }
+  .task-list {
+    width: 500px;
+    padding: 16px 16px 8px 16px;
+    .task {
+      .time {
+        color: #c1c1c1;
+        font-size: 12px;
+        .bullet-separator {
+          font-size: 10px;
+          color: #d1d1d1;
+        }
+      }
+    }
+    .all-tasks {
+      text-align: center;
+      width: 100%;
+      display: inline-block;
+    }
+  }
+}

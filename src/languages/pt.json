@@ -128,4 +128,5 @@
   "messages.invalid.minlength": "O valor é muito curto",
   "messages.invalid.email": "Informe um email válido",
   "messages.invalid.passwordMatch": "As senhas não coincidem"
+  "tasks.menu.all": "Todas as tarefas"
 }

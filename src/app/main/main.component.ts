@@ -52,6 +52,8 @@ import { SearchFormComponent } from "../search/search-form/search-form.component
 
 import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../known-events";
+import { TasksMenuComponent } from "../task/tasks-menu/tasks-menu.component";
+
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
@@ -118,16 +120,16 @@ export class EnvironmentContent {
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
-        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent
+        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, RegisterService,
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
         "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor",
         "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
         "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
-        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch", "ngPassword"]
+        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch"]
 })
 @StateConfig([
     {
@@ -148,6 +150,7 @@ export class EnvironmentContent {
         url: '/',
         component: EnvironmentComponent,
         name: 'main.environment',
+        abstract: true,
         views: {
             "content": {
                 templateUrl: "app/environment/environment.html",

@@ -1,0 +1,20 @@
+<li class="btn-nav tasks-menu" uib-dropdown  ng-show="ctrl.total > 0">
+  <a href="#" uib-dropdown-toggle>
+    <i class="fa fa-bell-o fa-fw fa-2x"></i>
+    <span class="badge">{{ctrl.total}}</span>
+  </a>
+  <ul class="dropdown-menu task-list" uib-dropdown-menu>
+    <li ng-repeat="(target, tasks) in ctrl.tasks | groupBy: 'target.name'">
+      {{target}}
+      <a href="#" ng-repeat="task in tasks | orderBy: 'created_at':true" class="task">
+        {{task.type}}
+        {{task.requestor.name}}
+        {{task.target.name}}
+        <span class="time">
+          <span class="bullet-separator">•</span> <span am-time-ago="task.created_at | dateFormat"></span>
+        </span>
+      </a>
+    </li>
+    <a href="#" class="all-tasks btn btn-default btn-xs">{{"tasks.menu.all" | translate}}</a>
+  </ul>
+</li>
