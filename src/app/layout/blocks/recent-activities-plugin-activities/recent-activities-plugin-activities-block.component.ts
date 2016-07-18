@@ -18,7 +18,12 @@ export class RecentActivitiesPluginActivitiesBlockComponent {
     constructor(private blockService: BlockService, private $state: any) { }
 
     getActivityTemplate(activity: any) {
-        return 'app/layout/blocks/recent-activities-plugin-activities/activities/' + activity.verb + '.html';
+        if (activity.label === 'events') {
+          return 'app/layout/blocks/recent-activities-plugin-activities/activities/event.html';
+        }
+        else {
+          return 'app/layout/blocks/recent-activities-plugin-activities/activities/' + activity.verb + '.html';
+        }
     }
 
     urlFor(params: any) {

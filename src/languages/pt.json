@@ -97,5 +97,8 @@
   "block.edition.display_user.all": "Todos os usuários",
   "block.edition.display_user.logged": "Logados",
   "block.edition.display_user.not_logged": "Não logados",
-  "block.edition.language.label": "Exibir para:"
+  "block.edition.language.label": "Exibir para:",
+  "activities.event.description": "Evento em",
+  "time.at": "às",
+  "date.on": "Em"
 }
