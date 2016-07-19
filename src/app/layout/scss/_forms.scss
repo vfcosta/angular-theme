@@ -2,6 +2,10 @@ label {
   cursor: pointer;
 }
 
+.has-error .help-block {
+  font-weight: bold;
+}
+
 .checkbox-nice {
 	position: relative;
 	padding-left: 15px;

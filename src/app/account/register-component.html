@@ -4,47 +4,60 @@
     <div class="environment-signup-intro" ng-bind-html="ctrl.environment.signup_intro"></div>
     <p>{{"account.register.seeMoreMessage" | translate}} <a href="#">{{"account.register.informationsMessage" | translate}} </a></p>
   </div>
-  <form>
+  <form name="signupForm">
     <div class="row">
-      <div class="col-md-6 register-field">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-male"></i><i class="fa fa-female"></i></span>
-          <input type="text" class="form-control" id="name" placeholder="{{'account.register.firstNameLabel' | translate }}" ng-model="ctrl.account.name">
-        </div>
-      </div>
-
-      <div class="col-md-6 register-field">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-male"></i><i class="fa fa-female"></i></span>
-          <input type="text" class="form-control" id="lastName" placeholder="{{'account.register.lastNameLabel' | translate }}" ng-model="ctrl.account.lastName">
-        </div>
-      </div>
-
       <div class="col-md-12 register-field">
         <div class="input-group">
-          <span class="input-group-addon" style="font-weight: bold;"><i class="fa fa-globe"></i>&nbsp;http://ola.coop.br/</span>
-          <input type="text" class="form-control" id="login" placeholder="{{'account.register.usernameLabel' | translate }}" ng-model="ctrl.account.login">
+          <span class="input-group-addon"><i class="fa fa-male"></i><i class="fa fa-female"></i></span>
+          <input type="text" class="form-control" id="name" name="fullName" placeholder="{{'account.register.fullNameLabel' | translate }}" ng-model="ctrl.account.name">
         </div>
       </div>
 
-      <div class="col-md-12 register-field">
+      <div class="form-group col-md-12 register-field" ng-class="ctrl.isInvalid(signupForm.username)">
+        <div class="input-group">
+          <span class="input-group-addon" style="font-weight: bold;"><i class="fa fa-globe"></i>&nbsp;{{ ctrl.environment.host }}</span>
+          <input type="text" id="username" name="username" class="form-control" placeholder="{{'account.register.usernameLabel' | translate }}" ng-model="ctrl.account.login" required>
+        </div>
+        <div class="help-block" ng-show="signupForm.username.$touched" ng-messages="signupForm.username.$error">
+          <ul class="list-unstyled">
+            <li ng-messages-include="languages/messages.html"></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="form-group col-md-12 register-field" ng-class="ctrl.isInvalid(signupForm.email)">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-          <input type="text" class="form-control" id="email" placeholder="{{'account.register.emailLabel' | translate }}" ng-model="ctrl.account.email">
+          <input type="email" class="form-control" id="email" name="email" placeholder="{{'account.register.emailLabel' | translate }}" ng-model="ctrl.account.email" required>
+        </div>
+        <div class="help-block" ng-show="signupForm.email.$touched" ng-messages="signupForm.email.$error">
+          <ul class="list-unstyled">
+            <li ng-messages-include="languages/messages.html"></li>
+          </ul>
         </div>
       </div>
 
-      <div class="col-md-6 register-field">
+      <div class="form-group col-md-6 register-field" ng-class="ctrl.isInvalid(signupForm.password)">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-          <input type="password" class="form-control" id="password" placeholder="{{'account.register.passwordLabel' | translate }}" ng-model="ctrl.account.password">
+          <input type="password" class="form-control" id="password" name="password" placeholder="{{'account.register.passwordLabel' | translate }}" ng-model="ctrl.account.password" required>
+        </div>
+        <div class="help-block" ng-show="signupForm.password.$touched" ng-messages="signupForm.password.$error">
+          <ul class="list-unstyled">
+            <li ng-messages-include="languages/messages.html"></li>
+          </ul>
         </div>
       </div>
 
-      <div class="col-md-6 register-field">
+      <div class="form-group col-md-6 register-field" ng-class="ctrl.isInvalid(signupForm.passwordConfirm)">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-          <input type="password" class="form-control" id="passwordConfirmation" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" ng-model="ctrl.account.password_confirmation">
+          <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" ng-model="ctrl.account.password_confirmation" required>
+        </div>
+        <div class="help-block" ng-show="signupForm.passwordConfirm.$touched" ng-messages="signupForm.passwordConfirm.$error">
+          <ul class="list-unstyled">
+            <li ng-messages-include="languages/messages.html"></li>
+          </ul>
         </div>
       </div>
 
@@ -53,7 +66,7 @@
       </div>
 
       <div class="col-md-12">
-        <button type="submit" class="btn btn-default" ng-click="ctrl.signup()">{{"account.register.signupMessage" | translate}}</button>
+        <button type="submit" class="btn btn-default" ng-disabled="signupForm.$invalid" ng-click="ctrl.signup()">{{"account.register.signupMessage" | translate}}</button>
       </div>
 
     </div>

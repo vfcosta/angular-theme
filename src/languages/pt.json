@@ -105,7 +105,7 @@
   "account.register.welcomeMessage": "Ótimo ter você aqui!",
   "account.register.seeMoreMessage": "Saiba mais ",
   "account.register.informationsMessage": "informações",
-  "account.register.firstNameLabel": "Nome",
+  "account.register.fullNameLabel": "Nome completo",
   "account.register.lastNameLabel": "Sobrenome",
   "account.register.usernameLabel": "Nome de usuário",
   "account.register.emailLabel": "Email",
@@ -117,5 +117,9 @@
   "account.register.haveAccountMessage": "Já possui uma conta?",
   "account.register.success.title": "Bom trabalho!",
   "account.register.success.message": "Conta criada com sucesso!",
-  "account.register.passwordConfirmation.failed": "A confirmação de senha não corresponde à senha"
+  "account.register.passwordConfirmation.failed": "A confirmação de senha não corresponde à senha",
+  "messages.invalid.required": "Campo obrigatório",
+  "messages.invalid.maxlength": "O valor é muito longo",
+  "messages.invalid.minlength": "O valor é muito curto",
+  "messages.invalid.email": "Informe um email válido"
 }

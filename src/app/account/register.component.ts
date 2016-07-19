@@ -40,4 +40,8 @@ export class RegisterComponent {
             this.notificationService.error({ message: "account.register.passwordConfirmation.failed" });
         }
     }
+
+    isInvalid(field: Object): Object {
+        return { 'has-error': field['$touched'] && field['$invalid'] };
+    }
 }

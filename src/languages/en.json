@@ -105,8 +105,7 @@
   "account.register.welcomeMessageTitle": "Nice to have you there!",
   "account.register.seeMoreMessage": "See more ",
   "account.register.informationsMessage": "informations",
-  "account.register.firstNameLabel": "First name",
-  "account.register.lastNameLabel": "Last name",
+  "account.register.fullNameLabel": "Full name",
   "account.register.usernameLabel": "Username",
   "account.register.emailLabel": "Email",
   "account.register.passwordLabel": "Password",
@@ -117,5 +116,9 @@
   "account.register.termsOfUseMessage": "terms of use",
   "account.register.success.title": "Good job!",
   "account.register.success.message": "Account created!",
-  "account.register.passwordConfirmation.failed": "Wrong password confirmation"
+  "account.register.passwordConfirmation.failed": "Wrong password confirmation",
+  "messages.invalid.required": "This field is required",
+  "messages.invalid.maxlength": "This field is too long",
+  "messages.invalid.minlength": "This field is too short",
+  "messages.invalid.email": "This needs to be a valid email"
 }
