@@ -1,32 +1,30 @@
-.tasks-menu {
-  position: relative;
-  margin-right: 0;
-  .badge {
-    position: absolute;
-    top: 1px;
-    right: 8px;
-    border-radius: 6px;
-  }
-  i {
-    color: #FFF;
-  }
-  .task-list {
-    width: 500px;
-    padding: 16px 16px 8px 16px;
-    .task {
-      .time {
-        color: #c1c1c1;
-        font-size: 12px;
-        .bullet-separator {
-          font-size: 10px;
-          color: #d1d1d1;
-        }
-      }
+tasks-menu {
+  .tasks-menu {
+    position: relative;
+    margin-right: 0;
+    .badge {
+      position: absolute;
+      top: 1px;
+      right: 8px;
+      border-radius: 6px;
+      background-color: #e84e40;
+      color: #fff;
     }
     .all-tasks {
       text-align: center;
-      width: 100%;
-      display: inline-block;
+      width: 97%;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .task-panel {
+      width: 550px;
+      padding-top: 0;
+    }
+    .task-menu-header {
+      text-align: center;
+      padding: 7px;
+      font-weight: bold;
     }
   }
 }

@@ -21,6 +21,7 @@ export class TaskService extends RestangularService<noosfero.Task> {
     }
 
     getAllPending(params: any) {
-        return this.list(null, { all_pending: true });
+        params['all_pending'] = true;
+        return this.list(null, params);
     }
 }

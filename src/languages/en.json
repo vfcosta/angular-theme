@@ -125,5 +125,7 @@
   "messages.invalid.minlength": "This field is too short",
   "messages.invalid.email": "This needs to be a valid email",
   "messages.invalid.passwordMatch": "Your passwords did not match",
-  "tasks.menu.all": "All tasks"
+  "tasks.menu.all": "All tasks",
+  "tasks.menu.all": "See all tasks",
+  "tasks.menu.header": "You have {tasks, plural, one{one pending task} other{# pending tasks}}"
 }

@@ -49,10 +49,10 @@ import { HtmlEditorComponent } from "../shared/components/html-editor/html-edito
 import { PermissionDirective } from "../shared/components/permission/permission.directive";
 import { SearchComponent } from "../search/search.component";
 import { SearchFormComponent } from "../search/search-form/search-form.component";
-
 import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../known-events";
 import { TasksMenuComponent } from "../task/tasks-menu/tasks-menu.component";
+import { TaskListComponent } from "../task/task-list/task-list.component";
 
 /**
  * @ngdoc controller
@@ -120,7 +120,7 @@ export class EnvironmentContent {
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
-        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent
+        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",

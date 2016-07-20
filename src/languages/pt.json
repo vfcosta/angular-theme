@@ -127,6 +127,8 @@
   "messages.invalid.maxlength": "O valor é muito longo",
   "messages.invalid.minlength": "O valor é muito curto",
   "messages.invalid.email": "Informe um email válido",
-  "messages.invalid.passwordMatch": "As senhas não coincidem"
-  "tasks.menu.all": "Todas as tarefas"
+  "messages.invalid.passwordMatch": "As senhas não coincidem",
+  "tasks.menu.all": "Todas as tarefas",
+  "tasks.menu.all": "Veja todas as tarefas",
+  "tasks.menu.header": "Você tem {tasks, plural, one{uma tarefa pendente} other{# tarefas pendentes}}"
 }
