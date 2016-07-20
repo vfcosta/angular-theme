@@ -7,5 +7,7 @@ namespace noosfero {
      */
     export interface Task extends RestModel {
         type: string;
+        accept_details: boolean;
+        reject_details: boolean;
     }
 }

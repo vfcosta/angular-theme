@@ -11,14 +11,14 @@ export class TasksMenuComponent {
 
     tasks: noosfero.Task[];
     total: number;
-    perPage: 5;
+    perPage = 5;
     person: noosfero.Person;
 
     constructor(private taskService: TaskService, private session: SessionService) { }
 
     ngOnInit() {
         this.person = this.session.currentUser() ? this.session.currentUser().person : null;
-        this.taskService.getAllPending({ per_page: this.perPage }).then((result: noosfero.RestResult) => {
+        this.taskService.getAllPending({ per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
             this.total = result.headers('total');
             this.tasks = result.data;
         });

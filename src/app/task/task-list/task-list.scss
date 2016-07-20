@@ -1,3 +1,6 @@
+$task-action-accept-color: #77c123;
+$task-action-reject-color: #d64e18;
+
 .task-list {
   width: 100%;
   padding: 0;
@@ -24,15 +27,36 @@
   }
   .task-body {
     margin-left: 35px;
-    padding: 3px;
+    padding: 2px;
     .task {
       display: inline-block;
+      color: #949494;
       .task-icon {
         font-size: 18px;
         color: #e84e40;
       }
       .requestor, .target {
          font-style: italic;
+         color: #676767;
+      }
+    }
+    .actions {
+      display: inline-block;
+      font-size: 19px;
+      a {
+        text-decoration: none;
+      }
+      .accept {
+        color: $task-action-accept-color;
+        &:hover {
+          color: darken($task-action-accept-color, 10%);
+        }
+      }
+      .reject {
+        color: $task-action-reject-color;
+        &:hover {
+          color: darken($task-action-reject-color, 10%);
+        }
       }
     }
     .time {
@@ -43,5 +67,20 @@
         color: #d1d1d1;
       }
     }
+  }
+}
+.task-confirmation {
+  @extend .form-group;
+  .confirmation-details {
+    margin-bottom: 20px;
+  }
+  .confirmation-title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  .actions {
+    text-align: center;
   }
 }

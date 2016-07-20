@@ -24,4 +24,14 @@ export class TaskService extends RestangularService<noosfero.Task> {
         params['all_pending'] = true;
         return this.list(null, params);
     }
+
+    finishTask(task: noosfero.Task) {
+        let element = this.getElement(task.id);
+        return element.customPUT(null, "finish");
+    }
+
+    cancelTask(task: noosfero.Task) {
+        let element = this.getElement(task.id);
+        return element.customPUT(null, "cancel");
+    }
 }

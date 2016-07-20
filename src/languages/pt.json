@@ -130,5 +130,17 @@
   "messages.invalid.passwordMatch": "As senhas não coincidem",
   "tasks.menu.all": "Todas as tarefas",
   "tasks.menu.all": "Veja todas as tarefas",
-  "tasks.menu.header": "Você tem {tasks, plural, one{uma tarefa pendente} other{# tarefas pendentes}}"
+  "tasks.menu.header": "Você tem {tasks, plural, one{uma tarefa pendente} other{# tarefas pendentes}}",
+  "tasks.actions.accept": "Aceitar",
+  "tasks.actions.reject": "Rejeitar",
+  "tasks.header": "Tarefas",
+  "tasks.actions.accept.confirmation.title": "Confirmar aprovação da tarefa?",
+  "tasks.actions.reject.confirmation.title": "Confirmar reprovação da tarefa?",
+  "tasks.actions.confirmation.yes": "Sim",
+  "tasks.actions.confirmation.cancel": "Cancelar",
+  "tasks.actions.accept.title": "Bom trabalho!",
+  "tasks.actions.reject.title": "Bom trabalho!",
+  "tasks.actions.accept.message": "Tarefa Aceita",
+  "tasks.actions.reject.message": "Tarefa Rejeitada",
+  "tasks.actions.reject.explanation.label": "Motivo da rejeição"
 }

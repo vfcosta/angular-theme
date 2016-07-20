@@ -8,6 +8,14 @@
       <div class="task">
         <ng-include src="ctrl.getTaskTemplate(task)"></ng-include>
       </div>
+      <div class="actions">
+        <a href="#" ng-if="!task.accept_disabled" ng-click="ctrl.accept(task)" class="accept" uib-tooltip="{{'tasks.actions.accept' | translate}}">
+          <i class="fa fa-check"></i>
+        </a>
+        <a href="#" ng-if="!task.reject_disabled" ng-click="ctrl.reject(task)" class="reject" uib-tooltip="{{'tasks.actions.reject' | translate}}">
+          <i class="fa fa-close"></i>
+        </a>
+      </div>
       <span class="time">
         <span class="bullet-separator">•</span> <span am-time-ago="task.created_at | dateFormat"></span>
       </span>
