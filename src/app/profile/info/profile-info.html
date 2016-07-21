@@ -6,10 +6,12 @@
         <h2>{{vm.profile.name}}</h2>
       </header>
       <div id="profile-left" class="main-box-body clearfix">
-        <noosfero-profile-image [profile]="vm.profile" class="img-responsive center-block"></noosfero-profile-image>
-        <span class="label" ng-class="{'label-danger': vm.profile.type == 'Community', 'label-info': vm.profile.type == 'Person'}">{{vm.profile | translateProfile}}</span>
-        <div class="profile-since">
-          {{"profile.member_since" | translate}}: {{vm.profile.created_at | amDateFormat:'MMMM YYYY'}}
+        <noosfero-profile-image [profile]="vm.profile" [editable]="true" [edit-class]="'profile-info-editable'" class="img-responsive center-block profile-info"></noosfero-profile-image>
+        <div id="profile-info-extrainfo" class="profile-info-extrainfo">
+          <span class="label" ng-class="{'label-danger': vm.profile.type == 'Community', 'label-info': vm.profile.type == 'Person'}">{{vm.profile | translateProfile}}</span>
+          <div class="profile-since">
+            {{"profile.member_since" | translate}}: {{vm.profile.created_at | amDateFormat:'MMMM YYYY'}}
+          </div>
         </div>
       </div>
     </div>
