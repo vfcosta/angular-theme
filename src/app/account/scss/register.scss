@@ -1,3 +1,8 @@
+.modal .modal-body-overflow {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
 .register-page button {
     width: 100%;
     text-transform: uppercase;
@@ -14,6 +19,7 @@
 .register-page .terms-info {
     margin-top: 30px;
     margin-bottom: 30px;
+    font-weight: bold;
 }
 
 .register-page .welcome-message {

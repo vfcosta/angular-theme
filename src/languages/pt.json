@@ -121,5 +121,6 @@
   "messages.invalid.required": "Campo obrigatório",
   "messages.invalid.maxlength": "O valor é muito longo",
   "messages.invalid.minlength": "O valor é muito curto",
-  "messages.invalid.email": "Informe um email válido"
+  "messages.invalid.email": "Informe um email válido",
+  "messages.invalid.passwordConfirm": "As senhas não coincidem"
 }

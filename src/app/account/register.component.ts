@@ -2,6 +2,8 @@ import { Inject, Input, Component, Output, EventEmitter, provide } from 'ng-forw
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 import { NotificationService } from "./../shared/services/notification.service";
 import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
+import { RegisterController } from "./register.controller";
+import { IModalComponent } from "../shared/components/interfaces";
 
 @Component({
     selector: 'noosfero-register',
@@ -11,16 +13,20 @@ import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.s
     ]
 })
 
-@Inject("$state", RegisterService, NotificationService, EnvironmentService)
+@Inject('$state', '$uibModal', '$scope', RegisterService, NotificationService, EnvironmentService)
 export class RegisterComponent {
     @Input() account: any;
     environment: noosfero.Environment;
 
+    modalInstance: ng.ui.bootstrap.IModalServiceInstance;
+
     constructor(
         private $state: ng.ui.IStateService,
+        private $uibModal: ng.ui.bootstrap.IModalService,
+        private $scope: ng.IScope,
         public registerService: RegisterService,
         private notificationService: NotificationService,
-        private environmentService: EnvironmentService
+        private environmentService: EnvironmentService,
     ) {
         this.account = {};
         this.environment = environmentService.getCurrentEnvironment();
@@ -43,5 +49,17 @@ export class RegisterComponent {
 
     isInvalid(field: Object): Object {
         return { 'has-error': field['$touched'] && field['$invalid'] };
+    }
+
+    openTerms() {
+
+        this.modalInstance = this.$uibModal.open({
+            templateUrl: 'app/account/register-terms.html',
+            size: 'lg',
+            controller: RegisterController,
+            controllerAs: 'vm',
+            bindToController: true,
+            scope: this.$scope
+        });
     }
 }

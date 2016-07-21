@@ -103,8 +103,6 @@
   "time.at": "at",
   "date.on": "On",
   "account.register.welcomeMessageTitle": "Nice to have you there!",
-  "account.register.seeMoreMessage": "See more ",
-  "account.register.informationsMessage": "informations",
   "account.register.fullNameLabel": "Full name",
   "account.register.usernameLabel": "Username",
   "account.register.emailLabel": "Email",
@@ -120,5 +118,6 @@
   "messages.invalid.required": "This field is required",
   "messages.invalid.maxlength": "This field is too long",
   "messages.invalid.minlength": "This field is too short",
-  "messages.invalid.email": "This needs to be a valid email"
+  "messages.invalid.email": "This needs to be a valid email",
+  "messages.invalid.passwordConfirm": "Passwords do not match"
 }
