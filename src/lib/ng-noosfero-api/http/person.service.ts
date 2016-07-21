@@ -28,4 +28,19 @@ export class PersonService extends RestangularService<noosfero.Person> {
         p.catch(this.getHandleErrorFunction<noosfero.RestResult<any>>(deferred));
         return deferred.promise;
     }
+
+    uploadImage(profile: noosfero.Profile, base64_image_json: any) {
+        let headers = { 'Content-Type': 'application/json' };
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Profile>>();
+        // TODO dynamically copy the selected attributes to update
+        let attributesToUpdate: any = {
+            person: { image_builder: base64_image_json }
+        };
+        let restRequest: ng.IPromise<noosfero.RestResult<any>> = 
+            this.getElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
+        restRequest.then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
+
 }
