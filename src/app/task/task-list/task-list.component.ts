@@ -89,11 +89,11 @@ export class TaskListComponent {
     }
 
     private getTemplateName(task: noosfero.Task) {
-        return task.type.replace(/::/, '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase());
+        return task.type.replace(/::/, '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
     }
 
     private removeTask(task: noosfero.Task) {
-        let index = this.tasks.indexOf(task, 0);
+        let index = this.tasks.map((t: noosfero.Task) => { return t.id; }).indexOf(task.id);
         if (index > -1) {
             this.tasks.splice(index, 1);
         }

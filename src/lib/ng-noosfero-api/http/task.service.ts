@@ -20,18 +20,25 @@ export class TaskService extends RestangularService<noosfero.Task> {
         };
     }
 
-    getAllPending(params: any) {
+    getAllPending(params: any = {}) {
         params['all_pending'] = true;
         return this.list(null, params);
     }
 
     finishTask(task: noosfero.Task) {
-        let element = this.getElement(task.id);
-        return element.customPUT(null, "finish");
+        return this.closeTask(task, "finish");
     }
 
     cancelTask(task: noosfero.Task) {
+        return this.closeTask(task, "cancel");
+    }
+
+    private closeTask(task: noosfero.Task, action: string) {
         let element = this.getElement(task.id);
-        return element.customPUT(null, "cancel");
+        let put = element.customPUT(null, action);
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Task>>();
+        put.then(this.getHandleSuccessFunction<noosfero.RestResult<noosfero.Task>>(deferred));
+        put.catch(this.getHandleErrorFunction<noosfero.RestResult<noosfero.Task>>(deferred));
+        return deferred.promise;
     }
 }

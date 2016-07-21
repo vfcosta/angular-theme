@@ -2,7 +2,7 @@ import { Component, Inject, provide } from "ng-forward";
 import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
 
 @Component({
-    selector: "tasks-component",
+    selector: "tasks",
     templateUrl: "app/task/tasks/tasks.html",
     providers: [
         provide('taskService', { useClass: TaskService })

@@ -10,7 +10,7 @@ export class AddMemberTaskAcceptComponent {
     roles: any;
 
     constructor() {
-        //TODO list roles from API
+        // TODO list roles from API
         this.roles = ["Profile Administrator", "Member", "Moderator"];
     }
 
