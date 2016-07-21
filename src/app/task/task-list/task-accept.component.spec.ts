@@ -8,6 +8,7 @@ describe("Components", () => {
     describe("Task Accept Component", () => {
 
         let task = { id: 1, type: "AddMember" };
+        let roleService = jasmine.createSpyObj("roleService", ["getByProfile"]);
 
         beforeEach(angular.mock.module("templates"));
 
@@ -15,7 +16,10 @@ describe("Components", () => {
             return helpers.quickCreateComponent({
                 template: htmlTemplate,
                 directives: [TaskAcceptComponent],
-                properties: { task: task }
+                properties: { task: task },
+                providers: [
+                    helpers.createProviderToValue("RoleService", roleService)
+                ]
             });
         }
 

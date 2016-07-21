@@ -9,5 +9,6 @@ namespace noosfero {
         type: string;
         accept_details: boolean;
         reject_details: boolean;
+        target: noosfero.Profile | noosfero.Environment;
     }
 }
