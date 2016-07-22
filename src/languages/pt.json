@@ -142,5 +142,6 @@
   "tasks.actions.reject.title": "Bom trabalho!",
   "tasks.actions.accept.message": "Tarefa Aceita",
   "tasks.actions.reject.message": "Tarefa Rejeitada",
-  "tasks.actions.reject.explanation.label": "Motivo da rejeição"
+  "tasks.actions.reject.explanation.label": "Motivo da rejeição",
+  "tasks.add_member.accept.select_role": "Selecionar papéis:"
 }

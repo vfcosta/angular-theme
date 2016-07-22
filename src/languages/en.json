@@ -139,5 +139,6 @@
   "tasks.actions.reject.title": "Good job!",
   "tasks.actions.accept.message": "Task Accepted",
   "tasks.actions.reject.message": "Task Rejected",
-  "tasks.actions.reject.explanation.label": "Rejection explanation"
+  "tasks.actions.reject.explanation.label": "Rejection explanation",
+  "tasks.add_member.accept.select_role": "Select Roles:"
 }

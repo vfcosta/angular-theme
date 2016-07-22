@@ -1,15 +1,20 @@
-import { Component, Input, Inject } from "ng-forward";
+import { Component, Input, Inject, provide } from "ng-forward";
 import { NotificationService } from "../../shared/services/notification.service";
 import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
 import { TaskAcceptComponent } from "./task-accept.component";
 import { Arrays } from "../../../lib/util/arrays";
+import { EventsHubService } from "../../shared/services/events-hub.service";
+import { NoosferoKnownEvents } from "../../known-events";
 
 @Component({
     selector: "task-list",
     templateUrl: "app/task/task-list/task-list.html",
-    directives: [TaskAcceptComponent]
+    directives: [TaskAcceptComponent],
+    providers: [
+        provide('eventsHubService', { useClass: EventsHubService })
+    ]
 })
-@Inject(NotificationService, "$scope", "$uibModal", TaskService)
+@Inject(NotificationService, "$scope", "$uibModal", TaskService, EventsHubService)
 export class TaskListComponent {
 
     @Input() tasks: noosfero.Task[];
@@ -18,9 +23,23 @@ export class TaskListComponent {
 
     currentTask: noosfero.Task;
     confirmationTask: noosfero.Task;
+    eventsNames: NoosferoKnownEvents;
     private modalInstance: any = null;
 
-    constructor(private notificationService: NotificationService, private $scope: ng.IScope, private $uibModal: any, private taskService: TaskService) { }
+    constructor(private notificationService: NotificationService,
+        private $scope: ng.IScope,
+        private $uibModal: any,
+        private taskService: TaskService,
+        private eventsHubService: EventsHubService) {
+
+        this.eventsNames = new NoosferoKnownEvents();
+    }
+
+    ngOnInit() {
+        this.eventsHubService.subscribeToEvent(this.eventsNames.TASK_CLOSED, (task: noosfero.Task) => {
+            Arrays.remove(this.tasks, task);
+        });
+    }
 
     getTaskTemplate(task: noosfero.Task) {
         if (this.taskTemplates.indexOf(task.type) >= 0) {
@@ -65,7 +84,7 @@ export class TaskListComponent {
 
     callAccept() {
         this.taskService.finishTask(this.confirmationTask).then(() => {
-            Arrays.remove(this.tasks, this.currentTask);
+            this.eventsHubService.emitEvent(this.eventsNames.TASK_CLOSED, this.currentTask);
             this.notificationService.success({ title: "tasks.actions.accept.title", message: "tasks.actions.accept.message" });
         }).finally(() => {
             this.cancel();
@@ -74,7 +93,7 @@ export class TaskListComponent {
 
     callReject() {
         this.taskService.cancelTask(this.confirmationTask).then(() => {
-            Arrays.remove(this.tasks, this.currentTask);
+            this.eventsHubService.emitEvent(this.eventsNames.TASK_CLOSED, this.currentTask);
             this.notificationService.success({ title: "tasks.actions.reject.title", message: "tasks.actions.reject.message" });
         }).finally(() => {
             this.cancel();

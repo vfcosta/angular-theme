@@ -40,7 +40,8 @@ describe("MainComponent", function () {
                     useValue: [
                         'IMAGE_PROFILE_UPDATED',
                         'PROFILE_INFO_UPDATED',
-                        'ARTICLE_UPDATED'
+                        'ARTICLE_UPDATED',
+                        'TASK_CLOSED'
                     ]
                 }),
         ]

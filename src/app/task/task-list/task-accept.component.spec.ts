@@ -19,7 +19,7 @@ describe("Components", () => {
                 properties: { task: task },
                 providers: [
                     helpers.createProviderToValue("RoleService", roleService)
-                ]
+                ].concat(helpers.provideFilters("translateFilter"))
             });
         }
 

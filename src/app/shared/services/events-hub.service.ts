@@ -31,13 +31,13 @@ export class EventsHubService {
     emitEvent(eventType: string, payload?: any) {
         this.checkKnownEvent(eventType);
         let event = this.emitters.get(eventType);
-        if ( event ) this.emitters.get(eventType).next(payload);
+        if (event) this.emitters.get(eventType).next(payload);
     }
 
     subscribeToEvent<T>(eventType: string, generatorOrNext?: ((p?: T) => void), error?: any, complete?: any) {
         this.checkKnownEvent(eventType);
         let event = this.emitters.get(eventType);
-        if (event)  event.subscribe(generatorOrNext, error, complete);
+        if (event) event.subscribe(generatorOrNext, error, complete);
     }
 
     private setupEmitters() {

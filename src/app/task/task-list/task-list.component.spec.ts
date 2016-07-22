@@ -12,6 +12,7 @@ describe("Components", () => {
         let taskService = jasmine.createSpyObj("taskService", ["getAllPending"]);
         let tasks = [{ id: 1 }, { id: 2 }];
         let modal = helpers.mocks.$modal;
+        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
         taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
 
         beforeEach(angular.mock.module("templates"));
@@ -22,6 +23,7 @@ describe("Components", () => {
                 directives: [TaskListComponent],
                 providers: [
                     helpers.createProviderToValue("TaskService", taskService),
+                    helpers.createProviderToValue("EventsHubService", eventsHubService),
                     helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
                     helpers.createProviderToValue('$uibModal', modal),
                 ].concat(helpers.provideFilters("groupByFilter")),
@@ -66,24 +68,24 @@ describe("Components", () => {
             expect(helper.component.callReject).toHaveBeenCalled();
         });
 
-        it("call cancel and remove the current task when accept was called successfully", () => {
+        it("call cancel and emit event when accept was called successfully", () => {
             helper.component.currentTask = <any>{ id: 1 };
             let result = helpers.mocks.promiseResultTemplate({ data: { id: 1 } });
             taskService.finishTask = jasmine.createSpy("finishTask").and.returnValue(result);
             helper.component.cancel = jasmine.createSpy("cancel");
             helper.component.callAccept();
             expect(helper.component.cancel).toHaveBeenCalled();
-            expect(helper.component.tasks).toEqual([{ id: 2 }]);
+            expect((<any>helper.component)['eventsHubService'].emitEvent).toHaveBeenCalled();
         });
 
-        it("call cancel and remove the current task when reject was called successfully", () => {
+        it("call cancel and emit event when reject was called successfully", () => {
             helper.component.currentTask = <any>{ id: 1 };
             let result = helpers.mocks.promiseResultTemplate({ data: { id: 1 } });
             taskService.cancelTask = jasmine.createSpy("cancelTask").and.returnValue(result);
             helper.component.cancel = jasmine.createSpy("cancel");
             helper.component.callReject();
             expect(helper.component.cancel).toHaveBeenCalled();
-            expect(helper.component.tasks).toEqual([{ id: 2 }]);
+            expect((<any>helper.component)['eventsHubService'].emitEvent).toHaveBeenCalled();
         });
 
         it("reset currentTask and close modal when call cancel", () => {

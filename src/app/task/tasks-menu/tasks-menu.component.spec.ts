@@ -12,6 +12,7 @@ describe("Components", () => {
         let helper: ComponentTestHelper<TasksMenuComponent>;
         let taskService = jasmine.createSpyObj("taskService", ["getAllPending"]);
         let tasks = [{ id: 1 }, { id: 2 }];
+        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
         taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
 
         beforeEach(angular.mock.module("templates"));
@@ -22,6 +23,7 @@ describe("Components", () => {
                 directives: [TasksMenuComponent],
                 providers: [
                     helpers.createProviderToValue("TaskService", taskService),
+                    helpers.createProviderToValue("EventsHubService", eventsHubService),
                     helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
                 ]
             });
