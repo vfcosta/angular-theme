@@ -26,15 +26,16 @@ export class RegisterComponent {
         private $scope: ng.IScope,
         public registerService: RegisterService,
         private notificationService: NotificationService,
-        private environmentService: EnvironmentService,
+        private environmentService: EnvironmentService
     ) {
         this.account = {};
         this.environment = environmentService.getCurrentEnvironment();
     }
 
     signup() {
-        if (this.account.password === this.account.password_confirmation) {
+        if (this.account.password === this.account.passwordConfirmation) {
             this.registerService.createAccount(this.account).then((response) => {
+
                 if (response.status === 201) {
                     this.$state.transitionTo('main.environment');
                     this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
@@ -47,7 +48,7 @@ export class RegisterComponent {
         }
     }
 
-    isInvalid(field: Object): Object {
+    isInvalid(field: any): any {
         return { 'has-error': field['$touched'] && field['$invalid'] };
     }
 

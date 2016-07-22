@@ -8,7 +8,7 @@ export class RegisterController {
 
     constructor(
         private $log: ng.ILogService,
-        private $stateParams: any,
+        private $stateParams: any
     ) { }
 
     closeTerms() {

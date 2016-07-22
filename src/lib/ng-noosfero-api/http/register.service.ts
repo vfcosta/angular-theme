@@ -1,5 +1,5 @@
 import { Injectable, Inject } from "ng-forward";
-import {RestangularService} from "./restangular_service";
+import { RestangularService } from "./restangular_service";
 
 @Injectable()
 @Inject("Restangular")
