@@ -10,11 +10,12 @@ import { AddMemberTaskAcceptComponent } from "../types/add-member/add-member-tas
 export class TaskAcceptComponent {
 
     @Input() task: noosfero.Task;
+    @Input() confirmationTask: noosfero.Task;
 
     ngOnInit() {
         let componentName = this.task.type.replace(/::/, '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
         componentName += "-task-accept";
-        this.$element.replaceWith(this.$compile(`<${componentName} [task]="ctrl.task"></${componentName}>`)(this.$scope));
+        this.$element.replaceWith(this.$compile(`<${componentName} [task]="ctrl.task" [confirmation-task]="ctrl.confirmationTask"></${componentName}>`)(this.$scope));
     }
 
     constructor(private $element: any, private $scope: ng.IScope, private $injector: ng.auto.IInjectorService, private $compile: ng.ICompileService) { }

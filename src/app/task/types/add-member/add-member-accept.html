@@ -2,7 +2,7 @@
   <label>Select Roles:</label>
   <div class="form-group roles">
     <div class="checkbox" ng-repeat="role in ctrl.roles">
-      <input type="checkbox"> {{role.name}}
+      <input type="checkbox" ng-click="ctrl.toggleSelection(role)"> {{role.name}}
     </div>
   </div>
 </div>

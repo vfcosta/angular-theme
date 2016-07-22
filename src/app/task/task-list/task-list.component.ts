@@ -2,6 +2,7 @@ import { Component, Input, Inject } from "ng-forward";
 import { NotificationService } from "../../shared/services/notification.service";
 import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
 import { TaskAcceptComponent } from "./task-accept.component";
+import { Arrays } from "../../../lib/util/arrays";
 
 @Component({
     selector: "task-list",
@@ -15,8 +16,8 @@ export class TaskListComponent {
 
     private taskTemplates = ["AddFriend", "AddMember", "CreateCommunity", "SuggestArticle", "AbuseComplaint"];
 
-    rejectionExplanation: string;
     currentTask: noosfero.Task;
+    confirmationTask: noosfero.Task;
     private modalInstance: any = null;
 
     constructor(private notificationService: NotificationService, private $scope: ng.IScope, private $uibModal: any, private taskService: TaskService) { }
@@ -32,6 +33,7 @@ export class TaskListComponent {
 
     accept(task: noosfero.Task) {
         this.currentTask = task;
+        this.confirmationTask = <any>{ id: task.id };
         if (task.accept_details) {
             this.modalInstance = this.$uibModal.open({
                 templateUrl: "app/task/task-list/accept.html",
@@ -47,6 +49,7 @@ export class TaskListComponent {
 
     reject(task: noosfero.Task) {
         this.currentTask = task;
+        this.confirmationTask = <any>{ id: task.id };
         if (task.reject_details) {
             this.modalInstance = this.$uibModal.open({
                 templateUrl: "app/task/task-list/reject.html",
@@ -61,8 +64,8 @@ export class TaskListComponent {
     }
 
     callAccept() {
-        this.taskService.finishTask(this.currentTask).then(() => {
-            this.removeTask(this.currentTask);
+        this.taskService.finishTask(this.confirmationTask).then(() => {
+            Arrays.remove(this.tasks, this.currentTask);
             this.notificationService.success({ title: "tasks.actions.accept.title", message: "tasks.actions.accept.message" });
         }).finally(() => {
             this.cancel();
@@ -70,8 +73,8 @@ export class TaskListComponent {
     }
 
     callReject() {
-        this.taskService.cancelTask(this.currentTask).then(() => {
-            this.removeTask(this.currentTask);
+        this.taskService.cancelTask(this.confirmationTask).then(() => {
+            Arrays.remove(this.tasks, this.currentTask);
             this.notificationService.success({ title: "tasks.actions.reject.title", message: "tasks.actions.reject.message" });
         }).finally(() => {
             this.cancel();
@@ -83,19 +86,12 @@ export class TaskListComponent {
             this.modalInstance.close();
             this.modalInstance = null;
         }
-        if (this.currentTask) {
-            this.currentTask = null;
-        }
+        this.currentTask = null;
+        this.confirmationTask = null;
     }
 
     private getTemplateName(task: noosfero.Task) {
         return task.type.replace(/::/, '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
     }
 
-    private removeTask(task: noosfero.Task) {
-        let index = this.tasks.map((t: noosfero.Task) => { return t.id; }).indexOf(task.id);
-        if (index > -1) {
-            this.tasks.splice(index, 1);
-        }
-    }
 }

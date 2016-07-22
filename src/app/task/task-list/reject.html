@@ -1,7 +1,7 @@
 <div class="task-reject task-confirmation">
   <div class="reject-title confirmation-title">{{"tasks.actions.reject.confirmation.title" | translate}}</div>
   <div class="reject-fields confirmation-details">
-    <input ng-model="ctrl.rejectionExplanation" id="rejectionExplanationInput" type="text" placeholder="{{'tasks.actions.reject.explanation.label' | translate}}" class="rejection-explanation form-control">
+    <input ng-model="ctrl.confirmationTask.reject_explanation" id="rejectionExplanationInput" type="text" placeholder="{{'tasks.actions.reject.explanation.label' | translate}}" class="rejection-explanation form-control">
   </div>
   <div class="actions">
     <button type="submit" class="btn btn-default" ng-click="ctrl.callReject()">{{"tasks.actions.confirmation.yes" | translate}}</button>

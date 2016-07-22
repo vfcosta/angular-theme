@@ -36,7 +36,8 @@ export class TaskService extends RestangularService<noosfero.Task> {
 
     private closeTask(task: noosfero.Task, action: string) {
         let element = this.getElement(task.id);
-        let put = element.customPUT(null, action);
+        delete task.id;
+        let put = element.customPUT({ task: task }, action);
         let deferred = this.$q.defer<noosfero.RestResult<noosfero.Task>>();
         put.then(this.getHandleSuccessFunction<noosfero.RestResult<noosfero.Task>>(deferred));
         put.catch(this.getHandleErrorFunction<noosfero.RestResult<noosfero.Task>>(deferred));
