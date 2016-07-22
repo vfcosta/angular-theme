@@ -1,4 +1,4 @@
-import {bootstrap} from "ng-forward";
+import {bootstrap, provide} from "ng-forward";
 import {noosferoModuleConfig} from "./index.config";
 import {noosferoAngularRunBlock} from "./index.run";
 import {MainComponent} from "./main/main.component";
@@ -22,4 +22,13 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     run(noosferoAngularRunBlock).
     constant("moment", moment).
     constant("AuthEvents", AuthEvents);
-bootstrap(MainComponent);
+
+
+import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
+import { NoosferoKnownEvents } from './known-events';
+
+bootstrap(MainComponent,
+    [
+        provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
+    ]
+);
