@@ -1,53 +1,53 @@
 import * as plugins from "../../plugins";
-import {bundle, Component, StateConfig, Inject} from "ng-forward";
-import {ArticleBlogComponent} from "./../article/types/blog/blog.component";
+import { bundle, Component, StateConfig, Inject } from "ng-forward";
+import { ArticleBlogComponent } from "./../article/types/blog/blog.component";
 
-import {ArticleViewComponent} from "./../article/article-default-view.component";
+import { ArticleViewComponent } from "./../article/article-default-view.component";
 
-import {ProfileComponent} from "../profile/profile.component";
-import {BoxesComponent} from "../layout/boxes/boxes.component";
-import {BlockContentComponent} from "../layout/blocks/block-content.component";
-import {BlockComponent} from "../layout/blocks/block.component";
-import {EnvironmentComponent} from "../environment/environment.component";
-import {EnvironmentHomeComponent} from "../environment/environment-home.component";
-import {PeopleBlockComponent} from "../layout/blocks/people/people-block.component";
-import {DisplayContentBlockComponent} from "../layout/blocks/display-content/display-content-block.component";
-import {LinkListBlockComponent} from "../layout/blocks/link-list/link-list-block.component";
-import {RecentDocumentsBlockComponent} from "../layout/blocks/recent-documents/recent-documents-block.component";
-import {ProfileImageBlockComponent} from "../layout/blocks/profile-image/profile-image-block.component";
-import {RawHTMLBlockComponent} from "../layout/blocks/raw-html/raw-html-block.component";
-import {StatisticsBlockComponent} from "../layout/blocks/statistics/statistics-block.component";
-import {PersonTagsPluginInterestsBlockComponent} from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
-import {TagsBlockComponent} from "../layout/blocks/tags/tags-block.component";
-import {CustomContentComponent} from "../profile/custom-content/custom-content.component";
-import {RecentActivitiesPluginActivitiesBlockComponent} from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
-import {RegisterComponent} from "../account/register.component";
+import { ProfileComponent } from "../profile/profile.component";
+import { BoxesComponent } from "../layout/boxes/boxes.component";
+import { BlockContentComponent } from "../layout/blocks/block-content.component";
+import { BlockComponent } from "../layout/blocks/block.component";
+import { EnvironmentComponent } from "../environment/environment.component";
+import { EnvironmentHomeComponent } from "../environment/environment-home.component";
+import { PeopleBlockComponent } from "../layout/blocks/people/people-block.component";
+import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
+import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
+import { RecentDocumentsBlockComponent } from "../layout/blocks/recent-documents/recent-documents-block.component";
+import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
+import { RawHTMLBlockComponent } from "../layout/blocks/raw-html/raw-html-block.component";
+import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
+import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
+import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
+import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
+import { RecentActivitiesPluginActivitiesBlockComponent } from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
+import { RegisterComponent } from "../account/register.component";
 
-import {MembersBlockComponent} from "../layout/blocks/members/members-block.component";
-import {CommunitiesBlockComponent} from "../layout/blocks/communities/communities-block.component";
+import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
+import { CommunitiesBlockComponent } from "../layout/blocks/communities/communities-block.component";
 
-import {LoginBlockComponent} from "../layout/blocks/login-block/login-block.component";
+import { LoginBlockComponent } from "../layout/blocks/login-block/login-block.component";
 
-import {NoosferoTemplate} from "../shared/pipes/noosfero-template.filter";
-import {DateFormat} from "../shared/pipes/date-format.filter";
+import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
+import { DateFormat } from "../shared/pipes/date-format.filter";
 
-import {AuthService} from "../login/auth.service";
-import {SessionService} from "../login/session.service";
-import {EnvironmentService} from "./../../lib/ng-noosfero-api/http/environment.service";
-import {NotificationService} from "../shared/services/notification.service";
-import {RegisterService} from "./../../lib/ng-noosfero-api/http/register.service";
+import { AuthService } from "../login/auth.service";
+import { SessionService } from "../login/session.service";
+import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment.service";
+import { NotificationService } from "../shared/services/notification.service";
+import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 
-import {BodyStateClassesService} from "./../layout/services/body-state-classes.service";
+import { BodyStateClassesService } from "./../layout/services/body-state-classes.service";
 
-import {Navbar} from "../layout/navbar/navbar";
+import { Navbar } from "../layout/navbar/navbar";
 
-import {SidebarComponent} from "../layout/sidebar/sidebar.component";
+import { SidebarComponent } from "../layout/sidebar/sidebar.component";
 
-import {MainBlockComponent} from "../layout/blocks/main/main-block.component";
-import {HtmlEditorComponent} from "../shared/components/html-editor/html-editor.component";
-import {PermissionDirective} from "../shared/components/permission/permission.directive";
-import {SearchComponent} from "../search/search.component";
-import {SearchFormComponent} from "../search/search-form/search-form.component";
+import { MainBlockComponent } from "../layout/blocks/main/main-block.component";
+import { HtmlEditorComponent } from "../shared/components/html-editor/html-editor.component";
+import { PermissionDirective } from "../shared/components/permission/permission.directive";
+import { SearchComponent } from "../search/search.component";
+import { SearchFormComponent } from "../search/search-form/search-form.component";
 
 import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../known-events";
@@ -124,7 +124,7 @@ export class EnvironmentContent {
         "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
         "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
-        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch"]
+        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch", "ngPassword"]
 })
 @StateConfig([
     {

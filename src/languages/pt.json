@@ -122,5 +122,5 @@
   "messages.invalid.maxlength": "O valor é muito longo",
   "messages.invalid.minlength": "O valor é muito curto",
   "messages.invalid.email": "Informe um email válido",
-  "messages.invalid.passwordConfirm": "As senhas não coincidem"
+  "messages.invalid.passwordMatch": "As senhas não coincidem"
 }

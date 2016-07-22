@@ -51,11 +51,12 @@
       <div class="form-group col-md-6 register-field" ng-class="ctrl.isInvalid(signupForm.passwordConfirm)">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-          <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" ng-model="ctrl.account.password_confirmation" required>
+          <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" match-password="password" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" ng-model="ctrl.account.password_confirmation" required>
         </div>
         <div class="help-block" ng-show="signupForm.passwordConfirm.$touched" ng-messages="signupForm.passwordConfirm.$error">
           <ul class="list-unstyled">
             <li ng-messages-include="languages/messages.html"></li>
+            <li ng-message="passwordMatch" translate="messages.invalid.passwordMatch"></li>
           </ul>
         </div>
       </div>

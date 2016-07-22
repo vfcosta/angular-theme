@@ -119,5 +119,5 @@
   "messages.invalid.maxlength": "This field is too long",
   "messages.invalid.minlength": "This field is too short",
   "messages.invalid.email": "This needs to be a valid email",
-  "messages.invalid.passwordConfirm": "Passwords do not match"
+  "messages.invalid.passwordMatch": "Your passwords did not match"
 }
