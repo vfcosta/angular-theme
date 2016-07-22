@@ -1,8 +1,8 @@
-import {Component, Input, Inject} from 'ng-forward';
-import {ProfileService} from '../../../lib/ng-noosfero-api/http/profile.service';
-import {NotificationService} from '../../shared/services/notification.service';
-import {PermissionDirective} from '../../shared/components/permission/permission.directive';
-import {DesignModeService} from '../../admin/layout-edit/designMode.service';
+import { Component, Input, Inject } from 'ng-forward';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
+import { NotificationService } from '../../shared/services/notification.service';
+import { PermissionDirective } from '../../shared/components/permission/permission.directive';
+import { DesignModeService } from '../../admin/layout-edit/designMode.service';
 
 @Component({
     selector: 'custom-content',
@@ -21,9 +21,10 @@ export class CustomContentComponent {
 
     content: string;
     originalContent: string;
-    private modalInstance: any = null;
+    private modalInstance: ng.ui.bootstrap.IModalServiceInstance;
 
-    constructor(private $uibModal: any,
+    constructor(
+        private $uibModal: ng.ui.bootstrap.IModalService,
         private $scope: ng.IScope,
         private profileService: ProfileService,
         private notificationService: NotificationService,

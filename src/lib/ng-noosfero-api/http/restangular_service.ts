@@ -80,14 +80,16 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         }
         return {
             data: (response.data[dataKey] || response.data),
-            headers: response.headers
+            headers: response.headers,
+            status: response.status
         };
     };
 
     protected buildResult(response: restangular.IResponse): noosfero.RestResult<T> {
         return {
             data: response.data,
-            headers: response.headers
+            headers: response.headers,
+            status: response.status
         };
     };
     /**

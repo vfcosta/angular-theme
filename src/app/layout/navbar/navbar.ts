@@ -1,11 +1,11 @@
-import {Component, Inject, EventEmitter, Input} from "ng-forward";
-import {LanguageSelectorComponent} from "../language-selector/language-selector.component";
-import {SessionService, AuthService, AuthController, AuthEvents} from "./../../login";
-import {EnvironmentService} from "./../../../lib/ng-noosfero-api/http/environment.service";
-import {SidebarNotificationService} from "../sidebar/sidebar.notification.service";
-import {BodyStateClassesService} from '../services/body-state-classes.service';
-import {DesignModeTogglerComponent} from './../../admin/layout-edit/designModeToggler.component';
-import {BootstrapSwitcherComponent, BootstrapSwitcherItem} from './../../shared/components/bootstrap-switcher/bootstrap-switcher.component';
+import { Component, Inject, EventEmitter, Input } from "ng-forward";
+import { LanguageSelectorComponent } from "../language-selector/language-selector.component";
+import { SessionService, AuthService, AuthController, AuthEvents } from "./../../login";
+import { EnvironmentService } from "./../../../lib/ng-noosfero-api/http/environment.service";
+import { SidebarNotificationService } from "../sidebar/sidebar.notification.service";
+import { BodyStateClassesService } from '../services/body-state-classes.service';
+import { DesignModeTogglerComponent } from './../../admin/layout-edit/designModeToggler.component';
+import { BootstrapSwitcherComponent, BootstrapSwitcherItem } from './../../shared/components/bootstrap-switcher/bootstrap-switcher.component';
 
 @Component({
     selector: "acme-navbar",
@@ -17,14 +17,14 @@ import {BootstrapSwitcherComponent, BootstrapSwitcherItem} from './../../shared/
 export class Navbar {
 
     private currentUser: noosfero.User;
-    private modalInstance: any = null;
+    private modalInstance: ng.ui.bootstrap.IModalServiceInstance;
     public showHamburger: boolean = false;
     public currentEnvironment: noosfero.Environment = <any>{ name: '' };
     /**
      *
      */
     constructor(
-        private $uibModal: any,
+        private $uibModal: ng.ui.bootstrap.IModalService,
         public authService: AuthService,
         private session: SessionService,
         private $state: ng.ui.IStateService,

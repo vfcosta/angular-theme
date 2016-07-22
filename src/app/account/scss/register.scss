@@ -1,0 +1,44 @@
+.modal .modal-body-overflow {
+    max-height: 420px;
+    overflow-y: auto;
+}
+
+.register-page button {
+    width: 100%;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.register-page .light-text {
+    color: #BBB;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: 600;
+}
+
+.register-page .terms-info {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.register-page .welcome-message {
+    text-align: center;
+}
+
+.register-page .already-registered-message {
+    margin-top: 60px;
+    text-align: center;
+}
+
+.register-page input {
+    height: 40px;
+}
+
+.register-page .register-field {
+    margin-bottom: 25px;
+}
+
+.register-page input:focus {
+    border: 2px solid #bbb;
+}

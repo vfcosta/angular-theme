@@ -18,7 +18,7 @@ export class BlockComponent {
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile | noosfero.Environment;
 
-    private modalInstance: any = null;
+    private modalInstance: ng.ui.bootstrap.IModalServiceInstance;
     originalBlock: noosfero.Block;
 
     currentUser: noosfero.User;
@@ -26,7 +26,8 @@ export class BlockComponent {
     editionMode = false;
     designMode = false;
 
-    constructor(private $uibModal: any,
+    constructor(
+        private $uibModal: ng.ui.bootstrap.IModalService,
         private $scope: ng.IScope,
         private $state: ng.ui.IStateService,
         private $rootScope: ng.IRootScopeService,

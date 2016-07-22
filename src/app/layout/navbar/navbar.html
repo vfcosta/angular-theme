@@ -20,6 +20,12 @@
           <a ng-href="#" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
         </li>
 
+        <li ng-show="!ctrl.currentUser">
+          <a ui-sref="main.register">
+            Sign Up
+          </a>
+        </li>
+
         <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
           <a href="#" class="dropdown-toggle" aria-expanded="false" uib-dropdown-toggle>
             <noosfero-profile-image [profile]="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>

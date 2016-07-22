@@ -40,6 +40,11 @@ export var mocks: any = {
             return this.modalInstance;
         }
     },
+    registerService: {
+        createAccount: (user: noosfero.User) => {
+            return Promise.resolve({ status: 201 });
+        }
+    },
     authService: {
         loginSuccess: {
             event: Function,
@@ -145,6 +150,15 @@ export var mocks: any = {
             return mocks.promiseResultTemplate({
                 people: {}
             });
+        },
+        getCurrentEnvironment: (): any => {
+            return {
+                id: 1,
+                settings: {},
+                layout_template: '',
+                signup_intro: 'Welcome to Noosfero',
+                host: 'http://localhost'
+            };
         }
     },
     profileService: {
@@ -240,6 +254,7 @@ export var mocks: any = {
     },
     notificationService: {
         success: () => { },
-        confirmation: () => { }
+        confirmation: () => { },
+        error: () => { }
     }
 };

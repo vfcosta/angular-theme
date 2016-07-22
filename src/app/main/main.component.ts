@@ -21,6 +21,7 @@ import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person
 import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
 import { RecentActivitiesPluginActivitiesBlockComponent } from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
+import { RegisterComponent } from "../account/register.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
 import { CommunitiesBlockComponent } from "../layout/blocks/communities/communities-block.component";
@@ -34,6 +35,7 @@ import { AuthService } from "../login/auth.service";
 import { SessionService } from "../login/session.service";
 import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment.service";
 import { NotificationService } from "../shared/services/notification.service";
+import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 
 import { BodyStateClassesService } from "./../layout/services/body-state-classes.service";
 
@@ -113,16 +115,16 @@ export class EnvironmentContent {
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
-        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent, BlockComponent
+        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent, BlockComponent, RegisterComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, RegisterService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
         "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor",
         "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
         "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
-        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch"]
+        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch", "ngPassword"]
 })
 @StateConfig([
     {
@@ -143,11 +145,22 @@ export class EnvironmentContent {
         url: '/',
         component: EnvironmentComponent,
         name: 'main.environment',
-        abstract: true,
         views: {
             "content": {
                 templateUrl: "app/environment/environment.html",
                 controller: EnvironmentComponent,
+                controllerAs: "vm"
+            }
+        }
+    },
+    {
+        url: '/account/signup',
+        component: RegisterComponent,
+        name: 'main.register',
+        views: {
+            "content": {
+                templateUrl: "app/account/register.html",
+                controller: RegisterComponent,
                 controllerAs: "vm"
             }
         }
