@@ -1,0 +1,8 @@
+<ul class="profile-images-plugin-profile-images">
+  <li ng-repeat="image in ctrl.images">
+    <a ng-href="{{ctrl.urlFor(image.view_url)}}" ng-style="{'background-image': 'url(' + image.path + ')'}">
+      <span>{{image.title}}</span>
+    </a>
+  </li>
+</ul>
+<br style="clear: both;" />

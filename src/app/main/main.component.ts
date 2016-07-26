@@ -21,6 +21,7 @@ import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person
 import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
 import { RecentActivitiesPluginActivitiesBlockComponent } from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
+import { ProfileImagesPluginProfileImagesBlockComponent } from "../layout/blocks/profile-images-plugin-profile-images/profile-images-plugin-profile-images-block.component";
 import { RegisterComponent } from "../account/register.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
@@ -96,7 +97,8 @@ export class EnvironmentContent {
  * @name main.Main
  * @requires AuthService, Session, Notification, ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
  * MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock, MembersBlock,
- * NoosferoTemplate, DateFormat, RawHTMLBlock, PersonTagsPluginInterestsBlock, RecentActivitiesPluginActivitiesBlock,
+ * NoosferoTemplate, DateFormat, RawHTMLBlock, PersonTagsPluginInterestsBlock,
+ * RecentActivitiesPluginActivitiesBlock, ProfileImagesPluginProfileImages
  * @description
  *  The Main controller for the Noosfero Angular Theme application.
  *
@@ -115,7 +117,8 @@ export class EnvironmentContent {
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
-        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent, BlockComponent, RegisterComponent
+        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
+        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, RegisterService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
