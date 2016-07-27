@@ -1,6 +1,10 @@
 {
   "noosfero.name" : "Noosfero",
   "blocks.profile_image.control_panel": "Control Panel",
+  "blocks.profile_image.join": "Join community",
+  "blocks.profile_image.leave": "Leave community",
+  "blocks.profile_image.join.moderation.title": "Good job!",
+  "blocks.profile_image.join.moderation.message": "Your membership is waiting for approval",
   "navbar.profile": "Profile",
   "navbar.settings": "Settings",
   "navbar.logout": "Log Out",

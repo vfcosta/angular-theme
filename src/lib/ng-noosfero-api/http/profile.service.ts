@@ -64,4 +64,29 @@ export class ProfileService {
         let headers = { 'Content-Type': 'application/json' };
         return this.get(profile.id).customPOST({ profile: profile }, null, null, headers);
     }
+
+    getMembers(profile: noosfero.Profile, params?: any) {
+        let p = this.get(profile.id);
+        return p.customGET('members', params);
+    }
+
+    isMember(person: noosfero.Person, profile: noosfero.Profile) {
+        let deferred = this.$q.defer();
+        if (person) {
+            this.getMembers(profile, { identifier: person.identifier }).then((result: any) => {
+                deferred.resolve(result.data.people.length > 0);
+            });
+        } else {
+            deferred.resolve(false);
+        }
+        return deferred.promise;
+    }
+
+    addMember(person: noosfero.Person, profile: noosfero.Profile) {
+        return this.get(profile.id).customPOST({}, "members", null, null);
+    }
+
+    removeMember(person: noosfero.Person, profile: noosfero.Profile) {
+        return this.get(profile.id).customDELETE("members", null, null);
+    }
 }

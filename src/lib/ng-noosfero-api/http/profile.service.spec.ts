@@ -111,6 +111,56 @@ describe("Services", () => {
                 });
                 $httpBackend.flush();
             });
+
+            it("should return the profile members", (done) => {
+                let profileId = 1;
+                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, { people: [{ id: 2 }] });
+                profileService.getMembers(<any>{ id: profileId }).then((response: restangular.IResponse) => {
+                    expect(response.data.people).toEqual([{ id: 2 }]);
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should return true if the person is a profile member", (done) => {
+                let profileId = 1;
+                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, { people: [{ id: 2 }] });
+                profileService.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
+                    expect(response).toEqual(true);
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should return false if the person is a profile member", (done) => {
+                let profileId = 1;
+                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, { people: [] });
+                profileService.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
+                    expect(response).toEqual(false);
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should add member to profile", (done) => {
+                let profileId = 1;
+                $httpBackend.expectPOST(`/api/v1/profiles/${profileId}/members`).respond(200, { pending: false });
+                profileService.addMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
+                    expect(response.data.pending).toEqual(false);
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should remove member from profile", (done) => {
+                let profileId = 1;
+                $httpBackend.expectDELETE(`/api/v1/profiles/${profileId}/members`).respond(200, { person: { id: 2 } });
+                profileService.removeMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
+                    expect(response.data.person).toEqual({ id: 2 });
+                    done();
+                });
+                $httpBackend.flush();
+            });
         });
 
 
