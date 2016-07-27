@@ -62,11 +62,11 @@ describe("Components", () => {
             });
         });
 
-        it("render scrap template correctly", done => {
-            activity = { name: "scrap1", verb: "scrap" };
+        it("render leave scrap template correctly", done => {
+            activity = { name: "scrap1", verb: "leave_scrap" };
             tcb.createAsync(BlockContainerComponent).then(fixture => {
                 let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(fixture.debugElement.queryAll(".activity.scrap").length).toEqual(1);
+                expect(fixture.debugElement.queryAll(".activity.leave_scrap").length).toEqual(1);
                 done();
             });
         });
