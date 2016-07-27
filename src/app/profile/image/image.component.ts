@@ -13,7 +13,7 @@ import {ProfileImageEditorComponent} from "./profile-image-editor.component";
     templateUrl: 'app/profile/image/image.html',
     providers: [ provide('personService',  { useClass: PersonService }) ]
 })
-@Inject(PersonService, "$uibModal", "Upload", "$timeout", "$scope")
+@Inject(PersonService, "$uibModal", "$scope")
 export class ProfileImageComponent {
 
     /**
@@ -32,22 +32,18 @@ export class ProfileImageComponent {
      *  The default icon used by this profile
      */
     defaultIcon: string;
-    
+
     @Input() editable: boolean;
-    
+
     @Input() editClass: string;
 
     picFile: any;
     croppedDataUrl: any;
     modalInstance: any;
 
-    constructor(private personService: PersonService, private $uibModal: any, private Upload: any, 
-            private $timeout: any, private $scope: ng.IScope) {
-        //console.log("ImageComponent.Created with upload: ", this.Upload);
-        //console.log("ImageComponent.Cropped: ", this.croppedDataUrl);
-        //console.log("ImageComponent.PicFile: ", this.picFile);
+    constructor(private personService: PersonService, private $uibModal: any, private $scope: ng.IScope) {
     }
-    
+
     fileSelected(file: any, errFiles: any) {
         console.log("File selected: ", file);
         if (file) {
@@ -67,18 +63,18 @@ export class ProfileImageComponent {
             });
         }
     }
-    
+
     private _showCamera: boolean = false;
-    
+
     showChange(show: boolean) {
         this._showCamera = show;
     }
-    
+
     showCamera() {
         return this._showCamera;
     }
-    
-    
+
+
     /**
      * @ngdoc method
      * @name ngOnInit
@@ -92,11 +88,6 @@ export class ProfileImageComponent {
             this.defaultIcon = 'fa-user';
         }
     }
-    
-    ngAfterViewInit() {
-        console.log("Parent scope: ", this.$scope.$parent['ctrl']['__proto__']);
-        console.log("Editable: " + this.editable);
-        console.log("Edit_class: " + this.editClass);
-    }
+
 }
 

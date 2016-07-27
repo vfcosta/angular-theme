@@ -36,7 +36,7 @@ export class PersonService extends RestangularService<noosfero.Person> {
         let attributesToUpdate: any = {
             person: { image_builder: base64_image_json }
         };
-        let restRequest: ng.IPromise<noosfero.RestResult<any>> = 
+        let restRequest: ng.IPromise<noosfero.RestResult<any>> =
             this.getElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
         restRequest.then(this.getHandleSuccessFunction(deferred))
             .catch(this.getHandleErrorFunction(deferred));

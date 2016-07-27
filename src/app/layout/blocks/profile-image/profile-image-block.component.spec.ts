@@ -14,6 +14,7 @@ describe("Components", () => {
     describe("Profile Image Block Component", () => {
 
         beforeEach(angular.mock.module("templates"));
+	let personService = jasmine.createSpyObj("personService", ["upload"]);	
 
         let profileService = jasmine.createSpyObj("ProfileService", ["isMember", "addMember", "removeMember"]);
         profileService.isMember = jasmine.createSpy("isMember").and.returnValue(Promise.resolve(false));
@@ -24,6 +25,8 @@ describe("Components", () => {
             directives: [ProfileImageBlockComponent],
             providers: [
                 helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
+		helpers.createProviderToValue("PersonService", personService),
+		helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
                 helpers.createProviderToValue('ProfileService', profileService),
                 helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
             ].concat(helpers.provideFilters("translateFilter"))

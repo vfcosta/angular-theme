@@ -4,22 +4,49 @@
  * @description
  *  This file contains the tests for the {@link components.noosfero.profile-image.ProfileImage} component.
  */
-
+import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 import {TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {Pipe, Input, provide, Component} from 'ng-forward';
+import {PersonService} from "../../../lib/ng-noosfero-api/http/person.service";
 
 import * as helpers from "../../../spec/helpers";
 
 import {ProfileImageComponent} from "./image.component";
 
-const tcb = new TestComponentBuilder();
+const htmlTemplate: string = '<noosfero-profile-image [editable]="true" [edit-class]="editable-class" [profile]="ctrl.profile"></noosfero-profile-image>';
 
 describe("Components", () => {
 
     describe("Profile Image Component", () => {
 
+        let helper: ComponentTestHelper<ProfileImageComponent>;
+
         beforeEach(angular.mock.module("templates"));
 
+        beforeEach((done) => {
+            let scope = helpers.mocks.scopeWithEvents;
+            let personService = jasmine.createSpyObj("personService", ["upload"]);
+            let properties = { profile: { custom_footer: "footer" } };
+            let cls = createClass({
+                template: htmlTemplate,
+                directives: [ProfileImageComponent],
+                properties: properties,
+                providers: [
+                    helpers.createProviderToValue("PersonService", personService),
+                    helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
+                    helpers.createProviderToValue("$scope", scope)
+                ]
+            });
+            helper = new ComponentTestHelper<ProfileImageComponent>(cls, done);
+        });
+
+        it("set modal instance when select files modal", () => {
+            helper.component['$uibModal'].open = jasmine.createSpy("open");
+            helper.component.fileSelected("file", []);
+            expect(helper.component['$uibModal'].open).toHaveBeenCalled();
+        });
+
+        /*    
         it("show community users image if profile is not Person", done => {
             helpers.tcb.createAsync(ProfileImageComponent).then(fixture => {
                 let profileImageComponent: ProfileImageComponent = fixture.componentInstance;
@@ -45,7 +72,7 @@ describe("Components", () => {
                 expect(profileImageComponent.defaultIcon).toEqual("fa-user", "The default icon should be person user");
                 done();
             });
-        });
+        });*/
 
     });
 });
