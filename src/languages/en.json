@@ -21,6 +21,7 @@
   "profile.person.title": "Person",
   "activities.title": "Activities",
   "activities.create_article.description": "has published on",
+  "activities.scrap.description": "wrote in its timeline",
   "activities.add_member_in_community.description": "has joined the community",
   "activities.new_friendship.description": "has made {friends, plural, one{one new friend} other{# new friends}}:",
   "auth.title": "Great to have you back!",
