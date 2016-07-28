@@ -71,7 +71,7 @@ describe("Components", () => {
         it("call cancel and emit event when accept was called successfully", () => {
             helper.component.currentTask = <any>{ id: 1 };
             let result = helpers.mocks.promiseResultTemplate({ data: { id: 1 } });
-            taskService.finishTask = jasmine.createSpy("finishTask").and.returnValue(result);
+            taskService.closeTask = jasmine.createSpy("closeTask").and.returnValue(result);
             helper.component.cancel = jasmine.createSpy("cancel");
             helper.component.callAccept();
             expect(helper.component.cancel).toHaveBeenCalled();
@@ -81,7 +81,7 @@ describe("Components", () => {
         it("call cancel and emit event when reject was called successfully", () => {
             helper.component.currentTask = <any>{ id: 1 };
             let result = helpers.mocks.promiseResultTemplate({ data: { id: 1 } });
-            taskService.cancelTask = jasmine.createSpy("cancelTask").and.returnValue(result);
+            taskService.closeTask = jasmine.createSpy("closeTask").and.returnValue(result);
             helper.component.cancel = jasmine.createSpy("cancel");
             helper.component.callReject();
             expect(helper.component.cancel).toHaveBeenCalled();

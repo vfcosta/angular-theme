@@ -51,50 +51,41 @@ export class TaskListComponent {
     }
 
     accept(task: noosfero.Task) {
-        this.currentTask = task;
-        this.confirmationTask = <any>{ id: task.id };
-        if (task.accept_details) {
-            this.modalInstance = this.$uibModal.open({
-                templateUrl: "app/task/task-list/accept.html",
-                controller: TaskListComponent,
-                controllerAs: 'modal',
-                bindToController: true,
-                scope: this.$scope
-            });
-        } else {
-            this.callAccept();
-        }
+        this.closeTask(task, task.accept_details, "app/task/task-list/accept.html", () => { this.callAccept(); });
     }
 
     reject(task: noosfero.Task) {
+        this.closeTask(task, task.reject_details, "app/task/task-list/reject.html", () => { this.callReject(); });
+    }
+
+    private closeTask(task: noosfero.Task, hasDetails: boolean, templateUrl: string, confirmationFunction: Function) {
         this.currentTask = task;
         this.confirmationTask = <any>{ id: task.id };
-        if (task.reject_details) {
+        if (hasDetails) {
             this.modalInstance = this.$uibModal.open({
-                templateUrl: "app/task/task-list/reject.html",
+                templateUrl: templateUrl,
                 controller: TaskListComponent,
                 controllerAs: 'modal',
                 bindToController: true,
                 scope: this.$scope
             });
         } else {
-            this.callReject();
+            confirmationFunction();
         }
     }
 
     callAccept() {
-        this.taskService.finishTask(this.confirmationTask).then(() => {
-            this.eventsHubService.emitEvent(this.eventsNames.TASK_CLOSED, this.currentTask);
-            this.notificationService.success({ title: "tasks.actions.accept.title", message: "tasks.actions.accept.message" });
-        }).finally(() => {
-            this.cancel();
-        });
+        this.callCloseTask("finish", "tasks.actions.accept.title", "tasks.actions.accept.message");
     }
 
     callReject() {
-        this.taskService.cancelTask(this.confirmationTask).then(() => {
+        this.callCloseTask("cancel", "tasks.actions.reject.title", "tasks.actions.reject.message");
+    }
+
+    private callCloseTask(action: string, title: string, message: string) {
+        this.taskService.closeTask(this.confirmationTask, action).then(() => {
             this.eventsHubService.emitEvent(this.eventsNames.TASK_CLOSED, this.currentTask);
-            this.notificationService.success({ title: "tasks.actions.reject.title", message: "tasks.actions.reject.message" });
+            this.notificationService.success({ title: title, message: message });
         }).finally(() => {
             this.cancel();
         });
