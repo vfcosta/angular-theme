@@ -9,25 +9,25 @@ import { RoleService } from "../../../../lib/ng-noosfero-api/http/role.service";
 export class AddMemberTaskAcceptComponent {
 
     @Input() task: noosfero.Task;
-    @Input() confirmationTask: noosfero.Task;
+    @Input() confirmationTask: noosfero.AddMemberTask;
     roles: noosfero.Role[];
 
     constructor(private roleService: RoleService) { }
 
     ngOnInit() {
         if (!this.task.target) return;
-        (<any>this.confirmationTask)['roles'] = [];
+        this.confirmationTask.roles = [];
         this.roleService.getByProfile(this.task.target.id).then((result: noosfero.RestResult<noosfero.Role[]>) => {
             this.roles = result.data;
         });
     }
 
     toggleSelection(role: noosfero.Role) {
-        let index = (<any>this.confirmationTask)['roles'].indexOf(role.id);
+        let index = this.confirmationTask.roles.indexOf(role.id);
         if (index >= 0) {
-            (<any>this.confirmationTask)['roles'].splice(index, 1);
+            this.confirmationTask.roles.splice(index, 1);
         } else {
-            (<any>this.confirmationTask)['roles'].push(role.id);
+            this.confirmationTask.roles.push(role.id);
         }
     }
 }

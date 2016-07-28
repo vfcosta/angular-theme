@@ -31,14 +31,14 @@ describe("Components", () => {
         it("insert role id in roles list when toggle selection", () => {
             let role = { id: 1 };
             helper.component.toggleSelection(<any>role);
-            expect((<any>helper.component.confirmationTask)['roles']).toEqual([role.id]);
+            expect(helper.component.confirmationTask.roles).toEqual([role.id]);
         });
 
         it("remove role id from roles list when toggle selection", () => {
             let role = { id: 1 };
-            (<any>helper.component.confirmationTask)['roles'] = [role.id];
+            helper.component.confirmationTask.roles = [role.id];
             helper.component.toggleSelection(<any>role);
-            expect((<any>helper.component.confirmationTask)['roles']).toEqual([]);
+            expect(helper.component.confirmationTask.roles).toEqual([]);
         });
     });
 });
