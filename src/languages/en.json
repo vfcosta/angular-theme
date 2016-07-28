@@ -140,5 +140,10 @@
   "tasks.actions.accept.message": "Task Accepted",
   "tasks.actions.reject.message": "Task Rejected",
   "tasks.actions.reject.explanation.label": "Rejection explanation",
-  "tasks.add_member.accept.select_role": "Select Roles:"
+  "tasks.add_member.accept.select_role": "Select Roles:",
+  "tasks.abuse_complaint.message": "was reported due to inappropriate behavior",
+  "tasks.add_friend.message": "wants to be friend of",
+  "tasks.add_member.message": "wants to join",
+  "tasks.create_community.message": "wants to create a new community:",
+  "tasks.suggest_article.message": "suggested a new article:"
 }

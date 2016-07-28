@@ -143,5 +143,10 @@
   "tasks.actions.accept.message": "Tarefa Aceita",
   "tasks.actions.reject.message": "Tarefa Rejeitada",
   "tasks.actions.reject.explanation.label": "Motivo da rejeição",
-  "tasks.add_member.accept.select_role": "Selecionar papéis:"
+  "tasks.add_member.accept.select_role": "Selecionar papéis:",
+  "tasks.abuse_complaint.message": "foi notificado por comportamento inadequado",
+  "tasks.add_friend.message": "quer ser amigo de",
+  "tasks.add_member.message": "quer entrar em",
+  "tasks.create_community.message": "quer criar uma nova comunidade:",
+  "tasks.suggest_article.message": "sugeriu um novo artigo:"
 }
