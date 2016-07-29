@@ -1,4 +1,4 @@
-<div id="profile-image-container" style="">    
+<div id="profile-image-container" style="">
     <div class="profile-image-wrap" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)">
         <img ng-if="ctrl.profile.image" ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image">
         <i ng-if="!ctrl.profile.image" class="fa {{ctrl.defaultIcon}} fa-5x profile-image"></i>
@@ -10,12 +10,12 @@
                 <!-- The upload button hidden behind the camera -->
                 <div class="upload-button" ngf-select="ctrl.fileSelected($file)"
                     ngf-pattern="'image/*'" ngf-accept="'image/*'"
-                    ngf-max-size="20MB"	ngf-resize="{width: 100, height: 100}" 
+                    ngf-max-size="20MB"	ngf-resize="{width: 100, height: 100}"
                     data-toggle="modal" data-target=".crop-dialog">
                     {{"profile.image.upload" | translate}}
                 </div>
-            </a>        
+            </a>
         </div>
-        
+
     </div>
 </div>

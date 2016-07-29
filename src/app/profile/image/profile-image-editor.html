@@ -10,7 +10,7 @@
 		</div>
 		<div>
 			<img ng-src="{{ctrl.croppedDataUrl}}" />
-		</div>        
+		</div>
 		<span class="progress" ng-show="progress >= 0">
 			<div style="width: {{progress" ng-bind="progress + '%'"></div>
 		</span> <span ng-show="ctrl.result">Upload Successful</span> <span class="err"
@@ -18,7 +18,7 @@
   </form>
 
   <div class="actions">
-    <button type="submit" class="btn btn-default" ng-click="ctrl.uploadImage(ctrl.croppedDataUrl, ctrl.picFile.name)">Upload</button>
-    <button type="submit" class="btn btn-danger" ng-click="ctrl.cancel()">Cancel</button>
+    <button type="submit" class="btn btn-default" (click)="ctrl.uploadImage(ctrl.croppedDataUrl, ctrl.picFile.name)">Upload</button>
+    <button type="submit" class="btn btn-danger" (click)="ctrl.cancel()">Cancel</button>
   </div>
 </div>

@@ -37,9 +37,8 @@ i.profile-image {
 }
 
 .select-photo-container {
-    //overflow: hidden;
     position: absolute;
-    z-index: -1;    
+    z-index: -1;
     background: #000;
     background: rgba(0, 0, 0, .6);
     background: linear-gradient(transparent, rgba(0, 0, 0, .6) 70%, rgba(0, 0, 0, .6) 100%);
@@ -58,7 +57,6 @@ i.profile-image {
 .upload-button {
     -webkit-font-smoothing: antialiased;
     color: #fff;
-    //word-wrap: break-word;    
 }
 
 .upload-container {
@@ -95,4 +93,3 @@ form .progress {
     background: orange;
     width: 0;
 }
-

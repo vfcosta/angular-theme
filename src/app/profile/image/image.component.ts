@@ -1,6 +1,6 @@
-import {Inject, Input, Component, provide} from "ng-forward";
-import {PersonService} from "../../../lib/ng-noosfero-api/http/person.service";
-import {ProfileImageEditorComponent} from "./profile-image-editor.component";
+import { Inject, Input, Component, provide } from "ng-forward";
+import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
+import { ProfileImageEditorComponent } from "./profile-image-editor.component";
 
 /**
  * @ngdoc controller
@@ -11,7 +11,7 @@ import {ProfileImageEditorComponent} from "./profile-image-editor.component";
 @Component({
     selector: "noosfero-profile-image",
     templateUrl: 'app/profile/image/image.html',
-    providers: [ provide('personService',  { useClass: PersonService }) ]
+    providers: [provide('personService', { useClass: PersonService })]
 })
 @Inject(PersonService, "$uibModal", "$scope")
 export class ProfileImageComponent {
@@ -20,7 +20,7 @@ export class ProfileImageComponent {
      * @ngdoc property
      * @name profile
      * @propertyOf components.noosfero.profile-image.ProfileImage
-     * @description 
+     * @description
      *  The Noosfero {@link models.Profile} holding the image.
      */
     @Input() profile: noosfero.Profile;
@@ -41,7 +41,7 @@ export class ProfileImageComponent {
     croppedDataUrl: any;
     modalInstance: any;
 
-    constructor(private personService: PersonService, private $uibModal: any, private $scope: ng.IScope) {
+    constructor(private personService: PersonService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
     }
 
     fileSelected(file: any, errFiles: any) {
@@ -79,8 +79,8 @@ export class ProfileImageComponent {
      * @ngdoc method
      * @name ngOnInit
      * @methodOf components.noosfero.profile-image.ProfileImage
-     * @description 
-     *  Initializes the icon names to their corresponding values depending on the profile type passed to the controller 
+     * @description
+     *  Initializes the icon names to their corresponding values depending on the profile type passed to the controller
      */
     ngOnInit() {
         this.defaultIcon = 'fa-users';
@@ -90,4 +90,3 @@ export class ProfileImageComponent {
     }
 
 }
-
