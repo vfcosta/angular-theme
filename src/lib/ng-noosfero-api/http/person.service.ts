@@ -1,6 +1,6 @@
 import { Injectable, Inject } from "ng-forward";
-import {RestangularService} from "./restangular_service";
-import {ProfileService} from "./profile.service";
+import { RestangularService } from "./restangular_service";
+import { ProfileService } from "./profile.service";
 
 @Injectable()
 @Inject("Restangular", "$q", "$log", ProfileService)
@@ -28,4 +28,19 @@ export class PersonService extends RestangularService<noosfero.Person> {
         p.catch(this.getHandleErrorFunction<noosfero.RestResult<any>>(deferred));
         return deferred.promise;
     }
+
+    uploadImage(profile: noosfero.Profile, base64ImageJson: any) {
+        let headers = { 'Content-Type': 'application/json' };
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Profile>>();
+        // TODO dynamically copy the selected attributes to update
+        let attributesToUpdate: any = {
+            person: { image_builder: base64ImageJson }
+        };
+        let restRequest: ng.IPromise<noosfero.RestResult<any>> =
+            this.getElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
+        restRequest.then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
+
 }

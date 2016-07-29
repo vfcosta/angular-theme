@@ -1,4 +1,21 @@
-<span class="profile-image-wrap" title="{{ctrl.profile.name}}">
-  <img ng-if="ctrl.profile.image" ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image">
-  <i ng-if="!ctrl.profile.image" class="fa {{ctrl.defaultIcon}} fa-5x profile-image"></i>
-</span>
+<div id="profile-image-container" style="">
+    <div class="profile-image-wrap" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)">
+        <img ng-if="ctrl.profile.image" ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image">
+        <i ng-if="!ctrl.profile.image" class="fa {{ctrl.defaultIcon}} fa-5x profile-image"></i>
+        <div ng-if="ctrl.editable" class="upload-camera-container">
+            <i id="camera" class="fa fa-camera upload-camera" aria-hidden="true"></i>
+        </div>
+        <div ng-if="ctrl.editable" id="select-photo-container" name="select-photo-container" class="select-photo-container container" ng-class="ctrl.editClass">
+            <a id="upload-container" class="upload-container" href="#" rel="dialog" role="button">
+                <!-- The upload button hidden behind the camera -->
+                <div class="upload-button" ngf-select="ctrl.fileSelected($file)"
+                    ngf-pattern="'image/*'" ngf-accept="'image/*'"
+                    ngf-max-size="20MB"	ngf-resize="{width: 100, height: 100}"
+                    data-toggle="modal" data-target=".crop-dialog">
+                    {{"profile.image.upload" | translate}}
+                </div>
+            </a>
+        </div>
+
+    </div>
+</div>
