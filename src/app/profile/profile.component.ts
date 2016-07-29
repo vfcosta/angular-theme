@@ -1,16 +1,18 @@
-import {StateConfig, Component, Inject, provide} from 'ng-forward';
-import {ProfileInfoComponent} from './info/profile-info.component';
-import {ProfileHomeComponent} from './profile-home.component';
-import {BasicEditorComponent} from '../article/cms/basic-editor/basic-editor.component';
-import {CmsComponent} from '../article/cms/cms.component';
-import {ContentViewerComponent} from "../article/content-viewer/content-viewer.component";
-import {ContentViewerActionsComponent} from "../article/content-viewer/content-viewer-actions.component";
-import {ActivitiesComponent} from "./activities/activities.component";
-import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
-import {NotificationService} from "../shared/services/notification.service";
-import {MyProfileComponent} from "./myprofile.component";
-import {ProfileActionsComponent} from "./profile-actions.component";
-import {ConfigBarComponent} from "./config-bar.component";
+import { StateConfig, Component, Inject, provide } from 'ng-forward';
+import { ProfileInfoComponent } from './info/profile-info.component';
+import { ProfileHomeComponent } from './profile-home.component';
+import { BasicEditorComponent } from '../article/cms/basic-editor/basic-editor.component';
+import { CmsComponent } from '../article/cms/cms.component';
+import { ContentViewerComponent } from "../article/content-viewer/content-viewer.component";
+import { ContentViewerActionsComponent } from "../article/content-viewer/content-viewer-actions.component";
+import { ActivitiesComponent } from "./activities/activities.component";
+import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
+import { NotificationService } from "../shared/services/notification.service";
+import { MyProfileComponent } from "./myprofile.component";
+import { ProfileActionsComponent } from "./profile-actions.component";
+import { ConfigBarComponent } from "./config-bar.component";
+import { TasksComponent } from "../task/tasks/tasks.component";
+
 /**
  * @ngdoc controller
  * @name profile.Profile
@@ -87,6 +89,18 @@ import {ConfigBarComponent} from "./config-bar.component";
             "content": {
                 templateUrl: "app/article/cms/cms.html",
                 controller: CmsComponent,
+                controllerAs: "vm"
+            }
+        }
+    },
+    {
+        name: 'main.profile.tasks',
+        url: "^/myprofile/:profile/tasks",
+        component: TasksComponent,
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/task/tasks/tasks.html",
+                controller: TasksComponent,
                 controllerAs: "vm"
             }
         }

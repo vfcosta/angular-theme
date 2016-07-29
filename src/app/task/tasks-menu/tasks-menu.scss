@@ -1,0 +1,29 @@
+tasks-menu {
+  .tasks-menu {
+    position: relative;
+    margin-right: 0;
+    .badge {
+      position: absolute;
+      top: 1px;
+      right: 8px;
+      border-radius: 6px;
+      background-color: #e84e40;
+      color: #fff;
+    }
+    .all-tasks {
+      text-align: center;
+      width: 100%;
+      display: block;
+      line-height: 25px;
+    }
+    .task-panel {
+      width: 550px;
+      padding: 0;
+    }
+    .task-menu-header {
+      text-align: center;
+      padding: 7px;
+      font-weight: bold;
+    }
+  }
+}

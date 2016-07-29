@@ -1,0 +1,11 @@
+<li class="btn-nav tasks-menu" uib-dropdown  ng-show="ctrl.total > 0" ng-if="ctrl.total">
+  <a href="#" uib-dropdown-toggle>
+    <i class="fa fa-bell-o fa-fw fa-2x"></i>
+    <span class="badge">{{ctrl.total}}</span>
+  </a>
+  <div class="dropdown-menu task-panel" uib-dropdown-menu>
+    <div class="task-menu-header">{{"tasks.menu.header" | translate:{tasks: ctrl.total}:"messageformat"}}</div>
+    <task-list [tasks]="ctrl.tasks"></task-list>
+    <a ui-sref="main.profile.tasks({profile: ctrl.person.identifier})" class="all-tasks btn btn-default btn-xs">{{"tasks.menu.all" | translate}}</a>
+  </div>
+</li>
