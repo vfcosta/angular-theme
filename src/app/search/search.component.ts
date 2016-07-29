@@ -19,6 +19,7 @@ export class SearchComponent {
 
     constructor(private articleService: ArticleService, private $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService) {
         this.query = this.$stateParams['query'];
+        this.perPage = this.$stateParams['per_page'] || this.perPage;
         this.loadPage();
     }
 

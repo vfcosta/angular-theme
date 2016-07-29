@@ -32,7 +32,7 @@ import {SearchComponent} from "../search/search.component";
         }
     },
     {
-        url: '^/search?query',
+        url: '^/search?query&per_page',
         component: SearchComponent,
         name: 'main.environment.search',
         views: {
