@@ -25,13 +25,16 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
 }
 
 function configTranslation($translateProvider: angular.translate.ITranslateProvider, tmhDynamicLocaleProvider: any) {
+    let defaultLanguage = (<any>navigator)['languages'] ? (<any>navigator)['languages'][0] : (navigator.language || (<any>navigator)['userLanguage']);
+    defaultLanguage = defaultLanguage ? defaultLanguage.replace(/-br|-us/i, '') : 'en';
+
     $translateProvider.useStaticFilesLoader({
         prefix: '/languages/',
         suffix: '.json'
     });
     $translateProvider.addInterpolation('$translateMessageFormatInterpolation');
     $translateProvider.useMissingTranslationHandlerLog();
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.preferredLanguage(defaultLanguage);
     $translateProvider.useSanitizeValueStrategy('escape');
     tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
     tmhDynamicLocaleProvider.useCookieStorage();
