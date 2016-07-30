@@ -47,7 +47,6 @@ describe("Components", () => {
         it("upload image", done => {
             let imageName = "image1";
             personServiceMock = jasmine.createSpyObj("personServiceMock", ["uploadImage"]);
-            console.log("PersonServiceMock:", personServiceMock);
             let deferredUploadImage = $q.defer();
             personServiceMock.uploadImage = jasmine.createSpy('uploadImage').and.returnValue(deferredUploadImage.promise);
             comp.personService = personServiceMock;

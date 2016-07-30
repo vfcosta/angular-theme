@@ -45,7 +45,6 @@ export class ProfileImageComponent {
     }
 
     fileSelected(file: any, errFiles: any) {
-        console.log("File selected: ", file);
         if (file) {
             this.picFile = file;
             this.modalInstance = this.$uibModal.open({
