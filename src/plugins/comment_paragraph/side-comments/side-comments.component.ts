@@ -1,7 +1,7 @@
-import {Component, Inject, Input, Output} from "ng-forward";
-import {CommentsComponent} from "../../../app/article/comment/comments.component";
-import {CommentService} from "../../../lib/ng-noosfero-api/http/comment.service";
-import {CommentParagraphService} from "../http/comment-paragraph.service";
+import { Component, Inject, Input, Output } from "ng-forward";
+import { CommentsComponent } from "../../../app/article/comment/comments.component";
+import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
+import { CommentParagraphService } from "../http/comment-paragraph.service";
 
 @Component({
     selector: "comment-paragraph-side-comments",
@@ -12,6 +12,7 @@ export class SideCommentsComponent extends CommentsComponent {
 
     @Input() article: noosfero.Article;
     @Input() paragraphUuid: string;
+    @Input() fullPagination = true;
 
     constructor(commentService: CommentService,
         $scope: ng.IScope,

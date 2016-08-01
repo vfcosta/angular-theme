@@ -4,5 +4,10 @@
   <div class="comments-list">
     <noosfero-comment (comment-removed)="ctrl.commentRemoved($event.detail)" ng-repeat="comment in ctrl.comments | orderBy: 'created_at':true" [comment]="comment" [article]="ctrl.article"></noosfero-comment>
   </div>
+
   <button type="button" ng-if="ctrl.displayMore()" class="more-comments btn btn-default btn-block" ng-click="ctrl.loadNextPage()">{{"comment.pagination.more" | translate}}</button>
+  <uib-pagination ng-if="ctrl.displayFullPagination()" ng-model="ctrl.page" total-items="ctrl.total" class="pagination-sm center-block"
+    boundary-links="true" items-per-page="ctrl.perPage" ng-change="ctrl.loadNextPage()"
+    first-text="«" last-text="»" previous-text="‹" next-text="›">
+  </uib-pagination>
 </div>

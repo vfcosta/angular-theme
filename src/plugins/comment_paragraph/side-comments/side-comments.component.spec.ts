@@ -10,7 +10,7 @@ describe("Components", () => {
     describe("Side Comments Component", () => {
 
         let serviceMock = jasmine.createSpyObj("CommentParagraphService", ["getByArticle"]);
-        serviceMock.getByArticle = jasmine.createSpy("getByArticle").and.returnValue(Promise.resolve({ data: {} }));
+        serviceMock.getByArticle = jasmine.createSpy("getByArticle").and.returnValue(Promise.resolve({ data: [] }));
 
         let commentServiceMock = {};
         let postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["emit", "subscribe"]);
