@@ -26,7 +26,7 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
 
 function configTranslation($translateProvider: angular.translate.ITranslateProvider, tmhDynamicLocaleProvider: any) {
     let defaultLanguage = (<any>navigator)['languages'] ? (<any>navigator)['languages'][0] : (navigator.language || (<any>navigator)['userLanguage']);
-    defaultLanguage = defaultLanguage ? defaultLanguage.replace(/-br|-us/i, '') : 'en';
+    defaultLanguage = defaultLanguage && (<any>navigator)['userAgent'].indexOf('PhantomJS') === -1 ? defaultLanguage.replace(/-br|-us/i, '') : 'en';
 
     $translateProvider.useStaticFilesLoader({
         prefix: '/languages/',
