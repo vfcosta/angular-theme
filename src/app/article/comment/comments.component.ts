@@ -89,7 +89,7 @@ export class CommentsComponent {
     }
 
     displayFullPagination() {
-        return !this.parent && this.fullPagination && this.getPages() > 0;
+        return !this.parent && this.fullPagination && this.getPages() > 1;
     }
 
     private getPages() {
