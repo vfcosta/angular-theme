@@ -34,8 +34,7 @@ describe("Components", () => {
         class BlockContainerComponent {
             block = { type: 'Block' };
             owner = { name: 'profile-name' };
-            constructor() {
-            }
+            constructor() { }
         }
 
         it("show image if present", () => {
@@ -55,7 +54,19 @@ describe("Components", () => {
         it("display button to join community", (done: Function) => {
             helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
                 let elProfile = fixture.debugElement.componentViewChildren[0];
-                expect(elProfile.query('.actions .join').length).toEqual(1);
+                expect(elProfile.componentInstance.displayOrganizationActions()).toBeTruthy();
+                expect(elProfile.query('.actions .organization-actions .join').length).toEqual(1);
+                done();
+            });
+        });
+
+        it("not display button to join community for person", (done: Function) => {
+            helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
+                let elProfile = fixture.debugElement.componentViewChildren[0];
+                elProfile.componentInstance.owner = { name: 'person-name', type: 'Person' };
+                fixture.detectChanges();
+                expect(elProfile.componentInstance.displayOrganizationActions()).toBeFalsy();
+                expect(elProfile.queryAll('.actions .organization-actions .join').length).toEqual(0);
                 done();
             });
         });

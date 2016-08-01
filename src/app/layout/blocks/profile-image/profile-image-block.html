@@ -4,7 +4,9 @@
   </a>
   <a class="settings-link" target="_self" ui-sref="main.profile.settings({profile: ctrl.owner.identifier})">{{"blocks.profile_image.control_panel" | translate}}</a>
   <div class="actions" ng-show="ctrl.isMember!=null">
-    <a ng-if="!ctrl.isMember" ng-click="ctrl.join()" class="btn btn-primary btn-sm join" href="#">{{"blocks.profile_image.join" | translate}}</a>
-    <a ng-if="ctrl.isMember" ng-click="ctrl.leave()" class="btn btn-warning btn-sm leave" href="#">{{"blocks.profile_image.leave" | translate}}</a>
+    <div class="organization-actions" ng-if="ctrl.displayOrganizationActions()">
+      <a ng-if="!ctrl.isMember" ng-click="ctrl.join()" class="btn btn-primary btn-sm join" href="#">{{"blocks.profile_image.join" | translate}}</a>
+      <a ng-if="ctrl.isMember" ng-click="ctrl.leave()" class="btn btn-warning btn-sm leave" href="#">{{"blocks.profile_image.leave" | translate}}</a>
+    </div>
   </div>
 </div>

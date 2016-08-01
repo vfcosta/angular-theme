@@ -1,8 +1,8 @@
-import {Inject, Input, Component} from "ng-forward";
-import {ProfileImageComponent} from "./../../../profile/image/image.component";
-import {ProfileService} from "../../../../lib/ng-noosfero-api/http/profile.service";
-import {SessionService} from "./../../../login";
-import {NotificationService} from "../../../shared/services/notification.service";
+import { Inject, Input, Component } from "ng-forward";
+import { ProfileImageComponent } from "./../../../profile/image/image.component";
+import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service";
+import { SessionService } from "./../../../login";
+import { NotificationService } from "../../../shared/services/notification.service";
 
 @Component({
     selector: "noosfero-profile-image-block",
@@ -47,5 +47,9 @@ export class ProfileImageBlockComponent {
         this.profileService.removeMember(person, this.owner).then(() => {
             this.loadMembership();
         });
+    }
+
+    displayOrganizationActions() {
+        return this.owner.type !== 'Person';
     }
 }
