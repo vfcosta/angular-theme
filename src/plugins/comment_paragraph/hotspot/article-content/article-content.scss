@@ -1,15 +1,15 @@
 .discussion-header {
-  @extend .pull-right;
+  text-align: right;
   margin-bottom: 20px;
   .period {
-    @extend .pull-right;
+    display: inline-block;
     .description {
       font-weight: bold;
       color: #A2A2A2;
     }
   }
   .icon {
-    @extend .pull-right;
+    display: inline-block;
     margin-left: 8px;
   }
 }

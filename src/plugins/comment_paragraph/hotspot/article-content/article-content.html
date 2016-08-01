@@ -1,7 +1,4 @@
 <div class="discussion-header" ng-if="ctrl.isDiscussion()">
-  <div class="icon">
-    <i class="fa fa-calendar fa-fw fa-lg"></i>
-  </div>
   <div class="period">
     <div ng-if="ctrl.notOpened()" class="description not-opened">
       {{"comment-paragraph-plugin.discussion.notOpened.header" | translate:{date: (ctrl.article.start_date | dateFormat | amTimeAgo)} }}
@@ -17,5 +14,8 @@
     <div ng-if="ctrl.closed()" class="description closed">
       {{"comment-paragraph-plugin.discussion.closed.header" | translate:{date: (ctrl.article.end_date | dateFormat | amTimeAgo)} }}
     </div>
+  </div>
+  <div class="icon">
+    <i class="fa fa-calendar fa-fw fa-lg"></i>
   </div>
 </div>
