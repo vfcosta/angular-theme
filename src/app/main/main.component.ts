@@ -4,6 +4,7 @@ import { ArticleBlogComponent } from "./../article/types/blog/blog.component";
 
 import { ArticleViewComponent } from "./../article/article-default-view.component";
 
+import { PasswordComponent } from "../login/new-password.component";
 import { ProfileComponent } from "../profile/profile.component";
 import { BoxesComponent } from "../layout/boxes/boxes.component";
 import { BlockContentComponent } from "../layout/blocks/block-content.component";
@@ -120,7 +121,8 @@ export class EnvironmentContent {
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
-        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent
+        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
+        PasswordComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
@@ -167,6 +169,18 @@ export class EnvironmentContent {
             "content": {
                 templateUrl: "app/account/register.html",
                 controller: RegisterComponent,
+                controllerAs: "vm"
+            }
+        }
+    },
+    {
+        url: "/account/new_password/:code",
+        component: PasswordComponent,
+        name: 'main.newPasswd',
+        views: {
+            "content": {
+                templateUrl: "app/login/new-password.html",
+                controller: PasswordComponent,
                 controllerAs: "vm"
             }
         }

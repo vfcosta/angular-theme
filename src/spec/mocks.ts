@@ -257,6 +257,11 @@ export var mocks: any = {
         changeLanguage: (lang: string) => { },
         translate: (text: string) => { return text; }
     },
+    passwordService: {
+        new_password: (param: any) => {
+            return Promise.resolve({ status: 201 });
+        }
+    },
     notificationService: {
         success: () => { },
         confirmation: () => { },
