@@ -16,6 +16,7 @@ export class CommentsComponent {
     @Input() showForm = true;
     @Input() article: noosfero.Article;
     @Input() parent: noosfero.CommentViewModel;
+    @Input() fullPagination = false;
     protected page = 1;
     protected perPage = 5;
     protected total = 0;
@@ -73,14 +74,25 @@ export class CommentsComponent {
 
     loadNextPage() {
         this.loadComments().then((result: noosfero.RestResult<noosfero.Comment[]>) => {
-            this.comments = this.comments.concat(result.data);
+            if (this.fullPagination) {
+                this.comments = result.data;
+            } else {
+                this.comments = this.comments.concat(result.data);
+                this.page++;
+            }
             this.total = result.headers ? result.headers("total") : this.comments.length;
-            this.page++;
         });
     }
 
     displayMore() {
-        let pages = Math.ceil(this.total / this.perPage);
-        return !this.parent && pages >= this.page;
+        return !this.parent && !this.fullPagination && this.getPages() >= this.page;
+    }
+
+    displayFullPagination() {
+        return !this.parent && this.fullPagination && this.getPages() > 0;
+    }
+
+    private getPages() {
+        return Math.ceil(this.total / this.perPage);
     }
 }
