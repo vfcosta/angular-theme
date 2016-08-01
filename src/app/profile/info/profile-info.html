@@ -10,7 +10,7 @@
         <div id="profile-info-extrainfo" class="profile-info-extrainfo">
           <span class="label" ng-class="{'label-danger': vm.profile.type == 'Community', 'label-info': vm.profile.type == 'Person'}">{{vm.profile | translateProfile}}</span>
           <div class="profile-since">
-            {{"profile.member_since" | translate}}: {{vm.profile.created_at | amDateFormat:'MMMM YYYY'}}
+            {{"profile.member_since" | translate}}: {{vm.profile.created_at | dateFormat | amDateFormat:'MMMM YYYY'}}
           </div>
         </div>
       </div>
