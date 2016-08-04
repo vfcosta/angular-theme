@@ -18,7 +18,7 @@ describe("Components", () => {
         let modalInstance = jasmine.createSpyObj("$uibModalInstance", ["close"]);
         let picFile = { type: "png" };
         let $q: ng.IQService;
-        let personServiceMock: any;
+        let profileServiceMock: any;
         let $rootScope: ng.IRootScopeService;
 
         beforeEach(inject((_$q_: ng.IQService, _$rootScope_: ng.IRootScopeService) => {
@@ -26,7 +26,7 @@ describe("Components", () => {
             $rootScope = _$rootScope_;
         }));
 
-        let comp = new ProfileImageEditorComponent(picFile, this.profile, personServiceMock, modalInstance);
+        let comp = new ProfileImageEditorComponent(picFile, this.profile, profileServiceMock, modalInstance);
 
         it("get data", done => {
 
@@ -46,10 +46,10 @@ describe("Components", () => {
 
         it("upload image", done => {
             let imageName = "image1";
-            personServiceMock = jasmine.createSpyObj("personServiceMock", ["uploadImage"]);
+            profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["uploadImage"]);
             let deferredUploadImage = $q.defer();
-            personServiceMock.uploadImage = jasmine.createSpy('uploadImage').and.returnValue(deferredUploadImage.promise);
-            comp.personService = personServiceMock;
+            profileServiceMock.uploadImage = jasmine.createSpy('uploadImage').and.returnValue(deferredUploadImage.promise);
+            comp.profileService = profileServiceMock;
             comp.uploadImage(testDataUrl, imageName);
             deferredUploadImage.resolve();
             $rootScope.$apply();

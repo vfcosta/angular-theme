@@ -1,5 +1,5 @@
 import { Inject, Input, Component, provide } from "ng-forward";
-import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import { PermissionService } from "../../shared/services/permission.service";
 import { ProfileImageEditorComponent } from "./profile-image-editor.component";
 
@@ -12,11 +12,10 @@ import { ProfileImageEditorComponent } from "./profile-image-editor.component";
 @Component({
     selector: "noosfero-profile-image",
     templateUrl: 'app/profile/image/image.html',
-    providers: [provide('personService', { useClass: PersonService })]
+    providers: [provide('profileService', { useClass: ProfileService })]
 })
-@Inject(PersonService, PermissionService, "$uibModal", "$scope")
+@Inject(ProfileService, PermissionService, "$uibModal", "$scope")
 export class ProfileImageComponent {
-
     /**
      * @ngdoc property
      * @name profile
@@ -42,8 +41,7 @@ export class ProfileImageComponent {
     croppedDataUrl: any;
     modalInstance: any;
 
-    constructor(private personService: PersonService, private permissionService: PermissionService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
-        console.log('wwwwwwwwwwwwwwwwwwwwwwww', this.editable);
+    constructor(private profileService: ProfileService, private permissionService: PermissionService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
     }
 
     fileSelected(file: any, errFiles: any) {
@@ -59,7 +57,7 @@ export class ProfileImageComponent {
                 resolve: {
                     picFile: this.picFile,
                     profile: this.profile,
-                    personService: this.personService
+                    profileService: this.profileService
                 }
             });
         }
@@ -78,7 +76,6 @@ export class ProfileImageComponent {
     isEditable() {
         return this.editable && this.permissionService.isAllowed(this.profile, 'allow_edit');
     }
-
 
     /**
      * @ngdoc method

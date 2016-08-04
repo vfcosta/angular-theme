@@ -7,7 +7,7 @@
 import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
 import { TestComponentBuilder, ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder';
 import { Pipe, Input, provide, Component } from 'ng-forward';
-import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 
 import * as helpers from "../../../spec/helpers";
 
@@ -25,14 +25,14 @@ describe("Components", () => {
 
         beforeEach((done) => {
             let scope = helpers.mocks.scopeWithEvents;
-            let personService = jasmine.createSpyObj("personService", ["upload"]);
+            let profileService = jasmine.createSpyObj("profileService", ["upload"]);
             let properties = { profile: { custom_footer: "footer" } };
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [ProfileImageComponent],
                 properties: properties,
                 providers: [
-                    helpers.createProviderToValue("PersonService", personService),
+                    helpers.createProviderToValue("ProfileService", profileService),
                     helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
                     helpers.createProviderToValue("$scope", scope)
                 ]
