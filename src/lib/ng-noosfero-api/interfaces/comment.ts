@@ -5,6 +5,7 @@ namespace noosfero {
         reply_of: Comment;
         replies: Comment[];
         body: string;
+        permissions: string[];
     }
 
     export interface CommentViewModel extends Comment {

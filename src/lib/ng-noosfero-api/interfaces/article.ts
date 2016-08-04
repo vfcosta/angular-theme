@@ -8,6 +8,8 @@ namespace noosfero {
         parent: Article;
         body: string;
         title: string;
+
+
         name: string;
         published: boolean;
         setting: any;

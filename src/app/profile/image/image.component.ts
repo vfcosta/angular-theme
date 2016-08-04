@@ -1,5 +1,6 @@
 import { Inject, Input, Component, provide } from "ng-forward";
 import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
+import { PermissionService } from "../../shared/services/permission.service";
 import { ProfileImageEditorComponent } from "./profile-image-editor.component";
 
 /**
@@ -13,7 +14,7 @@ import { ProfileImageEditorComponent } from "./profile-image-editor.component";
     templateUrl: 'app/profile/image/image.html',
     providers: [provide('personService', { useClass: PersonService })]
 })
-@Inject(PersonService, "$uibModal", "$scope")
+@Inject(PersonService, PermissionService, "$uibModal", "$scope")
 export class ProfileImageComponent {
 
     /**
@@ -41,7 +42,8 @@ export class ProfileImageComponent {
     croppedDataUrl: any;
     modalInstance: any;
 
-    constructor(private personService: PersonService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
+    constructor(private personService: PersonService, private permissionService: PermissionService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
+        console.log('wwwwwwwwwwwwwwwwwwwwwwww', this.editable);
     }
 
     fileSelected(file: any, errFiles: any) {
@@ -71,6 +73,10 @@ export class ProfileImageComponent {
 
     showCamera() {
         return this._showCamera;
+    }
+
+    isEditable() {
+        return this.editable && this.permissionService.isAllowed(this.profile, 'allow_edit');
     }
 
 

@@ -4,7 +4,6 @@ import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service"
 
 export class ProfileImageEditorComponent {
 
-    activities: any;
     croppedDataUrl: string;
     static $inject = ["picFile", "profile", "personService", "$uibModalInstance"];
 
