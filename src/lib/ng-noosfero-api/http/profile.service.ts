@@ -1,13 +1,27 @@
 import { Injectable, Inject } from "ng-forward";
+import { RestangularService } from "./restangular_service";
+
 
 @Injectable()
 @Inject("Restangular", "$q")
-export class ProfileService {
+export class ProfileService extends RestangularService<noosfero.Profile> {
 
     private _currentProfilePromise: ng.IDeferred<noosfero.Profile>;
 
-    constructor(private restangular: restangular.IService, private $q: ng.IQService) {
+    constructor(private restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
+        super(restangular, $q, $log);
         this.resetCurrentProfile();
+    }
+
+    getResourcePath() {
+        return "profiles";
+    }
+
+    getDataKeys() {
+        return {
+            singular: 'profile',
+            plural: 'profiles'
+        };
     }
 
     resetCurrentProfile() {
@@ -31,7 +45,7 @@ export class ProfileService {
     }
 
     getHomePage(profileId: number, params?: any) {
-        return this.get(profileId).customGET("home_page", params);
+        return this.getProfileElement(profileId).customGET("home_page", params);
     }
 
     getByIdentifier(identifier: string): ng.IPromise<noosfero.Profile> {
@@ -45,28 +59,28 @@ export class ProfileService {
     }
 
     getProfileMembers(profileId: number, params?: any): restangular.IPromise<any> {
-        return this.get(profileId).customGET("members", params);
+        return this.getProfileElement(profileId).customGET("members", params);
     }
 
     getBoxes(profileId: number): restangular.IPromise<any> {
-        return this.get(profileId).customGET('boxes');
+        return this.getProfileElement(profileId).customGET('boxes');
     }
 
     getActivities(profileId: number, params?: any): restangular.IPromise<any> {
-        return this.get(profileId).customGET("activities", params);
+        return this.getProfileElement(profileId).customGET("activities", params);
     }
 
-    get(profileId: number): restangular.IElement {
+    getProfileElement(profileId: number): restangular.IElement {
         return this.restangular.one('profiles', profileId);
     }
 
     update(profile: noosfero.Profile) {
         let headers = { 'Content-Type': 'application/json' };
-        return this.get(profile.id).customPOST({ profile: profile }, null, null, headers);
+        return this.getProfileElement(profile.id).customPOST({ profile: profile }, null, null, headers);
     }
 
     getMembers(profile: noosfero.Profile, params?: any) {
-        let p = this.get(profile.id);
+        let p = this.getProfileElement(profile.id);
         return p.customGET('members', params);
     }
 
@@ -83,10 +97,24 @@ export class ProfileService {
     }
 
     addMember(person: noosfero.Person, profile: noosfero.Profile) {
-        return this.get(profile.id).customPOST({}, "members", null, null);
+        return this.getProfileElement(profile.id).customPOST({}, "members", null, null);
     }
 
     removeMember(person: noosfero.Person, profile: noosfero.Profile) {
-        return this.get(profile.id).customDELETE("members", null, null);
+        return this.getProfileElement(profile.id).customDELETE("members", null, null);
+    }
+
+    uploadImage(profile: noosfero.Profile, base64ImageJson: any) {
+        let headers = { 'Content-Type': 'application/json' };
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Profile>>();
+        // TODO dynamically copy the selected attributes to update
+        let attributesToUpdate: any = {
+            profile: { image_builder: base64ImageJson }
+        };
+        let restRequest: ng.IPromise<noosfero.RestResult<any>> =
+            this.getProfileElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
+        restRequest.then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
     }
 }

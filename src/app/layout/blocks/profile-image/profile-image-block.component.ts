@@ -1,5 +1,5 @@
 import { Inject, Input, Component } from "ng-forward";
-import { ProfileImageComponent } from "./../../../profile/image/image.component";
+import { ProfileImageComponent } from "./../../../profile/image/profile-image.component";
 import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service";
 import { SessionService } from "./../../../login";
 import { NotificationService } from "../../../shared/services/notification.service";

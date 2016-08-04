@@ -58,7 +58,7 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     }
 
     createInProfile(profile: noosfero.Profile, article: noosfero.Article): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
-        let profileElement = this.profileService.get(<number>profile.id);
+        let profileElement = this.profileService.getProfileElement(<number>profile.id);
         (<any>profileElement).id = profile.id;
         let headers = {
             'Content-Type': 'application/json'
@@ -84,13 +84,13 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     }
 
     getByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {
-        let profileElement = this.profileService.get(<number>profile.id);
+        let profileElement = this.profileService.getProfileElement(<number>profile.id);
         return this.list(profileElement, params);
     }
 
     getArticleByProfileAndPath(profile: noosfero.Profile, path: string): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
         let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
-        let profileElement = this.profileService.get(<number>profile.id);
+        let profileElement = this.profileService.getProfileElement(<number>profile.id);
 
         let restRequest: ng.IPromise<any>;
 
@@ -108,7 +108,7 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     }
 
     getOneByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
-        let profileElement = this.profileService.get(<number>profile.id);
+        let profileElement = this.profileService.getProfileElement(<number>profile.id);
         return this.getSub(profileElement, params);
     }
 

@@ -1,5 +1,6 @@
 import { Inject, Input, Component, provide } from "ng-forward";
-import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { PermissionService } from "../../shared/services/permission.service";
 import { ProfileImageEditorComponent } from "./profile-image-editor.component";
 
 /**
@@ -10,10 +11,10 @@ import { ProfileImageEditorComponent } from "./profile-image-editor.component";
  */
 @Component({
     selector: "noosfero-profile-image",
-    templateUrl: 'app/profile/image/image.html',
-    providers: [provide('personService', { useClass: PersonService })]
+    templateUrl: 'app/profile/image/profile-image.html',
+    providers: [provide('profileService', { useClass: ProfileService })]
 })
-@Inject(PersonService, "$uibModal", "$scope")
+@Inject(ProfileService, PermissionService, "$uibModal", "$scope")
 export class ProfileImageComponent {
 
     /**
@@ -35,13 +36,10 @@ export class ProfileImageComponent {
 
     @Input() editable: boolean;
 
-    @Input() editClass: string;
-
     picFile: any;
-    croppedDataUrl: any;
     modalInstance: any;
 
-    constructor(private personService: PersonService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
+    constructor(private profileService: ProfileService, private permissionService: PermissionService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
     }
 
     fileSelected(file: any, errFiles: any) {
@@ -57,22 +55,15 @@ export class ProfileImageComponent {
                 resolve: {
                     picFile: this.picFile,
                     profile: this.profile,
-                    personService: this.personService
+                    profileService: this.profileService
                 }
             });
         }
     }
 
-    private _showCamera: boolean = false;
-
-    showChange(show: boolean) {
-        this._showCamera = show;
+    isEditable() {
+        return this.editable && this.permissionService.isAllowed(this.profile, 'allow_edit');
     }
-
-    showCamera() {
-        return this._showCamera;
-    }
-
 
     /**
      * @ngdoc method

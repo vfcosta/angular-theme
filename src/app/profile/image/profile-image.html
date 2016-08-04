@@ -1,0 +1,20 @@
+<div ng-if="ctrl.isEditable()" id="profile-image-container">
+  <div class="profile-image-wrap" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)">
+    <div class="hovereffect   ">
+      <i ng-if="!ctrl.profile.image" class="fa {{ctrl.defaultIcon}} fa-5x profile-image"></i>
+      <img ng-if="ctrl.profile.image" ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image">
+      <div class='container-camera'>
+        <a ngf-select="ctrl.fileSelected($file)"
+            ngf-pattern="'image/*'" ngf-accept="'image/*'"
+            ngf-max-size="20MB"
+            data-toggle="modal" data-target=".crop-dialog" href="#"><i class="fa fa-camera upload-camera" ></i>
+        </a>
+      </div>
+      <div class="overlay"></div>
+    </div>
+  </div>
+</div>
+<span ng-if="!ctrl.isEditable()" class="profile-image-wrap" title="{{ctrl.profile.name}}">
+  <img ng-if="ctrl.profile.image" ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image">
+  <i ng-if="!ctrl.profile.image" class="fa {{ctrl.defaultIcon}} fa-5x profile-image"></i>
+</span>
