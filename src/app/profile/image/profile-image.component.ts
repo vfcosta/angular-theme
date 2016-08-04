@@ -11,11 +11,12 @@ import { ProfileImageEditorComponent } from "./profile-image-editor.component";
  */
 @Component({
     selector: "noosfero-profile-image",
-    templateUrl: 'app/profile/image/image.html',
+    templateUrl: 'app/profile/image/profile-image.html',
     providers: [provide('profileService', { useClass: ProfileService })]
 })
 @Inject(ProfileService, PermissionService, "$uibModal", "$scope")
 export class ProfileImageComponent {
+  
     /**
      * @ngdoc property
      * @name profile

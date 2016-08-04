@@ -10,7 +10,7 @@ export class ProfileImageEditorComponent {
     constructor(public picFile: any, public profile: noosfero.Profile, public profileService: ProfileService,
         public modalInstance: ng.ui.bootstrap.IModalServiceInstance) {
     }
-    
+
     uploadImage(dataUrl: any, name: any) {
         let base64ImageJson = this.getBase64ImageJson(dataUrl, name);
         this.profileService.uploadImage(this.profile, base64ImageJson).then((result: any) => {
