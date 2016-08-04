@@ -16,7 +16,7 @@ import { ProfileImageEditorComponent } from "./profile-image-editor.component";
 })
 @Inject(ProfileService, PermissionService, "$uibModal", "$scope")
 export class ProfileImageComponent {
-  
+
     /**
      * @ngdoc property
      * @name profile
@@ -36,10 +36,7 @@ export class ProfileImageComponent {
 
     @Input() editable: boolean;
 
-    @Input() editClass: string;
-
     picFile: any;
-    croppedDataUrl: any;
     modalInstance: any;
 
     constructor(private profileService: ProfileService, private permissionService: PermissionService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
@@ -62,16 +59,6 @@ export class ProfileImageComponent {
                 }
             });
         }
-    }
-
-    private _showCamera: boolean = false;
-
-    showChange(show: boolean) {
-        this._showCamera = show;
-    }
-
-    showCamera() {
-        return this._showCamera;
     }
 
     isEditable() {

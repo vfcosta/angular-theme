@@ -26,6 +26,7 @@ describe("Components", () => {
         beforeEach((done) => {
             let scope = helpers.mocks.scopeWithEvents;
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
+            let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
             let properties = { profile: { custom_footer: "footer" } };
             let cls = createClass({
                 template: htmlTemplate,
@@ -33,6 +34,7 @@ describe("Components", () => {
                 properties: properties,
                 providers: [
                     helpers.createProviderToValue("ProfileService", profileService),
+                    helpers.createProviderToValue("PermissionService", permissionService),
                     helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
                     helpers.createProviderToValue("$scope", scope)
                 ]
@@ -61,6 +63,23 @@ describe("Components", () => {
             helper.component.profile = profile;
             helper.component.ngOnInit();
             expect(helper.component.defaultIcon).toEqual("fa-user", "The default icon should be person user");
+            done();
+        });
+
+        it("is editable be true in blocks that are editable", (done) => {
+            expect(helper.component.editable).toBe(true);
+            done();
+        });
+
+        it("is not editable in editable blocks but without permission", (done) => {
+            helper.component['permissionService'].isAllowed = jasmine.createSpy("isAllowed").and.returnValue(false);
+            expect(helper.component.isEditable()).toBe(false);
+            done();
+        });
+
+        it("is editable in editable blocks with edit permission", (done) => {
+            helper.component['permissionService'].isAllowed = jasmine.createSpy("isAllowed").and.returnValue(true);
+            expect(helper.component.isEditable()).toBe(true);
             done();
         });
 
