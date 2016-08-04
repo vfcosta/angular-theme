@@ -61,6 +61,7 @@ describe("MainComponent", function () {
         quickCreateComponent({ directives: [MainComponentParent], template: "<parent></parent>" })
             .then((fixture) => {
                 fixture.debugElement.getLocal("$httpBackend").expectGET("/api/v1/environments/1/boxes").respond(200, {});
+                fixture.debugElement.getLocal("$httpBackend").expectGET("/api/v1/tasks?all_pending=true&per_page=5&status=1").respond(200, {});
                 localFixture = fixture;
                 // get the $state service to navigate between routes
                 $state = fixture.debugElement.getLocal("$state");
