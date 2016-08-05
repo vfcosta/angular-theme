@@ -14,7 +14,7 @@
     </div>
   </div>
 </div>
-<span ng-if="!ctrl.isEditable()" class="profile-image-wrap" title="{{ctrl.profile.name}}">
-  <img ng-if="ctrl.profile.image" ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image">
-  <i ng-if="!ctrl.profile.image" class="fa {{ctrl.defaultIcon}} fa-5x profile-image"></i>
-</span>
+<div ng-if="!ctrl.isEditable()" class="profile-image-wrap" title="{{ctrl.profile.name}}">
+  <img ng-if="ctrl.profile.image" ng-src="{{ctrl.profile.image.url}}" class="item-avatar-img">
+  <i ng-if="!ctrl.profile.image" class="fa {{ctrl.defaultIcon}} fa-5x item-avatar-img"></i>
+</div>

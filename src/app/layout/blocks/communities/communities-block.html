@@ -1,5 +1,11 @@
-<div class="communities-block">
-  <a ng-repeat="profile in ctrl.profiles" ui-sref="main.profile.home({profile: profile.identifier})" class="profile">
-    <noosfero-profile-image [profile]="profile"></noosfero-profile-image>
-  </a>
-</div>
+<ul class="media-list">
+  <li ng-repeat="profile in ctrl.profiles" ui-sref="main.profile.home({profile: profile.identifier})" class="media">
+    <div class="media-left">
+      <noosfero-profile-image [profile]="profile"></noosfero-profile-image>
+    </div>
+    <div class="media-body">
+      <h4 class="media-heading">{{profile.name}}</h4>
+      {{"block.communities.members.count" | translate:{members: profile.members_count}:"messageformat"}}
+    </div>
+  </li>
+</ul>

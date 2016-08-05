@@ -106,6 +106,7 @@
   "block.edition.display_user.logged": "Logged",
   "block.edition.display_user.not_logged": "Not logged",
   "block.edition.language.label": "Show for:",
+  "block.communities.members.count": "{members, plural, one{one member} other{# members}}",
   "activities.event.description": "Event on",
   "time.at": "at",
   "date.on": "On",
