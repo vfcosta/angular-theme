@@ -1,6 +1,6 @@
 
 namespace noosfero {
-    export interface Article extends RestModel {
+    export interface Article extends RestModel, ModelWithPermissions {
         abstract: string;
         path: string;
         profile: Profile;
@@ -16,7 +16,5 @@ namespace noosfero {
         start_date: string;
         end_date: string;
         accept_comments: boolean;
-
-        permissions: string[];
     }
 }
