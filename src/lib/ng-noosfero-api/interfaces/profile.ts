@@ -6,7 +6,7 @@ namespace noosfero {
  * @description
  *  A representation of a Noosfero Profile.
  */
-    export interface Profile extends RestModel {
+    export interface Profile extends RestModel, ModelWithPermissions {
         /**
          * @ngdoc property
          * @name id
@@ -78,8 +78,6 @@ namespace noosfero {
          * @returns {string} The Profile footer
          */
         custom_footer: string;
-
-        permissions: string[];
 
         /**
          * @ngdoc property
