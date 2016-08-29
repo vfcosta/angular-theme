@@ -50,29 +50,29 @@ describe("Register Component", () => {
         expect(helper.debugElement.query('div.register-page').length).toEqual(1);
     });
 
-   it("registers a new user", done => {
-       user_data = { username: "username", password: "password", password_confirmation: "password", email: "user@company.com" };
-       response = { };
+    it("registers a new user", done => {
+        user_data = { username: "username", password: "password", password_confirmation: "password", email: "user@company.com" };
+        response = {};
 
-       helper.component.account = user_data;
+        helper.component.account = user_data;
 
-       deferred = $q.defer();
-       deferred.resolve({ data: response });
-       registerService.createAccount = jasmine.createSpy("createAccount").and.returnValue(deferred.promise);
+        deferred = $q.defer();
+        deferred.resolve({ data: response });
+        registerService.createAccount = jasmine.createSpy("createAccount").and.returnValue(deferred.promise);
 
-       helper.component.signup();
-       $rootScope.$apply();
+        helper.component.signup();
+        helper.detectChanges();
 
-       expect(registerService.createAccount).toHaveBeenCalledWith(user_data);
-       expect(stateService.transitionTo).toHaveBeenCalledWith("main.environment");
-       expect(notificationService.success).toHaveBeenCalled();
+        expect(registerService.createAccount).toHaveBeenCalledWith(user_data);
+        expect(stateService.transitionTo).toHaveBeenCalledWith("main.environment");
+        expect(notificationService.success).toHaveBeenCalled();
 
-       done();
-   });
+        done();
+    });
 
     it("gives error when registration fails", done => {
         user_data = { password: "pas" };
-        response = { data: { message: '{ "password": ["is too short"] }'}};
+        response = { data: { message: '{ "password": ["is too short"] }' } };
 
         helper.component.account = user_data;
 
@@ -81,7 +81,7 @@ describe("Register Component", () => {
         registerService.createAccount = jasmine.createSpy("createAccount").and.returnValue(deferred.promise);
 
         helper.component.signup();
-        $rootScope.$apply();
+        helper.detectChanges();
 
         expect(registerService.createAccount).toHaveBeenCalledWith(user_data);
 
