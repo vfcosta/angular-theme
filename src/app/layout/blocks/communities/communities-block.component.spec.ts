@@ -1,50 +1,46 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider, Input, provide, Component} from 'ng-forward';
-
+import {Provider} from 'ng-forward';
+import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
+// import {providers} from 'ng-forward/cjs/testing/providers';
 import {CommunitiesBlockComponent} from './communities-block.component';
 
 const htmlTemplate: string = '<noosfero-communities-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-communities-block>';
 
-const tcb = new TestComponentBuilder();
-
 describe("Components", () => {
-    describe("Communities Block Component", () => {
+
+    describe("Community Block Component", () => {
+        let serviceMock = {
+            getByOwner: (owner: any, params: any): any => {
+                return Promise.resolve({ data: [{ identifier: "community1" }] });
+            }
+        };
+
+        let providers = [new Provider('CommunityService', { useValue: serviceMock })];
+
+        let helper: ComponentTestHelper<CommunitiesBlockComponent>;
 
         beforeEach(angular.mock.module("templates"));
-
-        let state = jasmine.createSpyObj("state", ["go"]);
-        let providers = [
-            new Provider('truncateFilter', { useValue: () => { } }),
-            new Provider('stripTagsFilter', { useValue: () => { } }),
-            new Provider('$state', { useValue: state }),
-            new Provider('CommunityService', {
-                useValue: {
-                    getByOwner: (owner: any, params: any): any => {
-                        return Promise.resolve({ data: [{ identifier: "community1" }] });
-                    }
-                }
-            }),
-        ];
-        @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [CommunitiesBlockComponent], providers: providers })
-        class BlockContainerComponent {
-            block = { type: 'Block', settings: {} };
-            owner = { name: 'profile-name' };
-        }
-
-        it("get communities", done => {
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let block: CommunitiesBlockComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(block.profiles).toEqual([{ identifier: "community1" }]);
-                done();
+        beforeEach((done) => {
+            let cls = createClass({
+                template: htmlTemplate,
+                directives: [CommunitiesBlockComponent],
+                providers: providers,
+                properties: {}
             });
+            helper = new ComponentTestHelper<CommunitiesBlockComponent>(cls, done);
         });
 
-        it("render the profile image for each community", done => {
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                fixture.debugElement.getLocal("$rootScope").$apply();
-                expect(fixture.debugElement.queryAll("noosfero-profile-image").length).toEqual(1);
-                done();
-            });
+        it("get block with one community", done => {
+            expect(helper.component.profiles[0].identifier).toEqual("community1");
+            done();
+        });
+
+        it("render the profile image for each community", () => {
+            expect(helper.all("noosfero-profile-image").length).toEqual(1);
+        });
+
+        it("render the noosfero communities block", () => {
+            expect(helper.all(".media-list").length).toEqual(1);
         });
 
     });

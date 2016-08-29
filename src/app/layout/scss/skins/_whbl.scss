@@ -272,10 +272,7 @@ $whbl-font-color: #16191c;
 		border-bottom-color: $whbl-primary-color;
 		border-top-color: $whbl-primary-color;
 	}
-	.panel-default > .panel-heading,
-	.notifications-list .item-footer {
-		background-color: $whbl-primary-color;
-	}
+
 	.notifications-list .item-footer a:hover {
 		background-color: #2980b9;
 	}

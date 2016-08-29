@@ -13,6 +13,15 @@
     .panel-heading {
       background-color: transparent;
       border: 0;
+      padding: 0.5em 1.2em 0 1em;
+      h3{
+        border-bottom: 3px solid #1E96D0;
+        padding: 1em;
+        padding-left: 0;
+      }
+    }
+    .panel-body{
+      padding-top: 0.5em;
     }
   }
   .block-actions {
