@@ -64,7 +64,7 @@ describe("Register Component", () => {
         helper.detectChanges();
 
         expect(registerService.createAccount).toHaveBeenCalledWith(user_data);
-        expect(stateService.transitionTo).toHaveBeenCalledWith("main.environment");
+        expect(stateService.transitionTo).toHaveBeenCalledWith("main.environment.home");
         expect(notificationService.success).toHaveBeenCalled();
 
         done();
@@ -85,7 +85,7 @@ describe("Register Component", () => {
 
         expect(registerService.createAccount).toHaveBeenCalledWith(user_data);
 
-        expect(stateService.transitionTo).not.toHaveBeenCalledWith("main.environment");
+        expect(stateService.transitionTo).not.toHaveBeenCalledWith("main.environment.home");
         expect(notificationService.error).toHaveBeenCalled();
 
         done();

@@ -41,7 +41,7 @@ export class RegisterComponent {
         let field = '';
         this.errorMessages = [];
         this.registerService.createAccount(this.account).then((response) => {
-            this.$state.transitionTo('main.environment');
+            this.$state.transitionTo('main.environment.home');
             this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
         }).catch((response) => {
             if (response.data.error) {
