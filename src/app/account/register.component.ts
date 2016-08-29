@@ -3,6 +3,7 @@ import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.servi
 import { NotificationService } from "./../shared/services/notification.service";
 import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
 import { RegisterController } from "./register.controller";
+import { AuthController } from "./../login";
 import { IModalComponent } from "../shared/components/interfaces";
 
 @Component({
@@ -20,6 +21,8 @@ export class RegisterComponent {
 
     modalInstance: ng.ui.bootstrap.IModalServiceInstance;
 
+    errorMessages: any[];
+
     constructor(
         private $state: ng.ui.IStateService,
         private $uibModal: ng.ui.bootstrap.IModalService,
@@ -33,19 +36,27 @@ export class RegisterComponent {
     }
 
     signup() {
-        if (this.account.password === this.account.passwordConfirmation) {
-            this.registerService.createAccount(this.account).then((response) => {
-
-                if (response.status === 201) {
-                    this.$state.transitionTo('main.environment');
-                    this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
-                } else {
-                    throw new Error('Invalid attributes');
+        let error = '';
+        let errors: any;
+        let field = '';
+        this.errorMessages = [];
+        this.registerService.createAccount(this.account).then((response) => {
+            this.$state.transitionTo('main.environment');
+            this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
+        }).catch((response) => {
+            if (response.data.error) {
+                errors = response.data['error'].split(', ');
+                for (error in errors) {
+                    this.errorMessages.push({ message: errors[error] });
                 }
-            });
-        } else {
-            this.notificationService.error({ message: "account.register.passwordConfirmation.failed" });
-        }
+            } else if (response.data.message) {
+                errors = JSON.parse(response.data.message);
+                for (field in errors) {
+                    this.errorMessages.push({ fieldName: field, message: errors[field][0] });
+                }
+            }
+            this.notificationService.error({ title: "account.register.save.failed" });
+        });
     }
 
     isInvalid(field: any): any {
@@ -63,4 +74,14 @@ export class RegisterComponent {
             scope: this.$scope
         });
     }
+
+    openLogin() {
+        this.modalInstance = this.$uibModal.open({
+            templateUrl: 'app/login/login.html',
+            controller: AuthController,
+            controllerAs: 'vm',
+            bindToController: true
+        });
+    }
+
 }

@@ -3,6 +3,14 @@
     <h1>{{"account.register.welcomeMessageTitle" | translate }}</h1>
     <div class="environment-signup-intro" ng-bind-html="ctrl.environment.signup_intro"></div>
   </div>
+
+  <div class="error-messages" ng-if="ctrl.errorMessages">
+    <p>{{ "account.register.errorMessagesTitle" | translate }}</p>
+    <ul>
+       <li ng-repeat="error in ctrl.errorMessages">{{ error.fieldName | translate }} {{ error.message | translate }}</li>
+    </ul>
+  </div>
+
   <form name="signupForm">
     <div class="row">
       <div class="col-md-12 register-field">
@@ -17,10 +25,12 @@
           <span class="input-group-addon" style="font-weight: bold;"><i class="fa fa-globe"></i>&nbsp;{{ ctrl.environment.host }}</span>
           <input type="text" id="username" name="username" class="form-control" placeholder="{{'account.register.usernameLabel' | translate }}" ng-model="ctrl.account.login" required>
         </div>
-        <div class="help-block" ng-show="signupForm.username.$touched" ng-messages="signupForm.username.$error">
-          <ul class="list-unstyled">
-            <li ng-messages-include="languages/messages.html"></li>
-          </ul>
+        <div class="help-block" ng-messages="signupForm.username.$error">
+          <div ng-if="signupForm.username.$touched && !signupForm.username.$empty">
+            <ul class="list-unstyled">
+              <li ng-messages-include="app/shared/messages/form-errors.html"></li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -29,22 +39,26 @@
           <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
           <input type="email" class="form-control" id="email" name="email" placeholder="{{'account.register.emailLabel' | translate }}" ng-model="ctrl.account.email" required>
         </div>
-        <div class="help-block" ng-show="signupForm.email.$touched" ng-messages="signupForm.email.$error">
-          <ul class="list-unstyled">
-            <li ng-messages-include="languages/messages.html"></li>
-          </ul>
+        <div class="help-block" ng-messages="signupForm.email.$error">
+          <div ng-if="signupForm.email.$touched && !signupForm.email.$empty">
+            <ul class="list-unstyled">
+              <li ng-messages-include="app/shared/messages/form-errors.html"></li>
+            </ul>
+          </div>
         </div>
       </div>
 
       <div class="form-group col-md-6 register-field" ng-class="ctrl.isInvalid(signupForm.password)">
         <div class="input-group">
           <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-          <input type="password" class="form-control" id="password" name="password" placeholder="{{'account.register.passwordLabel' | translate }}" ng-model="ctrl.account.password" required>
+          <input type="password" class="form-control" id="password" name="password" placeholder="{{'account.register.passwordLabel' | translate }}" ng-model="ctrl.account.password" required minlength="4">
         </div>
-        <div class="help-block" ng-show="signupForm.password.$touched" ng-messages="signupForm.password.$error">
-          <ul class="list-unstyled">
-            <li ng-messages-include="languages/messages.html"></li>
-          </ul>
+        <div class="help-block" ng-messages="signupForm.password.$error">
+          <div ng-if="signupForm.password.$touched && !signupForm.password.$empty">
+            <ul class="list-unstyled">
+              <li ng-messages-include="app/shared/messages/form-errors.html"></li>
+            </ul>
+          </div>
         </div>
       </div>
 
@@ -55,7 +69,7 @@
         </div>
         <div class="help-block" ng-show="signupForm.passwordConfirm.$touched" ng-messages="signupForm.passwordConfirm.$error">
           <ul class="list-unstyled">
-            <li ng-messages-include="languages/messages.html"></li>
+            <li ng-messages-include="app/shared/messages/form-errors.html"></li>
             <li ng-message="passwordMatch" translate="messages.invalid.passwordMatch"></li>
           </ul>
         </div>
@@ -72,6 +86,5 @@
     </div>
   </form>
 
-  <p class="already-registered-message">{{"account.register.haveAccountMessage" | translate}}</p>
-
+  <a class="already-registered-message" ng-href="#" ng-click="ctrl.openLogin()">{{"account.register.haveAccountMessage" | translate}}</a>
 </div>
