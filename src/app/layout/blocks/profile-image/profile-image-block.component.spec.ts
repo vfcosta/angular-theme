@@ -44,13 +44,6 @@ describe("Components", () => {
             });
         });
 
-        it("has link to the profile", () => {
-            helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let elProfile = fixture.debugElement.componentViewChildren[0];
-                expect(elProfile.query('a.settings-link').length).toEqual(1);
-            });
-        });
-
         it("display button to join community", (done: Function) => {
             helpers.tcb.createAsync(BlockContainerComponent).then(fixture => {
                 let elProfile = fixture.debugElement.componentViewChildren[0];
