@@ -4,10 +4,10 @@
     <div class="environment-signup-intro" ng-bind-html="ctrl.environment.signup_intro"></div>
   </div>
 
-  <div class="error-messages" ng-if="errorMessages">
+  <div class="error-messages" ng-if="ctrl.errorMessages">
     <p>{{ "account.register.errorMessagesTitle" | translate }}</p>
     <ul>
-       <li ng-repeat="error in errorMessages">{{ error.fieldName | translate }} {{ error.message | translate }}</li>
+       <li ng-repeat="error in ctrl.errorMessages">{{ error.fieldName | translate }} {{ error.message | translate }}</li>
     </ul>
   </div>
 

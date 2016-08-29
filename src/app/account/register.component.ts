@@ -4,7 +4,7 @@ import { NotificationService } from "./../shared/services/notification.service";
 import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
 import { RegisterController } from "./register.controller";
 import { AuthController } from "./../login";
-import { IModalComponent, IErrorMessages } from "../shared/components/interfaces";
+import { IModalComponent } from "../shared/components/interfaces";
 
 @Component({
     selector: 'noosfero-register',
@@ -21,10 +21,12 @@ export class RegisterComponent {
 
     modalInstance: ng.ui.bootstrap.IModalServiceInstance;
 
+    errorMessages: any[];
+
     constructor(
         private $state: ng.ui.IStateService,
         private $uibModal: ng.ui.bootstrap.IModalService,
-        private $scope: IErrorMessages,
+        private $scope: ng.IScope,
         public registerService: RegisterService,
         private notificationService: NotificationService,
         private environmentService: EnvironmentService
@@ -37,21 +39,21 @@ export class RegisterComponent {
         let error = '';
         let errors: any;
         let field = '';
-        this.$scope.errorMessages = [];
+        this.errorMessages = [];
         this.registerService.createAccount(this.account).then((response) => {
             this.$state.transitionTo('main.environment');
             this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
         }).catch((response) => {
-            if ( response.data.error ) {
-              errors = response.data['error'].split(', ');
-              for (error in errors) {
-                 this.$scope.errorMessages.push({ message: errors[error] });
-              }
-            } else if ( response.data.message ) {
-              errors = JSON.parse(response.data.message);
-              for (field in errors) {
-                 this.$scope.errorMessages.push({ fieldName: field, message: errors[field][0] });
-              }
+            if (response.data.error) {
+                errors = response.data['error'].split(', ');
+                for (error in errors) {
+                    this.errorMessages.push({ message: errors[error] });
+                }
+            } else if (response.data.message) {
+                errors = JSON.parse(response.data.message);
+                for (field in errors) {
+                    this.errorMessages.push({ fieldName: field, message: errors[field][0] });
+                }
             }
             this.notificationService.error({ title: "account.register.save.failed" });
         });
