@@ -167,5 +167,8 @@
   "identifier": "identificador",
   "is not available.": "não está disponível",
   "user": "usuário",
-  "is invalid": "é inválido"
+  "is invalid": "é inválido",
+  "block.edition.save.button": "Salvar",
+  "block.edition.preview.button": "Simular",
+  "block.edition.cancel.button": "Cancelar"
 }

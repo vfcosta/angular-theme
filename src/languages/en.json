@@ -164,5 +164,8 @@
   "identifier": "identifier",
   "is not available.": "is not available",
   "user": "user",
-  "is invalid": "is invalid"
+  "is invalid": "is invalid",
+  "block.edition.save.button": "Save",
+  "block.edition.preview.button": "Preview",
+  "block.edition.cancel.button": "Cancel"
 }
