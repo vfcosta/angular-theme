@@ -170,5 +170,8 @@
   "is invalid": "é inválido",
   "block.edition.save.button": "Salvar",
   "block.edition.preview.button": "Simular",
-  "block.edition.cancel.button": "Cancelar"
+  "block.edition.cancel.button": "Cancelar",
+  "custom-content.edition.save.button": "Salvar",
+  "custom-content.edition.preview.button": "Simular",
+  "custom-content.edition.cancel.button": "Cancelar"
 }

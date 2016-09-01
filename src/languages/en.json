@@ -167,5 +167,8 @@
   "is invalid": "is invalid",
   "block.edition.save.button": "Save",
   "block.edition.preview.button": "Preview",
-  "block.edition.cancel.button": "Cancel"
+  "block.edition.cancel.button": "Cancel",
+  "custom-content.edition.save.button": "Save",
+  "custom-content.edition.preview.button": "Preview",
+  "custom-content.edition.cancel.button": "Cancel"
 }
