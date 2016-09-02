@@ -18,8 +18,7 @@ describe("Controllers", () => {
 
         beforeEach(() => {
             $modal = helpers.mocks.$modal;
-            AuthServiceMock = jasmine.createSpyObj("AuthService", ["login",
-"forgotPassword"]);
+            AuthServiceMock = jasmine.createSpyObj("AuthService", ["login", "forgotPassword"]);
             authController = new AuthController(null, null, AuthServiceMock, $modal, notificationService);
         });
 

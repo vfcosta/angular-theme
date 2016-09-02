@@ -2,7 +2,6 @@ import {Injectable, Inject, EventEmitter} from "ng-forward";
 
 import {NoosferoRootScope, UserResponse} from "./../shared/models/interfaces";
 import {SessionService} from "./session.service";
-import { RestangularService } from "./../../lib/ng-noosfero-api/http/restangular_service";
 
 import {AuthEvents} from "./auth-events";
 

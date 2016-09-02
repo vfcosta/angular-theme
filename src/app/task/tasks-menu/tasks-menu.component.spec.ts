@@ -24,7 +24,8 @@ describe("Components", () => {
                 providers: [
                     helpers.createProviderToValue("TaskService", taskService),
                     helpers.createProviderToValue("EventsHubService", eventsHubService),
-                    helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
+                    helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
+                    helpers.createProviderToValue('AuthService', helpers.mocks.authService)
                 ]
             });
             helper = new ComponentTestHelper<TasksMenuComponent>(cls, done);

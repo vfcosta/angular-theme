@@ -4,20 +4,20 @@ import { PasswordComponent } from "./new-password.component";
 
 
 describe("Password Component", () => {
-   const htmlTemplate: string = '<new-password></new-password>';
+    const htmlTemplate: string = '<new-password></new-password>';
 
-   let helper: ComponentTestHelper<PasswordComponent>;
-   let passwordService = helpers.mocks.passwordService;
-   let stateService = jasmine.createSpyObj("$state", ["transitionTo"]);
-   let stateParams = jasmine.createSpyObj("$stateParams", ["code"]);
-   let notificationService = helpers.mocks.notificationService;
-   notificationService.success = jasmine.createSpy('success');
-   notificationService.error = jasmine.createSpy('error');
+    let helper: ComponentTestHelper<PasswordComponent>;
+    let passwordService = helpers.mocks.passwordService;
+    let stateService = jasmine.createSpyObj("$state", ["transitionTo"]);
+    let stateParams = jasmine.createSpyObj("$stateParams", ["code"]);
+    let notificationService = helpers.mocks.notificationService;
+    notificationService.success = jasmine.createSpy('success');
+    notificationService.error = jasmine.createSpy('error');
 
 
-   let data: any;
+    let data: any;
 
-   beforeEach(() => {
+    beforeEach(() => {
         angular.mock.module('templates');
         angular.mock.module('ngSanitize');
         angular.mock.module('ngMessages');
@@ -44,19 +44,19 @@ describe("Password Component", () => {
 
     it("changes the user password", done => {
         data = {
-           code: '1234567890',
-           password: 'test',
-           passwordConfirmation: 'test'
+            code: '1234567890',
+            password: 'test',
+            passwordConfirmation: 'test'
         };
 
         helper.component.code = data.code;
         helper.component.password = data.password;
         helper.component.passwordConfirmation = data.passwordConfirmation;
 
-        passwordService.new_password = jasmine.createSpy("new_password").and.returnValue(Promise.resolve());
+        passwordService.newPassword = jasmine.createSpy("new_password").and.returnValue(Promise.resolve());
 
         helper.component.sendNewPassword();
-        expect(passwordService.new_password).toHaveBeenCalledWith('1234567890', 'test', 'test');
+        expect(passwordService.newPassword).toHaveBeenCalledWith('1234567890', 'test', 'test');
 
         expect(notificationService.success).toHaveBeenCalled();
 
@@ -65,19 +65,19 @@ describe("Password Component", () => {
 
     it("fails when try to change the user password", done => {
         data = {
-           code: '1234567890',
-           password: 'test',
-           passwordConfirmation: 'test-invalid'
+            code: '1234567890',
+            password: 'test',
+            passwordConfirmation: 'test-invalid'
         };
 
         helper.component.code = data.code;
         helper.component.password = data.password;
         helper.component.passwordConfirmation = data.passwordConfirmation;
 
-        passwordService.new_password = jasmine.createSpy("new_password").and.returnValue(Promise.reject({data: {message: 'Error'}}));
+        passwordService.newPassword = jasmine.createSpy("new_password").and.returnValue(Promise.reject({ data: { message: 'Error' } }));
 
         helper.component.sendNewPassword();
-        expect(passwordService.new_password).toHaveBeenCalledWith('1234567890', 'test', 'test-invalid');
+        expect(passwordService.newPassword).toHaveBeenCalledWith('1234567890', 'test', 'test-invalid');
 
         expect(notificationService.error).toHaveBeenCalled();
 
