@@ -171,5 +171,6 @@
   "custom-content.edition.save.button": "Save",
   "custom-content.edition.preview.button": "Preview",
   "custom-content.edition.cancel.button": "Cancel",
-  "profile.image.editor.cancel.button": "Cancel"
+  "profile.image.editor.cancel.button": "Cancel",
+  "navbar.signup.button": "Sign up"
 }

@@ -174,5 +174,6 @@
   "custom-content.edition.save.button": "Salvar",
   "custom-content.edition.preview.button": "Simular",
   "custom-content.edition.cancel.button": "Cancelar",
-  "profile.image.editor.cancel.button": "Cancelar"
+  "profile.image.editor.cancel.button": "Cancelar",
+  "navbar.signup.button": "Cadastre-se"
 }
