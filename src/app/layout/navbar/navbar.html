@@ -21,9 +21,7 @@
         </li>
 
         <li ng-show="!ctrl.currentUser">
-          <a ui-sref="main.register">
-            Sign Up
-          </a>
+          <a ui-sref="main.register">{{"navbar.signup.button" | translate}}</a>
         </li>
 
         <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
