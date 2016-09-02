@@ -10,11 +10,11 @@
 		</div>
 		<div class='cropped-image'>
 			<img ng-src="{{ctrl.croppedDataUrl}}" />
-		</div>		
+		</div>
   </form>
 
   <div class="actions">
     <button type="submit" class="btn btn-default" (click)="ctrl.uploadImage(ctrl.croppedDataUrl, ctrl.picFile.name)">Upload</button>
-    <button type="submit" class="btn btn-danger" (click)="ctrl.cancel()">Cancel</button>
+    <button type="submit" class="btn btn-danger" (click)="ctrl.cancel()">{{"profile.image.editor.cancel.button" | translate}}</button>
   </div>
 </div>

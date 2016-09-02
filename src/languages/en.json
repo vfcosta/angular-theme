@@ -170,5 +170,6 @@
   "block.edition.cancel.button": "Cancel",
   "custom-content.edition.save.button": "Save",
   "custom-content.edition.preview.button": "Preview",
-  "custom-content.edition.cancel.button": "Cancel"
+  "custom-content.edition.cancel.button": "Cancel",
+  "profile.image.editor.cancel.button": "Cancel"
 }
