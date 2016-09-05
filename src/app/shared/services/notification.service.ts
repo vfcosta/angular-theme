@@ -14,6 +14,8 @@ export class NotificationService {
     public static DEFAULT_ERROR_TITLE = "notification.error.default.title";
     public static DEFAULT_ERROR_MESSAGE = "notification.error.default.message";
     public static DEFAULT_SUCCESS_TIMER = 1000;
+    public static DEFAULT_INFO_TITLE = "notification.info.default.title";
+    public static DEFAULT_INFO_MESSAGE = "notification.info.default.message";
 
     error({
         message = NotificationService.DEFAULT_ERROR_MESSAGE,
@@ -38,6 +40,14 @@ export class NotificationService {
 
     confirmation({title, message, showCancelButton = true, type = "warning"}, confirmationFunction: Function) {
         this.showMessage({ title: title, text: message, showCancelButton: showCancelButton, type: type, closeOnConfirm: false }, confirmationFunction);
+    }
+
+    info({
+        message = NotificationService.DEFAULT_INFO_MESSAGE,
+        title = NotificationService.DEFAULT_INFO_TITLE,
+        showConfirmButton = true
+    } = {}) {
+        this.showMessage({ title: title, text: message, showConfirmButton: showConfirmButton, type: "info" });
     }
 
     private showMessage({title, text, type = "success", timer = null, showConfirmButton = true, showCancelButton = false, closeOnConfirm = true}, confirmationFunction: Function = null) {

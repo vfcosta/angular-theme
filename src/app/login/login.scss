@@ -10,6 +10,12 @@
       margin-top: 20px;
       text-transform: uppercase;
     }
+    .form-inline {
+      display: inline;
+      div {
+        display: inline-block;
+      }
+    }
   }
 }
 

@@ -6,7 +6,7 @@ import {SessionService} from "./session.service";
 import {AuthEvents} from "./auth-events";
 
 @Injectable()
-@Inject("$http", SessionService, "$log")
+@Inject("$http", SessionService, "$log", "Restangular")
 export class AuthService {
 
     public loginSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
@@ -15,7 +15,10 @@ export class AuthService {
 
     constructor(private $http: ng.IHttpService,
         private sessionService: SessionService,
-        private $log: ng.ILogService) {
+        private $log: ng.ILogService,
+        private Restangular: restangular.IService
+    ) {
+        this.Restangular = Restangular;
     }
 
     loginFromCookie() {
@@ -76,4 +79,9 @@ export class AuthService {
             throw new Error(`The event: ${eventName} not exists`);
         }
     }
+
+    forgotPassword(value: string): ng.IPromise<noosfero.RestResult<any>> {
+        return this.Restangular.all("").customPOST("", "forgot_password", {value: value});
+    }
+
 }
