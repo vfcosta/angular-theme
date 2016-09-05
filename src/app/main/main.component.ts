@@ -22,6 +22,7 @@ import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
 import { RecentActivitiesPluginActivitiesBlockComponent } from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
 import { ProfileImagesPluginProfileImagesBlockComponent } from "../layout/blocks/profile-images-plugin-profile-images/profile-images-plugin-profile-images-block.component";
+import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
@@ -100,7 +101,7 @@ export class EnvironmentContent {
  * @requires AuthService, Session, Notification, ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
  * MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock, MembersBlock,
  * NoosferoTemplate, DateFormat, RawHTMLBlock, PersonTagsPluginInterestsBlock,
- * RecentActivitiesPluginActivitiesBlock, ProfileImagesPluginProfileImages
+ * RecentActivitiesPluginActivitiesBlock, ProfileImagesPluginProfileImages, EventPluginEvent
  * @description
  *  The Main controller for the Noosfero Angular Theme application.
  *
@@ -120,7 +121,8 @@ export class EnvironmentContent {
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
-        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent
+        EventPluginEventBlockComponent, ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent,
+        TasksMenuComponent, TaskListComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
@@ -129,7 +131,8 @@ export class EnvironmentContent {
         "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
         "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
-        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch", "ngFileUpload", "ngImgCrop"]
+        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch",
+        "ngFileUpload", "ngImgCrop", "flexcalendar"]
 })
 @StateConfig([
     {

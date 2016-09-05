@@ -1,0 +1,70 @@
+@import url('../../bower_components/flex-calendar/dist/flex-calendar.css');
+
+.flex-calendar {
+  .week {
+    background: #ccc;
+  }
+
+  .month {
+    background: #333;
+
+    .arrow {
+      width: 25px;
+      height: 43px;
+    }
+
+    .label {
+      font-size: 16px;
+      line-height: 40px;
+      height: 40px;
+    }
+  }
+
+  .days {
+    .day {
+      height: 30px;
+      line-height: 30px;
+      font-size: 14px;
+      min-height: 0;
+
+      .number {
+        color: #333;
+      }
+
+      &.event {
+        &:before {
+          width: auto;
+          height: auto;
+        }
+        
+        background: #1E96D0;
+
+        .number {
+          color: #FFF;
+        }
+      }
+
+      &.selected {
+        background: #1E96D0;
+
+        .number {
+          width: auto;
+          height: auto;
+          line-height: 30px;
+          background: transparent;
+          border-radius: 0;
+          color: #FFF;
+        }
+      }
+    }
+  }
+}
+
+.event-plugin-event {
+  padding: 0;
+  margin: 0;
+
+  li {
+    list-style: none;
+  }
+}
