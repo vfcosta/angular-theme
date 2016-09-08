@@ -25,6 +25,7 @@
   "profile.person.title": "Person",
   "profile.image.edit": "Crop photo",
   "profile.image.upload": "Upload Photo",
+  "person.friends_count": "Friends",
   "activities.title": "Activities",
   "activities.create_article.description": "has published on",
   "activities.scrap.description": "wrote in its timeline",

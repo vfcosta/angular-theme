@@ -2,13 +2,14 @@ import {Component, Inject, Input} from "ng-forward";
 import {SidebarNotificationService} from "./sidebar.notification.service";
 import {SessionService} from '../../login/session.service';
 import {SidebarSectionComponent} from './sidebar-section.component';
+import {TranslatorService} from '../../shared/services/translator.service';
 
 @Component({
     selector: 'sidebar',
     templateUrl: 'app/layout/sidebar/sidebar.html',
     directives: [SidebarSectionComponent]
 })
-@Inject(SidebarNotificationService, SessionService)
+@Inject(SidebarNotificationService, SessionService, TranslatorService)
 /**
  * @ngdoc object
  * @name sidebar.SidebarComponent
@@ -26,6 +27,8 @@ import {SidebarSectionComponent} from './sidebar-section.component';
  * </pre>
  */
 export class SidebarComponent {
+
+    private items: any[] = null;
 
     /**
      * @ngdoc property
@@ -68,7 +71,9 @@ export class SidebarComponent {
      * @description
      *  The constructor for this component. Loads the dependencies services
      */
-    constructor(private notificationService: SidebarNotificationService, private session: SessionService) { }
+    constructor(private notificationService: SidebarNotificationService, private session: SessionService,
+        private translatorService: TranslatorService) {
+    }
 
     /**
      * @ngdoc method
@@ -100,5 +105,19 @@ export class SidebarComponent {
      */
     isVisible(): boolean {
         return <boolean>this.visible;
+    }
+
+
+    getSectionItems(): any[] {
+        if (!this.items) {
+            this.items = [{
+                title: this.translatorService.translate("person.friends_count"),
+                count: this.user.friends_count,
+                url: '#',
+                className: 'active',
+                icon: 'fa-users'
+            }];
+        }
+        return this.items;
     }
 }
