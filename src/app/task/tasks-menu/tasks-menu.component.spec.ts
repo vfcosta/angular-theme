@@ -41,5 +41,10 @@ describe("Components", () => {
             (<any>helper.component['authService'])[AuthEvents[AuthEvents.loginSuccess]].next({});
             expect(helper.component.loadTasks).toHaveBeenCalled();
         });
+
+
+        it("load person tasks with page parameter", () => {
+            expect(taskService.getAllPending).toHaveBeenCalledWith({ per_page: 5, content_type: ['AddMember'] });
+        });
     });
 });

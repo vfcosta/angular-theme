@@ -38,7 +38,7 @@ export class TasksMenuComponent {
     loadTasks() {
         if (!this.session.currentUser()) return;
         this.person = this.session.currentUser().person;
-        this.taskService.getAllPending({ per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
+        this.taskService.getAllPending({ per_page: this.perPage, content_type: ['AddMember'] }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
             this.total = result.headers('total');
             this.tasks = result.data;
         });
