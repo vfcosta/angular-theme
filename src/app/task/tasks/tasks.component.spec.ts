@@ -30,5 +30,9 @@ describe("Components", () => {
         it("load person tasks", () => {
             expect(taskService.getAllPending).toHaveBeenCalled();
         });
+
+        it("load person tasks with page parameter", () => {
+            expect(taskService.getAllPending).toHaveBeenCalledWith({ page: 1, per_page: 5, content_type: ['AddMember'] });
+        });
     });
 });

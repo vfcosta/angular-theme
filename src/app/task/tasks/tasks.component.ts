@@ -13,7 +13,7 @@ export class TasksComponent {
 
     tasks: noosfero.Task[];
     total: number;
-    currentPage: number;
+    currentPage = 1;
     perPage = 5;
 
     constructor(private taskService: TaskService) {
@@ -21,7 +21,7 @@ export class TasksComponent {
     }
 
     loadPage() {
-        this.taskService.getAllPending({ page: this.currentPage, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
+        this.taskService.getAllPending({ page: this.currentPage, per_page: this.perPage, content_type: ['AddMember'] }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
             this.total = result.headers('total');
             this.tasks = result.data;
         });
