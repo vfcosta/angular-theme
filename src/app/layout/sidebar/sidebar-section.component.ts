@@ -53,10 +53,8 @@ export class SidebarSectionComponent {
      * @ngdoc method
      * @name constructor
      * @methodOf sidebar.SidebarSectionComponent
-     * @param {string} name The name of the section (optional)
      * @description
-     *  The constructor for this component. The name of section
-     *  can be assigned here, optionally
+     *  The constructor for this component.
      */
     constructor() {
     }
