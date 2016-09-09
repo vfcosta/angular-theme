@@ -4,6 +4,7 @@ import {providers} from 'ng-forward/cjs/testing/providers';
 import {SidebarComponent} from './sidebar.component';
 import {SidebarSectionComponent} from './sidebar-section.component';
 import * as helpers from '../../../spec/helpers';
+import {TranslatorService} from '../../shared/services/translator.service';
 
 const htmlTemplate: string = '<sidebar [visible]="false"></sidebar>';
 
@@ -26,7 +27,7 @@ describe('Sidebar Component', () => {
     let sessionService: any = {
         currentUser: (): any => {
             return {
-                person: { name: 'test' }
+                person: { name: 'test', friends_count: 10 }
             };
         }
     };
@@ -45,6 +46,10 @@ describe('Sidebar Component', () => {
                 }),
                 provide('SidebarSectionComponent', {
                     useValue: SidebarSectionComponent
+
+                }),
+                provide('TranslatorService', {
+                    useValue: helpers.mocks.translatorService
                 })
             ];
         });
@@ -77,10 +82,14 @@ describe('Sidebar Component', () => {
         expect(helper.debugElement.query('div.user-box .name a').text()).toMatch(sessionService.currentUser().person.name);
     });
 
-    it('show sidebar section with a menu itens', () => {
-
+    it('show sidebar section with a friends count item label', () => {
         notifyService.setVisibility(true);
-        expect(helper.debugElement.query('li.active a span').text()).toMatch('Friends');
+        expect(helper.debugElement.query('li.active a span').text()).toMatch('person.friends_count');
+    });
+
+    it('show sidebar section with a friends count item number', () => {
+        notifyService.setVisibility(true);
+        expect(helper.debugElement.query('li.active a span.item-count').text()).toMatch('10');
     });
 
 });

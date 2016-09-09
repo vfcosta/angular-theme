@@ -7,7 +7,7 @@
       <a href="{{item.url}}" class="dropdown-toggle">
         <i class="fa {{item.icon}}"></i>
         <span>{{item.title}}</span>
-        <span class="label label-primary label-circle pull-right" ng-class="{'submenu-count': item.subitems}" ng-show="item.count != undefined">{{item.count}}</span>
+        <span class="item-count" ng-class="{'submenu-count': item.subitems}" ng-show="item.count != undefined">{{item.count}}</span>
         <i class="fa fa-angle-right drop-icon" ng-show="item.subitems"></i>
       </a>
       <ul class="submenu" ng-show="widgetExpanded && item.subitems">

@@ -1,0 +1,7 @@
+
+.item-count {
+  @extend .label;
+  @extend .label-primary;
+  @extend .label-circle;
+  @extend .pull-right;
+}

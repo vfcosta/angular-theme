@@ -47,27 +47,16 @@ export class SidebarSectionComponent {
      *  Array of items to render into this sidebar menu
      */
     @Input()
-    public items: any[] = [
-        {
-            title: 'Friends',
-            count: 0,
-            url: '#',
-            className: 'active',
-            icon: 'fa-users'
-        }
-    ];
+    public items: any[] = [];
 
     /**
      * @ngdoc method
      * @name constructor
      * @methodOf sidebar.SidebarSectionComponent
-     * @param {string} name The name of the section (optional)
      * @description
-     *  The constructor for this component. The name of section
-     *  can be assigned here, optionally
+     *  The constructor for this component.
      */
-    constructor(name?: string) {
-        this.name = name;
+    constructor() {
     }
 
     /**
