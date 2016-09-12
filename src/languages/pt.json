@@ -12,6 +12,7 @@
   "navbar.toggle_menu": "Abrir Menu",
   "configbar.label": "Configurações",
   "configbar.section.layout": "Visual",
+  "configbar.icon.description": "abrir menu de configuração",
   "language.all": "Todos os idiomas",
   "language.en": "Inglês",
   "language.pt": "Português",
@@ -25,6 +26,7 @@
   "profile.person.title": "Pessoa",
   "profile.image.edit": "Recortar photo",
   "profile.image.upload": "Enviar photo",
+  "profile.image.description": "imagem do perfil",
   "person.friends_count": "Amigos",
   "activities.title": "Atividades",
   "activities.create_article.description": "publicou em",
@@ -102,6 +104,7 @@
   "search.results.summary": "{results, plural, one{# resultado} other{# resultados}}",
   "search.results.query.label": "Termo da busca:",
   "search.label": "Pesquisar",
+  "search.icon.description": "ícone de busca",
   "block.edit": "Editar",
   "block.edition.title": "Editar Bloco",
   "block.edition.success.title": "Bom trabalho!",
@@ -170,6 +173,7 @@
   "tasks.add_member.message": "quer entrar em",
   "tasks.create_community.message": "quer criar uma nova comunidade:",
   "tasks.suggest_article.message": "sugeriu um novo artigo:",
+  "tasks.icon.description": "ícone de notificações",
   "account.register.save.failed": "A conta não pode ser criada",
   "account.register.mandatoryField": "Este campo é obrigatório",
   "account.register.invalidEmail": "Este campo deve ser um endereço de e-mail válido.",
@@ -192,5 +196,7 @@
   "custom-content.edition.preview.button": "Simular",
   "custom-content.edition.cancel.button": "Cancelar",
   "profile.image.editor.cancel.button": "Cancelar",
-  "navbar.signup.button": "Cadastre-se"
+  "navbar.signup.button": "Cadastre-se",
+  "navbar.icon.description": "abrir menu lateral do usuário",
+  "calendar.icon.description": "imagem de calendário"
 }

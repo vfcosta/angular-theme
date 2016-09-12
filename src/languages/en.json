@@ -12,6 +12,7 @@
   "navbar.toggle_menu": "Toggle navigation",
   "configbar.label": "Configuration",
   "configbar.section.layout": "Layout",
+  "configbar.icon.description": "open config menu",
   "language.all": "All languages",
   "language.en": "English",
   "language.pt": "Portuguese",
@@ -25,6 +26,7 @@
   "profile.person.title": "Person",
   "profile.image.edit": "Crop photo",
   "profile.image.upload": "Upload Photo",
+  "profile.image.description": "profile image",
   "person.friends_count": "Friends",
   "activities.title": "Activities",
   "activities.create_article.description": "has published on",
@@ -101,6 +103,7 @@
   "search.results.summary": "{results, plural, one{result} other{# results}}",
   "search.results.query.label": "Search therm:",
   "search.label": "Search",
+  "search.icon.description": "ícone de busca",
   "block.edit": "Edit",
   "block.edition.title": "Edit Block",
   "block.edition.success.title": "Good job!",
@@ -166,6 +169,7 @@
   "tasks.add_member.message": "wants to join",
   "tasks.create_community.message": "wants to create a new community:",
   "tasks.suggest_article.message": "suggested a new article:",
+  "tasks.icon.description": "notification icon",
   "account.register.save.failed": "This account could not be created",
   "account.register.mandatoryField": "This field is mandatory",
   "account.register.invalidEmail": "This field must be a valid email address.",
@@ -188,5 +192,7 @@
   "custom-content.edition.preview.button": "Preview",
   "custom-content.edition.cancel.button": "Cancel",
   "profile.image.editor.cancel.button": "Cancel",
-  "navbar.signup.button": "Sign up"
+  "navbar.signup.button": "Sign up",
+  "navbar.icon.description": "open side user menu",
+  "calendar.icon.description": "calendar image"
 }
