@@ -32,7 +32,7 @@ describe("Components", () => {
                     useValue: mockedBlockService
                 }),
                 new Provider('ArticleService', { useValue: articleService })
-            ].concat(provideFilters("truncateFilter", "stripTagsFilter"));
+            ].concat(provideFilters("truncateFilter", "stripTagsFilter","translateFilter"));
         }
         let componentClass: any = null;
 
