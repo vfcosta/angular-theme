@@ -58,8 +58,9 @@ export class SidebarComponent {
      *  The user data to show into sidebar
      */
     @Input()
-    public user: { name: string } = {
-        name: ''
+    public user: { name: string, friends_count: number } = {
+        name: '',
+        friends_count: 0
     };
 
     /**
