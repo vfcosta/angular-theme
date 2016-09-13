@@ -113,7 +113,7 @@ export class EnvironmentContent {
  */
 @Component({
     selector: 'main',
-    template: '<ui-view></ui-view>',
+    template: '<ui-view/>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
