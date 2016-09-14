@@ -38,7 +38,13 @@ export class AuthService {
     login(credentials: noosfero.Credentials): ng.IPromise<noosfero.User> {
         let url = '/api/v1/login';
         let encodedData = 'login=' + credentials.username + '&password=' + credentials.password;
-        return this.$http.post(url, encodedData).then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
+        return this.$http.post(url, encodedData)
+            .then(
+            this.loginSuccessCallback.bind(this),
+            (e) => {
+                this.loginFailedCallback.bind(this);
+                throw e;
+            });
     }
 
     private loginFailedCallback(response: ng.IHttpPromiseCallbackArg<any>): any {
@@ -81,7 +87,7 @@ export class AuthService {
     }
 
     forgotPassword(value: string): ng.IPromise<noosfero.RestResult<any>> {
-        return this.Restangular.all("").customPOST("", "forgot_password", {value: value});
+        return this.Restangular.all("").customPOST("", "forgot_password", { value: value });
     }
 
 }

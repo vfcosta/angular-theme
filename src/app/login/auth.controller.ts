@@ -20,7 +20,11 @@ export class AuthController {
     username: string;
 
     login() {
-        this.AuthService.login(this.credentials);
+        this.AuthService.login(this.credentials).then((response) => {
+            this.notificationService.info({ title: "auth.login.success.title", message: "auth.login.success.message" });
+        }).catch((response) => {
+            this.notificationService.error({ title: "auth.login.error.title", message: "auth.login.error.message" });
+        });
     }
 
     openForgotPassword() {
@@ -34,9 +38,9 @@ export class AuthController {
 
     sendPasswdInfo() {
         this.AuthService.forgotPassword(this.username).then((response) => {
-            this.notificationService.info({ title: "forgotPasswd.email_sent.title.info", message: "forgotPasswd.email_sent.message.info" });
+            this.notificationService.info({ title: "auth.forgot_password.mail.title", message: "forgot_password.mail.message" });
         }).catch((response) => {
-            this.notificationService.error({ title: "forgotPasswd.not_found.title.error", message: "forgotPasswd.not_found.message.error" });
+            this.notificationService.error({ title: "auth.forgot_password.not_found.title", message: "auth.forgot_password.not_found.message" });
             this.openForgotPassword();
         });
     }
