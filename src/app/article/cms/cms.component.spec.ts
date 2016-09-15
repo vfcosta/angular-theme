@@ -33,10 +33,10 @@ describe("Article Cms", () => {
         setCurrentProfileByIdentifierResponse.resolve(profile);
 
         let articleCreate = $q.defer();
-        articleCreate.resolve({ data: { path: "path", profile: { identifier: "profile" } } });
+        articleCreate.resolve({ data: { path: "path", type: "TextArticle", profile: { identifier: "profile" } } });
 
         let articleGet = $q.defer();
-        articleGet.resolve({ data: { path: "parent-path", profile: { identifier: "profile" } } });
+        articleGet.resolve({ data: { path: "parent-path", type: "TextArticle", profile: { identifier: "profile" } } });
 
         profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(setCurrentProfileByIdentifierResponse.promise);
         articleServiceMock.createInParent = jasmine.createSpy("createInParent").and.returnValue(articleCreate.promise);

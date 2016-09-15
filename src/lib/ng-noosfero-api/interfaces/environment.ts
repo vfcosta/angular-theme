@@ -39,5 +39,14 @@ namespace noosfero {
          * @returns {string} The Environment default domain address with 'http://' prefix (e.g. http://localhost)
          */
         host: string;
+
+
+        /**
+         * @ngdoc property
+         * @name name
+         * @propertyOf noofero.Environment
+         * @returns {string} The Environment Name
+         */
+        name: string;
     }
 }

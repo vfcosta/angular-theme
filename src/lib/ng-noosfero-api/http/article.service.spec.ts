@@ -7,6 +7,7 @@ describe("Services", () => {
 
         let $httpBackend: ng.IHttpBackendService;
         let articleService: ArticleService;
+        let $window: any;
 
         beforeEach(angular.mock.module("main", ($translateProvider: angular.translate.ITranslateProvider) => {
             $translateProvider.translations('en', {});
@@ -15,6 +16,7 @@ describe("Services", () => {
         beforeEach(inject((_$httpBackend_: ng.IHttpBackendService, _ArticleService_: ArticleService) => {
             $httpBackend = _$httpBackend_;
             articleService = _ArticleService_;
+            $window = jasmine.createSpyObj("$window", ["title"]);
         }));
 
         describe("Succesfull requests", () => {

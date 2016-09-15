@@ -25,6 +25,7 @@ export class CmsComponent {
     id: number;
     parentId: number;
     profileIdentifier: string;
+    loading: boolean | number;
 
     constructor(private articleService: ArticleService,
         private profileService: ProfileService,
@@ -53,6 +54,7 @@ export class CmsComponent {
     }
 
     save() {
+        this.loading = true;
         this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
             if (this.id) {
                 return this.articleService.updateArticle(this.article);
@@ -64,9 +66,10 @@ export class CmsComponent {
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
             this.$state.go('main.profile.page', { page: article.path, profile: article.profile.identifier });
-            this.notification.success({ title: "article.basic_editor.success.title", message: "article.basic_editor.success.message" });
+            this.notification.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message`, notificationType: NotificationService.NotificationType.Toast });
         }).catch(() => {
-            this.notification.error({ message: "article.basic_editor.save.failed" });
+            this.loading = false;
+            this.notification.error({ message: "article.basic_editor.save.failed", notificationType: NotificationService.NotificationType.Toast }, { tapToDismiss: false });
         });
     }
 

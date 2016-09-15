@@ -2,12 +2,20 @@ import { Injectable, Inject, EventEmitter } from "ng-forward";
 import {RestangularService} from "./restangular_service";
 import {ProfileService} from "./profile.service";
 import {NoosferoRootScope} from "./../../../app/shared/models/interfaces";
+import { EnvironmentService } from './environment.service';
 
 @Injectable()
-@Inject("Restangular", "$q", "$log", ProfileService)
+@Inject("Restangular", "$q", "$log", ProfileService, "$document", EnvironmentService)
 export class ArticleService extends RestangularService<noosfero.Article> {
 
-    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected profileService: ProfileService) {
+    constructor(
+        Restangular: restangular.IService,
+        $q: ng.IQService,
+        $log: ng.ILogService,
+        protected profileService: ProfileService,
+        private $document: ng.IDocumentService,
+        private environmentService: EnvironmentService
+    ) {
         super(Restangular, $q, $log);
     }
 
@@ -37,7 +45,10 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     // private notifyArticleRemovedListeners(article: noosfero.Article) {
     //     this.modelRemovedEventEmitter.next(article);
     // }
-
+    setCurrent(article: noosfero.Article) {
+        super.setCurrent(article);
+        this.$document.prop('title', this.environmentService.getCurrentEnvironment().name + ' - ' + article.title);
+    }
 
     updateArticle(article: noosfero.Article) {
         let headers = {

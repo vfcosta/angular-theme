@@ -7,5 +7,6 @@
   "comment-paragraph-plugin.discussion.notOpened.header": "Discussão iniciará {{date}}",
   "comment-paragraph-plugin.discussion.available.header": "Discussão terminará {{date}}",
   "comment-paragraph-plugin.discussion.available.without-end.header": "Discussão aberta",
-  "comment-paragraph-plugin.discussion.closed.header": "Discussão finalizada {{date}}"
+  "comment-paragraph-plugin.discussion.closed.header": "Discussão finalizada {{date}}",
+  "article.basic_editor.Discussion.success.message": "Discussão salva com sucesso!"
 }
