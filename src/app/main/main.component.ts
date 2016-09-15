@@ -133,7 +133,7 @@ export class EnvironmentContent {
         "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
         "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch",
-        "ngFileUpload", "ngImgCrop", "flexcalendar"]
+        "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda"]
 })
 @StateConfig([
     {
