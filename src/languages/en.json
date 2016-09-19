@@ -37,6 +37,7 @@
   "article.basic_editor.save": "Save",
   "article.basic_editor.success.message": "Article saved!",
   "article.basic_editor.success.title": "Good job!",
+  "article.basic_editor.TextArticle.success.message": "Content was sucessfully saved!",
   "article.basic_editor.title": "Title",
   "article.basic_editor.visibility.private": "Private",
   "article.basic_editor.visibility.public": "Public",

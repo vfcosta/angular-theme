@@ -40,6 +40,7 @@
   "article.basic_editor.save": "Salvar",
   "article.basic_editor.success.message": "Artigo salvo com sucesso!",
   "article.basic_editor.success.title": "Bom trabalho!",
+  "article.basic_editor.TextArticle.success.message": "Conteúdo salvo com sucesso!",
   "article.basic_editor.title": "Título",
   "article.basic_editor.visibility.private": "Privado",
   "article.basic_editor.visibility.public": "Público",

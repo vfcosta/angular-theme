@@ -5,13 +5,13 @@
   </div>
 
   <div class="page-header" ng-show="!ctrl.article.image">
-    <h3 ng-bind="ctrl.article.title"></h3>
+    <h1 ng-bind="ctrl.article.title"></h1>
   </div>
 
   <div>
     <div ng-repeat="child in ctrl.posts | orderBy: 'created_at':true">
       <div class="page-header">
-        <a class="title" ui-sref="main.profile.page({profile: ctrl.profile.identifier, page: child.path})"><h4 ng-bind="child.title"></h4></a>
+        <a class="title" ui-sref="main.profile.page({profile: ctrl.profile.identifier, page: child.path})"><h2 ng-bind="child.title"></h2></a>
         <div class="post-lead" ng-bind-html="child.body | truncate: 500: '...': true"></div>
       </div>
     </div>
