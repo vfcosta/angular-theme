@@ -46,7 +46,9 @@ var webpackConfig = {
         extensions: ['', '.webpack.js', '.web.js', '.ts', '.tsx', '.js']
     },
     // Source maps support (or 'inline-source-map' also works)
-    devtool: 'source-map',
+    // FIXME see why source map is breaking the build
+    //devtool: 'source-map',
+    devtool: 'eval',
 
     module: {
         loaders: [{
