@@ -4,9 +4,6 @@ import {Pipe, Input, provide, Component} from 'ng-forward';
 import * as helpers from "../../../spec/helpers";
 
 import {NotificationService} from "./notification.service";
-// import {TranslatorService} from './translator.service';
-
-// import {NotificationService} from "./translator.service";
 
 const tcb = new TestComponentBuilder();
 
@@ -20,7 +17,7 @@ describe("Components", () => {
 
         beforeEach(() => {
             sweetAlert = jasmine.createSpyObj("sweetAlert", ["swal"]);
-            toastr = jasmine.createSpyObj("toastr", ["error", "success"]);
+            toastr = jasmine.createSpyObj("toastr", ["error", "success", "info"]);
             translatorService = jasmine.createSpyObj("translatorService", ["translate", "currentLanguage"]);
         });
 
@@ -45,7 +42,7 @@ describe("Components", () => {
             done();
         });
 
-        it("use the default message when call notification component without a message", done => {
+        it("use the default message when call error notification component without a message", done => {
             let component: NotificationService = createComponent();
             component.error();
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
@@ -55,7 +52,7 @@ describe("Components", () => {
             done();
         });
 
-        it("use the default title when call notification component without a title", done => {
+        it("use the default title when call error notification component without a title", done => {
             let component: NotificationService = createComponent();
             component.error();
             expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
@@ -72,14 +69,14 @@ describe("Components", () => {
             done();
         });
 
-        it("use the default message when call notification toast component without a message", done => {
+        it("use the default message when call error notification toast component without a message", done => {
             let component: NotificationService = createComponent();
             component.error({ notificationType: NotificationService.NotificationType.Toast });
             expect(toastr.error).toHaveBeenCalledWith(NotificationService.DEFAULT_ERROR_MESSAGE, jasmine.any(String), jasmine.any(Object));
             done();
         });
 
-        it("use the default message when call notification toast component without a message", done => {
+        it("use the default message when call error notification toast component without a message", done => {
             let component: NotificationService = createComponent();
             component.error({ notificationType: NotificationService.NotificationType.Toast });
             expect(toastr.error).toHaveBeenCalledWith(jasmine.any(String), NotificationService.DEFAULT_ERROR_TITLE, jasmine.any(Object));
@@ -146,5 +143,62 @@ describe("Components", () => {
             }), jasmine.any(Function));
             done();
         });
+
+        // FIXME test-component-builder
+
+        it("display an info message when notify an info", done => {
+            let component: NotificationService = createComponent();
+
+            component.info({ message: "message", title: "title" });
+            expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
+                title: "title",
+                text: "message",
+                type: "info"
+            }), null);
+            done();
+        });
+
+        it("use the default message when call info notification component without a message", done => {
+            let component: NotificationService = createComponent();
+            component.info();
+            expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
+                text: NotificationService.DEFAULT_INFO_MESSAGE,
+                type: "info"
+            }), null);
+            done();
+        });
+
+        it("use the default title when call info notification component without a title", done => {
+            let component: NotificationService = createComponent();
+            component.info();
+            expect(sweetAlert.swal).toHaveBeenCalledWith(jasmine.objectContaining({
+                title: NotificationService.DEFAULT_INFO_TITLE,
+                type: "info"
+            }), null);
+            done();
+        });
+
+        it("display an toast info message when notify an info", done => {
+            let component: NotificationService = createComponent();
+            component.info({ message: "some message", title: "some title", notificationType: NotificationService.NotificationType.Toast });
+            expect(toastr.info).toHaveBeenCalledWith("some message", "some title", jasmine.any(Object));
+            done();
+        });
+
+        it("use the default message when call info notification toast component without a message", done => {
+            let component: NotificationService = createComponent();
+            component.info({ notificationType: NotificationService.NotificationType.Toast });
+            expect(toastr.info).toHaveBeenCalledWith(NotificationService.DEFAULT_INFO_MESSAGE, jasmine.any(String), jasmine.any(Object));
+            done();
+        });
+
+        it("use the default message when call info notification toast component without a message", done => {
+            let component: NotificationService = createComponent();
+            component.info({ notificationType: NotificationService.NotificationType.Toast });
+            expect(toastr.info).toHaveBeenCalledWith(jasmine.any(String), NotificationService.DEFAULT_INFO_TITLE, jasmine.any(Object));
+            done();
+        });
+
+
     });
 });

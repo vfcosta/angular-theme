@@ -76,9 +76,14 @@ export class NotificationService {
     info({
         message = NotificationService.DEFAULT_INFO_MESSAGE,
         title = NotificationService.DEFAULT_INFO_TITLE,
-        showConfirmButton = true
-    } = {}) {
-        this.showMessage({ title: title, text: message, showConfirmButton: showConfirmButton, type: "info" });
+        notificationType = NotificationType.SweetAlert
+    } = {}, options = {}) {
+        if (notificationType === NotificationType.Toast) {
+            this.toastr.info(this.translatorService.translate(message), this.translatorService.translate(title), angular.extend(this.toastrOptions(), options));
+        } else {
+            this.showMessage(angular.extend({ title: title, text: message, showConfirmButton: true, type: "info" }, options));
+        }
+
     }
 
     private showMessage({ title = '', text = '', type = "success", timer = NotificationService.DEFAULT_SUCCESS_TIMER, showConfirmButton = true, showCancelButton = false, closeOnConfirm = true }, confirmationFunction: Function = null) {
