@@ -1,10 +1,4 @@
 import { Input, Component, Inject } from 'ng-forward';
-// import { BlockEditionComponent } from './block-edition/block-edition.component';
-// import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
-// import { NotificationService } from '../../shared/services/notification.service';
-// import { AuthService, SessionService, AuthEvents } from "../../login";
-// import { TranslatorService } from "../../shared/services/translator.service";
-// import { DesignModeService } from "../../admin/layout-edit/designMode.service";
 
 @Component({
     selector: 'discussion-period',
@@ -18,7 +12,11 @@ export class DiscussionPeriodComponent {
     constructor(private $scope: ng.IScope) { }
 
     isDiscussion() {
-        return this.article.type === "CommentParagraphPlugin::Discussion";
+        if ((this.article !== undefined) && (this.article.type === "CommentParagraphPlugin::Discussion")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     notOpened() {
