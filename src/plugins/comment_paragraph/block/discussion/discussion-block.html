@@ -4,20 +4,9 @@
         <img ng-src="{{card.author.image.url}}" class="img-circle">
       </div>
       <div class="header media-body">
-        <h5 class="title media-heading" ng-bind="card.title"></h5>
-
+        <h4 class="title media-heading" ng-bind="card.title"></h4>
         <div class="subheader">
-          <span class="time">
-            <i class="fa fa-clock-o"></i>
-            <span class="start-date date" ng-show="card.start_date">
-              <span class="description">{{"comment-paragraph-plugin.discussion.editor.start_date.label" | translate}}</span>
-              <span class="value">{{card.start_date | amDateFormat:'DD/MM/YYYY'}}</span>
-            </span>
-            <span class="end-date date" ng-show="card.end_date">
-              <span class="description">{{"comment-paragraph-plugin.discussion.editor.end_date.label" | translate}}</span>
-              <span class="value">{{card.end_date | amDateFormat:'DD/MM/YYYY'}}</span>
-            </span>
-          </span>
+          <discussion-period [article]="card"></discussion-period>
         </div>
       </div>
       <img ng-show="card.image" ng-src="{{card.image.url}}" class="img-responsive article-image">
