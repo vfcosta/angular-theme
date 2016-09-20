@@ -4,6 +4,7 @@ import {CommentParagraphFormHotspotComponent} from "./hotspot/comment-paragraph-
 import {DiscussionEditorComponent} from "./article/cms/discussion-editor/discussion-editor.component";
 import {CommentParagraphArticleContentHotspotComponent} from "./hotspot/article-content/article-content.component";
 import {DiscussionBlockComponent} from "./block/discussion/discussion-block.component";
+import {DiscussionPeriodComponent} from "./article/discussion-period/discussion-period.component";
 
-export let mainComponents: any = [AllowCommentComponent, DiscussionEditorComponent, DiscussionBlockComponent];
+export let mainComponents: any = [AllowCommentComponent, DiscussionEditorComponent, DiscussionBlockComponent, DiscussionPeriodComponent];
 export let hotspots: any = [ExportCommentButtonHotspotComponent, CommentParagraphFormHotspotComponent, CommentParagraphArticleContentHotspotComponent];
