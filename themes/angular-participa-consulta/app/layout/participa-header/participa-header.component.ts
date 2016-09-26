@@ -3,19 +3,18 @@ import { EventsHubService } from "../../../../../src/app/shared/services/events-
 import { NoosferoKnownEvents } from "../../../../../src/app/known-events";
 
 @Component({
-    selector: "theme-header",
-    templateUrl: "app/layout/theme-header/theme-header.html",
+    selector: "participa-header",
+    templateUrl: "app/layout/participa-header/participa-header.html",
     providers: [
         provide('eventsHubService', { useClass: EventsHubService })
     ]
 })
 @Inject(EventsHubService, "angularLoad")
-export class ThemeHeaderComponent {
+export class ParticipaHeaderComponent {
 
     eventsNames: NoosferoKnownEvents;
 
     constructor(private eventsHubService: EventsHubService, private angularLoad: any) {
-        console.log("OVERRIDE");
         this.eventsNames = new NoosferoKnownEvents();
     }
 

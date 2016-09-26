@@ -9,7 +9,7 @@ var browserSync = require('browser-sync');
 var $ = require('gulp-load-plugins')();
 
 
-gulp.task('scripts-reload', ['inject-skin'], function() {
+gulp.task('scripts-reload', ['inject-skin', 'inject-theme-components'], function() {
   return buildScripts()
     .pipe(browserSync.stream());
 });
