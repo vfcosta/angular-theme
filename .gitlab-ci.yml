@@ -7,7 +7,6 @@ frontend:
   image: node:wheezy
   script:
     - export PATH=$PATH:node_modules/.bin
-    - cd frontend
     - npm install
     - npm run test
     - npm run build
