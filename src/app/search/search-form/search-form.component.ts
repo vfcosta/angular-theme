@@ -1,4 +1,4 @@
-import {Component, Inject} from "ng-forward";
+import { Component, Inject } from "ng-forward";
 
 @Component({
     selector: 'search-form',
@@ -8,6 +8,7 @@ import {Component, Inject} from "ng-forward";
 export class SearchFormComponent {
 
     query: string;
+    showSearch = false;
 
     constructor(private $state: ng.ui.IStateService) {
     }
