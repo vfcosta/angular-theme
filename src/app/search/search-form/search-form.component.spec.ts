@@ -1,5 +1,5 @@
-import {ComponentTestHelper, createClass} from "../../../spec/component-test-helper";
-import {SearchFormComponent} from "./search-form.component";
+import { ComponentTestHelper, createClass } from "../../../spec/component-test-helper";
+import { SearchFormComponent } from "./search-form.component";
 import * as helpers from "../../../spec/helpers";
 
 const htmlTemplate: string = '<search-form></search-form>';
@@ -9,6 +9,7 @@ describe("Components", () => {
 
         let helper: ComponentTestHelper<SearchFormComponent>;
         let stateMock = jasmine.createSpyObj("$state", ["go", "params", "current"]);
+        let eventsHubServiceMock = jasmine.createSpyObj("eventsHubServiceMock", ["subscribeToEvent"]);
 
         beforeEach(angular.mock.module("templates"));
 
@@ -16,7 +17,10 @@ describe("Components", () => {
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [SearchFormComponent],
-                providers: [helpers.createProviderToValue("$state", stateMock)]
+                providers: [
+                    helpers.createProviderToValue("$state", stateMock),
+                    helpers.createProviderToValue("EventsHubService", eventsHubServiceMock),
+                ]
             });
             helper = new ComponentTestHelper<SearchFormComponent>(cls, done);
         });
@@ -29,6 +33,10 @@ describe("Components", () => {
             helper.component.query = 'query';
             helper.component.search();
             expect(stateMock.go).toHaveBeenCalledWith('main.environment.search', { query: 'query' });
+        });
+
+        it("subscribe to event on init", () => {
+            expect(eventsHubServiceMock.subscribeToEvent).toHaveBeenCalled();
         });
     });
 });

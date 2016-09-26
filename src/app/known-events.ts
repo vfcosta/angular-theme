@@ -5,6 +5,7 @@ export class NoosferoKnownEvents implements EventsHubKnownEventNames {
     PROFILE_INFO_UPDATED: string = 'PROFILE_INFO_UPDATED';
     ARTICLE_UPDATED: string = 'ARTICLE_UPDATED';
     TASK_CLOSED: string = 'TASK_CLOSED';
+    OPEN_SEARCH_FORM: string = 'OPEN_SEARCH_FORM';
 
     constructor() {
     }
