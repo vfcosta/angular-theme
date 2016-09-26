@@ -1,0 +1,18 @@
+variables:
+    GIT_SSL_NO_VERIFY: "true"
+before_script:
+#  - cd frontend
+#  - npm install
+frontend:
+  image: node:wheezy
+  script:
+    - export PATH=$PATH:node_modules/.bin
+    - cd frontend
+    - npm install
+    - npm run test
+    - npm run build
+#backend:
+#  image: maven:3.3.9-jdk-8
+#  script:
+#    - cd backend
+#    - mvn package
