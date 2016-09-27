@@ -30,11 +30,12 @@ var karmaPlugins = [
     'karma-spec-reporter',
     'karma-ng-html2js-preprocessor',
     'karma-sourcemap-loader',
-    'karma-coverage'
+    'karma-coverage',
+    'karma-remap-istanbul'
 ];
 
 
-var karmaReporters = ['spec', 'coverage'];
+var karmaReporters = ['spec', 'coverage', 'karma-remap-istanbul'];
 
 
 
@@ -122,6 +123,12 @@ module.exports = function (config) {
 
         proxies: {
             '/assets/': path.join('/base/', conf.paths.src, '/assets/')
+        },
+
+        remapIstanbulReporter: {
+          reports: {
+            html: 'coverage'
+          }
         }
     };
 

@@ -9,7 +9,7 @@ frontend:
     - export PATH=$PATH:node_modules/.bin
     - npm install --unsafe-perm
     - bower install --allow-root
-    - npm run test
+    - npm run test-single
     - npm run build
 #backend:
 #  image: maven:3.3.9-jdk-8
