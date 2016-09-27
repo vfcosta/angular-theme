@@ -1,17 +1,11 @@
 variables:
     GIT_SSL_NO_VERIFY: "true"
 before_script:
-#  - cd frontend
-#  - npm install
-frontend:
-  image: node:6.6.0
-  script:
     - export PATH=$PATH:node_modules/.bin
     - npm install --unsafe-perm
+    - bower install --allow-root
+unit_test:
+  image: node:6.6.0
+  stage: test
+  script:
     - npm run test-single
-    - npm run build
-#backend:
-#  image: maven:3.3.9-jdk-8
-#  script:
-#    - cd backend
-#    - mvn package
