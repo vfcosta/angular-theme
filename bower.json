@@ -28,7 +28,7 @@
     "angular-scroll": "~1.0.0",
     "ngSweetAlert": "angular-sweetalert#~1.1.0",
     "angular-mocks": "^1.5.0",
-    "angular-translate": "^2.10.0",
+    "angular-translate": "~2.12.1",
     "angular-translate-loader-static-files": "^2.10.0",
     "angular-translate-handler-log": "^2.10.0",
     "angular-dynamic-locale": "^0.1.30",
@@ -80,6 +80,6 @@
   },
   "resolutions": {
     "angular": "1.5.8",
-    "angular-translate": "~2.11.0"
+    "angular-translate": "~2.12.1"
   }
 }
