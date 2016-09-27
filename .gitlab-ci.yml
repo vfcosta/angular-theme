@@ -4,10 +4,11 @@ before_script:
 #  - cd frontend
 #  - npm install
 frontend:
-  image: node:wheezy
+  image: node:6.6.0
   script:
     - export PATH=$PATH:node_modules/.bin
     - npm install
+    - bower install --allow-root
     - npm run test
     - npm run build
 #backend:
