@@ -8,7 +8,6 @@ frontend:
   script:
     - export PATH=$PATH:node_modules/.bin
     - npm install --unsafe-perm
-    - bower install --allow-root
     - npm run test-single
     - npm run build
 #backend:
