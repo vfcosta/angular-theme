@@ -97,7 +97,7 @@ if (argv.test) {
 
         // here we are patching the stdin to allow trigger tests when pressing 'Enter'
         // on terminal
-        if (!stdinPatched) {
+        if (!argv.singleRun && !stdinPatched) {
             process.stdin.on('data', function(info) {
                 if (info == '\n') {
                     spawnChildProcessTest();
