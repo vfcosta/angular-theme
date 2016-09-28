@@ -3,7 +3,6 @@ variables:
 before_script:
     - export PATH=$PATH:node_modules/.bin
     - npm install --unsafe-perm
-    - bower install --allow-root
 unit_test:
   image: node:6.6.0
   stage: test
