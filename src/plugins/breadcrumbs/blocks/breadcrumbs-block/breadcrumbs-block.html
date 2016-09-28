@@ -1,0 +1,6 @@
+<ol class="breadcrumb">
+  <li ng-repeat="link in ctrl.links" ng-class="{'active': link.active}">
+    <a ng-if="!link.active" href="{{link.url}}">{{link.name}}</a>
+    <span ng-if="link.active">{{link.name}}</span>
+  </li>
+</ol>

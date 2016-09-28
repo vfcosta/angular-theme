@@ -1,6 +1,6 @@
 import { Injectable, Inject } from "ng-forward";
-import {RestangularService} from "./restangular_service";
-import {ProfileService} from "./profile.service";
+import { RestangularService } from "./restangular_service";
+import { ProfileService } from "./profile.service";
 
 @Injectable()
 @Inject("Restangular", "$q", "$log")
@@ -21,13 +21,13 @@ export class BlockService extends RestangularService<noosfero.Block> {
         };
     }
 
-    getApiContent(block: noosfero.Block) {
+    getApiContent(block: noosfero.Block, params?: any) {
         let apiContentPromise = this.$q.defer();
         if (block) {
             if (block.api_content) {
                 apiContentPromise.resolve(block.api_content);
             } else {
-                this.get(block.id)
+                this.get(block.id, null, params)
                     .then((result: noosfero.RestResult<noosfero.Block>) => {
                         block = result.data;
                         apiContentPromise.resolve(block.api_content);
