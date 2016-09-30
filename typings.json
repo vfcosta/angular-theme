@@ -2,7 +2,7 @@
   "name": "angular",
   "dependencies": {},
   "devDependencies": {},
-  "ambientDependencies": {
+  "globalDependencies": {
     "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#1c4a34873c9e70cce86edd0e61c559e43dfa5f75",
     "angular-dynamic-locale": "github:DefinitelyTyped/DefinitelyTyped/angular-dynamic-locale/angular-dynamic-locale.d.ts#42ab06c354ccbadeafa60df1efc76b81a22809b1",
     "angular-mocks": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-mocks.d.ts",
