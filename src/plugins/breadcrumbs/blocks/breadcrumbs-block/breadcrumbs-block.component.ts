@@ -12,7 +12,7 @@ export class BreadcrumbsBlockComponent {
     @Input() owner: any;
 
     profile: noosfero.Profile;
-    links: [];
+    links: any[] = [];
 
     constructor(private blockService: BlockService,
         private $scope: ng.IScope,
@@ -35,15 +35,14 @@ export class BreadcrumbsBlockComponent {
         });
     };
 
-    getDisplayName(state) {
-        console.log(state);
+    getDisplayName(state: any) {
         if (state.data && state.data.displayName) {
             return state.data.displayName;
         }
         return state.name;
     }
 
-    isCurrent(state) {
-        return this.$state.$current.name === state.name;
+    isCurrent(state: any) {
+        return (<any>this.$state.$current)['name'] === state.name;
     }
 }
