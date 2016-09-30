@@ -83,3 +83,28 @@ gulp.task('inject-skin', function () {
   }
 
 });
+
+/**
+* Replace the default theme to a npm config
+*/
+gulp.task('inject-theme-components', function () {
+  var jsPaths = {
+    src: path.join(conf.paths.src, './noosfero.js'),
+    dest: conf.paths.src,
+  };
+
+  var replaceTheme = transform(function(filename) {
+    return map(function(file, next) {
+      var contents = file.toString();
+      contents = contents.replace('angular-default', conf.paths.theme);
+      return next(null, contents);
+    });
+  });
+  if (conf.isBuild()) {
+    jsPaths.src = path.join(conf.paths.dist, 'scripts', 'app-*.js');
+    jsPaths.dest = path.join(conf.paths.dist, 'scripts');
+  }
+  gulp.src(jsPaths.src)
+      .pipe(replaceTheme)
+      .pipe(gulp.dest(jsPaths.dest));
+});

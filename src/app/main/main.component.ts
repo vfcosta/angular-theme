@@ -1,4 +1,5 @@
 import * as plugins from "../../plugins";
+import * as theme from "../../../themes";
 import { bundle, Component, StateConfig, Inject } from "ng-forward";
 import { ArticleBlogComponent } from "./../article/types/blog/blog.component";
 
@@ -126,7 +127,7 @@ export class EnvironmentContent {
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent
-    ].concat(plugins.mainComponents).concat(plugins.hotspots),
+    ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
         "ngSanitize", "ngMessages", "ngAria", "restangular",
