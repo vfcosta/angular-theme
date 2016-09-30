@@ -6,5 +6,6 @@ namespace noosfero {
         api_content: any;
         hide: boolean;
         title: string;
+        type: string;
     }
 }

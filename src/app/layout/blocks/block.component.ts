@@ -98,6 +98,11 @@ export class BlockComponent {
             !this.block.hide;
     }
 
+    blockClass() {
+        if (!this.block || !this.block.type) return null;
+        return this.block.type.toLowerCase().replace(/::/, '-');
+    }
+
     protected visible() {
         let display = this.block.settings ? (<any>this.block.settings)['display'] : null;
         return !display || ((this.isHomepage ? display !== "except_home_page" : display !== "home_page_only") && display !== "never");

@@ -1,0 +1,15 @@
+.block {
+  &.breadcrumbsplugin-contentbreadcrumbsblock {
+    margin-bottom: 0;
+    .breadcrumb {
+      margin-bottom: 0;
+      background-color: transparent;
+      > li + li:before {
+        content: "> ";
+      }
+    }
+    .panel-body {
+      padding: 0;
+    }
+  }
+}
