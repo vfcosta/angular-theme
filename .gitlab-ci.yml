@@ -1,10 +1,45 @@
+image: node:6.7.0
 variables:
     GIT_SSL_NO_VERIFY: "true"
+
+cache:
+  paths:
+    - node_modules/
+    - bower_components/
+
 before_script:
+    - git config --global url."https://".insteadOf git://
     - export PATH=$PATH:node_modules/.bin
     - npm install --unsafe-perm
+
+build:
+  stage: build
+  script:
+    - npm run build-all
+  artifacts:
+    expire_in: 1 week
+    paths:
+      - dist
+
 unit_test:
-  image: node:6.6.0
   stage: test
   script:
     - npm run test-single
+
+staging:
+  stage: deploy
+  only:
+    - staging
+  script: echo "DEPLOY STAGING"
+  environment: staging
+  dependencies:
+    - build
+
+production:
+  stage: deploy
+  only:
+    - production
+  script: echo "DEPLOY PRODUCTION"
+  environment: production
+  dependencies:
+    - build
