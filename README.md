@@ -1,5 +1,8 @@
 # Angular Theme
 
+[![build status](https://gitlab.com/noosfero-themes/angular-theme/badges/master/build.svg)](https://gitlab.com/noosfero-themes/angular-theme/commits/master)
+[![coverage report](https://gitlab.com/noosfero-themes/angular-theme/badges/master/coverage.svg)](https://gitlab.com/noosfero-themes/angular-theme/commits/master)
+
 The Noosfero theme that uses the API to create a totally new client-side frontend.
 
 ## Getting started
