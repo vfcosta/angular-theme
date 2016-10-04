@@ -9,12 +9,12 @@ import { NoosferoKnownEvents } from "../../../../../src/app/known-events";
         provide('eventsHubService', { useClass: EventsHubService })
     ]
 })
-@Inject(EventsHubService, "angularLoad")
+@Inject(EventsHubService, "angularLoad", "$location", "$anchorScroll")
 export class ParticipaHeaderComponent {
 
     eventsNames: NoosferoKnownEvents;
 
-    constructor(private eventsHubService: EventsHubService, private angularLoad: any) {
+    constructor(private eventsHubService: EventsHubService, private angularLoad: any, private $location: any, private $anchorScroll: any) {
         this.eventsNames = new NoosferoKnownEvents();
     }
 
@@ -26,4 +26,9 @@ export class ParticipaHeaderComponent {
         this.eventsHubService.emitEvent(this.eventsNames.OPEN_SEARCH_FORM, null);
     }
 
+    scrollTo(anchor: string) {
+        this.$location.hash(anchor);
+        this.$anchorScroll();
+        this.$location.hash(null);
+    };
 }
