@@ -36,6 +36,7 @@ function configTranslation($translateProvider: angular.translate.ITranslateProvi
     $translateProvider.useMissingTranslationHandlerLog();
     $translateProvider.preferredLanguage(defaultLanguage);
     $translateProvider.useSanitizeValueStrategy('escape');
+    tmhDynamicLocaleProvider.defaultLocale(defaultLanguage);
     tmhDynamicLocaleProvider.localeLocationPattern('bower_components/angular-i18n/angular-locale_{{locale}}.js');
     tmhDynamicLocaleProvider.useCookieStorage();
 }
