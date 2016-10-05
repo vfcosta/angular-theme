@@ -1,5 +1,5 @@
-import {Component, Inject, provide} from "ng-forward";
-import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
+import { Component, Inject, provide } from "ng-forward";
+import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
     selector: "configbar",
@@ -10,6 +10,7 @@ import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 })
 @Inject(ProfileService)
 export class ConfigBarComponent {
+
     profile: noosfero.Profile;
     parentId: number;
 
