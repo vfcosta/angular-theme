@@ -1,5 +1,5 @@
-import {Injectable, Inject} from "ng-forward";
-import {TranslatorService} from "./translator.service";
+import { Injectable, Inject } from "ng-forward";
+import { TranslatorService } from "./translator.service";
 
 enum NotificationType {
     Toast = 1,
@@ -30,7 +30,7 @@ export class NotificationService {
     error({
         message = NotificationService.DEFAULT_ERROR_MESSAGE,
         title = NotificationService.DEFAULT_ERROR_TITLE,
-        notificationType = NotificationType.SweetAlert
+        notificationType = NotificationType.Toast
     } = {}, options = {}) {
         if (notificationType === NotificationType.Toast) {
             this.toastr.error(this.translatorService.translate(message), this.translatorService.translate(title), angular.extend(this.toastrOptions(), options));
@@ -55,7 +55,7 @@ export class NotificationService {
     success({
         title = '',
         message = '',
-        notificationType = NotificationType.SweetAlert
+        notificationType = NotificationType.Toast
     }, options = {}) {
         if (notificationType === NotificationType.Toast) {
             options = angular.extend({ timeOut: NotificationService.DEFAULT_SUCCESS_TIMER });
@@ -70,13 +70,13 @@ export class NotificationService {
     }
 
     confirmation({ title = '', message = '', showCancelButton = true, type = "warning" }, confirmationFunction: Function) {
-        this.showMessage({ title: title, text: message, showCancelButton: showCancelButton, type: type, closeOnConfirm: false }, confirmationFunction);
+        this.showMessage({ title: title, text: message, showCancelButton: showCancelButton, type: type, closeOnConfirm: true }, confirmationFunction);
     }
 
     info({
         message = NotificationService.DEFAULT_INFO_MESSAGE,
         title = NotificationService.DEFAULT_INFO_TITLE,
-        notificationType = NotificationType.SweetAlert
+        notificationType = NotificationType.Toast
     } = {}, options = {}) {
         if (notificationType === NotificationType.Toast) {
             this.toastr.info(this.translatorService.translate(message), this.translatorService.translate(title), angular.extend(this.toastrOptions(), options));

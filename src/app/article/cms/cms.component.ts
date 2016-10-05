@@ -1,10 +1,10 @@
-import {StateConfig, Component, Inject, provide} from 'ng-forward';
-import {ArticleService} from "../../../lib/ng-noosfero-api/http/article.service";
-import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service";
-import {NotificationService} from "../../shared/services/notification.service.ts";
-import {BasicOptionsComponent} from './basic-options/basic-options.component';
-import {BasicEditorComponent} from './basic-editor/basic-editor.component';
-import {ArticleEditorComponent} from './article-editor/article-editor.component';
+import { StateConfig, Component, Inject, provide } from 'ng-forward';
+import { ArticleService } from "../../../lib/ng-noosfero-api/http/article.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { NotificationService } from "../../shared/services/notification.service.ts";
+import { BasicOptionsComponent } from './basic-options/basic-options.component';
+import { BasicEditorComponent } from './basic-editor/basic-editor.component';
+import { ArticleEditorComponent } from './article-editor/article-editor.component';
 
 @Component({
     selector: 'article-cms',
@@ -66,10 +66,10 @@ export class CmsComponent {
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
             this.$state.go('main.profile.page', { page: article.path, profile: article.profile.identifier });
-            this.notification.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message`, notificationType: NotificationService.NotificationType.Toast });
+            this.notification.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message` });
         }).catch(() => {
             this.loading = false;
-            this.notification.error({ message: "article.basic_editor.save.failed", notificationType: NotificationService.NotificationType.Toast }, { tapToDismiss: false });
+            this.notification.error({ message: "article.basic_editor.save.failed" });
         });
     }
 
