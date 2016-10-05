@@ -1,8 +1,8 @@
-import {Component} from 'ng-forward';
-import {BlockComponent} from './block.component';
+import { Component } from 'ng-forward';
+import { BlockComponent } from './block.component';
 import * as helpers from "../../../spec/helpers";
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
-import {DesignModeService} from '../../admin/layout-edit/designMode.service';
+import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
+import { DesignModeService } from '../../admin/layout-edit/designMode.service';
 
 const htmlTemplate: string = '<noosfero-block [block]="ctrl.block" [owner]="ctrl.profile"></noosfero-block>';
 
@@ -133,4 +133,17 @@ describe("Boxes Component", () => {
         expect(helper.component.canDisplay()).toEqual(true);
     });
 
+    it("display block actions in design mode", () => {
+        helper.component.block = <any>{ id: 1, hide: false };
+        helper.component.designMode = true;
+        helper.detectChanges();
+        expect(helper.all(".block-actions").length).toEqual(1);
+    });
+
+    it("not display block actions in normal mode", () => {
+        helper.component.block = <any>{ id: 1, hide: false };
+        helper.component.designMode = false;
+        helper.detectChanges();
+        expect(helper.all(".block-actions").length).toEqual(0);
+    });
 });
