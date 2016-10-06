@@ -1,5 +1,7 @@
 <acme-navbar></acme-navbar>
 <!-- Sidebar Left -->
 <sidebar [visible]="false"></sidebar>
-<div id="content" class="content-wrapper full-content" ui-view="content"></div>
+<div class="content-wrapper full-content">
+  <div id="content" ui-view="content"></div>
+</div>
 <theme-footer id="footer"></theme-footer>
