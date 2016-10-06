@@ -2,6 +2,7 @@ $whbl-nav-col-bg: #ffffff; //f3f5f6
 $whbl-sidebar-linkColor: #484848;
 $whbl-primary-color: #1E96D0; //blue
 $whbl-font-color: #16191c;
+$whbl-nav-noosfero-name-font-color: #ffffff;
 
 %skin-base {
 	#header-navbar {
@@ -14,6 +15,9 @@ $whbl-font-color: #16191c;
 	      background-color: #1b86ba;
 	    }
 		}
+		.noosfero-name {
+      color: $whbl-nav-noosfero-name-font-color;
+    }
 	}
 
 	.navbar > .container .navbar-brand {
