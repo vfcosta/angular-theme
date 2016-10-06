@@ -37,4 +37,8 @@ export class PostCommentComponent {
             this.notificationService.success({ title: "comment.post.success.title", message: "comment.post.success.message" });
         });
     }
+
+    loggedIn() {
+        return this.currentUser != null;
+    }
 }

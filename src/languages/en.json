@@ -87,6 +87,7 @@
   "comment.post": "Post a comment",
   "comment.post.success.message": "Comment saved!",
   "comment.post.success.title": "Good job!",
+  "comment.post.not_logged": "you have to sign in to comment",
   "comment.remove.confirmation.message": "You will not be able to recover this comment!",
   "comment.remove.confirmation.title": "Are you sure?",
   "comment.remove": "remove",

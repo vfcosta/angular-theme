@@ -1,15 +1,19 @@
-import {Provider, provide, Component} from 'ng-forward';
+import { Provider, provide, Component } from 'ng-forward';
 import * as helpers from "../../../../spec/helpers";
-import {PostCommentComponent} from './post-comment.component';
+import { PostCommentComponent } from './post-comment.component';
 
 const htmlTemplate: string = '<noosfero-post-comment [article]="ctrl.article" [reply-of]="ctrl.comment"></noosfero-post-comment>';
 
 describe("Components", () => {
     describe("Post Comment Component", () => {
 
-        let properties = { article: { id: 1, accept_comments: true } };
+        let properties: any;
 
         beforeEach(angular.mock.module("templates"));
+
+        beforeEach(() => {
+            properties = { article: { id: 1, accept_comments: true } };
+        });
 
         let commentService = jasmine.createSpyObj("commentService", ["createInArticle"]);
         let user = {};
@@ -73,5 +77,15 @@ describe("Components", () => {
             });
         });
 
+        it("render alert when not logged in", done => {
+            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
+                let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                component['currentUser'] = null;
+                fixture.detectChanges();
+                expect(fixture.debugElement.queryAll("form .post-comment-logged-in").length).toEqual(0);
+                expect(fixture.debugElement.queryAll("form .post-comment-not-logged-in").length).toEqual(1);
+                done();
+            });
+        });
     });
 });

@@ -90,6 +90,7 @@
   "comment.post.placeholder": "Participe da discussão...",
   "comment.post.success.message": "Comentário salvo com sucesso!",
   "comment.post.success.title": "Bom trabalho!",
+  "comment.post.not_logged": "você precisa logar para comentar",
   "comment.remove.confirmation.message": "Você não poderá recuperar o comentário removido!",
   "comment.remove.confirmation.title": "Tem certeza?",
   "comment.remove": "remover",
