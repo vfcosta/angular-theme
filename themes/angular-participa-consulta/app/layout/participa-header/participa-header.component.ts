@@ -27,6 +27,7 @@ export class ParticipaHeaderComponent {
 
     ngOnInit() {
         this.angularLoad.loadScript('//barra.brasil.gov.br/barra.js');
+        this.setupBarraBrasil();
     }
 
     openSearch() {
@@ -44,6 +45,15 @@ export class ParticipaHeaderComponent {
             this.bodyStateClassesService.setThemeSkin(this.highContrastSkin);
         } else {
             this.bodyStateClassesService.setThemeSkin(this.defaultSkin);
+        }
+        this.setupBarraBrasil();
+    }
+
+    private setupBarraBrasil() {
+        if (this.bodyStateClassesService.getThemeSkin() === this.highContrastSkin) {
+            this.bodyStateClassesService.addBodyClass('contraste');
+        } else {
+            this.bodyStateClassesService.removeBodyClass('contraste');
         }
     }
 }

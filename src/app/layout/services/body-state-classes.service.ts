@@ -69,6 +69,14 @@ export class BodyStateClassesService {
         return this.$localStorage.settings.skin;
     }
 
+    addBodyClass(className: string) {
+        this.getBodyElement().addClass(className);
+    }
+
+    removeBodyClass(className: string) {
+        this.getBodyElement().removeClass(className);
+    }
+
     addContentClass(addClass: boolean, className?: string): BodyStateClassesService {
 
         let fullContentClass: string = className || BodyStateClassesService.CONTENT_WRAPPER_FULL;
