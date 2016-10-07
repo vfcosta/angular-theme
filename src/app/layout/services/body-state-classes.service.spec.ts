@@ -1,11 +1,11 @@
 import * as helpers from '../../../spec/helpers';
-import {BodyStateClassesService} from "./body-state-classes.service";
-import {AuthService} from "./../../login/auth.service";
-import {AuthEvents} from "./../../login/auth-events";
+import { BodyStateClassesService } from "./body-state-classes.service";
+import { AuthService } from "./../../login/auth.service";
+import { AuthEvents } from "./../../login/auth-events";
 
-import {EventEmitter} from 'ng-forward';
-import {DesignModeService} from './../../admin/layout-edit/designMode.service';
-import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
+import { EventEmitter } from 'ng-forward';
+import { DesignModeService } from './../../admin/layout-edit/designMode.service';
+import { INoosferoLocalStorage } from "./../../shared/models/interfaces";
 
 describe("BodyStateClasses Service", () => {
 
@@ -27,7 +27,7 @@ describe("BodyStateClasses Service", () => {
 
 
     let getService = (): BodyStateClassesService => {
-        return new BodyStateClassesService($rootScope, $document, $state, authService, designModeService);
+        return new BodyStateClassesService($rootScope, $document, $state, authService, designModeService, $localStorage);
     };
 
     beforeEach(() => {
@@ -197,5 +197,19 @@ describe("BodyStateClasses Service", () => {
 
 
         expect(bodyElJq.addClass).toHaveBeenCalledWith(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+    });
+
+    it("save skin into settings at local storage", () => {
+        let service = getService();
+        bodyElJq.addClass = jasmine.createSpy("addClass");
+        bodyElJq.removeClass = jasmine.createSpy("removeClass");
+        service["bodyElement"] = bodyElJq;
+        service.setThemeSkin('skin-test2');
+        expect($localStorage.settings.skin).toEqual('skin-test2');
+    });
+
+    it("get theme skin from local storage", () => {
+        $localStorage.settings.skin = 'skin-test3';
+        expect(getService().getThemeSkin()).toEqual('skin-test3');
     });
 });

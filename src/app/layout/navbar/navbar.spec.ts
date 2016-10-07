@@ -1,15 +1,11 @@
 import * as helpers from "./../../../spec/helpers";
-import {Navbar} from "./navbar";
-
-import {Injectable, Provider, provide, EventEmitter} from "ng-forward";
-
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-
-import {SessionService, AuthService, AuthController, AuthEvents} from "./../../login";
-
+import { Navbar } from "./navbar";
+import { Injectable, Provider, provide, EventEmitter } from "ng-forward";
+import { ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder';
+import { SessionService, AuthService, AuthController, AuthEvents } from "./../../login";
 import events from 'ng-forward/cjs/events/events';
-
-import {DesignModeService} from '../../admin/layout-edit/designMode.service';
+import { DesignModeService } from '../../admin/layout-edit/designMode.service';
+import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 describe("Components", () => {
 
@@ -83,6 +79,9 @@ describe("Components", () => {
                     }),
                     provide('DesignModeService', {
                         useValue: helpers.mocks.designModeService
+                    }),
+                    provide('$localStorage', {
+                        useValue: <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } }
                     })
                 ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],
