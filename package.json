@@ -13,7 +13,7 @@
   },
   "scripts": {
     "build": "webpack; gulp clean && gulp --theme=$npm_package_config_theme --skin=$npm_package_config_skin build",
-    "build-all": "webpack; gulp clean && for d in ./themes/* ; do (gulp --theme=`basename $d` build); done",
+    "build-all": "gulp clean && for d in ./themes/*/ ; do (webpack && gulp --theme=`basename $d` build); done",
     "webpack": "webpack",
     "karma": "concurrently \"webpack -w\" \"karma start\"",
     "docs": "gulp ngdocs; static-server docs",
