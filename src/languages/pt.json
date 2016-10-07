@@ -113,7 +113,7 @@
   "auth.forgot_password.action": "Ao clicar no botão acima, você receberá um email com instruções para criar uma nova senha.",
   "auth.forgot_password.not_found.message": "Não foi possível recuperar a senha deste usuário",
   "auth.forgot_password.not_found.title": "Usuário não encontrado",
-  "auth.forgot_password.button.send_instructions": "Send instructions",
+  "auth.forgot_password.button.send_instructions": "Enviar instruções",
   "has already been taken": "já está sendo usado",
   "identifier": "identificador",
   "is invalid": "é inválido",
