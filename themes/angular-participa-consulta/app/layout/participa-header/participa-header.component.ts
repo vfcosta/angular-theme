@@ -14,7 +14,8 @@ import { BodyStateClassesService } from "../../../../../src/app/layout/services/
 export class ParticipaHeaderComponent {
 
     eventsNames: NoosferoKnownEvents;
-    defaultSkin = "skin-yellow";
+    defaultSkin = 'skin-yellow';
+    highContrastSkin = 'skin-high-contrast';
 
     constructor(private eventsHubService: EventsHubService,
         private angularLoad: any,
@@ -40,7 +41,7 @@ export class ParticipaHeaderComponent {
 
     toggleHighContrast() {
         if (this.bodyStateClassesService.getThemeSkin() === this.defaultSkin) {
-            this.bodyStateClassesService.setThemeSkin('skin-high-contrast');
+            this.bodyStateClassesService.setThemeSkin(this.highContrastSkin);
         } else {
             this.bodyStateClassesService.setThemeSkin(this.defaultSkin);
         }
