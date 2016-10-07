@@ -45,6 +45,7 @@ gulp.task('inject', ['scripts', 'styles'], function () {
 
 /**
 * Replace the default theme skin to a npm config
+* Also include custom components from themes
 *
 * Uses "vinyl-transform" + "map-stream" to open the
 * js file and rewrite the source file into the same
@@ -53,58 +54,29 @@ gulp.task('inject', ['scripts', 'styles'], function () {
 * @see https://www.npmjs.com/package/vinyl-transform
 * @see https://www.npmjs.com/package/map-stream
 */
-gulp.task('inject-skin', function () {
-
-  if(conf.paths.skin) {
-
-    var jsPaths = {
-      src: path.join(conf.paths.src,'./noosfero.js'),
-      dest: conf.paths.src,
-    };
-
-    $.util.log('Configuring theme skin:', conf.paths.skin, '...');
-
-    var replaceSkin = transform(function(filename) {
-      return map(function(file, next) {
-        var contents = file.toString();
-        contents = contents.replace('skin-whbl', conf.paths.skin);
-        return next(null, contents);
-      });
-    });
-
-    if (conf.isBuild()) {
-      jsPaths.src = path.join(conf.paths.dist, 'scripts', 'app-*.js');
-      jsPaths.dest = path.join(conf.paths.dist, 'scripts');
-    }
-
-    gulp.src(jsPaths.src)
-        .pipe(replaceSkin)
-        .pipe(gulp.dest(jsPaths.dest));
-  }
-
-});
-
-/**
-* Replace the default theme to a npm config
-*/
-gulp.task('inject-theme-components', function () {
+gulp.task('inject-theme-options', function () {
   var jsPaths = {
     src: path.join(conf.paths.src, './noosfero.js'),
     dest: conf.paths.src,
   };
 
-  var replaceTheme = transform(function(filename) {
+  $.util.log('Configuring theme skin:', conf.paths.skin, '...');
+
+  var replaceThemeOptions = transform(function(filename) {
     return map(function(file, next) {
       var contents = file.toString();
+      if(conf.paths.skin) contents = contents.replace('skin-whbl', conf.paths.skin);
       contents = contents.replace('angular-default', conf.paths.theme);
       return next(null, contents);
     });
   });
+
   if (conf.isBuild()) {
     jsPaths.src = path.join(conf.paths.dist, 'scripts', 'app-*.js');
     jsPaths.dest = path.join(conf.paths.dist, 'scripts');
   }
+
   gulp.src(jsPaths.src)
-      .pipe(replaceTheme)
+      .pipe(replaceThemeOptions)
       .pipe(gulp.dest(jsPaths.dest));
 });
