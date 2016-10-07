@@ -1,8 +1,27 @@
+$hc-primary-color: #000000;
+$hc-secondary-color: #FFFFFF;
+$hc-font-color: $hc-secondary-color;
+
 .skin-high-contrast {
   @extend %skin-base;
 
   .navbar {
-    background-color: black;
+    background-color: $hc-primary-color;
     background-image: none;
+  }
+
+  .content-wrapper {
+    background-color: $hc-primary-color !important;
+    * {
+      color: $hc-font-color !important;
+      background-color: $hc-primary-color !important;
+      background: $hc-primary-color !important;
+    }
+    .panel-heading {
+      background: $hc-primary-color !important;
+      h3 {
+        border-bottom: 3px solid $hc-secondary-color !important;
+      }
+    }
   }
 }
