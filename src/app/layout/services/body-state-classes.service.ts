@@ -4,6 +4,7 @@ import { AuthService } from "./../../login/auth.service";
 import { HtmlUtils } from "../html-utils";
 import { INgForwardJQuery } from 'ng-forward/cjs/util/jqlite-extensions';
 import { DesignModeService } from './../../admin/layout-edit/designMode.service';
+import { INoosferoLocalStorage } from "./../../shared/models/interfaces";
 
 export interface StartParams {
     skin?: string;
@@ -23,7 +24,7 @@ export interface StartParams {
  *         - full-content
  */
 @Injectable()
-@Inject("$rootScope", "$document", "$state", AuthService, DesignModeService)
+@Inject("$rootScope", "$document", "$state", AuthService, DesignModeService, "$localStorage")
 export class BodyStateClassesService {
 
     private started: boolean = false;
@@ -41,7 +42,8 @@ export class BodyStateClassesService {
         private $document: ng.IDocumentService,
         private $state: ng.ui.IStateService,
         private authService: AuthService,
-        private designModeService: DesignModeService
+        private designModeService: DesignModeService,
+        private $localStorage: INoosferoLocalStorage
     ) {
     }
 
@@ -51,20 +53,20 @@ export class BodyStateClassesService {
             this.setupStateClassToggle();
             this.setupDesignModeClassToggle();
             if (config) {
-                this.setThemeSkin(config.skin);
+                this.setThemeSkin(this.$localStorage.settings.skin || config.skin);
             }
             this.started = true;
         }
     }
 
     setThemeSkin(skin: string) {
-        this.getBodyElement().removeClass(this.skin);
+        this.getBodyElement().removeClass(this.getThemeSkin());
         this.getBodyElement().addClass(skin);
-        this.skin = skin;
+        this.$localStorage.settings.skin = skin;
     }
 
     getThemeSkin() {
-        return this.skin;
+        return this.$localStorage.settings.skin;
     }
 
     addContentClass(addClass: boolean, className?: string): BodyStateClassesService {
