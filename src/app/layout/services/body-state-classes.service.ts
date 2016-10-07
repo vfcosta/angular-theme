@@ -1,9 +1,9 @@
-import {Directive, Inject, Injectable} from "ng-forward";
-import {AuthEvents} from "../../login/auth-events";
-import {AuthService} from "./../../login/auth.service";
-import {HtmlUtils} from "../html-utils";
-import {INgForwardJQuery} from 'ng-forward/cjs/util/jqlite-extensions';
-import {DesignModeService} from './../../admin/layout-edit/designMode.service';
+import { Directive, Inject, Injectable } from "ng-forward";
+import { AuthEvents } from "../../login/auth-events";
+import { AuthService } from "./../../login/auth.service";
+import { HtmlUtils } from "../html-utils";
+import { INgForwardJQuery } from 'ng-forward/cjs/util/jqlite-extensions';
+import { DesignModeService } from './../../admin/layout-edit/designMode.service';
 
 export interface StartParams {
     skin?: string;
@@ -58,7 +58,13 @@ export class BodyStateClassesService {
     }
 
     setThemeSkin(skin: string) {
+        this.getBodyElement().removeClass(this.skin);
         this.getBodyElement().addClass(skin);
+        this.skin = skin;
+    }
+
+    getThemeSkin() {
+        return this.skin;
     }
 
     addContentClass(addClass: boolean, className?: string): BodyStateClassesService {

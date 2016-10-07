@@ -4,29 +4,37 @@
 		<li><a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a></li>
 	</ul>
 </div>
-<ul id="accessibility">
-  <li>
-    <a id="link-content" href="#" ng-click="ctrl.scrollTo('content')" accesskey="1">
-      Ir para o conteúdo
-      <span class="accesskey">1</span>
-    </a>
-  </li>
-  <li>
-    <a id="link-navbar" href="#" ng-click="ctrl.scrollTo('navbar')" accesskey="2">
-      Ir para o menu
-      <span class="accesskey">2</span>
-    </a>
-  </li>
-  <li>
-    <a id="link-search" href="#" ng-click="ctrl.openSearch()" accesskey="3">
-      Ir para a busca
-      <span class="accesskey">3</span>
-    </a>
-  </li>
-  <li>
-    <a id="link-footer" href="#" ng-click="ctrl.scrollTo('footer')" accesskey="4">
-      Ir para o rodapé
-      <span class="accesskey">4</span>
-    </a>
-  </li>
-</ul>
+
+<div class="row participa-accessibility">
+	<ul id="participa-links">
+	  <li>
+	    <a id="link-content" href="#" ng-click="ctrl.scrollTo('content')" accesskey="1">
+	      Ir para o conteúdo
+	      <span class="accesskey">1</span>
+	    </a>
+	  </li>
+	  <li>
+	    <a id="link-navbar" href="#" ng-click="ctrl.scrollTo('navbar')" accesskey="2">
+	      Ir para o menu
+	      <span class="accesskey">2</span>
+	    </a>
+	  </li>
+	  <li>
+	    <a id="link-search" href="#" ng-click="ctrl.openSearch()" accesskey="3">
+	      Ir para a busca
+	      <span class="accesskey">3</span>
+	    </a>
+	  </li>
+	  <li>
+	    <a id="link-footer" href="#" ng-click="ctrl.scrollTo('footer')" accesskey="4">
+	      Ir para o rodapé
+	      <span class="accesskey">4</span>
+	    </a>
+	  </li>
+	</ul>
+	<ul id="participa-actions">
+		<li id="participa-contraste">
+			<a href="#" (click)="ctrl.toggleHighContrast()">Alto Contraste</a>
+		</li>
+	</ul>
+</div>

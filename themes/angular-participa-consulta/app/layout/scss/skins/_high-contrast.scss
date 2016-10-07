@@ -1,0 +1,8 @@
+.skin-high-contrast {
+  @extend %skin-base;
+
+  .navbar {
+    background-color: black;
+    background-image: none;
+  }
+}
