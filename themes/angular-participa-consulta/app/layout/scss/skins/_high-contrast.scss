@@ -2,21 +2,67 @@ $hc-primary-color: #000000;
 $hc-secondary-color: #FFFFFF;
 $hc-font-color: $hc-secondary-color;
 
+@mixin force-high-contrast() {
+  color: $hc-font-color !important;
+  background-color: $hc-primary-color !important;
+}
+
 .skin-high-contrast {
   @extend %skin-base;
+  @include force-high-contrast();
+
+  button, .btn, .btn-nav {
+    border-color: $hc-font-color !important;
+    @include force-high-contrast();
+    &:hover, &:focus {
+      @include force-high-contrast();
+    }
+  }
+
+  .dropdown {
+    .dropdown-menu {
+      border-color: $hc-secondary-color !important;
+      border: 1px solid $hc-secondary-color !important;
+      li a:hover {
+        opacity: 0.6;
+      }
+    }
+    * {
+      @include force-high-contrast();
+    }
+  }
+
+  .caret {
+    border-bottom-color: $hc-font-color !important;
+    border-top-color: $hc-font-color !important;
+  }
 
   .navbar {
-    background-color: $hc-primary-color;
     background-image: none;
+    &, .noosfero-name, .open > a {
+      @include force-high-contrast();
+    }
+    .participa-accessibility {
+      * {
+        @include force-high-contrast();
+        border-color: $hc-font-color !important;
+      }
+      #participa-links li a .accesskey {
+        background-color: $hc-secondary-color !important;
+        color: $hc-primary-color !important;
+      }
+    }
   }
 
   .content-wrapper {
-    background-color: $hc-primary-color !important;
     * {
-      color: $hc-font-color !important;
-      background-color: $hc-primary-color !important;
+      @include force-high-contrast();
       background: $hc-primary-color !important;
     }
+    a {
+      text-decoration: underline !important;
+    }
+    @include force-high-contrast();
     .panel-heading {
       background: $hc-primary-color !important;
       h3 {
