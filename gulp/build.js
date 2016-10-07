@@ -158,4 +158,4 @@ gulp.task('inject-build', ['html'], function () {
   gulp.start('inject-theme-options');
 });
 
-gulp.task('build', ['ckeditor', 'html', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero', 'inject-build']);
+gulp.task('build', ['ckeditor', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero', 'inject-build']);
