@@ -54,6 +54,23 @@ $hc-font-color: $hc-secondary-color;
     }
   }
 
+  .modal-dialog {
+    .modal-content {
+      border: 1px solid $hc-secondary-color !important;
+    }
+    * {
+      @include force-high-contrast();
+    }
+  }
+
+  .toast {
+    @include force-high-contrast();
+    border: 1px solid $hc-secondary-color !important;
+    * {
+      @include force-high-contrast();
+    }
+  }
+
   .content-wrapper {
     * {
       @include force-high-contrast();
