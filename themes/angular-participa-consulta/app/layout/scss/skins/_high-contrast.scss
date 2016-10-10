@@ -47,6 +47,7 @@ $hc-font-color: $hc-secondary-color;
 
   .navbar {
     background-image: none;
+    border-bottom: 1px solid $hc-secondary-color;
     &, .noosfero-name, .open > a {
       @include force-high-contrast();
     }
@@ -107,6 +108,17 @@ $hc-font-color: $hc-secondary-color;
   :focus {
     outline: 2px dashed $hc-secondary-color !important;
     outline-offset: -2px;
+  }
+
+  .top-search-toggled {
+    border-bottom: 1px solid $hc-secondary-color;
+    @include force-high-contrast();
+    * {
+      @include force-high-contrast();
+    }
+    .tsw-inner > * {
+      border: 1px solid $hc-secondary-color;
+    }
   }
 
   .content-wrapper {
