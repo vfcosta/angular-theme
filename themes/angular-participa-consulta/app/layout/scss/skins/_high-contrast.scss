@@ -81,6 +81,10 @@ $hc-font-color: $hc-secondary-color;
     }
   }
 
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border-top: 2px solid $hc-secondary-color;
+  }
+
   sidebar {
     @include force-high-contrast();
     * {
@@ -108,6 +112,13 @@ $hc-font-color: $hc-secondary-color;
     }
     .badge {
       @include force-high-contrast-inverse();
+    }
+    .timeline-badge {
+      @include force-high-contrast-inverse();
+      border-radius: 50%;
+      i {
+        @include force-high-contrast-inverse();
+      }
     }
 
     comment-paragraph-plugin-allow-comment {
