@@ -95,6 +95,15 @@ $hc-font-color: $hc-secondary-color;
     }
   }
 
+  theme-footer {
+    * {
+      @include force-high-contrast();
+    }
+    a {
+      text-decoration: underline !important;
+    }
+  }
+
   .content-wrapper {
     * {
       @include force-high-contrast();
