@@ -5,7 +5,7 @@
   <div class="ng-scope" ng-class="{'top-search-wrap': !ctrl.showSearch, 'top-search-toggled': ctrl.showSearch}">
     <div class="tsw-inner">
       <i id="top-search-close" class="fa fa-chevron-left" aria-hidden="true" ng-click="ctrl.showSearch = false"></i>
-      <input type="text" placeholder="{{ 'search.label' | translate }}" name="q" ng-model="ctrl.query">
+      <input type="text" placeholder="{{ 'search.label' | translate }}" name="q" ng-model="ctrl.query" focus-if="ctrl.showSearch">
       <i alt='{{"search.icon.description" | translate}}' class="fa fa-search btn-search" aria-hidden="true" (click)="ctrl.search()"></i>
       <button type="submit" (click)="ctrl.search()"></i>
     </div>
