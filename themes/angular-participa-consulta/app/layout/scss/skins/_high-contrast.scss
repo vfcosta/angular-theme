@@ -129,6 +129,15 @@ $hc-font-color: $hc-secondary-color;
         @include force-high-contrast-inverse();
       }
     }
+    .container-camera {
+       * {
+         background-color: transparent !important;
+         background: transparent !important;
+       }
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.5) !important;
+    }
 
     comment-paragraph-plugin-allow-comment {
       .arrow_box {
