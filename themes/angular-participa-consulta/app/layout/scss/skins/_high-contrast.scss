@@ -32,6 +32,10 @@ $hc-font-color: $hc-secondary-color;
     }
   }
 
+  .popover {
+    border: 1px solid $hc-secondary-color !important;
+  }
+
   .caret {
     border-bottom-color: $hc-font-color !important;
     border-top-color: $hc-font-color !important;
@@ -67,6 +71,24 @@ $hc-font-color: $hc-secondary-color;
       background: $hc-primary-color !important;
       h3 {
         border-bottom: 3px solid $hc-secondary-color !important;
+      }
+    }
+
+    comment-paragraph-plugin-allow-comment {
+      .arrow_box {
+        background-color: $hc-secondary-color !important;
+        background: $hc-secondary-color !important;
+        .count {
+          color: $hc-primary-color !important;
+          background-color: $hc-secondary-color !important;
+          background: $hc-secondary-color !important;
+        }
+        &:after {
+          border-top-color: $hc-secondary-color !important;
+        }
+      }
+      .arrow {
+        background: transparent !important;
       }
     }
   }
