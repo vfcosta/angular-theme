@@ -141,10 +141,18 @@ $hc-font-color: $hc-secondary-color;
     }
   }
 
+  .cke {
+    .cke_top {
+      * {
+        background-color: $hc-secondary-color !important;
+        color: $hc-primary-color !important;
+      }
+    }
+  }
+
   .content-wrapper {
     * {
       @include force-high-contrast();
-      background: $hc-primary-color !important;
     }
     a {
       text-decoration: underline !important;
