@@ -70,3 +70,7 @@
 	@include border-radius(50%);
 	padding: 4px !important;
 }
+a:focus, button:focus {
+  outline: 5px auto #4e4e4e !important;
+  outline-offset: -2px;
+}
