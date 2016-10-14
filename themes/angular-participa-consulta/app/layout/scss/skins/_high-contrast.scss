@@ -104,6 +104,11 @@ $hc-font-color: $hc-secondary-color;
     }
   }
 
+  :focus {
+    outline: 2px dashed $hc-secondary-color !important;
+    outline-offset: -2px;
+  }
+
   .content-wrapper {
     * {
       @include force-high-contrast();
