@@ -6,6 +6,10 @@ $hc-font-color: $hc-secondary-color;
   color: $hc-font-color !important;
   background-color: $hc-primary-color !important;
 }
+@mixin force-high-contrast-inverse() {
+  color: $hc-primary-color !important;
+  background-color: $hc-secondary-color !important;
+}
 
 .skin-high-contrast {
   @extend %skin-base;
@@ -52,9 +56,11 @@ $hc-font-color: $hc-secondary-color;
         border-color: $hc-font-color !important;
       }
       #participa-links li a .accesskey {
-        background-color: $hc-secondary-color !important;
-        color: $hc-primary-color !important;
+        @include force-high-contrast-inverse();
       }
+    }
+    .badge {
+      @include force-high-contrast-inverse();
     }
   }
 
@@ -75,6 +81,29 @@ $hc-font-color: $hc-secondary-color;
     }
   }
 
+  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    border-top: 2px solid $hc-secondary-color;
+  }
+
+  sidebar {
+    @include force-high-contrast();
+    * {
+      @include force-high-contrast();
+    }
+    .item-count {
+      @include force-high-contrast-inverse();
+    }
+  }
+
+  theme-footer {
+    * {
+      @include force-high-contrast();
+    }
+    a {
+      text-decoration: underline !important;
+    }
+  }
+
   .content-wrapper {
     * {
       @include force-high-contrast();
@@ -90,14 +119,32 @@ $hc-font-color: $hc-secondary-color;
         border-bottom: 3px solid $hc-secondary-color !important;
       }
     }
+    .badge {
+      @include force-high-contrast-inverse();
+    }
+    .timeline-badge {
+      @include force-high-contrast-inverse();
+      border-radius: 50%;
+      i {
+        @include force-high-contrast-inverse();
+      }
+    }
+    .container-camera {
+       * {
+         background-color: transparent !important;
+         background: transparent !important;
+       }
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.5) !important;
+    }
 
     comment-paragraph-plugin-allow-comment {
       .arrow_box {
         background-color: $hc-secondary-color !important;
         background: $hc-secondary-color !important;
         .count {
-          color: $hc-primary-color !important;
-          background-color: $hc-secondary-color !important;
+          @include force-high-contrast-inverse();
           background: $hc-secondary-color !important;
         }
         &:after {
