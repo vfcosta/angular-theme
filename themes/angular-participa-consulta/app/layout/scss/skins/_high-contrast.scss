@@ -121,10 +121,38 @@ $hc-font-color: $hc-secondary-color;
     }
   }
 
+  #config-tool {
+    * {
+      color: $hc-primary-color !important;
+    }
+    .switch.checked {
+      @include force-high-contrast();
+      border-color: $hc-secondary-color;
+      .switch-text {
+        * {
+          color: $hc-secondary-color !important;
+        }
+      }
+    }
+    #config-tool-cog {
+      &:hover {
+        background-color: $hc-secondary-color !important;
+      }
+    }
+  }
+
+  .cke {
+    .cke_top {
+      * {
+        background-color: $hc-secondary-color !important;
+        color: $hc-primary-color !important;
+      }
+    }
+  }
+
   .content-wrapper {
     * {
       @include force-high-contrast();
-      background: $hc-primary-color !important;
     }
     a {
       text-decoration: underline !important;
