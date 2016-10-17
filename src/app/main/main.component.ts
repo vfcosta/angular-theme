@@ -2,7 +2,8 @@ import * as plugins from "../../plugins";
 import * as theme from "../../../themes";
 import { bundle, Component, StateConfig, Inject } from "ng-forward";
 import { ArticleBlogComponent } from "./../article/types/blog/blog.component";
-
+import { FolderComponent } from "./../article/types/folder/folder.component";
+import { ArticleIconComponent } from "./../article/article-icon/article-icon.component";
 import { ArticleViewComponent } from "./../article/article-default-view.component";
 
 import { PasswordComponent } from "../login/new-password.component";
@@ -126,7 +127,8 @@ export class EnvironmentContent {
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
-        PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent
+        PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
+        FolderComponent, ArticleIconComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",

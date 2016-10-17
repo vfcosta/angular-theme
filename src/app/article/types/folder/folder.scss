@@ -1,0 +1,16 @@
+.folder {
+  .media {
+    margin: 20px;
+    .media-body {
+      margin: 0 0 5px 0;
+      padding: 0;
+      .media-heading {
+        word-wrap: break-word;
+      }
+      .time {
+        color: #a2a2a2;
+        font-size: 14px;
+      }
+    }
+  }
+}
