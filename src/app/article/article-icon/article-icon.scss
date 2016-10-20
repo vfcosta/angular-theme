@@ -1,0 +1,14 @@
+noosfero-article-icon {
+  .text-article {
+    @extend .fa-file-text-o;
+  }
+  .uploaded-file {
+    @extend .fa-cloud-download;
+  }
+  .folder {
+    @extend .fa-folder-o;
+  }
+  .rss-feed {
+    @extend .fa-feed;
+  }
+}
