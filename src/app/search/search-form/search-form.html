@@ -3,7 +3,7 @@
     <span class="read-aloud">{{"search.icon.description" | translate}}</span>
   </i>
 </a>
-<form class="navbar-form search-form" role="search">
+<form class="navbar-form search-form" role="search" (submit)="ctrl.search()">
   <div class="ng-scope" ng-class="{'top-search-wrap': !ctrl.showSearch, 'top-search-toggled': ctrl.showSearch}">
     <div class="tsw-inner">
       <i id="top-search-close" class="fa fa-chevron-left" aria-hidden="true" ng-click="ctrl.showSearch = false"></i>
