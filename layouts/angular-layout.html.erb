@@ -1,5 +1,1 @@
-<% if params[:angular_theme_old] %>
-  <%= render file: Rails.root.join("app/views/layouts/application-ng.html.erb"), use_full_path: false %>
-<% else %>
-  <%= from_theme_include(current_theme, "index") %>
-<% end %>
+<%= from_theme_include(current_theme, "index") %>
