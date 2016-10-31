@@ -1,12 +1,17 @@
-import {Injectable, Inject} from "ng-forward";
-import {UserResponse, INoosferoLocalStorage} from "./../shared/models/interfaces";
+import { Injectable, Inject } from "ng-forward";
+import { UserResponse, INoosferoLocalStorage } from "./../shared/models/interfaces";
+import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 
 @Injectable()
-@Inject("$localStorage", "$log")
+@Inject("$localStorage", "$log", ProfileService)
 export class SessionService {
 
-    constructor(private $localStorage: INoosferoLocalStorage, private $log: ng.ILogService) {
-
+    constructor(private $localStorage: INoosferoLocalStorage, private $log: ng.ILogService, private profileService: ProfileService) {
+        if (this.currentUser() && this.currentUser().person) {
+            profileService.getByIdentifier(this.currentUser().person.identifier).then((profile: noosfero.Profile) => {
+                this.currentUser().person = <noosfero.Person>profile;
+            });
+        }
     }
 
     create(data: UserResponse): noosfero.User {
