@@ -12,6 +12,7 @@ import { MyProfileComponent } from "./myprofile.component";
 import { ProfileActionsComponent } from "./profile-actions.component";
 import { ConfigBarComponent } from "./config-bar.component";
 import { TasksComponent } from "../task/tasks/tasks.component";
+import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
 
 /**
  * @ngdoc controller
@@ -101,6 +102,18 @@ import { TasksComponent } from "../task/tasks/tasks.component";
             "mainBlockContent": {
                 templateUrl: "app/task/tasks/tasks.html",
                 controller: TasksComponent,
+                controllerAs: "vm"
+            }
+        }
+    },
+    {
+        name: 'main.profile.home.destroy',
+        url: "^/myprofile/:profile/profile_editor/destroy_profile",
+        component: DestroyProfileComponent,
+        views: {
+            "actions@main": {
+                template: "<div></div>",
+                controller: DestroyProfileComponent,
                 controllerAs: "vm"
             }
         }
