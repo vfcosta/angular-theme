@@ -246,7 +246,8 @@ export var mocks: any = {
         };
         return {
             then: callback,
-            finally: callback
+            finally: callback,
+            catch: callback
         };
     },
     $log: {
