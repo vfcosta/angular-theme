@@ -21,7 +21,7 @@ export class TasksComponent {
     }
 
     loadPage() {
-        this.taskService.getAllPending({ page: this.currentPage, per_page: this.perPage, content_type: TaskService.TASK_TYPES }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
+        this.taskService.getAllPending({ page: this.currentPage, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
             this.total = result.headers('total');
             this.tasks = result.data;
         });
