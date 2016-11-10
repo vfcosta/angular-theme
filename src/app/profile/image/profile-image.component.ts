@@ -2,6 +2,8 @@ import { Inject, Input, Component, provide } from "ng-forward";
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import { PermissionService } from "../../shared/services/permission.service";
 import { ProfileImageEditorComponent } from "./profile-image-editor.component";
+import { EventsHubService } from "../../shared/services/events-hub.service";
+import { NoosferoKnownEvents } from "../../known-events";
 
 /**
  * @ngdoc controller
@@ -12,9 +14,12 @@ import { ProfileImageEditorComponent } from "./profile-image-editor.component";
 @Component({
     selector: "noosfero-profile-image",
     templateUrl: 'app/profile/image/profile-image.html',
-    providers: [provide('profileService', { useClass: ProfileService })]
+    providers: [
+        provide('profileService', { useClass: ProfileService }),
+        provide('eventsHubService', { useClass: EventsHubService })
+    ]
 })
-@Inject(ProfileService, PermissionService, "$uibModal", "$scope")
+@Inject(ProfileService, PermissionService, "$uibModal", "$scope", EventsHubService)
 export class ProfileImageComponent {
 
     /**
@@ -38,8 +43,15 @@ export class ProfileImageComponent {
 
     picFile: any;
     modalInstance: any;
+    eventsNames: NoosferoKnownEvents;
 
-    constructor(private profileService: ProfileService, private permissionService: PermissionService, private $uibModal: ng.ui.bootstrap.IModalService, private $scope: ng.IScope) {
+    constructor(private profileService: ProfileService,
+        private permissionService: PermissionService,
+        private $uibModal: ng.ui.bootstrap.IModalService,
+        private $scope: ng.IScope,
+        private eventsHubService: EventsHubService) {
+
+        this.eventsNames = new NoosferoKnownEvents();
     }
 
     fileSelected(file: any, errFiles: any) {
@@ -55,7 +67,8 @@ export class ProfileImageComponent {
                 resolve: {
                     picFile: this.picFile,
                     profile: this.profile,
-                    profileService: this.profileService
+                    profileService: this.profileService,
+                    eventsHubService: this.eventsHubService
                 }
             });
         }
@@ -77,6 +90,11 @@ export class ProfileImageComponent {
         if (this.profile && this.profile.type === 'Person') {
             this.defaultIcon = 'fa-user';
         }
+
+        this.eventsHubService.subscribeToEvent(this.eventsNames.IMAGE_PROFILE_UPDATED, (profile: noosfero.Profile) => {
+            this.profile = profile;
+        });
+
     }
 
 }

@@ -17,6 +17,7 @@ describe("Components", () => {
         let personService = jasmine.createSpyObj("personService", ["upload"]);
 
         let profileService = jasmine.createSpyObj("ProfileService", ["isMember", "addMember", "removeMember"]);
+        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
         profileService.isMember = jasmine.createSpy("isMember").and.returnValue(Promise.resolve(false));
 
         @Component({
@@ -28,6 +29,7 @@ describe("Components", () => {
                 helpers.createProviderToValue("PersonService", personService),
                 helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
                 helpers.createProviderToValue('ProfileService', profileService),
+                helpers.createProviderToValue("EventsHubService", eventsHubService),
                 helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService)
             ].concat(helpers.provideFilters("translateFilter"))
         })
