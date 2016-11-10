@@ -19,8 +19,6 @@ export class TaskListComponent {
 
     @Input() tasks: noosfero.Task[];
 
-    private taskTemplates = ["AddFriend", "AddMember", "CreateCommunity", "SuggestArticle", "AbuseComplaint"];
-
     currentTask: noosfero.Task;
     confirmationTask: noosfero.Task;
     eventsNames: NoosferoKnownEvents;
@@ -42,7 +40,7 @@ export class TaskListComponent {
     }
 
     getTaskTemplate(task: noosfero.Task) {
-        if (this.taskTemplates.indexOf(task.type) >= 0) {
+        if (TaskService.TASK_TYPES.indexOf(task.type) >= 0) {
             let templateName = this.getTemplateName(task);
             return `app/task/types/${templateName}/${templateName}.html`;
         } else {
