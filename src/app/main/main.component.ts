@@ -60,6 +60,8 @@ import { TaskListComponent } from "../task/task-list/task-list.component";
 import { ThemeHeaderComponent } from "../layout/theme-header/theme-header.component";
 import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.component";
 
+import { HeaderService } from "./../shared/services/header.service";
+
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
@@ -75,19 +77,21 @@ import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.compon
     templateUrl: "app/main/main.html",
     providers: [AuthService, SessionService]
 })
-@Inject(BodyStateClassesService, EVENTS_HUB_KNOW_EVENT_NAMES)
+@Inject(BodyStateClassesService, HeaderService, EVENTS_HUB_KNOW_EVENT_NAMES)
 export class MainContentComponent {
 
     public themeSkin: string = 'skin-whbl';
 
     constructor(
         private bodyStateClassesService: BodyStateClassesService,
+        private headerService: HeaderService,
         eventsNames: NoosferoKnownEvents,
         eventsHubService: EventsHubService
     ) {
         bodyStateClassesService.start({
             skin: this.themeSkin
         });
+        headerService.setEnvironmentTitle();
     }
 }
 
