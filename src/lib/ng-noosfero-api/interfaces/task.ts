@@ -10,5 +10,7 @@ namespace noosfero {
         accept_details: boolean;
         reject_details: boolean;
         target: noosfero.Profile | noosfero.Environment;
+        created_at: Date;
+        requestor: Person;
     }
 }

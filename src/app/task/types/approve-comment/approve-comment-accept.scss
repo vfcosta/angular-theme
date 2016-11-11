@@ -1,0 +1,17 @@
+approve-comment-task-accept {
+  .approve-comment-accept-title {
+    text-align: center;
+    color: #c1c1c1;
+    margin-bottom: 10px;
+  }
+  noosfero-comment {
+    .comment {
+      background-color: #efefef;
+      padding: 12px;
+      border-radius: 10px;
+    }
+    noosfero-comments {
+      display: none;
+    }
+  }
+}
