@@ -1,0 +1,17 @@
+.abuse-reports {
+    list-style: none;
+    padding: 0;
+}
+
+.abuse-reports .abuse-report .info {
+    font-size: 0.9em;
+    font-style: italic;
+}
+
+.abuse-reports .abuse-report .reported-by {
+    font-weight: bold;
+}
+
+.abuse-reports .abuse-report + .abuse-report {
+    border-top: 1px solid #f0f0f0;
+}
