@@ -1,8 +1,8 @@
 <div class="abuse-complaint-details">
-    <ul>
+    <ul class="abuse-reports">
         <li class="abuse-report" ng-repeat="(abuse_reports, abuse_report) in ctrl.task.abuse_reports">
             <div class="reason">{{abuse_report.reason}}</div>
-            <div>
+            <div class="info">
                 {{"tasks.abuse_report.reported_by" | translate}} 
                 <span class="reported-by">{{abuse_report.reporter.name}}</span> 
                 <span class="time">
