@@ -187,6 +187,7 @@
   "statistics.tags": "Tags",
   "statistics.users": "Users",
   "tasks.abuse_complaint.message": "was reported due to inappropriate behavior",
+  "tasks.abuse_report.reported_by": "Reported by",
   "tasks.actions.accept": "Accept",
   "tasks.actions.accept.confirmation.title": "Confirm task acceptance?",
   "tasks.actions.accept.message": "Task Accepted",

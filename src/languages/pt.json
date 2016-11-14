@@ -190,6 +190,7 @@
   "statistics.tags": "Tags",
   "statistics.users": "Usuários",
   "tasks.abuse_complaint.message": "foi notificado por comportamento inadequado",
+  "tasks.abuse_report.reported_by": "Reportado por",
   "tasks.actions.accept": "Aceitar",
   "tasks.actions.accept.confirmation.title": "Confirmar aprovação da tarefa?",
   "tasks.actions.accept.message": "Tarefa Aceita",
