@@ -213,6 +213,8 @@
   "tasks.suggest_article.message": "sugeriu um novo artigo:",
   "tasks.approve_comment.message": "fez um comentário",
   "tasks.approve_comment.accept.message": "Comentário criado em",
+  "tasks.approve_article.message": "sugeriu a publicação do artigo:",
+  "tasks.approve_article.select_folder": "Selecione a pasta:",
   "time.at": "às",
   "user": "usuário"
   }
