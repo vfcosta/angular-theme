@@ -9,13 +9,11 @@ import { TaskService } from "../../../../lib/ng-noosfero-api/http/task.service";
 export class AbuseComplaintTaskAcceptComponent {
 
     @Input() task: noosfero.AbuseComplaint;
-    abuseComplaintMessage: string;
 
     constructor(private taskService: TaskService) { }
 
     ngOnInit() {
         if (!this.task.target) return;
-        this.abuseComplaintMessage = "";
         this.taskService.get(this.task.id).then((result: noosfero.RestResult<noosfero.AbuseComplaint>) => {
             this.task = result.data;
         });
