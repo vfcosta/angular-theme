@@ -26,6 +26,7 @@ describe("Components", () => {
         beforeEach((done) => {
             let scope = helpers.mocks.scopeWithEvents;
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
+            let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent"]);
             let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
             let properties = { profile: { custom_footer: "footer" } };
             let cls = createClass({
@@ -34,6 +35,7 @@ describe("Components", () => {
                 properties: properties,
                 providers: [
                     helpers.createProviderToValue("ProfileService", profileService),
+                    helpers.createProviderToValue("EventsHubService", eventsHubService),
                     helpers.createProviderToValue("PermissionService", permissionService),
                     helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
                     helpers.createProviderToValue("$scope", scope)

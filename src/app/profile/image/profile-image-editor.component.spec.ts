@@ -16,6 +16,7 @@ describe("Components", () => {
         let profile = <noosfero.Profile>{ name: "profile_name", id: 1, identifier: "test" };
         let modal = helpers.mocks.$modal;
         let modalInstance = jasmine.createSpyObj("$uibModalInstance", ["close"]);
+        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["emitEvent"]);
         let picFile = { type: "png" };
         let $q: ng.IQService;
         let profileServiceMock: any;
@@ -26,7 +27,7 @@ describe("Components", () => {
             $rootScope = _$rootScope_;
         }));
 
-        let comp = new ProfileImageEditorComponent(picFile, this.profile, profileServiceMock, modalInstance);
+        let comp = new ProfileImageEditorComponent(picFile, this.profile, profileServiceMock, modalInstance, eventsHubService);
 
         it("get data", done => {
 
@@ -51,7 +52,7 @@ describe("Components", () => {
             profileServiceMock.uploadImage = jasmine.createSpy('uploadImage').and.returnValue(deferredUploadImage.promise);
             comp.profileService = profileServiceMock;
             comp.uploadImage(testDataUrl, imageName);
-            deferredUploadImage.resolve();
+            deferredUploadImage.resolve({ data: {} });
             $rootScope.$apply();
             expect(comp.modalInstance.close).toHaveBeenCalled();
             done();
