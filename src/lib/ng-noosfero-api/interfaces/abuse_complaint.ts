@@ -6,6 +6,6 @@ namespace noosfero {
      *  A representation of a AbuseComplaint in Noosfero.
      */
     export interface AbuseComplaint extends Task {
-        abuse_reports: any[];
+        abuse_reports: AbuseReport[];
     }
 }
