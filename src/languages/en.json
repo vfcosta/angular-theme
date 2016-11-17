@@ -209,6 +209,7 @@
   "tasks.menu.all": "See all tasks",
   "tasks.menu.header": "You have {tasks, plural, one{one pending task} other{# pending tasks}}",
   "tasks.suggest_article.message": "suggested a new article:",
+  "tasks.suggest_article.select_folder": "Select folder:",
   "tasks.approve_comment.message": "created a comment",
   "tasks.approve_comment.accept.message": "Comment created in",
   "time.at": "at",

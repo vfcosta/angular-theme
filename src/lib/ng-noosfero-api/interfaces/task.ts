@@ -12,5 +12,6 @@ namespace noosfero {
         target: noosfero.Profile | noosfero.Environment;
         created_at: Date;
         requestor: Person;
+        data: any;
     }
 }

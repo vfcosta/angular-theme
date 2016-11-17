@@ -1,0 +1,19 @@
+<div class="suggest-article-accept">
+  <div class="suggest-article">
+    <span class="requestor">{{ctrl.task.requestor.name}}</span> {{"tasks.suggest_article.message" | translate}}
+    <span class="article">{{ctrl.task.data.name}}</span>
+  </div>
+  <div class="form">
+    <div class="article">
+      <div class="form-group article">
+        <article-editor [article]="ctrl.task.data.article"></article-editor>
+      </div>
+    </div>
+  </div>
+  <div class="select-folder form-group">
+    <label for="folderSelect">{{"tasks.suggest_article.select_folder" | translate}}</label>
+    <select name="folderSelect" class="form-control" id="folderSelect" ng-model="ctrl.confirmationTask.data.article.parent_id"
+    ng-options="folder.id as folder.path for folder in ctrl.folders">
+  </select>
+</div>
+</div>

@@ -211,6 +211,7 @@
   "tasks.menu.all": "Todas as tarefas",
   "tasks.menu.header": "Você tem {tasks, plural, one{uma tarefa pendente} other{# tarefas pendentes}}",
   "tasks.suggest_article.message": "sugeriu um novo artigo:",
+  "tasks.suggest_article.select_folder": "Selecione a pasta:",
   "tasks.approve_comment.message": "fez um comentário",
   "tasks.approve_comment.accept.message": "Comentário criado em",
   "time.at": "às",
