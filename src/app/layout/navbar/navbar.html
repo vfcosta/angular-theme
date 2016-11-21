@@ -18,11 +18,11 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li class="btn-nav" ng-show="!ctrl.currentUser">
-          <a ng-href="#" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
+          <a ng-href="#" ng-click="ctrl.openLogin()" tabindex="10">{{"navbar.login" | translate}}</a>
         </li>
 
         <li ng-show="!ctrl.currentUser">
-          <a ui-sref="main.register">{{"navbar.signup.button" | translate}}</a>
+          <a ui-sref="main.register" tabindex="11">{{"navbar.signup.button" | translate}}</a>
         </li>
 
         <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
