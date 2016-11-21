@@ -32,14 +32,14 @@
           </a>
           <ul class="dropdown-menu" uib-dropdown-menu>
             <li>
-              <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-user"></i> {{"navbar.profile" | translate}}</a>
+              <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})" tabindex="10"><i class="fa fa-fw fa-user"></i> {{"navbar.profile" | translate}}</a>
             </li>
             <li>
-              <a target="_self" ui-sref="main.profile.settings({profile: ctrl.currentUser.person.identifier})"><i class="fa fa-fw fa-gear"></i> {{"navbar.settings" | translate}}</a>
+              <a target="_self" ui-sref="main.profile.settings({profile: ctrl.currentUser.person.identifier})" tabindex="10"><i class="fa fa-fw fa-gear"></i> {{"navbar.settings" | translate}}</a>
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
+              <a href="#" ng-click="ctrl.logout()" tabindex="10"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
             </li>
           </ul>
         </li>
