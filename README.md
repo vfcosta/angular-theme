@@ -110,7 +110,7 @@ if you bump into this message:
 
 `
 [15:10:04] 'watch' errored after 11 ms
-[1] [15:10:04] Error: watch /home/93274300500/p/angular-theme/src/ ENOSPC
+[1] [15:10:04] Error: watch /home/jonhdoe/p/angular-theme/src/ ENOSPC
 [1]     at exports._errnoException (util.js:1026:11)
 `
 
