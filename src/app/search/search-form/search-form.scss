@@ -35,6 +35,8 @@
   height: 70px;
   background: #fff;
   z-index: 10;
+  visibility: hidden;
+  display: none;
 
   .tsw-inner {
     position: relative;
@@ -94,6 +96,8 @@
     position: fixed;
     top: 0;
     box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
+    visibility: visible;
+    display: block;
 }
 
 .btn-nav {

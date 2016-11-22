@@ -2,14 +2,14 @@
   <div class="container-fluid">
     <theme-header></theme-header>
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" (click)="ctrl.toggleCollapse()" ng-show="ctrl.showHamburger" tabindex="2">
-        <span class="sr-only">{{"navbar.toggle_menu" | translate}}</span>
-        <i alt='{{"navbar.icon.description" | translate}}' class="fa fa-bars"></i>
-      </button>
-      <a class="navbar-brand" ui-sref="main.environment.home" tabindex="1">
+      <a class="navbar-brand" ui-sref="main.environment.home">
         <span class="noosfero-logo"> </span>
         <h1 class="noosfero-name">{{ ctrl.currentEnvironment.name }}</h1>
       </a>
+      <button type="button" class="navbar-toggle collapsed" (click)="ctrl.toggleCollapse()" ng-show="ctrl.showHamburger">
+        <span class="sr-only">{{"navbar.toggle_menu" | translate}}</span>
+        <i alt='{{"navbar.icon.description" | translate}}' class="fa fa-bars"></i>
+      </button>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse" collapse="isCollapsed">
@@ -25,8 +25,19 @@
           <a ui-sref="main.register">{{"navbar.signup.button" | translate}}</a>
         </li>
 
+        <div ui-view="actions" class="custom-actions"></div>
+
+        <div class="nav navbar-nav search">
+          <search-form></search-form>
+        </div>
+        <ul class="nav navbar-nav">
+          <tasks-menu class="nav navbar-nav navbar-right"></tasks-menu>
+        </ul>
+        <ul class="nav navbar-nav">
+          <language-selector class="nav navbar-nav navbar-right"></language-selector>
+        </ul>
         <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
-          <a href="#" class="dropdown-toggle" aria-expanded="false" uib-dropdown-toggle tabindex="5">
+          <a href="#" class="dropdown-toggle" aria-expanded="false" uib-dropdown-toggle>
             <noosfero-profile-image [profile]="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>
             <span ng-bind="ctrl.currentUser.person.name"></span> <b class="caret"></b>
           </a>
@@ -44,16 +55,6 @@
           </ul>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <language-selector class="nav navbar-nav navbar-right"></language-selector>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <tasks-menu class="nav navbar-nav navbar-right"></tasks-menu>
-      </ul>
-      <div ui-view="actions"></div>
-      <div class="nav navbar-nav search navbar-right">
-        <search-form></search-form>
-      </div>
     </div>
   </div>
 </nav>
