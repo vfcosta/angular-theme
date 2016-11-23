@@ -21,7 +21,7 @@ describe("Services", () => {
         describe("Succesfull requests", () => {
 
             it("list pending tasks", (done) => {
-                $httpBackend.expectGET(`/api/v1/tasks?all_pending=true&content_type=AddMember,ApproveComment,ApproveArticle,AbuseComplaint,SuggestArticle,CreateCommunity&status=1`).respond(200, { tasks: [{ id: 1 }] });
+                $httpBackend.expectGET(`/api/v1/tasks?all_pending=true&content_type=AddMember,ApproveComment,ApproveArticle,AbuseComplaint,SuggestArticle,CreateCommunity,AddFriend&status=1`).respond(200, { tasks: [{ id: 1 }] });
 
                 taskService.getAllPending().then((result: noosfero.RestResult<noosfero.Task[]>) => {
                     expect(result.data).toEqual([{ id: 1 }]);

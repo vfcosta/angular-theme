@@ -6,7 +6,7 @@ import { RestangularService } from "./restangular_service";
 export class TaskService extends RestangularService<noosfero.Task> {
 
     public static TASK_TYPES = ["AddMember", "ApproveComment", "ApproveArticle",
-        "AbuseComplaint", "SuggestArticle", "CreateCommunity"];
+        "AbuseComplaint", "SuggestArticle", "CreateCommunity", "AddFriend"];
 
     constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
         super(Restangular, $q, $log);
