@@ -39,4 +39,21 @@ participa-header {
       }
     }
   }
+
+  #participa-contraste {
+    font-size: 10px;
+    text-align: right;
+    @extend .col-md-6;
+    margin: 4px 0;
+    a {
+      border-bottom: 1px dotted #00500f;
+      color: #00500f;
+      padding: 2px 0px;
+      text-decoration: none;
+      text-transform: uppercase;
+      &:hover {
+        color: #03316f;
+      }
+    }
+  }
 }
