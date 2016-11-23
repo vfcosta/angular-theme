@@ -102,3 +102,18 @@ Example: _mycustom.
 
  For some reason the messageformat installed on bower_component directory was an older version. Removing the bower_components directory
 and runing `bower install` solved the problem
+
+
+### Error watching files during npm serve
+
+if you bump into this message: 
+
+`
+[15:10:04] 'watch' errored after 11 ms
+[1] [15:10:04] Error: watch /home/jonhdoe/p/angular-theme/src/ ENOSPC
+[1]     at exports._errnoException (util.js:1026:11)
+`
+
+run:
+    
+    echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
