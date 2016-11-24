@@ -200,6 +200,8 @@
   "tasks.actions.reject": "Reject",
   "tasks.actions.reject.title": "Good job!",
   "tasks.add_friend.message": "wants to be friend of",
+  "tasks.add_friend.group.field.placeholder": "Classify your new friend",
+  "tasks.add_friend.group.suggestions": "Suggestions: friends, work, school, family",
   "tasks.add_member.accept.select_role": "Select Roles:",
   "tasks.add_member.message": "wants to join",
   "tasks.create_community.message": "wants to create a new community:",
