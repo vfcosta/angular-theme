@@ -1,1 +1,7 @@
-<ng-include ng-repeat="box in ctrl.boxes | displayBoxes:ctrl.layout" src="'app/layout/boxes/box.html'"></ng-include>
+<div ng-repeat="column in ctrl.getLayout()">
+  <div class="col-md-{{column['size']}}" ng-init="box = ctrl.getBox($index)">
+    <noosfero-block ng-repeat="block in box.blocks | orderBy: 'position'"
+      [block]="block" [owner]="ctrl.owner">
+    </noosfero-block>
+  </div>
+</div>
