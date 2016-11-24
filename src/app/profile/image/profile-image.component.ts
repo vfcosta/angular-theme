@@ -75,7 +75,8 @@ export class ProfileImageComponent {
     }
 
     isEditable() {
-        return this.editable && this.permissionService.isAllowed(this.profile, 'allow_edit');
+        // return this.editable && this.permissionService.isAllowed(this.profile, 'allow_edit');
+        return this.editable;
     }
 
     /**

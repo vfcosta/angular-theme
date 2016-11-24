@@ -29,6 +29,44 @@
           font-size: 1.7em;
         }
       }
+
+      .dropdown-menu {
+        .dropdown-menu-profile-image {
+          display: inline-block;
+          width: 40%;
+        }
+
+        .dropdown-menu-profile-info {
+          display: inline-block;
+          width: 60%;
+          text-align: left;
+          padding-top: 5px;
+          float: right;
+
+          .name {
+            font-weight: bold;
+          }
+
+          .email {
+            font-size: 0.7em;
+          }
+
+          a {
+            border: 1px solid #e5e5e5;
+            margin-top: 5px;
+            font-size: 0.8em;
+            text-align: center;
+          }
+        }
+
+        .dropdown-menu-profile-logout {
+          text-align: right;
+        }
+
+        .divider {
+          margin: 5px 0;
+        }
+      }
     }
 
     .navbar-toggle {
