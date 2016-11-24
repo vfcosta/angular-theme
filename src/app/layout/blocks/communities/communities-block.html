@@ -2,12 +2,12 @@
   <li ng-repeat="profile in ctrl.profiles" class="media">
     
       <div class="media-left">
-        <a href="main.profile.home({profile: profile.identifier})">
+        <a ui-sref="main.profile.home({profile: profile.identifier})">
           <noosfero-profile-image [profile]="profile"></noosfero-profile-image>
         </a>
       </div>
       <div class="media-body">
-        <a href="main.profile.home({profile: profile.identifier})">
+        <a ui-sref="main.profile.home({profile: profile.identifier})">
           <h4 class="media-heading">{{profile.name}}</h4>
         </a>
         {{"block.communities.members.count" | translate:{members: profile.members_count}:"messageformat"}}
