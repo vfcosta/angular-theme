@@ -203,6 +203,8 @@
   "tasks.actions.reject": "Rejeitar",
   "tasks.actions.reject.title": "Bom trabalho!",
   "tasks.add_friend.message": "quer ser amigo de",
+  "tasks.add_friend.group.field.placeholder": "Classifique seu novo amigo",
+  "tasks.add_friend.group.suggestions": "Sugestões: amigos, trabalho, escola, família",
   "tasks.add_member.accept.select_role": "Selecionar papéis:",
   "tasks.add_member.message": "quer entrar em",
   "tasks.create_community.message": "quer criar uma nova comunidade:",
