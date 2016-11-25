@@ -1,10 +1,8 @@
 import { Input, Component } from 'ng-forward';
-import { DisplayBoxes } from "./display-boxes.filter";
 
 @Component({
     selector: "noosfero-boxes",
-    templateUrl: "app/layout/boxes/boxes.html",
-    directives: [DisplayBoxes]
+    templateUrl: "app/layout/boxes/boxes.html"
 })
 export class BoxesComponent {
 
