@@ -30,7 +30,10 @@
         }
       }
 
-      .dropdown-menu {
+      .dropdown-menu-profile {
+	      width: 350px;
+	      padding: 10px;
+        
         .dropdown-menu-profile-image {
           display: inline-block;
           width: 40%;
@@ -52,6 +55,7 @@
           .email {
             font-size: 0.7em;
             margin-bottom: 10px;
+            word-wrap: break-word;
           }
 
           .btn-edit {
