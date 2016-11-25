@@ -1,7 +1,7 @@
 <div ng-if="ctrl.isEditable()">
     <div class="profile-image-wrap" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)">
         <div class="hovereffect   ">
-            <i ng-if="!ctrl.profile.image" alt='{{"profile.image.description" | translate}}' class="fa {{ctrl.defaultIcon}} fa-5x profile-image"></i>
+            <i ng-if="!ctrl.profile.image" alt='{{"profile.image.description" | translate}}' class="fa {{ctrl.defaultIcon}} {{ctrl.iconSize}} profile-image"></i>
             <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image">
             <div class='container-camera'>
                 <div ngf-select="ctrl.fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"

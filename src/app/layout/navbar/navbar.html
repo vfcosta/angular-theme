@@ -46,7 +46,27 @@
           </a>
 
           <ul class="dropdown-menu" uib-dropdown-menu>
-            <li class="dropdown-menu-profile-image">
+            <li>
+              <div class="col-md-4">
+                <noosfero-profile-image [profile]="ctrl.currentUser.person" [editable]="true" [iconSize]="fa-4x"></noosfero-profile-image>
+              </div>
+              <div class="col-md-8">
+                <div class="row">
+                <span ng-bind="ctrl.currentUser.person.name" class="name"></span><br />
+                </div>
+                <div class="row">
+                <span ng-bind="ctrl.currentUser.email" class="email"></span>
+                </div>
+                <div class="row">
+                <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
+                </div>
+                <div class="row">
+                <span class="divider"></span>
+                <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
+                </div>
+              </div>
+            </li>
+            <!--<li class="dropdown-menu-profile-image">
               <noosfero-profile-image [profile]="ctrl.currentUser.person" [editable]="true"></noosfero-profile-image>
             </li>
             <li class="dropdown-menu-profile-info">
@@ -57,7 +77,7 @@
             <li class="divider"></li>
             <li class="dropdown-menu-profile-logout">
               <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
-            </li>
+            </li>-->
           </ul>
         </li>
 

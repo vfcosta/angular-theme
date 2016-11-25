@@ -38,7 +38,8 @@ export class ProfileImageComponent {
      *  The default icon used by this profile
      */
     defaultIcon: string;
-
+    
+    @Input() iconSize: string = 'fa-5x';
     @Input() editable: boolean;
 
     picFile: any;
