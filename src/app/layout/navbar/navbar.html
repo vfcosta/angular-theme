@@ -47,37 +47,32 @@
 
           <ul class="dropdown-menu" uib-dropdown-menu>
             <li>
-              <div class="col-md-4">
-                <noosfero-profile-image [profile]="ctrl.currentUser.person" [editable]="true" [iconSize]="fa-4x"></noosfero-profile-image>
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-4">
+                    <noosfero-profile-image 
+                      [profile]="ctrl.currentUser.person" 
+                      [editable]="true" 
+                      [icon-size]="'fa-4x'"></noosfero-profile-image>
+                  </div>
+                  <div class="col-md-8 profile-menu-info">
+                    <div class="row name" ng-bind="ctrl.currentUser.person.name"></div>
+                    <div class="row email" ng-bind="ctrl.currentUser.email"></div>
+                    <div class="row text-center">
+                      <a class="btn btn-default btn-edit" ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="divider"></div>
+                </div>
+                <div class="row">
+                  <div class="profile-menu-logout">
+                    <a class="btn btn-default btn-logout" href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-8">
-                <div class="row">
-                <span ng-bind="ctrl.currentUser.person.name" class="name"></span><br />
-                </div>
-                <div class="row">
-                <span ng-bind="ctrl.currentUser.email" class="email"></span>
-                </div>
-                <div class="row">
-                <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
-                </div>
-                <div class="row">
-                <span class="divider"></span>
-                <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
-                </div>
-              </div>
             </li>
-            <!--<li class="dropdown-menu-profile-image">
-              <noosfero-profile-image [profile]="ctrl.currentUser.person" [editable]="true"></noosfero-profile-image>
-            </li>
-            <li class="dropdown-menu-profile-info">
-              <span ng-bind="ctrl.currentUser.person.name" class="name"></span><br />
-              <span ng-bind="ctrl.currentUser.email" class="email"></span>
-              <a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
-            </li>
-            <li class="divider"></li>
-            <li class="dropdown-menu-profile-logout">
-              <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
-            </li>-->
           </ul>
         </li>
 

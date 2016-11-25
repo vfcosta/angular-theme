@@ -36,31 +36,39 @@
           width: 40%;
         }
 
-        .dropdown-menu-profile-info {
-          display: inline-block;
-          width: 60%;
-          text-align: left;
-          padding-top: 5px;
-          float: right;
+        .btn {
+          color: #555!important;
+          border: 0px;
+          border-radius: 1px;
+          font-size: .8em;
+        }
+
+        .profile-menu-info {
 
           .name {
             font-weight: bold;
           }
 
           .email {
-            font-size: 0.6em;
+            font-size: 0.7em;
+            margin-bottom: 10px;
           }
 
-          a {
-            border: 1px solid #e5e5e5;
-            margin-top: 5px;
-            font-size: 0.8em;
-            text-align: center;
+          .btn-edit {
+            line-height: .5;
+            width: 100%;
+            background-color: lightgray;
           }
         }
 
-        .dropdown-menu-profile-logout {
+        .profile-menu-logout {
           text-align: right;
+          font-size: .8em;
+
+          .btn-logout {
+            line-height: .5;
+            background-color: #ecf0f1;
+          }
         }
 
         .divider {
