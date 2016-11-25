@@ -1,10 +1,10 @@
-import {Component} from 'ng-forward';
-import {BoxesComponent} from './boxes.component';
+import { Component } from 'ng-forward';
+import { BoxesComponent } from './boxes.component';
 import * as helpers from "../../../spec/helpers";
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
+import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
 
 // this htmlTemplate will be re-used between the container components in this spec file
-const htmlTemplate: string = '<noosfero-boxes [boxes]="ctrl.boxes" [owner]="ctrl.profile"></noosfero-blog>';
+const htmlTemplate: string = '<noosfero-boxes [boxes]="ctrl.boxes" [owner]="ctrl.profile" [layout]="ctrl.layout"></noosfero-boxes>';
 
 
 describe("Boxes Component", () => {
@@ -23,7 +23,8 @@ describe("Boxes Component", () => {
             id: 1,
             identifier: 'profile-name',
             type: 'Person'
-        }
+        },
+        layout: 'default'
     };
     beforeEach((done) => {
         let cls = createClass({

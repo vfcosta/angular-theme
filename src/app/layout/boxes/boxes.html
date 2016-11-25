@@ -1,7 +1,8 @@
-<div ng-repeat="column in ctrl.getLayout()">
-  <div class="col-md-{{column['size']}}" ng-init="box = ctrl.getBox($index)">
-    <noosfero-block ng-repeat="block in box.blocks | orderBy: 'position'"
-      [block]="block" [owner]="ctrl.owner">
-    </noosfero-block>
+<div ng-repeat="column in ctrl.columns">
+  <div class="{{ctrl.getBoxClass(column)}}" ng-init="box = ctrl.getBox($index)">
+    <noosfero-block ng-if="!column['subcolumns']" ng-repeat="block in box.blocks | orderBy: 'position'"
+      [block]="block" [owner]="ctrl.owner"></noosfero-block>
+    <noosfero-boxes ng-if="column['subcolumns']" [columns]="column['subcolumns']"
+      [boxes]="ctrl.boxes" [owner]="ctrl.owner" [start-index]="ctrl.lastIndex"></noosfero-boxes>
   </div>
 </div>
