@@ -46,7 +46,17 @@ describe("Boxes Component", () => {
     state.current = { name: "" };
 
     it("renders boxes into a container", () => {
-        expect(helper.find('div.col-md-6').length).toEqual(1);
-        expect(helper.find('div.col-md-3').length).toEqual(1);
+        expect(helper.all('div.col-md-6').length).toEqual(1);
+        expect(helper.all('div.col-md-3').length).toEqual(2);
+    });
+
+    it("render subcolumns into a box container", () => {
+        helper.component.layout = "lefttopright";
+        helper.component.columns = null;
+        helper.component.ngOnInit();
+        helper.detectChanges();
+        expect(helper.all('.col-md-9 .col-md-12').length).toEqual(1);
+        expect(helper.all('.col-md-9 .col-md-9').length).toEqual(1);
+        expect(helper.all('.col-md-9 .col-md-3').length).toEqual(1);
     });
 });
