@@ -1,7 +1,14 @@
 <div class="layout-config">
-  <div class="section-title">{{ 'layout-config.title' | translate }}</div>
+  <div class="header">
+    <div class="section-title">{{ 'layout-config.title' | translate }}</div>
+    <div ng-if="ctrl.isChanged()" class="apply">
+      <a class="btn btn-default btn-xs" href="#" (click)="ctrl.apply()">
+        <i class="fa fa-check"></i> {{"layout-config.apply" | translate}}
+      </a>
+    </div>
+  </div>
   <ul>
-    <li ng-repeat="(layout, _) in ctrl.layouts()">
+    <li ng-repeat="(layout, _) in ctrl.layouts()" class="layout-{{layout}}" ng-class="{'selected': ctrl.isSelected(layout)}">
       <a href="#" (click)="ctrl.changeLayout(layout)">{{"layout-config.template." + layout  | translate}}</a>
     </li>
   </ul>
