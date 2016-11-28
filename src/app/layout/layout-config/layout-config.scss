@@ -4,6 +4,13 @@
       .header {
         .apply {
           display: inline-block;
+          margin-left: 6px;
+          &.ng-hide-add {
+            animation: 0.5s lightSpeedOut ease;
+          }
+          &.ng-hide-remove {
+            animation: 0.5s lightSpeedIn ease;
+          }
         }
         .section-title {
           display: inline-block;
