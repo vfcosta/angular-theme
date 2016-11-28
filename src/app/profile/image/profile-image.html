@@ -14,6 +14,6 @@
     </div>
 </div>
 <div ng-if="!ctrl.isEditable()" class="profile-image-wrap" title="{{ctrl.profile.name}}">
-    <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url }}" class="item-avatar-img">
+    <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url }}" class="item-avatar-img img-responsive">
     <i ng-if="!ctrl.profile.image" alt='{{"profile.image.description" | translate}}' class="fa {{ctrl.defaultIcon}} fa-5x item-avatar-img"></i>
 </div>
