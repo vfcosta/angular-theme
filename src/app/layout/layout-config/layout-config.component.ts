@@ -17,7 +17,9 @@ export class LayoutConfigComponent {
     constructor(private profileService: ProfileService, private notificationService: NotificationService) { }
 
     ngOnInit() {
-        this.originalLayout = this.owner.layout_template;
+        if (this.owner) {
+            this.originalLayout = this.owner.layout_template;
+        }
     }
 
     changeLayout(layout: string) {
@@ -38,10 +40,10 @@ export class LayoutConfigComponent {
     }
 
     isSelected(layout: string) {
-        return this.owner.layout_template === layout;
+        return this.owner && this.owner.layout_template === layout;
     }
 
     isChanged() {
-        return this.originalLayout !== this.owner.layout_template;
+        return this.owner && this.originalLayout !== this.owner.layout_template;
     }
 }
