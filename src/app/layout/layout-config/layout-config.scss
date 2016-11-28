@@ -23,6 +23,12 @@
             &:hover, &:focus {
               text-decoration: none;
             }
+            img {
+              width: 30px;
+            }
+            .layout-name {
+              margin-left: 8px;
+            }
           }
           &.selected {
             a {
