@@ -219,5 +219,14 @@
   "tasks.approve_article.message": "sugeriu a publicação do artigo:",
   "tasks.approve_article.select_folder": "Selecione a pasta:",
   "time.at": "às",
-  "user": "usuário"
+  "user": "usuário",
+  "layout-config.title": "Padrão de Layout",
+  "layout-config.template.topleft": "Barra no topo e à esquerda",
+  "layout-config.template.leftbar": "Barra à esquerda",
+  "layout-config.template.default": "Padrão",
+  "layout-config.template.lefttopright": "Barra no topo e nas laterais",
+  "layout-config.template.2leftbars": "2 barras à esquerda",
+  "layout-config.template.rightbar": "Barra à direita",
+  "layout-config.template.leftbottom": "Barra inferior e à esquerda",
+  "layout-config.template.nosidebars": "Sem barras laterais"
   }

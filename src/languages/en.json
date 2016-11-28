@@ -217,5 +217,14 @@
   "tasks.approve_article.message": "suggested the publication of the article:",
   "tasks.approve_article.select_folder": "Select folder:",
   "time.at": "at",
-  "user": "user"
+  "user": "user",
+  "layout-config.title": "Layout Template",
+  "layout-config.template.topleft": "Top and Left Bar",
+  "layout-config.template.leftbar": "Left Bar",
+  "layout-config.template.default": "Default",
+  "layout-config.template.lefttopright": "Top and Side Bars",
+  "layout-config.template.2leftbars": "2 Left Bars",
+  "layout-config.template.rightbar": "Right Bar",
+  "layout-config.template.leftbottom": "Left and Bottom Bar",
+  "layout-config.template.nosidebars": "No Sidebars"
   }

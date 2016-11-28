@@ -1,0 +1,8 @@
+<div class="layout-config">
+  <div class="section-title">{{ 'layout-config.title' | translate }}</div>
+  <ul>
+    <li ng-repeat="(layout, _) in ctrl.layouts()">
+      <a href="#" (click)="ctrl.changeLayout(layout)">{{"layout-config.template." + layout  | translate}}</a>
+    </li>
+  </ul>
+</div>

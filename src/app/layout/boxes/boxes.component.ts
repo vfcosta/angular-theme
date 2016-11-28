@@ -18,7 +18,7 @@ export class BoxesComponent {
     /**
      * Mapping between noosfero layouts and bootstrap grid system
      */
-    layouts = {
+    static layouts = {
         "topleft": [{ size: 12 }, { size: 3 }, { size: 9, main: true }],
         "leftbar": [{ size: 3 }, { size: 9, main: true }],
         "default": [{ size: 3 }, { size: 6, main: true }, { size: 3 }],
@@ -43,7 +43,7 @@ export class BoxesComponent {
     }
 
     setupColumns() {
-        if (!this.columns) this.columns = (<any>this.layouts)[this.layout];
+        if (!this.columns) this.columns = (<any>BoxesComponent.layouts)[this.layout];
         this.mainColumn = this.columns.findIndex((el: any) => {
             return el.main;
         });
