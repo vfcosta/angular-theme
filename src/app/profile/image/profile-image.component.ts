@@ -38,7 +38,7 @@ export class ProfileImageComponent {
      *  The default icon used by this profile
      */
     defaultIcon: string;
-    
+
     @Input() iconSize: string;
     @Input() editable: boolean;
 
