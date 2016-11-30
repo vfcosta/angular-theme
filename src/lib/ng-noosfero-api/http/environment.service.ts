@@ -48,6 +48,12 @@ export class EnvironmentService {
         return deferred.promise;
     }
 
+    update(environment: noosfero.Environment) {
+        let headers = { 'Content-Type': 'application/json' };
+        let env = this.restangular.one('environments', environment.id);
+        return env.customPOST({ environment: environment }, null, null, headers);
+    }
+
     /** TODO - Please, use the base class RestangularService
      * (description)
      *

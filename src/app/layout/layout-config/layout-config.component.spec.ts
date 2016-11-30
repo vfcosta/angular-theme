@@ -28,13 +28,15 @@ describe("Layout Config Component", () => {
             properties: properties,
             providers: [
                 helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
-                helpers.createProviderToValue('ProfileService', profileService)
+                helpers.createProviderToValue('ProfileService', profileService),
+                helpers.createProviderToValue('EnvironmentService', environmentService)
             ]
         });
         helper = new ComponentTestHelper<LayoutConfigComponent>(cls, done);
     });
 
     let profileService = jasmine.createSpyObj("profileService", ["update"]);
+    let environmentService = jasmine.createSpyObj("environmentService", ["update"]);
 
     it("render template options", () => {
         expect(helper.all('.layout-template-option').length).toEqual(8);
@@ -57,5 +59,13 @@ describe("Layout Config Component", () => {
         helper.component.changeLayout("leftbar");
         helper.component.apply();
         expect(profileService.update).toHaveBeenCalledWith({ id: 1, layout_template: "leftbar" });
+    });
+
+    it("call environment service when owner is an environment", () => {
+        environmentService.update = jasmine.createSpy("update").and.returnValue(helpers.mocks.promiseResultTemplate());
+        helper.component.owner = <noosfero.Environment>{ id: 2, layout_template: 'default' };
+        helper.component.changeLayout("leftbar");
+        helper.component.apply();
+        expect(environmentService.update).toHaveBeenCalledWith({ id: 2, layout_template: "leftbar" });
     });
 });
