@@ -66,11 +66,11 @@ describe("Components", () => {
         });
 
         it("hide button to delete article when user doesn't have permission", () => {
-            expect(helper.find(".article-toolbar .delete-article").attr('style')).toEqual("display: none; ");
+            expect(helper.find(".article-toolbar .delete-article").attr('style').trim() ).toEqual("display: none;");
         });
 
         it("hide button to edit article when user doesn't have permission", () => {
-            expect(helper.find(".article-toolbar .edit-article").attr('style')).toEqual("display: none; ");
+            expect(helper.find(".article-toolbar .edit-article").attr('style').trim() ).toEqual("display: none;");
         });
 
         it("show button to edit article when user has permission", () => {
