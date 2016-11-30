@@ -1,2 +1,3 @@
 <div id="environment-description" ng-bind-html="vm.getEnvironmentDescription()" class="environment-description">    
 </div>
+<config-bar ng-if="vm.environment" [owner]="vm.environment" [permission-action]="'edit_environment_design'"></config-bar>
