@@ -50,7 +50,7 @@ export class EnvironmentService {
 
     update(environment: noosfero.Environment) {
         let headers = { 'Content-Type': 'application/json' };
-        let env = this.restangular.one('environments', environment.id);
+        let env = this.restangular.one('environment', environment.id);
         return env.customPOST({ environment: environment }, null, null, headers);
     }
 
