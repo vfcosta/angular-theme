@@ -59,6 +59,7 @@ import { TasksMenuComponent } from "../task/tasks-menu/tasks-menu.component";
 import { TaskListComponent } from "../task/task-list/task-list.component";
 import { ThemeHeaderComponent } from "../layout/theme-header/theme-header.component";
 import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.component";
+import { LayoutConfigComponent } from "../layout/layout-config/layout-config.component";
 
 import { HeaderService } from "./../shared/services/header.service";
 
@@ -132,7 +133,7 @@ export class EnvironmentContent {
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
-        FolderComponent, ArticleIconComponent
+        FolderComponent, ArticleIconComponent, LayoutConfigComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",

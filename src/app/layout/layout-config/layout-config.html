@@ -1,0 +1,18 @@
+<div class="layout-config">
+  <div class="header">
+    <div class="section-title">{{ 'layout-config.title' | translate }}</div>
+    <div ng-show="ctrl.isChanged()" class="apply">
+      <a class="btn btn-default btn-xs" href="#" (click)="ctrl.apply()">
+        <i class="fa fa-check"></i> {{"layout-config.apply" | translate}}
+      </a>
+    </div>
+  </div>
+  <ul>
+    <li ng-repeat="(layout, _) in ctrl.layouts()" class="layout-template-option layout-{{layout}}" ng-class="{'selected': ctrl.isSelected(layout)}">
+      <a href="#" (click)="ctrl.changeLayout(layout)">
+        <img src="/assets/images/icons-app/layouts/{{layout}}.png">
+        <span class="layout-name">{{"layout-config.template." + layout  | translate}}</span>
+      </a>
+    </li>
+  </ul>
+</div>

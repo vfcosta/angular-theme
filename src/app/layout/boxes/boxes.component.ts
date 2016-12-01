@@ -1,9 +1,10 @@
-import { Input, Component } from 'ng-forward';
+import { Inject, Input, Component } from 'ng-forward';
 
 @Component({
     selector: "noosfero-boxes",
     templateUrl: "app/layout/boxes/boxes.html"
 })
+@Inject("$scope")
 export class BoxesComponent {
 
     @Input() boxes: noosfero.Box[];
@@ -17,7 +18,7 @@ export class BoxesComponent {
     /**
      * Mapping between noosfero layouts and bootstrap grid system
      */
-    layouts = {
+    static layouts = {
         "topleft": [{ size: 12 }, { size: 3 }, { size: 9, main: true }],
         "leftbar": [{ size: 3 }, { size: 9, main: true }],
         "default": [{ size: 3 }, { size: 6, main: true }, { size: 3 }],
@@ -28,8 +29,21 @@ export class BoxesComponent {
         "nosidebars": [{ size: 12, main: true }]
     };
 
+    constructor(private $scope: ng.IScope) { }
+
     ngOnInit() {
-        if (!this.columns) this.columns = (<any>this.layouts)[this.layout];
+        if (!this.layout) {
+            this.setupColumns();
+        } else {
+            this.$scope.$watch("ctrl.layout", () => {
+                this.columns = null;
+                this.setupColumns();
+            });
+        }
+    }
+
+    setupColumns() {
+        if (!this.columns) this.columns = (<any>BoxesComponent.layouts)[this.layout];
         this.mainColumn = this.columns.findIndex((el: any) => {
             return el.main;
         });
