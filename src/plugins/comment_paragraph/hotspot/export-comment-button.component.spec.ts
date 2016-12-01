@@ -52,7 +52,7 @@ describe("Components", () => {
         it('not display export comment button when user does not have permission', () => {
             helper.component.article = <noosfero.Article>{ setting: { comment_paragraph_plugin_activate: true } };
             helper.detectChanges();
-            expect(helper.find('.export-comment-button').attr('style')).toEqual("display: none; ");
+            expect(helper.find('.export-comment-button').attr('style').trim()).toEqual("display: none;");
         });
     });
 });
