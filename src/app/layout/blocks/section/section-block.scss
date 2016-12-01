@@ -1,0 +1,40 @@
+.noosfero-block {
+    .block {
+        .panel-body {
+            &.sectionblockplugin-sectionblock {
+                padding: 0;
+            }
+        }
+    }
+
+    .sectionblockplugin-sectionblock {
+        .section {
+            padding: 15px;
+        }
+    }
+
+    .sectionblockplugin-sectionblock {
+        .section {
+
+            padding: 15px;
+
+            .name, .description, .separator {
+                display: inline-block;
+                height: 45px;
+                line-height: 45px;
+                vertical-align: top;
+            }
+
+            .name {
+                font-weight: bold;
+            }
+
+            .separator {
+                i {
+                    vertical-align: middle;
+                }
+            }
+
+        }
+    }
+}

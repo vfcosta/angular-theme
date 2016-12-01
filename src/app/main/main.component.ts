@@ -5,6 +5,7 @@ import { ArticleBlogComponent } from "./../article/types/blog/blog.component";
 import { FolderComponent } from "./../article/types/folder/folder.component";
 import { ArticleIconComponent } from "./../article/article-icon/article-icon.component";
 import { ArticleViewComponent } from "./../article/article-default-view.component";
+import { SectionBlockComponent } from "../layout/blocks/section/section-block.component";
 
 import { PasswordComponent } from "../login/new-password.component";
 import { ProfileComponent } from "../profile/profile.component";
@@ -132,7 +133,7 @@ export class EnvironmentContent {
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
-        FolderComponent, ArticleIconComponent
+        FolderComponent, ArticleIconComponent, SectionBlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
