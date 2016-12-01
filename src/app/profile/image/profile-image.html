@@ -2,7 +2,7 @@
     <div class="profile-image-wrap" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)">
         <div class="hovereffect   ">
             <i ng-if="!ctrl.profile.image" alt='{{"profile.image.description" | translate}}' class="fa {{ctrl.defaultIcon}} {{ctrl.iconSize}} profile-image"></i>
-            <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image">
+            <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image img-circle">
             <div class='container-camera'>
                 <div ngf-select="ctrl.fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
                     data-target=".crop-dialog">
@@ -14,6 +14,6 @@
     </div>
 </div>
 <div ng-if="!ctrl.isEditable()" class="profile-image-wrap" title="{{ctrl.profile.name}}">
-    <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url }}" class="item-avatar-img img-responsive">
+    <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url }}" class="item-avatar-img img-responsive  img-circle">
     <i ng-if="!ctrl.profile.image" alt='{{"profile.image.description" | translate}}' class="fa {{ctrl.defaultIcon}} fa-5x item-avatar-img"></i>
 </div>
