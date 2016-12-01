@@ -1,0 +1,15 @@
+#language-chooser {
+    text-align: center;
+    
+    li {
+        font-size: 12px;
+        display: inline-block;
+    }
+
+    li + li {
+        border-left: 1px solid #999;
+        margin-left: 10px;
+        padding-left: 10px;
+
+    }
+}
