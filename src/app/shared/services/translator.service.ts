@@ -40,8 +40,15 @@ export class TranslatorService {
 
     private configAvailableLanguages() {
         this.availableLanguages = {
-            "en": this.$translate.instant("language.en"),
-            "pt": this.$translate.instant("language.pt")
+            "en" : "English",
+            "pt" : "Português"
+            // "fr" : "Français",
+            // "hy" : "հայերեն լեզու",
+            // "de" : "Deutsch",
+            // "ru" : "русский язык",
+            // "es" : "Español",
+            // "eo" : "Esperanto",
+            // "it" : "Italiano"
         };
     }
 

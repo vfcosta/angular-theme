@@ -93,21 +93,22 @@
     "phantomjs": "~1.9.18",
     "phantomjs-polyfill": "0.0.2",
     "reflect-metadata": "^0.1.3",
-    "remap-istanbul": "github:sitepen/remap-istanbul",
+    "remap-istanbul": "~0.7.0",
     "replace": "^0.3.0",
     "static-server": "^2.0.1",
     "ts-loader": "^0.8.1",
-    "ts-node": "^0.9.1",
+    "ts-node": "^1.7.0",
     "tslint": "^3.5.0",
     "tslint-loader": "^2.1.3",
     "typescript": "^1.8.10",
-    "typings": "^1.1.0",
+    "typings": "^2.0.0",
     "uglify-save-license": "~0.4.1",
     "vinyl-transform": "^1.0.0",
     "webpack": "^1.12.14",
     "wiredep": "~2.2.2",
     "wrench": "~1.5.8",
-    "yargs": "^4.2.0"
+    "yargs": "^4.2.0",
+    "node-sass": "^3.13.0"
   },
   "engines": {
     "node": ">=0.10.0"
