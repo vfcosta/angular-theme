@@ -1,5 +1,5 @@
 .navbar {
-
+  z-index: 1100;
   .noosfero-name {
     font-size: 19px;
     display: inline;
@@ -27,6 +27,55 @@
         }
         i {
           font-size: 1.7em;
+        }
+      }
+
+      .dropdown-menu-profile {
+	      min-width: 350px;
+	      padding: 10px;
+        
+        .dropdown-menu-profile-image {
+          display: inline-block;
+          width: 40%;
+        }
+
+        .btn {
+          color: #555!important;
+          border: 0px;
+          border-radius: 1px;
+          font-size: .8em;
+        }
+
+        .profile-menu-info {
+
+          .name {
+            font-weight: bold;
+          }
+
+          .email {
+            font-size: 0.7em;
+            margin-bottom: 10px;
+            word-wrap: break-word;
+          }
+
+          .btn-edit {
+            line-height: .5;
+            width: 100%;
+          }
+        }
+
+        .profile-menu-logout {
+          text-align: right;
+          font-size: .8em;
+
+          .btn-logout {
+            line-height: .5;
+            background-color: #ecf0f1;
+          }
+        }
+
+        .divider {
+          margin: 5px 0;
         }
       }
     }

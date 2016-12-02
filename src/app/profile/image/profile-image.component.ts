@@ -39,6 +39,7 @@ export class ProfileImageComponent {
      */
     defaultIcon: string;
 
+    @Input() iconSize: string;
     @Input() editable: boolean;
 
     picFile: any;
@@ -86,6 +87,7 @@ export class ProfileImageComponent {
      *  Initializes the icon names to their corresponding values depending on the profile type passed to the controller
      */
     ngOnInit() {
+        this.iconSize = "fa-5x";
         this.defaultIcon = 'fa-users';
         if (this.profile && this.profile.type === 'Person') {
             this.defaultIcon = 'fa-user';
@@ -94,7 +96,6 @@ export class ProfileImageComponent {
         this.eventsHubService.subscribeToEvent(this.eventsNames.IMAGE_PROFILE_UPDATED, (profile: noosfero.Profile) => {
             this.profile = profile;
         });
-
     }
 
 }
