@@ -218,5 +218,17 @@
   "tasks.approve_article.message": "suggested the publication of the article:",
   "tasks.approve_article.select_folder": "Select folder:",
   "time.at": "at",
-  "user": "user"
+  "user": "user",
+  "layout-config.title": "Layout Template",
+  "layout-config.template.topleft": "Top and left bar",
+  "layout-config.template.leftbar": "Left bar",
+  "layout-config.template.default": "Right and left bars",
+  "layout-config.template.lefttopright": "Top and side bars",
+  "layout-config.template.2leftbars": "2 left bars",
+  "layout-config.template.rightbar": "Right bar",
+  "layout-config.template.leftbottom": "Left and bottom bar",
+  "layout-config.template.nosidebars": "No sidebars",
+  "layout-config.apply": "Apply",
+  "layout-config.apply.success.message": "Layout template saved!",
+  "layout-config.apply.success.title": "Good job!"
   }
