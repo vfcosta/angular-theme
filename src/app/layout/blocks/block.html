@@ -1,4 +1,4 @@
-<div ng-show="ctrl.canDisplay() || ctrl.inEditMode() || ctrl.designMode" ng-class="{'invisible-block': !ctrl.canDisplay()}" class="noosfero-block" ng-mouseover="displayActions = true" ng-mouseleave="displayActions = false">
+<div ng-show="ctrl.canDisplay() || ctrl.inEditMode() || ctrl.designMode" ng-class="{'invisible-block': !ctrl.canDisplay()}" class="noosfero-block col-md-{{ctrl.block.settings.visualization.columns || 12}}" ng-mouseover="displayActions = true" ng-mouseleave="displayActions = false">
   <div ng-if="ctrl.designMode" ng-show="displayActions" class="actions block-actions" permission="ctrl.block.permissions" permission-action="allow_edit">
     <button type="submit" class="btn btn-xs btn-default" ng-click="ctrl.openEdit()"><i class="fa fa-edit fa-fw"></i></button>
   </div>
