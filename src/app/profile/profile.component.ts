@@ -10,7 +10,6 @@ import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { MyProfileComponent } from "./myprofile.component";
 import { ProfileActionsComponent } from "./profile-actions.component";
-import { ConfigBarComponent } from "./config-bar.component";
 import { TasksComponent } from "../task/tasks/tasks.component";
 import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
 
@@ -45,11 +44,6 @@ import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
                 templateUrl: "app/profile/navbar-actions.html",
                 controller: ProfileActionsComponent,
                 controllerAs: "vm"
-            },
-            "toolbar@main": {
-                templateUrl: "app/profile/configbar.html",
-                controller: ConfigBarComponent,
-                controllerAs: "vm"
             }
         }
     },
@@ -61,11 +55,6 @@ import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
             "actions@main": {
                 templateUrl: "app/profile/navbar-actions.html",
                 controller: ProfileActionsComponent,
-                controllerAs: "vm"
-            },
-            "toolbar@main": {
-                templateUrl: "app/profile/configbar.html",
-                controller: ConfigBarComponent,
                 controllerAs: "vm"
             }
         }
@@ -142,11 +131,6 @@ import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
             "actions@main": {
                 templateUrl: "app/article/content-viewer/navbar-actions.html",
                 controller: ContentViewerActionsComponent,
-                controllerAs: "vm"
-            },
-            "toolbar@main": {
-                templateUrl: "app/profile/configbar.html",
-                controller: ConfigBarComponent,
                 controllerAs: "vm"
             }
         }
