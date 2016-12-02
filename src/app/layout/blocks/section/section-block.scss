@@ -9,32 +9,12 @@
 
     .sectionblockplugin-sectionblock {
         .section {
-            padding: 15px;
-        }
-    }
-
-    .sectionblockplugin-sectionblock {
-        .section {
-
-            padding: 15px;
-
-            .name, .description, .separator {
-                display: inline-block;
-                height: 45px;
-                line-height: 45px;
-                vertical-align: top;
-            }
-
+            padding: 27px;
             .name {
                 font-weight: bold;
+                font-size: 1.2em;
+                padding-right: 10px;
             }
-
-            .separator {
-                i {
-                    vertical-align: middle;
-                }
-            }
-
         }
     }
 }
