@@ -126,7 +126,8 @@ export class BlockComponent {
             display: (<any>this.block.settings).display,
             title: this.block.title,
             display_user: (<any>this.block.settings).display_user,
-            language: (<any>this.block.settings).language
+            language: (<any>this.block.settings).language,
+            visualization: (<any>this.block.settings).visualization
         };
     }
 
