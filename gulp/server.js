@@ -30,6 +30,7 @@ function browserSyncInit(baseDir, browser) {
                       //  proxyMiddleware('http://localhost:3000/myprofile', {changeOrigin:true}),
                        proxyMiddleware('http://localhost:3000/designs', {changeOrigin:true}),
                        proxyMiddleware('http://localhost:3000/image_uploads', {changeOrigin:true}),
+                       proxyMiddleware('http://localhost:3000/articles', {changeOrigin:true}),
                        proxyMiddleware('http://localhost:3000/account/logout', {changeOrigin:true}),
                        proxyMiddleware('http://localhost:3000/images', {changeOrigin:true})];
 
