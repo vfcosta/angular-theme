@@ -6,13 +6,13 @@
     right: 2px;
     cursor: col-resize;
     width: 10px;
-    height: 50%;
+    height: 100%;
     padding-right: 14px;
     &:before {
       content: "\f065";
       font-family: "FontAwesome";
       color: #95a5a6;
-      bottom: 0;
+      bottom: 32px;
       position: absolute;
     }
   }

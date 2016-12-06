@@ -14,6 +14,7 @@ export class BootstrapResizableDirective {
     w: number;
     h: number;
     prefix = "col-md-";
+    margin = 32;
 
     mouseUpFn = (e: MouseEvent) => this.dragEnd(e);
     mouseMoveFn = (e: MouseEvent) => this.dragging(e);
@@ -24,14 +25,13 @@ export class BootstrapResizableDirective {
         private $window: ng.IWindowService) {
 
         this.$element.append('<div class="bootstrap-resize-tool"></div>');
-        $element[0].querySelector('.bootstrap-resize-tool').addEventListener('mousedown', (e: MouseEvent) => this.down(e), false);
-        $element[0].querySelector('.bootstrap-resize-tool').addEventListener('touchstart', (e: MouseEvent) => this.down(e), false);
+        let resizeTool = this.$element[0].querySelector('.bootstrap-resize-tool');
+        resizeTool.addEventListener('mousedown', (e: MouseEvent) => this.mouseDown(e), false);
+        resizeTool.addEventListener('touchstart', (e: MouseEvent) => this.mouseDown(e), false);
 
         this.style = $window.getComputedStyle($element[0], null);
 
         $scope.$watch(() => { return this.isEnabled(); }, () => {
-            let resizeTool = this.$element[0].querySelector('.bootstrap-resize-tool');
-            resizeTool.style['height'] = this.$element[0].clientHeight - 32 + "px";
             if (this.isEnabled()) {
                 this.$element.addClass('boostrap-resizable');
                 this.$element.removeClass('boostrap-resizable-disabled');
@@ -43,10 +43,10 @@ export class BootstrapResizableDirective {
     }
 
     isEnabled() {
-        return this.$scope.$eval(this.$attrs['bootstrapResizable']);
+        return this.$scope.$eval(this.$attrs['bootstrapResizable']) === true;
     }
 
-    down(e: MouseEvent) {
+    mouseDown(e: MouseEvent) {
         if (this.isEnabled() && (e.which === 1 || (<any>e).touches)) {
             this.dragStart(e); // left mouse click or touch screen
         }
@@ -67,7 +67,7 @@ export class BootstrapResizableDirective {
         if (e.preventDefault) e.preventDefault();
         e.cancelBubble = true;
         e.returnValue = false;
-        this.$element.addClass('boostrap-resizing');
+        this.$element.addClass('bootstrap-resizing');
     }
 
     getCurrentColumns() {
@@ -102,10 +102,10 @@ export class BootstrapResizableDirective {
         document.removeEventListener('mousemove', this.mouseMoveFn, false);
         document.removeEventListener('touchend', this.mouseUpFn, false);
         document.removeEventListener('touchmove', this.mouseMoveFn, false);
-        this.$element.removeClass('boostrap-resizing');
+        this.$element.removeClass('bootstrap-resizing');
     }
 
-    getClientX(e: MouseEvent) {
+    private getClientX(e: MouseEvent) {
         return (<any>e).touches ? (<any>e).touches[0].clientX : e.clientX;
     }
 
