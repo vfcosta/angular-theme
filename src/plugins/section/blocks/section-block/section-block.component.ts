@@ -2,7 +2,7 @@ import {Component, Inject, Input} from "ng-forward";
 
 @Component({
     selector: "noosfero-section-block-plugin-section-block",
-    templateUrl: "app/layout/blocks/section/section-block.html"
+    templateUrl: "plugins/section/blocks/section-block/section-block.html"
 })
 export class SectionBlockComponent {
 
