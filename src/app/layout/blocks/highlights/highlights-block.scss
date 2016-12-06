@@ -1,0 +1,40 @@
+.highlights-block {
+  height: 400px;
+
+  .carousel {
+    height: 100%;
+
+    .carousel-inner {
+      height: 100%;
+      .item {
+        height: 100%;
+        .image-link {
+          height: 100%;
+          display: inline-block;
+        }
+      }
+    }
+    .carousel-caption {
+      background-color: rgba(0, 0, 0, 0.7);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      .title {
+        padding-bottom: 15px;
+        display: inline-block;
+        font-size: 22px;
+        color: white;
+        text-decoration: none;
+      }
+    }
+    .carousel-indicators {
+      bottom: 0px;
+    }
+
+    &.no-controls {
+      .carousel-indicators {
+        display: none;
+      }
+    }
+  }
+}
