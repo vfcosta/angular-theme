@@ -216,7 +216,8 @@ export var mocks: any = {
             next: (param: any) => {
                 mocks.designModeService.modeFn(param);
             }
-        }
+        },
+        isInDesignMode: () => { return false; }
     },
     $translate: {
         use: (lang?: string) => {

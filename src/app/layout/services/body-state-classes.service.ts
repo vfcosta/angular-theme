@@ -109,13 +109,18 @@ export class BodyStateClassesService {
      * indicating the user activated the designMode
      */
     private setupDesignModeClassToggle() {
+        this.toggleDesignModeClass(this.designModeService.isInDesignMode());
         this.designModeService.onToggle.subscribe((designOn: boolean) => {
-            if (designOn) {
-                this.getBodyElement().addClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
-            } else {
-                this.getBodyElement().removeClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
-            }
+            this.toggleDesignModeClass(designOn);
         });
+    }
+
+    private toggleDesignModeClass(designOn: boolean) {
+        if (designOn) {
+            this.getBodyElement().addClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+        } else {
+            this.getBodyElement().removeClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+        }
     }
 
     private setupStateClassToggle() {
