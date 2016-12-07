@@ -1,0 +1,20 @@
+.noosfero-block {
+    .block {
+        .panel-body {
+            &.sectionblockplugin-sectionblock {
+                padding: 0;
+            }
+        }
+    }
+
+    .sectionblockplugin-sectionblock {
+        .section {
+            padding: 27px;
+            .name {
+                font-weight: bold;
+                font-size: 1.2em;
+                padding-right: 10px;
+            }
+        }
+    }
+}
