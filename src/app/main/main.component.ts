@@ -51,6 +51,7 @@ import { SidebarComponent } from "../layout/sidebar/sidebar.component";
 import { MainBlockComponent } from "../layout/blocks/main/main-block.component";
 import { HtmlEditorComponent } from "../shared/components/html-editor/html-editor.component";
 import { PermissionDirective } from "../shared/components/permission/permission.directive";
+import { BootstrapResizableDirective } from "../shared/components/bootstrap-resizable/bootstrap-resizable.directive";
 import { SearchComponent } from "../search/search.component";
 import { SearchFormComponent } from "../search/search-form/search-form.component";
 import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../shared/services/events-hub.service";
@@ -134,7 +135,7 @@ export class EnvironmentContent {
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
-        FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent
+        FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",

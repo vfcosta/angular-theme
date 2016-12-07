@@ -51,14 +51,14 @@ export class BlockComponent {
             this.verifyHomepage();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
-            this.editionMode = designModeOn;
-            this.designMode = designModeOn;
+            this.updateDesignMode(designModeOn);
             this.$scope.$apply();
         });
     }
 
     ngOnInit() {
         this.verifyHomepage();
+        this.updateDesignMode(this.designModeService.isInDesignMode());
     }
 
     openEdit() {
@@ -103,6 +103,11 @@ export class BlockComponent {
         return this.block.type.toLowerCase().replace(/::/, '-');
     }
 
+    updateDesignMode(designModeOn: boolean) {
+        this.editionMode = designModeOn;
+        this.designMode = designModeOn;
+    }
+
     protected visible() {
         let display = this.block.settings ? (<any>this.block.settings)['display'] : null;
         return !display || ((this.isHomepage ? display !== "except_home_page" : display !== "home_page_only") && display !== "never");
@@ -126,7 +131,8 @@ export class BlockComponent {
             display: (<any>this.block.settings).display,
             title: this.block.title,
             display_user: (<any>this.block.settings).display_user,
-            language: (<any>this.block.settings).language
+            language: (<any>this.block.settings).language,
+            visualization: (<any>this.block.settings).visualization
         };
     }
 

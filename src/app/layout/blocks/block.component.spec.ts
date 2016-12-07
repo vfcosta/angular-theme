@@ -14,7 +14,7 @@ describe("Boxes Component", () => {
     });
 
     let properties = {
-        block: { id: 1 },
+        block: { id: 1, settings: { visualization: { columns: 7 } } },
         owner: {
             id: 1,
             identifier: 'profile-name',
@@ -145,5 +145,9 @@ describe("Boxes Component", () => {
         helper.component.designMode = false;
         helper.detectChanges();
         expect(helper.all(".block-actions").length).toEqual(0);
+    });
+
+    it("set block columns according to visualization settings", () => {
+        expect(helper.all(".noosfero-block.col-md-7").length).toEqual(1);
     });
 });
