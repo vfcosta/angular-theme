@@ -5,12 +5,6 @@ $off-color: #EFEFEF;
 $blue-color: #36B4F6;
 $red-color: #DF3B3A;
 
-body.noosfero-design-on {
-    .boxes-container {
-        opacity: 0.5;
-    }
-}
-
 .switch {
   @include not-select();
   background-color: $off-color;

@@ -18,9 +18,6 @@ export class BlockComponent {
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile | noosfero.Environment;
 
-    private modalInstance: ng.ui.bootstrap.IModalServiceInstance;
-    originalBlock: noosfero.Block;
-
     currentUser: noosfero.User;
     isHomepage = true;
     editionMode = false;
@@ -61,35 +58,11 @@ export class BlockComponent {
         this.updateDesignMode(this.designModeService.isInDesignMode());
     }
 
-    openEdit() {
-        this.editionMode = true;
-        if (!this.originalBlock) this.originalBlock = JSON.parse(JSON.stringify(this.block)); // deep copy of block data
-        this.modalInstance = this.$uibModal.open({
-            templateUrl: 'app/layout/blocks/block-edition/block-edition.html',
-            size: 'lg',
-            controller: BlockEditionComponent,
-            controllerAs: 'modal',
-            bindToController: true,
-            scope: this.$scope
-        });
-    }
-
     save() {
         this.editionMode = false;
         this.blockService.update(this.attributesToUpdate()).then(() => {
-            this.closeEdit();
             this.notificationService.success({ title: "block.edition.success.title", message: "block.edition.success.message" });
         });
-    }
-
-    preview() {
-        this.closeEdit();
-    }
-
-    cancel() {
-        this.editionMode = false;
-        this.block = this.originalBlock;
-        this.closeEdit();
     }
 
     canDisplay() {
@@ -148,13 +121,6 @@ export class BlockComponent {
             }
         } else {
             this.isHomepage = this.$state.current.name === "main.environment.home";
-        }
-    }
-
-    private closeEdit() {
-        if (this.modalInstance) {
-            this.modalInstance.close();
-            this.modalInstance = null;
         }
     }
 

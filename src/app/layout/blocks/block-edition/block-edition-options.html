@@ -1,0 +1,7 @@
+<div class="edit-block">
+  <div class="list-group block-option" ng-repeat="(optionKey, options) in ctrl.options">
+    <a href="#" ng-class="{'selected': ctrl.isOptionSelected(optionKey, option)}" (click)="ctrl.selectOption(optionKey, option)" class="list-group-item" ng-repeat="option in options">
+      {{"block.edition." + optionKey + "." + option | translate}}
+    </a>
+  </div>
+</div>
