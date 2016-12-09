@@ -1,6 +1,5 @@
-<div bootstrap-resizable="ctrl.designMode" bootstrap-resizable-columns="ctrl.block.settings.visualization.columns" ng-show="ctrl.canDisplay() || ctrl.inEditMode() || ctrl.designMode" ng-class="{'invisible-block': !ctrl.canDisplay()}" class="noosfero-block col-md-{{ctrl.block.settings.visualization.columns || 12}}">
+<div bootstrap-resizable="ctrl.designMode" bootstrap-resizable-columns="ctrl.block.settings.visualization.columns" ng-show="ctrl.canDisplay() || ctrl.designMode" ng-class="{'invisible-block': !ctrl.canDisplay()}" class="noosfero-block col-md-{{ctrl.block.settings.visualization.columns || 12}}">
   <div ng-if="ctrl.designMode" class="actions block-actions" permission="ctrl.block.permissions" permission-action="allow_edit">
-    <a (click)="ctrl.save()" class="action save" href="#"><i class="fa fa-check fa-fw"></i></a>
     <noosfero-block-edition [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-edition>
   </div>
   <div class="panel panel-default block {{ctrl.blockClass()}}" >

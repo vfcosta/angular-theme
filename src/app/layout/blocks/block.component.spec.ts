@@ -6,7 +6,7 @@ import { DesignModeService } from '../../admin/layout-edit/designMode.service';
 
 const htmlTemplate: string = '<noosfero-block [block]="ctrl.block" [owner]="ctrl.profile"></noosfero-block>';
 
-describe("Boxes Component", () => {
+describe("Block Component", () => {
 
     let helper: ComponentTestHelper<BlockComponent>;
     beforeEach(() => {
@@ -27,20 +27,20 @@ describe("Boxes Component", () => {
             directives: [BlockComponent],
             properties: properties,
             providers: [
-                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
-                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
-                helpers.createProviderToValue('$state', state),
-                helpers.createProviderToValue('TranslatorService', translatorService),
                 helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
-                helpers.createProviderToValue('BlockService', blockService),
+                helpers.createProviderToValue('$state', state),
                 helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
+                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
+                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
+                helpers.createProviderToValue('TranslatorService', translatorService),
+                helpers.createProviderToValue("EventsHubService", eventsHubService),
                 helpers.createProviderToValue('DesignModeService', helpers.mocks.designModeService)
             ]
         });
         helper = new ComponentTestHelper<BlockComponent>(cls, done);
     });
+    let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
     let translatorService = jasmine.createSpyObj("translatorService", ["currentLanguage"]);
-    let blockService = jasmine.createSpyObj("blockService", ["update"]);
     let state = jasmine.createSpyObj("state", ["current"]);
     state.current = { name: "" };
 

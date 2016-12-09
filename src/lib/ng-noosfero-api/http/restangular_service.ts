@@ -1,4 +1,4 @@
-import {EventEmitter} from "ng-forward";
+import { EventEmitter } from "ng-forward";
 /**
  * @name RestangularService
  * Base class to be extended by classes which will provide access
@@ -285,6 +285,14 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         return deferred.promise;
     }
 
+    public patch(data?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+        let deferred = this.$q.defer<noosfero.RestResult<T>>();
+        let restRequest = this.baseResource.patch(data, headers);
+        restRequest
+            .then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
 
     public post(path: string, rootElement?: restangular.IElement, data?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
         let deferred = this.$q.defer<noosfero.RestResult<T>>();

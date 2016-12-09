@@ -3,9 +3,9 @@ import { BlockEditionComponent } from './block-edition.component';
 import * as helpers from "../../../../spec/helpers";
 import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
 
-const htmlTemplate: string = '<noosfero-block-edition></noosfero-block-edition>';
+const htmlTemplate: string = '<noosfero-block-edition [block]="ctrl.block"></noosfero-block-edition>';
 
-describe("Boxes Component", () => {
+describe("Block Edition Component", () => {
 
     let helper: ComponentTestHelper<BlockEditionComponent>;
 
@@ -13,11 +13,16 @@ describe("Boxes Component", () => {
         angular.mock.module("templates");
     });
 
+    let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
+
     beforeEach((done) => {
         let cls = createClass({
             template: htmlTemplate,
             directives: [BlockEditionComponent],
-            properties: { block: { settings: <any>{} } }
+            properties: { block: { id: 1, settings: <any>{} } },
+            providers: [
+                helpers.createProviderToValue('EventsHubService', eventsHubService),
+            ]
         });
         helper = new ComponentTestHelper<BlockEditionComponent>(cls, done);
     });
@@ -33,5 +38,29 @@ describe("Boxes Component", () => {
     it("change block setting when select an option", () => {
         helper.component.selectOption("display", "never");
         expect(helper.component.isOptionSelected("display", "never")).toBeTruthy();
+    });
+
+    it("emit change event when an attribute was modified", () => {
+        helper.component.block.title = "changed";
+        helper.component.emitChanges();
+        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, title: "changed" });
+    });
+
+    it("emit change event with block id when no attribute was modified", () => {
+        helper.component.emitChanges();
+        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1 });
+    });
+
+    it("emit change event when an setting attribute was modified", () => {
+        (<any>helper.component.block.settings).display = "never";
+        helper.component.emitChanges();
+        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, display: "never" });
+    });
+
+    it("emit change event with block id when an setting attribute was not modified", () => {
+        (<any>helper.component.originalBlock.settings).display = "never";
+        (<any>helper.component.block.settings).display = "never";
+        helper.component.emitChanges();
+        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1 });
     });
 });

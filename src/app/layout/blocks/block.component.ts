@@ -1,6 +1,5 @@
 import { Input, Component, Inject } from 'ng-forward';
 import { BlockEditionComponent } from './block-edition/block-edition.component';
-import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService, SessionService, AuthEvents } from "../../login";
 import { TranslatorService } from "../../shared/services/translator.service";
@@ -11,7 +10,7 @@ import { DesignModeService } from "../../admin/layout-edit/designMode.service";
     templateUrl: 'app/layout/blocks/block.html',
     directives: [BlockEditionComponent]
 })
-@Inject("$uibModal", "$scope", "$state", "$rootScope", BlockService, NotificationService,
+@Inject("$uibModal", "$scope", "$state", "$rootScope", NotificationService,
     AuthService, SessionService, TranslatorService, DesignModeService)
 export class BlockComponent {
 
@@ -20,7 +19,6 @@ export class BlockComponent {
 
     currentUser: noosfero.User;
     isHomepage = true;
-    editionMode = false;
     designMode = false;
 
     constructor(
@@ -28,7 +26,6 @@ export class BlockComponent {
         private $scope: ng.IScope,
         private $state: ng.ui.IStateService,
         private $rootScope: ng.IRootScopeService,
-        private blockService: BlockService,
         private notificationService: NotificationService,
         private authService: AuthService,
         private session: SessionService,
@@ -48,21 +45,14 @@ export class BlockComponent {
             this.verifyHomepage();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
-            this.updateDesignMode(designModeOn);
+            this.designMode = designModeOn;
             this.$scope.$apply();
         });
     }
 
     ngOnInit() {
         this.verifyHomepage();
-        this.updateDesignMode(this.designModeService.isInDesignMode());
-    }
-
-    save() {
-        this.editionMode = false;
-        this.blockService.update(this.attributesToUpdate()).then(() => {
-            this.notificationService.success({ title: "block.edition.success.title", message: "block.edition.success.message" });
-        });
+        this.designMode = this.designModeService.isInDesignMode();
     }
 
     canDisplay() {
@@ -74,11 +64,6 @@ export class BlockComponent {
     blockClass() {
         if (!this.block || !this.block.type) return null;
         return this.block.type.toLowerCase().replace(/::/, '-');
-    }
-
-    updateDesignMode(designModeOn: boolean) {
-        this.editionMode = designModeOn;
-        this.designMode = designModeOn;
     }
 
     protected visible() {
@@ -96,17 +81,6 @@ export class BlockComponent {
         let displayLanguage = this.block.settings ? (<any>this.block.settings)['language'] : null;
         return !displayLanguage || displayLanguage === "all" ||
             language === displayLanguage;
-    }
-
-    protected attributesToUpdate() {
-        return <any>{
-            id: this.block.id,
-            display: (<any>this.block.settings).display,
-            title: this.block.title,
-            display_user: (<any>this.block.settings).display_user,
-            language: (<any>this.block.settings).language,
-            visualization: (<any>this.block.settings).visualization
-        };
     }
 
     protected verifyHomepage() {
