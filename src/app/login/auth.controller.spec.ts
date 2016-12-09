@@ -1,5 +1,5 @@
-import {AuthController} from "./auth.controller";
-import {AuthService} from "./auth.service";
+import { AuthController } from "./auth.controller";
+import { AuthService } from "./auth.service";
 import { NotificationService } from "./../shared/services/notification.service";
 import * as helpers from "./../../spec/helpers";
 
@@ -87,16 +87,11 @@ describe("Controllers", () => {
         });
 
         it("calls info on NotificationService when login was sucessfully", done => {
-            let fakePromise: any = {
-                then: (callback: Function) => {
-                    callback();
-                    expect(notificationService.info).toHaveBeenCalled();
-                    done();
-                }
-            };
-            AuthServiceMock.login = () => fakePromise;
+            AuthServiceMock.login = () => helpers.mocks.promiseResultTemplate();
             notificationService.info = jasmine.createSpy('info');
             authController.login();
+            expect(notificationService.info).toHaveBeenCalled();
+            done();
         });
 
         it("calls error on NotificationService when login was not sucessfully", done => {
