@@ -14,10 +14,11 @@ export class HighlightsBlockComponent {
     images: any;
 
     ngOnInit() {
-        this.images = (<any>this.block.settings).images;
+        this.images = (<any>this.block.settings).block_images;
         if ((<any>this.block.settings).shuffle) {
             this.images = _.shuffle(this.images);
         }
+        this.block.hide = (<any>this.images == null || <any>this.images.length === 0);
     }
 
     getTarget(image: any) {
