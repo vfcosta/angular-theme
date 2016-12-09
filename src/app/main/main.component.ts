@@ -27,6 +27,7 @@ import { RecentActivitiesPluginActivitiesBlockComponent } from "../layout/blocks
 import { ProfileImagesPluginProfileImagesBlockComponent } from "../layout/blocks/profile-images-plugin-profile-images/profile-images-plugin-profile-images-block.component";
 import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
+import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
 import { CommunitiesBlockComponent } from "../layout/blocks/communities/communities-block.component";
@@ -135,7 +136,8 @@ export class EnvironmentContent {
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
-        FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective
+        FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
+        HighlightsBlockComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
