@@ -154,12 +154,15 @@ describe("Boxes Component", () => {
     it("display block title if it's in design mode", () => {
         helper.component.block = <any>{ id: 1, title: '' };
         helper.component.designMode = true;
-        expect(helper.all(".panel-title").length).toEqual(1);
+        helper.detectChanges();
+        expect(helper.find(".panel-heading").attr('class').trim()).not.toContain("ng-hide");
     });
 
     it("display block title if the block has title", () => {
         helper.component.block = <any>{ id: 1, title: 'some title' };
-        expect(helper.all(".panel-title").length).toEqual(1);
+        helper.detectChanges();
+        expect(helper.find(".panel-title").html()).toContain('some title');
     });
+
 
 });
