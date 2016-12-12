@@ -6,7 +6,8 @@ export function noosferoAngularRunBlock(
     $log: ng.ILogService,
     Restangular: restangular.IService,
     SessionService: SessionService,
-    NotificationService: NotificationService
+    NotificationService: NotificationService,
+    editableOptions: angular.xeditable.IEditableOptions
 ) {
 
     Restangular.addFullRequestInterceptor((element: any, operation: string, route: string, url: string, headers: string) => {
@@ -19,4 +20,5 @@ export function noosferoAngularRunBlock(
         // return false to break the promise chain and don't call catch
         return !NotificationService.httpError(response.status, response.data);
     });
+    editableOptions.buttons = 'no';
 }

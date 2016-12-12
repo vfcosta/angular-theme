@@ -150,4 +150,19 @@ describe("Block Component", () => {
     it("set block columns according to visualization settings", () => {
         expect(helper.all(".noosfero-block.col-md-7").length).toEqual(1);
     });
+
+    it("display block title if it's in design mode", () => {
+        helper.component.block = <any>{ id: 1, title: '' };
+        helper.component.designMode = true;
+        helper.detectChanges();
+        expect(helper.find(".panel-heading").attr('class').trim()).not.toContain("ng-hide");
+    });
+
+    it("display block title if the block has title", () => {
+        helper.component.block = <any>{ id: 1, title: 'some title' };
+        helper.detectChanges();
+        expect(helper.find(".panel-title").html()).toContain('some title');
+    });
+
+
 });
