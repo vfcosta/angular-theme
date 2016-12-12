@@ -26,24 +26,30 @@ describe("Boxes Component", () => {
         },
         layout: 'default'
     };
+
+    let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
+    let blockService = jasmine.createSpyObj("BlockService", ["updateAll"]);
+    let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
+    blockService.updateAll = jasmine.createSpy("updateAll").and.returnValue(helpers.mocks.promiseResultTemplate());
+
+    let eventFunction: Function;
+    eventsHubService.subscribeToEvent = (ev: string, fn: Function) => { eventFunction = fn; };
+
     beforeEach((done) => {
         let cls = createClass({
             template: htmlTemplate,
             directives: [BoxesComponent],
             properties: properties,
             providers: [
-                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
-                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
-                helpers.createProviderToValue('$state', state),
-                helpers.createProviderToValue('TranslatorService', translatorService)
+                helpers.createProviderToValue("$scope", scope),
+                helpers.createProviderToValue("EventsHubService", eventsHubService),
+                helpers.createProviderToValue("BlockService", blockService),
+                helpers.createProviderToValue("NotificationService", helpers.mocks.notificationService),
+                helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService)
             ]
         });
         helper = new ComponentTestHelper<BoxesComponent>(cls, done);
     });
-
-    let translatorService = jasmine.createSpyObj("translatorService", ["currentLanguage"]);
-    let state = jasmine.createSpyObj("state", ["current"]);
-    state.current = { name: "" };
 
     it("renders boxes into a container", () => {
         expect(helper.all('div.col-md-6').length).toEqual(1);
@@ -58,5 +64,39 @@ describe("Boxes Component", () => {
         expect(helper.all('.col-md-9 .col-md-12').length).toEqual(1);
         expect(helper.all('.col-md-9 .col-md-9').length).toEqual(1);
         expect(helper.all('.col-md-9 .col-md-3').length).toEqual(1);
+    });
+
+    it("call block service to apply blocks changes", () => {
+        helper.component.applyBlockChanges();
+        expect(blockService.updateAll).toHaveBeenCalled();
+    });
+
+    it("return false when there is no blocks to be updated", () => {
+        expect(helper.component.displayApplyBlockChanges()).toBeFalsy();
+    });
+
+    it("return true when exists blocks to be updated", () => {
+        helper.component.blocksChanged = <noosfero.Block[]>[{ id: 1 }];
+        expect(helper.component.displayApplyBlockChanges()).toBeTruthy();
+    });
+
+    it("add block to blocksChanged when receive an event", () => {
+        let blockChanged = <noosfero.Block>{ id: 2, title: 'changed' };
+        eventFunction(blockChanged);
+        expect(helper.component.blocksChanged).toEqual([blockChanged]);
+    });
+
+    it("replace block to blocksChanged when receive an event", () => {
+        let blockChanged = <noosfero.Block>{ id: 2, title: 'changed' };
+        eventFunction(blockChanged);
+        blockChanged = <noosfero.Block>{ id: 2, title: 'changed again' };
+        eventFunction(blockChanged);
+        expect(helper.component.blocksChanged).toEqual([blockChanged]);
+    });
+
+    it("not add block to blocksChanged when there is no changes in block", () => {
+        let blockChanged = <noosfero.Block>{ id: 2 };
+        eventFunction(blockChanged);
+        expect(helper.component.blocksChanged).toEqual([]);
     });
 });

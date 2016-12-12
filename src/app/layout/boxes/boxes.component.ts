@@ -1,10 +1,15 @@
 import { Inject, Input, Component } from 'ng-forward';
+import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../../shared/services/events-hub.service";
+import { NoosferoKnownEvents } from "../../known-events";
+import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
+import { NotificationService } from '../../shared/services/notification.service';
+import { DesignModeService } from "../../admin/layout-edit/designMode.service";
 
 @Component({
     selector: "noosfero-boxes",
     templateUrl: "app/layout/boxes/boxes.html"
 })
-@Inject("$scope")
+@Inject("$scope", EventsHubService, BlockService, NotificationService, DesignModeService)
 export class BoxesComponent {
 
     @Input() boxes: noosfero.Box[];
@@ -14,6 +19,9 @@ export class BoxesComponent {
     @Input() startIndex: number = 0;
     mainColumn: number = -1;
     lastIndex: number;
+    eventsNames: NoosferoKnownEvents;
+    blocksChanged: noosfero.Block[];
+    designModeOn = false;
 
     /**
      * Mapping between noosfero layouts and bootstrap grid system
@@ -29,7 +37,13 @@ export class BoxesComponent {
         "nosidebars": [{ size: 12, main: true }]
     };
 
-    constructor(private $scope: ng.IScope) { }
+    constructor(private $scope: ng.IScope,
+        private eventsHubService: EventsHubService,
+        private blockService: BlockService,
+        private notificationService: NotificationService,
+        private designModeService: DesignModeService) {
+        this.eventsNames = new NoosferoKnownEvents();
+    }
 
     ngOnInit() {
         if (!this.layout) {
@@ -40,6 +54,32 @@ export class BoxesComponent {
                 this.setupColumns();
             });
         }
+        this.blocksChanged = [];
+        this.eventsHubService.subscribeToEvent(this.eventsNames.BLOCK_CHANGED, (block: noosfero.Block) => {
+            this.blocksChanged = this.blocksChanged.filter((b: noosfero.Block) => {
+                return block.id !== b.id;
+            });
+            if (block.title != null || Object.keys(block).length > 1) {
+                this.blocksChanged.push(block);
+            }
+            this.$scope.$apply();
+        });
+        this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            this.designModeOn = designModeOn;
+            this.$scope.$apply();
+        });
+        this.designModeOn = this.designModeService.isInDesignMode();
+    }
+
+    displayApplyBlockChanges() {
+        return this.blocksChanged.length > 0;
+    }
+
+    applyBlockChanges() {
+        this.blockService.updateAll(this.blocksChanged).then(() => {
+            this.notificationService.success({ title: "boxes.edition.success.title", message: "boxes.edition.success.message" });
+            this.blocksChanged = [];
+        });
     }
 
     setupColumns() {

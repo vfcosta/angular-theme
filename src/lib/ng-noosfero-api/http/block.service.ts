@@ -55,4 +55,10 @@ export class BlockService extends RestangularService<noosfero.Block> {
         return this.post(null, element, { block: block }, headers);
     }
 
+    updateAll(blocks: noosfero.Block[]) {
+        let headers = {
+            'Content-Type': 'application/json'
+        };
+        return this.patch({ blocks: blocks }, headers);
+    }
 }

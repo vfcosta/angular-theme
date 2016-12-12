@@ -14,7 +14,6 @@ export class BootstrapResizableDirective {
     w: number;
     h: number;
     prefix = "col-md-";
-    margin = 32;
 
     mouseUpFn = (e: MouseEvent) => this.dragEnd(e);
     mouseMoveFn = (e: MouseEvent) => this.dragging(e);

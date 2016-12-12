@@ -2,7 +2,7 @@
   position: relative;
   .bootstrap-resize-tool {
     position: absolute;
-    top: 0;
+    top: 20px;
     right: 2px;
     cursor: col-resize;
     width: 10px;
@@ -11,8 +11,8 @@
     &:before {
       content: "\f065";
       font-family: "FontAwesome";
-      color: #95a5a6;
-      bottom: 32px;
+      color: #cacaca;
+      bottom: 50px;
       position: absolute;
     }
   }

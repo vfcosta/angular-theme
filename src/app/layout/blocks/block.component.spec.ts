@@ -6,7 +6,7 @@ import { DesignModeService } from '../../admin/layout-edit/designMode.service';
 
 const htmlTemplate: string = '<noosfero-block [block]="ctrl.block" [owner]="ctrl.profile"></noosfero-block>';
 
-describe("Boxes Component", () => {
+describe("Block Component", () => {
 
     let helper: ComponentTestHelper<BlockComponent>;
     beforeEach(() => {
@@ -27,20 +27,20 @@ describe("Boxes Component", () => {
             directives: [BlockComponent],
             properties: properties,
             providers: [
-                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
-                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
-                helpers.createProviderToValue('$state', state),
-                helpers.createProviderToValue('TranslatorService', translatorService),
                 helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
-                helpers.createProviderToValue('BlockService', blockService),
+                helpers.createProviderToValue('$state', state),
                 helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
+                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
+                helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
+                helpers.createProviderToValue('TranslatorService', translatorService),
+                helpers.createProviderToValue("EventsHubService", eventsHubService),
                 helpers.createProviderToValue('DesignModeService', helpers.mocks.designModeService)
             ]
         });
         helper = new ComponentTestHelper<BlockComponent>(cls, done);
     });
+    let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
     let translatorService = jasmine.createSpyObj("translatorService", ["currentLanguage"]);
-    let blockService = jasmine.createSpyObj("blockService", ["update"]);
     let state = jasmine.createSpyObj("state", ["current"]);
     state.current = { name: "" };
 
@@ -150,4 +150,19 @@ describe("Boxes Component", () => {
     it("set block columns according to visualization settings", () => {
         expect(helper.all(".noosfero-block.col-md-7").length).toEqual(1);
     });
+
+    it("display block title if it's in design mode", () => {
+        helper.component.block = <any>{ id: 1, title: '' };
+        helper.component.designMode = true;
+        helper.detectChanges();
+        expect(helper.find(".panel-heading").attr('class').trim()).not.toContain("ng-hide");
+    });
+
+    it("display block title if the block has title", () => {
+        helper.component.block = <any>{ id: 1, title: 'some title' };
+        helper.detectChanges();
+        expect(helper.find(".panel-title").html()).toContain('some title');
+    });
+
+
 });

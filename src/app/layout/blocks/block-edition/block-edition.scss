@@ -1,13 +1,42 @@
-.edit-block {
-  margin: 20px;
+.block-edition {
+  &.popover {
+    min-width: 250px;
+    .popover-content {
+      padding: 0;
+    }
+  }
 
-  .options {
-    margin-bottom: 20px;
+  .edit-block {
+    margin: 0;
 
+    .options {
+      margin-bottom: 20px;
+    }
+    .list-group {
+      margin-bottom: 0;
+      margin-top: 5px;
+      .list-group-item {
+        border: 0;
+        padding: 4px 10px 4px 30px;
+        color: #868686;
+        font-size: 14px;
+        &.selected {
+          color: #676767;
+          font-weight: bold;
+          &:before {
+            content: "\f00c";
+            font-family: "FontAwesome";
+            color: #afafaf;
+            position: absolute;
+            left: 8px;
+          }
+        }
+      }
+    }
     .block-option {
-      @extend .form-group;
-      .block-input {
-        @extend .form-control;
+      border-bottom: 1px solid #e4e4e4;
+      &:last-child {
+        border-bottom: 0;
       }
     }
   }

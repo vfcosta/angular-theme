@@ -7,9 +7,20 @@
     }
   }
   .block {
+    min-height: 45px;
     .panel-title {
       font-size: 15px;
       font-weight: bold;
+      a.editable-click {
+        border-bottom: none;
+      }
+    }
+
+    .editable-input{
+      background-color: rgba(0, 0, 0, 0.10);
+      border: none;
+      border-bottom: 1px solid;
+      outline: none;
     }
     .panel-heading {
       background-color: transparent;
@@ -27,8 +38,11 @@
   }
   .block-actions {
     position: absolute;
-    z-index: 100;
     right: 1px;
     top: 1px;
+    z-index: 1;
+    .action {
+      color: #b9b9b9;
+    }
   }
 }
