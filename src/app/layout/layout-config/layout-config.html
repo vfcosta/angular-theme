@@ -10,7 +10,7 @@
   <ul>
     <li ng-repeat="(layout, _) in ctrl.layouts()" class="layout-template-option layout-{{layout}}" ng-class="{'selected': ctrl.isSelected(layout)}">
       <a href="#" (click)="ctrl.changeLayout(layout)">
-        <img src="/assets/images/icons-app/layouts/{{layout}}.png">
+        <img ng-src="/assets/images/icons-app/layouts/{{layout}}.png">
         <span class="layout-name">{{"layout-config.template." + layout  | translate}}</span>
       </a>
     </li>
