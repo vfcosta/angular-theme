@@ -7,6 +7,7 @@ export class NoosferoKnownEvents implements EventsHubKnownEventNames {
     TASK_CLOSED: string = 'TASK_CLOSED';
     OPEN_SEARCH_FORM: string = 'OPEN_SEARCH_FORM';
     BLOCK_CHANGED: string = 'BLOCK_CHANGED';
+    BLOCKS_SAVED: string = 'BLOCKS_SAVED';
 
     constructor() {
     }

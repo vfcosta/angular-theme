@@ -1,13 +1,8 @@
-<div class="layout-config">
-  <div class="header">
-    <div class="section-title">{{ 'layout-config.title' | translate }}</div>
-    <div ng-show="ctrl.isChanged()" class="apply">
-      <a class="btn btn-default btn-xs" href="#" (click)="ctrl.apply()">
-        <i class="fa fa-check"></i> {{"layout-config.apply" | translate}}
-      </a>
-    </div>
-  </div>
-  <ul>
+<div class="layout-config" uib-dropdown>
+  <a href="" uib-dropdown-toggle class="btn btn-sm">
+    {{ 'layout-config.title' | translate }} <i class="fa fa-caret-down fa-fw"></i>
+  </a>
+  <ul uib-dropdown-menu>
     <li ng-repeat="(layout, _) in ctrl.layouts()" class="layout-template-option layout-{{layout}}" ng-class="{'selected': ctrl.isSelected(layout)}">
       <a href="#" (click)="ctrl.changeLayout(layout)">
         <img ng-src="/assets/images/icons-app/layouts/{{layout}}.png">

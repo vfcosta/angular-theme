@@ -76,9 +76,6 @@
   "block.edition.success.title": "Good job!",
   "block.edition.title": "Edit Block",
   "block.edition.title.label": "Custom title for this block:",
-  "boxes.edition.success.message": "Blocks saved!",
-  "boxes.edition.success.title": "Good job!",
-  "boxes.edition.apply": "Apply changes",
   "blocks.profile_image.control_panel": "Control Panel",
   "blocks.profile_image.join": "Join community",
   "blocks.profile_image.join.moderation.message": "Your membership is waiting for approval",
@@ -100,6 +97,9 @@
   "configbar.icon.description": "Config menu",
   "configbar.label": "Configuration",
   "configbar.section.layout": "Layout",
+  "configbar.edition.apply": "Apply changes",
+  "configbar.edition.apply.success.message": "Your changes have been saved!",
+  "configbar.edition.apply.success.title": "Good job!",
   "custom-content.edition.cancel.button": "Cancel",
   "custom-content.edition.preview.button": "Preview",
   "custom-content.edition.save.button": "Save",
@@ -232,7 +232,5 @@
   "layout-config.template.rightbar": "Right bar",
   "layout-config.template.leftbottom": "Left and bottom bar",
   "layout-config.template.nosidebars": "No sidebars",
-  "layout-config.apply": "Apply",
-  "layout-config.apply.success.message": "Layout template saved!",
-  "layout-config.apply.success.title": "Good job!"
+  "layout-config.apply": "Apply"
   }

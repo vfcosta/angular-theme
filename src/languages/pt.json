@@ -79,9 +79,6 @@
   "block.edition.success.title": "Bom trabalho!",
   "block.edition.title": "Editar Bloco",
   "block.edition.title.label": "Título personalizado do bloco:",
-  "boxes.edition.success.message": "Blocos salvos com sucesso!",
-  "boxes.edition.success.title": "Bom trabalho!",
-  "boxes.edition.apply": "Salvar alterações",
   "blocks.profile_image.control_panel": "Painel de Controle",
   "blocks.profile_image.join": "Entrar na comunidade",
   "blocks.profile_image.join.moderation.message": "Sua participação está pendente de aprovação",
@@ -103,6 +100,9 @@
   "configbar.icon.description": "Menu de configuração",
   "configbar.label": "Configurações",
   "configbar.section.layout": "Visual",
+  "configbar.edition.apply": "Salvar alterações",
+  "configbar.edition.apply.success.message": "Suas alterações foram salvas!",
+  "configbar.edition.apply.success.title": "Bom trabalho!",
   "custom-content.edition.cancel.button": "Cancelar",
   "custom-content.edition.preview.button": "Simular",
   "custom-content.edition.save.button": "Salvar",
@@ -234,7 +234,5 @@
   "layout-config.template.rightbar": "Barra à direita",
   "layout-config.template.leftbottom": "Barra inferior e à esquerda",
   "layout-config.template.nosidebars": "Sem barras laterais",
-  "layout-config.apply": "Aplicar",
-  "layout-config.apply.success.message": "Padrão de layout salvo!",
-  "layout-config.apply.success.title": "Bom trabalho!"
+  "layout-config.apply": "Aplicar"
   }
