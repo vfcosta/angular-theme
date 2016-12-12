@@ -13,7 +13,6 @@ describe("Controllers", () => {
         let AuthServiceMock: AuthService;
         let username: string;
 
-
         beforeEach(() => {
             $modal = helpers.mocks.$modal;
             AuthServiceMock = <any>{
@@ -23,7 +22,6 @@ describe("Controllers", () => {
             notificationService = jasmine.createSpyObj("NotificationService", ["info", "error"]);
             authController = new AuthController(null, null, AuthServiceMock, $modal, notificationService);
         });
-
 
         it("calls authenticate on AuthService when login called", () => {
             let credentials = { username: "username", password: "password" };
@@ -54,36 +52,21 @@ describe("Controllers", () => {
         });
 
         it("calls info on NotificationService when sendPasswdInfo was sucessfully", done => {
-            let fakePromise: any = {
-                then: (callback: Function) => {
-                    callback();
-                    expect(notificationService.info).toHaveBeenCalled();
-                    done();
-                }
-            };
-            AuthServiceMock.forgotPassword = () => fakePromise;
+            AuthServiceMock.forgotPassword = () => helpers.mocks.promiseResultTemplate();
             authController.username = "john";
             notificationService.info = jasmine.createSpy('info');
             authController.sendPasswdInfo();
-
+            expect(notificationService.info).toHaveBeenCalled();
+            done();
         });
 
         it("calls error on NotificationService when sendPasswdInfo was not sucessfully", done => {
-            let fakePromise: any = {
-                then: (callback: Function) => {
-                    return {
-                        catch: (callback: Function) => {
-                            callback();
-                            expect(notificationService.error).toHaveBeenCalled();
-                            done();
-                        }
-                    };
-                }
-            };
             authController.openForgotPassword = jasmine.createSpy('openForgotPassword');
             authController.username = "john";
-            AuthServiceMock.forgotPassword = () => fakePromise;
+            AuthServiceMock.forgotPassword = () => helpers.mocks.promiseResultTemplate();
             authController.sendPasswdInfo();
+            expect(notificationService.error).toHaveBeenCalled();
+            done();
         });
 
         it("calls info on NotificationService when login was sucessfully", done => {
@@ -95,19 +78,10 @@ describe("Controllers", () => {
         });
 
         it("calls error on NotificationService when login was not sucessfully", done => {
-            let fakePromise: any = {
-                then: (callback: Function) => {
-                    return {
-                        catch: (callback: Function) => {
-                            callback();
-                            expect(notificationService.error).toHaveBeenCalled();
-                            done();
-                        }
-                    };
-                }
-            };
-            AuthServiceMock.login = () => fakePromise;
+            AuthServiceMock.login = () => helpers.mocks.promiseResultTemplate();
             authController.login();
+            expect(notificationService.error).toHaveBeenCalled();
+            done();
         });
 
     });
