@@ -115,6 +115,7 @@
   "auth.forgot_password.not_found.title": "Usuário não encontrado",
   "auth.forgot_password.button.send_instructions": "Enviar instruções",
   "has already been taken": "já está sendo usado",
+  "form.title.placeholder": "Adicione o título",
   "identifier": "identificador",
   "is invalid": "é inválido",
   "is not available.": "não está disponível",

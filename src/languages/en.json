@@ -112,6 +112,7 @@
   "auth.forgot_password.not_found.title": "User not found",
   "auth.forgot_password.button.send_instructions": "Send instructions",
   "has already been taken": "has already been taken",
+  "form.title.placeholder": "Enter title",
   "identifier": "identifier",
   "is invalid": "is invalid",
   "is not available.": "is not available",
