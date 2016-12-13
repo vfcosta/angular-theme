@@ -21,6 +21,8 @@ export class ConfigBarComponent {
     designModeOn = false;
     eventsNames: NoosferoKnownEvents;
     originalLayout: string;
+    originalCustomHeader: string;
+    originalCustomFooter: string;
 
     constructor(private $scope: ng.IScope,
         private eventsHubService: EventsHubService,
@@ -33,6 +35,10 @@ export class ConfigBarComponent {
     }
 
     ngOnInit() {
+        if (this.isProfile()) {
+            this.originalCustomHeader = (<noosfero.Profile>this.owner).custom_header;
+            this.originalCustomFooter = (<noosfero.Profile>this.owner).custom_footer;
+        }
         this.originalLayout = this.owner.layout_template;
         this.blocksChanged = [];
         this.eventsHubService.subscribeToEvent(this.eventsNames.BLOCK_CHANGED, (block: noosfero.Block) => {
@@ -52,9 +58,7 @@ export class ConfigBarComponent {
     }
 
     private callOwnerService(obj: noosfero.Profile | noosfero.Environment) {
-        let type = (<any>this.owner)['type'];
-        let isProfile = type === "Community" || type === "Person";
-        if (isProfile) {
+        if (this.isProfile()) {
             return this.profileService.update(<noosfero.Profile>obj);
         } else {
             return this.environmentService.update(<noosfero.Environment>obj);
@@ -62,7 +66,7 @@ export class ConfigBarComponent {
     }
 
     apply() {
-        Promise.all([this.applyBlockChanges(), this.applyLayoutTemplate()]).then(() => {
+        Promise.all([this.applyBlockChanges(), this.applyLayoutTemplate(), this.applyCustomContentChanges()]).then(() => {
             this.notificationService.success({ title: "configbar.edition.apply.success.title", message: "configbar.edition.apply.success.message" });
         });
     }
@@ -83,8 +87,17 @@ export class ConfigBarComponent {
         });
     }
 
+    applyCustomContentChanges() {
+        if (!this.isCustomContentChanged() || !this.isProfile()) return Promise.resolve();
+        let profile: any = { id: this.owner.id, custom_header: (<noosfero.Profile>this.owner).custom_header, custom_footer: (<noosfero.Profile>this.owner).custom_footer };
+        return this.profileService.update(profile).then(() => {
+            this.originalCustomHeader = profile.custom_header;
+            this.originalCustomFooter = profile.custom_footer;
+        });
+    }
+
     displayApplyButton() {
-        return this.hasBlockChanges() || this.isLayoutTemplateChanged();
+        return this.hasBlockChanges() || this.isLayoutTemplateChanged() || this.isCustomContentChanged();
     }
 
     hasBlockChanges() {
@@ -93,5 +106,16 @@ export class ConfigBarComponent {
 
     isLayoutTemplateChanged() {
         return this.owner && this.originalLayout !== this.owner.layout_template;
+    }
+
+    isCustomContentChanged() {
+        if (!this.isProfile()) return false;
+        let profile = <noosfero.Profile>this.owner;
+        return this.originalCustomHeader !== profile.custom_header || this.originalCustomFooter !== profile.custom_footer;
+    }
+
+    private isProfile() {
+        let type = (<any>this.owner)['type'];
+        return type === "Community" || type === "Person";
     }
 }

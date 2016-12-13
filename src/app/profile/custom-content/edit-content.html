@@ -1,7 +1,6 @@
 <div class="edit-content">
   <h3>{{"custom_content.title" | translate}}</h3>
-  <html-editor [(value)]="ctrl.content"></html-editor>
-  <button type="submit" class="btn btn-default" ng-click="ctrl.save()">{{"custom-content.edition.save.button" | translate}}</button>
+  <html-editor [(value)]="ctrl.profile[ctrl.attribute]"></html-editor>
   <button type="submit" class="btn btn-warning" ng-click="ctrl.preview()">{{"custom-content.edition.preview.button" | translate}}</button>
   <button type="submit" class="btn btn-danger" ng-click="ctrl.cancel()">{{"custom-content.edition.cancel.button" | translate}}</button>
 </div>

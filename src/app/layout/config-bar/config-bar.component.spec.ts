@@ -107,4 +107,12 @@ describe("ConfigBar Component", () => {
         helper.component.applyLayoutTemplate();
         expect(environmentService.update).toHaveBeenCalledWith({ id: 2, layout_template: "rightbar" });
     });
+
+    it("call profile service to update profile when save", () => {
+        helper.component['profileService'].update = jasmine.createSpy("update").and.returnValue({
+            then: (func: Function) => { func(); }
+        });
+        helper.component.applyCustomContentChanges();
+        expect(helper.component['notificationService'].success).toHaveBeenCalled();
+    });
 });

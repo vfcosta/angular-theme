@@ -1,7 +1,7 @@
-import {CustomContentComponent} from './custom-content.component';
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
+import { CustomContentComponent } from './custom-content.component';
+import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
 import * as helpers from "../../../spec/helpers";
-import {DesignModeService} from '../../admin/layout-edit/designMode.service';
+import { DesignModeService } from '../../admin/layout-edit/designMode.service';
 
 const htmlTemplate: string = '<custom-content [attribute]="\'custom_footer\'" [profile]="ctrl.profile"></custom-content>';
 
@@ -13,9 +13,7 @@ describe("Components", () => {
         beforeEach(angular.mock.module("ngSanitize"));
 
         beforeEach((done) => {
-            let profileService = jasmine.createSpyObj("profileService", ["update"]);
-            let notificationService = jasmine.createSpyObj("notificationService", ["success"]);
-            let designModeService = {  isInDesignMode: () => { return true; }};
+            let designModeService = { isInDesignMode: () => { return true; } };
             let properties = { profile: { custom_footer: "footer" } };
             let cls = createClass({
                 template: htmlTemplate,
@@ -23,8 +21,6 @@ describe("Components", () => {
                 properties: properties,
                 providers: [
                     helpers.createProviderToValue("$uibModal", helpers.mocks.$modal),
-                    helpers.createProviderToValue("ProfileService", profileService),
-                    helpers.createProviderToValue("NotificationService", notificationService),
                     helpers.createProviderToValue("DesignModeService", designModeService)
                 ]
             });
@@ -35,26 +31,26 @@ describe("Components", () => {
             helper.component['$uibModal'].open = jasmine.createSpy("open");
             helper.component.openEdit();
             expect(helper.component['$uibModal'].open).toHaveBeenCalled();
-            expect(helper.component.originalContent).toEqual(helper.component.content);
+            expect(helper.component.originalContent).toEqual(helper.component.profile.custom_footer);
         });
 
         it("restore original content when cancelled", () => {
             helper.component.openEdit();
-            helper.component.content = "modified";
+            helper.component.profile.custom_footer = "modified";
             helper.component.cancel();
-            expect(helper.component.content).toEqual(helper.component.originalContent);
+            expect(helper.component.profile.custom_footer).toEqual(helper.component.originalContent);
         });
 
         it("keep modified content when click on preview", () => {
             helper.component.openEdit();
-            helper.component.content = "modified";
+            helper.component.profile.custom_footer = "modified";
             helper.component.preview();
-            expect(helper.component.content).toEqual("modified");
+            expect(helper.component.profile.custom_footer).toEqual("modified");
         });
 
         it("not override original content when cancelled openEdit again", () => {
             helper.component.openEdit();
-            helper.component.content = "modified";
+            helper.component.profile.custom_footer = "modified";
             helper.component.openEdit();
             expect(helper.component.originalContent).toEqual("footer");
         });
@@ -67,14 +63,6 @@ describe("Components", () => {
             helper.component.cancel();
             expect(modalInstance.close).toHaveBeenCalled();
             expect(helper.component['modalInstance']).toBeNull();
-        });
-
-        it("call profile service to update profile when save", () => {
-            helper.component['profileService'].update = jasmine.createSpy("update").and.returnValue({
-                then: (func: Function) => { func(); }
-            });
-            helper.component.save();
-            expect(helper.component['notificationService'].success).toHaveBeenCalled();
         });
 
         it("hide button to edit content when user doesn't have the permission", () => {
