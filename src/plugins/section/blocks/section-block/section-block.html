@@ -1,4 +1,6 @@
 <div class="section" style="{{ctrl.colors()}}">
-  <span class="name" ng-bind="ctrl.name"></span>
-  <span ng-if="ctrl.description" class="description" ng-bind="ctrl.description"></span>
+  <span class="name" e-class="form-control input-sm" edit-disabled="!ctrl.designMode" editable-text="ctrl.block.settings.name"
+    e-placeholder='{{"edit.inline.section_name" | translate}}'>{{ ctrl.block.settings.name || ("edit.inline.section_name" | translate) }}</span>
+  <span class="description" e-class="form-control input-sm" edit-disabled="!ctrl.designMode" editable-text="ctrl.block.settings.description"
+    e-placeholder='{{"edit.inline.section_description" | translate}}'>{{ ctrl.block.settings.description || ("edit.inline.section_description" | translate) }}</span>
 </div>
