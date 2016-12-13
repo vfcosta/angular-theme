@@ -23,10 +23,10 @@ export class VideoBlockComponent {
     ngOnInit() {
         if (this.block && this.block.settings) {
             this.url = this.$sce.trustAsResourceUrl(this.block.settings.url);
-            this.platform = this.block.settings.platform;
+            this.platform = this.block.api_content.platform;
             this.width = this.block.settings.width;
             this.height = this.block.settings.height;
-            this.mimeType = this.block.settings.mime_type;
+            this.mimeType = this.block.api_content.mime_type;
             this.config =  {
 				sources: [
 					{src: this.url, type: this.mimeType}
