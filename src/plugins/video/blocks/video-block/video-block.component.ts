@@ -15,7 +15,7 @@ export class VideoBlockComponent {
     width: string;
     height: string;
     config: any;
-    mimeType: string;  
+    mimeType: string;
 
     constructor (private $sce: ng.ISCEService) {
     }
@@ -27,12 +27,12 @@ export class VideoBlockComponent {
             this.width = this.block.settings.width;
             this.height = this.block.settings.height;
             this.mimeType = this.block.api_content.mime_type;
-            this.config =  {
-				sources: [
-					{src: this.url, type: this.mimeType}
+            this.config = {
+                sources: [
+                    {src: this.url, type: this.mimeType}
                 ]
-            }
-        }   
+            };
+        }
     }
 
 }
