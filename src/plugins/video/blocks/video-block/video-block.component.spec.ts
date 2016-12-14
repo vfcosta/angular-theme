@@ -3,7 +3,7 @@ import { ComponentTestHelper, createClass } from './../../../../spec/component-t
 import { VideoBlockComponent } from './video-block.component';
 import * as helpers from "../../../../spec/helpers";
 
-const htmlTemplate: string = '<noosfero-section-block-plugin-section-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-section-block-plugin-section-block>';
+const htmlTemplate: string = '<noosfero-video-plugin-video-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-video-plugin-video-block>';
 
 describe("Components", () => {
 
@@ -22,8 +22,7 @@ describe("Components", () => {
                     platform: `youtube`,
                     width: 400,
                     height: 330,
-                    config: "",
-                    // mimeType: ,
+                    config: ""
                 }
             });
             helper = new ComponentTestHelper<VideoBlockComponent>(cls, done);
@@ -45,8 +44,8 @@ describe("Components", () => {
             expect(helper.component.height).toEqual(330);
         });
 
-        it("should have height equals 330", () => {
-            expect(helper.component.config.sources).toEqual({ src: 'https://www.youtube.com/watch?v=BwXuu0gnIoE', type: ''});
+        it("should have config url equals 'https://www.youtube.com/watch?v=BwXuu0gnIoE'", () => {
+            expect(helper.component.config.sources).toEqual({ src: 'https://www.youtube.com/watch?v=BwXuu0gnIoE', type: '' });
         });
 
     });
