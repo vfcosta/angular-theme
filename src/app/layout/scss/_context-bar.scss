@@ -1,0 +1,14 @@
+$font-color: #8e8e8e;
+
+#context-bar {
+  text-align: right;
+  font-size: 13px;
+  color: $font-color;
+  margin-bottom: 8px;
+  a.btn:not(.btn-default) {
+    color: $font-color;
+  }
+  > :not(:first-child) {
+    border-left: 1px solid #e0e0e0;
+  }
+}

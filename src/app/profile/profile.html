@@ -1,4 +1,7 @@
-<config-bar ng-if="vm.profile" [owner]="vm.profile"></config-bar>
+<div id="context-bar">
+  <profile-actions [profile]="vm.profile"></profile-actions>
+  <config-bar ng-if="vm.profile" [owner]="vm.profile"></config-bar>
+</div>
 <div class="boxes-container profile-container">
   <div class="row">
     <custom-content class="profile-header"
@@ -9,7 +12,7 @@
     <noosfero-boxes ng-if="vm.boxes"
                     [layout]="vm.profile.layout_template"
                     [boxes]="vm.boxes"
-                    [owner]="vm.profile" class="row">
+                    [owner]="vm.profile">
     </noosfero-boxes>
     <custom-content class="profile-footer" [label]="'profile.custom_footer.label'" [attribute]="'custom_footer'" [profile]="vm.profile"></custom-content>
   </div>

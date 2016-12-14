@@ -1,6 +1,6 @@
 <div id="config-tool" permission="ctrl.owner.permissions" permission-action="{{ctrl.permissionAction}}">
 	<div class="config-option apply">
-		<a href="" (click)="ctrl.apply()" class="btn btn-default btn-sm" ng-show="ctrl.displayApplyButton()">
+		<a href="" (click)="ctrl.apply()" class="btn btn-default btn-sm ng-hide" ng-show="ctrl.displayApplyButton()">
 			<i class="fa fa-check fa-fw"></i> {{"configbar.edition.apply" | translate}}
 		</a>
 	</div>
