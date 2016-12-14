@@ -32,7 +32,6 @@ export class SectionBlockComponent {
             this.font_color = this.block.settings.font_color.trim();
             this.background_color = this.block.settings.background_color.trim();
         }
-        console.log("======== BLOCK: ", this.block);
     }
 
     colors() {
