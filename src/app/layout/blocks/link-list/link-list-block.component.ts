@@ -1,4 +1,4 @@
-import {Component, Input} from "ng-forward";
+import { Component, Input, Inject } from "ng-forward";
 
 @Component({
     selector: "noosfero-link-list-block",
@@ -8,6 +8,7 @@ export class LinkListBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     links: any;
 
