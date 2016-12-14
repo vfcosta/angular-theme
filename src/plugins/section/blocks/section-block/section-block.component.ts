@@ -5,7 +5,7 @@ import { DesignModeService } from "../../../../app/admin/layout-edit/designMode.
     selector: "noosfero-section-block-plugin-section-block",
     templateUrl: "plugins/section/blocks/section-block/section-block.html"
 })
-@Inject( "$scope", DesignModeService)
+@Inject("$scope", DesignModeService)
 export class SectionBlockComponent {
 
     @Input() block: any;
@@ -16,8 +16,8 @@ export class SectionBlockComponent {
     designMode = false;
 
 
-    constructor(private $scope: ng.IScope, 
-    private designModeService: DesignModeService) {
+    constructor(private $scope: ng.IScope,
+        private designModeService: DesignModeService) {
 
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
@@ -32,6 +32,7 @@ export class SectionBlockComponent {
             this.font_color = this.block.settings.font_color.trim();
             this.background_color = this.block.settings.background_color.trim();
         }
+        console.log("======== BLOCK: ", this.block);
     }
 
     colors() {
