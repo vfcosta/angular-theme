@@ -1,5 +1,5 @@
 <div class="highlights-block">
-  <div uib-carousel ng-class="{'no-controls': ctrl.hideControls()}" class="carousel" active="0" interval="ctrl.getTransitionInterval()" no-wrap="false">
+  <div ng-if="!ctrl.designMode" uib-carousel ng-class="{'no-controls': ctrl.hideControls()}" class="carousel" active="0" interval="ctrl.getTransitionInterval()" no-wrap="false">
     <div uib-slide ng-repeat="slide in ctrl.images | filter:{image_src: ''}" index="$index">
       <a ng-href="{{slide.address}}" target="{{ctrl.getTarget(slide)}}" class="image-link">
         <img ng-src="{{slide.image_src}}" class="img-responsive">
@@ -8,6 +8,23 @@
         <a ng-href="{{slide.address}}" target="{{ctrl.getTarget(slide)}}" class="title">
           {{slide.title}}
         </a>
+      </div>
+    </div>
+  </div>
+  <div ng-if="ctrl.designMode" uib-carousel class="carousel" active="0" no-wrap="false">
+    <div uib-slide ng-repeat="slide in ctrl.images | filter:{image_src: ''}" index="$index">
+      <img ng-src="{{slide.image_src}}" class="img-responsive">
+      <div class="carousel-caption">
+        <div class='title'>
+          <a href="#" editable-text="slide.title" e-placeholder='{{"edit.inline.title" | translate}}'>
+            {{slide.title || (edit.inline.title | translate) }}
+          </a>
+        </div>
+        <div class='link'>
+          <a href="#" editable-text="slide.address" e-placeholder='{{"edit.inline.link" | translate}}'>
+            {{slide.address || (edit.inline.link | translate) }}
+          </a>
+        </div>
       </div>
     </div>
   </div>

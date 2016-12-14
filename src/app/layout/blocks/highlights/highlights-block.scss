@@ -19,12 +19,12 @@
       left: 0;
       right: 0;
       bottom: 0;
+      margin-bottom: 10px;
       .title {
-        padding-bottom: 15px;
-        display: inline-block;
         font-size: 22px;
-        color: white;
-        text-decoration: none;
+        a{
+          color: white;
+        }
       }
     }
     .carousel-indicators {

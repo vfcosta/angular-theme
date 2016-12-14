@@ -10,6 +10,7 @@ export class HighlightsBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
+    @Input() designMode: boolean;
 
     images: any;
 
@@ -35,4 +36,5 @@ export class HighlightsBlockComponent {
     hideControls() {
         return !(<any>this.block.settings).navigation;
     }
+
 }
