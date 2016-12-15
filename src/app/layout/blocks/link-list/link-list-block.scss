@@ -31,4 +31,22 @@
     line-height: 25px;
     color: #949494;
   }
+
+  .link-edition {
+    margin-bottom: 5px;
+
+    .link-address-edition {
+      display: inline-block;
+      font-size: 12px;
+      color: #848484;
+      border-bottom-color: #848484;
+    }
+    .remove-link {
+      margin-left: 14px;
+    }
+  }
+  .new-link {
+    text-align: right;
+    width: 100%;
+  }
 }

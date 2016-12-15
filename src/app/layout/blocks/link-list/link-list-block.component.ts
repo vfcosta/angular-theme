@@ -18,4 +18,11 @@ export class LinkListBlockComponent {
         }
     }
 
+    addLink() {
+        this.links.push({ name: "", address: "http://" });
+    }
+
+    removeLink(index: number) {
+        this.links.splice(index, 1);
+    }
 }

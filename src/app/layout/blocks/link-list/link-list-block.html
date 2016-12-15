@@ -3,8 +3,19 @@
     <a ng-href="{{link.address | noosferoTemplate:{profile: ctrl.owner.identifier} }}">
       <i class="fa fa-fw icon-{{link.icon}}"></i>
       <span noosfero-editable="ctrl.designMode" noosfero-editable-text="link.name">
-        {{link.name}}
+        {{ link.name || ("edit.inline.title" | translate) }}
       </span>
     </a>
+    <div class="link-edition" ng-if="ctrl.designMode">
+      <span class="remove-link" ng-if="ctrl.designMode">
+        <a href="" (click)="ctrl.removeLink($index)" class="btn btn-xs"><i class="fa fa-fw fa-remove"></i></a>
+      </span>
+      <div class="link-address-edition" noosfero-editable="ctrl.designMode" noosfero-editable-text="link.address">
+        {{link.address}}
+      </div>
+    </div>
+  </div>
+  <div class="new-link" ng-if="ctrl.designMode">
+    <a href="" (click)="ctrl.addLink()" class="btn btn-xs"><i class="fa fa-fw fa-plus"></i> New link</a>
   </div>
 </div>
