@@ -4,14 +4,13 @@ import { ProfileHomeComponent } from './profile-home.component';
 import { BasicEditorComponent } from '../article/cms/basic-editor/basic-editor.component';
 import { CmsComponent } from '../article/cms/cms.component';
 import { ContentViewerComponent } from "../article/content-viewer/content-viewer.component";
-import { ContentViewerActionsComponent } from "../article/content-viewer/content-viewer-actions.component";
 import { ActivitiesComponent } from "./activities/activities.component";
 import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { MyProfileComponent } from "./myprofile.component";
-import { ProfileActionsComponent } from "./profile-actions.component";
 import { TasksComponent } from "../task/tasks/tasks.component";
 import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
+import { ProfileActionsComponent } from "./actions/profile-actions.component";
 
 /**
  * @ngdoc controller
@@ -23,7 +22,7 @@ import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html",
-    directives: [ActivitiesComponent],
+    directives: [ActivitiesComponent, ProfileActionsComponent],
     providers: [
         provide('profileService', { useClass: ProfileService }),
         provide('notificationService', { useClass: NotificationService })
@@ -39,25 +38,13 @@ import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
                 templateUrl: "app/profile/info/profile-info.html",
                 controller: ProfileInfoComponent,
                 controllerAs: "vm"
-            },
-            "actions@main": {
-                templateUrl: "app/profile/navbar-actions.html",
-                controller: ProfileActionsComponent,
-                controllerAs: "vm"
             }
         }
     },
     {
         name: 'main.profile.settings',
         url: "^/myprofile/:profile",
-        component: MyProfileComponent,
-        views: {
-            "actions@main": {
-                templateUrl: "app/profile/navbar-actions.html",
-                controller: ProfileActionsComponent,
-                controllerAs: "vm"
-            }
-        }
+        component: MyProfileComponent
     },
     {
         name: 'main.cms',
@@ -126,11 +113,6 @@ import { DestroyProfileComponent } from "./destroy/destroy-profile.component";
             "mainBlockContent": {
                 templateUrl: "app/article/content-viewer/page.html",
                 controller: ContentViewerComponent,
-                controllerAs: "vm"
-            },
-            "actions@main": {
-                templateUrl: "app/article/content-viewer/navbar-actions.html",
-                controller: ContentViewerActionsComponent,
                 controllerAs: "vm"
             }
         }

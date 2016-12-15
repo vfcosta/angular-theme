@@ -8,6 +8,7 @@ $red-color: #DF3B3A;
 .switch {
   @include not-select();
   background-color: $off-color;
+  vertical-align: middle;
 
   &[on][off] {
     width: 60px;

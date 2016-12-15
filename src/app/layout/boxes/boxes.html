@@ -1,6 +1,3 @@
-<div class="boxes-action" ng-if="ctrl.designModeOn">
-  <button ng-disabled="!ctrl.displayApplyBlockChanges()" (click)="ctrl.applyBlockChanges()" class="btn btn-default btn-sm">{{"boxes.edition.apply" | translate}}</button>
-</div>
 <div ng-repeat="column in ctrl.columns">
   <div class="{{ctrl.getBoxClass(column)}}" ng-init="box = ctrl.getBox($index)">
     <noosfero-block ng-if="!column['subcolumns']" ng-repeat="block in box.blocks | orderBy: 'position'"

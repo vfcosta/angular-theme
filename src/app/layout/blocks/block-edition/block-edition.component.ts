@@ -35,6 +35,9 @@ export class BlockEditionComponent {
         }, () => {
             this.emitChanges();
         }, true);
+        this.eventsHubService.subscribeToEvent(this.eventsNames.BLOCKS_SAVED, (owner: noosfero.Profile | noosfero.Environment) => {
+            this.originalBlock = JSON.parse(JSON.stringify(this.block));
+        });
     }
 
     selectOption(optionKey: string, option: string) {

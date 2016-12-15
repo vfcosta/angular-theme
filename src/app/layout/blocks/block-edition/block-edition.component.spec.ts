@@ -13,7 +13,11 @@ describe("Block Edition Component", () => {
         angular.mock.module("templates");
     });
 
+    let blocksSavedFn: Function;
     let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
+    eventsHubService.subscribeToEvent = (event: string, fn: Function) => {
+        blocksSavedFn = fn;
+    };
 
     beforeEach((done) => {
         let cls = createClass({
@@ -62,5 +66,11 @@ describe("Block Edition Component", () => {
         (<any>helper.component.block.settings).display = "never";
         helper.component.emitChanges();
         expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1 });
+    });
+
+    it("update originalBlock when receive a BLOCKS_SAVED event", () => {
+        (<any>helper.component.block.settings).display = "never";
+        blocksSavedFn();
+        expect((<any>helper.component.originalBlock.settings).display).toBe("never");
     });
 });

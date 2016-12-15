@@ -1,23 +1,14 @@
-<div id="config-tool" ng-class="{'closed': !showConfig}" permission="ctrl.owner.permissions" permission-action="{{ctrl.permissionAction}}">
-		<a id="config-tool-cog" href="#" ng-click="showConfig = !showConfig">
-			<i class="fa fa-cog" ng-class="{'anim-icon': showConfig}"></i>
-      <span class="read-aloud">{{"configbar.icon.description" | translate}}</span>
+<div id="config-tool" permission="ctrl.owner.permissions" permission-action="{{ctrl.permissionAction}}">
+	<div class="layout-config config-option">
+		<layout-config [owner]="ctrl.owner"></layout-config>
+	</div>
+	<div class="design-mode config-option">
+		<span class="item-label">{{ 'designMode.label' | translate }}</span>
+		<design-toggler ng-class="{'config-tool-options-closed': !showConfig}"></design-toggler>
+	</div>
+	<div class="config-option apply">
+		<a href="" (click)="ctrl.apply()" class="btn btn-default btn-sm ng-hide" ng-show="ctrl.displayApplyButton()">
+			<i class="fa fa-check fa-fw"></i> {{"configbar.edition.apply" | translate}}
 		</a>
-
-		<div id="config-tool-options">
-			<h4>{{ 'configbar.label' | translate }}</h4>
-      <div class="section-title">{{ 'configbar.section.layout' | translate }}</div>
-			<ul>
-        <li>
-          <label class="pull-left">
-            <i class="fa fa-th-large"></i>
-            <span class="item-label">{{ 'designMode.label' | translate }}</span>
-          </label>
-          <label class="pull-right">
-            <design-toggler ng-class="{'config-tool-options-closed': !showConfig}"></design-toggler>
-          </label>
-        </li>
-			</ul>
-			<layout-config [owner]="ctrl.owner"></layout-config>
-		</div>
+	</div>
 </div>

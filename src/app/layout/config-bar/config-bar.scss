@@ -1,114 +1,24 @@
-@import "../scss/mixins";
+config-bar {
+	display: inline-block;
+	#config-tool {
+		margin: 0 16px 0 0;
+		text-align: right;
 
-@include keyframes(rotating) {
-	from {
-		transform: rotate(0deg);
-	}
-	to {
-		transform: rotate(360deg);
-	}
-}
+		.config-option {
+			display: inline-block;
 
-/* CONFIG TOOLS */
-#config-tool {
-	@include transition(all 0.2s ease-in-out 0s);
-	@include box-shadow(0px 1px 4px rgba(0, 0, 0, 0.3));
-	position: fixed;
-	right: 0;
-	top: 150px;
-	min-width: 200px;
-	z-index: 1000;
-
-	#config-tool-cog {
-		@include border-radius($border-radius-base 0 0 $border-radius-base);
-		@include transition(all 0.1s ease-in-out 0s);
-		@include box-shadow(-3px 3px 3px -2px rgba(0, 0, 0, 0.1));
-		background: #fff;
-		cursor: pointer;
-		left: -50px;
-		padding: 10px;
-		position: absolute;
-		text-align: center;
-		width: 50px;
-		top: 0;
-
-		i {
-			font-size: 2.2em;
-		}
-
-		.anim-icon {
-			@include animation(rotating 0.7s ease-in-out 0s);
-		}
-	}
-
-	&.closed {
-		right: -280px;
-		box-shadow: none;
-
-		#config-tool-cog {
-			&:hover {
-				background-color: $primary-color;
-				color: #fff;
-			}
-		}
-	}
-
-	&.opened {
-		right: 0;
-	}
-
-	.section-title {
-	  margin: 30px 0 5px;
-		font: {
-			size: 15px;
-	  	weight: bold;
-		}
-
-	}
-
-	.config-tool-options-closed {
-		visibility: hidden!important;
-		display: none!important;
-	}
-
-	#config-tool-options {
-		@include box-shadow(-3px 3px 3px -2px rgba(0, 0, 0, 0.1));
-		background: #fff;
-		padding: 15px;
-
-		h4 {
-			margin: 0;
-			font-size: 1.3em;
-		}
-
-		ul {
-			list-style: none;
-			border-radius: 2px;
-		  padding: 0;
-
-		  background: {
-				clip: padding-box;
-		  	color: #f1f3f2;
-			}
-
-			li {
-			  padding: 10px;
-				width: 250px;
-			  min-height: 50px;
-				font: {
-					size: 13px;
-			  	weight: 300;
+			&.apply {
+				display: inline-block;
+				.btn {
+					@extend .btn-xs;
+					margin-left: 16px;
+					&.ng-hide-add {
+						animation: 0.5s lightSpeedOut ease;
+					}
+					&.ng-hide-remove {
+						animation: 0.5s lightSpeedIn ease;
+					}
 				}
-
-				.checkbox {
-					margin: 0;
-				}
-
-				.pull-left {
-					margin-top: 8px;
-					font-weight: normal;
-				}
-
 			}
 		}
 	}
