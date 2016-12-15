@@ -1,7 +1,10 @@
 <div class="link-list-block">
   <div ng-repeat="link in ctrl.links">
     <a ng-href="{{link.address | noosferoTemplate:{profile: ctrl.owner.identifier} }}">
-      <i class="fa fa-fw icon-{{link.icon}}"></i> <span>{{link.name}}</span>
+      <i class="fa fa-fw icon-{{link.icon}}"></i>
+      <span noosfero-editable="ctrl.designMode" noosfero-editable-text="link.name">
+        {{link.name}}
+      </span>
     </a>
   </div>
 </div>
