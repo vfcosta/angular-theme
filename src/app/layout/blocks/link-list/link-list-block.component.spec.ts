@@ -1,8 +1,8 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Pipe, Input, provide, Component} from 'ng-forward';
-import {provideFilters} from '../../../../spec/helpers';
+import { TestComponentBuilder } from 'ng-forward/cjs/testing/test-component-builder';
+import { Pipe, Input, provide, Component } from 'ng-forward';
+import { provideFilters } from '../../../../spec/helpers';
 
-import {LinkListBlockComponent} from './link-list-block.component';
+import { LinkListBlockComponent } from './link-list-block.component';
 
 const tcb = new TestComponentBuilder();
 
@@ -48,7 +48,7 @@ describe("Components", () => {
                 selector: 'test-container-component',
                 template: htmlTemplate,
                 directives: [LinkListBlockComponent],
-                providers: provideFilters("noosferoTemplateFilter")
+                providers: provideFilters("noosferoTemplateFilter", "translateFilter")
             })
             class CustomBlockType {
                 block: any = { settings: { links: [{ name: 'link1', address: 'address1' }, { name: 'link2', address: 'address2' }] } };
