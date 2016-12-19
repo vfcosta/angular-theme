@@ -1,0 +1,11 @@
+<span ng-if="ctrl.designMode">
+  <a href="" uib-popover-template="'app/shared/components/editable-link/editable-link-form.html'"
+    popover-trigger="outsideClick" popover-append-to-body="true" popover-placement="auto right"
+    popover-class="editable-link-popover" class="editable-link">
+    {{ ctrl.link.name || ("edit.inline.title" | translate) }}
+  </a>
+</span>
+
+<span ng-if="!ctrl.designMode">
+  {{ ctrl.link.name }}
+</span>

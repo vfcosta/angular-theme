@@ -28,6 +28,7 @@ import { ProfileImagesPluginProfileImagesBlockComponent } from "../layout/blocks
 import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
+import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
 import { CommunitiesBlockComponent } from "../layout/blocks/communities/communities-block.component";
@@ -138,7 +139,7 @@ export class EnvironmentContent {
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
-        HighlightsBlockComponent, EditableDirective
+        HighlightsBlockComponent, EditableDirective, EditableLinkComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",

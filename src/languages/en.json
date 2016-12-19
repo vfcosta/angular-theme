@@ -234,5 +234,9 @@
   "layout-config.template.rightbar": "Right bar",
   "layout-config.template.leftbottom": "Left and bottom bar",
   "layout-config.template.nosidebars": "No sidebars",
-  "layout-config.apply": "Apply"
-  }
+  "layout-config.apply": "Apply",
+  "layout-config.apply.success.message": "Layout template saved!",
+  "layout-config.apply.success.title": "Good job!",
+  "editable-link.form.name": "Title",
+  "editable-link.form.address": "Address"
+}

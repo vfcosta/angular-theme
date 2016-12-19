@@ -234,5 +234,9 @@
   "layout-config.template.rightbar": "Barra à direita",
   "layout-config.template.leftbottom": "Barra inferior e à esquerda",
   "layout-config.template.nosidebars": "Sem barras laterais",
-  "layout-config.apply": "Aplicar"
-  }
+  "layout-config.apply": "Aplicar",
+  "layout-config.apply.success.message": "Padrão de layout salvo!",
+  "layout-config.apply.success.title": "Bom trabalho!",
+  "editable-link.form.name": "Título",
+  "editable-link.form.address": "Endereço"
+}
