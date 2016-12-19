@@ -1,28 +1,28 @@
-.icon-event {
+.icon.event {
   @extend .fa-calendar;
 }
-.icon-photos {
+.icon.photos {
   @extend .fa-photo;
 }
-.icon-edit {
+.icon.edit {
   @extend .fa-edit;
 }
-.icon-ok {
+.icon.ok {
   @extend .fa-check;
 }
-.icon-send {
+.icon.send {
   @extend .fa-send-o;
 }
-.icon-menu-people {
+.icon.menu-people {
   @extend .fa-user;
 }
-.icon-forum {
+.icon.forum {
   @extend .fa-users;
 }
-.icon-new {
+.icon.new {
   @extend .fa-file-o;
 }
-.icon-save {
+.icon.save {
   @extend .fa-save;
 }
 
@@ -30,6 +30,10 @@
   a i {
     line-height: 25px;
     color: #949494;
+  }
+
+  .design-mode {
+    margin-bottom: 4px;
   }
 
   .link-edition {

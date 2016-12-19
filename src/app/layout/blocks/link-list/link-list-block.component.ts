@@ -19,7 +19,7 @@ export class LinkListBlockComponent {
     }
 
     addLink() {
-        this.links.push({ name: "", address: "http://" });
+        this.links.push({ name: "", address: "http://", icon: "fa-file-o" });
     }
 
     removeLink(index: number) {
