@@ -35,6 +35,18 @@ describe("Components", () => {
         it("display links stored in block settings", () => {
             expect(helper.all(".link-list-block a").length).toEqual(2);
         });
+
+        it("add a new link", () => {
+            helper.component.addLink();
+            helper.detectChanges();
+            expect(helper.all(".link-list-block a").length).toEqual(3);
+        });
+
+        it("remove a new link", () => {
+            helper.component.removeLink(0);
+            helper.detectChanges();
+            expect(helper.all(".link-list-block a").length).toEqual(1);
+        });
     });
 
 });
