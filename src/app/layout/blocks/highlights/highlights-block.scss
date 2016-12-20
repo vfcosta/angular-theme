@@ -19,7 +19,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      margin-bottom: 10px;
+      .caption {
+        margin-bottom: 10px;
+      }
       .title {
         font-size: 22px;
         a{

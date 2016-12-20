@@ -1,0 +1,34 @@
+$font-color: #7b7b7b;
+
+noosfero-highlights-block-settings {
+  .extra-settings-btn {
+    @extend .btn;
+    @extend .btn-sm;
+  }
+  .slides {
+    .new-slide {
+      color: $font-color;
+      margin-left: 20px;
+      &:hover {
+        color: darken($font-color, 10%);
+      }
+    }
+    .slide {
+      position: relative;
+      display: inline-block;
+      float: none;
+      vertical-align: top;
+      .remove {
+        @extend .btn;
+        @extend .btn-danger;
+        @extend .btn-xs;
+        position: absolute;
+        top: 7px;
+        right: 22px;
+      }
+      .thumbnail {
+        min-height: 80px;
+      }
+    }
+  }
+}

@@ -30,6 +30,7 @@ export class HighlightsBlockComponent {
     }
 
     getTransitionInterval() {
+        if (this.designMode) return 0;
         return (<any>this.block.settings).interval * 1000;
     }
 

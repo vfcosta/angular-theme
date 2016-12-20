@@ -1,4 +1,5 @@
 import { Input, Inject, Component } from "ng-forward";
+import { TranslatorService } from "../../../shared/services/translator.service";
 
 declare var _: any;
 
@@ -6,6 +7,7 @@ declare var _: any;
     selector: "noosfero-highlights-block-settings",
     templateUrl: 'app/layout/blocks/highlights/highlights-block-settings.html',
 })
+@Inject(TranslatorService)
 export class HighlightsBlockSettingsComponent {
 
     @Input() block: noosfero.Block;
@@ -16,7 +18,22 @@ export class HighlightsBlockSettingsComponent {
 
     ngOnInit() {
         this.isCollapsed = true;
-        this.images = (<any>this.block.settings).block_images;
+        this.images = (<any>this.block.settings).block_images || [];
     }
 
+    constructor(private translatorService: TranslatorService) {
+
+    }
+
+    addSlide() {
+        this.images.push({ image_src: "", title: this.translatorService.translate("edit.inline.title"), address: "http://" });
+    }
+
+    removeSlide(index: number) {
+        this.images.splice(index, 1);
+    }
+
+    selectSlide(index: number) {
+        (<any>this.block)['active'] = index;
+    }
 }

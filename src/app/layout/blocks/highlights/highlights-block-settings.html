@@ -1,12 +1,19 @@
 <div class="highlights-block-settings">
-  <i ng-click="ctrl.isCollapsed = !ctrl.isCollapsed" class="fa fa-caret-square-o-down">
-    {{ "block.edition.extra_config" | translate }}
-  </i>
-	<div uib-collapse="ctrl.isCollapsed">
-		<div class="well well-lg">Some content</div>
+  <a href="" ng-click="ctrl.isCollapsed = !ctrl.isCollapsed" class="extra-settings-btn">
+    <i class="fa fa-caret-down"></i> {{ "block.edition.extra_config" | translate }}
+  </a>
+	<div uib-collapse="ctrl.isCollapsed" class="slides">
     <div class="row">
-      <div class="col-xs-6 col-md-3" ng-repeat="slide in ctrl.images">
-        <a class="thumbnail" ng-click="select(slide)" > <img ng-src="{{slide.image_src}}" class="img-responsive"></a>
+      <div class="col-xs-6 col-md-3 slide" ng-repeat="slide in ctrl.images">
+        <a class="thumbnail" ng-click="ctrl.selectSlide($index)" href>
+          <img ng-src="{{slide.image_src}}">
+        </a>
+        <a href ng-click="ctrl.removeSlide($index)" class="remove"><i class="fa fa-remove"></i></a>
+      </div>
+      <div class="slide">
+        <a class="new-slide" ng-click="ctrl.addSlide()" href>
+          <i class="fa fa-plus fa-5x"></i>
+        </a>
       </div>
     </div>
 	</div>

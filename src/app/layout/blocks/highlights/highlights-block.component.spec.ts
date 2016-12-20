@@ -54,4 +54,15 @@ describe("Highlights Block Component", () => {
         expect(helper.component.block.hide).toBeTruthy();
     });
 
+    it("transition interval should be zero in design mode", () => {
+        (<any>helper.component.block.settings).interval = 5;
+        helper.component.designMode = true;
+        expect(helper.component.getTransitionInterval()).toEqual(0);
+    });
+
+    it("return transition interval in miliseconds when not in design mode", () => {
+        (<any>helper.component.block.settings).interval = 5;
+        helper.component.designMode = false;
+        expect(helper.component.getTransitionInterval()).toEqual(5000);
+    });
 });
