@@ -3,8 +3,9 @@
     <i class="fa fa-caret-down"></i> {{ "block.edition.extra_config" | translate }}
   </a>
 	<div uib-collapse="ctrl.isCollapsed" class="slides">
-    <div class="row">
-      <div class="col-xs-6 col-md-3 slide" ng-repeat="slide in ctrl.images">
+    <div class="row" dnd-list="ctrl.images">
+      <div class="dndPlaceholder col-xs-6 col-md-3 slide"></div>
+      <div class="col-xs-6 col-md-3 slide" ng-repeat="slide in ctrl.images" dnd-draggable="slide" dnd-moved="ctrl.images.splice($index, 1)" dnd-effect-allowed="move">
         <a class="thumbnail" ng-click="ctrl.selectSlide($index)" href>
           <img ng-src="{{slide.image_src}}">
         </a>

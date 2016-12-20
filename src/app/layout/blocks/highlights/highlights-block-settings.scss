@@ -6,6 +6,10 @@ noosfero-highlights-block-settings {
     @extend .btn-sm;
   }
   .slides {
+    .dndPlaceholder {
+      height: 150px;
+      background-color: #dcdcdc;
+    }
     .new-slide {
       color: $font-color;
       margin-left: 20px;
@@ -27,7 +31,13 @@ noosfero-highlights-block-settings {
         right: 22px;
       }
       .thumbnail {
-        min-height: 80px;
+        height: 150px;
+        img {
+          max-height: 100%;
+        }
+      }
+      &.dndDraggingSource {
+        display: none;
       }
     }
   }
