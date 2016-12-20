@@ -10,26 +10,16 @@ export class VideoBlockComponent {
     @Input() block: any;
     @Input() owner: any;
 
-    url: string;
-    platform: string;
-    width: string;
-    height: string;
     config: any;
-    mimeType: string;
 
-    constructor (private $sce: ng.ISCEService) {
+    constructor(private $sce: ng.ISCEService) {
     }
 
     ngOnInit() {
-        if (this.block && this.block.settings) {
-            this.url = this.$sce.trustAsResourceUrl(this.block.settings.url);
-            this.platform = this.block.api_content.platform;
-            this.width = this.block.settings.width;
-            this.height = this.block.settings.height;
-            this.mimeType = this.block.api_content.mime_type;
+        if (this.block && this.block.api_content) {
             this.config = {
                 sources: [
-                    {src: this.url, type: this.mimeType}
+                    { src: this.$sce.trustAsHtml(this.block.api_content.url), type: this.block.api_content.mime_type }
                 ]
             };
         }

@@ -18,30 +18,13 @@ describe("Components", () => {
                 template: htmlTemplate,
                 directives: [VideoBlockComponent],
                 properties: {
-                    url: `https://www.youtube.com/watch?v=BwXuu0gnIoE`,
-                    platform: `youtube`,
-                    width: 400,
-                    height: 330,
-                    config: ""
-                }
-            });
+                    block: {
+                        api_content: {
+                            url: 'https://www.youtube.com/watch?v=BwXuu0gnIoE'
+                        }
+                    }
+                });
             helper = new ComponentTestHelper<VideoBlockComponent>(cls, done);
-        });
-
-        it("should have url equals 'https://www.youtube.com/watch?v=BwXuu0gnIoE'", () => {
-            expect(helper.component.url).toEqual("https://www.youtube.com/watch?v=BwXuu0gnIoE");
-        });
-
-        it("should have platform equals to 'youtube'", () => {
-            expect(helper.component.platform).toEqual("youtube");
-        });
-
-        it("should have width equal to 400", () => {
-            expect(helper.component.width).toEqual(400);
-        });
-
-        it("should have height equals 330", () => {
-            expect(helper.component.height).toEqual(330);
         });
 
         it("should have config url equals 'https://www.youtube.com/watch?v=BwXuu0gnIoE'", () => {
