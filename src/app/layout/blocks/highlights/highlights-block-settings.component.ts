@@ -12,12 +12,11 @@ export class HighlightsBlockSettingsComponent {
     @Input() owner: noosfero.Profile;
 
     isCollapsed: any;
+    images: any;
 
     ngOnInit() {
         this.isCollapsed = true;
+        this.images = (<any>this.block.settings).block_images;
     }
 
-    switchCollapsed() {
-        this.isCollapsed = !this.isCollapsed;
-    }
 }

@@ -4,5 +4,10 @@
   </i>
 	<div uib-collapse="ctrl.isCollapsed">
 		<div class="well well-lg">Some content</div>
+    <div class="row">
+      <div class="col-xs-6 col-md-3" ng-repeat="slide in ctrl.images">
+        <a class="thumbnail" ng-click="select(slide)" > <img ng-src="{{slide.image_src}}" class="img-responsive"></a>
+      </div>
+    </div>
 	</div>
 </div>
