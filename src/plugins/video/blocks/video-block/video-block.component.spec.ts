@@ -20,15 +20,33 @@ describe("Components", () => {
                 properties: {
                     block: {
                         api_content: {
-                            url: 'https://www.youtube.com/watch?v=BwXuu0gnIoE'
+                            url: "https://someurlvideo",
+                            mime_type: ''
                         }
                     }
-                });
+                }
+            });
             helper = new ComponentTestHelper<VideoBlockComponent>(cls, done);
         });
 
-        it("should have config url equals 'https://www.youtube.com/watch?v=BwXuu0gnIoE'", () => {
-            expect(helper.component.config.sources).toEqual({ src: 'https://www.youtube.com/watch?v=BwXuu0gnIoE', type: '' });
+        it("should have config url equals to block url paramter", () => {
+            expect(helper.component.config.sources).toContain({ src: "https://someurlvideo", type: '' });
+        });
+
+        it("render video tag if has any video defined on block", () => {
+            expect(helper.all("videogular").length).toEqual(1);
+        });
+
+        it("not render block if config has no api_content", () => {
+            (<any>helper.component.block).api_content = {};
+            helper.component.ngOnInit();
+            expect(helper.component.block.hide).toBeTruthy();
+        });
+
+        it("not render block if config has no url in api_content", () => {
+            (<any>helper.component.block).api_content = { url: '' };
+            helper.component.ngOnInit();
+            expect(helper.component.block.hide).toBeTruthy();
         });
 
     });
