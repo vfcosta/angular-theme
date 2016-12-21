@@ -6,6 +6,17 @@ noosfero-highlights-block-settings {
     @extend .btn-sm;
   }
   .slides {
+    .transition-setting {
+      margin-bottom: 15px;
+      .editable {
+        min-width: 15px;
+        display: inline-block;
+        text-align: center;
+      }
+      .editable-input {
+        width: 80px;
+      }
+    }
     .dndPlaceholder {
       height: 150px;
       background-color: #dcdcdc;
