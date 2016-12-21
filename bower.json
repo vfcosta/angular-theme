@@ -52,8 +52,6 @@
     "videogular-buffering": "^1.4.4",
     "videogular-overlay-play": "^1.4.4",
     "videogular-poster": "^1.4.4",
-    "videogular-ima-ads": "^1.4.4",
-    "videogular-angulartics": "^1.4.4",
     "videogular-themes-default": "^1.4.4",
     "bower-videogular-youtube": "videogular-youtube#^2.0.6"
   },
