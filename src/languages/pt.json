@@ -119,6 +119,7 @@
   "auth.forgot_password.button.send_instructions": "Enviar instruções",
   "has already been taken": "já está sendo usado",
   "edit.inline.title": "Adicione o título",
+  "edit.inline.link": "Edite o link",
   "identifier": "identificador",
   "is invalid": "é inválido",
   "is not available.": "não está disponível",

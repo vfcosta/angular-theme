@@ -119,6 +119,7 @@
   "auth.forgot_password.button.send_instructions": "Send instructions",
   "has already been taken": "has already been taken",
   "edit.inline.title": "Enter title",
+  "edit.inline.link": "Edit link",
   "identifier": "identifier",
   "is invalid": "is invalid",
   "is not available.": "is not available",
