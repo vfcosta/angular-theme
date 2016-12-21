@@ -239,5 +239,7 @@
   "layout-config.apply.success.message": "Layout template saved!",
   "layout-config.apply.success.title": "Good job!",
   "editable-link.form.name": "Title",
-  "editable-link.form.address": "Address"
+  "editable-link.form.address": "Address",
+  "editable-link.form.ok": "Ok",
+  "editable-link.form.cancel": "Cancel"
 }

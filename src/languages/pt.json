@@ -239,5 +239,7 @@
   "layout-config.apply.success.message": "Padrão de layout salvo!",
   "layout-config.apply.success.title": "Bom trabalho!",
   "editable-link.form.name": "Título",
-  "editable-link.form.address": "Endereço"
+  "editable-link.form.address": "Endereço",
+  "editable-link.form.ok": "Ok",
+  "editable-link.form.cancel": "Cancelar"
 }

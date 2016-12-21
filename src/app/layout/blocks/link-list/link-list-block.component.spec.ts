@@ -47,6 +47,11 @@ describe("Components", () => {
             helper.detectChanges();
             expect(helper.all(".link-list-block a").length).toEqual(1);
         });
+
+        it("return true when check for a new link by index", () => {
+            helper.component.addLink();
+            expect(helper.component.isNewLink(2)).toBeTruthy();
+        });
     });
 
 });
