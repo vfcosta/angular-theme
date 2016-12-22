@@ -7,7 +7,7 @@ const htmlTemplate: string = '<noosfero-video-plugin-video-block [block]="ctrl.b
 
 describe("Components", () => {
 
-    describe("Section Block Component", () => {
+    describe("Video Block Component", () => {
 
         let helper: ComponentTestHelper<VideoBlockComponent>;
 
@@ -49,5 +49,10 @@ describe("Components", () => {
             expect(helper.component.block.hide).toBeTruthy();
         });
 
+        it("not render block if config has api_content equals to null", () => {
+            (<any>helper.component.block).api_content = null;
+            helper.component.ngOnInit();
+            expect(helper.component.block.hide).toBeTruthy();
+        });
     });
 });

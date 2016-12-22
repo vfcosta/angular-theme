@@ -1,4 +1,4 @@
-import {Component, Inject, Input} from "ng-forward";
+import { Component, Inject, Input } from "ng-forward";
 
 @Component({
     selector: "noosfero-video-plugin-video-block",
