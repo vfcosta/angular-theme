@@ -1,11 +1,13 @@
 import { Component, Inject, Input } from "ng-forward";
 import { DesignModeService } from "../../../../app/admin/layout-edit/designMode.service";
+import { SectionImageEditorComponent } from "./section-image-editor.component";
+import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 
 @Component({
     selector: "noosfero-section-block-plugin-section-block",
     templateUrl: "plugins/section/blocks/section-block/section-block.html"
 })
-@Inject("$scope", DesignModeService)
+@Inject(BlockService, "$scope", "$uibModal", DesignModeService)
 export class SectionBlockComponent {
 
     @Input() block: any;
@@ -15,8 +17,12 @@ export class SectionBlockComponent {
     background_color: string;
     designMode = false;
 
+    picFile: any;
+    modalInstance: any;
 
-    constructor(private $scope: ng.IScope,
+    constructor(private blockService: BlockService,
+        private $scope: ng.IScope,
+        private $uibModal: ng.ui.bootstrap.IModalService,
         private designModeService: DesignModeService) {
 
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
@@ -61,4 +67,27 @@ export class SectionBlockComponent {
         return css_style;
     }
 
+    fileSelected(file: any, errFiles: any) {
+        if (file) {
+            this.picFile = file;
+            this.modalInstance = this.$uibModal.open({
+                templateUrl: 'app/profile/image/profile-image-editor.html',
+                controller: SectionImageEditorComponent,
+                controllerAs: 'ctrl',
+                scope: this.$scope,
+                bindToController: true,
+                backdrop: 'static',
+                resolve: {
+                    picFile: this.picFile, 
+                    block: this.block,
+                    blockService: this.blockService
+                }
+            });
+        }
+    }
+
+    getSectionImage()
+    {
+        return this.block.images[0];
+    }
 }
