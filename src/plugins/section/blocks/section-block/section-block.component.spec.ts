@@ -11,6 +11,7 @@ describe("Components", () => {
 
         let helper: ComponentTestHelper<SectionBlockComponent>;
         let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
+        let blockService = jasmine.createSpyObj("BlockService", ["uploadImages"]);
         beforeEach(angular.mock.module("templates"));
 
         beforeEach((done) => {
@@ -28,7 +29,9 @@ describe("Components", () => {
                     }
                 },
                 providers: [
+                    helpers.createProviderToValue("BlockService", blockService),
                     helpers.createProviderToValue('$scope', scope),
+                    helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
                     helpers.createProviderToValue('DesignModeService', helpers.mocks.designModeService)
                 ]
 
@@ -59,6 +62,8 @@ describe("Components", () => {
         it("should contain background color on css inline style", () => {
             expect(helper.component.colors()).toContain("background-color: #C0C0C0;");
         });
+
+        // it("should return the uploaded image")
 
     });
 });

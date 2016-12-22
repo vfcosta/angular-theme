@@ -78,7 +78,7 @@ export class SectionBlockComponent {
                 bindToController: true,
                 backdrop: 'static',
                 resolve: {
-                    picFile: this.picFile, 
+                    picFile: this.picFile,
                     block: this.block,
                     blockService: this.blockService
                 }
@@ -86,8 +86,11 @@ export class SectionBlockComponent {
         }
     }
 
-    getSectionImage()
-    {
-        return this.block.images[0];
+    getSectionImage() {
+        if (this.block.images && this.block.images.lenth() >= 0) {
+            return this.block.images[0];
+        } else {
+            return null;
+        }
     }
 }
