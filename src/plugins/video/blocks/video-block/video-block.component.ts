@@ -4,6 +4,7 @@ import { Component, Inject, Input } from "ng-forward";
     selector: "noosfero-video-plugin-video-block",
     templateUrl: "plugins/video/blocks/video-block/video-block.html"
 })
+@Inject("$scope")
 export class VideoBlockComponent {
 
     @Input() block: any;
@@ -11,18 +12,20 @@ export class VideoBlockComponent {
 
     config: any;
 
-    ngOnInit() {
-        if (this.block && this.block.api_content) {
-            this.config = {
-                sources: [
-                    { src: this.block.api_content.url, type: this.block.api_content.mime_type }
-                ]
-            };
-            this.block.hide = (<any>this.block.api_content.url == null || <any>this.block.api_content.url === '');
-        } else {
-            this.block.hide = true;
-        }
-
+    constructor(private $scope: ng.IScope) {
     }
 
+    ngOnInit() {
+        this.$scope.$watch(() => { return this.block.settings.url; }, () => {
+            this.block.hide = true;
+            if (this.block && this.block.settings && this.block.settings.url && this.block.api_content) {                
+                this.config = {
+                    sources: [
+                        { src: this.block.settings.url, type: this.block.api_content.mime_type }
+                    ]
+                };
+                this.block.hide = false;
+            }
+        });
+    }
 }

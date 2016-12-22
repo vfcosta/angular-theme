@@ -1,12 +1,15 @@
 noosfero-video-plugin-video-block {
   .video-block {
     height: 400px;
+    .overlay {
+      display: none;
+    }
   }
 }
 
 .noosfero-design-on noosfero-video-plugin-video-block {
-  .video-block
-    .after {
+  .video-block {
+    .overlay {
       position: absolute;
       top: 0;
       left: 0;
@@ -15,10 +18,28 @@ noosfero-video-plugin-video-block {
       display: none;
       color: #FFF;
       z-index: 100;
-      font-size: 7em;
+      font-size: 5em;
       text-align: center;
+      .container-video{
+        background-color: rgba(0, 0, 0, 0.8);
+        bottom: 0;
+        left: 50%;
+        position: absolute;
+        width: 100%;
+        transform: translate(-50%);
+        .editable{
+          color: #FFF;
+          border-bottom-color: #FFF;
+        }
+        .editable-empty:hover{
+          font-style: normal;
+        }
+        .editable-controls{
+          font-size: medium;
+        }
+      }
     }
-    :hover .after {
+    :hover .overlay {
       display: block;
       background: rgba(0, 0, 0, .6);
     }
