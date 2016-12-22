@@ -1,3 +1,7 @@
-<switch  name="enabled" ng-model="ctrl.inDesignMode" on="ON" off="OFF" class="green">
+<!--switch  name="enabled" ng-model="ctrl.inDesignMode" on="ON" off="OFF" class="green">
     <span class="read-aloud">{{"configbar.icon.description" | translate}}</span>
-</switch>
+</switch-->
+<button type="button" class="btn btn-default btn-info btn-sm" ng-click="ctrl.togleDesignMode()" class="green">
+<i class="fa fa-calendar fa-fw"></i>
+{{ctrl.label()}}
+</button>

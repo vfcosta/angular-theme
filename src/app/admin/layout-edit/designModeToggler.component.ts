@@ -24,4 +24,17 @@ export class DesignModeTogglerComponent {
     set inDesignMode(value: boolean) {
         this.designModeService.setInDesignMode(value);
     };
+
+    label() {
+        if (this.designModeService.isInDesignMode()) {
+            return "Preview Mode"
+        } else {
+            return "Edit Mode";
+        }
+    }
+
+    togleDesignMode() {
+        var value = this.designModeService.isInDesignMode();
+        this.designModeService.setInDesignMode(!value);
+    }
 }
