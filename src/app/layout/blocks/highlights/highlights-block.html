@@ -7,13 +7,8 @@
       <div class="carousel-caption">
         <div class="caption">
           <div class='title'>
-            <a ng-href="{{slide.address}}" noosfero-editable="ctrl.designMode" noosfero-editable-text="slide.title" e-placeholder='{{"edit.inline.title" | translate}}'>
-              {{slide.title || (edit.inline.title | translate) }}
-            </a>
-          </div>
-          <div class='link' ng-if="ctrl.designMode">
-            <a href="" editable-text="slide.address" e-placeholder='{{"edit.inline.link" | translate}}'>
-              {{slide.address || (edit.inline.link | translate) }}
+            <a ng-href="{{slide.address}}">
+              <noosfero-editable-link [link]="slide" [design-mode]="ctrl.designMode"></noosfero-editable-link>
             </a>
           </div>
         </div>
