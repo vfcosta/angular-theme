@@ -1,4 +1,4 @@
-$font-color: #7b7b7b;
+$font-color: #c3c3c3;
 
 noosfero-highlights-block-settings {
   .extra-settings-btn {
@@ -14,7 +14,7 @@ noosfero-highlights-block-settings {
         text-align: center;
       }
       .editable-input {
-        width: 80px;
+        width: 50px;
       }
     }
     .dndPlaceholder {
@@ -23,32 +23,52 @@ noosfero-highlights-block-settings {
     }
     .new-slide {
       color: $font-color;
-      margin-left: 20px;
-      &:hover {
+      text-align: center;
+      padding-top: 30px;
+      &:hover, &:focus {
         color: darken($font-color, 10%);
       }
     }
     .slide {
       position: relative;
       display: inline-block;
-      float: none;
       vertical-align: top;
-      .remove {
-        @extend .btn;
-        @extend .btn-danger;
-        @extend .btn-xs;
+
+      &.ng-enter {
+        animation: 0.5s lightSpeedIn ease;
+      }
+
+      &.ng-leave {
+        animation: 0.5s lightSpeedOut ease;
+      }
+
+      .actions {
         position: absolute;
         top: 7px;
-        right: 22px;
+        right: 7px;
+        .remove {
+          @extend .btn;
+          @extend .btn-xs;
+          @extend .btn-danger;
+        }
       }
       .thumbnail {
         height: 150px;
         img {
           max-height: 100%;
         }
+        overflow: hidden;
       }
       &.dndDraggingSource {
         display: none;
+      }
+      .hovereffect {
+        .container-camera {
+          bottom: 30px;
+        }
+        img {
+          width: auto;
+        }
       }
     }
   }

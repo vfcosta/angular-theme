@@ -8,13 +8,26 @@
     <div class="row" dnd-list="ctrl.images">
       <div class="dndPlaceholder col-xs-6 col-md-3 slide"></div>
       <div class="col-xs-6 col-md-3 slide" ng-repeat="slide in ctrl.images" dnd-draggable="slide" dnd-moved="ctrl.images.splice($index, 1)" dnd-effect-allowed="move">
-        <a class="thumbnail" ng-click="ctrl.selectSlide($index)" href>
-          <img ng-src="{{slide.image_src}}">
-        </a>
-        <a href ng-click="ctrl.removeSlide($index)" class="remove"><i class="fa fa-remove"></i></a>
+
+        <div class="hovereffect">
+          <a class="thumbnail" ng-click="ctrl.selectSlide($index)" href>
+            <img ng-src="{{slide.image_src}}">
+          </a>
+          <div class="actions">
+            <a href ng-click="ctrl.removeSlide($index)" class="remove"><i class="fa fa-remove"></i></a>
+          </div>
+
+          <div class="container-camera">
+              <div ngf-select="ctrl.fileSelected($file, slide)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
+                  data-target=".crop-dialog">
+                  <a href="" class="fa fa-camera upload-camera"></a>
+              </div>
+          </div>
+        </div>
       </div>
-      <div class="slide">
-        <a class="new-slide" ng-click="ctrl.addSlide()" href>
+
+      <div class="col-xs-6 col-md-3 slide">
+        <a class="thumbnail new-slide" ng-click="ctrl.addSlide()" href>
           <i class="fa fa-plus fa-5x"></i>
         </a>
       </div>

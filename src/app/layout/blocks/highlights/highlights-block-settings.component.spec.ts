@@ -8,6 +8,8 @@ const htmlTemplate: string = '<noosfero-highlights-block-settings  [block]="ctrl
 describe("Highlights Block Settings Component", () => {
 
     let helper: ComponentTestHelper<HighlightsBlockSettingsComponent>;
+    let blockService = jasmine.createSpyObj("BlockService", ["uploadImages"]);
+    let modal = jasmine.createSpyObj("$uibModal", ["open"]);
 
     beforeEach(() => {
         angular.mock.module("templates");
@@ -19,10 +21,15 @@ describe("Highlights Block Settings Component", () => {
             directives: [HighlightsBlockSettingsComponent],
             properties: {
                 block: {
-                    settings: { interval: 2, shuffle: true, block_images: [{ image_src: "image.png" }] }
+                    settings: { interval: 2, shuffle: true },
+                    api_content: { slides: [{ image_src: "image.png" }] }
                 }
             },
-            providers: [helpers.createProviderToValue('TranslatorService', helpers.mocks.translatorService)]
+            providers: [
+                helpers.createProviderToValue('TranslatorService', helpers.mocks.translatorService),
+                helpers.createProviderToValue('BlockService', blockService),
+                helpers.createProviderToValue('$uibModal', modal)
+            ]
         });
         helper = new ComponentTestHelper<HighlightsBlockSettingsComponent>(cls, done);
     });
@@ -34,13 +41,13 @@ describe("Highlights Block Settings Component", () => {
     it("add an empty slide", () => {
         helper.component.addSlide();
         helper.detectChanges();
-        expect(helper.all(".highlights-block-settings .slide .thumbnail").length).toEqual(2);
+        expect(helper.all(".highlights-block-settings .slide .thumbnail img").length).toEqual(2);
     });
 
     it("remove slide", () => {
         helper.component.removeSlide(0);
         helper.detectChanges();
-        expect(helper.all(".highlights-block-settings .slide .thumbnail").length).toEqual(0);
+        expect(helper.all(".highlights-block-settings .slide .thumbnail img").length).toEqual(0);
     });
 
     it("update active slide on selection", () => {
@@ -49,8 +56,18 @@ describe("Highlights Block Settings Component", () => {
     });
 
     it("default to empty array when there is no block images", () => {
-        (<any>helper.component.block.settings).block_images = null;
+        helper.component.block.api_content = { slides: null };
         helper.component.ngOnInit();
         expect(helper.component.images).toEqual([]);
+    });
+
+    it("do nothing when no file was selected", () => {
+        helper.component.fileSelected(null, null, null);
+        expect(modal.open).not.toHaveBeenCalled();
+    });
+
+    it("open modal when a file was selected", () => {
+        helper.component.fileSelected("file", {}, {});
+        expect(modal.open).toHaveBeenCalled();
     });
 });

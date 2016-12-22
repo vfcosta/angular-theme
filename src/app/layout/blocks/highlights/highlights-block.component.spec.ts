@@ -43,13 +43,13 @@ describe("Highlights Block Component", () => {
     });
 
     it("render highlights block if there are images on block", () => {
-        (<any>helper.component.block.settings).block_images = [{ id: 1 }];
+        helper.component.block.api_content = { slides: [{ id: 1 }] };
         helper.component.ngOnInit();
         expect(helper.component.block.hide).toBeFalsy();
     });
 
     it("not render highlights block if images array is empty", () => {
-        (<any>helper.component.block.settings).block_images = [];
+        helper.component.block.api_content = { slides: [] };
         helper.component.ngOnInit();
         expect(helper.component.block.hide).toBeTruthy();
     });
