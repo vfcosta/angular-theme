@@ -1,8 +1,13 @@
 noosfero-video-plugin-video-block {
   .video-block {
     height: 400px;
+  }
+}
+
+.noosfero-design-on noosfero-video-plugin-video-block {
+  .video-block
     .after {
-      position: absolute;      
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
