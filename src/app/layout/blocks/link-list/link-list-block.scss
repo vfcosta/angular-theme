@@ -1,28 +1,28 @@
-.icon-event {
+.icon.event {
   @extend .fa-calendar;
 }
-.icon-photos {
+.icon.photos {
   @extend .fa-photo;
 }
-.icon-edit {
+.icon.edit {
   @extend .fa-edit;
 }
-.icon-ok {
+.icon.ok {
   @extend .fa-check;
 }
-.icon-send {
+.icon.send {
   @extend .fa-send-o;
 }
-.icon-menu-people {
+.icon.menu-people {
   @extend .fa-user;
 }
-.icon-forum {
+.icon.forum {
   @extend .fa-users;
 }
-.icon-new {
+.icon.new {
   @extend .fa-file-o;
 }
-.icon-save {
+.icon.save {
   @extend .fa-save;
 }
 
@@ -30,5 +30,36 @@
   a i {
     line-height: 25px;
     color: #949494;
+  }
+
+  .design-mode {
+    margin-bottom: 4px;
+    &:hover {
+      background-color: #dcdcdc;
+      cursor: move;
+    }
+  }
+
+  .link-edition {
+    margin-bottom: 5px;
+
+    .link-address-edition {
+      display: inline-block;
+      font-size: 12px;
+      color: #848484;
+      border-bottom-color: #848484;
+    }
+    .remove-link {
+      margin-left: 14px;
+    }
+  }
+  .new-link {
+    text-align: right;
+    width: 100%;
+  }
+  .dndPlaceholder {
+    width: 100%;
+    height: 30px;
+    background-color: #dcdcdc;
   }
 }

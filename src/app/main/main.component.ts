@@ -28,6 +28,8 @@ import { ProfileImagesPluginProfileImagesBlockComponent } from "../layout/blocks
 import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
+import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
+import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
 import { CommunitiesBlockComponent } from "../layout/blocks/communities/communities-block.component";
@@ -138,23 +140,17 @@ export class EnvironmentContent {
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
-        HighlightsBlockComponent, EditableDirective
+        HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
-        "ngAnimate", "ngCookies", "ngStorage", "ngTouch",
-        "ngSanitize", "ngMessages", "ngAria", "restangular",
-        "ui.router", "ui.bootstrap", "toastr", "ngCkeditor",
-        "angular-bind-html-compile", "angularMoment", "angular.filter", "akoenig.deckgrid",
-        "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
-        "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad",
-        "angular-click-outside", "ngTagCloud", "noosfero.init", "uiSwitch",
-        "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if", "xeditable",
-        "com.2fdevs.videogular",
-        "com.2fdevs.videogular.plugins.controls",
-        "com.2fdevs.videogular.plugins.overlayplay",
-        "com.2fdevs.videogular.plugins.poster",
-        "com.2fdevs.videogular.plugins.buffering",
-        "info.vietnamcode.nampnq.videogular.plugins.youtube"]
+        "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
+        "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment", 
+        "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
+        "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud", 
+        "noosfero.init", "uiSwitch", "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if", 
+        "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
+        "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
+        "info.vietnamcode.nampnq.videogular.plugins.youtube", 'dndLists']
 })
 @StateConfig([
     {

@@ -119,6 +119,7 @@
   "auth.forgot_password.button.send_instructions": "Send instructions",
   "has already been taken": "has already been taken",
   "edit.inline.title": "Enter title",
+  "edit.inline.link": "Edit link",
   "identifier": "identifier",
   "is invalid": "is invalid",
   "is not available.": "is not available",
@@ -234,5 +235,11 @@
   "layout-config.template.rightbar": "Right bar",
   "layout-config.template.leftbottom": "Left and bottom bar",
   "layout-config.template.nosidebars": "No sidebars",
-  "layout-config.apply": "Apply"
-  }
+  "layout-config.apply": "Apply",
+  "layout-config.apply.success.message": "Layout template saved!",
+  "layout-config.apply.success.title": "Good job!",
+  "editable-link.form.name": "Title",
+  "editable-link.form.address": "Address",
+  "editable-link.form.ok": "Ok",
+  "editable-link.form.cancel": "Cancel"
+}

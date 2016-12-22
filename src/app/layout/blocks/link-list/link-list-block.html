@@ -1,10 +1,16 @@
-<div class="link-list-block">
-  <div ng-repeat="link in ctrl.links">
+<div class="link-list-block" dnd-list="ctrl.links" dnd-disable-if="!ctrl.designMode">
+  <div class="dndPlaceholder"></div>
+  <div ng-repeat="link in ctrl.links" dnd-draggable="link" dnd-moved="ctrl.links.splice($index, 1)" dnd-effect-allowed="move" ng-class="{'design-mode': ctrl.designMode}">
     <a ng-href="{{link.address | noosferoTemplate:{profile: ctrl.owner.identifier} }}">
-      <i class="fa fa-fw icon-{{link.icon}}"></i>
-      <span noosfero-editable="ctrl.designMode" noosfero-editable-text="link.name">
-        {{link.name}}
-      </span>
+      <i ng-if="!ctrl.designMode" class="fa fa-fw icon {{link.icon}}"></i>
+      <noosfero-icon-picker ng-if="ctrl.designMode" [(current-icon)]="link.icon"></noosfero-icon-picker>
+      <noosfero-editable-link [link]="link" [design-mode]="ctrl.designMode" [popup-open]="ctrl.isNewLink($index)"></noosfero-editable-link>
     </a>
+    <span class="remove-link" ng-if="ctrl.designMode">
+      <a href="" (click)="ctrl.removeLink($index)" class="btn btn-xs"><i class="fa fa-fw fa-remove"></i></a>
+    </span>
+  </div>
+  <div class="new-link" ng-if="ctrl.designMode">
+    <a href="" (click)="ctrl.addLink()" class="btn btn-xs"><i class="fa fa-fw fa-plus"></i> New link</a>
   </div>
 </div>
