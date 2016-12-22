@@ -1,5 +1,21 @@
 noosfero-video-plugin-video-block {
   .video-block {
     height: 400px;
+    .after {
+      position: absolute;      
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: none;
+      color: #FFF;
+      z-index: 100;
+      font-size: 7em;
+      text-align: center;
+    }
+    :hover .after {
+      display: block;
+      background: rgba(0, 0, 0, .6);
+    }
   }
 }
