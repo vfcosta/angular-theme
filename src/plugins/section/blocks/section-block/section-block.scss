@@ -25,10 +25,25 @@
     }
     .section_image{
         width: 3.5em;
+        height: 3.5em;
+    }
+
+    .section_image_block{
+        width: 3.5em;
+    }
+
+    .section_text_block{
+        padding-top: 1pc;
+        padding-left: 2pc;
+    }
+
+    .row
+    {
+        vertical-align: middle;
     }
    
     .hovereffect {
-        width:100%;
+        width:inherit;
         height:100%;
         float:left;
         overflow:hidden;
