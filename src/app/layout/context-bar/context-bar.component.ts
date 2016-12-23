@@ -12,7 +12,7 @@ import { DesignModeService } from "../../shared/services/design-mode.service";
     selector: "context-bar",
     templateUrl: "app/layout/context-bar/context-bar.html"
 })
-@Inject("$scope", EventsHubService, BlockService, NotificationService, DesignModeService, ProfileService, EnvironmentService)
+@Inject("$state", "$scope", EventsHubService, BlockService, NotificationService, DesignModeService, ProfileService, EnvironmentService)
 export class ContextBarComponent {
 
     @Input() owner: noosfero.Profile | noosfero.Environment;
@@ -25,7 +25,8 @@ export class ContextBarComponent {
     originalCustomHeader: string;
     originalCustomFooter: string;
 
-    constructor(private $scope: ng.IScope,
+    constructor(private $state: ng.ui.IStateService,
+        private $scope: ng.IScope,
         private eventsHubService: EventsHubService,
         private blockService: BlockService,
         private notificationService: NotificationService,
@@ -68,8 +69,13 @@ export class ContextBarComponent {
 
     apply() {
         Promise.all([this.applyBlockChanges(), this.applyLayoutTemplate(), this.applyCustomContentChanges()]).then(() => {
-            this.notificationService.success({ title: "configbar.edition.apply.success.title", message: "configbar.edition.apply.success.message" });
+            this.notificationService.success({ title: "contextbar.edition.apply.success.title", message: "contextbar.edition.apply.success.message" });
         });
+    }
+
+    //FIXME make this test
+    discard() {
+        this.notificationService.success({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
     }
 
     applyLayoutTemplate() {
