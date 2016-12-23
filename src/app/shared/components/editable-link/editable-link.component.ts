@@ -6,7 +6,8 @@ import { Component, Input } from "ng-forward";
 })
 export class EditableLinkComponent {
 
-    @Input() link: any;
+    @Input() name: string;
+    @Input() address: string;
     @Input() designMode: boolean;
     @Input() popupOpen = false;
 
@@ -17,8 +18,8 @@ export class EditableLinkComponent {
     }
 
     save() {
-        this.link.name = this.modifiedLink.name;
-        this.link.address = this.modifiedLink.address;
+        this.name = this.modifiedLink.name;
+        this.address = this.modifiedLink.address;
         this.popupOpen = false;
     }
 
@@ -28,6 +29,6 @@ export class EditableLinkComponent {
     }
 
     copyLink() {
-        this.modifiedLink = JSON.parse(JSON.stringify(this.link));
+        this.modifiedLink = { name: this.name, address: this.address };
     }
 }

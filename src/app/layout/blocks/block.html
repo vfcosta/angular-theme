@@ -11,5 +11,8 @@
     <div class="panel-body {{ctrl.blockClass()}}" >
       <noosfero-block-content [design-mode]="ctrl.designMode" [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-content>
     </div>
+    <div class="panel-footer {{ctrl.blockClass()}}" ng-if='ctrl.designMode'>
+      <noosfero-block-settings [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-settings>
+    </div>
   </div>
 </div>

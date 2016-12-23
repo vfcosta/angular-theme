@@ -1,0 +1,75 @@
+$font-color: #c3c3c3;
+
+noosfero-highlights-block-settings {
+  .extra-settings-btn {
+    @extend .btn;
+    @extend .btn-sm;
+  }
+  .slides {
+    .transition-setting {
+      margin-bottom: 15px;
+      .editable {
+        min-width: 15px;
+        display: inline-block;
+        text-align: center;
+      }
+      .editable-input {
+        width: 50px;
+      }
+    }
+    .dndPlaceholder {
+      height: 150px;
+      background-color: #dcdcdc;
+    }
+    .new-slide {
+      color: $font-color;
+      text-align: center;
+      padding-top: 30px;
+      &:hover, &:focus {
+        color: darken($font-color, 10%);
+      }
+    }
+    .slide {
+      position: relative;
+      display: inline-block;
+      vertical-align: top;
+
+      &.ng-enter {
+        animation: 0.5s lightSpeedIn ease;
+      }
+
+      &.ng-leave {
+        animation: 0.5s lightSpeedOut ease;
+      }
+
+      .actions {
+        position: absolute;
+        top: 7px;
+        right: 7px;
+        .remove {
+          @extend .btn;
+          @extend .btn-xs;
+          @extend .btn-danger;
+        }
+      }
+      .thumbnail {
+        height: 150px;
+        img {
+          max-height: 100%;
+        }
+        overflow: hidden;
+      }
+      &.dndDraggingSource {
+        display: none;
+      }
+      .hovereffect {
+        .container-camera {
+          bottom: 30px;
+        }
+        img {
+          width: auto;
+        }
+      }
+    }
+  }
+}

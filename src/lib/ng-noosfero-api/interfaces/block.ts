@@ -7,5 +7,6 @@ namespace noosfero {
         hide: boolean;
         title: string;
         type: string;
+        images: Image[];
     }
 }

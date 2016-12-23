@@ -10,6 +10,7 @@ import { PasswordComponent } from "../login/new-password.component";
 import { ProfileComponent } from "../profile/profile.component";
 import { BoxesComponent } from "../layout/boxes/boxes.component";
 import { BlockContentComponent } from "../layout/blocks/block-content.component";
+import { BlockSettingsComponent } from "../layout/blocks/block-settings.component";
 import { BlockComponent } from "../layout/blocks/block.component";
 import { EnvironmentComponent } from "../environment/environment.component";
 import { EnvironmentHomeComponent } from "../environment/environment-home.component";
@@ -30,6 +31,7 @@ import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
 import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
 import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
+import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
 import { CommunitiesBlockComponent } from "../layout/blocks/communities/communities-block.component";
@@ -131,7 +133,7 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
-        EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
+        BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
@@ -140,14 +142,14 @@ export class EnvironmentContent {
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
-        HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent
+        HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
-        "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment", 
+        "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
-        "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud", 
-        "noosfero.init", "uiSwitch", "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if", 
+        "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",
+        "noosfero.init", "uiSwitch", "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if",
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", 'dndLists']

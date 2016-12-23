@@ -10,11 +10,12 @@ export class HighlightsBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
+    @Input() designMode: boolean;
 
     images: any;
 
     ngOnInit() {
-        this.images = (<any>this.block.settings).block_images;
+        this.images = (<any>this.block.api_content || {}).slides || [];
         if ((<any>this.block.settings).shuffle) {
             this.images = _.shuffle(this.images);
         }
@@ -29,10 +30,12 @@ export class HighlightsBlockComponent {
     }
 
     getTransitionInterval() {
+        if (this.designMode) return 0;
         return (<any>this.block.settings).interval * 1000;
     }
 
     hideControls() {
         return !(<any>this.block.settings).navigation;
     }
+
 }

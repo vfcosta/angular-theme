@@ -1,13 +1,17 @@
 <div class="highlights-block">
-  <div uib-carousel ng-class="{'no-controls': ctrl.hideControls()}" class="carousel" active="0" interval="ctrl.getTransitionInterval()" no-wrap="false">
-    <div uib-slide ng-repeat="slide in ctrl.images | filter:{image_src: ''}" index="$index">
+  <div uib-carousel ng-class="{'no-controls': ctrl.hideControls()}" class="carousel" active="ctrl.block.active" interval="ctrl.getTransitionInterval()" no-wrap="false">
+    <div uib-slide ng-repeat="slide in ctrl.images" index="$index">
       <a ng-href="{{slide.address}}" target="{{ctrl.getTarget(slide)}}" class="image-link">
         <img ng-src="{{slide.image_src}}" class="img-responsive">
       </a>
       <div class="carousel-caption">
-        <a ng-href="{{slide.address}}" target="{{ctrl.getTarget(slide)}}" class="title">
-          {{slide.title}}
-        </a>
+        <div class="caption">
+          <div class='title'>
+            <a ng-href="{{slide.address}}">
+              <noosfero-editable-link [(name)]="slide.title" [(address)]="slide.address" [design-mode]="ctrl.designMode"></noosfero-editable-link>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

@@ -1,0 +1,45 @@
+<div class="highlights-block-settings">
+  <a href="" ng-click="ctrl.isCollapsed = !ctrl.isCollapsed" class="extra-settings-btn">
+    <i class="fa fa-caret-down"></i> {{ "block.edition.extra_config" | translate }}
+  </a>
+
+	<div uib-collapse="ctrl.isCollapsed" class="slides">
+
+    <div class="row" dnd-list="ctrl.images">
+      <div class="dndPlaceholder col-xs-6 col-md-3 slide"></div>
+      <div class="col-xs-6 col-md-3 slide" ng-repeat="slide in ctrl.images" dnd-draggable="slide" dnd-moved="ctrl.images.splice($index, 1)" dnd-effect-allowed="move">
+
+        <div class="hovereffect">
+          <a class="thumbnail" ng-click="ctrl.selectSlide($index)" href>
+            <img ng-src="{{slide.image_src}}">
+          </a>
+          <div class="actions">
+            <a href ng-click="ctrl.removeSlide($index)" class="remove"><i class="fa fa-remove"></i></a>
+          </div>
+
+          <div class="container-camera">
+              <div ngf-select="ctrl.fileSelected($file, slide)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
+                  data-target=".crop-dialog">
+                  <a href="" class="fa fa-camera upload-camera"></a>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-6 col-md-3 slide">
+        <a class="thumbnail new-slide" ng-click="ctrl.addSlide()" href>
+          <i class="fa fa-plus fa-5x"></i>
+        </a>
+      </div>
+    </div>
+
+    <div class="transition-setting form-inline">
+      <div class="form-group">
+        <span>{{"highlights-block.edition.transition.label" | translate}}</span>
+        <span editable-number="ctrl.block.settings.interval">{{ctrl.block.settings.interval || 0}}</span>
+        <span>{{"highlights-block.edition.transition.seconds" | translate:{interval: ctrl.block.settings.interval}:"messageformat"}}</span>
+      </div>
+    </div>
+
+	</div>
+</div>

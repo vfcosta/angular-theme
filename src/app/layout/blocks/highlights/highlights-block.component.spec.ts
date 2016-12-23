@@ -43,15 +43,26 @@ describe("Highlights Block Component", () => {
     });
 
     it("render highlights block if there are images on block", () => {
-        (<any>helper.component.block.settings).block_images = [{ id: 1 }];
+        helper.component.block.api_content = { slides: [{ id: 1 }] };
         helper.component.ngOnInit();
         expect(helper.component.block.hide).toBeFalsy();
     });
 
     it("not render highlights block if images array is empty", () => {
-        (<any>helper.component.block.settings).block_images = [];
+        helper.component.block.api_content = { slides: [] };
         helper.component.ngOnInit();
         expect(helper.component.block.hide).toBeTruthy();
     });
 
+    it("transition interval should be zero in design mode", () => {
+        (<any>helper.component.block.settings).interval = 5;
+        helper.component.designMode = true;
+        expect(helper.component.getTransitionInterval()).toEqual(0);
+    });
+
+    it("return transition interval in miliseconds when not in design mode", () => {
+        (<any>helper.component.block.settings).interval = 5;
+        helper.component.designMode = false;
+        expect(helper.component.getTransitionInterval()).toEqual(5000);
+    });
 });

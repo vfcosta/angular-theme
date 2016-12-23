@@ -1,12 +1,11 @@
 {
   "name": "angular",
-  "dependencies": {
-  },
   "devDependencies": {},
   "globalDependencies": {
     "angular": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular.d.ts#1c4a34873c9e70cce86edd0e61c559e43dfa5f75",
     "angular-dynamic-locale": "github:DefinitelyTyped/DefinitelyTyped/angular-dynamic-locale/angular-dynamic-locale.d.ts#42ab06c354ccbadeafa60df1efc76b81a22809b1",
     "angular-mocks": "github:DefinitelyTyped/DefinitelyTyped/angularjs/angular-mocks.d.ts#ea24441ae4b3a413dbde70adc7b3f8e640258bb6",
+    "ng-file-upload": "github:DefinitelyTyped/DefinitelyTyped/ng-file-upload/ng-file-upload.d.ts#541e24b685e257ca23b747c231fbeceaf464ae8d",
     "angular-toastr": "github:DefinitelyTyped/DefinitelyTyped/angular-toastr/angular-toastr.d.ts#5a66911a99a4c13ecf4f38c3f574e32339e24de9",
     "angular-translate": "github:DefinitelyTyped/DefinitelyTyped/angular-translate/angular-translate.d.ts#19850bf86c876e0c2544842114878ece4664941a",
     "angular-ui-bootstrap": "github:DefinitelyTyped/DefinitelyTyped/angular-ui-bootstrap/angular-ui-bootstrap.d.ts#541e24b685e257ca23b747c231fbeceaf464ae8d",
