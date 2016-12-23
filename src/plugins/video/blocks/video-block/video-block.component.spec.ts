@@ -22,6 +22,9 @@ describe("Components", () => {
                         api_content: {
                             url: "https://someurlvideo",
                             mime_type: ''
+                        },
+                        settings: {
+                            url: "https://someurlvideo"
                         }
                     }
                 }
@@ -29,7 +32,7 @@ describe("Components", () => {
             helper = new ComponentTestHelper<VideoBlockComponent>(cls, done);
         });
 
-        it("should have config url equals to block url paramter", () => {
+        it("should have config url equals to block url parameter", () => {
             expect(helper.component.config.sources).toContain({ src: "https://someurlvideo", type: '' });
         });
 
@@ -37,21 +40,26 @@ describe("Components", () => {
             expect(helper.all("videogular").length).toEqual(1);
         });
 
-        it("not render block if config has no api_content", () => {
-            (<any>helper.component.block).api_content = {};
-            helper.component.ngOnInit();
+        it("hide attribute block is false by default", () => {
+            expect(helper.component.block.hide).toBeFalsy();
+        });
+
+        it("not render block if config has no settings", () => {
+            (<any>helper.component.block).settings = {};
+            helper.detectChanges();
             expect(helper.component.block.hide).toBeTruthy();
         });
 
-        it("not render block if config has no url in api_content", () => {
-            (<any>helper.component.block).api_content = { url: '' };
-            helper.component.ngOnInit();
+        it("not render block if config has no url in settings", () => {
+            (<any>helper.component.block.settings).url = '';
+            helper.detectChanges();
             expect(helper.component.block.hide).toBeTruthy();
         });
 
         it("not render block if config has api_content equals to null", () => {
             (<any>helper.component.block).api_content = null;
             helper.component.ngOnInit();
+            helper.detectChanges();
             expect(helper.component.block.hide).toBeTruthy();
         });
     });
