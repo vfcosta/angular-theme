@@ -35,8 +35,8 @@ export class SectionBlockComponent {
 
     ngOnInit() {
         if (this.block && this.block.settings) {
-            this.font_color = this.block.settings.font_color.trim();
-            this.background_color = this.block.settings.background_color.trim();
+            this.font_color = this.block.settings.font_color;
+            this.background_color = this.block.settings.background_color;
         }
     }
 
