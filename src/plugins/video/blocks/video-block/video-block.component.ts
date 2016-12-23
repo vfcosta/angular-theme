@@ -18,7 +18,7 @@ export class VideoBlockComponent {
     ngOnInit() {
         this.$scope.$watch(() => { return this.block.settings.url; }, () => {
             this.block.hide = true;
-            if (this.block && this.block.settings && this.block.settings.url && this.block.api_content) {                
+            if (this.block && this.block.settings && this.block.settings.url && this.block.api_content) {
                 this.config = {
                     sources: [
                         { src: this.block.settings.url, type: this.block.api_content.mime_type }
