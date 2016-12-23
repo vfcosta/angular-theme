@@ -1,0 +1,18 @@
+context-bar {
+  .config-option {
+		display: inline-block;
+		&.apply {
+			display: inline-block;
+			.btn {
+				@extend .btn-xs;
+				margin-left: 16px;
+				&.ng-hide-add {
+					animation: 0.5s lightSpeedOut ease;
+				}
+				&.ng-hide-remove {
+					animation: 	0.5s lightSpeedIn ease;
+				}
+			}
+		}
+	}
+}

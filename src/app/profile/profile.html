@@ -1,7 +1,5 @@
-<div id="context-bar">
-  <profile-actions [profile]="vm.profile"></profile-actions>
-  <config-bar ng-if="vm.profile" [owner]="vm.profile"></config-bar>
-</div>
+<context-bar ng-if="vm.profile" [owner]="vm.profile"></context-bar>
+
 <div class="boxes-container profile-container">
   <div class="row">
     <custom-content class="profile-header"
