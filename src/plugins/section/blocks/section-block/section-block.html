@@ -1,4 +1,23 @@
-<div class="section" style="{{ctrl.colors()}}">
-  <span class="name" ng-bind="ctrl.name"></span>
-  <span ng-if="ctrl.description" class="description" ng-bind="ctrl.description"></span>
+<div class="section section-yellow" style="{{ctrl.colors()}}">
+  <div class="row">
+    <div class="section_image_block col-xs-6">
+      <img ng-if="!ctrl.designMode" ng-src="{{ctrl.getSectionImage().url}}" class="img-circle section_image">
+      <div class="hovereffect" ng-if="ctrl.designMode">
+        <img ng-if="ctrl.getSectionImage()" ng-src="{{ctrl.getSectionImage().url}}" class="img-circle section_image">
+        <i class="fa {{ctrl.defaultIcon}} {{ctrl.iconSize}}"></i>
+        <div class='container-camera'>
+          <div ngf-select="ctrl.fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
+            data-target=".crop-dialog">
+            <a href="" class="fa fa-camera upload-camera"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="section_text_block col-xs-10">
+      <span class="name" e-class="form-control input-sm" edit-disabled="!ctrl.designMode" editable-text="ctrl.block.settings.name"
+        e-placeholder='{{"edit.inline.section_name" | translate}}'>{{ ctrl.block.settings.name || ("edit.inline.section_name" | translate) }}</span>
+      <span class="description" e-class="form-control input-sm" edit-disabled="!ctrl.designMode" editable-text="ctrl.block.settings.description"
+        e-placeholder='{{"edit.inline.section_description" | translate}}'>{{ ctrl.block.settings.description || ("edit.inline.section_description" | translate) }}</span>
+    </div>
+  </div>
 </div>

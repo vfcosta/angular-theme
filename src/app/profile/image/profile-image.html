@@ -1,6 +1,6 @@
 <div ng-if="ctrl.isEditable()">
     <div class="profile-image-wrap" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)">
-        <div class="hovereffect   ">
+        <div class="hovereffect">
             <i ng-if="!ctrl.profile.image" alt='{{"profile.image.description" | translate}}' class="fa {{ctrl.defaultIcon}} {{ctrl.iconSize}} profile-image"></i>
             <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image img-circle">
             <div class='container-camera'>
