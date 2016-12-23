@@ -10,12 +10,13 @@ noosfero-video-plugin-video-block {
 .noosfero-design-on noosfero-video-plugin-video-block {
   .video-block {
     .overlay {
+      display: block;
+      background: rgba(0, 0, 0, .6);
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      display: none;
       color: #FFF;
       z-index: 100;
       font-size: 5em;
@@ -34,8 +35,17 @@ noosfero-video-plugin-video-block {
         .editable-empty:hover{
           font-style: normal;
         }
-        .editable-controls{
-          font-size: medium;
+        form {
+          width: 100%;
+          .editable-controls{
+            font-size: medium;
+            width: 100%;
+            display: inline-block;
+            .editable-input {
+              width: 60%;
+              background-color: #171717;
+            }
+          }
         }
       }
     }
