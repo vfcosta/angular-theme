@@ -63,7 +63,25 @@ describe("Components", () => {
             expect(helper.component.colors()).toContain("background-color: #C0C0C0;");
         });
 
-        // it("should return the uploaded image")
+        it("should return the uploaded image", () => {
+            
+        });
+
+        it("should show the image uploaded", () => {
+            
+        });
+
+        it("should update the text", () => {
+            
+        });
+
+        it("should show the tip when the name is empty", () => {
+            
+        });
+
+        it("should show the tip when the description is empty", () => {
+            
+        });
 
     });
 });
