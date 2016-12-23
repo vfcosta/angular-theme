@@ -4,7 +4,7 @@
     <a ng-href="{{link.address | noosferoTemplate:{profile: ctrl.owner.identifier} }}">
       <i ng-if="!ctrl.designMode" class="fa fa-fw icon {{link.icon}}"></i>
       <noosfero-icon-picker ng-if="ctrl.designMode" [(current-icon)]="link.icon"></noosfero-icon-picker>
-      <noosfero-editable-link [link]="link" [design-mode]="ctrl.designMode" [popup-open]="ctrl.isNewLink($index)"></noosfero-editable-link>
+      <noosfero-editable-link [(name)]="link.name" [(address)]="link.address" [design-mode]="ctrl.designMode" [popup-open]="ctrl.isNewLink($index)"></noosfero-editable-link>
     </a>
     <span class="remove-link" ng-if="ctrl.designMode">
       <a href="" (click)="ctrl.removeLink($index)" class="btn btn-xs"><i class="fa fa-fw fa-remove"></i></a>
