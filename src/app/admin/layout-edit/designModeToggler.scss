@@ -1,5 +1,33 @@
 @import "../../layout/scss/mixins";
 
+
+design-toggler{
+  .button-edit-mode{
+    @extend .btn;
+    @extend .btn-default;
+    @extend .btn-sm;
+    .icon-edit-mode{
+      @extend .fa;
+      @extend .fa-pencil-square-o;
+      @extend .fa-fw;
+    }
+  }
+
+  .button-preview-mode{
+    @extend .btn;
+    @extend .btn-primary;
+    @extend .btn-sm;
+    .icon-preview-mode{
+      @extend .fa;
+      @extend .fa-eye;
+      @extend .fa-fw;
+    }
+  }
+
+
+}
+
+//See if the code above is necessary
 $off-text: #949494;
 $off-color: #EFEFEF;
 $blue-color: #36B4F6;

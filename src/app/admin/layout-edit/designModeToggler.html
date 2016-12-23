@@ -1,7 +1,13 @@
 <!--switch  name="enabled" ng-model="ctrl.inDesignMode" on="ON" off="OFF" class="green">
     <span class="read-aloud">{{"configbar.icon.description" | translate}}</span>
 </switch-->
-<button type="button" class="btn btn-default btn-info btn-sm" ng-click="ctrl.togleDesignMode()" class="green">
-<i class="fa fa-calendar fa-fw"></i>
-{{ctrl.label()}}
+
+<button ng-if='ctrl.inDesignMode' type="button" class="button-preview-mode" ng-click="ctrl.togleDesignMode()">
+  <i class='icon-preview-mode'></i>
+  {{ 'design-toggler.preview.mode' | translate }}
+</button>
+
+<button ng-if='!ctrl.inDesignMode' type="button" class="button-edit-mode" ng-click="ctrl.togleDesignMode()">
+  <i class='icon-edit-mode'></i>
+  {{ "design-toggler.edit.mode"  | translate }}
 </button>

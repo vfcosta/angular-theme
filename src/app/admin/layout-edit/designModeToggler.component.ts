@@ -1,6 +1,7 @@
 import {Component, Inject, Input} from 'ng-forward';
 import {DesignModeService} from './designMode.service';
 import {AuthService, AuthEvents} from '../../login';
+import { TranslatorService } from "../../shared/services/translator.service";
 
 @Component({
     selector: 'design-toggler',
@@ -25,16 +26,8 @@ export class DesignModeTogglerComponent {
         this.designModeService.setInDesignMode(value);
     };
 
-    label() {
-        if (this.designModeService.isInDesignMode()) {
-            return "Preview Mode"
-        } else {
-            return "Edit Mode";
-        }
-    }
-
     togleDesignMode() {
-        var value = this.designModeService.isInDesignMode();
+        let value = this.designModeService.isInDesignMode();
         this.designModeService.setInDesignMode(!value);
     }
 }

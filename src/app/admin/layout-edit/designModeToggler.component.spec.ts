@@ -30,13 +30,16 @@ describe('DesignModeToggler Component', () => {
         helper = new ComponentTestHelper<DesignModeTogglerComponent>(cls, done);
     });
 
-    it('changes css classes representing the switch is on or off', () => {
-        let switchEl: INgForwardJQuery = helper.debugElement.query('span.switch');
-
-        expect(switchEl.hasClass('checked')).toBeFalsy();
+    it('display preview button if design mode is edit mode', () => {
         helper.component.inDesignMode = true;
         helper.detectChanges();
-        expect(switchEl.hasClass('checked')).toBeTruthy();
+        expect(helper.all(".button-preview-mode").length).toEqual(1);
+    });
+
+    it('display edit button if design mode is not in edit mode', () => {
+        helper.component.inDesignMode = false;
+        helper.detectChanges();
+        expect(helper.all(".button-edit-mode").length).toEqual(1);
     });
 
     it('emits event with value "true" when changing inDesignMode to On', (done) => {
@@ -61,4 +64,26 @@ describe('DesignModeToggler Component', () => {
         helper.component.inDesignMode = false;
         helper.detectChanges();
     });
+
+    it('emits event with value "true" when toggle design mode', (done) => {
+        designModeService.setInDesignMode(false);
+        designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            expect(designModeOn).toBeTruthy();
+            done();
+        });
+        helper.component.togleDesignMode();
+        helper.detectChanges();
+    });
+
+    it('emits event with value "false" when toggle design mode', (done) => {
+        designModeService.setInDesignMode(true);
+        helper.detectChanges();
+        designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            expect(designModeOn).toBeFalsy();
+            done();
+        });
+        helper.component.togleDesignMode();
+        helper.detectChanges();
+    });
+
 });
