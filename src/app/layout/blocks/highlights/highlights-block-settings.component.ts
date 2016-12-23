@@ -1,13 +1,12 @@
 import { Input, Inject, Component } from "ng-forward";
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
-import { HighlightsBlockImageEditorComponent } from "./highlights-block-image-editor.component";
 
 @Component({
     selector: "noosfero-highlights-block-settings",
     templateUrl: 'app/layout/blocks/highlights/highlights-block-settings.html',
 })
-@Inject(TranslatorService, BlockService, "$scope", "$uibModal")
+@Inject(TranslatorService, BlockService, "$scope", "Upload")
 export class HighlightsBlockSettingsComponent {
 
     @Input() block: noosfero.Block;
@@ -19,7 +18,7 @@ export class HighlightsBlockSettingsComponent {
     constructor(private translatorService: TranslatorService,
         private blockService: BlockService,
         private $scope: ng.IScope,
-        private $uibModal: ng.ui.bootstrap.IModalService) {
+        private Upload: angular.angularFileUpload.IUploadService) {
     }
 
     ngOnInit() {
@@ -47,18 +46,32 @@ export class HighlightsBlockSettingsComponent {
 
     fileSelected(file: any, slide: any, errFiles: any) {
         if (!file) return;
-        this.$uibModal.open({
-            templateUrl: 'app/layout/blocks/highlights/highlights-block-image-editor.html',
-            controller: HighlightsBlockImageEditorComponent,
-            controllerAs: 'ctrl',
-            bindToController: true,
-            backdrop: 'static',
-            resolve: {
-                picFile: file,
-                slide: slide,
-                block: this.block,
-                blockService: this.blockService
-            }
+        this.Upload.dataUrl(file, true).then((dataUrl: any) => {
+            let base64ImagesJson = [this.getBase64ImageJson(dataUrl, file)];
+            this.blockService.uploadImages(this.block, base64ImagesJson).then((result: any) => {
+                this.block.images = result.data.images;
+                if (result.data.images.length > 0) {
+                    let image = result.data.images[result.data.images.length - 1];
+                    slide.image_id = image.id;
+                    slide.image_src = image.url;
+                }
+            });
         });
+    }
+
+    getBase64ImageJson(dataUrl: any, file: any): any {
+        return {
+            tempfile: this.getData(dataUrl),
+            filename: this.getImageName(file.name),
+            type: file.type
+        };
+    }
+
+    getImageName(name: any): string {
+        return this.block.id + "_" + name;
+    }
+
+    getData(dataUrl: any): string {
+        return dataUrl.substring(dataUrl.indexOf('base64,') + 7);
     }
 }
