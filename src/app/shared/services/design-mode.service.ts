@@ -1,5 +1,5 @@
 import { Injectable, Output, EventEmitter, Inject } from 'ng-forward';
-import { INoosferoLocalStorage } from "./../../shared/models/interfaces";
+import { INoosferoLocalStorage } from "..//models/interfaces";
 
 @Injectable()
 @Inject("$localStorage")

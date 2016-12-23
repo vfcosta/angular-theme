@@ -3,8 +3,8 @@ import { AuthEvents } from "../../login/auth-events";
 import { AuthService } from "./../../login/auth.service";
 import { HtmlUtils } from "../html-utils";
 import { INgForwardJQuery } from 'ng-forward/cjs/util/jqlite-extensions';
-import { DesignModeService } from './../../admin/layout-edit/designMode.service';
-import { INoosferoLocalStorage } from "./../../shared/models/interfaces";
+import { DesignModeService } from './design-mode.service';
+import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 export interface StartParams {
     skin?: string;

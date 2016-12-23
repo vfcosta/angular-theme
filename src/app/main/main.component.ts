@@ -47,7 +47,7 @@ import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment
 import { NotificationService } from "../shared/services/notification.service";
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 
-import { BodyStateClassesService } from "./../layout/services/body-state-classes.service";
+import { BodyStateClassesService } from "./../shared/services/body-state-classes.service";
 
 import { Navbar } from "../layout/navbar/navbar";
 

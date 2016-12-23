@@ -3,7 +3,7 @@ import { BlockEditionComponent } from './block-edition/block-edition.component';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService, SessionService, AuthEvents } from "../../login";
 import { TranslatorService } from "../../shared/services/translator.service";
-import { DesignModeService } from "../../admin/layout-edit/designMode.service";
+import { DesignModeService } from "../../shared/services/design-mode.service";
 
 @Component({
     selector: 'noosfero-block',

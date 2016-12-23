@@ -2,7 +2,7 @@ import { Component } from 'ng-forward';
 import { BlockComponent } from './block.component';
 import * as helpers from "../../../spec/helpers";
 import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
-import { DesignModeService } from '../../admin/layout-edit/designMode.service';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 
 const htmlTemplate: string = '<noosfero-block [block]="ctrl.block" [owner]="ctrl.profile"></noosfero-block>';
 

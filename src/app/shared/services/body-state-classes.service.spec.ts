@@ -4,8 +4,8 @@ import { AuthService } from "./../../login/auth.service";
 import { AuthEvents } from "./../../login/auth-events";
 
 import { EventEmitter } from 'ng-forward';
-import { DesignModeService } from './../../admin/layout-edit/designMode.service';
-import { INoosferoLocalStorage } from "./../../shared/models/interfaces";
+import { DesignModeService } from './design-mode.service';
+import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 describe("BodyStateClasses Service", () => {
 

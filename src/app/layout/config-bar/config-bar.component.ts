@@ -5,7 +5,7 @@ import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
 import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { EnvironmentService } from '../../../lib/ng-noosfero-api/http/environment.service';
 import { NotificationService } from '../../shared/services/notification.service';
-import { DesignModeService } from "../../admin/layout-edit/designMode.service";
+import { DesignModeService } from "../../shared/services/design-mode.service";
 
 @Component({
     selector: "config-bar",

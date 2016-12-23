@@ -1,7 +1,7 @@
 import { CustomContentComponent } from './custom-content.component';
 import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
 import * as helpers from "../../../spec/helpers";
-import { DesignModeService } from '../../admin/layout-edit/designMode.service';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 
 const htmlTemplate: string = '<custom-content [attribute]="\'custom_footer\'" [profile]="ctrl.profile"></custom-content>';
 

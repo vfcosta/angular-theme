@@ -1,7 +1,7 @@
 import { Component, Inject, provide } from "ng-forward";
 import { EventsHubService } from "../../../../../src/app/shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../../../../src/app/known-events";
-import { BodyStateClassesService } from "../../../../../src/app/layout/services/body-state-classes.service";
+import { BodyStateClassesService } from "../../../../../src/app/shared/services/body-state-classes.service";
 
 @Component({
     selector: "participa-header",

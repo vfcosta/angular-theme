@@ -1,8 +1,8 @@
 import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 import {INgForwardJQuery} from 'ng-forward/cjs/util/jqlite-extensions';
 import * as helpers from '../../../spec/helpers';
-import {DesignModeTogglerComponent} from './designModeToggler.component';
-import {DesignModeService} from './designMode.service';
+import {DesignModeTogglerComponent} from './design-mode-toggler.component';
+import {DesignModeService} from '../../shared/services/design-mode.service';
 import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
 
 describe('DesignModeToggler Component', () => {
