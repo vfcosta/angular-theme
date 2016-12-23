@@ -13,6 +13,8 @@ describe("Components", () => {
         let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
         let blockService = jasmine.createSpyObj("BlockService", ["uploadImages"]);
         beforeEach(angular.mock.module("templates"));
+        let imageURL = "aURL";
+
 
         beforeEach((done) => {
             let cls = createClass({
@@ -25,7 +27,12 @@ describe("Components", () => {
                             description: "This is a Section Description!",
                             font_color: "000000",
                             background_color: "C0C0C0",
-                        }
+                        },
+                        images: [
+                            {
+                                url: imageURL
+                            }
+                        ]
                     }
                 },
                 providers: [
@@ -63,24 +70,25 @@ describe("Components", () => {
             expect(helper.component.colors()).toContain("background-color: #C0C0C0;");
         });
 
-        it("should return the uploaded image", () => {
-            
+        it("should show the first image from block images", () => {
+            expect( helper.find(".section_image").attr("src")).toEqual(imageURL);
         });
 
-        it("should show the image uploaded", () => {
-            
+        it("should activate edition mode", () => {
+            helper.component.designMode = true;
+            helper.detectChanges();
+            expect(helper.find(".hovereffect")).toBeDefined();
         });
 
-        it("should update the text", () => {
-            
+        it("should deactivate edition mode", () => {
+            helper.component.designMode = false;
+            helper.detectChanges();
+            expect(helper.find(".hovereffect")).toBeUndefined();
         });
 
-        it("should show the tip when the name is empty", () => {
-            
-        });
-
-        it("should show the tip when the description is empty", () => {
-            
+        it("should open modal image editor when select valid file", () => {
+            helper.component.fileSelected("file", null);
+            expect(helpers.mocks.$modal.open).toHaveBeenCalled();
         });
 
     });

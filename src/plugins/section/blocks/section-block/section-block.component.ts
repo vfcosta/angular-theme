@@ -30,7 +30,7 @@ export class SectionBlockComponent {
             this.$scope.$apply();
         });
 
-        this.designMode = this.designModeService.isInDesignMode()
+        this.designMode = this.designModeService.isInDesignMode();
     }
 
     ngOnInit() {
@@ -87,7 +87,7 @@ export class SectionBlockComponent {
     }
 
     getSectionImage() {
-        if (this.block.images && this.block.images.lenth() >= 0) {
+        if (this.block.images && this.block.images.length >= 0) {
             return this.block.images[0];
         } else {
             return null;
