@@ -3,7 +3,7 @@
     font-size: 19px;
     display: inline;
   }
-
+  border-radius: 0;
   margin-bottom: 0px;
 
   .container-fluid {
@@ -11,7 +11,7 @@
     .navbar-brand {
       .noosfero-logo {
         background: url("../assets/images/logo-noosfero.png") no-repeat;
-        padding: 0px 62px 28px 15px;
+        padding: 12px 50px 28px 15px;
         background-size: 46px;
       }
     }

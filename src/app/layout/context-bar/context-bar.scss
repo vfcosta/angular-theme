@@ -1,18 +1,37 @@
+$font-color: #8e8e8e;
+
 context-bar {
-  .config-option {
-		display: inline-block;
-		&.apply {
-			display: inline-block;
-			.btn {
-				@extend .btn-xs;
-				margin-left: 16px;
-				&.ng-hide-add {
-					animation: 0.5s lightSpeedOut ease;
-				}
-				&.ng-hide-remove {
-					animation: 	0.5s lightSpeedIn ease;
-				}
-			}
-		}
-	}
+  #context-bar {
+    text-align: right;
+    font-size: 13px;
+    color: $font-color;
+    margin-bottom: 8px;
+    a.btn:not(.btn-default) {
+      color: $font-color;
+    }
+    > :not(:first-child) {
+      border-left: 1px solid #e0e0e0;
+    }
+
+    .config-option {
+      display: inline-block;
+      &.apply {
+        display: inline-block;
+        .btn {
+          @extend .btn-xs;
+          margin-left: 5px;
+        }
+      }
+      &.alert {
+        padding: 4px 15px;
+        margin: 0 10px 0 0;
+        &.ng-leave {
+          animation: 1.0s lightSpeedOut ease;
+        }
+        &.ng-enter {
+          animation: 	1.0s lightSpeedIn ease;
+        }
+      }
+    }
+  }
 }

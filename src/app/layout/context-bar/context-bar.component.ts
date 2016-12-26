@@ -73,7 +73,7 @@ export class ContextBarComponent {
         });
     }
 
-    //FIXME make this test
+    // FIXME make this test
     discard() {
         this.notificationService.success({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
     }

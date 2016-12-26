@@ -10,10 +10,10 @@ config-bar {
 					@extend .btn;
 					@extend .btn-xs;
 					&.ng-hide-add {
-						animation: 1.5s lightSpeedOut ease;
+						animation: 0.5s lightSpeedOut ease;
 					}
 					&.ng-hide-remove {
-						animation: 1.5s lightSpeedIn ease;
+						animation: 0.5s lightSpeedIn ease;
 					}
 				}
 			}

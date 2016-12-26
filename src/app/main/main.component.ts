@@ -68,6 +68,7 @@ import { ThemeHeaderComponent } from "../layout/theme-header/theme-header.compon
 import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.component";
 import { LayoutConfigComponent } from "../layout/layout-config/layout-config.component";
 import { ConfigBarComponent } from "../layout/config-bar/config-bar.component";
+import { ContextBarComponent } from "../layout/context-bar/context-bar.component";
 
 import { HeaderService } from "./../shared/services/header.service";
 
@@ -143,7 +144,7 @@ export class EnvironmentContent {
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
-	ContextBarComponent
+        ContextBarComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
