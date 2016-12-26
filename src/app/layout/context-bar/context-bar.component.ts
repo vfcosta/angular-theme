@@ -1,4 +1,3 @@
-
 import { Inject, Input, Component } from 'ng-forward';
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
@@ -73,9 +72,9 @@ export class ContextBarComponent {
         });
     }
 
-    // FIXME make this test
     discard() {
-        this.notificationService.success({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
+        this.$state.reload();
+        this.notificationService.info({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
     }
 
     applyLayoutTemplate() {
@@ -103,7 +102,7 @@ export class ContextBarComponent {
         });
     }
 
-    displayApplyButton() {
+    displayAlertBar() {
         return this.hasBlockChanges() || this.isLayoutTemplateChanged() || this.isCustomContentChanged();
     }
 

@@ -1,5 +1,5 @@
-import {Component, Inject, Input} from 'ng-forward';
-import {DesignModeService} from '../../shared/services/design-mode.service';
+import { Component, Inject, Input } from 'ng-forward';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 
 @Component({
     selector: "config-bar",
@@ -14,9 +14,6 @@ export class ConfigBarComponent {
     designModeOn = false;
 
     constructor(private $scope: ng.IScope, private designModeService: DesignModeService) {
-        // this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
-        //     this.designModeService.destroy();
-        // });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;
             this.$scope.$apply();

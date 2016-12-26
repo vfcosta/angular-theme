@@ -32,6 +32,7 @@ describe("Context Bar Component", () => {
 
     let profileService = jasmine.createSpyObj("profileService", ["update"]);
     let environmentService = jasmine.createSpyObj("environmentService", ["update"]);
+    let state = jasmine.createSpyObj("$state", ["reload"]);
 
     beforeEach((done) => {
         let cls = createClass({
@@ -39,6 +40,7 @@ describe("Context Bar Component", () => {
             directives: [ContextBarComponent],
             properties: properties,
             providers: [
+                helpers.createProviderToValue("$state", state),
                 helpers.createProviderToValue("$scope", scope),
                 helpers.createProviderToValue("EventsHubService", eventsHubService),
                 helpers.createProviderToValue("BlockService", blockService),
@@ -119,4 +121,13 @@ describe("Context Bar Component", () => {
         expect(helper.component['notificationService'].success).toHaveBeenCalled();
     });
 
+    it("call state reload when discard changes", () => {
+        helper.component.discard();
+        expect(state.reload).toHaveBeenCalled();
+    });
+
+    it("call notification success when apply changes", () => {
+        helper.component.apply();
+        expect(helper.component['notificationService'].success).toHaveBeenCalled();
+    });
 });

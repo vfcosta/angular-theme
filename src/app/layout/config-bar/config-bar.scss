@@ -5,6 +5,7 @@ config-bar {
 		text-align: right;
 		.config-option {
 			display: inline-block;
+	    margin-left: 6px;
 			&.layout-config {
 				.animate{
 					@extend .btn;

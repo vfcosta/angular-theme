@@ -1,7 +1,7 @@
 <div id="context-bar">
-  <div class="alert alert-warning config-option apply" ng-if="ctrl.displayApplyButton()">
+  <div class="alert alert-warning config-option apply" ng-if="ctrl.displayAlertBar()">
     <strong> {{"contextbar.edition.has_changes" | translate}}</strong>
-    <a href="" (click)="ctrl.apply()" class="btn btn-primary btn-sm ng-hide" ng-show="ctrl.displayApplyButton()">
+    <a href="" (click)="ctrl.apply()" class="btn btn-primary btn-sm">
       <i class="fa fa-check fa-fw"></i> {{"contextbar.edition.apply" | translate}}
     </a>
     <a href="" (click)="ctrl.discard()" class="btn btn-danger btn-sm">
