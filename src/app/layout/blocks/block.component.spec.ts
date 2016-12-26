@@ -144,7 +144,7 @@ describe("Block Component", () => {
         helper.component.block = <any>{ id: 1, hide: false };
         helper.component.designMode = false;
         helper.detectChanges();
-        expect(helper.all(".block-actions").length).toEqual(0);
+        expect(helper.all(".block-actions.ng-hide").length).toEqual(1);
     });
 
     it("set block columns according to visualization settings", () => {
