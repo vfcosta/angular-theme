@@ -1,9 +1,9 @@
-import {Injectable, Inject, EventEmitter} from "ng-forward";
+import { Injectable, Inject, EventEmitter } from "ng-forward";
 
-import {NoosferoRootScope, UserResponse} from "./../shared/models/interfaces";
-import {SessionService} from "./session.service";
+import { NoosferoRootScope, UserResponse } from "./../shared/models/interfaces";
+import { SessionService } from "./session.service";
 
-import {AuthEvents} from "./auth-events";
+import { AuthEvents } from "./auth-events";
 
 @Injectable()
 @Inject("$http", SessionService, "$log", "Restangular")
@@ -22,6 +22,7 @@ export class AuthService {
     }
 
     loginFromCookie() {
+        if (this.sessionService.currentUser()) return;
         let url: string = '/api/v1/login_from_cookie';
         return this.$http.post(url, null).then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
     }

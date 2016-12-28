@@ -1,5 +1,5 @@
-import {DesignModeService} from './designMode.service';
-import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
+import {DesignModeService} from './design-mode.service';
+import {INoosferoLocalStorage} from "../models/interfaces";
 
 describe('DesignMode Service', () => {
     let service: DesignModeService;

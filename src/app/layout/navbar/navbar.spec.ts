@@ -4,7 +4,7 @@ import { Injectable, Provider, provide, EventEmitter } from "ng-forward";
 import { ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder';
 import { SessionService, AuthService, AuthController, AuthEvents } from "./../../login";
 import events from 'ng-forward/cjs/events/events';
-import { DesignModeService } from '../../admin/layout-edit/designMode.service';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 describe("Components", () => {

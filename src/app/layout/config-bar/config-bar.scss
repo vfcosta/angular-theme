@@ -3,15 +3,13 @@ config-bar {
 	#config-tool {
 		margin: 0 16px 0 0;
 		text-align: right;
-
 		.config-option {
 			display: inline-block;
-
-			&.apply {
-				display: inline-block;
-				.btn {
+	    margin-left: 6px;
+			&.layout-config {
+				.animate{
+					@extend .btn;
 					@extend .btn-xs;
-					margin-left: 16px;
 					&.ng-hide-add {
 						animation: 0.5s lightSpeedOut ease;
 					}

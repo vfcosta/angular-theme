@@ -1,6 +1,5 @@
-<div id="context-bar">
-  <config-bar ng-if="vm.environment" [owner]="vm.environment" [permission-action]="'edit_environment_design'"></config-bar>
-</div>
+<context-bar ng-if="vm.environment" [owner]="vm.environment" [permission-action]="'edit_environment_design'"></context-bar>
+
 <div class="boxes-container environment-container">
   <div class="row">
     <noosfero-boxes ng-if="vm.boxes"

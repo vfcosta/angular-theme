@@ -267,6 +267,7 @@ export var mocks: any = {
     notificationService: {
         success: () => { },
         confirmation: () => { },
+        info: () => { },
         error: () => { }
     }
 };

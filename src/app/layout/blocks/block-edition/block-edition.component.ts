@@ -29,14 +29,14 @@ export class BlockEditionComponent {
     }
 
     ngOnInit() {
-        this.originalBlock = JSON.parse(JSON.stringify(this.block));
+        this.originalBlock = angular.copy(this.block);
         this.$scope.$watch(() => {
             return this.block;
         }, () => {
             this.emitChanges();
         }, true);
         this.eventsHubService.subscribeToEvent(this.eventsNames.BLOCKS_SAVED, (owner: noosfero.Profile | noosfero.Environment) => {
-            this.originalBlock = JSON.parse(JSON.stringify(this.block));
+            this.originalBlock = angular.copy(this.block);
         });
     }
 
@@ -47,7 +47,7 @@ export class BlockEditionComponent {
     emitChanges() {
         let blockDiff = <noosfero.Block>{ id: this.block.id };
         for (let k in this.block.settings) {
-            if (JSON.stringify((<any>this.block.settings)[k]) !== JSON.stringify((<any>this.originalBlock.settings)[k])) {
+            if (!angular.equals((<any>this.block.settings)[k], (<any>this.originalBlock.settings)[k])) {
                 (<any>blockDiff)[k] = (<any>this.block.settings)[k];
             }
         }

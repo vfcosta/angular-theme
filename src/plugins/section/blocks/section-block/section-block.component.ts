@@ -1,5 +1,5 @@
 import { Component, Inject, Input } from "ng-forward";
-import { DesignModeService } from "../../../../app/admin/layout-edit/designMode.service";
+import { DesignModeService } from '../../../../app/shared/services/design-mode.service';
 import { SectionImageEditorComponent } from "./section-image-editor.component";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 

@@ -1,6 +1,6 @@
 import { Component, Input, Inject } from 'ng-forward';
 import { PermissionDirective } from '../../shared/components/permission/permission.directive';
-import { DesignModeService } from '../../admin/layout-edit/designMode.service';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 
 @Component({
     selector: 'custom-content',

@@ -3,8 +3,8 @@ import { LanguageSelectorComponent } from "../language-selector/language-selecto
 import { SessionService, AuthService, AuthController, AuthEvents } from "./../../login";
 import { EnvironmentService } from "./../../../lib/ng-noosfero-api/http/environment.service";
 import { SidebarNotificationService } from "../sidebar/sidebar.notification.service";
-import { BodyStateClassesService } from '../services/body-state-classes.service';
-import { DesignModeTogglerComponent } from './../../admin/layout-edit/designModeToggler.component';
+import { BodyStateClassesService } from '../../shared/services/body-state-classes.service';
+import { DesignModeTogglerComponent } from '../design-mode-toggler/design-mode-toggler.component';
 import { BootstrapSwitcherComponent, BootstrapSwitcherItem } from './../../shared/components/bootstrap-switcher/bootstrap-switcher.component';
 
 @Component({

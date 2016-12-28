@@ -47,7 +47,7 @@ import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment
 import { NotificationService } from "../shared/services/notification.service";
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 
-import { BodyStateClassesService } from "./../layout/services/body-state-classes.service";
+import { BodyStateClassesService } from "./../shared/services/body-state-classes.service";
 
 import { Navbar } from "../layout/navbar/navbar";
 
@@ -68,6 +68,7 @@ import { ThemeHeaderComponent } from "../layout/theme-header/theme-header.compon
 import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.component";
 import { LayoutConfigComponent } from "../layout/layout-config/layout-config.component";
 import { ConfigBarComponent } from "../layout/config-bar/config-bar.component";
+import { ContextBarComponent } from "../layout/context-bar/context-bar.component";
 
 import { HeaderService } from "./../shared/services/header.service";
 
@@ -142,7 +143,8 @@ export class EnvironmentContent {
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
-        HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent
+        HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
+        ContextBarComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",

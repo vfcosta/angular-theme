@@ -1,14 +1,9 @@
 <div id="config-tool" permission="ctrl.owner.permissions" permission-action="{{ctrl.permissionAction}}">
-	<div class="layout-config config-option">
-		<layout-config [owner]="ctrl.owner"></layout-config>
+	<div class="config-option layout-config">
+		<layout-config  class='animate ng-hide' ng-show="ctrl.designModeOn" [owner]="ctrl.owner"></layout-config>
 	</div>
-	<div class="design-mode config-option">
-		<span class="item-label">{{ 'designMode.label' | translate }}</span>
-		<design-toggler ng-class="{'config-tool-options-closed': !showConfig}"></design-toggler>
-	</div>
-	<div class="config-option apply">
-		<a href="" (click)="ctrl.apply()" class="btn btn-default btn-sm ng-hide" ng-show="ctrl.displayApplyButton()">
-			<i class="fa fa-check fa-fw"></i> {{"configbar.edition.apply" | translate}}
-		</a>
+
+	<div class="config-option design-mode">
+		<design-toggler></design-toggler>
 	</div>
 </div>

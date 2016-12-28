@@ -1,10 +1,11 @@
 import {Component, Inject, Input} from 'ng-forward';
-import {DesignModeService} from './designMode.service';
+import {DesignModeService} from '../../shared/services/design-mode.service';
 import {AuthService, AuthEvents} from '../../login';
+import { TranslatorService } from "../../shared/services/translator.service";
 
 @Component({
     selector: 'design-toggler',
-    templateUrl: 'app/admin/layout-edit/designModeToggler.html'
+    templateUrl: 'app/layout/design-mode-toggler/design-mode-toggler.html'
 })
 @Inject(DesignModeService, AuthService, '$sce')
 export class DesignModeTogglerComponent {
@@ -24,4 +25,9 @@ export class DesignModeTogglerComponent {
     set inDesignMode(value: boolean) {
         this.designModeService.setInDesignMode(value);
     };
+
+    togleDesignMode() {
+        let value = this.designModeService.isInDesignMode();
+        this.designModeService.setInDesignMode(!value);
+    }
 }

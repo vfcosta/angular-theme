@@ -2,7 +2,7 @@ import { Component } from 'ng-forward';
 import { BlockComponent } from './block.component';
 import * as helpers from "../../../spec/helpers";
 import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
-import { DesignModeService } from '../../admin/layout-edit/designMode.service';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 
 const htmlTemplate: string = '<noosfero-block [block]="ctrl.block" [owner]="ctrl.profile"></noosfero-block>';
 
@@ -144,7 +144,7 @@ describe("Block Component", () => {
         helper.component.block = <any>{ id: 1, hide: false };
         helper.component.designMode = false;
         helper.detectChanges();
-        expect(helper.all(".block-actions").length).toEqual(0);
+        expect(helper.all(".block-actions.ng-hide").length).toEqual(1);
     });
 
     it("set block columns according to visualization settings", () => {
