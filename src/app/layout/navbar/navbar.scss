@@ -1,31 +1,67 @@
+$navbar-font-color: #9a9a9a;
+
 .navbar {
+
   .noosfero-name {
     font-size: 19px;
-    display: inline;
+    display: none;
   }
   border-radius: 0;
   margin-bottom: 0px;
 
-  .container-fluid {
-
+  .container {
     .navbar-brand {
       .noosfero-logo {
         background: url("../assets/images/logo-noosfero.png") no-repeat;
-        padding: 12px 50px 28px 15px;
-        background-size: 46px;
+        padding: 20px 60px;
+        background-size: 115px;
+        background-position: 2px 16px;
       }
     }
 
     .navbar-nav {
-      .profile-menu .profile-image {
-        img {
-          height: 30px;
-          width: 30px;
-          display: inline-block;
-          @extend .img-circle;
+      height: $navbar-height;
+      li {
+        height: 100%;
+        > a {
+          color: $navbar-font-color;
+          padding: 20px 15px;
         }
-        i {
-          font-size: 1.7em;
+        search-form > a {
+          padding: 23px 15px;
+        }
+      }
+      i {
+        color: $navbar-font-color;
+        font-size: 18px;
+        &.fa-chevron-down {
+          font-size: 9px;
+          position: relative;
+          top: -1px;
+        }
+      }
+      .dropdown-toggle {
+        height: 100%;
+      }
+
+      .profile-menu {
+        margin-left: 35px;
+        .dropdown-toggle {
+          padding: 16px 0 16px 8px;
+        }
+        .profile-image {
+          img {
+            height: 30px;
+            width: 30px;
+            display: inline-block;
+            @extend .img-circle;
+          }
+          i {
+            font-size: 1.7em;
+          }
+        }
+        .profile-link {
+          padding-right: 0;
         }
       }
 
@@ -39,7 +75,6 @@
         }
 
         .btn {
-          color: #555!important;
           border: 0px;
           border-radius: 1px;
           font-size: .8em;
@@ -70,6 +105,7 @@
           .btn-logout {
             line-height: .5;
             background-color: #ecf0f1;
+            color: $navbar-font-color;
           }
         }
 
@@ -78,14 +114,6 @@
         }
       }
     }
-
-    .navbar-toggle {
-  		display: block;
-      color: #fff;
-      padding: 4px 12px;
-      margin: 10px 10px;
-      text-align: center;
-  	}
 
     .search {
       .search-input {
@@ -106,7 +134,7 @@
 
   .btn-nav {
     border-radius: 0px;
-    height: 50px;
+    height: 100%;
     border: none;
   }
 }

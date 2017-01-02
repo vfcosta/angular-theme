@@ -10,20 +10,11 @@ $whbl-nav-noosfero-name-font-color: #ffffff;
 	}
 
 	.navbar {
-		.btn-nav {
-			&:hover {
-	      background-color: #1b86ba;
-	    }
-		}
 		.noosfero-name {
       color: $whbl-nav-noosfero-name-font-color;
     }
 	}
 
-	.navbar > .container .navbar-brand {
-		background-color: transparent;
-		width: 221px;
-	}
 	#nav-col,
 	#page-wrapper {
 		background-color: $whbl-nav-col-bg;
@@ -57,9 +48,6 @@ $whbl-nav-noosfero-name-font-color: #ffffff;
 		border-bottom-color: #e7ebee;
 		color: $whbl-sidebar-linkColor;
 	}
-	#sidebar-nav .nav-pills > li.active > a > i {
-		color: #2980b9;
-	}
 	#sidebar-nav .nav > li > a:hover {
 		background-color: darken($whbl-nav-col-bg, 4%);
 		border-color: $whbl-primary-color;
@@ -78,9 +66,6 @@ $whbl-nav-noosfero-name-font-color: #ffffff;
 	#header-navbar .nav > li > a:focus,
 	#header-navbar .nav .open > a,
 	#header-navbar .nav .open > a:hover,
-	#header-navbar .nav .open > a:focus {
-		background-color: #2980b9;
-	}
 	#sidebar-nav .nav li .submenu,
 	#nav-col-submenu .submenu {
 		background-color: darken($whbl-nav-col-bg, 4%);
@@ -332,9 +317,6 @@ $whbl-nav-noosfero-name-font-color: #ffffff;
 		}
 		#logo.navbar-brand > img.normal-logo.logo-black {
 			display: none;
-		}
-		.navbar > .container .navbar-brand {
-			background-color: $whbl-primary-color;
 		}
 	}
 }
