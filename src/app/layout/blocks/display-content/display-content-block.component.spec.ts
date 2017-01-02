@@ -1,8 +1,8 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider, provide} from 'ng-forward';
-import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
-import {providers} from 'ng-forward/cjs/testing/providers';
-import {DisplayContentBlockComponent} from './display-content-block.component';
+import { TestComponentBuilder } from 'ng-forward/cjs/testing/test-component-builder';
+import { Provider, provide } from 'ng-forward';
+import { ComponentTestHelper, createClass } from './../../../../spec/component-test-helper';
+import { providers } from 'ng-forward/cjs/testing/providers';
+import { DisplayContentBlockComponent } from './display-content-block.component';
 import * as helpers from './../../../../spec/helpers';
 
 const htmlTemplate: string = '<noosfero-display-content-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-display-content-block>';
@@ -19,7 +19,7 @@ describe("Components", () => {
         ].concat(helpers.provideFilters("translateFilter"));
 
         let sections: noosfero.Section[] = [
-            { value: 'abstract', checked: 'abstract'},
+            { value: 'abstract', checked: 'abstract' },
             { value: 'title', checked: 'title' }
         ];
         let settings: noosfero.Settings = {
@@ -47,17 +47,10 @@ describe("Components", () => {
                 properties: {
                     block: {
                         settings: settings
-                     }
+                    }
                 }
             });
             helper = new ComponentTestHelper<DisplayContentBlockComponent>(cls, done);
-        });
-
-        it("verify settings is injected", () => {
-           expect(helper.component.block).not.toBeNull;
-           expect(helper.component.block.settings).not.toBeNull;
-           expect(helper.component.block.settings.limit).toEqual(6);
-           expect(helper.component.block.settings.sections.length).toEqual(3);
         });
 
         it("verify abstract is displayed", () => {

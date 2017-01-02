@@ -1,5 +1,5 @@
 <div class="{{ctrl.type}}-block">
-  <div ng-repeat="article in ctrl.articles" ui-sref="main.profile.page({profile: ctrl.profile.identifier, page: article.path})"" class="article">
+  <div ng-repeat="article in ctrl.articles" ui-sref="main.profile.page({profile: ctrl.profile.identifier, page: article.path})" class="article">
     <!-- Article Title -->
     <div class="page-header" ng-if="ctrl.display('title')">
         <h5 class="title media-heading" ng-bind="article.title"></h3>
@@ -19,7 +19,7 @@
                 <i class="fa fa-clock-o"></i> <span am-time-ago="article.created_at | dateFormat"></span>
             </span>
             <!-- Article Author -->
-            <span class="author" ng-if="ctrl.display('author')">
+            <span class="author">
                 <i class="fa fa-user"></i>
                 <a ui-sref="main.profile.home({profile: article.author.identifier})" ng-if="article.author">
                     <span class="author-name" ng-bind="article.author.name"></span>
