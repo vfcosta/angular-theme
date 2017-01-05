@@ -104,13 +104,19 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         return this.getProfileElement(profile.id).customDELETE("members", null, null);
     }
 
-    uploadImage(profile: noosfero.Profile, base64ImageJson: any) {
+    uploadImage(profile: noosfero.Profile, base64ImageJson: any, type: string) {
         let headers = { 'Content-Type': 'application/json' };
         let deferred = this.$q.defer<noosfero.RestResult<noosfero.Profile>>();
         // TODO dynamically copy the selected attributes to update
-        let attributesToUpdate: any = {
+        var attributesToUpdate: any = {
             profile: { image_builder: base64ImageJson }
         };
+        if(type == "top"){
+            attributesToUpdate = {
+                profile: { top_image_builder: base64ImageJson }
+            };
+        }
+
         let restRequest: ng.IPromise<noosfero.RestResult<any>> =
             this.getProfileElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
         restRequest.then(this.getHandleSuccessFunction(deferred))

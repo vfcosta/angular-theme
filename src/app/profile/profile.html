@@ -1,7 +1,11 @@
 <context-bar ng-if="vm.profile" [owner]="vm.profile"></context-bar>
-
+<noosfero-top-profile-image 
+  [profile]="vm.profile" 
+  [editable]="true"
+  [edit-class]="editable-class" >
+</noosfero-top-profile-image>
 <div class="boxes-container profile-container">
-  <div class="row">
+  <div class="row" id="box-margin-top">
     <custom-content class="profile-header"
                     [label]="'profile.custom_header.label'"
                     [attribute]="'custom_header'"
