@@ -8,18 +8,39 @@
   background-image: -ms-radial-gradient(center, ellipse cover, #fcdd4e 1%, #f9c404 100%);
   background-image: radial-gradient(ellipse at center, #fcdd4e 1%, #f9c404 100%);
 
-  .container-fluid {
+  .container {
     .navbar-brand {
       .noosfero-logo {
-        display: none;
+        display: none !important;
       }
       .noosfero-name {
+        margin: 0;
         color: #03316f;
         font-size: 40px;
         font-weight: 800;
         line-height: 1em;
         letter-spacing: -0.05em;
+        display: block !important;
       }
     }
+    .navbar-nav {
+      li {
+        > a, i {
+          color: #fff !important;
+        }
+      }
+    }
+  }
+
+  tasks-menu .tasks-menu .badge {
+    background-color: #f95d5d;
+  }
+
+  #barra-brasil {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 0;
   }
 }

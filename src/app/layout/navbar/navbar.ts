@@ -18,7 +18,6 @@ export class Navbar {
 
     private currentUser: noosfero.User;
     private modalInstance: ng.ui.bootstrap.IModalServiceInstance;
-    public showHamburger: boolean = false;
     public currentEnvironment: noosfero.Environment = <any>{ name: '' };
     /**
      *
@@ -34,8 +33,6 @@ export class Navbar {
     ) {
         this.currentUser = this.session.currentUser();
         this.currentEnvironment = environmentService.getCurrentEnvironment();
-
-        this.showHamburger = this.authService.isAuthenticated();
         this.bodyStateService.addContentClass(!this.sidebarNotificationService.sidebarVisible);
 
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
@@ -43,10 +40,7 @@ export class Navbar {
                 this.modalInstance.close();
                 this.modalInstance = null;
             }
-
             this.currentUser = this.session.currentUser();
-            this.showHamburger = true;
-
             this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
         });
 
@@ -54,12 +48,6 @@ export class Navbar {
             this.currentUser = this.session.currentUser();
         });
 
-    }
-
-    public toggleCollapse() {
-        this.sidebarNotificationService.alternateVisibility();
-
-        this.bodyStateService.addContentClass(!this.sidebarNotificationService.sidebarVisible);
     }
 
     openLogin() {

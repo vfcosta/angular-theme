@@ -1,7 +1,6 @@
 <div class="cms">
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <article-editor ng-if="vm.article" [article]="vm.article"></article-editor>
     </div>
     <div class="col-md-3">
@@ -9,8 +8,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-1"></div>
-    <div class="col-md-8">
+    <div class="col-md-9">
       <button type="submit" ladda="vm.loading" data-style="expand-left" data-size="l"
        class="btn btn-default" ng-click="vm.save()">{{"article.basic_editor.save" | translate}}</button>
       <button type="button" class="btn btn-danger" ng-click="vm.cancel()">{{"article.basic_editor.cancel" | translate}}</button>

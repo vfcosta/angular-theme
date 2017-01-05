@@ -1,5 +1,5 @@
 .environment-container {
-  @extend .container-fluid;
+  @extend .container;
   padding: 0 1%;
   @media (max-width: 978px) {
     padding: 0 2%;

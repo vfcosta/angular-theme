@@ -1,21 +1,23 @@
 <nav id="navbar" class="navbar navbar-inverse">
-  <div class="container-fluid">
+  <div class="container">
     <theme-header></theme-header>
     <div class="navbar-header">
       <a class="navbar-brand" ui-sref="main.environment.home">
         <span class="noosfero-logo"> </span>
         <h1 class="noosfero-name">{{ ctrl.currentEnvironment.name }}</h1>
       </a>
-      <button type="button" class="navbar-toggle collapsed" (click)="ctrl.toggleCollapse()" ng-show="ctrl.showHamburger">
-        <span class="sr-only">{{"navbar.toggle_menu" | translate}}</span>
-        <i alt='{{"navbar.icon.description" | translate}}' class="fa fa-bars"></i>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+         <span class="sr-only">{{"navbar.toggle_menu" | translate}}</span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
+         <span class="icon-bar"></span>
       </button>
     </div>
 
     <div class="collapse navbar-collapse" id="navbar-collapse" collapse="isCollapsed">
       <ul class="nav navbar-nav">
+        <li><search-form></search-form></li>
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <li class="btn-nav" ng-show="!ctrl.currentUser">
           <a ng-href="#" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
@@ -27,18 +29,14 @@
 
         <div ui-view="actions" class="custom-actions"></div>
 
-        <div class="nav navbar-nav search">
-          <search-form></search-form>
-        </div>
-        <ul class="nav navbar-nav">
-          <tasks-menu class="nav navbar-nav navbar-right"></tasks-menu>
-        </ul>
+        <tasks-menu class="nav navbar-nav"></tasks-menu>
+
         <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
 
-          <a href="#" class="dropdown-toggle" aria-expanded="false" uib-dropdown-toggle>
-            {{"navbar.profile.greeting" | translate}}, <span ng-bind="ctrl.currentUser.person.name"></span>
+          <a href="#" class="dropdown-toggle profile-link" aria-expanded="false" uib-dropdown-toggle>
             <noosfero-profile-image [profile]="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>
-            <b class="caret"></b>
+            <span ng-bind="ctrl.currentUser.person.name"></span>
+            <i class="fa fa-fw fa-chevron-down"></i>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-profile" uib-dropdown-menu>
