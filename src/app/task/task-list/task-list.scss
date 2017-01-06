@@ -47,15 +47,23 @@ $task-action-reject-color: #d64e18;
         text-decoration: none;
       }
       .accept {
-        color: $task-action-accept-color;
+        i {
+          color: $task-action-accept-color;
+        }
         &:hover {
-          color: darken($task-action-accept-color, 10%);
+          i {
+            color: darken($task-action-accept-color, 10%);
+          }
         }
       }
       .reject {
-        color: $task-action-reject-color;
+        i {
+          color: $task-action-reject-color;
+        }
         &:hover {
-          color: darken($task-action-reject-color, 10%);
+          i {
+            color: darken($task-action-reject-color, 10%);
+          }
         }
       }
     }

@@ -1,34 +1,54 @@
 $badge-bg-color: #95bd29;
 $badge-color: #fff;
 
-tasks-menu {
-  .tasks-menu {
-    position: relative;
-    margin-right: 0;
-    .badge {
-      position: absolute;
-      top: 12px;
-      left: 27px;
-      border-radius: 4px;
-      background-color: $badge-bg-color;
-      color: $badge-color;
-      font-size: 11px;
-      padding: 2px 3px;
-    }
-    .all-tasks {
-      text-align: center;
-      width: 100%;
-      display: block;
-      line-height: 25px;
-    }
-    .task-panel {
-      width: 550px;
-      padding: 0;
-    }
-    .task-menu-header {
-      text-align: center;
-      padding: 7px;
-      font-weight: bold;
+.navbar {
+  tasks-menu {
+    display: inline-block;
+    .tasks-menu {
+      position: relative;
+      margin-right: 0;
+      .badge {
+        position: absolute;
+        top: 12px;
+        left: 28px;
+        border-radius: 4px;
+        background-color: $badge-bg-color;
+        color: $badge-color;
+        font-size: 11px;
+        padding: 2px 3px;
+      }
+      .all-tasks {
+        text-align: center;
+        width: 100%;
+        display: block;
+        line-height: 25px;
+      }
+      @media (min-width: 320px) {
+        .task-panel {
+          width: 270px;
+        }
+      }
+      @media (min-width: 500px) {
+        .task-panel {
+          width: 400px;
+        }
+      }
+      @media (min-width: 767px) {
+        .task-panel {
+          width: 550px;
+        }
+      }
+      .task-panel {
+        padding: 0;
+        left: inherit;
+        right: 0;
+        position: absolute;
+      }
+      .task-menu-header {
+        text-align: center;
+        padding: 7px;
+        font-weight: bold;
+      }
     }
   }
 }
