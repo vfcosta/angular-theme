@@ -94,7 +94,9 @@ export class ProfileImageComponent {
         }
 
         this.eventsHubService.subscribeToEvent(this.eventsNames.IMAGE_PROFILE_UPDATED, (profile: noosfero.Profile) => {
-            this.profile = profile;
+            if (this.profile.id == profile.id) {
+                this.profile = profile;
+            }
         });
     }
 
