@@ -1,11 +1,11 @@
-<context-bar ng-if="vm.environment" [owner]="vm.environment" [permission-action]="'edit_environment_design'"></context-bar>
+<context-bar ng-if="ctrl.environment" [owner]="ctrl.environment" [permission-action]="'edit_environment_design'"></context-bar>
 
 <div class="boxes-container environment-container">
   <div class="row">
-    <noosfero-boxes ng-if="vm.boxes"
-                    [layout]="vm.environment.layout_template"
-                    [boxes]="vm.boxes"
-                    [owner]="vm.environment">
+    <noosfero-boxes ng-if="ctrl.boxes"
+                    [layout]="ctrl.environment.layout_template"
+                    [boxes]="ctrl.boxes"
+                    [owner]="ctrl.environment">
     </noosfero-boxes>
   </div>
 </div>

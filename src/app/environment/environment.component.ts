@@ -1,8 +1,9 @@
-import {StateConfig, Component, Inject, provide} from 'ng-forward';
-import {EnvironmentService} from "../../lib/ng-noosfero-api/http/environment.service";
-import {NotificationService} from "../shared/services/notification.service";
-import {EnvironmentHomeComponent} from "./environment-home.component";
-import {SearchComponent} from "../search/search.component";
+import { Input, StateConfig, Component, Inject, provide } from 'ng-forward';
+import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
+import { NotificationService } from "../shared/services/notification.service";
+import { EnvironmentHomeComponent } from "./environment-home.component";
+import { SearchComponent } from "../search/search.component";
+
 
 /**
  * @ngdoc controller
@@ -44,23 +45,24 @@ import {SearchComponent} from "../search/search.component";
         }
     }
 ])
-@Inject(EnvironmentService, "$state", "currentEnvironment")
+@Inject(EnvironmentService, "$state")
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];
-    environment: noosfero.Environment;
+    @Input() environment: noosfero.Environment;
 
-    constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService, currentEnvironment: noosfero.Environment) {
-        this.environment = currentEnvironment;
-
-        this.environmentService.getBoxes(this.environment.id)
-            .then((boxes: noosfero.Box[]) => {
-                this.boxes = boxes;
-            }).catch(() => {
-                this.$state.transitionTo('main');
-                this.notificationService.error({ message: "notification.environment.not_found" });
-            });
-
+    constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService) {
+        if (this.$state.params['environment'].id) {
+            this.environment = this.$state.params['environment'];
+        } else {
+            this.environment = this.environmentService.getCurrentEnvironment();
+        }
+        this.environmentService.getBoxes(this.environment.id).then((boxes: noosfero.Box[]) => {
+            this.boxes = boxes;
+        }).catch(() => {
+            this.$state.transitionTo('main');
+            this.notificationService.error({ message: "notification.environment.not_found" });
+        });
     }
 
 }

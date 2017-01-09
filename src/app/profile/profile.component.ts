@@ -1,4 +1,4 @@
-import { StateConfig, Component, Inject, provide } from 'ng-forward';
+import { StateConfig, Component, Inject, provide, Input } from 'ng-forward';
 import { ProfileInfoComponent } from './info/profile-info.component';
 import { ProfileHomeComponent } from './profile-home.component';
 import { BasicEditorComponent } from '../article/cms/basic-editor/basic-editor.component';
@@ -122,17 +122,25 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
 export class ProfileComponent {
 
     boxes: noosfero.Box[];
-    profile: noosfero.Profile;
+    @Input() profile: noosfero.Profile;
 
-    constructor(profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, $state: ng.ui.IStateService, notificationService: NotificationService) {
-        profileService.setCurrentProfileByIdentifier($stateParams["profile"]).then((profile: noosfero.Profile) => {
+    constructor(private profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService, private notificationService: NotificationService) {
+        let profilePromise: Promise<noosfero.Profile>;
+        if (this.$state.params['currentProfile'].id) {
+            this.profile = this.$state.params['currentProfile'];
+            profilePromise = Promise.resolve(this.profile);
+        } else {
+            profilePromise = profileService.getByIdentifier($stateParams["profile"]);
+        }
+        profilePromise.then((profile: noosfero.Profile) => {
             this.profile = profile;
-            return profileService.getBoxes(<number>this.profile.id);
+            profileService.setCurrentProfile(this.profile);
+            return this.profileService.getBoxes(<number>this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
-            $state.transitionTo('main.environment.home');
-            notificationService.error({ message: "notification.profile.not_found" });
+            this.$state.transitionTo('main.domain');
+            this.notificationService.error({ message: "notification.profile.not_found" });
         });
     }
 }

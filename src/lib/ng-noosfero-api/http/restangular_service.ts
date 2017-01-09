@@ -3,7 +3,7 @@ import { EventEmitter } from "ng-forward";
  * @name RestangularService
  * Base class to be extended by classes which will provide access
  * to te Noosfero REST API
- * 
+ *
  * @export RestangularService
  * @abstract
  * @class RestangularService
@@ -21,7 +21,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
     /**
      * Creates an instance of RestangularService.
-     * 
+     *
      * @param {restangular.IService} Restangular (description)
      * @param {ng.IQService} $q (description)
      * @param {ng.ILogService} $log (description)
@@ -29,7 +29,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     constructor(protected restangularService: restangular.IService, protected $q: ng.IQService, protected $log: ng.ILogService) {
         this.baseResource = restangularService.all(this.getResourcePath());
         this.resetCurrent();
-        // TODO 
+        // TODO
         // this.restangularService.setResponseInterceptor((data, operation, what, url, response, deferred) => {
         //     let transformedData: any = data;
         //     if (operation === "getList" && url.endsWith("/" + this.getDataKeys().plural)) {
@@ -93,7 +93,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         };
     };
     /**
-     * Abstract getPath() method is used to mount the url 
+     * Abstract getPath() method is used to mount the url
      * on REST Operations
      * @protected
      * @abstract
@@ -103,10 +103,10 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
     /**
      * Abstract getDataKeys()
-     * 
-     * Should be implemented into the child classes and 
+     *
+     * Should be implemented into the child classes and
      * returns the singular and plural names of the represented resource
-     * 
+     *
      * @protected
      * @abstract
      * @returns {{ singular: string, plural: string }} (description)
@@ -115,20 +115,20 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
     /**
      * Do a HTTP GET call to the resource represented using the id provided
-     * 
+     *
      * @protected
      * @param {number} id The resource id
-     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type 
+     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
      */
-    public get(id: number, rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public get(id: number | string, rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
         let deferred = this.$q.defer<noosfero.RestResult<T>>();
 
         let restRequest: ng.IPromise<noosfero.RestResult<T>>;
 
         if (rootElement) {
-            restRequest = rootElement.one(this.getResourcePath(), id).get(queryParams, headers);
+            restRequest = rootElement.one(this.getResourcePath(), <any>id).get(queryParams, headers);
         } else {
-            restRequest = this.restangularService.one(this.getResourcePath(), id).get(queryParams, headers);
+            restRequest = this.restangularService.one(this.getResourcePath(), <any>id).get(queryParams, headers);
         }
 
         restRequest.then(this.getHandleSuccessFunction(deferred, this.modelFoundEventEmitter))
@@ -140,10 +140,10 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
     /**
      * Do a HTTP GET call to the resource collection represented
-     * 
+     *
      * @protected
      * @param {number} id (description)
-     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type 
+     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
      */
     public list(rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T[]>> {
         let deferred = this.$q.defer<noosfero.RestResult<T[]>>();
@@ -167,10 +167,10 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
     /**
      * Do a HTTP GET call to the resource collection represented
-     * 
+     *
      * @protected
      * @param {number} id (description)
-     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type 
+     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
      */
     public getSub(rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
         let deferred = this.$q.defer<noosfero.RestResult<T>>();
@@ -310,7 +310,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     }
 
     /**
-     * Returns a Restangular IElement representing the 
+     * Returns a Restangular IElement representing the
      */
     public getElement(id: number, rootElement?: noosfero.RestModel): noosfero.RestModel {
         if (rootElement) {
@@ -326,7 +326,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
         /**
          * (description)
-         * 
+         *
          * @param {restangular.IResponse} response (description)
          */
         let successFunction = (response: restangular.IResponse): void => {
@@ -350,7 +350,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
     /**
      * (description)
-     * 
+     *
      * @template T
      * @param {ng.IDeferred<T>} deferred (description)
      * @returns {(response: restangular.IResponse) => void} (description)
@@ -359,7 +359,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         let self = this;
         /**
          * (description)
-         * 
+         *
          * @param {restangular.IResponse} response (description)
          */
         let successFunction = (response: restangular.IResponse): void => {

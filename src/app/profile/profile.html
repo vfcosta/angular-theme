@@ -1,17 +1,17 @@
-<context-bar ng-if="vm.profile" [owner]="vm.profile"></context-bar>
+<context-bar ng-if="ctrl.profile" [owner]="ctrl.profile"></context-bar>
 
 <div class="boxes-container profile-container">
   <div class="row">
     <custom-content class="profile-header"
                     [label]="'profile.custom_header.label'"
                     [attribute]="'custom_header'"
-                    [profile]="vm.profile">
+                    [profile]="ctrl.profile">
     </custom-content>
-    <noosfero-boxes ng-if="vm.boxes"
-                    [layout]="vm.profile.layout_template"
-                    [boxes]="vm.boxes"
-                    [owner]="vm.profile">
+    <noosfero-boxes ng-if="ctrl.boxes"
+                    [layout]="ctrl.profile.layout_template"
+                    [boxes]="ctrl.boxes"
+                    [owner]="ctrl.profile">
     </noosfero-boxes>
-    <custom-content class="profile-footer" [label]="'profile.custom_footer.label'" [attribute]="'custom_footer'" [profile]="vm.profile"></custom-content>
+    <custom-content class="profile-footer" [label]="'profile.custom_footer.label'" [attribute]="'custom_footer'" [profile]="ctrl.profile"></custom-content>
   </div>
 </div>

@@ -14,6 +14,9 @@ export class EnvironmentService {
         return this.currentEnvironment;
     }
 
+    setCurrentEnvironment(environment: noosfero.Environment) {
+        this.currentEnvironment = environment;
+    }
 
     getEnvironmentPeople(params: any): ng.IPromise<noosfero.Person[]> {
         let p = this.restangular.one('people').get(params);

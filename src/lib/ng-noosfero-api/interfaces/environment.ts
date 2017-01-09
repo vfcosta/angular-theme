@@ -48,5 +48,6 @@ namespace noosfero {
          * @returns {string} The Environment Name
          */
         name: string;
+        type: string;
     }
 }
