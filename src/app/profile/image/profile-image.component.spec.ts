@@ -21,12 +21,16 @@ describe("Components", () => {
 
         let helper: ComponentTestHelper<ProfileImageComponent>;
 
+        let imageProfileUpdateFn: Function;
+        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
+        eventsHubService.subscribeToEvent = (event: string, fn: Function) => {
+            imageProfileUpdateFn = fn;
+        };
         beforeEach(angular.mock.module("templates"));
 
-        beforeEach((done) => {
+        beforeEach((done: Function) => {
             let scope = helpers.mocks.scopeWithEvents;
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
-            let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent"]);
             let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
             let properties = { profile: { custom_footer: "footer" } };
             let cls = createClass({
@@ -51,38 +55,49 @@ describe("Components", () => {
         });
 
 
-        it("show community users image if profile is not Person", (done) => {
+        it("show community users image if profile is not Person", () => {
             let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
             helper.component.profile = profile;
             helper.component.ngOnInit();
             expect(helper.component.defaultIcon).toBe("fa-users", "The default icon should be community users");
-            done();
 
         });
 
-        it("show Person image if profile is Person", (done) => {
+        it("show Person image if profile is Person", () => {
             let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Person" };
             helper.component.profile = profile;
             helper.component.ngOnInit();
             expect(helper.component.defaultIcon).toEqual("fa-user", "The default icon should be person user");
-            done();
         });
 
-        it("is editable be true in blocks that are editable", (done) => {
+        it("is editable be true in blocks that are editable", () => {
             expect(helper.component.editable).toBe(true);
-            done();
         });
 
-        it("is not editable in editable blocks but without permission", (done) => {
+        it("is not editable in editable blocks but without permission", () => {
             helper.component['permissionService'].isAllowed = jasmine.createSpy("isAllowed").and.returnValue(false);
             expect(helper.component.isEditable()).toBe(false);
-            done();
         });
 
-        it("is editable in editable blocks with edit permission", (done) => {
+        it("is editable in editable blocks with edit permission", () => {
             helper.component['permissionService'].isAllowed = jasmine.createSpy("isAllowed").and.returnValue(true);
             expect(helper.component.isEditable()).toBe(true);
-            done();
+        });
+
+        it("should not update profile with different id", () => {
+            let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
+            helper.component.profile.id = 99;
+            imageProfileUpdateFn(helper.component.eventsNames.IMAGE_PROFILE_UPDATED,
+                profile);
+            expect(helper.component.profile.id).not.toEqual(profile.id);
+        });
+
+        it("should not update profile with different id", () => {
+            let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
+            helper.component.profile.id = 1;
+            imageProfileUpdateFn(helper.component.eventsNames.IMAGE_PROFILE_UPDATED,
+                profile);
+            expect(helper.component.profile.id).toEqual(profile.id);
         });
 
     });
