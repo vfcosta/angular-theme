@@ -53,13 +53,8 @@ export class TopProfileImageComponent {
         return dataUrl.substring(dataUrl.indexOf('base64,') + 7);
     }
 
-    background() {
-        let style: string = "position:absolute; left:0; right:0; height: 300px;";
-        if (!this.profile || !this.profile.top_image) {
-            return "background: green; " + style;
-        } else {
-            return "background-image: url('" + this.profile.top_image.url + "'); background-repeat: no-repeat; background-position:center; background-size:100% auto;" + style;
-        }
+    hasTopImage() {
+        return this.profile && this.profile.top_image;
     }
 
     isEditable() {

@@ -1,18 +1,26 @@
-.top-profile-image-wrap{
-  width:100%;
-  margin-top: -25px;
-}
+noosfero-top-profile-image {
+  .top-profile-image-content {
+    margin-top: -23px;
+    &.without-top-image {
+      height: 80px;
+    }
+    &.with-top-image {
+      .top-profile-image-wrap {
+        background-color: black;
+        img {
+          min-height: 120px;
+          width: 100%;
+        }
+      }
+    }
+  }
 
   .container-camera-top {
-    position: relative;
-    z-index: 2;
-    .upload-camera-top{
+    .upload-camera-top {
+      position: absolute;
       top: 10px;
       text-decoration: none;
-      left: 10px;
-      position: absolute;
       font-size: 1.5em;
-      bottom: 2px;
       text-shadow: 0px 0px 3px black;
       color: white;
       padding-top: 5px;
@@ -20,42 +28,41 @@
         font-size: 1.5em;
         background-color: rgba(0, 0, 0, 0.50);
       }
-
-  }
-  .overlay-top {
-    width:100%;
-    height:100%;
-    position:absolute;
-    overflow:hidden;
-    top:0;
-    left:0;
-    opacity:0;
-    background-color:rgba(0,0,0,0.5);
-    -webkit-transition:all .4s ease-in-out;
-    transition:all .4s ease-in-out;
-    z-index: 1;
-  }
-  img {
-    display:block;
-    position:relative;
-    -webkit-transition:all .4s linear;
-    transition:all .4s linear;
-    width: 100%;
-  }
-  &:hover {
+    }
+    .overlay-top {
+      width:100%;
+      height:100%;
+      position:absolute;
+      overflow:hidden;
+      top:0;
+      left:0;
+      opacity:0;
+      background-color:rgba(0,0,0,0.5);
+      -webkit-transition:all .4s ease-in-out;
+      transition:all .4s ease-in-out;
+      z-index: 1;
+    }
     img {
-      -ms-transform:scale(1.2);
-      -webkit-transform:scale(1.2);
-      transform:scale(1.2);
+      display:block;
+      position:relative;
+      -webkit-transition:all .4s linear;
+      transition:all .4s linear;
+      width: 100%;
     }
-    .overlay {
-      opacity:1;
-      filter:alpha(opacity=100);
+    &:hover {
+      img {
+        -ms-transform:scale(1.2);
+        -webkit-transform:scale(1.2);
+        transform:scale(1.2);
+      }
+      .overlay {
+        opacity:1;
+        filter:alpha(opacity=100);
+      }
     }
-
   }
-}
-.img-profile-nav-popup-top
-{
-  max-width: 4em;
+  .img-profile-nav-popup-top
+  {
+    max-width: 4em;
+  }
 }

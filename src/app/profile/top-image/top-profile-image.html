@@ -1,12 +1,12 @@
-<div class="top-profile-image-wrap" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)"
-  style="{{ ctrl.background() }}">
-    <div ng-if="ctrl.isEditable()">
-        <div class='container-camera-top'>
-            <div ngf-select="ctrl.fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
-                data-target=".crop-dialog">
-                <a href="" class="fa fa-camera upload-camera-top"></a>
-            </div>
-        </div>
+<div class="top-profile-image-content" ng-class="{'with-top-image': ctrl.hasTopImage(), 'without-top-image': !ctrl.hasTopImage()}">
+  <div class="top-profile-image-wrap row" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)">
+    <img ng-if="ctrl.hasTopImage()" ng-src="{{ctrl.profile.top_image.url}}" class="img-responsive center-block">
+    <div class="container container-camera-top" ng-if="ctrl.isEditable()">
+      <div ngf-select="ctrl.fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
+        data-target=".crop-dialog">
+        <a href="" class="fa fa-camera upload-camera-top"></a>
+      </div>
     </div>
     <div class="overlay-top"></div>
+  </div>
 </div>
