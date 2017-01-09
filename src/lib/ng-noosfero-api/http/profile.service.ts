@@ -108,10 +108,10 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         let headers = { 'Content-Type': 'application/json' };
         let deferred = this.$q.defer<noosfero.RestResult<noosfero.Profile>>();
         // TODO dynamically copy the selected attributes to update
-        var attributesToUpdate: any = {
+        let attributesToUpdate: any = {
             profile: { image_builder: base64ImageJson }
         };
-        if(type == "top"){
+        if (type === "top") {
             attributesToUpdate = {
                 profile: { top_image_builder: base64ImageJson }
             };
