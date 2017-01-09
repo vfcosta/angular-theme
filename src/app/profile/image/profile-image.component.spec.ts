@@ -92,7 +92,7 @@ describe("Components", () => {
             expect(helper.component.profile.id).not.toEqual(profile.id);
         });
 
-        it("should not update profile with different id", () => {
+        it("should update profile with same id", () => {
             let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
             helper.component.profile.id = 1;
             imageProfileUpdateFn(helper.component.eventsNames.IMAGE_PROFILE_UPDATED,
