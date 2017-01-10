@@ -2,11 +2,22 @@ noosfero-top-profile-image {
   .top-profile-image-content {
     margin-top: -23px;
     &.without-top-image {
-      height: 80px;
+      .top-profile-image-wrap {
+        background-image: url('/assets/images/default-profile-top.png');
+        height: 120px;
+        @media (min-width: $break-xs-min) {
+          height: 200px;
+        }
+        @media (min-width: $break-sm-min) {
+          height: 320px;
+        }
+      }
     }
     &.with-top-image {
       .top-profile-image-wrap {
         background-color: black;
+        overflow: hidden;
+        max-height: 320px;
         img {
           min-height: 120px;
           width: 100%;
@@ -18,14 +29,16 @@ noosfero-top-profile-image {
   .container-camera-top {
     .upload-camera-top {
       position: absolute;
+      padding: 10px;
+      border-radius: 5px;
       top: 10px;
       text-decoration: none;
       font-size: 1.5em;
       text-shadow: 0px 0px 3px black;
       color: white;
-      padding-top: 5px;
       &:hover{
         font-size: 1.5em;
+        color: #cacaca;
         background-color: rgba(0, 0, 0, 0.50);
       }
     }
