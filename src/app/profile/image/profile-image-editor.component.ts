@@ -20,7 +20,7 @@ export class ProfileImageEditorComponent {
 
     uploadImage(dataUrl: any, name: any) {
         let base64ImageJson = this.getBase64ImageJson(dataUrl, name);
-        this.profileService.uploadImage(this.profile, base64ImageJson).then((result: any) => {
+        this.profileService.uploadImage(this.profile, base64ImageJson, "profile").then((result: any) => {
             this.modalInstance.close(name);
             this.eventsHubService.emitEvent(this.eventsNames.IMAGE_PROFILE_UPDATED, result.data);
         });

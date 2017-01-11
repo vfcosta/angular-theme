@@ -1,5 +1,9 @@
 <context-bar ng-if="vm.profile" [owner]="vm.profile"></context-bar>
-
+<noosfero-top-profile-image ng-if="vm.profile"
+  [profile]="vm.profile" 
+  [editable]="true"
+  [edit-class]="editable-class" >
+</noosfero-top-profile-image>
 <div class="boxes-container profile-container">
   <div class="row">
     <custom-content class="profile-header"
