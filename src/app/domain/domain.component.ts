@@ -8,22 +8,20 @@ import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
         provide('domainService', { useClass: DomainService }),
     ]
 })
-@Inject(DomainService, "$state")
+@Inject(DomainService, "$state", "$stateParams", "contextResult")
 export class DomainComponent {
 
     owner: noosfero.Environment | noosfero.Profile;
     domain: noosfero.Domain;
 
-    constructor(private domainService: DomainService, private $state: ng.ui.IStateService) {
-        this.domainService.get("context").then((result: noosfero.RestResult<noosfero.Domain>) => {
-            this.domain = result.data;
-            this.owner = result.data.owner;
-            if (this.isProfile()) {
-                $state.go('main.profile.home', { currentProfile: this.owner });
-            } else {
-                $state.go('main.environment.home', { environment: this.owner });
-            }
-        });
+    constructor(private domainService: DomainService, private $state: ng.ui.IStateService, $stateParams: ng.ui.IStateParamsService, contextResult: noosfero.RestResult<noosfero.Domain>) {
+        this.domain = contextResult.data;
+        this.owner = contextResult.data.owner;
+        if (this.isProfile()) {
+            $state.go('main.profile.home', { currentProfile: this.owner }, { inherit: false });
+        } else {
+            $state.go('main.environment.home', { environment: this.owner });
+        }
     }
 
     isEnvironment() {
