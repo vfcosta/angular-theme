@@ -46,6 +46,7 @@ import { SessionService } from "../login/session.service";
 import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
+import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
 
 import { BodyStateClassesService } from "./../shared/services/body-state-classes.service";
 
@@ -176,6 +177,11 @@ export class EnvironmentContent {
         url: '/',
         component: DomainComponent,
         name: 'main.domain',
+        resolve: {
+            contextResult: (DomainService: DomainService) => {
+                return DomainService.get("context");
+            }
+        },
         views: {
             "content": {
                 template: "<div></div>",
