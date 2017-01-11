@@ -86,5 +86,13 @@ namespace noosfero {
          * @returns {string} The Profile layout template (e.g.: "rightbar", "default")
          */
         layout_template: string;
+
+        /**
+         * @ngdoc property
+         * @name top_image
+         * @propertyOf noofero.Profile
+         * @returns {any} The Profile top image
+         */
+        top_image: any;
     }
 }

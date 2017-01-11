@@ -26,7 +26,7 @@ export class CustomContentComponent {
         private designModeService: DesignModeService) { }
 
     inEditMode() {
-        return this.designModeService.isInDesignMode();
+        return false; // this.designModeService.isInDesignMode();
     }
 
     openEdit() {
