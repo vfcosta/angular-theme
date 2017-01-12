@@ -5,12 +5,11 @@ import { EnvironmentService } from "./../../../lib/ng-noosfero-api/http/environm
 import { SidebarNotificationService } from "../sidebar/sidebar.notification.service";
 import { BodyStateClassesService } from '../../shared/services/body-state-classes.service';
 import { DesignModeTogglerComponent } from '../design-mode-toggler/design-mode-toggler.component';
-import { BootstrapSwitcherComponent, BootstrapSwitcherItem } from './../../shared/components/bootstrap-switcher/bootstrap-switcher.component';
 
 @Component({
     selector: "acme-navbar",
     templateUrl: "app/layout/navbar/navbar.html",
-    directives: [LanguageSelectorComponent, DesignModeTogglerComponent, BootstrapSwitcherComponent],
+    directives: [LanguageSelectorComponent, DesignModeTogglerComponent],
     providers: [AuthService, SessionService, SidebarNotificationService, EnvironmentService]
 })
 @Inject("$uibModal", AuthService, "SessionService", "$state", SidebarNotificationService, BodyStateClassesService, EnvironmentService)
