@@ -40,8 +40,6 @@ $break-xxs-max: ($break-xxs-min - 1);
 $break-sm-max: ($break-sm-min - 1);
 $break-xs-max: ($break-xs-min - 1);
 
-@import "../../bower_components/bootswatch/flatly/_variables.scss";
-
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
  *  sass dependencies when defined in the bower.json of your dependencies
