@@ -16,7 +16,7 @@ describe("Components", () => {
         let imageURL = "aURL";
 
 
-        beforeEach((done) => {
+        beforeEach((done: Function) => {
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [SectionBlockComponent],

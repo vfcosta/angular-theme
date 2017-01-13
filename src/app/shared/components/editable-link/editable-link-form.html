@@ -8,7 +8,8 @@
     <input type="text" class="form-control input-sm" ng-model="ctrl.modifiedLink.address">
   </div>
   <div class="actions">
-    <button type="button" class="btn btn-default btn-sm" (click)="ctrl.save()">{{"editable-link.form.ok" | translate}}</button>
-    <button type="button" class="btn btn-danger btn-sm" (click)="ctrl.cancel()">{{"editable-link.form.cancel" | translate}}</button>
+
+    <button type="button" class="btn btn-primary" (click)="ctrl.save()"><span class="glyphicon glyphicon-ok"></span></button>
+    <button type="button" class="btn btn-default" (click)="ctrl.cancel()"><span class="glyphicon glyphicon-remove"></span></button>
   </div>
 </div>

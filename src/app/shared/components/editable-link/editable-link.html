@@ -1,10 +1,12 @@
 <span ng-if="ctrl.designMode">
   <a href="" uib-popover-template="'app/shared/components/editable-link/editable-link-form.html'"
     popover-trigger="outsideClick" popover-append-to-body="true" popover-placement="auto right"
-    popover-class="editable-link-popover" class="editable-link" popover-is-open="ctrl.popupOpen">
+    popover-class="editable-link-popover" class="editable-link" popover-is-open="ctrl.popupOpen"
+    e-form="textBtnForm">
     {{ ctrl.name || ("edit.inline.link" | translate) }}
   </a>
 </span>
+  <a ng-if="ctrl.designMode" href="#" class="fa fa-pencil" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
 
 <span ng-if="!ctrl.designMode">
   {{ ctrl.name }}
