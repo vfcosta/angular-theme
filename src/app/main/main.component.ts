@@ -91,7 +91,7 @@ import { HeaderService } from "./../shared/services/header.service";
 @Inject(BodyStateClassesService, HeaderService, EVENTS_HUB_KNOW_EVENT_NAMES)
 export class MainContentComponent {
 
-    public themeSkin: string = 'skin-whbl';
+    public themeSkin: string = 'skin-default';
 
     constructor(
         private bodyStateClassesService: BodyStateClassesService,

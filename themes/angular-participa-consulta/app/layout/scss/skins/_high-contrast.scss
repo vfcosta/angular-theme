@@ -12,7 +12,6 @@ $hc-font-color: $hc-secondary-color;
 }
 
 .skin-high-contrast {
-  @extend %skin-base;
   @include force-high-contrast();
 
   button, .btn, .btn-nav {

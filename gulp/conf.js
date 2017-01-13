@@ -75,14 +75,6 @@ exports.skinExists = function (skin) {
     } catch(e) {
       throw new Error('The skin file "'+skinPath+'" was not found');
     }
-
-    var content = fs.readFileSync(skinPath, {encoding: 'utf8'});
-    if (content.search(skin) == -1) {
-      throw new Error('The skin css selector ".'+skin+'" was not found in "'+skinPath+'" file');
-    }else if (content.search('@extend %skin-base') == -1) {
-      throw new Error('The skin css selector ".'+skin+'" needs inherit from %skin-base sass placeholder');
-    }
-
 };
 
 exports.configTheme = function(theme) {
