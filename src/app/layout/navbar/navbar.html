@@ -52,7 +52,7 @@
                         <noosfero-profile-image
                           [profile]="ctrl.currentUser.person"
                           [editable]="true"
-                          [icon-size]="'fa-4x'"></noosfero-profile-image>
+                          [icon-size]="'fa-5x'"></noosfero-profile-image>
                       </div>
                       <div class="col-xs-8 col-sm-8 col-md-8 profile-menu-info">
                         <div class="row name" ng-bind="ctrl.currentUser.person.name"></div>
@@ -67,7 +67,7 @@
                     </div>
                     <div class="row">
                       <div class="profile-menu-logout">
-                        <a class="btn btn-default btn-logout" href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
+                        <a class="btn btn-default btn-logout" href="#" ng-click="ctrl.logout()">{{"navbar.logout" | translate}}</a>
                       </div>
                     </div>
                   </div>
