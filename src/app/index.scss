@@ -58,6 +58,12 @@ h1, h2, h3, h4, h5 {
   color: #237394;
 }
 
+@media (min-width: 1380px) {
+  .container {
+    width: 1380px;
+  }
+}
+
 /**
  *  Do not remove the comments below. It's the markers used by gulp-inject to inject
  *  all your sass files automatically
@@ -67,7 +73,6 @@ h1, h2, h3, h4, h5 {
 
 // @import "../../bower_components/bootswatch/flatly/_bootswatch.scss";
 @import "layout/scss/mixins";
-@import "layout/scss/bootstrap-overrides";
 @import "layout/scss/layout";
 @import "layout/scss/sidebar";
 @import "layout/scss/tables";
