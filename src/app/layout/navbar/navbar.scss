@@ -31,14 +31,8 @@ $navbar-font-color: #9a9a9a;
       .noosfero-logo {
         background: url("../assets/images/logo-noosfero.png") no-repeat;
         padding: 20px 60px;
-        background-size: 115px;
         background-position: 2px 16px;
-      }
-      @media (max-width: 423px) {
-        .noosfero-logo {
-          padding: 20px 23px;
-        }
-      }
+      }      
     }
 
     .navbar-nav {
@@ -86,7 +80,7 @@ $navbar-font-color: #9a9a9a;
       .dropdown-menu-profile {
 	      min-width: 350px;
 	      padding: 10px;
-        
+
         .dropdown-menu-profile-image {
           display: inline-block;
           width: 40%;
