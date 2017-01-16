@@ -19,7 +19,7 @@
     "docs": "gulp ngdocs; static-server docs",
     "coverage": "karma start --single-run",
     "remap-coverage": "ts-node --project ./dev-scripts ./dev-scripts/remapCoverage.ts",
-    "test-single": "webpack --test --single-run",
+    "test-single": "webpack && karma start --single-run",
     "test-and-coverage": "karma start & npm run remap-coverage",
     "test": "webpack -w --test",
     "jenkins": "webpack && karma start --single-run",
