@@ -33,5 +33,18 @@ $break-xs-max: ($break-xs-min - 1);
 
 $container-large-desktop: 1380px;
 
+//BUTTONS
+$btn-primary-color: #fff;
+$btn-primary-bg: #689f38;
+$btn-primary-border: #658b42;
+
 $navbar-border-radius: 0;
 $navbar-inverse-border: transparent;
+
+$panel-default-border: transparent;
+$body-bg: #ededed;
+
+$font-family-base: 'Roboto', sans-serif;
+
+$panel-body-padding: 15px 20px;
+$panel-heading-padding: 10px 20px;

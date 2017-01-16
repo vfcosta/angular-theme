@@ -10,10 +10,7 @@
     min-height: 45px;
     .panel-title {
       font-size: 15px;
-      font-weight: bold;
-      a.editable-click {
-        border-bottom: none;
-      }
+      text-transform: uppercase;
     }
 
     .editable-input{
@@ -25,9 +22,7 @@
     .panel-heading {
       background-color: transparent;
       border: 0;
-      padding: 0.5em 1.2em 0 1em;
       h3{
-        border-bottom: 3px solid #1E96D0;
         padding: 1em;
         padding-left: 0;
       }
@@ -43,6 +38,13 @@
     z-index: 1;
     .action {
       color: #b9b9b9;
+    }
+  }
+  .editable-click, a.editable-click {
+    color: $brand-success;
+    border-bottom: dashed 1px $brand-success;
+    &.editable-empty {
+      color: lighten($brand-success, 30);
     }
   }
 }
