@@ -1,7 +1,7 @@
-import {Component} from "ng-forward";
+import { Component } from "ng-forward";
 
 @Component({
-    selector: 'profile',
+    selector: 'myprofile',
     templateUrl: "app/profile/profile.html",
 })
 export class MyProfileComponent {

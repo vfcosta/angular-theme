@@ -47,6 +47,7 @@ import { SessionService } from "../login/session.service";
 import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
+import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
 
 import { BodyStateClassesService } from "./../shared/services/body-state-classes.service";
 
@@ -70,6 +71,7 @@ import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.compon
 import { LayoutConfigComponent } from "../layout/layout-config/layout-config.component";
 import { ConfigBarComponent } from "../layout/config-bar/config-bar.component";
 import { ContextBarComponent } from "../layout/context-bar/context-bar.component";
+import { DomainComponent } from "../domain/domain.component";
 
 import { HeaderService } from "./../shared/services/header.service";
 
@@ -145,7 +147,7 @@ export class EnvironmentContent {
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
-        ContextBarComponent, TopProfileImageComponent
+        DomainComponent, ContextBarComponent, TopProfileImageComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
@@ -174,16 +176,33 @@ export class EnvironmentContent {
     },
     {
         url: '/',
+        component: DomainComponent,
+        name: 'main.domain',
+        resolve: {
+            contextResult: (DomainService: DomainService) => {
+                return DomainService.get("context");
+            }
+        },
+        views: {
+            "content": {
+                template: "<div></div>",
+                controller: DomainComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    },
+    {
+        url: '/',
         component: EnvironmentComponent,
         name: 'main.environment',
-        abstract: true,
         views: {
             "content": {
                 templateUrl: "app/environment/environment.html",
                 controller: EnvironmentComponent,
-                controllerAs: "vm"
+                controllerAs: "ctrl"
             }
-        }
+        },
+        params: { environment: {} }
     },
     {
         url: '/account/signup',
@@ -218,9 +237,10 @@ export class EnvironmentContent {
             "content": {
                 templateUrl: "app/profile/profile.html",
                 controller: ProfileComponent,
-                controllerAs: "vm"
+                controllerAs: "ctrl"
             }
-        }
+        },
+        params: { currentProfile: {} }
     }
 ])
 export class MainComponent { }
