@@ -21,7 +21,7 @@
     "remap-coverage": "ts-node --project ./dev-scripts ./dev-scripts/remapCoverage.ts",
     "test-single": "webpack && karma start --single-run",
     "test-and-coverage": "karma start & npm run remap-coverage",
-    "test": "webpack -w --test",
+    "test": "webpack -w --env.test",
     "jenkins": "webpack && karma start --single-run",
     "postinstall": "bower install --allow-root; typings install; cd dev-scripts; typings install; cd ../; npm run fix-jqlite",
     "start": "concurrently \"webpack -w\" \"gulp --theme=$npm_package_config_theme --skin=$npm_package_config_skin serve\"",
@@ -89,6 +89,7 @@
     "main-bower-files": "~2.9.0",
     "map-stream": "0.0.6",
     "merge-stream": "^1.0.0",
+    "node-sass": "^3.13.0",
     "on-build-webpack": "^0.1.0",
     "phantomjs": "~1.9.18",
     "phantomjs-polyfill": "0.0.2",
@@ -104,11 +105,10 @@
     "typings": "^2.0.0",
     "uglify-save-license": "~0.4.1",
     "vinyl-transform": "^1.0.0",
-    "webpack": "~1.14.0",
+    "webpack": "^2.2.0-rc.6",
     "wiredep": "~2.2.2",
     "wrench": "~1.5.8",
-    "yargs": "^4.2.0",
-    "node-sass": "^3.13.0"
+    "yargs": "^4.2.0"
   },
   "engines": {
     "node": ">=0.10.0"
