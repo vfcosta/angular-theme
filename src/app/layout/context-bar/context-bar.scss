@@ -2,11 +2,13 @@ $font-color: #8e8e8e;
 
 context-bar {
   #context-bar {
+    z-index: 1;
     position: relative;
     text-align: right;
     font-size: 13px;
     color: $font-color;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     a.btn:not(.btn-default) {
       color: $font-color;
     }

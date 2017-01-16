@@ -6,7 +6,6 @@ $navbar-font-color: #9a9a9a;
     font-size: 19px;
     display: none;
   }
-  border-radius: 0;
   margin-bottom: 0px;
 
   .container {
@@ -31,13 +30,7 @@ $navbar-font-color: #9a9a9a;
       .noosfero-logo {
         background: url("../assets/images/logo-noosfero.png") no-repeat;
         padding: 20px 60px;
-        background-size: 115px;
         background-position: 2px 16px;
-      }
-      @media (max-width: 423px) {
-        .noosfero-logo {
-          padding: 20px 23px;
-        }
       }
     }
 
@@ -54,7 +47,6 @@ $navbar-font-color: #9a9a9a;
       }
       i {
         color: $navbar-font-color;
-        font-size: 18px;
         &.fa-chevron-down {
           font-size: 9px;
           position: relative;
@@ -86,16 +78,10 @@ $navbar-font-color: #9a9a9a;
       .dropdown-menu-profile {
 	      min-width: 350px;
 	      padding: 10px;
-        
+
         .dropdown-menu-profile-image {
           display: inline-block;
           width: 40%;
-        }
-
-        .btn {
-          border: 0px;
-          border-radius: 1px;
-          font-size: .8em;
         }
 
         .profile-menu-info {
@@ -111,7 +97,6 @@ $navbar-font-color: #9a9a9a;
           }
 
           .btn-edit {
-            line-height: .5;
             width: 100%;
           }
         }
@@ -121,9 +106,7 @@ $navbar-font-color: #9a9a9a;
           font-size: .8em;
 
           .btn-logout {
-            line-height: .5;
-            background-color: #ecf0f1;
-            color: $navbar-font-color;
+            border: none;
           }
         }
 

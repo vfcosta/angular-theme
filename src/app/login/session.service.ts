@@ -7,8 +7,11 @@ import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 export class SessionService {
 
     constructor(private $localStorage: INoosferoLocalStorage, private $log: ng.ILogService, private profileService: ProfileService) {
+    }
+
+    reloadUser() {
         if (this.currentUser() && this.currentUser().person) {
-            profileService.getByIdentifier(this.currentUser().person.identifier).then((profile: noosfero.Profile) => {
+            this.profileService.getByIdentifier(this.currentUser().person.identifier).then((profile: noosfero.Profile) => {
                 this.currentUser().person = <noosfero.Person>profile;
             });
         }
