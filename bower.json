@@ -88,7 +88,7 @@
     }
   },
   "resolutions": {
-    "angular": "1.5.10",
+    "angular": "1.5.11",
     "angular-translate": "~2.12.1"
   }
 }
