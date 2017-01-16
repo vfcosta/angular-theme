@@ -1,76 +1,83 @@
-<nav id="navbar" class="navbar navbar-inverse">
+<nav id="navbar" class="navbar navbar-inverse navbar-static-top">
   <div class="container">
     <theme-header></theme-header>
-    <div class="navbar-header">
-      <a class="navbar-brand" ui-sref="main.domain">
-        <span class="noosfero-logo"> </span>
-        <h1 class="noosfero-name">{{ ctrl.currentEnvironment.name }}</h1>
-      </a>
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-         <span class="sr-only">{{"navbar.toggle_menu" | translate}}</span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-         <span class="icon-bar"></span>
-      </button>
-    </div>
+    <div class="row">
+      <div class="navbar-header col-md-10 col-sm-9">
+        <ul class="nav navbar-nav row">
+          <li class="col-md-7 col-xs-7">
+            <a class="navbar-brand" ui-sref="main.domain">
+              <span class="noosfero-logo"> </span>
+              <h1 class="noosfero-name">{{ ctrl.currentEnvironment.name }}</h1>
+            </a>
+            <search-form></search-form>
+          </li>
+          <li class="col-md-5 col-xs-5">
+            <button type="button" (click)="navCollapsed = !navCollapsed" class="pull-right navbar-toggle collapsed" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">{{"navbar.toggle_menu" | translate}}</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <tasks-menu class="navbar-nav pull-right"></tasks-menu>
+          </li>
+        </ul>
+      </div>
 
-    <div class="collapse navbar-collapse" id="navbar-collapse" collapse="isCollapsed">
-      <ul class="nav navbar-nav">
-        <li><search-form></search-form></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li class="btn-nav" ng-show="!ctrl.currentUser">
-          <a ng-href="#" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
-        </li>
+      <div class="col-md-2 col-sm-3">
+        <div uib-collapse="navCollapsed" class="navbar-collapse collapse " id="navbar-collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li class="btn-nav" ng-show="!ctrl.currentUser">
+              <a ng-href="#" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
+            </li>
 
-        <li ng-show="!ctrl.currentUser">
-          <a ui-sref="main.register">{{"navbar.signup.button" | translate}}</a>
-        </li>
+            <li ng-show="!ctrl.currentUser">
+              <a ui-sref="main.register">{{"navbar.signup.button" | translate}}</a>
+            </li>
 
-        <div ui-view="actions" class="custom-actions"></div>
+            <div ui-view="actions" class="custom-actions"></div>
 
-        <tasks-menu class="nav navbar-nav"></tasks-menu>
+            <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
 
-        <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
+              <a href="#" class="dropdown-toggle profile-link" aria-expanded="false" uib-dropdown-toggle>
+                <noosfero-profile-image [profile]="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>
+                <span ng-bind="ctrl.currentUser.person.name"></span>
+                <i class="fa fa-fw fa-chevron-down"></i>
+              </a>
 
-          <a href="#" class="dropdown-toggle profile-link" aria-expanded="false" uib-dropdown-toggle>
-            <noosfero-profile-image [profile]="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>
-            <span ng-bind="ctrl.currentUser.person.name"></span>
-            <i class="fa fa-fw fa-chevron-down"></i>
-          </a>
-
-          <ul class="dropdown-menu dropdown-menu-profile" uib-dropdown-menu>
-            <li>
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-xs-4 col-sm-4 col-md-4 text-center">
-                    <noosfero-profile-image 
-                      [profile]="ctrl.currentUser.person" 
-                      [editable]="true" 
-                      [icon-size]="'fa-4x'"></noosfero-profile-image>
-                  </div>
-                  <div class="col-xs-8 col-sm-8 col-md-8 profile-menu-info">
-                    <div class="row name" ng-bind="ctrl.currentUser.person.name"></div>
-                    <div class="row email" ng-bind="ctrl.currentUser.email"></div>
-                    <div class="row text-center">
-                      <a class="btn btn-default btn-edit" ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
+              <ul class="dropdown-menu dropdown-menu-profile" uib-dropdown-menu>
+                <li>
+                  <div class="container-fluid">
+                    <div class="row">
+                      <div class="col-xs-4 col-sm-4 col-md-4 text-center">
+                        <noosfero-profile-image
+                          [profile]="ctrl.currentUser.person"
+                          [editable]="true"
+                          [icon-size]="'fa-4x'"></noosfero-profile-image>
+                      </div>
+                      <div class="col-xs-8 col-sm-8 col-md-8 profile-menu-info">
+                        <div class="row name" ng-bind="ctrl.currentUser.person.name"></div>
+                        <div class="row email" ng-bind="ctrl.currentUser.email"></div>
+                        <div class="row text-center">
+                          <a class="btn btn-default btn-edit" ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="divider"></div>
+                    </div>
+                    <div class="row">
+                      <div class="profile-menu-logout">
+                        <a class="btn btn-default btn-logout" href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div class="row">
-                  <div class="divider"></div>
-                </div>
-                <div class="row">
-                  <div class="profile-menu-logout">
-                    <a class="btn btn-default btn-logout" href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
-                  </div>
-                </div>
-              </div>
+                </li>
+              </ul>
             </li>
-          </ul>
-        </li>
 
-      </ul>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

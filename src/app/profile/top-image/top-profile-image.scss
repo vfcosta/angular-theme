@@ -3,7 +3,7 @@ noosfero-top-profile-image {
     margin-top: -23px;
     &.without-top-image {
       .top-profile-image-wrap {
-        background-image: url('/assets/images/default-profile-top.png');
+        background-image: url('../assets/images/default-profile-top.png');
         height: 120px;
         @media (min-width: $break-xs-min) {
           height: 200px;
