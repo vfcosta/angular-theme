@@ -13,10 +13,12 @@
     <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.activity.created_at | dateFormat"></span></small></p>
   </timeline-heading>
   <div class="timeline-body">
-    <span ng-repeat="path in activity.params.thumbnail_path">
-      <a class="upimg" ng-href="{{activity.params.view_url[$index] | noosferoUrl}}" ng-style="{'background-image':'url({{path}})'}">
-        <span>{{path}}</span>
-      </a>
-    </span>
+    <div class="row">
+      <div class="col-xs-12 col-md-6" ng-repeat="path in ctrl.activity.params.thumbnail_path">
+        <a class="thumbnail" ng-href="{{ctrl.activity.params.view_url[$index] | noosferoUrl}}">
+          <img src="{{ctrl.environment.host}}/{{path}}" alt="descricao da imagem">
+        </a>
+      </div>
+    </div>
   </div>
 </timeline-panel>
