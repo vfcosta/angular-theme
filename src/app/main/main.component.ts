@@ -40,6 +40,7 @@ import { CommunitiesBlockComponent } from "../layout/blocks/communities/communit
 import { LoginBlockComponent } from "../layout/blocks/login-block/login-block.component";
 
 import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
+import { NoosferoUrl } from "../shared/pipes/noosfero-url.filter";
 import { DateFormat } from "../shared/pipes/date-format.filter";
 
 import { AuthService } from "../login/auth.service";
@@ -140,7 +141,7 @@ export class EnvironmentContent {
         BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
+        MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
