@@ -148,7 +148,7 @@ export class EnvironmentContent {
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
         DomainComponent, ContextBarComponent, TopProfileImageComponent
-    ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
+    ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",

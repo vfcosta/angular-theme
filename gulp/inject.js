@@ -69,7 +69,7 @@ gulp.task('inject-theme-options', function () {
     jsPaths.dest = path.join(conf.paths.dist, 'scripts');
   }
 
-  var ret = gulp.src(jsPaths.src).pipe(replace("theme.components['angular-default']", "theme.components['angular-participa-consulta']"));
+  var ret = gulp.src(jsPaths.src).pipe(replace('theme.components["angular-default"]', 'theme.components["angular-participa-consulta"]'));
   if(conf.paths.skin) ret.pipe(replace('skin-default', conf.paths.skin));
   ret.pipe(gulp.dest(jsPaths.dest));
 });
