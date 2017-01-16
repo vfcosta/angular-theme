@@ -12,6 +12,16 @@ export class SectionBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() popupOpen = false;
+
+    save() {
+        this.popupOpen = false;
+    }
+
+    cancel() {
+        this.popupOpen = false;
+    }
+
 
     font_color: string;
     background_color: string;

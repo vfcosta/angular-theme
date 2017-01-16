@@ -14,10 +14,16 @@
       </div>
     </div>
     <div class="section_text_block col-xs-10">
-      <span class="name" e-class="form-control input-sm" edit-disabled="!ctrl.designMode" editable-text="ctrl.block.settings.name"
-        e-placeholder='{{"edit.inline.section_name" | translate}}'>{{ ctrl.block.settings.name || ("edit.inline.section_name" | translate) }}</span>
-      <span class="description" e-class="form-control input-sm" edit-disabled="!ctrl.designMode" editable-text="ctrl.block.settings.description"
-        e-placeholder='{{"edit.inline.section_description" | translate}}'>{{ ctrl.block.settings.description || ("edit.inline.section_description" | translate) }}</span>
+      <span class="name" e-class="form-control input-sm" 
+        e-placeholder='{{"edit.popover.section_name" | translate}}'>{{ ctrl.block.settings.name || ("edit.popover.section_name" | translate) }}</span>
+      <span class="description" 
+        e-placeholder='{{"edit.popover.section_description" | translate}}'>{{ ctrl.block.settings.description || ("edit.popover.section_description" | translate) }}</span>
+        
+  <a href="" uib-popover-template="'plugins/section/blocks/section-block/section-header-form.html'"
+    popover-trigger="outsideClick" popover-append-to-body="true" popover-placement="auto right"
+    popover-class="editable-link-popover" popover-is-open="ctrl.popupOpen"
+    e-form="linkForm"><i class="fa fa-pencil"></i></a>
+        
     </div>
   </div>
 </div>
