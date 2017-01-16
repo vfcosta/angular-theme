@@ -17,18 +17,6 @@ export class ProfileImagesPluginProfileImagesBlockComponent {
 
     constructor(private blockService: BlockService, private $state: any) { }
 
-    urlFor(params: any) {
-        let url = '//' + params.host;
-        if (params.port) {
-              url += ':' + params.port;
-        }
-        url += '/' + params.profile + '/';
-        if (params.page) {
-            url += params.page.join('/');
-        }
-        return url;
-    }
-
     ngOnInit() {
         this.profile = this.owner;
         this.images = [];

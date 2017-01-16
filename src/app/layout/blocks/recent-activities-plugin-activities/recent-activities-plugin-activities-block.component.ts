@@ -19,23 +19,11 @@ export class RecentActivitiesPluginActivitiesBlockComponent {
 
     getActivityTemplate(activity: any) {
         if (activity.label === 'events') {
-          return 'app/layout/blocks/recent-activities-plugin-activities/activities/event.html';
+            return 'app/layout/blocks/recent-activities-plugin-activities/activities/event.html';
         }
         else {
-          return 'app/layout/blocks/recent-activities-plugin-activities/activities/' + activity.verb + '.html';
+            return 'app/layout/blocks/recent-activities-plugin-activities/activities/' + activity.verb + '.html';
         }
-    }
-
-    urlFor(params: any) {
-        let url = '//' + params.host;
-        if (params.port) {
-              url += ':' + params.port;
-        }
-        url += '/' + params.profile + '/';
-        if (params.page) {
-            url += params.page.join('/');
-        }
-        return url;
     }
 
     ngOnInit() {

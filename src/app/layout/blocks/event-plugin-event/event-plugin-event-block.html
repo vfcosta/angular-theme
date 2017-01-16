@@ -1,7 +1,7 @@
 <flex-calendar options="ctrl.options" events="ctrl.events"></flex-calendar>
 <ul class="event-plugin-event">
   <li ng-repeat="event in ctrl.monthEvents">
-    <a ng-href="{{ctrl.urlFor(event.view_url)}}">
+    <a ng-href="{{event.view_url | noosferoUrl}}">      
       <span>{{event.label}}</span>
     </a>
   </li>

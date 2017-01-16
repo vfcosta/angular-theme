@@ -1,6 +1,6 @@
-{{'uploaded images:' | translate}}<br /> 
+{{'uploaded images:' | translate}}<br />
 <span ng-repeat="path in activity.params.thumbnail_path">
-  <a class="upimg" ng-href="{{ctrl.urlFor(activity.params.view_url[$index])}}" ng-style="{'background-image':'url({{path}})'}">
+  <a class="upimg" ng-href="{{activity.params.view_url[$index] | noosferoUrl}}" ng-style="{'background-image':'url({{path}})'}">
     <span>{{path}}</span>
   </a>
 </span>

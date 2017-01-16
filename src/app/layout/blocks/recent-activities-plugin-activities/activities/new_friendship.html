@@ -1,6 +1,6 @@
-{{'has made new friends:' | translate}}<br /> 
+{{'has made new friends:' | translate}}<br />
 <span ng-repeat="name in activity.params.friend_name">
-  <a ng-href="{{ctrl.urlFor(activity.params.friend_url[$index])}}" ng-attr-title="{{name}}">
+  <a ng-href="{{activity.params.friend_url[$index] | noosferoUrl}}" ng-attr-title="{{name}}">
     <img ng-src="{{activity.params.friend_profile_custom_icon[$index]}}" ng-attr-alt="{{name}}" />
   </a>
 </span>
