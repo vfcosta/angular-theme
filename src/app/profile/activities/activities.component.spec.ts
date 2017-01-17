@@ -1,6 +1,7 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Pipe, Input, provide, Component} from 'ng-forward';
 import {provideFilters} from '../../../spec/helpers';
+import * as helpers from "../../../spec/helpers";
 
 import {ActivitiesComponent} from './activities.component';
 
@@ -12,6 +13,7 @@ const htmlTemplate: string = '<noosfero-activities [activities]="ctrl.activities
 describe("Components", () => {
 
     describe("Noosfero Activities", () => {
+        let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment"]);
 
         beforeEach(angular.mock.module("templates"));
 
@@ -19,7 +21,9 @@ describe("Components", () => {
             selector: 'test-container-component',
             template: htmlTemplate,
             directives: [ActivitiesComponent],
-            providers: provideFilters("truncateFilter", "stripTagsFilter", "translateFilter")
+            providers: [
+                helpers.createProviderToValue('EnvironmentService', environmentService)
+            ].concat(provideFilters("truncateFilter", "stripTagsFilter", "translateFilter"))
         })
         class BlockContainerComponent {
             activities = [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }];
