@@ -1,0 +1,18 @@
+<timeline-badge class="info">
+  <i alt='{{"activity.new_follower.icon" | translate}}' class="fa fa-users"></i>
+</timeline-badge>
+<timeline-panel>
+  <timeline-heading>
+    <h4 class="timeline-title">
+      <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})"><strong ng-bind="ctrl.activity.user.name"></strong></a>
+      <span> {{"activities.new_follower.description" | translate:{followers: ctrl.activity.params.follower_name.length}:"messageformat" }} </span>
+      <span class="comma-separated">
+        <a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.follower_url[$index].profile})" ng-repeat="follower in ctrl.activity.params.follower_name">
+          <strong ng-bind="follower"></strong>
+        </a>
+      </span>
+    </h4>
+    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.activity.created_at | dateFormat"></span></small></p>
+  </timeline-heading>
+  <div class="timeline-body"></div>
+</timeline-panel>
