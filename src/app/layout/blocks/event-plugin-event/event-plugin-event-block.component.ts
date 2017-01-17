@@ -19,18 +19,6 @@ export class EventPluginEventBlockComponent {
 
     constructor(private blockService: BlockService, private $state: any, private $scope: any) { }
 
-    urlFor(params: any) {
-        let url = '//' + params.host;
-        if (params.port) {
-              url += ':' + params.port;
-        }
-        url += '/' + params.profile + '/';
-        if (params.page) {
-            url += params.page.join('/');
-        }
-        return url;
-    }
-
     populateMonthEvents(month: number, year: number) {
         let events: any = [];
         this.events.forEach((e: any) => {

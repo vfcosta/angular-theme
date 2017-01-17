@@ -19,6 +19,7 @@ import { DisplayContentBlockComponent } from "../layout/blocks/display-content/d
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
 import { RecentDocumentsBlockComponent } from "../layout/blocks/recent-documents/recent-documents-block.component";
 import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
+import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
 import { RawHTMLBlockComponent } from "../layout/blocks/raw-html/raw-html-block.component";
 import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
 import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
@@ -39,6 +40,7 @@ import { CommunitiesBlockComponent } from "../layout/blocks/communities/communit
 import { LoginBlockComponent } from "../layout/blocks/login-block/login-block.component";
 
 import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
+import { NoosferoUrl } from "../shared/pipes/noosfero-url.filter";
 import { DateFormat } from "../shared/pipes/date-format.filter";
 
 import { AuthService } from "../login/auth.service";
@@ -46,6 +48,7 @@ import { SessionService } from "../login/session.service";
 import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
+import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
 
 import { BodyStateClassesService } from "./../shared/services/body-state-classes.service";
 
@@ -69,6 +72,7 @@ import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.compon
 import { LayoutConfigComponent } from "../layout/layout-config/layout-config.component";
 import { ConfigBarComponent } from "../layout/config-bar/config-bar.component";
 import { ContextBarComponent } from "../layout/context-bar/context-bar.component";
+import { DomainComponent } from "../domain/domain.component";
 
 import { HeaderService } from "./../shared/services/header.service";
 
@@ -90,7 +94,7 @@ import { HeaderService } from "./../shared/services/header.service";
 @Inject(BodyStateClassesService, HeaderService, EVENTS_HUB_KNOW_EVENT_NAMES)
 export class MainContentComponent {
 
-    public themeSkin: string = 'skin-whbl';
+    public themeSkin: string = 'skin-default';
 
     constructor(
         private bodyStateClassesService: BodyStateClassesService,
@@ -137,21 +141,21 @@ export class EnvironmentContent {
         BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
+        MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
-        ContextBarComponent
-    ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components['angular-default']),
+        DomainComponent, ContextBarComponent, TopProfileImageComponent
+    ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",
-        "noosfero.init", "uiSwitch", "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if",
+        "noosfero.init", "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if",
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar"]
@@ -173,16 +177,33 @@ export class EnvironmentContent {
     },
     {
         url: '/',
+        component: DomainComponent,
+        name: 'main.domain',
+        resolve: {
+            contextResult: (DomainService: DomainService) => {
+                return DomainService.get("context");
+            }
+        },
+        views: {
+            "content": {
+                template: "<div></div>",
+                controller: DomainComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    },
+    {
+        url: '/',
         component: EnvironmentComponent,
         name: 'main.environment',
-        abstract: true,
         views: {
             "content": {
                 templateUrl: "app/environment/environment.html",
                 controller: EnvironmentComponent,
-                controllerAs: "vm"
+                controllerAs: "ctrl"
             }
-        }
+        },
+        params: { environment: {} }
     },
     {
         url: '/account/signup',
@@ -217,9 +238,10 @@ export class EnvironmentContent {
             "content": {
                 templateUrl: "app/profile/profile.html",
                 controller: ProfileComponent,
-                controllerAs: "vm"
+                controllerAs: "ctrl"
             }
-        }
+        },
+        params: { currentProfile: {} }
     }
 ])
 export class MainComponent { }

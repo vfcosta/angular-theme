@@ -12,7 +12,6 @@ describe('DesignModeToggler Component', () => {
     beforeEach(() => {
         angular.mock.module('templates');
         angular.mock.module('ngSanitize');
-        angular.mock.module('uiSwitch');
     });
 
     let designModeService: DesignModeService;

@@ -1,5 +1,6 @@
 'use strict';
 
+var replace = require('gulp-replace');
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
@@ -60,23 +61,15 @@ gulp.task('inject-theme-options', function () {
     dest: conf.paths.src,
   };
 
+  $.util.log('Configuring theme:', conf.paths.theme, '...');
   $.util.log('Configuring theme skin:', conf.paths.skin, '...');
-
-  var replaceThemeOptions = transform(function(filename) {
-    return map(function(file, next) {
-      var contents = file.toString();
-      if(conf.paths.skin) contents = contents.replace('skin-whbl', conf.paths.skin);
-      contents = contents.replace('angular-default', conf.paths.theme);
-      return next(null, contents);
-    });
-  });
 
   if (conf.isBuild()) {
     jsPaths.src = path.join(conf.paths.dist, 'scripts', 'app-*.js');
     jsPaths.dest = path.join(conf.paths.dist, 'scripts');
   }
 
-  gulp.src(jsPaths.src)
-      .pipe(replaceThemeOptions)
-      .pipe(gulp.dest(jsPaths.dest));
+  var ret = gulp.src(jsPaths.src).pipe(replace('theme.components["angular-default"]', 'theme.components["angular-participa-consulta"]'));
+  if(conf.paths.skin) ret.pipe(replace('skin-default', conf.paths.skin));
+  ret.pipe(gulp.dest(jsPaths.dest));
 });

@@ -1,4 +1,4 @@
-import {RestangularService} from "./restangular_service";
+import { RestangularService } from "./restangular_service";
 
 interface ObjectModel extends noosfero.RestModel {
 }
@@ -81,6 +81,7 @@ describe("Restangular Service - base Class", () => {
         $httpBackend.verifyNoOutstandingExpectation();
     });
 
+
     it("get(1) calls GET /objects/1", (done) => {
         $httpBackend.expectGET("/api/v1/objects/1").respond(200, { object: { id: 1 } });
 
@@ -92,6 +93,20 @@ describe("Restangular Service - base Class", () => {
         $httpBackend.flush();
         $httpBackend.verifyNoOutstandingExpectation();
     });
+
+
+    it("get('cow') calls GET /objects/cow", (done) => {
+        $httpBackend.expectGET("/api/v1/objects/cow").respond(200, { object: { id: "cow" } });
+
+        objectRestService.get("cow").then((result: noosfero.RestResult<ObjectModel>) => {
+            expect(result.data).toBeDefined();
+            expect((<ObjectModel>result.data).id).toEqual("cow");
+            done();
+        });
+        $httpBackend.flush();
+        $httpBackend.verifyNoOutstandingExpectation();
+    });
+
 
     it("objectService.get(1, rootObject) calls GET /rootObjects/1/objects/1", (done) => {
         let rootObj: RootObjectModel = rootObjectRestService.getElement(1);

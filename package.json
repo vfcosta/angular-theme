@@ -19,9 +19,9 @@
     "docs": "gulp ngdocs; static-server docs",
     "coverage": "karma start --single-run",
     "remap-coverage": "ts-node --project ./dev-scripts ./dev-scripts/remapCoverage.ts",
-    "test-single": "webpack --test --single-run",
+    "test-single": "webpack && karma start --single-run",
     "test-and-coverage": "karma start & npm run remap-coverage",
-    "test": "webpack -w --test",
+    "test": "webpack -w --env.test",
     "jenkins": "webpack && karma start --single-run",
     "postinstall": "bower install --allow-root; typings install; cd dev-scripts; typings install; cd ../; npm run fix-jqlite",
     "start": "concurrently \"webpack -w\" \"gulp --theme=$npm_package_config_theme --skin=$npm_package_config_skin serve\"",
@@ -31,7 +31,7 @@
   },
   "devDependencies": {
     "bower": "^1.7.7",
-    "browser-sync": "~2.9.11",
+    "browser-sync": "~2.18.6",
     "browser-sync-spa": "~1.0.3",
     "chalk": "~1.1.1",
     "concurrently": "^2.0.0",
@@ -73,7 +73,7 @@
     "http-proxy-middleware": "~0.9.0",
     "iron-node": "^3.0.7",
     "istanbul": "1.1.0-alpha.1",
-    "karma": "1.3.0",
+    "karma": "~1.4.0",
     "karma-angular-filesort": "~1.0.0",
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^1.1.1",
@@ -89,6 +89,7 @@
     "main-bower-files": "~2.9.0",
     "map-stream": "0.0.6",
     "merge-stream": "^1.0.0",
+    "node-sass": "^3.13.0",
     "on-build-webpack": "^0.1.0",
     "phantomjs": "~1.9.18",
     "phantomjs-polyfill": "0.0.2",
@@ -104,11 +105,10 @@
     "typings": "^2.0.0",
     "uglify-save-license": "~0.4.1",
     "vinyl-transform": "^1.0.0",
-    "webpack": "^1.12.14",
+    "webpack": "^2.2.0-rc.6",
     "wiredep": "~2.2.2",
     "wrench": "~1.5.8",
-    "yargs": "^4.2.0",
-    "node-sass": "^3.13.0"
+    "yargs": "^4.2.0"
   },
   "engines": {
     "node": ">=0.10.0"

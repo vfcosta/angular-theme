@@ -26,13 +26,13 @@ function browserSyncInit(baseDir, browser) {
     routes: routes
   };
 
-  server.middleware = [proxyMiddleware('http://localhost:3000/api', {changeOrigin:true}),
-                      //  proxyMiddleware('http://localhost:3000/myprofile', {changeOrigin:true}),
-                       proxyMiddleware('http://localhost:3000/designs', {changeOrigin:true}),
-                       proxyMiddleware('http://localhost:3000/image_uploads', {changeOrigin:true}),
-                       proxyMiddleware('http://localhost:3000/articles', {changeOrigin:true}),
-                       proxyMiddleware('http://localhost:3000/account/logout', {changeOrigin:true}),
-                       proxyMiddleware('http://localhost:3000/images', {changeOrigin:true})];
+  server.middleware = [proxyMiddleware('http://localhost:3000/api', {changeOrigin:false}),
+                      //  proxyMiddleware('http://localhost:3000/myprofile', {changeOrigin:false}),
+                       proxyMiddleware('http://localhost:3000/designs', {changeOrigin:false}),
+                       proxyMiddleware('http://localhost:3000/image_uploads', {changeOrigin:false}),
+                       proxyMiddleware('http://localhost:3000/articles', {changeOrigin:false}),
+                       proxyMiddleware('http://localhost:3000/account/logout', {changeOrigin:false}),
+                       proxyMiddleware('http://localhost:3000/images', {changeOrigin:false})];
 
   browserSync.instance = browserSync.init({
     startPath: '/',

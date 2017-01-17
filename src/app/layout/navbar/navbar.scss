@@ -6,34 +6,47 @@ $navbar-font-color: #9a9a9a;
     font-size: 19px;
     display: none;
   }
-  border-radius: 0;
   margin-bottom: 0px;
 
   .container {
+    .navbar-header {
+      > ul {
+        width: 100%;
+      }
+      li {
+        display: inline-block;
+      }
+      tasks-menu {
+        &.navbar-nav {
+          margin: 0;
+        }
+      }
+      .navbar-toggle {
+        margin-left: 10px;
+        margin-right: 0;
+      }
+    }
     .navbar-brand {
       .noosfero-logo {
         background: url("../assets/images/logo-noosfero.png") no-repeat;
         padding: 20px 60px;
-        background-size: 115px;
         background-position: 2px 16px;
       }
     }
 
     .navbar-nav {
-      height: $navbar-height;
       li {
         height: 100%;
         > a {
           color: $navbar-font-color;
-          padding: 20px 15px;
         }
-        search-form > a {
-          padding: 23px 15px;
+        .tasks-menu-link, search-form > a {
+          padding: 24px 15px;
+          display: inline-block;
         }
       }
       i {
         color: $navbar-font-color;
-        font-size: 18px;
         &.fa-chevron-down {
           font-size: 9px;
           position: relative;
@@ -45,7 +58,7 @@ $navbar-font-color: #9a9a9a;
       }
 
       .profile-menu {
-        margin-left: 35px;
+        margin-right: 10px;
         .dropdown-toggle {
           padding: 16px 0 16px 8px;
         }
@@ -60,24 +73,15 @@ $navbar-font-color: #9a9a9a;
             font-size: 1.7em;
           }
         }
-        .profile-link {
-          padding-right: 0;
-        }
       }
 
       .dropdown-menu-profile {
 	      min-width: 350px;
 	      padding: 10px;
-        
+
         .dropdown-menu-profile-image {
           display: inline-block;
           width: 40%;
-        }
-
-        .btn {
-          border: 0px;
-          border-radius: 1px;
-          font-size: .8em;
         }
 
         .profile-menu-info {
@@ -93,7 +97,6 @@ $navbar-font-color: #9a9a9a;
           }
 
           .btn-edit {
-            line-height: .5;
             width: 100%;
           }
         }
@@ -103,9 +106,7 @@ $navbar-font-color: #9a9a9a;
           font-size: .8em;
 
           .btn-logout {
-            line-height: .5;
-            background-color: #ecf0f1;
-            color: $navbar-font-color;
+            border: none;
           }
         }
 

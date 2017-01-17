@@ -57,6 +57,7 @@ describe("Services", () => {
             };
             $localStorage.currentUser = fixtures.user;
             let session = new SessionService($localStorage, $log, profileService);
+            session.reloadUser();
 
             expect(profileService.getByIdentifier).toHaveBeenCalled();
             expect($localStorage.currentUser.person).toEqual({ name: "updated" });
