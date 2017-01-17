@@ -16,7 +16,7 @@
     <div class="row">
       <div class="col-xs-12 col-md-6" ng-repeat="path in ctrl.activity.params.thumbnail_path">
         <a class="thumbnail" ng-href="{{ctrl.activity.params.view_url[$index] | noosferoUrl}}">
-          <img src="{{ctrl.environment.host}}/{{path}}" alt="descricao da imagem">
+          <img ng-src="{{ctrl.environment.host}}{{path}}" alt="descricao da imagem">
         </a>
       </div>
     </div>
