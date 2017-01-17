@@ -1,4 +1,9 @@
 .noosfero-block {
+    .editable-link-popover {
+        &.popover {
+            min-width: 300px;
+        }
+    }    
     .sectionblockplugin-sectionblock {
         .panel-body {
             padding: 0;

@@ -97,5 +97,4 @@ export class BlockComponent {
             this.isHomepage = this.$state.current.name === "main.environment.home";
         }
     }
-
 }
