@@ -6,6 +6,7 @@ import { noosferoModuleConfig } from "./index.config";
 import { noosferoAngularRunBlock } from "./index.run";
 import { MainComponent } from "./main/main.component";
 import { AuthEvents } from "./login/auth-events";
+import {noosferoRoutes} from "./routes";
 
 import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
 import { NoosferoKnownEvents } from './known-events';
@@ -36,6 +37,7 @@ try {
 
 angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.plugins']).
     config(noosferoModuleConfig).
+    config(noosferoRoutes).
     run(noosferoAngularRunBlock).
     constant("moment", moment).
     constant("AuthEvents", AuthEvents).
