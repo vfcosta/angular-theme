@@ -1,0 +1,22 @@
+noosfero-profile-header {
+  position: relative;
+  .profile-header {
+    margin-top: -10px;
+    background-image: url('../assets/images/default-profile-top.png');
+    @media (min-width: $break-xs-min) {
+        height: 200px;
+    }
+    @media (min-width: $break-sm-min) {
+        height: 320px;
+    }
+    background-repeat: no-repeat;
+    background-color: black;
+    background-size: 100%;
+    .top-bar {
+      margin-top: 15px;
+    }
+    .bottom-bar {
+      margin-bottom: 30px;
+    }
+  }
+}
