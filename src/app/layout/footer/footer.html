@@ -1,0 +1,14 @@
+<div class="footer container">
+  <div class="row">
+    <div class="col-md-6 user">
+      <span>{{"footer.logged.as" | translate}} {{ctrl.currentUser.person.name}}
+        (<a href (click)="ctrl.logout()">{{"footer.logout" | translate}}</a>)
+      </span>
+    </div>
+    <div class="col-md-6 noosfero">
+      <span class="message">{{"footer.developed.with" | translate}}</span>
+      <a href="http://noosfero.org" target="_blank">
+        <span class="noosfero-logo"></span>
+      </a>
+    </div>
+</div>

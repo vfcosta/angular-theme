@@ -255,5 +255,8 @@
   "editable-link.form.name": "Title",
   "editable-link.form.address": "Address",
   "editable-link.form.ok": "Ok",
-  "editable-link.form.cancel": "Cancel"
+  "editable-link.form.cancel": "Cancel",
+  "footer.logout": "Logout",
+  "footer.logged.as": "You are identified as",
+  "footer.developed.with": "Developed with:"
 }
