@@ -3,6 +3,8 @@ noosfero-profile-header {
   .profile-header {
     margin-top: -10px;
     background-image: url('../assets/images/default-profile-top.png');
+    background-position: center;
+    background-size: cover;
     @media (min-width: $break-xs-min) {
         height: 200px;
     }
@@ -11,12 +13,12 @@ noosfero-profile-header {
     }
     background-repeat: no-repeat;
     background-color: black;
-    background-size: 100%;
     .top-bar {
       margin-top: 15px;
     }
     .bottom-bar {
       margin-bottom: 30px;
+      margin-top: 20px;
     }
   }
 }
