@@ -1,0 +1,17 @@
+<ul class="">
+  <div ng-repeat="person in ctrl.profiles.people">
+    <div class="col-md-3">
+      <div class="container friend-item">
+        <div class="row">
+          <span>
+            <i class="fa fa-user item-avatar-img fa-5x" ng-if="!person.image.url"></i>
+          </span>
+          <img class="img-responsive" src="{{person.image.url}}">
+        </div>
+        <div class="row">
+          <span class="media-heading ">{{person.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</ul>
