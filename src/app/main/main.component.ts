@@ -71,6 +71,7 @@ import { TasksMenuComponent } from "../task/tasks-menu/tasks-menu.component";
 import { TaskListComponent } from "../task/task-list/task-list.component";
 import { ThemeHeaderComponent } from "../layout/theme-header/theme-header.component";
 import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.component";
+import { FooterComponent } from "../layout/footer/footer.component";
 import { LayoutConfigComponent } from "../layout/layout-config/layout-config.component";
 import { ConfigBarComponent } from "../layout/config-bar/config-bar.component";
 import { ContextBarComponent } from "../layout/context-bar/context-bar.component";
@@ -150,7 +151,7 @@ export class EnvironmentContent {
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
-        DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent
+        DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent, FooterComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
