@@ -1,4 +1,4 @@
-<div id="context-bar" class="container" ng-class="{'profile-context-bar': ctrl.isProfile(), 'environment-context-bar': !ctrl.isProfile()}">
+<div id="context-bar" class="container-fluid" ng-class="{'profile-context-bar': ctrl.isProfile(), 'environment-context-bar': !ctrl.isProfile()}">
   <div id="config-bar-position">
     <div class="alert alert-warning config-option apply" ng-if="ctrl.displayAlertBar()">
       <strong> {{"contextbar.edition.has_changes" | translate}}</strong>

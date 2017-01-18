@@ -1,0 +1,26 @@
+noosfero-profile-summary {
+  color: #fff;
+  .profile-summary {
+    .media-left {
+      padding-right: 15px;
+      noosfero-profile-image {
+        width: 150px;
+        display: inline-block;
+        i.profile-image {
+          color: #424242;
+          background-color: white;
+          border-radius: 50%;
+          padding: 30px 40px;
+        }
+      }
+    }
+    .media-body {
+      .media-heading {
+        color: #fff;
+      }
+      .profile-link {
+        color: #ededed;
+      }
+    }
+  }
+}

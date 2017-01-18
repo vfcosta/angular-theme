@@ -20,6 +20,8 @@ import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-blo
 import { RecentDocumentsBlockComponent } from "../layout/blocks/recent-documents/recent-documents-block.component";
 import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
 import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
+import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
+import { ProfileHeaderComponent } from "../profile/header/profile-header.component";
 import { RawHTMLBlockComponent } from "../layout/blocks/raw-html/raw-html-block.component";
 import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
 import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
@@ -148,7 +150,7 @@ export class EnvironmentContent {
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
-        DomainComponent, ContextBarComponent, TopProfileImageComponent
+        DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",

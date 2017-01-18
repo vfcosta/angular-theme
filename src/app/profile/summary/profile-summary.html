@@ -1,0 +1,11 @@
+<div class="profile-summary media">
+  <div class="media-left media-middle">
+    <noosfero-profile-image [profile]="ctrl.profile" [editable]="true" [edit-class]="'profile-image-block-editable'"></noosfero-profile-image>
+  </div>
+  <div class="media-body media-middle">
+    <h1 class="media-heading profile-name">{{ctrl.profile.name}}</h1>
+    <div class="profile-link">
+      {{ctrl.profileLink()}}
+    </div>
+  </div>
+</div>
