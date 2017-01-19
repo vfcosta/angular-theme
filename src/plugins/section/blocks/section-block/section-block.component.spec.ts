@@ -38,8 +38,7 @@ describe("Components", () => {
                 providers: [
                     helpers.createProviderToValue("BlockService", blockService),
                     helpers.createProviderToValue('$scope', scope),
-                    helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
-                    helpers.createProviderToValue('DesignModeService', helpers.mocks.designModeService)
+                    helpers.createProviderToValue('$uibModal', helpers.mocks.$modal)
                 ]
 
             });

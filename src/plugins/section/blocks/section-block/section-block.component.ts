@@ -1,5 +1,4 @@
 import { Component, Inject, Input } from "ng-forward";
-import { DesignModeService } from '../../../../app/shared/services/design-mode.service';
 import { SectionImageEditorComponent } from "./section-image-editor.component";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 
@@ -7,12 +6,13 @@ import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service
     selector: "noosfero-section-block-plugin-section-block",
     templateUrl: "plugins/section/blocks/section-block/section-block.html"
 })
-@Inject(BlockService, "$scope", "$uibModal", DesignModeService)
+@Inject(BlockService, "$scope", "$uibModal")
 export class SectionBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
     @Input() popupOpen = false;
+    @Input() designMode: boolean;
 
     save() {
         this.popupOpen = false;
@@ -25,22 +25,13 @@ export class SectionBlockComponent {
 
     font_color: string;
     background_color: string;
-    designMode = false;
 
     picFile: any;
     modalInstance: any;
 
     constructor(private blockService: BlockService,
         private $scope: ng.IScope,
-        private $uibModal: ng.ui.bootstrap.IModalService,
-        private designModeService: DesignModeService) {
-
-        this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
-            this.designMode = designModeOn;
-            this.$scope.$apply();
-        });
-
-        this.designMode = this.designModeService.isInDesignMode();
+        private $uibModal: ng.ui.bootstrap.IModalService) {
     }
 
     ngOnInit() {
