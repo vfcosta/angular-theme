@@ -7,13 +7,16 @@ noosfero-profile-summary {
       noosfero-profile-image {
         width: 150px;
         display: inline-block;
-        i.profile-image {
+        .img-profile-nav-popup {
+          max-width: 150px;
+        }
+        i.profile-image, i.item-avatar-img {
           color: #424242;
           background-color: white;
           border-radius: 50%;
           padding: 40px 0;
           width: 150px;
-          vertical-align: middle;
+          text-align: center;
         }
       }
     }
