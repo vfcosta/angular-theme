@@ -5,12 +5,6 @@ noosfero-profile-header {
     background-image: url('../assets/images/default-profile-top.png');
     background-position: center;
     background-size: cover;
-    @media (min-width: $break-xs-min) {
-        height: 200px;
-    }
-    @media (min-width: $break-sm-min) {
-        height: 320px;
-    }
     background-repeat: no-repeat;
     background-color: black;
     .top-bar {
