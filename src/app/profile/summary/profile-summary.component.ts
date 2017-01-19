@@ -16,7 +16,7 @@ export class ProfileSummaryComponent {
     }
 
     profileLink() {
-        if(!this.environment || !this.environment.host || !this.profile) return null;
+        if (!this.environment || !this.environment.host || !this.profile) return null;
         let host = this.environment.host.replace(/https?:\/\//, "");
         return `${host}/${this.profile.identifier}`;
     }
