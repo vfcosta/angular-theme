@@ -84,14 +84,14 @@ describe("Components", () => {
             });
         });
 
-	it("render upload_image template correctly", done => {
-            activity = { name: "some_image", verb: "upload_image" };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(fixture.debugElement.queryAll(".activity.upload_image").length).toEqual(1);
-                done();
+        it("render upload_image template correctly", done => {
+                activity = { name: "some_image", verb: "upload_image" };
+                tcb.createAsync(BlockContainerComponent).then(fixture => {
+                    let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                    expect(fixture.debugElement.queryAll(".activity.upload_image").length).toEqual(1);
+                    done();
+                });
             });
         });
-    });
 
 });
