@@ -1,3 +1,5 @@
+import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
+import { FooterComponent } from './layout/footer/footer.component';
 import { bundle, bootstrap, provide } from "ng-forward";
 import { noosferoModuleConfig } from "./index.config";
 import { noosferoAngularRunBlock } from "./index.run";
@@ -34,7 +36,13 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     config(noosferoModuleConfig).
     run(noosferoAngularRunBlock).
     constant("moment", moment).
-    constant("AuthEvents", AuthEvents);
+    constant("AuthEvents", AuthEvents).
+    directive('noosferoFooter',
+        downgradeComponent({component: FooterComponent}) as angular.IDirectiveFactory
+    ).
+    directive('languageSelector',
+        downgradeComponent({component: LanguageSelectorComponent}) as angular.IDirectiveFactory
+    );
 
 platformBrowserDynamic().bootstrapModule(AppModule).then(platformRef => {
     const upgrade = platformRef.injector.get(UpgradeModule) as UpgradeModule;

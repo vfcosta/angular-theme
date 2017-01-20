@@ -1,5 +1,4 @@
 import { Component, Inject, EventEmitter, Input } from "ng-forward";
-import { LanguageSelectorComponent } from "../language-selector/language-selector.component";
 import { SessionService, AuthService, AuthController, AuthEvents } from "./../../login";
 import { EnvironmentService } from "./../../../lib/ng-noosfero-api/http/environment.service";
 import { SidebarNotificationService } from "../sidebar/sidebar.notification.service";
@@ -9,7 +8,7 @@ import { DesignModeTogglerComponent } from '../design-mode-toggler/design-mode-t
 @Component({
     selector: "acme-navbar",
     templateUrl: "app/layout/navbar/navbar.html",
-    directives: [LanguageSelectorComponent, DesignModeTogglerComponent],
+    directives: [DesignModeTogglerComponent],
     providers: [AuthService, SessionService, SidebarNotificationService, EnvironmentService]
 })
 @Inject("$uibModal", AuthService, "SessionService", "$state", SidebarNotificationService, BodyStateClassesService, EnvironmentService)

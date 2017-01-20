@@ -1,14 +1,13 @@
-import {Component, Inject} from "ng-forward";
+import { Component, Inject } from '@angular/core';
 import {TranslatorService} from "../../shared/services/translator.service";
 
 @Component({
     selector: "language-selector",
     templateUrl: "app/layout/language-selector/language-selector.html"
 })
-@Inject(TranslatorService)
 export class LanguageSelectorComponent {
 
-    constructor(private translatorService: TranslatorService) { }
+    constructor(@Inject("translatorService") private translatorService: TranslatorService) { }
 
     currentLanguage() {
         return this.translatorService.currentLanguage();
@@ -18,7 +17,11 @@ export class LanguageSelectorComponent {
         this.translatorService.changeLanguage(language);
     }
 
-    availableLanguages() {
-        return this.translatorService.availableLanguages;
+    availableLanguageKeys(): Array<string> {
+        return Object.keys(this.translatorService.availableLanguages);
+    }
+
+    languageDescription(lang: string) {
+        return this.translatorService.availableLanguages[lang];
     }
 }
