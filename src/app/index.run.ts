@@ -20,6 +20,5 @@ export function noosferoAngularRunBlock(
         // return false to break the promise chain and don't call catch
         return !NotificationService.httpError(response.status, response.data);
     });
-      editableOptions.theme = 'bs3';
-
+    editableOptions.theme = 'bs3';
 }

@@ -1,8 +1,20 @@
-import {bootstrap, provide} from "ng-forward";
-import {noosferoModuleConfig} from "./index.config";
-import {noosferoAngularRunBlock} from "./index.run";
-import {MainComponent} from "./main/main.component";
-import {AuthEvents} from "./login/auth-events";
+import { bundle, bootstrap, provide } from "ng-forward";
+import { noosferoModuleConfig } from "./index.config";
+import { noosferoAngularRunBlock } from "./index.run";
+import { MainComponent } from "./main/main.component";
+import { AuthEvents } from "./login/auth-events";
+
+import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
+import { NoosferoKnownEvents } from './known-events';
+
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { UpgradeModule, downgradeInjectable } from '@angular/upgrade/static';
+import { AppModule } from './app.module';
+import { AuthService } from "./login/auth.service";
+import { SessionService } from "./login/session.service";
+import { NotificationService } from "./shared/services/notification.service";
+import { BodyStateClassesService } from "./shared/services/body-state-classes.service";
+import { downgradeComponent } from '@angular/upgrade/static';
 
 declare var moment: any;
 
@@ -17,18 +29,17 @@ try {
 } catch (error) {
     angular.module('noosfero.templates.plugins', []);
 }
+
 angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.plugins']).
     config(noosferoModuleConfig).
     run(noosferoAngularRunBlock).
     constant("moment", moment).
     constant("AuthEvents", AuthEvents);
 
-
-import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
-import { NoosferoKnownEvents } from './known-events';
-
-bootstrap(MainComponent,
-    [
+platformBrowserDynamic().bootstrapModule(AppModule).then(platformRef => {
+    const upgrade = platformRef.injector.get(UpgradeModule) as UpgradeModule;
+    let noosferoApp = bundle('noosferoApp', MainComponent, [
         provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
-    ]
-);
+    ]).publish();
+    upgrade.bootstrap(document.documentElement, [noosferoApp.name]);
+});

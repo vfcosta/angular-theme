@@ -28,7 +28,9 @@ var testingFiles = glob.sync("./src/app/**/**/*.[sS]pec.ts");
 var entries = {
     noosfero: './src/app/index.ts',
     'noosfero-specs': testFiles, // './src/specs.ts',
-    'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng-forward/cjs/testing/test-component-builder']
+    'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 
+      'ng-forward/cjs/testing/test-component-builder', 'zone.js',
+      '@angular/core','@angular/upgrade/static', '@angular/platform-browser-dynamic']
 };
 
 module.exports = function(env) {
