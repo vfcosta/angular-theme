@@ -35,10 +35,10 @@
     "test-and-coverage": "karma start & npm run remap-coverage",
     "test": "webpack -w --env.test",
     "jenkins": "webpack && karma start --single-run",
-    "postinstall": "bower install --allow-root; typings install; cd dev-scripts; typings install; cd ../; npm run fix-jqlite",
+    "postinstall": "bower install --allow-root; typings install; cd dev-scripts; typings install; cd ../; npm run fix-ngforward",
     "start": "concurrently \"webpack -w\" \"gulp --theme=$npm_package_config_theme --skin=$npm_package_config_skin serve\"",
     "generate-indexes": "ts-node --project ./dev-scripts ./dev-scripts/generate-index-modules.ts",
-    "fix-jqlite": "ts-node --project ./dev-scripts dev-scripts/fix-jqlite.ts",
+    "fix-ngforward": "ts-node --project ./dev-scripts dev-scripts/fix-ngforward.ts",
     "debug-gulp": "webpack; gulp clean; ./node_modules/.bin/iron-node node_modules/gulp/bin/gulp.js --theme=$npm_package_config_theme --skin=$npm_package_config_skin"
   },
   "devDependencies": {
