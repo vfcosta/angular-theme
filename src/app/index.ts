@@ -9,9 +9,6 @@ import { AuthEvents } from "./login/auth-events";
 import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
 import { NoosferoKnownEvents } from './known-events';
 
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { UpgradeModule, downgradeInjectable } from '@angular/upgrade/static';
-import { AppModule } from './app.module';
 import { AuthService } from "./login/auth.service";
 import { SessionService } from "./login/session.service";
 import { NotificationService } from "./shared/services/notification.service";
@@ -44,10 +41,6 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({component: LanguageSelectorComponent}) as angular.IDirectiveFactory
     );
 
-platformBrowserDynamic().bootstrapModule(AppModule).then(platformRef => {
-    const upgrade = platformRef.injector.get(UpgradeModule) as UpgradeModule;
-    let noosferoApp = bundle('noosferoApp', MainComponent, [
-        provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
-    ]).publish();
-    upgrade.bootstrap(document.documentElement, [noosferoApp.name]);
-});
+export let noosferoApp = bundle('main', MainComponent, [
+    provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
+]).publish();

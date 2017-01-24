@@ -1,46 +1,34 @@
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-import {provide} from 'ng-forward';
-
-import {LanguageSelectorComponent} from './language-selector.component';
-
-import * as helpers from "../../../spec/helpers";
+import { TranslatorService } from './../../shared/services/translator.service';
+import { LanguageSelectorComponent } from './language-selector.component';
+import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 
 describe("Components", () => {
-
     describe("Language Selector Component", () => {
 
-        beforeEach(angular.mock.module("templates"));
+        let translatorServiceMock = jasmine.createSpyObj('translatorService', ['currentLanguage', 'changeLanguage']);
+        translatorServiceMock.availableLanguages = { "en" : "English", "pt": "Português" };
 
-        let translatorService: any;
-
-        let buildComponent = (): Promise<ComponentFixture> => {
-            translatorService = jasmine.createSpyObj("translatorService", ["availableLanguages", "currentLanguage"]);
-            return helpers.quickCreateComponent({
-                template: "<language-selector></language-selector>",
-                directives: [LanguageSelectorComponent],
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [ LanguageSelectorComponent ],
                 providers: [
-                    provide('TranslatorService', {
-                        useValue: translatorService
-                    })
-                ].concat(helpers.provideFilters("translateFilter"))
-            });
-        };
+                    { provide: 'translatorService', useValue: translatorServiceMock }
+                ]
+            }).compileComponents();
+        }));
 
-        it("display language options", (done) => {
-            buildComponent().then(fixture => {
-                fixture.debugElement.getLocal("$rootScope").$apply();
-                expect(fixture.debugElement.queryAll('li.language').length).toEqual(2);
-                done();
-            });
+        it('should display language options', () => {
+            const fixture = TestBed.createComponent(LanguageSelectorComponent);
+            fixture.detectChanges();
+            let compiled = fixture.debugElement.nativeElement;
+            expect(compiled.querySelectorAll('li.language').length).toEqual(2);
         });
 
-        it("call the translator service when change the language", (done) => {
-            let translatorService = jasmine.createSpyObj("translatorService", ["changeLanguage"]);
-            let languageSelector = new LanguageSelectorComponent(<any>translatorService);
-            languageSelector.changeLanguage("en");
-            expect(translatorService.changeLanguage).toHaveBeenCalledWith("en");
-            done();
+        it("call the translator service when change the language", () => {
+            const fixture = TestBed.createComponent(LanguageSelectorComponent);
+            fixture.componentInstance.changeLanguage("en");
+            expect(translatorServiceMock.changeLanguage).toHaveBeenCalledWith("en");
         });
-
     });
 });
