@@ -3,13 +3,14 @@ import {SideCommentsComponent} from "../side-comments/side-comments.component";
 import {CommentParagraphEventService} from "../events/comment-paragraph-event.service";
 import {CommentParagraphService} from "../http/comment-paragraph.service";
 import {CommentService} from "./../../../lib/ng-noosfero-api/http/comment.service";
+import {PermissionService} from "../../../app/shared/services/permission.service";
 
 @Component({
     selector: "comment-paragraph-plugin-allow-comment",
     templateUrl: "plugins/comment_paragraph/allow-comment/allow-comment.html",
     directives: [SideCommentsComponent]
 })
-@Inject("$scope", CommentParagraphEventService, CommentParagraphService, CommentService)
+@Inject("$scope", CommentParagraphEventService, CommentParagraphService, CommentService, PermissionService)
 export class AllowCommentComponent {
 
     @Input() content: string;
@@ -21,7 +22,8 @@ export class AllowCommentComponent {
     constructor(private $scope: ng.IScope,
         private commentParagraphEventService: CommentParagraphEventService,
         private commentParagraphService: CommentParagraphService,
-        private commentService: CommentService
+        private commentService: CommentService,
+        private permissionService: PermissionService
     ) { }
 
     ngOnInit() {
@@ -44,6 +46,12 @@ export class AllowCommentComponent {
                 this.commentsCount -= (comment.replies) ? 1 + comment.replies.length : 1;
             };
         });
+    }
+
+    isAllowedShow() {
+        return this.article && this.article.setting &&
+            this.article.setting.comment_paragraph_plugin_activate &&
+            this.permissionService.isAllowed(this.article, 'allow_edit');
     }
 
     isActivated() {

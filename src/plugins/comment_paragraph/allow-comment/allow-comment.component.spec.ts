@@ -21,10 +21,17 @@ describe("Components", () => {
             }
         };
 
+        let permissionServiceMock = {
+            isAllowed: () => {
+              return true;
+            }
+        };
+
         let providers = [
             new Provider('CommentService', { useValue: helpers.mocks.commentService } ),
             new Provider('CommentParagraphService', { useValue: serviceMock }),
-            new Provider('CommentParagraphEventService', { useValue: eventServiceMock })
+            new Provider('CommentParagraphEventService', { useValue: eventServiceMock }),
+            new Provider('PermissionService', { useValue: permissionServiceMock })
         ];
         let helper: ComponentTestHelper<AllowCommentComponent>;
 
@@ -85,6 +92,12 @@ describe("Components", () => {
             helper.component.article.accept_comments = false;
             helper.component.commentsCount = 2;
             expect(helper.component.isActivated()).toBeTruthy();
+        });
+
+        it('display button to side comments when the user has permission to edit the discussion even when comments was closed', () => {
+            helper.component.article.accept_comments = false;
+            helper.component.commentsCount = 0;
+            expect(helper.component.isAllowedShow()).toBeTruthy();
         });
     });
 });

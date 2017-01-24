@@ -38,6 +38,14 @@ comment-paragraph-plugin-allow-comment {
         margin-top: 5px;
         width: 25px;
         border-radius: 2px;
+        &.linked {
+          &:hover, &.active {
+            background: $balloon-selected-color;
+            &:after {
+              border-top-color: $balloon-selected-color;
+            }
+          }
+        }
         &:after {
           top: 100%;
           left: 50%;
@@ -49,12 +57,6 @@ comment-paragraph-plugin-allow-comment {
           border-top-color: $balloon-color;
           border-width: 6px;
           margin-left: -6px;
-        }
-        &:hover, &.active {
-          background: $balloon-selected-color;
-          &:after {
-            border-top-color: $balloon-selected-color;
-          }
         }
       }
     }
