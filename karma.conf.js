@@ -51,8 +51,6 @@ var karmaPlugins = [
     'karma-webpack'
 ];
 
-
-var karmaReporters = ['spec', 'coverage', 'karma-remap-istanbul'];
 var _ = require('lodash');
 var wiredep = require('wiredep');
 
@@ -99,9 +97,7 @@ module.exports = function (config) {
         autoWatch: true,
         colors: true,
         logLevel: config.LOG_INFO,
-        webpack: _.merge({}, webpackConfig, {
-            devtool: 'inline-source-map'
-        }),
+        webpack: webpackConfig,
         webpackServer: {
             quite: true
         },
@@ -115,7 +111,7 @@ module.exports = function (config) {
         },
         browsers: ['PhantomJS'],
         plugins: karmaPlugins,
-        reporters: karmaReporters,
+        reporters: ['spec', 'coverage'],
         proxies: {
             '/assets/': path.join('/base/', conf.paths.src, '/assets/'),
             '/app/': path.join('/base/', conf.paths.src, '/app/')
@@ -125,12 +121,8 @@ module.exports = function (config) {
             html: 'coverage'
           }
         },
-        // This is the default preprocessors configuration for a usage with Karma cli
-        // The coverage preprocessor is added in gulp/unit-test.js only for single tests
-        // It was not possible to do it there because karma doesn't let us now if we are
-        // running a single test or not
         preprocessors: {
-            'src/noosfero.js': ['sourcemap', 'coverage'],
+            'src/noosfero-test.js': ['coverage', 'sourcemap'],
             'src/**/*.ts': ['sourcemap'],
             'karma.entry.js': ['webpack']
         },
@@ -151,20 +143,5 @@ module.exports = function (config) {
     pathSrcHtml.forEach(function (path) {
         configuration.preprocessors[path] = ['ng-html2js'];
     });
-
-    // This block is needed to execute Chrome on Travis
-    // If you ever plan to use Chrome and Travis, you can keep it
-    // If not, you can safely remove it
-    // https://github.com/karma-runner/karma/issues/1144#issuecomment-53633076
-    if (configuration.browsers[0] === 'Chrome' && process.env.TRAVIS) {
-        configuration.customLaunchers = {
-            'chrome-travis-ci': {
-                base: 'Chrome',
-                flags: ['--no-sandbox']
-            }
-        };
-        configuration.browsers = ['chrome-travis-ci'];
-    }
-
     config.set(configuration);
 };
