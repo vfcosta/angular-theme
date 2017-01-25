@@ -49,6 +49,4 @@ gulp.task('watch', ['inject'], function () {
   gulp.watch(watchPaths, function(event) {
     browserSync.reload(event.path);
   });
-
-  gulp.start('inject-theme-options');
 });
