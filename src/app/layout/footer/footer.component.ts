@@ -3,7 +3,7 @@ import { AuthService, SessionService } from "./../../login";
 
 @Component({
     selector: "noosfero-footer",
-    templateUrl: "app/layout/footer/footer.html"
+    template: require("app/layout/footer/footer.html")
 })
 export class FooterComponent {
 

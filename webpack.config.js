@@ -51,7 +51,8 @@ module.exports = function(env) {
 
         resolve: {
             // Add `.ts` and `.tsx` as a resolvable extension.
-            extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']
+            extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
+            modules: ['src', 'node_modules']
         },
         // Source maps support (or 'inline-source-map' also works)
         devtool: 'source-map',
@@ -74,6 +75,9 @@ module.exports = function(env) {
             }, {
                 test: /\.ts?$/,
                 loader: "tslint-loader"
+            },{
+                test: /\.html$/,
+                loader: 'html-loader'
             }]
         }
     };
