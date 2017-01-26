@@ -19,6 +19,7 @@ export class FriendsBlockComponent {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
         this.personService.getFriends(this.owner.id, { limit: limit }).then((result: noosfero.RestResult<any>) => {
             this.friends = result.data['people'];
+            this.block.api_content = {'#': this.friends.length};
         });
     }
 }
