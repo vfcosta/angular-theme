@@ -11,15 +11,14 @@ export class FriendsBlockComponent {
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
 
-    profiles: any = [];
+    friends: any = [];
 
     constructor(private personService: PersonService) { }
 
     ngOnInit() {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
-        this.personService.getFriends(this.owner.id, { limit: limit }).then((result: noosfero.RestResult<noosfero.Person[]>) => {
-            this.profiles = result.data;
-            console.log("### Profiles ==", result.data);
+        this.personService.getFriends(this.owner.id, { limit: limit }).then((result: noosfero.RestResult<any>) => {
+            this.friends = result.data['people'];
         });
     }
 }

@@ -1,17 +1,10 @@
-<ul class="">
-  <div ng-repeat="person in ctrl.profiles.people">
-    <div class="col-md-3">
-      <div class="container friend-item">
-        <div class="row">
-          <span>
-            <i class="fa fa-user item-avatar-img fa-5x" ng-if="!person.image.url"></i>
-          </span>
-          <img class="img-responsive" src="{{person.image.url}}">
-        </div>
-        <div class="row">
-          <span class="media-heading ">{{person.name}}</span>
-        </div>
-      </div>
+<div class="friends-block">
+  <div class="friends-list">
+    <div ng-repeat="friend in ctrl.friends" class="friend-item">
+      <a ui-sref="main.profile.home({profile: friend.identifier})" href class="friend-link">
+        <noosfero-profile-image [profile]="friend" class="friend-image"></noosfero-profile-image>
+        <div class="friend-name">{{friend.name}}</div>
+      </a>
     </div>
   </div>
-</ul>
+</div>
