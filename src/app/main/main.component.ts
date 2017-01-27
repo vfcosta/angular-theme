@@ -57,8 +57,6 @@ import { BodyStateClassesService } from "./../shared/services/body-state-classes
 
 import { Navbar } from "../layout/navbar/navbar";
 
-import { SidebarComponent } from "../layout/sidebar/sidebar.component";
-
 import { MainBlockComponent } from "../layout/blocks/main/main-block.component";
 import { HtmlEditorComponent } from "../shared/components/html-editor/html-editor.component";
 import { PermissionDirective } from "../shared/components/permission/permission.directive";
@@ -144,7 +142,7 @@ export class EnvironmentContent {
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, MenuBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
-        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
+        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
