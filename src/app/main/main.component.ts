@@ -17,6 +17,7 @@ import { EnvironmentHomeComponent } from "../environment/environment-home.compon
 import { PeopleBlockComponent } from "../layout/blocks/people/people-block.component";
 import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
+import { MenuBlockComponent } from "../layout/blocks/menu/menu-block.component";
 import { RecentDocumentsBlockComponent } from "../layout/blocks/recent-documents/recent-documents-block.component";
 import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
 import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
@@ -142,7 +143,7 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
-        LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
+        LinkListBlockComponent, MenuBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat, RawHTMLBlockComponent, StatisticsBlockComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
