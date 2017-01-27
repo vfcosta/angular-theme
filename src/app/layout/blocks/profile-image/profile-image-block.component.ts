@@ -6,8 +6,7 @@ import { NotificationService } from "../../../shared/services/notification.servi
 
 @Component({
     selector: "noosfero-profile-image-block",
-    templateUrl: 'app/layout/blocks/profile-image/profile-image-block.html',
-    directives: [ProfileImageComponent]
+    templateUrl: 'app/layout/blocks/profile-image/profile-image-block.html'
 })
 @Inject(ProfileService, SessionService, NotificationService)
 export class ProfileImageBlockComponent {

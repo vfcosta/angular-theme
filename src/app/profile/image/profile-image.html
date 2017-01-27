@@ -1,10 +1,10 @@
-<div ng-if="ctrl.isEditable()">
-    <div class="profile-image-wrap" title="{{ctrl.profile.name}}" ng-mouseenter="ctrl.showChange(true)" ng-mouseleave="ctrl.showChange(false)">
+<div *ngIf="isEditable()">
+    <div class="profile-image-wrap" title="{{profile.name}}" ng-mouseenter="showChange(true)" ng-mouseleave="showChange(false)">
         <div class="hovereffect">
-            <i ng-if="!ctrl.profile.image" alt='{{"profile.image.description" | translate}}' class="fa {{ctrl.defaultIcon}} {{ctrl.iconSize}} profile-image"></i>
-            <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url}}" class="img-responsive profile-image img-circle">
+            <i *ngIf="!profile.image" class="fa {{defaultIcon}} {{iconSize}} profile-image"></i>
+            <img *ngIf="profile.image" [alt]='"profile.image.description" | translate' [src]="profile.image.url" class="img-responsive profile-image img-circle">
             <div class='container-camera'>
-                <div ngf-select="ctrl.fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
+                <div ngf-select="fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
                     data-target=".crop-dialog">
                     <a href="" class="fa fa-camera upload-camera"></a>
                 </div>
@@ -13,7 +13,7 @@
         </div>
     </div>
 </div>
-<div ng-if="!ctrl.isEditable()" class="profile-image-wrap" title="{{ctrl.profile.name}}">
-    <img ng-if="ctrl.profile.image" alt='{{"profile.image.description" | translate}}' ng-src="{{ctrl.profile.image.url }}" class="item-avatar-img img-responsive  img-circle img-profile-nav-popup">
-    <i ng-if="!ctrl.profile.image" alt='{{"profile.image.description" | translate}}' class="item-avatar-img fa {{ctrl.defaultIcon}} fa-5x"></i>
+<div *ngIf="!isEditable() && profile" class="profile-image-wrap" title="{{profile.name}}">
+    <img *ngIf="profile.image" [alt]='"profile.image.description" | translate' [src]="profile.image.url" class="item-avatar-img img-responsive  img-circle img-profile-nav-popup">
+    <i *ngIf="!profile.image" class="item-avatar-img fa {{defaultIcon}} fa-5x"></i>
 </div>
