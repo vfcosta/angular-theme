@@ -11,9 +11,9 @@ describe("Components", () => {
     describe("Friends Block Component", () => {
 
         let helper: ComponentTestHelper<FriendsBlockComponent>;
-        let personServiceMock = jasmine.createSpyObj("PersonService", ["getFriends"]);
-        let friends = [{id: 2}, {id: 3}, {id: 4}];
-        personServiceMock.getFriends = jasmine.createSpy("getFriends").and.returnValue(helpers.mocks.promiseResultTemplate({data: {people: friends}}));
+        let blockServiceMock = jasmine.createSpyObj("BlockService", ["getApiContent"]);
+        let friends = [{ id: 2 }, { id: 3 }, { id: 4 }];
+        blockServiceMock.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(helpers.mocks.promiseResultTemplate({ people: friends, '#': 3 }));
 
         beforeEach(angular.mock.module("templates"));
 
@@ -22,18 +22,18 @@ describe("Components", () => {
                 template: htmlTemplate,
                 directives: [FriendsBlockComponent],
                 properties: {
-                    block: { settings: {limit: 3} },
-                    owner: {id: 1}
+                    block: { settings: { limit: 3 } },
+                    owner: { id: 1 }
                 },
                 providers: [
-                    helpers.createProviderToValue("PersonService", personServiceMock)
+                    helpers.createProviderToValue("BlockService", blockServiceMock)
                 ]
             });
             helper = new ComponentTestHelper<FriendsBlockComponent>(cls, done);
         });
 
         it("call person service to return friends list", () => {
-            expect(personServiceMock.getFriends).toHaveBeenCalledWith(1, { limit: 3 });
+            expect(blockServiceMock.getApiContent).toHaveBeenCalledWith(helper.component.block);
         });
 
         it("list friends", () => {

@@ -1,11 +1,11 @@
-import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { Component, Inject, Input } from "ng-forward";
 
 @Component({
     selector: "noosfero-friends-block",
     templateUrl: "plugins/friends/blocks/friends-block/friends-block.html"
 })
-@Inject(PersonService)
+@Inject(BlockService)
 export class FriendsBlockComponent {
 
     @Input() block: noosfero.Block;
@@ -13,13 +13,13 @@ export class FriendsBlockComponent {
 
     friends: any = [];
 
-    constructor(private personService: PersonService) { }
+    constructor(private blockService: BlockService) { }
 
     ngOnInit() {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
-        this.personService.getFriends(this.owner.id, { limit: limit }).then((result: noosfero.RestResult<any>) => {
-            this.friends = result.data['people'];
-            this.block.api_content = {'#': this.friends.length};
+        this.blockService.getApiContent(this.block).then((content: any) => {
+            this.friends = content['people'];
+            this.block.api_content = content;
         });
     }
 }
