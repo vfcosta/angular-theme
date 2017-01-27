@@ -28,7 +28,7 @@ export class MenuBlockComponent {
         this.links = [];
         if (this.block && this.block.api_content) {
             for (let link of this.block.api_content) {
-                if (this.hasAvailabledPage(link)) {
+                if (this.hasAvailablePage(link)) {
                     this.links.push(this.makeUrl(link));
                 }
             }
@@ -38,9 +38,14 @@ export class MenuBlockComponent {
     makeUrl(params: any) {
         let link: any = {};
         let url = '';
+
+        if (params.controller === 'profile') {
+            url += '/' + params.controller;
+        }
+
         url += '/' + this.owner.identifier;
 
-        if (params.controller != 'profile') {
+        if (params.controller !== 'profile') {
             url += '/' + params.controller;
         }
         url += '/' + params.action;
@@ -50,9 +55,18 @@ export class MenuBlockComponent {
         return link;
     }
 
-    //communities and friends links are not available in this template yet.    
-    hasAvailabledPage(link: any) {
-        if (link.controller == 'profile') {
+    // Communities and friends links are not available in this template yet.
+    hasAvailablePage(link: any) {
+        if (link.controller === 'profile') {
+            return true;
+        }
+        return false;
+    }
+
+
+    // FIXME check the current url
+    isActive(link: any) {
+        if (link.url.match(/activities/i)) {
             return true;
         }
         return false;

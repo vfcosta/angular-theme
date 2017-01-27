@@ -1,6 +1,6 @@
 <div class="menu-block">
-  <ul>
-    <li ng-repeat="link in ctrl.links">
+  <ul class="nav nav-pills">
+    <li ng-repeat="link in ctrl.links" ng-class="{'active': ctrl.isActive(link)}">
       <a ng-href="{{link['url']}}">
         <span>{{link['title']}}</span>
       </a>

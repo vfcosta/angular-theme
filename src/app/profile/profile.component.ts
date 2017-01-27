@@ -1,10 +1,10 @@
 import { StateConfig, Component, Inject, provide, Input } from 'ng-forward';
-import { ProfileInfoComponent } from './info/profile-info.component';
 import { ProfileHomeComponent } from './profile-home.component';
 import { BasicEditorComponent } from '../article/cms/basic-editor/basic-editor.component';
 import { CmsComponent } from '../article/cms/cms.component';
 import { ContentViewerComponent } from "../article/content-viewer/content-viewer.component";
 import { ActivitiesComponent } from "./activities/activities.component";
+import { ProfileDataComponent } from "./data/profile-data.component";
 import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { MyProfileComponent } from "./myprofile.component";
@@ -32,12 +32,12 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
     {
         name: 'main.profile.info',
         url: "^/profile/:profile",
-        component: ProfileInfoComponent,
+        component: ActivitiesComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/profile/info/profile-info.html",
-                controller: ProfileInfoComponent,
-                controllerAs: "vm"
+                templateUrl: "app/profile/activities/activities.html",
+                controller: ActivitiesComponent,
+                controllerAs: "ctrl"
             }
         }
     },
@@ -49,6 +49,18 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
             "mainBlockContent": {
                 templateUrl: "app/profile/activities/activities.html",
                 controller: ActivitiesComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    },
+    {
+        name: 'main.profile.about',
+        url: "^/profile/:profile/about",
+        component: ProfileDataComponent,
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/profile/data/profile-data.html",
+                controller: ProfileDataComponent,
                 controllerAs: "ctrl"
             }
         }

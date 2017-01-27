@@ -17,21 +17,12 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
     directives: [ActivityComponent]
 })
 @Inject(ProfileService)
-// @Inject("amDateFormatFilter")
 export class ActivitiesComponent {
-
-    /**
-     * @ngdoc property
-     * @propertyOf NoosferoActivities
-     * @name activities
-     * @returns {Activity[]} An array of {@link Activity}.
-     */
-    // @Input() activities: noosfero.Activity[];
 
     activities: any;
     profile: noosfero.Profile;
 
-    constructor(private profileService: ProfileService, private amDateFormatFilter: any) {
+    constructor(private profileService: ProfileService) {
         this.init();
     }
 
