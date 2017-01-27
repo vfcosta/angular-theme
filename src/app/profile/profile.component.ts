@@ -42,6 +42,18 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
         }
     },
     {
+        name: 'main.profile.activities',
+        url: "^/profile/:profile/activities",
+        component: ActivitiesComponent,
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/profile/activities/activities.html",
+                controller: ActivitiesComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    },
+    {
         name: 'main.profile.settings',
         url: "^/myprofile/:profile",
         component: MyProfileComponent
