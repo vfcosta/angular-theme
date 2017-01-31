@@ -32,7 +32,6 @@ export class ActivitiesComponent {
             return this.profileService.getActivities(<number>this.profile.id);
         }).then((response: restangular.IResponse) => {
             this.activities = response.data.activities;
-            console.log(this.activities);
         });
     }
 

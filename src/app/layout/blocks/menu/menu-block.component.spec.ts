@@ -4,7 +4,7 @@ import { MenuBlockComponent } from './menu-block.component';
 import * as helpers from "../../../../spec/helpers";
 import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
 
-const htmlTemplate: string = '<noosfero-menu-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-link-list-block>';
+const htmlTemplate: string = '<noosfero-menu-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-menu-block>';
 
 describe("Components", () => {
 
@@ -12,20 +12,35 @@ describe("Components", () => {
 
         let helper: ComponentTestHelper<MenuBlockComponent>;
 
-        beforeEach(angular.mock.module("templates"));
+        beforeEach(() => {
+            angular.mock.module("templates");
+        });
 
         beforeEach((done) => {
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [MenuBlockComponent],
                 properties: {
-                    block: { type: 'Block', settings: {} },
+                    block: {
+                        id: 1,
+                        type: 'Block',
+                        settings: { interval: 2, shuffle: true },
+                        api_content: [
+                            { "title": "Activities", "controller": "profile", "action": "activities" },
+                            { "title": "About", "controller": "profile", "action": "about" },
+                            { "title": "Communities", "controller": "memberships", "action": "index" },
+                            { "title": "People", "controller": "friends", "action": "index" }
+                        ]
+                    },
                     owner: { name: 'profile-name' }
                 },
-                providers: provideFilters("noosferoTemplateFilter", "translateFilter")
+                providers: [
+                    helpers.createProviderToValue('TranslatorService', helpers.mocks.translatorService)
+                ]
             });
             helper = new ComponentTestHelper<MenuBlockComponent>(cls, done);
         });
+
 
         it("receives the block and the owner as inputs", () => {
             expect(helper.component.block.type).toEqual("Block");
@@ -33,7 +48,32 @@ describe("Components", () => {
         });
 
         it("display the default links defined for person profile", () => {
-            expect(helper.all(".menu-block a").length).toEqual(4);
+            expect(helper.all(".menu-block a").length).toEqual(2);
+        });
+
+        it("make available only url's of controller profile", () => {
+            expect(helper.component.hasAvailablePage({ "title": "Activities", "controller": "profile", "action": "activities" })).toBeTruthy();
+        });
+
+        it("generate correct url for activities", () => {
+            let url = { title: 'blocks.menu.activities', url: 'main.profile.activities({profile: ctrl.owner.identifier})' };
+            expect(helper.component.makeUrl({ "title": "Activities", "controller": "profile", "action": "activities" })).toEqual(url);
+        });
+
+        it("generate correct url for about", () => {
+            let url = { title: 'blocks.menu.about', url: 'main.profile.about({profile: ctrl.owner.identifier})' };
+            expect(helper.component.makeUrl({ "title": "About", "controller": "profile", "action": "about" })).toEqual(url);
+        });
+
+        it("initialize links variable", () => {
+            let profileLinks = [
+                { title: 'blocks.menu.activities', url: 'main.profile.activities({profile: ctrl.owner.identifier})' },
+                { title: 'blocks.menu.about', url: 'main.profile.about({profile: ctrl.owner.identifier})' }
+            ]
+
+            for (var i = 0; i < helper.component.links.length; i++) {
+                expect(helper.component.links[i]).toEqual(jasmine.objectContaining(profileLinks[i]));
+            }
         });
 
     });
