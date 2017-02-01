@@ -22,7 +22,6 @@ import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profi
 import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
 import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
 import { ProfileHeaderComponent } from "../profile/header/profile-header.component";
-import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
 import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
 import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
@@ -142,7 +141,7 @@ export class EnvironmentContent {
         BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat, StatisticsBlockComponent,
+        MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,

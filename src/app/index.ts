@@ -16,6 +16,7 @@ import { BodyStateClassesService } from "./shared/services/body-state-classes.se
 import { downgradeComponent } from '@angular/upgrade/static';
 
 import { RawHTMLBlockComponent } from "./layout/blocks/raw-html/raw-html-block.component";
+import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 
 
 declare var moment: any;
@@ -38,13 +39,16 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     constant("moment", moment).
     constant("AuthEvents", AuthEvents).
     directive('noosferoFooter',
-      downgradeComponent({ component: FooterComponent }) as angular.IDirectiveFactory
+    downgradeComponent({ component: FooterComponent }) as angular.IDirectiveFactory
     ).
     directive('noosferoRawHtmlblock',
-      downgradeComponent({ component: RawHTMLBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: RawHTMLBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoStatisticsBlock',
+    downgradeComponent({ component: StatisticsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('languageSelector',
-      downgradeComponent({ component: LanguageSelectorComponent }) as angular.IDirectiveFactory
+    downgradeComponent({ component: LanguageSelectorComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [
