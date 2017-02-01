@@ -1,6 +1,30 @@
 .menu-block {
-  a i {
-    line-height: 25px;
-    color: #949494;
+  .nav-pills {
+    > li {
+      > a {
+        border: none; color: #666;
+      }
+      &.active > a,  > a:hover {
+        border: none;
+        color: #4285F4 !important;
+        background-color: transparent;
+      }
+      > a::after {
+        content: "";
+        background: #4285F4;
+        height: 2px;
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        bottom: -1px;
+        transition: all 250ms ease 0s;
+        transform: scale(0);
+      }
+      &.active, &:hover {
+        > a::after {
+          transform: scale(1);
+        }
+      }
+    }
   }
 }
