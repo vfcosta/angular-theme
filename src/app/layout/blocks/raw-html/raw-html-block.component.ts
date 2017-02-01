@@ -1,8 +1,8 @@
-import {Component, Input} from "ng-forward";
+import {Component, Input} from '@angular/core';
 
 @Component({
-    selector: "noosfero-raw-html-block",
-    templateUrl: 'app/layout/blocks/raw-html/raw-html-block.html'
+    selector: "noosfero-raw-htmlblock",
+    template: require('app/layout/blocks/raw-html/raw-html-block.html')
 })
 
 export class RawHTMLBlockComponent {
@@ -10,9 +10,10 @@ export class RawHTMLBlockComponent {
     @Input() block: any;
     @Input() owner: any;
 
-    html: string;
-
-    ngOnInit() {
-        this.html = this.block.settings.html;
+    html() {
+        if (this.block && this.block.settings) {
+            return this.block.settings.html;
+        }
     }
+
 }

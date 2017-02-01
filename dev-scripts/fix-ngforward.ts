@@ -11,3 +11,10 @@ replace({
     sillent: false
 });
 
+let inputsBuilder = path.join(__dirname, "../node_modules/ng-forward/cjs/properties/inputs-builder.js");
+replace({
+    regex: /var __using_binding = Symbol\(\);/,
+    replacement: "var __using_binding = '__using_binding';",
+    paths: [inputsBuilder],
+    sillent: false
+});

@@ -8,10 +8,12 @@ dist/
 .tmp/
 .vscode/
 src/noosfero.js*
+src/noosfero-test.js*
 src/commons.js*
 src/noosfero-specs.js*
 typings
 npm-debug.log
 src/vendor.bundle.js*
+src/vendor.test.bundle.js*
 .vagrant/
 *.sw*

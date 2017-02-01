@@ -1,8 +1,8 @@
 <ul id="language-chooser">
-  <li ng-repeat="(language, description) in ctrl.availableLanguages()"
-    class="language language-{{language}}" ng-class="{'active': language==ctrl.currentLanguage()}">
-    <a href="#" ng-click="ctrl.changeLanguage(language)">
-      {{description}}
+  <li *ngFor="let lang of availableLanguageKeys()"
+    class="language language-{{lang}}" ng-class="{'active': lang==currentLanguage()}">
+    <a href="#" (click)="changeLanguage(lang)">
+      {{languageDescription(lang)}}
     </a>
   </li>
 </ul>

@@ -3,7 +3,7 @@ import {providers} from 'ng-forward/cjs/testing/providers';
 import {Input, provide, Component} from 'ng-forward';
 import {ArticleBlogComponent} from './blog.component';
 
-import {createComponentFromClass, quickCreateComponent, provideEmptyObjects, createProviderToValue, provideFilters} from "../../../../spec/helpers.ts";
+import {createComponentFromClass, quickCreateComponent, provideEmptyObjects, createProviderToValue, provideFilters} from "../../../../spec/helpers";
 
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 
