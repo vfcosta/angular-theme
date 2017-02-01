@@ -15,6 +15,9 @@ import { NotificationService } from "./shared/services/notification.service";
 import { BodyStateClassesService } from "./shared/services/body-state-classes.service";
 import { downgradeComponent } from '@angular/upgrade/static';
 
+import { RawHTMLBlockComponent } from "./layout/blocks/raw-html/raw-html-block.component";
+
+
 declare var moment: any;
 
 // FIXME see a better way to declare template modules for dev mode
@@ -35,10 +38,13 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     constant("moment", moment).
     constant("AuthEvents", AuthEvents).
     directive('noosferoFooter',
-        downgradeComponent({component: FooterComponent}) as angular.IDirectiveFactory
+      downgradeComponent({ component: FooterComponent }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoRawHtmlblock',
+      downgradeComponent({ component: RawHTMLBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('languageSelector',
-        downgradeComponent({component: LanguageSelectorComponent}) as angular.IDirectiveFactory
+      downgradeComponent({ component: LanguageSelectorComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

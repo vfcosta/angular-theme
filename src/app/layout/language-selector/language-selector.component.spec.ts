@@ -1,7 +1,6 @@
 import { TranslatorService } from './../../shared/services/translator.service';
 import { LanguageSelectorComponent } from './language-selector.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 
 describe("Components", () => {
     describe("Language Selector Component", () => {

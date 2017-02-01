@@ -1,36 +1,26 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Component} from 'ng-forward';
-
+import { async, TestBed, ComponentFixture } from '@angular/core/testing';
+import {By} from '@angular/platform-browser';
 import {RawHTMLBlockComponent} from './raw-html-block.component';
 
-const tcb = new TestComponentBuilder();
-
-const htmlTemplate: string = '<noosfero-raw-html-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-raw-html-block>';
+const htmlTemplate: string = '<noosfero-raw-htmlblock [block]="block" [owner]="owner"></noosfero-raw-htmlblock>';
 
 describe("Components", () => {
 
     describe("Raw Html Block Component", () => {
 
-        beforeEach(angular.mock.module("templates"));
-        beforeEach(angular.mock.module("ngSanitize"));
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [RawHTMLBlockComponent]
+            }).compileComponents();
+        }));
 
-        it("display html stored in block settings", done => {
-
-            @Component({
-                selector: 'test-container-component',
-                template: htmlTemplate,
-                directives: [RawHTMLBlockComponent],
-            })
-            class CustomBlockType {
-                block: any = { settings: { html: '<em>block content</em>' } };
-                owner: any = { name: 'profile-name' };
-            }
-            tcb.createAsync(CustomBlockType).then(fixture => {
-                expect(fixture.debugElement.query(".raw-html-block em").text().trim()).toEqual('block content');
-                done();
-            });
+        it('display html stored in block settings', () => {
+            const fixture = TestBed.createComponent(RawHTMLBlockComponent);
+            fixture.componentInstance.block = { settings: { html: '<p>block content</p>' } };
+            fixture.componentInstance.owner = { name: 'profile-name' };
+            fixture.detectChanges();
+            expect(fixture.debugElement.nativeElement.querySelector(".raw-html-block p").innerHTML).toEqual('block content');
         });
-
     });
 
 });

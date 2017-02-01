@@ -5,6 +5,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
 
+import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -13,11 +15,13 @@ import { UpgradeModule } from '@angular/upgrade/static';
     declarations: [
         FooterComponent,
         TranslatePipe,
-        LanguageSelectorComponent
+        LanguageSelectorComponent,
+        RawHTMLBlockComponent
     ],
     entryComponents: [
         FooterComponent,
-        LanguageSelectorComponent
+        LanguageSelectorComponent,
+        RawHTMLBlockComponent
     ],
     providers: [{
         provide: 'authService',
