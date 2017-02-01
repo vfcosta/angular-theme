@@ -16,7 +16,7 @@ describe("Components", () => {
             angular.mock.module("templates");
         });
 
-        beforeEach((done) => {
+        beforeEach((done: Function) => {
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [MenuBlockComponent],
@@ -40,7 +40,6 @@ describe("Components", () => {
             });
             helper = new ComponentTestHelper<MenuBlockComponent>(cls, done);
         });
-
 
         it("receives the block and the owner as inputs", () => {
             expect(helper.component.block.type).toEqual("Block");
@@ -69,9 +68,8 @@ describe("Components", () => {
             let profileLinks = [
                 { title: 'blocks.menu.activities', url: 'main.profile.activities({profile: ctrl.owner.identifier})' },
                 { title: 'blocks.menu.about', url: 'main.profile.about({profile: ctrl.owner.identifier})' }
-            ]
-
-            for (var i = 0; i < helper.component.links.length; i++) {
+            ];
+            for (let i = 0; i < helper.component.links.length; i++) {
                 expect(helper.component.links[i]).toEqual(jasmine.objectContaining(profileLinks[i]));
             }
         });

@@ -12,12 +12,12 @@ export class MenuBlockComponent {
     @Input() owner: any;
     @Input() designMode: boolean;
 
-    titleTranslator = {
+    titleTranslator: any = {
         'profile_about': this.translatorService.translate('blocks.menu.about'),
         'profile_activities': this.translatorService.translate('blocks.menu.activities'),
         'memberships_index': this.translatorService.translate('blocks.menu.communities'),
         'friends_index': this.translatorService.translate('blocks.menu.friends')
-    };;
+    };
     links: any[];
 
     constructor(private translatorService: TranslatorService) { }
@@ -35,7 +35,7 @@ export class MenuBlockComponent {
 
     makeUrl(params: any) {
         let link: { title: string, url: string } = { title: '', url: '' };
-        let urlMapping = {
+        let urlMapping: any = {
             'about': 'main.profile.about({profile: ctrl.owner.identifier})',
             'activities': 'main.profile.activities({profile: ctrl.owner.identifier})'
         };
@@ -46,7 +46,7 @@ export class MenuBlockComponent {
         return link;
     }
 
-    //TODO Communities and friends links are not available in this template yet.
+    // TODO Communities and friends links are not available in this template yet.
     hasAvailablePage(link: any) {
         if (link.controller === 'profile') {
             return true;
