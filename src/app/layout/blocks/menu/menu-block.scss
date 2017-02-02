@@ -1,28 +1,35 @@
-.menu-block {
-  .nav-pills {
-    > li {
-      > a {
-        border: none; color: #666;
-      }
-      &.active > a,  > a:hover {
-        border: none;
-        color: #4285F4 !important;
-        background-color: transparent;
-      }
-      > a::after {
-        content: "";
-        background: #4285F4;
-        height: 2px;
-        position: absolute;
-        width: 100%;
-        left: 0px;
-        bottom: -1px;
-        transition: all 250ms ease 0s;
-        transform: scale(0);
-      }
-      &.active, &:hover {
+.menublock {
+  padding: 0;
+  .menu-block {
+    .nav-pills {
+      > li {
+        > a {
+          color: $panel-default-text;
+          border: none;
+          text-transform: uppercase;
+          padding: 15px 40px;
+          font-size: 14px;
+          font-weight: 500;
+        }
+        &.active > a,  > a:hover {
+          border: none;
+          background-color: transparent;
+        }
         > a::after {
-          transform: scale(1);
+          content: "";
+          background: $secondary-color;
+          height: 3px;
+          position: absolute;
+          width: 100%;
+          left: 0px;
+          bottom: -1px;
+          transition: all 250ms ease 0s;
+          transform: scale(0);
+        }
+        &.active, &:hover {
+          > a::after {
+            transform: scale(1);
+          }
         }
       }
     }
