@@ -50,24 +50,25 @@ export class ProfileImageComponent {
         this.eventsNames = new NoosferoKnownEvents();
     }
 
-    fileSelected(file: any, errFiles: any) {
-        if (file) {
-            this.picFile = file;
-            this.modalInstance = this.$uibModal.open({
-                templateUrl: 'app/profile/image/profile-image-editor.html',
-                controller: ProfileImageEditorComponent,
-                controllerAs: 'ctrl',
-                scope: this.$scope,
-                bindToController: true,
-                backdrop: 'static',
-                resolve: {
-                    picFile: this.picFile,
-                    profile: this.profile,
-                    profileService: this.profileService,
-                    eventsHubService: this.eventsHubService
-                }
-            });
-        }
+    fileSelected($event: any) {
+        if (!$event) return;
+        let file: File = $event.target.files[0];
+        if (!file) return;
+        this.picFile = file;
+        this.modalInstance = this.$uibModal.open({
+            templateUrl: 'app/profile/image/profile-image-editor.html',
+            controller: ProfileImageEditorComponent,
+            controllerAs: 'ctrl',
+            scope: this.$scope,
+            bindToController: true,
+            backdrop: 'static',
+            resolve: {
+                picFile: this.picFile,
+                profile: this.profile,
+                profileService: this.profileService,
+                eventsHubService: this.eventsHubService
+            }
+        });
     }
 
     isEditable() {

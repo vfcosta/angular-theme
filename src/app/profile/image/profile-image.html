@@ -4,10 +4,8 @@
             <i *ngIf="!profile.image" class="fa {{defaultIcon}} {{iconSize}} profile-image"></i>
             <img *ngIf="profile.image" [alt]='"profile.image.description" | translate' [src]="profile.image.url" class="img-responsive profile-image img-circle">
             <div class='container-camera'>
-                <div ngf-select="fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" data-toggle="modal"
-                    data-target=".crop-dialog">
-                    <a href="" class="fa fa-camera upload-camera"></a>
-                </div>
+                <input #fileUploadInput type="file" (change)="fileSelected($event)" style="display: none;">
+                <a href="#" class="fa fa-camera upload-camera" (click)="fileUploadInput.click()"></a>
             </div>
             <div class="overlay"></div>
         </div>
