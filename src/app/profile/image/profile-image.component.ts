@@ -1,4 +1,4 @@
-import { Inject, Input, Component, provide } from "ng-forward";
+import { Inject, Input, Component } from '@angular/core';
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import { PermissionService } from "../../shared/services/permission.service";
 import { ProfileImageEditorComponent } from "./profile-image-editor.component";
@@ -13,13 +13,8 @@ import { NoosferoKnownEvents } from "../../known-events";
  */
 @Component({
     selector: "noosfero-profile-image",
-    templateUrl: 'app/profile/image/profile-image.html',
-    providers: [
-        provide('profileService', { useClass: ProfileService }),
-        provide('eventsHubService', { useClass: EventsHubService })
-    ]
+    template: require('app/profile/image/profile-image.html')
 })
-@Inject(ProfileService, PermissionService, "$uibModal", "$scope", EventsHubService)
 export class ProfileImageComponent {
 
     /**
@@ -46,33 +41,34 @@ export class ProfileImageComponent {
     modalInstance: any;
     eventsNames: NoosferoKnownEvents;
 
-    constructor(private profileService: ProfileService,
-        private permissionService: PermissionService,
-        private $uibModal: ng.ui.bootstrap.IModalService,
-        private $scope: ng.IScope,
-        private eventsHubService: EventsHubService) {
+    constructor( @Inject("profileService") private profileService: ProfileService,
+        @Inject("permissionService") private permissionService: PermissionService,
+        @Inject("$uibModal") private $uibModal: ng.ui.bootstrap.IModalService,
+        @Inject("$scope") private $scope: ng.IScope,
+        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
 
         this.eventsNames = new NoosferoKnownEvents();
     }
 
-    fileSelected(file: any, errFiles: any) {
-        if (file) {
-            this.picFile = file;
-            this.modalInstance = this.$uibModal.open({
-                templateUrl: 'app/profile/image/profile-image-editor.html',
-                controller: ProfileImageEditorComponent,
-                controllerAs: 'ctrl',
-                scope: this.$scope,
-                bindToController: true,
-                backdrop: 'static',
-                resolve: {
-                    picFile: this.picFile,
-                    profile: this.profile,
-                    profileService: this.profileService,
-                    eventsHubService: this.eventsHubService
-                }
-            });
-        }
+    fileSelected($event: any) {
+        if (!$event) return;
+        let file: File = $event.target.files[0];
+        if (!file) return;
+        this.picFile = file;
+        this.modalInstance = this.$uibModal.open({
+            templateUrl: 'app/profile/image/profile-image-editor.html',
+            controller: ProfileImageEditorComponent,
+            controllerAs: 'ctrl',
+            scope: this.$scope,
+            bindToController: true,
+            backdrop: 'static',
+            resolve: {
+                picFile: this.picFile,
+                profile: this.profile,
+                profileService: this.profileService,
+                eventsHubService: this.eventsHubService
+            }
+        });
     }
 
     isEditable() {

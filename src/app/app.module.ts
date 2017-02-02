@@ -4,7 +4,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { UpgradeModule } from '@angular/upgrade/static';
-
+import { ProfileImageComponent } from "./profile/image/profile-image.component";
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 
@@ -18,13 +18,15 @@ import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-
         TranslatePipe,
         LanguageSelectorComponent,
         RawHTMLBlockComponent,
-        StatisticsBlockComponent
+        StatisticsBlockComponent,
+        ProfileImageComponent
     ],
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
         RawHTMLBlockComponent,
-        StatisticsBlockComponent
+        StatisticsBlockComponent,
+        ProfileImageComponent
     ],
     providers: [{
         provide: 'authService',
@@ -53,6 +55,22 @@ import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-
         }, {
             provide: 'profileService',
             useFactory: (i: any) => i.get('ProfileService'),
+            deps: ['$injector']
+        }, {
+            provide: 'permissionService',
+            useFactory: (i: any) => i.get('PermissionService'),
+            deps: ['$injector']
+        }, {
+            provide: 'eventsHubService',
+            useFactory: (i: any) => i.get('EventsHubService'),
+            deps: ['$injector']
+        }, {
+            provide: '$uibModal',
+            useFactory: (i: any) => i.get('$uibModal'),
+            deps: ['$injector']
+        }, {
+            provide: '$scope',
+            useFactory: (i: any) => i.get('$scope'),
             deps: ['$injector']
         }],
 })
