@@ -269,5 +269,8 @@ export var mocks: any = {
         confirmation: () => { },
         info: () => { },
         error: () => { }
+    },
+    blockService: {
+        getBlock: (id: number) => { },
     }
 };

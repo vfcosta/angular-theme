@@ -141,7 +141,7 @@ export class EnvironmentContent {
         BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, MenuBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat, StatisticsBlockComponent,
+        MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
