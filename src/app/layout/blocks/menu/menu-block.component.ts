@@ -37,7 +37,7 @@ export class MenuBlockComponent {
         let link: { title: string, url: string } = { title: '', url: '' };
         let urlMapping: any = {
             'about': 'main.profile.about({profile: ctrl.owner.identifier})',
-            'activities': 'main.profile.activities({profile: ctrl.owner.identifier})'
+            'activities': 'main.profile.info({profile: ctrl.owner.identifier})'
         };
 
         link.title = this.titleTranslator[params.controller + '_' + params.action];

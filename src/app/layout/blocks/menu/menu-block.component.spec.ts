@@ -55,7 +55,7 @@ describe("Components", () => {
         });
 
         it("generate correct url for activities", () => {
-            let url = { title: 'blocks.menu.activities', url: 'main.profile.activities({profile: ctrl.owner.identifier})' };
+            let url = { title: 'blocks.menu.activities', url: 'main.profile.info({profile: ctrl.owner.identifier})' };
             expect(helper.component.makeUrl({ "title": "Activities", "controller": "profile", "action": "activities" })).toEqual(url);
         });
 
@@ -66,7 +66,7 @@ describe("Components", () => {
 
         it("initialize links variable", () => {
             let profileLinks = [
-                { title: 'blocks.menu.activities', url: 'main.profile.activities({profile: ctrl.owner.identifier})' },
+                { title: 'blocks.menu.activities', url: 'main.profile.info({profile: ctrl.owner.identifier})' },
                 { title: 'blocks.menu.about', url: 'main.profile.about({profile: ctrl.owner.identifier})' }
             ];
             for (let i = 0; i < helper.component.links.length; i++) {
