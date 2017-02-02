@@ -272,5 +272,8 @@ export var mocks: any = {
     },
     blockService: {
         getBlock: (id: number) => { },
+    },
+    noosferoTemplateFilter: (text: string, options: any) => {
+        return text;
     }
 };

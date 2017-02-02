@@ -21,6 +21,10 @@ export class PersonService extends RestangularService<noosfero.Person> {
         };
     }
 
+    getFriends(profileId: number, params?: any): restangular.IPromise<any> {
+        return this.getElement(profileId).customGET("friends", params);
+    }
+
     getTags(profile: noosfero.Profile): ng.IPromise<noosfero.RestResult<any>> {
         let p = this.getElement(<number>profile.id).customGET('tags');
         let deferred = this.$q.defer<noosfero.RestResult<any>>();

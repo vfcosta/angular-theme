@@ -8,9 +8,9 @@
       <h3 class="panel-title">
         <div class="popover-wrapper">
           <span ng-hide="!textBtnForm.$visible" ng-if="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}'>
-            {{ ctrl.block.title || ("edit.inline.title" | translate) }}</span>
+            {{ (ctrl.block.title | noosferoTemplate:ctrl.block.api_content ) || ("edit.inline.title" | translate) }}</span>
           <span editable-text="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}' e-form="textBtnForm">
-            {{ ctrl.block.title || ("edit.inline.title" | translate) }}</span>
+            {{ (ctrl.block.title | noosferoTemplate:ctrl.block.api_content ) || ("edit.inline.title" | translate) }}</span>
           <a ng-if="ctrl.designMode" href="#" class="fa fa-pencil" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
           </a>
         </div>
