@@ -17,11 +17,13 @@ import { EnvironmentHomeComponent } from "../environment/environment-home.compon
 import { PeopleBlockComponent } from "../layout/blocks/people/people-block.component";
 import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
+import { MenuBlockComponent } from "../layout/blocks/menu/menu-block.component";
 import { RecentDocumentsBlockComponent } from "../layout/blocks/recent-documents/recent-documents-block.component";
 import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
 import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
 import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
 import { ProfileHeaderComponent } from "../profile/header/profile-header.component";
+import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
 import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
 import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
@@ -53,8 +55,6 @@ import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
 import { BodyStateClassesService } from "./../shared/services/body-state-classes.service";
 
 import { Navbar } from "../layout/navbar/navbar";
-
-import { SidebarComponent } from "../layout/sidebar/sidebar.component";
 
 import { MainBlockComponent } from "../layout/blocks/main/main-block.component";
 import { HtmlEditorComponent } from "../shared/components/html-editor/html-editor.component";
@@ -139,8 +139,8 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
-        LinkListBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
-        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, SidebarComponent, ProfileImageBlockComponent,
+        LinkListBlockComponent, MenuBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
+        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,

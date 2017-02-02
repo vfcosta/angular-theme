@@ -1,0 +1,9 @@
+<div class="menu-block">
+  <ul class="nav nav-pills">
+    <li ng-repeat="link in ctrl.links" ui-sref-active="active">
+      <a ui-sref="{{link['url']}}">
+        <span>{{link['title']}}</span>
+      </a>
+    </li>
+  </ul>
+</div>
