@@ -1,20 +1,19 @@
-import { Component, Input, Inject, provide } from "ng-forward";
+import { TaskModal } from './task-modal';
+import { components } from './../../../../themes/index';
+import { AppModule } from './../../app.module';
+import { Component, Input, Inject } from '@angular/core';
 import { NotificationService } from "../../shared/services/notification.service";
 import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
-import { TaskAcceptComponent } from "./task-accept.component";
 import { Arrays } from "../../../lib/util/arrays";
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
 
+declare var _: any;
+
 @Component({
     selector: "task-list",
-    templateUrl: "app/task/task-list/task-list.html",
-    directives: [TaskAcceptComponent],
-    providers: [
-        provide('eventsHubService', { useClass: EventsHubService })
-    ]
+    template: require("app/task/task-list/task-list.html")
 })
-@Inject(NotificationService, "$scope", "$uibModal", TaskService, EventsHubService)
 export class TaskListComponent {
 
     @Input() tasks: noosfero.Task[];
@@ -24,11 +23,13 @@ export class TaskListComponent {
     eventsNames: NoosferoKnownEvents;
     private modalInstance: any = null;
 
-    constructor(private notificationService: NotificationService,
-        private $scope: ng.IScope,
-        private $uibModal: any,
-        private taskService: TaskService,
-        private eventsHubService: EventsHubService) {
+    tasksGroups: noosfero.Task[];
+
+    constructor(@Inject("notificationService") private notificationService: NotificationService,
+        @Inject("$scope") private $scope: ng.IScope,
+        @Inject("$uibModal") private $uibModal: any,
+        @Inject("taskService") private taskService: TaskService,
+        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
 
         this.eventsNames = new NoosferoKnownEvents();
     }
@@ -39,12 +40,17 @@ export class TaskListComponent {
         });
     }
 
+    ngOnChanges() {
+        this.tasks = _.sortBy(this.tasks, 'created_at').reverse();
+        this.tasksGroups = _.values(_.groupBy(this.tasks, 'target.name'));
+    }
+
     getTaskTemplate(task: noosfero.Task) {
         if (TaskService.TASK_TYPES.indexOf(task.type) >= 0) {
             let templateName = this.getTemplateName(task);
-            return `app/task/types/${templateName}/${templateName}.html`;
+            return require(`app/task/types/${templateName}/${templateName}.html`);
         } else {
-            return 'app/task/types/default.html';
+            return require('app/task/types/default.html');
         }
     }
 
@@ -62,10 +68,16 @@ export class TaskListComponent {
         if (hasDetails) {
             this.modalInstance = this.$uibModal.open({
                 templateUrl: templateUrl,
-                controller: TaskListComponent,
+                controller: TaskModal,
                 controllerAs: 'modal',
                 bindToController: true,
-                scope: this.$scope
+                scope: this.$scope,
+                resolve: {
+                    currentTask: this.currentTask,
+                    confirmationTask: this.confirmationTask,
+                    taskList: this
+                }
+
             });
         } else {
             confirmationFunction();

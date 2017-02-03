@@ -1,3 +1,4 @@
+import { TaskAcceptComponent } from './../task/task-list/task-accept.component';
 import * as plugins from "../../plugins";
 import * as theme from "../../../themes";
 import { bundle, Component, StateConfig, Inject } from "ng-forward";
@@ -66,7 +67,6 @@ import { SearchFormComponent } from "../search/search-form/search-form.component
 import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../known-events";
 import { TasksMenuComponent } from "../task/tasks-menu/tasks-menu.component";
-import { TaskListComponent } from "../task/task-list/task-list.component";
 import { ThemeHeaderComponent } from "../layout/theme-header/theme-header.component";
 import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.component";
 import { LayoutConfigComponent } from "../layout/layout-config/layout-config.component";
@@ -144,8 +144,8 @@ export class EnvironmentContent {
         MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
-        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent, TaskListComponent,
-        PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent,
+        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent,
+        PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent
