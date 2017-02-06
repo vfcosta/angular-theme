@@ -1,3 +1,4 @@
+import { MomentModule } from 'angular2-moment';
 import { Directive, Input } from '@angular/core';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
@@ -30,6 +31,7 @@ describe("Components", () => {
             let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
 
             TestBed.configureTestingModule({
+                imports: [MomentModule],
                 declarations: [TaskListComponent, TranslatePipe, ProfileImageComponent, DynamicComponentMock],
                 providers: [
                     { provide: "taskService", useValue: taskService },
