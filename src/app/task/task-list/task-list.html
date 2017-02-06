@@ -1,19 +1,19 @@
 <ul class="task-list">
-  <li class="task-group" ng-repeat="(target, tasks) in ctrl.tasks | groupBy: 'target.name'">
+  <li class="task-group" *ngFor="let group of tasksGroups">
     <div class="task-target">
-      <noosfero-profile-image ng-if="tasks[0].target.type" [profile]="tasks[0].target"></noosfero-profile-image>
-      <div class="target-name">{{target}}</div>
+      <noosfero-profile-image *ngIf="group[0].target.type" [profile]="group[0].target"></noosfero-profile-image>
+      <div class="target-name">{{group[0].target.name}}</div>
     </div>
-    <div class="task-body" ng-repeat="task in tasks | orderBy: 'created_at':true">
+    <div class="task-body" *ngFor="let task of group; let i = index;">
       <div class="task">
-        <ng-include src="ctrl.getTaskTemplate(task)"></ng-include>
+        <div *dynamicComponent="getTaskTemplate(task); context: {task: task};"></div>
       </div>
       <div class="actions">
-        <a href="#" ng-if="!task.accept_disabled" ng-click="ctrl.accept(task)" class="accept" uib-tooltip="{{'tasks.actions.accept' | translate}}">
+        <a href="#" *ngIf="!task.accept_disabled" (click)="accept(task)" class="accept" title="{{'tasks.actions.accept' | translate}}">
           <i class="fa fa-check"></i>
           <span class="read-aloud">{{"tasks.actions.accept" | translate}}</span>
         </a>
-        <a href="#" ng-if="!task.reject_disabled" ng-click="ctrl.reject(task)" class="reject" uib-tooltip="{{'tasks.actions.reject' | translate}}">
+        <a href="#" *ngIf="!task.reject_disabled" (click)="reject(task)" class="reject" title="{{'tasks.actions.reject' | translate}}">
           <i class="fa fa-close"></i>
           <span class="read-aloud">{{"tasks.actions.reject" | translate}}</span>
         </a>

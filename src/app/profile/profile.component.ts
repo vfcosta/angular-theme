@@ -90,7 +90,7 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
             "mainBlockContent": {
                 templateUrl: "app/task/tasks/tasks.html",
                 controller: TasksComponent,
-                controllerAs: "vm"
+                controllerAs: "ctrl"
             }
         }
     },

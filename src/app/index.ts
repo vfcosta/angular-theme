@@ -1,3 +1,4 @@
+import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { bundle, bootstrap, provide } from "ng-forward";
@@ -52,6 +53,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoProfileImage',
         downgradeComponent({component: ProfileImageComponent, inputs: ['profile', 'iconSize', 'editable']}) as angular.IDirectiveFactory
+    ).
+    directive('taskList',
+        downgradeComponent({component: TaskListComponent, inputs: ['tasks']}) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [
