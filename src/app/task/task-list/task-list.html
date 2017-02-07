@@ -4,11 +4,14 @@
       <noosfero-profile-image *ngIf="group[0].target.type" [profile]="group[0].target"></noosfero-profile-image>
       <div class="target-name">{{group[0].target.name}}</div>
     </div>
-    <div class="task-body" *ngFor="let task of group; let i = index;">
-      <div class="task">
+    <div class="task-body row" *ngFor="let task of group; let i = index;">
+      <div class="task col-md-10">
         <div *dynamicComponent="getTaskTemplate(task); context: {task: task};"></div>
+        <div class="time">
+          <span>{{task.created_at | amTimeAgo}}</span>
+        </div>
       </div>
-      <div class="actions">
+      <div class="actions col-md-2">
         <a href="#" *ngIf="!task.accept_disabled" (click)="accept(task)" class="accept" title="{{'tasks.actions.accept' | translate}}">
           <i class="fa fa-check"></i>
           <span class="read-aloud">{{"tasks.actions.accept" | translate}}</span>
@@ -18,9 +21,6 @@
           <span class="read-aloud">{{"tasks.actions.reject" | translate}}</span>
         </a>
       </div>
-      <span class="time">
-        <span class="bullet-separator">•</span> <span>{{task.created_at | amTimeAgo}}</span>
-      </span>
     </div>
   </li>
 </ul>
