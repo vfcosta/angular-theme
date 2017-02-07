@@ -1,55 +1,43 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider, Input, provide, Component} from 'ng-forward';
-import {provideFilters} from '../../../../spec/helpers';
+import * as helpers from "../../../../spec/helpers";
+import {ComponentTestHelper, createClass} from '../../../../spec/component-test-helper';
+
 import {TagsBlockComponent} from './tags-block.component';
 
 const htmlTemplate: string = '<noosfero-tags-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-tags-block>';
 
-const tcb = new TestComponentBuilder();
-
 describe("Components", () => {
     describe("Tags Block Component", () => {
 
-        let settingsObj = {};
-        let mockedEnvironmentService = {
-            getTags: (): any => {
-                return Promise.resolve({ foo: 10, bar: 20 });
-            }
-        };
-        let profile = { name: 'profile-name' };
-        beforeEach(angular.mock.module("templates"));
+        let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment", "getTags"]);
+        environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
+        environmentService.getTags = jasmine.createSpy("getTags").and.returnValue(helpers.mocks.promiseResultTemplate([{ text: "foo", weight: '10', link: '/tag/foo' }, { text: "bar", weight: '20', link: '/tag/bar' }]));
 
-        let state = jasmine.createSpyObj("state", ["go"]);
+        let state = jasmine.createSpyObj("$state", ["reload"]);
+        let helper: ComponentTestHelper<TagsBlockComponent>;
 
-
-        function getProviders() {
-            return [
-                new Provider('$state', { useValue: state }),
-                new Provider('EnvironmentService', {
-                    useValue: mockedEnvironmentService
-                }),
-            ].concat(provideFilters("truncateFilter", "stripTagsFilter"));
-        }
-        let componentClass: any = null;
-
-        function getComponent() {
-            @Component({ selector: 'test-container-component', template: htmlTemplate, directives: [TagsBlockComponent], providers: getProviders() })
-            class BlockContainerComponent {
-                block = { type: 'Block', settings: settingsObj };
-                owner = profile;
-                constructor() {
-                }
-            }
-            return BlockContainerComponent;
-        }
-
-
-        it("get tags from the environment service", done => {
-            tcb.createAsync(getComponent()).then(fixture => {
-                let tagsBlock: TagsBlockComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(tagsBlock.tags).toEqual([{ text: "foo", weight: '10', link: '/tag/foo' }, { text: "bar", weight: '20', link: '/tag/bar' }]);
-                done();
-            });
+        beforeEach(() => {
+            angular.mock.module("templates");
         });
+
+        beforeEach((done) => {
+            let cls = createClass({
+                template: htmlTemplate,
+                directives: [TagsBlockComponent],
+                properties: {
+                    block: {}
+                },
+                providers: [
+                    helpers.createProviderToValue("$state", state),
+                    helpers.createProviderToValue('EnvironmentService', environmentService)
+                ]
+            });
+            helper = new ComponentTestHelper<TagsBlockComponent>(cls, done);
+        });
+
+        it("get tags from the environment service", () => {
+            expect(environmentService.getTags).toHaveBeenCalled();
+            expect(helper.component.tags).toEqual([{ text: "foo", weight: '10', link: '/tag/foo' }, { text: "bar", weight: '20', link: '/tag/bar' }]);
+        });
+
     });
 });

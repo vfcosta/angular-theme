@@ -28,7 +28,9 @@ export class Navbar {
         private environmentService: EnvironmentService
     ) {
         this.currentUser = this.session.currentUser();
-        this.currentEnvironment = environmentService.getCurrentEnvironment();
+        environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
+            this.currentEnvironment = environment;
+        });
 
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             if (this.modalInstance) {

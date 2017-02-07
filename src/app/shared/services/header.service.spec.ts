@@ -2,33 +2,24 @@ import * as helpers from '../../../spec/helpers';
 import { HeaderService } from "./header.service";
 
 describe("Header Service", () => {
+    let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment"]);
+    environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
 
-    let headerService: HeaderService;
-    let $rootScope: ng.IRootScopeService = <any>{},
-        $document: ng.IDocumentService = <any>{},
-        $environmentService: any = helpers.mocks.environmentService,
-        titleElJq: any;
-
-    let getService = (): HeaderService => {
-        return new HeaderService($rootScope, $document, $environmentService);
+    let $rootScope: ng.IRootScopeService = <any>{};
+    let $document: ng.IDocumentService = <any>{};
+    let createComponent = (): HeaderService => {
+        return new HeaderService($rootScope, $document, environmentService);
     };
 
-    beforeEach(() => {
-        $environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue({
-            name: 'Page Title'
-        });
-        titleElJq = jasmine.createSpyObj("titleElement", ["text"]);
-    });
-
     it("should set the header title element", () => {
-        let service = getService();
+        let component: HeaderService = createComponent();
 
+        let titleElJq = jasmine.createSpyObj("titleElement", ["text"]);
         titleElJq.text = jasmine.createSpy("text");
-        service["titleElement"] = titleElJq;
+        component["titleElement"] = titleElJq;
+        component.setEnvironmentTitle();
 
-        service.setEnvironmentTitle();
-
-        expect(titleElJq.text).toHaveBeenCalledWith('Page Title');
+        expect(titleElJq.text).toHaveBeenCalledWith('Noosfero');
     });
 
 });

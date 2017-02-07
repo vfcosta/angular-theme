@@ -21,8 +21,10 @@ describe("Components", () => {
         let stateService: any;
         let sessionService: SessionService;
         let designModeService: DesignModeService;
-
         let provideFunc = provide;
+
+        let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment"]);
+        environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
 
         // before Each -> loading mocks on locals variables
         beforeEach(() => {
@@ -70,9 +72,7 @@ describe("Components", () => {
                         }
                     }),
                     provide('EnvironmentService', {
-                        useValue: {
-                            getCurrentEnvironment: () => { return { id: 1, name: 'Nosofero' }; }
-                        }
+                        useValue: environmentService
                     }),
                     provide('TranslatorService', {
                         useValue: helpers.mocks.translatorService

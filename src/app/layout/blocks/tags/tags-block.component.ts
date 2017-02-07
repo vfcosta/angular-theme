@@ -8,38 +8,20 @@ import {EnvironmentService} from "../../../../lib/ng-noosfero-api/http/environme
 @Inject(EnvironmentService, "$state")
 export class TagsBlockComponent {
 
-    @Input() block: any;
-    @Input() owner: any;
+    @Input() block: noosfero.Block;
+    @Input() owner: noosfero.Environment;
 
-    profile: any;
-    tags: any;
-    tagsLoaded: boolean = false;
+    tags: noosfero.Tag[];
 
     constructor(private environmentService: EnvironmentService, private $state: any) {
         this.loadTags();
     }
 
     loadTags() {
-        this.tags = [];
-        let tag = '';
-        let tags: any = [];
-        let that = this;
-
-        this.environmentService.getTags()
-        .then((result: any) => {
-            for (tag in result) {
-                if (result.hasOwnProperty(tag)) {
-                    let size: number = result[tag];
-                    tags.push({ text: tag.toString(), weight: size.toString(), link: '/tag/' + tag });
-                }
-            }
-
-            that.tagsLoaded = true;
-            that.tags = tags.slice();
+        this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
+            return this.environmentService.getTags(environment.id);
+        }).then((result: any) => {
+            this.tags = result;
         });
-    }
-
-    ngOnInit() {
-        this.profile = this.owner;
     }
 }

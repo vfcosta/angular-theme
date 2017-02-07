@@ -18,9 +18,12 @@ export class PeopleBlockComponent {
     }
 
     ngOnInit() {
-        this.environmentService.getEnvironmentPeople({ limit: '6' }).then((people: noosfero.Person[]) => {
-            this.people = people;
+        this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
+            this.environmentService.getEnvironmentPeople(environment.id, { limit: '6' }).then((result: noosfero.RestResult<any>) => {
+                this.people = result.data.people;
+            });
         });
+
     }
 
 }
