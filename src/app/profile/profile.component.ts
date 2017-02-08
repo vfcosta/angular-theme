@@ -39,7 +39,7 @@ export class ProfileComponent {
             this.profile = this.$state.params['currentProfile'];
             profilePromise = Promise.resolve(this.profile);
         } else {
-            profilePromise = profileService.getByIdentifier($stateParams["profile"]);
+            profilePromise = profileService.setCurrentProfileByIdentifier($stateParams["profile"]);
         }
         profilePromise.then((profile: noosfero.Profile) => {
             this.profile = profile;
