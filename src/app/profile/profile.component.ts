@@ -1,4 +1,4 @@
-import { StateConfig, Component, Inject, provide, Input } from 'ng-forward';
+import { Component, Inject, provide, Input } from 'ng-forward';
 import { ProfileHomeComponent } from './profile-home.component';
 import { BasicEditorComponent } from '../article/cms/basic-editor/basic-editor.component';
 import { CmsComponent } from '../article/cms/cms.component';
@@ -18,7 +18,6 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
  * @description
  *  This is the profile controller. It provide routes to supported Noosfero Profiles.
  */
-
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html",
@@ -28,108 +27,6 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
         provide('notificationService', { useClass: NotificationService })
     ]
 })
-// @StateConfig([
-//     {
-//         name: 'main.profile.info',
-//         url: "^/profile/:profile",
-//         component: ActivitiesComponent,
-//         views: {
-//             "mainBlockContent": {
-//                 templateUrl: "app/profile/activities/activities.html",
-//                 controller: ActivitiesComponent,
-//                 controllerAs: "ctrl"
-//             }
-//         }
-//     },
-//     {
-//         name: 'main.profile.about',
-//         url: "^/profile/:profile/about",
-//         component: ProfileDataComponent,
-//         views: {
-//             "mainBlockContent": {
-//                 templateUrl: "app/profile/data/profile-data.html",
-//                 controller: ProfileDataComponent,
-//                 controllerAs: "ctrl"
-//             }
-//         }
-//     },
-//     {
-//         name: 'main.profile.settings',
-//         url: "^/myprofile/:profile",
-//         component: MyProfileComponent
-//     },
-//     {
-//         name: 'main.cms',
-//         url: "^/myprofile/:profile/cms?parent_id&type",
-//         component: CmsComponent,
-//         views: {
-//             "content": {
-//                 templateUrl: "app/article/cms/cms.html",
-//                 controller: CmsComponent,
-//                 controllerAs: "vm"
-//             }
-//         }
-//     },
-//     {
-//         name: 'main.cmsEdit',
-//         url: "^/myprofile/:profile/cms/edit/:id",
-//         component: CmsComponent,
-//         views: {
-//             "content": {
-//                 templateUrl: "app/article/cms/cms.html",
-//                 controller: CmsComponent,
-//                 controllerAs: "vm"
-//             }
-//         }
-//     },
-//     {
-//         name: 'main.profile.tasks',
-//         url: "^/myprofile/:profile/tasks",
-//         component: TasksComponent,
-//         views: {
-//             "mainBlockContent": {
-//                 templateUrl: "app/task/tasks/tasks.html",
-//                 controller: TasksComponent,
-//                 controllerAs: "ctrl"
-//             }
-//         }
-//     },
-//     {
-//         name: 'main.profile.home.destroy',
-//         url: "^/myprofile/:profile/profile_editor/destroy_profile",
-//         component: DestroyProfileComponent,
-//         views: {
-//             "actions@main": {
-//                 template: "<div></div>",
-//                 controller: DestroyProfileComponent,
-//                 controllerAs: "vm"
-//             }
-//         }
-//     },
-//     {
-//         name: 'main.profile.home',
-//         url: "",
-//         component: ProfileHomeComponent,
-//         views: {
-//             "mainBlockContent": {
-//                 controller: ProfileHomeComponent,
-//                 controllerAs: "vm"
-//             }
-//         }
-//     },
-//     {
-//         name: 'main.profile.page',
-//         url: "/{page:any}",
-//         component: ContentViewerComponent,
-//         views: {
-//             "mainBlockContent": {
-//                 templateUrl: "app/article/content-viewer/page.html",
-//                 controller: ContentViewerComponent,
-//                 controllerAs: "vm"
-//             }
-//         }
-//     }
-// ])
 @Inject(ProfileService, "$stateParams", "$state")
 export class ProfileComponent {
 

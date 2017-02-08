@@ -1,4 +1,4 @@
-import { StateConfig, Component, Input, Output, Inject, provide } from 'ng-forward';
+import { Component, Input, Output, Inject, provide } from 'ng-forward';
 import { TranslateProfile } from "../../../../app/shared/pipes/translate-profile.filter";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 

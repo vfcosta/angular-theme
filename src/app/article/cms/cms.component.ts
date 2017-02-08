@@ -1,4 +1,4 @@
-import { StateConfig, Component, Inject, provide } from 'ng-forward';
+import { Component, Inject, provide } from 'ng-forward';
 import { ArticleService } from "../../../lib/ng-noosfero-api/http/article.service";
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import { NotificationService } from "../../shared/services/notification.service";
@@ -12,9 +12,8 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
     providers: [
         provide('articleService', { useClass: ArticleService }),
         provide('profileService', { useClass: ProfileService }),
-        provide('notification', { useClass: NotificationService })
-    ],
-    directives: [ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent]
+        provide('notificationService', { useClass: NotificationService })
+    ]
 })
 @Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams", "$window")
 export class CmsComponent {
@@ -30,7 +29,7 @@ export class CmsComponent {
     constructor(private articleService: ArticleService,
         private profileService: ProfileService,
         private $state: ng.ui.IStateService,
-        private notification: NotificationService,
+        private notificationService: NotificationService,
         private $stateParams: ng.ui.IStateParamsService,
         private $window: ng.IWindowService) {
 
@@ -66,10 +65,10 @@ export class CmsComponent {
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
             this.$state.go('main.profile.page', { page: article.path, profile: article.profile.identifier });
-            this.notification.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message` });
+            this.notificationService.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message` });
         }).catch(() => {
             this.loading = false;
-            this.notification.error({ message: "article.basic_editor.save.failed" });
+            this.notificationService.error({ message: "article.basic_editor.save.failed" });
         });
     }
 

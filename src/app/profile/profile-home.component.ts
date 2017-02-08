@@ -1,4 +1,4 @@
-import {StateConfig, Component, Inject, provide} from 'ng-forward';
+import {Component, Inject, provide} from 'ng-forward';
 
 import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
 

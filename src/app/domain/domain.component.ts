@@ -1,4 +1,4 @@
-import { StateConfig, Component, Inject, provide } from 'ng-forward';
+import { Component, Inject, provide } from 'ng-forward';
 import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
 
 @Component({
@@ -15,14 +15,11 @@ export class DomainComponent {
     domain: noosfero.Domain;
 
     constructor(private domainService: DomainService, private $state: ng.ui.IStateService, $stateParams: ng.ui.IStateParamsService, contextResult: noosfero.RestResult<noosfero.Domain>) {
-        console.log("domain component");
         this.domain = contextResult.data;
         this.owner = contextResult.data.owner;
         if (this.isProfile()) {
-            console.log("Go to profile");
             $state.go('main.profile.home', { currentProfile: this.owner }, { inherit: false });
         } else {
-            console.log("Go to environment");
             $state.go('main.environment.home', { environment: this.owner });
         }
     }

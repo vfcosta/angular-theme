@@ -1,7 +1,11 @@
+import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
+import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
+import { BasicOptionsComponent } from './../article/cms/basic-options/basic-options.component';
+import { BasicEditorComponent } from './../article/cms/basic-editor/basic-editor.component';
 import { TaskAcceptComponent } from './../task/task-list/task-accept.component';
 import * as plugins from "../../plugins";
 import * as theme from "../../../themes";
-import { provide, bundle, Component, StateConfig, Inject } from "ng-forward";
+import { provide, bundle, Component, Inject } from "ng-forward";
 import { ArticleBlogComponent } from "./../article/types/blog/blog.component";
 import { FolderComponent } from "./../article/types/folder/folder.component";
 import { ArticleIconComponent } from "./../article/article-icon/article-icon.component";
@@ -103,7 +107,6 @@ export class MainContentComponent {
         eventsNames: NoosferoKnownEvents,
         eventsHubService: EventsHubService
     ) {
-        console.log("AAAA");
         bodyStateClassesService.start({
             skin: this.themeSkin
         });
@@ -150,7 +153,8 @@ export class EnvironmentContent {
         PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
-        DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent
+        DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent,
+        ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
@@ -163,91 +167,7 @@ export class EnvironmentContent {
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
         provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
         provide('headerService', { useClass: HeaderService }),
-        provide('eventsNames', { useClass: NoosferoKnownEvents }),        
+        provide('eventsNames', { useClass: NoosferoKnownEvents })
     ]
 })
-// @StateConfig([
-//     {
-//         url: '',
-//         component: MainContentComponent,
-//         abstract: true,
-//         name: 'main',
-//         resolve: {
-//             currentUser: function(AuthService: AuthService) {
-//                 return AuthService.loginFromCookie();
-//             },
-//             currentEnvironment: function(EnvironmentService: EnvironmentService) {
-//                 return EnvironmentService.get();
-//             }
-//         }
-//     },
-//     {
-//         url: '/',
-//         component: DomainComponent,
-//         name: 'main.domain',
-//         resolve: {
-//             contextResult: (DomainService: DomainService) => {
-//                 return DomainService.get("context");
-//             }
-//         },
-//         views: {
-//             "content": {
-//                 template: "<div></div>",
-//                 controller: DomainComponent,
-//                 controllerAs: "ctrl"
-//             }
-//         }
-//     },
-//     {
-//         url: '/',
-//         component: EnvironmentComponent,
-//         name: 'main.environment',
-//         views: {
-//             "content": {
-//                 templateUrl: "app/environment/environment.html",
-//                 controller: EnvironmentComponent,
-//                 controllerAs: "ctrl"
-//             }
-//         },
-//         params: { environment: {} }
-//     },
-//     {
-//         url: '/account/signup',
-//         component: RegisterComponent,
-//         name: 'main.register',
-//         views: {
-//             "content": {
-//                 templateUrl: "app/account/register.html",
-//                 controller: RegisterComponent,
-//                 controllerAs: "vm"
-//             }
-//         }
-//     },
-//     {
-//         url: "/account/new_password/:code",
-//         component: PasswordComponent,
-//         name: 'main.newPasswd',
-//         views: {
-//             "content": {
-//                 templateUrl: "app/login/new-password.html",
-//                 controller: PasswordComponent,
-//                 controllerAs: "vm"
-//             }
-//         }
-//     },
-//     {
-//         url: "^/:profile",
-//         abstract: true,
-//         component: ProfileComponent,
-//         name: 'main.profile',
-//         views: {
-//             "content": {
-//                 templateUrl: "app/profile/profile.html",
-//                 controller: ProfileComponent,
-//                 controllerAs: "ctrl"
-//             }
-//         },
-//         params: { currentProfile: {} }
-//     }
-// ])
 export class MainComponent { }

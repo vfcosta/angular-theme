@@ -1,4 +1,4 @@
-import { StateConfig, Component, Inject, provide } from 'ng-forward';
+import { Component, Inject, provide } from 'ng-forward';
 
 import { PasswordService } from "../../lib/ng-noosfero-api/http/password.service";
 import { NotificationService } from "./../shared/services/notification.service";
