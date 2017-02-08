@@ -10,9 +10,10 @@ import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.c
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 import { UpgradeUtils } from "./shared/upgrade-utils";
 import { DynamicComponentModule } from "ng-dynamic";
+import { MomentModule } from 'angular2-moment';
 
 @NgModule({
-    imports: [BrowserModule, UpgradeModule, DynamicComponentModule.forRoot({imports: [AppModule]})],
+    imports: [BrowserModule, UpgradeModule, MomentModule, DynamicComponentModule.forRoot({imports: [AppModule]})],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent,
                    ProfileImageComponent, TaskListComponent],

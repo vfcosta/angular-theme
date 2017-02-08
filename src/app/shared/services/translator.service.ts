@@ -1,4 +1,6 @@
 import {Injectable, Inject} from "ng-forward";
+import * as moment from 'moment';
+
 
 @Injectable()
 @Inject("$translate", "tmhDynamicLocale", "amMoment", "angularLoad", "$rootScope")
@@ -59,6 +61,7 @@ export class TranslatorService {
         }
         localePromise.then(() => {
             this.amMoment.changeLocale(language);
+            moment.locale(language);
         });
     }
 }

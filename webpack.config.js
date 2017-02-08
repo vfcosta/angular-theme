@@ -30,7 +30,7 @@ var entries = {
     'noosfero-test': './src/app/index.ts',
     'noosfero-specs': testFiles, // './src/specs.ts',
     'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 
-      'ng-forward/cjs/testing/test-component-builder', 'zone.js',
+      'ng-forward/cjs/testing/test-component-builder', 'zone.js', 'moment',
       '@angular/core','@angular/upgrade/static', '@angular/platform-browser-dynamic']
 };
 
