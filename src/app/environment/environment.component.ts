@@ -31,12 +31,15 @@ export class EnvironmentComponent {
         } else {
             this.environment = this.environmentService.getCurrentEnvironment();
         }
-        this.environmentService.getBoxes(this.environment.id).then((boxes: noosfero.Box[]) => {
-            this.boxes = boxes;
-        }).catch(() => {
-            this.$state.transitionTo('main');
-            this.notificationService.error({ message: "notification.environment.not_found" });
-        });
+        environmentService.get().then((result: any) => {
+            this.environment = result;
+            this.environmentService.getBoxes(this.environment.id).then((boxes: noosfero.Box[]) => {
+                this.boxes = boxes;
+            }).catch(() => {
+                this.$state.transitionTo('main');
+                this.notificationService.error({ message: "notification.environment.not_found" });
+            });
+        })
     }
 
 }

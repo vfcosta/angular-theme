@@ -1,5 +1,6 @@
 import { quickCreateComponent } from "../../spec/helpers";
 import { EnvironmentComponent } from "./environment.component";
+import * as helpers from "../../spec/helpers";
 
 describe("Components", () => {
     describe("Environment Component", () => {
@@ -19,13 +20,14 @@ describe("Components", () => {
         beforeEach(() => {
             $state = jasmine.createSpyObj("$state", ["transitionTo"]);
             $state.params = { environment: defaultEnvironment };
-            environmentServiceMock = jasmine.createSpyObj("environmentServiceMock", ["setCurrentEnvironment", "getBoxes"]);
+            environmentServiceMock = jasmine.createSpyObj("environmentServiceMock", ["setCurrentEnvironment", "getBoxes", "get"]);
             notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
 
             let getBoxesResponse = $q.defer();
             getBoxesResponse.resolve({ data: { boxes: [{ id: 2 }] } });
 
             environmentServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);
+            environmentServiceMock.get = jasmine.createSpy("get").and.returnValue(helpers.mocks.promiseResultTemplate(defaultEnvironment));
         });
 
         it("get the default environment", done => {
