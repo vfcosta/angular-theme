@@ -1,2 +1,3 @@
 layout: "angular-layout"
 icon_theme: [default, pidgin]
+angular_theme: true
