@@ -8,9 +8,11 @@ var browserSync = require('browser-sync');
 
 var $ = require('gulp-load-plugins')();
 
+gulp.task('scripts-reload-with-theme', ['scripts-reload'], function() {
+  gulp.start('inject-theme-options');
+});
 
 gulp.task('scripts-reload', function() {
-  gulp.start('inject-theme-options');
   return buildScripts()
     .pipe(browserSync.stream());
 });

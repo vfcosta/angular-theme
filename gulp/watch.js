@@ -31,7 +31,7 @@ gulp.task('watch', ['inject'], function () {
 
   gulp.watch(path.join(conf.paths.src, '/**/*.js'), function(event) {
     if(isOnlyChange(event)) {
-      gulp.start('scripts-reload');
+      gulp.start('scripts-reload-with-theme');
     } else {
       gulp.start('inject-reload');
     }
