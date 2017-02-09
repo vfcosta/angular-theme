@@ -5,9 +5,8 @@ namespace noosfero {
      * @description
      *  A representation of a Tags in Noosfero.
      */
-    export interface Tag extends RestModel {
+    export interface Tag {
         text: string;
-        link: string;
         weight: number;
     }
 }

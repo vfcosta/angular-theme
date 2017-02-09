@@ -22,8 +22,18 @@ describe("Services", () => {
 
             it("should return the boxes of environment ", (done) => {
                 let environmentId = 1;
-                $httpBackend.expectGET(`/api/v1/environment/${environmentId}/boxes`).respond(200, [{ position: 1 }]);
+                $httpBackend.expectGET(`/api/v1/environments/${environmentId}/boxes`).respond(200, [{ position: 1 }]);
                 environmentService.getBoxes(environmentId).then((response: restangular.IResponse) => {
+                    expect(response.data[0]).toEqual({ position: 1 });
+                    done();
+                });
+                $httpBackend.flush();
+            });
+
+            it("should return the tags of environment ", (done) => {
+                let environmentId = 1;
+                $httpBackend.expectGET(`/api/v1/environment/tags`).respond(200, [{ position: 1 }]);
+                environmentService.getTags(environmentId).then((response: restangular.IResponse) => {
                     expect(response.data[0]).toEqual({ position: 1 });
                     done();
                 });

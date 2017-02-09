@@ -15,13 +15,13 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
     }
 
     getResourcePath() {
-        return "environment";
+        return "environments";
     }
 
     getDataKeys() {
         return {
             singular: 'environment',
-            plural: 'environment'
+            plural: 'environments'
         };
     }
 
@@ -38,7 +38,7 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
     }
 
     getEnvironmentElement(environmentId: number | string): restangular.IElement {
-        return this.restangular.one('environment', <any>environmentId);
+        return this.restangular.one('environments', <any>environmentId);
     }
 
     getBoxes(environmentId: number | string): restangular.IPromise<any> {
@@ -50,6 +50,6 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
     }
 
     getEnvironmentPeople(environmentId: number | string, params?: any): restangular.IPromise<any> {
-        return this.restangular.one('people').get(params);
+        return this.getEnvironmentElement(environmentId).customGET('people', params);
     }
 }

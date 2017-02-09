@@ -18,10 +18,13 @@ export class TagsBlockComponent {
     }
 
     loadTags() {
+        this.tags = [];
         this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             return this.environmentService.getTags(environment.id);
-        }).then((result: any) => {
-            this.tags = result;
+        }).then((result: noosfero.RestResult<any>) => {
+            for (let tag of result.data) {
+                this.tags.push({ text: tag.name, weight: tag.count });
+            };
         });
     }
 }
