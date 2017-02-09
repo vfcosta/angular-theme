@@ -41,7 +41,7 @@ describe("Components", () => {
             let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
             $rootScope.$apply();
             expect(environmentServiceMock.getBoxes).toHaveBeenCalled();
-            expect(component.boxes).toEqual({ data: { boxes: [{ id: 2 }] } });
+            expect(component.boxes).toEqual([{ id: 2 }]);
             done();
         });
 

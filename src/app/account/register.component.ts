@@ -32,7 +32,9 @@ export class RegisterComponent {
         private environmentService: EnvironmentService
     ) {
         this.account = {};
-        this.environment = environmentService.getCurrentEnvironment();
+        environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
+            this.environment = environment;
+        });
     }
 
     signup() {

@@ -14,7 +14,11 @@ describe("Components", () => {
 
     describe("Noosfero Activity", () => {
         let activity = { name: "activity1", verb: "create_article" };
-        let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment"]);
+        let environmentService = {
+            getCurrentEnvironment: (filters: any): any => {
+                return Promise.resolve({ id: 1, name: 'Nosofero' });
+            }
+        };
 
         beforeEach(angular.mock.module("templates"));
 
@@ -85,13 +89,13 @@ describe("Components", () => {
         });
 
         it("render upload_image template correctly", done => {
-                activity = { name: "some_image", verb: "upload_image" };
-                tcb.createAsync(BlockContainerComponent).then(fixture => {
-                    let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                    expect(fixture.debugElement.queryAll(".activity.upload_image").length).toEqual(1);
-                    done();
-                });
+            activity = { name: "some_image", verb: "upload_image" };
+            tcb.createAsync(BlockContainerComponent).then(fixture => {
+                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+                expect(fixture.debugElement.queryAll(".activity.upload_image").length).toEqual(1);
+                done();
             });
         });
+    });
 
 });

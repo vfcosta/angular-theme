@@ -1,4 +1,5 @@
 import {Component, Input, Inject} from 'ng-forward';
+import * as moment from 'moment';
 
 @Component({
     selector: 'comment-paragraph-plugin-discussion-editor',

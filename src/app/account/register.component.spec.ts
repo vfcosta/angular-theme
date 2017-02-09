@@ -17,6 +17,9 @@ describe("Register Component", () => {
     let $rootScope: ng.IRootScopeService;
     let $q: ng.IQService;
 
+    let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment"]);
+    environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
+
     beforeEach(() => {
         stateService = jasmine.createSpyObj("$state", ["transitionTo"]);
 
@@ -25,6 +28,8 @@ describe("Register Component", () => {
         angular.mock.module('ngMessages');
         angular.mock.module('ngPassword');
     });
+
+
 
     beforeEach((done) => {
         let cls = createClass({
@@ -35,7 +40,7 @@ describe("Register Component", () => {
                 helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
                 helpers.createProviderToValue('RegisterService', registerService),
                 helpers.createProviderToValue('NotificationService', notificationService),
-                helpers.createProviderToValue('EnvironmentService', helpers.mocks.environmentService)
+                helpers.createProviderToValue('EnvironmentService', environmentService)
             ]
         });
         helper = new ComponentTestHelper<RegisterComponent>(cls, done);

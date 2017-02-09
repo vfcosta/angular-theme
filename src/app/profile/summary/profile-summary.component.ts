@@ -12,7 +12,9 @@ export class ProfileSummaryComponent {
     environment: noosfero.Environment;
 
     constructor(private environmentService: EnvironmentService) {
-        this.environment = environmentService.getCurrentEnvironment();
+        environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
+            this.environment = environment;
+        });
     }
 
     profileLink() {

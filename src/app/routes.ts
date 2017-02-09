@@ -31,7 +31,11 @@ export function noosferoRoutes($stateProvider: any) {
                 return AuthService.loginFromCookie();
             },
             currentEnvironment: function(EnvironmentService: EnvironmentService) {
-                return EnvironmentService.get();
+                return EnvironmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                    let environment = result.data;
+                    EnvironmentService.setCurrentEnvironment(environment);
+                    return environment;
+                });
             }
         }
     });

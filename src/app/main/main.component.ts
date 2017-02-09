@@ -77,7 +77,6 @@ import { LayoutConfigComponent } from "../layout/layout-config/layout-config.com
 import { ConfigBarComponent } from "../layout/config-bar/config-bar.component";
 import { ContextBarComponent } from "../layout/context-bar/context-bar.component";
 import { DomainComponent } from "../domain/domain.component";
-// import { state } from ""
 
 import { HeaderService } from "./../shared/services/header.service";
 
@@ -156,7 +155,7 @@ export class EnvironmentContent {
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
+    providers: [HeaderService, EnvironmentService, AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

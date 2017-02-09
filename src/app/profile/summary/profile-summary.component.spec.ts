@@ -14,12 +14,15 @@ describe("Components", () => {
     describe("Profile Summary Component", () => {
 
         let helper: ComponentTestHelper<ProfileSummaryComponent>;
+        let environmentService = {
+            getCurrentEnvironment: (filters: any): any => {
+                return Promise.resolve({ id: 1, name: 'Nosofero', host: "https://noosfero.org" });
+            }
+        };
 
         beforeEach(angular.mock.module("templates"));
 
         beforeEach((done: Function) => {
-            let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment"]);
-            environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue({ host: "https://noosfero.org" });
             let properties = { profile: { identifier: 'adminuser' } };
             let cls = createClass({
                 template: htmlTemplate,

@@ -17,29 +17,19 @@ describe("Components", () => {
             angular.mock.module("templates");
         });
 
-        let profileServiceMock = {
+        let profileService = {
             getCurrentProfile: (filters: any): any => {
                 return Promise.resolve({ id: 1, identifier: "person1" });
             },
             getActivities: (id: number): any => {
                 if (id === 1) {
-                    return Promise.resolve(
-                        {
-                            data: {
-                                activities:
-                                [
-                                    { name: "activity1", verb: "create_article" },
-                                    { name: "activity2", verb: "create_article" }
-                                ]
-                            }
-
-                        }
-                    )
+                    return Promise.resolve({ data: { activities: [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }] } });
                 }
             }
         };
-        let serviceProvider = new Provider('ProfileService', { useValue: profileServiceMock });
-        let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment"]);
+
+        let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment"]);
+        environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
 
         beforeEach((done) => {
             let cls = createClass({
@@ -55,7 +45,7 @@ describe("Components", () => {
                 providers:
                 [
                     helpers.createProviderToValue('EnvironmentService', environmentService),
-                    serviceProvider
+                    helpers.createProviderToValue('ProfileService', profileService)
                 ].concat(provideFilters("truncateFilter", "stripTagsFilter", "translateFilter"))
             });
             helper = new ComponentTestHelper<ActivitiesComponent>(cls, done);

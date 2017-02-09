@@ -29,17 +29,17 @@ export class EnvironmentComponent {
         if (this.$state.params['environment'].id) {
             this.environment = this.$state.params['environment'];
         } else {
-            this.environment = this.environmentService.getCurrentEnvironment();
-        }
-        environmentService.get().then((result: any) => {
-            this.environment = result;
-            this.environmentService.getBoxes(this.environment.id).then((boxes: noosfero.Box[]) => {
-                this.boxes = boxes;
-            }).catch(() => {
-                this.$state.transitionTo('main');
-                this.notificationService.error({ message: "notification.environment.not_found" });
+            environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
+                this.environment = environment;
             });
-        })
+        }
+
+        this.environmentService.getBoxes(this.environment.id).then((response: restangular.IResponse) => {
+            this.boxes = response.data.boxes;
+        }).catch(() => {
+            this.$state.transitionTo('main');
+            this.notificationService.error({ message: "notification.environment.not_found" });
+        });
     }
 
 }
