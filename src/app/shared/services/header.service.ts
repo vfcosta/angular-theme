@@ -3,7 +3,7 @@ import { INgForwardJQuery } from 'ng-forward/cjs/util/jqlite-extensions';
 import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
 
 @Injectable()
-@Inject("$rootScope", "$document", EnvironmentService)
+@Inject("$rootScope", "$document", "environmentService")
 export class HeaderService {
     private started: boolean = false;
     private titleElement: ng.IAugmentedJQuery = null;
@@ -17,6 +17,7 @@ export class HeaderService {
     ) {
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
+            this.setEnvironmentTitle();
         });
     }
 

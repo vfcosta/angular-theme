@@ -17,7 +17,6 @@ import { BoxesComponent } from "../layout/boxes/boxes.component";
 import { BlockContentComponent } from "../layout/blocks/block-content.component";
 import { BlockSettingsComponent } from "../layout/blocks/block-settings.component";
 import { BlockComponent } from "../layout/blocks/block.component";
-import { EnvironmentComponent } from "../environment/environment.component";
 import { EnvironmentHomeComponent } from "../environment/environment-home.component";
 import { PeopleBlockComponent } from "../layout/blocks/people/people-block.component";
 import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
@@ -109,7 +108,6 @@ export class MainContentComponent {
         bodyStateClassesService.start({
             skin: this.themeSkin
         });
-        headerService.setEnvironmentTitle();
     }
 }
 
@@ -142,7 +140,7 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
-        BlockSettingsComponent, EnvironmentComponent, PeopleBlockComponent, DisplayContentBlockComponent,
+        BlockSettingsComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, MenuBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
@@ -155,7 +153,7 @@ export class EnvironmentContent {
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
-    providers: [HeaderService, EnvironmentService, AuthService, SessionService, NotificationService, BodyStateClassesService,
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
@@ -166,7 +164,8 @@ export class EnvironmentContent {
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
         provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
         provide('headerService', { useClass: HeaderService }),
-        provide('eventsNames', { useClass: NoosferoKnownEvents })
+        provide('eventsNames', { useClass: NoosferoKnownEvents }),
+        provide('environmentService', { useClass: EnvironmentService })
     ]
 })
 export class MainComponent { }

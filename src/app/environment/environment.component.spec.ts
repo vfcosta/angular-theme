@@ -20,14 +20,14 @@ describe("Components", () => {
         beforeEach(() => {
             $state = jasmine.createSpyObj("$state", ["transitionTo"]);
             $state.params = { environment: defaultEnvironment };
-            environmentServiceMock = jasmine.createSpyObj("environmentServiceMock", ["setCurrentEnvironment", "getBoxes", "get"]);
+            environmentServiceMock = jasmine.createSpyObj("environmentServiceMock", ["setCurrentEnvironment", "getBoxes", "getCurrentEnvironment"]);
             notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
 
             let getBoxesResponse = $q.defer();
             getBoxesResponse.resolve({ data: { boxes: [{ id: 2 }] } });
 
             environmentServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);
-            environmentServiceMock.get = jasmine.createSpy("get").and.returnValue(helpers.mocks.promiseResultTemplate(defaultEnvironment));
+            environmentServiceMock.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate(defaultEnvironment));
         });
 
         it("get the default environment", done => {
@@ -38,6 +38,7 @@ describe("Components", () => {
         });
 
         it("get the environment boxes", done => {
+            $state.params = { environment: {} };
             let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
             $rootScope.$apply();
             expect(environmentServiceMock.getBoxes).toHaveBeenCalled();
@@ -48,7 +49,7 @@ describe("Components", () => {
         it("display notification error when does not find boxes to the environment", done => {
             let environmentResponse = $q.defer();
             environmentResponse.reject();
-
+            $state.params = { environment: {} };
             environmentServiceMock.getBoxes = jasmine.createSpy('getBoxes').and.returnValue(environmentResponse.promise);
 
             let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);

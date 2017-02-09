@@ -30,10 +30,10 @@ export function noosferoRoutes($stateProvider: any) {
             currentUser: function(AuthService: AuthService) {
                 return AuthService.loginFromCookie();
             },
-            currentEnvironment: function(EnvironmentService: EnvironmentService) {
-                return EnvironmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+            currentEnvironment: function(environmentService: EnvironmentService) {
+                return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
                     let environment = result.data;
-                    EnvironmentService.setCurrentEnvironment(environment);
+                    environmentService.setCurrentEnvironment(environment);
                     return environment;
                 });
             }

@@ -15,7 +15,6 @@ import { SearchComponent } from "../search/search.component";
     selector: 'environment',
     templateUrl: "app/environment/environment.html",
     providers: [
-        provide('environmentService', { useClass: EnvironmentService }),
         provide('notificationService', { useClass: NotificationService })
     ]
 })
@@ -26,15 +25,17 @@ export class EnvironmentComponent {
     @Input() environment: noosfero.Environment;
 
     constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService) {
+        let environmentPromise: Promise<noosfero.Environment>;
         if (this.$state.params['environment'].id) {
             this.environment = this.$state.params['environment'];
+            environmentPromise = Promise.resolve(this.environment);
         } else {
-            environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
-                this.environment = environment;
-            });
+            environmentPromise = environmentService.getCurrentEnvironment();
         }
-
-        this.environmentService.getBoxes(this.environment.id).then((response: restangular.IResponse) => {
+        environmentPromise.then((environment: noosfero.Environment) => {
+            this.environment = environment;
+            return this.environmentService.getBoxes(this.environment.id);
+        }).then((response: restangular.IResponse) => {
             this.boxes = response.data.boxes;
         }).catch(() => {
             this.$state.transitionTo('main');
