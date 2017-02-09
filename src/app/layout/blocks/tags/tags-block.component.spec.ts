@@ -1,7 +1,7 @@
 import * as helpers from "../../../../spec/helpers";
-import {ComponentTestHelper, createClass} from '../../../../spec/component-test-helper';
+import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
 
-import {TagsBlockComponent} from './tags-block.component';
+import { TagsBlockComponent } from './tags-block.component';
 
 const htmlTemplate: string = '<noosfero-tags-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-tags-block>';
 
@@ -10,7 +10,7 @@ describe("Components", () => {
 
         let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment", "getTags"]);
         environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
-        environmentService.getTags = jasmine.createSpy("getTags").and.returnValue(helpers.mocks.promiseResultTemplate([{ text: "foo", weight: '10', link: '/tag/foo' }, { text: "bar", weight: '20', link: '/tag/bar' }]));
+        environmentService.getTags = jasmine.createSpy("getTags").and.returnValue(helpers.mocks.promiseResultTemplate({ data: [{ name: "foo", count: 10, link: '/tag/foo' }, { name: "bar", count: 20, link: '/tag/bar' }] }));
 
         let state = jasmine.createSpyObj("$state", ["reload"]);
         let helper: ComponentTestHelper<TagsBlockComponent>;
@@ -36,7 +36,7 @@ describe("Components", () => {
 
         it("get tags from the environment service", () => {
             expect(environmentService.getTags).toHaveBeenCalled();
-            expect(helper.component.tags).toEqual([{ text: "foo", weight: '10', link: '/tag/foo' }, { text: "bar", weight: '20', link: '/tag/bar' }]);
+            expect(helper.component.tags).toEqual([{ text: "foo", weight: 10, link: '/tag/foo' }, { text: "bar", weight: 20, link: '/tag/bar' }]);
         });
 
     });

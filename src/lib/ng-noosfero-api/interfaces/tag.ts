@@ -6,7 +6,7 @@ namespace noosfero {
      *  A representation of a Tags in Noosfero.
      */
     export interface Tag {
-        text: string;
-        weight: number;
+        name: string;
+        count: number;
     }
 }

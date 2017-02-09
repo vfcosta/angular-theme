@@ -1,5 +1,5 @@
-import {Component, Inject, Input} from "ng-forward";
-import {EnvironmentService} from "../../../../lib/ng-noosfero-api/http/environment.service";
+import { Component, Inject, Input } from "ng-forward";
+import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
 
 @Component({
     selector: "noosfero-tags-block",
@@ -11,20 +11,19 @@ export class TagsBlockComponent {
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Environment;
 
-    tags: noosfero.Tag[];
+    tags: any[];
 
     constructor(private environmentService: EnvironmentService, private $state: any) {
         this.loadTags();
     }
 
     loadTags() {
-        this.tags = [];
         this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             return this.environmentService.getTags(environment.id);
-        }).then((result: noosfero.RestResult<any>) => {
-            for (let tag of result.data) {
-                this.tags.push({ text: tag.name, weight: tag.count });
-            };
+        }).then((result: noosfero.RestResult<noosfero.Tag[]>) => {
+            this.tags = result.data.map((tag: noosfero.Tag) => {
+                return { text: tag.name, weight: tag.count, link: `/tag/${tag.name}` };
+            });
         });
     }
 }

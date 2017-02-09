@@ -1,4 +1,4 @@
-import {EnvironmentService} from "./environment.service";
+import { EnvironmentService } from "./environment.service";
 
 describe("Services", () => {
 
@@ -32,7 +32,7 @@ describe("Services", () => {
 
             it("should return the tags of environment ", (done) => {
                 let environmentId = 1;
-                $httpBackend.expectGET(`/api/v1/environment/tags`).respond(200, [{ position: 1 }]);
+                $httpBackend.expectGET(`/api/v1/environments/${environmentId}/tags`).respond(200, [{ position: 1 }]);
                 environmentService.getTags(environmentId).then((response: restangular.IResponse) => {
                     expect(response.data[0]).toEqual({ position: 1 });
                     done();
@@ -52,8 +52,8 @@ describe("Services", () => {
 
             it("should return all people of environment", (done) => {
                 let environmentId = 1;
-                $httpBackend.expectGET(`/api/v1/people`).respond(200, { people: [{ id: 2 }] });
-                environmentService.getEnvironmentPeople(<any>{ id: environmentId }).then((response: restangular.IResponse) => {
+                $httpBackend.expectGET(`/api/v1/environments/${environmentId}/people`).respond(200, { people: [{ id: 2 }] });
+                environmentService.getEnvironmentPeople(environmentId).then((response: restangular.IResponse) => {
                     expect(response.data.people).toEqual([{ id: 2 }]);
                     done();
                 });
