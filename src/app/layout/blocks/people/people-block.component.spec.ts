@@ -1,20 +1,19 @@
 import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
 import {Provider} from 'ng-forward';
-import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
+import {ComponentTestHelper, createClass} from '../../../../spec/component-test-helper';
 import {providers} from 'ng-forward/cjs/testing/providers';
 import {PeopleBlockComponent} from './people-block.component';
+import * as helpers from "../../../../spec/helpers";
 
 const htmlTemplate: string = '<noosfero-people-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-people-block>';
 
 describe("Components", () => {
 
     describe("People Block Component", () => {
-        let serviceMock = {
-            getEnvironmentPeople: (filters: any): any => {
-                return Promise.resolve([{ identifier: "person1" }]);
-            }
-        };
-        let providers = [new Provider('EnvironmentService', { useValue: serviceMock })];
+
+        let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment", "getTags"]);
+        environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
+        environmentService.getEnvironmentPeople = jasmine.createSpy("getEnvironmentPeople").and.returnValue(helpers.mocks.promiseResultTemplate({ data: { people: [{ identifier: "person1" }] } }));
 
         let helper: ComponentTestHelper<PeopleBlockComponent>;
 
@@ -32,7 +31,7 @@ describe("Components", () => {
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [PeopleBlockComponent],
-                providers: providers,
+                providers: [helpers.createProviderToValue('EnvironmentService', environmentService)],
                 properties: {}
             });
             helper = new ComponentTestHelper<PeopleBlockComponent>(cls, done);
@@ -44,6 +43,8 @@ describe("Components", () => {
          * return the given array with one person.
          */
         it("get block with one people", () => {
+            expect(environmentService.getCurrentEnvironment).toHaveBeenCalled();
+            expect(environmentService.getEnvironmentPeople).toHaveBeenCalled();
             expect(helper.component.people[0].identifier).toEqual("person1");
         });
 

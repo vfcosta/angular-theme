@@ -150,7 +150,7 @@ export class EnvironmentContent {
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
+    providers: [HeaderService, EnvironmentService, AuthService, SessionService, NotificationService, BodyStateClassesService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
@@ -171,7 +171,11 @@ export class EnvironmentContent {
                 return AuthService.loginFromCookie();
             },
             currentEnvironment: function(EnvironmentService: EnvironmentService) {
-                return EnvironmentService.get();
+                return EnvironmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                    let environment = result.data;
+                    EnvironmentService.setCurrentEnvironment(environment);
+                    return environment;
+                });
             }
         }
     },

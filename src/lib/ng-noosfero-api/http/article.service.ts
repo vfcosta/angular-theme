@@ -7,6 +7,7 @@ import { EnvironmentService } from './environment.service';
 @Injectable()
 @Inject("Restangular", "$q", "$log", ProfileService, "$document", EnvironmentService)
 export class ArticleService extends RestangularService<noosfero.Article> {
+    environment: noosfero.Environment;
 
     constructor(
         Restangular: restangular.IService,
@@ -47,7 +48,10 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     // }
     setCurrent(article: noosfero.Article) {
         super.setCurrent(article);
-        this.$document.prop('title', this.environmentService.getCurrentEnvironment().name + ' - ' + article.title);
+        this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
+            this.environment = environment;
+        });
+        this.$document.prop('title', this.environment.name + ' - ' + article.title);
     }
 
     updateArticle(article: noosfero.Article) {
