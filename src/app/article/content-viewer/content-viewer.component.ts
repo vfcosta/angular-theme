@@ -1,5 +1,5 @@
 import {ArticleViewComponent} from "./../article-default-view.component";
-import {Input, Component, StateConfig, Inject, provide} from "ng-forward";
+import {Input, Component, Inject, provide} from "ng-forward";
 
 import {ArticleBlogComponent} from "./../types/blog/blog.component";
 import {ArticleService} from "../../../lib/ng-noosfero-api/http/article.service";

@@ -20,7 +20,7 @@ describe("Components", () => {
             $state = jasmine.createSpyObj("$state", ["transitionTo"]);
             $state.params = { currentProfile: {} };
             $stateParams = jasmine.createSpyObj("$stateParams", ["profile"]);
-            profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfile", "getByIdentifier", "getBoxes"]);
+            profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfile", "setCurrentProfileByIdentifier", "getBoxes"]);
             notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
 
             let profileResponse = $q.defer();
@@ -28,7 +28,7 @@ describe("Components", () => {
             let getBoxesResponse = $q.defer();
             getBoxesResponse.resolve({ data: { boxes: [{ id: 2 }] } });
 
-            profileServiceMock.getByIdentifier = jasmine.createSpy("getByIdentifier").and.returnValue(profileResponse.promise);
+            profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profileResponse.promise);
             profileServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);
         });
 
@@ -36,7 +36,7 @@ describe("Components", () => {
             $state.params = { currentProfile: { id: 2 } };
             let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock);
             $rootScope.$apply();
-            expect(profileServiceMock.getByIdentifier).not.toHaveBeenCalled();
+            expect(profileServiceMock.setCurrentProfileByIdentifier).not.toHaveBeenCalled();
             expect(component.profile).toEqual({ id: 2 });
             done();
         });
@@ -44,7 +44,7 @@ describe("Components", () => {
         it("get the profile and store in profile service", done => {
             let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock);
             $rootScope.$apply();
-            expect(profileServiceMock.getByIdentifier).toHaveBeenCalled();
+            expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
             expect(component.profile).toEqual({ id: 1 });
             done();
         });
@@ -60,12 +60,12 @@ describe("Components", () => {
         it("display notification error when the profile wasn't found", done => {
             let profileResponse = $q.defer();
             profileResponse.reject();
-            profileServiceMock.getByIdentifier = jasmine.createSpy("getByIdentifier").and.returnValue(profileResponse.promise);
+            profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profileResponse.promise);
 
             let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock);
             $rootScope.$apply();
 
-            expect(profileServiceMock.getByIdentifier).toHaveBeenCalled();
+            expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
             expect(notificationMock.error).toHaveBeenCalled();
             expect(component.profile).toBeUndefined();
             done();

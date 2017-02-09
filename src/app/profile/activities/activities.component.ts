@@ -1,6 +1,4 @@
 import {Component, Input, Inject} from "ng-forward";
-// import { StateConfig, Component, Inject, provide } from 'ng-forward';
-
 import {ActivityComponent} from "./activity/activity.component";
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 

@@ -1,4 +1,4 @@
-import { StateConfig, Component, Inject, provide } from 'ng-forward';
+import { Component, Inject, provide } from 'ng-forward';
 import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
 
 @Component({

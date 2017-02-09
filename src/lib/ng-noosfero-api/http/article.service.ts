@@ -1,11 +1,11 @@
 import { Injectable, Inject, EventEmitter } from "ng-forward";
-import {RestangularService} from "./restangular_service";
-import {ProfileService} from "./profile.service";
-import {NoosferoRootScope} from "./../../../app/shared/models/interfaces";
+import { RestangularService } from "./restangular_service";
+import { ProfileService } from "./profile.service";
+import { NoosferoRootScope } from "./../../../app/shared/models/interfaces";
 import { EnvironmentService } from './environment.service';
 
 @Injectable()
-@Inject("Restangular", "$q", "$log", ProfileService, "$document", EnvironmentService)
+@Inject("Restangular", "$q", "$log", ProfileService, "$document", "environmentService")
 export class ArticleService extends RestangularService<noosfero.Article> {
     environment: noosfero.Environment;
 
@@ -50,8 +50,8 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         super.setCurrent(article);
         this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
+            this.$document.prop('title', this.environment.name + ' - ' + article.title);
         });
-        this.$document.prop('title', this.environment.name + ' - ' + article.title);
     }
 
     updateArticle(article: noosfero.Article) {

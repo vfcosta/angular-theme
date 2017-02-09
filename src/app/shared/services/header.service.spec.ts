@@ -3,7 +3,9 @@ import { HeaderService } from "./header.service";
 
 describe("Header Service", () => {
     let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment"]);
-    environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
+    let resolveEnvironmentPromise;
+    let environmentPromise = { then: (func: Function) => { resolveEnvironmentPromise = func; } };
+    environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(environmentPromise);
 
     let $rootScope: ng.IRootScopeService = <any>{};
     let $document: ng.IDocumentService = <any>{};
@@ -13,13 +15,10 @@ describe("Header Service", () => {
 
     it("should set the header title element", () => {
         let component: HeaderService = createComponent();
-
         let titleElJq = jasmine.createSpyObj("titleElement", ["text"]);
         titleElJq.text = jasmine.createSpy("text");
         component["titleElement"] = titleElJq;
-        component.setEnvironmentTitle();
-
+        resolveEnvironmentPromise({ id: 1, name: 'Noosfero' });
         expect(titleElJq.text).toHaveBeenCalledWith('Noosfero');
     });
-
 });

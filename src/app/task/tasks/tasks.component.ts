@@ -3,10 +3,7 @@ import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
 
 @Component({
     selector: "tasks",
-    templateUrl: "app/task/tasks/tasks.html",
-    providers: [
-        provide('taskService', { useClass: TaskService })
-    ]
+    templateUrl: "app/task/tasks/tasks.html"
 })
 @Inject(TaskService)
 export class TasksComponent {
@@ -16,12 +13,12 @@ export class TasksComponent {
     currentPage = 1;
     perPage = 5;
 
-    constructor(private taskService: TaskService) {
+    constructor(private TaskService: TaskService) {
         this.loadPage();
     }
 
     loadPage() {
-        this.taskService.getAllPending({ page: this.currentPage, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
+        this.TaskService.getAllPending({ page: this.currentPage, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
             this.total = result.headers('total');
             this.tasks = result.data;
         });

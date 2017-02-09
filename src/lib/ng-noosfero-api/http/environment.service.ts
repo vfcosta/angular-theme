@@ -8,7 +8,7 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
 
     private _currentEnvironmentPromise: ng.IDeferred<noosfero.Environment>;
     private _environment: noosfero.Environment;
-    private now = new Date();
+
     constructor(private restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
         super(restangular, $q, $log);
         this.resetCurrentEnvironment();
