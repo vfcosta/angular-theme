@@ -11,7 +11,10 @@ describe('Profile data component', () => {
 
     let profileService: any;
     let profile = {
-        id: 1, identifier: "profile-test", additional_data: { 'Address': 'Street A, Number 102' }
+        id: 1,
+        identifier: "profile-test",
+        type: 'Person',
+        additional_data: { 'Address': 'Street A, Number 102' }
     };
 
     let helper: ComponentTestHelper<ProfileDataComponent>;
@@ -20,7 +23,6 @@ describe('Profile data component', () => {
     beforeEach((done) => {
         profileService = jasmine.createSpyObj("profileService", ["getCurrentProfile"]);
         profileService.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(helpers.mocks.promiseResultTemplate(profile));
-
 
         let cls = createClass({
             template: htmlTemplate,
@@ -33,7 +35,6 @@ describe('Profile data component', () => {
     });
 
     it("renders profile-data directive", () => {
-        expect(helper.all("div.table-responsive").length).toEqual(1);
         expect(helper.all("span.label-info").length).toEqual(1);
     });
 
