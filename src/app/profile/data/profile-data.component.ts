@@ -1,4 +1,4 @@
-import {Component, Inject, Input, provide} from 'ng-forward';
+import {Component, Inject, provide} from 'ng-forward';
 import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service";
 import {TranslateProfile} from "../../shared/pipes/translate-profile.filter";
 
@@ -7,10 +7,16 @@ import {TranslateProfile} from "../../shared/pipes/translate-profile.filter";
     templateUrl: "app/profile/data/profile-data.html",
     pipes: [TranslateProfile]
 })
+@Inject(ProfileService)
 export class ProfileDataComponent {
 
-    @Input()
     profile: noosfero.Profile;
+
+    constructor(profileService: ProfileService) {
+        profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
+            this.profile = profile;
+        });
+    }
 
     hasCustomFields(): boolean {
         let result: boolean = false;
