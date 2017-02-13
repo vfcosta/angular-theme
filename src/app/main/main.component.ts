@@ -52,6 +52,7 @@ import { DateFormat } from "../shared/pipes/date-format.filter";
 import { AuthService } from "../login/auth.service";
 import { SessionService } from "../login/session.service";
 import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment.service";
+import { CommunityService } from "./../../lib/ng-noosfero-api/http/community.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
@@ -153,7 +154,7 @@ export class EnvironmentContent {
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
