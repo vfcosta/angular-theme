@@ -1,7 +1,7 @@
 <div class="communities-block">
   <div class="communities-list">
-    <div ng-repeat="community in ctrl.profiles" class="community-item">
-      <a ui-sref="main.profile.home({profile: community.identifier})" href class="community-link">
+    <div *ngFor="let community of profiles" class="community-item">
+      <a [href]="community.identifier" class="community-link">
         <noosfero-profile-image [profile]="community" class="community-image"></noosfero-profile-image>
         <div class="community-name">{{community.name}}</div>
       </a>

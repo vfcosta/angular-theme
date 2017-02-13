@@ -1,11 +1,10 @@
-import { Input, Inject, Component } from "ng-forward";
+import { Component, Inject, Input } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-communities-block",
-    templateUrl: 'app/layout/blocks/communities/communities-block.html',
+    template: require('app/layout/blocks/communities/communities-block.html')
 })
-@Inject(BlockService)
 export class CommunitiesBlockComponent {
 
     @Input() block: noosfero.Block;
@@ -13,7 +12,7 @@ export class CommunitiesBlockComponent {
 
     profiles: any = [];
 
-    constructor(private blockService: BlockService) { }
+    constructor(@Inject('blockService') private blockService: BlockService) { }
 
     ngOnInit() {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;

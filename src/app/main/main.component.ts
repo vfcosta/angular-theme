@@ -41,7 +41,6 @@ import { IconPickerComponent } from "../shared/components/icon-picker/icon-picke
 import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
-import { CommunitiesBlockComponent } from "../layout/blocks/communities/communities-block.component";
 
 import { LoginBlockComponent } from "../layout/blocks/login-block/login-block.component";
 
@@ -142,7 +141,7 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         BlockSettingsComponent, PeopleBlockComponent, DisplayContentBlockComponent,
-        LinkListBlockComponent, MenuBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
+        LinkListBlockComponent, MenuBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
