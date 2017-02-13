@@ -1,8 +1,8 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider} from 'ng-forward';
-import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
+import { TestComponentBuilder } from 'ng-forward/cjs/testing/test-component-builder';
+import { Provider } from 'ng-forward';
+import { ComponentTestHelper, createClass } from './../../../../spec/component-test-helper';
 // import {providers} from 'ng-forward/cjs/testing/providers';
-import {CommunitiesBlockComponent} from './communities-block.component';
+import { CommunitiesBlockComponent } from './communities-block.component';
 
 const htmlTemplate: string = '<noosfero-communities-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-communities-block>';
 
@@ -40,7 +40,7 @@ describe("Components", () => {
         });
 
         it("render the noosfero communities block", () => {
-            expect(helper.all(".media-list").length).toEqual(1);
+            expect(helper.all(".communities-block").length).toEqual(1);
         });
 
     });
