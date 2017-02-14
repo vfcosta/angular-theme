@@ -33,8 +33,12 @@ export class ProfileFastEditionComponent {
     }
 
     cloneProfile() {
-      this.updatedProfile = <noosfero.Profile>['id', 'name'].reduce((object, key) => {
+      this.updatedProfile = <noosfero.Profile>['id', 'name', 'identifier'].reduce((object, key) => {
         object[key] = this.profile[key]; return object;
       }, {});
+    }
+
+    getProfileLink() {
+      return `${window.location.hostname}/${this.updatedProfile.identifier}`;
     }
 }

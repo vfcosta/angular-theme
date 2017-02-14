@@ -1,7 +1,12 @@
-<div class="form editable-link-form">
+<div class="form editable-profile-form">
   <div class="form-group">
     <label class="control-label">{{"profile.edition.name_label" | translate}}</label>
     <input type="text" class="form-control input-sm" [(ngModel)]="updatedProfile.name" required>
+  </div>
+  <div class="form-group">
+    <label class="control-label">{{"profile.edition.identifier_label" | translate}}</label>
+    <input type="text" class="form-control input-sm" [(ngModel)]="updatedProfile.identifier" required>
+    <span class="updated-profile-link">{{getProfileLink()}}</span>
   </div>
   <div class="actions">
     <button type="button" class="btn btn-primary" (click)="save()">{{"profile.edition.action.save" | translate}}</button>
