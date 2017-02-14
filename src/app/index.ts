@@ -1,3 +1,4 @@
+import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -56,6 +57,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('taskList',
         downgradeComponent({component: TaskListComponent, inputs: ['tasks']}) as angular.IDirectiveFactory
+    ).
+    directive('noosferoCommunitiesBlock',
+        downgradeComponent({component: CommunitiesBlockComponent, inputs: ['block', 'owner']}) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

@@ -1,4 +1,57 @@
-.media-list .media{
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 0.3em;
+.communitiesblock {
+  .panel-title {
+    &:before {
+      @extend .fa-users;
+      @extend .fa-fw;
+      @extend .img-circle;
+      font-family: FontAwesome;
+      background-color: #999999;
+      font-size: 22px;
+      padding: 10px;
+      color: white;
+      margin-right: 5px;
+    }
+  }
+  noosfero-communities-block {
+    .communities-block {
+      @extend .container-fluid;
+      .communities-list {
+        @extend .row;
+        border-bottom: 1px solid #ededed;
+        .community-item {
+          @extend .col-md-3;
+          @extend .col-sm-2;
+          @extend .col-xs-2;
+          display: block;
+          margin-bottom: 15px;
+          padding: 0 5px;
+          min-height: 90px;
+          min-width: 62px;
+
+          .community-link {
+            .community-image {
+              color: $text-color;
+              text-align: center;
+              @extend .center-block;
+              img {
+                @extend .center-block;
+                border-radius: 0;
+                background-color: #dcdcdc;
+              }
+              i {
+                background-color: #dcdcdc;
+                font-size: 45px;
+                padding: 5px;
+              }
+            }
+            .community-name {
+              text-align: center;
+              color: $text-color;
+              font-size: 12px;
+            }
+          }
+        }
+      }
+    }
+  }
 }

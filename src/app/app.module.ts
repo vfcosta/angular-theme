@@ -1,3 +1,4 @@
+import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { TranslatePipe } from './shared/pipes/translate-pipe';
@@ -16,9 +17,9 @@ import { MomentModule } from 'angular2-moment';
     imports: [BrowserModule, UpgradeModule, MomentModule, DynamicComponentModule.forRoot({imports: [AppModule]})],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent,
-                   ProfileImageComponent, TaskListComponent],
+                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent],
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent, ProfileImageComponent,
-                      TaskListComponent],
+                      TaskListComponent, CommunitiesBlockComponent],
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'ProfileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
         '$log', 'SweetAlert', 'toastr', 'TaskService'])

@@ -1,11 +1,10 @@
-import {Input, Inject, Component} from "ng-forward";
-import {CommunityService} from "../../../../lib/ng-noosfero-api/http/community.service";
+import { Component, Inject, Input } from '@angular/core';
+import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-communities-block",
-    templateUrl: 'app/layout/blocks/communities/communities-block.html',
+    template: require('app/layout/blocks/communities/communities-block.html')
 })
-@Inject(CommunityService)
 export class CommunitiesBlockComponent {
 
     @Input() block: noosfero.Block;
@@ -13,12 +12,13 @@ export class CommunitiesBlockComponent {
 
     profiles: any = [];
 
-    constructor(private communityService: CommunityService) { }
+    constructor(@Inject('blockService') private blockService: BlockService) { }
 
     ngOnInit() {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
-        this.communityService.getByOwner(this.owner, { limit: limit }).then((result: noosfero.RestResult<noosfero.Community[]>) => {
-            this.profiles = result.data;
+        this.blockService.getApiContent(this.block).then((content: any) => {
+            this.profiles = content['communities'];
+            this.block.api_content = content;
         });
     }
 }

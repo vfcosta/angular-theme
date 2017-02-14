@@ -41,7 +41,6 @@ import { IconPickerComponent } from "../shared/components/icon-picker/icon-picke
 import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
 
 import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
-import { CommunitiesBlockComponent } from "../layout/blocks/communities/communities-block.component";
 
 import { LoginBlockComponent } from "../layout/blocks/login-block/login-block.component";
 
@@ -52,6 +51,7 @@ import { DateFormat } from "../shared/pipes/date-format.filter";
 import { AuthService } from "../login/auth.service";
 import { SessionService } from "../login/session.service";
 import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment.service";
+import { CommunityService } from "./../../lib/ng-noosfero-api/http/community.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
@@ -141,7 +141,7 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         BlockSettingsComponent, PeopleBlockComponent, DisplayContentBlockComponent,
-        LinkListBlockComponent, MenuBlockComponent, CommunitiesBlockComponent, HtmlEditorComponent, ProfileComponent,
+        LinkListBlockComponent, MenuBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
@@ -153,7 +153,7 @@ export class EnvironmentContent {
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

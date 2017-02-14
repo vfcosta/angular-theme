@@ -1,16 +1,10 @@
-<ul class="media-list">
-  <li ng-repeat="profile in ctrl.profiles" class="media">
-    
-      <div class="media-left">
-        <a ui-sref="main.profile.home({profile: profile.identifier})">
-          <noosfero-profile-image [profile]="profile"></noosfero-profile-image>
-        </a>
-      </div>
-      <div class="media-body">
-        <a ui-sref="main.profile.home({profile: profile.identifier})">
-          <h4 class="media-heading">{{profile.name}}</h4>
-        </a>
-        {{"block.communities.members.count" | translate:{members: profile.members_count}:"messageformat"}}
-      </div>
-  </li>
-</ul>
+<div class="communities-block">
+  <div class="communities-list">
+    <div *ngFor="let community of profiles" class="community-item">
+      <a [href]="community.identifier" class="community-link">
+        <noosfero-profile-image [profile]="community" class="community-image"></noosfero-profile-image>
+        <div class="community-name">{{community.name}}</div>
+      </a>
+    </div>
+  </div>
+</div>

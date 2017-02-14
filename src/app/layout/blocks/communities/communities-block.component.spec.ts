@@ -1,47 +1,49 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider} from 'ng-forward';
-import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
-// import {providers} from 'ng-forward/cjs/testing/providers';
-import {CommunitiesBlockComponent} from './communities-block.component';
-
-const htmlTemplate: string = '<noosfero-communities-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-communities-block>';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { ProfileImageComponent } from './../../../profile/image/profile-image.component';
+import { By } from '@angular/platform-browser';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommunitiesBlockComponent } from './communities-block.component';
+import * as helpers from "../../../../spec/helpers";
 
 describe("Components", () => {
 
     describe("Community Block Component", () => {
-        let serviceMock = {
-            getByOwner: (owner: any, params: any): any => {
-                return Promise.resolve({ data: [{ identifier: "community1" }] });
-            }
-        };
+        let fixture: ComponentFixture<CommunitiesBlockComponent>;
+        let component: CommunitiesBlockComponent;
+        let blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
+        blockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ communities: [{ identifier: "community1" }] }));
 
-        let providers = [new Provider('CommunityService', { useValue: serviceMock })];
-
-        let helper: ComponentTestHelper<CommunitiesBlockComponent>;
-
-        beforeEach(angular.mock.module("templates"));
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [CommunitiesBlockComponent],
-                providers: providers,
-                properties: {}
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [ CommunitiesBlockComponent, TranslatePipe ],
+                providers: [
+                    { provide: "blockService", useValue: blockService }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(CommunitiesBlockComponent);
+                component = fixture.componentInstance;
+                component.block = <noosfero.Block>{id: 1};
             });
-            helper = new ComponentTestHelper<CommunitiesBlockComponent>(cls, done);
-        });
+        }));
 
-        it("get block with one community", done => {
-            expect(helper.component.profiles[0].identifier).toEqual("community1");
-            done();
-        });
+        it("get block with one community", (fakeAsync(() => {
+            fixture.detectChanges();
+            tick();
+            expect(blockService.getApiContent).toHaveBeenCalled();
+            expect(component.profiles[0].identifier).toEqual("community1");
+        })));
 
-        it("render the profile image for each community", () => {
-            expect(helper.all("noosfero-profile-image").length).toEqual(1);
-        });
+        it("render the profile image for each community", (fakeAsync(() => {
+            fixture.detectChanges();
+            tick();
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('noosfero-profile-image')).length).toEqual(1);
+        })));
 
         it("render the noosfero communities block", () => {
-            expect(helper.all(".media-list").length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css(".communities-block")).length).toEqual(1);
         });
-
     });
 });
