@@ -1,3 +1,4 @@
+import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
@@ -60,6 +61,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoCommunitiesBlock',
         downgradeComponent({component: CommunitiesBlockComponent, inputs: ['block', 'owner']}) as angular.IDirectiveFactory
+    ).
+    directive('profileFastEdition',
+        downgradeComponent({component: ProfileFastEditionComponent, inputs: ['profile'], outputs: ['finished']}) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

@@ -11,6 +11,8 @@ export class ProfileSummaryComponent {
     @Input() profile: noosfero.Profile;
     environment: noosfero.Environment;
 
+    editPopoverOpen = false;
+
     constructor(private environmentService: EnvironmentService) {
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
@@ -21,5 +23,9 @@ export class ProfileSummaryComponent {
         if (!this.environment || !this.environment.host || !this.profile) return null;
         let host = this.environment.host.replace(/https?:\/\//, "");
         return `${host}/${this.profile.identifier}`;
+    }
+
+    closeEdition() {
+        this.editPopoverOpen = false;
     }
 }

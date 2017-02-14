@@ -24,10 +24,21 @@ noosfero-profile-summary {
       text-align: left;
       .media-heading {
         color: #fff;
+        display: inline-block;
       }
       .profile-link {
         color: #ededed;
       }
+      .profile-edition-link {
+        vertical-align: 20%;
+        margin-left: 10px;
+        .edit-icon {
+          color: #fff;
+        }
+      }
     }
   }
+}
+.editable-profile-popover {
+  margin-top: -5px;
 }

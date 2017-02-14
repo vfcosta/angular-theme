@@ -268,5 +268,10 @@
   "editable-link.form.cancel": "Cancel",
   "footer.logout": "Logout",
   "footer.logged.as": "You are identified as",
-  "footer.developed.with": "Developed with:"
+  "footer.developed.with": "Developed with:",
+  "profile.edition.success.title": "Good job!",
+  "profile.edition.success.message": "Profile successfully saved!",
+  "profile.edition.name_label": "Name",
+  "profile.edition.action.save": "Save",
+  "profile.edition.action.cancel": "Cancel"
 }
