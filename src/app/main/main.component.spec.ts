@@ -76,15 +76,13 @@ describe("MainComponent", function() {
     // });
 
     it("does not render the main component when get error loading the environment", (done) => {
+        // mock the environmentService to force a rejected promise
+        environmentService.get = jasmine.createSpy("get").and.returnValue(Promise.reject("Error simulated"));
         quickCreateComponent({ directives: [MainComponentParent], template: "<parent></parent>" })
             .then((fixture) => {
                 localFixture = fixture;
                 // get the $state service to navigate between routes
                 $state = fixture.debugElement.getLocal("$state");
-                // get the $q service to create a rejected promise
-                $q = fixture.debugElement.getLocal("$q");
-                // mock the environmentService to force a rejected promise
-                environmentService.get = jasmine.createSpy("get").and.returnValue($q.reject("Error simulated"));
                 // tries to navigate to the environment home
                 $state.go("main.environment.home");
                 localFixture.detectChanges();

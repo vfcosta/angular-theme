@@ -29,35 +29,9 @@ export function noosferoRoutes($stateProvider: any) {
         resolve: {
             currentUser: function(AuthService: AuthService) {
                 return AuthService.loginFromCookie();
-            },
-            currentEnvironment: function(environmentService: EnvironmentService) {
-                return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
-                    let environment = result.data;
-                    environmentService.setCurrentEnvironment(environment);
-                    return environment;
-                });
             }
         }
     });
-
-    $stateProvider.state({
-        controller: DomainComponent,
-        url: '/',
-        name: 'main.domain',
-        views: {
-            "content": {
-                template: "<div></div>",
-                controller: DomainComponent,
-                controllerAs: "ctrl"
-            }
-        },
-        resolve: {
-            contextResult: (DomainService: DomainService) => {
-                return DomainService.get("context");
-            }
-        }
-    });
-
 
     $stateProvider.state({
         controller: EnvironmentComponent,
@@ -85,6 +59,24 @@ export function noosferoRoutes($stateProvider: any) {
             }
         },
         params: { environment: {} }
+    });
+
+    $stateProvider.state({
+        controller: DomainComponent,
+        url: '/',
+        name: 'main.domain',
+        views: {
+            "content": {
+                template: "<div></div>",
+                controller: DomainComponent,
+                controllerAs: "ctrl"
+            }
+        },
+        resolve: {
+            contextResult: (DomainService: DomainService) => {
+                return DomainService.get("context");
+            }
+        }
     });
 
     $stateProvider.state({
