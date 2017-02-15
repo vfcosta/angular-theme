@@ -41,4 +41,8 @@ export class ProfileFastEditionComponent {
     getProfileLink() {
       return `${window.location.hostname}/${this.updatedProfile.identifier}`;
     }
+
+    identifierChanged() {
+      return this.updatedProfile.identifier !== this.profile.identifier;
+    }
 }

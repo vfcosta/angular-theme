@@ -274,5 +274,8 @@
   "profile.edition.name_label": "Nome",
   "profile.edition.identifier_label": "Nome de usuário",
   "profile.edition.action.save": "Salvar Alterações",
-  "profile.edition.action.cancel": "Cancelar"
+  "profile.edition.action.cancel": "Cancelar",
+  "profile.edition.name.required": "Nome é obrigatório",
+  "profile.edition.identifier.required": "Nome de usuário é obrigatório",
+  "profile.edition.identifier.change_message": "A url do perfil será modificada"
 }
