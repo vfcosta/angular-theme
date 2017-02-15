@@ -6,7 +6,7 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
     $httpProvider: ng.IHttpProvider,
     $provide: ng.auto.IProvideService,
     $translateProvider: angular.translate.ITranslateProvider,
-    tmhDynamicLocaleProvider: any) {
+    tmhDynamicLocaleProvider: any, $urlMatcherFactoryProvider: any) {
 
     $logProvider.debugEnabled(true);
     $locationProvider.html5Mode({ enabled: true });
@@ -22,6 +22,8 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
         };
     });
     configTranslation($translateProvider, tmhDynamicLocaleProvider);
+
+    $urlMatcherFactoryProvider.strictMode(false);
 }
 
 function configTranslation($translateProvider: angular.translate.ITranslateProvider, tmhDynamicLocaleProvider: any) {
