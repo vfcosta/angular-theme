@@ -63,7 +63,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({component: CommunitiesBlockComponent, inputs: ['block', 'owner']}) as angular.IDirectiveFactory
     ).
     directive('profileFastEdition',
-        downgradeComponent({component: ProfileFastEditionComponent, inputs: ['profile'], outputs: ['finished']}) as angular.IDirectiveFactory
+        downgradeComponent({component: ProfileFastEditionComponent, inputs: ['profile', 'environment'], outputs: ['finished']}) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

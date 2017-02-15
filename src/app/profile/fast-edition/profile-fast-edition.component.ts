@@ -9,40 +9,51 @@ import { Component, Inject, Input, Output, EventEmitter } from '@angular/core';
 export class ProfileFastEditionComponent {
 
     @Input() profile: noosfero.Profile;
+    @Input() environment: noosfero.Environment;
     @Output() finished = new EventEmitter<noosfero.Profile>();
 
     updatedProfile: noosfero.Profile;
 
-    constructor(@Inject("profileService") private profileService: ProfileService,
-                @Inject("notificationService") private notificationService: NotificationService) { }
+    constructor( @Inject("profileService") private profileService: ProfileService,
+        @Inject("notificationService") private notificationService: NotificationService) { }
 
     ngOnInit() {
-      this.cloneProfile();
+        this.cloneProfile();
     }
 
     save() {
-      this.profileService.update(this.updatedProfile).then(() => {
-        this.profile = Object.assign(this.profile, this.updatedProfile);
-        this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
-        this.finished.emit(this.profile);
-      });
+        this.profileService.update(this.updatedProfile).then(() => {
+            this.profile = Object.assign(this.profile, this.updatedProfile);
+            this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
+            this.finished.emit(this.profile);
+        });
     }
 
     cancel() {
-      this.finished.emit(this.profile);
+        this.finished.emit(this.profile);
     }
 
     cloneProfile() {
-      this.updatedProfile = <noosfero.Profile>['id', 'name', 'identifier'].reduce((object, key) => {
-        object[key] = this.profile[key]; return object;
-      }, {});
+        this.updatedProfile = <noosfero.Profile>['id', 'name', 'identifier'].reduce((object, key) => {
+            object[key] = this.profile[key]; return object;
+        }, {});
     }
 
     getProfileLink() {
-      return `${window.location.hostname}/${this.updatedProfile.identifier}`;
+        if (!this.environment || !this.environment.host || !this.profile) return null;
+        let host = this.environment.host.replace(/https?:\/\//, "");
+        return `${host}/${this.updatedProfile.identifier}`;
     }
 
     identifierChanged() {
-      return this.updatedProfile.identifier !== this.profile.identifier;
+        return this.updatedProfile.identifier !== this.profile.identifier;
+    }
+
+    allowChangeIdentifier() {
+        if (this.profile.type === 'Person') {
+            return this.environment.settings['enable_person_url_change_enabled'];
+        } else {
+            return this.environment.settings['enable_organization_url_change_enabled'];
+        }
     }
 }

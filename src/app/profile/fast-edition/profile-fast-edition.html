@@ -6,7 +6,7 @@
       {{"profile.edition.name.required" | translate}}
     </div>
   </div>
-  <div class="form-group">
+  <div class="form-group" *ngIf="allowChangeIdentifier()">
     <label class="control-label" for="identifier">{{"profile.edition.identifier_label" | translate}}</label>
     <input type="text" class="form-control input-sm" [(ngModel)]="updatedProfile.identifier" required #identifier="ngModel" id="identifier" name="identifier">
     <div [hidden]="identifier.valid || identifier.pristine" class="alert alert-danger">

@@ -1,3 +1,4 @@
+import { By } from '@angular/platform-browser';
 import { ProfileFastEditionComponent } from './profile-fast-edition.component';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -26,6 +27,7 @@ describe("Components", () => {
                 fixture = TestBed.createComponent(ProfileFastEditionComponent);
                 component = fixture.componentInstance;
                 component.profile = <noosfero.Profile>{ id: 1, name: "Test", identifier: "test" };
+                component.environment = <noosfero.Environment>{ id: 2, settings: {} };
             });
         }));
 
@@ -38,6 +40,25 @@ describe("Components", () => {
             fixture.detectChanges();
             component.save();
             expect(profileService.update).toHaveBeenCalled();
+        });
+
+        it("not display edition input for identifier when not allowed", () => {
+            fixture.detectChanges();
+            expect(fixture.debugElement.query(By.css('#identifier'))).toBeNull();
+        });
+
+        it("display person edition of identifier when allowed", () => {
+            component.profile = <noosfero.Profile>{ id: 1, name: "Test", identifier: "test", type: "Person" };
+            component.environment = <noosfero.Environment>{ id: 2, settings: {enable_person_url_change_enabled: true} };
+            fixture.detectChanges();
+            expect(fixture.debugElement.query(By.css('#identifier'))).not.toBeNull();
+        });
+
+        it("display community edition of identifier when allowed", () => {
+            component.profile = <noosfero.Profile>{ id: 1, name: "Test", identifier: "test", type: "Community" };
+            component.environment = <noosfero.Environment>{ id: 2, settings: {enable_organization_url_change_enabled: true} };
+            fixture.detectChanges();
+            expect(fixture.debugElement.query(By.css('#identifier'))).not.toBeNull();
         });
     });
 });
