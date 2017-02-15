@@ -10,9 +10,11 @@
     <label class="control-label" for="identifier">{{"profile.edition.identifier_label" | translate}}</label>
     <input type="text" class="form-control input-sm" [(ngModel)]="updatedProfile.identifier" required #identifier="ngModel" id="identifier" name="identifier">
     <div [hidden]="identifier.valid || identifier.pristine" class="alert alert-danger">
-      {{"profile.edition.identifier.required" | translate}}
+      <div *ngFor="let error of getErrors('identifier')" class="identifier-error">
+        {{error | translate}}
+      </div>
     </div>
-    <div [hidden]="!identifierChanged()" class="alert alert-warning">
+    <div [hidden]="!identifierChanged() || !identifier.valid" class="alert alert-warning">
       {{"profile.edition.identifier.change_message" | translate}}
     </div>
     <span class="updated-profile-link">{{getProfileLink()}}</span>

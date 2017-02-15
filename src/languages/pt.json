@@ -277,5 +277,6 @@
   "profile.edition.action.cancel": "Cancelar",
   "profile.edition.name.required": "Nome é obrigatório",
   "profile.edition.identifier.required": "Nome de usuário é obrigatório",
-  "profile.edition.identifier.change_message": "A url do perfil será modificada"
+  "profile.edition.identifier.change_message": "A url do perfil será modificada",
+  "profile.edition.identifier.is-not-available": "Nome de usuário não disponível"
 }

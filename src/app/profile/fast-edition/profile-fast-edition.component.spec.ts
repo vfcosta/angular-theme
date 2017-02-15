@@ -60,5 +60,11 @@ describe("Components", () => {
             fixture.detectChanges();
             expect(fixture.debugElement.query(By.css('#identifier'))).not.toBeNull();
         });
+
+        it("display error when update profile with invalid attributes", () => {
+            component.profile = <noosfero.Profile>{ id: 1, name: null, identifier: "test", type: "Community" };
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('.identifier-error')).length).not.toEqual(1);
+        });
     });
 });
