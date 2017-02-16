@@ -13,6 +13,7 @@ describe("Components", () => {
         let component: ProfileFastEditionComponent;
         let profileService = jasmine.createSpyObj("profileService", ["update"]);
         profileService.update = jasmine.createSpy("update").and.returnValue(Promise.resolve({}));
+        let state = jasmine.createSpyObj("$state", ["go"]);
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -21,7 +22,8 @@ describe("Components", () => {
                 providers: [
                     { provide: "profileService", useValue: profileService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: "$state", useValue: state }
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(ProfileFastEditionComponent);
