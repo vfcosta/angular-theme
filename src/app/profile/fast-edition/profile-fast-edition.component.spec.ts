@@ -1,4 +1,5 @@
 import { By } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProfileFastEditionComponent } from './profile-fast-edition.component';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -19,6 +20,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 imports: [FormsModule],
                 declarations: [ProfileFastEditionComponent, TranslatePipe],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: "profileService", useValue: profileService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
@@ -61,12 +63,6 @@ describe("Components", () => {
             component.environment = <noosfero.Environment>{ id: 2, settings: {enable_organization_url_change_enabled: true} };
             fixture.detectChanges();
             expect(fixture.debugElement.query(By.css('#identifier'))).not.toBeNull();
-        });
-
-        it("display error when update profile with invalid attributes", () => {
-            component.profile = <noosfero.Profile>{ id: 1, name: null, identifier: "test", type: "Community" };
-            fixture.detectChanges();
-            expect(fixture.debugElement.queryAll(By.css('.identifier-error')).length).not.toEqual(1);
         });
     });
 });

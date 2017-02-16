@@ -1,3 +1,4 @@
+import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { UiSrefDirective } from './shared/directives/ui-sref-directive';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
@@ -20,7 +21,8 @@ import { MomentModule } from 'angular2-moment';
     imports: [FormsModule, BrowserModule, UpgradeModule, MomentModule, DynamicComponentModule.forRoot({imports: [AppModule]})],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent,
-                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, UiSrefDirective, ProfileFastEditionComponent],
+                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, UiSrefDirective, ProfileFastEditionComponent,
+                   ValidationMessageComponent],
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent, ProfileImageComponent,
                       TaskListComponent, CommunitiesBlockComponent, ProfileFastEditionComponent],
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',

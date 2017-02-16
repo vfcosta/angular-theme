@@ -12,7 +12,7 @@ export class ProfileFastEditionComponent {
     @Input() environment: noosfero.Environment;
     @Output() finished = new EventEmitter<noosfero.Profile>();
 
-    @ViewChild('identifier') identifier;
+    @ViewChild('identifierErrors') identifierErrors;
 
     updatedProfile: noosfero.Profile;
 
@@ -39,13 +39,7 @@ export class ProfileFastEditionComponent {
             }
         }).catch((response) => {
             this.errors = response.data.message;
-            if (this.errors['identifier']) {
-                let identifierErrors = {};
-                for (let error of this.errors['identifier']) {
-                    identifierErrors[error] = true;
-                }
-                this.identifier.control.setErrors(identifierErrors);
-            }
+            this.identifierErrors.setErrors(this.errors['identifier']);
         });
     }
 
@@ -76,15 +70,5 @@ export class ProfileFastEditionComponent {
         } else {
             return this.environment.settings['enable_organization_url_change_enabled'];
         }
-    }
-
-    dasherize(text: string) {
-        return text.toLowerCase().replace(/\s/g, '-').replace(/\./g, '');
-    }
-
-    getErrors(field: string) {
-        if (!this[field] || !this[field].errors) return null;
-        let prefix = "profile.edition.identifier.";
-        return Object.keys(this[field].errors).map(key => prefix + this.dasherize(key));
     }
 }
