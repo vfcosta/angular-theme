@@ -1,3 +1,4 @@
+import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { ProfileImageComponent } from './../../../profile/image/profile-image.component';
 import { By } from '@angular/platform-browser';
@@ -11,14 +12,16 @@ describe("Components", () => {
     describe("Community Block Component", () => {
         let fixture: ComponentFixture<CommunitiesBlockComponent>;
         let component: CommunitiesBlockComponent;
+        let state = jasmine.createSpyObj("$state", ["href"]);
         let blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
         blockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ communities: [{ identifier: "community1" }] }));
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [ CommunitiesBlockComponent, TranslatePipe ],
+                declarations: [ CommunitiesBlockComponent, TranslatePipe, UiSrefDirective ],
                 providers: [
-                    { provide: "blockService", useValue: blockService }
+                    { provide: "blockService", useValue: blockService },
+                    { provide: "$state", useValue: state }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             }).compileComponents().then(() => {

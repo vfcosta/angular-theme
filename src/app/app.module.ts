@@ -1,3 +1,4 @@
+import { UiSrefDirective } from './shared/directives/ui-sref-directive';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
@@ -17,7 +18,7 @@ import { MomentModule } from 'angular2-moment';
     imports: [BrowserModule, UpgradeModule, MomentModule, DynamicComponentModule.forRoot({imports: [AppModule]})],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent,
-                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent],
+                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, UiSrefDirective],
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent, ProfileImageComponent,
                       TaskListComponent, CommunitiesBlockComponent],
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
