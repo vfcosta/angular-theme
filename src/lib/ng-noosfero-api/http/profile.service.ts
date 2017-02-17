@@ -51,10 +51,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
     getByIdentifier(identifier: string): ng.IPromise<noosfero.Profile> {
         let p = this.restangular.one('profiles', identifier).get({ key: "identifier" });
         return p.then((response: restangular.IResponse) => {
-            if (response.data.length === 0) {
-                return this.$q.reject(p);
-            }
-            return response.data[0];
+            return response.data;
         });
     }
 
