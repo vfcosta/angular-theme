@@ -35,7 +35,7 @@ export class ProfileFastEditionComponent {
             this.finished.emit(this.profile);
             if (identifierChanged) {
                 // go to the state with the new identifier url
-                this.$state.go(this.$state.current, {profile: this.profile.identifier}, {reload: true});
+                this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
             }
         }).catch((response) => {
             this.errors = response.data.message;
@@ -65,10 +65,6 @@ export class ProfileFastEditionComponent {
 
     allowChangeIdentifier() {
         if (!this.environment || !this.environment.settings) return false;
-        if (this.profile.type === 'Person') {
-            return this.environment.settings['enable_person_url_change_enabled'];
-        } else {
-            return this.environment.settings['enable_organization_url_change_enabled'];
-        }
+        return this.environment.settings['enable_profile_url_change_enabled'];
     }
 }
