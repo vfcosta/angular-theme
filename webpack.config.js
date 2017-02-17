@@ -11,6 +11,7 @@ var stdinPatched = false;
 var WebpackOnBuildPlugin = require('on-build-webpack');
 
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+var ContextReplacementPlugin = require("webpack/lib/ContextReplacementPlugin");
 
 var extension = ".js";
 var testFiles = glob.sync("./src/**/**/*.[sS]pec.ts");
@@ -42,7 +43,13 @@ module.exports = function(env) {
     var config = {
         entry: entries,
 
-        plugins: [new CommonsChunkPlugin({name: "commons", filename: "commons.js"})],
+        plugins: [
+            new CommonsChunkPlugin({name: "commons", filename: "commons.js"}),
+            new ContextReplacementPlugin(
+                /angular(\\|\/)core(\\|\/)(esm(\\|\/)src|src)(\\|\/)linker/,
+                path.resolve(__dirname, 'doesnotexist/')
+            )
+        ],
 
         output: {
             path: path.join(__dirname, "src"),
