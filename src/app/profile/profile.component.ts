@@ -46,7 +46,7 @@ export class ProfileComponent {
             profileService.setCurrentProfile(this.profile);
             return this.profileService.getBoxes(<number>this.profile.id);
         }).then((response: restangular.IResponse) => {
-            this.boxes = response.data.boxes;
+            this.boxes = response.data;
         }).catch(() => {
             this.$state.transitionTo('main.domain');
             this.notificationService.error({ message: "notification.profile.not_found" });

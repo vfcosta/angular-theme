@@ -88,7 +88,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         let deferred = this.$q.defer();
         if (person) {
             this.getMembers(profile, { identifier: person.identifier }).then((result: any) => {
-                deferred.resolve(result.data.people.length > 0);
+                deferred.resolve(result.data.length > 0);
             });
         } else {
             deferred.resolve(false);
