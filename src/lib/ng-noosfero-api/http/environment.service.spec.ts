@@ -52,9 +52,9 @@ describe("Services", () => {
 
             it("should return all people of environment", (done) => {
                 let environmentId = 1;
-                $httpBackend.expectGET(`/api/v1/environments/${environmentId}/people`).respond(200, { people: [{ id: 2 }] });
+                $httpBackend.expectGET(`/api/v1/environments/${environmentId}/people`).respond(200, [{ id: 2 }]);
                 environmentService.getEnvironmentPeople(environmentId).then((response: restangular.IResponse) => {
-                    expect(response.data.people).toEqual([{ id: 2 }]);
+                    expect(response.data).toEqual([{ id: 2 }]);
                     done();
                 });
                 $httpBackend.flush();

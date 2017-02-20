@@ -29,7 +29,7 @@ export class ActivitiesComponent {
             this.profile = profile;
             return this.profileService.getActivities(<number>this.profile.id);
         }).then((response: restangular.IResponse) => {
-            this.activities = response.data.activities;
+            this.activities = response.data;
         });
     }
 

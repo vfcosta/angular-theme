@@ -45,7 +45,7 @@ describe("Components", () => {
         it("get block with one people", () => {
             expect(environmentService.getCurrentEnvironment).toHaveBeenCalled();
             expect(environmentService.getEnvironmentPeople).toHaveBeenCalled();
-            expect(helper.component.people[0].identifier).toEqual("person1");
+            expect(helper.component[0].identifier).toEqual("person1");
         });
 
         /**

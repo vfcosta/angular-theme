@@ -16,7 +16,7 @@ describe("Components", () => {
             new Provider('ProfileService', {
                 useValue: {
                     getProfileMembers: (profileId: number, filters: any): any => {
-                        return Promise.resolve({ data: { people: [{ identifier: "person1" }] } });
+                        return Promise.resolve({ data: [{ identifier: "person1" }] });
                     }
                 }
             }),
