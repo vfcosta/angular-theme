@@ -1,0 +1,66 @@
+<div class="profile-about">
+  <!-- Basic data -->
+  <div class="main-box-body clearfix" ng-if="ctrl.profile.email">
+    <form class="form-horizontal">
+      <div class="form-group" ng-if="ctrl.profile.email">
+        <label class="col-sm-3 control-label">{{"profile.email" | translate}}</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{ctrl.profile.email}}</p>
+        </div>
+      </div>
+      <div class="form-group" ng-if="ctrl.profile.formation">
+        <label class="col-sm-3 control-label">{{"profile.formation" | translate}}</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{ctrl.profile.formation}}</p>
+        </div>
+      </div>
+      <div class="form-group" ng-if="ctrl.profile.schooling">
+        <label class="col-sm-3 control-label">{{"profile.schooling" | translate}}</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{ctrl.profile.schooling}}</p>
+        </div>
+      </div>
+      <div class="form-group" ng-if="ctrl.profile.nationality">
+        <label class="col-sm-3 control-label">{{"profile.nationality" | translate}}</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{ctrl.profile.nationality}}</p>
+        </div>
+      </div>
+      <div class="form-group" ng-if="ctrl.profile.country">
+        <label class="col-sm-3 control-label">{{"profile.country" | translate}}</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{ctrl.profile.country}}</p>
+        </div>
+      </div>
+      <div class="form-group" ng-if="ctrl.profile.state">
+        <label class="col-sm-3 control-label">{{"profile.state" | translate}}</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{ctrl.profile.state}}</p>
+        </div>
+      </div>
+      <div class="form-group" ng-if="ctrl.profile.city">
+        <label class="col-sm-3 control-label">{{"profile.city" | translate}}</label>
+        <div class="col-sm-9">
+          <p class="form-control-static">{{ctrl.profile.city}}</p>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- Custom Fields -->
+  <div class="main-box clearfix profile-custom-fields" ng-if="!equals({},ctrl.profile.additional_data)">
+    <header class="main-box-header clearfix">
+      <h2>{{"profile.others_info" | translate}}</h2>
+    </header>
+    <div class="main-box-body clearfix">
+      <form class="form-horizontal">
+        <div class="form-group" ng-repeat="(field, value) in ctrl.profile.additional_data">
+          <label class="col-sm-3 control-label">{{ field }}</label>
+          <div class="col-sm-9">
+            <p class="form-control-static">{{ value }}</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

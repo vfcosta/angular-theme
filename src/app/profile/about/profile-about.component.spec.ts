@@ -1,11 +1,11 @@
 import * as helpers from "./../../../spec/helpers";
 import {Injectable, Provider, provide} from "ng-forward";
 import {providers} from 'ng-forward/cjs/testing/providers';
-import {ProfileDataComponent} from "./profile-data.component";
+import {ProfileAboutComponent} from "./profile-about.component";
 import {TranslateProfile} from '../../shared/pipes/translate-profile.filter';
 import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 
-let htmlTemplate = '<profile-data></profile-data>';
+let htmlTemplate = '<profile-about></profile-about>';
 
 describe('Profile data component', () => {
 
@@ -17,7 +17,7 @@ describe('Profile data component', () => {
         additional_data: { 'Address': 'Street A, Number 102' }
     };
 
-    let helper: ComponentTestHelper<ProfileDataComponent>;
+    let helper: ComponentTestHelper<ProfileAboutComponent>;
     beforeEach(angular.mock.module("templates"));
 
     beforeEach((done) => {
@@ -26,19 +26,19 @@ describe('Profile data component', () => {
 
         let cls = createClass({
             template: htmlTemplate,
-            directives: [ProfileDataComponent],
+            directives: [ProfileAboutComponent],
             providers: [
                 helpers.createProviderToValue('ProfileService', profileService)
             ]
         });
-        helper = new ComponentTestHelper<ProfileDataComponent>(cls, done);
+        helper = new ComponentTestHelper<ProfileAboutComponent>(cls, done);
     });
 
-    it("renders profile-data directive", () => {
+    it("renders profile-about directive", () => {
         expect(helper.all("span.label-info").length).toEqual(1);
     });
 
-    it('renders profile-data directive with custom fields', () => {
+    it('renders profile-about directive with custom fields', () => {
         expect(helper.all("div.profile-custom-fields").length).toEqual(1);
     });
 
