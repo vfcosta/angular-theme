@@ -23,7 +23,7 @@ describe("Components", () => {
             },
             getActivities: (id: number): any => {
                 if (id === 1) {
-                    return Promise.resolve({ data: { activities: [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }] } });
+                    return Promise.resolve({ data: [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }] });
                 }
             }
         };

@@ -90,14 +90,6 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         return this.create(article, parent, null, headers, true, "children");
     }
 
-    getAsCollectionChildrenOf<C>(rootElement: noosfero.Environment | noosfero.Article | noosfero.Profile, path: string, queryParams?: any, headers?: any): restangular.ICollectionPromise<C> {
-        return rootElement.getList<C>(path, queryParams, headers);
-    }
-
-    getAsElementChildrenOf<C>(rootElement: noosfero.Environment | noosfero.Article | noosfero.Profile, path: string, id: number, queryParams?: any, headers?: any) {
-        return rootElement.one(path, id).get<C>(queryParams, headers);
-    }
-
     getByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {
         let profileElement = this.profileService.getProfileElement(<number>profile.id);
         return this.list(profileElement, params);
@@ -120,11 +112,6 @@ export class ArticleService extends RestangularService<noosfero.Article> {
 
 
         return deferred.promise;
-    }
-
-    getOneByProfile<T>(profile: noosfero.Profile, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
-        let profileElement = this.profileService.getProfileElement(<number>profile.id);
-        return this.getSub(profileElement, params);
     }
 
     getChildren<T>(article: noosfero.Article, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {

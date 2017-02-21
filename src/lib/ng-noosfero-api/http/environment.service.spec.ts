@@ -54,7 +54,7 @@ describe("Services", () => {
                 let environmentId = 1;
                 $httpBackend.expectGET(`/api/v1/environments/${environmentId}/people`).respond(200, [{ id: 2 }]);
                 environmentService.getEnvironmentPeople(environmentId).then((response: restangular.IResponse) => {
-                    expect(response.data).toEqual([{ id: 2 }]);
+                    expect(response.data).toEqual(jasmine.objectContaining([{ id: 2 }]));
                     done();
                 });
                 $httpBackend.flush();

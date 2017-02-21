@@ -13,7 +13,7 @@ describe("Components", () => {
 
         let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment", "getTags"]);
         environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
-        environmentService.getEnvironmentPeople = jasmine.createSpy("getEnvironmentPeople").and.returnValue(helpers.mocks.promiseResultTemplate({ data: { people: [{ identifier: "person1" }] } }));
+        environmentService.getEnvironmentPeople = jasmine.createSpy("getEnvironmentPeople").and.returnValue(helpers.mocks.promiseResultTemplate({ data: [{ identifier: "person1" }] }));
 
         let helper: ComponentTestHelper<PeopleBlockComponent>;
 
@@ -45,7 +45,7 @@ describe("Components", () => {
         it("get block with one people", () => {
             expect(environmentService.getCurrentEnvironment).toHaveBeenCalled();
             expect(environmentService.getEnvironmentPeople).toHaveBeenCalled();
-            expect(helper.component[0].identifier).toEqual("person1");
+            expect(helper.component.people[0].identifier).toEqual("person1");
         });
 
         /**

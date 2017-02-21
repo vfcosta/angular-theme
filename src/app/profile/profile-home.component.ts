@@ -17,7 +17,7 @@ export class ProfileHomeComponent {
             this.profile = profile;
             return profileService.getHomePage(<number>this.profile.id, { fields: 'path' });
         }).then((response: restangular.IResponse) => {
-            if (response.data) {
+            if (response.data.path) {
                 this.profile.homepage = response.data.path;
                 $state.transitionTo('main.profile.page', { page: response.data.path, profile: this.profile.identifier }, { location: false });
             } else {
