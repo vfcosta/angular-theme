@@ -1,18 +1,6 @@
-<timeline-badge class="info">
-  <i alt='{{"activity.new_friendship.icon" | translate}}' class="fa fa-user-plus"></i>
-</timeline-badge>
-<timeline-panel>
-  <timeline-heading>
-    <h4 class="timeline-title">
-      <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})"><strong ng-bind="ctrl.activity.user.name"></strong></a>
-      <span> {{"activities.new_friendship.description" | translate:{friends: ctrl.activity.params.friend_name.length}:"messageformat" }} </span>
-      <span class="comma-separated">
-        <a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.friend_url[$index].profile})" ng-repeat="friend in ctrl.activity.params.friend_name">
-          <strong ng-bind="friend"></strong>
-        </a>
-      </span>
-    </h4>
-    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.activity.created_at | dateFormat"></span></small></p>
-  </timeline-heading>
-  <div class="timeline-body"></div>
-</timeline-panel>
+<span> {{"activities.new_friendship.description" | translate:{friends: ctrl.activity.params.friend_name.length}:"messageformat" }} </span>
+<span class="comma-separated">
+	<a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.friend_url[$index].profile})" ng-repeat="friend in ctrl.activity.params.friend_name">
+	  <strong ng-bind="friend"></strong>
+	</a>
+</span>

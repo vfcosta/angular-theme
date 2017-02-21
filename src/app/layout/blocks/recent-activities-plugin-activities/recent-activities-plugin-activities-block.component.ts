@@ -19,10 +19,10 @@ export class RecentActivitiesPluginActivitiesBlockComponent {
 
     getActivityTemplate(activity: any) {
         if (activity.label === 'events') {
-            return 'app/layout/blocks/recent-activities-plugin-activities/activities/event.html';
+            //return 'app/layout/blocks/recent-activities-plugin-activities/activities/event.html';
         }
         else {
-            return 'app/layout/blocks/recent-activities-plugin-activities/activities/' + activity.verb + '.html';
+            //return 'app/layout/blocks/recent-activities-plugin-activities/activities/' + activity.verb + '.html';
         }
     }
 

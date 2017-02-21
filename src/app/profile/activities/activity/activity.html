@@ -1,3 +1,22 @@
 <div class="activity {{ctrl.activity.verb}}">
-  <ng-include src="ctrl.getActivityTemplate()"></ng-include>
+    <br>
+    
+    <img src="{{ctrl.image()}}" alt="Avatar" class="avatar" style="width:60px">
+    <div class="panel-body">
+        <div class="card-title">
+            <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})">
+            <strong ng-bind="ctrl.activity.user.name"></strong>
+  	</div>
+  	<div>
+  		<p>
+    		<small class="text-muted">
+          <i class="fa fa-clock-o"></i> 
+          <span am-time-ago="ctrl.activity.created_at | dateFormat"></span>
+        </small>
+      </p>
+  	</div>
+  </div>
+  <div class="panel-body">
+    <ng-include src="ctrl.getActivityTemplate()"></ng-include>
+  </div>
 </div>
