@@ -22,9 +22,9 @@ describe("Services", () => {
 
             it("should return profile by its identifier", (done) => {
                 let identifier = 'profile1';
-                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, [{ name: "profile1" }]);
+                $httpBackend.expectGET(`/api/v1/profiles/${identifier}?key=identifier`).respond(200, { name: "profile1" });
                 profileService.getByIdentifier(identifier).then((profile: noosfero.Profile) => {
-                    expect(profile).toEqual({ name: "profile1" });
+                    expect(profile).toEqual(jasmine.objectContaining({ name: "profile1" }));
                     done();
                 });
                 $httpBackend.flush();
@@ -32,7 +32,7 @@ describe("Services", () => {
 
             it("should reject the promise if the profile wasn't found", (done) => {
                 let identifier = 'profile1';
-                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, []);
+                $httpBackend.expectGET(`/api/v1/profiles/${identifier}?key=identifier`).respond(404, {});
                 profileService.getByIdentifier(identifier).catch(() => {
                     done();
                 });
@@ -91,11 +91,11 @@ describe("Services", () => {
 
             it("should find the profile by identifier, set and resolve the current profile", (done) => {
                 let identifier = 'profile1';
-                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, [{ name: "profile1" }]);
+                $httpBackend.expectGET(`/api/v1/profiles/${identifier}?key=identifier`).respond(200, { name: "profile1" });
                 profileService.setCurrentProfileByIdentifier(identifier).then((profile: noosfero.Profile) => {
-                    expect(profile).toEqual({ name: "profile1" });
+                    expect(profile).toEqual(jasmine.objectContaining({ name: "profile1" }));
                     profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
-                        expect(profile).toEqual({ name: "profile1" });
+                        expect(profile).toEqual(jasmine.objectContaining({ name: "profile1" }));
                         done();
                     });
                 });

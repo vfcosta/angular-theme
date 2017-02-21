@@ -15,16 +15,6 @@ export class ProfileAboutComponent {
     constructor(profileService: ProfileService) {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-            console.log("===== profile =====", profile);
         });
     }
-
-    hasCustomFields(): boolean {
-        let result: boolean = false;
-        if (this.profile)
-            result = (this.profile.additional_data) && Object.keys(this.profile.additional_data).length > 0;
-
-        return result;
-    }
-
 }

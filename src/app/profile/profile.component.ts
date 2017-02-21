@@ -4,7 +4,7 @@ import { BasicEditorComponent } from '../article/cms/basic-editor/basic-editor.c
 import { CmsComponent } from '../article/cms/cms.component';
 import { ContentViewerComponent } from "../article/content-viewer/content-viewer.component";
 import { ActivitiesComponent } from "./activities/activities.component";
-import { ProfileAboutComponent } from "./data/profile-about.component";
+import { ProfileAboutComponent } from "./about/profile-about.component";
 import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 import { NotificationService } from "../shared/services/notification.service";
 import { MyProfileComponent } from "./myprofile.component";

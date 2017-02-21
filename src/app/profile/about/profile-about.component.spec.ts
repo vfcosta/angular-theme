@@ -7,7 +7,7 @@ import {ComponentTestHelper, createClass} from '../../../spec/component-test-hel
 
 let htmlTemplate = '<profile-about></profile-about>';
 
-describe('Profile data component', () => {
+describe('Profile about component', () => {
 
     let profileService: any;
     let profile = {
@@ -35,7 +35,7 @@ describe('Profile data component', () => {
     });
 
     it("renders profile-about directive", () => {
-        expect(helper.all("span.label-info").length).toEqual(1);
+        expect(helper.all("div.profile-about").length).toEqual(1);
     });
 
     it('renders profile-about directive with custom fields', () => {
