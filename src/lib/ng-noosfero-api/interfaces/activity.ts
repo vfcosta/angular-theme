@@ -14,6 +14,6 @@ namespace noosfero {
          */
         verb: string;
 
-        params: any;
+        params: any[];
     }
 }
