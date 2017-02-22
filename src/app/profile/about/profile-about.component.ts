@@ -1,6 +1,6 @@
-import {Component, Inject, provide} from 'ng-forward';
-import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service";
-import {TranslateProfile} from "../../shared/pipes/translate-profile.filter";
+import { Component, Inject, provide } from 'ng-forward';
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { TranslateProfile } from "../../shared/pipes/translate-profile.filter";
 
 @Component({
     selector: 'profile-about',
@@ -16,5 +16,9 @@ export class ProfileAboutComponent {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
         });
+    }
+
+    hasCustomFields() {
+        return this.profile.additional_data && Object.keys(this.profile.additional_data).length > 0;
     }
 }

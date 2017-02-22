@@ -48,7 +48,7 @@
   </div>
 
   <!-- Custom Fields -->
-  <div class="main-box clearfix profile-custom-fields" ng-if="!equals({},ctrl.profile.additional_data)">
+  <div class="main-box clearfix profile-custom-fields" ng-if="ctrl.hasCustomFields()">
     <header class="main-box-header clearfix">
       <h2>{{"profile.others_info" | translate}}</h2>
     </header>
