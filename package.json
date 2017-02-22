@@ -130,7 +130,8 @@
     "webpack": "^2.2.0-rc.6",
     "wiredep": "~2.2.2",
     "wrench": "~1.5.8",
-    "yargs": "^4.2.0"
+    "yargs": "^4.2.0",
+    "watchpack": "~1.2.1"
   },
   "engines": {
     "node": ">=0.10.0"
