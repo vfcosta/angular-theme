@@ -1,0 +1,18 @@
+<h1>{{"profile.members.title" | translate}}</h1>
+
+<div class="members-list">
+    <profile-list [profiles]="ctrl.members"></profile-list>
+</div>
+
+<uib-pagination 
+    ng-model="ctrl.currentPage"
+    total-items="ctrl.totalMembers"
+    class="pagination-sm center-block"
+    boundary-links="true"
+    items-per-page="ctrl.membersPerPage"
+    ng-change="ctrl.loadPage()"
+    first-text="«"
+    last-text="»"
+    previous-text="‹"
+    next-text="›">
+</uib-pagination>

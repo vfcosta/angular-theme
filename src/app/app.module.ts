@@ -20,6 +20,7 @@ import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { ModalModule } from 'ng2-bootstrap';
+import { ListProfilesComponent } from './profile/lists/list-profiles.component';
 
 @NgModule({
     imports: [
@@ -33,10 +34,8 @@ import { ModalModule } from 'ng2-bootstrap';
     ],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent,
-                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, UiSrefDirective, ProfileFastEditionComponent,
-                   ValidationMessageComponent, ImageUploadCropComponent, ImageUploadComponent],
-    entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent, ProfileImageComponent,
-                      TaskListComponent, CommunitiesBlockComponent, ProfileFastEditionComponent, ImageUploadComponent, ImageUploadCropComponent],
+                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, UiSrefDirective, ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadCropComponent, ImageUploadComponent, ListProfilesComponent],
+    entryComponents: [ListProfilesComponent, FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent, ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, ProfileFastEditionComponent, ImageUploadComponent, ImageUploadCropComponent],
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'ProfileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
         '$log', 'SweetAlert', 'toastr', 'TaskService'])

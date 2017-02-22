@@ -1,0 +1,10 @@
+<div *ngFor="let profile of profiles" class="profile-item">
+  <a uiSref="main.profile.home" [uiParams]="{profile: profile.identifier}">
+    <noosfero-profile-image [profile]="profile">
+      <div title="Testes" ng-reflect-title="Testes" class="profile-image-wrap">
+        <i class="item-avatar-img fa fa-users fa-3x" ng-reflect-class-name="item-avatar-img fa fa-users fa-3x"></i>
+      </div>
+    </noosfero-profile-image>
+    <div class="profile-name">{{profile.name}}</div>
+  </a>
+</div>
