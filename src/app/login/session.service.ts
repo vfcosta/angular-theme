@@ -17,8 +17,8 @@ export class SessionService {
         }
     }
 
-    create(data: UserResponse): noosfero.User {
-        this.$localStorage.currentUser = data.user;
+    create(user: UserResponse): noosfero.User {
+        this.$localStorage.currentUser = user;
         return this.$localStorage.currentUser;
     };
 
