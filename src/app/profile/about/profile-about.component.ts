@@ -11,11 +11,23 @@ import { TranslateProfile } from "../../shared/pipes/translate-profile.filter";
 export class ProfileAboutComponent {
 
     profile: noosfero.Profile;
+    profileFields: any;
 
     constructor(profileService: ProfileService) {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
+            this.loadProfileFields();
         });
+    }
+
+    loadProfileFields() {
+        let fields = ['email', 'formation', 'schooling', 'nationality', 'country', 'state', 'city'];
+        this.profileFields = {};
+        for (let field of fields) {
+            if (this.profile[field]) {
+                this.profileFields[field] = this.profile[field];
+            }
+        }
     }
 
     hasCustomFields() {
