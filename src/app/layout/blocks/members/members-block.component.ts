@@ -19,7 +19,7 @@ export class MembersBlockComponent {
 
     ngOnInit() {
         this.profileService.getProfileMembers(this.owner.id, { per_page: 6 }).then((response: any) => {
-            this.members = response.data.people;
+            this.members = response.data;
         });
     }
 }

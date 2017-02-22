@@ -14,14 +14,14 @@ export class SectionImageEditorComponent {
     }
 
     uploadImage(dataUrl: any, name: any) {
-        let base64ImagesJson = [ this.getBase64ImageJson(dataUrl, name)] ;
-        angular.forEach(this.block.images, function(value, key){
+        let base64ImagesJson = [this.getBase64ImageJson(dataUrl, name)];
+        angular.forEach(this.block.images, function(value, key) {
             value.remove_image = true;
             base64ImagesJson.push(value);
         });
 
         this.blockService.uploadImages(this.block, base64ImagesJson).then((result: any) => {
-            this.block.images = result.data.images;
+            this.block.images = result.data;
             this.modalInstance.close(name);
         });
 

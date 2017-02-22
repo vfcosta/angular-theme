@@ -22,9 +22,9 @@ describe("Services", () => {
 
             it("should return profile by its identifier", (done) => {
                 let identifier = 'profile1';
-                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, [{ name: "profile1" }]);
+                $httpBackend.expectGET(`/api/v1/profiles/${identifier}?key=identifier`).respond(200, { name: "profile1" });
                 profileService.getByIdentifier(identifier).then((profile: noosfero.Profile) => {
-                    expect(profile).toEqual({ name: "profile1" });
+                    expect(profile).toEqual(jasmine.objectContaining({ name: "profile1" }));
                     done();
                 });
                 $httpBackend.flush();
@@ -32,7 +32,7 @@ describe("Services", () => {
 
             it("should reject the promise if the profile wasn't found", (done) => {
                 let identifier = 'profile1';
-                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, []);
+                $httpBackend.expectGET(`/api/v1/profiles/${identifier}?key=identifier`).respond(404, {});
                 profileService.getByIdentifier(identifier).catch(() => {
                     done();
                 });
@@ -81,9 +81,9 @@ describe("Services", () => {
 
             it("should return the profile home page", (done) => {
                 let profileId = 1;
-                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/home_page`).respond(200, { article: { path: "/something" } });
+                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/home_page`).respond(200, { path: "/something" });
                 profileService.getHomePage(profileId).then((response: restangular.IResponse) => {
-                    expect(response.data.article).toEqual({ path: "/something" });
+                    expect(response.data).toEqual(jasmine.objectContaining({ path: "/something" }));
                     done();
                 });
                 $httpBackend.flush();
@@ -91,11 +91,11 @@ describe("Services", () => {
 
             it("should find the profile by identifier, set and resolve the current profile", (done) => {
                 let identifier = 'profile1';
-                $httpBackend.expectGET(`/api/v1/profiles?identifier=${identifier}`).respond(200, [{ name: "profile1" }]);
+                $httpBackend.expectGET(`/api/v1/profiles/${identifier}?key=identifier`).respond(200, { name: "profile1" });
                 profileService.setCurrentProfileByIdentifier(identifier).then((profile: noosfero.Profile) => {
-                    expect(profile).toEqual({ name: "profile1" });
+                    expect(profile).toEqual(jasmine.objectContaining({ name: "profile1" }));
                     profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
-                        expect(profile).toEqual({ name: "profile1" });
+                        expect(profile).toEqual(jasmine.objectContaining({ name: "profile1" }));
                         done();
                     });
                 });
@@ -104,9 +104,9 @@ describe("Services", () => {
 
             it("should update the profile attributes", (done) => {
                 let profileId = 1;
-                $httpBackend.expectPOST(`/api/v1/profiles/${profileId}`).respond(200, { profile: { custom_header: "something" } });
+                $httpBackend.expectPOST(`/api/v1/profiles/${profileId}`).respond(200, { custom_header: "something" });
                 profileService.update(<any>{ id: profileId, custom_header: "something" }).then((response: restangular.IResponse) => {
-                    expect(response.data.profile.custom_header).toEqual("something");
+                    expect(response.data.custom_header).toEqual("something");
                     done();
                 });
                 $httpBackend.flush();
@@ -114,9 +114,9 @@ describe("Services", () => {
 
             it("should return the profile members", (done) => {
                 let profileId = 1;
-                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, { people: [{ id: 2 }] });
+                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, [{ id: 2 }]);
                 profileService.getMembers(<any>{ id: profileId }).then((response: restangular.IResponse) => {
-                    expect(response.data.people).toEqual([{ id: 2 }]);
+                    expect(response.data).toEqual(jasmine.objectContaining([{ id: 2 }]));
                     done();
                 });
                 $httpBackend.flush();
@@ -124,7 +124,7 @@ describe("Services", () => {
 
             it("should return true if the person is a profile member", (done) => {
                 let profileId = 1;
-                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, { people: [{ id: 2 }] });
+                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, [{ id: 2 }]);
                 profileService.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
                     expect(response).toEqual(true);
                     done();
@@ -134,7 +134,7 @@ describe("Services", () => {
 
             it("should return false if the person is a profile member", (done) => {
                 let profileId = 1;
-                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, { people: [] });
+                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/members`).respond(200, []);
                 profileService.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
                     expect(response).toEqual(false);
                     done();
@@ -154,9 +154,9 @@ describe("Services", () => {
 
             it("should remove member from profile", (done) => {
                 let profileId = 1;
-                $httpBackend.expectDELETE(`/api/v1/profiles/${profileId}/members`).respond(200, { person: { id: 2 } });
+                $httpBackend.expectDELETE(`/api/v1/profiles/${profileId}/members`).respond(200, { id: 2 });
                 profileService.removeMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
-                    expect(response.data.person).toEqual({ id: 2 });
+                    expect(response.data).toEqual(jasmine.objectContaining({ id: 2 }));
                     done();
                 });
                 $httpBackend.flush();

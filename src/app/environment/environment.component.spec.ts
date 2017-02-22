@@ -24,7 +24,7 @@ describe("Components", () => {
             notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
 
             let getBoxesResponse = $q.defer();
-            getBoxesResponse.resolve({ data: { boxes: [{ id: 2 }] } });
+            getBoxesResponse.resolve({ data: [{ id: 2 }] });
 
             environmentServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);
             environmentServiceMock.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate(defaultEnvironment));

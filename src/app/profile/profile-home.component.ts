@@ -1,6 +1,6 @@
-import {Component, Inject, provide} from 'ng-forward';
+import { Component, Inject, provide } from 'ng-forward';
 
-import {ProfileService} from "../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
     selector: 'profile-home',
@@ -17,9 +17,9 @@ export class ProfileHomeComponent {
             this.profile = profile;
             return profileService.getHomePage(<number>this.profile.id, { fields: 'path' });
         }).then((response: restangular.IResponse) => {
-            if (response.data.article) {
-                this.profile.homepage = response.data.article.path;
-                $state.transitionTo('main.profile.page', { page: response.data.article.path, profile: this.profile.identifier }, { location: false });
+            if (response.data && response.data.path) {
+                this.profile.homepage = response.data.path;
+                $state.transitionTo('main.profile.page', { page: response.data.path, profile: this.profile.identifier }, { location: false });
             } else {
                 this.profile.homepage = null;
                 $state.transitionTo('main.profile.info', { profile: this.profile.identifier }, { location: false });

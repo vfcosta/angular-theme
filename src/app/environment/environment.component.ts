@@ -36,7 +36,7 @@ export class EnvironmentComponent {
             this.environment = environment;
             return this.environmentService.getBoxes(this.environment.id);
         }).then((response: restangular.IResponse) => {
-            this.boxes = response.data.boxes;
+            this.boxes = response.data;
         }).catch(() => {
             this.$state.transitionTo('main');
             this.notificationService.error({ message: "notification.environment.not_found" });

@@ -28,7 +28,7 @@ describe("Components", () => {
         });
 
         it("transition to profile homepage when there is a homepage setted", done => {
-            homePageResponse.resolve({ data: { article: { path: "something" } } });
+            homePageResponse.resolve({ data: { path: "something" } });
 
             let component: ProfileHomeComponent = new ProfileHomeComponent(profileServiceMock, $state);
             $rootScope.$apply();

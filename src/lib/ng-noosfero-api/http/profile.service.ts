@@ -49,12 +49,12 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
     }
 
     getByIdentifier(identifier: string): ng.IPromise<noosfero.Profile> {
-        let p = this.restangular.one('profiles').get({ identifier: identifier });
+        let p = this.restangular.one('profiles', identifier).get({ key: "identifier" });
         return p.then((response: restangular.IResponse) => {
-            if (response.data.length === 0) {
+            if (response.status === 404) {
                 return this.$q.reject(p);
             }
-            return response.data[0];
+            return response.data;
         });
     }
 
@@ -88,7 +88,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         let deferred = this.$q.defer();
         if (person) {
             this.getMembers(profile, { identifier: person.identifier }).then((result: any) => {
-                deferred.resolve(result.data.people.length > 0);
+                deferred.resolve(result.data.length > 0);
             });
         } else {
             deferred.resolve(false);

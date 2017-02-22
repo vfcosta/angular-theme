@@ -5,7 +5,7 @@ import { DestroyProfileComponent } from './profile/destroy/destroy-profile.compo
 import { TasksComponent } from './task/tasks/tasks.component';
 import { CmsComponent } from './article/cms/cms.component';
 import { MyProfileComponent } from './profile/myprofile.component';
-import { ProfileDataComponent } from './profile/data/profile-data.component';
+import { ProfileAboutComponent } from './profile/about/profile-about.component';
 import { ProfileHomeComponent } from './profile/profile-home.component';
 import { ActivitiesComponent } from './profile/activities/activities.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -135,11 +135,11 @@ export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
         name: 'main.profile.about',
         url: "^/profile/:profile/about",
-        controller: ProfileDataComponent,
+        controller: ProfileAboutComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/profile/data/profile-data.html",
-                controller: ProfileDataComponent,
+                templateUrl: "app/profile/about/profile-about.html",
+                controller: ProfileAboutComponent,
                 controllerAs: "ctrl"
             }
         }

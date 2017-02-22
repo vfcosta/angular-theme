@@ -26,7 +26,7 @@ describe("Components", () => {
             let profileResponse = $q.defer();
             profileResponse.resolve({ id: 1 });
             let getBoxesResponse = $q.defer();
-            getBoxesResponse.resolve({ data: { boxes: [{ id: 2 }] } });
+            getBoxesResponse.resolve({ data: [{ id: 2 }] });
 
             profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profileResponse.promise);
             profileServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);

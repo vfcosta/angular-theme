@@ -43,7 +43,7 @@ export class NotificationService {
     httpError(status: number, data: any): boolean {
         // FIXME check other https status and make a generic message
         // not-found, unauthorized, forbidden, server error
-        if ([404, 401, 403, 500].indexOf(status) > -1) {
+        if ([401, 403, 500].indexOf(status) > -1) {
             this.error({ message: `notification.http_error.${status}.message` });
             return true; // return true to indicate that the error was already handled
         } else {

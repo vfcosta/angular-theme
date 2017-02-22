@@ -49,9 +49,9 @@ export class HighlightsBlockSettingsComponent {
         this.Upload.dataUrl(file, true).then((dataUrl: any) => {
             let base64ImagesJson = [this.getBase64ImageJson(dataUrl, file)];
             this.blockService.uploadImages(this.block, base64ImagesJson).then((result: any) => {
-                this.block.images = result.data.images;
-                if (result.data.images.length > 0) {
-                    let image = result.data.images[result.data.images.length - 1];
+                this.block.images = result.data;
+                if (result.data.length > 0) {
+                    let image = result.data[result.data.length - 1];
                     slide.image_id = image.id;
                     slide.image_src = image.url;
                 }

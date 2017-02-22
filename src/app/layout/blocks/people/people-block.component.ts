@@ -20,7 +20,7 @@ export class PeopleBlockComponent {
     ngOnInit() {
         this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environmentService.getEnvironmentPeople(environment.id, { limit: '6' }).then((result: noosfero.RestResult<any>) => {
-                this.people = result.data.people;
+                this.people = result.data;
             });
         });
 
