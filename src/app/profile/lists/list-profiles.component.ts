@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 
 @Component({
-    selector: 'list-profiles',
+    selector: 'profile-list',
     template: require("app/profile/lists/list-profiles.component.html")
 })
 export class ListProfilesComponent {
