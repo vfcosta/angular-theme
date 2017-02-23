@@ -41,7 +41,7 @@ describe("Services", () => {
                 factory = getAngularServiceFactory();
                 authService = factory.getAngularService("AuthService");
                 $httpBackend = factory.getHttpBackendService();
-                $httpBackend.expectPOST("/api/v1/login", "login=user&password=password").respond(200, { user: user });
+                $httpBackend.expectPOST("/api/v1/login", "login=user&password=password").respond(200, user);
             });
 
             it("should return loggedUser", (done) => {

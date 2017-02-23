@@ -1,6 +1,6 @@
 import { Injectable, Inject, EventEmitter } from "ng-forward";
 
-import { NoosferoRootScope, UserResponse } from "./../shared/models/interfaces";
+import { NoosferoRootScope } from "./../shared/models/interfaces";
 import { SessionService } from "./session.service";
 
 import { AuthEvents } from "./auth-events";
@@ -28,7 +28,7 @@ export class AuthService {
     }
 
 
-    private loginSuccessCallback(response: ng.IHttpPromiseCallbackArg<UserResponse>) {
+    private loginSuccessCallback(response: ng.IHttpPromiseCallbackArg<noosfero.User>) {
         this.$log.debug('AuthService.login [SUCCESS] response', response);
         let currentUser: noosfero.User = this.sessionService.create(response.data);
         this.loginSuccess.next(currentUser);

@@ -1,7 +1,7 @@
 import { Component } from "ng-forward";
 import { SessionService } from "./session.service";
 import { fixtures, createComponentFromClass, createProviderToValue } from "./../../spec/helpers";
-import { UserResponse, INoosferoLocalStorage } from "./../shared/models/interfaces";
+import { INoosferoLocalStorage } from "./../shared/models/interfaces";
 import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 import * as helpers from "../../spec/helpers";
 
@@ -25,18 +25,12 @@ describe("Services", () => {
 
         it("method 'create()' saves the current user on $localstorage service", () => {
             let session = new SessionService($localStorage, $log, profileService);
-            let userResponse = <UserResponse>{
-                user: fixtures.user
-            };
-            session.create(userResponse);
-            expect($localStorage.currentUser).toEqual(userResponse.user);
+            session.create(fixtures.user);
+            expect($localStorage.currentUser).toEqual(fixtures.user);
         });
 
         it("method 'destroy()' clean the currentUser on $localstorage", () => {
             let session = new SessionService($localStorage, $log, profileService);
-            let userResponse = <UserResponse>{
-                user: fixtures.user
-            };
             $localStorage.currentUser = fixtures.user;
             session.destroy();
             expect($localStorage.currentUser).toBeUndefined();
@@ -44,17 +38,11 @@ describe("Services", () => {
 
         it("method 'currentUser()' returns the user recorded on $localstorage service", () => {
             let session = new SessionService($localStorage, $log, profileService);
-            let userResponse = <UserResponse>{
-                user: fixtures.user
-            };
             $localStorage.currentUser = fixtures.user;
             expect(session.currentUser()).toEqual($localStorage.currentUser);
         });
 
         it("profile is updated when user is logged in", () => {
-            let userResponse = <UserResponse>{
-                user: fixtures.user
-            };
             $localStorage.currentUser = fixtures.user;
             let session = new SessionService($localStorage, $log, profileService);
             session.reloadUser();

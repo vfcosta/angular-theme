@@ -1,5 +1,5 @@
 import { Injectable, Inject } from "ng-forward";
-import { UserResponse, INoosferoLocalStorage } from "./../shared/models/interfaces";
+import { INoosferoLocalStorage } from "./../shared/models/interfaces";
 import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
 
 @Injectable()
@@ -17,7 +17,7 @@ export class SessionService {
         }
     }
 
-    create(user: UserResponse): noosfero.User {
+    create(user: noosfero.User): noosfero.User {
         this.$localStorage.currentUser = user;
         return this.$localStorage.currentUser;
     };
