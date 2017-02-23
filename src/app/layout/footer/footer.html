@@ -1,7 +1,7 @@
 <div class="footer container">
   <div class="row">
     <div class="col-md-6 user">
-      <span>{{"footer.logged.as" | translate}} {{currentUser.person.name}}
+      <span>{{"footer.logged.as" | translate}} {{currentUser?.person.name}}
         (<a href (click)="logout()">{{"footer.logout" | translate}}</a>)
       </span>
     </div>
