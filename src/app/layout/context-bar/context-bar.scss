@@ -38,9 +38,6 @@ context-bar {
     &.profile-context-bar {
       #config-bar-position{
         @extend .pull-right;
-        padding: 10px;
-        background-color: rgba(165, 165, 165, 0.4);
-        border-radius: 4px;
       }
     }
   }
