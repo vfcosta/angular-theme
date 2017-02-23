@@ -74,6 +74,23 @@ describe("Components", () => {
             }
         });
 
+        it("hide attribute block is false by default", () => {
+            (<any>helper.component.block).api_content = [];
+            helper.detectChanges();
+            expect(helper.component.block.hide).toBeTruthy();
+        });
+
+        it("not render block if config has no url", () => {
+            (<any>helper.component.block).api_content = [];
+            helper.detectChanges();
+            expect(helper.component.block.hide).toBeTruthy();
+        });
+
+        it("render block if config has no some url", () => {
+            expect(helper.component.block.hide).toBeFalsy();
+        });
+
+
     });
 
 });

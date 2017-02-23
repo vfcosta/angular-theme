@@ -24,10 +24,12 @@ export class MenuBlockComponent {
 
     ngOnInit() {
         this.links = [];
+        this.block.hide = true;
         if (this.block && this.block.api_content) {
             for (let link of this.block.api_content) {
                 if (this.hasAvailablePage(link)) {
                     this.links.push(this.makeUrl(link));
+                    this.block.hide = false;
                 }
             }
         }
