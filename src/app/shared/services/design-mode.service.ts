@@ -8,7 +8,7 @@ export class DesignModeService {
     @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     isInDesignMode(): boolean {
-        return this.$localStorage.settings.designModeOn;
+        return this.$localStorage.settings && this.$localStorage.settings.designModeOn;
     }
 
     destroy() {
