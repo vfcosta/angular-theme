@@ -1,6 +1,8 @@
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { UiSrefDirective } from './shared/directives/ui-sref-directive';
+import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
+import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
@@ -16,15 +18,25 @@ import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-
 import { UpgradeUtils } from "./shared/upgrade-utils";
 import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
+import { ImageCropperModule } from 'ng2-img-cropper';
+import { ModalModule } from 'ng2-bootstrap';
 
 @NgModule({
-    imports: [FormsModule, BrowserModule, UpgradeModule, MomentModule, DynamicComponentModule.forRoot({imports: [AppModule]})],
+    imports: [
+        FormsModule,
+        BrowserModule,
+        UpgradeModule,
+        MomentModule,
+        DynamicComponentModule.forRoot({imports: [AppModule]}),
+        ModalModule.forRoot(),
+        ImageCropperModule
+    ],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent,
                    ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, UiSrefDirective, ProfileFastEditionComponent,
-                   ValidationMessageComponent],
+                   ValidationMessageComponent, ImageUploadCropComponent, ImageUploadComponent],
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent, ProfileImageComponent,
-                      TaskListComponent, CommunitiesBlockComponent, ProfileFastEditionComponent],
+                      TaskListComponent, CommunitiesBlockComponent, ProfileFastEditionComponent, ImageUploadComponent, ImageUploadCropComponent],
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'ProfileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
         '$log', 'SweetAlert', 'toastr', 'TaskService'])

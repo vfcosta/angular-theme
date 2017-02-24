@@ -1,4 +1,6 @@
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
+import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
+import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
@@ -64,6 +66,12 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('profileFastEdition',
         downgradeComponent({component: ProfileFastEditionComponent, inputs: ['profile', 'environment'], outputs: ['finished']}) as angular.IDirectiveFactory
+    ).
+    directive('imageUploadCrop',
+        downgradeComponent({component: ImageUploadCropComponent, inputs: ['file']}) as angular.IDirectiveFactory
+    ).
+    directive('imageUpload',
+        downgradeComponent({component: ImageUploadComponent, inputs: ['cropEnabled'], outputs: ['finished']}) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

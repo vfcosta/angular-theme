@@ -15,8 +15,8 @@
   cursor:default;
   .container-camera {
       position: relative;
-      z-index: 2;
       .upload-camera{
+        z-index: 2;
         text-decoration: none;
         right: 0px;
         left: 0px;

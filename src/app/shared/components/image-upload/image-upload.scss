@@ -1,0 +1,23 @@
+bs-modal-backdrop {
+  z-index: 0;
+}
+
+image-upload {
+
+  .crop-area{
+    background: #E4E4E4;
+    height: 100%;
+  }
+  .cropped-image {
+    margin-top: 10px;
+    text-align: center;
+    img {
+      width: 100px;
+    }
+  }
+
+  .modal-body .actions{
+    text-align: center;
+  }
+  
+}
