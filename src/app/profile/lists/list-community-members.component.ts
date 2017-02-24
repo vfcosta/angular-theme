@@ -3,7 +3,7 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
 
 @Component({
     selector: 'list-community-members',
-    templateUrl: "app/profile/lists/list-community-members"
+    templateUrl: "app/profile/lists/list-community-members.html"
 })
 @Inject(ProfileService)
 export class ListCommunityMembersComponent {
