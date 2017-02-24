@@ -10,11 +10,11 @@ export class ValidationMessageComponent {
     @Input() field: NgModel;
     @Input() prefix: string;
 
-    setErrors(messages: any) {
-        if (!messages) return;
+    setErrors(errorObjects: any) {
+        if (!errorObjects) return;
         let errors = {};
-        for (let error of messages) {
-            errors[error] = true;
+        for (let errorObj of errorObjects) {
+            errors[errorObj.error] = true;
         }
         this.field.control.setErrors(errors);
     }
