@@ -23,8 +23,7 @@ describe("Components", () => {
                 properties: {
                     block: {
                         id: 1,
-                        type: 'Block',
-                        settings: { interval: 2, shuffle: true },
+                        type: 'MenuBlock',
                         api_content: [
                             { "title": "Activities", "controller": "profile", "action": "activities" },
                             { "title": "About", "controller": "profile", "action": "about" },
@@ -42,7 +41,7 @@ describe("Components", () => {
         });
 
         it("receives the block and the owner as inputs", () => {
-            expect(helper.component.block.type).toEqual("Block");
+            expect(helper.component.block.type).toEqual("MenuBlock");
             expect(helper.component.owner.name).toEqual("profile-name");
         });
 
@@ -74,15 +73,15 @@ describe("Components", () => {
             }
         });
 
-        it("hide attribute block is false by default", () => {
+        it("hide attribute block is true by default", () => {
             (<any>helper.component.block).api_content = [];
-            helper.detectChanges();
+            helper.component.ngOnInit();
             expect(helper.component.block.hide).toBeTruthy();
         });
 
         it("not render block if config has no url", () => {
             (<any>helper.component.block).api_content = [];
-            helper.detectChanges();
+            helper.component.ngOnInit();
             expect(helper.component.block.hide).toBeTruthy();
         });
 
