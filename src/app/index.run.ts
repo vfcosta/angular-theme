@@ -1,5 +1,5 @@
-import {SessionService} from "./login";
-import {NotificationService} from "./shared/services/notification.service";
+import { SessionService } from "./login";
+import { NotificationService } from "./shared/services/notification.service";
 
 /** @ngInject */
 export function noosferoAngularRunBlock(
@@ -17,8 +17,8 @@ export function noosferoAngularRunBlock(
     });
     SessionService.reloadUser();
     Restangular.setErrorInterceptor((response: restangular.IResponse, deferred: ng.IDeferred<any>) => {
-        // return false to break the promise chain and don't call catch
-        return !NotificationService.httpError(response.status, response.data);
+        NotificationService.httpError(response.status, response.data);
+        return true; // return true to continue the promise chain and call catch
     });
     editableOptions.theme = 'bs3';
 }

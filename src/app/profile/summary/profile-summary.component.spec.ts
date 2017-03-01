@@ -48,5 +48,11 @@ describe("Components", () => {
             helper.component.profile = null;
             expect(helper.component.profileLink()).toBeNull();
         });
+
+        it("set popover open to false when close edition", () => {
+            helper.component.editPopoverOpen = true;
+            helper.component.closeEdition();
+            expect(helper.component.editPopoverOpen).toBeFalsy();
+        });
     });
 });

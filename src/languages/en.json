@@ -268,5 +268,16 @@
   "editable-link.form.cancel": "Cancel",
   "footer.logout": "Logout",
   "footer.logged.as": "You are identified as",
-  "footer.developed.with": "Developed with:"
+  "footer.developed.with": "Developed with:",
+  "profile.edition.success.title": "Good job!",
+  "profile.edition.success.message": "Profile successfully saved!",
+  "profile.edition.name_label": "Name",
+  "profile.edition.identifier_label": "User name",
+  "profile.edition.action.save": "Save",
+  "profile.edition.action.cancel": "Cancel",
+  "profile.edition.name.required": "Name is required",
+  "profile.edition.identifier.required": "User name is required",
+  "profile.edition.identifier.not_available": "Username is already being taken",
+  "profile.edition.identifier.change_message": "The profile url will be changed",
+  "profile.edition.identifier.is-not-available": "User name is not available"
 }

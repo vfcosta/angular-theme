@@ -1,0 +1,20 @@
+<form class="form editable-profile-form" (ngSubmit)="save()" #profileForm="ngForm">
+  <div class="form-group">
+    <label class="control-label" for="name">{{"profile.edition.name_label" | translate}}</label>
+    <input type="text" class="form-control input-sm" [(ngModel)]="updatedProfile.name" required #name="ngModel" id="name" name="name">
+    <validation-message [field]="name" [prefix]="'profile.edition.name'"></validation-message>
+  </div>
+  <div class="form-group" *ngIf="allowChangeIdentifier()">
+    <label class="control-label" for="identifier">{{"profile.edition.identifier_label" | translate}}</label>
+    <input type="text" class="form-control input-sm" [(ngModel)]="updatedProfile.identifier" required #identifier="ngModel" id="identifier" name="identifier">
+    <validation-message #identifierErrors [field]="identifier" [prefix]="'profile.edition.identifier'"></validation-message>
+    <div [hidden]="!identifierChanged() || !identifier.valid" class="alert alert-warning">
+      {{"profile.edition.identifier.change_message" | translate}}
+    </div>
+    <span class="updated-profile-link">{{getProfileLink()}}</span>
+  </div>
+  <div class="actions">
+    <button type="submit" class="btn btn-primary">{{"profile.edition.action.save" | translate}}</button>
+    <button type="button" class="btn btn-default" (click)="cancel()">{{"profile.edition.action.cancel" | translate}}</button>
+  </div>
+</form>

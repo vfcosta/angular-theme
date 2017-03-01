@@ -1,0 +1,19 @@
+profile-fast-edition {
+  .editable-profile-form {
+    .updated-profile-link {
+      margin: 5px;
+      display: inline-block;
+      color: #999999;
+      word-break: break-all;
+    }
+    .alert {
+      padding: 5px 15px;
+      margin-bottom: 0;
+    }
+    .actions {
+      .edition-error {
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
