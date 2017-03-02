@@ -35,13 +35,15 @@ describe("Block Component", () => {
                 helpers.createProviderToValue('TranslatorService', translatorService),
                 helpers.createProviderToValue("EventsHubService", eventsHubService),
                 helpers.createProviderToValue('DesignModeService', helpers.mocks.designModeService),
-                helpers.createProviderToValue('noosferoTemplateFilter', helpers.mocks.noosferoTemplateFilter)
+                helpers.createProviderToValue('noosferoTemplateFilter', helpers.mocks.noosferoTemplateFilter),
+                helpers.createProviderToValue('$transitions', transitions),
             ]
         });
         helper = new ComponentTestHelper<BlockComponent>(cls, done);
     });
     let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
     let translatorService = jasmine.createSpyObj("translatorService", ["currentLanguage"]);
+    let transitions = jasmine.createSpyObj("transitions", ["onSuccess"]);
     let state = jasmine.createSpyObj("state", ["current"]);
     state.current = { name: "" };
 
@@ -93,6 +95,8 @@ describe("Block Component", () => {
 
     it("return false in canDisplay with home_page_only outside homepage", () => {
         helper.component.block = <any>{ settings: { display_user: "home_page_only" } };
+        state.current = { name: "main.environment.search" };
+        helper.component.ngOnInit();
         expect(helper.component.canDisplay()).toEqual(false);
     });
 

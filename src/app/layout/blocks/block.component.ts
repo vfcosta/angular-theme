@@ -11,7 +11,7 @@ import { DesignModeService } from "../../shared/services/design-mode.service";
     directives: [BlockEditionComponent]
 })
 @Inject("$uibModal", "$scope", "$state", "$rootScope", NotificationService,
-    AuthService, SessionService, TranslatorService, DesignModeService)
+    AuthService, SessionService, TranslatorService, DesignModeService, "$transitions")
 export class BlockComponent {
 
     @Input() block: noosfero.Block;
@@ -30,7 +30,8 @@ export class BlockComponent {
         private authService: AuthService,
         private session: SessionService,
         private translatorService: TranslatorService,
-        private designModeService: DesignModeService) {
+        private designModeService: DesignModeService,
+        private $transitions) {
 
         this.currentUser = this.session.currentUser();
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
@@ -42,6 +43,9 @@ export class BlockComponent {
             this.verifyHomepage();
         });
         this.$rootScope.$on("$stateChangeSuccess", (event: ng.IAngularEvent, toState: ng.ui.IState) => {
+            this.verifyHomepage();
+        });
+        this.$transitions.onSuccess({}, (trans) => {
             this.verifyHomepage();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
