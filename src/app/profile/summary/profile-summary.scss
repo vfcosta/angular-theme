@@ -25,6 +25,12 @@ noosfero-profile-summary {
       .media-heading {
         color: #fff;
         display: inline-block;
+        a{
+          &:hover{
+          color: #fff;
+          }
+          color: #fff;
+        }
       }
       .profile-link {
         color: #ededed;

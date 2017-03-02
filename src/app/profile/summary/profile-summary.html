@@ -3,7 +3,11 @@
     <noosfero-profile-image [profile]="ctrl.profile" [editable]="true" [edit-class]="'profile-image-block-editable'"></noosfero-profile-image>
   </div>
   <div class="media-body media-middle">
-    <h1 class="media-heading profile-name">{{ctrl.profile.name}}</h1>
+    <h1 class="media-heading profile-name">
+      <a ui-sref="main.profile.home({profile: ctrl.profile.identifier})">
+        {{ctrl.profile.name}}
+      </a>
+    </h1>
     <a href permission="ctrl.profile.permissions" permission-action="allow_edit"
         uib-popover-template="'app/profile/summary/profile-summary-edition.html'"
         popover-trigger="outsideClick" popover-append-to-body="true" popover-placement="right-top"
