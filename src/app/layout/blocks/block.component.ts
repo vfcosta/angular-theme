@@ -42,9 +42,6 @@ export class BlockComponent {
             this.currentUser = this.session.currentUser();
             this.verifyHomepage();
         });
-        this.$rootScope.$on("$stateChangeSuccess", (event: ng.IAngularEvent, toState: ng.ui.IState) => {
-            this.verifyHomepage();
-        });
         this.$transitions.onSuccess({}, (trans) => {
             this.verifyHomepage();
         });
