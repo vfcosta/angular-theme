@@ -22,8 +22,10 @@ import { downgradeComponent } from '@angular/upgrade/static';
 import { ProfileImageComponent } from "./profile/image/profile-image.component";
 import { RawHTMLBlockComponent } from "./layout/blocks/raw-html/raw-html-block.component";
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
-import { ListProfilesComponent } from './profile/lists/list-profiles.component';
+import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 
+//Plugins imports
+import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
 
 declare var moment: any;
 
@@ -65,6 +67,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('noosferoCommunitiesBlock',
         downgradeComponent({ component: CommunitiesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
+    directive('noosferoFriendsBlock',
+        downgradeComponent({ component: FriendsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
     directive('profileFastEdition',
         downgradeComponent({component: ProfileFastEditionComponent, inputs: ['profile', 'environment'], outputs: ['finished']}) as angular.IDirectiveFactory
     ).
@@ -75,7 +80,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({component: ImageUploadComponent, inputs: ['cropEnabled'], outputs: ['finished']}) as angular.IDirectiveFactory
     ).
     directive('profileList',
-        downgradeComponent({ component: ListProfilesComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
+        downgradeComponent({ component: ProfileListComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

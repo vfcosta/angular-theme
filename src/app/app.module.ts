@@ -20,7 +20,8 @@ import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { ModalModule } from 'ng2-bootstrap';
-import { ListProfilesComponent } from './profile/lists/list-profiles.component';
+import { ProfileListComponent } from './profile/profile-list/profile-list.component';
+import * as plugins from "../plugins";
 
 @NgModule({
     imports: [
@@ -33,9 +34,13 @@ import { ListProfilesComponent } from './profile/lists/list-profiles.component';
         ImageCropperModule
     ],
     exports: [TranslatePipe],
-    declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent,
-                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, UiSrefDirective, ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadCropComponent, ImageUploadComponent, ListProfilesComponent],
-    entryComponents: [ListProfilesComponent, FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent, ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, ProfileFastEditionComponent, ImageUploadComponent, ImageUploadCropComponent],
+    declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent,
+        StatisticsBlockComponent, ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent,
+        UiSrefDirective, ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent, ImageUploadCropComponent,
+        ProfileListComponent].concat(plugins.ng2MainComponents),
+    entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent,
+        StatisticsBlockComponent, ProfileImageComponent, TaskListComponent,
+        CommunitiesBlockComponent, ProfileFastEditionComponent, ImageUploadComponent, ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'ProfileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
         '$log', 'SweetAlert', 'toastr', 'TaskService'])
