@@ -1,22 +1,26 @@
 <div class="activity {{ctrl.activity.verb}}">
     <br>
     
-    <img src="{{ctrl.image()}}" alt="Avatar" class="avatar" style="width:60px">
+    <!--img src="{{ctrl.image()}}" alt="Avatar" class="avatar" style="width:60px"-->
+    <noosfero-profile-image [profile]="ctrl.activity.user" class="avatar"></noosfero-profile-image>
     <div class="panel-body">
         <div class="card-title">
-            <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})">
+          <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})">
             <strong ng-bind="ctrl.activity.user.name"></strong>
-  	</div>
-  	<div>
-  		<p>
-    		<small class="text-muted">
-          <i class="fa fa-clock-o"></i> 
-          <span am-time-ago="ctrl.activity.created_at | dateFormat"></span>
-        </small>
-      </p>
-  	</div>
-  </div>
-  <div class="panel-body">
-    <ng-include src="ctrl.getActivityTemplate()"></ng-include>
-  </div>
+          </a>
+  	    </div>
+      	<div>
+          <i alt='{{"activity.leave_scrap.icon" | translate}}' class="fa fa-commenting-o"></i>
+          <span> {{ctrl.description() | translate:{profiles:ctrl.profiles()}:"messageformat" }} </span>          
+      		<p>
+        		<small class="text-muted">
+              <i class="fa fa-clock-o"></i> 
+              <span am-time-ago="ctrl.activity.created_at | dateFormat"></span>
+            </small>
+          </p>
+      	</div>
+    </div>
+    <div class="panel-body">
+      <ng-include src="ctrl.getActivityTemplate()"></ng-include>
+    </div>
 </div>

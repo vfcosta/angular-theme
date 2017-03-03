@@ -1,6 +1,7 @@
-<span> {{"activities.new_follower.description" | translate:{followers: 	ctrl.activity.params.follower_name.length}:"messageformat" }} </span>
+<i alt='{{"activity.new_follower.icon" | translate}}' class="fa fa-users"></i>
+<span> {{"activities.new_follower.description" | translate:{followers: ctrl.activity.params.follower_name.length}:"messageformat" }} </span>
 <span class="comma-separated">
-	<a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.follower_url[$index].profile})" ng-repeat="follower in ctrl.activity.params.follower_name">
-  		<strong ng-bind="follower"></strong>
-	</a>
+        <a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.follower_url[$index].profile})" ng-repeat="follower in ctrl.activity.params.follower_name">
+          <strong ng-bind="follower"></strong>
+        </a>
 </span>

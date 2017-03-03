@@ -1,10 +1,13 @@
-<timeline-badge class="success">
-  <i alt='{{"activity.leave_scrap.icon" | translate}}' class="fa fa-commenting-o"></i>
-</timeline-badge>
-    <span> {{"activities.scrap.description" | translate}} </span>
-  <div class="timeline-body">
-    <div class="scrap">
-      <div ng-bind-html="ctrl.activity.content | stripTags | truncate: 100 : '...': true"></div>
-    </div>
-  </div>
+
+<span class="comma-separated">
+	<a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.receiver_url.profile})">
+	  <strong>{{ctrl.activity.params.receiver_name}}</strong>
+	</a>
+</span>
+<span>
+<div class="scrap">
+  <div ng-bind-html="ctrl.activity.params.content | stripTags | truncate: 100 : '...': true"></div>
+</div>
+</span>
+
 
