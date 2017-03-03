@@ -4,15 +4,17 @@
     <profile-list [profiles]="ctrl.members"></profile-list>
 </div>
 
+<!--
+FIXME see a way to add pagination
 <uib-pagination
-    ng-model="ctrl.currentPage"
-    total-items="ctrl.totalMembers"
+    ng-model="currentPage"
+    total-items="totalMembers"
     class="pagination-sm center-block"
     boundary-links="true"
-    items-per-page="ctrl.membersPerPage"
-    ng-change="ctrl.loadPage()"
+    items-per-page="membersPerPage"
+    ng-change="loadPage()"
     first-text="«"
     last-text="»"
     previous-text="‹"
     next-text="›">
-</uib-pagination>
+</uib-pagination> -->

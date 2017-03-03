@@ -1,14 +1,14 @@
 import * as helpers from "../../../spec/helpers";
 import {ComponentTestHelper, createClass} from './../../../spec/component-test-helper';
-import {ListCommunityMembersComponent} from './list-community-members.component';
+import {CommunityMembersComponent} from './community-members.component';
 
-const htmlTemplate: string = '<list-community-members></list-community-members>';
+const htmlTemplate: string = '<community-members></community-members>';
 
 describe("Components", () => {
 
     describe("List Community Members Component", () => {
 
-        let helper: ComponentTestHelper<ListCommunityMembersComponent>;
+        let helper: ComponentTestHelper<CommunityMembersComponent>;
         let profileService = jasmine.createSpyObj("profileService", ["getCurrentProfile", "getMembers"]);
         let currentProfile = {id: 1};
         let members = [{id: 1 }, { id: 2 }];
@@ -30,13 +30,13 @@ describe("Components", () => {
 
             let cls = createClass({
                 template: htmlTemplate,
-                directives: [ListCommunityMembersComponent],
+                directives: [CommunityMembersComponent],
                 providers:  [
                     helpers.createProviderToValue("ProfileService", profileService)
                 ]
             });
 
-            helper = new ComponentTestHelper<ListCommunityMembersComponent>(cls, done);
+            helper = new ComponentTestHelper<CommunityMembersComponent>(cls, done);
         });
 
         it("load current profile", () => {

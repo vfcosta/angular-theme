@@ -4,6 +4,7 @@ import { ImageUploadCropComponent } from './shared/components/image-upload/image
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
 import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
+import { CommunityMembersComponent } from './profile/community-members/community-members.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -74,6 +75,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoPeopleBlock',
     downgradeComponent({ component: PeopleBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoListCommunityMembers',
+    downgradeComponent({ component: CommunityMembersComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoFriendsBlock',
         downgradeComponent({ component: FriendsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory

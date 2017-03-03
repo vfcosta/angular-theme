@@ -1,25 +1,24 @@
-import {Component, Inject, provide} from 'ng-forward';
+import { Component, Inject, Input } from '@angular/core';
 import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
-    selector: 'list-community-members',
-    templateUrl: "app/profile/lists/list-community-members.html"
+    selector: "noosfero-community-members",
+    template: require('app/profile/community-members/community-members.html')
 })
-@Inject(ProfileService)
-export class ListCommunityMembersComponent {
+export class CommunityMembersComponent {
 
     private members: noosfero.Person[];
     private currentPage: number;
     private membersPerPage: number;
     private totalMembers: number;
 
-    constructor(private profileService: ProfileService) {
-      this.members = [];
-      this.currentPage = 1;
-      this.membersPerPage = 20;
-      this.totalMembers = 0;
+    constructor( @Inject('profileService') private profileService: ProfileService) {
+        this.members = [];
+        this.currentPage = 1;
+        this.membersPerPage = 20;
+        this.totalMembers = 0;
 
-      this.loadPage();
+        this.loadPage();
     }
 
     loadPage() {
@@ -31,8 +30,9 @@ export class ListCommunityMembersComponent {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             return this.profileService.getMembers(profile, filters);
         }).then((result: any) => {
-            this.totalMembers = <number>result.headers("total");
+            // this.totalMembers = <number>result.headers("total");
             this.members = result.data;
         });
     }
+
 }
