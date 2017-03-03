@@ -94,5 +94,13 @@ namespace noosfero {
          * @returns {any} The Profile top image
          */
         top_image: any;
+
+        /**
+         * @ngdoc property
+         * @name image
+         * @propertyOf noofero.Profile
+         * @returns {any} The Profile image
+         */
+        image: any;        
     }
 }

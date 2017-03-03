@@ -1,3 +1,4 @@
+<i alt='{{"activity.new_friendship.icon" | translate}}' class="fa fa-user-plus"></i>
 <span> {{"activities.new_friendship.description" | translate:{friends: ctrl.activity.params.friend_name.length}:"messageformat" }} </span>
 <span class="comma-separated">
 	<a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.friend_url[$index].profile})" ng-repeat="friend in ctrl.activity.params.friend_name">
