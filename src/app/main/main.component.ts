@@ -40,8 +40,6 @@ import { EditableLinkComponent } from "../shared/components/editable-link/editab
 import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
 import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
 
-import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
-
 import { LoginBlockComponent } from "../layout/blocks/login-block/login-block.component";
 
 import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
@@ -142,7 +140,7 @@ export class EnvironmentContent {
         BlockSettingsComponent, PeopleBlockComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, MenuBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
+        NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent,
@@ -170,7 +168,7 @@ export class EnvironmentContent {
 @Inject(EnvironmentService)
 export class MainComponent {
 
-     constructor(environmentService: EnvironmentService) {
+    constructor(environmentService: EnvironmentService) {
         environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
             let environment = result.data;
             environmentService.setCurrentEnvironment(environment);

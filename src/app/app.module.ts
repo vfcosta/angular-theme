@@ -4,6 +4,7 @@ import { UiSrefDirective } from './shared/directives/ui-sref-directive';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
+import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { TranslatePipe } from './shared/pipes/translate-pipe';
@@ -38,11 +39,13 @@ import * as plugins from "../plugins";
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent,
         StatisticsBlockComponent, ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent,
-        UiSrefDirective, ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent, ImageUploadCropComponent,
+        MembersBlockComponent, UiSrefDirective, ProfileFastEditionComponent, ValidationMessageComponent, 
+        ImageUploadComponent, ImageUploadCropComponent,
         ProfileListComponent].concat(plugins.ng2MainComponents),
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent,
         StatisticsBlockComponent, ProfileImageComponent, TaskListComponent,
-        CommunitiesBlockComponent, ProfileFastEditionComponent, ImageUploadComponent, ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
+        CommunitiesBlockComponent, MembersBlockComponent, ProfileFastEditionComponent, 
+        ImageUploadComponent, ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'ProfileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
         '$log', 'SweetAlert', 'toastr', 'TaskService'])

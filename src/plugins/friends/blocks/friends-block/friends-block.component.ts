@@ -17,7 +17,7 @@ export class FriendsBlockComponent {
     ngOnInit() {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
         this.blockService.getApiContent(this.block).then((content: any) => {
-            //FIXME we don't need to use api_content and friends at the same time
+            // FIXME we don't need to use api_content and friends at the same time
             this.profiles = content['people'];
             this.block.api_content = content;
         });
