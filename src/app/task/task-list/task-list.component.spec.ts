@@ -1,5 +1,5 @@
 import { MomentModule } from 'angular2-moment';
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -39,7 +39,8 @@ describe("Components", () => {
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "$uibModal", useValue: helpers.mocks.$modal },
                     { provide: "$scope", useValue: helpers.mocks.scopeWithEvents }
-                ]
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(TaskListComponent);
                 component = fixture.componentInstance;

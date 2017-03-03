@@ -1,3 +1,4 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
@@ -23,11 +24,12 @@ describe("Components", () => {
 
             TestBed.configureTestingModule({
                 declarations: [ProfileImageComponent, TranslatePipe],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
+                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "profileService", useValue: profileService },
                     { provide: "eventsHubService", useValue: eventsHubService },
                     { provide: "permissionService", useValue: permissionService },
-                    { provide: "$uibModal", useValue: helpers.mocks.$modal },
                     { provide: "$scope", useValue: scope }
                 ]
             }).compileComponents().then(() => {
@@ -37,12 +39,6 @@ describe("Components", () => {
                 component.editable = true;
             });
         }));
-
-        it("set modal instance when select files modal", () => {
-            component['$uibModal'].open = jasmine.createSpy("open");
-            component.fileSelected({target: {files: ["file"]}});
-            expect(component['$uibModal'].open).toHaveBeenCalled();
-        });
 
         it("show community users image if profile is not Person", () => {
             let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };

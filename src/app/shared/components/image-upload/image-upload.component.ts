@@ -39,6 +39,8 @@ export class ImageUploadComponent {
     }
 
     getFilename() {
+        let element = this.elementRef.nativeElement.querySelector('img-cropper input');
+        if (!element) return null;
         let file = this.elementRef.nativeElement.querySelector('img-cropper input').value.split('\\');
         return file[file.length - 1];
     }
