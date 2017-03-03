@@ -4,8 +4,7 @@
             <i *ngIf="!profile.image" class="fa {{defaultIcon}} {{iconSize}} profile-image"></i>
             <img *ngIf="profile.image" [alt]='"profile.image.description" | translate' [src]="profile.image.url" class="img-responsive profile-image img-circle">
             <div class='container-camera'>
-                <input #fileUploadInput type="file" (change)="fileSelected($event)" style="display: none;">
-                <a href="#" class="fa fa-camera upload-camera" (click)="fileUploadInput.click()"></a>
+                <image-upload #imageUpload (finished)="upload($event)"></image-upload>
             </div>
             <div class="overlay"></div>
         </div>

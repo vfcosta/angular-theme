@@ -1,7 +1,7 @@
+import { NotificationService } from './../../shared/services/notification.service';
 import { Inject, Input, Component } from '@angular/core';
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import { PermissionService } from "../../shared/services/permission.service";
-import { ProfileImageEditorComponent } from "./profile-image-editor.component";
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
 
@@ -37,37 +37,21 @@ export class ProfileImageComponent {
     @Input() iconSize: string;
     @Input() editable: boolean;
 
-    picFile: any;
-    modalInstance: any;
     eventsNames: NoosferoKnownEvents;
 
     constructor( @Inject("profileService") private profileService: ProfileService,
         @Inject("permissionService") private permissionService: PermissionService,
-        @Inject("$uibModal") private $uibModal: ng.ui.bootstrap.IModalService,
         @Inject("$scope") private $scope: ng.IScope,
-        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
+        @Inject("eventsHubService") private eventsHubService: EventsHubService,
+        @Inject("notificationService") private notificationService: NotificationService) {
 
         this.eventsNames = new NoosferoKnownEvents();
     }
 
-    fileSelected($event: any) {
-        if (!$event) return;
-        let file: File = $event.target.files[0];
-        if (!file) return;
-        this.picFile = file;
-        this.modalInstance = this.$uibModal.open({
-            templateUrl: 'app/profile/image/profile-image-editor.html',
-            controller: ProfileImageEditorComponent,
-            controllerAs: 'ctrl',
-            scope: this.$scope,
-            bindToController: true,
-            backdrop: 'static',
-            resolve: {
-                picFile: this.picFile,
-                profile: this.profile,
-                profileService: this.profileService,
-                eventsHubService: this.eventsHubService
-            }
+    upload(data: any) {
+        this.profileService.uploadImage(this.profile, data, "profile").then((result: any) => {
+            this.eventsHubService.emitEvent(this.eventsNames.IMAGE_PROFILE_UPDATED, result.data);
+            this.notificationService.success({ title: "profile.image.upload.success.title", message: "profile.image.upload.success.message" });
         });
     }
 
