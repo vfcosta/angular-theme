@@ -1,10 +1,1 @@
-<div class="friends-block">
-  <div class="friends-list">
-    <div *ngFor="let friend of profiles" class="friend-item">
-      <a ui-sref="main.profile.home({profile: friend.identifier})" href class="friend-link">
-        <noosfero-profile-image [profile]="friend" class="friend-image"></noosfero-profile-image>
-        <div class="friend-name">{{friend.name}}</div>
-      </a>
-    </div>
-  </div>
-</div>
+<profile-list [profiles]="profiles"></profile-list>

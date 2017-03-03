@@ -1,0 +1,38 @@
+.profile-list {
+  @extend .container-fluid;
+  @extend .row;
+  border-bottom: 1px solid #ededed;
+  .profile-item {
+    @extend .col-md-3;
+    @extend .col-sm-2;
+    @extend .col-xs-2;
+    display: block;
+    margin-bottom: 15px;
+    padding: 0 5px;
+    min-height: 90px;
+    min-width: 62px;
+
+    .profile-link {
+      .profile-image {
+        color: $text-color;
+        text-align: center;
+        @extend .center-block;
+        img {
+          @extend .center-block;
+          border-radius: 0;
+          background-color: #dcdcdc;
+        }
+        i {
+          background-color: #dcdcdc;
+          font-size: 55px;
+          padding: 0 8px;
+        }
+      }
+      .profile-name {
+        text-align: center;
+        color: $text-color;
+        font-size: 12px;
+      }
+    }
+  }
+}
