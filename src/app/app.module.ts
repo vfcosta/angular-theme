@@ -21,6 +21,7 @@ import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { ModalModule } from 'ng2-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
+import {NgPipesModule} from 'ngx-pipes';
 import * as plugins from "../plugins";
 
 @NgModule({
@@ -31,7 +32,8 @@ import * as plugins from "../plugins";
         MomentModule,
         DynamicComponentModule.forRoot({imports: [AppModule]}),
         ModalModule.forRoot(),
-        ImageCropperModule
+        ImageCropperModule,
+        NgPipesModule
     ],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent,
