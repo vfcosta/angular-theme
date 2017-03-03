@@ -1,29 +1,26 @@
-import {Input, Inject, Component} from "ng-forward";
-import {EnvironmentService} from "../../../../lib/ng-noosfero-api/http/environment.service";
+import { Component, Inject, Input } from '@angular/core';
+import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-people-block",
-    templateUrl: 'app/layout/blocks/people/people-block.html',
+    template: require('app/layout/blocks/people/people-block.html')
 })
-@Inject(EnvironmentService)
 export class PeopleBlockComponent {
 
     @Input() block: noosfero.Block;
+    // @Input() owner: noosfero.Profile;
     @Input() owner: noosfero.Environment;
-    private type: string = "people";
+    // private type: string = "people";
 
-    people: noosfero.Person[] = [];
+    profiles: any = [];
 
-    constructor(private environmentService: EnvironmentService) {
-    }
+    constructor( @Inject('blockService') private blockService: BlockService) { }
 
     ngOnInit() {
-        this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
-            this.environmentService.getEnvironmentPeople(environment.id, { limit: '6' }).then((result: noosfero.RestResult<any>) => {
-                this.people = result.data;
-            });
+        let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
+        this.blockService.getApiContent(this.block).then((content: any) => {
+            this.block.api_content = content;
+            this.profiles = this.block.api_content.people;
         });
-
     }
-
 }

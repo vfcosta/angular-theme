@@ -18,7 +18,6 @@ import { BlockContentComponent } from "../layout/blocks/block-content.component"
 import { BlockSettingsComponent } from "../layout/blocks/block-settings.component";
 import { BlockComponent } from "../layout/blocks/block.component";
 import { EnvironmentHomeComponent } from "../environment/environment-home.component";
-import { PeopleBlockComponent } from "../layout/blocks/people/people-block.component";
 import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
 import { MenuBlockComponent } from "../layout/blocks/menu/menu-block.component";
@@ -137,7 +136,7 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
-        BlockSettingsComponent, PeopleBlockComponent, DisplayContentBlockComponent,
+        BlockSettingsComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, MenuBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         NoosferoTemplate, NoosferoUrl, DateFormat,

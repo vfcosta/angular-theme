@@ -1,7 +1,1 @@
-<div class="{{ctrl.type}}-block">
-  <div ng-repeat="person in ctrl.people" class="item-avatar">
-    <a  ui-sref="main.profile.home({profile: person.identifier})">
-      <noosfero-profile-image [profile]="person"></noosfero-profile-image>
-    </a>
-  </div>
-</div>
+<profile-list [profiles]="profiles"></profile-list>
