@@ -1,8 +1,8 @@
 <div class="profile-list">
   <div *ngFor="let profile of profiles" class="profile-item">
-    <a ui-sref="main.profile.home({profile: profile.identifier})" href class="profile-link">
+    <a ui-sref="main.profile.home({profile: profile.identifier})" data-toggle="tooltip" title="{{profile.name}}" href class="profile-link">
       <noosfero-profile-image [profile]="profile" class="profile-image"></noosfero-profile-image>
-      <div class="profile-name">{{profile.name | shorten: 14: '...' }}</div>
+      <div class="profile-name">{{profile.name | shorten: 12: '...' }}</div>
     </a>
   </div>
 </div>
