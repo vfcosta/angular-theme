@@ -30,7 +30,7 @@ var entries = {
     noosfero: './src/app/boot.ts',
     'noosfero-test': './src/app/index.ts',
     'noosfero-specs': testFiles, // './src/specs.ts',
-    'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 
+    'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng2-img-cropper',
       'ng-forward/cjs/testing/test-component-builder', 'zone.js', 'moment',
       '@angular/core','@angular/upgrade/static', '@angular/platform-browser-dynamic']
 };
@@ -78,10 +78,10 @@ module.exports = function(env) {
                 loader: 'url-loader?limit=100000'
             }, {
                 test: /\.tsx?$/,
-                loader: 'ts-loader'
-            }, {
-                test: /\.ts?$/,
-                loader: "tslint-loader"
+                loader: 'awesome-typescript-loader',
+                options: {
+                    ignoreDiagnostics: [2300, 2374, 2375, 2403]
+                }
             },{
                 test: /\.html$/,
                 loader: 'html-loader'
