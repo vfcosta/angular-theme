@@ -5,16 +5,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProfileListComponent } from './profile-list.component';
 import {Pipe, PipeTransform} from '@angular/core';
 
-@Pipe({ name: 'shorten' })
-class ShortenPipe implements PipeTransform {
-    transform(value: number): number {
-        // Do nothing
-        return value;
-    }
-}
 describe("Components", () => {
 
     describe("Profile List Component", () => {
+
+        @Pipe({ name: 'shorten' })
+        class MockPipe implements PipeTransform {
+            transform(value: number): number {
+                // Do nothing
+                return value;
+            }
+        }
 
         let fixture: ComponentFixture<ProfileListComponent>;
         let component: ProfileListComponent;
@@ -28,7 +29,7 @@ describe("Components", () => {
         beforeEach(async(() => {
 
             TestBed.configureTestingModule({
-                declarations: [ProfileListComponent, UiSrefDirective, ShortenPipe],
+                declarations: [ProfileListComponent, UiSrefDirective, MockPipe],
                 providers: [
                     { provide: "$state", useValue: state },
                 ],
