@@ -18,7 +18,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [ CommunitiesBlockComponent, TranslatePipe, UiSrefDirective ],
+                declarations: [CommunitiesBlockComponent, TranslatePipe, UiSrefDirective],
                 providers: [
                     { provide: "blockService", useValue: blockService },
                     { provide: "$state", useValue: state }
@@ -27,7 +27,7 @@ describe("Components", () => {
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(CommunitiesBlockComponent);
                 component = fixture.componentInstance;
-                component.block = <noosfero.Block>{id: 1};
+                component.block = <noosfero.Block>{ id: 1 };
             });
         }));
 
@@ -38,15 +38,8 @@ describe("Components", () => {
             expect(component.profiles[0].identifier).toEqual("community1");
         })));
 
-        it("render the profile image for each community", (fakeAsync(() => {
-            fixture.detectChanges();
-            tick();
-            fixture.detectChanges();
-            expect(fixture.debugElement.queryAll(By.css('noosfero-profile-image')).length).toEqual(1);
-        })));
-
-        it("render the noosfero communities block", () => {
-            expect(fixture.debugElement.queryAll(By.css(".communities-block")).length).toEqual(1);
+        it("render the noosfero profile-list", () => {
+            expect(fixture.debugElement.queryAll(By.css("profile-list")).length).toEqual(1);
         });
     });
 });

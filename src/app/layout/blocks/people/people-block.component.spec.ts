@@ -1,73 +1,45 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider} from 'ng-forward';
-import {ComponentTestHelper, createClass} from '../../../../spec/component-test-helper';
-import {providers} from 'ng-forward/cjs/testing/providers';
-import {PeopleBlockComponent} from './people-block.component';
+import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { ProfileImageComponent } from './../../../profile/image/profile-image.component';
+import { By } from '@angular/platform-browser';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { PeopleBlockComponent } from './people-block.component';
 import * as helpers from "../../../../spec/helpers";
-
-const htmlTemplate: string = '<noosfero-people-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-people-block>';
 
 describe("Components", () => {
 
     describe("People Block Component", () => {
+        let fixture: ComponentFixture<PeopleBlockComponent>;
+        let component: PeopleBlockComponent;
+        let state = jasmine.createSpyObj("$state", ["href"]);
+        let blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
+        blockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ people: [{ identifier: "person1" }] }));
 
-        let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment", "getTags"]);
-        environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
-        environmentService.getEnvironmentPeople = jasmine.createSpy("getEnvironmentPeople").and.returnValue(helpers.mocks.promiseResultTemplate({ data: [{ identifier: "person1" }] }));
-
-        let helper: ComponentTestHelper<PeopleBlockComponent>;
-
-        beforeEach(angular.mock.module("templates"));
-
-        /**
-         * The beforeEach procedure will initialize the helper and parse
-         * the component according to the given providers. Unfortunetly, in
-         * this mode, the providers and properties given to the construtor
-         * can't be overriden.
-        */
-        beforeEach((done) => {
-            // Create the component bed for the test. Optionally, this could be done
-            // in each test if one needs customization of these parameters per test
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [PeopleBlockComponent],
-                providers: [helpers.createProviderToValue('EnvironmentService', environmentService)],
-                properties: {}
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [PeopleBlockComponent, TranslatePipe, UiSrefDirective],
+                providers: [
+                    { provide: "blockService", useValue: blockService },
+                    { provide: "$state", useValue: state }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(PeopleBlockComponent);
+                component = fixture.componentInstance;
+                component.block = <noosfero.Block>{ id: 1 };
             });
-            helper = new ComponentTestHelper<PeopleBlockComponent>(cls, done);
-        });
+        }));
 
-        /**
-         * By default the helper will have the component, with all properties
-         * ready to be used. Here the mock provider 'EnvironmentService' will
-         * return the given array with one person.
-         */
-        it("get block with one people", () => {
-            expect(environmentService.getCurrentEnvironment).toHaveBeenCalled();
-            expect(environmentService.getEnvironmentPeople).toHaveBeenCalled();
-            expect(helper.component.people[0].identifier).toEqual("person1");
-        });
+        it("get block with one person", (fakeAsync(() => {
+            fixture.detectChanges();
+            tick();
+            expect(blockService.getApiContent).toHaveBeenCalled();
+            expect(component.profiles[0].identifier).toEqual("person1");
+        })));
 
-        /**
-         * There are helper functions to access the JQuery DOM like this.
-         */
-        it("render the profile image for each person", () => {
-            expect(helper.all("noosfero-profile-image").length).toEqual(1);
-        });
-
-        /**
-         * The main debugElement element is also available
-         */
-        it("render the main noosfero people block", () => {
-            expect(helper.debugElement.children().length).toEqual(1, "The people-block should have a div children");
-        });
-
-        /**
-         * Just another example of a JQuery DOM helper function
-         */
-        it("render the noosfero people block div", () => {
-            let div = helper.findChildren("noosfero-people-block", "div");
-            expect(div.className).toBe('people-block', "The class should be people-block");
+        it("render the noosfero profile-list", () => {
+            expect(fixture.debugElement.queryAll(By.css("profile-list")).length).toEqual(1);
         });
     });
 });

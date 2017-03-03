@@ -38,15 +38,8 @@ describe("Components", () => {
             expect(component.profiles[0].identifier).toEqual("person1");
         })));
 
-        it("render the profile image for each community", (fakeAsync(() => {
-            fixture.detectChanges();
-            tick();
-            fixture.detectChanges();
-            expect(fixture.debugElement.queryAll(By.css('noosfero-profile-image')).length).toEqual(1);
-        })));
-
-        it("render the noosfero communities block", () => {
-            expect(fixture.debugElement.queryAll(By.css(".membersblock")).length).toEqual(1);
+        it("render the noosfero profile-list", () => {
+            expect(fixture.debugElement.queryAll(By.css("profile-list")).length).toEqual(1);
         });
     });
 });

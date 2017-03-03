@@ -3,7 +3,15 @@ import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProfileListComponent } from './profile-list.component';
+import {Pipe, PipeTransform} from '@angular/core';
 
+@Pipe({ name: 'shorten' })
+class ShortenPipe implements PipeTransform {
+    transform(value: number): number {
+        // Do nothing
+        return value;
+    }
+}
 describe("Components", () => {
 
     describe("Profile List Component", () => {
@@ -20,7 +28,7 @@ describe("Components", () => {
         beforeEach(async(() => {
 
             TestBed.configureTestingModule({
-                declarations: [ ProfileListComponent, UiSrefDirective ],
+                declarations: [ProfileListComponent, UiSrefDirective, ShortenPipe],
                 providers: [
                     { provide: "$state", useValue: state },
                 ],
