@@ -1,15 +1,20 @@
-import * as helpers from "../../../spec/helpers";
-import {ComponentTestHelper, createClass} from './../../../spec/component-test-helper';
-import {CommunityMembersComponent} from './community-members.component';
-
-const htmlTemplate: string = '<community-members></community-members>';
+import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { ProfileImageComponent } from './../../../profile/image/profile-image.component';
+import { By } from '@angular/platform-browser';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CommunityMembersComponent } from './community-members.component';
+import * as helpers from "../../../../spec/helpers";
 
 describe("Components", () => {
 
-    describe("List Community Members Component", () => {
-
-        let helper: ComponentTestHelper<CommunityMembersComponent>;
+    describe("Community Members Component", () => {
+        let fixture: ComponentFixture<CommunityMembersComponent>;
+        let component: CommunityMembersComponent;
+        let state = jasmine.createSpyObj("$state", ["href"]);
         let profileService = jasmine.createSpyObj("profileService", ["getCurrentProfile", "getMembers"]);
+        profileService.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ people: [{ identifier: "person1" }] }));
         let currentProfile = {id: 1};
         let members = [{id: 1 }, { id: 2 }];
 
@@ -24,20 +29,20 @@ describe("Components", () => {
               data: members
           }));
 
-        beforeEach(angular.mock.module("templates"));
 
-        beforeEach((done) => {
-
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [CommunityMembersComponent],
-                providers:  [
-                    helpers.createProviderToValue("ProfileService", profileService)
-                ]
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [CommunityMembersComponent, TranslatePipe, UiSrefDirective],
+                providers: [
+                    { provide: "profileService", useValue: profileService },
+                    { provide: "$state", useValue: state }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(CommunityMembersComponent);
+                component = fixture.componentInstance;
             });
-
-            helper = new ComponentTestHelper<CommunityMembersComponent>(cls, done);
-        });
+        }));
 
         it("load current profile", () => {
             expect(profileService.getCurrentProfile).toHaveBeenCalled();
@@ -52,5 +57,4 @@ describe("Components", () => {
         });
 
     });
-
 });
