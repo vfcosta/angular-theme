@@ -1,43 +1,45 @@
-import { mocks } from './../../../../spec/mocks';
+import { UiSrefDirective } from './../../../../app/shared/directives/ui-sref-directive';
+import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
+import { ProfileImageComponent } from './../../../../app/profile/image/profile-image.component';
+import { By } from '@angular/platform-browser';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FriendsBlockComponent } from './friends-block.component';
-import { provide } from 'ng-forward';
-import { ComponentTestHelper, createClass } from './../../../../spec/component-test-helper';
 import * as helpers from "../../../../spec/helpers";
-
-const htmlTemplate: string = '<noosfero-friends-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-friends-block>';
 
 describe("Components", () => {
 
     describe("Friends Block Component", () => {
+        let fixture: ComponentFixture<FriendsBlockComponent>;
+        let component: FriendsBlockComponent;
+        let state = jasmine.createSpyObj("$state", ["href"]);
+        let blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
+        blockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ people: [{ identifier: "person1" }] }));
 
-        let helper: ComponentTestHelper<FriendsBlockComponent>;
-        let blockServiceMock = jasmine.createSpyObj("BlockService", ["getApiContent"]);
-        let friends = [{ id: 2 }, { id: 3 }, { id: 4 }];
-        blockServiceMock.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(helpers.mocks.promiseResultTemplate({ people: friends, '#': 3 }));
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [FriendsBlockComponent],
-                properties: {
-                    block: { settings: { limit: 3 } },
-                    owner: { id: 1 }
-                },
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [FriendsBlockComponent, TranslatePipe, UiSrefDirective],
                 providers: [
-                    helpers.createProviderToValue("BlockService", blockServiceMock)
-                ]
+                    { provide: "blockService", useValue: blockService },
+                    { provide: "$state", useValue: state }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(FriendsBlockComponent);
+                component = fixture.componentInstance;
+                component.block = <noosfero.Block>{ id: 1 };
             });
-            helper = new ComponentTestHelper<FriendsBlockComponent>(cls, done);
-        });
+        }));
 
-        it("call person service to return friends list", () => {
-            expect(blockServiceMock.getApiContent).toHaveBeenCalledWith(helper.component.block);
-        });
+        it("get block with one friend", (fakeAsync(() => {
+            fixture.detectChanges();
+            tick();
+            expect(blockService.getApiContent).toHaveBeenCalled();
+            expect(component.profiles[0].identifier).toEqual("person1");
+        })));
 
-        it("list friends", () => {
-            expect(helper.all(".friend-item").length).toEqual(3);
+        it("render the noosfero profile-list", () => {
+            expect(fixture.debugElement.queryAll(By.css("profile-list")).length).toEqual(1);
         });
     });
 });

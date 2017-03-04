@@ -18,7 +18,6 @@ import { BlockContentComponent } from "../layout/blocks/block-content.component"
 import { BlockSettingsComponent } from "../layout/blocks/block-settings.component";
 import { BlockComponent } from "../layout/blocks/block.component";
 import { EnvironmentHomeComponent } from "../environment/environment-home.component";
-import { PeopleBlockComponent } from "../layout/blocks/people/people-block.component";
 import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
 import { MenuBlockComponent } from "../layout/blocks/menu/menu-block.component";
@@ -39,8 +38,6 @@ import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights
 import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
 import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
 import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
-
-import { MembersBlockComponent } from "../layout/blocks/members/members-block.component";
 
 import { LoginBlockComponent } from "../layout/blocks/login-block/login-block.component";
 
@@ -139,10 +136,10 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
-        BlockSettingsComponent, PeopleBlockComponent, DisplayContentBlockComponent,
+        BlockSettingsComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, MenuBlockComponent, HtmlEditorComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
-        MembersBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
+        NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent,
@@ -170,7 +167,7 @@ export class EnvironmentContent {
 @Inject(EnvironmentService)
 export class MainComponent {
 
-     constructor(environmentService: EnvironmentService) {
+    constructor(environmentService: EnvironmentService) {
         environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
             let environment = result.data;
             environmentService.setCurrentEnvironment(environment);

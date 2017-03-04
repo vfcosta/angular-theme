@@ -12,6 +12,14 @@ mainComponents = mainComponents
     .concat(video.mainComponents)
     .concat(friends.mainComponents);
 
+export let ng2MainComponents: any = [];
+ng2MainComponents = ng2MainComponents
+    .concat(commentParagraph.ng2MainComponents)
+    .concat(breadcrumbs.ng2MainComponents)
+    .concat(section.ng2MainComponents)
+    .concat(video.ng2MainComponents)
+    .concat(friends.ng2MainComponents);
+
 export let hotspots: any = [];
 hotspots = hotspots
     .concat(commentParagraph.hotspots)

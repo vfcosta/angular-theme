@@ -17,6 +17,7 @@ import { EnvironmentService } from "./../lib/ng-noosfero-api/http/environment.se
 import { DomainService } from "./../lib/ng-noosfero-api/http/domain.service";
 import { EnvironmentComponent } from "./environment/environment.component";
 import { EnvironmentHomeComponent } from "./environment/environment-home.component";
+import { CommunityMembersComponent } from './profile/community-members/community-members.component';
 
 /** @ngInject */
 export function noosferoRoutes($stateProvider: any) {
@@ -241,4 +242,18 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
+
+    $stateProvider.state({
+        name: 'main.profile.members',
+        url: "^/profile/:profile/members",
+        controller: CommunityMembersComponent,
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/profile/community-members/community-members.html",
+                controller: CommunityMembersComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
 }

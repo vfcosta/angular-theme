@@ -7,4 +7,5 @@ import {DiscussionBlockComponent} from "./block/discussion/discussion-block.comp
 import {DiscussionPeriodComponent} from "./article/discussion-period/discussion-period.component";
 
 export let mainComponents: any = [AllowCommentComponent, DiscussionEditorComponent, DiscussionBlockComponent, DiscussionPeriodComponent];
+export let ng2MainComponents: any = [];
 export let hotspots: any = [ExportCommentButtonHotspotComponent, CommentParagraphFormHotspotComponent, CommentParagraphArticleContentHotspotComponent];

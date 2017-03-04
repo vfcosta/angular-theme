@@ -1,49 +1,45 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider, Input, provide, Component} from 'ng-forward';
-import {MembersBlockComponent} from './members-block.component';
-import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
-
-const htmlTemplate: string = '<noosfero-members-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-members-block>';
-
-const tcb = new TestComponentBuilder();
+import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { ProfileImageComponent } from './../../../profile/image/profile-image.component';
+import { By } from '@angular/platform-browser';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { MembersBlockComponent } from './members-block.component';
+import * as helpers from "../../../../spec/helpers";
 
 describe("Components", () => {
+
     describe("Members Block Component", () => {
+        let fixture: ComponentFixture<MembersBlockComponent>;
+        let component: MembersBlockComponent;
+        let state = jasmine.createSpyObj("$state", ["href"]);
+        let blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
+        blockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ people: [{ identifier: "person1" }] }));
 
-        let helper: ComponentTestHelper<MembersBlockComponent>;
-
-        let providers = [
-            new Provider('ProfileService', {
-                useValue: {
-                    getProfileMembers: (profileId: number, filters: any): any => {
-                        return Promise.resolve({ data: [{ identifier: "person1" }] });
-                    }
-                }
-            }),
-        ];
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            // Custom properties for the component
-            let properties = { owner: { id: 1 } };
-            // Create the component bed for the test.
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [MembersBlockComponent],
-                providers: providers,
-                properties: properties
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [MembersBlockComponent, TranslatePipe, UiSrefDirective],
+                providers: [
+                    { provide: "blockService", useValue: blockService },
+                    { provide: "$state", useValue: state }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(MembersBlockComponent);
+                component = fixture.componentInstance;
+                component.block = <noosfero.Block>{ id: 1 };
             });
-            helper = new ComponentTestHelper<MembersBlockComponent>(cls, done);
-        });
+        }));
 
-        it("get members of the block owner", () => {
-            expect(helper.component.members[0].identifier).toEqual("person1");
-        });
+        it("get block with one member", (fakeAsync(() => {
+            fixture.detectChanges();
+            tick();
+            expect(blockService.getApiContent).toHaveBeenCalled();
+            expect(component.profiles[0].identifier).toEqual("person1");
+        })));
 
-        it("render the profile image for each member", () => {
-            expect(helper.all("noosfero-profile-image").length).toEqual(1);
+        it("render the noosfero profile-list", () => {
+            expect(fixture.debugElement.queryAll(By.css("profile-list")).length).toEqual(1);
         });
-
     });
 });

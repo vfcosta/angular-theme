@@ -2,6 +2,9 @@ import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
+import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
+import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
+import { CommunityMembersComponent } from './profile/community-members/community-members.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -22,7 +25,10 @@ import { downgradeComponent } from '@angular/upgrade/static';
 import { ProfileImageComponent } from "./profile/image/profile-image.component";
 import { RawHTMLBlockComponent } from "./layout/blocks/raw-html/raw-html-block.component";
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
+import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 
+// Plugins imports
+import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
 
 declare var moment: any;
 
@@ -53,16 +59,28 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({ component: StatisticsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('languageSelector',
-        downgradeComponent({component: LanguageSelectorComponent}) as angular.IDirectiveFactory
+        downgradeComponent({ component: LanguageSelectorComponent }) as angular.IDirectiveFactory
     ).
     directive('noosferoProfileImage',
-        downgradeComponent({component: ProfileImageComponent, inputs: ['profile', 'iconSize', 'editable']}) as angular.IDirectiveFactory
+        downgradeComponent({ component: ProfileImageComponent, inputs: ['profile', 'iconSize', 'editable'] }) as angular.IDirectiveFactory
     ).
     directive('taskList',
-        downgradeComponent({component: TaskListComponent, inputs: ['tasks']}) as angular.IDirectiveFactory
+        downgradeComponent({ component: TaskListComponent, inputs: ['tasks'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoCommunitiesBlock',
-        downgradeComponent({component: CommunitiesBlockComponent, inputs: ['block', 'owner']}) as angular.IDirectiveFactory
+        downgradeComponent({ component: CommunitiesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoMembersBlock',
+    downgradeComponent({ component: MembersBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoPeopleBlock',
+    downgradeComponent({ component: PeopleBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoListCommunityMembers',
+    downgradeComponent({ component: CommunityMembersComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoFriendsBlock',
+        downgradeComponent({ component: FriendsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('profileFastEdition',
         downgradeComponent({component: ProfileFastEditionComponent, inputs: ['profile', 'environment'], outputs: ['finished']}) as angular.IDirectiveFactory
@@ -72,6 +90,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('imageUpload',
         downgradeComponent({component: ImageUploadComponent, inputs: ['cropEnabled'], outputs: ['finished']}) as angular.IDirectiveFactory
+    ).
+    directive('profileList',
+        downgradeComponent({ component: ProfileListComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

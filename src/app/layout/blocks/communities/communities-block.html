@@ -1,10 +1,1 @@
-<div class="communities-block">
-  <div class="communities-list">
-    <div *ngFor="let community of profiles" class="community-item">
-      <a uiSref="main.profile.home" [uiParams]="{profile: community.identifier}" class="community-link">
-        <noosfero-profile-image [profile]="community" class="community-image"></noosfero-profile-image>
-        <div class="community-name">{{community.name}}</div>
-      </a>
-    </div>
-  </div>
-</div>
+<profile-list [profiles]="profiles"></profile-list>

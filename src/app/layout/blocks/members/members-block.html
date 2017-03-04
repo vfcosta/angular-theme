@@ -1,5 +1,1 @@
-<div class="members-block">
-  <a ng-repeat="member in ctrl.members" ui-sref="main.profile.home({profile: member.identifier})" class="member">
-    <noosfero-profile-image [profile]="member"></noosfero-profile-image>
-  </a>
-</div>
+<profile-list [profiles]="profiles"></profile-list>

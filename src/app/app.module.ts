@@ -4,6 +4,9 @@ import { UiSrefDirective } from './shared/directives/ui-sref-directive';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
+import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
+import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
+import { CommunityMembersComponent } from './profile/community-members/community-members.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { TranslatePipe } from './shared/pipes/translate-pipe';
@@ -20,6 +23,9 @@ import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { ModalModule } from 'ng2-bootstrap';
+import { ProfileListComponent } from './profile/profile-list/profile-list.component';
+import {NgPipesModule} from 'ngx-pipes';
+import * as plugins from "../plugins";
 
 @NgModule({
     imports: [
@@ -29,14 +35,20 @@ import { ModalModule } from 'ng2-bootstrap';
         MomentModule,
         DynamicComponentModule.forRoot({imports: [AppModule]}),
         ModalModule.forRoot(),
-        ImageCropperModule
+        ImageCropperModule,
+        NgPipesModule
     ],
     exports: [TranslatePipe],
-    declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent,
-                   ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent, UiSrefDirective, ProfileFastEditionComponent,
-                   ValidationMessageComponent, ImageUploadCropComponent, ImageUploadComponent],
-    entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent, StatisticsBlockComponent, ProfileImageComponent,
-                      TaskListComponent, CommunitiesBlockComponent, ProfileFastEditionComponent, ImageUploadComponent, ImageUploadCropComponent],
+    declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent,
+        StatisticsBlockComponent, ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent,
+        MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent,  UiSrefDirective, 
+        ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent, 
+        ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
+    entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent,
+        StatisticsBlockComponent, ProfileImageComponent, TaskListComponent,
+        CommunitiesBlockComponent, MembersBlockComponent,  PeopleBlockComponent, CommunityMembersComponent, 
+        ProfileFastEditionComponent, 
+        ImageUploadComponent, ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'ProfileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
         '$log', 'SweetAlert', 'toastr', 'TaskService'])
