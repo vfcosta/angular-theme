@@ -30,12 +30,15 @@ describe("Components", () => {
           }));
 
 
+        let translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
+
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 declarations: [CommunityMembersComponent, TranslatePipe, UiSrefDirective],
                 providers: [
                     { provide: "profileService", useValue: profileService },
-                    { provide: "$state", useValue: state }
+                    { provide: "$state", useValue: state },
+                    { provide: "translatorService", useValue: translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             }).compileComponents().then(() => {
