@@ -99,6 +99,7 @@
     "http-proxy-middleware": "~0.9.0",
     "iron-node": "^3.0.7",
     "istanbul": "0.4.5",
+    "istanbul-instrumenter-loader": "^2.0.0",
     "karma": "~1.4.0",
     "karma-angular-filesort": "~1.0.0",
     "karma-chrome-launcher": "^0.2.2",
