@@ -88,6 +88,11 @@ module.exports = function(env) {
             },{
                 test: /\.html$/,
                 loader: 'html-loader'
+            },{
+                test: /src\/.+\.ts$/,
+                exclude: /(node_modules|\.spec\.ts$)/,
+                loader: 'istanbul-instrumenter-loader',
+                enforce: 'post'
             }]
         }
     };

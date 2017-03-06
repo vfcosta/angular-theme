@@ -47,7 +47,7 @@ var karmaPlugins = [
     'karma-ng-html2js-preprocessor',
     'karma-sourcemap-loader',
     'karma-coverage',
-    'karma-remap-istanbul',
+    'karma-coverage-istanbul-reporter',
     'karma-webpack'
 ];
 
@@ -83,7 +83,6 @@ function listFiles() {
         served: true,
         watched: false
     });
-    files.push({pattern: 'karma.entry.js'});
     files.push({ pattern: './src/app/layout/language-selector/**/*.html', included: false, watched: true, served: true });
     return files;
 }
@@ -111,20 +110,18 @@ module.exports = function (config) {
         },
         browsers: ['PhantomJS'],
         plugins: karmaPlugins,
-        reporters: ['spec', 'coverage'],
+        reporters: ['spec', 'coverage-istanbul'],
         proxies: {
             '/assets/': path.join('/base/', conf.paths.src, '/assets/'),
             '/app/': path.join('/base/', conf.paths.src, '/app/')
         },
-        remapIstanbulReporter: {
-          reports: {
-            html: 'coverage'
-          }
+        coverageIstanbulReporter: {
+            reports: ['html', 'text-summary'],
+            dir: './coverage',
+            fixWebpackSourcePaths: true
         },
         preprocessors: {
-            'src/noosfero-test.js': ['coverage', 'sourcemap'],
-            'src/**/*.ts': ['sourcemap'],
-            'karma.entry.js': ['webpack']
+            'src/**/*.ts': ['sourcemap']
         },
         coverageReporter: {
             dir: 'coverage/',
