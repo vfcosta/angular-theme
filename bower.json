@@ -86,6 +86,11 @@
         "scss/font-awesome.scss",
         "fonts/*"
       ]
+    },
+    "roboto-fontface": {
+      "main": [
+        "fonts/Roboto/*"
+      ]
     }
   },
   "resolutions": {
