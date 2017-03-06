@@ -13,6 +13,7 @@ const htmlTemplate: string = '<content-viewer [article]="ctrl.article" [profile]
 describe('Content Viewer Component', () => {
 
     let stateParamsService: any;
+    let stateMock = jasmine.createSpyObj("$state", ["go"]);
 
     // loading the templates
     beforeEach(() => {
@@ -28,9 +29,11 @@ describe('Content Viewer Component', () => {
                 provide('ProfileService', {
                     useValue: helpers.mocks.profileService
                 }),
-                // TODO: Como criar um mock do atributo "page" de stateParams
                 provide('$stateParams', {
                     useValue: stateParamsService
+                }),
+                provide('$state', {
+                    useValue: stateMock
                 })
             ];
         });
@@ -82,6 +85,16 @@ describe('Content Viewer Component', () => {
             expect(contentViewerComp.profile).toEqual(profile);
             expect(contentViewerComp.article).toEqual(article);
 
+            done();
+        });
+    });
+
+    it('redirect to profile home when page is empty', (done: Function) => {
+        buildComponent().then((fixture: ComponentFixture) => {
+            let contentViewerComp: ContentViewerComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
+            contentViewerComp['$stateParams'] = {};
+            contentViewerComp.activate();
+            expect(stateMock.go).toHaveBeenCalled();
             done();
         });
     });

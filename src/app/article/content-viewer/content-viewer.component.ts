@@ -14,7 +14,7 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
         provide('profileService', { useClass: ProfileService })
     ]
 })
-@Inject(ArticleService, ProfileService, "$stateParams")
+@Inject(ArticleService, ProfileService, "$stateParams", "$state")
 export class ContentViewerComponent {
 
     @Input()
@@ -26,11 +26,15 @@ export class ContentViewerComponent {
     constructor(
         private articleService: ArticleService,
         private profileService: ProfileService,
-        private $stateParams: angular.ui.IStateParamsService) {
+        private $stateParams: angular.ui.IStateParamsService,
+        private $state: ng.ui.IStateService) {
         this.activate();
     }
 
     activate() {
+        if (!this.$stateParams["page"]) {
+            return this.$state.go('main.profile.home', this.$stateParams);
+        }
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
             return this.articleService.getArticleByProfileAndPath(this.profile, this.$stateParams["page"]);
