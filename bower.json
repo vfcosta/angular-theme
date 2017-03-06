@@ -89,6 +89,7 @@
     },
     "roboto-fontface": {
       "main": [
+        "./css/roboto/roboto-fontface.css",
         "fonts/Roboto/*"
       ]
     }
