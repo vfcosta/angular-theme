@@ -6,7 +6,17 @@ import * as moment from 'moment';
 @Inject("$translate", "tmhDynamicLocale", "amMoment", "angularLoad", "$rootScope")
 export class TranslatorService {
 
-    availableLanguages: any;
+    availableLanguages = {
+        "en" : "English",
+        "pt" : "Português"
+        // "fr" : "Français",
+        // "hy" : "հայերեն լեզու",
+        // "de" : "Deutsch",
+        // "ru" : "русский язык",
+        // "es" : "Español",
+        // "eo" : "Esperanto",
+        // "it" : "Italiano"
+    };
 
     constructor(private $translate: angular.translate.ITranslateService,
         private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
@@ -16,9 +26,6 @@ export class TranslatorService {
 
         this.$rootScope.$on("$localeChangeSuccess", () => {
             this.changeLanguage(tmhDynamicLocale.get() || $translate.use());
-        });
-        this.$rootScope.$on("$translateChangeSuccess", () => {
-            this.configAvailableLanguages();
         });
     }
 
@@ -38,20 +45,6 @@ export class TranslatorService {
 
     translate(text: string) {
         return this.$translate.instant(text);
-    }
-
-    private configAvailableLanguages() {
-        this.availableLanguages = {
-            "en" : "English",
-            "pt" : "Português"
-            // "fr" : "Français",
-            // "hy" : "հայերեն լեզու",
-            // "de" : "Deutsch",
-            // "ru" : "русский язык",
-            // "es" : "Español",
-            // "eo" : "Esperanto",
-            // "it" : "Italiano"
-        };
     }
 
     private changeMomentLocale(language: string) {

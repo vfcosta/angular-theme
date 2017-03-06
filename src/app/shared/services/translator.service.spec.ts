@@ -27,15 +27,6 @@ describe("Services", () => {
             );
         }
 
-        it("set available languages when change language", (done) => {
-            let component: TranslatorService = createComponent();
-            component.availableLanguages = null;
-            expect(component.availableLanguages).toBeNull();
-            $rootScope.$emit("$translateChangeSuccess");
-            expect(component.availableLanguages).not.toBeNull();
-            done();
-        });
-
         it("change the language", (done) => {
             let component: TranslatorService = createComponent();
             let loadScripPromise = $q.defer();
