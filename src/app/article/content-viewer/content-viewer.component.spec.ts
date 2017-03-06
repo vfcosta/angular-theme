@@ -88,14 +88,4 @@ describe('Content Viewer Component', () => {
             done();
         });
     });
-
-    it('redirect to profile home when page is empty', (done: Function) => {
-        buildComponent().then((fixture: ComponentFixture) => {
-            let contentViewerComp: ContentViewerComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-            contentViewerComp['$stateParams'] = {};
-            contentViewerComp.activate();
-            expect(stateMock.go).toHaveBeenCalled();
-            done();
-        });
-    });
 });

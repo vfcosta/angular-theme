@@ -6,7 +6,9 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
     $httpProvider: ng.IHttpProvider,
     $provide: ng.auto.IProvideService,
     $translateProvider: angular.translate.ITranslateProvider,
-    tmhDynamicLocaleProvider: any, $urlMatcherFactoryProvider: any) {
+    tmhDynamicLocaleProvider: any,
+    $urlMatcherFactoryProvider: angular.ui.IUrlMatcherFactory,
+    $urlRouterProvider: angular.ui.IUrlRouterProvider) {
 
     $logProvider.debugEnabled(true);
     $locationProvider.html5Mode({ enabled: true });
@@ -24,6 +26,16 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
     configTranslation($translateProvider, tmhDynamicLocaleProvider);
 
     $urlMatcherFactoryProvider.strictMode(false);
+
+    // Remove trailing slash from url
+    $urlRouterProvider.rule(($injector, $location) => {
+        let path = $location.path();
+        let hasTrailingSlash = path[path.length - 1] === '/';
+        if (hasTrailingSlash) {
+            let newPath = path.substr(0, path.length - 1);
+            return newPath;
+        }
+    });
 }
 
 function configTranslation($translateProvider: angular.translate.ITranslateProvider, tmhDynamicLocaleProvider: any) {

@@ -32,9 +32,6 @@ export class ContentViewerComponent {
     }
 
     activate() {
-        if (!this.$stateParams["page"]) {
-            return this.$state.go('main.profile.home', this.$stateParams);
-        }
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
             return this.articleService.getArticleByProfileAndPath(this.profile, this.$stateParams["page"]);
