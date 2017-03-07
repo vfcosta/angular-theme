@@ -21,7 +21,7 @@ export class DiscussionBlockComponent {
 
     profile: noosfero.Profile;
     documents: Array<noosfero.Article>;
-    presentation_mode: string;
+    presentation_mode: PRESENTATION_MODES;
 
     static PRESENTATION_MODES = PRESENTATION_MODES;
 
