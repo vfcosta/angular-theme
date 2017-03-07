@@ -20,6 +20,7 @@ describe("Components", () => {
                 return Promise.resolve({ articles: [article], headers: (name: string) => { return name; } });
             }
         };
+
         let articleService: any = helpers.mocks.articleService;
         let profile = { name: 'profile-name' };
 
@@ -46,7 +47,7 @@ describe("Components", () => {
         });
 
         it("get discussions from the block service", () => {
-            expect(helper.component.documents).toEqual([{ name: "article1" }]);
+            expect(helper.component.documents).toEqual([jasmine.objectContaining({ name: "article1" })]);
             expect(helper.component.block.hide).toEqual(false);
         });
 
@@ -61,6 +62,61 @@ describe("Components", () => {
             simulateRemovedEvent();
             expect(helper.component.documents.length).toEqual(0);
         });
+
+        it("presentAbstract return true if block presentation mode is title_and_abstract", () => {
+
+            helper.component.block = { settings: { presentation_mode: 'title_and_abstract' } };
+            helper.component.ngOnInit();
+            expect(helper.component.presentAbstract()).toEqual(true);
+        });
+
+        it("presentAbstract return false if block presentation mode is title_only", () => {
+
+            helper.component.block = { settings: { presentation_mode: 'title_only' } };
+            helper.component.ngOnInit();
+            expect(helper.component.presentAbstract()).toEqual(false);
+        });
+
+        it("presentAbstract return true if block presentation mode is full_content", () => {
+
+            helper.component.block = { settings: { presentation_mode: 'full_content' } };
+            helper.component.ngOnInit();
+            expect(helper.component.presentAbstract()).toEqual(false);
+        });
+
+        it("presentAbstract display abstract content", () => {
+            helper.component.block = { settings: { presentation_mode: 'title_and_abstract' } };
+            helper.component.ngOnInit();
+            helper.detectChanges();
+            expect(helper.all(".abstract").length).toEqual(1);
+        });
+
+        it("presentFullContent return true if block presentation mode is full_content", () => {
+            helper.component.block = { settings: { presentation_mode: 'full_content' } };
+            helper.component.ngOnInit();
+            expect(helper.component.presentFullContent()).toEqual(true);
+        });
+
+        it("presentFullContent return false if block presentation mode is title_only", () => {
+            helper.component.block = { settings: { presentation_mode: 'title_only' } };
+            helper.component.ngOnInit();
+            expect(helper.component.presentFullContent()).toEqual(false);
+        });
+
+        it("presentFullContent return true if block presentation mode is title_and_abstract", () => {
+            helper.component.block = { settings: { presentation_mode: 'title_and_abstract' } };
+            helper.component.ngOnInit();
+            expect(helper.component.presentFullContent()).toEqual(false);
+        });
+
+        it("presentAbstract display full content", () => {
+            helper.component.block = { settings: { presentation_mode: 'full_content' } };
+            helper.component.ngOnInit();
+            helper.detectChanges();
+
+            expect(helper.all("noosfero-article").length).toEqual(1);
+        });
+
         /**
          * Simulate the ArticleService ArticleEvent.removed event
          */

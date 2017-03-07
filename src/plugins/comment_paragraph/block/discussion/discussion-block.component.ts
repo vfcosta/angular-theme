@@ -3,6 +3,12 @@ import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
 import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
 import {Arrays} from "./../../../../lib/util/arrays";
 
+enum PRESENTATION_MODES {
+    TITLE_ONLY = <any>'title_only',
+    FULL_CONTENT = <any>'full_content',
+    TITLE_AND_ABSTRACT = <any>'title_and_abstract'
+}
+
 @Component({
     selector: "noosfero-comment-paragraph-plugin-discussion-block",
     templateUrl: 'plugins/comment_paragraph/block/discussion/discussion-block.html'
@@ -15,6 +21,9 @@ export class DiscussionBlockComponent {
 
     profile: noosfero.Profile;
     documents: Array<noosfero.Article>;
+    presentation_mode: PRESENTATION_MODES;
+
+    static PRESENTATION_MODES = PRESENTATION_MODES;
 
     constructor(private blockService: BlockService, private $state: any, public articleService: ArticleService) { }
 
@@ -24,6 +33,10 @@ export class DiscussionBlockComponent {
             this.documents = content.articles;
             this.block.hide = !this.documents || this.documents.length === 0;
         });
+        this.presentation_mode = PRESENTATION_MODES.TITLE_ONLY;
+        if (this.block && this.block.settings && this.block.settings.presentation_mode) {
+            this.presentation_mode = this.block.settings.presentation_mode;
+        }
         this.watchArticles();
     }
 
@@ -35,6 +48,14 @@ export class DiscussionBlockComponent {
 
     openDocument(article: any) {
         this.$state.go("main.profile.page", { page: article.path, profile: article.profile.identifier });
+    }
+
+    presentAbstract() {
+        return this.presentation_mode === PRESENTATION_MODES.TITLE_AND_ABSTRACT;
+    }
+
+    presentFullContent() {
+        return this.presentation_mode === PRESENTATION_MODES.FULL_CONTENT;
     }
 
 }
