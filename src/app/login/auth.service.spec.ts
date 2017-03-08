@@ -41,7 +41,10 @@ describe("Services", () => {
                 factory = getAngularServiceFactory();
                 authService = factory.getAngularService("AuthService");
                 $httpBackend = factory.getHttpBackendService();
-                $httpBackend.expectPOST("/api/v1/login", "login=user&password=password").respond(200, user);
+                let data = new FormData();
+                data.append('login', 'user');
+                data.append('password', 'password');
+                $httpBackend.expectPOST("/api/v1/login", data).respond(200, user);
             });
 
             it("should return loggedUser", (done) => {
@@ -56,7 +59,7 @@ describe("Services", () => {
             it("should emit event loggin successful with user logged data", (done: Function) => {
                 let successEvent: any = AuthEvents[AuthEvents.loginSuccess];
                 (<any>authService)[successEvent].subscribe((userThroughEvent: noosfero.User): any => {
-                    expect(userThroughEvent).toEqual(user);
+                    expect(userThroughEvent).toEqual(jasmine.objectContaining(user));
                     done();
                 });
                 authService.login(credentials);
@@ -68,7 +71,7 @@ describe("Services", () => {
                 authService.login(credentials);
                 $httpBackend.flush();
                 let actual: noosfero.User = authService.currentUser();
-                expect(actual).toEqual(user, "The returned user must be present");
+                expect(actual).toEqual(jasmine.objectContaining(user), "The returned user must be present");
             });
 
             it("should not return the current user after logout", () => {
