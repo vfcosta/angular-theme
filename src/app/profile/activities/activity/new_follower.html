@@ -1,7 +1,56 @@
-<i alt='{{"activity.new_follower.icon" | translate}}' class="fa fa-users"></i>
-<span> {{"activities.new_follower.description" | translate:{followers: ctrl.activity.params.follower_name.length}:"messageformat" }} </span>
-<span class="comma-separated">
-        <a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.follower_url[$index].profile})" ng-repeat="follower in ctrl.activity.params.follower_name">
-          <strong ng-bind="follower"></strong>
-        </a>
-</span>
+<div class="activity {{ctrl.activity.verb}}">
+    <br>
+    <noosfero-activity-header 
+    	[activity]="ctrl.activity" 
+    	[desc]="'activities.new_follower.description'"
+    	[profiles]="ctrl.activity.params.follower_name.length"
+    	[iconalt]="'activity.new_follower.icon'"
+    	[iconclass]="'fa fa-users'">
+    </noosfero-activity-header>
+    <div class="panel-body">
+		<span class="comma-separated">
+		<!--span class="col-md-12"-->
+			<a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.follower_url[$index].profile})" ng-repeat="follower in ctrl.activity.params.follower_name">
+	       	<!--a class="col-md-3" ui-sref="main.profile.info({profile: ctrl.activity.params.follower_url[$index].profile})" ng-repeat="follower in ctrl.activity.params.follower_name"-->
+	       		<img src="{{ctrl.activity.params.follower_profile_custom_icon[$index]}}" class="img-circle img-profile-nav-popup small">
+	       		<!--img src="{{ctrl.activity.params.follower_profile_custom_icon[$index]}}" class="img-circle img-profile-nav-popup avatar small"-->
+	       		<strong ng-bind="follower"></strong>
+			</a>
+		</span>
+
+		<div class="friends-block">
+		  <div class="friends-list">
+		    <div ng-repeat="follower in ctrl.activity.params.follower_name" class="friend-item">
+		      <a ui-sref="main.profile.info({profile: ctrl.activity.params.follower_url[$index].profile})" href class="friend-link">
+		      	<img src="{{ctrl.activity.params.follower_profile_custom_icon[$index]}}" class="friend-image item-avatar-img img-responsive  img-circle img-profile-nav-popup">
+		        <!--noosfero-profile-image [profile]="friend" class="friend-image"></noosfero-profile-image-->
+		        <div class="friend-name">{{follower}}</div>
+		      </a>
+		    </div>
+		  </div>
+		</div>
+
+
+    </div>
+</div>
+
+<!--
+-<timeline-badge class="info">
+-  <i alt='{{"activity.new_follower.icon" | translate}}' class="fa fa-users"></i>
+-</timeline-badge>
+-<timeline-panel>
+-  <timeline-heading>
+-    <h4 class="timeline-title">
+-      <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})"><strong ng-bind="ctrl.activity.user.name"></strong></a>
+-      <span> {{"activities.new_follower.description" | translate:{followers: ctrl.activity.params.follower_name.length}:"messageformat" }} </span>
+-      <span class="comma-separated">
+-        <a class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.follower_url[$index].profile})" ng-repeat="follower in ctrl.activity.params.follower_name">
+-          <strong ng-bind="follower"></strong>
+-        </a>
+-      </span>
+-    </h4>
+-    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.activity.created_at | dateFormat"></span></small></p>
+-  </timeline-heading>
+-  <div class="timeline-body"></div>
+-</timeline-panel>
+-->

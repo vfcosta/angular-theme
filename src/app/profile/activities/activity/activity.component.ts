@@ -1,10 +1,12 @@
 import {Component, Input, Inject} from "ng-forward";
 import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
+import { ActivityHeaderComponent } from "./activityheader.component";
 import { TranslatorService } from "../../../shared/services/translator.service";
 
 @Component({
     selector: "noosfero-activity",
-    templateUrl: 'app/profile/activities/activity/activity.html'
+    templateUrl: 'app/profile/activities/activity/activity.html',
+    directives: [ActivityHeaderComponent]
 })
 @Inject(EnvironmentService, TranslatorService)
 export class ActivityComponent {
@@ -14,6 +16,17 @@ export class ActivityComponent {
     images = {
         'new_friendship': 'friend_profile_custom_icon',
         'new_follower': 'follower_profile_custom_icon'
+    };
+
+    urls_attributes = {
+        'new_friendship': 'friend_url',
+        'new_follower': 'follower_url'
+    };
+
+    profiles_attributes = {
+        'new_friendship': 'friend_name',
+        'new_follower': 'follower_name',
+        'leave_scrap': 'target'
     };
 
     environment: noosfero.Environment;
@@ -26,7 +39,7 @@ export class ActivityComponent {
     }
 
     ngOnInit() {
-        console.log("onInit => ", this.activity);        
+        console.log("onInit.Activity => ", this.activity);        
     }
 
     getActivityTemplate() {
@@ -37,11 +50,50 @@ export class ActivityComponent {
     description() {
         console.log("Verb: ", this.activity.verb);
         console.log("Translating....");
-        let t1 = this.translatorService.translate("activities." + this.activity.verb + ".description");
-        return t1;
+        let key = "activities." + this.activity.verb + ".description";
+        let t1 = this.translatorService.translate(key);
+        console.log("Translation for [" + key + "] => ", t1);
+        return key;
     }
 
     profiles() {
-        return this.activity.params.length;
+        let profiles_attribute = this.profile_attribute();
+        console.log("Profiles_attribute: ", profiles_attribute);
+        console.log("Activity params: ", this.activity.params);
+        if (profiles_attribute && this.activity.params) {
+            let profiles_length = this.activity.params[profiles_attribute].length;
+            console.log("Profiles length: ", profiles_length);
+            return profiles_length;
+        }
+        return 0;
     }
+
+    profile_attribute() {
+        return this.profiles_attributes[this.activity.verb];
+    }
+
+    profile_is_array() {
+        if (this.activity.params) {
+            return Array.isArray(this.activity.params[this.profile_attribute()]);
+        }
+        return false;
+    }
+
+    url(index: any) {
+        let url_attribute = this.urls_attributes[this.activity.verb];
+        console.log("Url for index[" + index + "]=>", url_attribute);
+        if (url_attribute) {
+            let profile_url = this.activity.params[url_attribute][index].profile;
+            return profile_url;
+        }
+        return '';
+    }
+
+    hasTarget() {
+        if (this.activity['target']) {
+            return true;
+        }
+        return false;
+    }
+
 }
