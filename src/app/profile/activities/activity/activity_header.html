@@ -1,0 +1,13 @@
+
+<noosfero-profile-image [profile]="ctrl.activity.user" class="avatar"></noosfero-profile-image>
+<div class="panel-body">
+    <div class="card-title">
+      <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})">
+        <strong ng-bind="ctrl.activity.user.name"></strong>
+      </a>
+    </div>
+  	<div>
+    <i alt='{{ctrl.iconalt | translate}}' class="{{ctrl.iconclass}}"></i>
+    <span> {{ctrl.desc | translate:{profiles:ctrl.profiles}:"messageformat" }} </span>          
+</div>
+
