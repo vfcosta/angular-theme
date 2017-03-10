@@ -1,3 +1,4 @@
+import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
@@ -93,7 +94,10 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('profileList',
         downgradeComponent({ component: ProfileListComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
-    );
+    ).
+    directive('htmlEditor',
+        downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'value'] }) as angular.IDirectiveFactory
+    );;
 
 export let noosferoApp = bundle('main', MainComponent, [
     provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
