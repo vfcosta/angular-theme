@@ -8,7 +8,9 @@ import {Component, Input, Inject} from 'ng-forward';
 export class ArticleEditorComponent {
 
     @Input() article: noosfero.Article;
-
+    @Input() profile: noosfero.Profile;
+    @Input() path: string;
+    options: any;
     constructor(
         private $element: any,
         private $scope: ng.IScope,
@@ -22,6 +24,7 @@ export class ArticleEditorComponent {
         if (specificDirective !== "articleEditor" && this.$injector.has(specificDirective + 'Directive')) {
             directiveName = specificDirective.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
         }
-        this.$element.replaceWith(this.$compile('<' + directiveName + ' [article]="ctrl.article"></' + directiveName + '>')(this.$scope));
+        this.options = { filebrowserBrowseUrl: '/ng2-filemanager?editor=CKEditor&profile=' + this.path};
+        this.$element.replaceWith(this.$compile('<' + directiveName + ' [article]="ctrl.article" [options]="ctrl.options"></' + directiveName + '>')(this.$scope));
     }
 }
