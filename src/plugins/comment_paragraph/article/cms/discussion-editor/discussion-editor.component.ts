@@ -9,6 +9,7 @@ import * as moment from 'moment';
 export class DiscussionEditorComponent {
 
     @Input() article: noosfero.Article;
+    @Input() options: any;
     start_date: Date;
     end_date: Date;
 

@@ -26,7 +26,7 @@ export class ArticleEditorComponent {
             directiveName = specificDirective.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
         }
         let parentId = this.article.parent ? this.article.parent.id : null;
-        this.options = { filebrowserBrowseUrl: `/ng2-filemanager?editor=CKEditor&profile=/api/v1/profiles/${this.profile.id}/articles?content_type=Folder,UploadedFile&parent_id=${parentId}`};
+        this.options = { removeButtons: 'Image', filebrowserBrowseUrl: `/ng2-filemanager?editor=CKEditor&profile=/api/v1/profiles/${this.profile.id}/articles?content_type=Folder,UploadedFile&parent_id=${parentId}`};
         this.$element.replaceWith(this.$compile('<' + directiveName + ' [article]="ctrl.article" [options]="ctrl.options"></' + directiveName + '>')(this.$scope));
     }
 }
