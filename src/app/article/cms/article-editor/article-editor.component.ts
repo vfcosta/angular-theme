@@ -11,6 +11,7 @@ export class ArticleEditorComponent {
     @Input() profile: noosfero.Profile;
     @Input() path: string;
     options: any;
+
     constructor(
         private $element: any,
         private $scope: ng.IScope,
@@ -24,7 +25,8 @@ export class ArticleEditorComponent {
         if (specificDirective !== "articleEditor" && this.$injector.has(specificDirective + 'Directive')) {
             directiveName = specificDirective.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
         }
-        this.options = { filebrowserBrowseUrl: '/ng2-filemanager?editor=CKEditor&profile=/api/v1/profiles/' + this.profile.id + '/articles?content_type=Folder,UploadedFile&parent_id=' + this.article.parent.id};
+        let parentId = this.article.parent ? this.article.parent.id : null;
+        this.options = { filebrowserBrowseUrl: `/ng2-filemanager?editor=CKEditor&profile=/api/v1/profiles/${this.profile.id}/articles?content_type=Folder,UploadedFile&parent_id=${parentId}`};
         this.$element.replaceWith(this.$compile('<' + directiveName + ' [article]="ctrl.article" [options]="ctrl.options"></' + directiveName + '>')(this.$scope));
     }
 }

@@ -1,7 +1,7 @@
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import {HtmlEditorComponent} from "./html-editor.component";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
 describe("Components", () => {
@@ -11,7 +11,7 @@ describe("Components", () => {
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 declarations: [HtmlEditorComponent],
-                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+                schemas: [NO_ERRORS_SCHEMA]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(HtmlEditorComponent);
                 component = fixture.componentInstance;
@@ -19,7 +19,7 @@ describe("Components", () => {
         }));
 
         it("render a textarea", () => {
-            expect(fixture.debugElement.queryAll(By.css("textarea")).length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css("ckeditor")).length).toEqual(1);
         });
     });
 });

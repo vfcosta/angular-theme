@@ -22,15 +22,16 @@ describe("Article Cms", () => {
 
     beforeEach(() => {
         $window = jasmine.createSpyObj("$window", ["back"]);
+        $window.location = {pathname: ''};
         $state = jasmine.createSpyObj("$state", ["go"]);
         notification = jasmine.createSpyObj("notification", ["success"]);
-        profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier"]);
+        profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier", "getCurrentProfile"]);
         articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["createInParent", "updateArticle", "get"]);
 
         $stateParams = { profile: "profile" };
 
-        let setCurrentProfileByIdentifierResponse = $q.defer();
-        setCurrentProfileByIdentifierResponse.resolve(profile);
+        let profilePromise = $q.defer();
+        profilePromise.resolve(profile);
 
         let articleCreate = $q.defer();
         articleCreate.resolve({ data: { path: "path", type: "TextArticle", profile: { identifier: "profile" } } });
@@ -38,7 +39,8 @@ describe("Article Cms", () => {
         let articleGet = $q.defer();
         articleGet.resolve({ data: { path: "parent-path", type: "TextArticle", profile: { identifier: "profile" } } });
 
-        profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(setCurrentProfileByIdentifierResponse.promise);
+        profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profilePromise.promise);
+        profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(profilePromise.promise);
         articleServiceMock.createInParent = jasmine.createSpy("createInParent").and.returnValue(articleCreate.promise);
         articleServiceMock.updateArticle = jasmine.createSpy("updateArticle").and.returnValue(articleCreate.promise);
         articleServiceMock.get = jasmine.createSpy("get").and.returnValue(articleGet.promise);
@@ -76,6 +78,7 @@ describe("Article Cms", () => {
         $stateParams['parent_id'] = null;
         $stateParams['id'] = 2;
         let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        $rootScope.$apply();
         component.save();
         $rootScope.$apply();
         expect(articleServiceMock.updateArticle).toHaveBeenCalledWith(component.article);

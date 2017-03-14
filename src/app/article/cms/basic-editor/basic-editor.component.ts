@@ -5,7 +5,6 @@ import { Component, Input, Inject } from 'ng-forward';
     selector: 'article-basic-editor',
     templateUrl: "app/article/cms/basic-editor/basic-editor.html"
 })
-@Inject("$stateParams", ProfileService)
 export class BasicEditorComponent {
 
     @Input() article: noosfero.Article;
