@@ -1,17 +1,24 @@
-<timeline-badge class="success">
-  <i alt='{{"activity.create_article.icon" | translate}}' class="fa fa-file-text"></i>
-</timeline-badge>
-      <span> {{"activities.create_article.description" | translate}} </span>
-      <span><a ui-sref="main.profile.info({profile: ctrl.activity.target.article.profile.identifier})">
-        <strong ng-bind="ctrl.activity.target.article.profile.name"></strong>
-      </a>
+<div class="activity {{ctrl.activity.verb}}">
+    <br>
+    <noosfero-activity-header 
+      [activity]="ctrl.activity" 
+      [desc]="'activities.create_article.description'"
+      [iconalt]="'activity.create_article.icon'"
+      [iconclass]="'fa fa-file-text'">
+    </noosfero-activity-header>
+    <div class="panel-body">
+      <span>
+        <div class="article">
+          <div class="title">
+            <a ui-sref="main.profile.page({profile: ctrl.activity.target.profile.identifier, page: ctrl.activity.target.path})"
+               ng-bind="ctrl.activity.target.title"></a>
+          </div>
+          <p class="lead small">
+            <div ng-bind-html="ctrl.activity.target.body | stripTags | truncate: 600 : '...': true"></div>
+          </p>
+        </div>
       </span>
-<div class="article">
-  <div class="title">
-    <a ui-sref="main.profile.page({profile: ctrl.activity.target.article.profile.identifier, page: ctrl.activity.target.article.path})"
-       ng-bind="ctrl.activity.target.article.title"></a>
-  </div>
-  <div class="lead small">
-    <div ng-bind-html="ctrl.activity.target.article.body | stripTags | truncate: 100 : '...': true"></div>
-  </div>
+
+    </div>
 </div>
+

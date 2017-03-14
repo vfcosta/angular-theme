@@ -1,12 +1,13 @@
-<timeline-badge class="success">
-  <i alt='{{"activity.upload_image.icon" | translate}}' class="fa fa-file-text"></i>
-</timeline-badge>
-  <span> {{"activities.upload_image.description" | translate}} </span>
-  <span>
-    <a ui-sref="main.profile.info({profile: ctrl.activity.target.article.profile.identifier})">
-      <strong ng-bind="ctrl.activity.target.article.profile.name"></strong>
-    </a>
-  </span>
+<div class="activity {{ctrl.activity.verb}}">
+    <br>
+    <noosfero-activity-header 
+      [activity]="ctrl.activity" 
+      [desc]="'activities.upload_image.description'"
+      [iconalt]="'activity.upload_image.icon'"
+      [iconclass]="'fa fa-file-text'">
+    </noosfero-activity-header>
+</div>
+
 <div class="row">
   <div class="col-xs-12 col-md-6" ng-repeat="path in ctrl.activity.params.thumbnail_path">
     <a class="thumbnail" ng-href="{{ctrl.activity.params.view_url[$index] | noosferoUrl}}">

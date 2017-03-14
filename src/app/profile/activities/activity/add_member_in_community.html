@@ -1,4 +1,9 @@
-<timeline-badge class="info">
-  <i alt='{{"activity.add_member_in_community.icon" | translate}}' class="fa fa-user-plus"></i>
-</timeline-badge>
-  <span> {{"activities.add_member_in_community.description" | translate}}</span>
+<div class="activity {{ctrl.activity.verb}}">
+    <br>
+    <noosfero-activity-header 
+      [activity]="ctrl.activity" 
+      [desc]="'activities.add_member_in_community.description'"
+      [iconalt]="'activity.add_member_in_community.icon'"
+      [iconclass]="'fa fa-user-plus'">
+    </noosfero-activity-header>
+</div>
