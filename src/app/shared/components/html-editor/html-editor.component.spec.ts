@@ -18,8 +18,15 @@ describe("Components", () => {
             });
         }));
 
-        it("render a textarea", () => {
+        it("render ckeditor", () => {
+            component.object = { value: 'test' };
+            component.attribute = 'value';
+            fixture.detectChanges();
             expect(fixture.debugElement.queryAll(By.css("ckeditor")).length).toEqual(1);
+        });
+
+        it("render nothing when object is null", () => {
+            expect(fixture.debugElement.queryAll(By.css("ckeditor")).length).toEqual(0);
         });
     });
 });

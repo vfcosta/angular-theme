@@ -96,7 +96,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({ component: ProfileListComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
     ).
     directive('htmlEditor',
-        downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'value'] }) as angular.IDirectiveFactory
+        downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'object', 'attribute'] }) as angular.IDirectiveFactory
     );;
 
 export let noosferoApp = bundle('main', MainComponent, [

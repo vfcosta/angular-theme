@@ -1,4 +1,4 @@
-<ckeditor
-  [(ngModel)]="value"
+<ckeditor *ngIf="object"
+  [(ngModel)]="object[attribute]"
   [config]="options">
 </ckeditor>

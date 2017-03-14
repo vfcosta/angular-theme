@@ -7,5 +7,6 @@ import {Component, Input} from '@angular/core';
 export class HtmlEditorComponent {
 
     @Input() options: any = { };
-    @Input() value: any;
+    @Input() object: any;
+    @Input() attribute: string;
 }
