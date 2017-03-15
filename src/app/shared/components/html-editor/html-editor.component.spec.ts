@@ -1,26 +1,32 @@
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import {HtmlEditorComponent} from "./html-editor.component";
-
-const htmlTemplate: string = '<html-editor [(value)]="ctrl.value" [options]="ctrl.options"></html-editor>';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
 
 describe("Components", () => {
     describe("Html Editor Component", () => {
-
-        let helper: ComponentTestHelper<HtmlEditorComponent>;
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let properties = { value: "value" };
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [HtmlEditorComponent],
-                properties: properties
+        let fixture: ComponentFixture<HtmlEditorComponent>;
+        let component: HtmlEditorComponent;
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [HtmlEditorComponent],
+                schemas: [NO_ERRORS_SCHEMA]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(HtmlEditorComponent);
+                component = fixture.componentInstance;
             });
-            helper = new ComponentTestHelper<HtmlEditorComponent>(cls, done);
+        }));
+
+        it("render ckeditor", () => {
+            component.object = { value: 'test' };
+            component.attribute = 'value';
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css("ckeditor")).length).toEqual(1);
         });
 
-        it("render a textarea", () => {
-            expect(helper.find("textarea").length).toEqual(1);
+        it("render nothing when object is null", () => {
+            expect(fixture.debugElement.queryAll(By.css("ckeditor")).length).toEqual(0);
         });
     });
 });

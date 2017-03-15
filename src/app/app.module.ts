@@ -1,3 +1,4 @@
+import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { UiSrefDirective } from './shared/directives/ui-sref-directive';
@@ -25,6 +26,7 @@ import { ImageCropperModule } from 'ng2-img-cropper';
 import { ModalModule } from 'ng2-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import {NgPipesModule} from 'ngx-pipes';
+import { CKEditorModule } from 'ng2-ckeditor';
 import * as plugins from "../plugins";
 
 @NgModule({
@@ -36,18 +38,19 @@ import * as plugins from "../plugins";
         DynamicComponentModule.forRoot({imports: [AppModule]}),
         ModalModule.forRoot(),
         ImageCropperModule,
-        NgPipesModule
+        NgPipesModule,
+        CKEditorModule
     ],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent,
         StatisticsBlockComponent, ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent,
-        MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent,  UiSrefDirective, 
-        ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent, 
-        ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
+        MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent,  UiSrefDirective,
+        ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent,
+        ImageUploadCropComponent, ProfileListComponent, HtmlEditorComponent].concat(plugins.ng2MainComponents),
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent,
         StatisticsBlockComponent, ProfileImageComponent, TaskListComponent,
-        CommunitiesBlockComponent, MembersBlockComponent,  PeopleBlockComponent, CommunityMembersComponent, 
-        ProfileFastEditionComponent, 
+        CommunitiesBlockComponent, MembersBlockComponent,  PeopleBlockComponent, CommunityMembersComponent,
+        ProfileFastEditionComponent, HtmlEditorComponent,
         ImageUploadComponent, ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'ProfileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',

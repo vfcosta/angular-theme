@@ -3,7 +3,7 @@ import {BasicEditorComponent} from "../basic-editor/basic-editor.component";
 import {ComponentTestHelper, createClass} from '../../../../spec/component-test-helper';
 import * as helpers from "../../../../spec/helpers";
 
-const htmlTemplate: string = '<article-editor [article]="ctrl.article"></article-editor>';
+const htmlTemplate: string = '<article-editor [article]="ctrl.article" [profile]="ctrl.profile"></article-editor>';
 
 describe("Components", () => {
     describe("Article Editor Component", () => {
@@ -12,7 +12,7 @@ describe("Components", () => {
         beforeEach(angular.mock.module("templates"));
 
         beforeEach((done) => {
-            let properties = { article: { type: "TextArticle" } };
+            let properties = { article: { type: "TextArticle", parent: { id: 20 } }, profile: { id: 10 } };
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [ArticleEditorComponent, BasicEditorComponent],

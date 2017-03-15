@@ -1,1 +1,4 @@
-<textarea ckeditor="ctrl.options" class="form-control" ng-model="ctrl.value"></textarea>
+<ckeditor *ngIf="object"
+  [(ngModel)]="object[attribute]"
+  [config]="options">
+</ckeditor>

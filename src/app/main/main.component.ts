@@ -58,7 +58,6 @@ import { BodyStateClassesService } from "./../shared/services/body-state-classes
 import { Navbar } from "../layout/navbar/navbar";
 
 import { MainBlockComponent } from "../layout/blocks/main/main-block.component";
-import { HtmlEditorComponent } from "../shared/components/html-editor/html-editor.component";
 import { PermissionDirective } from "../shared/components/permission/permission.directive";
 import { BootstrapResizableDirective } from "../shared/components/bootstrap-resizable/bootstrap-resizable.directive";
 import { EditableDirective } from "../shared/components/editable/editable.directive";
@@ -137,7 +136,7 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         BlockSettingsComponent, DisplayContentBlockComponent,
-        LinkListBlockComponent, MenuBlockComponent, HtmlEditorComponent, ProfileComponent,
+        LinkListBlockComponent, MenuBlockComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         NoosferoTemplate, NoosferoUrl, DateFormat,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
@@ -151,7 +150,7 @@ export class EnvironmentContent {
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
-        "ui.router", "ui.bootstrap", "toastr", "ngCkeditor", "angular-bind-html-compile", "angularMoment",
+        "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",
         "noosfero.init", "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if",

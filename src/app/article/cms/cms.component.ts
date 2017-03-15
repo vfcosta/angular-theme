@@ -20,11 +20,14 @@ export class CmsComponent {
 
     article: noosfero.Article;
     parent: noosfero.Article = <noosfero.Article>{};
+    profile: noosfero.Profile;
 
     id: number;
     parentId: number;
     profileIdentifier: string;
     loading: boolean | number;
+    path: string;
+
 
     constructor(private articleService: ArticleService,
         private profileService: ProfileService,
@@ -36,6 +39,12 @@ export class CmsComponent {
         this.parentId = this.$stateParams['parent_id'];
         this.profileIdentifier = this.$stateParams["profile"];
         this.id = this.$stateParams['id'];
+
+        this.path = $window.location.pathname;
+
+        this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
+            this.profile = profile;
+        });
 
         if (this.parentId) {
             this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
@@ -54,7 +63,8 @@ export class CmsComponent {
 
     save() {
         this.loading = true;
-        this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
+
+        this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             if (this.id) {
                 return this.articleService.updateArticle(this.article);
             } else if (this.parentId) {
