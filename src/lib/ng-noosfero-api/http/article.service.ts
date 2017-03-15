@@ -4,6 +4,8 @@ import { ProfileService } from "./profile.service";
 import { NoosferoRootScope } from "./../../../app/shared/models/interfaces";
 import { EnvironmentService } from './environment.service';
 
+declare var _: any;
+
 @Injectable()
 @Inject("Restangular", "$q", "$log", ProfileService, "$document", "environmentService")
 export class ArticleService extends RestangularService<noosfero.Article> {
@@ -59,12 +61,8 @@ export class ArticleService extends RestangularService<noosfero.Article> {
             'Content-Type': 'application/json'
         };
         let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
-        // TODO dynamically copy the selected attributes to update
         let attributesToUpdate: any = {
-            article: {
-                name: article.name, body: article.body, published: article.published,
-                start_date: article['start_date'], end_date: article['end_date']
-            }
+            article: Object.assign({}, _.omitBy(_.pick(article, ['name', 'body', 'published', 'start_date', 'end_date']), _.isNull))
         };
         let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Article>> = this.getElement(article.id).customPOST(attributesToUpdate, null, null, headers);
         restRequest.then(this.getHandleSuccessFunction(deferred))

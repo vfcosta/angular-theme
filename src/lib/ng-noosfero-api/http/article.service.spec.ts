@@ -91,6 +91,16 @@ describe("Services", () => {
                 });
                 $httpBackend.flush();
             });
+
+            it("should update an article", (done) => {
+                let article: noosfero.Article = <any>{ id: 10, name: "article name" };
+                $httpBackend.expectPOST(`/api/v1/articles/10`, { article: {name: "article name"} }).respond(200, { article: { id: 2 } });
+                articleService.updateArticle(article).then((result: noosfero.RestResult<noosfero.Article>) => {
+                    expect(result.data).toEqual({ id: 2 });
+                    done();
+                });
+                $httpBackend.flush();
+            });
         });
 
     });
