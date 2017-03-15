@@ -1,23 +1,24 @@
-.w3-container{padding:0.01em 16px}
-.w3-circle{border-radius:50%!important}
-.w3-left{float:left!important}
-.w3-right{float:right!important}
-.w3-margin-left{margin-left:16px!important}
-.w3-margin-right{margin-right:16px!important}
-.w3-margin{margin:16px!important}
-.w3-margin-0{margin:0!important}
+/*
+* Borrowed from w3c
+*/
+.cards-container{padding:0.01em 16px}
+.cards-circle{border-radius:50%!important}
+.cards-left{float:left!important}
+.cards-margin-right{margin-right:16px!important}
+.cards-margin{margin:16px!important}
+
 .card-title {
 	color: #9ec23b;
 }
 
 .activity {
 	@extend .panel;
-	@extend .w3-container;
-	@extend .w3-margin;
+	@extend .cards-container;
+	@extend .cards-margin;
 }
 
 .avatar {
-	@extend .w3-left;
-	@extend .w3-circle;
-	@extend .w3-margin-right;
+	@extend .cards-left;
+	@extend .cards-circle;
+	@extend .cards-margin-right;
 }
