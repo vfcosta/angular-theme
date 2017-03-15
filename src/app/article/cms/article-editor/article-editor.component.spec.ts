@@ -16,7 +16,10 @@ describe("Components", () => {
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [ArticleEditorComponent, BasicEditorComponent],
-                properties: properties
+                properties: properties,
+                providers: [
+                    helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))
+                ]
             });
             helper = new ComponentTestHelper<ArticleEditorComponent>(cls, done);
         });
