@@ -43,7 +43,6 @@ export class ActivityComponent {
     * causes errors on Angular
     */
     ngOnInit() {
-        //console.log("onInit.Activity => ", this.activity);
         if (this.activity.verb == 'new_follower' || this.activity.verb == 'new_friendship') {
             this.profiles_list(this.activity.verb);
         }
@@ -54,25 +53,12 @@ export class ActivityComponent {
     }
 
     /**
-    * Returns the number of profiles associated with the current activity
-    */
-    profiles() {
-        let profiles_attribute = this.profile_attribute();
-        if (profiles_attribute && this.activity.params) {
-            let profiles_length = this.activity.params[profiles_attribute].length;
-            console.log("Profiles length: ", profiles_length);
-            return profiles_length;
-        }
-        return 0;
-    }
-
-    /**
     * Create a list of Profiles based on activity name, image url and identifier
     */
     private profiles_list(type: string) {
         let profiles_attribute = this.profile_attribute();
-        for (var i = this.activity.params[profiles_attribute].length - 1; i >= 0; i--) {
-            let profile = { 
+        for (var i = 0; i < this.activity.params[profiles_attribute].length; i++) {
+            let profile = {
                 name: this.name(i), 
                 identifier: this.url(i),
                 image: { url: this.icon(i) }
@@ -103,19 +89,10 @@ export class ActivityComponent {
 
     url(index: any) {
         let url_attribute = this.urls_attributes[this.activity.verb];
-        //console.log("Url for index[" + index + "]=>", url_attribute);
         if (url_attribute) {
-            let profile_url = this.activity.params[url_attribute][index].profile;
-            return profile_url;
+            return this.activity.params[url_attribute][index].profile;
         }
         return '';
-    }
-
-    hasTarget() {
-        if (this.activity['target']) {
-            return true;
-        }
-        return false;
     }
 
 }

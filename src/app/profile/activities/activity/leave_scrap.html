@@ -8,17 +8,17 @@
     </noosfero-activity-header>
     <div class="panel-body">
 		<span class="title">
-			<a ng-if="!ctrl.hasTarget()" class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.receiver_url.profile})">
+			<a ng-if="!ctrl.activity.target" class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.receiver_url.profile})">
 			  <span>{{ctrl.activity.params.receiver_name}}</span>
 			</a>
-			<a ng-if="ctrl.hasTarget()" class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.target.identifier})">
+			<a ng-if="ctrl.activity.target" class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.target.identifier})">
 			  <span>{{ctrl.activity.target.name}}</span>
 			</a>			
 		</span>
 		<span>
 			<div class="scrap">
-			  <div ng-if="!ctrl.hasTarget()" ng-bind-html="ctrl.activity.params.content | stripTags | truncate: 100 : '...': true"></div>
-			  <div ng-if="ctrl.hasTarget()" ng-bind-html="ctrl.activity.content | stripTags | truncate: 100 : '...': true"></div>
+			  <div ng-if="!ctrl.activity.target" ng-bind-html="ctrl.activity.params.content | stripTags | truncate: 100 : '...': true"></div>
+			  <div ng-if="ctrl.activity.target" ng-bind-html="ctrl.activity.content | stripTags | truncate: 100 : '...': true"></div>
 			</div>
 		</span>
 
