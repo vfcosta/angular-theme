@@ -5,7 +5,7 @@ import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service
     selector: "noosfero-breadcrumbs-plugin-content-breadcrumbs-block",
     templateUrl: 'plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.html'
 })
-@Inject(BlockService, "$scope", "$state", "$stateParams")
+@Inject(BlockService, "$state", "$stateParams", "$transitions")
 export class BreadcrumbsBlockComponent {
 
     @Input() block: any;
@@ -15,12 +15,14 @@ export class BreadcrumbsBlockComponent {
     links: any[] = [];
 
     constructor(private blockService: BlockService,
-        private $scope: ng.IScope,
         private $state: ng.ui.IStateService,
-        private $stateParams: ng.ui.IStateParamsService) { }
+        private $stateParams: ng.ui.IStateParamsService,
+        private $transitions: any) { }
 
     ngOnInit() {
-        this.$scope.$on('$stateChangeSuccess', () => this.setNavigationState());
+        this.$transitions.onSuccess({}, (trans) => {
+            this.setNavigationState();
+        });
         this.setNavigationState();
         this.profile = this.owner;
     }

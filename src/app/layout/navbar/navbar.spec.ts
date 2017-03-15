@@ -22,7 +22,7 @@ describe("Components", () => {
         let sessionService: SessionService;
         let designModeService: DesignModeService;
         let provideFunc = provide;
-
+        let $transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
         let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment"]);
         environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
 
@@ -82,6 +82,9 @@ describe("Components", () => {
                     }),
                     provide('$localStorage', {
                         useValue: <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } }
+                    }),
+                    provide('$transitions', {
+                        useValue: $transitions
                     })
                 ].concat(helpers.provideFilters("translateFilter")),
                 directives: [Navbar],

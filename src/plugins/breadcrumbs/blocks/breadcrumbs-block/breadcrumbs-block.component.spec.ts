@@ -15,11 +15,12 @@ describe("Components", () => {
         mockedBlockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ links: links }));
         let state = jasmine.createSpyObj("state", ["go"]);
         let stateParams = {};
+        let transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
 
         let providers = [
             new Provider('$state', { useValue: state }),
             new Provider('$stateParams', { useValue: stateParams }),
-            new Provider('$scope', { useValue: helpers.mocks.scopeWithEvents }),
+            new Provider('$transitions', { useValue: transitions }),
             new Provider('BlockService', {
                 useValue: mockedBlockService
             })

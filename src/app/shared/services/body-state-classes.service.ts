@@ -24,7 +24,7 @@ export interface StartParams {
  *         - full-content
  */
 @Injectable()
-@Inject("$rootScope", "$document", "$state", AuthService, DesignModeService, "$localStorage")
+@Inject("$document", "$state", AuthService, DesignModeService, "$localStorage", "$transitions")
 export class BodyStateClassesService {
 
     private started: boolean = false;
@@ -38,12 +38,12 @@ export class BodyStateClassesService {
     private bodyElement: ng.IAugmentedJQuery = null;
 
     constructor(
-        private $rootScope: ng.IRootScopeService,
         private $document: ng.IDocumentService,
         private $state: ng.ui.IStateService,
         private authService: AuthService,
         private designModeService: DesignModeService,
-        private $localStorage: INoosferoLocalStorage
+        private $localStorage: INoosferoLocalStorage,
+        private $transitions: any
     ) {
     }
 
@@ -92,13 +92,6 @@ export class BodyStateClassesService {
         return this;
     }
 
-    private getStateChangeSuccessHandlerFunction(bodyElement: ng.IAugmentedJQuery): (event: ng.IAngularEvent, toState: ng.ui.IState) => void {
-        let self = this;
-        return (event: ng.IAngularEvent, toState: ng.ui.IState) => {
-            self.switchStateClasses(bodyElement, toState);
-        };
-    }
-
     private switchStateClasses(bodyElement: ng.IAugmentedJQuery, state: ng.ui.IState) {
         HtmlUtils.removeCssClassByPrefix(bodyElement[0], BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX);
         bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + state.name);
@@ -126,7 +119,9 @@ export class BodyStateClassesService {
     private setupStateClassToggle() {
         let bodyElement = this.getBodyElement();
         bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + this.$state.current.name);
-        this.$rootScope.$on("$stateChangeSuccess", this.getStateChangeSuccessHandlerFunction(bodyElement));
+        this.$transitions.onSuccess({}, (trans) => {
+            this.switchStateClasses(bodyElement, trans.$to());
+        });
     }
 
     /**

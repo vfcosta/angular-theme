@@ -12,8 +12,7 @@ describe("BodyStateClasses Service", () => {
     let currentStateName = "main";
     let bodyStateClasseService: BodyStateClassesService;
     let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
-    let $rootScope: ng.IRootScopeService = <any>{},
-        $document: ng.IDocumentService = <any>{},
+    let $document: ng.IDocumentService = <any>{},
         $state: ng.ui.IStateService = <any>{
             current: {
                 name: currentStateName
@@ -24,10 +23,14 @@ describe("BodyStateClasses Service", () => {
         bodyElJq: any,
         designModeService = new DesignModeService($localStorage);
 
-
+    let transitionFunction: Function;
+    let $transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
+    $transitions.onSuccess = (obj, func: Function) => {
+        transitionFunction = func;
+    };
 
     let getService = (): BodyStateClassesService => {
-        return new BodyStateClassesService($rootScope, $document, $state, authService, designModeService, $localStorage);
+        return new BodyStateClassesService($document, $state, authService, designModeService, $localStorage, $transitions);
     };
 
     beforeEach(() => {
@@ -38,7 +41,6 @@ describe("BodyStateClasses Service", () => {
 
     it("should add the class noosfero-user-logged to the body element if the user is authenticated", () => {
         authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
-        $rootScope.$on = jasmine.createSpy("$on");
 
         let service = getService();
 
@@ -51,7 +53,6 @@ describe("BodyStateClasses Service", () => {
     });
 
     it("should add the class noosfero-route-[currentStateName] the body element", () => {
-        $rootScope.$on = jasmine.createSpy("$on");
         let service = getService();
 
         bodyElJq.addClass = jasmine.createSpy("addClass");
@@ -113,11 +114,10 @@ describe("BodyStateClasses Service", () => {
         expect(bodyElJq.removeClass).toHaveBeenCalledWith(userLoggedClassName);
     });
 
-    it("should capture $stateChangeSuccess event and switch route class in the body element", () => {
+    it("should capture transition event and switch route class in the body element", () => {
         let userLoggedClassName = BodyStateClassesService.USER_LOGGED_CLASSNAME;
 
         authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(false);
-        $rootScope = <any>helpers.mocks.scopeWithEvents();
         bodyElJq.addClass = (className: string) => {
             bodyEl.className = className;
         };
@@ -132,8 +132,8 @@ describe("BodyStateClasses Service", () => {
         // checks if the bodyEl has a class indicating the currentState
         expect(bodyEl.className).toEqual(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + currentStateName);
 
-        // emit the event $stateChangeSuccess
-        $rootScope.$emit("$stateChangeSuccess", null, { name: "new-route" });
+        // call the transition function
+        transitionFunction({$to: () => { return {name: 'new-route' }; }});
 
         // and check now if the bodyEl has a class indicating the new state route
         expect(bodyEl.className).toEqual(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + "new-route");
