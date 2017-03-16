@@ -1,17 +1,16 @@
 <div class="activity {{ctrl.activity.verb}}">
-    <br>
     <noosfero-activity-header 
       [activity]="ctrl.activity" 
       [desc]="'activities.upload_image.description'"
       [iconalt]="'activity.upload_image.icon'"
       [iconclass]="'fa fa-file-text'">
     </noosfero-activity-header>
-</div>
 
-<div class="row">
-  <div class="col-xs-12 col-md-6" ng-repeat="path in ctrl.activity.params.thumbnail_path">
-    <a class="thumbnail" ng-href="{{ctrl.activity.params.view_url[$index] | noosferoUrl}}">
-      <img ng-src="{{ctrl.environment.host}}{{path}}" alt="descricao da imagem">
-    </a>
+  <div class="row">
+    <div class="col-xs-12 col-md-6" ng-repeat="path in ctrl.activity.params.thumbnail_path">
+      <a class="thumbnail" ng-href="{{ctrl.activity.params.view_url[$index] | noosferoUrl}}">
+        <img ng-src="{{ctrl.environment.host}}{{path}}" alt="descricao da imagem">
+      </a>
+    </div>
   </div>
 </div>

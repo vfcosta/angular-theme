@@ -6,8 +6,8 @@
         <strong ng-bind="ctrl.activity.user.name"></strong>
       </a>
     </div>
-  	<div>
-    <i alt='{{ctrl.iconalt | translate}}' class="{{ctrl.iconclass}}"></i>
-    <span> {{ctrl.desc | translate:{profiles:ctrl.profiles}:"messageformat" }} </span>          
+    <div class="card-type">
+      <i alt='{{ctrl.iconalt | translate}}' class="{{ctrl.iconclass}}"></i>
+      <span> {{ctrl.desc | translate:{profiles:ctrl.profiles}:"messageformat" }} </span>          
+    </div>
 </div>
-
