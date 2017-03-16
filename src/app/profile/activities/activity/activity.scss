@@ -1,24 +1,27 @@
-/*
-* Borrowed from w3c
-*/
-.cards-container{padding:0.01em 16px}
-.cards-circle{border-radius:50%!important}
-.cards-left{float:left!important}
-.cards-margin-right{margin-right:16px!important}
-.cards-margin{margin:16px!important}
-
-.card-title {
-	color: #9ec23b;
-}
-
 .activity {
 	@extend .panel;
-	@extend .cards-container;
-	@extend .cards-margin;
-}
-
-.avatar {
-	@extend .cards-left;
-	@extend .cards-circle;
-	@extend .cards-margin-right;
+	padding: 15px 16px 0 16px;
+	.profile-list {
+		border: 0;
+		.profile-item {
+			min-height: 62px;
+		}
+	}
+	.card-type {
+		i {
+			color: #bdbdbd;
+		}
+	}
+	.card-title {
+		a {
+			color: $secondary-color;
+		}
+	}
+	.avatar {
+		float: left;
+		margin-right: 16px;
+		.img-profile-nav-popup {
+			max-width: 3em;
+		}
+	}
 }
