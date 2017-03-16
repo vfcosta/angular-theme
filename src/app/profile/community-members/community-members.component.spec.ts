@@ -3,8 +3,9 @@ import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommunityMembersComponent } from './community-members.component';
+import { PaginationModule } from 'ng2-bootstrap';
 import * as helpers from "../../../spec/helpers";
 
 describe("Components", () => {
@@ -15,19 +16,19 @@ describe("Components", () => {
         let state = jasmine.createSpyObj("$state", ["href"]);
         let profileService = jasmine.createSpyObj("profileService", ["getCurrentProfile", "getMembers"]);
         profileService.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ people: [{ identifier: "person1" }] }));
-        let currentProfile = {id: 1};
-        let members = [{id: 1 }, { id: 2 }];
+        let currentProfile = { id: 1 };
+        let members = [{ id: 1 }, { id: 2 }];
 
         profileService.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(
-          Promise.resolve({
-              data: currentProfile
-          }));
+            Promise.resolve({
+                data: currentProfile
+            }));
 
         profileService.getMembers = jasmine.createSpy("getMembers").and.returnValue(
-          Promise.resolve({
-              headers: () => { },
-              data: members
-          }));
+            Promise.resolve({
+                headers: () => { },
+                data: members
+            }));
 
 
         let translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
@@ -40,7 +41,7 @@ describe("Components", () => {
                     { provide: "$state", useValue: state },
                     { provide: "translatorService", useValue: translatorService }
                 ],
-                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+                schemas: [NO_ERRORS_SCHEMA]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(CommunityMembersComponent);
                 component = fixture.componentInstance;

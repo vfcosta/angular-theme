@@ -1,5 +1,5 @@
 import { Component, Inject, Input } from '@angular/core';
-import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
     selector: "noosfero-community-members",
@@ -18,19 +18,18 @@ export class CommunityMembersComponent {
         this.membersPerPage = 20;
         this.totalMembers = 0;
 
-        this.loadPage();
+        this.loadPage({ page: 1 });
     }
 
-    loadPage() {
+    loadPage($event: any) {
         let filters = {
             per_page: this.membersPerPage,
-            page: this.currentPage
+            page: $event.page
         };
-
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             return this.profileService.getMembers(profile, filters);
         }).then((result: any) => {
-            // this.totalMembers = <number>result.headers("total");
+            this.totalMembers = <number>result.headers("total");
             this.members = result.data;
         });
     }
