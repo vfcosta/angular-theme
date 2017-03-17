@@ -69,7 +69,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({ component: TaskListComponent, inputs: ['tasks'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoCommunitiesBlock',
-        downgradeComponent({ component: CommunitiesBlockComponent }) as angular.IDirectiveFactory
+        downgradeComponent({ component: CommunitiesBlockComponent, inputs: ['block', 'owner']  }) as angular.IDirectiveFactory
     ).
     directive('noosferoMembersBlock',
     downgradeComponent({ component: MembersBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
@@ -78,7 +78,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     downgradeComponent({ component: PeopleBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoCommunityMembers',
-    downgradeComponent({ component: CommunityMembersComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: CommunityMembersComponent }) as angular.IDirectiveFactory
     ).
     directive('noosferoFriendsBlock',
         downgradeComponent({ component: FriendsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
