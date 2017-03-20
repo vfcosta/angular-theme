@@ -1,7 +1,7 @@
 <h1>{{"profile.members.title" | translate}}</h1>
 
 <div class="members-list">
-    <profile-list [profiles]="members"></profile-list>
+    <profile-list [profiles]="members" [owner]="profile"></profile-list>
 </div>
 
 <pagination *ngIf="totalMembers>0" [totalItems]="totalMembers" [itemsPerPage]="membersPerPage"

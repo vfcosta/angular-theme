@@ -1,5 +1,8 @@
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
+import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
+import { DateFormatPipe } from './shared/pipes/date-format.ng2.filter';
+import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
@@ -27,6 +30,7 @@ import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { ModalModule } from 'ng2-bootstrap';
 import { PaginationModule } from 'ng2-bootstrap';
+import { PopoverModule } from 'ng2-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { NgPipesModule } from 'ngx-pipes';
@@ -44,7 +48,8 @@ import * as plugins from "../plugins";
         ImageCropperModule,
         NgPipesModule,
         CKEditorModule,
-        PaginationModule.forRoot()
+        PaginationModule.forRoot(),
+        PopoverModule.forRoot()
     ],
     exports: [TranslatePipe],
     declarations: [
@@ -68,7 +73,9 @@ import * as plugins from "../plugins";
         ProfileJoinComponent,
         HtmlEditorComponent,
         ProfileConfigurationMenuComponent,
-        ProfilePersonalDataComponent].concat(plugins.ng2MainComponents),
+        ProfilePersonalDataComponent,
+        DateFormatPipe,
+        PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -106,7 +113,9 @@ import * as plugins from "../plugins";
         'toastr',
         'TaskService',
         '$transitions',
-        '$stateParams'])
+        '$stateParams',
+        'amParseFilter',
+        'RoleService'])
 })
 export class AppModule {
     ngDoBootstrap() {

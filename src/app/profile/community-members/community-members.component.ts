@@ -11,6 +11,7 @@ export class CommunityMembersComponent {
     private currentPage: number;
     private membersPerPage: number;
     private totalMembers: number;
+    private profile: noosfero.Profile;
 
     constructor( @Inject('profileService') private profileService: ProfileService) {
         this.members = [];
@@ -27,6 +28,7 @@ export class CommunityMembersComponent {
             page: $event.page
         };
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
+            this.profile = profile;
             return this.profileService.getMembers(profile, filters);
         }).then((result: any) => {
             this.totalMembers = <number>result.headers("total");
