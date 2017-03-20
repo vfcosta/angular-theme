@@ -296,5 +296,10 @@
     "myprofile.configuration.communities": "Comunidades",
     "myprofile.configuration.password": "Senha",
     "myprofile.configuration.delete_account": "Apagar conta",
-    "myprofile.configuration.title": "Configurações"
+    "myprofile.configuration.title": "Configurações",
+    "profile-list.member-edition.date.label": "Membro desde",
+    "profile-list.member-edition.save": "Salvar",
+    "profile-list.member-edition.cancel": "Cancelar",
+    "profile-list-edition.role.success.title": "Bom trabalho!",
+    "profile-list-edition.role.success.message": "Papéis atualizados com sucesso!"
 }

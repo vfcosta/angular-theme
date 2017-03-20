@@ -296,5 +296,10 @@
     "myprofile.configuration.communities": "Communities",
     "myprofile.configuration.password": "Password",
     "myprofile.configuration.delete_account": "Delete account",
-    "myprofile.configuration.title": "Configuration"
+    "myprofile.configuration.title": "Configuration",
+    "profile-list.member-edition.date.label": "Member since",
+    "profile-list.member-edition.save": "Save",
+    "profile-list.member-edition.cancel": "Cancel",
+    "profile-list-edition.role.success.title": "Good job!",
+    "profile-list-edition.role.success.message": "Roles successfully updated!"
 }

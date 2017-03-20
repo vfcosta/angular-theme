@@ -1,0 +1,31 @@
+<div [class.opened]="popover.isOpen" class="profile-list-edition" *ngIf="ownerIsCommunity()">
+    <template #memberEditionTemplate>
+        <div class="member-edition">
+            <div class="name">
+                {{profile.name}}
+            </div>
+            <div class="date">
+                <span class="date-label">
+                    {{"profile-list.member-edition.date.label" | translate}}
+                </span>
+                <span class="date-value">
+                    {{profile.created_at | dateFormat | amDateFormat:'LL'}}
+                </span>
+            </div>
+            <div class="roles">
+                <div class="role" *ngFor="let role of roles">
+                    <input type="checkbox" [(ngModel)]="role.assigned" >
+                    <span class="role-name">{{role.name}}</span>
+                </div>
+            </div>
+            <div class="actions">
+                <a href="#" class="btn btn-primary btn-xs" (click)="save()">{{"profile-list.member-edition.save" | translate}}</a>
+                <a href="#" class="btn btn-default btn-xs" (click)="popover.hide()">{{"profile-list.member-edition.cancel" | translate}}</a>
+            </div>
+        </div>
+    </template>
+
+    <a href="#" class="edit-button fa fa-pencil ng-scope" #popover="bs-popover"
+        (onShown)="loadRoles()" triggers="click" [popover]="memberEditionTemplate">
+    </a>
+</div>

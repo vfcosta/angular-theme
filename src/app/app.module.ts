@@ -1,5 +1,7 @@
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
+import { DateFormatPipe } from './shared/pipes/date-format.ng2.filter';
+import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
@@ -27,6 +29,7 @@ import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { ModalModule } from 'ng2-bootstrap';
 import { PaginationModule } from 'ng2-bootstrap';
+import { PopoverModule } from 'ng2-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -43,7 +46,8 @@ import * as plugins from "../plugins";
         ImageCropperModule,
         NgPipesModule,
         CKEditorModule,
-        PaginationModule.forRoot()
+        PaginationModule.forRoot(),
+        PopoverModule.forRoot()
     ],
     exports: [TranslatePipe],
     declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent,
@@ -51,7 +55,8 @@ import * as plugins from "../plugins";
         MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent, UiSrefDirective,
         ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent,
         ImageUploadCropComponent, ProfileListComponent, HtmlEditorComponent,
-        ProfileConfigurationMenuComponent, ProfilePersonalDataComponent].concat(plugins.ng2MainComponents),
+        ProfileConfigurationMenuComponent, ProfilePersonalDataComponent,
+        ProfileListEditionComponent, DateFormatPipe].concat(plugins.ng2MainComponents),
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent,
         StatisticsBlockComponent, ProfileImageComponent, TaskListComponent,
         CommunitiesBlockComponent, MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent,
@@ -60,7 +65,7 @@ import * as plugins from "../plugins";
         ImageUploadComponent, ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'profileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
-        '$log', 'SweetAlert', 'toastr', 'TaskService', '$transitions', '$stateParams'])
+        '$log', 'SweetAlert', 'toastr', 'TaskService', '$transitions', '$stateParams', 'amParseFilter', 'RoleService'])
 })
 export class AppModule {
     ngDoBootstrap() {
