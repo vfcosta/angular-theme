@@ -28,10 +28,12 @@ $green-color-dark: #689f38;
 $break-xxs-min: 420px;
 $break-xs-min: 768px;
 $break-sm-min: 992px;
+$break-md-min: 1200px;
 
 $break-xxs-max: ($break-xxs-min - 1);
 $break-sm-max: ($break-sm-min - 1);
 $break-xs-max: ($break-xs-min - 1);
+$break-md-max: ($break-md-min - 1);
 
 $container-large-desktop: 1380px;
 

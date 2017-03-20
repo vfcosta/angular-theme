@@ -73,6 +73,20 @@ $navbar-font-color: #fff;
             font-size: 1.7em;
           }
         }
+        .profile-name {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          max-width: 140px;
+          display: inline-block;
+          vertical-align: middle;
+          @media (max-width: $break-md-max) {
+            max-width: 80px;
+          }
+          @media (max-width: $break-sm-max) {
+            max-width: 105px;
+          }
+        }
       }
 
       .dropdown-menu-profile {
