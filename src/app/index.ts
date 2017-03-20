@@ -69,7 +69,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({ component: TaskListComponent, inputs: ['tasks'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoCommunitiesBlock',
-        downgradeComponent({ component: CommunitiesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+        downgradeComponent({ component: CommunitiesBlockComponent, inputs: ['block', 'owner']  }) as angular.IDirectiveFactory
     ).
     directive('noosferoMembersBlock',
     downgradeComponent({ component: MembersBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
@@ -77,8 +77,8 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('noosferoPeopleBlock',
     downgradeComponent({ component: PeopleBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
-    directive('noosferoListCommunityMembers',
-    downgradeComponent({ component: CommunityMembersComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    directive('noosferoCommunityMembers',
+    downgradeComponent({ component: CommunityMembersComponent }) as angular.IDirectiveFactory
     ).
     directive('noosferoFriendsBlock',
         downgradeComponent({ component: FriendsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
@@ -97,7 +97,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('htmlEditor',
         downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'object', 'attribute'] }) as angular.IDirectiveFactory
-    );;
+    );
 
 export let noosferoApp = bundle('main', MainComponent, [
     provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
