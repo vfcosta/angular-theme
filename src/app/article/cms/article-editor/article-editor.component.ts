@@ -31,6 +31,8 @@ export class ArticleEditorComponent {
         let parentId = this.article.parent ? this.article.parent.id : '';
         this.$window['uploadUrl'] = '/api/v1/profiles/' + this.profile.id + '/articles';
         this.$window['listUrl'] = '/api/v1/profiles/' + this.profile.id + '/articles?content_type=Folder,UploadedFile&parent_id=';
+        this.$window['deleteUrl'] = '/api/v1/articles';
+        this.$window['renameUrl'] = '/api/v1/articles';
         this.$window['privateToken'] = this.sessionService.currentUser().private_token;
         this.options = { filebrowserBrowseUrl: '/ng2-filemanager?editor=CKEditor'};
         this.$element.replaceWith(this.$compile('<' + directiveName + ' [article]="ctrl.article" [options]="ctrl.options"></' + directiveName + '>')(this.$scope));
