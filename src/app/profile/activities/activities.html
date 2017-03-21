@@ -2,5 +2,9 @@
 	<div ng-repeat="activity in ctrl.activities | orderBy: 'created_at':true " class="">
 		<noosfero-activity [activity]="activity"></noosfero-activity>
 	</div>
-	<button class="btn btn-primary btn-lg" (click)="ctrl.viewMore()">View more</button>
+	<div class="row">
+		<div class="col-md-12">
+			<button class="btn btn-primary btn-lg btn-view-more" (click)="ctrl.viewMore()">View more</button>
+		</div>
+	</div>
 </div>
