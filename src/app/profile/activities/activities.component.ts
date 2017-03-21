@@ -28,7 +28,7 @@ export class ActivitiesComponent {
     init() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-            return this.profileService.getActivities(<number>this.profile.id, { page: this.page });
+            return this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page });
         }).then((response: restangular.IResponse) => {
             this.activities = response.data.plain();
         });
@@ -36,7 +36,7 @@ export class ActivitiesComponent {
 
     viewMore() {
         this.page++;
-        this.profileService.getActivities(<number>this.profile.id, { page: this.page }).then((response: restangular.IResponse) => {
+        this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page }).then((response: restangular.IResponse) => {
             angular.forEach(response.data.plain(), (value, key) => {
                 this.activities.push(value);
             });

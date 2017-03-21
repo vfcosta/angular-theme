@@ -16,7 +16,8 @@
 		</span>
 		<span>
 			<div class="scrap">
-			  <div ng-bind-html="ctrl.activity.params.content | stripTags | truncate: 100 : '...': true"></div>
+			  <div ng-if="ctrl.activity.params.content" ng-bind-html="ctrl.activity.params.content | stripTags | truncate: 100 : '...': true"></div>
+			  <div ng-if="ctrl.activity.content" ng-bind-html="ctrl.activity.content | stripTags | truncate: 100 : '...': true"></div>
 			</div>
 		</span>
 
