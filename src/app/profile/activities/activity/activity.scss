@@ -1,0 +1,27 @@
+.activity {
+	@extend .panel;
+	padding: 15px 16px 0 16px;
+	.profile-list {
+		border: 0;
+		.profile-item {
+			min-height: 62px;
+		}
+	}
+	.card-type {
+		i {
+			color: #bdbdbd;
+		}
+	}
+	.card-title {
+		a {
+			color: $secondary-color;
+		}
+	}
+	.avatar {
+		float: left;
+		margin-right: 16px;
+		.img-profile-nav-popup {
+			max-width: 3em;
+		}
+	}
+}

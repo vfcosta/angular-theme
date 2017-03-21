@@ -1,5 +1,5 @@
-import {Component, Input, Inject} from "ng-forward";
-import {ActivityComponent} from "./activity/activity.component";
+import { Component, Input, Inject } from "ng-forward";
+import { ActivityComponent } from "./activity/activity.component";
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 
 /**
@@ -8,7 +8,7 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
  * @description
  *  The controller responsible to retreive profile activities.
  */
-
+const LIMIT = 10;
 @Component({
     selector: "noosfero-activities",
     templateUrl: 'app/profile/activities/activities.html',
@@ -18,6 +18,7 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
 export class ActivitiesComponent {
 
     activities: any;
+    page: number = 1;
     profile: noosfero.Profile;
 
     constructor(private profileService: ProfileService) {
@@ -27,10 +28,18 @@ export class ActivitiesComponent {
     init() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-            return this.profileService.getActivities(<number>this.profile.id);
+            return this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page });
         }).then((response: restangular.IResponse) => {
-            this.activities = response.data;
+            this.activities = response.data.plain();
         });
     }
 
+    viewMore() {
+        this.page++;
+        this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page }).then((response: restangular.IResponse) => {
+            angular.forEach(response.data.plain(), (value, key) => {
+                this.activities.push(value);
+            });
+        });
+    }
 }

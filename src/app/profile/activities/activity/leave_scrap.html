@@ -1,17 +1,25 @@
-<timeline-badge class="success">
-  <i alt='{{"activity.leave_scrap.icon" | translate}}' class="fa fa-commenting-o"></i>
-</timeline-badge>
-<timeline-panel>
-  <timeline-heading>
-    <h4 class="timeline-title">
-      <a ui-sref="main.profile.info({profile: ctrl.activity.user.identifier})"><strong ng-bind="ctrl.activity.user.name"></strong></a>
-      <span> {{"activities.scrap.description" | translate}} </span>
-    </h4>
-    <p><small class="text-muted"><i class="fa fa-clock-o"></i> <span am-time-ago="ctrl.activity.created_at | dateFormat"></span></small></p>
-  </timeline-heading>
-  <div class="timeline-body">
-    <div class="scrap">
-      <div ng-bind-html="ctrl.activity.content | stripTags | truncate: 100 : '...': true"></div>
+<div class="activity {{ctrl.activity.verb}}">
+    <noosfero-activity-header 
+    	[activity]="ctrl.activity" 
+    	[desc]="'activities.leave_scrap.description'"
+    	[iconalt]="'activity.leave_scrap.icon'"
+    	[iconclass]="'fa fa-commenting-o'">
+    </noosfero-activity-header>
+    <div class="panel-body">
+		<span class="title">
+			<a ng-if="!ctrl.activity.target" class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.params.receiver_url.profile})">
+			  <span>{{ctrl.activity.params.receiver_name}}</span>
+			</a>
+			<a ng-if="ctrl.activity.target" class="separated-item" ui-sref="main.profile.info({profile: ctrl.activity.target.identifier})">
+			  <span>{{ctrl.activity.target.name}}</span>
+			</a>			
+		</span>
+		<span>
+			<div class="scrap">
+			  <div ng-if="ctrl.activity.params.content" ng-bind-html="ctrl.activity.params.content | stripTags | truncate: 100 : '...': true"></div>
+			  <div ng-if="ctrl.activity.content" ng-bind-html="ctrl.activity.content | stripTags | truncate: 100 : '...': true"></div>
+			</div>
+		</span>
+
     </div>
-  </div>
-</timeline-panel>
+</div>

@@ -1,12 +1,13 @@
 <div class="activity {{ctrl.activity.verb}}">
     <noosfero-activity-header 
     	[activity]="ctrl.activity" 
-    	[desc]="'activities.new_friendship.description'"
-    	[profiles]="ctrl.activity.params.friend_name.length"
-    	[iconalt]="'activity.new_friendship.icon'"
-    	[iconclass]="'fa fa-user-plus'">
+    	[desc]="'activities.add_member_in_community.description'"
+    	[profiles]="ctrl.activity.params.add_member_in_community.length"
+    	[iconalt]="'activity.add_member_in_community.icon'"
+    	[iconclass]="'fa fa-users'">
     </noosfero-activity-header>
     <div class="panel-body">
     	<profile-list [profiles]="ctrl.profiles"></profile-list>
     </div>
 </div>
+

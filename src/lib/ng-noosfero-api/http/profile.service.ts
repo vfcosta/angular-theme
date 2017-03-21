@@ -70,6 +70,10 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         return this.getProfileElement(profileId).customGET("activities", params);
     }
 
+    getNetworkActivities(profileId: number, params?: any): restangular.IPromise<any> {
+        return this.getProfileElement(profileId).customGET("network_activities", params);
+    }
+
     getProfileElement(profileId: number): restangular.IElement {
         return this.restangular.one('profiles', profileId);
     }

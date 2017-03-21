@@ -13,5 +13,9 @@ namespace noosfero {
          * @returns {string} The activity verb.
          */
         verb: string;
+
+        user: noosfero.Profile;
+        
+        params: any[];
     }
 }
