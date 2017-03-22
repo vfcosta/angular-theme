@@ -1,3 +1,4 @@
+import { SessionService } from './../../login/session.service';
 import { NotificationService } from './../../shared/services/notification.service';
 import { Inject, Input, Component } from '@angular/core';
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
@@ -36,7 +37,6 @@ export class ProfileImageComponent {
 
     @Input() iconSize: string;
     @Input() editable: boolean;
-
     eventsNames: NoosferoKnownEvents;
 
     constructor( @Inject("profileService") private profileService: ProfileService,
@@ -44,7 +44,6 @@ export class ProfileImageComponent {
         @Inject("$scope") private $scope: ng.IScope,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
         @Inject("notificationService") private notificationService: NotificationService) {
-
         this.eventsNames = new NoosferoKnownEvents();
     }
 
@@ -79,5 +78,4 @@ export class ProfileImageComponent {
             }
         });
     }
-
 }
