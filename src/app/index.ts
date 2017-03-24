@@ -1,3 +1,6 @@
+import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
+import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
+import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
@@ -97,6 +100,15 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('htmlEditor',
         downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'object', 'attribute'] }) as angular.IDirectiveFactory
+    ).
+    directive('profileConfiguration',
+        downgradeComponent({ component: ProfileConfigurationComponent }) as angular.IDirectiveFactory
+    ).
+    directive('profileConfigurationMenu',
+        downgradeComponent({ component: ProfileConfigurationMenuComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('profilePersonalData',
+        downgradeComponent({ component: ProfilePersonalDataComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

@@ -1,0 +1,17 @@
+.configuration {
+  @extend .container;
+  .header {
+    hr {  
+        display: block;
+        height: 1px;
+        border: 0;
+        border-top: 1px solid #d2d1d1;
+        padding-bottom: 30px; 
+    }
+    h1 {
+        margin-bottom: 0px;
+    }
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

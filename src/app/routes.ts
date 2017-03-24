@@ -1,10 +1,11 @@
+import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
+import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
 import { PasswordComponent } from './login/new-password.component';
 import { RegisterComponent } from './account/register.component';
 import { ContentViewerComponent } from './article/content-viewer/content-viewer.component';
 import { DestroyProfileComponent } from './profile/destroy/destroy-profile.component';
 import { TasksComponent } from './task/tasks/tasks.component';
 import { CmsComponent } from './article/cms/cms.component';
-import { MyProfileComponent } from './profile/myprofile.component';
 import { ProfileAboutComponent } from './profile/about/profile-about.component';
 import { ProfileHomeComponent } from './profile/profile-home.component';
 import { ActivitiesComponent } from './profile/activities/activities.component';
@@ -28,7 +29,7 @@ export function noosferoRoutes($stateProvider: any) {
         abstract: true,
         name: 'main',
         resolve: {
-            currentUser: function(AuthService: AuthService) {
+            currentUser: function (AuthService: AuthService) {
                 return AuthService.loginFromCookie();
             }
         }
@@ -147,12 +148,6 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
-        name: 'main.profile.settings',
-        url: "^/myprofile/:profile",
-        controller: MyProfileComponent
-    });
-
-    $stateProvider.state({
         name: 'main.cms',
         url: "^/myprofile/:profile/cms?parent_id&type",
         controller: CmsComponent,
@@ -256,4 +251,29 @@ export function noosferoRoutes($stateProvider: any) {
         }
     });
 
+    $stateProvider.state({
+        name: 'main.myprofile',
+        url: "^/myprofile/:profile",
+        controller: ProfileConfigurationComponent,
+        views: {
+            "content": {
+                templateUrl: "app/profile/configuration/profile-configuration.html",
+                controller: ProfileConfigurationComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
+    $stateProvider.state({
+        name: 'main.myprofile.personal_data',
+        url: "/personal_data",
+        controller: ProfilePersonalDataComponent,
+        views: {
+            "myprofileContent": {
+                templateUrl: "app/profile/configuration/personal-data/profile-personal-data.html",
+                controller: ProfilePersonalDataComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
 }

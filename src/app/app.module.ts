@@ -1,3 +1,6 @@
+import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
+import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
+import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
@@ -48,15 +51,17 @@ import * as plugins from "../plugins";
         StatisticsBlockComponent, ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent,
         MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent, UiSrefDirective,
         ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent,
-        ImageUploadCropComponent, ProfileListComponent, HtmlEditorComponent].concat(plugins.ng2MainComponents),
+        ImageUploadCropComponent, ProfileListComponent, HtmlEditorComponent, ProfileConfigurationComponent,
+        ProfileConfigurationMenuComponent, ProfilePersonalDataComponent].concat(plugins.ng2MainComponents),
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent,
         StatisticsBlockComponent, ProfileImageComponent, TaskListComponent,
         CommunitiesBlockComponent, MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent,
-        ProfileFastEditionComponent, HtmlEditorComponent,
+        ProfileFastEditionComponent, HtmlEditorComponent, ProfileConfigurationComponent, ProfileConfigurationMenuComponent, 
+        ProfilePersonalDataComponent,
         ImageUploadComponent, ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
         'BlockService', 'profileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
-        '$log', 'SweetAlert', 'toastr', 'TaskService'])
+        '$log', 'SweetAlert', 'toastr', 'TaskService', '$transitions'])
 })
 export class AppModule {
     ngDoBootstrap() {
