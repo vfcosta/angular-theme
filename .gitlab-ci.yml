@@ -1,4 +1,4 @@
-image: node:6.9.4
+image: node:7.2.1
 variables:
     GIT_SSL_NO_VERIFY: "true"
 
