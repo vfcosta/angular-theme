@@ -19,6 +19,8 @@ describe("Components", () => {
                 return Promise.resolve({ id: 1, name: 'Nosofero', host: "https://noosfero.org" });
             }
         };
+        let personService = jasmine.createSpyObj("personService", ["upload", "isFriend"]);
+        personService.isFriend = jasmine.createSpy("isFriend").and.returnValue(Promise.resolve(false));
 
         beforeEach(angular.mock.module("templates"));
 
@@ -29,7 +31,11 @@ describe("Components", () => {
                 directives: [ProfileSummaryComponent],
                 properties: properties,
                 providers: [
-                    helpers.createProviderToValue("EnvironmentService", environmentService)
+                    helpers.createProviderToValue("EnvironmentService", environmentService),
+                    helpers.createProviderToValue("SessionService", helpers.mocks.sessionWithCurrentUser({ person: { id: 0 } })),
+                    helpers.createProviderToValue("PersonService", personService),
+                    helpers.createProviderToValue("NotificationService", helpers.mocks.notificationService)
+
                 ]
             });
             helper = new ComponentTestHelper<ProfileSummaryComponent>(cls, done);
