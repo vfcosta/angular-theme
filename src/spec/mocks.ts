@@ -204,7 +204,8 @@ export var mocks: any = {
     },
     sessionWithCurrentUser: (user: any) => {
         return {
-            currentUser: () => { return user; }
+            currentUser: () => { return user; },
+            localStorage: {}
         };
     },
     designModeService: {
