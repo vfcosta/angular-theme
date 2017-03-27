@@ -1,0 +1,16 @@
+<div class="container-fluid configuration" ng-if="ctrl.profile">
+    <div class="row header">
+        <div class="col-md-12">
+            <h1>{{ 'myprofile.configuration.title' | translate}}</h1>
+            <hr />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <profile-configuration-menu [profile]="ctrl.profile"></profile-configuration-menu>
+        </div>
+        <div class="col-md-9">
+            <div ui-view="myprofileContent"></div>
+        </div>
+    </div>
+</div>

@@ -21,6 +21,12 @@ describe("Components", () => {
         let component: ProfileListComponent;
         let state = jasmine.createSpyObj("$state", ["href"]);
 
+        let transitionFunction: Function;
+        let transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
+        transitions.onSuccess = (obj, func: Function) => {
+            transitionFunction = func;
+        };
+
         let profiles = [
             { id: 1, identifier: 'profile1' },
             { id: 2, identifier: 'profile2' }
@@ -29,9 +35,10 @@ describe("Components", () => {
         beforeEach(async(() => {
 
             TestBed.configureTestingModule({
-                declarations: [ProfileListComponent, UiSrefDirective, MockPipe],
+                declarations: [ProfileListComponent, MockPipe, UiSrefDirective],
                 providers: [
                     { provide: "$state", useValue: state },
+                    { provide: "$transitions", useValue: transitions },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
             }).compileComponents().then(() => {
@@ -44,6 +51,7 @@ describe("Components", () => {
 
         it("render the profile image for each profile", (fakeAsync(() => {
             fixture.detectChanges();
+            transitionFunction({$to: () => { return { toState: { name: 'new-route' } }; }});
             tick();
             fixture.detectChanges();
             expect(fixture.debugElement.queryAll(By.css('noosfero-profile-image')).length).toEqual(2);
@@ -51,6 +59,7 @@ describe("Components", () => {
 
         it("render profiles", () => {
             fixture.detectChanges();
+            transitionFunction({$to: () => { return {name: 'new-route' }; }});
             expect(fixture.debugElement.queryAll(By.css(".profile-item")).length).toEqual(2);
         });
 
