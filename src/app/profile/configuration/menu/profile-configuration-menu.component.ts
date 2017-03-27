@@ -1,3 +1,4 @@
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import {Component, Input} from '@angular/core';
 
 /**
@@ -8,7 +9,7 @@ import {Component, Input} from '@angular/core';
  */
 @Component({
     selector: "profile-configuration-menu",
-    templateUrl: 'app/profile/configuration/menu/profile-configuration-menu.html',
+    template: require('app/profile/configuration/menu/profile-configuration-menu.html'),
 })
 export class ProfileConfigurationMenuComponent {
     @Input() profile: noosfero.Profile;

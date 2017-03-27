@@ -101,9 +101,6 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('htmlEditor',
         downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'object', 'attribute'] }) as angular.IDirectiveFactory
     ).
-    directive('profileConfiguration',
-        downgradeComponent({ component: ProfileConfigurationComponent }) as angular.IDirectiveFactory
-    ).
     directive('profileConfigurationMenu',
         downgradeComponent({ component: ProfileConfigurationMenuComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).

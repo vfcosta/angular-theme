@@ -289,5 +289,12 @@
     "profile.edition.identifier.required": "Nome de usuário é obrigatório",
     "profile.edition.identifier.not_available": "O nome de usuário já está sendo utilizado",
     "profile.edition.identifier.change_message": "A url do perfil será modificada",
-    "profile.edition.identifier.is-not-available": "Nome de usuário não disponível"
+    "profile.edition.identifier.is-not-available": "Nome de usuário não disponível",
+    "myprofile.configuration.personal_data": "Dados pessoais",
+    "myprofile.configuration.advanced": "Configurações avanaçadas",
+    "myprofile.configuration.people": "Pessoas",
+    "myprofile.configuration.communities": "Comunidades",
+    "myprofile.configuration.password": "Senha",
+    "myprofile.configuration.delete_account": "Apagar conta",
+    "myprofile.configuration.title": "Configurações"
 }
