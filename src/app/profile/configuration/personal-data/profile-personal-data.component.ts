@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 
 /**
  * @ngdoc controller
- * @name NoosferoActivities
+ * @name ProfilePersonalDataComponent
  * @description
  *  The controller responsible to profile configuration.
  */

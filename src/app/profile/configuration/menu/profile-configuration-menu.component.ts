@@ -3,7 +3,7 @@ import {Component, Input} from '@angular/core';
 
 /**
  * @ngdoc controller
- * @name NoosferoActivities
+ * @name ProfileConfigurationMenuComponent
  * @description
  *  The controller responsible to profile configuration.
  */

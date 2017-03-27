@@ -26,7 +26,6 @@ describe("Components", () => {
         transitions.onSuccess = (obj, func: Function) => {
             transitionFunction = func;
         };
-        // let uiSrefdirecitve = jasmine.createSpyObj("uiSrefDirective", ["toggleActiveClass"]);
 
         let profiles = [
             { id: 1, identifier: 'profile1' },
