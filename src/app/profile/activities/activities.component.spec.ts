@@ -21,9 +21,11 @@ describe("Components", () => {
             getCurrentProfile: (filters: any): any => {
                 return Promise.resolve({ id: 1, identifier: "person1" });
             },
-            getActivities: (id: number): any => {
+            getNetworkActivities: (id: number): any => {
                 if (id === 1) {
-                    return Promise.resolve({ data: [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }] });
+                    return Promise.resolve({ data: {plain: () => { return [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }]; } } });
+                } else {
+                    return Promise.resolve({ data: {plain: () => { return []; }}});
                 }
             }
         };
