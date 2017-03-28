@@ -1,5 +1,6 @@
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
+import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
 import { DateFormatPipe } from './shared/pipes/date-format.ng2.filter';
 import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
@@ -56,7 +57,7 @@ import * as plugins from "../plugins";
         ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent,
         ImageUploadCropComponent, ProfileListComponent, HtmlEditorComponent,
         ProfileConfigurationMenuComponent, ProfilePersonalDataComponent,
-        ProfileListEditionComponent, DateFormatPipe].concat(plugins.ng2MainComponents),
+        ProfileListEditionComponent, DateFormatPipe, PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent,
         StatisticsBlockComponent, ProfileImageComponent, TaskListComponent,
         CommunitiesBlockComponent, MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent,
