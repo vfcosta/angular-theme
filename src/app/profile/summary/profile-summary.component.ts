@@ -3,6 +3,8 @@ import { PersonService } from './../../../lib/ng-noosfero-api/http/person.servic
 import { SessionService } from './../../login/session.service';
 import { Inject, Input, Component } from "ng-forward";
 import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
+import { ProfileJoinComponent } from "./../../profile/profile-join/profile-join.component";
+
 
 @Component({
     selector: "noosfero-profile-summary",

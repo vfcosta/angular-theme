@@ -39,8 +39,11 @@ $container-large-desktop: 1380px;
 
 //BUTTONS
 $btn-primary-color: #fff;
-$btn-primary-bg: #689f38;
-$btn-primary-border: #658b42;
+$btn-primary-bg: $green-color;
+$btn-primary-border: $green-color;
+
+//BADGES
+$badge-bg-color: $green-color;
 
 $navbar-border-radius: 0;
 $navbar-inverse-border: transparent;
