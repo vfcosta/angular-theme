@@ -33,8 +33,12 @@ export class ProfileListEditionComponent {
         let removeRoleIds = _.map(_.filter(this.roles, ['assigned', false]), 'id');
         this.roleService.assign(this.owner.id, this.profile.id, roleIds, removeRoleIds).then((result: noosfero.RestResult<noosfero.Role[]>) => {
             this.notificationService.success({ title: "profile-list-edition.role.success.title", message: "profile-list-edition.role.success.message" });
-            this.popover.hide();
+            this.hidePopover();
         });
+    }
+
+    hidePopover() {
+        this.popover.hide();
     }
 
     ownerIsCommunity() {
@@ -44,7 +48,7 @@ export class ProfileListEditionComponent {
     @HostListener('document:click', ['$event'])
     onClick($event: any) {
         if (!this.elementRef.nativeElement.contains(event.target)) {
-            this.popover.hide();
+            this.hidePopover();
         }
     }
 }

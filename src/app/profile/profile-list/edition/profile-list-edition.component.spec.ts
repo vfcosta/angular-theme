@@ -50,6 +50,7 @@ describe("Components", () => {
         });
 
         it("call notification success when save without errors", () => {
+            component.hidePopover = jasmine.createSpy("hidePopover");
             component.save();
             expect(component['notificationService'].success).toHaveBeenCalled();
         });
