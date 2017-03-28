@@ -2,6 +2,7 @@
   @extend .container-fluid;
   @extend .row;
   border-bottom: 1px solid #ededed;
+  
   .profile-item {
     @extend .col-md-2;
     @extend .col-sm-2;
@@ -11,7 +12,14 @@
     padding: 0 5px;
     min-height: 90px;
     min-width: 62px;
-
+    &:hover {
+      .profile-list-edition {
+        display: inline;
+      }
+    }
+    .profile-list-edition {
+      display: none;
+    }
     .profile-link {
       .profile-image {
         color: $text-color;

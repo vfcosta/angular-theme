@@ -1,0 +1,35 @@
+profile-list-edition {
+    .profile-list-edition {
+        &.opened {
+            display: inline !important;
+        }
+        .edit-button {
+            position: absolute;
+            right: 0;
+            top: -10px;
+            padding: 10px;
+            color: #afafaf;
+            &:hover, &:focus {
+                text-decoration: none;
+            }
+        }
+
+        popover-container {
+            width: 300px;
+
+            .member-edition {
+                font-size: 12px;
+                .name {
+                    font-weight: bold;
+                    font-size: 14px;
+                }
+                .roles {
+                    margin-top: 12px;
+                }
+                .actions {
+                    margin-top: 10px;
+                }
+            }
+        }
+    }
+}
