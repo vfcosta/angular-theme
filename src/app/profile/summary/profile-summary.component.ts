@@ -3,6 +3,8 @@ import { PersonService } from './../../../lib/ng-noosfero-api/http/person.servic
 import { SessionService } from './../../login/session.service';
 import { Inject, Input, Component } from "ng-forward";
 import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
+import { ProfileJoinComponent } from "./../../profile/profile-join/profile-join.component";
+
 
 @Component({
     selector: "noosfero-profile-summary",
@@ -30,11 +32,16 @@ export class ProfileSummaryComponent {
     }
 
     ngOnInit() {
-        this.personService.isFriend(<number>this.currentUser.person.id, <number>this.profile.id).then((response: restangular.IResponse) => {
-            this.showRemoveFriend = true;
-        }).catch((response: restangular.IResponse) => {
-            this.showAddFriend = true;
-        });
+        if (this.profile.type === "Person" && this.currentUser && this.currentUser.person && this.currentUser.person.id !== this.profile.id) {
+            this.personService.isFriend(<number>this.currentUser.person.id, <number>this.profile.id).then((response: restangular.IResponse) => {
+                this.showRemoveFriend = true;
+            }).catch((response: restangular.IResponse) => {
+                this.showAddFriend = true;
+            });
+        } else {
+            this.showAddFriend = false;
+            this.showRemoveFriend = false;
+        }
     }
 
     profileLink() {

@@ -25,7 +25,7 @@ describe("Components", () => {
         beforeEach(angular.mock.module("templates"));
 
         beforeEach((done: Function) => {
-            let properties = { profile: { identifier: 'adminuser' } };
+            let properties = { profile: { id: 1, identifier: 'adminuser' } };
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [ProfileSummaryComponent],
@@ -59,6 +59,13 @@ describe("Components", () => {
             helper.component.editPopoverOpen = true;
             helper.component.closeEdition();
             expect(helper.component.editPopoverOpen).toBeFalsy();
+        });
+
+        it("not display add/remove button when view the current user profile", () => {
+            helper.component.profile.id = 0;
+            helper.component.ngOnInit();
+            expect(helper.component.showRemoveFriend).toBeFalsy();
+            expect(helper.component.showAddFriend).toBeFalsy();
         });
     });
 });

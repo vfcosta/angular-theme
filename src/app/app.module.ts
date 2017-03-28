@@ -32,6 +32,7 @@ import { ModalModule } from 'ng2-bootstrap';
 import { PaginationModule } from 'ng2-bootstrap';
 import { PopoverModule } from 'ng2-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
+import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
 import * as plugins from "../plugins";
@@ -51,22 +52,70 @@ import * as plugins from "../plugins";
         PopoverModule.forRoot()
     ],
     exports: [TranslatePipe],
-    declarations: [FooterComponent, TranslatePipe, LanguageSelectorComponent, RawHTMLBlockComponent,
-        StatisticsBlockComponent, ProfileImageComponent, TaskListComponent, CommunitiesBlockComponent,
-        MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent, UiSrefDirective,
-        ProfileFastEditionComponent, ValidationMessageComponent, ImageUploadComponent,
-        ImageUploadCropComponent, ProfileListComponent, HtmlEditorComponent,
-        ProfileConfigurationMenuComponent, ProfilePersonalDataComponent,
-        ProfileListEditionComponent, DateFormatPipe, PermissionNg2Directive].concat(plugins.ng2MainComponents),
-    entryComponents: [FooterComponent, LanguageSelectorComponent, RawHTMLBlockComponent,
-        StatisticsBlockComponent, ProfileImageComponent, TaskListComponent,
-        CommunitiesBlockComponent, MembersBlockComponent, PeopleBlockComponent, CommunityMembersComponent,
-        ProfileFastEditionComponent, HtmlEditorComponent, ProfileConfigurationMenuComponent,
+    declarations: [
+        FooterComponent,
+        TranslatePipe,
+        LanguageSelectorComponent,
+        RawHTMLBlockComponent,
+        StatisticsBlockComponent,
+        ProfileImageComponent,
+        TaskListComponent,
+        CommunitiesBlockComponent,
+        MembersBlockComponent,
+        PeopleBlockComponent,
+        CommunityMembersComponent,
+        UiSrefDirective,
+        ProfileFastEditionComponent,
+        ValidationMessageComponent,
+        ImageUploadComponent,
+        ImageUploadCropComponent,
+        ProfileListComponent,
+        ProfileJoinComponent,
+        HtmlEditorComponent,
+        ProfileConfigurationMenuComponent,
         ProfilePersonalDataComponent,
-        ImageUploadComponent, ImageUploadCropComponent, ProfileListComponent].concat(plugins.ng2MainComponents),
-    providers: UpgradeUtils.provideAngular1Services(['AuthService', 'SessionService', '$state', 'TranslatorService', 'ArticleService',
-        'BlockService', 'profileService', 'PermissionService', 'EventsHubService', '$uibModal', '$scope', 'NotificationService',
-        '$log', 'SweetAlert', 'toastr', 'TaskService', '$transitions', '$stateParams', 'amParseFilter', 'RoleService'])
+	DateFormatPipe, 
+	PermissionNg2Directive].concat(plugins.ng2MainComponents),
+    entryComponents: [
+        FooterComponent,
+        LanguageSelectorComponent,
+        RawHTMLBlockComponent,
+        StatisticsBlockComponent,
+        ProfileImageComponent,
+        TaskListComponent,
+        CommunitiesBlockComponent,
+        MembersBlockComponent,
+        PeopleBlockComponent,
+        CommunityMembersComponent,
+        ProfileFastEditionComponent,
+        HtmlEditorComponent,
+        ProfileConfigurationMenuComponent,
+        ProfilePersonalDataComponent,
+        ImageUploadComponent,
+        ImageUploadCropComponent,
+        ProfileListComponent,
+        ProfileJoinComponent].concat(plugins.ng2MainComponents),
+    providers: UpgradeUtils.provideAngular1Services([
+        'AuthService',
+        'SessionService',
+        '$state',
+        'TranslatorService',
+        'ArticleService',
+        'BlockService',
+        'profileService',
+        'PermissionService',
+        'EventsHubService',
+        '$uibModal',
+        '$scope',
+        'NotificationService',
+        '$log',
+        'SweetAlert',
+        'toastr',
+        'TaskService',
+        '$transitions',
+        '$stateParams', 
+	'amParseFilter', 
+	'RoleService'])
 })
 export class AppModule {
     ngDoBootstrap() {
