@@ -41,7 +41,7 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
         return this.restangular.one('environments', <any>environmentId);
     }
 
-    getBoxes(environmentId: number | string): restangular.IPromise<any> {
+    getBoxes(environmentId: number | string): restangular.IPromise<restangular.IResponse> {
         return this.getEnvironmentElement(environmentId).customGET('boxes');
     }
 

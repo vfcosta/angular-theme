@@ -62,7 +62,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         return this.getProfileElement(profileId).customGET("members", params);
     }
 
-    getBoxes(profileId: number): restangular.IPromise<any> {
+    getBoxes(profileId: number): restangular.IPromise<restangular.IResponse> {
         return this.getProfileElement(profileId).customGET('boxes');
     }
 
