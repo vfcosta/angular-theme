@@ -1,3 +1,4 @@
+import { ProfileConfigurationOptionComponent } from './profile/configuration/profile-configuration-option.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
 import { PasswordComponent } from './login/new-password.component';
@@ -267,11 +268,11 @@ export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
         name: 'main.myprofile.personal_data',
         url: "/personal_data",
-        controller: ProfilePersonalDataComponent,
+        controller: ProfileConfigurationOptionComponent,
         views: {
             "myprofileContent": {
-                templateUrl: "app/profile/configuration/personal-data/profile-personal-data.html",
-                controller: ProfilePersonalDataComponent,
+                template: "<profile-personal-data ng-if='ctrl.profile' [profile]='ctrl.profile'></profile-personal-data>",
+                controller: ProfileConfigurationOptionComponent,
                 controllerAs: "ctrl"
             }
         }
