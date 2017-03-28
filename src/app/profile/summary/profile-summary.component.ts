@@ -30,7 +30,7 @@ export class ProfileSummaryComponent {
     }
 
     ngOnInit() {
-        if (this.currentUser && this.currentUser.person && this.currentUser.person.id !== this.profile.id) {
+        if (this.profile.type === "Person" && this.currentUser && this.currentUser.person && this.currentUser.person.id !== this.profile.id) {
             this.personService.isFriend(<number>this.currentUser.person.id, <number>this.profile.id).then((response: restangular.IResponse) => {
                 this.showRemoveFriend = true;
             }).catch((response: restangular.IResponse) => {
