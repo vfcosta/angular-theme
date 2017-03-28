@@ -21,9 +21,11 @@ export class ProfileListEditionComponent {
         @Inject('notificationService') private notificationService: NotificationService) { }
 
     loadRoles() {
-        this.roleService.getByProfile(this.owner.id, { person_id: this.profile.id }).then((result: noosfero.RestResult<noosfero.Role[]>) => {
-            this.roles = result.data;
-        });
+        this.roleService.getByProfile(this.owner.id, { person_id: this.profile.id }).then(
+            (result: noosfero.RestResult<noosfero.Role[]>) => {
+                this.roles = result.data;
+            }
+        );
     }
 
     save() {
@@ -31,6 +33,7 @@ export class ProfileListEditionComponent {
         let removeRoleIds = _.map(_.filter(this.roles, ['assigned', false]), 'id');
         this.roleService.assign(this.owner.id, this.profile.id, roleIds, removeRoleIds).then((result: noosfero.RestResult<noosfero.Role[]>) => {
             this.notificationService.success({ title: "profile-list-edition.role.success.title", message: "profile-list-edition.role.success.message" });
+            this.popover.hide();
         });
     }
 
