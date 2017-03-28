@@ -1,78 +1,30 @@
-<div class="profile-main-block" ng-if="updatedProfile">
+<div class="container-fluid profile-main-block" ng-if="updatedProfile">
+    <h1>{{'myprofile.configuration.personal_data' | translate}}</h1>
     <form class="form" (ngSubmit)="save()" #profileForm="ngForm">
-        <div class="container-fluid">
-            <div class="col-sm-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <label for="name">{{'profile.edition.name_label' | translate}}</label>
+            <input type="text" class="form-control" placeholder="{{'profile.edition.name_label' | translate}}" [(ngModel)]="updatedProfile.name"
+                required #name="ngModel" id="name" name="name">
+            <validation-message [field]="name" [prefix]="'profile.edition.name'"></validation-message>
+        </div>
+        <div class="form-group">
+            <label for="email">{{'profile.edition.email_label' | translate}}</label>
+            <input type="text" class="form-control" id="email" name="email" placeholder="{{'profile.edition.email_label' | translate}}"
+                [(ngModel)]="updatedProfile.email" required #name="ngModel">
+        </div>
+        <fieldset class="custom-fields-border" ng-if='keys()'>
+            <legend class="custom-fields-border">Campos adicionais</legend>
+            <div *ngFor="let key of keys()" class="profile-item">
                 <div class="form-group">
-                    <label for="name">{{'profile.edition.name_label' | translate}}</label>
-                    <input type="text" class="form-control" placeholder="{{'profile.edition.name_label' | translate}}" [(ngModel)]="updatedProfile.name"
-                        required #name="ngModel" id="name" name="name">
-                    <validation-message [field]="name" [prefix]="'profile.edition.name'"></validation-message>
+                    <label for="{{ key }}">{{ translateLabel(key) }}</label>
+                    <input [type]="fieldType(key)" class="form-control" #name="ngModel" id="{{ key }}" name="{{ key }}" [(ngModel)]="customFieldsDict[key]" required  >
+                    <!--<input *ngIf="key === 'birth_date'" [type]="date" [(ngModel)]="customFieldsDict[key]" #name="ngModel" id="{{ key }}" name="{{ key }}">-->
                 </div>
             </div>
-            <div class="col-sm-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <label for="email">{{'profile.edition.email_label' | translate}}</label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="{{'profile.edition.email_label' | translate}}"  [(ngModel)]="updatedProfile.email"
-                        required #name="ngModel">
-                    
-                </div>
-            </div>
-            <!-- 
-            <div class="col-sm-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <label class="radio control-label">Tornar email</label>
-                    <div class="radio-inline">
-                        <label><input type="radio" name="turnEmail" id="turnEmailPublic" value="1"> Público </label>
-                    </div>
-                    <div class="radio-inline">
-                        <label><input type="radio" name="turnEmail" id="turnEmailPrivate" value="2"> Privado </label>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 col-sm-12 col-md-12">
-                <label for="areaCode">Telefone</label>
-            </div>
-            <div class="col-sm-12 col-sm-12 col-md-12">
-                <div class="form-group form-inline">
-                    <input type="text" class="form-control" id="areaCode" placeholder="DDD" maxlength="3">
-                    <input type="text" class="form-control" id="phoneNumber" placeholder="Telefone" maxlength="9">
-                </div>
-            </div>
-            <div class="col-sm-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <label class="radio control-label">Tornar telefone</label>
-                    <div class="radio-inline">
-                        <label><input type="radio" name="turnPhone" id="turnPhonePublic" value="1"> Público </label>
-                    </div>
-                    <div class="radio-inline">
-                        <label><input type="radio" name="turnPhone" id="turnPhonePrivate" value="2"> Privado </label>
-                    </div>
-                </div>
-            </div>
-            -->
-            <div class="col-sm-12 col-sm-12 col-md-12">
-                <fieldset class="custom-fields-border" ng-if='keys()'>
-                    <legend class="custom-fields-border">Campos adicionais</legend>
-                    <div *ngFor="let key of keys()" class="profile-item">
-                        <div class="form-group">
-                            <label for="customField">{{ key }}</label>
-                            <input type="text" id="{{ key }}" [(ngModel)]="customFieldsDict[key]" required #name="ngModel" name="{{ key }}">
-                        </div>
-                    </div>
-                </fieldset>
-            </div>
-            <div class="col-sm-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <label for="profilePhoto">Atualizar foto</label>
-                    <input type="file" id="profilePhoto">
-                </div>
-            </div>
-            <div class="col-sm-12 col-sm-12 col-md-12">
-                <div class="actions">
-                    <button type="submit" class="btn btn-primary">{{"profile.edition.action.save" | translate}}</button>
-                    <button type="button" class="btn btn-default" (click)="cancel()">{{"profile.edition.action.cancel" | translate}}</button>
-                </div>
-            </div>
+        </fieldset>
+        <div class="form-group actions">
+            <button type="submit" class="btn btn-primary">{{"profile.edition.action.save" | translate}}</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">{{"profile.edition.action.cancel" | translate}}</button>
         </div>
     </form>
 </div>
