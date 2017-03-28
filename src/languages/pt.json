@@ -282,6 +282,7 @@
     "profile.edition.success.title": "Bom trabalho!",
     "profile.edition.success.message": "Perfil salvo com sucesso!",
     "profile.edition.name_label": "Nome",
+	"profile.edition.email_label": "Email",
     "profile.edition.identifier_label": "Nome de usuário",
     "profile.edition.action.save": "Salvar Alterações",
     "profile.edition.action.cancel": "Cancelar",
