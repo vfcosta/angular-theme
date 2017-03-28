@@ -8,6 +8,7 @@ export class NoosferoKnownEvents implements EventsHubKnownEventNames {
     OPEN_SEARCH_FORM: string = 'OPEN_SEARCH_FORM';
     BLOCK_CHANGED: string = 'BLOCK_CHANGED';
     BLOCKS_SAVED: string = 'BLOCKS_SAVED';
+    PROFILE_MEMBERSHIP_CHANGED: string = 'PROFILE_MEMBERSHIP_CHANGED';
 
     constructor() {
     }

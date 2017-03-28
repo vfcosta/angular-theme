@@ -1,11 +1,6 @@
 <div class="center-block profile-image-block">
   <a ui-sref="main.profile.info({profile: ctrl.owner.identifier})">
     <noosfero-profile-image [profile]="ctrl.owner" [editable]="true" [edit-class]="'profile-image-block-editable'"></noosfero-profile-image>
-  </a>  
-  <div class="actions" ng-show="ctrl.isMember!=null">
-    <div class="organization-actions" ng-if="ctrl.displayOrganizationActions()">
-      <a ng-if="!ctrl.isMember" ng-click="ctrl.join()" class="btn btn-primary btn-sm join" href="#">{{"blocks.profile_image.join" | translate}}</a>
-      <a ng-if="ctrl.isMember" ng-click="ctrl.leave()" class="btn btn-warning btn-sm leave" href="#">{{"blocks.profile_image.leave" | translate}}</a>
-    </div>
-  </div>
+  </a>
+  <profile-join [profile]="ctrl.owner"></profile-join>
 </div>

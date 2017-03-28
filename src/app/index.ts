@@ -30,6 +30,7 @@ import { ProfileImageComponent } from "./profile/image/profile-image.component";
 import { RawHTMLBlockComponent } from "./layout/blocks/raw-html/raw-html-block.component";
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
+import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 
 // Plugins imports
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
@@ -97,6 +98,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('profileList',
         downgradeComponent({ component: ProfileListComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
+    ).
+    directive('profileJoin',
+        downgradeComponent({ component: ProfileJoinComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('htmlEditor',
         downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'object', 'attribute'] }) as angular.IDirectiveFactory
