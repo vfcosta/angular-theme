@@ -30,11 +30,16 @@ export class ProfileSummaryComponent {
     }
 
     ngOnInit() {
-        this.personService.isFriend(<number>this.currentUser.person.id, <number>this.profile.id).then((response: restangular.IResponse) => {
-            this.showRemoveFriend = true;
-        }).catch((response: restangular.IResponse) => {
-            this.showAddFriend = true;
-        });
+        if (this.currentUser && this.currentUser.person && this.currentUser.person.id !== this.profile.id) {
+            this.personService.isFriend(<number>this.currentUser.person.id, <number>this.profile.id).then((response: restangular.IResponse) => {
+                this.showRemoveFriend = true;
+            }).catch((response: restangular.IResponse) => {
+                this.showAddFriend = true;
+            });
+        } else {
+            this.showAddFriend = false;
+            this.showRemoveFriend = false;
+        }
     }
 
     profileLink() {
