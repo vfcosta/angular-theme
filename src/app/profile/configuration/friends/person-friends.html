@@ -1,0 +1,14 @@
+<div class="person-friends">
+    <h2>{{ 'myprofile.configuration.people' | translate}}</h2>
+
+    <div class="friends-filter">
+        
+    </div>
+
+    <profile-list [profiles]="friends"></profile-list>
+
+    <pagination *ngIf="total>0" [totalItems]="total" [itemsPerPage]="perPage"
+    [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
+    firstText="«" lastText="»" previousText="‹" nextText="›"
+    class="pagination-sm center-block"></pagination>
+</div>

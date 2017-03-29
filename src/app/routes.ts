@@ -277,4 +277,17 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
+
+    $stateProvider.state({
+        name: 'main.myprofile.friends',
+        url: "/friends",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
+                controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
 }
