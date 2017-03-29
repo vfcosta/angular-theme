@@ -53,6 +53,7 @@ describe("Components", () => {
             component.hidePopover = jasmine.createSpy("hidePopover");
             component.save();
             expect(component['notificationService'].success).toHaveBeenCalled();
+            expect(component.hidePopover).toHaveBeenCalled();
         });
 
         it("load roles", () => {
