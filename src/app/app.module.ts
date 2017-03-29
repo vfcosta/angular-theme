@@ -75,6 +75,7 @@ import * as plugins from "../plugins";
         ProfileConfigurationMenuComponent,
         ProfilePersonalDataComponent,
         DateFormatPipe,
+        ProfileListEditionComponent,
         PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
