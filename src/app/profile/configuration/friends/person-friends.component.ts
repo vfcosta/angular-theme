@@ -38,7 +38,7 @@ export class PersonFriendsComponent {
         });
     }
 
-    save() {
+    searchFriends() {
         this.loadPage({page: this.currentPage});
     }
 

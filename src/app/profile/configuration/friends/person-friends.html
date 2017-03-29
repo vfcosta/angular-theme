@@ -1,7 +1,7 @@
 <div class="person-friends container-fluid">
     <h2>{{ 'myprofile.configuration.people' | translate}}</h2>
 
-    <form class="form friends-filter" (ngSubmit)="save()" #profileForm="ngForm">
+    <form class="form friends-filter" (ngSubmit)="searchFriends()" #profileForm="ngForm">
         <div class="input-group margin-bottom-sm">
             <input [(ngModel)]="search" (ngModelChange)="searchChanged.next($event)" class="form-control" type="text" placeholder="{{ 'myprofile.configuration.people.search.label' | translate }}" name="search">
             <span class="input-group-addon">
