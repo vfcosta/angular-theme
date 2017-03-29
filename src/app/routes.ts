@@ -280,7 +280,7 @@ export function noosferoRoutes($stateProvider: any) {
 
     $stateProvider.state({
         name: 'main.myprofile.friends',
-        url: "/friends",
+        url: "/friends?search",
         controller: ProfileConfigurationOptionComponent,
         views: {
             "myprofileContent": {
