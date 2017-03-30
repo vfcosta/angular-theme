@@ -33,7 +33,7 @@ export class ProfileFastEditionComponent {
             this.profile = Object.assign(this.profile, this.updatedProfile);
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
             this.finished.emit(this.profile);
-            if (identifierChanged) {
+            if (this.allowChangeIdentifier() && identifierChanged) {
                 // go to the state with the new identifier url
                 this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
             }
@@ -48,7 +48,11 @@ export class ProfileFastEditionComponent {
     }
 
     cloneProfile() {
-        this.updatedProfile = <noosfero.Profile>['id', 'name', 'identifier'].reduce((object, key) => {
+        let fields = ['id', 'name'];
+        if (this.allowChangeIdentifier()) {
+            fields.push('identifier');
+        }
+        this.updatedProfile = <noosfero.Profile>fields.reduce((object, key) => {
             object[key] = this.profile[key]; return object;
         }, {});
     }
