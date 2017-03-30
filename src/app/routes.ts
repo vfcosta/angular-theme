@@ -291,9 +291,12 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
+<<<<<<< HEAD
         name: 'main.myprofile.community_add',
         url: "/community/add",
         controller: AddCommunityComponent,
+=======
+>>>>>>> Add community from profile configuration
         name: 'main.myprofile.community_new',
         url: "/community/new",
         controller: ProfileConfigurationOptionComponent,

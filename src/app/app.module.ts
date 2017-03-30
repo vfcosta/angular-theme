@@ -1,6 +1,5 @@
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
-import { AddCommunityComponent } from './profile/configuration/community/add-community.component';
 import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
@@ -80,6 +79,7 @@ import * as plugins from "../plugins";
         ProfilePersonalDataComponent,
         DateFormatPipe,
         ProfileListEditionComponent,
+        NewCommunityComponent,
         PermissionNg2Directive,
         PersonFriendsComponent,
         PersonCommunitiesComponent
@@ -106,10 +106,6 @@ import * as plugins from "../plugins";
         ImageUploadCropComponent,
         ProfileListComponent,
         ProfileJoinComponent,
-        PersonFriendsComponent,
-        PersonCommunitiesComponent
-    ].concat(plugins.ng2MainComponents),
-        AddCommunityComponent,
         NewCommunityComponent,
         ProfileJoinComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
