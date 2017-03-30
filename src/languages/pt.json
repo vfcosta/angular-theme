@@ -311,5 +311,6 @@
     "profile-list.member-edition.save": "Salvar",
     "profile-list.member-edition.cancel": "Cancelar",
     "profile-list-edition.role.success.title": "Bom trabalho!",
-    "profile-list-edition.role.success.message": "Papéis atualizados com sucesso!"
+    "profile-list-edition.role.success.message": "Papéis atualizados com sucesso!",
+    "myprofile.configuration.communities.search.label": "Buscar comunidades"
 }

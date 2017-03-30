@@ -1,3 +1,4 @@
+import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
@@ -76,7 +77,9 @@ import * as plugins from "../plugins";
         ProfilePersonalDataComponent,
         DateFormatPipe,
         ProfileListEditionComponent,
-        PermissionNg2Directive].concat(plugins.ng2MainComponents),
+        PermissionNg2Directive,
+        PersonCommunitiesComponent
+    ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -95,7 +98,9 @@ import * as plugins from "../plugins";
         ImageUploadComponent,
         ImageUploadCropComponent,
         ProfileListComponent,
-        ProfileJoinComponent].concat(plugins.ng2MainComponents),
+        ProfileJoinComponent,
+        PersonCommunitiesComponent
+    ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',
@@ -116,7 +121,9 @@ import * as plugins from "../plugins";
         '$transitions',
         '$stateParams',
         'amParseFilter',
-        'RoleService'])
+        'RoleService',
+        'PersonService',
+    ])
 })
 export class AppModule {
     ngDoBootstrap() {
