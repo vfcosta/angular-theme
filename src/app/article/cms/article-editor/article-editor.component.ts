@@ -34,7 +34,12 @@ export class ArticleEditorComponent {
         this.$window['deleteUrl'] = '/api/v1/articles';
         this.$window['renameUrl'] = '/api/v1/articles';
         this.$window['privateToken'] = this.sessionService.currentUser().private_token;
+        this.$window['baseUrl'] = this.getDomanWithPort();
         this.options = { filebrowserBrowseUrl: '/ng2-filemanager?editor=CKEditor'};
         this.$element.replaceWith(this.$compile('<' + directiveName + ' [article]="ctrl.article" [options]="ctrl.options"></' + directiveName + '>')(this.$scope));
+    }
+
+    getDomanWithPort() {
+        return location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
     }
 }
