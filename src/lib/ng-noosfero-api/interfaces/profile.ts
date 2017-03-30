@@ -101,6 +101,6 @@ namespace noosfero {
          * @propertyOf noofero.Profile
          * @returns {any} The Profile image
          */
-        image: any;        
+        image: any;
     }
 }

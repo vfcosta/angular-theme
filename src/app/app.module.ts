@@ -1,3 +1,4 @@
+import { AddCommunityComponent } from './profile/configuration/community/add-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
@@ -76,6 +77,7 @@ import * as plugins from "../plugins";
         ProfilePersonalDataComponent,
         DateFormatPipe,
         ProfileListEditionComponent,
+        AddCommunityComponent,
         PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -95,6 +97,7 @@ import * as plugins from "../plugins";
         ImageUploadComponent,
         ImageUploadCropComponent,
         ProfileListComponent,
+        AddCommunityComponent,
         ProfileJoinComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
