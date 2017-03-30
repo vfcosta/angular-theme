@@ -1,5 +1,7 @@
 bs-modal-backdrop {
-  z-index: 0;
+  &.modal-backdrop {
+    z-index: 0;
+  }
 }
 
 image-upload {
