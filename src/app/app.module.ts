@@ -1,5 +1,6 @@
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
+import { AddCommunityComponent } from './profile/configuration/community/add-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
@@ -82,6 +83,8 @@ import * as plugins from "../plugins";
         PersonFriendsComponent,
         PersonCommunitiesComponent
     ].concat(plugins.ng2MainComponents),
+        AddCommunityComponent,
+        PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -104,6 +107,8 @@ import * as plugins from "../plugins";
         PersonFriendsComponent,
         PersonCommunitiesComponent
     ].concat(plugins.ng2MainComponents),
+        AddCommunityComponent,
+        ProfileJoinComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',

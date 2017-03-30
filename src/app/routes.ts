@@ -1,4 +1,5 @@
 import { ProfileConfigurationOptionComponent } from './profile/configuration/profile-configuration-option.component';
+import { AddCommunityComponent } from './profile/configuration/community/add-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
 import { PasswordComponent } from './login/new-password.component';
@@ -201,19 +202,6 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
-        name: 'main.profile.page',
-        url: "/{page:any}",
-        controller: ContentViewerComponent,
-        views: {
-            "mainBlockContent": {
-                templateUrl: "app/article/content-viewer/page.html",
-                controller: ContentViewerComponent,
-                controllerAs: "vm"
-            }
-        }
-    });
-
-    $stateProvider.state({
         name: 'main.register',
         url: "/account/signup",
         controller: RegisterComponent,
@@ -299,6 +287,32 @@ export function noosferoRoutes($stateProvider: any) {
                 template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
                 controller: ProfileConfigurationOptionComponent,
                 controllerAs: "ctrl"
+            }
+        }
+    });
+
+    $stateProvider.state({
+        name: 'main.myprofile.community_add',
+        url: "/community/add",
+        controller: AddCommunityComponent,
+        views: {
+            "myprofileContent": {
+                templateUrl: "app/profile/configuration/community/add-community.html",
+                controller: AddCommunityComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
+    $stateProvider.state({
+        name: 'main.profile.page',
+        url: "/{page:any}",
+        controller: ContentViewerComponent,
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/article/content-viewer/page.html",
+                controller: ContentViewerComponent,
+                controllerAs: "vm"
             }
         }
     });
