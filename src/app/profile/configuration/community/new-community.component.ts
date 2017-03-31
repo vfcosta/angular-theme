@@ -30,7 +30,7 @@ export class NewCommunityComponent {
             this.finished.emit(this.community);
         }).catch((response) => {
             this.errors = response.data;
-            this.notificationService.error({ title: "profile.edition.error.title", message: "profile.edition.error.message" });
+            this.notificationService.error({ title: "profile.edition.error.title", message: response.data.message ? response.data.message : "profile.edition.error.message" });
         });
     }
 
