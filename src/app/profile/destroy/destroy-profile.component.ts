@@ -9,17 +9,30 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
 @Inject("$state", NotificationService, ProfileService)
 export class DestroyProfileComponent {
 
-    constructor($state: ng.ui.IStateService, notificationService: NotificationService, profileService: ProfileService) {
+    constructor(private $state: ng.ui.IStateService, private notificationService: NotificationService, profileService: ProfileService) {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             if (!profile) return;
             notificationService.confirmation({ title: "profile.remove.confirmation.title", message: "profile.remove.confirmation.message" }, () => {
-                profileService.remove(profile).then(() => {
-                    $state.go("main.environment.home");
-                    notificationService.success({ title: "profile.remove.success.title", message: "profile.remove.success.message" });
+                profileService.remove(profile).then((response: noosfero.RestResult<any>) => {
+                    if (response.data.success) {
+                        this.handleSuccess(profile);
+                    } else {
+                        this.handleError(profile);
+                    }
                 }).catch(() => {
-                    notificationService.error({ title: "profile.remove.failed.title" });
+                    this.handleError(profile);
                 });
             });
         });
+    }
+
+    handleSuccess(profile: noosfero.Profile) {
+        this.$state.go("main.domain");
+        this.notificationService.success({ title: "profile.remove.success.title", message: "profile.remove.success.message" });
+    }
+
+    handleError(profile: noosfero.Profile) {
+        this.$state.go("main.myprofile", { profile: profile.identifier });
+        this.notificationService.error({ title: "profile.remove.failed.title" });
     }
 }

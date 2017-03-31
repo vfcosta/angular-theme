@@ -188,19 +188,6 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
-        name: 'main.profile.home.destroy',
-        url: "^/myprofile/:profile/profile_editor/destroy_profile",
-        controller: DestroyProfileComponent,
-        views: {
-            "actions@main": {
-                template: "<div></div>",
-                controller: DestroyProfileComponent,
-                controllerAs: "vm"
-            }
-        }
-    });
-
-    $stateProvider.state({
         name: 'main.profile.page',
         url: "/{page:any}",
         controller: ContentViewerComponent,
@@ -286,6 +273,19 @@ export function noosferoRoutes($stateProvider: any) {
             "myprofileContent": {
                 template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
                 controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
+    $stateProvider.state({
+        name: 'main.myprofile.destroy',
+        url: "/profile_editor/destroy_profile",
+        controller: DestroyProfileComponent,
+        views: {
+            "myprofileContent": {
+                template: "<div></div>",
+                controller: DestroyProfileComponent,
                 controllerAs: "ctrl"
             }
         }

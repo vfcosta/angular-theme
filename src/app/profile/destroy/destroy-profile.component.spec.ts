@@ -24,7 +24,7 @@ describe("Components", () => {
                 func();
             };
             spyOn(notificationMock, 'confirmation').and.callThrough();
-            profileServiceMock.remove = jasmine.createSpy("remove").and.returnValue(helpers.mocks.promiseResultTemplate());
+            profileServiceMock.remove = jasmine.createSpy("remove").and.returnValue(helpers.mocks.promiseResultTemplate({data: {success: true}}));
 
             let cls = createClass({
                 template: htmlTemplate,
