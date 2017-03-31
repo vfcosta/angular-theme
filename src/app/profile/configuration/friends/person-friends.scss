@@ -1,0 +1,12 @@
+.person-friends {
+    background-color: white;
+    border-radius: 10px;
+    padding-bottom: 30px;
+    .friends-filter {
+        margin-bottom: 30px;
+        .btn-search {
+            @extend .btn-link;
+            color: #676767;
+        }
+    }
+}
