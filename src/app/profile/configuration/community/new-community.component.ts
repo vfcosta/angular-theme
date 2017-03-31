@@ -9,33 +9,27 @@ import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
  * @name AddCommunityComponent
  */
 @Component({
-    selector: "add-community",
-    template: require('app/profile/configuration/community/add-community.html'),
+    selector: "new-community",
+    template: require('app/profile/configuration/community/new-community.html'),
 })
-export class AddCommunityComponent {
-    profile: noosfero.Profile;
-    community: noosfero.Community;
+export class NewCommunityComponent {
+    @Input() profile: noosfero.Profile;
+    community = <noosfero.Community> {};
     @Output() finished = new EventEmitter<noosfero.Profile>();
     errors: any;
-    closed: boolean;
 
-    constructor( @Inject('profileService') private profileService: ProfileService,
-        @Inject("notificationService") private notificationService: NotificationService) {
-        profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
-            this.profile = profile;
-        });
-    }
+    constructor(@Inject("notificationService") private notificationService: NotificationService,
+    @Inject('communityService') private communityService: CommunityService) {}
 
     save() {
         this.community.type = 'Community';
-        this.community.closed = this.closed;
-        this.profileService.create(this.community).then(() => {
+        console.log(this.community);
+        this.communityService.createNewCommunity(this.community).then( (result) => {
             this.errors = null;
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
-            this.finished.emit(this.profile);
+            this.finished.emit(this.community);
         }).catch((response) => {
-            this.errors = response.data.error;
-            console.log(this.errors);
+            this.errors = response.data;
             this.notificationService.error({ title: "profile.edition.error.title", message: "profile.edition.error.message" });
         });
     }
@@ -45,7 +39,6 @@ export class AddCommunityComponent {
     }
 
     onSelectionChange(entry) {
-        this.closed = entry;
-        console.log(entry);
+        this.community.closed = entry;
     }
 }

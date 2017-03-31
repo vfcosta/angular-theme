@@ -18,7 +18,6 @@
                 <div class="form-group">
                     <label for="{{ key }}">{{ translateLabel(key) }}</label>
                     <input [type]="fieldType(key)" class="form-control" #name="ngModel" id="{{ key }}" name="{{ key }}" [(ngModel)]="customFieldsDict[key]" required  >
-                    <!--<input *ngIf="key === 'birth_date'" [type]="date" [(ngModel)]="customFieldsDict[key]" #name="ngModel" id="{{ key }}" name="{{ key }}">-->
                 </div>
             </div>
         </fieldset>
