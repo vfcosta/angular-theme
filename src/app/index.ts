@@ -117,20 +117,11 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('profilePersonalData',
         downgradeComponent({ component: ProfilePersonalDataComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
-<<<<<<< HEAD
-    ).
-    directive('personCommunities',
-        downgradeComponent({ component: PersonCommunitiesComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('personFriends',
-        downgradeComponent({ component: PersonFriendsComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
-        downgradeComponent({ component: ProfilePersonalDataComponent }) as angular.IDirectiveFactory
-        downgradeComponent({ component: ProfilePersonalDataComponent, inputs: ['profile']  }) as angular.IDirectiveFactory
-=======
-    ).directive('personFriends',
          downgradeComponent({ component: PersonFriendsComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
->>>>>>> Add community from profile configuration
-    ).directive('addCommunity',
+    ).
+    directive('newCommunity',
         downgradeComponent({component: NewCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     );
 
