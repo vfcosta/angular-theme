@@ -1,0 +1,22 @@
+<div class="person-communities container-fluid">
+    <h2>{{ 'myprofile.configuration.communities' | translate}}</h2>
+
+    <form class="form communities-filter" (ngSubmit)="searchCommunities()" #profileForm="ngForm">
+        <div class="input-group margin-bottom-sm">
+            <input [(ngModel)]="search" (ngModelChange)="searchChanged.next($event)" class="form-control" type="text" placeholder="{{ 'myprofile.configuration.communities.search.label' | translate }}" name="search">
+            <span class="input-group-addon">
+                <button type="submit" class="btn-search">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </form>
+
+    <profile-list [profiles]="communities"></profile-list>
+
+    <pagination *ngIf="total>0" [totalItems]="total" [itemsPerPage]="perPage"
+        [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
+        firstText="«" lastText="»" previousText="‹" nextText="›"
+        class="pagination-sm center-block"></pagination>
+	
+</div>

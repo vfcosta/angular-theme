@@ -25,6 +25,10 @@ export class PersonService extends RestangularService<noosfero.Person> {
         return this.getElement(profileId).customGET("friends", params);
     }
 
+    getCommunities(profileId: number, params?: any): restangular.IPromise<any> {
+        return this.getElement(profileId).customGET("communities", params);
+    }
+
     isFriend(profileId: number, friendId: number, params?: any): restangular.IPromise<any> {
         return this.getElement(profileId).customGET("friends/" + friendId, params);
     }

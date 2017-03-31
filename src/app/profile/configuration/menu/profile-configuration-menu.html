@@ -7,9 +7,15 @@
                     <i class="fa fa-user" aria-hidden="true"></i> {{ 'myprofile.configuration.people' | translate}}
                 </a>
             </li>
-            <li role="presentation"><a href="#"><i class="fa fa-users" aria-hidden="true"></i> {{ 'myprofile.configuration.communities' | translate}}</a></li>
+            <li role="presentation" class="">
+                <a href="#" uiSrefActive="active" uiSref="main.myprofile.communities" [uiParams]="{profile: profile.identifier}">
+                    <i class="fa fa-users" aria-hidden="true"></i> {{ 'myprofile.configuration.communities' | translate}}
+                </a>
+            </li>
             <li role="presentation"><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> {{ 'myprofile.configuration.advanced' | translate}}</a></li>
-            <li role="separator" class="divider"><hr /></li>
+            <li role="separator" class="divider">
+                <hr />
+            </li>
             <li role="presentation"><a href="#"><i class="fa fa-lock" aria-hidden="true"></i> {{ 'myprofile.configuration.password' | translate}}</a></li>
             <li role="presentation"><a href="#"><i class="fa fa-trash" aria-hidden="true"></i> {{ 'myprofile.configuration.delete_account' | translate}}</a></li>
         </ul>

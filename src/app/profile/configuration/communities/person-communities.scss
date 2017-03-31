@@ -1,0 +1,13 @@
+.person-communities {
+    background-color: white;
+    border-radius: 10px;
+    padding-bottom: 30px;
+
+    .communities-filter {
+        margin-bottom: 30px;
+        .btn-search {
+            @extend .btn-link;
+            color: #676767;
+        }
+    }
+}

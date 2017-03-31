@@ -279,6 +279,18 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
+        name: 'main.myprofile.communities',
+        url: "/communities?search",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<person-communities ng-if='ctrl.profile' [profile]='ctrl.profile'></person-communities>",
+            }
+        }
+    });
+
+
+    $stateProvider.state({
         name: 'main.myprofile.friends',
         url: "/friends?search",
         controller: ProfileConfigurationOptionComponent,

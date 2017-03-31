@@ -287,9 +287,9 @@
     "profile.edition.success.title": "Bom trabalho!",
     "profile.edition.success.message": "Perfil salvo com sucesso!",
     "profile.edition.error.title": "Oops!",
-    "profile.edition.error.message": "Algo deu errado!",    
+    "profile.edition.error.message": "Algo deu errado!",
     "profile.edition.name_label": "Nome",
-	"profile.edition.email_label": "Email",
+    "profile.edition.email_label": "Email",
     "profile.edition.identifier_label": "Nome de usuário",
     "profile.edition.action.save": "Salvar Alterações",
     "profile.edition.action.cancel": "Cancelar",
@@ -312,5 +312,6 @@
     "profile-list.member-edition.cancel": "Cancelar",
     "profile-list-edition.role.success.title": "Bom trabalho!",
     "profile-list-edition.role.success.message": "Papéis atualizados com sucesso!",
+    "myprofile.configuration.communities.search.label": "Buscar comunidades",
     "myprofile.configuration.people.search.label": "Buscar amigos"
 }

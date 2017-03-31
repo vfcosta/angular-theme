@@ -288,9 +288,9 @@
     "profile.edition.success.title": "Good job!",
     "profile.edition.success.message": "Profile successfully saved!",
     "profile.edition.error.title": "Oops!",
-    "profile.edition.error.message": "Something went wrong!",      
+    "profile.edition.error.message": "Something went wrong!",
     "profile.edition.name_label": "Name",
-	"profile.edition.email_label": "Email",
+    "profile.edition.email_label": "Email",
     "profile.edition.identifier_label": "User name",
     "profile.edition.action.save": "Save",
     "profile.edition.action.cancel": "Cancel",
@@ -300,7 +300,7 @@
     "profile.edition.identifier.change_message": "The profile url will be changed",
     "profile.edition.identifier.is-not-available": "User name is not available",
     "profile.edition.birth_date": "Birth date",
-    "profile.edition.description": "Description",    
+    "profile.edition.description": "Description",
     "myprofile.configuration.personal_data": "Personal data",
     "myprofile.configuration.advanced": "Advanced configurations",
     "myprofile.configuration.people": "People",
@@ -313,5 +313,6 @@
     "profile-list.member-edition.cancel": "Cancel",
     "profile-list-edition.role.success.title": "Good job!",
     "profile-list-edition.role.success.message": "Roles successfully updated!",
+    "myprofile.configuration.communities.search.label": "Search for communities",
     "myprofile.configuration.people.search.label": "Search for friends"
 }

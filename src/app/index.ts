@@ -1,3 +1,4 @@
+import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
@@ -111,6 +112,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('profilePersonalData',
         downgradeComponent({ component: ProfilePersonalDataComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('personCommunities',
+        downgradeComponent({ component: PersonCommunitiesComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('personFriends',
         downgradeComponent({ component: PersonFriendsComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
