@@ -1,34 +1,35 @@
 <div class="container-fluid add-community">
-    <h1>{{'myprofile.configuration.add.community' | translate}}</h1>
-    <form class="form" enctype='multipart/form-data' (ngSubmit)="save()" #profileForm="ngForm">
+    <h1>{{'myprofile.configuration.community.new' | translate}}</h1>
+    <form class="form" (ngSubmit)="save()" #communityForm="ngForm">
         <div class="form-group">
             <label for="name">{{'myprofile.configuration.community.name_label' | translate}}</label>
             <input type="text" class="form-control" placeholder="{{'myprofile.configuration.community.name_label' | translate}}" [(ngModel)]="community.name"
                 required #name="ngModel" id="name" name="name">
             <validation-message [field]="name" [prefix]="'profile.edition.name'"></validation-message>
         </div>
-        <div class="form-group">
-            <label for="image">{{'myprofile.configuration.community.image_label' | translate}}</label>
-            <input type="file" id="image" [(ngModel)]="community.image" #name="ngModel" id="image" name="image">
-        </div>
+        <!--<div class="form-group">
+            <label for="identifier">{{'identifier' | translate}}</label>
+            <input type="text" class="form-control" placeholder="{{'myprofile.configuration.community.name_label' | translate}}" [(ngModel)]="community.identifier"
+                required #name="ngModel" id="identifier" name="identifier">
+        </div>        -->
         <div class="form-group">
             <label>{{'myprofile.configuration.community.approved_members_label' | translate}}</label>
             <div class="radio">
                 <label>
-                <input type="radio" name="acceptMember" id="acceptBefore" value="true" (change)="ctrl.onSelectionChange(true)" required>
+                <input type="radio" name="acceptMember" id="acceptBefore" value="true" (change)="onSelectionChange(true)" required>
                 {{'myprofile.configuration.community.approved_members_before' | translate}}
             </label>
             </div>
             <div class="radio">
                 <label>
-                <input type="radio" name="acceptMember" id="acceptAfter" value="false" (change)="ctrl.onSelectionChange(false)" required>
+                <input type="radio" name="acceptMember" id="acceptAfter" value="false" (change)="onSelectionChange(false)" required>
                 {{'myprofile.configuration.community.approved_members_after' | translate}}
             </label>
             </div>
         </div>
         <div class="form-group actions">
-            <button type="submit" class="btn btn-primary" (click)="ctrl.save()">{{"profile.edition.action.save" | translate}}</button>
-            <button type="button" class="btn btn-default" (click)="ctrl.cancel()">{{"profile.edition.action.cancel" | translate}}</button>
+            <button type="submit" class="btn btn-primary">{{"profile.edition.action.save" | translate}}</button>
+            <button type="button" class="btn btn-default" (click)="cancel()">{{"profile.edition.action.cancel" | translate}}</button>
         </div>
     </form>
 </div>

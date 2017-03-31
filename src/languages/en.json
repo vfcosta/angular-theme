@@ -305,7 +305,7 @@
     "myprofile.configuration.advanced": "Advanced configurations",
     "myprofile.configuration.people": "People",
     "myprofile.configuration.communities": "Communities",
-    "myprofile.configuration.add.community": "Creating new community",
+    "myprofile.configuration.community.new": "Creating new community",
     "myprofile.configuration.community.name_label": "Name",
     "myprofile.configuration.community.label_label": "Label",   
     "myprofile.configuration.community.image_label": "Choose a image",

@@ -1,5 +1,4 @@
 import { ProfileConfigurationOptionComponent } from './profile/configuration/profile-configuration-option.component';
-import { AddCommunityComponent } from './profile/configuration/community/add-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
 import { PasswordComponent } from './login/new-password.component';
@@ -267,13 +266,13 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
-        name: 'main.myprofile.community_add',
-        url: "/community/add",
-        controller: AddCommunityComponent,
+        name: 'main.myprofile.community_new',
+        url: "/community/new",
+        controller: ProfileConfigurationOptionComponent,
         views: {
             "myprofileContent": {
-                templateUrl: "app/profile/configuration/community/add-community.html",
-                controller: AddCommunityComponent,
+                template: "<new-community ng-if='ctrl.profile' [profile]='ctrl.profile'></new-community>",
+                controller: ProfileConfigurationOptionComponent,
                 controllerAs: "ctrl"
             }
         }

@@ -1,4 +1,4 @@
-import { AddCommunityComponent } from './profile/configuration/community/add-community.component';
+import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
@@ -110,9 +110,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({ component: ProfileConfigurationMenuComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('profilePersonalData',
-        downgradeComponent({ component: ProfilePersonalDataComponent }) as angular.IDirectiveFactory
+        downgradeComponent({ component: ProfilePersonalDataComponent, inputs: ['profile']  }) as angular.IDirectiveFactory
     ).directive('addCommunity',
-        downgradeComponent({component: AddCommunityComponent }) as angular.IDirectiveFactory
+        downgradeComponent({component: NewCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [
