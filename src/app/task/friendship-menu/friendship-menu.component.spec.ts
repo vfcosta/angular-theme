@@ -1,27 +1,30 @@
+import { FriendshipMenuComponent } from './friendship-menu.component';
 import { Provider, provide, Component } from 'ng-forward';
 import * as helpers from "../../../spec/helpers";
 import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
-import { TasksMenuComponent } from './tasks-menu.component';
 import { AuthEvents } from "./../../login";
 
-const htmlTemplate: string = '<tasks-menu></tasks-menu>';
+const htmlTemplate: string = '<friendship-menu></friendship-menu>';
 
 describe("Components", () => {
-    describe("Task Menu Component", () => {
+    describe("Add Friend Task Menu Component", () => {
 
-        let helper: ComponentTestHelper<TasksMenuComponent>;
-        let taskService = jasmine.createSpyObj("taskService", ["getAllPending"]);
+        let helper: ComponentTestHelper<FriendshipMenuComponent>;
         let tasks = [{ id: 1 }, { id: 2 }];
+        let taskService = jasmine.createSpyObj("taskService", ["getAllPending"]);
         let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
-        taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
         let $stateParams = jasmine.createSpyObj("$stateParams", ["profile", "taskTypes"]);
-        $stateParams.taskTypes = 'AddMember,ApproveComment,ApproveArticle,AbuseComplaint,SuggestArticle,CreateCommunity';
-        beforeEach(angular.mock.module("templates"));
+
+        beforeEach(() => {
+            taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
+            $stateParams.taskTypes = 'AddFriend';
+            beforeEach(angular.mock.module("templates"));
+        });
 
         beforeEach((done) => {
             let cls = createClass({
                 template: htmlTemplate,
-                directives: [TasksMenuComponent],
+                directives: [FriendshipMenuComponent],
                 providers: [
                     helpers.createProviderToValue("TaskService", taskService),
                     helpers.createProviderToValue("EventsHubService", eventsHubService),
@@ -30,22 +33,17 @@ describe("Components", () => {
                     helpers.createProviderToValue('$stateParams', $stateParams)
                 ]
             });
-            helper = new ComponentTestHelper<TasksMenuComponent>(cls, done);
+            helper = new ComponentTestHelper<FriendshipMenuComponent>(cls, done);
         });
 
-        it("load person tasks", () => {
-            expect(taskService.getAllPending).toHaveBeenCalled();
-        });
-
-        it("load person tasks when receive a login event", () => {
+        it("load person add friend tasks when receive a login event", () => {
             helper.component.loadTasks = jasmine.createSpy("loadTasks");
             helper.component.ngOnInit();
             (<any>helper.component['authService'])[AuthEvents[AuthEvents.loginSuccess]].next({});
             expect(helper.component.loadTasks).toHaveBeenCalled();
         });
 
-
-        it("load person tasks with page parameter", () => {
+        it("load person add friend tasks with page parameter", () => {
             expect(taskService.getAllPending).toHaveBeenCalledWith({content_type: $stateParams.taskTypes, per_page: 5 });
         });
     });

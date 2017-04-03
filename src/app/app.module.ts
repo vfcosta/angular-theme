@@ -1,3 +1,4 @@
+import { FriendshipMenuComponent } from './task/friendship-menu/friendship-menu.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
@@ -81,6 +82,7 @@ import * as plugins from "../plugins";
         PermissionNg2Directive,
         PersonFriendsComponent,
         PersonCommunitiesComponent
+        // FriendshipMenuComponent
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -103,6 +105,7 @@ import * as plugins from "../plugins";
         ProfileJoinComponent,
         PersonFriendsComponent,
         PersonCommunitiesComponent
+        // FriendshipMenuComponent
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

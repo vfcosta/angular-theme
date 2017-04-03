@@ -5,13 +5,13 @@ import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
 
 @Component({
-    selector: "tasks-menu",
-    templateUrl: "app/task/tasks-menu/tasks-menu.html"
+    selector: "friendship-menu",
+    templateUrl: "app/task/friendship-menu/friendship-menu.html"
 })
 @Inject(TaskService, SessionService, AuthService, EventsHubService)
-export class TasksMenuComponent {
+export class FriendshipMenuComponent {
 
-    taskTypes = "AddMember,ApproveComment,ApproveArticle,AbuseComplaint,SuggestArticle,CreateCommunity";
+    taskTypes = "AddFriend";
 
     tasks: noosfero.Task[] = [];
     total: number;

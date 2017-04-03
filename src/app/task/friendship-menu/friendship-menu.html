@@ -1,0 +1,27 @@
+<div class="btn-nav friendship-menu" uib-dropdown  ng-show="ctrl.total > 0" ng-if="ctrl.total">
+  <a href="#" uib-dropdown-toggle class="tasks-menu-link">
+    <i  alt='{{"tasks.icon.description" | translate}}' class="fa fa-user-o fa-fw fa-2x" aria-hidden="true"></i>
+    <span class="badge-friendship">{{ctrl.total}}</span>
+    <span class="read-aloud">{{"tasks.header" | translate}}</span>
+  </a>
+  <div class="dropdown-menu friendship-panel" uib-dropdown-menu>
+    <div class="friendship-menu-header">{{"tasks.menu.header" | translate:{tasks: ctrl.total}:"messageformat"}}</div>
+    <task-list [tasks]="ctrl.tasks"></task-list>
+    <a ui-sref="main.profile.tasks({profile: ctrl.person.identifier, taskTypes: ctrl.taskTypes })" class="all-friendship btn btn-default btn-xs">{{"tasks.menu.all" | translate}}</a>
+  </div>
+</div>
+
+<!--
+<div class="btn-nav tasks-menu" uib-dropdown *ngIf="total > 0">
+  <a href="#" uib-dropdown-toggle class="tasks-menu-link">
+    <i  class="fa fa-user fa-fw fa-2x" aria-hidden="true"></i>
+    <span class="badge">{{total}}</span>
+    <span class="read-aloud">{{"tasks.header" | translate}}</span>
+  </a>
+  <div class="dropdown-menu task-panel" uib-dropdown-menu>
+    <div class="task-menu-header">{{"tasks.menu.header" | translate:{tasks: total}:"messageformat"}}</div>
+    <task-list [tasks]="tasks"></task-list>
+    <a href="#" uiSref="main.myprofile.communities" [uiParams]="{profile: profile.identifier}" class="all-tasks btn btn-default btn-xs">{{"tasks.menu.all" | translate}}</a>
+  </div>
+</div>
+-->
