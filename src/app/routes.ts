@@ -188,7 +188,6 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
-<<<<<<< HEAD
         name: 'main.profile.page',
         url: "/{page:any}",
         controller: ContentViewerComponent,
@@ -196,7 +195,12 @@ export function noosferoRoutes($stateProvider: any) {
             "mainBlockContent": {
                 templateUrl: "app/article/content-viewer/page.html",
                 controller: ContentViewerComponent,
-=======
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
+    $stateProvider.state({
         name: 'main.profile.home.destroy',
         url: "^/myprofile/:profile/profile_editor/destroy_profile",
         controller: DestroyProfileComponent,
@@ -204,7 +208,6 @@ export function noosferoRoutes($stateProvider: any) {
             "actions@main": {
                 template: "<div></div>",
                 controller: DestroyProfileComponent,
->>>>>>> a8b16dd143fb735ab4e1ec8d3a2b5518baf41fe7
                 controllerAs: "vm"
             }
         }
@@ -312,6 +315,7 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
+
     $stateProvider.state({
         name: 'main.myprofile.community_new',
         url: "/community/new",
