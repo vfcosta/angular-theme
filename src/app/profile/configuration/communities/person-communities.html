@@ -1,5 +1,10 @@
 <div class="person-communities container-fluid">
     <h2>{{ 'myprofile.configuration.communities' | translate}}</h2>
+    <div class="form-group">
+         <a href="#" class="btn btn-primary" uiSrefActive="active" uiSref="main.myprofile.community_new" [uiParams]="{profile: profile.identifier}">
+            <i class="fa fa-plus" aria-hidden="true"></i> {{ 'profile.actions.new_community' | translate}}
+        </a>
+    </div>
 
     <form class="form communities-filter" (ngSubmit)="searchCommunities()" #profileForm="ngForm">
         <div class="input-group margin-bottom-sm">

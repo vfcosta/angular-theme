@@ -119,6 +119,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('newCommunity',
         downgradeComponent({component: NewCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('personCommunities',
+        downgradeComponent({component: PersonCommunitiesComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

@@ -15,11 +15,16 @@ import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
 export class NewCommunityComponent {
     @Input() profile: noosfero.Profile;
     community = <noosfero.Community> {};
-    @Output() finished = new EventEmitter<noosfero.Profile>();
+    @Output() finished = new EventEmitter<noosfero.Community>();
     errors: any;
 
     constructor(@Inject("notificationService") private notificationService: NotificationService,
-    @Inject('communityService') private communityService: CommunityService) {}
+    @Inject('communityService') private communityService: CommunityService,
+    @Inject('$state') private $state: ng.ui.IStateService) {}
+
+    ngOnInit() {
+        this.community.closed = true;
+    }
 
     save() {
         this.community.type = 'Community';
@@ -28,6 +33,7 @@ export class NewCommunityComponent {
             this.errors = null;
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
             this.finished.emit(this.community);
+            this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
         }).catch((response) => {
             this.errors = response.data;
             this.notificationService.error({ title: "profile.edition.error.title", message: response.data.message ? response.data.message : "profile.edition.error.message" });
@@ -36,6 +42,7 @@ export class NewCommunityComponent {
 
     cancel() {
         this.finished.emit(this.community);
+        this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
     }
 
     onSelectionChange(entry) {

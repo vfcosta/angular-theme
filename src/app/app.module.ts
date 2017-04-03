@@ -105,6 +105,8 @@ import * as plugins from "../plugins";
         ProfileListComponent,
         ProfileJoinComponent,
         NewCommunityComponent,
+        PersonFriendsComponent,
+        PersonCommunitiesComponent,
         ProfileJoinComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
