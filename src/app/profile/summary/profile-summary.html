@@ -15,10 +15,10 @@
         </div>
         <br>
         <div ng-if="ctrl.showAddFriend">
-            <button class="btn btn-primary" (click)="ctrl.addFriend()"> {{"profile.actions.add_friend" | translate}} </button>
+            <button class="btn btn-primary" (click)="ctrl.addFriend()"><i class="fa fa-plus" aria-hidden="true"></i> {{"profile.actions.add_friend" | translate}} </button>
         </div>
         <div ng-if="ctrl.showRemoveFriend">
-            <button class="btn btn-warning" (click)="ctrl.removeFriend()"> {{"profile.actions.remove_friend" | translate}} </button>
+            <button class="btn btn-warning" (click)="ctrl.removeFriend()"><i class="fa fa-minus" aria-hidden="true"></i> {{"profile.actions.remove_friend" | translate}} </button>
         </div>
         <profile-join [profile]="ctrl.profile"></profile-join>
     </div>

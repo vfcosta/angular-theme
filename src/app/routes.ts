@@ -188,6 +188,7 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
+<<<<<<< HEAD
         name: 'main.profile.page',
         url: "/{page:any}",
         controller: ContentViewerComponent,
@@ -195,6 +196,15 @@ export function noosferoRoutes($stateProvider: any) {
             "mainBlockContent": {
                 templateUrl: "app/article/content-viewer/page.html",
                 controller: ContentViewerComponent,
+=======
+        name: 'main.profile.home.destroy',
+        url: "^/myprofile/:profile/profile_editor/destroy_profile",
+        controller: DestroyProfileComponent,
+        views: {
+            "actions@main": {
+                template: "<div></div>",
+                controller: DestroyProfileComponent,
+>>>>>>> a8b16dd143fb735ab4e1ec8d3a2b5518baf41fe7
                 controllerAs: "vm"
             }
         }
@@ -266,6 +276,18 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
+        name: 'main.myprofile.communities',
+        url: "/communities?search",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<person-communities ng-if='ctrl.profile' [profile]='ctrl.profile'></person-communities>",
+            }
+        }
+    });
+
+
+    $stateProvider.state({
         name: 'main.myprofile.friends',
         url: "/friends?search",
         controller: ProfileConfigurationOptionComponent,
@@ -287,6 +309,31 @@ export function noosferoRoutes($stateProvider: any) {
                 template: "<div></div>",
                 controller: DestroyProfileComponent,
                 controllerAs: "ctrl"
+            }
+        }
+    });
+    $stateProvider.state({
+        name: 'main.myprofile.community_new',
+        url: "/community/new",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<new-community ng-if='ctrl.profile' [profile]='ctrl.profile'></new-community>",
+                controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
+    $stateProvider.state({
+        name: 'main.profile.page',
+        url: "/{page:any}",
+        controller: ContentViewerComponent,
+        views: {
+            "mainBlockContent": {
+                templateUrl: "app/article/content-viewer/page.html",
+                controller: ContentViewerComponent,
+                controllerAs: "vm"
             }
         }
     });
