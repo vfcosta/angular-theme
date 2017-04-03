@@ -12,17 +12,16 @@ import { SessionService } from "./../../login";
     selector: "noosfero-profile-configuration",
     templateUrl: 'app/profile/configuration/profile-configuration.html',
 })
-@Inject(SessionService, '$stateParams')
+@Inject(ProfileService, '$stateParams')
 export class ProfileConfigurationComponent {
     profile: noosfero.Profile;
     profileIdentifier: string;
+    showComponent: string = "";
 
     constructor(private profileService: ProfileService, private $stateParams: ng.ui.IStateParamsService) {
         this.profileIdentifier = this.$stateParams["profile"];
-        console.log(this.profileIdentifier);
         this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
             this.profile = profile;
-            console.log(this.profile);
         });
     }
 }

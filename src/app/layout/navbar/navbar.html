@@ -36,7 +36,7 @@
 
             <div ui-view="actions" class="custom-actions"></div>
 
-            <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown>
+            <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown auto-close="outsideClick">
 
               <a href="#" class="dropdown-toggle profile-link" aria-expanded="false" uib-dropdown-toggle>
                 <noosfero-profile-image [profile]="ctrl.currentUser.person" class="profile-image"></noosfero-profile-image>

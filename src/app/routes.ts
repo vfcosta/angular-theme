@@ -1,3 +1,4 @@
+import { ProfileConfigurationOptionComponent } from './profile/configuration/profile-configuration-option.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
 import { PasswordComponent } from './login/new-password.component';
@@ -187,19 +188,6 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
-        name: 'main.profile.home.destroy',
-        url: "^/myprofile/:profile/profile_editor/destroy_profile",
-        controller: DestroyProfileComponent,
-        views: {
-            "actions@main": {
-                template: "<div></div>",
-                controller: DestroyProfileComponent,
-                controllerAs: "vm"
-            }
-        }
-    });
-
-    $stateProvider.state({
         name: 'main.profile.page',
         url: "/{page:any}",
         controller: ContentViewerComponent,
@@ -267,11 +255,37 @@ export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
         name: 'main.myprofile.personal_data',
         url: "/personal_data",
-        controller: ProfilePersonalDataComponent,
+        controller: ProfileConfigurationOptionComponent,
         views: {
             "myprofileContent": {
-                templateUrl: "app/profile/configuration/personal-data/profile-personal-data.html",
-                controller: ProfilePersonalDataComponent,
+                template: "<profile-personal-data ng-if='ctrl.profile' [profile]='ctrl.profile'></profile-personal-data>",
+                controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
+    $stateProvider.state({
+        name: 'main.myprofile.friends',
+        url: "/friends?search",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
+                controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
+    $stateProvider.state({
+        name: 'main.myprofile.destroy',
+        url: "/profile_editor/destroy_profile",
+        controller: DestroyProfileComponent,
+        views: {
+            "myprofileContent": {
+                template: "<div></div>",
+                controller: DestroyProfileComponent,
                 controllerAs: "ctrl"
             }
         }
