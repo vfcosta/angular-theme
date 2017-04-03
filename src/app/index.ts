@@ -1,9 +1,5 @@
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
-<<<<<<< HEAD
-import { AddCommunityComponent } from './profile/configuration/community/add-community.component';
-=======
->>>>>>> Add community from profile configuration
 import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';

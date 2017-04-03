@@ -82,10 +82,8 @@ import * as plugins from "../plugins";
         NewCommunityComponent,
         PermissionNg2Directive,
         PersonFriendsComponent,
-        PersonCommunitiesComponent
-    ].concat(plugins.ng2MainComponents),
-        AddCommunityComponent,
         NewCommunityComponent,
+        PersonCommunitiesComponent,
         PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
