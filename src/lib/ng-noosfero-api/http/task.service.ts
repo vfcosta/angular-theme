@@ -23,9 +23,12 @@ export class TaskService extends RestangularService<noosfero.Task> {
         };
     }
 
+
     getAllPending(params: any = {}) {
         params['all_pending'] = true;
-        params['content_type'] = TaskService.TASK_TYPES.map(t => t).join(',');
+        if (!params['content_type']) {
+            params['content_type'] = TaskService.TASK_TYPES.map(t => t).join(',');
+        }
         params['status'] = 1;
         return this.list(null, params);
     }

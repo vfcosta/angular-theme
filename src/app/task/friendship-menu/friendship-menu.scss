@@ -1,0 +1,56 @@
+$badge-bg-color: #8bc34a;
+$badge-color: #fff;
+
+.navbar {
+  friendship-menu {
+    display: inline-block;
+    .friendship-menu {
+      position: relative;
+      margin-right: 0;
+      .badge-friendship {
+        position: absolute;
+        top: 5px;
+        left: 40px;
+        border-radius: 4px;
+        background-color: $badge-bg-color;
+        color: $badge-color;
+        font-size: 11px;
+        padding: 2px 3px;
+      }
+      .all-friendship {
+        text-align: center;
+        width: 100%;
+        display: block;
+        line-height: 25px;
+      }
+      @media (min-width: 320px) {
+        .friendship-panel {
+          width: 270px;
+        }
+      }
+      @media (min-width: 500px) {
+        .friendship-panel {
+          width: 400px;
+        }
+      }
+      @media (min-width: 767px) {
+        .friendship-panel {
+          width: 550px;
+        }
+      }
+      .friendship-panel {
+        padding: 0;
+        left: inherit;
+        right: 0;
+        position: absolute;
+        background-color: white;
+        margin-top: 0;
+      }
+      .friendship-menu-header {
+        text-align: center;
+        padding: 7px;
+        font-weight: bold;
+      }
+    }
+  }
+}
