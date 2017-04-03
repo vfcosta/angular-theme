@@ -176,7 +176,7 @@ export function noosferoRoutes($stateProvider: any) {
 
     $stateProvider.state({
         name: 'main.profile.tasks',
-        url: "^/myprofile/:profile/tasks",
+        url: "^/myprofile/:profile/tasks/:taskTypes",
         controller: TasksComponent,
         views: {
             "mainBlockContent": {

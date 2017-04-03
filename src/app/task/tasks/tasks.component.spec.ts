@@ -13,7 +13,8 @@ describe("Components", () => {
         let taskService = jasmine.createSpyObj("taskService", ["getAllPending"]);
         let tasks = [{ id: 1 }, { id: 2 }];
         taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
-
+        let $stateParams = jasmine.createSpyObj("$stateParams", ["profile", "taskTypes"]);
+        // $stateParams.taskTypes = 'AddMember,ApproveComment,ApproveArticle,AbuseComplaint,SuggestArticle,CreateCommunity,AddFriend';
         beforeEach(angular.mock.module("templates"));
 
         beforeEach((done) => {
@@ -21,7 +22,8 @@ describe("Components", () => {
                 template: htmlTemplate,
                 directives: [TasksComponent],
                 providers: [
-                    helpers.createProviderToValue("TaskService", taskService)
+                    helpers.createProviderToValue("TaskService", taskService),
+                    helpers.createProviderToValue("$stateParams", $stateParams)
                 ]
             });
             helper = new ComponentTestHelper<TasksComponent>(cls, done);
@@ -32,7 +34,7 @@ describe("Components", () => {
         });
 
         it("load person tasks with page parameter", () => {
-            expect(taskService.getAllPending).toHaveBeenCalledWith({ page: 1, per_page: 5 });
+            expect(taskService.getAllPending).toHaveBeenCalledWith({ content_type: $stateParams.taskTypes, page: 1, per_page: 5 });
         });
     });
 });
