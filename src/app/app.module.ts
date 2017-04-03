@@ -1,5 +1,6 @@
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
+import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
@@ -78,10 +79,12 @@ import * as plugins from "../plugins";
         ProfilePersonalDataComponent,
         DateFormatPipe,
         ProfileListEditionComponent,
+        NewCommunityComponent,
         PermissionNg2Directive,
         PersonFriendsComponent,
-        PersonCommunitiesComponent
-    ].concat(plugins.ng2MainComponents),
+        NewCommunityComponent,
+        PersonCommunitiesComponent,
+        PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -101,9 +104,10 @@ import * as plugins from "../plugins";
         ImageUploadCropComponent,
         ProfileListComponent,
         ProfileJoinComponent,
+        NewCommunityComponent,
         PersonFriendsComponent,
-        PersonCommunitiesComponent
-    ].concat(plugins.ng2MainComponents),
+        PersonCommunitiesComponent,
+        ProfileJoinComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',
@@ -112,6 +116,8 @@ import * as plugins from "../plugins";
         'ArticleService',
         'BlockService',
         'profileService',
+        'PersonService',
+        'CommunityService',
         'PermissionService',
         'EventsHubService',
         '$uibModal',

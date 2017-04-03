@@ -33,7 +33,7 @@ export class PersonCommunitiesComponent {
     loadPage($event: any) {
         let filters = { per_page: this.perPage, page: $event.page, search: this.search };
 
-        this.personService.getCommunities(this.profile.id, filters).then((result: noosfero.RestResult<noosfero.Person[]>) => {
+        this.personService.getCommunities(this.profile.id, filters).then((result: noosfero.RestResult<noosfero.Community[]>) => {
             this.total = <number>result.headers("total");
             this.communities = result.data;
         });
