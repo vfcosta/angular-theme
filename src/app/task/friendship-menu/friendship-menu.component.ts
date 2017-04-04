@@ -11,7 +11,7 @@ import { NoosferoKnownEvents } from "../../known-events";
 @Inject(TaskService, SessionService, AuthService, EventsHubService)
 export class FriendshipMenuComponent {
 
-    taskType = "AddFriend";
+    taskTypes = "AddFriend";
 
     tasks: noosfero.Task[] = [];
     total: number;
@@ -29,7 +29,7 @@ export class FriendshipMenuComponent {
 
     ngOnInit() {
         this.eventsHubService.subscribeToEvent(this.eventsNames.TASK_CLOSED, (task: noosfero.Task) => {
-            if (this.taskType === task.type) {
+            if (this.taskTypes === task.type) {
                 this.total--;
             }
         });
@@ -43,7 +43,7 @@ export class FriendshipMenuComponent {
         if (!this.session.currentUser()) return;
         this.person = this.session.currentUser().person;
 
-        this.taskService.getAllPending({ content_type: this.taskType, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
+        this.taskService.getAllPending({ content_type: this.taskTypes, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
             this.total = result.headers('total');
             this.tasks = result.data;
         });
