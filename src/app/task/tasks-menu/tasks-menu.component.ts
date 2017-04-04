@@ -11,7 +11,7 @@ import { NoosferoKnownEvents } from "../../known-events";
 @Inject(TaskService, SessionService, AuthService, EventsHubService)
 export class TasksMenuComponent {
 
-    taskTypes = "AddMember,ApproveComment,ApproveArticle,AbuseComplaint,SuggestArticle,CreateCommunity";
+    taskTypes = ['AddMember', 'ApproveComment', 'ApproveArticle', 'AbuseComplaint', 'SuggestArticle', 'CreateCommunity'];
 
     tasks: noosfero.Task[] = [];
     total: number;
@@ -29,7 +29,9 @@ export class TasksMenuComponent {
 
     ngOnInit() {
         this.eventsHubService.subscribeToEvent(this.eventsNames.TASK_CLOSED, (task: noosfero.Task) => {
-            this.total--;
+            if (this.taskTypes.indexOf(task.type) !== -1) {
+                this.total--;
+            }
         });
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             this.loadTasks();
@@ -41,7 +43,7 @@ export class TasksMenuComponent {
         if (!this.session.currentUser()) return;
         this.person = this.session.currentUser().person;
 
-        this.taskService.getAllPending({content_type: this.taskTypes, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
+        this.taskService.getAllPending({ content_type: this.taskTypes.join(), per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
             this.total = result.headers('total');
             this.tasks = result.data;
         });
