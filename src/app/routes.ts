@@ -188,19 +188,6 @@ export function noosferoRoutes($stateProvider: any) {
     });
 
     $stateProvider.state({
-        name: 'main.profile.page',
-        url: "/{page:any}",
-        controller: ContentViewerComponent,
-        views: {
-            "mainBlockContent": {
-                templateUrl: "app/article/content-viewer/page.html",
-                controller: ContentViewerComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
-
-    $stateProvider.state({
         name: 'main.profile.home.destroy',
         url: "^/myprofile/:profile/profile_editor/destroy_profile",
         controller: DestroyProfileComponent,
