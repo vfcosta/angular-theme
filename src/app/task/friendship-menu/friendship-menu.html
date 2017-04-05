@@ -7,6 +7,6 @@
   <div class="dropdown-menu friendship-panel" uib-dropdown-menu>
     <div class="friendship-menu-header">{{"tasks.menu.header" | translate:{tasks: ctrl.total}:"messageformat"}}</div>
     <task-list [tasks]="ctrl.tasks"></task-list>
-    <a ui-sref="main.profile.tasks({profile: ctrl.person.identifier, taskTypes: ctrl.taskTypes })" class="all-friendship btn btn-default btn-xs">{{"tasks.menu.all" | translate}}</a>
+    <a ui-sref="main.profile.tasks({profile: ctrl.person.identifier, taskType: ctrl.taskType })" class="all-friendship btn btn-default btn-xs">{{"tasks.menu.all" | translate}}</a>
   </div>
 </div>
