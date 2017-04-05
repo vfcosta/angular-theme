@@ -1,16 +1,12 @@
-<a href="#" aria-label='{{"search.icon.description" | translate}}' class="btn btn-nav" ng-click="ctrl.showSearch = !ctrl.showSearch">
-  <i class="fa fa-search btn-search-nav" aria-hidden="true">
-    <span class="read-aloud">{{"search.icon.description" | translate}}</span>
-  </i>
-</a>
-<form class="search-form" role="search" (submit)="ctrl.search()">
-  <div class="ng-scope" ng-class="{'top-search-wrap': !ctrl.showSearch, 'top-search-toggled': ctrl.showSearch}">
-    <div class="tsw-inner">
-      <i id="top-search-close" class="fa fa-chevron-left" aria-hidden="true" ng-click="ctrl.showSearch = false"></i>
-      <input type="text" placeholder="{{ 'search.label' | translate }}" name="q" ng-model="ctrl.query" focus-if="ctrl.showSearch" autofocus="true">
-      <a class="btn-search" (click)="ctrl.search()" href="#" alt='{{"search.icon.description" | translate}}'>
-        <i class="fa fa-search"></i>
-      </a>
+<form class="navbar-form navbar-left search-form" role="search" ng-submit="ctrl.search()">
+  <div class="form-group input-group">
+      <input type="text" class="form-control" placeholder="{{ 'search.label' | translate }}" name="q" ng-model="ctrl.query">
+      <span class="input-group-btn">
+        <a class="btn btn-warning" (click)="ctrl.search()" href="#" alt='{{"search.icon.description" | translate}}'>
+          <i class="fa fa-search fa-2x btn-search-nav" aria-hidden="true">
+            <span class="read-aloud">{{"search.icon.description" | translate}}</span>
+          </i>
+        </a>
+      </span>
     </div>
-  </div>
 </form>

@@ -31,6 +31,7 @@ export class SearchFormComponent {
     }
 
     search() {
+        console.log('QUERY ', this.query);
         this.$state.go('main.environment.search', { query: this.query });
     }
 
