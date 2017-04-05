@@ -5,13 +5,13 @@ import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
 
 @Component({
-    selector: "tasks-menu",
-    templateUrl: "app/task/tasks-menu/tasks-menu.html"
+    selector: "friendship-menu",
+    templateUrl: "app/task/friendship-menu/friendship-menu.html"
 })
 @Inject(TaskService, SessionService, AuthService, EventsHubService)
-export class TasksMenuComponent {
+export class FriendshipMenuComponent {
 
-    taskTypes = ['AddMember', 'ApproveComment', 'ApproveArticle', 'AbuseComplaint', 'SuggestArticle', 'CreateCommunity'];
+    taskType = "AddFriend";
 
     tasks: noosfero.Task[] = [];
     total: number;
@@ -29,7 +29,7 @@ export class TasksMenuComponent {
 
     ngOnInit() {
         this.eventsHubService.subscribeToEvent(this.eventsNames.TASK_CLOSED, (task: noosfero.Task) => {
-            if (this.taskTypes.indexOf(task.type) !== -1) {
+            if (this.taskType === task.type) {
                 this.total--;
             }
         });
@@ -43,7 +43,7 @@ export class TasksMenuComponent {
         if (!this.session.currentUser()) return;
         this.person = this.session.currentUser().person;
 
-        this.taskService.getAllPending({ content_type: this.taskTypes.join(), per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
+        this.taskService.getAllPending({ content_type: this.taskType, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
             this.total = result.headers('total');
             this.tasks = result.data;
         });

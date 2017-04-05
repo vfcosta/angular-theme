@@ -1,3 +1,4 @@
+import { FriendshipMenuComponent } from './task/friendship-menu/friendship-menu.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
 import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
