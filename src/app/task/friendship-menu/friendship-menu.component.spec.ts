@@ -15,11 +15,9 @@ describe("Components", () => {
         let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
         let $stateParams = jasmine.createSpyObj("$stateParams", ["profile", "taskTypes"]);
 
-        beforeEach(() => {
-            taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
-            $stateParams.taskTypes = 'AddFriend';
-            beforeEach(angular.mock.module("templates"));
-        });
+        taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
+        $stateParams.taskTypes = 'AddFriend';
+        beforeEach(angular.mock.module("templates"));
 
         beforeEach((done) => {
             let cls = createClass({
