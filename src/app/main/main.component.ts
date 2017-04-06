@@ -1,3 +1,4 @@
+import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { FriendshipMenuComponent } from './../task/friendship-menu/friendship-menu.component';
 import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
@@ -139,17 +140,17 @@ export class EnvironmentContent {
         BlockSettingsComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, MenuBlockComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
-        NoosferoTemplate, NoosferoUrl, DateFormat,
+        NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent,
-        PasswordComponent, EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
+        EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile, FriendshipMenuComponent
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService,
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

@@ -16,7 +16,11 @@
             <li role="separator" class="divider">
                 <hr />
             </li>
-            <li role="presentation"><a href="#"><i class="fa fa-lock" aria-hidden="true"></i> {{ 'myprofile.configuration.password' | translate}}</a></li>
+            <li role="presentation">
+                <a href="#" uiSrefActive="active" uiSref="main.myprofile.change_password" [uiParams]="{profile: profile.identifier}">
+                    <i class="fa fa-lock" aria-hidden="true"></i> {{ 'myprofile.configuration.password' | translate}}
+                </a>
+            </li>
             <li role="presentation" class="">
                 <a href="#" uiSrefActive="active" uiSref="main.myprofile.destroy" [uiParams]="{profile: profile.identifier}">
                     <i class="fa fa-trash" aria-hidden="true"></i> {{ 'myprofile.configuration.delete_account' | translate}}

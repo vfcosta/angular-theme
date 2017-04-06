@@ -1,5 +1,5 @@
 namespace noosfero {
-    export interface User {
+    export interface User extends RestModel, ModelWithPermissions {
         id: number;
         login: string;
         email: string;
