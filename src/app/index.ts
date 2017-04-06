@@ -1,5 +1,6 @@
 import { FriendshipMenuComponent } from './task/friendship-menu/friendship-menu.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
+import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
 import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
@@ -123,6 +124,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('personCommunities',
         downgradeComponent({component: PersonCommunitiesComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('changePassword',
+        downgradeComponent({ component: ChangePasswordComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

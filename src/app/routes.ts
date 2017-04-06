@@ -20,7 +20,6 @@ import { DomainService } from "./../lib/ng-noosfero-api/http/domain.service";
 import { EnvironmentComponent } from "./environment/environment.component";
 import { EnvironmentHomeComponent } from "./environment/environment-home.component";
 import { CommunityMembersRouteComponent } from './profile/community-members/community-members-route.component';
-
 /** @ngInject */
 export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
@@ -35,7 +34,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         controller: EnvironmentComponent,
         url: '/',
@@ -49,7 +47,6 @@ export function noosferoRoutes($stateProvider: any) {
         },
         params: { environment: {} }
     });
-
     $stateProvider.state({
         controller: EnvironmentHomeComponent,
         url: '',
@@ -63,7 +60,6 @@ export function noosferoRoutes($stateProvider: any) {
         },
         params: { environment: {} }
     });
-
     $stateProvider.state({
         controller: DomainComponent,
         url: '/',
@@ -81,7 +77,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         controller: SearchComponent,
         url: '^/search?query&per_page',
@@ -94,7 +89,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         url: "^/:profile",
         abstract: true,
@@ -109,7 +103,6 @@ export function noosferoRoutes($stateProvider: any) {
         },
         params: { currentProfile: {} }
     });
-
     $stateProvider.state({
         name: 'main.profile.info',
         url: "^/profile/:profile",
@@ -122,7 +115,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.profile.home',
         url: "",
@@ -134,7 +126,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.profile.about',
         url: "^/profile/:profile/about",
@@ -147,7 +138,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.cms',
         url: "^/myprofile/:profile/cms?parent_id&type",
@@ -160,7 +150,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.cmsEdit',
         url: "^/myprofile/:profile/cms/edit/:id",
@@ -173,7 +162,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.profile.tasks',
         url: "^/myprofile/:profile/tasks/:taskTypes",
@@ -186,7 +174,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.profile.home.destroy',
         url: "^/myprofile/:profile/profile_editor/destroy_profile",
@@ -199,7 +186,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.register',
         url: "/account/signup",
@@ -212,7 +198,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.newPasswd',
         url: "/account/new_password/:code",
@@ -225,7 +210,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.profile.members',
         url: "^/profile/:profile/members",
@@ -238,7 +222,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.myprofile',
         url: "^/myprofile/:profile",
@@ -251,7 +234,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.myprofile.personal_data',
         url: "/personal_data",
@@ -264,7 +246,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.myprofile.communities',
         url: "/communities?search",
@@ -275,8 +256,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
-
     $stateProvider.state({
         name: 'main.myprofile.friends',
         url: "/friends?search",
@@ -289,7 +268,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.myprofile.destroy',
         url: "/profile_editor/destroy_profile",
@@ -302,7 +280,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.myprofile.community_new',
         url: "/community/new",
@@ -315,7 +292,6 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-
     $stateProvider.state({
         name: 'main.profile.page',
         url: "/{page:any}",
@@ -325,6 +301,19 @@ export function noosferoRoutes($stateProvider: any) {
                 templateUrl: "app/article/content-viewer/page.html",
                 controller: ContentViewerComponent,
                 controllerAs: "vm"
+            }
+        }
+    });
+
+    $stateProvider.state({
+        name: 'main.myprofile.change_password',
+        url: "/change_password",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<change-password ng-if='ctrl.profile' [profile]='ctrl.profile'></change-password>",
+                controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
             }
         }
     });

@@ -1,5 +1,6 @@
 import { FriendshipMenuComponent } from './task/friendship-menu/friendship-menu.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
+import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
 import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
@@ -81,6 +82,7 @@ import * as plugins from "../plugins";
         DateFormatPipe,
         ProfileListEditionComponent,
         NewCommunityComponent,
+        ChangePasswordComponent,
         PermissionNg2Directive,
         PersonFriendsComponent,
         NewCommunityComponent,
@@ -108,7 +110,10 @@ import * as plugins from "../plugins";
         NewCommunityComponent,
         PersonFriendsComponent,
         PersonCommunitiesComponent,
-        ProfileJoinComponent].concat(plugins.ng2MainComponents),
+        ChangePasswordComponent,
+        PersonCommunitiesComponent,
+        ProfileJoinComponent]
+        .concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',
@@ -133,6 +138,7 @@ import * as plugins from "../plugins";
         'amParseFilter',
         'RoleService',
         'PersonService',
+        'UserService'
     ])
 })
 export class AppModule {

@@ -25,25 +25,25 @@ describe("Services", () => {
 
         it("method 'create()' saves the current user on $localstorage service", () => {
             let session = new SessionService($localStorage, $log, profileService);
-            session.create(fixtures.user);
+            session.create(<noosfero.User>fixtures.user);
             expect($localStorage.currentUser).toEqual(fixtures.user);
         });
 
         it("method 'destroy()' clean the currentUser on $localstorage", () => {
             let session = new SessionService($localStorage, $log, profileService);
-            $localStorage.currentUser = fixtures.user;
+            $localStorage.currentUser = <noosfero.User>fixtures.user;
             session.destroy();
             expect($localStorage.currentUser).toBeUndefined();
         });
 
         it("method 'currentUser()' returns the user recorded on $localstorage service", () => {
             let session = new SessionService($localStorage, $log, profileService);
-            $localStorage.currentUser = fixtures.user;
+            $localStorage.currentUser = <noosfero.User>fixtures.user;
             expect(session.currentUser()).toEqual($localStorage.currentUser);
         });
 
         it("profile is updated when user is logged in", () => {
-            $localStorage.currentUser = fixtures.user;
+            $localStorage.currentUser = <noosfero.User>fixtures.user;
             let session = new SessionService($localStorage, $log, profileService);
             session.reloadUser();
 

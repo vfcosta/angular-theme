@@ -115,6 +115,7 @@ export var fixtures = {
             identifier: 'user'
         },
         private_token: 'token',
-        userRole: 'admin'
+        userRole: 'admin',
+        permissions: []
     }
 };
