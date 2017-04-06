@@ -3,6 +3,8 @@ variables:
     GIT_SSL_NO_VERIFY: "true"
 
 cache:
+  key: "$CI_BUILD_REF_NAME"
+  untracked: true
   paths:
     - node_modules/
     - bower_components/
