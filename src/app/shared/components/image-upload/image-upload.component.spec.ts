@@ -1,7 +1,7 @@
 import { TranslatePipe } from './../../pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ModalModule } from 'ng2-bootstrap';
+import { ModalModule } from 'ngx-bootstrap';
 import { ImageUploadComponent } from "./image-upload.component";
 
 describe("Components", () => {

@@ -1,5 +1,5 @@
-<div [class.opened]="popover.isOpen" class="profile-list-edition" *ngIf="ownerIsCommunity()">
-    <ng-template #memberEditionTemplate>
+<div class="profile-list-edition" *ngIf="ownerIsCommunity()">
+    <popover-content #memberEditionTemplate placement="right" [animation]="true" [closeOnClickOutside]="true">
         <div class="member-edition">
             <div class="name">
                 {{profile.name}}
@@ -23,9 +23,7 @@
                 <a href="#" class="btn btn-default btn-xs" (click)="popover.hide()">{{"profile-list.member-edition.cancel" | translate}}</a>
             </div>
         </div>
-    </ng-template>
+    </popover-content>
 
-    <a href="#" class="edit-button fa fa-pencil ng-scope" #popover="bs-popover"
-        (onShown)="loadRoles()" triggers="click" [popover]="memberEditionTemplate">
-    </a>
+    <a href="#" class="edit-button fa fa-pencil ng-scope" (onShown)="loadRoles()" [popover]="memberEditionTemplate"></a>
 </div>

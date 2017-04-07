@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommunityMembersComponent } from './community-members.component';
-import { PaginationModule } from 'ng2-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap';
 import * as helpers from "../../../spec/helpers";
 
 describe("Components", () => {

@@ -1,3 +1,4 @@
+import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
@@ -126,6 +127,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('changePassword',
         downgradeComponent({ component: ChangePasswordComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoMenuBlock',
+        downgradeComponent({component: MenuBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

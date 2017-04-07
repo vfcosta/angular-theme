@@ -47,25 +47,25 @@ describe("Block Edition Component", () => {
     it("emit change event when an attribute was modified", () => {
         helper.component.block.title = "changed";
         helper.component.emitChanges();
-        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, title: "changed" });
+        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, title: "changed", api_content: { } });
     });
 
     it("emit change event with block id when no attribute was modified", () => {
         helper.component.emitChanges();
-        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1 });
+        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, api_content: { } });
     });
 
     it("emit change event when an setting attribute was modified", () => {
         (<any>helper.component.block.settings).display = "never";
         helper.component.emitChanges();
-        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, display: "never" });
+        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, display: "never", api_content: { } });
     });
 
     it("emit change event with block id when an setting attribute was not modified", () => {
         (<any>helper.component.originalBlock.settings).display = "never";
         (<any>helper.component.block.settings).display = "never";
         helper.component.emitChanges();
-        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1 });
+        expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, api_content: { } });
     });
 
     it("update originalBlock when receive a BLOCKS_SAVED event", () => {

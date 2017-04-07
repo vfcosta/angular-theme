@@ -45,10 +45,15 @@ export class BlockEditionComponent {
     }
 
     emitChanges() {
-        let blockDiff = <noosfero.Block>{ id: this.block.id };
+        let blockDiff = <noosfero.Block>{ id: this.block.id, api_content: {} };
         for (let k in this.block.settings) {
             if (!angular.equals((<any>this.block.settings)[k], (<any>this.originalBlock.settings)[k])) {
                 (<any>blockDiff)[k] = (<any>this.block.settings)[k];
+            }
+        }
+        for (let k in this.block.api_content) {
+            if (this.originalBlock.api_content && !angular.equals((<any>this.block.api_content)[k], (<any>this.originalBlock.api_content)[k])) {
+                (<any>blockDiff.api_content)[k] = (<any>this.block.api_content)[k];
             }
         }
         if (this.block.title !== this.originalBlock.title) {
