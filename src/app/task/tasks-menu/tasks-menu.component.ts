@@ -1,4 +1,4 @@
-import { Component, Inject } from "ng-forward";
+import { Component, Inject, Input } from "ng-forward";
 import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
 import { AuthService, SessionService, AuthEvents } from "./../../login";
 import { EventsHubService } from "../../shared/services/events-hub.service";
@@ -11,7 +11,7 @@ import { NoosferoKnownEvents } from "../../known-events";
 @Inject(TaskService, SessionService, AuthService, EventsHubService)
 export class TasksMenuComponent {
 
-    taskTypes = ['AddMember', 'ApproveComment', 'ApproveArticle', 'AbuseComplaint', 'SuggestArticle', 'CreateCommunity'];
+    @Input() taskTypes = ['AddMember', 'ApproveComment', 'ApproveArticle', 'AbuseComplaint', 'SuggestArticle', 'CreateCommunity'];
 
     tasks: noosfero.Task[] = [];
     total: number;
