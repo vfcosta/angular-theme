@@ -1,4 +1,7 @@
 .search-form {
+  margin-left: 0px;
+  margin-right: 0px;
+
   input[type="text"] {
     @include border-radius(2px);
     border: 0;

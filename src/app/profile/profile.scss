@@ -1,8 +1,8 @@
 .profile-container {
   @extend .container;
-  padding: 0 1%;
+  padding: 15px;
   @media (max-width: 978px) {
-    padding: 0 2%;
+    padding: 15px;
   }
   margin-top: -30px;
 }
