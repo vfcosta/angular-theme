@@ -1,4 +1,3 @@
-import { FriendshipMenuComponent } from './task/friendship-menu/friendship-menu.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';

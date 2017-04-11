@@ -1,5 +1,4 @@
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
-import { FriendshipMenuComponent } from './../task/friendship-menu/friendship-menu.component';
 import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
 import { BasicOptionsComponent } from './../article/cms/basic-options/basic-options.component';
@@ -148,7 +147,7 @@ export class EnvironmentContent {
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileSummaryComponent, ProfileHeaderComponent,
-        ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile, FriendshipMenuComponent
+        ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         "ngAnimate", "ngCookies", "ngStorage", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",

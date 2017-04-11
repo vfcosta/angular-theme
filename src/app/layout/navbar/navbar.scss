@@ -2,6 +2,14 @@ $navbar-font-color: #fff;
 
 .navbar {
 
+  tasks-menu {
+    &.friendship-menu {
+      .tasks-icon {
+        @extend .fa-user-o;
+      }
+    }
+  }
+
   .noosfero-name {
     font-size: 19px;
     display: none;
