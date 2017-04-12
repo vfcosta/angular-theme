@@ -49,5 +49,14 @@ namespace noosfero {
          */
         name: string;
         type: string;
+
+        /**
+         * @ngdoc property
+         * @name boxes
+         * @propertyOf noofero.Environment
+         * @returns noosfero.Box[] The Boxes of an environment
+         */
+        boxes: noosfero.Box[];
+
     }
 }

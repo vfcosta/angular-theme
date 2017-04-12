@@ -18,19 +18,20 @@ describe("Context Bar Component", () => {
             id: 1,
             identifier: 'profile-name',
             type: 'Person',
-            layout_template: 'default'
+            layout_template: 'default',
+            boxes: [{id: 6, blocks: [{id: 5}]}]
         }
     };
 
     let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
     let blockService = jasmine.createSpyObj("BlockService", ["updateAll"]);
     let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
-    blockService.updateAll = jasmine.createSpy("updateAll").and.returnValue(helpers.mocks.promiseResultTemplate());
 
     let eventFunction: Function;
     eventsHubService.subscribeToEvent = (ev: string, fn: Function) => { eventFunction = fn; };
 
     let profileService = jasmine.createSpyObj("profileService", ["update"]);
+    profileService.update = jasmine.createSpy("update").and.returnValue(helpers.mocks.promiseResultTemplate());
     let environmentService = jasmine.createSpyObj("environmentService", ["update"]);
     let state = jasmine.createSpyObj("$state", ["reload"]);
 
@@ -60,13 +61,13 @@ describe("Context Bar Component", () => {
     it("not call block service to apply blocks changes when no changes exists", () => {
         helper.component.blocksChanged = <noosfero.Block[]>[];
         helper.component.applyBlockChanges();
-        expect(blockService.updateAll).not.toHaveBeenCalled();
+        expect(profileService.update).not.toHaveBeenCalled();
     });
 
     it("call block service to apply blocks changes", () => {
         helper.component.blocksChanged = <noosfero.Block[]>[{ id: 1 }];
         helper.component.applyBlockChanges();
-        expect(blockService.updateAll).toHaveBeenCalled();
+        expect(profileService.update).toHaveBeenCalled();
     });
 
     it("return false when there is no blocks to be updated", () => {
@@ -130,4 +131,25 @@ describe("Context Bar Component", () => {
         helper.component.apply();
         expect(helper.component['notificationService'].success).toHaveBeenCalled();
     });
+
+    it("render template context-bar if block is marked for removal", () => {
+        helper.component.blocksChanged = <any> [{id: 5, _destroy: true}];
+        helper.detectChanges();
+        expect(helper.all('#context-bar .apply').length).toEqual(1);
+    });
+
+    it("call ProfileService.update if apply button is pressed", () => {
+        helper.component.blocksChanged = <any> [{id: 5, _destroy: true}];
+        helper.component.applyBlockChanges();
+        expect(profileService.update).toHaveBeenCalledWith({ id: 1, boxes_attributes: [ { id: 6, blocks_attributes: [ { id: 5, _destroy: true } ] } ] });
+    });
+
+    it("call EnvironmentService.update if apply button is pressed", () => {
+        helper.component.owner.type = "Environment";
+        helper.component.blocksChanged = <any> [{id: 5, _destroy: true}];
+        helper.component.applyBlockChanges();
+        expect(environmentService.update).toHaveBeenCalledWith({ id: 1, boxes_attributes: [ { id: 6, blocks_attributes: [ { id: 5, _destroy: true } ] } ] });
+    });
+
+
 });

@@ -21,6 +21,7 @@ export class BlockComponent {
     isHomepage = true;
     designMode = false;
 
+
     constructor(
         private $uibModal: ng.ui.bootstrap.IModalService,
         private $scope: ng.IScope,
@@ -57,7 +58,9 @@ export class BlockComponent {
     }
 
     canDisplay() {
-        return this.visible() && this.displayToUser() &&
+        if (this.block._destroy) return false;
+        if (this.designMode) return true;
+        return  this.visible() && this.displayToUser() &&
             this.displayOnLanguage(this.translatorService.currentLanguage()) &&
             !this.block.hide;
     }
@@ -97,5 +100,13 @@ export class BlockComponent {
         } else {
             this.isHomepage = this.$state.current.name === "main.environment.home";
         }
+    }
+
+    markForDeletion() {
+        this.block._destroy = true;
+    }
+
+    canDelete() {
+        return this.block.type !== 'MainBlock';
     }
 }

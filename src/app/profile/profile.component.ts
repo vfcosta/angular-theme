@@ -46,6 +46,7 @@ export class ProfileComponent {
             profileService.setCurrentProfile(this.profile);
             return this.profileService.getBoxes(<number>this.profile.id);
         }).then((response: restangular.IResponse) => {
+            this.profile.boxes = response.data;
             this.boxes = response.data;
         }).catch(() => {
             this.$state.transitionTo('main.domain');

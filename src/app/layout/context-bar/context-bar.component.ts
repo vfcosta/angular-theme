@@ -7,6 +7,8 @@ import { EnvironmentService } from '../../../lib/ng-noosfero-api/http/environmen
 import { NotificationService } from '../../shared/services/notification.service';
 import { DesignModeService } from "../../shared/services/design-mode.service";
 
+declare var _: any;
+
 @Component({
     selector: "context-bar",
     templateUrl: "app/layout/context-bar/context-bar.html"
@@ -87,7 +89,30 @@ export class ContextBarComponent {
 
     applyBlockChanges() {
         if (!this.hasBlockChanges()) return Promise.resolve();
-        return this.blockService.updateAll(this.blocksChanged).then(() => {
+        let groupedBoxesChanged = _.groupBy(this.blocksChanged, (block) => {
+            for (let box of this.owner.boxes) {
+                let b = _.find(box.blocks, {'id': block.id});
+                if (b) return box.id;
+            }
+        });
+
+        let boxes = [];
+        Object.keys(groupedBoxesChanged).forEach(function (key) {
+           boxes.push ( { id: +key, blocks_attributes: groupedBoxesChanged[key] });
+        });
+
+        let boxesHolder = {
+            id: this.owner.id, boxes_attributes: boxes
+        };
+
+        let updatePromise: ng.IPromise<any>;
+        if (this.owner.type === 'Environment') {
+            updatePromise = this.environmentService.update(<any> boxesHolder);
+        } else {
+            updatePromise = this.profileService.update(<any> boxesHolder);
+        }
+
+        return updatePromise.then(() => {
             this.blocksChanged = [];
             this.eventsHubService.emitEvent(this.eventsNames.BLOCKS_SAVED, this.owner);
         });

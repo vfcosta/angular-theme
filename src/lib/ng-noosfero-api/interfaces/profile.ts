@@ -102,5 +102,13 @@ namespace noosfero {
          * @returns {any} The Profile image
          */
         image: any;
+
+        /**
+         * @ngdoc property
+         * @name boxes
+         * @propertyOf noofero.Profile
+         * @returns noosfero.Box[] The Boxes of a profile
+         */
+        boxes: noosfero.Box[];
     }
 }
