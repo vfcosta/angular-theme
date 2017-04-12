@@ -83,7 +83,7 @@ module.exports = function(env) {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',
                 options: {
-                    ignoreDiagnostics: [2300, 2374, 2375, 2403]
+                    ignoreDiagnostics: [2300, 2374, 2375, 2403, 2304]
                 }
             },{
                 test: /\.html$/,
