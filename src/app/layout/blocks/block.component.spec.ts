@@ -169,5 +169,13 @@ describe("Block Component", () => {
         expect(helper.find(".panel-title").html()).toContain('some title');
     });
 
+    it("hides block if marked for removal", () => {
+        helper.component.block = <any>{ id: 1};
+        helper.component.markForDeletion();
+        helper.detectChanges();
+        expect(helper.find(".noosfero-block").attr('class').trim()).toContain("ng-hide");
+    });
+
+
 
 });

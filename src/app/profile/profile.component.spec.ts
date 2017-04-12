@@ -45,7 +45,7 @@ describe("Components", () => {
             let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock);
             $rootScope.$apply();
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
-            expect(component.profile).toEqual({ id: 1 });
+            expect(component.profile.id).toEqual(1);
             done();
         });
 

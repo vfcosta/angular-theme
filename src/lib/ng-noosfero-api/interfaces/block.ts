@@ -8,5 +8,6 @@ namespace noosfero {
         title: string;
         type: string;
         images: Image[];
+        _destroy: boolean;
     }
 }

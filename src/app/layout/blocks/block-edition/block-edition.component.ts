@@ -54,6 +54,10 @@ export class BlockEditionComponent {
         if (this.block.title !== this.originalBlock.title) {
             blockDiff.title = this.block.title;
         }
+        if (this.block._destroy !== this.originalBlock._destroy) {
+            blockDiff._destroy = this.block._destroy;
+        }
+
         this.eventsHubService.emitEvent(this.eventsNames.BLOCK_CHANGED, blockDiff);
     }
 

@@ -1,26 +1,28 @@
-<div bootstrap-resizable="ctrl.designMode" bootstrap-resizable-columns="ctrl.block.settings.visualization.columns" ng-show="ctrl.canDisplay() || ctrl.designMode"
-  ng-class="{'invisible-block': !ctrl.canDisplay()}" class="noosfero-block col-md-{{ctrl.block.settings.visualization.columns || 12}}">
-  <div ng-show="ctrl.designMode" class="actions block-actions" permission="ctrl.block.permissions" permission-action="allow_edit">
-    <noosfero-block-edition [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-edition>
-  </div>
-  <div class="panel panel-default block {{ctrl.blockClass()}}">
-    <div class="panel-heading" ng-show="ctrl.designMode || ctrl.block.title">
-      <h3 class="panel-title">
-        <div class="popover-wrapper">
-          <span ng-hide="!textBtnForm.$visible" ng-if="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}'>
+<div bootstrap-resizable="ctrl.designMode" bootstrap-resizable-columns="ctrl.block.settings.visualization.columns" ng-show="ctrl.canDisplay()" ng-class="{'invisible-block': !ctrl.visible()}" class="noosfero-block col-md-{{ctrl.block.settings.visualization.columns || 12}}">
+    <div ng-show="ctrl.designMode" class="actions block-actions" permission="ctrl.block.permissions" permission-action="allow_edit">
+        <a class="action visibility" href="#" ng-if="ctrl.canDelete()" (click)="ctrl.markForDeletion()">
+            <i class="fa fa-remove fa-fw fa-lg"></i>
+        </a>
+        <noosfero-block-edition [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-edition>
+    </div>
+    <div class="panel panel-default block {{ctrl.blockClass()}}">
+        <div class="panel-heading" ng-show="ctrl.designMode || ctrl.block.title">
+            <h3 class="panel-title">
+                <div class="popover-wrapper">
+                    <span ng-hide="!textBtnForm.$visible" ng-if="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}'>
             {{ (ctrl.block.title | noosferoTemplate:ctrl.block.api_content ) || ("edit.inline.title" | translate) }}</span>
-          <span editable-text="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}' e-form="textBtnForm">
+                    <span editable-text="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}' e-form="textBtnForm">
             {{ (ctrl.block.title | noosferoTemplate:ctrl.block.api_content ) || ("edit.inline.title" | translate) }}</span>
-          <a ng-if="ctrl.designMode" href="#" class="fa fa-pencil" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
-          </a>
+                    <a ng-if="ctrl.designMode" href="#" class="fa fa-pencil" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+                    </a>
+                </div>
+            </h3>
         </div>
-      </h3>
+        <div class="panel-body {{ctrl.blockClass()}}">
+            <noosfero-block-content [design-mode]="ctrl.designMode" [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-content>
+        </div>
+        <div class="panel-footer {{ctrl.blockClass()}}" ng-if='ctrl.designMode'>
+            <noosfero-block-settings [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-settings>
+        </div>
     </div>
-    <div class="panel-body {{ctrl.blockClass()}}">
-      <noosfero-block-content [design-mode]="ctrl.designMode" [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-content>
-    </div>
-    <div class="panel-footer {{ctrl.blockClass()}}" ng-if='ctrl.designMode'>
-      <noosfero-block-settings [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-settings>
-    </div>
-  </div>
 </div>

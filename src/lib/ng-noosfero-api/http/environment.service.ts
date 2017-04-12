@@ -52,4 +52,9 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
     getEnvironmentPeople(environmentId: number | string, params?: any): restangular.IPromise<any> {
         return this.getEnvironmentElement(environmentId).customGET('people', params);
     }
+
+    update(environment: noosfero.Environment) {
+        let headers = { 'Content-Type': 'application/json' };
+        return this.getEnvironmentElement(environment.id).customPOST({ environment: environment }, null, null, headers);
+    }
 }

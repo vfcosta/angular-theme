@@ -42,7 +42,6 @@ export class ArticleDefaultViewComponent {
         this.notificationService.confirmation({ title: "article.remove.confirmation.title", message: "article.remove.confirmation.message" }, () => {
             this.doDelete();
         });
-
     }
 
     doDelete() {
