@@ -27,7 +27,7 @@ describe("Components", () => {
 
         it("display error message when it has errors to display", () => {
             fixture.detectChanges();
-            component.field.errors = ['is not valid'];
+            component.field = <any>{errors: ['is not valid']};
             fixture.detectChanges();
             expect(fixture.debugElement.queryAll(By.css('.field-error')).length).toEqual(1);
         });
