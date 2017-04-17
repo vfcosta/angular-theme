@@ -39,6 +39,8 @@ import { ProfileJoinComponent } from './profile/profile-join/profile-join.compon
 import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
+import { InviteComponent } from './profile/community-members/invite.component';
+import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
 import * as plugins from "../plugins";
 
 @NgModule({
@@ -89,7 +91,9 @@ import * as plugins from "../plugins";
         NewCommunityComponent,
         PersonCommunitiesComponent,
         MenuBlockComponent,
-        PermissionNg2Directive].concat(plugins.ng2MainComponents),
+        PermissionNg2Directive,
+        InviteComponent
+        ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -114,7 +118,10 @@ import * as plugins from "../plugins";
         PersonCommunitiesComponent,
         ChangePasswordComponent,
         MenuBlockComponent,
-        ProfileJoinComponent].concat(plugins.ng2MainComponents),
+        PersonCommunitiesComponent,
+        ProfileJoinComponent,
+        InviteComponent
+        ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',
@@ -138,7 +145,6 @@ import * as plugins from "../plugins";
         '$stateParams',
         'amParseFilter',
         'RoleService',
-        'PersonService',
         'UserService'
     ])
 })

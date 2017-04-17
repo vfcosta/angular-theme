@@ -1,5 +1,7 @@
 <h1>{{"profile.members.title" | translate}}</h1>
 
+<noosfero-invite-component [members]="members"></noosfero-invite-component>
+
 <div class="members-list">
     <profile-list [profiles]="members" [owner]="profile"></profile-list>
 </div>

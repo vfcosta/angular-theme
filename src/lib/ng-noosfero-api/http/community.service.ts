@@ -54,4 +54,16 @@ export class CommunityService extends RestangularService<noosfero.Community> {
         let personElement = this.personService.getElement(person.id);
         return this.list(personElement, params);
     }
+
+    sendInvitations(communityId: number, people: noosfero.Person[]) {
+        let headers = {
+            'Content-Type': 'application/json'
+        };
+        let invitations = [];
+        for (let invitation of people) {
+            invitations.push(invitation.id);
+        }
+        let params = { 'contacts': invitations };
+        return this.getElement(communityId).customPOST(params, "invite", null, headers);
+    }
 }

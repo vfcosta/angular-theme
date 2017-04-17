@@ -14,6 +14,7 @@ import { CommunitiesBlockComponent } from './layout/blocks/communities/communiti
 import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
 import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
 import { CommunityMembersComponent } from './profile/community-members/community-members.component';
+import { InviteComponent } from './profile/community-members/invite.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -130,6 +131,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoMenuBlock',
         downgradeComponent({component: MenuBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoInviteComponent',
+        downgradeComponent({ component: InviteComponent, inputs:['people'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [
