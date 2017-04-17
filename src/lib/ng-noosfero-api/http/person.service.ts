@@ -1,6 +1,7 @@
 import { Injectable, Inject } from "ng-forward";
 import { RestangularService } from "./restangular_service";
 import { ProfileService } from "./profile.service";
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 @Inject("Restangular", "$q", "$log", ProfileService)
@@ -61,6 +62,15 @@ export class PersonService extends RestangularService<noosfero.Person> {
         restRequest.then(this.getHandleSuccessFunction(deferred))
             .catch(this.getHandleErrorFunction(deferred));
         return deferred.promise;
+    }
+
+    search(params: any): any {
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Profile[]>>();
+        let restRequest = this.restangularService.all("people").customGET('', params);
+        restRequest.then(this.getHandleSuccessFunction(deferred)).catch(this.getHandleErrorFunction(deferred));
+        return Observable.from(deferred.promise).map(ret => {
+            return ret.data;
+        });
     }
 
 }

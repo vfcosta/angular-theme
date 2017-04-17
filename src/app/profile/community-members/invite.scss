@@ -1,0 +1,70 @@
+.invitations {
+  @extend .container-fluid;
+  border: 1px solid #aaaaaa;
+  // box-shadow: rgba(31, 37, 50, 0.317647) 5px 5px 10px -5px;
+  border-radius: 2px;
+  border-color: #e3e3e3;
+  padding: 5px 0px 0px 5px;
+  cursor: text;
+
+  .invite-item{
+    display: inline-block;
+    z-index: 1;
+  }
+  .invite-search{
+    .typeahead-wrapper{
+      input{
+        &:focus{
+          outline: none;
+        }
+        border: none;
+        padding: 10px 0px 10px 10px;
+      }
+      border: none;
+      background: white;
+    }
+  }
+
+  .invite{
+    font-weight: bold;
+    color: white;
+    padding: .7em .7em .7em .7em;
+    margin: 0.1em 0.1em 0.5em 0.5em;
+    margin-bottom: 0.5em;
+    background-color: #386c98;
+    text-decoration: none;
+    font-size: 80%;
+    border-radius: 8px;
+    a{
+      :hover {
+        opacity: 1.0;
+      }
+      width: 12px;
+      height: 12px;
+      color: #bbb;
+      cursor: pointer;
+      margin: 0 0.2em 0 0.2em;
+      opacity: 0.6;
+    }
+    .remove{
+
+    }
+
+  }
+	.invitation {
+		@extend .col-md-2;
+		@extend .col-sm-2;
+		@extend .col-xs-2;
+		display: block;
+		margin-bottom: 15px;
+		padding: 0 5px;
+		min-height: 90px;
+		min-width: 62px;
+
+		.invitation a {
+			cursor:pointer;
+			font-weight:bold;
+		}
+	}
+
+}

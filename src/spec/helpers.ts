@@ -103,7 +103,7 @@ export function getAngularServiceFactory() {
     return new AngularServiceFactory();
 }
 
-export {mocks} from "./mocks";
+export {mocks, getMocks} from "./mocks";
 
 export var fixtures = {
     user: {

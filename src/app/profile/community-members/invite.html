@@ -1,0 +1,32 @@
+<div class="panel panel-default">
+	<ul class="invitations" >
+		<li class="invite-item invite" *ngFor="let invitation of peopleToInvite">
+			<span>{{invitation.name | shorten: 30: '...' }}</span>
+			<a (click)="unmarkToInvite(invitation)">
+				<i class="remove fa fa-remove fa-inverse"></i>
+			</a>
+		</li>
+
+		<li class='invite-item invite-search'>
+			<div class='typeahead-wrapper'>
+				<input [(ngModel)]="searchToken"
+				 [typeahead]="listOfPeople"
+				 (typeaheadOnSelect)="markToInvite($event.item)"
+				 typeaheadMinLength="0"
+				 typeaheadOptionsLimit="10"
+				 typeaheadOptionField="name"
+				 typeaheadWaitMs='500'
+				 placeholder="{{'profile.members.search_to_invite' | translate}}"
+				 >
+			</div>
+		</li>
+
+	</ul>
+	<div *ngIf="typeaheadNoResults" >
+		<i class="glyphicon glyphicon-remove"></i> No Results Found
+	</div>
+
+	<button (click)="sendInvitations()" class="btn btn-primary btn-sm leave ng-binding ng-scope">
+	   {{'profile.members.send.invitations' | translate }}
+	</button>
+</div>
