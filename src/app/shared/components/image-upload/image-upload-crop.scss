@@ -1,6 +1,9 @@
 image-upload-crop {
   input {
     margin-bottom: 15px;
+    width: 100%;
+    @extend .btn;
+    @extend .btn-primary;
   }
   .cropped-image {
     img {
