@@ -1,5 +1,5 @@
 import { Inject, Input, Output, Component, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { ModalDirective } from 'ng2-bootstrap';
+import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     selector: "image-upload",

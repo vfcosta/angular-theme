@@ -1,4 +1,4 @@
-import { PopoverModule } from 'ng2-bootstrap';
+import { PopoverModule } from 'ngx-bootstrap';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
 import { MomentModule } from 'angular2-moment';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -7,6 +7,12 @@ import { By } from '@angular/platform-browser';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
+
+export class MockDateFormatPipe {
+    transform() {
+        return '2016/03/10 10:46:47';
+    }
+}
 
 describe("Components", () => {
     describe("Profile List Edition Component", () => {
@@ -19,14 +25,21 @@ describe("Components", () => {
 
         let roleService = jasmine.createSpyObj("roleService", ["getByProfile", "assign"]);
         roleService.assign = jasmine.createSpy("assign").and.returnValue(helpers.mocks.promiseResultTemplate());
-        roleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(helpers.mocks.promiseResultTemplate({data: [{id: 10}, {id: 11}]}));
+        roleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(helpers.mocks.promiseResultTemplate({ data: [{ id: 10 }, { id: 11 }] }));
+        let amParseFilter = () => {
+            return {
+                toISOString: () => {}
+            };
+        };
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 declarations: [ProfileListEditionComponent, TranslatePipe, DateFormatPipe],
                 providers: [
                     { provide: "roleService", useValue: roleService },
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService }
+                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
+                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: "amParseFilter", useValue: amParseFilter }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [MomentModule, PopoverModule.forRoot()]
@@ -49,16 +62,9 @@ describe("Components", () => {
             expect(fixture.debugElement.queryAll(By.css('.edit-button')).length).toEqual(0);
         });
 
-        it("call notification success when save without errors", () => {
-            component.hidePopover = jasmine.createSpy("hidePopover");
-            component.save();
-            expect(component['notificationService'].success).toHaveBeenCalled();
-            expect(component.hidePopover).toHaveBeenCalled();
-        });
-
         it("load roles", () => {
             component.loadRoles();
-            expect(component.roles).toEqual([{id: 10}, {id: 11}]);
+            expect(component.roles).toEqual([{ id: 10 }, { id: 11 }]);
         });
     });
 

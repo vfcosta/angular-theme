@@ -48,7 +48,7 @@ export class ContextBarComponent {
             this.blocksChanged = this.blocksChanged.filter((b: noosfero.Block) => {
                 return block.id !== b.id;
             });
-            if (block.title != null || Object.keys(block).length > 1) {
+            if (block.title != null || Object.keys(block).length > 2 || (block.api_content && Object.keys(block.api_content).length >= 1)) {
                 this.blocksChanged.push(block);
             }
             this.$scope.$apply();

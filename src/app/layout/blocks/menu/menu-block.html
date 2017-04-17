@@ -1,8 +1,32 @@
-<div class="menu-block">
-  <ul class="nav nav-pills">
-    <li ng-repeat="link in ctrl.links" ui-sref-active="active">
-      <a ui-sref="{{link['url']}}">
-        <span>{{link['title']}}</span>
+<div class="menu-block collapse navbar-collapse">
+  <ul class="nav navbar-nav nav-pills" [dragula]='"bag-links"' [dragulaModel]='links' [dragulaOptions]="dragulaOptions">
+    <li class="menu-link" *ngFor="let link of links; let i = index" uiSrefActive="active">
+      <span class="badge" (click)='remove(i)' *ngIf="designMode"><i class="fa fa-fw fa-remove"></i></span>
+      <a [uiSref]="link['url']" [uiParams]="link['urlParams']">
+        <span>{{link['translatedTitle']}}</span>
+      </a>
+    </li>
+    <li *ngIf="designMode">
+      <ng-template #popoverTemplate>
+        <h4 *ngIf="linksAvailable.length>0">{{'blocks.menu.title' | translate}}</h4>
+        <ul class="list-group borderless">
+          <li class="list-group-item borderless" *ngFor="let link of linksAvailable">
+            <a href="#" class="btn btn-primary" (click)="add(link)">{{link['translatedTitle']}}</a>
+          </li>
+          <li class="list-group-item borderless">
+            <input [(ngModel)]="selected" [typeahead]="articles" typeaheadOptionField="translatedTitle" placeholder="{{'blocks.menu.article.placeholder' | translate}}"
+              class="form-group form-control">
+            <div class="form-group actions">
+              <button *ngIf="selected" type="button" class="btn btn-primary" (click)="addArticle()">
+                <i class="fa fa-check" aria-hidden="true"></i>{{'blocks.menu.article.add' | translate}}
+              </button>
+              <button type="button" class="btn btn-default" (click)="popover.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
+            </div>
+          </li>
+        </ul>
+      </ng-template>
+      <a href="#" #popover="bs-popover" triggers="click" [popover]="popoverTemplate">
+        <i class="fa fa-plus"></i>
       </a>
     </li>
   </ul>

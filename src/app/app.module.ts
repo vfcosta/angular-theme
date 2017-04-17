@@ -1,3 +1,4 @@
+import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
@@ -32,13 +33,12 @@ import { UpgradeUtils } from "./shared/upgrade-utils";
 import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
-import { ModalModule } from 'ng2-bootstrap';
-import { PaginationModule } from 'ng2-bootstrap';
-import { PopoverModule } from 'ng2-bootstrap';
+import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { DragulaModule, DragulaService } from 'ng2-dragula';
 import * as plugins from "../plugins";
 
 @NgModule({
@@ -53,7 +53,9 @@ import * as plugins from "../plugins";
         NgPipesModule,
         CKEditorModule,
         PaginationModule.forRoot(),
-        PopoverModule.forRoot()
+        PopoverModule.forRoot(),
+        DragulaModule,
+        TypeaheadModule.forRoot()
     ],
     exports: [TranslatePipe],
     declarations: [
@@ -86,6 +88,7 @@ import * as plugins from "../plugins";
         PersonFriendsComponent,
         NewCommunityComponent,
         PersonCommunitiesComponent,
+        MenuBlockComponent,
         PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -110,9 +113,8 @@ import * as plugins from "../plugins";
         PersonFriendsComponent,
         PersonCommunitiesComponent,
         ChangePasswordComponent,
-        PersonCommunitiesComponent,
-        ProfileJoinComponent]
-        .concat(plugins.ng2MainComponents),
+        MenuBlockComponent,
+        ProfileJoinComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',

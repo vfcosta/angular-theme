@@ -1,21 +1,36 @@
 .menublock {
   padding: 0;
   .menu-block {
+    .dndPlaceholder {
+      width: 100%;
+      height: 30px;
+      background-color: #dcdcdc;
+    }
     .nav-pills {
-      > li {
-        > a {
+      .design-mode {
+        margin-bottom: 4px;
+        &:hover {
+          background-color: #dcdcdc;
+          cursor: move;
+        }
+      }
+      > .menu-link {
+        a {
           color: $panel-default-text;
           border: none;
           text-transform: uppercase;
           padding: 15px 40px;
           font-size: 14px;
           font-weight: 500;
+          z-index: 1;
         }
         &.active > a,  > a:hover {
           border: none;
           background-color: transparent;
+          color: $panel-default-text;
         }
         > a::after {
+          color: $panel-default-text;
           content: "";
           background: $secondary-color;
           height: 3px;
@@ -28,10 +43,32 @@
         }
         &.active, &:hover {
           > a::after {
+            color: $panel-default-text;
             transform: scale(1);
           }
         }
+        .badge {
+          position: absolute;
+          top: -5px;
+          right: 3px;
+          background-color: white;
+          color: dimgray;
+          font-size: 11px;
+          z-index: 10;
+        }
       }
     }
+  }
+  .list-group{
+    .borderless {
+      border: 0 none;
+    }
+    .list-group-item {
+      display: inline-block;
+      padding: 5px;
+    }
+  }
+  .popover {
+    min-width: 300px
   }
 }

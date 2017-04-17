@@ -137,7 +137,7 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         BlockSettingsComponent, DisplayContentBlockComponent,
-        LinkListBlockComponent, MenuBlockComponent, ProfileComponent,
+        LinkListBlockComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
