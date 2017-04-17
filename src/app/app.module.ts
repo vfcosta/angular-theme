@@ -33,8 +33,7 @@ import { UpgradeUtils } from "./shared/upgrade-utils";
 import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
-import { ModalModule, TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
-import { PopoverModule } from 'ngx-popover';
+import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { NgPipesModule } from 'ngx-pipes';
@@ -54,7 +53,7 @@ import * as plugins from "../plugins";
         NgPipesModule,
         CKEditorModule,
         PaginationModule.forRoot(),
-        PopoverModule,
+        PopoverModule.forRoot(),
         DragulaModule,
         TypeaheadModule.forRoot()
     ],

@@ -1,5 +1,5 @@
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
-import { Component, Input, Inject } from "@angular/core";
+import { Component, Input, Inject, HostListener, ElementRef, ViewChild } from "@angular/core";
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { DragulaService } from 'ng2-dragula';
@@ -13,6 +13,7 @@ export class MenuBlockComponent {
     @Input() block: any;
     @Input() owner: any;
     @Input() designMode: boolean;
+    @ViewChild("popover") popover;
 
     titleTranslator: any = {
         'profile_about': this.translatorService.translate('blocks.menu.about'),
@@ -29,7 +30,8 @@ export class MenuBlockComponent {
     articles: any[];
     dragulaOptions: any;
 
-    constructor( @Inject('translatorService') private translatorService: TranslatorService,
+    constructor(private elementRef: ElementRef,
+        @Inject('translatorService') private translatorService: TranslatorService,
         @Inject("$scope") private $scope: ng.IScope,
         @Inject('articleService') private articleService: ArticleService,
         private dragulaService: DragulaService) {
@@ -224,5 +226,12 @@ export class MenuBlockComponent {
 
     public cancelArticle() {
         this.selected = '';
+    }
+
+    @HostListener('document:click', ['$event'])
+    onClick($event: any) {
+        if (!this.elementRef.nativeElement.contains(event.target)) {
+            this.popover.hide();
+        }
     }
 }

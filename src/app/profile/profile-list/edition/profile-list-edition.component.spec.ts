@@ -1,4 +1,4 @@
-import { PopoverModule } from 'ngx-popover';
+import { PopoverModule } from 'ngx-bootstrap';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
 import { MomentModule } from 'angular2-moment';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -42,7 +42,7 @@ describe("Components", () => {
                     { provide: "amParseFilter", useValue: amParseFilter }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [MomentModule, PopoverModule]
+                imports: [MomentModule, PopoverModule.forRoot()]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(ProfileListEditionComponent);
                 component = fixture.componentInstance;

@@ -7,7 +7,7 @@
       </a>
     </li>
     <li *ngIf="designMode">
-      <popover-content #myPopover placement="auto right" [animation]="true" [closeOnClickOutside]="true">
+      <ng-template #popoverTemplate>
         <h4 *ngIf="linksAvailable.length>0">{{'blocks.menu.title' | translate}}</h4>
         <ul class="list-group borderless">
           <li class="list-group-item borderless" *ngFor="let link of linksAvailable">
@@ -20,12 +20,14 @@
               <button *ngIf="selected" type="button" class="btn btn-primary" (click)="addArticle()">
                 <i class="fa fa-check" aria-hidden="true"></i>{{'blocks.menu.article.add' | translate}}
               </button>
-              <button type="button" class="btn btn-default" (click)="myPopover.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
+              <button type="button" class="btn btn-default" (click)="popover.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
             </div>
           </li>
         </ul>
-      </popover-content>
-      <a href="#" [popover]="myPopover"><i class="fa fa-plus"></i></a>
+      </ng-template>
+      <a href="#" #popover="bs-popover" triggers="click" [popover]="popoverTemplate">
+        <i class="fa fa-plus"></i>
+      </a>
     </li>
   </ul>
 </div>

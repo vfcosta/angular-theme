@@ -1,3 +1,4 @@
+import { PopoverModule } from 'ngx-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { provideFilters } from '../../../../spec/helpers';
@@ -28,7 +29,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, DragulaModule],
+                imports: [FormsModule, DragulaModule, PopoverModule],
                 declarations: [MenuBlockComponent, TranslatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
