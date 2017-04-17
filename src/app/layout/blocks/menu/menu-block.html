@@ -1,23 +1,26 @@
 <div class="menu-block collapse navbar-collapse">
   <ul class="nav navbar-nav nav-pills" [dragula]='"bag-links"' [dragulaModel]='links' [dragulaOptions]="dragulaOptions">
-    <li *ngFor="let link of links; let i = index" uiSrefActive="active">
+    <li class="menu-link" *ngFor="let link of links; let i = index" uiSrefActive="active">
       <span class="badge" (click)='remove(i)' *ngIf="designMode"><i class="fa fa-fw fa-remove"></i></span>
       <a [uiSref]="link['url']" [uiParams]="link['urlParams']">
         <span>{{link['translatedTitle']}}</span>
       </a>
     </li>
     <li *ngIf="designMode">
-      <popover-content #myPopover placement="right" [animation]="true" [closeOnClickOutside]="true">
+      <popover-content #myPopover placement="auto right" [animation]="true" [closeOnClickOutside]="true">
+        <h4 *ngIf="linksAvailable.length>0">{{'blocks.menu.title' | translate}}</h4>
         <ul class="list-group borderless">
           <li class="list-group-item borderless" *ngFor="let link of linksAvailable">
             <a href="#" class="btn btn-primary" (click)="add(link)">{{link['translatedTitle']}}</a>
           </li>
           <li class="list-group-item borderless">
-            <input [(ngModel)]="selected" [typeahead]="articles" typeaheadOptionField="translatedTitle" placeholder="Escolha um artigo"
+            <input [(ngModel)]="selected" [typeahead]="articles" typeaheadOptionField="translatedTitle" placeholder="{{'blocks.menu.article.placeholder' | translate}}"
               class="form-group form-control">
             <div class="form-group actions">
-              <button type="button" class="btn btn-primary" (click)="addArticle()"><i class="fa fa-check" aria-hidden="true"></i></button>
-              <button type="button" class="btn btn-danger" (click)="cancelArticle()"><i class="fa fa-ban" aria-hidden="true"></i></button>
+              <button *ngIf="selected" type="button" class="btn btn-primary" (click)="addArticle()">
+                <i class="fa fa-check" aria-hidden="true"></i>{{'blocks.menu.article.add' | translate}}
+              </button>
+              <button type="button" class="btn btn-default" (click)="myPopover.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
             </div>
           </li>
         </ul>

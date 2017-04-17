@@ -14,7 +14,7 @@
           cursor: move;
         }
       }
-      > li {        
+      > .menu-link {
         a {
           color: $panel-default-text;
           border: none;
@@ -59,12 +59,16 @@
       }
     }
   }
-}
-.list-group{
-  .borderless {
-    border: 0 none; 
+  .list-group{
+    .borderless {
+      border: 0 none;
+    }
+    .list-group-item {
+      display: inline-block;
+      padding: 5px;
+    }
   }
-}
-.popover {
-  min-width: 300px
+  .popover {
+    min-width: 300px
+  }
 }
