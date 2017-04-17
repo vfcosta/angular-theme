@@ -40,7 +40,6 @@ import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { InviteComponent } from './profile/community-members/invite.component';
-import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
 import * as plugins from "../plugins";
 
 @NgModule({
