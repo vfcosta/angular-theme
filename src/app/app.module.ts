@@ -92,7 +92,7 @@ import * as plugins from "../plugins";
         MenuBlockComponent,
         PermissionNg2Directive,
         InviteComponent
-        ].concat(plugins.ng2MainComponents),
+    ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -120,7 +120,7 @@ import * as plugins from "../plugins";
         PersonCommunitiesComponent,
         ProfileJoinComponent,
         InviteComponent
-        ].concat(plugins.ng2MainComponents),
+    ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',

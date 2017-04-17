@@ -6,7 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
-import { TypeaheadModule } from 'ng2-bootstrap/typeahead';
+import { TypeaheadModule } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/of";
 
