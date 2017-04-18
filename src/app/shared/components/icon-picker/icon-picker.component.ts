@@ -1,8 +1,8 @@
-import { Component, Input } from "ng-forward";
+import { Component, Input } from "@angular/core";
 
 @Component({
     selector: "noosfero-icon-picker",
-    templateUrl: "app/shared/components/icon-picker/icon-picker.html"
+    template: require("app/shared/components/icon-picker/icon-picker.html")
 })
 export class IconPickerComponent {
 

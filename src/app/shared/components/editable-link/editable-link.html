@@ -1,12 +1,24 @@
-<span ng-if="ctrl.designMode">
-  <a href="">
-    {{ ctrl.name || ("edit.inline.link" | translate) }}
-  </a>
-  <a href="" uib-popover-template="'app/shared/components/editable-link/editable-link-form.html'"
-    popover-trigger="outsideClick" popover-append-to-body="true" popover-placement="auto right"
-    popover-class="editable-link-popover" popover-is-open="ctrl.popupOpen"><i class="fa fa-pencil"></i></a>
+<span *ngIf="designMode">
+  {{ name || ("edit.inline.link" | translate) }}
+  <ng-template #popoverTemplate>
+    <div class="form editable-link-form">
+      <div class="form-group">
+        <label class="control-label">{{"editable-link.form.name" | translate}}</label>
+        <input type="text" class="form-control input-sm" [(ngModel)]="modifiedLink.name" #name="ngModel" id="name" name="name">
+      </div>
+      <div class="form-group">
+        <label class="control-label">{{"editable-link.form.address" | translate}}</label>
+        <input type="text" class="form-control input-sm" [(ngModel)]="modifiedLink.address" #address="ngModel" id="address" name="address">
+      </div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" (click)="save()"><span class="glyphicon glyphicon-ok"></span></button>
+        <button type="button" class="btn btn-default" (click)="cancel()"><span class="glyphicon glyphicon-remove"></span></button>
+      </div>
+    </div>
+  </ng-template>  
+  <a href="#" #popover="bs-popover" triggers="click" [popover]="popoverTemplate" (click)="copyLink()"><i class="fa fa-pencil"></i></a>
 </span>
 
-<span ng-if="!ctrl.designMode">
-  {{ ctrl.name }}
+<span *ngIf="!designMode">
+  <a [href]="address | noosferoTemplate:{profile: owner.identifier}"> {{  name }} </a>
 </span>

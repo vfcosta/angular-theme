@@ -1,3 +1,7 @@
+import { NoosferoTemplatePipe } from './shared/pipes/noosfero-template.ng2.filter';
+import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
+import { EditableLinkComponent } from './shared/components/editable-link/editable-link.component';
+import { LinkListBlockComponent } from './layout/blocks/link-list/link-list-block.component';
 import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
@@ -98,7 +102,11 @@ import * as plugins from "../plugins";
         InviteComponent,
         MainBlockUpgradeDirective,
         ProfileSummaryComponent,
-        PermissionNg2Directive].concat(plugins.ng2MainComponents),
+        PermissionNg2Directive,
+        LinkListBlockComponent,
+        EditableLinkComponent,
+        IconPickerComponent,
+        NoosferoTemplatePipe].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -128,7 +136,10 @@ import * as plugins from "../plugins";
         ProfileJoinComponent,
         InviteComponent,
         ProfileSummaryComponent,
-        ProfileJoinComponent].concat(plugins.ng2MainComponents),
+        ProfileJoinComponent,
+        LinkListBlockComponent,
+        EditableLinkComponent,
+        IconPickerComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',
