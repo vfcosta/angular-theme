@@ -1,12 +1,12 @@
 <div class="logged-user-info" ng-show="ctrl.currentUser">
-    <h4>Logged in as {{ctrl.currentUser.person.identifier}}</h4>
+    <h4>{{"blocks.login.login-as" | translate}} {{ctrl.currentUser.person.identifier}}</h4>
     <ul>
-        <li>User since 
+        <li>{{"blocks.login.user-since" | translate}}
             <span class="time">
                 <span am-time-ago="ctrl.currentUser.person.created_at | dateFormat"></span>
             </span>        
         </li>
-      <li><a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})">Profile Homepage</a></li>
+      <li><a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})">{{"blocks.login.homepage" | translate}}</a></li>
     </ul>
     <div class="user-actions">
       <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
