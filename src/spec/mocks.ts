@@ -246,18 +246,20 @@ export var mocks: any = {
             return Promise.resolve();
         }
     },
-    promiseResultTemplate: (response?: {}) => {
+    promiseResultTemplate: (response?: {}, callCatch = true) => {
         let callback = (func?: (response: any) => any) => {
             if (func) {
                 let ret = func(response);
                 if (ret && typeof ret.then === "function") return ret;
             }
-            return mocks.promiseResultTemplate(response);
+            return mocks.promiseResultTemplate(response, callCatch);
         };
+        let catchCallback = callback;
+        if (!callCatch) catchCallback = () => {};
         return {
             then: callback,
             finally: callback,
-            catch: callback
+            catch: catchCallback
         };
     },
     $log: {

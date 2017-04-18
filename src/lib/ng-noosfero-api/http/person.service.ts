@@ -22,6 +22,10 @@ export class PersonService extends RestangularService<noosfero.Person> {
         };
     }
 
+    getLoggedPerson(): restangular.IPromise<any> {
+        return this.getElement(<any>'me').get();
+    }
+
     getFriends(profileId: number, params?: any): restangular.IPromise<any> {
         return this.getElement(profileId).customGET("friends", params);
     }
