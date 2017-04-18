@@ -1,5 +1,5 @@
 <div class="navbar navbar-default">
-    <div class="container-fluid">
+    <div class="container-fluid"  *ngIf="profile.type === 'Person'">
         <ul class="nav nav-pills nav-stacked">
             <li role="presentation" class=""><a href="#" uiSrefActive="active" uiSref="main.myprofile.personal_data" [uiParams]="{profile: profile.identifier}"><i class="fa fa-flag" aria-hidden="true"></i> {{ 'myprofile.configuration.personal_data' | translate}}</a></li>
             <li role="presentation" class="">
@@ -24,6 +24,24 @@
             <li role="presentation" class="">
                 <a href="#" uiSrefActive="active" uiSref="main.myprofile.destroy" [uiParams]="{profile: profile.identifier}">
                     <i class="fa fa-trash" aria-hidden="true"></i> {{ 'myprofile.configuration.delete_account' | translate}}
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="container-fluid" *ngIf="profile.type === 'Community'">
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class=""><a href="#" uiSrefActive="active" uiSref="main.myprofile.community_edit" [uiParams]="{profile: profile.identifier}"><i class="fa fa-flag" aria-hidden="true"></i> {{ 'myprofile.configuration.community_data' | translate}}</a></li>
+            <li role="presentation" class="">
+                <a href="#" uiSrefActive="active" uiSref="main.myprofile.members" [uiParams]="{profile: profile.identifier}">
+                    <i class="fa fa-user" aria-hidden="true"></i> {{ 'myprofile.configuration.community.members' | translate}}
+                </a>
+            </li>
+            <li role="separator" class="divider">
+                <hr />
+            </li>
+            <li role="presentation" class="">
+                <a href="#" uiSrefActive="active" uiSref="main.myprofile.destroy" [uiParams]="{profile: profile.identifier}">
+                    <i class="fa fa-trash" aria-hidden="true"></i> {{ 'myprofile.configuration.community.delete' | translate}}
                 </a>
             </li>
         </ul>

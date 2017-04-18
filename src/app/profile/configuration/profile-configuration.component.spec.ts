@@ -14,6 +14,7 @@ describe("Components", () => {
         let $q: ng.IQService;
         let helper: ComponentTestHelper<ProfileConfigurationComponent>;
         let $rootScope: ng.IRootScopeService;
+        let $state: ng.ui.IStateService;
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;
@@ -22,7 +23,8 @@ describe("Components", () => {
 
         beforeEach(() => {
             profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier"]);
-
+            $state = jasmine.createSpyObj("$state", ["go"]);
+            $state.go = jasmine.createSpy("go").and.returnValue($q.defer().resolve(''));
             let profilePromise = $q.defer();
             profilePromise.resolve(profile);
 
@@ -31,7 +33,7 @@ describe("Components", () => {
 
         it("set profile service", (done => {
             $stateParams['parent_id'] = 1;
-            let component: ProfileConfigurationComponent = new ProfileConfigurationComponent(profileServiceMock, $stateParams);
+            let component: ProfileConfigurationComponent = new ProfileConfigurationComponent(profileServiceMock, $stateParams, $state);
             $rootScope.$apply();
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
             expect(component.profile.identifier).toEqual("identifier");

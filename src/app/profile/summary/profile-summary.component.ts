@@ -1,16 +1,15 @@
 import { NotificationService } from './../../shared/services/notification.service';
 import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
 import { SessionService } from './../../login/session.service';
-import { Inject, Input, Component } from "ng-forward";
+import { Inject, Input, Component, HostListener, ElementRef, ViewChild  } from "@angular/core";
 import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
 import { ProfileJoinComponent } from "./../../profile/profile-join/profile-join.component";
 
 
 @Component({
     selector: "noosfero-profile-summary",
-    templateUrl: 'app/profile/summary/profile-summary.html'
+    template: require('app/profile/summary/profile-summary.html')
 })
-@Inject(EnvironmentService, SessionService, PersonService, NotificationService)
 export class ProfileSummaryComponent {
 
     @Input() profile: noosfero.Profile;
@@ -19,11 +18,14 @@ export class ProfileSummaryComponent {
     editPopoverOpen = false;
     showAddFriend = false;
     showRemoveFriend = false;
+    showConfig = false;
+    @ViewChild("popover") popover;
 
-    constructor(private environmentService: EnvironmentService,
-        private session: SessionService,
-        private personService: PersonService,
-        private notificationService: NotificationService) {
+    constructor(private elementRef: ElementRef,
+        @Inject('environmentService') private environmentService: EnvironmentService,
+        @Inject('sessionService') private session: SessionService,
+        @Inject('personService') private personService: PersonService,
+        @Inject('notificationService') private notificationService: NotificationService) {
 
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
@@ -42,6 +44,9 @@ export class ProfileSummaryComponent {
             this.showAddFriend = false;
             this.showRemoveFriend = false;
         }
+        if (this.profile.permissions.indexOf('allow_edit') > -1) {
+            this.showConfig = true;
+        }
     }
 
     profileLink() {
@@ -52,12 +57,13 @@ export class ProfileSummaryComponent {
 
     closeEdition() {
         this.editPopoverOpen = false;
+        this.popover.hide();
     }
 
     addFriend() {
         this.personService.addFriend(<number>this.profile.id).then((response: restangular.IResponse) => {
             this.notificationService.success({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.message" });
-        }).catch( (response: restangular.IResponse) => {
+        }).catch((response: restangular.IResponse) => {
             if (response.data.message.target_id[0].error === 'taken') {
                 this.notificationService.error({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.taken.error.message" });
             } else {
@@ -71,8 +77,17 @@ export class ProfileSummaryComponent {
             this.showRemoveFriend = false;
             this.showAddFriend = true;
             this.notificationService.success({ title: "profile.actions.add_friend.title", message: "profile.actions.remove_friend.message" });
-        }).catch( (response: restangular.IResponse) => {
+        }).catch((response: restangular.IResponse) => {
             this.notificationService.error({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.error.message" });
         });
     }
+
+
+    @HostListener('document:click', ['$event'])
+    onClick($event: any) {
+        if (this.popover && !this.elementRef.nativeElement.contains(event.target)) {
+            this.popover.hide();
+        }
+    }
+
 }

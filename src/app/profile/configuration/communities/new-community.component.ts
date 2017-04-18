@@ -1,8 +1,9 @@
+import { SessionService } from './../../../login/session.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
-import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
+import { AbstractFormCommunity } from './abstract-form-community';
 
 /**
  * @ngdoc controller
@@ -10,25 +11,21 @@ import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
  */
 @Component({
     selector: "new-community",
-    template: require('app/profile/configuration/community/new-community.html'),
+    template: require('app/profile/configuration/communities/form-community.html'),
 })
-export class NewCommunityComponent {
-    @Input() profile: noosfero.Profile;
-    community = <noosfero.Community> {};
-    @Output() finished = new EventEmitter<noosfero.Community>();
-    errors: any;
-
-    constructor(@Inject("notificationService") private notificationService: NotificationService,
-    @Inject('communityService') private communityService: CommunityService,
-    @Inject('$state') private $state: ng.ui.IStateService) {}
-
+export class NewCommunityComponent extends AbstractFormCommunity {
     ngOnInit() {
+        this.sessionProfile = this.sessionService.currentUser().person;
+        this.community = <noosfero.Community> {};
         this.community.closed = true;
+    }
+
+    getTitle() {
+        return this.translatorService.translate('myprofile.configuration.community.new');
     }
 
     save() {
         this.community.type = 'Community';
-        console.log(this.community);
         this.communityService.createNewCommunity(this.community).then( (result) => {
             this.errors = null;
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
@@ -42,10 +39,6 @@ export class NewCommunityComponent {
 
     cancel() {
         this.finished.emit(this.community);
-        this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
-    }
-
-    onSelectionChange(entry) {
-        this.community.closed = entry;
+        this.$state.go('main.myprofile.communities', { profile: this.sessionProfile.identifier });
     }
 }

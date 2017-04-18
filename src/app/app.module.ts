@@ -1,9 +1,11 @@
 import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
+import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
+import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
+import { EditCommunityComponent } from './profile/configuration/communities/edit-community.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
-import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
@@ -89,12 +91,14 @@ import * as plugins from "../plugins";
         PermissionNg2Directive,
         PersonFriendsComponent,
         NewCommunityComponent,
+        EditCommunityComponent,
         PersonCommunitiesComponent,
         MenuBlockComponent,
         PermissionNg2Directive,
         InviteComponent,
-        MainBlockUpgradeDirective
-    ].concat(plugins.ng2MainComponents),
+        MainBlockUpgradeDirective,
+        ProfileSummaryComponent,
+        PermissionNg2Directive].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -115,14 +119,16 @@ import * as plugins from "../plugins";
         ProfileListComponent,
         ProfileJoinComponent,
         NewCommunityComponent,
+        EditCommunityComponent,
         PersonFriendsComponent,
         PersonCommunitiesComponent,
         ChangePasswordComponent,
         MenuBlockComponent,
         PersonCommunitiesComponent,
         ProfileJoinComponent,
-        InviteComponent
-    ].concat(plugins.ng2MainComponents),
+        InviteComponent,
+        ProfileSummaryComponent,
+        ProfileJoinComponent].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',
@@ -146,7 +152,9 @@ import * as plugins from "../plugins";
         '$stateParams',
         'amParseFilter',
         'RoleService',
-        'UserService'
+        'PersonService',
+        'UserService',
+        'EnvironmentService'
     ])
 })
 export class AppModule {

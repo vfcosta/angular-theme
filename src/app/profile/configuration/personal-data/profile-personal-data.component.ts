@@ -48,7 +48,6 @@ export class ProfilePersonalDataComponent {
             }
         }).catch((response) => {
             this.errors = response.data.error;
-            console.log(this.errors);
             this.notificationService.error({ title: "profile.edition.error.title", message: "profile.edition.error.message" });
             // this.identifierErrors.setErrors(this.errors['identifier']);
         });

@@ -230,7 +230,7 @@ export class MenuBlockComponent {
 
     @HostListener('document:click', ['$event'])
     onClick($event: any) {
-        if (!this.elementRef.nativeElement.contains(event.target)) {
+        if (this.popover && !this.elementRef.nativeElement.contains(event.target)) {
             this.popover.hide();
         }
     }
