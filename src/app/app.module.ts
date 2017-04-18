@@ -1,3 +1,4 @@
+import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
@@ -91,7 +92,8 @@ import * as plugins from "../plugins";
         PersonCommunitiesComponent,
         MenuBlockComponent,
         PermissionNg2Directive,
-        InviteComponent
+        InviteComponent,
+        MainBlockUpgradeDirective
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
