@@ -20,6 +20,10 @@ export class ProfileListEditionComponent {
         @Inject('roleService') private roleService: RoleService,
         @Inject('notificationService') private notificationService: NotificationService) { }
 
+    ngOnInit () {
+
+    }
+
     loadRoles() {
         this.roleService.getByProfile(this.owner.id, { person_id: this.profile.id }).then(
             (result: noosfero.RestResult<noosfero.Role[]>) => {
@@ -38,7 +42,7 @@ export class ProfileListEditionComponent {
     }
 
     hidePopover() {
-        this.popover.hide();
+        if (this.popover) this.popover.hide();
     }
 
     ownerIsCommunity() {

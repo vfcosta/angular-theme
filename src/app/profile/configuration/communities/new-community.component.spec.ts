@@ -14,7 +14,10 @@ describe("Components", () => {
     describe("New Community", () => {
         let fixture: ComponentFixture<NewCommunityComponent>;
         let component: NewCommunityComponent;
+        let profileService = jasmine.createSpyObj("profileService", ["update"]);
         let communityService = jasmine.createSpyObj("communityService", ["createNewCommunity"]);
+        let sessionService = jasmine.createSpyObj("sessionService", ["currentUser"]);
+        sessionService.currentUser = jasmine.createSpy("currentUser").and.returnValue({ person: { identifier: 'profile1' } });
         let state = jasmine.createSpyObj("$state", ["go"]);
         communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.resolve({}));
 
@@ -23,8 +26,10 @@ describe("Components", () => {
                 imports: [FormsModule],
                 declarations: [NewCommunityComponent, TranslatePipe],
                 providers: [
+                    { provide: "profileService", useValue: profileService },
                     { provide: "communityService", useValue: communityService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
+                    { provide: "sessionService", useValue: sessionService },
                     { provide: "$state", useValue: state },
                     { provide: "translatorService", useValue: helpers.mocks.translatorService },
                 ],
@@ -43,6 +48,5 @@ describe("Components", () => {
             tick();
             expect(component.errors).toBeNull();
         }));
-
     });
 });

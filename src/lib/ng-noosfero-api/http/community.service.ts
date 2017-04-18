@@ -27,11 +27,25 @@ export class CommunityService extends RestangularService<noosfero.Community> {
         let headers = {
             'Content-Type': 'application/json'
         };
-        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Community>>();
         let attributesToUpdate: any = {
             community: Object.assign({}, _.omitBy(_.pick(community, ['name', 'closed']), _.isNull))
         };
-        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Article>> = this.getElement(null).customPOST(attributesToUpdate, null, null, headers);
+        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Community>> = this.getElement(null).customPOST(attributesToUpdate, null, null, headers);
+        restRequest.then(this.getHandleSuccessFunction(deferred))
+            .catch(this.getHandleErrorFunction(deferred));
+        return deferred.promise;
+    }
+
+    updateCommunity(community: noosfero.Community){
+        let headers = {
+            'Content-Type': 'application/json'
+        };
+        let attributesToUpdate: any = {
+            community: Object.assign({}, _.omitBy(_.pick(community, ['name', 'closed']), _.isNull))
+        };
+        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Community>>();
+        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Community>> = this.getElement(community.id).customOperation("patch", null, null, headers, attributesToUpdate);
         restRequest.then(this.getHandleSuccessFunction(deferred))
             .catch(this.getHandleErrorFunction(deferred));
         return deferred.promise;

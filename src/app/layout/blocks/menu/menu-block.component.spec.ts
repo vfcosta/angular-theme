@@ -29,7 +29,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, DragulaModule, PopoverModule],
+                imports: [FormsModule, DragulaModule, PopoverModule.forRoot()],
                 declarations: [MenuBlockComponent, TranslatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [

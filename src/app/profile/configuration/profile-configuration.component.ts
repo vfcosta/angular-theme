@@ -12,16 +12,22 @@ import { SessionService } from "./../../login";
     selector: "noosfero-profile-configuration",
     templateUrl: 'app/profile/configuration/profile-configuration.html',
 })
-@Inject(ProfileService, '$stateParams')
+@Inject(ProfileService, '$stateParams', '$state')
 export class ProfileConfigurationComponent {
     profile: noosfero.Profile;
     profileIdentifier: string;
     showComponent: string = "";
 
-    constructor(private profileService: ProfileService, private $stateParams: ng.ui.IStateParamsService) {
+    constructor(private profileService: ProfileService, private $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService) {
         this.profileIdentifier = this.$stateParams["profile"];
         this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
             this.profile = profile;
+            if (this.profile.type === 'Community') {
+                this.$state.go('main.myprofile.community_edit', { profile: this.profile.identifier });
+            }
+            else {
+                this.$state.go('main.myprofile.personal_data', { profile: this.profile.identifier });
+            }
         });
     }
 }

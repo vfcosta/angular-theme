@@ -12,6 +12,29 @@
     padding: 0 5px;
     min-height: 105px;
     min-width: 62px;
+    .media-body {
+      text-align: right;
+      .media-heading {
+        color: $secondary-color;
+        display: inline-block;
+        a{
+          &:hover{
+          color: $secondary-color;
+          }
+          color: $secondary-color;
+        }
+      }
+      .profile-link {
+        color: $secondary-color;
+      }
+      .profile-edition-link {
+        vertical-align: 20%;
+        margin-left: 10px;
+        .edit-icon {
+          color: $secondary-color;
+        }
+      }
+    }    
     &:hover {
       .profile-list-edition {
         display: inline;

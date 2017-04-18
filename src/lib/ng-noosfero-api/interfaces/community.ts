@@ -14,5 +14,7 @@ namespace noosfero {
          * @returns {boolean} If the community is closed
          */
         closed: boolean;
+
+        admins: any;
     }
 }

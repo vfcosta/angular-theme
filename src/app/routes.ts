@@ -292,6 +292,20 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
+
+    $stateProvider.state({
+        name: 'main.myprofile.community_edit',
+        url: "/community/edit",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<edit-community ng-if='ctrl.profile' [profile]='ctrl.profile'></edit-community>",
+                controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+
     $stateProvider.state({
         name: 'main.profile.page',
         url: "/{page:any}",

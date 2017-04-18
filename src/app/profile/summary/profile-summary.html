@@ -1,25 +1,37 @@
 <div class="profile-summary media">
     <div class="media-left media-middle">
-        <noosfero-profile-image [profile]="ctrl.profile" [editable]="true" [edit-class]="'profile-image-block-editable'"></noosfero-profile-image>
+        <noosfero-profile-image [profile]="profile" [editable]="true"></noosfero-profile-image>
     </div>
     <div class="media-body media-middle">
         <h1 class="media-heading profile-name">
-            <a ui-sref="main.profile.home({profile: ctrl.profile.identifier})">{{ctrl.profile.name}}</a>
+            <a uiSref="main.profile.home" [uiParams]="{profile: profile.identifier}">{{profile.name}}</a>
         </h1>
-        <a href permission="ctrl.profile.permissions" permission-action="allow_edit" uib-popover-template="'app/profile/summary/profile-summary-edition.html'" popover-trigger="outsideClick" popover-append-to-body="true" popover-placement="right-top" popover-class="editable-profile-popover"
-            class="profile-edition-link" popover-is-open="ctrl.editPopoverOpen">
+        <ng-template #popoverTemplate>
+            <profile-fast-edition [profile]="profile" [environment]="environment" (finished)="closeEdition($event)"></profile-fast-edition>
+        </ng-template>
+        <a href="#" *ngIf="profile.permissions" [permission]="profile.permissions" permissionAction="allow_edit" #popover="bs-popover"
+            triggers="click" [popover]="popoverTemplate" class="profile-edition-link" placement="right">
             <i class="edit-icon fa fa-pencil fa-fw fa-lg"></i>
         </a>
         <div class="profile-link">
-            {{ctrl.profileLink()}}
+            {{profileLink()}}
         </div>
         <br>
-        <div ng-if="ctrl.showAddFriend">
-            <button class="btn btn-primary" (click)="ctrl.addFriend()"><i class="fa fa-plus" aria-hidden="true"></i> {{"profile.actions.add_friend" | translate}} </button>
+        <div class="actions">
+            <div class="add-friend action">
+                <div *ngIf="showAddFriend">
+                    <button class="btn btn-primary" (click)="addFriend()"><i class="fa fa-plus" aria-hidden="true"></i> {{"profile.actions.add_friend" | translate}} </button>
+                </div>
+                <div *ngIf="showRemoveFriend">
+                    <button class="btn btn-warning" (click)="removeFriend()"><i class="fa fa-minus" aria-hidden="true"></i> {{"profile.actions.remove_friend" | translate}} </button>
+                </div>
+                <profile-join [profile]="profile"></profile-join>
+            </div>
+            <div class="profile-setup action">
+                <a href="#" class="btn btn-default btn-sm" uiSref="main.myprofile" [uiParams]="{profile: profile.identifier}" *ngIf="showConfig">
+                    <i class="fa fa-cog" aria-hidden="true"></i> {{"myprofile.configuration.title" | translate}}
+                </a>
+            </div>
         </div>
-        <div ng-if="ctrl.showRemoveFriend">
-            <button class="btn btn-warning" (click)="ctrl.removeFriend()"><i class="fa fa-minus" aria-hidden="true"></i> {{"profile.actions.remove_friend" | translate}} </button>
-        </div>
-        <profile-join [profile]="ctrl.profile"></profile-join>
     </div>
 </div>

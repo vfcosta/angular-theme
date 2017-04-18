@@ -1,5 +1,5 @@
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
-import {Component, Input} from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 
 /**
  * @ngdoc controller
