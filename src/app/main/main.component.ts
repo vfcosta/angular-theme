@@ -40,8 +40,6 @@ import { EditableLinkComponent } from "../shared/components/editable-link/editab
 import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
 import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
 
-import { LoginBlockComponent } from "../layout/blocks/login-block/login-block.component";
-
 import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
 import { NoosferoUrl } from "../shared/pipes/noosfero-url.filter";
 import { DateFormat } from "../shared/pipes/date-format.filter";
@@ -140,7 +138,7 @@ export class EnvironmentContent {
         LinkListBlockComponent, ProfileComponent,
         MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
         NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
-        LoginBlockComponent, CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
+        CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
         ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent,
         EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,

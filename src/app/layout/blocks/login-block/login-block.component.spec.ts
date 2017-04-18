@@ -1,8 +1,9 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
+import { FormsModule } from '@angular/forms';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import {Injectable, Provider, provide} from "ng-forward";
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-import {providers} from 'ng-forward/cjs/testing/providers';
 import {LoginBlockComponent} from './login-block.component';
 import * as helpers from "./../../../../spec/helpers";
 import {SessionService, AuthService, AuthController, AuthEvents} from "./../../../login";
@@ -12,45 +13,39 @@ const htmlTemplate: string = '<noosfero-login-block></noosfero-login-block>';
 describe("Components", () => {
 
     describe("Login Block Component", () => {
-        let helper: ComponentTestHelper<LoginBlockComponent>;
         let person: any = null;
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<LoginBlockComponent>;
+        let component: LoginBlockComponent;
 
-        /**
-         * Mock objects
-         */
-        let authService: any = helpers.mocks.authService;
         let user = <noosfero.User>{ person: person };
-        let sessionService: any = <any>helpers.mocks.sessionWithCurrentUser(user);
-        let state = jasmine.createSpyObj("$state", ["go"]);
-        let scope = helpers.mocks.scopeWithEvents;
+        let sessionService = <any>mocks.sessionWithCurrentUser(user);
 
-        let providers = [
-            new Provider('SessionService', { useValue: sessionService }),
-            new Provider('$state', { useValue: state }),
-            new Provider('AuthService', { useValue: authService }),
-            new Provider('$scope', { useValue: scope })
-        ];
-
-        beforeEach( angular.mock.module("templates") );
-
-        beforeEach( (done: Function) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [LoginBlockComponent],
-                providers: providers,
-                properties: {}
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [LoginBlockComponent, TranslatePipe],
+                providers: [
+                    { provide: "sessionService", useValue: sessionService },
+                    { provide: "$state", useValue: mocks.stateService },
+                    { provide: "authService", useValue: mocks.authService },
+                    { provide: "translatorService", useValue: mocks.translatorService }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [FormsModule]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(LoginBlockComponent);
+                component = fixture.componentInstance;
             });
-            helper = new ComponentTestHelper<LoginBlockComponent>(cls, done);
-        });
+        }));
 
         it("expect person to be null with no logged in user", () => {
-            expect(helper.component.currentUser).toBeNull;
+            expect(component.currentUser).toBeNull;
         });
 
         it("expect person to be defined when user login", () => {
             // Executes the login method on the component
             doComponentLogin();
-            expect(helper.component.currentUser.person).toBe(person);
+            expect(component.currentUser.person).toBe(person);
         });
 
         it("expect person to be null when user logout", () => {
@@ -59,7 +54,7 @@ describe("Components", () => {
             // The logout the user
             doComponentLogout();
             // Check if the current user was cleared
-            expect(helper.component.currentUser).toBeNull;
+            expect(component.currentUser).toBeNull;
         });
 
         /**
@@ -67,9 +62,9 @@ describe("Components", () => {
          */
         function doComponentLogout() {
             // Create a mock for the AuthService logout method
-            spyOn(authService, "logout");
-            helper.component.logout();
-            expect(authService.logout).toHaveBeenCalled();
+            spyOn(component['authService'], "logout");
+            component.logout();
+            expect(component['authService'].logout).toHaveBeenCalled();
             // After the component logout method execution, fire the
             // AuthService event
             simulateLogoutEvent();
@@ -80,9 +75,9 @@ describe("Components", () => {
          */
         function doComponentLogin() {
             // Create a mock for the AuthService login method
-            spyOn(authService, "login");
-            helper.component.login();
-            expect(authService.login).toHaveBeenCalled();
+            spyOn(component['authService'], "login");
+            component.login();
+            expect(component['authService'].login).toHaveBeenCalled();
             // After the component login method execution, fire the
             // AuthService event
             simulateLoginEvent();
@@ -94,7 +89,7 @@ describe("Components", () => {
         function simulateLoginEvent() {
             let successEvent: string = AuthEvents[AuthEvents.loginSuccess];
 
-            (<any>helper.component.authService)[successEvent].next(user);
+            (<any>component.authService)[successEvent].next(user);
         }
 
         /**
@@ -103,7 +98,7 @@ describe("Components", () => {
         function simulateLogoutEvent() {
             let successEvent: string = AuthEvents[AuthEvents.logoutSuccess];
 
-            (<any>helper.component.authService)[successEvent].next(user);
+            (<any>component.authService)[successEvent].next(user);
         }
     });
 

@@ -1,3 +1,4 @@
+import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
@@ -98,7 +99,9 @@ import * as plugins from "../plugins";
         InviteComponent,
         MainBlockUpgradeDirective,
         ProfileSummaryComponent,
-        PermissionNg2Directive].concat(plugins.ng2MainComponents),
+        PermissionNg2Directive,
+        LoginBlockComponent,
+    ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -128,7 +131,9 @@ import * as plugins from "../plugins";
         ProfileJoinComponent,
         InviteComponent,
         ProfileSummaryComponent,
-        ProfileJoinComponent].concat(plugins.ng2MainComponents),
+        ProfileJoinComponent,
+        LoginBlockComponent,
+    ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',

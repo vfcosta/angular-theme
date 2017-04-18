@@ -1,3 +1,4 @@
+import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
 import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
@@ -5,6 +6,7 @@ import { EditCommunityComponent } from './profile/configuration/communities/edit
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
+import { NewCommunityComponent } from './profile/configuration/community/new-community.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
@@ -141,7 +143,10 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({component: MenuBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoInviteComponent',
-        downgradeComponent({ component: InviteComponent, inputs: ['people'] }) as angular.IDirectiveFactory
+        downgradeComponent({ component: InviteComponent, inputs:['people'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoLoginBlock',
+        downgradeComponent({ component: LoginBlockComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

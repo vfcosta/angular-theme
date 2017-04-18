@@ -542,6 +542,9 @@ export function getMocks() {
         },
         noosferoTemplateFilter: (text: string, options: any) => {
             return text;
+        },
+        stateService: {
+            go: () => {}
         }
     }
 };

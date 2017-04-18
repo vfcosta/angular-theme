@@ -1,26 +1,26 @@
-<div class="logged-user-info" ng-show="ctrl.currentUser">
-    <h4>{{"blocks.login.login-as" | translate}} {{ctrl.currentUser.person.identifier}}</h4>
+<div class="logged-user-info" *ngIf="currentUser">
+    <h4>{{"blocks.login.login-as" | translate}} {{currentUser.person.identifier}}</h4>
     <ul>
         <li>{{"blocks.login.user-since" | translate}}
             <span class="time">
-                <span am-time-ago="ctrl.currentUser.person.created_at | dateFormat"></span>
+                <span am-time-ago="currentUser.person.created_at | dateFormat"></span>
             </span>        
         </li>
-      <li><a ui-sref="main.profile.info({profile: ctrl.currentUser.person.identifier})">{{"blocks.login.homepage" | translate}}</a></li>
+      <li><a ui-sref="main.profile.info({profile: currentUser.person.identifier})">{{"blocks.login.homepage" | translate}}</a></li>
     </ul>
     <div class="user-actions">
-      <a href="#" ng-click="ctrl.logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
+      <a href="#" (click)="logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>
     </div>    
 </div>
-<div class="logged-user-info" ng-show="!ctrl.currentUser">
+<div class="logged-user-info" *ngIf="!currentUser">
   <form>
     <div class="form-group">
       <label for="email">{{"auth.form.login" | translate}}</label>
-      <input type="text" class="form-control" id="email" placeholder="{{'auth.form.login' | translate}}" ng-model="ctrl.credentials.username">
+      <input name="email" type="text" class="form-control" id="email" placeholder="{{'auth.form.login' | translate}}" [(ngModel)]="credentials.username">
     </div>
     <div class="form-group">
       <label for="passwd">{{"auth.form.password" | translate}}</label>
-      <input type="password" class="form-control" id="passwd" placeholder="{{'auth.form.password' | translate}}" ng-model="ctrl.credentials.password">
+      <input name="password" type="password" class="form-control" id="passwd" placeholder="{{'auth.form.password' | translate}}" [(ngModel)]="credentials.password">
     </div>
     <div class="form-inline">
       <div class="checkbox-nice">
@@ -30,6 +30,6 @@
         </label>
       </div>
     </div>
-    <button type="submit" class="btn btn-default" ng-click="ctrl.login()">{{"auth.form.login_button" | translate}}</button>
+    <button type="submit" class="btn btn-default" (click)="login()">{{"auth.form.login_button" | translate}}</button>
   </form>
 </div>

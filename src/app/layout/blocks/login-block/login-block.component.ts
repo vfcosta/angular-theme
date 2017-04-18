@@ -1,4 +1,4 @@
-import {Input, Inject, Component} from "ng-forward";
+import {Inject, Component} from "@angular/core";
 import {SessionService, AuthService, AuthEvents} from "./../../../login";
 
 /**
@@ -9,9 +9,8 @@ import {SessionService, AuthService, AuthEvents} from "./../../../login";
  */
 @Component({
     selector: "noosfero-login-block",
-    templateUrl: 'app/layout/blocks/login-block/login-block.html',
+    template: require('app/layout/blocks/login-block/login-block.html')
 })
-@Inject("SessionService", "$state", 'AuthService', "$scope")
 export class LoginBlockComponent {
 
     /**
@@ -30,23 +29,19 @@ export class LoginBlockComponent {
      * @description
      *  The credentials of the currentUser
      */
-    credentials: noosfero.Credentials;
+    credentials = <noosfero.Credentials>{};
 
-    constructor(
-        private session: SessionService,
-        private $state: ng.ui.IStateService,
-        public authService: AuthService,
-        private $scope: ng.IScope) {
+    constructor(@Inject("sessionService") private session: SessionService,
+        @Inject("$state") private $state: ng.ui.IStateService,
+        @Inject("authService") public authService: AuthService) {
+
         this.currentUser = this.session.currentUser();
-
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             this.currentUser = this.session.currentUser();
         });
-
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.currentUser = this.session.currentUser();
         });
-
     }
 
     /**
