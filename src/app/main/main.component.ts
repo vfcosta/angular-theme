@@ -22,7 +22,6 @@ import { EnvironmentHomeComponent } from "../environment/environment-home.compon
 import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
 import { MenuBlockComponent } from "../layout/blocks/menu/menu-block.component";
-import { RecentDocumentsBlockComponent } from "../layout/blocks/recent-documents/recent-documents-block.component";
 import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
 import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
 import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
@@ -136,7 +135,7 @@ export class EnvironmentContent {
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         BlockSettingsComponent, DisplayContentBlockComponent,
         LinkListBlockComponent, ProfileComponent,
-        MainBlockComponent, RecentDocumentsBlockComponent, Navbar, ProfileImageBlockComponent,
+        MainBlockComponent, Navbar, ProfileImageBlockComponent,
         NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
