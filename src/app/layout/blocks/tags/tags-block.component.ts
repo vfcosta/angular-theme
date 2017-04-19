@@ -2,7 +2,7 @@ import { Component, Inject, Input } from "ng-forward";
 import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
 
 @Component({
-    selector: "noosfero-tags-block",
+    selector: "noosfero-tags-cloud-block",
     templateUrl: 'app/layout/blocks/tags/tags-block.html'
 })
 @Inject(EnvironmentService, "$state")
