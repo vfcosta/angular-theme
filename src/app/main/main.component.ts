@@ -32,7 +32,6 @@ import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person
 import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
 import { RecentActivitiesPluginActivitiesBlockComponent } from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
-import { ProfileImagesPluginProfileImagesBlockComponent } from "../layout/blocks/profile-images-plugin-profile-images/profile-images-plugin-profile-images-block.component";
 import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
@@ -140,7 +139,7 @@ export class EnvironmentContent {
         NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
-        ProfileImagesPluginProfileImagesBlockComponent, BlockComponent, RegisterComponent, TasksMenuComponent,
+        BlockComponent, RegisterComponent, TasksMenuComponent,
         EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
