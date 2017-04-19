@@ -91,7 +91,6 @@ import * as plugins from "../plugins";
         ChangePasswordComponent,
         PermissionNg2Directive,
         PersonFriendsComponent,
-        NewCommunityComponent,
         EditCommunityComponent,
         PersonCommunitiesComponent,
         MenuBlockComponent,
