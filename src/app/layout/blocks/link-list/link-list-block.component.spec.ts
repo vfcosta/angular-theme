@@ -1,4 +1,4 @@
-import { DragulaModule } from 'ng2-dragula';
+import { NoosferoTemplatePipe } from './../../../shared/pipes/noosfero-template.ng2.filter';
 import { provideFilters } from '../../../../spec/helpers';
 import * as helpers from "../../../../spec/helpers";
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -9,24 +9,31 @@ import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core
 import { LinkListBlockComponent } from './link-list-block.component';
 
 describe("Components", () => {
-
     describe("Link List Block Component", () => {
-
         let fixture: ComponentFixture<LinkListBlockComponent>;
         let component: LinkListBlockComponent;
-
-
+        let noosferoTemplate: {
+            transform: () => {};
+        };
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [DragulaModule],
-                declarations: [LinkListBlockComponent, TranslatePipe],
+                declarations: [LinkListBlockComponent, TranslatePipe, NoosferoTemplatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: "noosferoTemplate", useValue: noosferoTemplate }
                 ]
             }).compileComponents().then(() => {
+                console.log('teste');
                 fixture = TestBed.createComponent(LinkListBlockComponent);
+                console.log("FIXTURE", fixture);
                 component = fixture.componentInstance;
+                component.block = {id: 1, type: 'Block'};
+                component.owner = {id: 1, identifier: 'profile', name: 'profile-name'};
+                component.links = [
+                    { name: "link1", address: "http://link1", icon: "fa-file-o" },
+                    { name: "link2", address: "http://link2", icon: "fa-file-o" }
+                ];
             });
         }));
 
@@ -36,6 +43,7 @@ describe("Components", () => {
         });
 
         it("display links stored in block settings", () => {
+            fixture.detectChanges();
             expect(all(".link-list-block a").length).toEqual(2);
         });
 

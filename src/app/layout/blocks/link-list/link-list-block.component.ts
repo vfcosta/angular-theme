@@ -1,4 +1,3 @@
-import { DragulaService } from 'ng2-dragula';
 import { Component, Input, Inject } from "@angular/core";
 
 @Component({
@@ -16,8 +15,7 @@ export class LinkListBlockComponent {
 
     dragulaOptions: any;
 
-    constructor(private dragulaService: DragulaService) {
-    }
+    constructor() { }
 
     ngOnInit() {
         this.dragulaOptions = {
