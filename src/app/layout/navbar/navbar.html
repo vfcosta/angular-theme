@@ -27,11 +27,11 @@
           <tasks-menu class="navbar-nav pull-right"></tasks-menu>
         </li>
         <li class="btn-nav" ng-show="!ctrl.currentUser">
-          <a ng-href="#" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
+          <a ng-href="#" class="login" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
         </li>
 
         <li ng-show="!ctrl.currentUser">
-          <a ui-sref="main.register">{{"navbar.signup.button" | translate}}</a>
+          <a ui-sref="main.register" class="signup">{{"navbar.signup.button" | translate}}</a>
         </li>
         <li>
           <div ui-view="actions" class="custom-actions"></div>
