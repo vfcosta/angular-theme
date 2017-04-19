@@ -1,10 +1,10 @@
-<span uib-dropdown>
-  <a href="#" uib-dropdown-toggle>
-     <i class="fa fa-fw {{currentIcon}}"></i> <i class="fa fa-fw fa-caret-down"></i>
+<span dropdown>
+  <a href dropdownToggle (click)="false">
+     <i class="fa fa-fw icon {{currentIcon}}"></i> <i class="fa fa-fw fa-caret-down"></i>
   </a>
-  <ul class="dropdown-menu icon-picker" uib-dropdown-menu>
-    <li ng-repeat="icon in availableIcons" class="icon-picker-item">
-      <a href="" (click)="changeIcon(icon)">
+  <ul *dropdownMenu class="dropdown-menu icon-picker">
+    <li *ngFor="let icon of availableIcons" class="icon-picker-item">
+      <a href="#" (click)="changeIcon(icon)">
         <i class="fa fa-fw {{icon}}"></i>
       </a>
     </li>

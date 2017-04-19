@@ -19,7 +19,6 @@ export class LinkListBlockComponent {
     constructor(private dragulaService: DragulaService) {
     }
 
-
     ngOnInit() {
         this.dragulaOptions = {
             invalid: () => {
@@ -27,19 +26,20 @@ export class LinkListBlockComponent {
             }
         };
 
-        this.dragulaService.dropModel.subscribe((value) => {
-            if (this.designMode) {
-                let links = [];
-                for (let link of this.links) {
-                    links.push(link);
-                }
-                this.block.settings.links = links;
-            }
-        });
-
         if (this.block && this.block.settings) {
             this.links = this.block.settings.links;
         }
+    }
+
+
+    updateLink(i: number, item: any) {
+        this.links[i].name = item.name;
+        this.links[i].address = item.address;
+    }
+
+
+    updateIcon(i: number, icon: string) {
+        this.links[i].icon = icon;
     }
 
     addLink() {

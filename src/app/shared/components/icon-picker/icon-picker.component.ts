@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
     selector: "noosfero-icon-picker",
@@ -7,6 +7,7 @@ import { Component, Input } from "@angular/core";
 export class IconPickerComponent {
 
     @Input() currentIcon: string;
+    @Output() iconChange = new EventEmitter<any>();
 
     availableIcons = ['', 'fa-edit', 'fa-file-o', 'fa-download', 'fa-mail-reply', 'fa-remove', 'fa-plus',
         'fa-arrow-circle-up', 'fa-arrow-circle-down', 'fa-arrow-circle-left', 'fa-arrow-circle-right',
@@ -16,5 +17,6 @@ export class IconPickerComponent {
 
     changeIcon(icon: string) {
         this.currentIcon = icon;
+        this.iconChange.emit(this.currentIcon);
     }
 }

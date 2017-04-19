@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, HostListener, ViewChild } from "@angular/core";
+import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: "noosfero-editable-link",
@@ -6,6 +6,8 @@ import { Component, Input, ElementRef, HostListener, ViewChild } from "@angular/
 })
 export class EditableLinkComponent {
 
+    @Input() link: any;
+    @Output() linkChange = new EventEmitter<any>();
     @Input() name: string;
     @Input() address: string;
     @Input() designMode: boolean;
@@ -22,9 +24,8 @@ export class EditableLinkComponent {
     }
 
     save() {
-        this.name = this.modifiedLink.name;
-        this.address = this.modifiedLink.address;
         this.popover.hide();
+        this.linkChange.emit(this.modifiedLink);
     }
 
     cancel() {
@@ -33,8 +34,7 @@ export class EditableLinkComponent {
     }
 
     copyLink() {
-        console.log(this.name, this.address);
-        this.modifiedLink = { name: this.name, address: this.address };
+        this.modifiedLink = { name: this.link.name, address: this.link.address };
     }
 
     @HostListener('document:click', ['$event'])
