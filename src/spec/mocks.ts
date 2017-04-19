@@ -255,7 +255,7 @@ export var mocks: any = {
             return mocks.promiseResultTemplate(response, callCatch);
         };
         let catchCallback = callback;
-        if (!callCatch) catchCallback = () => {};
+        if (!callCatch) catchCallback = () => { };
         return {
             then: callback,
             finally: callback,
@@ -300,6 +300,10 @@ export function getMocks() {
             open: (args: {}) => {
                 return this.modalInstance;
             }
+        },
+        $state: {
+            href: () => { },
+            go: () => { }
         },
         profile: {
             id: 1
@@ -539,12 +543,13 @@ export function getMocks() {
         },
         blockService: {
             getBlock: (id: number) => { },
+            getApiContent: (block: noosfero.Block, params?: any) => { return Promise.resolve({}); }
         },
         noosferoTemplateFilter: (text: string, options: any) => {
             return text;
         },
         stateService: {
-            go: () => {}
+            transitionTo: () => { }
         }
     }
 };
