@@ -1,34 +1,51 @@
-import { TestComponentBuilder } from 'ng-forward/cjs/testing/test-component-builder';
+import { async, TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { IconPickerComponent } from './icon-picker.component';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
+import { By } from '@angular/platform-browser';
 
-const htmlTemplate: string = '<noosfero-icon-picker [current-icon]="ctrl.currentIcon"></noosfero-icon-picker>';
+import { BsDropdownModule, BsDropdownMenuDirective, BsDropdownState, PositioningService, BsDropdownConfig, BsDropdownToggleDirective } from 'ngx-bootstrap';
+// import { provide } from 'ng-forward';
+// import { providers } from 'ng-forward/cjs/testing/providers';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
-describe("Components", () => {
+
+fdescribe("Components", () => {
 
     describe("Icon Picker Component", () => {
 
-        let helper: ComponentTestHelper<IconPickerComponent>;
+        let fixture: ComponentFixture<IconPickerComponent>;
+        let component: IconPickerComponent;
+        let dropdownMenu = {};
+   
 
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [IconPickerComponent],
-                properties: { icon: 'fa-edit' }
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                imports: [ BsDropdownModule.forRoot() ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                declarations: [IconPickerComponent]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(IconPickerComponent);
+                component = fixture.componentInstance;
             });
-            helper = new ComponentTestHelper<IconPickerComponent>(cls, done);
-        });
+        }));
 
         it("display available icons as options", () => {
-            expect(helper.all('.icon-picker-item').length).toEqual(helper.component.availableIcons.length);
+            fixture.detectChanges();
+            console.log('######################################3', fixture);
+            expect(all('.icon-picker-item').length).toEqual(component.availableIcons.length);
         });
 
         it("change current icon when select an option", () => {
-            helper.component.changeIcon("fa-plus");
-            expect(helper.all('.fa-plus').length).toEqual(1);
+            fixture.detectChanges();
+            component.changeIcon("fa-plus");
+            expect(all('.fa-plus').length).toEqual(1);
         });
+
+        function all(selector: string) {
+            let compiled = fixture.debugElement;
+            return compiled.queryAll(By.css(selector));
+        }
+
     });
 });

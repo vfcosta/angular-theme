@@ -24,9 +24,7 @@ describe("Components", () => {
                     { provide: "noosferoTemplate", useValue: noosferoTemplate }
                 ]
             }).compileComponents().then(() => {
-                console.log('teste');
                 fixture = TestBed.createComponent(LinkListBlockComponent);
-                console.log("FIXTURE", fixture);
                 component = fixture.componentInstance;
                 component.block = {id: 1, type: 'Block'};
                 component.owner = {id: 1, identifier: 'profile', name: 'profile-name'};
