@@ -40,6 +40,7 @@ import { RawHTMLBlockComponent } from "./layout/blocks/raw-html/raw-html-block.c
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
+import { RecentDocumentsBlockComponent } from "./layout/blocks/recent-documents/recent-documents-block.component";
 
 // Plugins imports
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
@@ -65,25 +66,25 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     constant("moment", moment).
     constant("AuthEvents", AuthEvents).
     directive('noosferoFooter',
-        downgradeComponent({ component: FooterComponent }) as angular.IDirectiveFactory
+    downgradeComponent({ component: FooterComponent }) as angular.IDirectiveFactory
     ).
     directive('noosferoRawHtmlblock',
-        downgradeComponent({ component: RawHTMLBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: RawHTMLBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoStatisticsBlock',
-        downgradeComponent({ component: StatisticsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: StatisticsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('languageSelector',
-        downgradeComponent({ component: LanguageSelectorComponent }) as angular.IDirectiveFactory
+    downgradeComponent({ component: LanguageSelectorComponent }) as angular.IDirectiveFactory
     ).
     directive('noosferoProfileImage',
-        downgradeComponent({ component: ProfileImageComponent, inputs: ['profile', 'iconSize', 'editable'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfileImageComponent, inputs: ['profile', 'iconSize', 'editable'] }) as angular.IDirectiveFactory
     ).
     directive('taskList',
-        downgradeComponent({ component: TaskListComponent, inputs: ['tasks'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: TaskListComponent, inputs: ['tasks'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoCommunitiesBlock',
-        downgradeComponent({ component: CommunitiesBlockComponent, inputs: ['block', 'owner']  }) as angular.IDirectiveFactory
+    downgradeComponent({ component: CommunitiesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoMembersBlock',
         downgradeComponent({ component: MembersBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
@@ -95,61 +96,64 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({ component: CommunityMembersComponent }) as angular.IDirectiveFactory
     ).
     directive('noosferoFriendsBlock',
-        downgradeComponent({ component: FriendsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: FriendsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoRecentDocumentsBlock',
+    downgradeComponent({ component: RecentDocumentsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoProfileImagesPluginProfileImagesBlock',
         downgradeComponent({ component: ProfileImagesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('profileFastEdition',
-        downgradeComponent({component: ProfileFastEditionComponent, inputs: ['profile', 'environment'], outputs: ['finished']}) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfileFastEditionComponent, inputs: ['profile', 'environment'], outputs: ['finished'] }) as angular.IDirectiveFactory
     ).
     directive('imageUploadCrop',
-        downgradeComponent({component: ImageUploadCropComponent, inputs: ['file']}) as angular.IDirectiveFactory
+    downgradeComponent({ component: ImageUploadCropComponent, inputs: ['file'] }) as angular.IDirectiveFactory
     ).
     directive('imageUpload',
-        downgradeComponent({component: ImageUploadComponent, inputs: ['cropEnabled'], outputs: ['finished']}) as angular.IDirectiveFactory
+    downgradeComponent({ component: ImageUploadComponent, inputs: ['cropEnabled'], outputs: ['finished'] }) as angular.IDirectiveFactory
     ).
     directive('profileList',
-        downgradeComponent({ component: ProfileListComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfileListComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
     ).
     directive('profileJoin',
-        downgradeComponent({ component: ProfileJoinComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfileJoinComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('htmlEditor',
-        downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'object', 'attribute'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: HtmlEditorComponent, inputs: ['options', 'object', 'attribute'] }) as angular.IDirectiveFactory
     ).
     directive('profileConfigurationMenu',
-        downgradeComponent({ component: ProfileConfigurationMenuComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfileConfigurationMenuComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('profilePersonalData',
-        downgradeComponent({ component: ProfilePersonalDataComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfilePersonalDataComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('personFriends',
-         downgradeComponent({ component: PersonFriendsComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: PersonFriendsComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('newCommunity',
-        downgradeComponent({component: NewCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: NewCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('editCommunity',
-        downgradeComponent({component: EditCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: EditCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('personCommunities',
-        downgradeComponent({component: PersonCommunitiesComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: PersonCommunitiesComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoProfileSummary',
-        downgradeComponent({component: ProfileSummaryComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfileSummaryComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('changePassword',
-        downgradeComponent({ component: ChangePasswordComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ChangePasswordComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoMenuBlock',
-        downgradeComponent({component: MenuBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: MenuBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoInviteComponent',
-        downgradeComponent({ component: InviteComponent, inputs:['people'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: InviteComponent, inputs: ['people'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoLoginBlock',
-        downgradeComponent({ component: LoginBlockComponent }) as angular.IDirectiveFactory
+    downgradeComponent({ component: LoginBlockComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [
