@@ -20,7 +20,9 @@ import { BlockSettingsComponent } from "../layout/blocks/block-settings.componen
 import { BlockComponent } from "../layout/blocks/block.component";
 import { EnvironmentHomeComponent } from "../environment/environment-home.component";
 import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
+import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
 import { MenuBlockComponent } from "../layout/blocks/menu/menu-block.component";
+import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
 import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
 import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
 import { ProfileHeaderComponent } from "../profile/header/profile-header.component";
@@ -30,6 +32,8 @@ import { CustomContentComponent } from "../profile/custom-content/custom-content
 import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
+import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
+import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
 import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
 
 import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
@@ -133,7 +137,7 @@ export class EnvironmentContent {
         BlockComponent, RegisterComponent, TasksMenuComponent,
         EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
-        HighlightsBlockComponent, EditableDirective, HighlightsBlockSettingsComponent,
+        EditableDirective, HighlightsBlockSettingsComponent,
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),

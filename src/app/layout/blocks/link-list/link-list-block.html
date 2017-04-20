@@ -4,7 +4,7 @@
       <i *ngIf="!designMode" class="fa fa-fw icon {{ link.icon }}"></i>
     </a>
     <noosfero-icon-picker *ngIf="designMode" [currentIcon]="link.icon" (iconChange)="updateIcon(i, $event)"></noosfero-icon-picker>
-    <noosfero-editable-link [link]="link" (linkChange)="updateLink(i, $event)" [owner]="owner" [designMode]="designMode" [popupOpen]="isNewLink(i)"></noosfero-editable-link>
+    <noosfero-editable-link [name]="link.name" [address]="link.address" (linkChange)="updateLink(i, $event)" [owner]="owner" [designMode]="designMode" [popupOpen]="isNewLink(i)"></noosfero-editable-link>
     <span class="remove-link" *ngIf="designMode">
       <a href="#" (click)="removeLink(i)" class="btn btn-xs"><i class="fa fa-fw fa-remove"></i></a>
     </span>
