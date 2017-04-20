@@ -331,7 +331,8 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
          */
         let successFunction = (response: restangular.IResponse): void => {
             if (self.$log) {
-                self.$log.debug("Request successfull executed", response.data, self, response);
+                // FIXME set only in debug mode
+                // self.$log.debug("Request successfull executed", response.data, self, response);
             }
             let resultModel: noosfero.RestResult<T> = <any>this.extractData(response);
             // resolve the promise with the model returned from the Noosfero API

@@ -29,7 +29,8 @@ export class AuthService {
 
 
     private loginSuccessCallback(response: ng.IHttpPromiseCallbackArg<noosfero.User>) {
-        this.$log.debug('AuthService.login [SUCCESS] response', response);
+        // FIXME set only in debug mode
+        // this.$log.debug('AuthService.login [SUCCESS] response', response);
         let currentUser: noosfero.User = this.sessionService.create(response.data);
         this.loginSuccess.next(currentUser);
 
@@ -41,12 +42,12 @@ export class AuthService {
         data.append('login', credentials.username);
         data.append('password', credentials.password);
         return this.Restangular.all("")
-            .customPOST(data, "login", null, {'Content-Type': undefined}).then(
-                (response: any) => this.loginSuccessCallback(response)).catch(
-                (e: any) => {
-                    this.loginFailedCallback(e);
-                    throw e;
-                });
+            .customPOST(data, "login", null, { 'Content-Type': undefined }).then(
+            (response: any) => this.loginSuccessCallback(response)).catch(
+            (e: any) => {
+                this.loginFailedCallback(e);
+                throw e;
+            });
     }
 
     private loginFailedCallback(response: ng.IHttpPromiseCallbackArg<any>): any {
