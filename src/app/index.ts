@@ -41,6 +41,7 @@ import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { RecentDocumentsBlockComponent } from "./layout/blocks/recent-documents/recent-documents-block.component";
+import { ProfileImageBlockComponent } from "./layout/blocks/profile-image/profile-image-block.component";
 
 // Plugins imports
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
@@ -87,13 +88,13 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     downgradeComponent({ component: CommunitiesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoMembersBlock',
-        downgradeComponent({ component: MembersBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: MembersBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoPeopleBlock',
-        downgradeComponent({ component: PeopleBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: PeopleBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoCommunityMembers',
-        downgradeComponent({ component: CommunityMembersComponent }) as angular.IDirectiveFactory
+    downgradeComponent({ component: CommunityMembersComponent }) as angular.IDirectiveFactory
     ).
     directive('noosferoFriendsBlock',
     downgradeComponent({ component: FriendsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
@@ -102,7 +103,10 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     downgradeComponent({ component: RecentDocumentsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoProfileImagesPluginProfileImagesBlock',
-        downgradeComponent({ component: ProfileImagesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfileImagesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoProfileImageBlock',
+    downgradeComponent({ component: ProfileImageBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('profileFastEdition',
     downgradeComponent({ component: ProfileFastEditionComponent, inputs: ['profile', 'environment'], outputs: ['finished'] }) as angular.IDirectiveFactory

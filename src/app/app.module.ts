@@ -22,6 +22,7 @@ import { ImageUploadCropComponent } from './shared/components/image-upload/image
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
 import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
+import { ProfileImageBlockComponent } from './layout/blocks/profile-image/profile-image-block.component';
 import { CommunityMembersComponent } from './profile/community-members/community-members.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
@@ -77,6 +78,7 @@ import * as plugins from "../plugins";
         CommunitiesBlockComponent,
         MembersBlockComponent,
         PeopleBlockComponent,
+        ProfileImageBlockComponent,
         CommunityMembersComponent,
         UiSrefDirective,
         ProfileFastEditionComponent,
@@ -116,6 +118,7 @@ import * as plugins from "../plugins";
         CommunitiesBlockComponent,
         MembersBlockComponent,
         PeopleBlockComponent,
+        ProfileImageBlockComponent,
         CommunityMembersComponent,
         ProfileFastEditionComponent,
         HtmlEditorComponent,
