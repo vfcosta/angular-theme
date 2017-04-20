@@ -4,43 +4,48 @@ import * as helpers from "../../../../spec/helpers";
 import { By } from '@angular/platform-browser';
 
 import { BsDropdownModule, BsDropdownMenuDirective, BsDropdownState, PositioningService, BsDropdownConfig, BsDropdownToggleDirective } from 'ngx-bootstrap';
-// import { provide } from 'ng-forward';
-// import { providers } from 'ng-forward/cjs/testing/providers';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 
 
-fdescribe("Components", () => {
+describe("Components", () => {
 
     describe("Icon Picker Component", () => {
 
         let fixture: ComponentFixture<IconPickerComponent>;
         let component: IconPickerComponent;
         let dropdownMenu = {};
-   
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [ BsDropdownModule.forRoot() ],
+                imports: [BsDropdownModule.forRoot()],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 declarations: [IconPickerComponent]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(IconPickerComponent);
                 component = fixture.componentInstance;
             });
+
         }));
 
-        it("display available icons as options", () => {
+        function renderDynamicDropDownMenu() {
             fixture.detectChanges();
-            console.log('######################################3', fixture);
-            expect(all('.icon-picker-item').length).toEqual(component.availableIcons.length);
-        });
+            let toggleButton = fixture.nativeElement.querySelector('a');
+            toggleButton.click();
+            tick();
+            fixture.detectChanges();
+        }
 
-        it("change current icon when select an option", () => {
-            fixture.detectChanges();
+        it("display available icons as options", fakeAsync(() => {
+            renderDynamicDropDownMenu();
+            expect(all('.icon-picker-item').length).toEqual(component.availableIcons.length);
+        }));
+
+        it("change current icon when select an option", fakeAsync(()  => {
+            renderDynamicDropDownMenu();
             component.changeIcon("fa-plus");
             expect(all('.fa-plus').length).toEqual(1);
-        });
+        }));
 
         function all(selector: string) {
             let compiled = fixture.debugElement;
