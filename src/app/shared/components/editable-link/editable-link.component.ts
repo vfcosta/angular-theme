@@ -13,6 +13,7 @@ export class EditableLinkComponent {
     @Input() designMode: boolean;
     @Input() owner: noosfero.Profile;
     @ViewChild("popover") popover;
+    @Input() popupOpen = false;
 
     modifiedLink: any;
 
