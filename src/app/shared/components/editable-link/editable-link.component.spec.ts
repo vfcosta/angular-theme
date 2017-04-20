@@ -7,7 +7,7 @@ import { FormsModule } from '@angular/forms';
 import * as helpers from "../../../../spec/helpers";
 import { EventEmitter } from '@angular/core';
 
-fdescribe("Components", () => {
+describe("Components", () => {
 
     describe("Editable Link Component", () => {
 
