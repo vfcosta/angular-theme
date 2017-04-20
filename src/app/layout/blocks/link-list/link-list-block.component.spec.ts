@@ -1,57 +1,71 @@
-import { TestComponentBuilder } from 'ng-forward/cjs/testing/test-component-builder';
+import { NoosferoTemplatePipe } from './../../../shared/pipes/noosfero-template.ng2.filter';
 import { provideFilters } from '../../../../spec/helpers';
-import { LinkListBlockComponent } from './link-list-block.component';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 
-const htmlTemplate: string = '<noosfero-link-list-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-link-list-block>';
+import { LinkListBlockComponent } from './link-list-block.component';
 
 describe("Components", () => {
-
     describe("Link List Block Component", () => {
-
-        let helper: ComponentTestHelper<LinkListBlockComponent>;
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [LinkListBlockComponent],
-                properties: {
-                    block: { type: 'Block', settings: { links: [{ name: 'link1', address: 'address1' }, { name: 'link2', address: 'address2' }] } },
-                    owner: { name: 'profile-name' }
-                },
-                providers: provideFilters("noosferoTemplateFilter", "translateFilter")
+        let fixture: ComponentFixture<LinkListBlockComponent>;
+        let component: LinkListBlockComponent;
+        let noosferoTemplate: {
+            transform: () => {};
+        };
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [LinkListBlockComponent, TranslatePipe, NoosferoTemplatePipe],
+                schemas: [NO_ERRORS_SCHEMA],
+                providers: [
+                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: "noosferoTemplate", useValue: noosferoTemplate }
+                ]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(LinkListBlockComponent);
+                component = fixture.componentInstance;
+                component.block = {id: 1, type: 'Block'};
+                component.owner = {id: 1, identifier: 'profile', name: 'profile-name'};
+                component.links = [
+                    { name: "link1", address: "http://link1", icon: "fa-file-o" },
+                    { name: "link2", address: "http://link2", icon: "fa-file-o" }
+                ];
             });
-            helper = new ComponentTestHelper<LinkListBlockComponent>(cls, done);
-        });
+        }));
 
         it("receives the block and the owner as inputs", () => {
-            expect(helper.component.block.type).toEqual("Block");
-            expect(helper.component.owner.name).toEqual("profile-name");
+            expect(component.block.type).toEqual("Block");
+            expect(component.owner.name).toEqual("profile-name");
         });
 
         it("display links stored in block settings", () => {
-            expect(helper.all(".link-list-block a").length).toEqual(2);
+            fixture.detectChanges();
+            expect(all(".link-list-block a").length).toEqual(2);
         });
 
         it("add a new link", () => {
-            helper.component.addLink();
-            helper.detectChanges();
-            expect(helper.all(".link-list-block a").length).toEqual(3);
+            component.addLink();
+            fixture.detectChanges();
+            expect(all(".link-list-block a").length).toEqual(3);
         });
 
         it("remove a new link", () => {
-            helper.component.removeLink(0);
-            helper.detectChanges();
-            expect(helper.all(".link-list-block a").length).toEqual(1);
+            component.removeLink(0);
+            fixture.detectChanges();
+            expect(all(".link-list-block a").length).toEqual(1);
         });
 
         it("return true when check for a new link by index", () => {
-            helper.component.addLink();
-            expect(helper.component.isNewLink(2)).toBeTruthy();
+            component.addLink();
+            expect(component.isNewLink(2)).toBeTruthy();
         });
+
+        function all(selector: string) {
+            let compiled = fixture.debugElement;
+            return compiled.queryAll(By.css(selector));
+        }
     });
 
 });

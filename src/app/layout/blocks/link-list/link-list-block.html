@@ -1,16 +1,15 @@
-<div class="link-list-block" dnd-list="ctrl.links" dnd-disable-if="!ctrl.designMode">
-  <div class="dndPlaceholder"></div>
-  <div ng-repeat="link in ctrl.links" dnd-draggable="link" dnd-moved="ctrl.links.splice($index, 1)" dnd-effect-allowed="move" ng-class="{'design-mode': ctrl.designMode}">
-    <a ng-href="{{link.address | noosferoTemplate:{profile: ctrl.owner.identifier} }}">
-      <i ng-if="!ctrl.designMode" class="fa fa-fw icon {{link.icon}}"></i>
-      <noosfero-icon-picker ng-if="ctrl.designMode" [(current-icon)]="link.icon"></noosfero-icon-picker>
-      <noosfero-editable-link [(name)]="link.name" [(address)]="link.address" [design-mode]="ctrl.designMode" [popup-open]="ctrl.isNewLink($index)"></noosfero-editable-link>
+<div class="link-list-block" [dragula]='"bag-links"' [dragulaModel]='links' [dragulaOptions]="dragulaOptions">
+  <div *ngFor="let link of links; let i = index">
+    <a [href]="link.address | noosferoTemplate:{profile: owner.identifier}">
+      <i *ngIf="!designMode" class="fa fa-fw icon {{ link.icon }}"></i>
     </a>
-    <span class="remove-link" ng-if="ctrl.designMode">
-      <a href="" (click)="ctrl.removeLink($index)" class="btn btn-xs"><i class="fa fa-fw fa-remove"></i></a>
+    <noosfero-icon-picker *ngIf="designMode" [currentIcon]="link.icon" (iconChange)="updateIcon(i, $event)"></noosfero-icon-picker>
+    <noosfero-editable-link [link]="link" (linkChange)="updateLink(i, $event)" [owner]="owner" [designMode]="designMode" [popupOpen]="isNewLink(i)"></noosfero-editable-link>
+    <span class="remove-link" *ngIf="designMode">
+      <a href="#" (click)="removeLink(i)" class="btn btn-xs"><i class="fa fa-fw fa-remove"></i></a>
     </span>
   </div>
-  <div class="new-link" ng-if="ctrl.designMode">
-    <a href="" (click)="ctrl.addLink()" class="btn btn-xs"><i class="fa fa-fw fa-plus"></i> New link</a>
+  <div class="new-link" *ngIf="designMode">
+    <a href="#" (click)="addLink()" class="btn btn-xs"><i class="fa fa-fw fa-plus"></i> New link</a>
   </div>
 </div>
