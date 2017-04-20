@@ -1,5 +1,7 @@
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
+import { TagCloudModule } from 'angular-tag-cloud-module';
+import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { NoosferoTemplatePipe } from './shared/pipes/noosfero-template.ng2.filter';
 import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
@@ -75,6 +77,7 @@ import * as plugins from "../plugins";
         CarouselModule.forRoot(),
         CollapseModule.forRoot(),
         BrowserAnimationsModule,
+        TagCloudModule,
     ],
     exports: [TranslatePipe],
     declarations: [
@@ -123,6 +126,7 @@ import * as plugins from "../plugins";
         NoosferoTemplatePipe,
         HighlightsBlockComponent,
         HighlightsBlockSettingsComponent,
+        TagsBlockComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -162,6 +166,7 @@ import * as plugins from "../plugins";
         IconPickerComponent,
         HighlightsBlockComponent,
         HighlightsBlockSettingsComponent,
+        TagsBlockComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
