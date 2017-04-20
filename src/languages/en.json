@@ -345,5 +345,6 @@
     "profile-list.member-edition.cancel": "Cancel",
     "profile-list-edition.role.success.title": "Good job!",
     "profile-list-edition.role.success.message": "Roles successfully updated!",
-    "myprofile.configuration.communities.search.label": "Search for communities"
+    "myprofile.configuration.communities.search.label": "Search for communities",
+    "required": "Is required"
 }

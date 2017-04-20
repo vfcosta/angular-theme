@@ -1,4 +1,5 @@
 {
+    "required": "é necessário o preenchimento",
     "account.register.accountCreatingMessage": "Ao criar uma conta, você está concordando com os ",
     "account.register.emailLabel": "Email",
     "account.register.errorMessagesTitle": "Houve erros com os seguintes campos:",
