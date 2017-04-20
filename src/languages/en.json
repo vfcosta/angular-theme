@@ -312,6 +312,7 @@
     "profile.edition.action.save": "Save",
     "profile.edition.action.cancel": "Cancel",
     "profile.edition.name.required": "Name is required",
+    "profile.edition.name.blank": "Name can't be empty",
     "profile.edition.identifier.required": "User name is required",
     "profile.edition.identifier.not_available": "Username is already being taken",
     "profile.edition.identifier.change_message": "The profile url will be changed",

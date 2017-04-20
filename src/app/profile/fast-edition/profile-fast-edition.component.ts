@@ -13,6 +13,7 @@ export class ProfileFastEditionComponent {
     @Output() finished = new EventEmitter<noosfero.Profile>();
 
     @ViewChild('identifierErrors') identifierErrors;
+    @ViewChild('nameErrors') nameErrors;
 
     updatedProfile: noosfero.Profile;
 
@@ -40,6 +41,7 @@ export class ProfileFastEditionComponent {
         }).catch((response) => {
             this.errors = response.data.message;
             this.identifierErrors.setErrors(this.errors['identifier']);
+            this.nameErrors.setErrors(this.errors['name']);
         });
     }
 
