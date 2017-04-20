@@ -1,3 +1,4 @@
+import { PersonTagsPluginInterestsBlockComponent } from './../plugins/person_tags/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component';
 import { RecentActivitiesPluginActivitiesBlockComponent } from './../plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
@@ -158,6 +159,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoRecentActivitiesPluginActivitiesBlock',
     downgradeComponent({ component: RecentActivitiesPluginActivitiesBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoInterestTagsBlock',
+    downgradeComponent({ component: PersonTagsPluginInterestsBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

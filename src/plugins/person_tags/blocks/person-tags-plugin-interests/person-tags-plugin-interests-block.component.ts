@@ -1,12 +1,11 @@
-import {Component, Inject, Input} from "ng-forward";
+import {Component, Inject, Input} from "@angular/core";
 import {PersonService} from "./../../../../lib/ng-noosfero-api/http/person.service";
 import {Arrays} from "./../../../../lib/util/arrays";
 
 @Component({
-    selector: "noosfero-person-tags-plugin-interests-block",
-    templateUrl: 'app/layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.html'
+    selector: "noosfero-interest-tags-block",
+    template: require('plugins/person_tags/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.html')
 })
-@Inject(PersonService, "$state")
 export class PersonTagsPluginInterestsBlockComponent {
 
     @Input() block: any;
@@ -15,7 +14,7 @@ export class PersonTagsPluginInterestsBlockComponent {
     profile: any;
     tags: any;
 
-    constructor(private personService: PersonService, private $state: any) { }
+    constructor(@Inject("personService") private personService: PersonService) { }
 
     ngOnInit() {
         this.profile = this.owner;
