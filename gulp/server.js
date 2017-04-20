@@ -39,7 +39,8 @@ function browserSyncInit(baseDir, browser) {
     startPath: '/',
     server: server,
     port: 3001,
-    browser: browser
+    browser: browser,
+    notify: false
   });
 }
 

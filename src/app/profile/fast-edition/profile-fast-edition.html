@@ -2,7 +2,7 @@
   <div class="form-group">
     <label class="control-label" for="name">{{"profile.edition.name_label" | translate}}</label>
     <input type="text" class="form-control input-sm" [(ngModel)]="updatedProfile.name" required #name="ngModel" id="name" name="name">
-    <validation-message [field]="name" [prefix]="'profile.edition.name'"></validation-message>
+    <validation-message #nameErrors [field]="name" [prefix]="'profile.edition.name'"></validation-message>
   </div>
   <div class="form-group" *ngIf="allowChangeIdentifier()">
     <label class="control-label" for="identifier">{{"profile.edition.identifier_label" | translate}}</label>

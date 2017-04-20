@@ -3,7 +3,7 @@ import { ComponentTestHelper, createClass } from '../../../../spec/component-tes
 
 import { TagsBlockComponent } from './tags-block.component';
 
-const htmlTemplate: string = '<noosfero-tags-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-tags-block>';
+const htmlTemplate: string = '<noosfero-tags-cloud-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-tags-cloud-block>';
 
 describe("Components", () => {
     describe("Tags Block Component", () => {

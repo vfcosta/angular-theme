@@ -1,21 +1,21 @@
-'use strict';
+describe('Noosfero Home', function () {
 
-describe('The main view', function () {
-  var page;
-
-  beforeEach(function () {
-    browser.get('/index.html');
-    page = require('./main.po');
+  beforeEach(function() {
+    browser.get('/');
   });
 
-  it('should include jumbotron with correct data', function() {
-    expect(page.h1El.getText()).toBe('\'Allo, \'Allo!');
-    expect(page.imgEl.getAttribute('src')).toMatch(/assets\/images\/yeoman.png$/);
-    expect(page.imgEl.getAttribute('alt')).toBe('I\'m Yeoman');
+  it('should have a logo', function() {
+    expect(element.all(by.css('.navbar-header .noosfero-logo')).count()).toEqual(1);
   });
 
-  it('should list more than 5 awesome things', function () {
-    expect(page.thumbnailEls.count()).toBeGreaterThan(5);
+  it('display modal when click on login button', function() {
+    element(by.css('#navbar .login')).click();
+    expect(element.all(by.css('.modal-body .login-form')).count()).toEqual(1);
+  });
+
+  it('display button to signup', function() {
+    element(by.css('#navbar .signup')).click();
+
   });
 
 });
