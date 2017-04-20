@@ -1,3 +1,4 @@
+import { RecentActivitiesPluginActivitiesBlockComponent } from './layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
@@ -154,6 +155,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoLoginBlock',
     downgradeComponent({ component: LoginBlockComponent }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoRecentActivitiesPluginActivitiesBlock',
+    downgradeComponent({ component: RecentActivitiesPluginActivitiesBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

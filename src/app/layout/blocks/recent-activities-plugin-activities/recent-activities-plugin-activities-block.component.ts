@@ -1,12 +1,11 @@
-import {Component, Inject, Input} from "ng-forward";
+import {Component, Inject, Input} from "@angular/core";
 import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
 import {Arrays} from "./../../../../lib/util/arrays";
 
 @Component({
     selector: "noosfero-recent-activities-plugin-activities-block",
-    templateUrl: 'app/layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.html'
+    template: require('app/layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.html')
 })
-@Inject(BlockService, "$state")
 export class RecentActivitiesPluginActivitiesBlockComponent {
 
     @Input() block: any;
@@ -15,7 +14,7 @@ export class RecentActivitiesPluginActivitiesBlockComponent {
     profile: any;
     activities: any;
 
-    constructor(private blockService: BlockService, private $state: any) { }
+    constructor(@Inject("blockService") private blockService: BlockService) { }
 
     getActivityTemplate(activity: any) {
         if (activity.label === 'events') {

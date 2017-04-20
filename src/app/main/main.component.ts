@@ -30,7 +30,6 @@ import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics
 import { PersonTagsPluginInterestsBlockComponent } from "../layout/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component";
 import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
-import { RecentActivitiesPluginActivitiesBlockComponent } from "../layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component";
 import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
@@ -137,7 +136,7 @@ export class EnvironmentContent {
         MainBlockComponent, Navbar, ProfileImageBlockComponent,
         NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
-        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent, RecentActivitiesPluginActivitiesBlockComponent,
+        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent,,
         BlockComponent, RegisterComponent, TasksMenuComponent,
         EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,

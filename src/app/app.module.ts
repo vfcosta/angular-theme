@@ -1,3 +1,4 @@
+import { RecentActivitiesPluginActivitiesBlockComponent } from './layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
@@ -104,6 +105,7 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         PermissionNg2Directive,
         LoginBlockComponent,
+        RecentActivitiesPluginActivitiesBlockComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -137,6 +139,7 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         ProfileJoinComponent,
         LoginBlockComponent,
+        RecentActivitiesPluginActivitiesBlockComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
