@@ -1,7 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
-// @Inject(BlockService, "$state")
 @Component({
     selector: "noosfero-profile-images-plugin-profile-images-block",
     template: require('plugins/profile_images/blocks/profile-images-block/profile-images-block.html')
@@ -15,7 +14,6 @@ export class ProfileImagesBlockComponent {
     profile: any;
     images: any;
 
-    // constructor(private blockService: BlockService, private $state: any) { }
     constructor( @Inject('blockService') private blockService: BlockService) { }
 
     ngOnInit() {

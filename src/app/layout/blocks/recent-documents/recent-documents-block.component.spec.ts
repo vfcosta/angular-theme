@@ -1,26 +1,16 @@
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
-
 import { RecentDocumentsBlockComponent } from './recent-documents-block.component';
 import * as helpers from "./../../../../spec/helpers";
-// import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-// import { FormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
 import { MomentModule } from 'angular2-moment';
-
-// import { Observable } from 'rxjs/Observable';
-// import "rxjs/add/observable/of";
-
-// const htmlTemplate: string = '<noosfero-recent-documents-block></noosfero-recent-documents-block>';
 
 describe("Components", () => {
     describe("Recent Documents Block Component", () => {
         let mocks = helpers.getMocks();
-        // let peopleToInvite = [<noosfero.Person>{ "id": 1, "name": "Person 1" }, <noosfero.Person>{ "id": 3, "name": "Person 3" }];
         let fixture: ComponentFixture<RecentDocumentsBlockComponent>;
-        let component: RecentDocumentsBlockComponent;
-        let state = jasmine.createSpyObj("$state", ["href"]);
+        let component: RecentDocumentsBlockComponent;        
         let article = <noosfero.Article>{ name: "article1" };
 
         beforeEach(async(() => {
@@ -32,15 +22,10 @@ describe("Components", () => {
                 declarations: [RecentDocumentsBlockComponent, TranslatePipe],
                 providers: [
                     { provide: "blockService", useValue: mocks.blockService },
-                    // { provide: "$state", useValue: state },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "articleService", useValue: mocks.articleService }
-                    // { provide: "profileService", useValue: mocks.profileService },
-                    // { provide: "communityService", useValue: mocks.communityService },
-                    // { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                // imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule]
                 imports: [NgPipesModule, MomentModule]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(RecentDocumentsBlockComponent);
@@ -91,7 +76,6 @@ describe("Components", () => {
         // function simulateRemovedEvent(recentDocumentsBlock: RecentDocumentsBlockComponent) {
         //     recentDocumentsBlock['articleService']['modelRemovedEventEmitter'].next(article);
         // }
-
 
     });
 

@@ -11,6 +11,7 @@ import { ProfilePersonalDataComponent } from './profile/configuration/personal-d
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
 import { DateFormatPipe } from './shared/pipes/date-format.ng2.filter';
+import { NoosferoUrlPipe } from './shared/pipes/noosfero-url.ng2.filter';
 import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
@@ -88,6 +89,7 @@ import * as plugins from "../plugins";
         ProfileConfigurationMenuComponent,
         ProfilePersonalDataComponent,
         DateFormatPipe,
+        NoosferoUrlPipe,
         ProfileListEditionComponent,
         NewCommunityComponent,
         ChangePasswordComponent,

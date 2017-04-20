@@ -1,20 +1,10 @@
-<!-- <ul class="profile-images-plugin-profile-images">
-  <li *ngFor="let image of images">
-
-    <a ng-href="{{image.view_url | noosferoUrl}}" ng-style="{'background-image': 'url(' + image.path + ')'}">
-      <span>{{image.title}}</span>
-    </a>
-
-    <a uiSref="{{image.view_url | noosferoUrl}}" title="{{image.title}}" href>
-      <span>{{image.title}}</span>
-    </a>
-  </li>
-</ul> -->
-
-<div class="row">
-  <div *ngFor="let image of images" class="col-xs-6 col-md-3">
-    <auiSref="{{image.view_url | noosferoUrl}}" title="{{image.title}}"  class="thumbnail" href>
-      <img src="image.path" alt="{{image.title}}">
+<div class="profile-images-block">
+  leandro
+  {{images}}
+  foi
+  <div *ngFor="let image of images" class="image-block">
+    <a [href]="image.view_url | noosferoUrl" title="{{image.title}}"  class="thumbnail" >
+      <img [alt]="image.title" [src]="image.path" class="img-responsive">
     </a>
   </div>
 </div>
