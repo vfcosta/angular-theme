@@ -6,7 +6,6 @@ import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmi
 })
 export class EditableLinkComponent {
 
-    @Input() link: any;
     @Output() linkChange = new EventEmitter<any>();
     @Input() name: string;
     @Input() address: string;
@@ -24,8 +23,10 @@ export class EditableLinkComponent {
     }
 
     save() {
-        this.popover.hide();
+        this.name = this.modifiedLink.name;
+        this.address = this.modifiedLink.address;
         this.linkChange.emit(this.modifiedLink);
+        this.popover.hide();
     }
 
     cancel() {
@@ -34,7 +35,7 @@ export class EditableLinkComponent {
     }
 
     copyLink() {
-        this.modifiedLink = { name: this.link.name, address: this.link.address };
+        this.modifiedLink = { name: this.name, address: this.address };
     }
 
     @HostListener('document:click', ['$event'])

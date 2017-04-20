@@ -111,6 +111,9 @@ module.exports = function (config) {
         browsers: ['PhantomJS'],
         plugins: karmaPlugins,
         reporters: ['spec', 'coverage-istanbul'],
+        specReporter: {
+            suppressSkipped: true,
+        },
         proxies: {
             '/assets/': path.join('/base/', conf.paths.src, '/assets/'),
             '/app/': path.join('/base/', conf.paths.src, '/app/')

@@ -28,7 +28,6 @@ describe("Components", () => {
                 component = fixture.componentInstance;
                 component.name = 'link';
                 component.address = 'address';
-                component.link = { name: 'link', address: 'address' };
                 component.designMode = true;
                 let popOver = { hide: () => { } };
                 component.popover = popOver;
