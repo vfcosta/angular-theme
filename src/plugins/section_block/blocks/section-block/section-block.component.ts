@@ -98,10 +98,14 @@ export class SectionBlockComponent {
 
     upload(data: any) {
         console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', data);
-        this.blockService.uploadImages(this.block, data).then((result: any) => {
-            console.log('fazendo upload da imagem');
-            this.block.images = result.data;
-            this.modalInstance.close(name);
+        this.blockService.uploadImages(this.block, [data]).then((result: noosfero.RestResult<noosfero.Block>) => {
+
+
+            this.block = result.data;
+            // this.block.images = result.data;
+            console.log('upload da imagem realizaod', this.block.images);
+
+            // this.modalInstance.close(name);
         });
     }
     updateLink(i: any, item: any) {
@@ -130,7 +134,7 @@ export class SectionBlockComponent {
 
     getSectionImage() {
         if (this.block.images && this.block.images.length >= 0) {
-            return this.block.images[0];
+            return this.block.images[this.block.images.length - 1];
         } else {
             return null;
         }
