@@ -434,7 +434,8 @@ export function getMocks() {
             instant: () => { }
         },
         personService: {
-            search: () => Observable.of([mocks.profile])
+            search: () => Observable.of([mocks.profile]),
+            getTags: () => { }
         },
         communityService: {
             sendInvitations: (communityId: number, people: noosfero.Person[]) => { }

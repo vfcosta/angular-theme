@@ -1,4 +1,8 @@
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
+import { NoosferoTemplatePipe } from './shared/pipes/noosfero-template.ng2.filter';
+import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
+import { EditableLinkComponent } from './shared/components/editable-link/editable-link.component';
+import { LinkListBlockComponent } from './layout/blocks/link-list/link-list-block.component';
 import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
@@ -39,7 +43,7 @@ import { UpgradeUtils } from "./shared/upgrade-utils";
 import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
-import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
+import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { NgPipesModule } from 'ngx-pipes';
@@ -63,7 +67,8 @@ import * as plugins from "../plugins";
         PaginationModule.forRoot(),
         PopoverModule.forRoot(),
         DragulaModule,
-        TypeaheadModule.forRoot()
+        TypeaheadModule.forRoot(),
+        BsDropdownModule.forRoot()
     ],
     exports: [TranslatePipe],
     declarations: [
@@ -106,7 +111,11 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         PermissionNg2Directive,
         LoginBlockComponent,
-    ].concat(plugins.ng2MainComponents),
+        LinkListBlockComponent,
+        EditableLinkComponent,
+        IconPickerComponent,
+        NoosferoTemplatePipe,
+        ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -135,12 +144,13 @@ import * as plugins from "../plugins";
         ChangePasswordComponent,
         MenuBlockComponent,
         PersonCommunitiesComponent,
-        ProfileJoinComponent,
         InviteComponent,
         ProfileSummaryComponent,
-        ProfileJoinComponent,
         LoginBlockComponent,
-    ].concat(plugins.ng2MainComponents),
+        LinkListBlockComponent,
+        EditableLinkComponent,
+        IconPickerComponent,
+        ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',

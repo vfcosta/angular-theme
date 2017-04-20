@@ -1,0 +1,21 @@
+<div class="deckgrid recent-activities-block">
+  <div *ngFor="let activity of activities" class="a-card panel media">
+
+    <div class="subheader">
+      <p *ngIf="activity.label === 'events'">
+        {{ 'activities.event.description' | translate }} <b>{{ activity.start_date | date:longDate }}</b> {{ 'time.at' | translate }} {{ activity.start_date | date:'HH:mm' }} - 
+        <a uiSref="main.profile.home" [uiParams]="{profile: activity.user.identifier}">{{activity.user.name}}</a> <span class="activity-label">{{activity.label}}</span>
+      </p>
+      <p *ngIf="activity.label !== 'events'">
+        {{ 'date.on' | translate }} <b>{{ activity.created_at | date:longDate }}</b> {{ 'time.at' | translate }} {{ activity.created_at | date:'HH:mm' }} - 
+        <a uiSref="main.profile.home" [uiParams]="{profile: activity.user.identifier}">{{activity.user.name}}</a> <span class="activity-label">{{activity.label}}</span>
+      </p>
+    </div>
+
+    <div class="header media-body">
+      <h5 class="title media-heading">
+      </h5>
+    </div>
+    <hr />
+  </div>
+</div>
