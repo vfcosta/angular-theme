@@ -1,4 +1,5 @@
 {
+    "required": "Is required",
     "account.register.accountCreatingMessage": "By creating an account, you are agreeing with the ",
     "account.register.emailLabel": "Email",
     "account.register.errorMessagesTitle": "There were problems with the following fields:",
@@ -345,6 +346,5 @@
     "profile-list.member-edition.cancel": "Cancel",
     "profile-list-edition.role.success.title": "Good job!",
     "profile-list-edition.role.success.message": "Roles successfully updated!",
-    "myprofile.configuration.communities.search.label": "Search for communities",
-    "required": "Is required"
+    "myprofile.configuration.communities.search.label": "Search for communities"
 }
