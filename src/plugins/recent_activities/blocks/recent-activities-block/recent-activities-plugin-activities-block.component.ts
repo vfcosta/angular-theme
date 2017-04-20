@@ -4,7 +4,7 @@ import {Arrays} from "./../../../../lib/util/arrays";
 
 @Component({
     selector: "noosfero-recent-activities-plugin-activities-block",
-    template: require('app/layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.html')
+    template: require('plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.html')
 })
 export class RecentActivitiesPluginActivitiesBlockComponent {
 

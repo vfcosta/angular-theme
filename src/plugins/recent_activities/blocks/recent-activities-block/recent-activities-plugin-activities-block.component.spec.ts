@@ -1,4 +1,4 @@
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import {RecentActivitiesPluginActivitiesBlockComponent} from './recent-activities-plugin-activities-block.component';
 import * as helpers from "./../../../../spec/helpers";
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';

@@ -136,7 +136,7 @@ export class EnvironmentContent {
         MainBlockComponent, Navbar, ProfileImageBlockComponent,
         NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
-        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent,,
+        PersonTagsPluginInterestsBlockComponent, TagsBlockComponent,
         BlockComponent, RegisterComponent, TasksMenuComponent,
         EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,

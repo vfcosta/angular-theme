@@ -1,4 +1,4 @@
-import { RecentActivitiesPluginActivitiesBlockComponent } from './layout/blocks/recent-activities-plugin-activities/recent-activities-plugin-activities-block.component';
+import { RecentActivitiesPluginActivitiesBlockComponent } from './../plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
