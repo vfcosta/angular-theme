@@ -39,8 +39,8 @@ export class ProfileFastEditionComponent {
                 this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
             }
         }).catch((response) => {
-            this.errors = response.data.message;
-            this.identifierErrors.setErrors(this.errors['identifier']);
+            this.errors = response.data.errors_details;
+            if (this.errors['identifier']) this.identifierErrors.setErrors(this.errors['identifier']);
             this.nameErrors.setErrors(this.errors['name']);
         });
     }
