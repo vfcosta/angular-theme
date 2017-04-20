@@ -56,6 +56,7 @@ import { ProfileImageBlockComponent } from "./layout/blocks/profile-image/profil
 // Plugins imports
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
 import { ProfileImagesBlockComponent } from '../plugins/profile_images/blocks/profile-images-block/profile-images-block.component';
+import { SectionBlockComponent } from '../plugins/section_block/blocks/section-block/section-block.component';
 
 declare var moment: any;
 
@@ -114,6 +115,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoProfileImagesPluginProfileImagesBlock',
         downgradeComponent({ component: ProfileImagesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoSectionBlockPluginSectionBlock',
+        downgradeComponent({ component: SectionBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoProfileImageBlock',
     downgradeComponent({ component: ProfileImageBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
