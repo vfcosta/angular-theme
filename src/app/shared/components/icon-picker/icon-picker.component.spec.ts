@@ -1,11 +1,9 @@
 import { async, TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { IconPickerComponent } from './icon-picker.component';
-import * as helpers from "../../../../spec/helpers";
 import { By } from '@angular/platform-browser';
 
-import { BsDropdownModule, BsDropdownMenuDirective, BsDropdownState, PositioningService, BsDropdownConfig, BsDropdownToggleDirective } from 'ngx-bootstrap';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { BsDropdownModule } from 'ngx-bootstrap';
+import { NgModule } from '@angular/core';
 
 
 describe("Components", () => {
@@ -19,7 +17,6 @@ describe("Components", () => {
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [BsDropdownModule.forRoot()],
-                schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 declarations: [IconPickerComponent]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(IconPickerComponent);

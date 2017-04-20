@@ -150,7 +150,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
         downgradeComponent({ component: LinkListBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoEditableLink',
-        downgradeComponent({component: EditableLinkComponent, inputs: ['name', 'address', 'designMode', 'popupOpen', 'owner'] }) as angular.IDirectiveFactory
+        downgradeComponent({component: EditableLinkComponent, inputs: ['name', 'address', 'designMode', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoIconPicker',
         downgradeComponent({ component: IconPickerComponent, inputs: ['currentIcon'] }) as angular.IDirectiveFactory
