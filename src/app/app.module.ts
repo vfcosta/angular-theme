@@ -1,3 +1,5 @@
+import { TagCloudModule } from 'angular-tag-cloud-module';
+import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
@@ -62,7 +64,8 @@ import * as plugins from "../plugins";
         PaginationModule.forRoot(),
         PopoverModule.forRoot(),
         DragulaModule,
-        TypeaheadModule.forRoot()
+        TypeaheadModule.forRoot(),
+        TagCloudModule
     ],
     exports: [TranslatePipe],
     declarations: [
@@ -104,6 +107,7 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         PermissionNg2Directive,
         LoginBlockComponent,
+        TagsBlockComponent
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -137,6 +141,7 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         ProfileJoinComponent,
         LoginBlockComponent,
+        TagsBlockComponent
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

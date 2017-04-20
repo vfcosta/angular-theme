@@ -1,3 +1,6 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TestBed, ComponentFixture, async } from '@angular/core/testing';
+import {Injectable, Provider, provide} from "ng-forward";
 import * as helpers from "../../../../spec/helpers";
 import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
 

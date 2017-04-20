@@ -27,7 +27,6 @@ import { TopProfileImageComponent } from "../profile/top-image/top-profile-image
 import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
 import { ProfileHeaderComponent } from "../profile/header/profile-header.component";
 import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
-import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
 import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
@@ -135,7 +134,6 @@ export class EnvironmentContent {
         MainBlockComponent, Navbar, ProfileImageBlockComponent,
         NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
-        TagsBlockComponent,
         BlockComponent, RegisterComponent, TasksMenuComponent,
         EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
