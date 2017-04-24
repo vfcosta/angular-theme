@@ -67,7 +67,7 @@ describe("Components", () => {
 
         it("hide button to edit content when user doesn't have the permission", () => {
             helper.detectChanges();
-            expect(helper.find(".actions").attr('style').trim()).toEqual('display: none;');
+            expect(helper.find(".actions").attr('style').trim()).toEqual('display: none !important');
         });
 
         it("show button to edit content when user has the permission", () => {

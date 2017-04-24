@@ -11,7 +11,7 @@ export class PermissionDirective {
             let permissions = $scope.$eval($attrs['permission']);
             let permissionAction = $attrs['permissionAction'];
             if (!permissions || permissions.indexOf(permissionAction) < 0) {
-                $element.css("display", "none");
+                $element.attr('style','display: none !important');
             } else {
                 $element.css("display", "");
             }
