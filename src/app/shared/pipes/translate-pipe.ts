@@ -6,7 +6,7 @@ export class TranslatePipe implements PipeTransform {
 
   constructor(@Inject("translatorService") private translatorService: TranslatorService) { }
 
-  transform(input: string) {
-    return this.translatorService.translate(input);
+  transform(input: string, interpolateParams?: any, interpolationId?: string) {
+    return this.translatorService.translate(input, interpolateParams, interpolationId);
   }
 }

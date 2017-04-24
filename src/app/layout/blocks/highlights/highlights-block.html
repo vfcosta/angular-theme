@@ -1,18 +1,16 @@
 <div class="highlights-block">
-  <div uib-carousel ng-class="{'no-controls': ctrl.hideControls()}" class="carousel" active="ctrl.block.active" interval="ctrl.getTransitionInterval()" no-wrap="false">
-    <div uib-slide ng-repeat="slide in ctrl.images" index="$index">
-      <a ng-href="{{slide.address}}" target="{{ctrl.getTarget(slide)}}" class="image-link">
-        <img ng-src="{{slide.image_src}}" class="img-responsive">
+  <carousel ng-class="{'no-controls': hideControls()}" class="carousel" [(activeSlide)]="block.active" [interval]="getTransitionInterval()" [noWrap]="false">
+    <slide *ngFor="let slide of images; let index=index">
+      <a [href]="slide.address" [target]="getTarget(slide)" class="image-link">
+        <img [src]="slide.image_src" class="img-responsive">
       </a>
       <div class="carousel-caption">
         <div class="caption">
-          <div class='title'>
-            <a ng-href="{{slide.address}}">
-              <noosfero-editable-link [(name)]="slide.title" [(address)]="slide.address" [design-mode]="ctrl.designMode"></noosfero-editable-link>
-            </a>
+          <div class="title">
+            <noosfero-editable-link (linkChange)="updateLink(index, $event)" [owner]="owner" [(name)]="slide.title" [(address)]="slide.address" [designMode]="designMode"></noosfero-editable-link>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+    </slide>
+  </carousel>
 </div>

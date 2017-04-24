@@ -1,49 +1,51 @@
-import { TestComponentBuilder } from 'ng-forward/cjs/testing/test-component-builder';
-import { provideFilters } from '../../../../spec/helpers';
+import { async, TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { EditableLinkComponent } from './editable-link.component';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { NoosferoTemplatePipe } from './../../../shared/pipes/noosfero-template.ng2.filter';
+import { PopoverModule } from 'ngx-bootstrap';
+import { FormsModule } from '@angular/forms';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
-
-const htmlTemplate: string = '<noosfero-editable-link [name]="ctrl.name" [address]="ctrl.address" [desig-mode]="ctrl.designMode" [opened]="ctrl.opened"></noosfero-editable-link>';
+import { EventEmitter } from '@angular/core';
 
 describe("Components", () => {
 
     describe("Editable Link Component", () => {
 
-        let helper: ComponentTestHelper<EditableLinkComponent>;
+        let fixture: ComponentFixture<EditableLinkComponent>;
+        let component: EditableLinkComponent;
 
-        beforeEach(angular.mock.module("templates"));
+        let linkChange = jasmine.createSpyObj("linkChange", ["emit"]);
+        linkChange.emit = jasmine.createSpy("emit");
 
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [EditableLinkComponent],
-                properties: {
-                    name: 'link',
-                    address: 'address',
-                    designMode: true,
-                    popupOpen: false
-                }
+        beforeEach(async(() => {
+
+            TestBed.configureTestingModule({
+                imports: [PopoverModule.forRoot(), FormsModule],
+                declarations: [EditableLinkComponent, TranslatePipe, NoosferoTemplatePipe],
+                providers: [{ provide: 'translatorService', useValue: helpers.mocks.translatorService }]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(EditableLinkComponent);
+                component = fixture.componentInstance;
+                component.name = 'link';
+                component.address = 'address';
+                component.designMode = true;
+                let popOver = { hide: () => { } };
+                component.popover = popOver;
+                component.linkChange = linkChange;
             });
-            helper = new ComponentTestHelper<EditableLinkComponent>(cls, done);
-        });
+        }));
 
         it("copy link content on init", () => {
-            expect(helper.component.modifiedLink).toEqual({ name: 'link', address: 'address' });
+            fixture.detectChanges();
+            expect(component.modifiedLink).toEqual({ name: 'link', address: 'address' });
         });
 
         it("copy link content when save", () => {
-            helper.component.modifiedLink = { name: "modified name", address: "modified address" };
-            helper.component.save();
-            expect(helper.component.name).toEqual('modified name');
-            expect(helper.component.address).toEqual('modified address');
+            component.modifiedLink = { name: "modified name", address: "modified address" };
+            component.save();
+            expect(component.linkChange.emit).toHaveBeenCalled();
         });
 
-        it("set popupOpen to false when cancel", () => {
-            helper.component.popupOpen = true;
-            helper.component.cancel();
-            expect(helper.component.popupOpen).toBeFalsy();
-        });
     });
 
 });

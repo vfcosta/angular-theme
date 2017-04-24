@@ -1,10 +1,10 @@
-import { Input, Inject, Component } from "ng-forward";
+import { Input, Inject, Component } from "@angular/core";
 
 declare var _: any;
 
 @Component({
     selector: "noosfero-highlights-block",
-    templateUrl: 'app/layout/blocks/highlights/highlights-block.html',
+    template: require('app/layout/blocks/highlights/highlights-block.html'),
 })
 export class HighlightsBlockComponent {
 
@@ -38,4 +38,8 @@ export class HighlightsBlockComponent {
         return !(<any>this.block.settings).navigation;
     }
 
+    updateLink(i: number, item: any) {
+        this.images[i].title = item.name;
+        this.images[i].address = item.address;
+    }
 }

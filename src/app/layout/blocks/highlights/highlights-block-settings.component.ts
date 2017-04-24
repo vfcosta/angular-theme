@@ -1,13 +1,12 @@
-import { Input, Inject, Component } from "ng-forward";
+import { Input, Inject, Component, OnInit } from "@angular/core";
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 
 @Component({
     selector: "noosfero-highlights-block-settings",
-    templateUrl: 'app/layout/blocks/highlights/highlights-block-settings.html',
+    template: require('app/layout/blocks/highlights/highlights-block-settings.html')
 })
-@Inject(TranslatorService, BlockService, "$scope", "Upload")
-export class HighlightsBlockSettingsComponent {
+export class HighlightsBlockSettingsComponent implements OnInit {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
@@ -15,20 +14,13 @@ export class HighlightsBlockSettingsComponent {
     isCollapsed: any;
     images: any;
 
-    constructor(private translatorService: TranslatorService,
-        private blockService: BlockService,
-        private $scope: ng.IScope,
-        private Upload: angular.angularFileUpload.IUploadService) {
-    }
+    constructor(@Inject("translatorService") private translatorService: TranslatorService,
+        @Inject("blockService") private blockService: BlockService) { }
 
     ngOnInit() {
         this.isCollapsed = true;
         this.images = (<any>this.block.api_content || {}).slides || [];
-        this.$scope.$watch(() => {
-            return this.images;
-        }, () => {
-            (<any>this.block.settings).block_images = this.images;
-        });
+        (<any>this.block.settings).block_images = this.images;
     }
 
     addSlide() {
@@ -44,34 +36,14 @@ export class HighlightsBlockSettingsComponent {
         (<any>this.block)['active'] = index;
     }
 
-    fileSelected(file: any, slide: any, errFiles: any) {
-        if (!file) return;
-        this.Upload.dataUrl(file, true).then((dataUrl: any) => {
-            let base64ImagesJson = [this.getBase64ImageJson(dataUrl, file)];
-            this.blockService.uploadImages(this.block, base64ImagesJson).then((result: any) => {
-                this.block.images = result.data;
-                if (result.data.length > 0) {
-                    let image = result.data[result.data.length - 1];
-                    slide.image_id = image.id;
-                    slide.image_src = image.url;
-                }
-            });
+    upload(data: any, slide: any) {
+        this.blockService.uploadImages(this.block, [data]).then((result: any) => {
+            this.block.images = result.data.images;
+            if (this.block.images.length > 0) {
+                let image = this.block.images[this.block.images.length - 1];
+                slide.image_id = image.id;
+                slide.image_src = image.url;
+            }
         });
-    }
-
-    getBase64ImageJson(dataUrl: any, file: any): any {
-        return {
-            tempfile: this.getData(dataUrl),
-            filename: this.getImageName(file.name),
-            type: file.type
-        };
-    }
-
-    getImageName(name: any): string {
-        return this.block.id + "_" + name;
-    }
-
-    getData(dataUrl: any): string {
-        return dataUrl.substring(dataUrl.indexOf('base64,') + 7);
     }
 }

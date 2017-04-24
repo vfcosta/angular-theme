@@ -316,6 +316,7 @@
     "profile.edition.identifier.not_available": "O nome de usuário já está sendo utilizado",
     "profile.edition.identifier.change_message": "A url do perfil será modificada",
     "profile.edition.identifier.is-not-available": "Nome de usuário não disponível",
+    "profile.edition.identifier.blank": "O nome do usuário deve ser preenchido",
     "profile.edition.birth_date": "Data de nascimento",
     "profile.edition.description": "Descrição",
     "myprofile.configuration.personal_data": "Dados pessoais",

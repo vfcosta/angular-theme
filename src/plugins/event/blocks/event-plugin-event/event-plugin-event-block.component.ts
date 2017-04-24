@@ -1,23 +1,24 @@
-import {Component, Inject, Input} from "ng-forward";
+import {Component, Inject, Input} from "@angular/core";
 import {BlockService} from "./../../../../lib/ng-noosfero-api/http/block.service";
 import {Arrays} from "./../../../../lib/util/arrays";
 
 @Component({
     selector: "noosfero-event-plugin-event-block",
-    templateUrl: 'app/layout/blocks/event-plugin-event/event-plugin-event-block.html'
+    template: require('plugins/event/blocks/event-plugin-event/event-plugin-event-block.html')
 })
-@Inject(BlockService, "$state", "$scope")
 export class EventPluginEventBlockComponent {
 
-    @Input() block: any;
-    @Input() owner: any;
+    @Input() block: noosfero.Block;
+    @Input() owner: noosfero.Profile;
 
-    profile: any;
     events: any;
     options: any;
     monthEvents: any;
 
-    constructor(private blockService: BlockService, private $state: any, private $scope: any) { }
+    constructor(
+        @Inject("blockService") private blockService: BlockService,
+        @Inject("$state") private $state: any,
+        @Inject("$scope") private $scope: any) { }
 
     populateMonthEvents(month: number, year: number) {
         let events: any = [];
@@ -29,18 +30,16 @@ export class EventPluginEventBlockComponent {
             }
         });
         this.monthEvents = events.slice();
-        this.$scope.$apply();
     }
 
     ngOnInit() {
-        this.profile = this.owner;
         this.events = [];
         this.monthEvents = [];
-        const that = this;
 
         this.options = {
             changeMonth(month: any, year: number) {
-                that.populateMonthEvents(month.index, year);
+                this.populateMonthEvents(month.index, year);
+                this.$scope.$apply();
             }
         };
 

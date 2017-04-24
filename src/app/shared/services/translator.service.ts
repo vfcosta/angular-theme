@@ -43,8 +43,8 @@ export class TranslatorService {
         return this.$translate.use(language);
     }
 
-    translate(text: string) {
-        return this.$translate.instant(text);
+    translate(text: string, interpolateParams?: any, interpolationId?: string) {
+        return this.$translate.instant(text, interpolateParams, interpolationId);
     }
 
     private changeMomentLocale(language: string) {

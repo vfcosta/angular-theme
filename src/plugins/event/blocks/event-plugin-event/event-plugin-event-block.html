@@ -1,0 +1,7 @@
+<ul class="event-plugin-event">
+  <li *ngFor="let event of monthEvents">
+    <a [href]="event.view_url | noosferoUrl">
+      <span>{{event.label}}</span>
+    </a>
+  </li>
+</ul>

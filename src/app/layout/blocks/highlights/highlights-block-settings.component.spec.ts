@@ -1,88 +1,80 @@
-import { Component } from 'ng-forward';
+import { DragulaModule } from 'ng2-dragula';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { HighlightsBlockSettingsComponent } from './highlights-block-settings.component';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
-
-const htmlTemplate: string = '<noosfero-highlights-block-settings  [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-highlights-block-settings>';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Highlights Block Settings Component", () => {
 
     let expectedData = "iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAgAElEQ…Cm2OLHvfdNPte3zrH709Q0esN1LPQ0t7DL696ERpu+9/8BVPLIpElf7VYAAAAASUVORK5CYII=";
     let testDataUrl = "data:image/png;base64," + expectedData;
-    let helper: ComponentTestHelper<HighlightsBlockSettingsComponent>;
-    let blockService = jasmine.createSpyObj("BlockService", ["uploadImages"]);
     let upload = jasmine.createSpyObj("Upload", ["dataUrl"]);
+    let mocks = helpers.getMocks();
+    let fixture: ComponentFixture<HighlightsBlockSettingsComponent>;
+    let component: HighlightsBlockSettingsComponent;
 
-    beforeEach(() => {
-        angular.mock.module("templates");
-    });
+    beforeEach(async(() => {
+        spyOn(mocks.blockService, 'uploadImages').and.returnValue(Promise.resolve({data: { images: []}}));
 
-    beforeEach((done) => {
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [HighlightsBlockSettingsComponent],
-            properties: {
-                block: {
-                    id: 1,
-                    settings: { interval: 2, shuffle: true },
-                    api_content: { slides: [{ image_src: "image.png" }] }
-                }
-            },
+        TestBed.configureTestingModule({
+            declarations: [HighlightsBlockSettingsComponent, TranslatePipe],
             providers: [
-                helpers.createProviderToValue('TranslatorService', helpers.mocks.translatorService),
-                helpers.createProviderToValue('BlockService', blockService),
-                helpers.createProviderToValue('Upload', upload)
-            ]
+                { provide: "blockService", useValue: mocks.blockService },
+                { provide: "translatorService", useValue: mocks.translatorService }
+            ],
+            schemas: [NO_ERRORS_SCHEMA],
+            imports: [DragulaModule]
+        }).compileComponents().then(() => {
+            fixture = TestBed.createComponent(HighlightsBlockSettingsComponent);
+            component = fixture.componentInstance;
+            component.block = <any>{
+                id: 1,
+                settings: { interval: 2, shuffle: true },
+                api_content: { slides: [{ image_src: "image.png" }] }
+            };
         });
-        helper = new ComponentTestHelper<HighlightsBlockSettingsComponent>(cls, done);
-    });
+    }));
 
     it("display block settings", () => {
-        expect(helper.all(".highlights-block-settings").length).toEqual(1);
+        expect(fixture.debugElement.queryAll(By.css(".highlights-block-settings")).length).toEqual(1);
     });
 
     it("add an empty slide", () => {
-        helper.component.addSlide();
-        helper.detectChanges();
-        expect(helper.all(".highlights-block-settings .slide .thumbnail img").length).toEqual(2);
+        fixture.detectChanges();
+        component.addSlide();
+        fixture.detectChanges();
+        expect(fixture.debugElement.queryAll(By.css(".highlights-block-settings .slide .thumbnail img")).length).toEqual(2);
     });
 
     it("remove slide", () => {
-        helper.component.removeSlide(0);
-        helper.detectChanges();
-        expect(helper.all(".highlights-block-settings .slide .thumbnail img").length).toEqual(0);
+        fixture.detectChanges();
+        expect(fixture.debugElement.queryAll(By.css(".highlights-block-settings .slide .thumbnail img")).length).toEqual(1);
+        component.removeSlide(0);
+        fixture.detectChanges();
+        expect(fixture.debugElement.queryAll(By.css(".highlights-block-settings .slide .thumbnail img")).length).toEqual(0);
     });
 
     it("update active slide on selection", () => {
-        helper.component.selectSlide(1);
-        expect((<any>helper.component.block).active).toEqual(1);
+        component.selectSlide(1);
+        expect((<any>component.block).active).toEqual(1);
     });
 
     it("default to empty array when there is no block images", () => {
-        helper.component.block.api_content = { slides: null };
-        helper.component.ngOnInit();
-        expect(helper.component.images).toEqual([]);
+        component.block.api_content = { slides: null };
+        component.ngOnInit();
+        expect(component.images).toEqual([]);
     });
 
     it("do nothing when no file was selected", () => {
-        helper.component.fileSelected(null, null, null);
+        component.upload(null, null);
         expect(upload.dataUrl).not.toHaveBeenCalled();
     });
 
     it("upload image when a file was selected", () => {
-        upload.dataUrl = jasmine.createSpy("dataUrl").and.returnValue(helpers.mocks.promiseResultTemplate(testDataUrl));
-        blockService.uploadImages = jasmine.createSpy("uploadImages").and.returnValue(helpers.mocks.promiseResultTemplate({ data: { images: [{ id: 10, url: "url" }] } }));
-        helper.component.fileSelected({ name: "img.png" }, {}, {});
-        expect(blockService.uploadImages).toHaveBeenCalled();
-    });
-
-    it("get data", () => {
-        let result = helper.component.getData(testDataUrl);
-        expect(result).toBe(expectedData);
-    });
-
-    it("get image name", () => {
-        let result = helper.component.getImageName("image");
-        expect(result).toBe("1_image");
+        component['blockService'].uploadImages = jasmine.createSpy("uploadImages").and.returnValue(helpers.mocks.promiseResultTemplate({ data: { images: [{ id: 10, url: "url" }] } }));
+        component.upload(testDataUrl, {});
+        expect(component['blockService'].uploadImages).toHaveBeenCalled();
     });
 });

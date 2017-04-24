@@ -1,8 +1,8 @@
-import { Component, Input, Inject } from "ng-forward";
+import { Component, Input, Inject } from "@angular/core";
 
 @Component({
     selector: "noosfero-link-list-block",
-    templateUrl: "app/layout/blocks/link-list/link-list-block.html"
+    template: require("app/layout/blocks/link-list/link-list-block.html")
 })
 export class LinkListBlockComponent {
 
@@ -13,10 +13,31 @@ export class LinkListBlockComponent {
     links: any;
     newIndex = -1;
 
+    dragulaOptions: any;
+
+    constructor() { }
+
     ngOnInit() {
+        this.dragulaOptions = {
+            invalid: () => {
+                return !this.designMode;
+            }
+        };
+
         if (this.block && this.block.settings) {
             this.links = this.block.settings.links;
         }
+    }
+
+
+    updateLink(i: number, item: any) {
+        this.links[i].name = item.name;
+        this.links[i].address = item.address;
+    }
+
+
+    updateIcon(i: number, icon: string) {
+        this.links[i].icon = icon;
     }
 
     addLink() {

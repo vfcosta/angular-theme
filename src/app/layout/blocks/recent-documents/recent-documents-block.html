@@ -8,13 +8,13 @@
 
         <div class="subheader">
           <span class="time">
-            <i class="fa fa-clock-o"></i> <span>{{card.created_at | amTimeAgo}}</span>
+            <i class="fa fa-clock-o"></i> <span>{{card.created_at | dateFormat | amTimeAgo}}</span>
           </span>
         </div>
       </div>
       <img *ngIf="card.image" [alt]="card.image.filename" [src]="card.image.url" class="img-responsive article-image">
       <div class="post-lead">
-        {{card.body | shorten: 100: '...' }}
+        {{(card.body || '') | stripTags |shorten: 100: '...' }}
       </div>
   </div>
 </div>

@@ -1,6 +1,6 @@
-<div class="center-block profile-image-block">
-  <a ui-sref="main.profile.info({profile: ctrl.owner.identifier})">
-    <noosfero-profile-image [profile]="ctrl.owner" [editable]="true" [edit-class]="'profile-image-block-editable'"></noosfero-profile-image>
+<div class="profile-image-block">
+  <a uiSref="main.profile.info" [uiParams]="{profile: owner.identifier}">
+    <noosfero-profile-image [profile]="owner" [editable]="true"></noosfero-profile-image>
   </a>
-  <profile-join [profile]="ctrl.owner"></profile-join>
+  <profile-join [profile]="owner"></profile-join>
 </div>

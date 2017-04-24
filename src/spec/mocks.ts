@@ -32,6 +32,10 @@ class ScopeWithEvents {
             });
         }
     }
+
+    public $watch(fn1: Function, fn2: Function) {
+
+    }
 }
 export var mocks: any = {
     scopeWithEvents: (): ScopeWithEvents => new ScopeWithEvents(),
@@ -544,7 +548,8 @@ export function getMocks() {
         },
         blockService: {
             getBlock: (id: number) => { },
-            getApiContent: (block: noosfero.Block, params?: any) => { return Promise.resolve({}); }
+            getApiContent: (block: noosfero.Block, params?: any) => { return Promise.resolve({}); },
+            uploadImages: () => {}
         },
         noosferoTemplateFilter: (text: string, options: any) => {
             return text;

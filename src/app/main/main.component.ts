@@ -19,7 +19,6 @@ import { BlockContentComponent } from "../layout/blocks/block-content.component"
 import { BlockSettingsComponent } from "../layout/blocks/block-settings.component";
 import { BlockComponent } from "../layout/blocks/block.component";
 import { EnvironmentHomeComponent } from "../environment/environment-home.component";
-import { DisplayContentBlockComponent } from "../layout/blocks/display-content/display-content-block.component";
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
 import { MenuBlockComponent } from "../layout/blocks/menu/menu-block.component";
 import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
@@ -28,12 +27,10 @@ import { ProfileSummaryComponent } from "../profile/summary/profile-summary.comp
 import { ProfileHeaderComponent } from "../profile/header/profile-header.component";
 import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
-import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
 import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
 import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
-import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
 
 import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
 import { NoosferoUrl } from "../shared/pipes/noosfero-url.filter";
@@ -129,15 +126,13 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
-        BlockSettingsComponent, DisplayContentBlockComponent,
-        LinkListBlockComponent, ProfileComponent,
-        MainBlockComponent, Navbar, ProfileImageBlockComponent,
-        NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
+        BlockSettingsComponent,
+        ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         BlockComponent, RegisterComponent, TasksMenuComponent,
-        EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
+        ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
-        HighlightsBlockComponent, EditableDirective, EditableLinkComponent, IconPickerComponent, HighlightsBlockSettingsComponent,
+        EditableDirective,
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
@@ -146,7 +141,7 @@ export class EnvironmentContent {
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",
-        "noosfero.init", "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if",
+        "noosfero.init", "ngFileUpload", "ngImgCrop", "angular-ladda", "focus-if",
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",

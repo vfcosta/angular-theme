@@ -1,7 +1,4 @@
 <div class="profile-images-block">
-  leandro
-  {{images}}
-  foi
   <div *ngFor="let image of images" class="image-block">
     <a [href]="image.view_url | noosferoUrl" title="{{image.title}}"  class="thumbnail" >
       <img [alt]="image.title" [src]="image.path" class="img-responsive">

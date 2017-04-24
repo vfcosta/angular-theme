@@ -1,6 +1,13 @@
 import { TagCloudModule } from 'angular-tag-cloud-module';
 import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
+import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
+import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
+import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
+import { NoosferoTemplatePipe } from './shared/pipes/noosfero-template.ng2.filter';
+import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
+import { EditableLinkComponent } from './shared/components/editable-link/editable-link.component';
+import { LinkListBlockComponent } from './layout/blocks/link-list/link-list-block.component';
 import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
@@ -24,6 +31,7 @@ import { ImageUploadCropComponent } from './shared/components/image-upload/image
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
 import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
+import { ProfileImageBlockComponent } from './layout/blocks/profile-image/profile-image-block.component';
 import { CommunityMembersComponent } from './profile/community-members/community-members.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
@@ -40,12 +48,13 @@ import { UpgradeUtils } from "./shared/upgrade-utils";
 import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
-import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule } from 'ngx-bootstrap';
+import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InviteComponent } from './profile/community-members/invite.component';
 import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
 import * as plugins from "../plugins";
@@ -65,7 +74,11 @@ import * as plugins from "../plugins";
         PopoverModule.forRoot(),
         DragulaModule,
         TypeaheadModule.forRoot(),
-        TagCloudModule
+        TagCloudModule,
+        BsDropdownModule.forRoot(),
+        CarouselModule.forRoot(),
+        CollapseModule.forRoot(),
+        BrowserAnimationsModule,
     ],
     exports: [TranslatePipe],
     declarations: [
@@ -80,6 +93,7 @@ import * as plugins from "../plugins";
         CommunitiesBlockComponent,
         MembersBlockComponent,
         PeopleBlockComponent,
+        ProfileImageBlockComponent,
         CommunityMembersComponent,
         UiSrefDirective,
         ProfileFastEditionComponent,
@@ -107,7 +121,14 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         PermissionNg2Directive,
         LoginBlockComponent,
-        TagsBlockComponent
+        TagsBlockComponent,
+        LinkListBlockComponent,
+        EditableLinkComponent,
+        IconPickerComponent,
+        NoosferoTemplatePipe,
+        HighlightsBlockComponent,
+        DisplayContentBlockComponent,
+        HighlightsBlockSettingsComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -120,6 +141,7 @@ import * as plugins from "../plugins";
         CommunitiesBlockComponent,
         MembersBlockComponent,
         PeopleBlockComponent,
+        ProfileImageBlockComponent,
         CommunityMembersComponent,
         ProfileFastEditionComponent,
         HtmlEditorComponent,
@@ -141,7 +163,14 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         ProfileJoinComponent,
         LoginBlockComponent,
-        TagsBlockComponent
+        TagsBlockComponent,
+        LinkListBlockComponent,
+        EditableLinkComponent,
+        IconPickerComponent,
+        HighlightsBlockComponent,
+        DisplayContentBlockComponent,
+        HighlightsBlockComponent,
+        HighlightsBlockSettingsComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

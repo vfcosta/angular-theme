@@ -1,22 +1,18 @@
-import { TestComponentBuilder } from 'ng-forward/cjs/testing/test-component-builder';
-import { Provider, provide } from 'ng-forward';
-import { ComponentTestHelper, createClass } from './../../../../spec/component-test-helper';
-import { providers } from 'ng-forward/cjs/testing/providers';
+import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
+import { NgPipesModule } from 'ngx-pipes';
+import { MomentModule } from 'angular2-moment';
+import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
 import { DisplayContentBlockComponent } from './display-content-block.component';
 import * as helpers from './../../../../spec/helpers';
-
-const htmlTemplate: string = '<noosfero-display-content-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-display-content-block>';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { By } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
-
     describe("Display Content Block Component", () => {
-        let state = jasmine.createSpyObj("state", ["go"]);
-        let providers = [
-            provide('ArticleService', {
-                useValue: helpers.mocks.articleService
-            }),
-            provide('$state', { useValue: state })
-        ].concat(helpers.provideFilters("translateFilter"));
+        let fixture: ComponentFixture<DisplayContentBlockComponent>;
+        let component: DisplayContentBlockComponent;
 
         let sections: noosfero.Section[] = [
             { value: 'abstract', checked: 'abstract' },
@@ -27,42 +23,47 @@ describe("Components", () => {
             sections: sections
         };
 
-        let helper: ComponentTestHelper<DisplayContentBlockComponent>;
+        let articles = [
+            {name: 'article 1', title: 'article 1', path: 'article-1', abstract: '', publish_date: '2016', body: '', author: '', created_at: '2016'},
+            {name: 'article 2', title: 'article 1', path: 'article-2', abstract: '', publish_date: '2016', body: '', author: '', created_at: '2016'}
+        ];
+        let articleService = jasmine.createSpyObj("ArticleService", ["getByProfile"]);
+        articleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: articles }));
 
-        beforeEach(angular.mock.module("templates"));
-
-        /**
-         * The beforeEach procedure will initialize the helper and parse
-         * the component according to the given providers. Unfortunetly, in
-         * this mode, the providers and properties given to the construtor
-         * can't be overriden.
-        */
-        beforeEach((done) => {
-            // Create the component bed for the test. Optionally, this could be done
-            // in each test if one needs customization of these parameters per test
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [DisplayContentBlockComponent],
-                providers: providers,
-                properties: {
-                    block: {
-                        settings: settings
-                    }
-                }
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                imports: [NgPipesModule, MomentModule],
+                declarations: [DisplayContentBlockComponent, TranslatePipe, UiSrefDirective, DateFormatPipe],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                providers: [
+                    { provide: "articleService", useValue: articleService },
+                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                ]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(DisplayContentBlockComponent);
+                component = fixture.componentInstance;
+                component.owner = <noosfero.Profile>{ id: 1, name: 'profile-name', identifier: 'profile-name' };
+                component.block = <noosfero.Block>{id: 1, type: 'DisplayContentBlock', settings: settings};
+            }).catch( error => {
+                console.log(error);
             });
-            helper = new ComponentTestHelper<DisplayContentBlockComponent>(cls, done);
-        });
+        }));
 
         it("verify abstract is displayed", () => {
-            expect(helper.all("div[ng-bind-html|='article.abstract']")[0]).not.toBeNull;
+            expect(all("div[innerHtml|='article.abstract']")[0]).not.toBeNull;
         });
 
         it("verify title is displayed", () => {
-            expect(helper.all("div > h5")[0]).not.toBeNull;
+            expect(all("div > h5")[0]).not.toBeNull;
         });
 
         it("verify body is not displayed", () => {
-            expect(helper.all("div[ng-bind-html|='article.body']")[0]).toBeNull;
+            expect(all("div[innerHtml|='article.body']")[0]).toBeNull;
         });
+
+        function all(selector: string) {
+            let compiled = fixture.debugElement;
+            return compiled.queryAll(By.css(selector));
+        }
     });
 });

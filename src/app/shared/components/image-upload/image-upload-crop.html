@@ -2,7 +2,7 @@
   <div class="crop-area">
     <img-cropper #imageCropper [image]="data" [settings]="cropperSettings"></img-cropper>
   </div>
-  <div class='cropped-image'>
-    <img *ngIf="data.image" [src]="data.image" [width]="cropperSettings.croppedWidth" [height]="cropperSettings.croppedHeight"/>
+  <div class="cropped-image">
+    <img *ngIf="data.image" [src]="data.image" class="img-responsive"/>
   </div>
 </form>

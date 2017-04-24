@@ -1,7 +1,14 @@
 import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
+import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
+import { EventPluginEventBlockComponent } from './../plugins/event/blocks/event-plugin-event/event-plugin-event-block.component';
+import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
+import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { PersonTagsPluginInterestsBlockComponent } from './../plugins/person_tags/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component';
 import { RecentActivitiesPluginActivitiesBlockComponent } from './../plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
+import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
+import { EditableLinkComponent } from './shared/components/editable-link/editable-link.component';
+import { LinkListBlockComponent } from './layout/blocks/link-list/link-list-block.component';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
 import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
@@ -44,6 +51,7 @@ import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { RecentDocumentsBlockComponent } from "./layout/blocks/recent-documents/recent-documents-block.component";
+import { ProfileImageBlockComponent } from "./layout/blocks/profile-image/profile-image-block.component";
 
 // Plugins imports
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
@@ -107,6 +115,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('noosferoProfileImagesPluginProfileImagesBlock',
         downgradeComponent({ component: ProfileImagesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
+    directive('noosferoProfileImageBlock',
+    downgradeComponent({ component: ProfileImageBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
     directive('profileFastEdition',
     downgradeComponent({ component: ProfileFastEditionComponent, inputs: ['profile', 'environment'], outputs: ['finished'] }) as angular.IDirectiveFactory
     ).
@@ -166,6 +177,27 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoTagsCloudBlock',
     downgradeComponent({ component: TagsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoLinkListBlock',
+    downgradeComponent({ component: LinkListBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoEditableLink',
+    downgradeComponent({ component: EditableLinkComponent, inputs: ['name', 'address', 'designMode', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoIconPicker',
+    downgradeComponent({ component: IconPickerComponent, inputs: ['currentIcon'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoHighlightsBlock',
+    downgradeComponent({ component: HighlightsBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoDisplayContentBlock',
+    downgradeComponent({ component: DisplayContentBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoHighlightsBlockSettings',
+    downgradeComponent({ component: HighlightsBlockSettingsComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoEventPluginEventBlock',
+        downgradeComponent({ component: EventPluginEventBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [
