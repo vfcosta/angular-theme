@@ -1,11 +1,11 @@
 <div class="section section-block" style="{{colors()}}">
   <div class="row">
-    <div class="section_image_block">
+    <div class="section-image-wrapper">
         <div class="" ng-mouseenter="showChange(true)" ng-mouseleave="showChange(false)">
-          <img *ngIf="!designMode" [src]="getSectionImage().url" class="img-responsive section_image img-circle">
+          <img *ngIf="!designMode" [src]="getSectionImage().url" class="img-responsive section-image img-circle">
           <div class="hovereffect" *ngIf="designMode">
               <i *ngIf="!getSectionImage()" class="fa fa-users fa-5x profile-image"></i>
-              <img *ngIf="getSectionImage()" [alt]='"profile.image.description" | translate' [src]="getSectionImage().url" class="img-responsive section_image img-circle">
+              <img *ngIf="getSectionImage()" [alt]='"profile.image.description" | translate' [src]="getSectionImage().url" class="img-responsive section-image img-circle">
               <div class='container-camera'>
                 <image-upload #imageUpload (finished)="upload($event)"></image-upload>
               </div>
@@ -18,11 +18,11 @@
           <form (ngSubmit)="save()">
             <div class="form">
               <div class="form-group">
-                <label class="control-label">{{"edit.popover.section_name" | translate}}</label>
+                <label class="control-label">{{"section_block.name" | translate}}</label>
                 <input type="text" class="form-control input-sm" [(ngModel)]="modifiedLink.name" #name="ngModel" id="name" name="name">
               </div>
               <div class="form-group">
-                <label class="control-label">{{"edit.popover.section_description" | translate}}</label>
+                <label class="control-label">{{"section_block.description" | translate}}</label>
                 <input type="text" class="form-control input-sm" [(ngModel)]="modifiedLink.description" #address="ngModel" id="description" name="description">
               </div>
               <div class="actions">
@@ -34,13 +34,13 @@
         </ng-template>
 
         <span class="name">
-          {{block.settings.name || ("edit.popover.section_name" | translate)}}
+          {{block.settings.name || ("section_block.name" | translate)}}
         </span>
         <span class="description">
-          {{block.settings.description || ("edit.popover.section_description" | translate)}}
+          {{block.settings.description || ("section_block.description" | translate)}}
         </span>
         <a *ngIf="designMode" href="#" #popover="bs-popover" triggers="click"
-        [popover]="popoverTemplate" class="profile-edition-link" placement="right">
+        [popover]="popoverTemplate" placement="right">
           <i class="edit-icon fa fa-pencil fa-fw fa-lg"></i>
         </a>
       </div>

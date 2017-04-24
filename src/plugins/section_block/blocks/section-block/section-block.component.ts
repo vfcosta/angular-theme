@@ -1,8 +1,4 @@
-// import { Component, Inject, Input } from "ng-forward";
-// import { SectionImageEditorComponent } from "./section-image-editor.component";
 import { Component, Inject, Input, ViewChild } from '@angular/core';
-// import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmitter } from '@angular/core';
-
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
@@ -13,33 +9,16 @@ export class SectionBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
-    @Input() popupOpen = false;
     @Input() designMode: boolean;
 
-    //Leandro atributtes
-    profile: any;
     @ViewChild("popover") popover;
     modifiedLink: any;
-
-
-    // save() {
-    //     this.popupOpen = false;
-    // }
-    //
-    // cancel() {
-    //     this.popupOpen = false;
-    // }
-
 
     font_color: string;
     background_color: string;
 
-    picFile: any;
-    modalInstance: any;
-
     constructor( @Inject('blockService') private blockService: BlockService,
         @Inject("$scope") private $scope: ng.IScope) {
-        this.profile = this.owner;
     }
 
     ngOnInit() {
@@ -77,53 +56,19 @@ export class SectionBlockComponent {
         return css_style;
     }
 
-    // fileSelected(file: any, errFiles: any) {
-    //     if (file) {
-    //         this.picFile = file;
-    //         this.modalInstance = this.$uibModal.open({
-    //             templateUrl: 'app/shared/components/image-upload/image-upload.html',
-    //             controller: SectionImageEditorComponent,
-    //             controllerAs: 'ctrl',
-    //             scope: this.$scope,
-    //             bindToController: true,
-    //             backdrop: 'static',
-    //             resolve: {
-    //                 picFile: this.picFile,
-    //                 block: this.block,
-    //                 blockService: this.blockService
-    //             }
-    //         });
-    //     }
-    // }
-
     upload(data: any) {
-        console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww', data);
         this.blockService.uploadImages(this.block, [data]).then((result: noosfero.RestResult<noosfero.Block>) => {
-
-
             this.block = result.data;
-            // this.block.images = result.data;
-            console.log('upload da imagem realizaod', this.block.images);
-
-            // this.modalInstance.close(name);
         });
-    }
-    updateLink(i: any, item: any) {
-        console.log('atualizando link', i, item);
-        // this.images[i].title = item.name;
-        // this.images[i].address = item.address;
     }
 
     save() {
-        console.log('salvando elementos');
         this.block.settings.name = this.modifiedLink.name;
         this.block.settings.description = this.modifiedLink.description;
-        // this.linkChange.emit(this.modifiedLink);
         this.popover.hide();
     }
 
     cancel() {
-        console.log('cancelando salvar');
         this.copyLink();
         this.popover.hide();
     }
