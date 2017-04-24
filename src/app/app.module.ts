@@ -162,7 +162,6 @@ import * as plugins from "../plugins";
         LinkListBlockComponent,
         EditableLinkComponent,
         IconPickerComponent,
-        HighlightsBlockComponent,
         DisplayContentBlockComponent,
         HighlightsBlockComponent,
         HighlightsBlockSettingsComponent,
