@@ -1,3 +1,4 @@
+import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { TagCloudModule } from 'angular-tag-cloud-module';
@@ -125,6 +126,7 @@ import * as plugins from "../plugins";
         IconPickerComponent,
         NoosferoTemplatePipe,
         HighlightsBlockComponent,
+        DisplayContentBlockComponent,
         HighlightsBlockSettingsComponent,
         TagsBlockComponent,
     ].concat(plugins.ng2MainComponents),
@@ -164,6 +166,8 @@ import * as plugins from "../plugins";
         LinkListBlockComponent,
         EditableLinkComponent,
         IconPickerComponent,
+        HighlightsBlockComponent,
+        DisplayContentBlockComponent,
         HighlightsBlockComponent,
         HighlightsBlockSettingsComponent,
         TagsBlockComponent,

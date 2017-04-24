@@ -1,11 +1,10 @@
-import { Input, Inject, Component } from "ng-forward";
+import { Input, Inject, Component } from "@angular/core";
 import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
     selector: "noosfero-display-content-block",
-    templateUrl: 'app/layout/blocks/display-content/display-content-block.html',
+    template: require('app/layout/blocks/display-content/display-content-block.html')
 })
-@Inject(ArticleService, "$state")
 export class DisplayContentBlockComponent {
 
     @Input() block: noosfero.Block;
@@ -17,15 +16,15 @@ export class DisplayContentBlockComponent {
 
     documentsLoaded: boolean = false;
 
-    constructor(private articleService: ArticleService, private $state: ng.ui.IStateService) { }
+    constructor(@Inject('articleService') private articleService: ArticleService) { }
 
     ngOnInit() {
         this.profile = this.owner;
         let limit = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 5;
-        this.articleService.getByProfile(this.profile, { content_type: 'TinyMceArticle', per_page: limit })
+        this.articleService.getByProfile(this.profile, { per_page: limit })
             .then((result: noosfero.RestResult<noosfero.Article[]>) => {
                 this.articles = <noosfero.Article[]>result.data;
-                this.sections = this.block.settings.sections;
+                this.sections = this.block.settings.sections || [<noosfero.Section>{ value: 'title' }, <noosfero.Section>{ value: 'publish_date' }, <noosfero.Section>{ value: 'abstract' }];
                 this.documentsLoaded = true;
             });
     }
@@ -35,7 +34,7 @@ export class DisplayContentBlockComponent {
      *
      */
     private display(section_name: string): boolean {
-        let section: noosfero.Section = this.sections.find(function(section: noosfero.Section) {
+        let section: noosfero.Section = this.sections.find( section => {
             return section.value === section_name;
         });
         return section !== undefined && section.checked !== undefined;

@@ -1,4 +1,8 @@
+<<<<<<< 6e2f7392f9f1a9ca729e2765271ce1f6b0c6fb74
 <<<<<<< d1b19be26a36493ce1a880ae3dc134884453ea41
+=======
+import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
+>>>>>>> Migrate of display content block to angular 2
 import { EventPluginEventBlockComponent } from './../plugins/event/blocks/event-plugin-event/event-plugin-event-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
@@ -189,6 +193,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoHighlightsBlock',
     downgradeComponent({ component: HighlightsBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoDisplayContentBlock',
+    downgradeComponent({ component: DisplayContentBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoHighlightsBlockSettings',
     downgradeComponent({ component: HighlightsBlockSettingsComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
