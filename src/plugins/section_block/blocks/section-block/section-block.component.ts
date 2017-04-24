@@ -17,9 +17,7 @@ export class SectionBlockComponent {
     font_color: string;
     background_color: string;
 
-    constructor( @Inject('blockService') private blockService: BlockService,
-        @Inject("$scope") private $scope: ng.IScope) {
-    }
+    constructor( @Inject('blockService') private blockService: BlockService) { }
 
     ngOnInit() {
         if (this.block && this.block.settings) {

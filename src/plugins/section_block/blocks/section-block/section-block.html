@@ -1,8 +1,8 @@
-<div class="section section-block" style="{{colors()}}">
+<div class="section section-block" style="colors()">
   <div class="row">
     <div class="section-image-wrapper">
         <div class="" ng-mouseenter="showChange(true)" ng-mouseleave="showChange(false)">
-          <img *ngIf="!designMode" [src]="getSectionImage().url" class="img-responsive section-image img-circle">
+          <img *ngIf="!designMode && getSectionImage()" [src]="getSectionImage().url" class="img-responsive section-image img-circle">
           <div class="hovereffect" *ngIf="designMode">
               <i *ngIf="!getSectionImage()" class="fa fa-users fa-5x profile-image"></i>
               <img *ngIf="getSectionImage()" [alt]='"profile.image.description" | translate' [src]="getSectionImage().url" class="img-responsive section-image img-circle">
@@ -33,7 +33,7 @@
           </form>
         </ng-template>
 
-        <span class="name">
+        <span class="name">          
           {{block.settings.name || ("section_block.name" | translate)}}
         </span>
         <span class="description">
