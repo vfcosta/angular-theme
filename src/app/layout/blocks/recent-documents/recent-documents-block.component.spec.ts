@@ -1,7 +1,8 @@
+import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { RecentDocumentsBlockComponent } from './recent-documents-block.component';
 import * as helpers from "./../../../../spec/helpers";
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NgPipesModule } from 'ngx-pipes';
 import { MomentModule } from 'angular2-moment';
@@ -10,7 +11,7 @@ describe("Components", () => {
     describe("Recent Documents Block Component", () => {
         let mocks = helpers.getMocks();
         let fixture: ComponentFixture<RecentDocumentsBlockComponent>;
-        let component: RecentDocumentsBlockComponent;        
+        let component: RecentDocumentsBlockComponent;
         let article = <noosfero.Article>{ name: "article1" };
 
         beforeEach(async(() => {
@@ -19,13 +20,13 @@ describe("Components", () => {
             spyOn(mocks.$state, 'go');
 
             TestBed.configureTestingModule({
-                declarations: [RecentDocumentsBlockComponent, TranslatePipe],
+                declarations: [RecentDocumentsBlockComponent, TranslatePipe, DateFormatPipe],
                 providers: [
                     { provide: "blockService", useValue: mocks.blockService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "articleService", useValue: mocks.articleService }
                 ],
-                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                schemas: [NO_ERRORS_SCHEMA],
                 imports: [NgPipesModule, MomentModule]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(RecentDocumentsBlockComponent);
