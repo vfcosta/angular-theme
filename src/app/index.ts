@@ -1,14 +1,8 @@
-<<<<<<< 6e2f7392f9f1a9ca729e2765271ce1f6b0c6fb74
-<<<<<<< d1b19be26a36493ce1a880ae3dc134884453ea41
-=======
+import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
->>>>>>> Migrate of display content block to angular 2
 import { EventPluginEventBlockComponent } from './../plugins/event/blocks/event-plugin-event/event-plugin-event-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
-=======
-import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
->>>>>>> refactoring tags block component
 import { PersonTagsPluginInterestsBlockComponent } from './../plugins/person_tags/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component';
 import { RecentActivitiesPluginActivitiesBlockComponent } from './../plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
@@ -181,7 +175,6 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('noosferoInterestTagsBlock',
     downgradeComponent({ component: PersonTagsPluginInterestsBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     ).
-<<<<<<< d1b19be26a36493ce1a880ae3dc134884453ea41
     directive('noosferoLinkListBlock',
     downgradeComponent({ component: LinkListBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     ).
@@ -202,10 +195,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoEventPluginEventBlock',
         downgradeComponent({ component: EventPluginEventBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
-=======
+    ).
     directive('noosferoTagsCloudBlock',
     downgradeComponent({ component: TagsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
->>>>>>> refactoring tags block component
     );
 
 export let noosferoApp = bundle('main', MainComponent, [
