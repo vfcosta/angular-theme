@@ -1,4 +1,4 @@
-<div class="section section-block" style="colors()">
+<div class="section section-block" [ngStyle]="setStyles()">  
   <div class="row">
     <div class="section-image-wrapper">
         <div class="" ng-mouseenter="showChange(true)" ng-mouseleave="showChange(false)">
@@ -33,7 +33,7 @@
           </form>
         </ng-template>
 
-        <span class="name">          
+        <span class="name">
           {{block.settings.name || ("section_block.name" | translate)}}
         </span>
         <span class="description">
