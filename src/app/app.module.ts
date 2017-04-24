@@ -1,3 +1,4 @@
+import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
@@ -122,6 +123,7 @@ import * as plugins from "../plugins";
         IconPickerComponent,
         NoosferoTemplatePipe,
         HighlightsBlockComponent,
+        DisplayContentBlockComponent,
         HighlightsBlockSettingsComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
@@ -160,6 +162,8 @@ import * as plugins from "../plugins";
         LinkListBlockComponent,
         EditableLinkComponent,
         IconPickerComponent,
+        HighlightsBlockComponent,
+        DisplayContentBlockComponent,
         HighlightsBlockComponent,
         HighlightsBlockSettingsComponent,
     ].concat(plugins.ng2MainComponents),
