@@ -13,7 +13,8 @@
             {{ (ctrl.block.title | noosferoTemplate:ctrl.block.api_content ) || ("edit.inline.title" | translate) }}</span>
                     <span editable-text="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}' e-form="textBtnForm">
             {{ (ctrl.block.title | noosferoTemplate:ctrl.block.api_content ) || ("edit.inline.title" | translate) }}</span>
-                    <a ng-if="ctrl.designMode" href="#" class="fa fa-pencil" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
+                    <a id="edit-pen" ng-if="ctrl.designMode" permission="ctrl.owner.permissions" permission-action="allow_edit"
+                        href="#" class="fa fa-pencil" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
                     </a>
                 </div>
             </h3>
