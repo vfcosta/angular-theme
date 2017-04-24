@@ -1,3 +1,4 @@
+import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { EventPluginEventBlockComponent } from './../plugins/event/blocks/event-plugin-event/event-plugin-event-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
@@ -194,6 +195,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoEventPluginEventBlock',
         downgradeComponent({ component: EventPluginEventBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoTagsCloudBlock',
+    downgradeComponent({ component: TagsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

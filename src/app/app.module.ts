@@ -1,6 +1,8 @@
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
+import { TagCloudModule } from 'angular-tag-cloud-module';
+import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { NoosferoTemplatePipe } from './shared/pipes/noosfero-template.ng2.filter';
 import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
@@ -72,10 +74,12 @@ import * as plugins from "../plugins";
         PopoverModule.forRoot(),
         DragulaModule,
         TypeaheadModule.forRoot(),
+        TagCloudModule,
         BsDropdownModule.forRoot(),
         CarouselModule.forRoot(),
         CollapseModule.forRoot(),
         BrowserAnimationsModule,
+        TagCloudModule,
     ],
     exports: [TranslatePipe],
     declarations: [
@@ -118,6 +122,7 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         PermissionNg2Directive,
         LoginBlockComponent,
+        TagsBlockComponent,
         LinkListBlockComponent,
         EditableLinkComponent,
         IconPickerComponent,
@@ -125,6 +130,7 @@ import * as plugins from "../plugins";
         HighlightsBlockComponent,
         DisplayContentBlockComponent,
         HighlightsBlockSettingsComponent,
+        TagsBlockComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -159,12 +165,14 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         ProfileJoinComponent,
         LoginBlockComponent,
+        TagsBlockComponent,
         LinkListBlockComponent,
         EditableLinkComponent,
         IconPickerComponent,
         DisplayContentBlockComponent,
         HighlightsBlockComponent,
         HighlightsBlockSettingsComponent,
+        TagsBlockComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

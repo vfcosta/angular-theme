@@ -1,42 +1,43 @@
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
-
 import { TagsBlockComponent } from './tags-block.component';
-
-const htmlTemplate: string = '<noosfero-tags-cloud-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-tags-cloud-block>';
 
 describe("Components", () => {
     describe("Tags Block Component", () => {
+        let mocks = helpers.getMocks();
 
-        let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment", "getTags"]);
-        environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
-        environmentService.getTags = jasmine.createSpy("getTags").and.returnValue(helpers.mocks.promiseResultTemplate({ data: [{ name: "foo", count: 10, link: '/tag/foo' }, { name: "bar", count: 20, link: '/tag/bar' }] }));
+        let fixture: ComponentFixture<TagsBlockComponent>;
+        let component: TagsBlockComponent;
 
-        let state = jasmine.createSpyObj("$state", ["reload"]);
-        let helper: ComponentTestHelper<TagsBlockComponent>;
+        let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment", "getTags"]);
 
-        beforeEach(() => {
-            angular.mock.module("templates");
-        });
+        environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(
+            Promise.resolve({ id: 1, name: 'Noosfero', host: "https://noosfero.org" })
+        );
 
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [TagsBlockComponent],
-                properties: {
-                    block: {}
-                },
+        environmentService.getTags = jasmine.createSpy("getTags").and.returnValue(
+            Promise.resolve({data:[{"name":"foo","count":10},{"name":"bar","count":20}]})
+        );
+
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                imports: [],
+                declarations: [TagsBlockComponent],
                 providers: [
-                    helpers.createProviderToValue("$state", state),
-                    helpers.createProviderToValue('EnvironmentService', environmentService)
-                ]
+                    { provide: "environmentService", useValue: environmentService},
+                    { provide: "$state", useValue: mocks.stateService },
+                ],
+                schemas: [NO_ERRORS_SCHEMA]
+            }).compileComponents().then(() => {
+                fixture = TestBed.createComponent(TagsBlockComponent);
+                component = fixture.componentInstance;
             });
-            helper = new ComponentTestHelper<TagsBlockComponent>(cls, done);
-        });
+        }));
 
         it("get tags from the environment service", () => {
             expect(environmentService.getTags).toHaveBeenCalled();
-            expect(helper.component.tags).toEqual([{ text: "foo", weight: 10, link: '/tag/foo' }, { text: "bar", weight: 20, link: '/tag/bar' }]);
+            expect(component.tags).toEqual([{ text: "foo", weight: 10, link: '/tag/foo' }, { text: "bar", weight: 20, link: '/tag/bar' }]);
         });
 
     });
