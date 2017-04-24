@@ -10,9 +10,6 @@ import { TypeaheadModule } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/of";
 
-
-const htmlTemplate: string = '<noosfero-invite-component [members]="members"></noosfero-invite-component>';
-
 describe("Components", () => {
     describe("Invite Component", () => {
         let mocks = helpers.getMocks();
@@ -35,11 +32,10 @@ describe("Components", () => {
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(InviteComponent);
-                component = fixture.componentInstance;
-                component.peopleToInvite = peopleToInvite;
             });
+            fixture = TestBed.createComponent(InviteComponent);
+            component = fixture.componentInstance;
+            component.peopleToInvite = peopleToInvite;
         }));
 
         it("verify get current profile is called ", async(() => {
