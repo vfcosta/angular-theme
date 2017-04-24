@@ -51,6 +51,7 @@ import { ProfileJoinComponent } from './profile/profile-join/profile-join.compon
 import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InviteComponent } from './profile/community-members/invite.component';
 import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
 import * as plugins from "../plugins";
@@ -73,6 +74,7 @@ import * as plugins from "../plugins";
         BsDropdownModule.forRoot(),
         CarouselModule.forRoot(),
         CollapseModule.forRoot(),
+        BrowserAnimationsModule,
     ],
     exports: [TranslatePipe],
     declarations: [

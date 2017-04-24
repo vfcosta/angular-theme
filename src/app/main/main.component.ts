@@ -29,7 +29,6 @@ import { ProfileHeaderComponent } from "../profile/header/profile-header.compone
 import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
 import { TagsBlockComponent } from "../layout/blocks/tags/tags-block.component";
 import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
-import { EventPluginEventBlockComponent } from "../layout/blocks/event-plugin-event/event-plugin-event-block.component";
 import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
 import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
@@ -134,7 +133,7 @@ export class EnvironmentContent {
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         TagsBlockComponent,
         BlockComponent, RegisterComponent, TasksMenuComponent,
-        EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
+        ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         EditableDirective,
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileHeaderComponent,
@@ -145,7 +144,7 @@ export class EnvironmentContent {
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",
-        "noosfero.init", "ngFileUpload", "ngImgCrop", "flexcalendar", "angular-ladda", "focus-if",
+        "noosfero.init", "ngFileUpload", "ngImgCrop", "angular-ladda", "focus-if",
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
