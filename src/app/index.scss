@@ -7,6 +7,7 @@ $icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/"
 $fa-font-path: "../../bower_components/font-awesome/fonts";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "layout/scss/variables";
+@import "../../node_modules/dragula/dist/dragula.css";
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject

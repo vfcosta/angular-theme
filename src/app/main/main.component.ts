@@ -34,7 +34,6 @@ import { RegisterComponent } from "../account/register.component";
 import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
 import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
 import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
-import { HighlightsBlockSettingsComponent } from "../layout/blocks/highlights/highlights-block-settings.component";
 
 import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
 import { NoosferoUrl } from "../shared/pipes/noosfero-url.filter";
@@ -137,7 +136,7 @@ export class EnvironmentContent {
         BlockComponent, RegisterComponent, TasksMenuComponent,
         EventPluginEventBlockComponent, ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
-        EditableDirective, HighlightsBlockSettingsComponent,
+        EditableDirective,
         DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),

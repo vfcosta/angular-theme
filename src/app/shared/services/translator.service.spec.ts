@@ -79,7 +79,7 @@ describe("Services", () => {
             let component: TranslatorService = createComponent();
             component["$translate"].instant = jasmine.createSpy("instant");
             component.translate("text");
-            expect(component["$translate"].instant).toHaveBeenCalledWith("text");
+            expect(component["$translate"].instant).toHaveBeenCalledWith("text", undefined, undefined);
             done();
         });
 

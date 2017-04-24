@@ -14,8 +14,7 @@ describe("Highlights Block Component", () => {
 
         TestBed.configureTestingModule({
             declarations: [HighlightsBlockComponent],
-            schemas: [NO_ERRORS_SCHEMA],
-            // imports: [CarouselModule.forRoot()]
+            schemas: [NO_ERRORS_SCHEMA]
         }).compileComponents().then(() => {
             fixture = TestBed.createComponent(HighlightsBlockComponent);
             component = fixture.componentInstance;

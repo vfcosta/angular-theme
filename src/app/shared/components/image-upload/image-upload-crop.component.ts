@@ -19,6 +19,7 @@ export class ImageUploadCropComponent implements OnInit {
         this.cropperSettings.croppedHeight = 100;
         this.cropperSettings.canvasWidth = 400;
         this.cropperSettings.canvasHeight = 300;
+        this.cropperSettings.preserveSize = true;
         this.cropperSettings.noFileInput = this.file != null;
     }
 }

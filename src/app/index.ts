@@ -1,3 +1,4 @@
+import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { PersonTagsPluginInterestsBlockComponent } from './../plugins/person_tags/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component';
 import { RecentActivitiesPluginActivitiesBlockComponent } from './../plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.component';
@@ -182,6 +183,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoHighlightsBlock',
     downgradeComponent({ component: HighlightsBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoHighlightsBlockSettings',
+    downgradeComponent({ component: HighlightsBlockSettingsComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, [

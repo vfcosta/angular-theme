@@ -1,5 +1,5 @@
 <div class="highlights-block">
-  <carousel ng-class="{'no-controls': hideControls()}" class="carousel" active="block.active" [interval]="getTransitionInterval()" [noWrap]="false">
+  <carousel ng-class="{'no-controls': hideControls()}" class="carousel" [(activeSlide)]="block.active" [interval]="getTransitionInterval()" [noWrap]="false">
     <slide *ngFor="let slide of images; let index=index">
       <a [href]="slide.address" [target]="getTarget(slide)" class="image-link">
         <img [src]="slide.image_src" class="img-responsive">

@@ -1,3 +1,4 @@
+import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
 import { NoosferoTemplatePipe } from './shared/pipes/noosfero-template.ng2.filter';
@@ -44,7 +45,7 @@ import { UpgradeUtils } from "./shared/upgrade-utils";
 import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
-import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CarouselModule } from 'ngx-bootstrap';
+import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
 import { NgPipesModule } from 'ngx-pipes';
@@ -70,7 +71,8 @@ import * as plugins from "../plugins";
         DragulaModule,
         TypeaheadModule.forRoot(),
         BsDropdownModule.forRoot(),
-        CarouselModule.forRoot()
+        CarouselModule.forRoot(),
+        CollapseModule.forRoot(),
     ],
     exports: [TranslatePipe],
     declarations: [
@@ -118,6 +120,7 @@ import * as plugins from "../plugins";
         IconPickerComponent,
         NoosferoTemplatePipe,
         HighlightsBlockComponent,
+        HighlightsBlockSettingsComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -155,7 +158,8 @@ import * as plugins from "../plugins";
         LinkListBlockComponent,
         EditableLinkComponent,
         IconPickerComponent,
-	HighlightsBlockComponent,
+        HighlightsBlockComponent,
+        HighlightsBlockSettingsComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
