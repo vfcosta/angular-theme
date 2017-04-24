@@ -1,4 +1,5 @@
 {
+    "required": "Is required",
     "account.register.accountCreatingMessage": "By creating an account, you are agreeing with the ",
     "account.register.emailLabel": "Email",
     "account.register.errorMessagesTitle": "There were problems with the following fields:",
