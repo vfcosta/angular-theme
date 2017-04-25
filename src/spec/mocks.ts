@@ -312,6 +312,12 @@ export function getMocks() {
         profile: {
             id: 1
         },
+        person: <noosfero.Person>{
+            id: 1
+        },
+        popover: {
+            hide: () => { }
+        },
         registerService: {
             createAccount: (user: noosfero.User) => {
                 return Promise.resolve({ status: 201 });
@@ -353,8 +359,8 @@ export function getMocks() {
             isAuthenticated: () => { }
         },
         articleService: {
-            articleRemovedFn: null,
-            articleAddedFn: null,
+            articleRemovedFn: () => { },
+            articleAddedFn: () => { },
             subscribeToModelRemoved: (fn: Function) => {
                 mocks.articleService.articleRemovedFn = fn;
             },
@@ -445,8 +451,8 @@ export function getMocks() {
             sendInvitations: (communityId: number, people: noosfero.Person[]) => { }
         },
         commentService: {
-            commentRemovedFn: null,
-            commentAddedFn: null,
+            commentRemovedFn: () => { },
+            commentAddedFn: () => { },
             subscribeToModelRemoved: (fn: Function) => {
                 mocks.commentService.commentRemovedFn = fn;
             },
@@ -484,7 +490,7 @@ export function getMocks() {
             };
         },
         designModeService: {
-            modeFn: null,
+            modeFn: () => { },
             onToggle: {
                 subscribe: (fn: Function) => {
                     mocks.designModeService.modeFn = fn;
@@ -549,7 +555,7 @@ export function getMocks() {
         blockService: {
             getBlock: (id: number) => { },
             getApiContent: (block: noosfero.Block, params?: any) => { return Promise.resolve({}); },
-            uploadImages: () => {}
+            uploadImages: () => { }
         },
         noosferoTemplateFilter: (text: string, options: any) => {
             return text;

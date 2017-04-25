@@ -28,7 +28,7 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
     $urlMatcherFactoryProvider.strictMode(false);
 
     // Remove trailing slash from url
-    $urlRouterProvider.rule(($injector, $location) => {
+    $urlRouterProvider.rule(($injector: any, $location: any) => {
         let path = $location.path();
         let hasTrailingSlash = path[path.length - 1] === '/';
         if (hasTrailingSlash) {
