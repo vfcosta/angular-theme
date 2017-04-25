@@ -315,6 +315,9 @@ export function getMocks() {
         person: <noosfero.Person>{
             id: 1
         },
+        popover: {
+            hide: () => { }
+        },
         registerService: {
             createAccount: (user: noosfero.User) => {
                 return Promise.resolve({ status: 201 });
@@ -552,7 +555,7 @@ export function getMocks() {
         blockService: {
             getBlock: (id: number) => { },
             getApiContent: (block: noosfero.Block, params?: any) => { return Promise.resolve({}); },
-            uploadImages: () => {}
+            uploadImages: () => { }
         },
         noosferoTemplateFilter: (text: string, options: any) => {
             return text;

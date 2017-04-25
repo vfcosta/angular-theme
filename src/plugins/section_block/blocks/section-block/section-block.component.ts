@@ -58,7 +58,7 @@ export class SectionBlockComponent {
     }
 
     getSectionImage() {
-        if (this.block.images && this.block.images.length >= 0) {
+        if (this.block.images && this.block.images.length > 0) {
             return this.block.images[this.block.images.length - 1];
         } else {
             return null;
