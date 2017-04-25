@@ -1,3 +1,4 @@
+import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
@@ -131,6 +132,7 @@ import * as plugins from "../plugins";
         DisplayContentBlockComponent,
         HighlightsBlockSettingsComponent,
         TagsBlockComponent,
+        BreadcrumbsBlockComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -173,6 +175,7 @@ import * as plugins from "../plugins";
         HighlightsBlockComponent,
         HighlightsBlockSettingsComponent,
         TagsBlockComponent,
+        BreadcrumbsBlockComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
