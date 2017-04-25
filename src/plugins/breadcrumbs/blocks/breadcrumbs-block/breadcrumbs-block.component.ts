@@ -1,11 +1,10 @@
-import { Component, Inject, Input } from "ng-forward";
+import { Component, Inject, Input } from "@angular/core";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 
 @Component({
     selector: "noosfero-breadcrumbs-plugin-content-breadcrumbs-block",
-    templateUrl: 'plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.html'
+    template: require('plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.html')
 })
-@Inject(BlockService, "$state", "$stateParams", "$transitions")
 export class BreadcrumbsBlockComponent {
 
     @Input() block: any;
@@ -14,10 +13,10 @@ export class BreadcrumbsBlockComponent {
     profile: noosfero.Profile;
     links: any[] = [];
 
-    constructor(private blockService: BlockService,
-        private $state: ng.ui.IStateService,
-        private $stateParams: ng.ui.IStateParamsService,
-        private $transitions: any) { }
+    constructor(@Inject('blockService') private blockService: BlockService,
+        @Inject("$state") private $state: ng.ui.IStateService,
+        @Inject("$stateParams") private $stateParams: ng.ui.IStateParamsService,
+        @Inject("$transitions") private $transitions: any) { }
 
     ngOnInit() {
         this.$transitions.onSuccess({}, (trans) => {
