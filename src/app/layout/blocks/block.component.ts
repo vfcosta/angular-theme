@@ -13,6 +13,7 @@ import { DesignModeService } from "../../shared/services/design-mode.service";
 export class BlockComponent {
 
     @Input() block: noosfero.Block;
+    @Input() box: noosfero.Box;
     @Input() owner: noosfero.Profile | noosfero.Environment;
 
     currentUser: noosfero.User;

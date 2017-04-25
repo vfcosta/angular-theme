@@ -46,7 +46,7 @@ export class ContextBarComponent {
             this.blocksChanged = this.blocksChanged.filter((b: noosfero.Block) => {
                 return block.id !== b.id;
             });
-            if (block.title != null || Object.keys(block).length > 2 || (block.api_content && Object.keys(block.api_content).length >= 1)) {
+            if (!block.id || block.title != null || Object.keys(block).length > 3 || (block.api_content && Object.keys(block.api_content).length >= 1)) {
                 this.blocksChanged.push(block);
             }
             this.$scope.$apply();
@@ -67,7 +67,8 @@ export class ContextBarComponent {
     }
 
     apply() {
-        Promise.all([this.applyBlockChanges(), this.applyLayoutTemplate(), this.applyCustomContentChanges()]).then(() => {
+        if (!this.isLayoutTemplateChanged() && !this.hasBlockChanges()) return Promise.resolve();
+        this.applyChanges().then(() => {
             this.notificationService.success({ title: "contextbar.edition.apply.success.title", message: "contextbar.edition.apply.success.message" });
         });
     }
@@ -77,56 +78,31 @@ export class ContextBarComponent {
         this.notificationService.info({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
     }
 
-    applyLayoutTemplate() {
-        if (!this.isLayoutTemplateChanged()) return Promise.resolve();
-        let updated: any = { id: this.owner.id, layout_template: this.owner.layout_template };
-        return this.callOwnerService(updated).then(() => {
-            this.originalLayout = updated.layout_template;
-        });
-    }
+    applyChanges() {
+        let boxesHolder = { id: this.owner.id };
+        if (this.hasBlockChanges()) {
+            let groupedBoxesChanged = _.groupBy(this.blocksChanged, (block) => {
+                let boxId = block.box.id;
+                delete block.box;
+                return boxId;
+            });
 
-    applyBlockChanges() {
-        if (!this.hasBlockChanges()) return Promise.resolve();
-        let groupedBoxesChanged = _.groupBy(this.blocksChanged, (block) => {
-            for (let box of this.owner.boxes) {
-                let b = _.find(box.blocks, {'id': block.id});
-                if (b) return box.id;
-            }
-        });
-
-        let boxes = [];
-        Object.keys(groupedBoxesChanged).forEach(function (key) {
-           boxes.push ( { id: +key, blocks_attributes: groupedBoxesChanged[key] });
-        });
-
-        let boxesHolder = {
-            id: this.owner.id, boxes_attributes: boxes
-        };
-
-        let updatePromise: ng.IPromise<any>;
-        if (this.owner.type === 'Environment') {
-            updatePromise = this.environmentService.update(<any> boxesHolder);
-        } else {
-            updatePromise = this.profileService.update(<any> boxesHolder);
+            let boxes = [];
+            Object.keys(groupedBoxesChanged).forEach(function (key) {
+                boxes.push ( { id: +key, blocks_attributes: groupedBoxesChanged[key] });
+            });
+            boxesHolder['boxes_attributes'] = boxes;
         }
+        if (this.isLayoutTemplateChanged()) boxesHolder['layout_template'] = this.owner.layout_template;
 
-        return updatePromise.then(() => {
+        return this.callOwnerService(<any> boxesHolder).then(() => {
             this.blocksChanged = [];
             this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, this.owner);
         });
     }
 
-    applyCustomContentChanges() {
-        if (!this.isCustomContentChanged() || !this.isProfile()) return Promise.resolve();
-        let profile: any = { id: this.owner.id, custom_header: (<noosfero.Profile>this.owner).custom_header, custom_footer: (<noosfero.Profile>this.owner).custom_footer };
-        return this.profileService.update(profile).then(() => {
-            this.originalCustomHeader = profile.custom_header;
-            this.originalCustomFooter = profile.custom_footer;
-        });
-    }
-
     displayAlertBar() {
-        return this.hasBlockChanges() || this.isLayoutTemplateChanged() || this.isCustomContentChanged();
+        return this.hasBlockChanges() || this.isLayoutTemplateChanged();
     }
 
     hasBlockChanges() {
@@ -135,12 +111,6 @@ export class ContextBarComponent {
 
     isLayoutTemplateChanged() {
         return this.owner && this.originalLayout !== this.owner.layout_template;
-    }
-
-    isCustomContentChanged() {
-        if (!this.isProfile()) return false;
-        let profile = <noosfero.Profile>this.owner;
-        return this.originalCustomHeader !== profile.custom_header || this.originalCustomFooter !== profile.custom_footer;
     }
 
     isProfile() {

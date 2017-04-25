@@ -20,7 +20,7 @@ describe("Context Bar Component", () => {
             identifier: 'profile-name',
             type: 'Person',
             layout_template: 'default',
-            boxes: [{id: 6, blocks: [{id: 5}]}]
+            boxes: [{id: 6, blocks: [{id: 5, box: {id: 6}}]}]
         }
     };
 
@@ -36,6 +36,7 @@ describe("Context Bar Component", () => {
     let state = jasmine.createSpyObj("$state", ["reload"]);
 
     beforeEach((done) => {
+        spyOn(mocks.notificationService, 'success');
         let cls = createClass({
             template: htmlTemplate,
             directives: [ContextBarComponent],
@@ -45,7 +46,7 @@ describe("Context Bar Component", () => {
                 helpers.createProviderToValue("$scope", scope),
                 helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
                 helpers.createProviderToValue("BlockService", blockService),
-                helpers.createProviderToValue("NotificationService", helpers.mocks.notificationService),
+                helpers.createProviderToValue("NotificationService", mocks.notificationService),
                 helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService),
                 helpers.createProviderToValue('ProfileService', profileService),
                 helpers.createProviderToValue('EnvironmentService', environmentService)
@@ -60,13 +61,13 @@ describe("Context Bar Component", () => {
 
     it("not call block service to apply blocks changes when no changes exists", () => {
         helper.component.blocksChanged = <noosfero.Block[]>[];
-        helper.component.applyBlockChanges();
+        helper.component.apply();
         expect(profileService.update).not.toHaveBeenCalled();
     });
 
     it("call block service to apply blocks changes", () => {
-        helper.component.blocksChanged = <noosfero.Block[]>[{ id: 1 }];
-        helper.component.applyBlockChanges();
+        helper.component.blocksChanged = <noosfero.Block[]>[{ id: 1, box: {id: 6} }];
+        helper.component.applyChanges();
         expect(profileService.update).toHaveBeenCalled();
     });
 
@@ -75,7 +76,7 @@ describe("Context Bar Component", () => {
     });
 
     it("return true when exists blocks to be updated", () => {
-        helper.component.blocksChanged = <noosfero.Block[]>[{ id: 1 }];
+        helper.component.blocksChanged = <noosfero.Block[]>[{ id: 1, box: {id: 6} }];
         expect(helper.component.hasBlockChanges()).toBeTruthy();
     });
 
@@ -102,7 +103,7 @@ describe("Context Bar Component", () => {
     it("call profile service to update template when apply", () => {
         profileService.update = jasmine.createSpy("update").and.returnValue(helpers.mocks.promiseResultTemplate());
         helper.component.owner.layout_template = "leftbar";
-        helper.component.applyLayoutTemplate();
+        helper.component.applyChanges();
         expect(profileService.update).toHaveBeenCalledWith({ id: 1, layout_template: "leftbar" });
     });
 
@@ -110,16 +111,8 @@ describe("Context Bar Component", () => {
         environmentService.update = jasmine.createSpy("update").and.returnValue(helpers.mocks.promiseResultTemplate());
         helper.component.owner = <noosfero.Environment>{ id: 2, layout_template: 'default' };
         helper.component.owner.layout_template = "rightbar";
-        helper.component.applyLayoutTemplate();
+        helper.component.applyChanges();
         expect(environmentService.update).toHaveBeenCalledWith({ id: 2, layout_template: "rightbar" });
-    });
-
-    it("call profile service to update profile when save", () => {
-        helper.component['profileService'].update = jasmine.createSpy("update").and.returnValue({
-            then: (func: Function) => { func(); }
-        });
-        helper.component.applyCustomContentChanges();
-        expect(helper.component['notificationService'].success).toHaveBeenCalled();
     });
 
     it("call state reload when discard changes", () => {
@@ -128,26 +121,28 @@ describe("Context Bar Component", () => {
     });
 
     it("call notification success when apply changes", () => {
+        helper.component.blocksChanged = <any> [{id: 5, _destroy: true, box: {id: 6}}];
         helper.component.apply();
+        helper.detectChanges();
         expect(helper.component['notificationService'].success).toHaveBeenCalled();
     });
 
     it("render template context-bar if block is marked for removal", () => {
-        helper.component.blocksChanged = <any> [{id: 5, _destroy: true}];
+        helper.component.blocksChanged = <any> [{id: 5, _destroy: true, box: {id: 6}}];
         helper.detectChanges();
         expect(helper.all('#context-bar .apply').length).toEqual(1);
     });
 
     it("call ProfileService.update if apply button is pressed", () => {
-        helper.component.blocksChanged = <any> [{id: 5, _destroy: true}];
-        helper.component.applyBlockChanges();
+        helper.component.blocksChanged = <any> [{id: 5, _destroy: true, box: {id: 6}}];
+        helper.component.applyChanges();
         expect(profileService.update).toHaveBeenCalledWith({ id: 1, boxes_attributes: [ { id: 6, blocks_attributes: [ { id: 5, _destroy: true } ] } ] });
     });
 
     it("call EnvironmentService.update if apply button is pressed", () => {
         helper.component.owner.type = "Environment";
-        helper.component.blocksChanged = <any> [{id: 5, _destroy: true}];
-        helper.component.applyBlockChanges();
+        helper.component.blocksChanged = <any> [{id: 5, _destroy: true, box: {id: 6}}];
+        helper.component.applyChanges();
         expect(environmentService.update).toHaveBeenCalledWith({ id: 1, boxes_attributes: [ { id: 6, blocks_attributes: [ { id: 5, _destroy: true } ] } ] });
     });
 

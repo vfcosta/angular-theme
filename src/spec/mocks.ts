@@ -288,6 +288,7 @@ export var mocks: any = {
     },
     blockService: {
         getBlock: (id: number) => { },
+        getAvailableBlocks: () => {}
     },
     noosferoTemplateFilter: (text: string, options: any) => {
         return text;
@@ -567,7 +568,10 @@ export function getMocks() {
         blockService: {
             getBlock: (id: number) => { },
             getApiContent: (block: noosfero.Block, params?: any) => { return Promise.resolve({}); },
-            uploadImages: () => { }
+            uploadImages: () => { },
+        },
+        settingsService: {
+            getAvailableBlocks: () => {}
         },
         noosferoTemplateFilter: (text: string, options: any) => {
             return text;

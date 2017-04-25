@@ -9,5 +9,8 @@ namespace noosfero {
         type: string;
         images: Image[];
         _destroy: boolean;
+        position: number;
+        permissions: string[];
+        box: noosfero.Box;
     }
 }
