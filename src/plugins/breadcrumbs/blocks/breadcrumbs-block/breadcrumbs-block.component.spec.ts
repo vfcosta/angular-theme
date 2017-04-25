@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { BreadcrumbsBlockComponent } from './breadcrumbs-block.component';
 import * as helpers from "./../../../../spec/helpers";
 
-fdescribe("Components", () => {
+describe("Components", () => {
     describe("Breadcrumbs Block Component", () => {
         let fixture: ComponentFixture<BreadcrumbsBlockComponent>;
         let component: BreadcrumbsBlockComponent;
