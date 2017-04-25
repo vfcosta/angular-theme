@@ -37,7 +37,14 @@ export class InviteComponent {
     }
 
     sendInvitations() {
-        this.communityService.sendInvitations(this.profile.id, this.peopleToInvite);
+        this.communityService.sendInvitations(this.profile.id, this.peopleToInvite).subscribe((response: noosfero.DefaultResponse) => {
+            if (response.success) {
+                this.zone.run(() => {
+                    this.peopleToInvite = [];
+                    this.searchToken = null;
+                });
+            }
+        }, error => { console.log(error) });
     }
 
     markToInvite(person) {
@@ -63,7 +70,7 @@ export class InviteComponent {
             } else {
                 return data;
             }
-        });;
+        });
     }
 
 }
