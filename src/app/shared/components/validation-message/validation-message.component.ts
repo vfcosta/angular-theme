@@ -21,7 +21,7 @@ export class ValidationMessageComponent {
 
     getErrors() {
         if (!this.field || !this.field.errors) return null;
-        return Object.keys(this.field.errors);
+        return Object.keys(this.field.errors).map(key => this.prefix + "." + this.dasherize(key));
     }
 
     dasherize(text: string) {
