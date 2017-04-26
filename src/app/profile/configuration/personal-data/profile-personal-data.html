@@ -12,7 +12,7 @@
             <input type="text" class="form-control" id="email" name="email" placeholder="{{'profile.edition.email_label' | translate}}"
                 [(ngModel)]="updatedProfile.email" required #name="ngModel">
         </div>
-        <fieldset class="custom-fields-border" ng-if='keys()'>
+        <!--fieldset class="custom-fields-border" ng-if='keys()'>
             <legend class="custom-fields-border">Campos adicionais</legend>
             <div *ngFor="let key of keys()" class="profile-item">
                 <div class="form-group">
@@ -20,7 +20,7 @@
                     <input [type]="fieldType(key)" class="form-control" #name="ngModel" id="{{ key }}" name="{{ key }}" [(ngModel)]="customFieldsDict[key]" required  >
                 </div>
             </div>
-        </fieldset>
+        </fieldset-->
         <div class="form-group actions">
             <button type="submit" class="btn btn-primary">{{"profile.edition.action.save" | translate}}</button>
             <button type="button" class="btn btn-default" (click)="cancel()">{{"profile.edition.action.cancel" | translate}}</button>
