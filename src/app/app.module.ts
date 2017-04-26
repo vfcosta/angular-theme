@@ -1,3 +1,4 @@
+import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
@@ -133,6 +134,7 @@ import * as plugins from "../plugins";
         HighlightsBlockSettingsComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
+        DiscussionBlockUpgradeDirective,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
