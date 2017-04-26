@@ -1,4 +1,4 @@
-<div [hidden]="field.valid || field.pristine" class="alert alert-danger">
+<div [hidden]="field.valid || (field.pristine && !field.formDirective?.submitted)" class="alert alert-danger">
   <div *ngFor="let error of getErrors()" class="field-error">
     {{error | translate}}
   </div>

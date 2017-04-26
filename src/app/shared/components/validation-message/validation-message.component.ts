@@ -11,16 +11,22 @@ export class ValidationMessageComponent {
     @Input() prefix: string;
 
     setErrors(errorObjects: any) {
+        console.log('####################', errorObjects);
         if (!errorObjects) return;
         let errors = {};
         for (let errorObj of errorObjects) {
-            errors[errorObj] = true;
+            errors[errorObj.error] = true;
         }
+        console.log(this.field);
+        console.log(this.field.formDirective);
+
         this.field.control.setErrors(errors);
+        
+        console.log(errors);
     }
 
     getErrors() {
-        if (!this.field || !this.field.errors) return null;
+        if (!this.field || !this.field.errors) return [];
         return Object.keys(this.field.errors).map(key => this.prefix + "." + this.dasherize(key));
     }
 
