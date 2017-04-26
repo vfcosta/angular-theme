@@ -8,7 +8,7 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 
-fdescribe("Components", () => {
+describe("Components", () => {
     describe("Section Block Component", () => {
         let mocks = helpers.getMocks();
         let fixture: ComponentFixture<SectionBlockComponent>;
