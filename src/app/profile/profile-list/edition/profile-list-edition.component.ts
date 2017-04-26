@@ -51,7 +51,7 @@ export class ProfileListEditionComponent {
 
     @HostListener('document:click', ['$event'])
     onClick($event: any) {
-        if (!this.elementRef.nativeElement.contains(event.target)) {
+        if (!this.elementRef.nativeElement.contains($event.target)) {
             this.hidePopover();
         }
     }
