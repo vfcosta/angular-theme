@@ -1,3 +1,4 @@
+import { ViewChild } from '@angular/core';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { SessionService } from './../../../login/session.service';
@@ -10,6 +11,8 @@ export abstract class AbstractFormCommunity {
     @Input() public profile: noosfero.Profile;
     public community: noosfero.Community;
     @Output() public finished = new EventEmitter<noosfero.Community>();
+    @ViewChild('nameErrors') nameErrors;
+
     public errors: any;
     public acceptBefore: boolean = true;
     public sessionProfile: noosfero.Profile;

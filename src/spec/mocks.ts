@@ -448,7 +448,11 @@ export function getMocks() {
             getTags: () => { }
         },
         communityService: {
-            sendInvitations: (communityId: number, people: noosfero.Person[]) => { }
+            sendInvitations: (communityId: number, people: noosfero.Person[]) => { },
+            createNewCommunity: (community: noosfero.Community) => Promise.resolve({ })
+        },
+        sessionService: {
+            currentUser: () => <noosfero.User>{person: {id: 1, identifier: 'test_user'} }
         },
         commentService: {
             commentRemovedFn: () => { },
