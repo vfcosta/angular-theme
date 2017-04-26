@@ -9,6 +9,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { TypeaheadModule } from 'ngx-bootstrap';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/of";
+import 'rxjs/add/observable/throw';
 
 describe("Components", () => {
     describe("Invite Component", () => {
@@ -19,7 +20,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             spyOn(mocks.profileService, 'getCurrentProfile').and.callThrough();
-            spyOn(mocks.communityService, 'sendInvitations');
+            spyOn(mocks.communityService, 'sendInvitations').and.callThrough();
             spyOn(mocks.personService, 'search').and.callThrough();
 
             TestBed.configureTestingModule({
@@ -28,6 +29,7 @@ describe("Components", () => {
                     { provide: "personService", useValue: mocks.personService },
                     { provide: "profileService", useValue: mocks.profileService },
                     { provide: "communityService", useValue: mocks.communityService },
+                    { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -36,6 +38,7 @@ describe("Components", () => {
             fixture = TestBed.createComponent(InviteComponent);
             component = fixture.componentInstance;
             component.peopleToInvite = peopleToInvite;
+
         }));
 
         it("verify get current profile is called ", async(() => {
@@ -55,6 +58,56 @@ describe("Components", () => {
             component.sendInvitations();
             tick();
             expect(mocks.communityService.sendInvitations).toHaveBeenCalledWith(mocks.profile.id, peopleToInvite);
+        }));
+
+        it("should call zone run if response is success", fakeAsync(() => {
+            spyOn(component['zone'], 'run').and.callThrough();
+            component.ngOnInit();
+            tick();
+            component.sendInvitations();
+            tick();
+            expect(component['zone'].run).toHaveBeenCalled();
+        }));
+
+        it("should put peopleToInvite as an empty array after call sendInvitations successfully", fakeAsync(() => {
+            let peopleToInvite = [<noosfero.Person>{ id: 1 }, <noosfero.Person>{ id: 2 }];
+            component.peopleToInvite = peopleToInvite;
+            component.ngOnInit();
+            tick();
+            expect(component.peopleToInvite).toEqual(peopleToInvite);
+            component.sendInvitations();
+            tick();
+            expect(component.peopleToInvite).toEqual([]);
+        }));
+
+        it("should put searchToken as null after call sendInvitations successfully", fakeAsync(() => {
+            component.searchToken = 'some';
+            fixture.detectChanges();
+            component.ngOnInit();
+            tick();
+            expect(component.searchToken).toEqual('some');
+            component.sendInvitations();
+            tick();
+            expect(component.searchToken).toEqual(null);
+        }));
+
+        it("should send notification message to user after call sendInvitations successfully", fakeAsync(() => {
+            spyOn(component.notificationService, 'success').and.callThrough();
+            component.ngOnInit();
+            tick();
+            component.sendInvitations();
+            tick();
+            expect(component.notificationService.success).toHaveBeenCalledWith({ title: "invite.send.success.title", message: "invite.send.success.message" });
+        }));
+
+        it("should send error notification message to user after call sendInvitations unsuccessfully", fakeAsync(() => {
+            spyOn(component.notificationService, 'error').and.callThrough();
+            component['communityService'].sendInvitations = jasmine.createSpy("sendInvitations").and.returnValue(Observable.throw('Some error'));
+            component.ngOnInit();
+            tick();
+            component.sendInvitations();
+            tick();
+            expect(component.notificationService.error).toHaveBeenCalledWith({ title: "invite.send.error.title", message: "invite.send.error.message" });
         }));
 
         it("should not mark to invite null person", () => {
