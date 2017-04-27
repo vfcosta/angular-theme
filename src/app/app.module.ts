@@ -19,6 +19,7 @@ import { EditCommunityComponent } from './profile/configuration/communities/edit
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
+import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
@@ -58,7 +59,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InviteComponent } from './profile/community-members/invite.component';
+import { InviteComponent } from './profile/configuration/communities/invite.component';
 import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
 import * as plugins from "../plugins";
 
@@ -116,6 +117,7 @@ import * as plugins from "../plugins";
         ChangePasswordComponent,
         PermissionNg2Directive,
         PersonFriendsComponent,
+        CommunityMembersMyProfileComponent,
         EditCommunityComponent,
         PersonCommunitiesComponent,
         MenuBlockComponent,
@@ -162,6 +164,7 @@ import * as plugins from "../plugins";
         NewCommunityComponent,
         EditCommunityComponent,
         PersonFriendsComponent,
+        CommunityMembersMyProfileComponent,
         PersonCommunitiesComponent,
         ChangePasswordComponent,
         MenuBlockComponent,
