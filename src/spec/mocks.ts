@@ -312,6 +312,12 @@ export function getMocks() {
         profile: {
             id: 1
         },
+        community: {
+            id: 1,
+            closed: true,
+            identifier: 'community-id',
+            name: 'community-id'
+        },
         person: <noosfero.Person>{
             id: 1
         },
@@ -441,7 +447,8 @@ export function getMocks() {
         },
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
-            instant: () => { }
+            instant: () => { },
+            update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile)
         },
         personService: {
             search: () => Observable.of([mocks.profile]),

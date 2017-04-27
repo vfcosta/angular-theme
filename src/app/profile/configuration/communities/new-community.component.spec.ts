@@ -8,8 +8,7 @@ import * as helpers from "../../../../spec/helpers";
 import { FormsModule, NG_VALIDATORS, AbstractControl, NgForm, FormControl } from '@angular/forms';
 
 describe("Components", () => {
-
-    fdescribe("New Community", () => {
+    describe("New Community", () => {
         let mocks = helpers.getMocks();
         let fixture: ComponentFixture<NewCommunityComponent>;
         let component: NewCommunityComponent;
@@ -103,6 +102,15 @@ describe("Components", () => {
             component.save();
             tick();
             expect(component.nameErrors.getErrors()[0]).toEqual('profile.edition.name.blank');
+        }));
+
+        it("verify if set identifier error when the save is rejected by the server ", fakeAsync(() => {
+            let response = {status: 422, data: {errors_details: { name: [{error: 'not_available'}] } } };
+            component.communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.reject(response));
+            fixture.detectChanges();
+            component.save();
+            tick();
+            expect(component.nameErrors.getErrors()[0]).toEqual('profile.edition.name.not_available');
         }));
 
         it("verify if the server could not save the community ", fakeAsync(() => {

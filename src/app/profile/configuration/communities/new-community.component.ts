@@ -26,15 +26,10 @@ export class NewCommunityComponent extends AbstractFormCommunity {
 
     save() {
         this.community.type = 'Community';
-        // console.log(this.communityService);
-        // console.log(this.communityService.createNewCommunity(this.community));
         this.communityService.createNewCommunity(this.community).then((result) => {
              this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
              this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
         }).catch(response => {
-            // console.log('@@@@@@@', response);
-            // console.log('$$$$$', this.nameErrors);
-
             let errors = response.data;
             if (response.status === 422) {
                 this.nameErrors.setErrors(errors.errors_details.name);
