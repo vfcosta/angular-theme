@@ -7,7 +7,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 const htmlTemplate: string = '<noosfero-block-settings [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-settings>';
 
-describe("Components", () => {
+fdescribe("Components", () => {
     describe("Block Component", () => {
 
         it("receives the block and the owner as inputs", () => {

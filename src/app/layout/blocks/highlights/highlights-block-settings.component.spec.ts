@@ -4,7 +4,8 @@ import { HighlightsBlockSettingsComponent } from './highlights-block-settings.co
 import * as helpers from "../../../../spec/helpers";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA, Injector } from '@angular/core';
+import { BlockSettingsComponent } from '../block-settings.component';
 
 describe("Highlights Block Settings Component", () => {
 
@@ -17,24 +18,26 @@ describe("Highlights Block Settings Component", () => {
 
     beforeEach(async(() => {
         spyOn(mocks.blockService, 'uploadImages').and.returnValue(Promise.resolve({data: { images: []}}));
+        let blockSettingsComponent = { block: {}, owner: {} };
 
         TestBed.configureTestingModule({
             declarations: [HighlightsBlockSettingsComponent, TranslatePipe],
             providers: [
                 { provide: "blockService", useValue: mocks.blockService },
-                { provide: "translatorService", useValue: mocks.translatorService }
+                { provide: Injector, useValue: mocks.injector },
+                { provide: "translatorService", useValue: mocks.translatorService },
+                { provide: BlockSettingsComponent, useValue: blockSettingsComponent },
             ],
             schemas: [NO_ERRORS_SCHEMA],
             imports: [DragulaModule]
-        }).compileComponents().then(() => {
-            fixture = TestBed.createComponent(HighlightsBlockSettingsComponent);
-            component = fixture.componentInstance;
-            component.block = <any>{
-                id: 1,
-                settings: { interval: 2, shuffle: true },
-                api_content: { slides: [{ image_src: "image.png" }] }
-            };
         });
+        fixture = TestBed.createComponent(HighlightsBlockSettingsComponent);
+        component = fixture.componentInstance;
+        component.parentBlock.block = <any>{
+            id: 1,
+            settings: { interval: 2, shuffle: true },
+            api_content: { slides: [{ image_src: "image.png" }] }
+        };
     }));
 
     it("display block settings", () => {
@@ -58,11 +61,11 @@ describe("Highlights Block Settings Component", () => {
 
     it("update active slide on selection", () => {
         component.selectSlide(1);
-        expect((<any>component.block).active).toEqual(1);
+        expect((<any>component.parentBlock.block).active).toEqual(1);
     });
 
     it("default to empty array when there is no block images", () => {
-        component.block.api_content = { slides: null };
+        component.parentBlock.block.api_content = { slides: null };
         component.ngOnInit();
         expect(component.images).toEqual([]);
     });
