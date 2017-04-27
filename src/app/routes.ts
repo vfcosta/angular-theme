@@ -274,8 +274,7 @@ export function noosferoRoutes($stateProvider: any) {
         controller: ProfileConfigurationOptionComponent,
         views: {
             "myprofileContent": {
-                // template: "<noosfero-community-members-my-profile ng-if='ctrl.profile' [profile]='ctrl.profile'></noosfero-community-members-my-profile>",
-                templateUrl: "app/profile/configuration/communities/community-members-my-profile.html",
+                template: "<noosfero-community-members-my-profile ng-if='ctrl.profile' [profile]='ctrl.profile'></noosfero-community-members-my-profile>",                
                 controller: ProfileConfigurationOptionComponent,
                 controllerAs: "ctrl"
             }
