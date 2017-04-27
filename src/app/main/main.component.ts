@@ -16,11 +16,9 @@ import { PasswordComponent } from "../login/new-password.component";
 import { ProfileComponent } from "../profile/profile.component";
 import { BoxesComponent } from "../layout/boxes/boxes.component";
 import { BlockContentComponent } from "../layout/blocks/block-content.component";
-import { BlockSettingsComponent } from "../layout/blocks/block-settings.component";
 import { BlockComponent } from "../layout/blocks/block.component";
 import { EnvironmentHomeComponent } from "../environment/environment-home.component";
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
-import { MenuBlockComponent } from "../layout/blocks/menu/menu-block.component";
 import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
 import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
 import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
@@ -125,7 +123,6 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
-        BlockSettingsComponent,
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         BlockComponent, RegisterComponent, TasksMenuComponent,

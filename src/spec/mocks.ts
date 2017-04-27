@@ -313,6 +313,9 @@ export function getMocks() {
         profile: {
             id: 1
         },
+        injector: {
+            get: (obj: any) => { return { block: {identifier: 'identifier', settings: '', api_content: ''} }; }
+        },
         community: {
             id: 1,
             closed: true,
@@ -580,5 +583,5 @@ export function getMocks() {
             emitEvent: () => {},
             knownEvents: new NoosferoKnownEvents()
         }
-    }
+    };
 };

@@ -2,7 +2,6 @@ import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/
 import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
-import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { TagCloudModule } from 'angular-tag-cloud-module';
 import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
@@ -30,8 +29,6 @@ import { HtmlEditorComponent } from './shared/components/html-editor/html-editor
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { UiSrefDirective } from './shared/directives/ui-sref-directive';
-import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
-import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
 import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
@@ -39,7 +36,6 @@ import { ProfileImageBlockComponent } from './layout/blocks/profile-image/profil
 import { CommunityMembersComponent } from './profile/community-members/community-members.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
-import { TranslatePipe } from './shared/pipes/translate-pipe';
 import { FooterComponent } from './layout/footer/footer.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -62,6 +58,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InviteComponent } from './profile/configuration/communities/invite.component';
 import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
 import * as plugins from "../plugins";
+import { SharedModule } from './shared.module';
 
 @NgModule({
     imports: [
@@ -78,17 +75,15 @@ import * as plugins from "../plugins";
         PopoverModule.forRoot(),
         DragulaModule,
         TypeaheadModule.forRoot(),
-        TagCloudModule,
         BsDropdownModule.forRoot(),
         CarouselModule.forRoot(),
         CollapseModule.forRoot(),
         BrowserAnimationsModule,
         TagCloudModule,
+        SharedModule
     ],
-    exports: [TranslatePipe],
     declarations: [
         FooterComponent,
-        TranslatePipe,
         LanguageSelectorComponent,
         RawHTMLBlockComponent,
         RecentDocumentsBlockComponent,
@@ -103,8 +98,6 @@ import * as plugins from "../plugins";
         UiSrefDirective,
         ProfileFastEditionComponent,
         ValidationMessageComponent,
-        ImageUploadComponent,
-        ImageUploadCropComponent,
         ProfileListComponent,
         ProfileJoinComponent,
         HtmlEditorComponent,
@@ -127,14 +120,12 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         PermissionNg2Directive,
         LoginBlockComponent,
-        TagsBlockComponent,
         LinkListBlockComponent,
         EditableLinkComponent,
         IconPickerComponent,
         NoosferoTemplatePipe,
         HighlightsBlockComponent,
         DisplayContentBlockComponent,
-        HighlightsBlockSettingsComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
         DiscussionBlockUpgradeDirective,
@@ -157,8 +148,6 @@ import * as plugins from "../plugins";
         HtmlEditorComponent,
         ProfileConfigurationMenuComponent,
         ProfilePersonalDataComponent,
-        ImageUploadComponent,
-        ImageUploadCropComponent,
         ProfileListComponent,
         ProfileJoinComponent,
         NewCommunityComponent,
@@ -174,13 +163,11 @@ import * as plugins from "../plugins";
         ProfileSummaryComponent,
         ProfileJoinComponent,
         LoginBlockComponent,
-        TagsBlockComponent,
         LinkListBlockComponent,
         EditableLinkComponent,
         IconPickerComponent,
         DisplayContentBlockComponent,
         HighlightsBlockComponent,
-        HighlightsBlockSettingsComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
         BlockEditionComponent,
@@ -213,6 +200,7 @@ import * as plugins from "../plugins";
         'EnvironmentService'
     ])
 })
+
 export class AppModule {
     ngDoBootstrap() {
     }

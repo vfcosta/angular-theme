@@ -1,6 +1,7 @@
-import { Input, Inject, Component, OnInit } from "@angular/core";
+import { Input, Inject, Component, OnInit, forwardRef, Injector } from '@angular/core';
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
+import { BlockSettingsComponent } from '../block-settings.component';
 
 @Component({
     selector: "noosfero-highlights-block-settings",
@@ -8,24 +9,27 @@ import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service
 })
 export class HighlightsBlockSettingsComponent implements OnInit {
 
-    @Input() block: noosfero.Block;
-    @Input() owner: noosfero.Profile;
-
     isCollapsed: any;
     images: any;
+    parentBlock: BlockSettingsComponent;
 
-    constructor(@Inject("translatorService") private translatorService: TranslatorService,
-        @Inject("blockService") private blockService: BlockService) { }
+    constructor(
+        injector: Injector,
+        @Inject("translatorService") private translatorService: TranslatorService,
+        @Inject("blockService") private blockService: BlockService) {
+        this.parentBlock = injector.get(BlockSettingsComponent);
+    }
 
     ngOnInit() {
         this.isCollapsed = true;
-        this.images = (<any>this.block.api_content || {}).slides || [];
-        (<any>this.block.settings).block_images = this.images;
+        this.images = (<any>this.parentBlock.block.api_content || {}).slides || [];
+        (<any>this.parentBlock.block.settings).block_images = this.images;
+
     }
 
     addSlide() {
         this.images.push({ image_src: "", title: this.translatorService.translate("edit.inline.title"), address: "http://" });
-        this.block.hide = false;
+        this.parentBlock.block.hide = false;
     }
 
     removeSlide(index: number) {
@@ -33,14 +37,14 @@ export class HighlightsBlockSettingsComponent implements OnInit {
     }
 
     selectSlide(index: number) {
-        (<any>this.block)['active'] = index;
+        (<any>this.parentBlock.block)['active'] = index;
     }
 
     upload(data: any, slide: any) {
-        this.blockService.uploadImages(this.block, [data]).then((result: any) => {
-            this.block.images = result.data.images;
-            if (this.block.images.length > 0) {
-                let image = this.block.images[this.block.images.length - 1];
+        this.blockService.uploadImages(this.parentBlock.block, [data]).then((result: any) => {
+            this.parentBlock.block.images = result.data.images;
+            if (this.parentBlock.block.images.length > 0) {
+                let image = this.parentBlock.block.images[this.parentBlock.block.images.length - 1];
                 slide.image_id = image.id;
                 slide.image_src = image.url;
             }
