@@ -29,7 +29,7 @@ export function noosferoRoutes($stateProvider: any) {
         abstract: true,
         name: 'main',
         resolve: {
-            currentUser: function (AuthService: AuthService) {
+            currentUser: function(AuthService: AuthService) {
                 return AuthService.loginFromCookie();
             }
         }
@@ -263,6 +263,18 @@ export function noosferoRoutes($stateProvider: any) {
         views: {
             "myprofileContent": {
                 template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
+                controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+    $stateProvider.state({
+        name: 'main.myprofile.members',
+        url: "/members?search",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<noosfero-community-members-my-profile ng-if='ctrl.profile' [profile]='ctrl.profile'></noosfero-community-members-my-profile>",
                 controller: ProfileConfigurationOptionComponent,
                 controllerAs: "ctrl"
             }

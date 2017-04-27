@@ -1,16 +1,15 @@
 import { Component, Inject, Input, NgZone } from '@angular/core';
-import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
-import { CommunityService } from "../../../lib/ng-noosfero-api/http/community.service";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
-import { TranslatorService } from "../../shared/services/translator.service";
-import { NotificationService } from '../../shared/services/notification.service';
-
+import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
+import { CommunityService } from "../../../../lib/ng-noosfero-api/http/community.service";
+import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service";
+import { TranslatorService } from "../../../shared/services/translator.service";
+import { NotificationService } from '../../../shared/services/notification.service';
 import { Observable } from 'rxjs/Observable';
 
 
 @Component({
     selector: "noosfero-invite-component",
-    template: require('app/profile/community-members/invite.html')
+    template: require('app/profile/configuration/communities/invite.html')
 })
 export class InviteComponent {
 

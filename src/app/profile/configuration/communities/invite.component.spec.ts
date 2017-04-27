@@ -1,7 +1,7 @@
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { InviteComponent } from './invite.component';
-import * as helpers from "../../../spec/helpers";
-import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
+import * as helpers from "../../../../spec/helpers";
+import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';

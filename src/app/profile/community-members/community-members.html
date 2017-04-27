@@ -1,12 +1,10 @@
-<h1>{{"profile.members.title" | translate}}</h1>
-
-<noosfero-invite-component [members]="members"></noosfero-invite-component>
-
 <div class="members-list">
     <profile-list [profiles]="members" [owner]="profile"></profile-list>
 </div>
 
+<div class="members-pagination">
 <pagination *ngIf="totalMembers>0" [totalItems]="totalMembers" [itemsPerPage]="membersPerPage"
   [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
   firstText="«" lastText="»" previousText="‹" nextText="›"
   class="pagination-sm center-block"></pagination>
+</div>
