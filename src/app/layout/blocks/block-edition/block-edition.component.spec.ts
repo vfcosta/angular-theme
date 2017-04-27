@@ -14,19 +14,19 @@ describe("Components", () => {
         let fixture: ComponentFixture<BlockEditionComponent>;
         let component: BlockEditionComponent;
         let blocksSavedFn: Function;
-        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
-        eventsHubService.subscribeToEvent = (event: string, fn: Function) => {
+        mocks.eventsHubService.subscribeToEvent = <any>((event: string, fn: Function) => {
             blocksSavedFn = fn;
-        };
+        });
 
         beforeEach(async(() => {
+            spyOn(mocks.eventsHubService, "emitEvent");
             TestBed.configureTestingModule({
                 imports: [PopoverModule.forRoot()],
                 declarations: [BlockEditionComponent, TranslatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: "$scope", useValue: mocks.scopeWithEvents() },
-                    { provide: "eventsHubService", useValue: eventsHubService },
+                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
                 ]
             });
 
@@ -54,25 +54,25 @@ describe("Components", () => {
         it("emit change event when an attribute was modified", () => {
             component.block.title = "changed";
             component.emitChanges();
-            expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, title: "changed", api_content: { } });
+            expect(mocks.eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, title: "changed", api_content: { } });
         });
 
         it("emit change event with block id when no attribute was modified", () => {
             component.emitChanges();
-            expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, api_content: { } });
+            expect(mocks.eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, api_content: { } });
         });
 
         it("emit change event when an setting attribute was modified", () => {
             (<any>component.block.settings).display = "never";
             component.emitChanges();
-            expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, display: "never", api_content: { } });
+            expect(mocks.eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, display: "never", api_content: { } });
         });
 
         it("emit change event with block id when an setting attribute was not modified", () => {
             (<any>component.originalBlock.settings).display = "never";
             (<any>component.block.settings).display = "never";
             component.emitChanges();
-            expect(eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, api_content: { } });
+            expect(mocks.eventsHubService.emitEvent).toHaveBeenCalledWith('BLOCK_CHANGED', { id: 1, api_content: { } });
         });
 
         it("update originalBlock when receive a BLOCKS_SAVED event", () => {

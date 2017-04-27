@@ -1,29 +1,13 @@
 import { Injectable, Inject, OpaqueToken, EventEmitter } from 'ng-forward';
-
-export const EVENTS_HUB_KNOW_EVENT_NAMES = new OpaqueToken('EVENTS_HUB_KNOW_EVENT_NAMES');
-
-export interface EventsHubKnownEventNames {
-    getNames(): string[];
-}
-
-function isEventsHubKnownEventNames(object: any): object is EventsHubKnownEventNames {
-    return 'getNames' in object;
-}
+import { NoosferoKnownEvents } from "../../known-events";
 
 @Injectable()
-@Inject(EVENTS_HUB_KNOW_EVENT_NAMES)
 export class EventsHubService {
 
     private emitters: Map<string, EventEmitter<any>>;
-    private knownEvents: string[] = [];
+    knownEvents = new NoosferoKnownEvents();
 
-    constructor(private eventsHubKnownEventNames: EventsHubKnownEventNames | string[]) {
-        if (isEventsHubKnownEventNames(eventsHubKnownEventNames)) {
-            this.knownEvents = eventsHubKnownEventNames.getNames();
-        } else if (Array.isArray(eventsHubKnownEventNames)) {
-            this.knownEvents = eventsHubKnownEventNames;
-        }
-
+    constructor() {
         this.emitters = new Map<string, EventEmitter<any>>();
         this.setupEmitters();
     }
@@ -41,9 +25,9 @@ export class EventsHubService {
     }
 
     private setupEmitters() {
-        for (let i: number = 0; i < this.knownEvents.length; i++) {
-            this.emitters.set(this.knownEvents[i], new EventEmitter<any>());
-        }
+        this.knownEvents.getNames().forEach((event: string) => {
+            this.emitters.set(event, new EventEmitter<any>());
+        });
     }
 
     private checkKnownEvent(eventType: string) {
@@ -51,6 +35,4 @@ export class EventsHubService {
             throw new Error('Unknown event named ' + eventType.toString());
         }
     }
-
-
 }

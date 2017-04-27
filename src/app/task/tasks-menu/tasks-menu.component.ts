@@ -17,18 +17,15 @@ export class TasksMenuComponent {
     total: number;
     perPage = 5;
     person: noosfero.Person;
-    eventsNames: NoosferoKnownEvents;
 
     constructor(private taskService: TaskService,
         private session: SessionService,
         private authService: AuthService,
         private eventsHubService: EventsHubService) {
-
-        this.eventsNames = new NoosferoKnownEvents();
     }
 
     ngOnInit() {
-        this.eventsHubService.subscribeToEvent(this.eventsNames.TASK_CLOSED, (task: noosfero.Task) => {
+        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.TASK_CLOSED, (task: noosfero.Task) => {
             if (this.taskTypes.indexOf(task.type) !== -1) {
                 this.total--;
             }

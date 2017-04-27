@@ -1,3 +1,4 @@
+import { NoosferoKnownEvents } from './../app/known-events';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/of";
 
@@ -573,6 +574,11 @@ export function getMocks() {
         },
         stateService: {
             transitionTo: () => { }
+        },
+        eventsHubService: {
+            subscribeToEvent: () => {},
+            emitEvent: () => {},
+            knownEvents: new NoosferoKnownEvents()
         }
     }
 };

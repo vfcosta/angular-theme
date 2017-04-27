@@ -38,7 +38,6 @@ import { noosferoAngularRunBlock } from "./index.run";
 import { MainComponent } from "./main/main.component";
 import { AuthEvents } from "./login/auth-events";
 
-import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
 import { NoosferoKnownEvents } from './known-events';
 
 import { AuthService } from "./login/auth.service";
@@ -208,6 +207,4 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     downgradeComponent({ component: BlockEditionComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     );
 
-export let noosferoApp = bundle('main', MainComponent, [
-    provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
-]).publish();
+export let noosferoApp = bundle('main', MainComponent, []).publish();

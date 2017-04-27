@@ -21,7 +21,6 @@ export class ContextBarComponent {
 
     blocksChanged: noosfero.Block[];
     designModeOn = false;
-    eventsNames: NoosferoKnownEvents;
     originalLayout: string;
     originalCustomHeader: string;
     originalCustomFooter: string;
@@ -34,7 +33,6 @@ export class ContextBarComponent {
         private designModeService: DesignModeService,
         private profileService: ProfileService,
         private environmentService: EnvironmentService) {
-        this.eventsNames = new NoosferoKnownEvents();
     }
 
     ngOnInit() {
@@ -44,7 +42,7 @@ export class ContextBarComponent {
         }
         this.originalLayout = this.owner.layout_template;
         this.blocksChanged = [];
-        this.eventsHubService.subscribeToEvent(this.eventsNames.BLOCK_CHANGED, (block: noosfero.Block) => {
+        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, (block: noosfero.Block) => {
             this.blocksChanged = this.blocksChanged.filter((b: noosfero.Block) => {
                 return block.id !== b.id;
             });
@@ -114,7 +112,7 @@ export class ContextBarComponent {
 
         return updatePromise.then(() => {
             this.blocksChanged = [];
-            this.eventsHubService.emitEvent(this.eventsNames.BLOCKS_SAVED, this.owner);
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, this.owner);
         });
     }
 

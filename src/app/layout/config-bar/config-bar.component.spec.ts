@@ -22,16 +22,13 @@ describe("ConfigBar Component", () => {
         layout: 'default'
     };
 
-    let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
     let blockService = jasmine.createSpyObj("BlockService", ["updateAll"]);
     let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
     blockService.updateAll = jasmine.createSpy("updateAll").and.returnValue(helpers.mocks.promiseResultTemplate());
 
-    let eventFunction: Function;
-    eventsHubService.subscribeToEvent = (ev: string, fn: Function) => { eventFunction = fn; };
-
     let profileService = jasmine.createSpyObj("profileService", ["update"]);
     let environmentService = jasmine.createSpyObj("environmentService", ["update"]);
+    let mocks = helpers.getMocks();
 
     beforeEach((done) => {
         let cls = createClass({
@@ -40,7 +37,7 @@ describe("ConfigBar Component", () => {
             properties: properties,
             providers: [
                 helpers.createProviderToValue("$scope", scope),
-                helpers.createProviderToValue("EventsHubService", eventsHubService),
+                helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
                 helpers.createProviderToValue("BlockService", blockService),
                 helpers.createProviderToValue("NotificationService", helpers.mocks.notificationService),
                 helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService),
