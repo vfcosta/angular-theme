@@ -6,20 +6,20 @@ const htmlTemplate: string = '<search-form></search-form>';
 
 describe("Components", () => {
     describe("Search Form Component", () => {
-
+        let mocks = helpers.getMocks();
         let helper: ComponentTestHelper<SearchFormComponent>;
         let stateMock = jasmine.createSpyObj("$state", ["go", "params", "current"]);
-        let eventsHubServiceMock = jasmine.createSpyObj("eventsHubServiceMock", ["subscribeToEvent"]);
 
         beforeEach(angular.mock.module("templates"));
 
         beforeEach((done) => {
+            spyOn(mocks.eventsHubService, 'subscribeToEvent');
             let cls = createClass({
                 template: htmlTemplate,
                 directives: [SearchFormComponent],
                 providers: [
                     helpers.createProviderToValue("$state", stateMock),
-                    helpers.createProviderToValue("EventsHubService", eventsHubServiceMock),
+                    helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
                 ]
             });
             helper = new ComponentTestHelper<SearchFormComponent>(cls, done);
@@ -36,7 +36,7 @@ describe("Components", () => {
         });
 
         it("subscribe to event on init", () => {
-            expect(eventsHubServiceMock.subscribeToEvent).toHaveBeenCalled();
+            expect(mocks.eventsHubService.subscribeToEvent).toHaveBeenCalled();
         });
     });
 });

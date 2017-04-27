@@ -1,0 +1,48 @@
+<div class="section section-block" [ngStyle]="setStyles()">
+  <div class="row">
+    <div class="section-image-wrapper">
+        <div class="" ng-mouseenter="showChange(true)" ng-mouseleave="showChange(false)">
+          <img *ngIf="!designMode && getSectionImage()" [src]="getSectionImage().url" class="img-responsive section-image img-circle">
+          <div class="hovereffect" *ngIf="designMode">
+              <i *ngIf="!getSectionImage()" class="fa fa-users fa-5x profile-image"></i>
+              <img *ngIf="getSectionImage()" [alt]='"profile.image.description" | translate' [src]="getSectionImage().url" class="img-responsive section-image img-circle">
+              <div class='container-camera'>
+                <image-upload #imageUpload (finished)="upload($event)"></image-upload>
+              </div>
+              <div class="overlay"></div>
+          </div>
+        </div>
+    </div>
+    <div class="text">
+        <ng-template #popoverTemplate>
+          <form (ngSubmit)="save()">
+            <div class="form">
+              <div class="form-group">
+                <label class="control-label">{{"section_block.name" | translate}}</label>
+                <input type="text" class="form-control input-sm" [(ngModel)]="modifiedLink.name" #name="ngModel" id="name" name="name">
+              </div>
+              <div class="form-group">
+                <label class="control-label">{{"section_block.description" | translate}}</label>
+                <input type="text" class="form-control input-sm" [(ngModel)]="modifiedLink.description" #address="ngModel" id="description" name="description">
+              </div>
+              <div class="actions">
+                <button type="button" class="btn btn-primary" (click)="save()"><span class="fa fa-check"></span></button>
+                <button type="button" class="btn btn-default" (click)="cancel()"><span class="fa fa-close"></span></button>
+              </div>
+            </div>
+          </form>
+        </ng-template>
+
+        <span class="name">
+          {{block.settings.name || ("section_block.name" | translate)}}
+        </span>
+        <span class="description">
+          {{block.settings.description || ("section_block.description" | translate)}}
+        </span>
+        <a *ngIf="designMode" href="#" #popover="bs-popover" triggers="click"
+        [popover]="popoverTemplate" placement="right">
+          <i class="edit-icon fa fa-pencil fa-fw fa-lg"></i>
+        </a>
+      </div>
+  </div>
+</div>

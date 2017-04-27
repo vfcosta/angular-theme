@@ -1,3 +1,4 @@
+import { NoosferoKnownEvents } from './../app/known-events';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/of";
 
@@ -315,6 +316,18 @@ export function getMocks() {
         injector: {
             get: (obj: any) => { return { block: {identifier: 'identifier', settings: '', api_content: ''} }; }
         },
+        community: {
+            id: 1,
+            closed: true,
+            identifier: 'community-id',
+            name: 'community-id'
+        },
+        person: <noosfero.Person>{
+            id: 1
+        },
+        popover: {
+            hide: () => { }
+        },
         registerService: {
             createAccount: (user: noosfero.User) => {
                 return Promise.resolve({ status: 201 });
@@ -356,8 +369,8 @@ export function getMocks() {
             isAuthenticated: () => { }
         },
         articleService: {
-            articleRemovedFn: null,
-            articleAddedFn: null,
+            articleRemovedFn: () => { },
+            articleAddedFn: () => { },
             subscribeToModelRemoved: (fn: Function) => {
                 mocks.articleService.articleRemovedFn = fn;
             },
@@ -438,18 +451,23 @@ export function getMocks() {
         },
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
-            instant: () => { }
+            instant: () => { },
+            update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile)
         },
         personService: {
             search: () => Observable.of([mocks.profile]),
             getTags: () => { }
         },
         communityService: {
-            sendInvitations: (communityId: number, people: noosfero.Person[]) => { }
+            sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),
+            createNewCommunity: (community: noosfero.Community) => Promise.resolve({ })
+        },
+        sessionService: {
+            currentUser: () => <noosfero.User>{person: {id: 1, identifier: 'test_user'} }
         },
         commentService: {
-            commentRemovedFn: null,
-            commentAddedFn: null,
+            commentRemovedFn: () => { },
+            commentAddedFn: () => { },
             subscribeToModelRemoved: (fn: Function) => {
                 mocks.commentService.commentRemovedFn = fn;
             },
@@ -487,7 +505,7 @@ export function getMocks() {
             };
         },
         designModeService: {
-            modeFn: null,
+            modeFn: () => { },
             onToggle: {
                 subscribe: (fn: Function) => {
                     mocks.designModeService.modeFn = fn;
@@ -552,13 +570,18 @@ export function getMocks() {
         blockService: {
             getBlock: (id: number) => { },
             getApiContent: (block: noosfero.Block, params?: any) => { return Promise.resolve({}); },
-            uploadImages: () => {}
+            uploadImages: () => { }
         },
         noosferoTemplateFilter: (text: string, options: any) => {
             return text;
         },
         stateService: {
             transitionTo: () => { }
+        },
+        eventsHubService: {
+            subscribeToEvent: () => {},
+            emitEvent: () => {},
+            knownEvents: new NoosferoKnownEvents()
         }
-    }
+    };
 };

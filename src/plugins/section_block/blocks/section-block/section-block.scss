@@ -1,0 +1,34 @@
+noosfero-section-block-plugin-section-block{
+  .section-block{
+    .row{
+        vertical-align: middle;
+    }
+
+    padding: 27px;
+    .name {
+        font-weight: bold;
+        font-size: 1.2em;
+        padding-right: 10px;
+        border-bottom: none;        
+    }
+    .description {
+        border-bottom: none;
+    }
+    .text{
+        padding-top: 1px;
+        padding-left: 2px;
+        float: left;
+        margin-left: 10px;
+        margin-top: 10px;
+    }
+    .section-image {
+        width: 3.5em;
+        height: 3.5em;
+    }
+    .section-image-wrapper{
+      width: 3.5em;
+      float: left;
+    }
+
+  }
+}

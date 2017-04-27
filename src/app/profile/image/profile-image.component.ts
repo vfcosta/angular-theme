@@ -37,19 +37,17 @@ export class ProfileImageComponent {
 
     @Input() iconSize: string;
     @Input() editable: boolean;
-    eventsNames: NoosferoKnownEvents;
 
     constructor( @Inject("profileService") private profileService: ProfileService,
         @Inject("permissionService") private permissionService: PermissionService,
         @Inject("$scope") private $scope: ng.IScope,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
         @Inject("notificationService") private notificationService: NotificationService) {
-        this.eventsNames = new NoosferoKnownEvents();
     }
 
     upload(data: any) {
         this.profileService.uploadImage(this.profile, data, "profile").then((result: any) => {
-            this.eventsHubService.emitEvent(this.eventsNames.IMAGE_PROFILE_UPDATED, result.data);
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.IMAGE_PROFILE_UPDATED, result.data);
             this.notificationService.success({ title: "profile.image.upload.success.title", message: "profile.image.upload.success.message" });
         });
     }
@@ -72,7 +70,7 @@ export class ProfileImageComponent {
             this.defaultIcon = 'fa-user';
         }
 
-        this.eventsHubService.subscribeToEvent(this.eventsNames.IMAGE_PROFILE_UPDATED, (profile: noosfero.Profile) => {
+        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.IMAGE_PROFILE_UPDATED, (profile: noosfero.Profile) => {
             if (this.profile.id === profile.id) {
                 this.profile = profile;
             }

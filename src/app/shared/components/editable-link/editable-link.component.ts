@@ -11,7 +11,7 @@ export class EditableLinkComponent {
     @Input() address: string;
     @Input() designMode: boolean;
     @Input() owner: noosfero.Profile;
-    @ViewChild("popover") popover;
+    @ViewChild("popover") popover: any;
     @Input() popupOpen = false;
 
     modifiedLink: any;
@@ -40,7 +40,7 @@ export class EditableLinkComponent {
 
     @HostListener('document:click', ['$event'])
     onClick($event: any) {
-        if (this.popover && !this.elementRef.nativeElement.contains(event.target)) {
+        if (this.popover && !this.elementRef.nativeElement.contains($event.target)) {
             this.popover.hide();
         }
     }

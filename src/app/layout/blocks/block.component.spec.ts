@@ -21,6 +21,7 @@ describe("Block Component", () => {
             type: 'Person'
         }
     };
+    let mocks = helpers.getMocks();
     beforeEach((done) => {
         let cls = createClass({
             template: htmlTemplate,
@@ -33,7 +34,7 @@ describe("Block Component", () => {
                 helpers.createProviderToValue('AuthService', helpers.mocks.authService),
                 helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({})),
                 helpers.createProviderToValue('TranslatorService', translatorService),
-                helpers.createProviderToValue("EventsHubService", eventsHubService),
+                helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
                 helpers.createProviderToValue('DesignModeService', helpers.mocks.designModeService),
                 helpers.createProviderToValue('noosferoTemplateFilter', helpers.mocks.noosferoTemplateFilter),
                 helpers.createProviderToValue('$transitions', transitions),
@@ -41,7 +42,6 @@ describe("Block Component", () => {
         });
         helper = new ComponentTestHelper<BlockComponent>(cls, done);
     });
-    let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
     let translatorService = jasmine.createSpyObj("translatorService", ["currentLanguage"]);
     let transitions = jasmine.createSpyObj("transitions", ["onSuccess"]);
     let state = jasmine.createSpyObj("state", ["current"]);

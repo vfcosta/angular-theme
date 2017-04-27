@@ -1,3 +1,5 @@
+import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
+import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
@@ -16,6 +18,7 @@ import { EditCommunityComponent } from './profile/configuration/communities/edit
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
+import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
@@ -52,7 +55,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InviteComponent } from './profile/community-members/invite.component';
+import { InviteComponent } from './profile/configuration/communities/invite.component';
 import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
 import * as plugins from "../plugins";
 import { SharedModule } from './shared.module';
@@ -107,6 +110,7 @@ import { SharedModule } from './shared.module';
         ChangePasswordComponent,
         PermissionNg2Directive,
         PersonFriendsComponent,
+        CommunityMembersMyProfileComponent,
         EditCommunityComponent,
         PersonCommunitiesComponent,
         MenuBlockComponent,
@@ -124,6 +128,8 @@ import { SharedModule } from './shared.module';
         DisplayContentBlockComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
+        DiscussionBlockUpgradeDirective,
+        BlockEditionComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -147,6 +153,7 @@ import { SharedModule } from './shared.module';
         NewCommunityComponent,
         EditCommunityComponent,
         PersonFriendsComponent,
+        CommunityMembersMyProfileComponent,
         PersonCommunitiesComponent,
         ChangePasswordComponent,
         MenuBlockComponent,
@@ -163,6 +170,7 @@ import { SharedModule } from './shared.module';
         HighlightsBlockComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
+        BlockEditionComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

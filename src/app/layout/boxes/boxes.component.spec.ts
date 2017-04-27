@@ -28,6 +28,7 @@ describe("Boxes Component", () => {
     };
 
     let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
+    let mocks = helpers.getMocks();
 
     beforeEach((done) => {
         let cls = createClass({
@@ -35,7 +36,9 @@ describe("Boxes Component", () => {
             directives: [BoxesComponent],
             properties: properties,
             providers: [
-                helpers.createProviderToValue("$scope", scope)
+                helpers.createProviderToValue("$scope", scope),
+                helpers.createProviderToValue("DesignModeService", mocks.designModeService),
+                helpers.createProviderToValue("EventsHubService", mocks.eventsHubService)
             ]
         });
         helper = new ComponentTestHelper<BoxesComponent>(cls, done);

@@ -10,12 +10,12 @@ describe("Components", () => {
     describe("Profile Image Component", () => {
         let fixture: ComponentFixture<ProfileImageComponent>;
         let component: ProfileImageComponent;
+        let mocks = helpers.getMocks();
 
         let imageProfileUpdateFn: Function;
-        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
-        eventsHubService.subscribeToEvent = (event: string, fn: Function) => {
+        mocks.eventsHubService.subscribeToEvent = <any>((event: string, fn: Function) => {
             imageProfileUpdateFn = fn;
-        };
+        });
 
         beforeEach(async(() => {
             let scope = helpers.mocks.scopeWithEvents;
@@ -28,7 +28,7 @@ describe("Components", () => {
                 providers: [
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "profileService", useValue: profileService },
-                    { provide: "eventsHubService", useValue: eventsHubService },
+                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "permissionService", useValue: permissionService },
                     { provide: "$scope", useValue: scope }
                 ]
@@ -71,7 +71,7 @@ describe("Components", () => {
         it("should not update profile with different id", () => {
             let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
             component.profile.id = 99;
-            imageProfileUpdateFn(component.eventsNames.IMAGE_PROFILE_UPDATED,
+            imageProfileUpdateFn(component['eventsHubService'].knownEvents.IMAGE_PROFILE_UPDATED,
                 profile);
             expect(component.profile.id).not.toEqual(profile.id);
         });
@@ -79,7 +79,7 @@ describe("Components", () => {
         it("should update profile with same id", () => {
             let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
             component.profile.id = 1;
-            imageProfileUpdateFn(component.eventsNames.IMAGE_PROFILE_UPDATED,
+            imageProfileUpdateFn(component['eventsHubService'].knownEvents.IMAGE_PROFILE_UPDATED,
                 profile);
             expect(component.profile.id).toEqual(profile.id);
         });

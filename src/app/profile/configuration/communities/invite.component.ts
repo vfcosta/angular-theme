@@ -1,18 +1,19 @@
 import { Component, Inject, Input, NgZone } from '@angular/core';
-import { PersonService } from "../../../lib/ng-noosfero-api/http/person.service";
-import { CommunityService } from "../../../lib/ng-noosfero-api/http/community.service";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
-import { TranslatorService } from "../../shared/services/translator.service";
+import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
+import { CommunityService } from "../../../../lib/ng-noosfero-api/http/community.service";
+import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service";
+import { TranslatorService } from "../../../shared/services/translator.service";
+import { NotificationService } from '../../../shared/services/notification.service';
+
 import { Observable } from 'rxjs/Observable';
 
 
 @Component({
     selector: "noosfero-invite-component",
-    template: require('app/profile/community-members/invite.html')
+    template: require('app/profile/configuration/communities/invite.html')
 })
 export class InviteComponent {
 
-    @Input() members;
     @Input() profile;
 
     public peopleToInvite: noosfero.Person[];
@@ -23,6 +24,7 @@ export class InviteComponent {
         @Inject('communityService') private communityService: CommunityService,
         @Inject('profileService') private profileService: ProfileService,
         @Inject('translatorService') private translatorService: TranslatorService,
+        @Inject("notificationService") public notificationService: NotificationService,
         private zone: NgZone) {
         this.peopleToInvite = [];
         this.listOfPeople = Observable.create((observer: any) => {
@@ -37,7 +39,18 @@ export class InviteComponent {
     }
 
     sendInvitations() {
-        this.communityService.sendInvitations(this.profile.id, this.peopleToInvite);
+        this.communityService.sendInvitations(this.profile.id, this.peopleToInvite).subscribe((response: noosfero.DefaultResponse) => {
+            if (response.success) {
+                this.zone.run(() => {
+                    this.peopleToInvite = [];
+                    this.searchToken = null;
+                    this.notificationService.success({ title: "invite.send.success.title", message: "invite.send.success.message" });
+                });
+            }
+        }, error => {
+            this.notificationService.error({ title: "invite.send.error.title", message: "invite.send.error.message" });
+            console.log(error)
+        });
     }
 
     markToInvite(person) {
@@ -63,7 +76,7 @@ export class InviteComponent {
             } else {
                 return data;
             }
-        });;
+        });
     }
 
 }

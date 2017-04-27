@@ -1,27 +1,28 @@
-import { Inject, Input, Component } from 'ng-forward';
-import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../../../shared/services/events-hub.service";
+import { Inject, Input, Component, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { EventsHubService } from "../../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../../known-events";
 
 declare var _: any;
 
 @Component({
     selector: 'noosfero-block-edition',
-    templateUrl: 'app/layout/blocks/block-edition/block-edition.html'
+    template: require('app/layout/blocks/block-edition/block-edition.html')
 })
-@Inject("$scope", EventsHubService)
 export class BlockEditionComponent {
 
-    eventsNames: NoosferoKnownEvents;
     options: any;
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile | noosfero.Environment;
+    @ViewChild("popover") popover: any;
 
     originalBlock: noosfero.Block;
     blockChanged = false;
 
-    constructor(private $scope: ng.IScope, private eventsHubService: EventsHubService) {
-        this.eventsNames = new NoosferoKnownEvents();
+    constructor(
+        private elementRef: ElementRef,
+        @Inject("$scope") private $scope: ng.IScope,
+        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
         this.options = {
             display: ["always", "home_page_only", "except_home_page", "never"],
             display_user: ["all", "logged", "not_logged"]
@@ -35,7 +36,7 @@ export class BlockEditionComponent {
         }, () => {
             this.emitChanges();
         }, true);
-        this.eventsHubService.subscribeToEvent(this.eventsNames.BLOCKS_SAVED, (owner: noosfero.Profile | noosfero.Environment) => {
+        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, (owner: noosfero.Profile | noosfero.Environment) => {
             this.originalBlock = angular.copy(this.block);
         });
     }
@@ -63,11 +64,26 @@ export class BlockEditionComponent {
             blockDiff._destroy = this.block._destroy;
         }
 
-        this.eventsHubService.emitEvent(this.eventsNames.BLOCK_CHANGED, blockDiff);
+        this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
     }
 
     isOptionSelected(optionKey: string, option: string) {
         return (<any>this.block.settings)[optionKey] === option ||
             (<any>this.block.settings)[optionKey] == null && this.options[optionKey].indexOf(option) === 0;
+    }
+
+    optionsKeys() {
+       return Object.keys(this.options);
+    }
+
+    optionsValues(optionKey: string) {
+       return this.options[optionKey];
+    }
+
+    @HostListener('document:click', ['$event'])
+    onClick($event: any) {
+        if (this.popover && !this.elementRef.nativeElement.contains($event.target)) {
+            this.popover.hide();
+        }
     }
 }

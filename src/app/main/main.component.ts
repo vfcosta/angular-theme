@@ -52,7 +52,7 @@ import { BootstrapResizableDirective } from "../shared/components/bootstrap-resi
 import { EditableDirective } from "../shared/components/editable/editable.directive";
 import { SearchComponent } from "../search/search.component";
 import { SearchFormComponent } from "../search/search-form/search-form.component";
-import { EVENTS_HUB_KNOW_EVENT_NAMES, EventsHubService } from "../shared/services/events-hub.service";
+import { EventsHubService } from "../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../known-events";
 import { TasksMenuComponent } from "../task/tasks-menu/tasks-menu.component";
 import { ThemeHeaderComponent } from "../layout/theme-header/theme-header.component";
@@ -79,7 +79,7 @@ import { HeaderService } from "./../shared/services/header.service";
     templateUrl: "app/main/main.html",
     providers: [AuthService, SessionService]
 })
-@Inject(BodyStateClassesService, HeaderService, EVENTS_HUB_KNOW_EVENT_NAMES)
+@Inject(BodyStateClassesService, HeaderService)
 export class MainContentComponent {
 
     public themeSkin: string = 'skin-default';
@@ -87,7 +87,6 @@ export class MainContentComponent {
     constructor(
         private bodyStateClassesService: BodyStateClassesService,
         private headerService: HeaderService,
-        eventsNames: NoosferoKnownEvents,
         eventsHubService: EventsHubService) {
         bodyStateClassesService.start({
             skin: this.themeSkin
@@ -144,7 +143,6 @@ export class EnvironmentContent {
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
         provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
         provide('headerService', { useClass: HeaderService }),
-        provide('eventsNames', { useClass: NoosferoKnownEvents }),
         provide('environmentService', { useClass: EnvironmentService })
     ]
 })

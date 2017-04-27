@@ -14,13 +14,13 @@ export class ValidationMessageComponent {
         if (!errorObjects) return;
         let errors = {};
         for (let errorObj of errorObjects) {
-            errors[errorObj] = true;
+            errors[errorObj.error] = true;
         }
         this.field.control.setErrors(errors);
     }
 
     getErrors() {
-        if (!this.field || !this.field.errors) return null;
+        if (!this.field || !this.field.errors) return [];
         return Object.keys(this.field.errors).map(key => this.prefix + "." + this.dasherize(key));
     }
 

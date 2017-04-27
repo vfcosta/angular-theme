@@ -1,3 +1,4 @@
+import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
 import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { EventPluginEventBlockComponent } from './../plugins/event/blocks/event-plugin-event/event-plugin-event-block.component';
@@ -16,6 +17,7 @@ import { EditCommunityComponent } from './profile/configuration/communities/edit
 import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
 import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
 import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
+import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
@@ -27,7 +29,7 @@ import { CommunitiesBlockComponent } from './layout/blocks/communities/communiti
 import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
 import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
 import { CommunityMembersComponent } from './profile/community-members/community-members.component';
-import { InviteComponent } from './profile/community-members/invite.component';
+import { InviteComponent } from './profile/configuration/communities/invite.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
 import { FooterComponent } from './layout/footer/footer.component';
@@ -37,7 +39,6 @@ import { noosferoAngularRunBlock } from "./index.run";
 import { MainComponent } from "./main/main.component";
 import { AuthEvents } from "./login/auth-events";
 
-import { EVENTS_HUB_KNOW_EVENT_NAMES } from './shared/services/events-hub.service';
 import { NoosferoKnownEvents } from './known-events';
 
 import { AuthService } from "./login/auth.service";
@@ -57,6 +58,7 @@ import { ProfileImageBlockComponent } from "./layout/blocks/profile-image/profil
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
 import { ProfileImagesBlockComponent } from '../plugins/profile_images/blocks/profile-images-block/profile-images-block.component';
 import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
+import { SectionBlockComponent } from '../plugins/section_block/blocks/section-block/section-block.component';
 
 declare var moment: any;
 
@@ -116,6 +118,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('noosferoProfileImagesPluginProfileImagesBlock',
     downgradeComponent({ component: ProfileImagesBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
+    directive('noosferoSectionBlockPluginSectionBlock',
+    downgradeComponent({ component: SectionBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
     directive('noosferoProfileImageBlock',
     downgradeComponent({ component: ProfileImageBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     ).
@@ -145,6 +150,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('personFriends',
     downgradeComponent({ component: PersonFriendsComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoCommunityMembersMyProfile',
+    downgradeComponent({ component: CommunityMembersMyProfileComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('newCommunity',
     downgradeComponent({ component: NewCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
@@ -202,8 +210,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoBlockSettings',
     downgradeComponent({ component: BlockSettingsComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoBlockEdition',
+    downgradeComponent({ component: BlockEditionComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     );
 
-export let noosferoApp = bundle('main', MainComponent, [
-    provide(EVENTS_HUB_KNOW_EVENT_NAMES, { useClass: NoosferoKnownEvents })
-]).publish();
+export let noosferoApp = bundle('main', MainComponent, []).publish();

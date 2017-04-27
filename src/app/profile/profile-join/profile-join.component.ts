@@ -14,18 +14,16 @@ export class ProfileJoinComponent {
     @Input() profile: noosfero.Profile;
 
     private isMember: boolean;
-    eventsNames: NoosferoKnownEvents;
 
     // @Inject(ProfileService, SessionService, NotificationService)
     constructor( @Inject('profileService') private profileService: ProfileService,
         @Inject('sessionService') private session: SessionService,
         @Inject('notificationService') private notificationService: NotificationService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService) {
-        this.eventsNames = new NoosferoKnownEvents();
     }
 
     ngOnInit() {
-        this.eventsHubService.subscribeToEvent(this.eventsNames.PROFILE_MEMBERSHIP_CHANGED, (isMember: boolean) => {
+        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, (isMember: boolean) => {
             this.isMember = isMember;
         });
         this.loadMembership();
@@ -35,7 +33,7 @@ export class ProfileJoinComponent {
         let person = this.session.currentUser() ? this.session.currentUser().person : null;
         this.profileService.isMember(person, this.profile).then((val: boolean) => {
             this.isMember = val;
-            this.eventsHubService.emitEvent(this.eventsNames.PROFILE_MEMBERSHIP_CHANGED, val);
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, val);
         });
     }
 
