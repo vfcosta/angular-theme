@@ -11,18 +11,12 @@ export class ValidationMessageComponent {
     @Input() prefix: string;
 
     setErrors(errorObjects: any) {
-        console.log('####################', errorObjects);
         if (!errorObjects) return;
         let errors = {};
         for (let errorObj of errorObjects) {
             errors[errorObj.error] = true;
         }
-        console.log(this.field);
-        console.log(this.field.formDirective);
-
         this.field.control.setErrors(errors);
-        
-        console.log(errors);
     }
 
     getErrors() {
