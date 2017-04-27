@@ -56,12 +56,6 @@ describe("Components", () => {
             expect(component.translatorService.translate).toHaveBeenCalledWith('myprofile.configuration.community.edit');
         });
 
-        // it("verify if changes the page after cancel is called ", () => {
-        //     spyOn(component.$state, 'go');
-        //     component.cancel();
-        //     expect(component.$state.go).toHaveBeenCalledWith('main.myprofile.communities', { profile: component.sessionProfile.identifier });
-        // });
-
         it("verify if the method update of profile service is called after save ", () => {
             spyOn(component.profileService, 'update').and.callThrough();
             component.save();
@@ -74,13 +68,6 @@ describe("Components", () => {
             tick();
             expect(component.notificationService.success).toHaveBeenCalledWith({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
         }));
-
-        // it("verify if changes page after community is successfuly created ", fakeAsync(() => {
-        //     spyOn(component.$state, 'go').and.callThrough();
-        //     component.save();
-        //     tick();
-        //     expect(component.$state.go).toHaveBeenCalledWith('main.myprofile.communities', { profile: component.profile.identifier });
-        // }));
 
         it("verify if set name error when the save is rejected by the server ", fakeAsync(() => {
             let response = { status: 422, data: { errors_details: { name: [{ error: 'blank' }] } } };

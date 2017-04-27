@@ -13,16 +13,7 @@ describe("Components", () => {
         let fixture: ComponentFixture<NewCommunityComponent>;
         let component: NewCommunityComponent;
 
-        // let profileService = jasmine.createSpyObj("profileService", ["update"]);
-        // let communityService = jasmine.createSpyObj("communityService", ["createNewCommunity"]);
-        //  let sessionService = jasmine.createSpyObj("sessionService", ["currentUser"]);
-        //  sessionService.currentUser = jasmine.createSpy("currentUser").and.returnValue({ person: { identifier: 'profile1' } });
-        // let state = jasmine.createSpyObj("$state", ["go"]);
-        // communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.resolve({}));
-
         beforeEach(async(() => {
-            // spyOn(mocks.notificationService, 'success').and.callThrough();
-            // spyOn(mocks.$state, 'go').and.callThrough();
             TestBed.configureTestingModule({
                 imports: [FormsModule],
                 declarations: [NewCommunityComponent, TranslatePipe, ValidationMessageComponent],
@@ -96,7 +87,7 @@ describe("Components", () => {
         }));
 
         it("verify if set name error when the save is rejected by the server ", fakeAsync(() => {
-            let response = {status: 422, data: {errors_details: { name: [{error: 'blank'}] } } };
+            let response = { status: 422, data: { errors_details: { name: [{ error: 'blank' }] } } };
             component.communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
@@ -105,7 +96,7 @@ describe("Components", () => {
         }));
 
         it("verify if set identifier error when the save is rejected by the server ", fakeAsync(() => {
-            let response = {status: 422, data: {errors_details: { name: [{error: 'not_available'}] } } };
+            let response = { status: 422, data: { errors_details: { name: [{ error: 'not_available' }] } } };
             component.communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
@@ -115,7 +106,7 @@ describe("Components", () => {
 
         it("verify if the server could not save the community ", fakeAsync(() => {
             spyOn(component.notificationService, 'error').and.callThrough();
-            let response = {status: 400, data: {message: 'Failed' } };
+            let response = { status: 400, data: { message: 'Failed' } };
             component.communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
