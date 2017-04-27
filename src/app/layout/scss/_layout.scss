@@ -40,3 +40,35 @@
 	position: absolute;
 	left: -999em;
 }
+
+.pencil-icon {
+  @extend .fa;
+  @extend .fa-pencil;
+  @extend .fa-fw;
+  @extend .fa-lg;
+  color: $pencil-icon-color-default;
+}
+
+.pencil-icon:hover{
+  color: $pencil-icon-color-default-hover;
+  text-decoration: none;
+}
+
+.pencil-icon-header {
+  color: $pencil-icon-color-header;
+  font-size: 2em;
+}
+
+.pencil-icon-header:hover {
+  color: $pencil-icon-color-header-hover;
+}
+
+.pencil-icon-block {
+  color: $pencil-icon-color-block;
+  font-size: inherit;
+  vertical-align: inherit;
+}
+
+.pencil-icon-block:hover {
+  color: $pencil-icon-color-block-hover;
+}
