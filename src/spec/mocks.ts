@@ -456,7 +456,7 @@ export function getMocks() {
             getTags: () => { }
         },
         communityService: {
-            sendInvitations: (communityId: number, people: noosfero.Person[]) => { },
+            sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),
             createNewCommunity: (community: noosfero.Community) => Promise.resolve({ })
         },
         sessionService: {

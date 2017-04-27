@@ -1,6 +1,7 @@
 import { Injectable, Inject } from "ng-forward";
-import {RestangularService} from "./restangular_service";
-import {PersonService} from "./person.service";
+import { RestangularService } from "./restangular_service";
+import { PersonService } from "./person.service";
+import { Observable } from 'rxjs/Observable';
 
 declare var _: any;
 
@@ -23,7 +24,7 @@ export class CommunityService extends RestangularService<noosfero.Community> {
         };
     }
 
-    createNewCommunity(community: noosfero.Community){
+    createNewCommunity(community: noosfero.Community) {
         let headers = {
             'Content-Type': 'application/json'
         };
@@ -37,7 +38,7 @@ export class CommunityService extends RestangularService<noosfero.Community> {
         return deferred.promise;
     }
 
-    updateCommunity(community: noosfero.Community){
+    updateCommunity(community: noosfero.Community) {
         let headers = {
             'Content-Type': 'application/json'
         };
@@ -78,6 +79,12 @@ export class CommunityService extends RestangularService<noosfero.Community> {
             invitations.push(invitation.id);
         }
         let params = { 'contacts': invitations };
-        return this.getElement(communityId).customPOST(params, "invite", null, headers);
+
+        let deferred = this.$q.defer();;
+        let restRequest = this.getElement(communityId).customPOST(params, "invite", null, headers);
+        restRequest.then(this.getHandleSuccessFunction(deferred)).catch(this.getHandleErrorFunction(deferred));
+        return Observable.from(deferred.promise).map((ret: any) => {
+            return ret.data;
+        });
     }
 }
