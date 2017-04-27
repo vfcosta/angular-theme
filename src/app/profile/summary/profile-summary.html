@@ -11,7 +11,7 @@
         </ng-template>
         <a href="#" *ngIf="profile.permissions" [permission]="profile.permissions" permissionAction="allow_edit" #popover="bs-popover"
             triggers="click" [popover]="popoverTemplate" class="profile-edition-link" placement="right">
-            <i class="edit-icon fa fa-pencil fa-fw fa-lg"></i>
+            <i class="pencil-icon pencil-icon-header"></i>
         </a>
         <div class="profile-link">
             {{profileLink()}}
