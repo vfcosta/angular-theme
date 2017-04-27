@@ -6,8 +6,8 @@ namespace noosfero {
  * @description
  *  A representation of a Noosfero Profile.
  */
-    export interface DefaultResponse {
-      
+    export interface DefaultResponse extends RestModel {
+
         code: number;
         message: string;
         success: boolean;
