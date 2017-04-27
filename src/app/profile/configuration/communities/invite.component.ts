@@ -4,6 +4,7 @@ import { CommunityService } from "../../../../lib/ng-noosfero-api/http/community
 import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service";
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { NotificationService } from '../../../shared/services/notification.service';
+
 import { Observable } from 'rxjs/Observable';
 
 
@@ -13,7 +14,6 @@ import { Observable } from 'rxjs/Observable';
 })
 export class InviteComponent {
 
-    @Input() members;
     @Input() profile;
 
     public peopleToInvite: noosfero.Person[];
