@@ -1,5 +1,4 @@
 import { Input, Component, Inject } from 'ng-forward';
-import { BlockEditionComponent } from './block-edition/block-edition.component';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService, SessionService, AuthEvents } from "../../login";
 import { TranslatorService } from "../../shared/services/translator.service";
@@ -7,8 +6,7 @@ import { DesignModeService } from "../../shared/services/design-mode.service";
 
 @Component({
     selector: 'noosfero-block',
-    templateUrl: 'app/layout/blocks/block.html',
-    directives: [BlockEditionComponent]
+    templateUrl: 'app/layout/blocks/block.html'
 })
 @Inject("$uibModal", "$scope", "$state", "$rootScope", NotificationService,
     AuthService, SessionService, TranslatorService, DesignModeService, "$transitions")
