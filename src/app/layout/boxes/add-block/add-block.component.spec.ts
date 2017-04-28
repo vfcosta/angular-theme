@@ -38,5 +38,17 @@ describe("Components", () => {
             component.addBlock(<noosfero.Block>{});
             expect(component.onAdd.emit).toHaveBeenCalled();
         });
+
+        it("filter blocks by whitelist when load available blocks", fakeAsync(() => {
+            TestBed.get('settingsService').getAvailableBlocks = jasmine.createSpy("getAvailableBlocks").and.returnValue(Promise.resolve({
+                data: [
+                    {type: 'RawHTMLBlock'},
+                    {type: 'OtherInvalidBlock'},
+                ]
+            }));
+            component.loadAvailableBlocks();
+            tick();
+            expect(component.blocks.length).toEqual(1);
+        }));
     });
 });
