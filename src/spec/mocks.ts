@@ -555,7 +555,8 @@ export function getMocks() {
         translatorService: {
             currentLanguage: () => { },
             changeLanguage: (lang: string) => { },
-            translate: (text: string) => { return text; }
+            translate: (text: string) => { return text; },
+            hasTranslation: (text: string) => {return text; }
         },
         passwordService: {
             new_password: (param: any) => {
