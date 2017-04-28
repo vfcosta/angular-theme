@@ -1,10 +1,12 @@
 import { Inject, Input, Component } from 'ng-forward';
+import { DesignModeService } from "../../shared/services/design-mode.service";
+import { EventsHubService } from "../../shared/services/events-hub.service";
 
 @Component({
     selector: "noosfero-boxes",
     templateUrl: "app/layout/boxes/boxes.html"
 })
-@Inject("$scope")
+@Inject("$scope", DesignModeService, EventsHubService)
 export class BoxesComponent {
 
     @Input() boxes: noosfero.Box[];
@@ -14,6 +16,7 @@ export class BoxesComponent {
     @Input() startIndex: number = 0;
     mainColumn: number = -1;
     lastIndex: number;
+    designMode = false;
 
     /**
      * Mapping between noosfero layouts and bootstrap grid system
@@ -29,7 +32,10 @@ export class BoxesComponent {
         "nosidebars": [{ size: 12, main: true }]
     };
 
-    constructor(private $scope: ng.IScope) {
+    constructor(private $scope: ng.IScope, private designModeService: DesignModeService, private eventsHubService: EventsHubService) {
+        this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            this.designMode = designModeOn;
+        });
     }
 
     ngOnInit() {
@@ -41,6 +47,7 @@ export class BoxesComponent {
                 this.setupColumns();
             });
         }
+        this.designMode = this.designModeService.isInDesignMode();
     }
 
     setupColumns() {
@@ -62,5 +69,16 @@ export class BoxesComponent {
 
     getBoxClass(column: any) {
         return `col-md-${column['size']}`;
+    }
+
+    addBlock(box: noosfero.Box, block: noosfero.Block) {
+        block.permissions = ["allow_edit"];
+        block.api_content = {};
+        block.settings = <any>{};
+        box.blocks.forEach((block: noosfero.Block) => {
+            if (!block._destroy) block.position++;
+        });
+        block.position = 1;
+        box.blocks.unshift(block);
     }
 }

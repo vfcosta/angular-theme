@@ -1,3 +1,4 @@
+import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.service';
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
@@ -143,6 +144,7 @@ export class EnvironmentContent {
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
         provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
         provide('headerService', { useClass: HeaderService }),
+        provide('SettingsService', { useClass: SettingsService }),
         provide('environmentService', { useClass: EnvironmentService })
     ]
 })

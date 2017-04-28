@@ -1,3 +1,4 @@
+import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
 import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
@@ -130,6 +131,7 @@ import { SharedModule } from './shared.module';
         BreadcrumbsBlockComponent,
         DiscussionBlockUpgradeDirective,
         BlockEditionComponent,
+        AddBlockComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -171,6 +173,7 @@ import { SharedModule } from './shared.module';
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
         BlockEditionComponent,
+        AddBlockComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
@@ -179,6 +182,7 @@ import { SharedModule } from './shared.module';
         'TranslatorService',
         'ArticleService',
         'BlockService',
+        'SettingsService',
         'profileService',
         'PersonService',
         'CommunityService',

@@ -23,10 +23,9 @@ export class LinkListBlockComponent {
                 return !this.designMode;
             }
         };
-
-        if (this.block && this.block.settings) {
-            this.links = this.block.settings.links;
-        }
+        if (!this.block.settings) this.block.settings = {};
+        if (!this.block.settings.links) this.block.settings.links = [];
+        this.links = this.block.settings.links;
     }
 
 

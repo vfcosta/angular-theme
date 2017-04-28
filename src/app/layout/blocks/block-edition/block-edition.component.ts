@@ -13,6 +13,7 @@ export class BlockEditionComponent {
     options: any;
 
     @Input() block: noosfero.Block;
+    @Input() box: noosfero.Box;
     @Input() owner: noosfero.Profile | noosfero.Environment;
     @ViewChild("popover") popover: any;
 
@@ -60,10 +61,15 @@ export class BlockEditionComponent {
         if (this.block.title !== this.originalBlock.title) {
             blockDiff.title = this.block.title;
         }
+        if (this.block.position !== this.originalBlock.position) {
+            blockDiff.position = this.block.position;
+        }
+        // if (!this.block.id && !blockDiff.position) blockDiff.position = 1; // initialize block position for new blocks
         if (this.block._destroy !== this.originalBlock._destroy) {
             blockDiff._destroy = this.block._destroy;
         }
-
+        blockDiff.box = <noosfero.Box>{id: this.box.id};
+        if (!this.block.id) blockDiff.type = this.block.type;
         this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
     }
 

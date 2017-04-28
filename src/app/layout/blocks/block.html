@@ -1,9 +1,12 @@
-<div bootstrap-resizable="ctrl.designMode" bootstrap-resizable-columns="ctrl.block.settings.visualization.columns" ng-show="ctrl.canDisplay()" ng-class="{'invisible-block': !ctrl.visible()}" class="noosfero-block col-md-{{ctrl.block.settings.visualization.columns || 12}}">
+<div bootstrap-resizable="ctrl.designMode" bootstrap-resizable-columns="ctrl.block.settings.visualization.columns" 
+    ng-show="ctrl.canDisplay()"
+    ng-class="{'invisible-block': !ctrl.visible(), 'animated bounceInDown': !ctrl.block.id, 'animated bounceOutUp': ctrl.block._destroy}"
+    class="noosfero-block col-md-{{ctrl.block.settings.visualization.columns || 12}}">
     <div ng-show="ctrl.designMode" class="actions block-actions" permission="ctrl.block.permissions" permission-action="allow_edit">
         <a class="action visibility" href="#" ng-if="ctrl.canDelete()" (click)="ctrl.markForDeletion()">
             <i class="fa fa-remove fa-fw fa-lg"></i>
         </a>
-        <noosfero-block-edition [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-edition>
+        <noosfero-block-edition [box]="ctrl.box" [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-edition>
     </div>
     <div class="panel panel-default block {{ctrl.blockClass()}}">
         <div class="panel-heading" ng-show="ctrl.designMode || ctrl.block.title">
