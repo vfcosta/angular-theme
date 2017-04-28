@@ -586,6 +586,11 @@ export function getMocks() {
             subscribeToEvent: () => {},
             emitEvent: () => {},
             knownEvents: new NoosferoKnownEvents()
+        },
+        amParseFilter: () => {
+            return {
+                toISOString: () => {}
+            };
         }
     };
 };

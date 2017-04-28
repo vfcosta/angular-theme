@@ -6,6 +6,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NgPipesModule } from 'ngx-pipes';
 import { MomentModule } from 'angular2-moment';
+import { By } from '@angular/platform-browser';
 
 describe("Components", () => {
     describe("Recent Documents Block Component", () => {
@@ -24,15 +25,16 @@ describe("Components", () => {
                 providers: [
                     { provide: "blockService", useValue: mocks.blockService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "articleService", useValue: mocks.articleService }
+                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: "amParseFilter", useValue: mocks.amParseFilter }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [NgPipesModule, MomentModule]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(RecentDocumentsBlockComponent);
-                component = fixture.componentInstance;
-                component.block = <noosfero.Block>{ id: 1 };
             });
+            fixture = TestBed.createComponent(RecentDocumentsBlockComponent);
+            component = fixture.componentInstance;
+            component.block = <noosfero.Block>{ id: 1 };
+            component.owner = <noosfero.Profile>{ identifier: 'identifier' };
         }));
 
         it("verify getApiContent is called ", fakeAsync(() => {
@@ -54,11 +56,6 @@ describe("Components", () => {
             component.ngOnInit();
             tick();
             expect(component['articleService'].subscribeToModelRemoved).toHaveBeenCalled();
-        }));
-
-        it("go to article page when open a document", fakeAsync(() => {
-            component.openDocument({ path: "path", profile: { identifier: "identifier" } });
-            expect(mocks.$state.go).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "identifier" });
         }));
 
         // FIXME put this test to works

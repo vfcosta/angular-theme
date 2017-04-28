@@ -30,9 +30,4 @@ export class RecentDocumentsBlockComponent {
             Arrays.remove(this.documents, article);
         });
     }
-
-    openDocument(article: any) {
-        this.$state.go("main.profile.page", { page: article.path, profile: article.profile.identifier });
-    }
-
 }
