@@ -31,9 +31,8 @@ export class EditCommunityComponent extends AbstractFormCommunity {
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
         }).catch((response) => {
             let errors = response.data;
-            if (response.status === 422) {
-                this.nameErrors.setErrors(errors.errors_details.name);
-                this.nameErrors.setErrors(errors.errors_details.identifier);
+            if (response.status === 422 && errors.errors_details.name) {
+                this.nameErrors.setBackendErrors(errors);
             } else {
                 this.notificationService.error({ title: "profile.edition.error.title", message: errors.message ? errors.message : "profile.edition.error.message" });
             }

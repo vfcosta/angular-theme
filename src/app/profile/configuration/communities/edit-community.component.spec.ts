@@ -70,21 +70,22 @@ describe("Components", () => {
         }));
 
         it("verify if set name error when the save is rejected by the server ", fakeAsync(() => {
-            let response = { status: 422, data: { errors_details: { name: [{ error: 'blank' }] } } };
+            let response = { status: 422, data: { errors_details: { name: [{ error: 'blank' }] }, errors_messages: { name: [{ error: 'cant be blank' }] }  } };
             component.profileService.update = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
             tick();
-            expect(component.nameErrors.getErrors()[0]).toEqual('profile.edition.name.blank');
+            expect(component.nameErrors.getBackendErrors()[0]).toEqual('profile.edition.name.blank');
         }));
 
         it("verify if set identifier error when the save is rejected by the server ", fakeAsync(() => {
-            let response = { status: 422, data: { errors_details: { identifier: [{ error: 'not_available' }] } } };
+            spyOn(component.notificationService, 'error').and.callThrough();
+            let response = { status: 422, data: { message: 'Failed', errors_details: { identifier: [{ error: 'not_available' }] }, errors_messages: { identifier: [{ error: 'not_available' }] } } };
             component.profileService.update = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
             tick();
-            expect(component.nameErrors.getErrors()[0]).toEqual('profile.edition.name.not_available');
+            expect(component.notificationService.error).toHaveBeenCalledWith({ title: "profile.edition.error.title", message: 'Failed' });
         }));
 
         it("verify if the server could not save the community ", fakeAsync(() => {

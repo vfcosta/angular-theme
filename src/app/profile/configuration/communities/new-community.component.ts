@@ -31,9 +31,8 @@ export class NewCommunityComponent extends AbstractFormCommunity {
              this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
         }).catch(response => {
             let errors = response.data;
-            if (response.status === 422) {
-                this.nameErrors.setErrors(errors.errors_details.name);
-                this.nameErrors.setErrors(errors.errors_details.identifier);
+            if (response.status === 422 && errors.errors_details.name) {
+                this.nameErrors.setBackendErrors(errors);
             } else {
                 this.notificationService.error({ title: "profile.edition.error.title", message: errors.message ? errors.message : "profile.edition.error.message" });
             }
