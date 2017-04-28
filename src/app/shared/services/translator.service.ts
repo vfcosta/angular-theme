@@ -47,6 +47,10 @@ export class TranslatorService {
         return this.$translate.instant(text, interpolateParams, interpolationId);
     }
 
+    hasTranslation(text: string): boolean {
+        return text !== this.translate(text);
+    }
+
     private changeMomentLocale(language: string) {
         let localePromise = Promise.resolve();
         if (language !== "en") {

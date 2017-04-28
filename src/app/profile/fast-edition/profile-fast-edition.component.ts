@@ -1,3 +1,4 @@
+import { ValidationMessageComponent } from './../../shared/components/validation-message/validation-message.component';
 import { NotificationService } from './../../shared/services/notification.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { Component, Inject, Input, Output, EventEmitter, ViewChild } from '@angular/core';
@@ -12,8 +13,8 @@ export class ProfileFastEditionComponent {
     @Input() environment: noosfero.Environment;
     @Output() finished = new EventEmitter<noosfero.Profile>();
 
-    @ViewChild('identifierErrors') identifierErrors;
-    @ViewChild('nameErrors') nameErrors;
+    @ViewChild('identifierErrors') identifierErrors: ValidationMessageComponent;
+    @ViewChild('nameErrors') nameErrors: ValidationMessageComponent;
 
     updatedProfile: noosfero.Profile;
 
@@ -39,9 +40,9 @@ export class ProfileFastEditionComponent {
                 this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
             }
         }).catch((response) => {
-            this.errors = response.data.errors_messages;
-            if (this.errors['identifier']) this.identifierErrors.setErrors(this.errors['identifier']);
-            this.nameErrors.setErrors(this.errors['name']);
+            this.errors = response.data;
+            this.identifierErrors.setBackendErrors(this.errors);
+            this.nameErrors.setBackendErrors(this.errors);
         });
     }
 
