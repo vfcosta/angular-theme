@@ -4,7 +4,7 @@
         <img [alt]='"profile.image.description" | translate' [src]="card.author.image.url" class="img-circle">
       </div>
       <div class="header media-body">
-        <a class="page-link" uiSref="main.profile.page" [uiParams]="{profile: profile.identifier, page: card.path}">
+        <a class="page-link" uiSref="main.profile.page" [uiParams]="{profile: card.profile.identifier, page: card.path}">
           <h5 class="title media-heading">{{card.title}}</h5>
         </a>
         <div class="subheader">
