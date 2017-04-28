@@ -12,8 +12,15 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
+                    <div class="row search-blocks">
+                        <div class="col-md-12 form-group">
+                            <input type="text" placeholder="{{'block.add_block.search.placeholder' | translate}}"
+                                class="form-control" [(ngModel)]="search" required #name="ngModel" id="search" name="search">
+                        </div>
+                    </div>
                     <div class="row blocks">
-                        <div class="block {{block.type | underscore | slugify}}" *ngFor="let block of blocks">
+                        <div class="block {{block.type | underscore | slugify}}"
+                            *ngFor="let block of blocks | filterBy: ['name', 'description']: search">
 
                             <div class="col-md-3 col-sm-6">
                                 <span class="thumbnail">

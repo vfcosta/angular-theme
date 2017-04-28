@@ -70,6 +70,7 @@
     "block.add_block.button": "New Block",
     "block.add_block.confirm_button": "Add",
     "block.add_block.title": "Select a Block",
+    "block.add_block.search.placeholder": "Search for a block to add",
     "block.edition.extra_config": "Extra Configuration",
     "block.edition.cancel.button": "Cancel",
     "block.edition.display.always": "Display in all pages",

@@ -11,6 +11,8 @@ export class AddBlockComponent {
     @Input() owner: noosfero.Profile | noosfero.Environment;
     @Output() onAdd = new EventEmitter<noosfero.Block>();
 
+    search: string;
+
     blocks: noosfero.BlockDefinition[];
 
     constructor(@Inject("settingsService") private settingsService: SettingsService) { }

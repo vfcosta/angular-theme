@@ -1,3 +1,4 @@
+import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -21,7 +22,7 @@ describe("Components", () => {
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [NgPipesModule, ModalModule.forRoot()]
+                imports: [NgPipesModule, ModalModule.forRoot(), FormsModule]
             });
             fixture = TestBed.createComponent(AddBlockComponent);
             component = fixture.componentInstance;

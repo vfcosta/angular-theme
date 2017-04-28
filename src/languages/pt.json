@@ -71,6 +71,7 @@
     "block.add_block.confirm_button": "Adicionar",
     "block.add_block.title": "Selecione um Bloco",
     "block.edition.extra_config": "Configurações adicionais",
+    "block.add_block.search.placeholder": "Busque um bloco para adicionar",
     "block.edition.cancel.button": "Cancelar",
     "block.edition.display.always": "Mostrar em todas as páginas",
     "block.edition.display.except_home_page": "Exceto na página inicial",
