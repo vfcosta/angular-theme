@@ -313,6 +313,9 @@ export function getMocks() {
         profile: {
             id: 1
         },
+        injector: {
+            get: (obj: any) => { return { block: {identifier: 'identifier', settings: '', api_content: ''} }; }
+        },
         community: {
             id: 1,
             closed: true,
@@ -456,7 +459,7 @@ export function getMocks() {
             getTags: () => { }
         },
         communityService: {
-            sendInvitations: (communityId: number, people: noosfero.Person[]) => { },
+            sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),
             createNewCommunity: (community: noosfero.Community) => Promise.resolve({ })
         },
         sessionService: {
@@ -580,5 +583,5 @@ export function getMocks() {
             emitEvent: () => {},
             knownEvents: new NoosferoKnownEvents()
         }
-    }
+    };
 };

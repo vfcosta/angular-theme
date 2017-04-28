@@ -147,6 +147,8 @@
     "identifier": "identifier",
     "is invalid": "is invalid",
     "is not available.": "is not available",
+    "invite.send.success.title": "Invitation Sent",
+    "invite.send.success.message": "You invitation was sent. Please wait for the users confirmation.",
     "language.all": "All languages",
     "language.en": "English",
     "language.pt": "Portuguese",

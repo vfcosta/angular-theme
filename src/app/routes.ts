@@ -19,7 +19,7 @@ import { EnvironmentService } from "./../lib/ng-noosfero-api/http/environment.se
 import { DomainService } from "./../lib/ng-noosfero-api/http/domain.service";
 import { EnvironmentComponent } from "./environment/environment.component";
 import { EnvironmentHomeComponent } from "./environment/environment-home.component";
-import { CommunityMembersRouteComponent } from './profile/community-members/community-members-route.component';
+import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
 /** @ngInject */
 export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
@@ -29,7 +29,7 @@ export function noosferoRoutes($stateProvider: any) {
         abstract: true,
         name: 'main',
         resolve: {
-            currentUser: function (AuthService: AuthService) {
+            currentUser: function(AuthService: AuthService) {
                 return AuthService.loginFromCookie();
             }
         }
@@ -213,11 +213,11 @@ export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
         name: 'main.profile.members',
         url: "^/profile/:profile/members",
-        controller: CommunityMembersRouteComponent,
+        controller: CommunityMembersProfileComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/profile/community-members/community-members-route.html",
-                controller: CommunityMembersRouteComponent,
+                templateUrl: "app/profile/community-members/community-members-profile.html",
+                controller: CommunityMembersProfileComponent,
                 controllerAs: "ctrl"
             }
         }
@@ -263,6 +263,18 @@ export function noosferoRoutes($stateProvider: any) {
         views: {
             "myprofileContent": {
                 template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
+                controller: ProfileConfigurationOptionComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+    $stateProvider.state({
+        name: 'main.myprofile.members',
+        url: "/members?search",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "myprofileContent": {
+                template: "<noosfero-community-members-my-profile ng-if='ctrl.profile' [profile]='ctrl.profile'></noosfero-community-members-my-profile>",                
                 controller: ProfileConfigurationOptionComponent,
                 controllerAs: "ctrl"
             }

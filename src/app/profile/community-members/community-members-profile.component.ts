@@ -4,8 +4,8 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
 
 @Component({
     selector: 'community-members-route',
-    templateUrl: "app/profile/community-members/community-members-route.html"
+    templateUrl: "app/profile/community-members/community-members-profile.html"
 })
-export class CommunityMembersRouteComponent {
+export class CommunityMembersProfileComponent {
 
 }
