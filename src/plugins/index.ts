@@ -1,6 +1,6 @@
 import * as commentParagraph from "./comment_paragraph";
 import * as breadcrumbs from "./breadcrumbs";
-import * as section from "./section";
+import * as section from "./section_block";
 import * as video from "./video";
 import * as friends from "./friends";
 import * as profileImages from "./profile_images";

@@ -28,16 +28,18 @@ export class EditCommunityComponent extends AbstractFormCommunity {
     save() {
         let profile: any = Object.assign({}, _.omitBy(_.pick(this.community, ['id', 'identifier', 'name', 'closed']), _.isNull));
         this.profileService.update(profile).then( (result) => {
-            this.errors = null;
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
-            this.finished.emit(this.community);
         }).catch((response) => {
-            this.errors = response.data;
-            this.notificationService.error({ title: "profile.edition.error.title", message: response.data.message ? response.data.message : "profile.edition.error.message" });
+            let errors = response.data;
+            if (response.status === 422) {
+                this.nameErrors.setErrors(errors.errors_details.name);
+                this.nameErrors.setErrors(errors.errors_details.identifier);
+            } else {
+                this.notificationService.error({ title: "profile.edition.error.title", message: errors.message ? errors.message : "profile.edition.error.message" });
+            }
         });
     }
 
     cancel() {
-        this.finished.emit(this.community);
     }
 }

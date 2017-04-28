@@ -12,6 +12,7 @@ describe("Context Bar Component", () => {
     beforeEach(() => {
         angular.mock.module("templates");
     });
+    let mocks = helpers.getMocks();
 
     let properties = {
         owner: {
@@ -23,12 +24,11 @@ describe("Context Bar Component", () => {
         }
     };
 
-    let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
     let blockService = jasmine.createSpyObj("BlockService", ["updateAll"]);
     let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
 
     let eventFunction: Function;
-    eventsHubService.subscribeToEvent = (ev: string, fn: Function) => { eventFunction = fn; };
+    mocks.eventsHubService.subscribeToEvent = <any>((ev: string, fn: Function) => { eventFunction = fn; });
 
     let profileService = jasmine.createSpyObj("profileService", ["update"]);
     profileService.update = jasmine.createSpy("update").and.returnValue(helpers.mocks.promiseResultTemplate());
@@ -43,7 +43,7 @@ describe("Context Bar Component", () => {
             providers: [
                 helpers.createProviderToValue("$state", state),
                 helpers.createProviderToValue("$scope", scope),
-                helpers.createProviderToValue("EventsHubService", eventsHubService),
+                helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
                 helpers.createProviderToValue("BlockService", blockService),
                 helpers.createProviderToValue("NotificationService", helpers.mocks.notificationService),
                 helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService),

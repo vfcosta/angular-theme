@@ -14,10 +14,10 @@ import { AbstractFormCommunity } from './abstract-form-community';
     template: require('app/profile/configuration/communities/form-community.html'),
 })
 export class NewCommunityComponent extends AbstractFormCommunity {
+
     ngOnInit() {
         this.sessionProfile = this.sessionService.currentUser().person;
-        this.community = <noosfero.Community> {};
-        this.community.closed = true;
+        this.community = <noosfero.Community>{closed: true};
     }
 
     getTitle() {
@@ -26,19 +26,21 @@ export class NewCommunityComponent extends AbstractFormCommunity {
 
     save() {
         this.community.type = 'Community';
-        this.communityService.createNewCommunity(this.community).then( (result) => {
-            this.errors = null;
-            this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
-            this.finished.emit(this.community);
-            this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
-        }).catch((response) => {
-            this.errors = response.data;
-            this.notificationService.error({ title: "profile.edition.error.title", message: response.data.message ? response.data.message : "profile.edition.error.message" });
+        this.communityService.createNewCommunity(this.community).then((result) => {
+             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
+             this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
+        }).catch(response => {
+            let errors = response.data;
+            if (response.status === 422) {
+                this.nameErrors.setErrors(errors.errors_details.name);
+                this.nameErrors.setErrors(errors.errors_details.identifier);
+            } else {
+                this.notificationService.error({ title: "profile.edition.error.title", message: errors.message ? errors.message : "profile.edition.error.message" });
+            }
         });
     }
 
     cancel() {
-        this.finished.emit(this.community);
         this.$state.go('main.myprofile.communities', { profile: this.sessionProfile.identifier });
     }
 }

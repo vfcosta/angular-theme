@@ -31,7 +31,7 @@ export class ValidationMessageComponent {
     }
 
     getFrontendErrors() {
-        if (!this.field || !this.field.errors) return null;
+        if (!this.field || !this.field.errors) return [];
         return Object.keys(this.field.errors).map(key => this.prefix + "." + this.dasherize(key));
     }
 

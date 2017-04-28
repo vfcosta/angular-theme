@@ -1,3 +1,5 @@
+import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
+import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
@@ -133,6 +135,8 @@ import * as plugins from "../plugins";
         HighlightsBlockSettingsComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
+        DiscussionBlockUpgradeDirective,
+        BlockEditionComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -176,6 +180,7 @@ import * as plugins from "../plugins";
         HighlightsBlockSettingsComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
+        BlockEditionComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

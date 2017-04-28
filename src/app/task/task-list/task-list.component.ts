@@ -20,7 +20,6 @@ export class TaskListComponent {
 
     currentTask: noosfero.Task;
     confirmationTask: noosfero.Task;
-    eventsNames: NoosferoKnownEvents;
     private modalInstance: any = null;
 
     tasksGroups: noosfero.Task[];
@@ -30,12 +29,10 @@ export class TaskListComponent {
         @Inject("$uibModal") private $uibModal: any,
         @Inject("taskService") private taskService: TaskService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService) {
-
-        this.eventsNames = new NoosferoKnownEvents();
     }
 
     ngOnInit() {
-        this.eventsHubService.subscribeToEvent(this.eventsNames.TASK_CLOSED, (task: noosfero.Task) => {
+        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.TASK_CLOSED, (task: noosfero.Task) => {
             Arrays.remove(this.tasks, task);
         });
     }
@@ -94,7 +91,7 @@ export class TaskListComponent {
 
     private callCloseTask(action: string, title: string, message: string) {
         this.taskService.closeTask(this.confirmationTask, action).then(() => {
-            this.eventsHubService.emitEvent(this.eventsNames.TASK_CLOSED, this.currentTask);
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.TASK_CLOSED, this.currentTask);
             this.notificationService.success({ title: title, message: message });
         }).finally(() => {
             this.cancel();

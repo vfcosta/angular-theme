@@ -15,17 +15,17 @@ class DynamicComponentMock {
 
 describe("Components", () => {
     describe("Task List Component", () => {
-
+        let mocks = helpers.getMocks();
         let fixture: ComponentFixture<TaskListComponent>;
         let component: TaskListComponent;
 
         let taskService = jasmine.createSpyObj("taskService", ["getAllPending"]);
         let tasks = [{ id: 1 }, { id: 2 }];
-        let modal = helpers.mocks.$modal;
-        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
         taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
 
         beforeEach(async(() => {
+            spyOn(mocks.eventsHubService, 'emitEvent');
+            spyOn(mocks.$modal, 'open');
             let scope = helpers.mocks.scopeWithEvents;
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
             let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
@@ -35,17 +35,16 @@ describe("Components", () => {
                 declarations: [TaskListComponent, TranslatePipe, ProfileImageComponent, DynamicComponentMock],
                 providers: [
                     { provide: "taskService", useValue: taskService },
-                    { provide: "eventsHubService", useValue: eventsHubService },
+                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "$uibModal", useValue: helpers.mocks.$modal },
+                    { provide: "$uibModal", useValue: mocks.$modal },
                     { provide: "$scope", useValue: helpers.mocks.scopeWithEvents }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(TaskListComponent);
-                component = fixture.componentInstance;
-                component.tasks = <any>tasks;
             });
+            fixture = TestBed.createComponent(TaskListComponent);
+            component = fixture.componentInstance;
+            component.tasks = <any>tasks;
         }));
 
         it("return specific template for a task", () => {
@@ -61,13 +60,13 @@ describe("Components", () => {
         it("open confirmation modal when it has details to accept a task", () => {
             let task = { accept_details: true };
             component.accept(<any>task);
-            expect(modal.open).toHaveBeenCalled();
+            expect(mocks.$modal.open).toHaveBeenCalled();
         });
 
         it("open confirmation modal when it has details to reject a task", () => {
             let task = { reject_details: true };
             component.reject(<any>task);
-            expect(modal.open).toHaveBeenCalled();
+            expect(mocks.$modal.open).toHaveBeenCalled();
         });
 
         it("call api directly when it has no details to accept a task", () => {

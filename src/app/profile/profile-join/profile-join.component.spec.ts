@@ -13,8 +13,7 @@ describe("Components", () => {
 
     describe("Profile Join Component", () => {
 
-
-        let eventsHubService = jasmine.createSpyObj("eventsHubService", ["subscribeToEvent", "emitEvent"]);
+        let mocks = helpers.getMocks();
 
         let fixture: ComponentFixture<ProfileJoinComponent>;
         let component: ProfileJoinComponent;
@@ -37,15 +36,14 @@ describe("Components", () => {
                     { provide: "profileService", useValue: profileService },
                     { provide: "sessionService", useValue: session },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "eventsHubService", useValue: eventsHubService },
+                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "$uibModal", useValue: helpers.mocks.$modal },
                     { provide: "translatorService", useValue: translatorService }
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(ProfileJoinComponent);
-                component = fixture.componentInstance;
-                component.profile = <any>{ name: 'profile-name' };
             });
+            fixture = TestBed.createComponent(ProfileJoinComponent);
+            component = fixture.componentInstance;
+            component.profile = <any>{ name: 'profile-name' };
         }));
 
         it("display button to join community", () => {

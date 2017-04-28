@@ -14,17 +14,15 @@ export class SearchFormComponent {
 
     query: string;
     showSearch = false;
-    eventsNames: NoosferoKnownEvents;
 
     constructor(private $state: ng.ui.IStateService,
         private $scope: ng.IScope,
         private eventsHubService: EventsHubService) {
-        this.eventsNames = new NoosferoKnownEvents();
     }
 
     ngOnInit() {
         this.query = this.$state.params['query'];
-        this.eventsHubService.subscribeToEvent(this.eventsNames.OPEN_SEARCH_FORM, () => {
+        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.OPEN_SEARCH_FORM, () => {
             this.showSearch = true;
             this.$scope.$apply();
         });
