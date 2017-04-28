@@ -81,4 +81,11 @@ export class BoxesComponent {
         block.position = 1;
         box.blocks.unshift(block);
     }
+
+    updatePosition(sortedBlocks: noosfero.Block[]) {
+        let i = 0;
+        sortedBlocks.forEach((block: noosfero.Block) => {
+            block.position = ++i;
+        });
+    }
 }
