@@ -1,9 +1,16 @@
 <div ng-repeat="column in ctrl.columns">
-  <div class="{{ctrl.getBoxClass(column)}}" ng-init="box = ctrl.getBox($index)">
+  <div class="{{ctrl.getBoxClass(column)}} box"  ng-init="box = ctrl.getBox($index); sortedBlocks = box.blocks | orderBy: 'position'" dnd-list="sortedBlocks">
     <add-block ng-if="ctrl.designMode" (on-add)="ctrl.addBlock(box, $event)" [box]="box" [owner]="ctrl.owner"></add-block>
-    <noosfero-block ng-if="!column['subcolumns']" ng-repeat="block in box.blocks | orderBy: 'position'"
-      [block]="block" [owner]="ctrl.owner" [box]="box"></noosfero-block>
+
+    <noosfero-block ng-if="!column['subcolumns']" ng-repeat="block in sortedBlocks"
+      [block]="block" [owner]="ctrl.owner" [box]="box"
+      dnd-draggable="block"
+      dnd-moved="sortedBlocks.splice($index, 1);">
+    </noosfero-block>
+
     <noosfero-boxes ng-if="column['subcolumns']" [columns]="column['subcolumns']"
       [boxes]="ctrl.boxes" [owner]="ctrl.owner" [start-index]="ctrl.lastIndex"></noosfero-boxes>
+
+    <div class="dndPlaceholder"></div>
   </div>
 </div>
