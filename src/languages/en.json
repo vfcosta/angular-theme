@@ -229,7 +229,7 @@
     "profile.actions.new_discussion": "New Discussion",
     "profile.actions.new_item": "New Item",
     "profile.actions.new_post": "New Post",
-    "profile.actions.new_community": "+ Create community",
+    "profile.actions.new_community": "Create community",
     "profile.actions.add_friend": "Add friend",
     "profile.actions.remove_friend": "Remove friend",
     "profile.actions.add_friend.title": "Friendship request",
