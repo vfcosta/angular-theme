@@ -4,6 +4,7 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { NotificationService } from './../../../shared/services/notification.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
+import { ValidationMessageComponent } from '../../../shared/components/validation-message/validation-message.component';
 
 
 /**
@@ -21,7 +22,9 @@ export class ChangePasswordComponent {
     @Input() profile: noosfero.Profile;
     @Output() finished = new EventEmitter<any[]>();
 
-    @ViewChild('identifierErrors') identifierErrors;
+    @ViewChild('currentPasswordValidation') currentPassword: ValidationMessageComponent;
+    @ViewChild('newPasswordValidation') newPassword: ValidationMessageComponent;
+    @ViewChild('newPasswordConfirmationValidation') newPasswordConfirmation: ValidationMessageComponent;
 
     current_password: string;
     new_password: string;
@@ -37,13 +40,18 @@ export class ChangePasswordComponent {
             this.notificationService.error({ title: "new_password.failed.title", message: "profile.edition.password.error.message" });
             return false;
         } else {
-            this.userService.changePassword(this.profile, this.current_password, this.new_password, this.new_password_confirmation).then( response => {
+            this.userService.changePassword(this.profile, this.current_password, this.new_password, this.new_password_confirmation).then(response => {
                 this.errors = null;
                 this.notificationService.success({ title: "profile.edition.success.title", message: "new_password.success.message" });
                 this.$state.go('main.myprofile', { profile: this.profile.identifier });
-            }).catch( error => {
-                this.errors = error.message;
-                this.notificationService.error({ title: "new_password.failed.title", message: "new_password.failed.message" });
+            }).catch(error => {
+                console.log('======================== entrou', this.currentPassword);
+                this.errors = error.data;
+                this.currentPassword.setBackendErrors(this.errors);
+                this.newPassword.setBackendErrors(this.errors);
+                this.newPasswordConfirmation.setBackendErrors(this.errors);
+                console.log('#################3 errors', this.errors);
+
             });
         }
     }
