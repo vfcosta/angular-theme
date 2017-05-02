@@ -1,6 +1,6 @@
 <div *ngFor="let card of documents" class="deckgrid">
   <div class="a-card panel media">
-      <div class="author media-left" *ngIf="card.author">
+      <div class="author media-left" *ngIf="card.author && card.author.image">
         <img [alt]='"profile.image.description" | translate' [src]="card.author.image.url" class="img-circle">
       </div>
       <div class="header media-body">

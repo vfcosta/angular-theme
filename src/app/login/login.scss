@@ -19,6 +19,12 @@
   }
 }
 
+.btn-login{
+  @extend .btn;
+  @extend .btn-default;
+  @extend .btn-block;
+}
+
 .strike {
   display: block;
   text-align: center;

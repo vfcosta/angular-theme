@@ -21,7 +21,6 @@ import { BlockComponent } from "../layout/blocks/block.component";
 import { EnvironmentHomeComponent } from "../environment/environment-home.component";
 import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
 import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
-import { TopProfileImageComponent } from "../profile/top-image/top-profile-image.component";
 import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
 import { ProfileHeaderComponent } from "../profile/header/profile-header.component";
 import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
@@ -130,7 +129,7 @@ export class EnvironmentContent {
         ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
         EditableDirective,
-        DomainComponent, ContextBarComponent, TopProfileImageComponent, ProfileHeaderComponent,
+        DomainComponent, ContextBarComponent, ProfileHeaderComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
