@@ -44,7 +44,7 @@
     "coverage": "karma start --single-run",
     "test-single": "webpack && karma start --single-run",
     "test": "webpack -w --env.test",
-    "e2e": "protractor protractor.conf.js",
+    "e2e": "npm run tsc e2e/*.ts && protractor protractor.conf.js",
     "jenkins": "webpack && karma start --single-run",
     "postinstall": "bower install --allow-root; typings install; cd dev-scripts; typings install; cd ../; npm run fix-ngforward",
     "start": "concurrently \"webpack -w\" \"gulp --theme=$npm_package_config_theme --skin=$npm_package_config_skin serve\"",
