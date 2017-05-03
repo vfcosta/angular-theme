@@ -21,20 +21,11 @@ export class ValidationMessageComponent {
     }
 
     setBackendErrors(errorObjects: any) {
-            console.log('%%%%%%%%%%%%%%0', this.field, this.field.name);
-        if (!errorObjects) {
-            console.log('%%%%%%%%%%%%%%1', errorObjects);
-        
-            console.log('fieldName', this.field, this.field.name);
-            return;
-        }
+        if (!errorObjects) return;
         if (errorObjects["errors_details"][this.field.name]) {
-            console.log('%%%%%%%%%%%%%%2', errorObjects, this.field.name);
-            
             this.backendErrors["errors_details"] = errorObjects["errors_details"][this.field.name];
         }
         if (errorObjects["errors_messages"][this.field.name]) {
-            console.log('%%%%%%%%%%%%%%3', errorObjects, this.field.name);
             this.backendErrors["errors_messages"] = errorObjects["errors_messages"][this.field.name];
         }
     }
@@ -81,4 +72,3 @@ export class ValidationMessageComponent {
         return text.charAt(0).toUpperCase() + text.slice(1);
     }
 }
-

@@ -17,3 +17,4 @@ src/vendor.bundle.js*
 src/vendor.test.bundle.js*
 .vagrant/
 *.sw*
+e2e/*.js

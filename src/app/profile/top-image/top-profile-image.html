@@ -1,9 +1,7 @@
-<div class="top-profile-image-content" ng-class="{'with-top-image': ctrl.hasTopImage(), 'without-top-image': !ctrl.hasTopImage()}">
-  <div class="top-profile-image-wrap" title="{{ctrl.profile.name}}">
-    <div class="container container-camera-top" ng-if="ctrl.isEditable()">
-      <div ngf-select="ctrl.fileSelected($file)" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
-        <a href="" class="fa fa-camera upload-camera-top"></a>
-      </div>
+<div class="top-profile-image-content" ng-class="{'with-top-image': hasTopImage(), 'without-top-image': !hasTopImage()}">
+  <div class="top-profile-image-wrap" title="{{profile.name}}">
+    <div class="container container-camera-top" ng-if="isEditable()">
+      <image-upload #imageUpload (finished)="upload($event)"></image-upload>
     </div>
   </div>
 </div>

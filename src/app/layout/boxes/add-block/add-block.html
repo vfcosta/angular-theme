@@ -1,0 +1,44 @@
+<button type="button" class="btn-add-block btn btn-default" (click)="modal.show()"><i class="fa fa-plus fa-fw"></i> {{"block.add_block.button" | translate}}</button>
+
+<div class="modal fade" bsModal #modal="bs-modal"
+    tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" (onShow)="loadAvailableBlocks()">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title pull-left">{{"block.add_block.title" | translate}}</h4>
+                <button type="button" class="close pull-right" aria-label="Close" (click)="modal.hide()">
+                    <span aria-hidden="true"><i class="fa fa-times fa-fw"></i></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row search-blocks">
+                        <div class="col-md-12 form-group">
+                            <input type="text" placeholder="{{'block.add_block.search.placeholder' | translate}}"
+                                class="form-control" [(ngModel)]="search" required #name="ngModel" id="search" name="search">
+                        </div>
+                    </div>
+                    <div class="row blocks">
+                        <div class="block {{block.type | underscore | slugify}}"
+                            *ngFor="let block of blocks | filterBy: ['name', 'description']: search">
+
+                            <div class="col-md-3 col-sm-6">
+                                <span class="thumbnail">
+                                    <div class="placeholder"></div>
+                                    <h4 class="block-name">{{block.name}}</h4>
+                                    <div class="block-description">{{block.description | stripTags | shorten: 80 : '...'}}</div>
+                                    <div class="actions">
+                                        <button class="btn-confirm-add btn btn-success btn-xs right" (click)="addBlock(block); modal.hide()">
+                                            <i class="fa fa-plus fa-fw"></i> {{"block.add_block.confirm_button" | translate}}
+                                        </button>
+                                    </div>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -58,4 +58,10 @@ describe("Boxes Component", () => {
         expect(helper.all('.col-md-9 .col-md-9').length).toEqual(1);
         expect(helper.all('.col-md-9 .col-md-3').length).toEqual(1);
     });
+
+    it("insert block into blocks list when receive event", () => {
+        let box = <noosfero.Box>{ id: 1, blocks: []};
+        helper.component.addBlock(box, <noosfero.Block>{});
+        expect(box.blocks.length).toEqual(1);
+    });
 });

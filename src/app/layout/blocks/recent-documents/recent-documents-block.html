@@ -1,11 +1,12 @@
 <div *ngFor="let card of documents" class="deckgrid">
-  <div class="a-card panel media" (click)="openDocument(card)">
-      <div class="author media-left" *ngIf="card.author">
+  <div class="a-card panel media">
+      <div class="author media-left" *ngIf="card.author && card.author.image">
         <img [alt]='"profile.image.description" | translate' [src]="card.author.image.url" class="img-circle">
       </div>
       <div class="header media-body">
-        <h5 class="title media-heading">{{card.title}}</h5>
-
+        <a class="page-link" uiSref="main.profile.page" [uiParams]="{profile: card.profile.identifier, page: card.path}">
+          <h5 class="title media-heading">{{card.title}}</h5>
+        </a>
         <div class="subheader">
           <span class="time">
             <i class="fa fa-clock-o"></i> <span>{{card.created_at | dateFormat | amTimeAgo}}</span>

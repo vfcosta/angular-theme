@@ -21,6 +21,7 @@ export class BlockService extends RestangularService<noosfero.Block> {
     }
 
     getApiContent(block: noosfero.Block, params?: any) {
+        if (!block.id) return Promise.resolve({}); // return empty when block is not persisted yet
         let apiContentPromise = this.$q.defer();
         if (block) {
             if (block.api_content) {
@@ -68,5 +69,15 @@ export class BlockService extends RestangularService<noosfero.Block> {
             block: { images_builder: base64ImagesJson }
         };
         return this.post(null, element, attributesToUpdate, headers);
+    }
+
+    getAvailableBlocks(owner: noosfero.Profile | noosfero.Environment): ng.IPromise<noosfero.RestResult<noosfero.BlockDefinition[]>> {
+        let restRequest;
+        if (owner.type === 'Environment') {
+            restRequest = this.restangularService.one("environments", owner.id);
+        } else {
+            restRequest = this.restangularService.one("profiles", owner.id);
+        }
+        return restRequest.all("blocks").get("available_blocks");
     }
 }

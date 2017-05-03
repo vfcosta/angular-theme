@@ -1,3 +1,5 @@
+import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
+import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
 import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
 import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
@@ -213,6 +215,12 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoBlockEdition',
     downgradeComponent({ component: BlockEditionComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('addBlock',
+    downgradeComponent({ component: AddBlockComponent, inputs: ['box', 'owner'], outputs: ['onAdd'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoTopProfileImage',
+    downgradeComponent({ component: TopProfileImageComponent, inputs: ['profile', 'editable'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

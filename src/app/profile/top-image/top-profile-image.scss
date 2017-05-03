@@ -1,12 +1,13 @@
 noosfero-top-profile-image {
   .container-camera-top {
-    .upload-camera-top {
+    .upload-camera {
       padding: 10px;
       border-radius: 5px;
       text-decoration: none;
       font-size: 1.5em;
       text-shadow: 0px 0px 3px black;
       color: white;
+      z-index: 2000;
       &:hover{
         font-size: 1.5em;
         color: #cacaca;

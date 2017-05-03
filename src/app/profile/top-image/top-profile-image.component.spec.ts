@@ -1,58 +1,61 @@
-/**
- * @ngdoc overview
- * @name components.noosfero.top-profile-image.ProfileImageSpec
- * @description
- *  This file contains the tests for the {@link components.noosfero.top-profile-image.ProfileImage} component.
- */
-import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
-import { TestComponentBuilder, ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder';
-import { Pipe, Input, provide, Component } from 'ng-forward';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
-
+import { TopProfileImageComponent } from './top-profile-image.component';
 import * as helpers from "../../../spec/helpers";
-
-import { TopProfileImageComponent } from "./top-profile-image.component";
-
-const htmlTemplate: string = '<noosfero-top-profile-image [editable]="true" [edit-class]="editable-class" [profile]="vm.profile"></noosfero-top-profile-image>';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
+    describe("Section Block Component", () => {
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<TopProfileImageComponent>;
+        let component: TopProfileImageComponent;
 
-    describe("Top Profile Image Component", () => {
-
-        let helper: ComponentTestHelper<TopProfileImageComponent>;
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let profileService = jasmine.createSpyObj("profileService", ["upload"]);
-            let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
-            let properties = { profile: { custom_footer: "footer", top_image: "top_image.png" } };
-            let upload = jasmine.createSpyObj("Upload", ["dataUrl"]);
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [TopProfileImageComponent],
-                properties: properties,
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [TopProfileImageComponent],
                 providers: [
-                    helpers.createProviderToValue("ProfileService", profileService),
-                    helpers.createProviderToValue("PermissionService", permissionService),
-                    helpers.createProviderToValue('Upload', upload)
-                ]
+                    { provide: "permissionService", useValue: mocks.permissionService },
+                    { provide: "profileService", useValue: mocks.profileService }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });
-            helper = new ComponentTestHelper<TopProfileImageComponent>(cls, done);
+            fixture = TestBed.createComponent(TopProfileImageComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>mocks.profile;
+            fixture.detectChanges();
+        }));
+
+
+        it("hasTopImage be false if there is no image", () => {
+            expect(component.hasTopImage()).toBeFalsy();
         });
 
-        it("is editable be true in blocks that are editable", () => {
-            expect(helper.component.editable).toBe(true);
+        it("hasTopImage be true profiel has top image", () => {
+            mocks.profile.top_image = '/tmp/image.png'
+            expect(component.hasTopImage()).toBeTruthy();
+        });
+
+        it("is editable be true if it's editable", () => {
+            component.editable = true;
+            expect(component.isEditable()).toBe(true);
+        });
+
+        it("is editable be false if it's not editable", () => {
+            component.editable = false;
+            expect(component.isEditable()).toBe(false);
         });
 
         it("is not editable in editable blocks but without permission", () => {
-            helper.component['permissionService'].isAllowed = jasmine.createSpy("isAllowed").and.returnValue(false);
-            expect(helper.component.isEditable()).toBe(false);
+            component.editable = true;
+            component['permissionService'].isAllowed = jasmine.createSpy("isAllowed").and.returnValue(false);
+            expect(component.isEditable()).toBe(false);
         });
 
         it("is editable in editable blocks with edit permission", () => {
-            helper.component['permissionService'].isAllowed = jasmine.createSpy("isAllowed").and.returnValue(true);
-            expect(helper.component.isEditable()).toBe(true);
+            component.editable = true;
+            component['permissionService'].isAllowed = jasmine.createSpy("isAllowed").and.returnValue(true);
+            expect(component.isEditable()).toBe(true);
         });
+
     });
+
 });

@@ -23,16 +23,17 @@ describe("Components", () => {
                     { provide: "translatorService", useValue: helpers.mocks.translatorService },
                     { provide: "noosferoTemplate", useValue: noosferoTemplate }
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(LinkListBlockComponent);
-                component = fixture.componentInstance;
-                component.block = {id: 1, type: 'Block'};
-                component.owner = {id: 1, identifier: 'profile', name: 'profile-name'};
-                component.links = [
+            });
+            fixture = TestBed.createComponent(LinkListBlockComponent);
+            component = fixture.componentInstance;
+            component.block = {id: 1, type: 'Block', settings: {
+                links: [
                     { name: "link1", address: "http://link1", icon: "fa-file-o" },
                     { name: "link2", address: "http://link2", icon: "fa-file-o" }
-                ];
-            });
+                ]}
+            };
+            component.owner = {id: 1, identifier: 'profile', name: 'profile-name'};
+            fixture.detectChanges();
         }));
 
         it("receives the block and the owner as inputs", () => {

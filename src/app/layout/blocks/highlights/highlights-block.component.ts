@@ -16,6 +16,7 @@ export class HighlightsBlockComponent {
 
     ngOnInit() {
         this.images = (<any>this.block.api_content || {}).slides || [];
+        if (!this.block.settings) this.block.settings = <any>{};
         if ((<any>this.block.settings).shuffle) {
             this.images = _.shuffle(this.images);
         }
