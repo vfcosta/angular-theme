@@ -10,7 +10,7 @@
       <div class="modal-body">
         <image-upload-crop [file]="file" [(data)]="data"></image-upload-crop>
         <div class="actions">
-          <button type="submit" class="btn btn-default" (click)="finish()">{{"profile.image.upload" | translate}}</button>
+          <button type="submit" class="btn btn-default btn-upload" (click)="finish()">{{"profile.image.upload" | translate}}</button>
           <button type="submit" class="btn btn-warning" (click)="staticModal.hide()">{{"profile.image.editor.cancel.button" | translate}}</button>
         </div>
       </div>
