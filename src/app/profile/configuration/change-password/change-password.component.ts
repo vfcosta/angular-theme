@@ -45,13 +45,10 @@ export class ChangePasswordComponent {
                 this.notificationService.success({ title: "profile.edition.success.title", message: "new_password.success.message" });
                 this.$state.go('main.myprofile', { profile: this.profile.identifier });
             }).catch(error => {
-                console.log('======================== entrou', this.currentPassword);
                 this.errors = error.data;
                 this.currentPassword.setBackendErrors(this.errors);
                 this.newPassword.setBackendErrors(this.errors);
                 this.newPasswordConfirmation.setBackendErrors(this.errors);
-                console.log('#################3 errors', this.errors);
-
             });
         }
     }
