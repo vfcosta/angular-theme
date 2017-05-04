@@ -29,6 +29,7 @@ export class MenuBlockComponent {
     selected: any;
     articles: any[];
     dragulaOptions: any;
+    selectedArticle: noosfero.Article;
 
     constructor(private elementRef: ElementRef,
         @Inject('translatorService') private translatorService: TranslatorService,
@@ -211,21 +212,19 @@ export class MenuBlockComponent {
 
     public addArticle() {
         let enabled = this.block.api_content.enabled_items;
-        for (let i = 0; i < this.articles.length; i++) {
-            if (this.articles[i].title === this.selected) {
-                let article = this.articles[i];
-                this.links.push(article);
-                this.articles.splice(i, 1);
-                enabled.push({ title: article.title, path: article.path });
-                break;
-            }
-        }
+        this.links.push(this.selectedArticle);
+        enabled.push({ title: this.selectedArticle.title, path: this.selectedArticle.path });
         this.block.api_content.enabled_items = enabled;
         this.cancelArticle();
     }
 
     public cancelArticle() {
         this.selected = '';
+        this.selectedArticle = null;
+    }
+
+    selectArticle($event: any) {
+        this.selectedArticle = $event.item;
     }
 
     @HostListener('document:click', ['$event'])
