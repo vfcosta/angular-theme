@@ -101,9 +101,10 @@ $navbar-font-color: #fff;
 	      min-width: 350px;
 	      padding: 10px;
 
-        .dropdown-menu-profile-image {
-          display: inline-block;
-          width: 40%;
+        noosfero-profile-image {
+          img {
+            max-width: 5em;
+          }
         }
 
         .profile-menu-info {
