@@ -71,4 +71,12 @@
   .popover {
     min-width: 300px
   }
+  .search-article {
+    width: 78%;
+    display: inline-block;
+    @extend .input-sm;
+  }
+  .btn-close {
+    margin-left: 6px;
+  }
 }

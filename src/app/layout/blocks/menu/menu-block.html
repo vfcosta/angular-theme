@@ -15,12 +15,12 @@
           </li>
           <li class="list-group-item borderless">
             <input [(ngModel)]="selected" (typeaheadOnSelect)="selectArticle($event)" [typeahead]="articles" typeaheadOptionField="translatedTitle" placeholder="{{'blocks.menu.article.placeholder' | translate}}"
-              class="form-group form-control">
+              class="form-group form-control search-article">
+            <button type="button" class="btn btn-default btn-close" (click)="popover.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
             <div class="form-group actions">
               <button *ngIf="selectedArticle" type="button" class="btn btn-primary btn-add-article" (click)="addArticle()">
                 <i class="fa fa-check" aria-hidden="true"></i>{{'blocks.menu.article.add' | translate}}
               </button>
-              <button type="button" class="btn btn-default" (click)="popover.hide()"><i class="fa fa-close" aria-hidden="true"></i></button>
             </div>
           </li>
         </ul>
