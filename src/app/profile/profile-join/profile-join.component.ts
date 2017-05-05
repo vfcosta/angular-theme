@@ -43,6 +43,7 @@ export class ProfileJoinComponent {
             if (result.data.pending) {
                 this.notificationService.success({ title: "profile.join.moderation.title", message: "profile.join.moderation.message" });
             } else {
+                this.notificationService.success({ title: "profile.join.moderation.title", message: "profile.join.success.message" });
                 this.loadMembership();
             }
         });
