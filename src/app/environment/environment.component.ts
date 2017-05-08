@@ -1,10 +1,8 @@
-import { DesignModeService } from './../shared/services/design-mode.service';
-import { Input, Component, Inject, provide } from 'ng-forward';
-import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
-import { NotificationService } from "../shared/services/notification.service";
-import { EnvironmentHomeComponent } from "./environment-home.component";
-import { SearchComponent } from "../search/search.component";
+import { EnvironmentService } from '../../lib/ng-noosfero-api/http/environment.service';
 import { AuthEvents, AuthService } from '../login';
+import { NotificationService } from '../shared/services/notification.service';
+import { DesignModeService } from './../shared/services/design-mode.service';
+import { Component, Inject, provide } from 'ng-forward';
 
 
 /**
@@ -21,14 +19,14 @@ import { AuthEvents, AuthService } from '../login';
         provide('designModeService', { useClass: DesignModeService })
     ]
 })
-@Inject(EnvironmentService, "$state", NotificationService, AuthService, '$scope')
+@Inject(EnvironmentService, "$state", NotificationService, AuthService)
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];
     environment: noosfero.Environment;
 
     constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService,
-        private AuthService: AuthService, private $scope: ng.IScope, private designModeService: DesignModeService) {
+        private AuthService: AuthService, private designModeService: DesignModeService) {
         designModeService.setInDesignMode(false);
         let environmentPromise: Promise<noosfero.Environment>;
         environmentPromise = environmentService.getCurrentEnvironment();
