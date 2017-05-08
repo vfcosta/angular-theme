@@ -1,3 +1,4 @@
+import { DesignModeService } from './../shared/services/design-mode.service';
 import { Input, Component, Inject, provide } from 'ng-forward';
 import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
 import { NotificationService } from "../shared/services/notification.service";
@@ -15,7 +16,8 @@ import { SearchComponent } from "../search/search.component";
     selector: 'environment',
     templateUrl: "app/environment/environment.html",
     providers: [
-        provide('notificationService', { useClass: NotificationService })
+        provide('notificationService', { useClass: NotificationService }),
+        provide('designModeService', { useClass: DesignModeService })
     ]
 })
 @Inject(EnvironmentService, "$state")
@@ -24,7 +26,10 @@ export class EnvironmentComponent {
     boxes: noosfero.Box[];
     @Input() environment: noosfero.Environment;
 
-    constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService) {
+    constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService,
+        private notificationService: NotificationService, private designModeService: DesignModeService) {
+
+        designModeService.setInDesignMode(false);
         let environmentPromise: Promise<noosfero.Environment>;
         if (this.$state.params['environment'].id) {
             this.environment = this.$state.params['environment'];

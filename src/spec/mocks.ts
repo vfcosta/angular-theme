@@ -454,7 +454,8 @@ export function getMocks() {
                 subscribe: (fn: Function) => { },
                 next: (param: any) => { }
             },
-            isInDesignMode: () => { return false; }
+            isInDesignMode: () => { return false; },
+            setInDesignMode: (value: boolean) => {}
         },
         $translate: {
             use: (lang?: string) => {

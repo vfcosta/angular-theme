@@ -1,3 +1,4 @@
+import { DesignModeService } from './../shared/services/design-mode.service';
 import { quickCreateComponent } from "../../spec/helpers";
 import { EnvironmentComponent } from "./environment.component";
 import * as helpers from "../../spec/helpers";
@@ -11,6 +12,8 @@ describe("Components", () => {
         let notificationMock: any;
         let $state: any;
         let defaultEnvironment = <any>{ id: 1, name: 'Noosfero' };
+        let mocks = helpers.getMocks();
+        let designModeServiceMock = <DesignModeService>mocks.designModeService;
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;
@@ -31,7 +34,7 @@ describe("Components", () => {
         });
 
         it("get the default environment", done => {
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, designModeServiceMock);
             $rootScope.$apply();
             expect(component.environment).toEqual({ id: 1, name: 'Noosfero' });
             done();
@@ -39,7 +42,7 @@ describe("Components", () => {
 
         it("get the environment boxes", done => {
             $state.params = { environment: {} };
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, designModeServiceMock);
             $rootScope.$apply();
             expect(environmentServiceMock.getBoxes).toHaveBeenCalled();
             expect(component.boxes).toEqual([{ id: 2 }]);
@@ -52,12 +55,18 @@ describe("Components", () => {
             $state.params = { environment: {} };
             environmentServiceMock.getBoxes = jasmine.createSpy('getBoxes').and.returnValue(environmentResponse.promise);
 
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, designModeServiceMock);
             $rootScope.$apply();
 
             expect(notificationMock.error).toHaveBeenCalled();
             done();
         });
 
+        it("reset design mode", done => {
+            spyOn(designModeServiceMock, "setInDesignMode");
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, designModeServiceMock);
+            expect(designModeServiceMock.setInDesignMode).toHaveBeenCalledWith(false);
+            done();
+        });
     });
 });

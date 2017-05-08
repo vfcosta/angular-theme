@@ -1,3 +1,4 @@
+import { DesignModeService } from './../shared/services/design-mode.service';
 import { Component, Inject, provide, Input } from 'ng-forward';
 import { ProfileHomeComponent } from './profile-home.component';
 import { BasicEditorComponent } from '../article/cms/basic-editor/basic-editor.component';
@@ -24,16 +25,19 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
     directives: [ActivitiesComponent, ProfileActionsComponent],
     providers: [
         provide('profileService', { useClass: ProfileService }),
-        provide('notificationService', { useClass: NotificationService })
+        provide('notificationService', { useClass: NotificationService }),
+        provide('designModeService', { useClass: DesignModeService })
     ]
 })
-@Inject(ProfileService, "$stateParams", "$state")
+@Inject(ProfileService, "$stateParams", "$state", NotificationService, DesignModeService)
 export class ProfileComponent {
 
     boxes: noosfero.Box[];
     @Input() profile: noosfero.Profile;
 
-    constructor(private profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService, private notificationService: NotificationService) {
+    constructor(private profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService,
+        private notificationService: NotificationService, private designModeService: DesignModeService) {
+        designModeService.setInDesignMode(false);
         let profilePromise: Promise<noosfero.Profile>;
         if (this.$state.params['currentProfile'].id) {
             this.profile = this.$state.params['currentProfile'];
