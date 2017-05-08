@@ -22,11 +22,13 @@ export class ProfileConfigurationComponent {
         this.profileIdentifier = this.$stateParams["profile"];
         this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
             this.profile = profile;
-            if (this.profile.type === 'Community') {
-                this.$state.go('main.myprofile.community_edit', { profile: this.profile.identifier });
-            }
-            else {
-                this.$state.go('main.myprofile.personal_data', { profile: this.profile.identifier });
+            if (this.$state.current.name === 'main.myprofile') {
+                if (this.profile.type === 'Community') {
+                    this.$state.go('main.myprofile.community_edit', { profile: this.profile.identifier });
+                }
+                else {
+                    this.$state.go('main.myprofile.personal_data', { profile: this.profile.identifier });
+                }
             }
         });
     }
