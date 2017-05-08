@@ -1,9 +1,9 @@
-import { Input, Component } from 'ng-forward';
+import { Input, Component } from '@angular/core';
 import { BoxesComponent } from '../boxes/boxes.component';
 
 @Component({
     selector: "layout-config",
-    templateUrl: "app/layout/layout-config/layout-config.html"
+    template: require("app/layout/layout-config/layout-config.html")
 })
 export class LayoutConfigComponent {
 

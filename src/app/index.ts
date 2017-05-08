@@ -1,3 +1,9 @@
+import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
+import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
+import { ConfigBarComponent } from './layout/config-bar/config-bar.component';
+import { LayoutConfigComponent } from './layout/layout-config/layout-config.component';
+import { ContextBarComponent } from './layout/context-bar/context-bar.component';
+import { ProfileHeaderComponent } from "./profile/header/profile-header.component";
 import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
@@ -225,6 +231,24 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoPostComment',
         downgradeComponent({ component: PostCommentComponent, inputs: ['article', 'parent', 'comment'], outputs: ['commentSaved'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoProfileHeader',
+    downgradeComponent({ component: ProfileHeaderComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('contextBar',
+    downgradeComponent({ component: ContextBarComponent, inputs: ['owner', 'permissionAction'] }) as angular.IDirectiveFactory
+    ).
+    directive('layoutConfig',
+    downgradeComponent({ component: LayoutConfigComponent, inputs: ['owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('configBar',
+    downgradeComponent({ component: ConfigBarComponent, inputs: ['owner', 'permissionAction'] }) as angular.IDirectiveFactory
+    ).
+    directive('profileActions',
+    downgradeComponent({ component: ProfileActionsComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('designToggler',
+    downgradeComponent({ component: DesignModeTogglerComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

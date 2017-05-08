@@ -1,57 +1,70 @@
-import { Input, Component, provide } from 'ng-forward';
-
+import { Input, Component } from '@angular/core';
 import * as helpers from "../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
 import { ProfileActionsComponent } from './profile-actions.component';
-
-// this htmlTemplate will be re-used between the container components in this spec file
-const htmlTemplate: string = '<profile-actions [profile]="ctrl.profile"></profile-actions>';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { TranslatePipe } from '../../shared/pipes/translate-pipe';
+import { By } from '@angular/platform-browser';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 describe('Profile Actions Component', () => {
+    let mocks = helpers.getMocks();
+    let fixture: ComponentFixture<ProfileActionsComponent>;
+    let component: ProfileActionsComponent;
 
-    let helper: ComponentTestHelper<ProfileActionsComponent>;
-
-    beforeEach(angular.mock.module("templates"));
-
-    let providers = [
-        provide('ArticleService', {
-            useValue: helpers.mocks.articleService
-        })
-    ].concat(helpers.provideFilters("translateFilter"));
-
-    beforeEach((done) => {
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [ProfileActionsComponent],
-            providers: providers
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            imports: [BsDropdownModule.forRoot()],
+            declarations: [ProfileActionsComponent, TranslatePipe],
+            providers: [
+                { provide: "articleService", useValue: helpers.mocks.articleService },
+                { provide: "translatorService", useValue: mocks.translatorService }
+            ],
+            schemas: [NO_ERRORS_SCHEMA]
         });
-        helper = new ComponentTestHelper<ProfileActionsComponent>(cls, done);
-    });
-
+        fixture = TestBed.createComponent(ProfileActionsComponent);
+        component = fixture.componentInstance;
+        component.profile = <noosfero.Profile>{ id: 1, identifier: 'adminuser', type: "Person", permissions: ['allow_edit'] };
+    }));
+    
     it('renders content viewer actions directive', () => {
-        expect(helper.all("profile-actions").length).toEqual(1);
+        expect(queryAll(".profile-menu").length).toEqual(1);
     });
 
     it('return article parent as container when it is not a folder', () => {
         let article = <noosfero.Article>({ id: 1, type: 'TextArticle', parent: { id: 2 } });
-        expect(helper.component.getArticleContainer(article)).toEqual(2);
+        expect(component.getArticleContainer(article)).toEqual(2);
     });
 
     it('return article as container when it is a folder', () => {
         let article = <noosfero.Article>({ id: 1, type: 'Folder' });
-        expect(helper.component.getArticleContainer(article)).toEqual(1);
+        expect(component.getArticleContainer(article)).toEqual(1);
     });
 
     it('return article as container when it is a blog', () => {
         let article = <noosfero.Article>({ id: 1, type: 'Blog' });
-        expect(helper.component.getArticleContainer(article)).toEqual(1);
+        expect(component.getArticleContainer(article)).toEqual(1);
     });
 
     it("render the actions new item menu", () => {
-        expect(helper.all("a[class|='btn dropdown-toggle']")[0]).not.toBeNull();
+        expect(queryAll("a[class|='btn btn-sm btn-primary']")[0]).not.toBeNull();
     });
 
-    it("render two menu item actions", () => {
-        expect(helper.all(".profile-menu ul li").length).toBe(2);
-    });
+    it("render two menu item actions", fakeAsync( () => {
+        renderDynamicDropDownMenu();
+        expect(queryAll(".profile-actions-item").length).toBe(2);
+    }));
+
+    function queryAll(selector: string) {
+        let compiled = fixture.debugElement;
+        return compiled.queryAll(By.css(selector));
+    }
+
+    function renderDynamicDropDownMenu() {
+        fixture.detectChanges();
+        let toggleButton = fixture.nativeElement.querySelector('button');
+        toggleButton.click();
+        tick();
+        fixture.detectChanges();
+    }
 });

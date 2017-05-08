@@ -1,4 +1,5 @@
 import { NotificationService } from './../../shared/services/notification.service';
+import { DesignModeService } from './../../shared/services/design-mode.service';
 import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
 import { SessionService } from './../../login/session.service';
 import { Inject, Input, Component, HostListener, ElementRef, ViewChild  } from "@angular/core";
@@ -19,13 +20,15 @@ export class ProfileSummaryComponent {
     showAddFriend = false;
     showRemoveFriend = false;
     showConfig = false;
+    designMode = false;
     @ViewChild("popover") popover;
 
     constructor(private elementRef: ElementRef,
         @Inject('environmentService') private environmentService: EnvironmentService,
         @Inject('sessionService') private session: SessionService,
         @Inject('personService') private personService: PersonService,
-        @Inject('notificationService') private notificationService: NotificationService) {
+        @Inject('notificationService') private notificationService: NotificationService,
+        @Inject('designModeService') private designModeService: DesignModeService) {
 
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
@@ -47,6 +50,10 @@ export class ProfileSummaryComponent {
         if (this.profile.permissions.indexOf('allow_edit') > -1) {
             this.showConfig = true;
         }
+        this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            this.designMode = designModeOn;
+        });
+        this.designMode = this.designModeService.isInDesignMode();        
     }
 
     profileLink() {

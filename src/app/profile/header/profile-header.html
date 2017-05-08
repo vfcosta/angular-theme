@@ -1,11 +1,11 @@
-<div class="profile-header" style="{{ctrl.profileBackground()}}">
+<div class="profile-header" [style]="profileBackground()">
   <div class="container">
     <div class="row top-bar">
-      <noosfero-top-profile-image  class="col-md-1" [profile]="ctrl.profile" [editable]="true" [edit-class]="editable-class"></noosfero-top-profile-image>
-      <context-bar [owner]="ctrl.profile" class="col-md-11 pull-right"></context-bar>
+      <noosfero-top-profile-image  class="col-md-1" [profile]="profile" [editable]="designMode"></noosfero-top-profile-image>
+      <context-bar [owner]="profile" class="col-md-11 pull-right"></context-bar>
     </div>
     <div class="row bottom-bar">
-      <noosfero-profile-summary class="col-md-12" [profile]="ctrl.profile"></noosfero-profile-summary>
+      <noosfero-profile-summary class="col-md-12" [profile]="profile"></noosfero-profile-summary>
     </div>
   </div>
 </div>

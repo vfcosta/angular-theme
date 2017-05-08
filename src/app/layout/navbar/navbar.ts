@@ -7,7 +7,6 @@ import { DesignModeTogglerComponent } from '../design-mode-toggler/design-mode-t
 @Component({
     selector: "acme-navbar",
     templateUrl: "app/layout/navbar/navbar.html",
-    directives: [DesignModeTogglerComponent],
     providers: [AuthService, SessionService, EnvironmentService]
 })
 @Inject("$uibModal", AuthService, "SessionService", "$state", BodyStateClassesService, EnvironmentService)

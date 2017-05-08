@@ -1,4 +1,4 @@
-import { Inject, Input, Component } from 'ng-forward';
+import { Inject, Input, Component } from '@angular/core';
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
 import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
@@ -11,13 +11,12 @@ declare var _: any;
 
 @Component({
     selector: "context-bar",
-    templateUrl: "app/layout/context-bar/context-bar.html"
+    template: require("app/layout/context-bar/context-bar.html")
 })
-@Inject("$state", "$scope", EventsHubService, BlockService, NotificationService, DesignModeService, ProfileService, EnvironmentService)
 export class ContextBarComponent {
 
     @Input() owner: noosfero.Profile | noosfero.Environment;
-    @Input() permissionAction: any;
+    @Input() permissionAction = 'allow_edit';
 
     blocksChanged: noosfero.Block[];
     designModeOn = false;
@@ -25,14 +24,15 @@ export class ContextBarComponent {
     originalCustomHeader: string;
     originalCustomFooter: string;
 
-    constructor(private $state: ng.ui.IStateService,
-        private $scope: ng.IScope,
-        private eventsHubService: EventsHubService,
-        private blockService: BlockService,
-        private notificationService: NotificationService,
-        private designModeService: DesignModeService,
-        private profileService: ProfileService,
-        private environmentService: EnvironmentService) {
+    constructor(
+        @Inject("$state") private $state: ng.ui.IStateService,
+        @Inject("$scope") private $scope: ng.IScope,
+        @Inject('eventsHubService') private eventsHubService: EventsHubService,
+        @Inject('blockService') private blockService: BlockService,
+        @Inject('notificationService') private notificationService: NotificationService,
+        @Inject('designModeService') private designModeService: DesignModeService,
+        @Inject('profileService') private profileService: ProfileService,
+        @Inject('environmentService') private environmentService: EnvironmentService) {
     }
 
     ngOnInit() {
@@ -94,7 +94,6 @@ export class ContextBarComponent {
             boxesHolder['boxes_attributes'] = boxes;
         }
         if (this.isLayoutTemplateChanged()) boxesHolder['layout_template'] = this.owner.layout_template;
-
         return this.callOwnerService(<any> boxesHolder).then(() => {
             this.blocksChanged = [];
             this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, this.owner);

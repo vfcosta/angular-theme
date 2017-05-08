@@ -14,7 +14,7 @@ describe("Components", () => {
         let $state: any;
         let defaultEnvironment = <any>{ id: 1, name: 'Noosfero' };
         let mocks = helpers.getMocks();
-        let designModeServiceMock = <DesignModeService>mocks.designModeService;
+        let designModeServiceMock = <DesignModeService> mocks.designModeService;
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;

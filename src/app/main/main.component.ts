@@ -1,68 +1,46 @@
+import * as theme from '../../../themes';
+import * as plugins from '../../plugins';
+import { RegisterComponent } from '../account/register.component';
+import { DomainComponent } from '../domain/domain.component';
+import { BlockContentComponent } from '../layout/blocks/block-content.component';
+import { BlockComponent } from '../layout/blocks/block.component';
+import { MainBlockComponent } from '../layout/blocks/main/main-block.component';
+import { BoxesComponent } from '../layout/boxes/boxes.component';
+import { Navbar } from '../layout/navbar/navbar';
+import { ThemeFooterComponent } from '../layout/theme-footer/theme-footer.component';
+import { ThemeHeaderComponent } from '../layout/theme-header/theme-header.component';
+import { AuthService } from '../login/auth.service';
+import { PasswordComponent } from '../login/new-password.component';
+import { SessionService } from '../login/session.service';
+import { CustomContentComponent } from '../profile/custom-content/custom-content.component';
+import { ProfileComponent } from '../profile/profile.component';
+import { SearchFormComponent } from '../search/search-form/search-form.component';
+import { SearchComponent } from '../search/search.component';
+import { BootstrapResizableDirective } from '../shared/components/bootstrap-resizable/bootstrap-resizable.directive';
+import { EditableDirective } from '../shared/components/editable/editable.directive';
+import { PermissionDirective } from '../shared/components/permission/permission.directive';
+import { DateFormat } from '../shared/pipes/date-format.filter';
+import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
+import { NoosferoUrl } from '../shared/pipes/noosfero-url.filter';
+import { EventsHubService } from '../shared/services/events-hub.service';
+import { NotificationService } from '../shared/services/notification.service';
+import { TasksMenuComponent } from '../task/tasks-menu/tasks-menu.component';
+import { CommunityService } from './../../lib/ng-noosfero-api/http/community.service';
+import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.service';
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
-import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
+import { ArticleViewComponent } from './../article/article-default-view.component';
+import { ArticleIconComponent } from './../article/article-icon/article-icon.component';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
-import { BasicOptionsComponent } from './../article/cms/basic-options/basic-options.component';
 import { BasicEditorComponent } from './../article/cms/basic-editor/basic-editor.component';
+import { BasicOptionsComponent } from './../article/cms/basic-options/basic-options.component';
+import { ArticleBlogComponent } from './../article/types/blog/blog.component';
+import { FolderComponent } from './../article/types/folder/folder.component';
+import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
+import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
+import { HeaderService } from './../shared/services/header.service';
 import { TaskAcceptComponent } from './../task/task-list/task-accept.component';
-import * as plugins from "../../plugins";
-import * as theme from "../../../themes";
-import { provide, bundle, Component, Inject } from "ng-forward";
-import { ArticleBlogComponent } from "./../article/types/blog/blog.component";
-import { FolderComponent } from "./../article/types/folder/folder.component";
-import { ArticleIconComponent } from "./../article/article-icon/article-icon.component";
-import { ArticleViewComponent } from "./../article/article-default-view.component";
-
-import { PasswordComponent } from "../login/new-password.component";
-import { ProfileComponent } from "../profile/profile.component";
-import { BoxesComponent } from "../layout/boxes/boxes.component";
-import { BlockContentComponent } from "../layout/blocks/block-content.component";
-import { BlockComponent } from "../layout/blocks/block.component";
-import { EnvironmentHomeComponent } from "../environment/environment-home.component";
-import { LinkListBlockComponent } from "../layout/blocks/link-list/link-list-block.component";
-import { ProfileImageBlockComponent } from "../layout/blocks/profile-image/profile-image-block.component";
-import { ProfileSummaryComponent } from "../profile/summary/profile-summary.component";
-import { ProfileHeaderComponent } from "../profile/header/profile-header.component";
-import { StatisticsBlockComponent } from "../layout/blocks/statistics/statistics-block.component";
-import { CustomContentComponent } from "../profile/custom-content/custom-content.component";
-import { RegisterComponent } from "../account/register.component";
-import { HighlightsBlockComponent } from "../layout/blocks/highlights/highlights-block.component";
-import { EditableLinkComponent } from "../shared/components/editable-link/editable-link.component";
-import { IconPickerComponent } from "../shared/components/icon-picker/icon-picker.component";
-
-import { NoosferoTemplate } from "../shared/pipes/noosfero-template.filter";
-import { NoosferoUrl } from "../shared/pipes/noosfero-url.filter";
-import { DateFormat } from "../shared/pipes/date-format.filter";
-
-import { AuthService } from "../login/auth.service";
-import { SessionService } from "../login/session.service";
-import { EnvironmentService } from "./../../lib/ng-noosfero-api/http/environment.service";
-import { CommunityService } from "./../../lib/ng-noosfero-api/http/community.service";
-import { NotificationService } from "../shared/services/notification.service";
-import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
-import { DomainService } from "../../lib/ng-noosfero-api/http/domain.service";
-
-import { BodyStateClassesService } from "./../shared/services/body-state-classes.service";
-
-import { Navbar } from "../layout/navbar/navbar";
-
-import { MainBlockComponent } from "../layout/blocks/main/main-block.component";
-import { PermissionDirective } from "../shared/components/permission/permission.directive";
-import { BootstrapResizableDirective } from "../shared/components/bootstrap-resizable/bootstrap-resizable.directive";
-import { EditableDirective } from "../shared/components/editable/editable.directive";
-import { SearchComponent } from "../search/search.component";
-import { SearchFormComponent } from "../search/search-form/search-form.component";
-import { EventsHubService } from "../shared/services/events-hub.service";
-import { NoosferoKnownEvents } from "../known-events";
-import { TasksMenuComponent } from "../task/tasks-menu/tasks-menu.component";
-import { ThemeHeaderComponent } from "../layout/theme-header/theme-header.component";
-import { ThemeFooterComponent } from "../layout/theme-footer/theme-footer.component";
-import { LayoutConfigComponent } from "../layout/layout-config/layout-config.component";
-import { ConfigBarComponent } from "../layout/config-bar/config-bar.component";
-import { ContextBarComponent } from "../layout/context-bar/context-bar.component";
-import { DomainComponent } from "../domain/domain.component";
-
-import { HeaderService } from "./../shared/services/header.service";
+import { Component, Inject, provide } from 'ng-forward';
 
 /**
  * @ngdoc controller
@@ -127,9 +105,9 @@ export class EnvironmentContent {
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
         BlockComponent, RegisterComponent, TasksMenuComponent,
         ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
-        FolderComponent, ArticleIconComponent, LayoutConfigComponent, ConfigBarComponent, BootstrapResizableDirective,
+        FolderComponent, ArticleIconComponent, BootstrapResizableDirective,
         EditableDirective,
-        DomainComponent, ContextBarComponent, ProfileHeaderComponent,
+        DomainComponent,
         ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,

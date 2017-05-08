@@ -1,3 +1,9 @@
+import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
+import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
+import { ConfigBarComponent } from './layout/config-bar/config-bar.component';
+import { LayoutConfigComponent } from './layout/layout-config/layout-config.component';
+import { ContextBarComponent } from './layout/context-bar/context-bar.component';
+import { ProfileHeaderComponent } from './profile/header/profile-header.component';
 import { CommentFormHotspotComponent } from './hotspot/comment-form-hotspot.component';
 import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
@@ -138,6 +144,12 @@ import { SharedModule } from './shared.module';
         TopProfileImageComponent,
         PostCommentComponent,
         CommentFormHotspotComponent,
+        ProfileHeaderComponent,
+        ContextBarComponent,
+        LayoutConfigComponent,
+        ProfileActionsComponent,
+        ConfigBarComponent,
+        DesignModeTogglerComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -182,6 +194,12 @@ import { SharedModule } from './shared.module';
         AddBlockComponent,
         TopProfileImageComponent,
         PostCommentComponent,
+        ProfileHeaderComponent,
+        ContextBarComponent,
+        LayoutConfigComponent,
+        ProfileActionsComponent,
+        ConfigBarComponent,
+        DesignModeTogglerComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
@@ -211,6 +229,8 @@ import { SharedModule } from './shared.module';
         'UserService',
         'EnvironmentService',
         'CommentService',
+        'DesignModeService',
+        '$sce'
     ])
 })
 
