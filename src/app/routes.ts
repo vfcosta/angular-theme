@@ -45,8 +45,7 @@ export function noosferoRoutes($stateProvider: any) {
                 controller: EnvironmentComponent,
                 controllerAs: "ctrl"
             }
-        },
-        params: { environment: {} }
+        }
     });
     $stateProvider.state({
         controller: EnvironmentHomeComponent,
@@ -58,8 +57,7 @@ export function noosferoRoutes($stateProvider: any) {
                 controller: EnvironmentHomeComponent,
                 controllerAs: "vm"
             }
-        },
-        params: { environment: {} }
+        }
     });
     $stateProvider.state({
         controller: DomainComponent,
