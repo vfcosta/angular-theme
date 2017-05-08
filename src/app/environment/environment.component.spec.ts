@@ -4,7 +4,7 @@ import { EnvironmentComponent } from "./environment.component";
 import * as helpers from "../../spec/helpers";
 
 describe("Components", () => {
-    fdescribe("Environment Component", () => {
+    describe("Environment Component", () => {
 
         let $rootScope: ng.IRootScopeService;
         let $q: ng.IQService;
