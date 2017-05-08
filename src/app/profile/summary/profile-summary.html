@@ -25,7 +25,7 @@
                 <div *ngIf="showRemoveFriend">
                     <button class="btn btn-warning" (click)="removeFriend()"><i class="fa fa-minus" aria-hidden="true"></i> {{"profile.actions.remove_friend" | translate}} </button>
                 </div>
-                <profile-join [profile]="profile"></profile-join>
+                <profile-join *ngIf='currentUser' [profile]="profile"></profile-join>
             </div>
             <div class="profile-setup action">
                 <a href="#" class="btn btn-default btn-sm" uiSref="main.myprofile" [uiParams]="{profile: profile.identifier}" *ngIf="showConfig">
