@@ -154,7 +154,6 @@ export class MainComponent {
         environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
             let environment = result.data;
             environmentService.setCurrentEnvironment(environment);
-            return environment;
         });
     }
 }

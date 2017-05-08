@@ -58,5 +58,7 @@ namespace noosfero {
          */
         boxes: noosfero.Box[];
 
+        permissions: string[];
+
     }
 }
