@@ -22,6 +22,7 @@ import { EnvironmentHomeComponent } from "./environment/environment-home.compone
 import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
 /** @ngInject */
 export function noosferoRoutes($stateProvider: any) {
+
     $stateProvider.state({
         controller: MainContentComponent,
         url: '',
@@ -174,18 +175,20 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
+
     $stateProvider.state({
-        name: 'main.profile.home.destroy',
-        url: "^/myprofile/:profile/profile_editor/destroy_profile",
+        name: 'main.myprofile.destroy',
+        url: "/destroy_profile",
         controller: DestroyProfileComponent,
         views: {
-            "actions@main": {
+            "myprofileContent": {
                 template: "<div></div>",
                 controller: DestroyProfileComponent,
-                controllerAs: "vm"
+                controllerAs: "ctrl"
             }
         }
     });
+
     $stateProvider.state({
         name: 'main.register',
         url: "/account/signup",
@@ -274,24 +277,13 @@ export function noosferoRoutes($stateProvider: any) {
         controller: ProfileConfigurationOptionComponent,
         views: {
             "myprofileContent": {
-                template: "<noosfero-community-members-my-profile ng-if='ctrl.profile' [profile]='ctrl.profile'></noosfero-community-members-my-profile>",                
+                template: "<noosfero-community-members-my-profile ng-if='ctrl.profile' [profile]='ctrl.profile'></noosfero-community-members-my-profile>",
                 controller: ProfileConfigurationOptionComponent,
                 controllerAs: "ctrl"
             }
         }
     });
-    $stateProvider.state({
-        name: 'main.myprofile.destroy',
-        url: "/profile_editor/destroy_profile",
-        controller: DestroyProfileComponent,
-        views: {
-            "myprofileContent": {
-                template: "<div></div>",
-                controller: DestroyProfileComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+
     $stateProvider.state({
         name: 'main.myprofile.community_new',
         url: "/community/new",
