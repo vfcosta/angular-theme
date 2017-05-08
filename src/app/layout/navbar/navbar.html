@@ -52,7 +52,9 @@
                     <noosfero-profile-image [profile]="ctrl.currentUser.person" [editable]="false" [icon-size]="'fa-5x'"></noosfero-profile-image>
                   </div>
                   <div class="col-xs-8 col-sm-8 col-md-8 profile-menu-info">
-                    <div class="row name" ng-bind="ctrl.currentUser.person.name"></div>
+                    <div class="row name">
+                      <a ui-sref="main.profile.home({profile: ctrl.currentUser.person.identifier})">{{ctrl.currentUser.person.name}}</a>
+                    </div>
                     <div class="row email" ng-bind="ctrl.currentUser.email"></div>
                     <div class="row text-center">
                       <a class="btn btn-default btn-edit" ui-sref="main.myprofile({profile: ctrl.currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
