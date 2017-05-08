@@ -25,6 +25,7 @@ describe("Components", () => {
             profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier"]);
             $state = jasmine.createSpyObj("$state", ["go"]);
             $state.go = jasmine.createSpy("go").and.returnValue($q.defer().resolve(''));
+            $state.is = jasmine.createSpy("is");
             let profilePromise = $q.defer();
             profilePromise.resolve(profile);
 
