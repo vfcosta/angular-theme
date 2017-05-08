@@ -1,24 +1,15 @@
 <div class="video-block">
-	<videogular>
-    <vg-media vg-src="ctrl.config.sources" vg-youtube="rel=0;showinfo=1"></vg-media>
-		<vg-controls>
-			<vg-play-pause-button></vg-play-pause-button>
-			<vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
-			<vg-scrub-bar>
-				<vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-			</vg-scrub-bar>
-			<vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
-			<vg-volume>
-				<vg-mute-button></vg-mute-button>
-				<vg-volume-bar></vg-volume-bar>
-			</vg-volume>
-			<vg-fullscreen-button></vg-fullscreen-button>
-		</vg-controls>
-		<vg-overlay-play></vg-overlay-play>
-		<div class="overlay">
-			<div class='container-video'>
-				<i class="fa fa-video-camera" editable-text="ctrl.block.settings.url"></i>
-			</div>
-		</div>
-	</videogular>
+	<div *ngIf="config.video_type === 'youtube'" class='youtube'>
+		<iframe class="video-block-center" [width]="config.width" [height]="config.height"
+			[src]="config.url" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+	</div>
+	<div *ngIf="config.video_type === 'vimeo'" class='vimeo'>
+		<iframe class="video-block-center" [width]="config.width" [height]="config.height"
+			[src]="config.url" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
+	</div>
+	<div *ngIf="config.video_type === 'video'" class='video'>
+		<video controls class="video-block-center" [width]="config.width" [height]="config.height">
+			<source [src]="config.url">
+		</video>
+	</div>
 </div>
