@@ -6,12 +6,13 @@ import { NotificationService } from './../../../shared/services/notification.ser
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
+import { ValidationMessageComponent } from '../../../shared/components/validation-message/validation-message.component';
 
 export abstract class AbstractFormCommunity {
     @Input() public profile: noosfero.Profile;
     public community: noosfero.Community;
     @Output() public finished = new EventEmitter<noosfero.Community>();
-    @ViewChild('nameErrors') nameErrors;
+    @ViewChild('nameErrors') nameErrors: ValidationMessageComponent;
 
     public errors: any;
     public acceptBefore: boolean = true;

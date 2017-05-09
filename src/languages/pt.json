@@ -323,6 +323,7 @@
     "profile.edition.name.required": "Nome é obrigatório",
     "profile.edition.name.blank": "Nome não pode estar vazio",
     "profile.edition.name.not_available": "O nome não está disponível",
+	"profile.edition.name.minlength": "O nome não pode ser tão pequeno",
     "profile.edition.identifier.required": "Nome de usuário é obrigatório",
     "profile.edition.identifier.not_available": "O nome de usuário já está sendo utilizado",
     "profile.edition.identifier.change_message": "A url do perfil será modificada",
