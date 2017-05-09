@@ -35,10 +35,11 @@ export class ChangePasswordComponent {
         @Inject("notificationService") private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService) { }
 
-    save() {
+    save(event: Event) {
+        event.preventDefault();
         if (this.new_password !== this.new_password_confirmation) {
-            this.errors.push({ title: "new_password.failed.title", message: "profile.edition.password.error.message" });
-            //return false;
+            this.newPasswordConfirmation.pushError({error: 'profile.edition.password.error.message'})
+            return false;
         } else {
             this.userService.changePassword(this.profile, this.current_password, this.new_password, this.new_password_confirmation)
                 .then(response => {
@@ -49,11 +50,8 @@ export class ChangePasswordComponent {
                 .catch(error => {
                     this.errors = error.data;
                     this.currentPassword.setBackendErrors(this.errors);
-                    console.log('this.currentPassword.setBackendErrors(this.errors)', this.errors);
                     this.newPassword.setBackendErrors(this.errors);
-                    console.log('this.newPassword.setBackendErrors(this.errors)');
                     this.newPasswordConfirmation.setBackendErrors(this.errors);
-                    console.log('this.newPasswordConfirmation.setBackendErrors(this.errors)');
                 });
         }
     }

@@ -26,13 +26,13 @@ describe("Components", () => {
                     { provide: "userService", useValue: userService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "translatorService", useValue: helpers.mocks.translatorService },
-                    { provide: "$state", useValue: $state},
+                    { provide: "$state", useValue: $state },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(ChangePasswordComponent);
                 component = fixture.componentInstance;
-                component.profile = <noosfero.Profile>{id: 1, identifier: 'profile1' };
+                component.profile = <noosfero.Profile>{ id: 1, identifier: 'profile1' };
             });
         }));
 
@@ -41,7 +41,8 @@ describe("Components", () => {
             component.new_password = 'teste123';
             component.new_password_confirmation = 'teste123';
             fixture.detectChanges();
-            component.save();
+            let e: Event;
+            component.save(e);
             tick();
             expect(component.errors).toBeNull();
         }));
@@ -52,7 +53,8 @@ describe("Components", () => {
             component.new_password_confirmation = 'teste1234';
             fixture.detectChanges();
             tick();
-            expect(component.save()).toEqual(false);
+            let e: Event;
+            expect(component.save(e)).toEqual(false);
         }));
 
     });

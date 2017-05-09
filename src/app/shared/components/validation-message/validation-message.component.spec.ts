@@ -38,7 +38,7 @@ describe("Components", () => {
             component.backendErrors["errors_details"] = [{"error": "blank"}];
             component['translatorService'].hasTranslation = jasmine.createSpy("hasTranslation").and.returnValue(true);
             component['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Name is required");
-            component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
+            // component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
             expect(component.getBackendErrors()).toEqual(["Name is required"]);
         });
 
@@ -51,7 +51,7 @@ describe("Components", () => {
                 return (myParam !== component.prefix + component.dasherize("blank"));
             });
             component['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Is required");
-            component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
+            // component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
             expect(component.getBackendErrors()).toEqual(["Is required"]);
         });
 
@@ -61,7 +61,7 @@ describe("Components", () => {
             component['translatorService'].hasTranslation = jasmine.createSpy('hasTranslation').and.callFake(function(myParam) {
                 return false;
             });
-            component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
+            // component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
             component.setBackendErrors(
                 {"errors_details": {"identifier": [{"error": "blank"}, {"error": "not_available"}]},
                 "errors_messages": {"identifier": ["não pode ficar em branco", "não está disponível."]},

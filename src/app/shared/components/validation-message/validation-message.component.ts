@@ -24,8 +24,7 @@ export class ValidationMessageComponent {
         );
     }
 
-    private pushErrors(errorObject: any) {
-        console.log('###### errorObject', errorObject);
+    pushError(errorObject: any) {
         let error: string;
         if (this.translatorService.hasTranslation(this.getCompleteErrorKey(errorObject.error))) {
             error = this.getCompleteErrorKey(errorObject.error);
@@ -34,29 +33,17 @@ export class ValidationMessageComponent {
         } else {
             error = errorObject.full_message;
         }
-        // let errorKey = this.dasherize(errorObject.error);
-        // console.log('%%%%% error:', error, '@@key@@', errorKey);
-        let bli = {};
-        bli = {error};
-
         let errors = {};
         let name: string = error;
         delete errorObject.error;
         errors[name] = errorObject;
-console.log('********', errors);
-
 
         this.field.control.setErrors(errors);
-        // console.log('%%%%% bli:', bli);
-        
-        // this.field.errors ? this.field.errors.push(error) : this.field.control.setErrors(bli);
     }
 
-    // TODO: change this method name to pushBackendErrors
     setBackendErrors(errorObjects: any) {
-        console.log('###### errorObjects', errorObjects, errorObjects.errors, this.field.name, errorObjects.errors[this.field.name]);
         if (errorObjects.errors && errorObjects.errors[this.field.name]) errorObjects.errors[this.field.name].forEach(errorObject => {
-            this.pushErrors(errorObject);
+            this.pushError(errorObject);
         });
     }
 
@@ -68,6 +55,10 @@ console.log('********', errors);
         }
     }
 
+    getBackendErrors() {
+
+    }
+
 
     dasherize(text: string) {
         return text.toLowerCase().replace(/\s/g, '-').replace(/\./g, '');
@@ -76,8 +67,4 @@ console.log('********', errors);
     private getCompleteErrorKey(key: string) {
         return this.prefix ? this.prefix + "." + this.dasherize(key) : this.dasherize(key);
     }
-
-    // capitalizeFirstLetter(text: string) {
-    //     return text.charAt(0).toUpperCase() + text.slice(1);
-    // }
 }
