@@ -1,9 +1,8 @@
+import { EnvironmentService } from '../../lib/ng-noosfero-api/http/environment.service';
+import { AuthEvents, AuthService } from '../login';
+import { NotificationService } from '../shared/services/notification.service';
 import { DesignModeService } from './../shared/services/design-mode.service';
-import { Input, Component, Inject, provide } from 'ng-forward';
-import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
-import { NotificationService } from "../shared/services/notification.service";
-import { EnvironmentHomeComponent } from "./environment-home.component";
-import { SearchComponent } from "../search/search.component";
+import { Component, Inject, provide } from 'ng-forward';
 
 
 /**
@@ -20,23 +19,17 @@ import { SearchComponent } from "../search/search.component";
         provide('designModeService', { useClass: DesignModeService })
     ]
 })
-@Inject(EnvironmentService, "$state")
+@Inject(EnvironmentService, "$state", NotificationService, AuthService)
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];
-    @Input() environment: noosfero.Environment;
+    environment: noosfero.Environment;
 
-    constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService,
-        private notificationService: NotificationService, private designModeService: DesignModeService) {
-
+    constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService,
+        private AuthService: AuthService, private designModeService: DesignModeService) {
         designModeService.setInDesignMode(false);
         let environmentPromise: Promise<noosfero.Environment>;
-        if (this.$state.params['environment'].id) {
-            this.environment = this.$state.params['environment'];
-            environmentPromise = Promise.resolve(this.environment);
-        } else {
-            environmentPromise = environmentService.getCurrentEnvironment();
-        }
+        environmentPromise = environmentService.getCurrentEnvironment();
         environmentPromise.then((environment: noosfero.Environment) => {
             this.environment = environment;
             return this.environmentService.getBoxes(this.environment.id);
@@ -47,6 +40,17 @@ export class EnvironmentComponent {
             this.$state.transitionTo('main');
             this.notificationService.error({ message: "notification.environment.not_found" });
         });
-    }
 
+        this.AuthService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
+            environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                Object.assign(this.environment, result.data);
+            });
+        });
+        this.AuthService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
+            environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                Object.assign(this.environment, result.data);
+                this.environment.permissions = undefined;
+            });
+        });
+    }
 }
