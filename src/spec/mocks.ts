@@ -535,6 +535,12 @@ export function getMocks() {
             return {
                 toISOString: () => { }
             };
+        },
+        localStorageService: {
+            storage: {},
+            remove: (key: string) => { delete mocks.localStorageService.storage[key]; },
+            get: (key: string) => { return mocks.localStorageService.storage[key]; },
+            set: (key: string, value: any) => { mocks.localStorageService.storage[key] = value; }
         }
     };
     return mocks;

@@ -9,9 +9,9 @@ import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 describe("BodyStateClasses Service", () => {
 
+    let mocks = helpers.getMocks();
     let currentStateName = "main";
     let bodyStateClasseService: BodyStateClassesService;
-    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
     let $document: ng.IDocumentService = <any>{},
         $state: ng.ui.IStateService = <any>{
             current: {
@@ -21,7 +21,7 @@ describe("BodyStateClasses Service", () => {
         authService: any = helpers.mocks.authService,
         bodyEl: { className: string },
         bodyElJq: any,
-        designModeService = new DesignModeService($localStorage);
+        designModeService = new DesignModeService(mocks.localStorageService);
 
     let transitionFunction: Function;
     let $transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
@@ -30,7 +30,7 @@ describe("BodyStateClasses Service", () => {
     };
 
     let getService = (): BodyStateClassesService => {
-        return new BodyStateClassesService($document, $state, authService, designModeService, $localStorage, $transitions);
+        return new BodyStateClassesService($document, $state, authService, designModeService, mocks.localStorageService, $transitions);
     };
 
     beforeEach(() => {
@@ -205,11 +205,11 @@ describe("BodyStateClasses Service", () => {
         bodyElJq.removeClass = jasmine.createSpy("removeClass");
         service["bodyElement"] = bodyElJq;
         service.setThemeSkin('skin-test2');
-        expect($localStorage.settings.skin).toEqual('skin-test2');
+        expect(mocks.localStorageService.get('skin')).toEqual('skin-test2');
     });
 
     it("get theme skin from local storage", () => {
-        $localStorage.settings.skin = 'skin-test3';
+        mocks.localStorageService.set('skin', 'skin-test3');
         expect(getService().getThemeSkin()).toEqual('skin-test3');
     });
 });

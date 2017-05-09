@@ -6,6 +6,7 @@ import {DesignModeService} from '../../shared/services/design-mode.service';
 import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
 
 describe('DesignModeToggler Component', () => {
+    let mocks = helpers.getMocks();
     const htmlTemplate: string = '<design-toggler></design-toggler>';
 
     let helper: ComponentTestHelper<DesignModeTogglerComponent>;
@@ -15,9 +16,8 @@ describe('DesignModeToggler Component', () => {
     });
 
     let designModeService: DesignModeService;
-    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
     beforeEach((done) => {
-        designModeService = new DesignModeService($localStorage);
+        designModeService = new DesignModeService(mocks.localStorageService);
         let cls = createClass({
             template: htmlTemplate,
             directives: [DesignModeTogglerComponent],

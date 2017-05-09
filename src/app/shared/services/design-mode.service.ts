@@ -2,32 +2,27 @@ import { Injectable, Output, EventEmitter, Inject } from 'ng-forward';
 import { INoosferoLocalStorage } from "..//models/interfaces";
 
 @Injectable()
-@Inject("$localStorage")
+@Inject("localStorageService")
 export class DesignModeService {
 
     @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     isInDesignMode(): boolean {
-        return this.$localStorage.settings && this.$localStorage.settings.designModeOn;
+        return this.localStorageService.get('designModeOn');
     }
 
     destroy() {
-        delete this.$localStorage.settings;
-        this.$localStorage.settings = {};
+        this.localStorageService.remove('designModeOn');
     }
 
     setInDesignMode(value: boolean) {
         if (this.isInDesignMode() !== value) {
-            this.$localStorage.settings.designModeOn = value;
+            this.localStorageService.set('designModeOn', value);
             this.onToggle.next(value);
         }
     }
 
-    constructor(private $localStorage: INoosferoLocalStorage) {
-        if (!this.$localStorage.settings) {
-            this.$localStorage.settings = {};
-        } else {
-            this.onToggle.next(this.isInDesignMode());
-        }
+    constructor(private localStorageService: any) {
+        this.onToggle.next(this.isInDesignMode());
     }
 }

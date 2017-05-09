@@ -3,10 +3,10 @@ import { INoosferoLocalStorage } from "./../shared/models/interfaces";
 import { PersonService } from "../../lib/ng-noosfero-api/http/person.service";
 
 @Injectable()
-@Inject("$localStorage", "$log", PersonService)
+@Inject("localStorageService", "$log", PersonService)
 export class SessionService {
 
-    constructor(private $localStorage: INoosferoLocalStorage, private $log: ng.ILogService, private personService: PersonService) {
+    constructor(private localStorageService: any, private $log: ng.ILogService, private personService: PersonService) {
     }
 
     reloadUser() {
@@ -20,17 +20,17 @@ export class SessionService {
     }
 
     create(user: noosfero.User): noosfero.User {
-        this.$localStorage.currentUser = user;
-        return this.$localStorage.currentUser;
+        this.localStorageService.set('currentUser', user);
+        return this.localStorageService.get('currentUser');
     };
 
     destroy() {
-        delete this.$localStorage.currentUser;
-        delete this.$localStorage.settings;
+        this.localStorageService.remove('currentUser');
+        this.localStorageService.remove('settings');
     };
 
     currentUser(): noosfero.User {
-        return this.$localStorage.currentUser;
+        return this.localStorageService.get('currentUser');
     };
 
 }
