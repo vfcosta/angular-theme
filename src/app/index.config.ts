@@ -8,8 +8,11 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
     $translateProvider: angular.translate.ITranslateProvider,
     tmhDynamicLocaleProvider: any,
     $urlMatcherFactoryProvider: angular.ui.IUrlMatcherFactory,
-    $urlRouterProvider: angular.ui.IUrlRouterProvider) {
+    $urlRouterProvider: angular.ui.IUrlRouterProvider,
+    localStorageServiceProvider: any) {
 
+    localStorageServiceProvider.setStorageType('localStorage');
+    localStorageServiceProvider.setPrefix('noosfero');
     $logProvider.debugEnabled(true);
     $locationProvider.html5Mode({ enabled: true });
     RestangularProvider.setBaseUrl("/api/v1");

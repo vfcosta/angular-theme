@@ -4,7 +4,7 @@
         <div class="" ng-mouseenter="showChange(true)" ng-mouseleave="showChange(false)">
           <img *ngIf="!designMode && getSectionImage()" [src]="getSectionImage().url" class="img-responsive section-image img-circle">
           <div class="hovereffect" *ngIf="designMode">
-              <i *ngIf="!getSectionImage()" class="fa fa-users fa-5x profile-image"></i>
+              <i *ngIf="!getSectionImage()" class="fa fa-pie-chart fa-4x profile-image"></i>
               <img *ngIf="getSectionImage()" [alt]='"profile.image.description" | translate' [src]="getSectionImage().url" class="img-responsive section-image img-circle">
               <div class='container-camera'>
                 <image-upload #imageUpload (finished)="upload($event)"></image-upload>

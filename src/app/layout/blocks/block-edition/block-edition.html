@@ -1,9 +1,9 @@
 <ng-template #popoverTemplate>
     <div class="edit-block">
         <div class="list-group block-option" *ngFor='let optionKey of optionsKeys()'>
-            <a  class="list-group-item" href="" [ngClass]="{'selected': isOptionSelected(optionKey, option)}" (click)="selectOption(optionKey, option)" *ngFor='let option of optionsValues(optionKey)'>
+            <button class="list-group-item btn-link btn" [ngClass]="{'selected': isOptionSelected(optionKey, option)}" (click)="selectOption(optionKey, option)" *ngFor='let option of optionsValues(optionKey)'>
                 {{"block.edition." + optionKey + "." + option | translate}}
-            </a>
+            </button>
         </div>
     </div>
 </ng-template>

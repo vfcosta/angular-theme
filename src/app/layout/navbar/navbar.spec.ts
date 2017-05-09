@@ -5,12 +5,12 @@ import { ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder'
 import { SessionService, AuthService, AuthController, AuthEvents } from "./../../login";
 import events from 'ng-forward/cjs/events/events';
 import { DesignModeService } from '../../shared/services/design-mode.service';
-import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 describe("Components", () => {
 
     describe("Navbar Component", () => {
 
+        let mocks = helpers.getMocks();
         let user: noosfero.User = null;
         let scope: any;
         let $rootScope: ng.IRootScopeService;
@@ -80,8 +80,8 @@ describe("Components", () => {
                     provide('DesignModeService', {
                         useValue: helpers.mocks.designModeService
                     }),
-                    provide('$localStorage', {
-                        useValue: <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } }
+                    provide('localStorageService', {
+                        useValue: mocks.localStorageService
                     }),
                     provide('$transitions', {
                         useValue: $transitions

@@ -1,4 +1,4 @@
-var path = require('path');
+let path = require('path');
 
 import { browser, element, by } from "protractor";
 
@@ -10,16 +10,18 @@ fdescribe('Noosfero Home', () => {
 
     it('should change top profile image', function() {
         element(by.css('#navbar .login')).click();
-        var email = element(by.css('#email'));
+        let email = element(by.css('#email'));
         email.sendKeys("adminuser");
-        var password = element(by.css('#passwd'));
-        password.sendKeys("123456");
+        let password = element(by.css('#passwd'));
+        password.sendKeys("admin");
         element(by.css('.btn-login')).click();
+        browser.sleep(1000);
+        element(by.css('noosfero-top-profile-image image-upload .upload-camera')).click();
 
-        element(by.css('image-upload .fa.fa-camera.upload-camera')).click();
-
-        var file = './assets/top-profile-image.png';
-        element(by.css('label > input[type="file"]')).sendKeys(path.resolve(__dirname, file));
+        let file = './assets/top-profile-image.png';
+        element(by.css('noosfero-top-profile-image img-cropper input[type="file"]')).sendKeys(path.resolve(__dirname, file));
+        // browser.pause();
+        element(by.css('noosfero-top-profile-image image-upload .btn-upload')).click();
         expect(element(by.css('noosfero-profile-header .profile-header')).getCssValue('background-image')).toContain('adminuser_top-profile-image.png');
     });
 

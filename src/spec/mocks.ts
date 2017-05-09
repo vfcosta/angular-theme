@@ -454,7 +454,8 @@ export function getMocks() {
                 subscribe: (fn: Function) => { },
                 next: (param: any) => { }
             },
-            isInDesignMode: () => { return false; }
+            isInDesignMode: () => { return false; },
+            setInDesignMode: (value: boolean) => {}
         },
         $translate: {
             use: (lang?: string) => {
@@ -534,6 +535,12 @@ export function getMocks() {
             return {
                 toISOString: () => { }
             };
+        },
+        localStorageService: {
+            storage: {},
+            remove: (key: string) => { delete mocks.localStorageService.storage[key]; },
+            get: (key: string) => { return mocks.localStorageService.storage[key]; },
+            set: (key: string, value: any) => { mocks.localStorageService.storage[key] = value; }
         }
     };
     return mocks;

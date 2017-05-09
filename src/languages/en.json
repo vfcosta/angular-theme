@@ -93,6 +93,7 @@
     "blocks.profile_image.join": "Join community",
     "blocks.profile_image.join.moderation.message": "Your membership is waiting for approval",
     "blocks.profile_image.join.moderation.title": "Good job!",
+    "profile.join.success.message": "Welcome to the community!",
     "blocks.profile_image.leave": "Leave community",
     "blocks.menu.about": "About",
     "blocks.menu.activities": "Activities",

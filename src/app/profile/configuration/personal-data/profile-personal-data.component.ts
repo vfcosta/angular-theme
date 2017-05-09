@@ -53,10 +53,6 @@ export class ProfilePersonalDataComponent {
         });
     }
 
-    cancel() {
-        this.finished.emit(this.profile);
-    }
-
     cloneProfile() {
         this.updatedProfile = <noosfero.Profile>['id', 'name', 'email'].reduce((object, key) => {
             object[key] = this.profile[key]; return object;

@@ -7,10 +7,7 @@ import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {getAngularServiceFactory, AngularServiceFactory} from "../../spec/helpers";
 
 describe("Services", () => {
-
-
     describe("Auth Service", () => {
-
         let $httpBackend: ng.IHttpBackendService;
         let authService: AuthService;
         let credentials: noosfero.Credentials;
@@ -77,7 +74,7 @@ describe("Services", () => {
             it("should not return the current user after logout", () => {
                 authService.logout();
                 let actual: any = authService.currentUser();
-                expect(actual).toEqual(undefined, "The returned user must not be defined");
+                expect(actual).toBeNull();
             });
         });
 

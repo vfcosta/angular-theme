@@ -138,6 +138,23 @@ describe("Components", () => {
             }
         });
 
-    });
+        it("not render add button when no article was selected", () => {
+            component.designMode = true;
+            component.selectedArticle = null;
+            fixture.detectChanges();
+            fixture.nativeElement.querySelector('.menu-new-item').click();
+            fixture.detectChanges();
+            expect(fixture.debugElement.query(By.css('.btn-add-article'))).toBeNull();
+        });
+
+        it("render add button when article was selected", () => {
+            component.designMode = true;
+            component.selectedArticle = <noosfero.Article>{id: 2};
+            fixture.detectChanges();
+            fixture.nativeElement.querySelector('.menu-new-item').click();
+            fixture.detectChanges();
+            expect(fixture.debugElement.query(By.css('.btn-add-article'))).toBeDefined();
+        });
+     });
 
 });

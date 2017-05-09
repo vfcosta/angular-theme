@@ -24,7 +24,7 @@ export interface StartParams {
  *         - full-content
  */
 @Injectable()
-@Inject("$document", "$state", AuthService, DesignModeService, "$localStorage", "$transitions")
+@Inject("$document", "$state", AuthService, DesignModeService, "localStorageService", "$transitions")
 export class BodyStateClassesService {
 
     private started: boolean = false;
@@ -42,7 +42,7 @@ export class BodyStateClassesService {
         private $state: ng.ui.IStateService,
         private authService: AuthService,
         private designModeService: DesignModeService,
-        private $localStorage: INoosferoLocalStorage,
+        private localStorageService: any,
         private $transitions: any
     ) {
     }
@@ -53,7 +53,7 @@ export class BodyStateClassesService {
             this.setupStateClassToggle();
             this.setupDesignModeClassToggle();
             if (config) {
-                this.setThemeSkin(this.$localStorage.settings.skin || config.skin);
+                this.setThemeSkin(this.localStorageService.get('skin') || config.skin);
             }
             this.started = true;
         }
@@ -62,11 +62,11 @@ export class BodyStateClassesService {
     setThemeSkin(skin: string) {
         this.getBodyElement().removeClass(this.getThemeSkin());
         this.getBodyElement().addClass(skin);
-        this.$localStorage.settings.skin = skin;
+        this.localStorageService.set('skin', skin);
     }
 
     getThemeSkin() {
-        return this.$localStorage.settings.skin;
+        return this.localStorageService.get('skin');
     }
 
     addBodyClass(className: string) {
