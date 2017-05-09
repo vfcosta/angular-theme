@@ -45,6 +45,14 @@ export function noosferoRoutes($stateProvider: any) {
                 controller: EnvironmentComponent,
                 controllerAs: "ctrl"
             }
+        },
+        resolve: {
+            environment: (environmentService: EnvironmentService) => {
+                return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                    environmentService.setCurrentEnvironment(result.data);
+                    return result.data;
+                });
+            }
         }
     });
     $stateProvider.state({

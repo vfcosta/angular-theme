@@ -27,10 +27,9 @@ export class EnvironmentComponent {
 
     constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService,
         private AuthService: AuthService, private designModeService: DesignModeService) {
+
         designModeService.setInDesignMode(false);
-        let environmentPromise: Promise<noosfero.Environment>;
-        environmentPromise = environmentService.getCurrentEnvironment();
-        environmentPromise.then((environment: noosfero.Environment) => {
+        environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
             return this.environmentService.getBoxes(this.environment.id);
         }).then((response: restangular.IResponse) => {

@@ -150,10 +150,4 @@ export class EnvironmentContent {
 @Inject(EnvironmentService)
 export class MainComponent {
 
-    constructor(environmentService: EnvironmentService) {
-        environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
-            let environment = result.data;
-            environmentService.setCurrentEnvironment(environment);
-        });
-    }
 }
