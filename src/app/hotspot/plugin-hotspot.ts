@@ -6,14 +6,14 @@ export abstract class PluginHotspot {
 
     constructor(protected hotspot: string) { }
 
-    ngOnInit() {
-        for (let component of plugins.hotspots) {
+    ngAfterContentInit() {
+        for (let component of plugins.hotspots.concat(plugins.ng2Hotspots)) {
             if (component.hotspot === this.hotspot) {
                 let directiveName = dasherize(component.name.replace('Component', ''));
-                this.addHotspot(directiveName);
+                this.addHotspot(directiveName, component);
             }
         }
     }
 
-    abstract addHotspot(directiveName: string): any;
+    abstract addHotspot(directiveName: string, component?: any): any;
 }

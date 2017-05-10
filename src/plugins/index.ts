@@ -11,6 +11,7 @@ import * as event from "./event";
 export let mainComponents: any = [];
 export let ng2MainComponents: any = [];
 export let hotspots: any = [];
+export let ng2Hotspots: any = [];
 
 let enabledPlugins = [
     commentParagraph,
@@ -27,4 +28,5 @@ enabledPlugins.forEach((plugin: any) => {
     mainComponents = mainComponents.concat(plugin.mainComponents);
     ng2MainComponents = ng2MainComponents.concat(plugin.ng2MainComponents);
     hotspots = hotspots.concat(plugin.hotspots);
+    if (plugin.ng2Hotspots) ng2Hotspots = ng2Hotspots.concat(plugin.ng2Hotspots);
 });

@@ -8,7 +8,7 @@
       </div>
       <div class="media-body">
         <textarea class="form-control custom-control" rows="1" name="body" [(ngModel)]="comment.body" placeholder="{{'comment.post.placeholder' | translate}}"></textarea>
-        <!--<noosfero-hotspot-comment-form [comment]="comment" [parent]="parent"></noosfero-hotspot-comment-form>-->
+        <noosfero-hotspot-comment-form [comment]="comment" [parent]="parent"></noosfero-hotspot-comment-form>
         <button [hidden]="!comment.body" type="submit" class="btn btn-default pull-right">{{"comment.post" | translate}}</button>
       </div>
     </div>

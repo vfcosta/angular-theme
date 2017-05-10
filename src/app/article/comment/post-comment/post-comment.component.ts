@@ -2,13 +2,11 @@ import { Inject, Input, Output, EventEmitter, Component } from '@angular/core';
 import { CommentService } from "../../../../lib/ng-noosfero-api/http/comment.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import { SessionService } from "../../../login";
-import { CommentFormHotspotComponent } from "../../../hotspot/comment-form-hotspot.component";
 
 @Component({
     selector: 'noosfero-post-comment',
     template: require('app/article/comment/post-comment/post-comment.html'),
     outputs: ['commentSaved'],
-    // directives: [CommentFormHotspotComponent]
 })
 export class PostCommentComponent {
 

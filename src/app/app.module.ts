@@ -1,3 +1,4 @@
+import { CommentFormHotspotComponent } from './hotspot/comment-form-hotspot.component';
 import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
@@ -136,6 +137,7 @@ import { SharedModule } from './shared.module';
         AddBlockComponent,
         TopProfileImageComponent,
         PostCommentComponent,
+        CommentFormHotspotComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
