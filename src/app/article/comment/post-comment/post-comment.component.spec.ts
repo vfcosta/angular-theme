@@ -1,91 +1,74 @@
-import { Provider, provide, Component } from 'ng-forward';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../../spec/helpers";
 import { PostCommentComponent } from './post-comment.component';
-
-const htmlTemplate: string = '<noosfero-post-comment [article]="ctrl.article" [reply-of]="ctrl.comment"></noosfero-post-comment>';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {
     describe("Post Comment Component", () => {
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<PostCommentComponent>;
+        let component: PostCommentComponent;
 
-        let properties: any;
+        beforeEach(async(() => {
+            spyOn(mocks.commentService, "createInArticle").and.callThrough();
+            TestBed.configureTestingModule({
+                declarations: [PostCommentComponent, TranslatePipe],
+                providers: [
+                    { provide: "commentService", useValue: mocks.commentService },
+                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: "notificationService", useValue: mocks.notificationService },
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [FormsModule]
+            });
+            fixture = TestBed.createComponent(PostCommentComponent);
+            component = fixture.componentInstance;
+            component.article = <noosfero.Article>{ id: 1, accept_comments: true };
+            component.comment = <noosfero.Comment>{ id: 2 };
+        }));
 
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach(() => {
-            properties = { article: { id: 1, accept_comments: true } };
+        it("render the post comment form", () => {
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css("form")).length).toEqual(1);
         });
 
-        let commentService = jasmine.createSpyObj("commentService", ["createInArticle"]);
-        let user = {};
-        let providers = [
-            new Provider('CommentService', { useValue: commentService }),
-            new Provider('NotificationService', { useValue: helpers.mocks.notificationService }),
-            new Provider('SessionService', { useValue: helpers.mocks.sessionWithCurrentUser(user) })
-        ].concat(helpers.provideFilters("translateFilter"));
-
-        @Component({ selector: 'test-container-component', directives: [PostCommentComponent], template: htmlTemplate, providers: providers })
-        class ContainerComponent {
-            article = properties['article'];
-            comment = { id: 2 };
-        }
-
-        it("render the post comment form", done => {
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
-                expect(fixture.debugElement.queryAll("form").length).toEqual(1);
-                done();
-            });
+        it("not render the post comment form when article doesn't accept comments", () => {
+            fixture.detectChanges();
+            component.article.accept_comments = false;
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css("form")).length).toEqual(0);
         });
 
-        it("not render the post comment form when article doesn't accept comments", done => {
-            properties['article'].accept_comments = false;
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
-                expect(fixture.debugElement.queryAll("form").length).toEqual(0);
-                done();
-            });
+        it("emit an event when create comment", fakeAsync(() => {
+            component.commentSaved.next = jasmine.createSpy("next");
+            component.save();
+            tick();
+            expect(component.commentSaved.next).toHaveBeenCalled();
+        }));
+
+        it("notify success when create comment", fakeAsync(() => {
+            component["notificationService"].success = jasmine.createSpy("success");
+            component.save();
+            tick();
+            expect(component["notificationService"].success).toHaveBeenCalled();
+        }));
+
+        it("set the reply id when reply to a comment", () => {
+            component.comment = <any>{ reply_of_id: null };
+            component.parent = <any>{ id: 10 };
+            component.save();
+            expect(component.comment.reply_of_id).toEqual(component.parent.id);
         });
 
-        it("emit an event when create comment", done => {
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
-                let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                component.commentSaved.next = jasmine.createSpy("next");
-                commentService.createInArticle = jasmine.createSpy("createInArticle").and.returnValue(helpers.mocks.promiseResultTemplate({ data: {} }));
-                component.save();
-                expect(component.commentSaved.next).toHaveBeenCalled();
-                done();
-            });
-        });
-
-        it("notify success when create comment", done => {
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
-                let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                commentService.createInArticle = jasmine.createSpy("createInArticle").and.returnValue(helpers.mocks.promiseResultTemplate({ data: {} }));
-                component["notificationService"].success = jasmine.createSpy("success");
-                component.save();
-                expect(component["notificationService"].success).toHaveBeenCalled();
-                done();
-            });
-        });
-
-        it("set the reply id when reply to a comment", done => {
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
-                let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                component.comment = <any>{ reply_of_id: null };
-                component.parent = <any>{ id: 10 };
-                component.save();
-                expect(component.comment.reply_of_id).toEqual(component.parent.id);
-                done();
-            });
-        });
-
-        it("render alert when not logged in", done => {
-            helpers.createComponentFromClass(ContainerComponent).then(fixture => {
-                let component: PostCommentComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                component['currentUser'] = null;
-                fixture.detectChanges();
-                expect(fixture.debugElement.queryAll("form .post-comment-logged-in").length).toEqual(0);
-                expect(fixture.debugElement.queryAll("form .post-comment-not-logged-in").length).toEqual(1);
-                done();
-            });
+        it("render alert when not logged in", () => {
+            component['currentUser'] = null;
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css("form .post-comment-logged-in")).length).toEqual(0);
+            expect(fixture.debugElement.queryAll(By.css("form .post-comment-not-logged-in")).length).toEqual(1);
         });
     });
 });

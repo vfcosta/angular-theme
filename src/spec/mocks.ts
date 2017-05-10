@@ -441,6 +441,9 @@ export function getMocks() {
             },
             getByArticle: (article: noosfero.Article) => {
                 return Promise.resolve({ data: {} });
+            },
+            createInArticle: (article: noosfero.Article, comment: noosfero.Comment) => {
+                return Promise.resolve({ data: {} });
             }
         },
         sessionWithCurrentUser: (user: any) => {
