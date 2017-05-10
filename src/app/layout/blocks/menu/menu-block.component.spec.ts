@@ -88,6 +88,12 @@ describe("Components", () => {
             expect(component.makeUrl({ "title": "About", "controller": "profile", "action": "about" })).toEqual(url);
         });
 
+        it("generate correct url for friends", () => {
+            component.owner = <noosfero.Person>{ id: 1, name: 'person-name', identifier: 'person-name', type: 'Person' };
+            let url = { translatedTitle: 'blocks.menu.friends', url: 'main.profile.friends', urlParams: '{profile: owner.identifier}', title: 'People', controller: 'friends', action: 'index', path: '' };
+            expect(component.makeUrl({ "title": "People", "controller": "friends", "action": "index" })).toEqual(url);
+        });
+
         it("initialize links variable", () => {
             let profileLinks = [
                 { title: 'blocks.menu.activities', url: 'main.profile.info', urlParams: { profile: component.owner.identifier }, controller: 'profile', action: 'index' },

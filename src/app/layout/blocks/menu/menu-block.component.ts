@@ -101,7 +101,7 @@ export class MenuBlockComponent {
         let urlMapping: any = {
             'about': 'main.profile.about',
             'activities': 'main.profile.info',
-            'index': 'main.profile.members'
+            'index': this.owner.type == 'Person' ? 'main.profile.friends' : 'main.profile.members'
         };
         let urlParamsMapping: any = {
             'about': '{profile: owner.identifier}',
