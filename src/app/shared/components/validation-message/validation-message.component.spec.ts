@@ -39,7 +39,7 @@ describe("Components", () => {
             component['translatorService'].hasTranslation = jasmine.createSpy("hasTranslation").and.returnValue(true);
             component['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Name is required");
             // component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
-            expect(component.getBackendErrors()).toEqual(["Name is required"]);
+            expect(component.getErrors()).toEqual(["Name is required"]);
         });
 
         it("get translation error code", () => {
@@ -52,7 +52,7 @@ describe("Components", () => {
             });
             component['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Is required");
             // component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
-            expect(component.getBackendErrors()).toEqual(["Is required"]);
+            expect(component.getErrors()).toEqual(["Is required"]);
         });
 
         it("get translated message from Grape API", () => {
@@ -67,7 +67,7 @@ describe("Components", () => {
                 "errors_messages": {"identifier": ["não pode ficar em branco", "não está disponível."]},
                 "full_messages": ["Identifier não pode ficar em branco", "Identifier não está disponível."]});
             // Notice the capitalizeFirstLetter() in action
-            expect(component.getBackendErrors()).toEqual(['Não pode ficar em branco', 'Não está disponível.']);
+            expect(component.getErrors()).toEqual(['Não pode ficar em branco', 'Não está disponível.']);
         });
 
     });

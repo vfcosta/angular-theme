@@ -16,7 +16,11 @@ describe("Components", () => {
         let component: ChangePasswordComponent;
         let userService = jasmine.createSpyObj("userService", ["changePassword"]);
         let $state = jasmine.createSpyObj("$state", ["go"]);
+        let $event = jasmine.createSpyObj("$event", ["preventDefault"]);
+        $event.preventDefault = jasmine.createSpy("preventDefault");
         userService.changePassword = jasmine.createSpy("changePassword").and.returnValue(Promise.resolve({}));
+        let newPasswordConfirmation = jasmine.createSpyObj("newPasswordConfirmation", ["pushError"]);
+        newPasswordConfirmation.pushError = jasmine.createSpy("pushError");
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -40,9 +44,9 @@ describe("Components", () => {
             component.current_password = 'teste';
             component.new_password = 'teste123';
             component.new_password_confirmation = 'teste123';
+             // component.newPasswordConfirmation = newPasswordConfirmation;
             fixture.detectChanges();
-            let e: Event;
-            component.save(e);
+            component.save($event);
             tick();
             expect(component.errors).toBeNull();
         }));
@@ -51,10 +55,10 @@ describe("Components", () => {
             component.current_password = 'teste';
             component.new_password = 'teste123';
             component.new_password_confirmation = 'teste1234';
+            component.newPasswordConfirmation = newPasswordConfirmation;
             fixture.detectChanges();
             tick();
-            let e: Event;
-            expect(component.save(e)).toEqual(false);
+            expect(component.save($event)).toEqual(false);
         }));
 
     });

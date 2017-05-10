@@ -38,7 +38,7 @@ export class ChangePasswordComponent {
     save(event: Event) {
         event.preventDefault();
         if (this.new_password !== this.new_password_confirmation) {
-            this.newPasswordConfirmation.pushError({error: 'profile.edition.password.error.message'})
+            this.newPasswordConfirmation.pushError({error: 'profile.edition.password.error.message'});
             return false;
         } else {
             this.userService.changePassword(this.profile, this.current_password, this.new_password, this.new_password_confirmation)

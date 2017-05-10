@@ -55,11 +55,6 @@ export class ValidationMessageComponent {
         }
     }
 
-    getBackendErrors() {
-
-    }
-
-
     dasherize(text: string) {
         return text.toLowerCase().replace(/\s/g, '-').replace(/\./g, '');
     }
