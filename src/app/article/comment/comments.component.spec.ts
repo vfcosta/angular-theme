@@ -2,7 +2,6 @@ import {Provider, provide, Component} from 'ng-forward';
 import * as helpers from "../../../spec/helpers";
 
 import {CommentsComponent} from './comments.component';
-import {PostCommentComponent} from "./post-comment/post-comment.component";
 
 const htmlTemplate: string = '<noosfero-comments [article]="ctrl.article"></noosfero-comments>';
 

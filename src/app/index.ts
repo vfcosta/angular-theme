@@ -1,3 +1,4 @@
+import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
 import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
@@ -221,6 +222,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoTopProfileImage',
     downgradeComponent({ component: TopProfileImageComponent, inputs: ['profile', 'editable'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoPostComment',
+        downgradeComponent({ component: PostCommentComponent, inputs: ['article', 'parent', 'comment'], outputs: ['commentSaved'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

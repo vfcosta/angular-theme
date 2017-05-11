@@ -1,19 +1,19 @@
-<form class="clearfix post-comment" ng-if="ctrl.article.accept_comments">
-  <div class="form-group post-comment-logged-in" ng-if="ctrl.loggedIn()">
+<form class="clearfix post-comment" *ngIf="article.accept_comments" (ngSubmit)="save()">
+  <div class="form-group post-comment-logged-in" *ngIf="loggedIn()">
     <div class="comment media">
       <div class="media-left">
-        <a ui-sref="main.profile.home({profile: ctrl.currentUser.person.identifier})">
-          <noosfero-profile-image [profile]="ctrl.currentUser.person"></noosfero-profile-image>
+        <a ui-sref="main.profile.home({profile: currentUser.person.identifier})">
+          <noosfero-profile-image [profile]="currentUser.person"></noosfero-profile-image>
         </a>
       </div>
       <div class="media-body">
-        <textarea class="form-control custom-control" rows="1" ng-model="ctrl.comment.body" placeholder="{{'comment.post.placeholder' | translate}}"></textarea>
-        <noosfero-hotspot-comment-form [comment]="ctrl.comment" [parent]="ctrl.parent"></noosfero-hotspot-comment-form>
-        <button ng-show="ctrl.comment.body" type="submit" class="btn btn-default pull-right ng-hide" ng-click="ctrl.save()">{{"comment.post" | translate}}</button>
+        <textarea class="form-control custom-control" rows="1" name="body" [(ngModel)]="comment.body" placeholder="{{'comment.post.placeholder' | translate}}"></textarea>
+        <noosfero-hotspot-comment-form [comment]="comment" [parent]="parent"></noosfero-hotspot-comment-form>
+        <button [hidden]="!comment.body" type="submit" class="btn btn-default pull-right">{{"comment.post" | translate}}</button>
       </div>
     </div>
   </div>
-  <div class="form-group post-comment-not-logged-in" ng-if="!ctrl.loggedIn()">
+  <div class="form-group post-comment-not-logged-in" *ngIf="!loggedIn()">
     <div class="not-logged">
       {{"comment.post.not_logged" | translate}}
     </div>

@@ -1,33 +1,31 @@
-import {CommentParagraphFormHotspotComponent} from "./comment-paragraph-form.component";
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
+import { CommentFormHotspotComponent } from './../../../app/hotspot/comment-form-hotspot.component';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CommentParagraphFormHotspotComponent } from "./comment-paragraph-form.component";
+import { Injector } from '@angular/core';
 import * as helpers from "../../../spec/helpers";
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-
-let htmlTemplate = '<comment-paragraph-form-hotspot [comment]="ctrl.comment" [parent]="ctrl.parent"></comment-paragraph-form-hotspot>';
 
 describe("Components", () => {
     describe("Comment Paragraph Form Hotspot Component", () => {
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<CommentParagraphFormHotspotComponent>;
+        let component: CommentParagraphFormHotspotComponent;
 
-        let helper: ComponentTestHelper<CommentParagraphFormHotspotComponent>;
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [CommentParagraphFormHotspotComponent],
-                providers: [],
-                properties: {
-                    comment: {}
-                }
+        beforeEach(async(() => {
+            let commentFormHotspotComponent = {comment: {}, parent: {}};
+            TestBed.configureTestingModule({
+                declarations: [CommentParagraphFormHotspotComponent],
+                providers: [
+                    { provide: CommentFormHotspotComponent, useValue: commentFormHotspotComponent },
+                ]
             });
-            helper = new ComponentTestHelper<CommentParagraphFormHotspotComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(CommentParagraphFormHotspotComponent);
+            component = fixture.componentInstance;
+        }));
 
         it('set paragraph uuid when parent has it setted', () => {
-            helper.component.parent = <any>{ paragraph_uuid: 'uuid' };
-            helper.detectChanges();
-            expect((<any>helper.component.comment).paragraph_uuid).toEqual('uuid');
+            component.parent.parent = <any>{ paragraph_uuid: 'uuid' };
+            fixture.detectChanges();
+            expect((<any>component.parent.comment).paragraph_uuid).toEqual('uuid');
         });
     });
 });

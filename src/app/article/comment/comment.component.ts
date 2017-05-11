@@ -1,5 +1,4 @@
 import { Inject, Input, Component, Output, EventEmitter } from 'ng-forward';
-import { PostCommentComponent } from "./post-comment/post-comment.component";
 import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
 import { NotificationService } from "../../shared/services/notification.service";
 import { PermissionDirective } from '../../shared/components/permission/permission.directive';

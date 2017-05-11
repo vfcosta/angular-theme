@@ -1,26 +1,23 @@
-import { Inject, Input, Component } from "ng-forward";
-import {Hotspot} from "../../../app/hotspot/hotspot.decorator";
+import { CommentFormHotspotComponent } from './../../../app/hotspot/comment-form-hotspot.component';
+import { Inject, Input, Component, Injector } from "@angular/core";
+import { Hotspot } from "../../../app/hotspot/hotspot.decorator";
 
 @Component({
     selector: "comment-paragraph-form-hotspot",
     template: "<span></span>",
 })
 @Hotspot("comment_form_extra_contents")
-@Inject("$scope")
 export class CommentParagraphFormHotspotComponent {
 
-    @Input() comment: noosfero.Comment;
-    @Input() parent: noosfero.Comment;
+    parent: CommentFormHotspotComponent;
 
-    constructor(private $scope: ng.IScope) { }
+    constructor(injector: Injector) {
+        this.parent = injector.get(CommentFormHotspotComponent);
+    }
 
     ngOnInit() {
-        this.$scope.$watch(() => {
-            return this.parent;
-        }, () => {
-            if (this.parent && (<any>this.parent).paragraph_uuid) {
-                (<any>this.comment).paragraph_uuid = (<any>this.parent).paragraph_uuid;
-            }
-        });
+        if (this.parent.parent && (<any>this.parent.parent).paragraph_uuid) {
+            (<any>this.parent.comment).paragraph_uuid = (<any>this.parent.parent).paragraph_uuid;
+        }
     }
 }

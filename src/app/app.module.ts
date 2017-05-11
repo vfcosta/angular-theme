@@ -1,3 +1,5 @@
+import { CommentFormHotspotComponent } from './hotspot/comment-form-hotspot.component';
+import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
 import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
@@ -134,6 +136,8 @@ import { SharedModule } from './shared.module';
         BlockEditionComponent,
         AddBlockComponent,
         TopProfileImageComponent,
+        PostCommentComponent,
+        CommentFormHotspotComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -177,6 +181,7 @@ import { SharedModule } from './shared.module';
         BlockEditionComponent,
         AddBlockComponent,
         TopProfileImageComponent,
+        PostCommentComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
@@ -204,7 +209,8 @@ import { SharedModule } from './shared.module';
         'RoleService',
         'PersonService',
         'UserService',
-        'EnvironmentService'
+        'EnvironmentService',
+        'CommentService',
     ])
 })
 
