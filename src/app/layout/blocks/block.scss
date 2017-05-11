@@ -12,7 +12,15 @@
       font-size: 15px;
       text-transform: uppercase;
     }
-
+    .panel-footer {
+      padding: 0;
+      .block-name {
+        text-align: right;
+        margin-right: 23px;
+        color: #a2a2a2;
+        font-weight: bold;
+      }
+    }
     .panel-heading {
       background-color: transparent;
       border: 0;
