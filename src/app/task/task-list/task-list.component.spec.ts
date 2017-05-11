@@ -1,5 +1,6 @@
+import { TaskComponent } from './../task.component';
 import { MomentModule } from 'angular2-moment';
-import { Directive, Input, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -40,22 +41,12 @@ describe("Components", () => {
                     { provide: "$uibModal", useValue: mocks.$modal },
                     { provide: "$scope", useValue: helpers.mocks.scopeWithEvents }
                 ],
-                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+                schemas: [NO_ERRORS_SCHEMA]
             });
             fixture = TestBed.createComponent(TaskListComponent);
             component = fixture.componentInstance;
             component.tasks = <any>tasks;
         }));
-
-        it("return specific template for a task", () => {
-            let task = { type: "AddMember" };
-            expect(component.getTaskTemplate(<any>task)).toMatch("task-icon fa fa-fw fa-user-plus");
-        });
-
-        it("return the default template for a task", () => {
-            let task = { type: "" };
-            expect(component.getTaskTemplate(<any>task)).toMatch('not implemented yet');
-        });
 
         it("open confirmation modal when it has details to accept a task", () => {
             let task = { accept_details: true };

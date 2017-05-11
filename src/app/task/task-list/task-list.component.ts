@@ -1,3 +1,7 @@
+import { AddFriendTaskComponent } from './../types/add-friend/add-friend-task.component';
+import { TaskModule } from './../task.module';
+import { NgModuleFactory } from '@angular/core';
+import { Compiler } from '@angular/core';
 import { TaskModal } from './task-modal';
 import { components } from './../../../../themes/index';
 import { AppModule } from './../../app.module';
@@ -40,15 +44,6 @@ export class TaskListComponent {
     ngOnChanges() {
         this.tasks = _.sortBy(this.tasks, 'created_at').reverse();
         this.tasksGroups = _.values(_.groupBy(this.tasks, 'target.name'));
-    }
-
-    getTaskTemplate(task: noosfero.Task) {
-        if (TaskService.TASK_TYPES.indexOf(task.type) >= 0) {
-            let templateName = this.getTemplateName(task);
-            return require(`app/task/types/${templateName}/${templateName}.html`);
-        } else {
-            return require('app/task/types/default.html');
-        }
     }
 
     accept(task: noosfero.Task) {
@@ -105,10 +100,6 @@ export class TaskListComponent {
         }
         this.currentTask = null;
         this.confirmationTask = null;
-    }
-
-    private getTemplateName(task: noosfero.Task) {
-        return task.type.replace(/::/, '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
     }
 
 }
