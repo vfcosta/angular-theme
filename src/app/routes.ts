@@ -108,7 +108,15 @@ export function noosferoRoutes($stateProvider: any) {
                 controllerAs: "ctrl"
             }
         },
-        params: { currentProfile: {} }
+        params: { currentProfile: {} },
+        resolve: {
+            environment: (EnvironmentService: EnvironmentService) => {
+                return EnvironmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                    EnvironmentService.setCurrentEnvironment(result.data);
+                    return result.data;
+                });
+            }
+        }
     });
     $stateProvider.state({
         name: 'main.profile.info',

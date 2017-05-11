@@ -1,3 +1,5 @@
+import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
+import { UiSrefDirective } from '../../shared/directives/ui-sref-directive';
 import { PopoverModule } from 'ngx-bootstrap';
 import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
@@ -22,24 +24,27 @@ describe("Components", () => {
         personService.isFriend = jasmine.createSpy("isFriend").and.returnValue(Promise.resolve(false));
         let sessionService = jasmine.createSpyObj("sessionService", ["currentUser"]);
         sessionService.currentUser = jasmine.createSpy("currentUser").and.returnValue({ person: { id: 1, identifier: 'adminuser', type: "Person" } });
-
+        let mocks = helpers.getMocks();
+        let $transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule, PopoverModule.forRoot()],
-                declarations: [ProfileSummaryComponent, TranslatePipe],
+                declarations: [ProfileSummaryComponent, TranslatePipe, UiSrefDirective, PermissionNg2Directive],
                 providers: [
                     { provide: "environmentService", useValue: environmentService},
                     { provide: "sessionService", useValue: sessionService },
                     { provide: "personService", useValue: personService },
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: "notificationService", useValue: mocks.notificationService },
+                    { provide: "designModeService", useValue: mocks.designModeService },
+                    { provide: "$state", useValue: mocks.$state },
+                    { provide: "$transitions", useValue: $transitions },
+                    { provide: "translatorService", useValue: mocks.translatorService }
                 ],
-                schemas: [NO_ERRORS_SCHEMA]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(ProfileSummaryComponent);
-                component = fixture.componentInstance;
-                component.profile = <noosfero.Profile>{ id: 1, identifier: 'adminuser', type: "Person", permissions: ['allow_edit'] };
-            });
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            })
+            fixture = TestBed.createComponent(ProfileSummaryComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>{ id: 1, identifier: 'adminuser', type: "Person", permissions: ['allow_edit'] };
         }));
 
         it("returns profile link", () => {
@@ -61,6 +66,7 @@ describe("Components", () => {
 
         it("set popover open to false when close edition", () => {
             fixture.detectChanges();
+            component.popover = { hide: () => { } };
             component.editPopoverOpen = true;
             component.closeEdition();
             expect(component.editPopoverOpen).toBeFalsy();

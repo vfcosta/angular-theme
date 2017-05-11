@@ -1,9 +1,9 @@
-<button ng-if='ctrl.inDesignMode' type="button" class="button-preview-mode" ng-click="ctrl.togleDesignMode()">
+<button *ngIf='inDesignMode' type="button" class="button-preview-mode" (click)="togleDesignMode()">
   <i class='icon-preview-mode'></i>
   {{ 'design-toggler.preview.mode' | translate }}
 </button>
 
-<button ng-if='!ctrl.inDesignMode' type="button" class="button-edit-mode" ng-click="ctrl.togleDesignMode()">
+<button *ngIf='!inDesignMode' type="button" class="button-edit-mode" (click)="togleDesignMode()">
   <i class='icon-edit-mode'></i>
   {{ "design-toggler.edit.mode"  | translate }}
 </button>

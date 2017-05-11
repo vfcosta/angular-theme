@@ -1,51 +1,44 @@
-import { Component } from 'ng-forward';
+import { Component } from '@angular/core';
 import { ConfigBarComponent } from './config-bar.component';
 import * as helpers from "../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
-
-// this htmlTemplate will be re-used between the container components in this spec file
-const htmlTemplate: string = '<config-bar [owner]="ctrl.owner"></config-bar>';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 
 describe("ConfigBar Component", () => {
-
-    let helper: ComponentTestHelper<ConfigBarComponent>;
-    beforeEach(() => {
-        angular.mock.module("templates");
-    });
-
-    let properties = {
-        owner: {
-            id: 1,
-            identifier: 'profile-name',
-            type: 'Person'
-        },
-        layout: 'default'
-    };
-
-    let blockService = jasmine.createSpyObj("BlockService", ["updateAll"]);
-    let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
-    blockService.updateAll = jasmine.createSpy("updateAll").and.returnValue(helpers.mocks.promiseResultTemplate());
-
-    let profileService = jasmine.createSpyObj("profileService", ["update"]);
-    let environmentService = jasmine.createSpyObj("environmentService", ["update"]);
     let mocks = helpers.getMocks();
+    let fixture: ComponentFixture<ConfigBarComponent>;
+    let component: ConfigBarComponent;
+    let $scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
 
-    beforeEach((done) => {
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [ConfigBarComponent],
-            properties: properties,
+    beforeEach(async(() => {
+        spyOn(mocks.designModeService, 'isInDesignMode').and.returnValue(false);
+
+        TestBed.configureTestingModule({
+            declarations: [ConfigBarComponent, PermissionNg2Directive],
             providers: [
-                helpers.createProviderToValue("$scope", scope),
-                helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
-                helpers.createProviderToValue("BlockService", blockService),
-                helpers.createProviderToValue("NotificationService", helpers.mocks.notificationService),
-                helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService),
-                helpers.createProviderToValue('ProfileService', profileService),
-                helpers.createProviderToValue('EnvironmentService', environmentService)
-            ]
+                { provide: "$scope", useValue: $scope },
+                { provide: "designModeService", useValue: mocks.designModeService }
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
         });
-        helper = new ComponentTestHelper<ConfigBarComponent>(cls, done);
-    });
+        fixture = TestBed.createComponent(ConfigBarComponent);
+        component = fixture.componentInstance;        
+        component.owner = <noosfero.Profile> {id: 1, permissions: ['allow_edit']};
+    }));
 
+    it('verify if on toggle subscribe is called', fakeAsync( () => {
+        TestBed.get("designModeService").setInDesignMode(false);
+        mocks.designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            expect(designModeOn).toBeTruthy();
+        });
+        component.designModeOn = true;
+
+    }));
+
+    it('verify if design mode is initialized correctly', () => {
+        fixture.detectChanges();
+        expect(component.designModeService.isInDesignMode).toHaveBeenCalled();
+        expect(component.designModeOn).toBeFalsy();
+    });
 });

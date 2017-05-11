@@ -1,11 +1,10 @@
-import { Component, Inject, Input } from 'ng-forward';
+import { Component, Inject, Input } from '@angular/core';
 import { DesignModeService } from '../../shared/services/design-mode.service';
 
 @Component({
     selector: "config-bar",
-    templateUrl: "app/layout/config-bar/config-bar.html"
+    template: require("app/layout/config-bar/config-bar.html")
 })
-@Inject("$scope", DesignModeService)
 export class ConfigBarComponent {
 
     @Input() owner: noosfero.Profile | noosfero.Environment;
@@ -13,12 +12,11 @@ export class ConfigBarComponent {
 
     designModeOn = false;
 
-    constructor(private $scope: ng.IScope, private designModeService: DesignModeService) {
+    constructor( @Inject("$scope") public $scope: ng.IScope, @Inject('designModeService') public designModeService: DesignModeService) {
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;
             this.$scope.$apply();
         });
         this.designModeOn = this.designModeService.isInDesignMode();
     }
-
 }
