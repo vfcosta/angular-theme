@@ -356,5 +356,7 @@
     "profile-list.member-edition.cancel": "Cancelar",
     "profile-list-edition.role.success.title": "Bom trabalho!",
     "profile-list-edition.role.success.message": "Papéis atualizados com sucesso!",
-    "myprofile.configuration.communities.search.label": "Buscar comunidades"
+    "myprofile.configuration.communities.search.label": "Buscar comunidades",
+    "myprofile.configuration.community-homepage": "Ir para a página da comunidade",
+    "myprofile.configuration.user-homepage": "Ir para seu perfil"
 }
