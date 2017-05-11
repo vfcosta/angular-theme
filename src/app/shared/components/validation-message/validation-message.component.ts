@@ -43,7 +43,8 @@ export class ValidationMessageComponent {
         equivalentFields.forEach(name => {
             if (errorObjects.errors && errorObjects.errors[name]) {
                 errorObjects.errors[name].forEach(errorObject => {
-                    errorCollection[this.translateError(errorObject)] = true;
+                    let key = this.translateError(errorObject);
+                    errorCollection[key] = true;
                 });
             }
         });

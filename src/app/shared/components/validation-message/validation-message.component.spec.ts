@@ -22,7 +22,7 @@ class FormTemplateTestComponet {
 }
 
 
-fdescribe("Components", () => {
+describe("Components", () => {
 
     describe("Validation Message Component", () => {
         let fixture: ComponentFixture<ValidationMessageComponent>;
@@ -66,10 +66,10 @@ fdescribe("Components", () => {
             formFixture.detectChanges();
 
             formComponent.currentPasswordValidation.prefix = "prefix1.prefix2";
-            formComponent.currentPasswordValidation.setBackendErrors({ errors: { current_password: [{ error: 'blank', full_message: 'cant be blank' }] } });
             formComponent.currentPasswordValidation['translatorService'].hasTranslation = jasmine.createSpy('hasTranslation').and.callFake(function (myParam) {
                 return (myParam === 'blank');
             });
+            formComponent.currentPasswordValidation.setBackendErrors({ errors: { current_password: [{ error: 'blank', full_message: 'cant be blank' }] } });
             expect(formComponent.currentPasswordValidation.getErrors()).toEqual(["blank"]);
         });
 
