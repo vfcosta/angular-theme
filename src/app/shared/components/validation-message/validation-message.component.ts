@@ -24,7 +24,7 @@ export class ValidationMessageComponent {
         );
     }
 
-    pushError(errorObject: any) {
+    pushError(errorObject: any, errorCollection: any) {
         let error: string;
         if (this.translatorService.hasTranslation(this.getCompleteErrorKey(errorObject.error))) {
             error = this.getCompleteErrorKey(errorObject.error);
@@ -33,26 +33,28 @@ export class ValidationMessageComponent {
         } else {
             error = errorObject.full_message;
         }
-        let errors = {};
         let name: string = error;
         delete errorObject.error;
-        errors[name] = errorObject;
 
-        this.field.control.setErrors(errors);
+        errorCollection[name] = errorObject;
+
     }
 
     setBackendErrors(errorObjects: any) {
+        let errorCollection = [];
+
         if (errorObjects.errors && errorObjects.errors[this.field.name]) errorObjects.errors[this.field.name].forEach(errorObject => {
-            this.pushError(errorObject);
+            this.pushError(errorObject, errorCollection);
         });
+
+        this.field.control.setErrors(errorCollection);
     }
 
     getErrors() {
-        if (!this.field || !this.field.errors) {
-            return [];
-        } else {
-            return Object.keys(this.field.errors);
-        }
+        let errors = [];
+        if (this.field.errors) errors = errors.concat(Object.keys(this.field.errors));
+
+        return errors;
     }
 
     dasherize(text: string) {
