@@ -4,8 +4,8 @@
         <div class="form-group">
             <label for="name">{{'myprofile.configuration.community.name_label' | translate}}</label>
             <input formValidation type="text" class="form-control" placeholder="{{'myprofile.configuration.community.name_label' | translate}}" [(ngModel)]="community.name"
-                required minlength="4" #identifier="ngModel" id="name" name="identifier">
-            <validation-message #nameErrors [field]="identifier" [prefix]="'profile.edition.name'"></validation-message>
+                required minlength="4" #name="ngModel" id="name" name="name">
+            <validation-message #nameErrors [field]="name" [prefix]="'profile.edition.name'"></validation-message>
         </div>
         <div class="form-group">
             <label>{{'myprofile.configuration.community.approved_members_label' | translate}}</label>

@@ -24,7 +24,7 @@ export class ValidationMessageComponent {
         );
     }
 
-    pushError(errorObject: any, errorCollection: any) {
+    translateError(errorObject: any) {
         let error: string;
         if (this.translatorService.hasTranslation(this.getCompleteErrorKey(errorObject.error))) {
             error = this.getCompleteErrorKey(errorObject.error);
@@ -33,18 +33,19 @@ export class ValidationMessageComponent {
         } else {
             error = errorObject.full_message;
         }
-        let name: string = error;
-        delete errorObject.error;
-
-        errorCollection[name] = errorObject;
-
+        return error;
     }
 
-    setBackendErrors(errorObjects: any) {
+    setBackendErrors(errorObjects: any, equivalentFields = []) {
         let errorCollection = [];
+        equivalentFields = equivalentFields.length > 0 ? equivalentFields : [this.field.name];
 
-        if (errorObjects.errors && errorObjects.errors[this.field.name]) errorObjects.errors[this.field.name].forEach(errorObject => {
-            this.pushError(errorObject, errorCollection);
+        equivalentFields.forEach(name => {
+            if (errorObjects.errors && errorObjects.errors[name]) {
+                errorObjects.errors[name].forEach(errorObject => {
+                    errorCollection[this.translateError(errorObject)] = true;
+                });
+            }
         });
 
         this.field.control.setErrors(errorCollection);

@@ -50,14 +50,6 @@ fdescribe("Components", () => {
 
         }));
 
-        fit("display error message from frontend when it has errors to display", () => {
-            formFixture.detectChanges();
-            formComponent.currentPassword.nativeElement.value = 'qwert';
-            formComponent.currentPassword.nativeElement.value = '';
-            formFixture.detectChanges();
-            expect(formFixture.debugElement.nativeElement.querySelector(".field-error").innerHTML).toContain('Name is required');
-        });
-
         it("get full translation of error message", () => {
             formFixture.detectChanges();
 
@@ -76,9 +68,8 @@ fdescribe("Components", () => {
             formComponent.currentPasswordValidation.prefix = "prefix1.prefix2";
             formComponent.currentPasswordValidation.setBackendErrors({ errors: { current_password: [{ error: 'blank', full_message: 'cant be blank' }] } });
             formComponent.currentPasswordValidation['translatorService'].hasTranslation = jasmine.createSpy('hasTranslation').and.callFake(function (myParam) {
-                return (myParam !== component.prefix + component.dasherize("blank"));
+                return (myParam === 'blank');
             });
-            formComponent.currentPasswordValidation['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Is required");
             expect(formComponent.currentPasswordValidation.getErrors()).toEqual(["blank"]);
         });
 
