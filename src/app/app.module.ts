@@ -1,3 +1,4 @@
+import { TaskComponent } from './task/task.component';
 import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
 import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
 import { ConfigBarComponent } from './layout/config-bar/config-bar.component';
@@ -55,7 +56,6 @@ import { ProfileImageComponent } from "./profile/image/profile-image.component";
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 import { UpgradeUtils } from "./shared/upgrade-utils";
-import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
@@ -76,7 +76,6 @@ import { SharedModule } from './shared.module';
         BrowserModule,
         UpgradeModule,
         MomentModule,
-        DynamicComponentModule.forRoot({ imports: [AppModule] }),
         ModalModule.forRoot(),
         ImageCropperModule,
         NgPipesModule,
@@ -150,6 +149,7 @@ import { SharedModule } from './shared.module';
         ProfileActionsComponent,
         ConfigBarComponent,
         DesignModeTogglerComponent,
+        TaskComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
