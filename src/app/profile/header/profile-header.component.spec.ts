@@ -37,7 +37,7 @@ describe("Components", () => {
         });
 
         it('verify if return the correct profile background', () => {
-            expect(component.profileBackground()).toEqual('background-image: url("teste.png")');
+            expect(component.profileBackground()).toEqual('url("teste.png")');
         });
     });
 });

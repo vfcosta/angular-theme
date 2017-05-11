@@ -69,6 +69,7 @@ export class ContextBarComponent {
     apply() {
         if (!this.isLayoutTemplateChanged() && !this.hasBlockChanges()) return Promise.resolve();
         this.applyChanges().then(() => {
+            this.originalLayout = this.owner.layout_template;
             this.notificationService.success({ title: "contextbar.edition.apply.success.title", message: "contextbar.edition.apply.success.message" });
         });
     }

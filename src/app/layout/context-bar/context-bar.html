@@ -2,12 +2,12 @@
   <div id="config-bar-position">
     <div class="alert alert-warning config-option apply" *ngIf="displayAlertBar()">
       <strong> {{"contextbar.edition.has_changes" | translate}}</strong>
-      <a href="" (click)="apply()" class="btn btn-success btn-sm">
+      <button (click)="apply()" class="btn btn-success btn-sm">
         <i class="fa fa-check fa-fw"></i> {{"contextbar.edition.apply" | translate}}
-      </a>
-      <a href="" (click)="discard()" class="btn btn-danger btn-sm">
+      </button>
+      <button (click)="discard()" class="btn btn-danger btn-sm">
         <i class="fa fa-remove fa-fw"></i> {{"contextbar.edition.discard" | translate}}
-      </a>
+      </button>
     </div>
     <profile-actions *ngIf="isProfile()" [profile]="owner"></profile-actions>
     <config-bar *ngIf="owner" [owner]="owner" [permissionAction]="permissionAction"></config-bar>

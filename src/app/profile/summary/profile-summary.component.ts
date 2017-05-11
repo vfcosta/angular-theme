@@ -53,7 +53,7 @@ export class ProfileSummaryComponent {
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
         });
-        this.designMode = this.designModeService.isInDesignMode();        
+        this.designMode = this.designModeService.isInDesignMode();
     }
 
     profileLink() {

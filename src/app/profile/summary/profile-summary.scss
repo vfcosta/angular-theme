@@ -10,6 +10,12 @@ noosfero-profile-summary {
         .img-profile-nav-popup {
           max-width: 150px;
         }
+        .profile-image-wrap {
+          display: block;
+          .item-avatar-img {
+            width: 100%;
+          }
+        }
         i.profile-image, i.item-avatar-img {
           color: #424242;
           background-color: white;

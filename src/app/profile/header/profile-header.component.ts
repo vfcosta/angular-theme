@@ -15,12 +15,12 @@ export class ProfileHeaderComponent {
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
         });
-        this.designMode = this.designModeService.isInDesignMode();        
+        this.designMode = this.designModeService.isInDesignMode();
     }
 
     profileBackground() {
         if (!this.profile || !this.profile.top_image) return null;
-        return `background-image: url("${this.profile.top_image.url}")`;
+        return `url("${this.profile.top_image.url}")`;
     }
 
 }
