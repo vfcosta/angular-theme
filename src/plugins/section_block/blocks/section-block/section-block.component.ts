@@ -21,17 +21,21 @@ export class SectionBlockComponent {
 
     ngOnInit() {
         if (this.block && this.block.settings) {
-            this.fontColor = this.block.settings.fontColor;
-            this.backgroundColor = this.block.settings.backgroundColor;
+            this.fontColor = this.block.settings.font_color;
+            this.backgroundColor = this.block.settings.background_color;
         }
         this.copyLink();
     }
 
     setStyles() {
+        let backgroundColor = (this.backgroundColor ? '#' + this.backgroundColor : 'inherit' );
+        let fontColor = (this.fontColor ? '#' + this.fontColor : 'inherit' );
+
         let styles = {
-            'background-color': ('#' + this.backgroundColor || 'inherit'),
-            'color': ('#' + this.fontColor || 'inherit')
+          'background-color': backgroundColor,
+          'color': fontColor
         };
+        
         return styles;
     }
 

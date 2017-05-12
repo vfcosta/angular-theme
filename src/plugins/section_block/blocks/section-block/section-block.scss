@@ -1,3 +1,6 @@
+.noosfero-block .block .panel-body.sectionblockplugin-sectionblock{
+  padding: 0px;
+}
 noosfero-section-block-plugin-section-block{
   .section-block{
     .row{
@@ -9,7 +12,7 @@ noosfero-section-block-plugin-section-block{
         font-weight: bold;
         font-size: 1.2em;
         padding-right: 10px;
-        border-bottom: none;        
+        border-bottom: none;
     }
     .description {
         border-bottom: none;
