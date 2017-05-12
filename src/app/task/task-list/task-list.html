@@ -6,7 +6,7 @@
     </div>
     <div class="task-body row" *ngFor="let task of group; let i = index;">
       <div class="task col-md-10">
-        <div *dynamicComponent="getTaskTemplate(task); context: {task: task};"></div>
+        <task [task]="task"></task>
         <div class="time">
           <span>{{task.created_at | amTimeAgo}}</span>
         </div>

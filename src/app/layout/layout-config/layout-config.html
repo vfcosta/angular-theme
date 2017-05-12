@@ -1,13 +1,13 @@
-<div class="layout-config" uib-dropdown>
-  <a href="" uib-dropdown-toggle class="btn btn-default btn-sm">
+<span class="layout-config" dropdown>
+  <button dropdownToggle class="btn btn-default btn-sm" (click)="false">
     {{ 'layout-config.title' | translate }} <i class="fa fa-caret-down fa-fw"></i>
-  </a>
-  <ul uib-dropdown-menu>
-    <li ng-repeat="(layout, _) in ctrl.layouts()" class="layout-template-option layout-{{layout}}" ng-class="{'selected': ctrl.isSelected(layout)}">
-      <a href="#" (click)="ctrl.changeLayout(layout)">
-        <img ng-src="/assets/images/icons-app/layouts/{{layout}}.png">
+  </button>
+  <ul *dropdownMenu class="dropdown-menu layout-config" role="menu">
+    <li *ngFor="let layout of layouts() | keys" role="menuitem" class="layout-template-option layout-{{layout}}" [ngClass]="{'selected': isSelected(layout)}">
+      <a href="#" (click)="changeLayout(layout)" class="dropdown-item">
+        <img src="/assets/images/icons-app/layouts/{{layout}}.png">
         <span class="layout-name">{{"layout-config.template." + layout  | translate}}</span>
       </a>
     </li>
   </ul>
-</div>
+</span>

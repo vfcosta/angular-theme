@@ -1,3 +1,12 @@
+import { TaskComponent } from './task/task.component';
+import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
+import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
+import { ConfigBarComponent } from './layout/config-bar/config-bar.component';
+import { LayoutConfigComponent } from './layout/layout-config/layout-config.component';
+import { ContextBarComponent } from './layout/context-bar/context-bar.component';
+import { ProfileHeaderComponent } from './profile/header/profile-header.component';
+import { CommentFormHotspotComponent } from './hotspot/comment-form-hotspot.component';
+import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
 import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
@@ -47,7 +56,6 @@ import { ProfileImageComponent } from "./profile/image/profile-image.component";
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 import { UpgradeUtils } from "./shared/upgrade-utils";
-import { DynamicComponentModule } from "ng-dynamic";
 import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
@@ -68,7 +76,6 @@ import { SharedModule } from './shared.module';
         BrowserModule,
         UpgradeModule,
         MomentModule,
-        DynamicComponentModule.forRoot({ imports: [AppModule] }),
         ModalModule.forRoot(),
         ImageCropperModule,
         NgPipesModule,
@@ -134,6 +141,15 @@ import { SharedModule } from './shared.module';
         BlockEditionComponent,
         AddBlockComponent,
         TopProfileImageComponent,
+        PostCommentComponent,
+        CommentFormHotspotComponent,
+        ProfileHeaderComponent,
+        ContextBarComponent,
+        LayoutConfigComponent,
+        ProfileActionsComponent,
+        ConfigBarComponent,
+        DesignModeTogglerComponent,
+        TaskComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -177,6 +193,13 @@ import { SharedModule } from './shared.module';
         BlockEditionComponent,
         AddBlockComponent,
         TopProfileImageComponent,
+        PostCommentComponent,
+        ProfileHeaderComponent,
+        ContextBarComponent,
+        LayoutConfigComponent,
+        ProfileActionsComponent,
+        ConfigBarComponent,
+        DesignModeTogglerComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
@@ -204,7 +227,10 @@ import { SharedModule } from './shared.module';
         'RoleService',
         'PersonService',
         'UserService',
-        'EnvironmentService'
+        'EnvironmentService',
+        'CommentService',
+        'DesignModeService',
+        '$sce'
     ])
 })
 

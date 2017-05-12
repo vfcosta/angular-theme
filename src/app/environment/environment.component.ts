@@ -23,17 +23,12 @@ import { Component, Inject, provide } from 'ng-forward';
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];
-    environment: noosfero.Environment;
 
     constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService,
-        private AuthService: AuthService, private designModeService: DesignModeService) {
+        private AuthService: AuthService, private designModeService: DesignModeService, private environment: noosfero.Environment) {
+
         designModeService.setInDesignMode(false);
-        let environmentPromise: Promise<noosfero.Environment>;
-        environmentPromise = environmentService.getCurrentEnvironment();
-        environmentPromise.then((environment: noosfero.Environment) => {
-            this.environment = environment;
-            return this.environmentService.getBoxes(this.environment.id);
-        }).then((response: restangular.IResponse) => {
+        this.environmentService.getBoxes(this.environment.id).then((response: restangular.IResponse) => {
             this.environment.boxes = response.data;
             this.boxes = response.data;
         }).catch(() => {

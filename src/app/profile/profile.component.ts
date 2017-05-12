@@ -22,7 +22,7 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
 @Component({
     selector: 'profile',
     templateUrl: "app/profile/profile.html",
-    directives: [ActivitiesComponent, ProfileActionsComponent],
+    directives: [ActivitiesComponent],
     providers: [
         provide('profileService', { useClass: ProfileService }),
         provide('notificationService', { useClass: NotificationService }),

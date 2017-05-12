@@ -1,26 +1,30 @@
-import {Component, Input, Inject} from "ng-forward";
+import { HotspotModule } from './hotspot.module';
+import {Component, Input, Inject, NgModuleFactory, Compiler} from "@angular/core";
 import * as plugins from "../../plugins";
 import {dasherize} from "ng-forward/cjs/util/helpers";
 import {PluginHotspot} from "./plugin-hotspot";
 
 @Component({
     selector: "noosfero-hotspot-comment-form",
-    template: "<span></span>"
+    template: `<ng-container *ngIf="myModule && hotspotComponent">
+                   <ng-container *ngComponentOutlet="hotspotComponent; ngModuleFactory: myModule;"></ng-container>
+               </ng-container>`
 })
-@Inject("$element", "$scope", "$compile")
 export class CommentFormHotspotComponent extends PluginHotspot {
 
     @Input() comment: noosfero.Comment;
     @Input() parent: noosfero.Comment;
+    hotspotComponent: any;
+    myModule: NgModuleFactory<any>;
 
-    constructor(
-        private $element: any,
-        private $scope: ng.IScope,
-        private $compile: ng.ICompileService) {
+    constructor(compiler: Compiler) {
         super("comment_form_extra_contents");
+        compiler.compileModuleAsync(HotspotModule).then(value => {
+            this.myModule = value;
+        });
     }
 
-    addHotspot(directiveName: string) {
-        this.$element.append(this.$compile('<' + directiveName + ' [comment]="ctrl.comment" [parent]="ctrl.parent"></' + directiveName + '>')(this.$scope));
+    addHotspot(directiveName: string, component: any) {
+        this.hotspotComponent = component;
     }
 }

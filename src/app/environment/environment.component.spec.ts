@@ -14,7 +14,7 @@ describe("Components", () => {
         let $state: any;
         let defaultEnvironment = <any>{ id: 1, name: 'Noosfero' };
         let mocks = helpers.getMocks();
-        let designModeServiceMock = <DesignModeService>mocks.designModeService;
+        let designModeServiceMock = <DesignModeService> mocks.designModeService;
 
         beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
             $rootScope = _$rootScope_;
@@ -23,7 +23,6 @@ describe("Components", () => {
 
         beforeEach(() => {
             $state = jasmine.createSpyObj("$state", ["transitionTo"]);
-            $state.params = { environment: defaultEnvironment };
             environmentServiceMock = jasmine.createSpyObj("environmentServiceMock", ["setCurrentEnvironment", "getBoxes", "getCurrentEnvironment"]);
             notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
 
@@ -37,15 +36,15 @@ describe("Components", () => {
         });
 
         it("get the default environment", done => {
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, authServiceMock, designModeServiceMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, authServiceMock, designModeServiceMock, defaultEnvironment);
             $rootScope.$apply();
-            expect(component.environment).toEqual({ id: 1, name: 'Noosfero', boxes: [ Object({ id: 2 }) ] });
+            expect(component['environment']).toEqual({ id: 1, name: 'Noosfero', boxes: [ Object({ id: 2 }) ] });
             done();
         });
 
         it("get the environment boxes", done => {
             $state.params = { environment: {} };
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, authServiceMock, designModeServiceMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, authServiceMock, designModeServiceMock, defaultEnvironment);
             $rootScope.$apply();
             expect(environmentServiceMock.getBoxes).toHaveBeenCalled();
             expect(component.boxes).toEqual([{ id: 2 }]);
@@ -58,7 +57,7 @@ describe("Components", () => {
             $state.params = { environment: {} };
             environmentServiceMock.getBoxes = jasmine.createSpy('getBoxes').and.returnValue(environmentResponse.promise);
 
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, authServiceMock, designModeServiceMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, authServiceMock, designModeServiceMock, defaultEnvironment);
             $rootScope.$apply();
 
             expect(notificationMock.error).toHaveBeenCalled();
@@ -67,7 +66,7 @@ describe("Components", () => {
 
         it("reset design mode", done => {
             spyOn(designModeServiceMock, "setInDesignMode");
-            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, authServiceMock, designModeServiceMock);
+            let component: EnvironmentComponent = new EnvironmentComponent(environmentServiceMock, $state, notificationMock, authServiceMock, designModeServiceMock, defaultEnvironment);
             expect(designModeServiceMock.setInDesignMode).toHaveBeenCalledWith(false);
             done();
         });

@@ -45,6 +45,14 @@ export function noosferoRoutes($stateProvider: any) {
                 controller: EnvironmentComponent,
                 controllerAs: "ctrl"
             }
+        },
+        resolve: {
+            environment: (environmentService: EnvironmentService) => {
+                return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                    environmentService.setCurrentEnvironment(result.data);
+                    return result.data;
+                });
+            }
         }
     });
     $stateProvider.state({
@@ -100,7 +108,15 @@ export function noosferoRoutes($stateProvider: any) {
                 controllerAs: "ctrl"
             }
         },
-        params: { currentProfile: {} }
+        params: { currentProfile: {} },
+        resolve: {
+            environment: (EnvironmentService: EnvironmentService) => {
+                return EnvironmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                    EnvironmentService.setCurrentEnvironment(result.data);
+                    return result.data;
+                });
+            }
+        }
     });
     $stateProvider.state({
         name: 'main.profile.info',
@@ -219,6 +235,18 @@ export function noosferoRoutes($stateProvider: any) {
             "mainBlockContent": {
                 templateUrl: "app/profile/community-members/community-members-profile.html",
                 controller: CommunityMembersProfileComponent,
+                controllerAs: "ctrl"
+            }
+        }
+    });
+    $stateProvider.state({
+        name: 'main.profile.friends',
+        url: "^/profile/:profile/friends",
+        controller: ProfileConfigurationOptionComponent,
+        views: {
+            "mainBlockContent": {
+                template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
+                controller: ProfileConfigurationOptionComponent,
                 controllerAs: "ctrl"
             }
         }

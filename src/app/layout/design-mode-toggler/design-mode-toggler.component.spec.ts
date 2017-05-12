@@ -1,88 +1,85 @@
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
-import {INgForwardJQuery} from 'ng-forward/cjs/util/jqlite-extensions';
+import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 import * as helpers from '../../../spec/helpers';
-import {DesignModeTogglerComponent} from './design-mode-toggler.component';
-import {DesignModeService} from '../../shared/services/design-mode.service';
-import {INoosferoLocalStorage} from "./../../shared/models/interfaces";
+import { DesignModeTogglerComponent } from './design-mode-toggler.component';
+import { INoosferoLocalStorage } from "./../../shared/models/interfaces";
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 describe('DesignModeToggler Component', () => {
+
+    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
     let mocks = helpers.getMocks();
-    const htmlTemplate: string = '<design-toggler></design-toggler>';
-
-    let helper: ComponentTestHelper<DesignModeTogglerComponent>;
-    beforeEach(() => {
-        angular.mock.module('templates');
-        angular.mock.module('ngSanitize');
-    });
-
-    let designModeService: DesignModeService;
-    beforeEach((done) => {
-        designModeService = new DesignModeService(mocks.localStorageService);
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [DesignModeTogglerComponent],
+    let fixture: ComponentFixture<DesignModeTogglerComponent>;
+    let component: DesignModeTogglerComponent;
+    beforeEach(async(() => {
+        spyOn(mocks.designModeService, 'isInDesignMode').and.callThrough();
+        TestBed.configureTestingModule({
+            declarations: [DesignModeTogglerComponent, TranslatePipe],
             providers: [
-                helpers.createProviderToValue('DesignModeService', designModeService),
-                helpers.createProviderToValue('AuthService', helpers.mocks.authService),
-            ]
+                { provide: "designModeService", useValue: mocks.designModeService },
+                { provide: "authService", useValue: mocks.authService },
+                { provide: "translatorService", useValue: mocks.translatorService }
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         });
-        helper = new ComponentTestHelper<DesignModeTogglerComponent>(cls, done);
-    });
+        fixture = TestBed.createComponent(DesignModeTogglerComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    }));
 
     it('display preview button if design mode is edit mode', () => {
-        helper.component.inDesignMode = true;
-        helper.detectChanges();
-        expect(helper.all(".button-preview-mode").length).toEqual(1);
+        TestBed.get("designModeService").setInDesignMode(true);
+        fixture.detectChanges();
+        expect(all(".button-preview-mode").length).toEqual(1);
     });
 
     it('display edit button if design mode is not in edit mode', () => {
-        helper.component.inDesignMode = false;
-        helper.detectChanges();
-        expect(helper.all(".button-edit-mode").length).toEqual(1);
+        //mocks.designModeService.setInDesignMode(false);
+        TestBed.get("designModeService").setInDesignMode(false);
+        fixture.detectChanges();
+        expect(all(".button-edit-mode").length).toEqual(1);
     });
 
-    it('emits event with value "true" when changing inDesignMode to On', (done) => {
-        designModeService.setInDesignMode(false);
-        designModeService.onToggle.subscribe((designModeOn: boolean) => {
+    it('emits event with value "true" when changing inDesignMode to On', fakeAsync(() => {
+        mocks.designModeService.setInDesignMode(false);
+        mocks.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             expect(designModeOn).toBeTruthy();
-            done();
         });
-        helper.component.inDesignMode = true;
-        helper.detectChanges();
-    });
+        component.inDesignMode = true;
+    }));
 
-    it('emits events with value "false" when changing inDesignMode to Off', (done) => {
-        helper.component.inDesignMode = true;
-        helper.detectChanges();
+    it('emits events with value "false" when changing inDesignMode to Off', fakeAsync((done) => {
+        component.inDesignMode = true;
 
-        designModeService.onToggle.subscribe((designModeOn: boolean) => {
+        mocks.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             expect(designModeOn).toBeFalsy();
             done();
         });
 
-        helper.component.inDesignMode = false;
-        helper.detectChanges();
-    });
+        component.inDesignMode = false;
+    }));
 
-    it('emits event with value "true" when toggle design mode', (done) => {
-        designModeService.setInDesignMode(false);
-        designModeService.onToggle.subscribe((designModeOn: boolean) => {
+    it('emits event with value "true" when toggle design mode', fakeAsync((done) => {
+        mocks.designModeService.setInDesignMode(false);
+        mocks.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             expect(designModeOn).toBeTruthy();
             done();
         });
-        helper.component.togleDesignMode();
-        helper.detectChanges();
-    });
+        component.togleDesignMode();
+    }));
 
-    it('emits event with value "false" when toggle design mode', (done) => {
-        designModeService.setInDesignMode(true);
-        helper.detectChanges();
-        designModeService.onToggle.subscribe((designModeOn: boolean) => {
+    it('emits event with value "false" when toggle design mode', fakeAsync((done) => {
+        mocks.designModeService.setInDesignMode(true);
+        mocks.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             expect(designModeOn).toBeFalsy();
             done();
         });
-        helper.component.togleDesignMode();
-        helper.detectChanges();
-    });
+        component.togleDesignMode();
+    }));
 
+    function all(selector: string) {
+        let compiled = fixture.debugElement;
+        return compiled.queryAll(By.css(selector));
+    }
 });

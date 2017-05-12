@@ -1,6 +1,6 @@
 <div class="profile-summary media">
     <div class="media-left media-middle">
-        <noosfero-profile-image [profile]="profile" [editable]="true"></noosfero-profile-image>
+        <noosfero-profile-image  [profile]="profile" [editable]="designMode"></noosfero-profile-image>
     </div>
     <div class="media-body media-middle">
         <h1 class="media-heading profile-name">
@@ -9,7 +9,7 @@
         <ng-template #popoverTemplate>
             <profile-fast-edition [profile]="profile" [environment]="environment" (finished)="closeEdition($event)"></profile-fast-edition>
         </ng-template>
-        <a href="#" *ngIf="profile.permissions" [permission]="profile.permissions" permissionAction="allow_edit" #popover="bs-popover"
+        <a href="#" *ngIf="designMode && profile.permissions" [permission]="profile.permissions" permissionAction="allow_edit" #popover="bs-popover"
             triggers="click" [popover]="popoverTemplate" class="profile-edition-link" placement="right">
             <i class="pencil-icon pencil-icon-header"></i>
         </a>

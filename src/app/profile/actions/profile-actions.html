@@ -1,18 +1,18 @@
-<div class="profile-menu" uib-dropdown permission="ctrl.profile.permissions" permission-action="allow_edit">
-  <a href="" uib-dropdown-toggle class="btn btn-sm btn-primary">
-    {{"profile.actions.new_item" | translate}} <i class="fa fa-caret-down"></i>
-  </a>
-  <ul uib-dropdown-menu ng-show="ctrl.profile">
-    <li>
-        <a href="#" ui-sref="main.cms({profile: ctrl.profile.identifier, parent_id: ctrl.parentId})">
-            <i class="fa fa-file fa-fw fa-lg"></i> {{"profile.actions.new_post" | translate}}
-        </a>
-    </li>
-    <!-- FIXED HERE BUT SHOULD BE A HOTSPOT TO INCLUDE LINKS FROM THE PLUGIN -->
-    <li>
-        <a href="#" ui-sref="main.cms({profile: ctrl.profile.identifier, parent_id: ctrl.parentId, type: 'CommentParagraphPlugin::Discussion'})">
-            <i class="fa fa-file fa-fw fa-lg"></i> {{"profile.actions.new_discussion" | translate}}
-        </a>
-    </li>
-  </ul>
+<div class="profile-menu" dropdown [permission]="profile.permissions" permissionAction="allow_edit">
+    <button dropdownToggle class="btn btn-sm btn-primary" (click)="false">
+        {{"profile.actions.new_item" | translate}} <i class="fa fa-caret-down"></i>
+    </button>
+    <ul *dropdownMenu class="dropdown-menu">
+        <li class="profile-actions-item">
+            <a href="#" uiSref="main.cms" [uiParams]="{profile: profile.identifier, parent_id: parentId}">
+                <i class="fa fa-file fa-fw fa-lg"></i> {{"profile.actions.new_post" | translate}}
+            </a>
+        </li>
+        <!-- FIXED HERE BUT SHOULD BE A HOTSPOT TO INCLUDE LINKS FROM THE PLUGIN -->
+        <li class="profile-actions-item">
+            <a href="#" uiSref="main.cms" [uiParams]="{profile: profile.identifier, parent_id: parentId, type: 'CommentParagraphPlugin::Discussion'}">
+                <i class="fa fa-file fa-fw fa-lg"></i> {{"profile.actions.new_discussion" | translate}}
+            </a>
+        </li>
+    </ul>
 </div>

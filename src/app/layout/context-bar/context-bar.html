@@ -1,15 +1,15 @@
-<div id="context-bar" class="container-fluid" ng-class="{'profile-context-bar': ctrl.isProfile(), 'environment-context-bar': !ctrl.isProfile()}">
+<div id="context-bar" class="container-fluid" [ngClass]="{'profile-context-bar': isProfile(), 'environment-context-bar': !isProfile()}">
   <div id="config-bar-position">
-    <div class="alert alert-warning config-option apply" ng-if="ctrl.displayAlertBar()">
+    <div class="alert alert-warning config-option apply" *ngIf="displayAlertBar()">
       <strong> {{"contextbar.edition.has_changes" | translate}}</strong>
-      <a href="" (click)="ctrl.apply()" class="btn btn-success btn-sm">
+      <button (click)="apply()" class="btn btn-success btn-sm">
         <i class="fa fa-check fa-fw"></i> {{"contextbar.edition.apply" | translate}}
-      </a>
-      <a href="" (click)="ctrl.discard()" class="btn btn-danger btn-sm">
+      </button>
+      <button (click)="discard()" class="btn btn-danger btn-sm">
         <i class="fa fa-remove fa-fw"></i> {{"contextbar.edition.discard" | translate}}
-      </a>
+      </button>
     </div>
-    <profile-actions ng-if="ctrl.isProfile()" [profile]="ctrl.owner"></profile-actions>
-    <config-bar ng-if="ctrl.owner" [owner]="ctrl.owner" [permission-action]="ctrl.permissionAction"></config-bar>
+    <profile-actions *ngIf="isProfile()" [profile]="owner"></profile-actions>
+    <config-bar *ngIf="owner" [owner]="owner" [permissionAction]="permissionAction"></config-bar>
   </div>
 </div>

@@ -37,6 +37,10 @@ class ScopeWithEvents {
     public $watch(fn1: Function, fn2: Function) {
 
     }
+
+    public $apply() {
+
+    }
 }
 export var mocks: any = {
     scopeWithEvents: (): ScopeWithEvents => new ScopeWithEvents(),
@@ -296,10 +300,17 @@ export function getMocks() {
                 return this.modalInstance;
             }
         },
+        $transitions :{
+            onSuccess: () => {}
+        },
         $state: {
             href: () => { },
             go: () => { }
         },
+        $scope: {
+            $watch: (param: string, f: Function) => { f(); },
+            $apply: () => { } 
+        },        
         profile: {
             id: 1,
             identifier: 'profile-id',
@@ -324,7 +335,7 @@ export function getMocks() {
             createAccount: (user: noosfero.User) => {
                 return Promise.resolve({ status: 201 });
             }
-        },
+        },      
         authService: {
             loginSuccess: {
                 subscribe: (fn: Function) => { },
@@ -408,7 +419,8 @@ export function getMocks() {
                     signup_intro: 'Welcome to Noosfero',
                     host: 'http://localhost'
                 };
-            }
+            },
+            update: (environment: noosfero.Environment) => Promise.resolve({id: 2})
         },
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
@@ -441,6 +453,9 @@ export function getMocks() {
             },
             getByArticle: (article: noosfero.Article) => {
                 return Promise.resolve({ data: {} });
+            },
+            createInArticle: (article: noosfero.Article, comment: noosfero.Comment) => {
+                return Promise.resolve({ data: {} });
             }
         },
         sessionWithCurrentUser: (user: any) => {
@@ -449,13 +464,14 @@ export function getMocks() {
                 localStorage: {}
             };
         },
+        inDesignMode: false,
         designModeService: {
             onToggle: {
                 subscribe: (fn: Function) => { },
                 next: (param: any) => { }
             },
-            isInDesignMode: () => { return false; },
-            setInDesignMode: (value: boolean) => {}
+            isInDesignMode: () => { return mocks.inDesignMode; },
+            setInDesignMode: (value: boolean) => { mocks.inDesignMode = value; }
         },
         $translate: {
             use: (lang?: string) => {

@@ -1,12 +1,11 @@
 import { Inject, Input, Component, provide } from 'ng-forward';
-import { PostCommentComponent } from "./post-comment/post-comment.component";
 import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
 import { CommentComponent } from "./comment.component";
 
 @Component({
     selector: 'noosfero-comments',
     templateUrl: 'app/article/comment/comments.html',
-    directives: [PostCommentComponent, CommentComponent],
+    directives: [CommentComponent],
     outputs: ['commentAdded']
 })
 @Inject(CommentService, "$scope")
@@ -48,7 +47,6 @@ export class CommentsComponent {
         }
         this.comments.push(comment);
         this.resetShowReply();
-        this.$scope.$apply();
     }
 
     commentRemoved(comment: noosfero.Comment): void {

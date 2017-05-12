@@ -1,6 +1,6 @@
-<div id="config-tool" permission="ctrl.owner.permissions" permission-action="{{ctrl.permissionAction}}">
+<div id="config-tool" [permission]="owner.permissions" [permissionAction]="permissionAction">
 	<div class="config-option layout-config">
-		<layout-config  class='animate ng-hide' ng-show="ctrl.designModeOn" [owner]="ctrl.owner"></layout-config>
+		<layout-config  class='animate' *ngIf="designModeOn" [owner]="owner"></layout-config>
 	</div>
 
 	<div class="config-option design-mode">

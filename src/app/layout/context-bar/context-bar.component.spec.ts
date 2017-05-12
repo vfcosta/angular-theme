@@ -1,89 +1,83 @@
-import { Component } from 'ng-forward';
+import { Component } from '@angular/core';
 import { ContextBarComponent } from './context-bar.component';
 import * as helpers from "../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
-
-// this htmlTemplate will be re-used between the container components in this spec file
-const htmlTemplate: string = '<context-bar [owner]="ctrl.owner"></context-bar>';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { TranslatePipe } from '../../shared/pipes/translate-pipe';
+import { By } from '@angular/platform-browser';
 
 describe("Context Bar Component", () => {
-
-    let helper: ComponentTestHelper<ContextBarComponent>;
-    beforeEach(() => {
-        angular.mock.module("templates");
-    });
     let mocks = helpers.getMocks();
-
-    let properties = {
-        owner: {
-            id: 1,
-            identifier: 'profile-name',
-            type: 'Person',
-            layout_template: 'default',
-            boxes: [{id: 6, blocks: [{id: 5, box: {id: 6}}]}]
-        }
-    };
-
-    let blockService = jasmine.createSpyObj("BlockService", ["updateAll"]);
-    let scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
-
+    let fixture: ComponentFixture<ContextBarComponent>;
+    let component: ContextBarComponent;
+    let state = jasmine.createSpyObj("$state", ["reload"]);
     let eventFunction: Function;
     mocks.eventsHubService.subscribeToEvent = <any>((ev: string, fn: Function) => { eventFunction = fn; });
 
-    let profileService = jasmine.createSpyObj("profileService", ["update"]);
-    profileService.update = jasmine.createSpy("update").and.returnValue(helpers.mocks.promiseResultTemplate());
-    let environmentService = jasmine.createSpyObj("environmentService", ["update"]);
-    let state = jasmine.createSpyObj("$state", ["reload"]);
-
-    beforeEach((done) => {
-        spyOn(mocks.notificationService, 'success');
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [ContextBarComponent],
-            properties: properties,
+    beforeEach(async(() => {
+        spyOn(mocks.profileService, 'update').and.returnValue(Promise.resolve(mocks.profile));
+        spyOn(mocks.environmentService, 'update').and.callThrough();
+        spyOn(mocks.notificationService, 'success').and.callThrough();
+        
+        TestBed.configureTestingModule({
+            declarations: [ContextBarComponent, TranslatePipe],
             providers: [
-                helpers.createProviderToValue("$state", state),
-                helpers.createProviderToValue("$scope", scope),
-                helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
-                helpers.createProviderToValue("BlockService", blockService),
-                helpers.createProviderToValue("NotificationService", mocks.notificationService),
-                helpers.createProviderToValue("DesignModeService", helpers.mocks.designModeService),
-                helpers.createProviderToValue('ProfileService', profileService),
-                helpers.createProviderToValue('EnvironmentService', environmentService)
-            ]
+                { provide: "$state", useValue: state },
+                { provide: "$scope", useValue: mocks.scopeWithEvents() },
+                { provide: "eventsHubService", useValue: mocks.eventsHubService },
+                { provide: "blockService", useValue: mocks.blockService },
+                { provide: "notificationService", useValue: mocks.notificationService },
+                { provide: "designModeService", useValue: mocks.designModeService },
+                { provide: 'profileService', useValue: mocks.profileService },
+                { provide: 'environmentService', useValue: mocks.environmentService },
+                { provide: 'translatorService', useValue: mocks.translatorService }
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         });
-        helper = new ComponentTestHelper<ContextBarComponent>(cls, done);
-    });
+        fixture = TestBed.createComponent(ContextBarComponent);
+        component = fixture.componentInstance;
+        component.originalLayout = 'default';
+        component.blocksChanged = [];
+        component.owner = 
+            <noosfero.Profile>{
+                id: 1,
+                identifier: 'profile-name',
+                type: 'Person',
+                layout_template: 'default',
+                boxes: [{ id: 6, blocks: [{ id: 5, box: { id: 6 } }] }]
+            }
+        fixture.detectChanges();
+    }));
 
     it("render template context-bar", () => {
-        expect(helper.all('#context-bar').length).toEqual(1);
+        expect(all('#context-bar').length).toEqual(1);
     });
 
     it("not call block service to apply blocks changes when no changes exists", () => {
-        helper.component.blocksChanged = <noosfero.Block[]>[];
-        helper.component.apply();
-        expect(profileService.update).not.toHaveBeenCalled();
+        component.blocksChanged = <noosfero.Block[]>[];
+        component.apply();
+        expect(mocks.profileService.update).not.toHaveBeenCalled();
     });
 
     it("call block service to apply blocks changes", () => {
-        helper.component.blocksChanged = <noosfero.Block[]>[{ id: 1, box: {id: 6} }];
-        helper.component.applyChanges();
-        expect(profileService.update).toHaveBeenCalled();
+        component.blocksChanged = <noosfero.Block[]>[{ id: 1, box: { id: 6 } }];
+        component.applyChanges();
+        expect(mocks.profileService.update).toHaveBeenCalled();
     });
 
     it("return false when there is no blocks to be updated", () => {
-        expect(helper.component.hasBlockChanges()).toBeFalsy();
+        expect(component.hasBlockChanges()).toBeFalsy();
     });
 
     it("return true when exists blocks to be updated", () => {
-        helper.component.blocksChanged = <noosfero.Block[]>[{ id: 1, box: {id: 6} }];
-        expect(helper.component.hasBlockChanges()).toBeTruthy();
+        component.blocksChanged = <noosfero.Block[]>[{ id: 1, box: { id: 6 } }];
+        expect(component.hasBlockChanges()).toBeTruthy();
     });
 
     it("add block to blocksChanged when receive an event", () => {
         let blockChanged = <noosfero.Block>{ id: 2, title: 'changed' };
         eventFunction(blockChanged);
-        expect(helper.component.blocksChanged).toEqual([blockChanged]);
+        expect(component.blocksChanged).toEqual([blockChanged]);
     });
 
     it("replace block to blocksChanged when receive an event", () => {
@@ -91,60 +85,63 @@ describe("Context Bar Component", () => {
         eventFunction(blockChanged);
         blockChanged = <noosfero.Block>{ id: 2, title: 'changed again' };
         eventFunction(blockChanged);
-        expect(helper.component.blocksChanged).toEqual([blockChanged]);
+        expect(component.blocksChanged).toEqual([blockChanged]);
     });
 
     it("not add block to blocksChanged when there is no changes in block", () => {
         let blockChanged = <noosfero.Block>{ id: 2 };
         eventFunction(blockChanged);
-        expect(helper.component.blocksChanged).toEqual([]);
+        expect(component.blocksChanged).toEqual([]);
     });
 
     it("call profile service to update template when apply", () => {
-        profileService.update = jasmine.createSpy("update").and.returnValue(helpers.mocks.promiseResultTemplate());
-        helper.component.owner.layout_template = "leftbar";
-        helper.component.applyChanges();
-        expect(profileService.update).toHaveBeenCalledWith({ id: 1, layout_template: "leftbar" });
+        component.owner.layout_template = "leftbar";
+        component.applyChanges();
+        expect(mocks.profileService.update).toHaveBeenCalledWith({ id: 1, layout_template: "leftbar" });
     });
 
     it("call environment service when owner is an environment", () => {
-        environmentService.update = jasmine.createSpy("update").and.returnValue(helpers.mocks.promiseResultTemplate());
-        helper.component.owner = <noosfero.Environment>{ id: 2, layout_template: 'default' };
-        helper.component.owner.layout_template = "rightbar";
-        helper.component.applyChanges();
-        expect(environmentService.update).toHaveBeenCalledWith({ id: 2, layout_template: "rightbar" });
+        component.owner = <noosfero.Environment>{ id: 2, layout_template: 'default' };
+        component.owner.layout_template = "rightbar";
+        component.applyChanges();
+        expect(mocks.environmentService.update).toHaveBeenCalledWith({ id: 2, layout_template: "rightbar" });
     });
 
     it("call state reload when discard changes", () => {
-        helper.component.discard();
+        component.discard();
         expect(state.reload).toHaveBeenCalled();
     });
 
-    it("call notification success when apply changes", () => {
-        helper.component.blocksChanged = <any> [{id: 5, _destroy: true, box: {id: 6}}];
-        helper.component.apply();
-        helper.detectChanges();
-        expect(helper.component['notificationService'].success).toHaveBeenCalled();
-    });
+    it("call notification success when apply changes", fakeAsync(() => {
+        component.blocksChanged = <any>[{ id: 5, _destroy: true, box: { id: 6 } }];
+        component.apply();
+        fixture.detectChanges();
+        tick();
+        expect(component['notificationService'].success).toHaveBeenCalledWith({ title: "contextbar.edition.apply.success.title", message: "contextbar.edition.apply.success.message" });
+    }));
 
     it("render template context-bar if block is marked for removal", () => {
-        helper.component.blocksChanged = <any> [{id: 5, _destroy: true, box: {id: 6}}];
-        helper.detectChanges();
-        expect(helper.all('#context-bar .apply').length).toEqual(1);
+        component.blocksChanged = <any>[{ id: 5, _destroy: true, box: { id: 6 } }];
+        fixture.detectChanges();
+        expect(all('#context-bar .apply').length).toEqual(1);
     });
 
     it("call ProfileService.update if apply button is pressed", () => {
-        helper.component.blocksChanged = <any> [{id: 5, _destroy: true, box: {id: 6}}];
-        helper.component.applyChanges();
-        expect(profileService.update).toHaveBeenCalledWith({ id: 1, boxes_attributes: [ { id: 6, blocks_attributes: [ { id: 5, _destroy: true } ] } ] });
+        component.blocksChanged = <any>[{ id: 5, _destroy: true, box: { id: 6 } }];
+        component.applyChanges();
+        expect(mocks.profileService.update).toHaveBeenCalledWith({ id: 1, boxes_attributes: [{ id: 6, blocks_attributes: [{ id: 5, _destroy: true }] }] });
     });
 
-    it("call EnvironmentService.update if apply button is pressed", () => {
-        helper.component.owner.type = "Environment";
-        helper.component.blocksChanged = <any> [{id: 5, _destroy: true, box: {id: 6}}];
-        helper.component.applyChanges();
-        expect(environmentService.update).toHaveBeenCalledWith({ id: 1, boxes_attributes: [ { id: 6, blocks_attributes: [ { id: 5, _destroy: true } ] } ] });
+    it("call mocks.EnvironmentService.update if apply button is pressed", () => {
+        component.owner.type = "Environment";
+        component.blocksChanged = <any>[{ id: 5, _destroy: true, box: { id: 6 } }];
+        component.applyChanges();
+        expect(mocks.environmentService.update).toHaveBeenCalledWith({ id: 1, boxes_attributes: [{ id: 6, blocks_attributes: [{ id: 5, _destroy: true }] }] });
     });
 
+    function all(selector: string) {
+        let compiled = fixture.debugElement;
+        return compiled.queryAll(By.css(selector));
+    }
 
 });

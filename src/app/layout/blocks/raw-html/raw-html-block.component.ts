@@ -1,4 +1,5 @@
 import {Component, Input} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: "noosfero-raw-htmlblock",
@@ -10,9 +11,11 @@ export class RawHTMLBlockComponent {
     @Input() block: any;
     @Input() owner: any;
 
+    constructor(private sanitizer: DomSanitizer) { }
+
     html() {
         if (this.block && this.block.settings) {
-            return this.block.settings.html;
+            return this.sanitizer.bypassSecurityTrustHtml(this.block.settings.html);
         }
     }
 

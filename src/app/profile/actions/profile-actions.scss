@@ -1,5 +1,38 @@
 #context-bar {
   profile-actions {
     display: inline-block;
+    .profile-actions-item {
+      display: block;
+    }
+    ul {
+      top: auto;
+      left: auto;
+      li {
+        min-height: 30px !important;
+        padding: 0;
+        a {
+          color: #676767;
+          width: 100%;
+          height: 100%;
+          display: inline-block;
+          padding: 10px;
+          &:hover, &:focus {
+            text-decoration: none;
+          }
+          img {
+            width: 30px;
+          }
+          .layout-name {
+            margin-left: 8px;
+          }
+        }
+        &.selected {
+          a {
+            font-weight: bold;
+          }
+          background-color: #d0d0d0;
+        }
+      }
+    }    
   }
 }
