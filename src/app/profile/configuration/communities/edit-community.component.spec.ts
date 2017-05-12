@@ -70,33 +70,34 @@ describe("Components", () => {
         }));
 
         it("verify if set name error when the save is rejected by the server ", fakeAsync(() => {
-            let response = { status: 422, data: { errors_details: { name: [{ error: 'blank' }] }, errors_messages: { name: [{ error: 'cant be blank' }] }  } };
+            let response = { status: 422, data: { errors: { name: [{ error: 'blank', full_message: 'cant be blank' }] } } };
             component.profileService.update = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
             tick();
-            expect(component.nameErrors.getBackendErrors()[0]).toEqual('profile.edition.name.blank');
+            expect(component.nameErrors.getErrors()[0]).toEqual('profile.edition.name.blank');
         }));
 
         it("verify if set identifier error when the save is rejected by the server ", fakeAsync(() => {
             spyOn(component.notificationService, 'error').and.callThrough();
-            let response = { status: 422, data: { message: 'Failed', errors_details: { identifier: [{ error: 'not_available' }] }, errors_messages: { identifier: [{ error: 'not_available' }] } } };
+            let response = { status: 422, data: { message: 'Failed', errors: { identifier: [{ error: 'not_available' }] }, errors_messages: { identifier: [{ error: 'not_available' }] } } };
             component.profileService.update = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
             tick();
-            expect(component.notificationService.error).toHaveBeenCalledWith({ title: "profile.edition.error.title", message: 'Failed' });
+            expect(component.nameErrors.getErrors()[0]).toEqual('profile.edition.name.not_available');
         }));
 
-        it("verify if the server could not save the community ", fakeAsync(() => {
-            spyOn(component.notificationService, 'error').and.callThrough();
-            let response = { status: 400, data: { message: 'Failed' } };
-            component.profileService.update = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
-            fixture.detectChanges();
-            component.save();
-            tick();
-            expect(component.notificationService.error).toHaveBeenCalledWith({ title: "profile.edition.error.title", message: 'Failed' });
-        }));
+        // TODO: this error should be handled by notification service. A generic test must be included.
+        // it("verify if the server could not save the community ", fakeAsync(() => {
+        //     spyOn(component.notificationService, 'error').and.callThrough();
+        //     let response = { status: 400, data: { message: 'Failed' } };
+        //     component.profileService.update = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
+        //     fixture.detectChanges();
+        //     component.save();
+        //     tick();
+        //     expect(component.notificationService.error).toHaveBeenCalledWith({ title: "profile.edition.error.title", message: 'Failed' });
+        // }));
 
         it("change selection of the community acceptance", () => {
             fixture.detectChanges();

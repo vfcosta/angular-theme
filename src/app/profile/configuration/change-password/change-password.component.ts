@@ -35,21 +35,24 @@ export class ChangePasswordComponent {
         @Inject("notificationService") private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService) { }
 
-    save() {
+    save(event: Event) {
+        event.preventDefault();
         if (this.new_password !== this.new_password_confirmation) {
-            this.notificationService.error({ title: "new_password.failed.title", message: "profile.edition.password.error.message" });
+            this.newPasswordConfirmation.setBackendErrors({errors: { password_confirmation: [{error: 'profile.edition.password.error.message'}] }});
             return false;
         } else {
-            this.userService.changePassword(this.profile, this.current_password, this.new_password, this.new_password_confirmation).then(response => {
-                this.errors = null;
-                this.notificationService.success({ title: "profile.edition.success.title", message: "new_password.success.message" });
-                this.$state.go('main.myprofile', { profile: this.profile.identifier });
-            }).catch(error => {
-                this.errors = error.data;
-                this.currentPassword.setBackendErrors(this.errors);
-                this.newPassword.setBackendErrors(this.errors);
-                this.newPasswordConfirmation.setBackendErrors(this.errors);
-            });
+            this.userService.changePassword(this.profile, this.current_password, this.new_password, this.new_password_confirmation)
+                .then(response => {
+                    this.errors = null;
+                    this.notificationService.success({ title: "profile.edition.success.title", message: "new_password.success.message" });
+                    this.$state.go('main.myprofile', { profile: this.profile.identifier });
+                })
+                .catch(error => {
+                    this.errors = error.data;
+                    this.currentPassword.setBackendErrors(this.errors);
+                    this.newPassword.setBackendErrors(this.errors);
+                    this.newPasswordConfirmation.setBackendErrors(this.errors);
+                });
         }
     }
 

@@ -1,10 +1,5 @@
-<div *ngFor="let error of getFrontendErrors()" [hidden]="field.valid || (field.pristine && !field.formDirective?.submitted)" class="alert alert-danger">
+<div *ngFor="let error of getErrors()" [hidden]="field.valid || (field.pristine && !field.formDirective?.submitted)" class="alert alert-danger">
   <div class="field-error">
     {{error | translate}}
-  </div>
-</div>
-<div *ngFor="let error of getBackendErrors()" [hidden]="!hasBackendErrors()" class="alert alert-danger">
-  <div class="field-error">
-    {{error}}
   </div>
 </div>

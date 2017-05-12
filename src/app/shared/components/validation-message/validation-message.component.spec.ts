@@ -2,72 +2,93 @@ import { TranslatePipe } from './../../pipes/translate-pipe';
 import { ValidationMessageComponent } from './validation-message.component';
 import { By } from '@angular/platform-browser';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, FormControl } from '@angular/forms';
 import * as helpers from "../../../../spec/helpers";
+import { fixtures } from '../../../../spec/helpers';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+
+
+@Component({
+    selector: "form-template-test",
+    template: `<form class="form" (ngSubmit)="save($event)" #profileForm="ngForm" novalidate>
+                    <input type="password" required #currentPasswordInput #currentPassword="ngModel" id="current_password"  name="current_password" [(ngModel)]="current_password">
+                    <validation-message #currentPasswordValidation [field]="currentPassword" [prefix]=""></validation-message>
+                </form>
+`
+})
+class FormTemplateTestComponet {
+    @ViewChild('currentPasswordValidation') currentPasswordValidation: ValidationMessageComponent;
+    @ViewChild('currentPasswordInput') currentPassword: ElementRef;
+}
+
 
 describe("Components", () => {
 
     describe("Validation Message Component", () => {
         let fixture: ComponentFixture<ValidationMessageComponent>;
+        let formFixture: ComponentFixture<FormTemplateTestComponet>;
         let component: ValidationMessageComponent;
+        let formComponent: FormTemplateTestComponet;
         let mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule],
-                declarations: [ValidationMessageComponent, TranslatePipe],
+                declarations: [ValidationMessageComponent, TranslatePipe, FormTemplateTestComponet],
                 providers: [
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(ValidationMessageComponent);
+
             component = fixture.componentInstance;
             component.field = jasmine.createSpyObj("field", ["valid", "pristine"]);
+            component.field.update = jasmine.createSpyObj("update", ["subscribe"]);
+
+            formFixture = TestBed.createComponent(FormTemplateTestComponet);
+            formComponent = formFixture.componentInstance;
+
         }));
 
-        it("display error message from frontend when it has errors to display", () => {
-            fixture.detectChanges();
-            component.field = <any>{errors: ['is not valid']};
-            fixture.detectChanges();
-            expect(fixture.debugElement.queryAll(By.css('.field-error')).length).toEqual(1);
-        });
-
         it("get full translation of error message", () => {
-            fixture.detectChanges();
-            component.field = <any> {};
-            component.backendErrors["errors_details"] = [{"error": "blank"}];
-            component['translatorService'].hasTranslation = jasmine.createSpy("hasTranslation").and.returnValue(true);
-            component['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Name is required");
-            component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
-            expect(component.getBackendErrors()).toEqual(["Name is required"]);
+            formFixture.detectChanges();
+
+            formComponent.currentPasswordValidation.setBackendErrors({ errors: { current_password: [{ error: 'blank', full_message: 'cant be blank' }] } });
+            formComponent.currentPasswordValidation['translatorService'].hasTranslation = jasmine.createSpy("hasTranslation").and.returnValue(true);
+            formComponent.currentPasswordValidation['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Name is required");
+
+            formFixture.detectChanges();
+
+            expect(formFixture.debugElement.nativeElement.querySelector(".field-error").innerHTML).toContain('Name is required');
         });
 
         it("get translation error code", () => {
-            fixture.detectChanges();
-            component.field = <any> {};
-            component.prefix = "prefix1.prefix2";
-            component.backendErrors["errors_details"] = [{"error": "blank"}];
-            component['translatorService'].hasTranslation = jasmine.createSpy('hasTranslation').and.callFake(function(myParam) {
-                return (myParam !== component.prefix + component.dasherize("blank"));
+            formFixture.detectChanges();
+
+            formComponent.currentPasswordValidation.prefix = "prefix1.prefix2";
+            formComponent.currentPasswordValidation['translatorService'].hasTranslation = jasmine.createSpy('hasTranslation').and.callFake(function (myParam) {
+                return (myParam === 'blank');
             });
-            component['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Is required");
-            component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
-            expect(component.getBackendErrors()).toEqual(["Is required"]);
+            formComponent.currentPasswordValidation.setBackendErrors({ errors: { current_password: [{ error: 'blank', full_message: 'cant be blank' }] } });
+            expect(formComponent.currentPasswordValidation.getErrors()).toEqual(["blank"]);
         });
 
         it("get translated message from Grape API", () => {
-            fixture.detectChanges();
-            component.field = <any> {name: "identifier"};
-            component['translatorService'].hasTranslation = jasmine.createSpy('hasTranslation').and.callFake(function(myParam) {
+            formFixture.detectChanges();
+            formComponent.currentPasswordValidation['translatorService'].hasTranslation = jasmine.createSpy('hasTranslation').and.callFake(function (myParam) {
                 return false;
             });
-            component.hasBackendErrors = jasmine.createSpy("hasBackendErrors").and.returnValue(true);
-            component.setBackendErrors(
-                {"errors_details": {"identifier": [{"error": "blank"}, {"error": "not_available"}]},
-                "errors_messages": {"identifier": ["não pode ficar em branco", "não está disponível."]},
-                "full_messages": ["Identifier não pode ficar em branco", "Identifier não está disponível."]});
-            // Notice the capitalizeFirstLetter() in action
-            expect(component.getBackendErrors()).toEqual(['Não pode ficar em branco', 'Não está disponível.']);
+            formComponent.currentPasswordValidation.setBackendErrors(
+                {
+                    errors: {
+                        current_password: [
+                            { error: "blank" , full_message: "Não pode ficar em branco" },
+                            { error: "not_available", full_message: "Não está disponível." }
+                        ]
+                    }
+                });
+            formFixture.detectChanges();
+            expect(formComponent.currentPasswordValidation.getErrors()).toEqual(['Não pode ficar em branco', 'Não está disponível.']);
         });
 
     });
