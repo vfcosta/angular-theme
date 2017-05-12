@@ -19,7 +19,7 @@ describe("Components", () => {
         let $event = jasmine.createSpyObj("$event", ["preventDefault"]);
         $event.preventDefault = jasmine.createSpy("preventDefault");
         userService.changePassword = jasmine.createSpy("changePassword").and.returnValue(Promise.resolve({}));
-        let newPasswordConfirmation = jasmine.createSpyObj("newPasswordConfirmation", ["pushError"]);
+        let newPasswordConfirmation = jasmine.createSpyObj("newPasswordConfirmation", ["setBackendErrors"]);
         newPasswordConfirmation.pushError = jasmine.createSpy("pushError");
 
         beforeEach(async(() => {

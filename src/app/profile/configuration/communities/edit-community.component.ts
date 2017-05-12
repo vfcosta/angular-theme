@@ -17,8 +17,9 @@ declare var _: any;
 export class EditCommunityComponent extends AbstractFormCommunity {
     ngOnInit() {
         this.sessionProfile = this.sessionService.currentUser().person;
-        this.community = <noosfero.Community> this.profile;
+        this.community = <noosfero.Community>this.profile;
         this.acceptBefore = this.community.closed;
+        this.nameErrors.pushAditionalField('identifier');
     }
 
     getTitle() {
@@ -27,7 +28,7 @@ export class EditCommunityComponent extends AbstractFormCommunity {
 
     save() {
         let profile: any = Object.assign({}, _.omitBy(_.pick(this.community, ['id', 'identifier', 'name', 'closed']), _.isNull));
-        this.profileService.update(profile).then( (result) => {
+        this.profileService.update(profile).then((result) => {
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
         }).catch((response) => {
             let errors = response.data;
@@ -35,6 +36,6 @@ export class EditCommunityComponent extends AbstractFormCommunity {
         });
     }
 
-    cancel() {
-    }
+    cancel() { }
+
 }

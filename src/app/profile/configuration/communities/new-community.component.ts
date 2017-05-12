@@ -17,7 +17,8 @@ export class NewCommunityComponent extends AbstractFormCommunity {
 
     ngOnInit() {
         this.sessionProfile = this.sessionService.currentUser().person;
-        this.community = <noosfero.Community>{closed: true};
+        this.community = <noosfero.Community>{ closed: true };
+        this.nameErrors.pushAditionalField('identifier');
     }
 
     getTitle() {
@@ -27,11 +28,11 @@ export class NewCommunityComponent extends AbstractFormCommunity {
     save() {
         this.community.type = 'Community';
         this.communityService.createNewCommunity(this.community).then((result) => {
-             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
-             this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
+            this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
+            this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
         }).catch(response => {
             let errors = response.data;
-            this.nameErrors.setBackendErrors(errors, ['name', 'identifier']);
+            this.nameErrors.setBackendErrors(errors);
         });
     }
 

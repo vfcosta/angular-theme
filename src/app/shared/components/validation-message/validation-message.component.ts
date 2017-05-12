@@ -12,17 +12,9 @@ export class ValidationMessageComponent {
     @Input() field: NgModel;
     @Input() prefix: string;
 
-    backendErrors: any;
+    private aditionalFields = [];
 
     constructor( @Inject('translatorService') public translatorService: TranslatorService) { }
-
-    ngOnInit() {
-        this.backendErrors = {};
-        this.field.update.subscribe(() => {
-            this.backendErrors = {};
-        }
-        );
-    }
 
     translateError(errorObject: any) {
         let error: string;
@@ -36,11 +28,16 @@ export class ValidationMessageComponent {
         return error;
     }
 
-    setBackendErrors(errorObjects: any, equivalentFields = []) {
-        let errorCollection = [];
-        equivalentFields = equivalentFields.length > 0 ? equivalentFields : [this.field.name];
+    pushAditionalField(field: string) {
+        this.aditionalFields.push(field);
+    }
 
-        equivalentFields.forEach(name => {
+    setBackendErrors(errorObjects: any) {
+        let errorCollection = [];
+        let fields = this.aditionalFields;
+        fields.push(this.field.name);
+
+        fields.forEach(name => {
             if (errorObjects.errors && errorObjects.errors[name]) {
                 errorObjects.errors[name].forEach(errorObject => {
                     let key = this.translateError(errorObject);

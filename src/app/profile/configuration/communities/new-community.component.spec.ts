@@ -87,7 +87,7 @@ describe("Components", () => {
         }));
 
         it("verify if set name error when the save is rejected by the server ", fakeAsync(() => {
-            let response = { status: 422, data: { errors: { identifier: [{ error: 'blank', full_message: 'cant be blank' }] } } };
+            let response = { status: 422, data: { errors: { name: [{ error: 'blank', full_message: 'cant be blank' }] } } };
             component.communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
