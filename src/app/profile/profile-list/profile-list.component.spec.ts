@@ -1,3 +1,4 @@
+import { ProfileLinkComponent } from './../profile-link/profile-link.component';
 import { UiSrefDirective } from './../../shared/directives/ui-sref-directive';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -35,7 +36,7 @@ describe("Components", () => {
         beforeEach(async(() => {
 
             TestBed.configureTestingModule({
-                declarations: [ProfileListComponent, MockPipe, UiSrefDirective],
+                declarations: [ProfileListComponent, MockPipe, UiSrefDirective, ProfileLinkComponent],
                 providers: [
                     { provide: "$state", useValue: state },
                     { provide: "$transitions", useValue: transitions },

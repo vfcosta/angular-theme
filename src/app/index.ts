@@ -1,3 +1,4 @@
+import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
 import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
 import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
 import { ConfigBarComponent } from './layout/config-bar/config-bar.component';
@@ -253,6 +254,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('designToggler',
     downgradeComponent({ component: DesignModeTogglerComponent }) as angular.IDirectiveFactory
+    ).
+    directive('profileLink',
+        downgradeComponent({ component: ProfileLinkComponent, inputs: ['profile', 'displayImage', 'displayName', 'truncate'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

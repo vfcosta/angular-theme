@@ -6,7 +6,11 @@
                 <span am-time-ago="currentUser.person.created_at | dateFormat"></span>
             </span>        
         </li>
-      <li><a uiSref="main.profile.info" [uiParams]="{profile: currentUser.person.identifier}">{{"blocks.login.homepage" | translate}}</a></li>
+      <li>
+        <profile-link [profile]="currentUser.person" [truncate]="false">
+          {{"blocks.login.homepage" | translate}}
+        </profile-link>
+      </li>
     </ul>
     <div class="user-actions">
       <a href="#" (click)="logout()"><i class="fa fa-fw fa-power-off"></i> {{"navbar.logout" | translate}}</a>

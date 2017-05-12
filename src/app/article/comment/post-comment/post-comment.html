@@ -2,9 +2,7 @@
   <div class="form-group post-comment-logged-in" *ngIf="loggedIn()">
     <div class="comment media">
       <div class="media-left">
-        <a ui-sref="main.profile.home({profile: currentUser.person.identifier})">
-          <noosfero-profile-image [profile]="currentUser.person"></noosfero-profile-image>
-        </a>
+        <profile-link [profile]="currentUser.person" [displayName]="false" [displayImage]="true"></profile-link>
       </div>
       <div class="media-body">
         <textarea class="form-control custom-control" rows="1" name="body" [(ngModel)]="comment.body" placeholder="{{'comment.post.placeholder' | translate}}"></textarea>

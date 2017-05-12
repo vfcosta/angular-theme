@@ -15,6 +15,9 @@
 	.card-title {
 		a {
 			color: $secondary-color;
+			.profile-name {
+				font-weight: bold;
+			}
 		}
 	}
 	.avatar {

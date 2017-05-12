@@ -11,9 +11,7 @@
       <h4 ng-bind="article.title"></h4>
     </a>
     <div class="info">
-      <a class="profile" ui-sref="main.profile.home({profile: article.profile.identifier})">
-        {{article.profile.name}}
-      </a>
+      <profile-link [profile]="article.profile" [truncate]="false"></profile-link>
       <span class="bullet-separator">•</span>
       <span class="time">
         <span am-time-ago="article.created_at | dateFormat"></span>

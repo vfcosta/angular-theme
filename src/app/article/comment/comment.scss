@@ -39,8 +39,10 @@ noosfero-comment {
           font-size: 10px;
         }
       }
-      h4 {
+      .profile-name {
         font-size: 16px;
+        font-weight: bold;
+        color: $primary-color-dark;
       }
     }
     noosfero-profile-image {

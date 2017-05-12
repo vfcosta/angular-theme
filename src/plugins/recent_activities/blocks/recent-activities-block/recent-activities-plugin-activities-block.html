@@ -4,11 +4,11 @@
     <div class="subheader">
       <p *ngIf="activity.label === 'events'">
         {{ 'activities.event.description' | translate }} <b>{{ activity.start_date | date:longDate }}</b> {{ 'time.at' | translate }} {{ activity.start_date | date:'HH:mm' }} - 
-        <a uiSref="main.profile.home" [uiParams]="{profile: activity.user.identifier}">{{activity.user.name}}</a> <span class="activity-label">{{activity.label}}</span>
+        <profile-link [profile]="activity.user" [truncate]="false"></profile-link>
       </p>
       <p *ngIf="activity.label !== 'events'">
         {{ 'date.on' | translate }} <b>{{ activity.created_at | date:longDate }}</b> {{ 'time.at' | translate }} {{ activity.created_at | date:'HH:mm' }} - 
-        <a uiSref="main.profile.home" [uiParams]="{profile: activity.user.identifier}">{{activity.user.name}}</a> <span class="activity-label">{{activity.label}}</span>
+        <profile-link [profile]="activity.user" [truncate]="false"></profile-link>
       </p>
     </div>
 

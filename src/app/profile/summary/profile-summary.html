@@ -4,7 +4,7 @@
     </div>
     <div class="media-body media-middle">
         <h1 class="media-heading profile-name">
-            <a uiSref="main.profile.home" [uiParams]="{profile: profile.identifier}">{{profile.name}}</a>
+            <profile-link [profile]="profile" [truncate]="false"></profile-link>
         </h1>
         <ng-template #popoverTemplate>
             <profile-fast-edition [profile]="profile" [environment]="environment" (finished)="closeEdition($event)"></profile-fast-edition>
