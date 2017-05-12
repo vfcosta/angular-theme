@@ -110,5 +110,13 @@ namespace noosfero {
          * @returns noosfero.Box[] The Boxes of a profile
          */
         boxes: noosfero.Box[];
+
+        /**
+         * @ngdoc property
+         * @name theme
+         * @propertyOf noofero.Profile
+         * @returns string The profile theme
+         */
+        theme: string;
     }
 }

@@ -1,3 +1,4 @@
+import { ThemeService } from './../shared/services/theme.service';
 import { DesignModeService } from './../shared/services/design-mode.service';
 import { Component, Inject, provide, Input } from 'ng-forward';
 import { ProfileHomeComponent } from './profile-home.component';
@@ -26,17 +27,19 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
     providers: [
         provide('profileService', { useClass: ProfileService }),
         provide('notificationService', { useClass: NotificationService }),
-        provide('designModeService', { useClass: DesignModeService })
+        provide('designModeService', { useClass: DesignModeService }),
+        provide('themeService', { useClass: ThemeService }),
     ]
 })
-@Inject(ProfileService, "$stateParams", "$state", NotificationService, DesignModeService)
+@Inject(ProfileService, "$stateParams", "$state", NotificationService, DesignModeService, ThemeService)
 export class ProfileComponent {
 
     boxes: noosfero.Box[];
     @Input() profile: noosfero.Profile;
 
     constructor(private profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService,
-        private notificationService: NotificationService, private designModeService: DesignModeService) {
+        private notificationService: NotificationService, private designModeService: DesignModeService,
+        private themeService: ThemeService) {
         designModeService.setInDesignMode(false);
         let profilePromise: Promise<noosfero.Profile>;
         if (this.$state.params['currentProfile'].id) {
@@ -46,6 +49,7 @@ export class ProfileComponent {
             profilePromise = profileService.setCurrentProfileByIdentifier($stateParams["profile"]);
         }
         profilePromise.then((profile: noosfero.Profile) => {
+            if (themeService.verifyTheme(profile.theme)) return <Promise<restangular.IResponse>>new Promise(() => {}); // return an empty promise to break promise chain
             this.profile = profile;
             profileService.setCurrentProfile(this.profile);
             return this.profileService.getBoxes(<number>this.profile.id);

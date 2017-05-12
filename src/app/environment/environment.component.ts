@@ -1,3 +1,4 @@
+import { ThemeService } from './../shared/services/theme.service';
 import { EnvironmentService } from '../../lib/ng-noosfero-api/http/environment.service';
 import { AuthEvents, AuthService } from '../login';
 import { NotificationService } from '../shared/services/notification.service';
@@ -16,17 +17,20 @@ import { Component, Inject, provide } from 'ng-forward';
     templateUrl: "app/environment/environment.html",
     providers: [
         provide('notificationService', { useClass: NotificationService }),
-        provide('designModeService', { useClass: DesignModeService })
+        provide('designModeService', { useClass: DesignModeService }),
+        provide('themeService', { useClass: ThemeService }),
     ]
 })
-@Inject(EnvironmentService, "$state", NotificationService, AuthService)
+@Inject(EnvironmentService, "$state", NotificationService, AuthService, DesignModeService, ThemeService)
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];
 
     constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService,
-        private AuthService: AuthService, private designModeService: DesignModeService, private environment: noosfero.Environment) {
+        private AuthService: AuthService, private designModeService: DesignModeService,
+        private themeService: ThemeService, private environment: noosfero.Environment) {
 
+        if (themeService.verifyTheme(this.environment.theme)) return;
         designModeService.setInDesignMode(false);
         this.environmentService.getBoxes(this.environment.id).then((response: restangular.IResponse) => {
             this.environment.boxes = response.data;
