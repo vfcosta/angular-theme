@@ -88,16 +88,15 @@ describe("Components", () => {
             expect(component.nameErrors.getErrors()[0]).toEqual('profile.edition.name.not_available');
         }));
 
-        // TODO: this error should be handled by notification service. A generic test must be included.
-        // it("verify if the server could not save the community ", fakeAsync(() => {
-        //     spyOn(component.notificationService, 'error').and.callThrough();
-        //     let response = { status: 400, data: { message: 'Failed' } };
-        //     component.profileService.update = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
-        //     fixture.detectChanges();
-        //     component.save();
-        //     tick();
-        //     expect(component.notificationService.error).toHaveBeenCalledWith({ title: "profile.edition.error.title", message: 'Failed' });
-        // }));
+        it("verify if the server could not save the community ", fakeAsync(() => {
+            spyOn(component.notificationService, 'error').and.callThrough();
+            let response = { status: 400, message: 'Failed' };
+            component.profileService.update = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
+            fixture.detectChanges();
+            component.save();
+            tick();
+            expect(component.notificationService.error).toHaveBeenCalledWith({ title: "profile.edition.error.title", message: 'Failed' });
+        }));
 
         it("change selection of the community acceptance", () => {
             fixture.detectChanges();
