@@ -1,14 +1,10 @@
 <div class="comment media">
   <div class="media-left">
-    <a ui-sref="main.profile.home({profile: ctrl.comment.author.identifier})">
-      <noosfero-profile-image [profile]="ctrl.comment.author"></noosfero-profile-image>
-    </a>
+    <profile-link [profile]="ctrl.comment.author" [display-name]="false" [display-image]="true"></profile-link>
   </div>
   <div class="media-body">
     <div class="heading clearfix">
-      <a class="pull-left" ui-sref="main.profile.home({profile: ctrl.comment.author.identifier})">
-        <h4 class="media-heading">{{ctrl.comment.author.name}}</h4>
-      </a>
+      <profile-link [profile]="ctrl.comment.author" [display-name]="true" [display-image]="false" [truncate]="false"></profile-link>
       <span class="reply-of" ng-if="ctrl.comment.reply_of" uib-tooltip-template="'app/article/comment/comment-reply-tooltip.html'">
         <i class="fa fa-fw fa-mail-forward"></i>
         <span class="author">{{ctrl.comment.reply_of.author.name}}</span>

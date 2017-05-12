@@ -21,9 +21,7 @@
             <!-- Article Author -->
             <span class="author">
                 <i class="fa fa-user"></i>
-                <a uiSref="main.profile.home" [uiParams]="{profile: article.author.identifier}" *ngIf="article.author">
-                    <span class="author-name" [innerHtml]="article.author.name"></span>
-                </a>
+                <profile-link [profile]="article.author" [truncate]="false"></profile-link>
             </span>
         </div>
     </div>

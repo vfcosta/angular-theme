@@ -1,3 +1,4 @@
+import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
 import { TaskComponent } from './task/task.component';
 import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
 import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
@@ -150,6 +151,7 @@ import { SharedModule } from './shared.module';
         ConfigBarComponent,
         DesignModeTogglerComponent,
         TaskComponent,
+        ProfileLinkComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -200,6 +202,7 @@ import { SharedModule } from './shared.module';
         ProfileActionsComponent,
         ConfigBarComponent,
         DesignModeTogglerComponent,
+        ProfileLinkComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
