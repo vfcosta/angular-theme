@@ -16,7 +16,7 @@ export class ValidationMessageComponent {
 
     constructor( @Inject('translatorService') public translatorService: TranslatorService) { }
 
-    translateError(errorObject: any) {
+    getErrorKey(errorObject: any) {
         let error: string;
         if (this.translatorService.hasTranslation(this.getCompleteErrorKey(errorObject.error))) {
             error = this.getCompleteErrorKey(errorObject.error);
@@ -40,7 +40,7 @@ export class ValidationMessageComponent {
         fields.forEach(name => {
             if (errorObjects.errors && errorObjects.errors[name]) {
                 errorObjects.errors[name].forEach(errorObject => {
-                    let key = this.translateError(errorObject);
+                    let key = this.getErrorKey(errorObject);
                     errorCollection[key] = true;
                 });
             }
