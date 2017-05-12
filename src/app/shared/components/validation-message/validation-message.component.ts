@@ -33,7 +33,7 @@ export class ValidationMessageComponent {
     }
 
     setBackendErrors(errorObjects: any) {
-        let errorCollection = [];
+        let errorCollection = {};
         let fields = this.aditionalFields;
         fields.push(this.field.name);
 
@@ -46,7 +46,7 @@ export class ValidationMessageComponent {
             }
         });
 
-        this.field.control.setErrors(errorCollection);
+        if (Object.keys(errorCollection).length > 0) this.field.control.setErrors(errorCollection);
     }
 
     getErrors() {
