@@ -1,3 +1,4 @@
+import { By } from '@angular/platform-browser';
 import { TranslatePipe } from './../../pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -47,6 +48,12 @@ describe("Components", () => {
             component.data = {image: null};
             component.finish();
             expect(component.finished.emit).not.toHaveBeenCalled();
+        });
+
+        it("display image upload input when crop is not enabled", () => {
+            component.cropEnabled = false;
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css(".image-upload-without-crop .image-upload-input")).length).toEqual(1);
         });
     });
 });

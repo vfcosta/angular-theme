@@ -21,5 +21,10 @@ image-upload {
   .modal-body .actions{
     text-align: center;
   }
-  
+
+  .image-upload-without-crop {
+    .image-upload-input {
+      display: none;
+    }
+  }
 }

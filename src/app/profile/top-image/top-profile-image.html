@@ -1,7 +1,7 @@
 <div class="top-profile-image-content" [class.with-top-image]="hasTopImage()" [class.without-top-image]="!hasTopImage()">
   <div class="top-profile-image-wrap" title="{{profile.name}}">
     <div class="container container-camera-top" *ngIf="isEditable()">
-      <image-upload #imageUpload (finished)="upload($event)"></image-upload>
+      <image-upload #imageUpload [cropEnabled]="false" (finished)="upload($event)"></image-upload>
     </div>
   </div>
 </div>
