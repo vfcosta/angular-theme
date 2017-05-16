@@ -5,7 +5,6 @@ import { CommentComponent } from "./comment.component";
 @Component({
     selector: 'noosfero-comments',
     templateUrl: 'app/article/comment/comments.html',
-    directives: [CommentComponent],
     outputs: ['commentAdded']
 })
 @Inject(CommentService, "$scope")
