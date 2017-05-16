@@ -1,5 +1,6 @@
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
+import { AbuseComplaintTaskAcceptComponent } from "./task/types/abuse-complaint/abuse-complaint-task-accept.component";
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
 import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
@@ -160,6 +161,7 @@ import { SharedModule } from './shared.module';
         TasksMenuComponent,
         SearchFormComponent,
         ApproveArticleTaskAcceptComponent,
+        AbuseComplaintTaskAcceptComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -215,6 +217,7 @@ import { SharedModule } from './shared.module';
         TasksMenuComponent,
         SearchFormComponent,
         ApproveArticleTaskAcceptComponent,
+        AbuseComplaintTaskAcceptComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
