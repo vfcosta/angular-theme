@@ -1,12 +1,10 @@
-import { Component, Input, Inject } from "ng-forward";
+import { Component, Input, Inject } from "@angular/core";
 import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
     selector: "suggest-article-task-accept",
-    templateUrl: "app/task/types/suggest-article/suggest-article-accept.html",
+    template: require("app/task/types/suggest-article/suggest-article-accept.html"),
 })
-
-@Inject(ArticleService)
 export class SuggestArticleTaskAcceptComponent {
 
     @Input() task: noosfero.Task;
@@ -14,7 +12,7 @@ export class SuggestArticleTaskAcceptComponent {
 
     folders: Array<any>;
 
-    constructor(private articleService: ArticleService) { }
+    constructor(@Inject("articleService") private articleService: ArticleService) { }
 
     ngOnInit() {
         let targetProfile = <noosfero.Profile>this.task.target;

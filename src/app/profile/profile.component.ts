@@ -2,7 +2,6 @@ import { ThemeService } from './../shared/services/theme.service';
 import { DesignModeService } from './../shared/services/design-mode.service';
 import { Component, Inject, provide, Input } from 'ng-forward';
 import { ProfileHomeComponent } from './profile-home.component';
-import { BasicEditorComponent } from '../article/cms/basic-editor/basic-editor.component';
 import { CmsComponent } from '../article/cms/cms.component';
 import { ContentViewerComponent } from "../article/content-viewer/content-viewer.component";
 import { ActivitiesComponent } from "./activities/activities.component";

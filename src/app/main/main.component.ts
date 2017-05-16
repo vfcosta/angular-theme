@@ -30,7 +30,6 @@ import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { ArticleViewComponent } from './../article/article-default-view.component';
 import { ArticleIconComponent } from './../article/article-icon/article-icon.component';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
-import { BasicEditorComponent } from './../article/cms/basic-editor/basic-editor.component';
 import { BasicOptionsComponent } from './../article/cms/basic-options/basic-options.component';
 import { ArticleBlogComponent } from './../article/types/blog/blog.component';
 import { FolderComponent } from './../article/types/folder/folder.component';
@@ -106,7 +105,7 @@ export class EnvironmentContent {
         FolderComponent, ArticleIconComponent, BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
-        ArticleEditorComponent, BasicOptionsComponent, BasicEditorComponent, TranslateProfile
+        ArticleEditorComponent, BasicOptionsComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",

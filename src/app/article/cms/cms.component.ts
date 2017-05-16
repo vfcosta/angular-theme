@@ -3,7 +3,6 @@ import { ArticleService } from "../../../lib/ng-noosfero-api/http/article.servic
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import { NotificationService } from "../../shared/services/notification.service";
 import { BasicOptionsComponent } from './basic-options/basic-options.component';
-import { BasicEditorComponent } from './basic-editor/basic-editor.component';
 import { ArticleEditorComponent } from './article-editor/article-editor.component';
 
 @Component({

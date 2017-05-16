@@ -1,5 +1,4 @@
 import {ArticleEditorComponent} from './article-editor.component';
-import {BasicEditorComponent} from "../basic-editor/basic-editor.component";
 import {ComponentTestHelper, createClass} from '../../../../spec/component-test-helper';
 import * as helpers from "../../../../spec/helpers";
 
@@ -15,7 +14,7 @@ describe("Components", () => {
             let properties = { article: { type: "TextArticle", parent: { id: 20 } }, profile: { id: 10 } };
             let cls = createClass({
                 template: htmlTemplate,
-                directives: [ArticleEditorComponent, BasicEditorComponent],
+                directives: [ArticleEditorComponent],
                 properties: properties,
                 providers: [
                     helpers.createProviderToValue('SessionService', helpers.mocks.sessionWithCurrentUser({}))

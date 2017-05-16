@@ -1,9 +1,8 @@
-import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
-import { Component, Input, Inject } from 'ng-forward';
+import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'article-basic-editor',
-    templateUrl: "app/article/cms/basic-editor/basic-editor.html"
+    template: require("app/article/cms/basic-editor/basic-editor.html")
 })
 export class BasicEditorComponent {
 
