@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 import { SearchFormComponent } from './search/search-form/search-form.component';
+=======
+>>>>>>> 9ca1d08c04a48737eb570183cc0b052a8a177ff2
 import { AbuseComplaintTaskAcceptComponent } from "./task/types/abuse-complaint/abuse-complaint-task-accept.component";
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
