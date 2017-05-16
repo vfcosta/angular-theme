@@ -1,42 +1,40 @@
-import { ComponentTestHelper, createClass } from "../../../spec/component-test-helper";
+import { By } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { SearchFormComponent } from "./search-form.component";
 import * as helpers from "../../../spec/helpers";
-
-const htmlTemplate: string = '<search-form></search-form>';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Search Form Component", () => {
         let mocks = helpers.getMocks();
-        let helper: ComponentTestHelper<SearchFormComponent>;
-        let stateMock = jasmine.createSpyObj("$state", ["go", "params", "current"]);
+        let fixture: ComponentFixture<SearchFormComponent>;
+        let component: SearchFormComponent;
 
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            spyOn(mocks.eventsHubService, 'subscribeToEvent');
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [SearchFormComponent],
+        beforeEach(async(() => {
+            spyOn(mocks.$state, "go");
+            TestBed.configureTestingModule({
+                declarations: [SearchFormComponent, TranslatePipe],
                 providers: [
-                    helpers.createProviderToValue("$state", stateMock),
-                    helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
-                ]
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: "$state", useValue: mocks.$state }
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
+                imports: [FormsModule]
             });
-            helper = new ComponentTestHelper<SearchFormComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(SearchFormComponent);
+            component = fixture.componentInstance;
+        }));
 
         it("render a button that open a search query field", () => {
-            expect(helper.find(".btn-search-nav").length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css(".btn-search-nav")).length).toEqual(1);
         });
 
         it("go to search page when click on search button", () => {
-            helper.component.query = 'query';
-            helper.component.search();
-            expect(stateMock.go).toHaveBeenCalledWith('main.environment.search', { query: 'query' });
-        });
-
-        it("subscribe to event on init", () => {
-            expect(mocks.eventsHubService.subscribeToEvent).toHaveBeenCalled();
+            component.query = 'query';
+            component.search();
+            expect(TestBed.get('$state').go).toHaveBeenCalledWith('main.environment.search', { query: 'query' });
         });
     });
 });

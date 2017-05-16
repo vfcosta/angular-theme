@@ -1,12 +1,9 @@
 import {Component, Inject, provide} from "ng-forward";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 
-import {SearchFormComponent} from "./search-form/search-form.component";
-
 @Component({
     selector: 'search',
     templateUrl: 'app/search/search.html',
-    directives: [SearchFormComponent],
     providers: [
         provide('articleService', { useClass: ArticleService })
     ]

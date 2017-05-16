@@ -1,8 +1,8 @@
-<form class="navbar-form navbar-left search-form" role="search" ng-submit="ctrl.search()">
+<form class="navbar-form navbar-left search-form" role="search" (ngSubmit)="search()" id="search-form">
   <div class="form-group input-group">
-      <input type="text" class="form-control" placeholder="{{ 'search.label' | translate }}" name="q" ng-model="ctrl.query">
+      <input type="text" class="form-control" placeholder="{{ 'search.label' | translate }}" name="q" [(ngModel)]="query">
       <span class="input-group-btn">
-        <a class="btn btn-warning" (click)="ctrl.search()" href="#" alt='{{"search.icon.description" | translate}}'>
+        <a class="btn btn-warning" (click)="search()" href="#" title='{{"search.icon.description" | translate}}'>
           <i class="fa fa-search fa-2x btn-search-nav" aria-hidden="true">
             <span class="read-aloud">{{"search.icon.description" | translate}}</span>
           </i>

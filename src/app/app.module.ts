@@ -1,3 +1,4 @@
+import { SearchFormComponent } from './search/search-form/search-form.component';
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
 import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
@@ -156,6 +157,7 @@ import { SharedModule } from './shared.module';
         ProfileLinkComponent,
         TasksComponent,
         TasksMenuComponent,
+        SearchFormComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -209,6 +211,7 @@ import { SharedModule } from './shared.module';
         ProfileLinkComponent,
         TasksComponent,
         TasksMenuComponent,
+        SearchFormComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

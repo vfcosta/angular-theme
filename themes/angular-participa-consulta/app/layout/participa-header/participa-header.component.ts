@@ -30,10 +30,6 @@ export class ParticipaHeaderComponent {
         this.setupBarraBrasil();
     }
 
-    openSearch() {
-        this.eventsHubService.emitEvent(this.eventsNames.OPEN_SEARCH_FORM, null);
-    }
-
     scrollTo(anchor: string) {
         this.$location.hash(anchor);
         this.$anchorScroll();
