@@ -1,12 +1,14 @@
-<div class="btn-nav tasks-menu" uib-dropdown  ng-show="ctrl.total > 0" ng-if="ctrl.total">
-  <a href="#" uib-dropdown-toggle class="tasks-menu-link">
-    <i  alt='{{"tasks.icon.description" | translate}}' class="tasks-icon fa fa-bell-o fa-fw fa-2x"></i>
-    <span class="badge">{{ctrl.total}}</span>
+<div class="btn-nav tasks-menu" dropdown [hidden]="total==0" *ngIf="total">
+  <a href="#" dropdownToggle class="tasks-menu-link">
+    <i [title]="'tasks.icon.description' | translate" class="tasks-icon fa fa-bell-o fa-fw fa-2x"></i>
+    <span class="badge">{{total}}</span>
     <span class="read-aloud">{{"tasks.header" | translate}}</span>
   </a>
-  <div class="dropdown-menu task-panel" uib-dropdown-menu>
-    <div class="task-menu-header">{{"tasks.menu.header" | translate:{tasks: ctrl.total}:"messageformat"}}</div>
-    <task-list [tasks]="ctrl.tasks"></task-list>
-    <a ui-sref="main.profile.tasks({profile: ctrl.person.identifier, taskTypes: ctrl.taskTypes })" class="all-tasks btn btn-default btn-xs">{{"tasks.menu.all" | translate}}</a>
+  <div class="dropdown-menu task-panel" *dropdownMenu>
+    <div class="task-menu-header">{{"tasks.menu.header" | translate:{tasks: total}:"messageformat"}}</div>
+    <task-list [tasks]="tasks"></task-list>
+    <a uiSref="main.profile.tasks" [uiParams]="{profile: person.identifier, taskTypes: taskTypes}" class="all-tasks btn btn-default btn-xs">
+      {{"tasks.menu.all" | translate}}
+    </a>
   </div>
 </div>

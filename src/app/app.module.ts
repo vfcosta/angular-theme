@@ -1,3 +1,4 @@
+import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
 import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
 import { TaskComponent } from './task/task.component';
@@ -154,6 +155,7 @@ import { SharedModule } from './shared.module';
         TaskComponent,
         ProfileLinkComponent,
         TasksComponent,
+        TasksMenuComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -206,6 +208,7 @@ import { SharedModule } from './shared.module';
         DesignModeTogglerComponent,
         ProfileLinkComponent,
         TasksComponent,
+        TasksMenuComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

@@ -24,7 +24,6 @@ import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
 import { NoosferoUrl } from '../shared/pipes/noosfero-url.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
 import { NotificationService } from '../shared/services/notification.service';
-import { TasksMenuComponent } from '../task/tasks-menu/tasks-menu.component';
 import { CommunityService } from './../../lib/ng-noosfero-api/http/community.service';
 import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.service';
@@ -103,7 +102,7 @@ export class EnvironmentContent {
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchFormComponent, SearchComponent,
-        BlockComponent, RegisterComponent, TasksMenuComponent,
+        BlockComponent, RegisterComponent,
         ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, ArticleIconComponent, BootstrapResizableDirective,
         EditableDirective,

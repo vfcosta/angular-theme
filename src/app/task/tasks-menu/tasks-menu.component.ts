@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from "ng-forward";
+import { Component, Inject, Input } from "@angular/core";
 import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
 import { AuthService, SessionService, AuthEvents } from "./../../login";
 import { EventsHubService } from "../../shared/services/events-hub.service";
@@ -6,9 +6,8 @@ import { NoosferoKnownEvents } from "../../known-events";
 
 @Component({
     selector: "tasks-menu",
-    templateUrl: "app/task/tasks-menu/tasks-menu.html"
+    template: require("app/task/tasks-menu/tasks-menu.html")
 })
-@Inject(TaskService, SessionService, AuthService, EventsHubService)
 export class TasksMenuComponent {
 
     @Input() taskTypes = ['AddMember', 'ApproveComment', 'ApproveArticle', 'AbuseComplaint', 'SuggestArticle', 'CreateCommunity'];
@@ -18,10 +17,10 @@ export class TasksMenuComponent {
     perPage = 5;
     person: noosfero.Person;
 
-    constructor(private taskService: TaskService,
-        private session: SessionService,
-        private authService: AuthService,
-        private eventsHubService: EventsHubService) {
+    constructor(@Inject("taskService") private taskService: TaskService,
+        @Inject("sessionService") private session: SessionService,
+        @Inject("authService") private authService: AuthService,
+        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
     }
 
     ngOnInit() {
