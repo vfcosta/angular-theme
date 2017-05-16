@@ -1,3 +1,4 @@
+import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import { DateFormatPipe } from './../../shared/pipes/date-format.ng2.filter';
 import { MomentModule } from 'angular2-moment';
 import { By } from '@angular/platform-browser';
@@ -15,11 +16,12 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [CommentComponent, TranslatePipe, DateFormatPipe],
+                declarations: [CommentComponent, TranslatePipe, DateFormatPipe, PermissionNg2Directive],
                 providers: [
                     { provide: "commentService", useValue: mocks.commentService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter },
+                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

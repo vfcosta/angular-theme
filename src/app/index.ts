@@ -1,4 +1,5 @@
 import { CommentComponent } from './article/comment/comment.component';
+import { CommentsComponent } from './article/comment/comments.component';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
@@ -289,6 +290,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoComment',
         downgradeComponent({ component: CommentComponent, inputs: ['comment', 'article', 'displayActions', 'displayReplies'], outputs: ['commentRemoved'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoComments',
+        downgradeComponent({ component: CommentsComponent, inputs: ['showForm', 'article', 'parent', 'fullPagination'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

@@ -18,11 +18,11 @@
         <span class="bullet-separator">•</span>
         {{"comment.reply" | translate}}
       </a>
-      <a permission="comment.permissions" permission-action="allow_destroy" href="#" (click)="remove()" class="action small text-muted remove" *ngIf="allowRemove()">
+      <a [permission]="comment.permissions" permissionAction="allow_destroy" href="#" (click)="remove()" class="action small text-muted remove" *ngIf="allowRemove()">
         <span class="bullet-separator">•</span>
         {{"comment.remove" | translate}}
       </a>
     </div>
   </div>
-  <!--<noosfero-comments [show-form]="showReply()" [article]="article" [parent]="comment" *ngIf="displayReplies"></noosfero-comments>-->
+  <noosfero-comments [showForm]="showReply()" [article]="article" [parent]="comment" *ngIf="displayReplies"></noosfero-comments>
 </div>
