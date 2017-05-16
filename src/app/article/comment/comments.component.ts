@@ -46,7 +46,6 @@ export class CommentsComponent {
             });
         }
         this.comments = [...this.comments, comment];
-        console.log(this.comments);
         this.resetShowReply();
     }
 
