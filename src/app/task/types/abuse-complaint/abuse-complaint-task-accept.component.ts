@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from "ng-forward";
+import { Component, Input, Inject } from "@angular/core";
 import { TaskService } from "../../../../lib/ng-noosfero-api/http/task.service";
 
 @Component({

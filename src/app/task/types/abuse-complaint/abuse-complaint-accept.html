@@ -1,12 +1,12 @@
 <div class="abuse-complaint-details">
     <ul class="abuse-reports">
-        <li class="abuse-report" ng-repeat="(abuse_reports, abuse_report) in ctrl.task.abuse_reports">
+        <li class="abuse-report" *ngFor="let abuse_report of task.abuse_reports">
             <div class="reason">{{abuse_report.reason}}</div>
             <div class="info">
                 {{"tasks.abuse_report.reported_by" | translate}} 
                 <span class="reported-by">{{abuse_report.reporter.name}}</span> 
                 <span class="time">
-                    <span am-time-ago="abuse_report.created_at | dateFormat"></span>
+                    <span> {{ abuse_report.created_at | amTimeAgo | dateFormat }}</span>
                 </span>
             </div>
         </li>
