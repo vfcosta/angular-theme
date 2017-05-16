@@ -558,6 +558,10 @@ export function getMocks() {
             get: (key: string) => { return mocks.localStorageService.storage[key]; },
             set: (key: string, value: any) => { mocks.localStorageService.storage[key] = value; }
         }
+        ,
+        themeService: {
+            verifyTheme: (theme: string) => { }
+        }
     };
     return mocks;
 };

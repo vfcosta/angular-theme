@@ -60,5 +60,12 @@ namespace noosfero {
 
         permissions: string[];
 
+        /**
+         * @ngdoc property
+         * @name theme
+         * @propertyOf noofero.Environment
+         * @returns string The environment theme
+         */
+        theme: string;
     }
 }

@@ -233,7 +233,8 @@ import { SharedModule } from './shared.module';
         'EnvironmentService',
         'CommentService',
         'DesignModeService',
-        '$sce'
+        '$sce',
+        'ThemeService',
     ])
 })
 
