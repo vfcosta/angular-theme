@@ -1,7 +1,6 @@
 import { Input, Inject, Component } from 'ng-forward';
 import { AddMemberTaskAcceptComponent } from "../types/add-member/add-member-task-accept.component";
 import { ApproveCommentTaskAcceptComponent } from "../types/approve-comment/approve-comment-task-accept.component";
-import { ApproveArticleTaskAcceptComponent } from "../types/approve-article/approve-article-task-accept.component";
 import { AbuseComplaintTaskAcceptComponent } from "../types/abuse-complaint/abuse-complaint-task-accept.component";
 import { SuggestArticleTaskAcceptComponent } from "../types/suggest-article/suggest-article-task-accept.component";
 import { AddFriendTaskAcceptComponent } from "../types/add-friend/add-friend-task-accept.component";
@@ -9,7 +8,7 @@ import { AddFriendTaskAcceptComponent } from "../types/add-friend/add-friend-tas
 @Component({
     selector: 'task-accept',
     template: '<div></div>',
-    directives: [AddMemberTaskAcceptComponent, ApproveCommentTaskAcceptComponent, ApproveArticleTaskAcceptComponent, AbuseComplaintTaskAcceptComponent, SuggestArticleTaskAcceptComponent, AddFriendTaskAcceptComponent]
+    directives: [AddMemberTaskAcceptComponent, ApproveCommentTaskAcceptComponent, AbuseComplaintTaskAcceptComponent, SuggestArticleTaskAcceptComponent, AddFriendTaskAcceptComponent]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class TaskAcceptComponent {

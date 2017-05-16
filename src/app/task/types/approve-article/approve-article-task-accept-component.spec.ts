@@ -1,37 +1,41 @@
-import { Provider, provide, Component } from 'ng-forward';
+import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { ApproveArticleTaskAcceptComponent } from './approve-article-task-accept.component';
-
-const htmlTemplate: string = '<approve-article-task-accept [task]="ctrl.task" [confirmation-task]="ctrl.confirmationTask"></approve-article-task-accept>';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Approve Article Task Accept Component", () => {
-
-        let helper: ComponentTestHelper<ApproveArticleTaskAcceptComponent>;
-        let articleService = jasmine.createSpyObj("articleService", ["getByProfile"]);
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<ApproveArticleTaskAcceptComponent>;
+        let component: ApproveArticleTaskAcceptComponent;
         let articles = [{ id: 1, title: "folder1" }, { id: 2, title: "folder2" }];
         let task = <any>{ target: { id: 5, identifier: "profile" }, data: {} };
-        articleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: articles }));
 
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [ApproveArticleTaskAcceptComponent],
+        beforeEach(async(() => {
+            spyOn(mocks.articleService, "getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: articles }));
+            TestBed.configureTestingModule({
+                declarations: [ApproveArticleTaskAcceptComponent, TranslatePipe],
                 providers: [
-                    helpers.createProviderToValue("ArticleService", articleService)
-                ].concat(helpers.provideFilters("translateFilter")),
-                properties: { task: task, confirmationTask: task }
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: "articleService", useValue: mocks.articleService }
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
+                imports: [FormsModule]
             });
-            helper = new ComponentTestHelper<ApproveArticleTaskAcceptComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(ApproveArticleTaskAcceptComponent);
+            component = fixture.componentInstance;
+            component.task = task;
+            component.confirmationTask = task;
+        }));
 
-        it("set folder array with folders as options", () => {
-            expect(articleService.getByProfile).toHaveBeenCalled();
-            expect(helper.component.folders.map((f) => { return f.id; })).toEqual([null, 1, 2]);
-            expect(helper.component.folders.map((f) => { return f.path; })).toEqual(["profile", "profile/folder1", "profile/folder2"]);
-        });
+        it("set folder array with folders as options", fakeAsync(() => {
+            fixture.detectChanges();
+            tick();
+            expect(TestBed.get('articleService').getByProfile).toHaveBeenCalled();
+            expect(component.folders.map((f) => { return f.id; })).toEqual([null, 1, 2]);
+            expect(component.folders.map((f) => { return f.path; })).toEqual(["profile", "profile/folder1", "profile/folder2"]);
+        }));
     });
 });

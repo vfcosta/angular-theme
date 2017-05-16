@@ -1,13 +1,13 @@
 <div class="approve-article-accept">
   <div class="approve-article">
-    <span class="requestor">{{ctrl.task.requestor.name}}</span> {{"tasks.approve_article.message" | translate}}
-    <span class="article">{{ctrl.task.data.name}}</span>
+    <span class="requestor">{{task.requestor?.name}}</span> {{"tasks.approve_article.message" | translate}}
+    <span class="article">{{task.data.name}}</span>
   </div>
   <div class="form">
     <div class="select-folder form-group">
       <label for="folderSelect">{{"tasks.approve_article.select_folder" | translate}}</label>
-      <select name="folderSelect" class="form-control" id="folderSelect" ng-model="ctrl.confirmationTask.data.article_parent_id"
-         ng-options="folder.id as folder.path for folder in ctrl.folders">
+      <select name="folderSelect" class="form-control" id="folderSelect" [(ngModel)]="confirmationTask.data.article_parent_id">
+         <option *ngFor="let folder of folders" [ngValue]="folder.id">{{folder.path}}</option>
       </select>
     </div>
   </div>

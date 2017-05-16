@@ -1,19 +1,18 @@
-import { Component, Input, Inject } from "ng-forward";
+import { Component, Input, Inject, OnInit } from "@angular/core";
 import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
     selector: "approve-article-task-accept",
-    templateUrl: "app/task/types/approve-article/approve-article-accept.html",
+    template: require("app/task/types/approve-article/approve-article-accept.html"),
 })
-@Inject(ArticleService)
-export class ApproveArticleTaskAcceptComponent {
+export class ApproveArticleTaskAcceptComponent implements OnInit {
 
     @Input() task: noosfero.ApproveArticleTask;
     @Input() confirmationTask: noosfero.ApproveArticleTask;
 
     folders: Array<any>;
 
-    constructor(private articleService: ArticleService) { }
+    constructor(@Inject("articleService") private articleService: ArticleService) { }
 
     ngOnInit() {
         let targetProfile = <noosfero.Profile>this.task.target;

@@ -1,3 +1,4 @@
+import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
@@ -269,6 +270,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('searchForm',
         downgradeComponent({ component: SearchFormComponent }) as angular.IDirectiveFactory
+    ).
+    directive('approveArticleTaskAccept',
+        downgradeComponent({ component: ApproveArticleTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
