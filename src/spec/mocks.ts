@@ -562,7 +562,8 @@ export function getMocks() {
             verifyTheme: (theme: string) => { }
         },
         taskService: {
-            getAllPending: () => {}
+            getAllPending: () => {},
+            get: (id: any) => { return Promise.resolve({})}
         }
     };
     return mocks;
