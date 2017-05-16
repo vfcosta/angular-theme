@@ -7,7 +7,7 @@ import { ModalDirective } from 'ngx-bootstrap';
 })
 export class ImageUploadComponent {
 
-    @Input() cropEnabled = false;
+    @Input() cropEnabled = true;
     @Output() finished = new EventEmitter<any>();
     file: any;
     data: any = {};
@@ -17,6 +17,15 @@ export class ImageUploadComponent {
 
     constructor(private elementRef: ElementRef) { }
 
+    fileSelectedWithoutCrop($event: any) {
+        this.fileSelected($event);
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+            this.finished.emit(this.getBase64ImageJson(e.target.result, this.file.name));
+        };
+        reader.readAsDataURL(this.file);
+    }
+
     fileSelected($event: any) {
         if (!$event) return;
         let file: File = $event.target.files[0];
@@ -25,7 +34,7 @@ export class ImageUploadComponent {
     }
 
     finish() {
-        this.modal.hide();
+        if (this.modal) this.modal.hide();
         if (!this.data.image) return;
         this.finished.emit(this.getBase64ImageJson(this.data.image, this.getFilename()));
     }
