@@ -6,7 +6,7 @@
                 {{"tasks.abuse_report.reported_by" | translate}} 
                 <span class="reported-by">{{abuse_report.reporter.name}}</span> 
                 <span class="time">
-                    <span> {{ abuse_report.created_at | amTimeAgo | dateFormat }}</span>
+                    <span> {{ abuse_report.created_at | dateFormat | amTimeAgo }}</span>
                 </span>
             </div>
         </li>
