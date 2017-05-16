@@ -1,40 +1,46 @@
-import { Provider, provide, Component } from 'ng-forward';
+import { MomentModule } from 'angular2-moment';
+import { TranslatePipe } from './../../shared/pipes/translate-pipe';
+import { FormsModule } from '@angular/forms';
+import { TaskListComponent } from './../task-list/task-list.component';
+import { PaginationModule } from 'ngx-bootstrap';
 import * as helpers from "../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { TasksComponent } from './tasks.component';
 import { AuthEvents } from "./../../login";
-
-const htmlTemplate: string = '<tasks></tasks>';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
-    describe("Task Menu Component", () => {
+    describe("Tasks Component", () => {
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<TasksComponent>;
+        let component: TasksComponent;
 
-        let helper: ComponentTestHelper<TasksComponent>;
-        let taskService = jasmine.createSpyObj("taskService", ["getAllPending"]);
         let tasks = [{ id: 1 }, { id: 2 }];
-        taskService.getAllPending = jasmine.createSpy("getAllPending").and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
-        let $stateParams = jasmine.createSpyObj("$stateParams", ["profile", "taskTypes"]);
-        // $stateParams.taskTypes = 'AddMember,ApproveComment,ApproveArticle,AbuseComplaint,SuggestArticle,CreateCommunity,AddFriend';
-        beforeEach(angular.mock.module("templates"));
 
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [TasksComponent],
+        beforeEach(async(() => {
+            spyOn(mocks.taskService, 'getAllPending').and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
+            TestBed.configureTestingModule({
+                declarations: [TasksComponent, TranslatePipe],
                 providers: [
-                    helpers.createProviderToValue("TaskService", taskService),
-                    helpers.createProviderToValue("$stateParams", $stateParams)
-                ]
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: "taskService", useValue: mocks.taskService }
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
+                imports: [PaginationModule.forRoot(), FormsModule]
             });
-            helper = new ComponentTestHelper<TasksComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(TasksComponent);
+            component = fixture.componentInstance;
+        }));
 
         it("load person tasks", () => {
-            expect(taskService.getAllPending).toHaveBeenCalled();
+            fixture.detectChanges();
+            expect(TestBed.get('taskService').getAllPending).toHaveBeenCalled();
         });
 
         it("load person tasks with page parameter", () => {
-            expect(taskService.getAllPending).toHaveBeenCalledWith({ content_type: $stateParams.taskTypes, page: 1, per_page: 5 });
+            component.taskTypes = "AddFriend";
+            fixture.detectChanges();
+            expect(TestBed.get('taskService').getAllPending).toHaveBeenCalledWith({ content_type: component.taskTypes, page: 1, per_page: 5 });
         });
     });
 });

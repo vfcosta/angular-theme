@@ -1,3 +1,4 @@
+import { TasksComponent } from './task/tasks/tasks.component';
 import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
 import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
 import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
@@ -257,6 +258,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('profileLink',
         downgradeComponent({ component: ProfileLinkComponent, inputs: ['profile', 'displayImage', 'displayName', 'truncate'] }) as angular.IDirectiveFactory
+    ).
+    directive('tasks',
+        downgradeComponent({ component: TasksComponent, inputs: ['taskTypes'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

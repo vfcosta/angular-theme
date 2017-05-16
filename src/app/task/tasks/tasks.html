@@ -1,8 +1,8 @@
 <h1>{{"tasks.header" | translate}}</h1>
 
-<task-list [tasks]="ctrl.tasks"></task-list>
+<task-list [tasks]="tasks"></task-list>
 
-<uib-pagination ng-model="ctrl.currentPage" total-items="ctrl.total" class="pagination-sm center-block"
-  boundary-links="true" items-per-page="ctrl.perPage" ng-change="ctrl.loadPage()"
-  first-text="«" last-text="»" previous-text="‹" next-text="›">
-</uib-pagination>
+<pagination *ngIf="total>0" [totalItems]="total" [itemsPerPage]="perPage"
+  [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
+  firstText="«" lastText="»" previousText="‹" nextText="›"
+  class="pagination-sm center-block"></pagination>

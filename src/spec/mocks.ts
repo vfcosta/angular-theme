@@ -557,10 +557,12 @@ export function getMocks() {
             remove: (key: string) => { delete mocks.localStorageService.storage[key]; },
             get: (key: string) => { return mocks.localStorageService.storage[key]; },
             set: (key: string, value: any) => { mocks.localStorageService.storage[key] = value; }
-        }
-        ,
+        },
         themeService: {
             verifyTheme: (theme: string) => { }
+        },
+        taskService: {
+            getAllPending: () => {}
         }
     };
     return mocks;

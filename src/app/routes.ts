@@ -1,3 +1,4 @@
+import { RouteNg2 } from './shared/components/route-ng2/route-ng2.component';
 import { ProfileConfigurationOptionComponent } from './profile/configuration/profile-configuration-option.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
@@ -180,12 +181,11 @@ export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
         name: 'main.profile.tasks',
         url: "^/myprofile/:profile/tasks/:taskTypes",
-        controller: TasksComponent,
         views: {
             "mainBlockContent": {
-                templateUrl: "app/task/tasks/tasks.html",
-                controller: TasksComponent,
-                controllerAs: "ctrl"
+                template: '<tasks [task-types]="ctrl.$stateParams[\'taskTypes\']"></tasks>',
+                controllerAs: "ctrl",
+                controller: RouteNg2
             }
         }
     });
