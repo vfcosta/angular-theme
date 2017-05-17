@@ -262,6 +262,8 @@ import { SharedModule } from './shared.module';
         'DesignModeService',
         '$sce',
         'ThemeService',
+        'CommentParagraphEventService',
+        'CommentParagraphService'
     ])
 })
 

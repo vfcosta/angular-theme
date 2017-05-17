@@ -1,3 +1,4 @@
+import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { CommentComponent } from './article/comment/comment.component';
 import { CommentsComponent } from './article/comment/comments.component';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
@@ -293,6 +294,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoComments',
         downgradeComponent({ component: CommentsComponent, inputs: ['showForm', 'article', 'parent', 'fullPagination'] }) as angular.IDirectiveFactory
+    ).
+    directive('commentParagraphPluginAllowComment',
+        downgradeComponent({ component: AllowCommentComponent, inputs: ['content', 'paragraphUuid', 'article'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

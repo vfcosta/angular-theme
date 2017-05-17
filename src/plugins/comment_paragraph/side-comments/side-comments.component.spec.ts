@@ -1,51 +1,48 @@
-import {SideCommentsComponent} from "./side-comments.component";
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
+import { TranslatePipe } from './../../../app/shared/pipes/translate-pipe';
+import { NgPipesModule } from 'ngx-pipes';
+import { SideCommentsComponent } from "./side-comments.component";
 import * as helpers from "../../../spec/helpers";
-import {Provider} from 'ng-forward';
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-
-let htmlTemplate = '<comment-paragraph-side-comments [article]="ctrl.article" [paragraph-uuid]="ctrl.paragraphUuid"></comment-paragraph-side-comments>';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Side Comments Component", () => {
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<SideCommentsComponent>;
+        let component: SideCommentsComponent;
 
         let serviceMock = jasmine.createSpyObj("CommentParagraphService", ["getByArticle"]);
         serviceMock.getByArticle = jasmine.createSpy("getByArticle").and.returnValue(Promise.resolve({ data: [] }));
 
-        let commentServiceMock = {};
         let postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["emit", "subscribe"]);
         postCommentEventService.subscribe = jasmine.createSpy("subscribe");
 
-        let providers = [
-            new Provider('CommentParagraphService', { useValue: serviceMock }),
-            new Provider('CommentService', { useValue: commentServiceMock }),
-            new Provider('PostCommentEventService', { useValue: postCommentEventService })
-        ];
-        let helper: ComponentTestHelper<SideCommentsComponent>;
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [SideCommentsComponent],
-                providers: providers,
-                properties: {
-                    paragraphUuid: "uuid",
-                    article: {}
-                }
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [SideCommentsComponent, TranslatePipe],
+                providers: [
+                    { provide: "commentParagraphService", useValue: serviceMock },
+                    { provide: "commentService", useValue: mocks.commentService },
+                    { provide: "postCommentEventService", useValue: postCommentEventService },
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
+                imports: [NgPipesModule]
             });
-            helper = new ComponentTestHelper<SideCommentsComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(SideCommentsComponent);
+            component = fixture.componentInstance;
+            component.paragraphUuid = "uuid";
+        }));
 
         it('call service to load paragraph comments', () => {
-            helper.component.loadComments();
+            component.loadComments();
             expect(serviceMock.getByArticle).toHaveBeenCalled();
         });
 
         it('set paragraph uuid in new comment object', () => {
-            let comment = <any>helper.component.newComment;
-            expect(comment['paragraph_uuid']).toEqual('uuid');
+            fixture.detectChanges();
+            expect(component.newComment['paragraph_uuid']).toEqual('uuid');
         });
     });
 });
