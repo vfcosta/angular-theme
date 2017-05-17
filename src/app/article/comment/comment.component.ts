@@ -1,4 +1,4 @@
-import { Inject, Input, Component, Output, EventEmitter } from 'ng-forward';
+import { Inject, Input, Component, Output, EventEmitter } from '@angular/core';
 import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
 import { NotificationService } from "../../shared/services/notification.service";
 import { PermissionDirective } from '../../shared/components/permission/permission.directive';
@@ -6,24 +6,22 @@ import { PermissionDirective } from '../../shared/components/permission/permissi
 
 @Component({
     selector: 'noosfero-comment',
-    outputs: ['commentRemoved'],
-    templateUrl: 'app/article/comment/comment.html'
+    template: require('app/article/comment/comment.html')
 })
-@Inject(CommentService, NotificationService)
 export class CommentComponent {
 
     @Input() comment: noosfero.CommentViewModel;
     @Input() article: noosfero.Article;
     @Input() displayActions = true;
     @Input() displayReplies = true;
-    @Output() commentRemoved: EventEmitter<Comment> = new EventEmitter<Comment>();
+    @Output() commentRemoved: EventEmitter<noosfero.CommentViewModel> = new EventEmitter<noosfero.CommentViewModel>();
 
     showReply() {
         return this.comment && this.comment.__show_reply === true;
     }
 
-    constructor(private commentService: CommentService,
-        private notificationService: NotificationService) { }
+    constructor(@Inject("commentService") private commentService: CommentService,
+        @Inject("notificationService") private notificationService: NotificationService) { }
 
     reply() {
         this.comment.__show_reply = !this.comment.__show_reply;

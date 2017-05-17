@@ -1,3 +1,7 @@
+import { CommentService } from './../../lib/ng-noosfero-api/http/comment.service';
+import { CommentParagraphService } from './../../plugins/comment_paragraph/http/comment-paragraph.service';
+import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
+import { PermissionService } from './../shared/services/permission.service';
 import * as theme from '../../../themes';
 import * as plugins from '../../plugins';
 import { RegisterComponent } from '../account/register.component';
@@ -108,6 +112,7 @@ export class EnvironmentContent {
         ArticleEditorComponent, BasicOptionsComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
+        PermissionService, CommentParagraphEventService, CommentParagraphService, CommentService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

@@ -1,4 +1,4 @@
-import {Component, Input, Inject} from "ng-forward";
+import {Component, HostListener, Input, Inject, ViewChild, ElementRef} from "@angular/core";
 import {SideCommentsComponent} from "../side-comments/side-comments.component";
 import {CommentParagraphEventService} from "../events/comment-paragraph-event.service";
 import {CommentParagraphService} from "../http/comment-paragraph.service";
@@ -7,10 +7,8 @@ import {PermissionService} from "../../../app/shared/services/permission.service
 
 @Component({
     selector: "comment-paragraph-plugin-allow-comment",
-    templateUrl: "plugins/comment_paragraph/allow-comment/allow-comment.html",
-    directives: [SideCommentsComponent]
+    template: require("plugins/comment_paragraph/allow-comment/allow-comment.html"),
 })
-@Inject("$scope", CommentParagraphEventService, CommentParagraphService, CommentService, PermissionService)
 export class AllowCommentComponent {
 
     @Input() content: string;
@@ -18,18 +16,18 @@ export class AllowCommentComponent {
     @Input() article: noosfero.Article;
     commentsCount: number = 0;
     display = false;
+    @ViewChild("popover") popover: any;
 
-    constructor(private $scope: ng.IScope,
-        private commentParagraphEventService: CommentParagraphEventService,
-        private commentParagraphService: CommentParagraphService,
-        private commentService: CommentService,
-        private permissionService: PermissionService
+    constructor(@Inject("commentParagraphEventService") private commentParagraphEventService: CommentParagraphEventService,
+        @Inject("commentParagraphService") private commentParagraphService: CommentParagraphService,
+        @Inject("commentService") private commentService: CommentService,
+        @Inject("permissionService") private permissionService: PermissionService,
+        private elementRef: ElementRef
     ) { }
 
     ngOnInit() {
         this.commentParagraphEventService.subscribeToggleCommentParagraph((article: noosfero.Article) => {
             this.article = article;
-            this.$scope.$apply();
         });
         this.commentParagraphService.commentParagraphCount(this.article, this.paragraphUuid).then((count: number) => {
             this.commentsCount = count ? count : 0;
@@ -61,10 +59,19 @@ export class AllowCommentComponent {
     }
 
     showParagraphComments() {
+        this.popover.show();
         this.display = true;
     }
 
     hideParagraphComments() {
+        this.popover.hide();
         this.display = false;
+    }
+
+    @HostListener('document:click', ['$event'])
+    onClick($event: any) {
+        if (this.popover && !this.elementRef.nativeElement.contains($event.target)) {
+            this.hideParagraphComments();
+        }
     }
 }
