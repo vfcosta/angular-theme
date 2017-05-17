@@ -359,6 +359,7 @@ export function getMocks() {
         articleService: {
             subscribeToModelRemoved: (fn: Function) => { },
             subscribeToModelAdded: (fn: Function) => { },
+            get: () => { return Promise.resolve({}) },
             modelRemovedEventEmitter:
             {
                 subscribe: (fn: Function) => { },

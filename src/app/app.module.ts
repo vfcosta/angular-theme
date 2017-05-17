@@ -166,6 +166,7 @@ import { SharedModule } from './shared.module';
         AbuseComplaintTaskAcceptComponent,
         SuggestArticleTaskAcceptComponent,
         BasicEditorComponent,
+        ApproveArticleTaskAcceptComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -224,6 +225,7 @@ import { SharedModule } from './shared.module';
         AbuseComplaintTaskAcceptComponent,
         SuggestArticleTaskAcceptComponent,
         BasicEditorComponent,
+        ApproveArticleTaskAcceptComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
