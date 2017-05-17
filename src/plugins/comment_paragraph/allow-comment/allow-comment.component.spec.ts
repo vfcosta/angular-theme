@@ -1,12 +1,13 @@
+import { PopoverModule } from 'ngx-bootstrap';
+import { By } from '@angular/platform-browser';
 import {AllowCommentComponent} from "./allow-comment.component";
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 import * as helpers from "../../../spec/helpers";
-import {Provider} from 'ng-forward';
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-let htmlTemplate = '<comment-paragraph-plugin-allow-comment [content]="ctrl.content" [paragraph-uuid]="ctrl.paragraphUuid" [article]="ctrl.article"></comment-paragraph-plugin-allow-comment>';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Allow Comment Component", () => {
+        let mocks = helpers.getMocks();
 
         let serviceMock = {
             commentParagraphCount: () => {
@@ -15,7 +16,6 @@ describe("Components", () => {
         };
         let functionToggleCommentParagraph: Function;
         let eventServiceMock = {
-            // toggleCommentParagraph
             subscribeToggleCommentParagraph: (fn: Function) => {
                 functionToggleCommentParagraph = fn;
             }
@@ -26,78 +26,72 @@ describe("Components", () => {
               return true;
             }
         };
+        let fixture: ComponentFixture<AllowCommentComponent>;
+        let component: AllowCommentComponent;
 
-        let providers = [
-            new Provider('CommentService', { useValue: helpers.mocks.commentService } ),
-            new Provider('CommentParagraphService', { useValue: serviceMock }),
-            new Provider('CommentParagraphEventService', { useValue: eventServiceMock }),
-            new Provider('PermissionService', { useValue: permissionServiceMock })
-        ];
-        let helper: ComponentTestHelper<AllowCommentComponent>;
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [AllowCommentComponent],
-                providers: providers,
-                properties: {
-                    content: "",
-                    paragraphUuid: "uuid",
-                    article: {
-                        setting: {
-                            comment_paragraph_plugin_activate: true
-                        }
-                    }
-                }
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [AllowCommentComponent],
+                providers: [
+                    { provide: "commentService", useValue: mocks.commentService },
+                    { provide: "permissionService", useValue: mocks.permissionService },
+                    { provide: "commentParagraphService", useValue: serviceMock },
+                    { provide: "commentParagraphEventService", useValue: eventServiceMock },
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
+                imports: [PopoverModule.forRoot()]
             });
-            helper = new ComponentTestHelper<AllowCommentComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(AllowCommentComponent);
+            component = fixture.componentInstance;
+            component.content = "";
+            component.paragraphUuid = "uuid";
+            component.article = <any>{setting: {comment_paragraph_plugin_activate: true}, accept_comments: true};
+            fixture.detectChanges();
+        }));
 
         it('update comments count', () => {
-            expect(helper.component.commentsCount).toEqual(5);
+            expect(component.commentsCount).toEqual(5);
         });
 
         it('display paragraph content', () => {
-            expect(helper.all(".paragraph .paragraph-content").length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css(".paragraph .paragraph-content")).length).toEqual(1);
         });
 
         it('display button to side comments', () => {
-            expect(helper.all(".paragraph .paragraph-actions a").length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css(".paragraph .paragraph-actions a")).length).toEqual(1);
         });
 
         it('set display to true when click in show paragraph', () => {
-            helper.component.showParagraphComments();
-            expect(helper.component.display).toBeTruthy();
+            component.showParagraphComments();
+            expect(component.display).toBeTruthy();
         });
 
         it('set display to false when click in hide paragraph', () => {
-            helper.component.hideParagraphComments();
-            expect(helper.component.display).toBeFalsy();
+            component.hideParagraphComments();
+            expect(component.display).toBeFalsy();
         });
 
         it('update article when receive a toogle paragraph event', () => {
             functionToggleCommentParagraph({ id: 2 });
-            expect(helper.component.article.id).toEqual(2);
+            expect(component.article.id).toEqual(2);
         });
 
         it('not display button to side comments when comments was closed and there is no comment paragraph', () => {
-            helper.component.article.accept_comments = false;
-            helper.component.commentsCount = 0;
-            expect(helper.component.isActivated()).toBeFalsy();
+            component.article.accept_comments = false;
+            component.commentsCount = 0;
+            expect(component.isActivated()).toBeFalsy();
         });
 
         it('display button to side comments when comments was closed and there is some comments to display', () => {
-            helper.component.article.accept_comments = false;
-            helper.component.commentsCount = 2;
-            expect(helper.component.isActivated()).toBeTruthy();
+            component.article.accept_comments = false;
+            component.commentsCount = 2;
+            expect(component.isActivated()).toBeTruthy();
         });
 
         it('display button to side comments when the user has permission to edit the discussion even when comments was closed', () => {
-            helper.component.article.accept_comments = false;
-            helper.component.commentsCount = 0;
-            expect(helper.component.isAllowedShow()).toBeTruthy();
+            component.article.accept_comments = false;
+            component.commentsCount = 0;
+            expect(component.isAllowedShow()).toBeTruthy();
         });
     });
 });

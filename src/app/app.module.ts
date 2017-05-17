@@ -1,4 +1,3 @@
-import { ArticleIconComponent } from './article/article-icon/article-icon.component';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
@@ -167,6 +166,8 @@ import { SharedModule } from './shared.module';
         AbuseComplaintTaskAcceptComponent,
         SuggestArticleTaskAcceptComponent,
         BasicEditorComponent,
+        CommentComponent,
+        CommentsComponent,
         ArticleIconComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
@@ -226,6 +227,8 @@ import { SharedModule } from './shared.module';
         AbuseComplaintTaskAcceptComponent,
         SuggestArticleTaskAcceptComponent,
         BasicEditorComponent,
+        CommentComponent,
+        CommentsComponent,
         ArticleIconComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
@@ -259,6 +262,8 @@ import { SharedModule } from './shared.module';
         'DesignModeService',
         '$sce',
         'ThemeService',
+        'CommentParagraphEventService',
+        'CommentParagraphService'
     ])
 })
 

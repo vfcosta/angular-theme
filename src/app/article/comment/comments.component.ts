@@ -1,14 +1,12 @@
-import { Inject, Input, Component, provide } from 'ng-forward';
+import { Inject, Input, Component, ChangeDetectorRef } from '@angular/core';
 import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
 import { CommentComponent } from "./comment.component";
 
 @Component({
     selector: 'noosfero-comments',
-    templateUrl: 'app/article/comment/comments.html',
-    directives: [CommentComponent],
+    template: require('app/article/comment/comments.html'),
     outputs: ['commentAdded']
 })
-@Inject(CommentService, "$scope")
 export class CommentsComponent {
 
     comments: noosfero.CommentViewModel[] = [];
@@ -22,7 +20,9 @@ export class CommentsComponent {
 
     newComment = <noosfero.Comment>{};
 
-    constructor(protected commentService: CommentService, private $scope: ng.IScope) { }
+    constructor(
+        @Inject('commentService') protected commentService: CommentService,
+        @Inject("$scope") private $scope: ng.IScope) { }
 
     ngOnInit() {
         if (this.parent) {
@@ -45,7 +45,7 @@ export class CommentsComponent {
                 }
             });
         }
-        this.comments.push(comment);
+        this.comments = [...this.comments, comment];
         this.resetShowReply();
     }
 
@@ -54,6 +54,7 @@ export class CommentsComponent {
         if (index >= 0) {
             this.comments.splice(index, 1);
         }
+        this.comments = [...this.comments];
     }
 
     private resetShowReply() {

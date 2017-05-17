@@ -1,28 +1,28 @@
 <div class="comment media">
   <div class="media-left">
-    <profile-link [profile]="ctrl.comment.author" [display-name]="false" [display-image]="true"></profile-link>
+    <profile-link [profile]="comment.author" [displayName]="false" [displayImage]="true"></profile-link>
   </div>
   <div class="media-body">
     <div class="heading clearfix">
-      <profile-link [profile]="ctrl.comment.author" [display-name]="true" [display-image]="false" [truncate]="false"></profile-link>
-      <span class="reply-of" ng-if="ctrl.comment.reply_of" uib-tooltip-template="'app/article/comment/comment-reply-tooltip.html'">
+      <profile-link [profile]="comment.author" [displayName]="true" [displayImage]="false" [truncate]="false"></profile-link>
+      <span class="reply-of" *ngIf="comment.reply_of" uib-tooltip-template="'app/article/comment/comment-reply-tooltip.html'">
         <i class="fa fa-fw fa-mail-forward"></i>
-        <span class="author">{{ctrl.comment.reply_of.author.name}}</span>
+        <span class="author">{{comment.reply_of.author.name}}</span>
       </span>
-      <span class="date" am-time-ago="ctrl.comment.created_at | dateFormat"></span>
+      <span class="date">{{comment.created_at | dateFormat | amTimeAgo}}</span>
     </div>
-    <div class="title">{{ctrl.comment.title}}</div>
-    <div class="body">{{ctrl.comment.body}}</div>
-    <div class="actions" ng-if="ctrl.displayActions">
-      <a href="#" (click)="ctrl.reply()" class="action small text-muted reply" ng-if="ctrl.article.accept_comments">
+    <div class="title">{{comment.title}}</div>
+    <div class="body">{{comment.body}}</div>
+    <div class="actions" *ngIf="displayActions">
+      <a href="#" (click)="reply()" class="action small text-muted reply" *ngIf="article.accept_comments">
         <span class="bullet-separator">•</span>
         {{"comment.reply" | translate}}
       </a>
-      <a permission="ctrl.comment.permissions" permission-action="allow_destroy" href="#" (click)="ctrl.remove()" class="action small text-muted remove" ng-if="ctrl.allowRemove()">
+      <a [permission]="comment.permissions" permissionAction="allow_destroy" href="#" (click)="remove()" class="action small text-muted remove" *ngIf="allowRemove()">
         <span class="bullet-separator">•</span>
         {{"comment.remove" | translate}}
       </a>
     </div>
   </div>
-  <noosfero-comments [show-form]="ctrl.showReply()" [article]="ctrl.article" [parent]="ctrl.comment" ng-if="ctrl.displayReplies"></noosfero-comments>
+  <noosfero-comments [showForm]="showReply()" [article]="article" [parent]="comment" *ngIf="displayReplies"></noosfero-comments>
 </div>

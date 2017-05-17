@@ -456,7 +456,7 @@ export function getMocks() {
             },
             createInArticle: (article: noosfero.Article, comment: noosfero.Comment) => {
                 return Promise.resolve({ data: {} });
-            }
+            },
         },
         sessionWithCurrentUser: (user: any) => {
             return {
