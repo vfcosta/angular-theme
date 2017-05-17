@@ -1,3 +1,4 @@
+import { ArticleIconComponent } from './article/article-icon/article-icon.component';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
@@ -285,6 +286,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('articleBasicEditor',
         downgradeComponent({ component: BasicEditorComponent, inputs: ['article', 'options'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoArticleIcon',
+        downgradeComponent({ component: ArticleIconComponent, inputs: ['article'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

@@ -1,8 +1,8 @@
-import { Component, Input } from "ng-forward";
+import { Component, Input } from "@angular/core";
 
 @Component({
     selector: "noosfero-article-icon",
-    templateUrl: "app/article/article-icon/article-icon.html"
+    template: require("app/article/article-icon/article-icon.html")
 })
 export class ArticleIconComponent {
 

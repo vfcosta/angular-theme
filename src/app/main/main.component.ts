@@ -28,7 +28,6 @@ import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment
 import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.service';
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { ArticleViewComponent } from './../article/article-default-view.component';
-import { ArticleIconComponent } from './../article/article-icon/article-icon.component';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
 import { BasicOptionsComponent } from './../article/cms/basic-options/basic-options.component';
 import { ArticleBlogComponent } from './../article/types/blog/blog.component';
@@ -102,7 +101,7 @@ export class EnvironmentContent {
         CustomContentComponent, PermissionDirective, SearchComponent,
         BlockComponent, RegisterComponent,
         ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
-        FolderComponent, ArticleIconComponent, BootstrapResizableDirective,
+        FolderComponent, BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
         ArticleEditorComponent, BasicOptionsComponent, TranslateProfile
