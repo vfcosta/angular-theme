@@ -1,5 +1,5 @@
 <div class="approve-comment-accept-title">
   {{"tasks.approve_comment.accept.message" | translate}}
-  <a ui-sref="main.profile.page({profile: ctrl.task.target.identifier, page: ctrl.article.path})">{{ctrl.article.title}}</a>:
+  <a uiSref="main.profile.page" [uiParams]="{profile: task.target.identifier, page: article.path}">{{article.title}}</a>:
 </div>
-<noosfero-comment [comment]="ctrl.comment"></noosfero-comment>
+<noosfero-comment [comment]="comment"></noosfero-comment>
