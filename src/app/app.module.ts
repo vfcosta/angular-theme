@@ -1,5 +1,6 @@
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
+import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
 import { AbuseComplaintTaskAcceptComponent } from "./task/types/abuse-complaint/abuse-complaint-task-accept.component";
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
@@ -161,6 +162,7 @@ import { SharedModule } from './shared.module';
         TasksComponent,
         TasksMenuComponent,
         SearchFormComponent,
+        ApproveArticleTaskAcceptComponent,
         AbuseComplaintTaskAcceptComponent,
         SuggestArticleTaskAcceptComponent,
         BasicEditorComponent,
@@ -218,6 +220,7 @@ import { SharedModule } from './shared.module';
         TasksComponent,
         TasksMenuComponent,
         SearchFormComponent,
+        ApproveArticleTaskAcceptComponent,
         AbuseComplaintTaskAcceptComponent,
         SuggestArticleTaskAcceptComponent,
         BasicEditorComponent,

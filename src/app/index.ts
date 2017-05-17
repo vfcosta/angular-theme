@@ -1,5 +1,6 @@
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
+import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
 import { AbuseComplaintTaskAcceptComponent } from './task/types/abuse-complaint/abuse-complaint-task-accept.component';
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
@@ -272,6 +273,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('searchForm',
         downgradeComponent({ component: SearchFormComponent }) as angular.IDirectiveFactory
+    ).
+    directive('approveArticleTaskAccept',
+        downgradeComponent({ component: ApproveArticleTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     ).
     directive('abuseComplaintTaskAccept',
         downgradeComponent({ component: AbuseComplaintTaskAcceptComponent, inputs: ['task'] }) as angular.IDirectiveFactory
