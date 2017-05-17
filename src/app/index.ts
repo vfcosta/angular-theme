@@ -2,6 +2,7 @@ import { ArticleIconComponent } from './article/article-icon/article-icon.compon
 import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { CommentComponent } from './article/comment/comment.component';
 import { CommentsComponent } from './article/comment/comments.component';
+import { ApproveCommentTaskAcceptComponent } from './task/types/approve-comment/approve-comment-task-accept.component';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
@@ -301,6 +302,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoArticleIcon',
         downgradeComponent({ component: ArticleIconComponent, inputs: ['article'] }) as angular.IDirectiveFactory
+    ).
+    directive('approveCommentTaskAccept',
+        downgradeComponent({ component: ApproveCommentTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

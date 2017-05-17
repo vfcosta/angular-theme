@@ -6,7 +6,7 @@ import { AddFriendTaskAcceptComponent } from "../types/add-friend/add-friend-tas
 @Component({
     selector: 'task-accept',
     template: '<div></div>',
-    directives: [AddMemberTaskAcceptComponent, ApproveCommentTaskAcceptComponent, AddFriendTaskAcceptComponent]
+    directives: [AddMemberTaskAcceptComponent, AddFriendTaskAcceptComponent]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class TaskAcceptComponent {

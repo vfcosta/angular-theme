@@ -1,40 +1,64 @@
-import { Provider, provide, Component } from 'ng-forward';
+import { UiSrefDirective } from '../../../shared/directives/ui-sref-directive';
+import { Provider, Component } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
 import { ApproveCommentTaskAcceptComponent } from './approve-comment-task-accept.component';
-
-const htmlTemplate: string = '<approve-comment-task-accept [task]="ctrl.task" [confirmation-task]="ctrl.confirmationTask"></approve-comment-task-accept>';
+import { TranslatePipe } from '../../../shared/pipes/translate-pipe';
+import { By } from '@angular/platform-browser';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Approve Comment Task Accept Component", () => {
 
-        let helper: ComponentTestHelper<ApproveCommentTaskAcceptComponent>;
-        let articleService = jasmine.createSpyObj("articleService", ["get"]);
         let article = { id: 1 };
         let task = <any>{ target: { id: 5 }, data: { comment_attributes: "{\"body\":\"comment body\",\"source_id\":4}" } };
-        articleService.get = jasmine.createSpy("get").and.returnValue(Promise.resolve({ headers: () => { }, data: article }));
 
-        beforeEach(angular.mock.module("templates"));
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<ApproveCommentTaskAcceptComponent>;
+        let component: ApproveCommentTaskAcceptComponent;
 
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [ApproveCommentTaskAcceptComponent],
+        beforeEach(async(() => {
+            spyOn(mocks.articleService, 'get').and.returnValue(Promise.resolve({ headers: () => { }, data: article }));
+
+            TestBed.configureTestingModule({
+                declarations: [ApproveCommentTaskAcceptComponent, TranslatePipe, UiSrefDirective],
                 providers: [
-                    helpers.createProviderToValue("ArticleService", articleService)
-                ].concat(helpers.provideFilters("translateFilter")),
-                properties: { task: task, confirmationTask: task }
+                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: "$state", useValue: mocks.$state },
+                    { provide: "$transitions", useValue: mocks.$transitions },
+                    { provide: "translatorService", useValue: mocks.translatorService }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });
-            helper = new ComponentTestHelper<ApproveCommentTaskAcceptComponent>(cls, done);
+            fixture = TestBed.createComponent(ApproveCommentTaskAcceptComponent);
+            component = fixture.componentInstance;
+            component.task = task;
+            component.confirmationTask = task;
+            fixture.detectChanges();
+        }));
+
+        it("verify if task contains comment attributes", () => {
+            expect(component.task.data.comment_attributes).toBeTruthy();
         });
 
         it("display comment for approval", () => {
-            expect(helper.component.comment.body).toEqual("comment body");
-            expect(helper.all('noosfero-comment').length).toEqual(1);
+            expect(component.comment.body).toEqual("comment body");
+            expect(all('noosfero-comment').length).toEqual(1);
         });
 
         it("call article service to load article", () => {
-            expect(articleService.get).toHaveBeenCalledWith(4);
+            expect(mocks.articleService.get).toHaveBeenCalledWith(4);
         });
+
+        it("verify if article is setted when article service is called", fakeAsync(() => {
+            tick();
+            expect(mocks.articleService.get).toHaveBeenCalledWith(4);
+            expect(component.article.id).toEqual(1);
+        }));
+
+        function all(selector: string) {
+            let compiled = fixture.debugElement;
+            return compiled.queryAll(By.css(selector));
+        }
     });
 });
