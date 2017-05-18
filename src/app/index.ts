@@ -1,3 +1,4 @@
+import { SearchComponent } from './search/search.component';
 import { ArticleIconComponent } from './article/article-icon/article-icon.component';
 import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { CommentComponent } from './article/comment/comment.component';
@@ -305,6 +306,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('approveCommentTaskAccept',
         downgradeComponent({ component: ApproveCommentTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
+    ).
+    directive('search',
+        downgradeComponent({ component: SearchComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

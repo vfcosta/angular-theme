@@ -1,3 +1,4 @@
+import { SearchComponent } from './search/search.component';
 import { ArticleIconComponent } from './article/article-icon/article-icon.component';
 import { CommentComponent } from './article/comment/comment.component';
 import { CommentsComponent } from './article/comment/comments.component';
@@ -173,6 +174,7 @@ import { SharedModule } from './shared.module';
         CommentsComponent,
         ArticleIconComponent,
         ApproveArticleTaskAcceptComponent,
+        SearchComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -235,6 +237,7 @@ import { SharedModule } from './shared.module';
         CommentsComponent,
         ArticleIconComponent,
         ApproveArticleTaskAcceptComponent,
+        SearchComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
