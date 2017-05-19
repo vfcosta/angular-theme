@@ -11,11 +11,6 @@ import { BlockComponent } from '../layout/blocks/block.component';
 import { MainBlockComponent } from '../layout/blocks/main/main-block.component';
 import { BoxesComponent } from '../layout/boxes/boxes.component';
 import { Navbar } from '../layout/navbar/navbar';
-<<<<<<< 4362cb61dfa62b4c6d1702acf4250cf7ac93fb15
-import { ThemeFooterComponent } from '../layout/theme-footer/theme-footer.component';
-=======
-import { ThemeHeaderComponent } from '../layout/theme-header/theme-header.component';
->>>>>>> Migrate theme footer component to angular 2
 import { AuthService } from '../login/auth.service';
 import { PasswordComponent } from '../login/new-password.component';
 import { SessionService } from '../login/session.service';
