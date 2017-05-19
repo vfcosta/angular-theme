@@ -1,8 +1,8 @@
-import { Component } from "ng-forward";
+import { Component } from "@angular/core";
 
 @Component({
     selector: "theme-footer",
-    templateUrl: "app/layout/theme-footer/theme-footer.html"
+    template: require("app/layout/theme-footer/theme-footer.html")
 })
 export class ThemeFooterComponent {
 
