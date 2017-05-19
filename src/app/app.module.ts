@@ -1,13 +1,14 @@
-import { ArticleIconComponent } from './article/article-icon/article-icon.component';
-import { CommentComponent } from './article/comment/comment.component';
+import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { CommentsComponent } from './article/comment/comments.component';
+import { CommentComponent } from './article/comment/comment.component';
+import { ArticleIconComponent } from './article/article-icon/article-icon.component';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
-import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
 import { AbuseComplaintTaskAcceptComponent } from "./task/types/abuse-complaint/abuse-complaint-task-accept.component";
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
+import { AddFriendTaskAcceptComponent } from './task/types/add-friend/add-friend-task-accept.component';
 import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
 import { TaskComponent } from './task/task.component';
 import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
@@ -164,15 +165,17 @@ import { SharedModule } from './shared.module';
         ProfileLinkComponent,
         TasksComponent,
         TasksMenuComponent,
+        AddFriendTaskAcceptComponent,
         SearchFormComponent,
-        ApproveArticleTaskAcceptComponent,
         AbuseComplaintTaskAcceptComponent,
+        ApproveArticleTaskAcceptComponent,
         SuggestArticleTaskAcceptComponent,
         BasicEditorComponent,
         CommentComponent,
         CommentsComponent,
         ArticleIconComponent,
         ApproveArticleTaskAcceptComponent,
+        AddFriendTaskAcceptComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -226,15 +229,17 @@ import { SharedModule } from './shared.module';
         ProfileLinkComponent,
         TasksComponent,
         TasksMenuComponent,
+        AddFriendTaskAcceptComponent,
         SearchFormComponent,
-        ApproveArticleTaskAcceptComponent,
         AbuseComplaintTaskAcceptComponent,
+        ApproveArticleTaskAcceptComponent,
         SuggestArticleTaskAcceptComponent,
         BasicEditorComponent,
         CommentComponent,
         CommentsComponent,
         ArticleIconComponent,
         ApproveArticleTaskAcceptComponent,
+        AddFriendTaskAcceptComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
