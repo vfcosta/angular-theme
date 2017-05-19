@@ -86,13 +86,13 @@ export function noosferoRoutes($stateProvider: any) {
         }
     });
     $stateProvider.state({
-        controller: ProfileConfigurationOptionComponent,
+        controller: RouteNg2,
         url: '^/search?query&per_page',
         name: 'main.environment.search',
         views: {
             "mainBlockContent": {
                 template: "<search></search>",
-                controller: ProfileConfigurationOptionComponent,
+                controller: RouteNg2,
                 controllerAs: "ctrl"
             }
         }
