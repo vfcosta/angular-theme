@@ -12,7 +12,6 @@ import { MainBlockComponent } from '../layout/blocks/main/main-block.component';
 import { BoxesComponent } from '../layout/boxes/boxes.component';
 import { Navbar } from '../layout/navbar/navbar';
 import { ThemeFooterComponent } from '../layout/theme-footer/theme-footer.component';
-import { ThemeHeaderComponent } from '../layout/theme-header/theme-header.component';
 import { AuthService } from '../login/auth.service';
 import { PasswordComponent } from '../login/new-password.component';
 import { SessionService } from '../login/session.service';
@@ -104,7 +103,7 @@ export class EnvironmentContent {
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
         CustomContentComponent, PermissionDirective, SearchComponent,
         BlockComponent, RegisterComponent,
-        ThemeHeaderComponent, ThemeFooterComponent, TaskAcceptComponent,
+        ThemeFooterComponent, TaskAcceptComponent,
         FolderComponent, BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
