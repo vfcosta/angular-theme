@@ -1,4 +1,4 @@
 <div class="add-friend-details">
-  <input ng-model="ctrl.confirmationTask.group_for_friend" id="groupsInput" type="text" placeholder="{{'tasks.add_friend.group.field.placeholder' | translate}}" class="form-control">
+  <input [ngModel]="confirmationTask.group_for_friend" #groupsInput="ngModel" name="groupsInput" id="groupsInput" type="text" placeholder="{{'tasks.add_friend.group.field.placeholder' | translate}}" class="form-control">
   <p class="suggestions">{{"tasks.add_friend.group.suggestions" | translate}}</p>
 </div>

@@ -300,8 +300,8 @@ export function getMocks() {
                 return this.modalInstance;
             }
         },
-        $transitions :{
-            onSuccess: () => {}
+        $transitions: {
+            onSuccess: () => { }
         },
         $state: {
             href: () => { },
@@ -309,8 +309,8 @@ export function getMocks() {
         },
         $scope: {
             $watch: (param: string, f: Function) => { f(); },
-            $apply: () => { } 
-        },        
+            $apply: () => { }
+        },
         profile: {
             id: 1,
             identifier: 'profile-id',
@@ -331,11 +331,20 @@ export function getMocks() {
         popover: {
             hide: () => { }
         },
+        taskService: {        
+            getAllPending: () => {},
+            get: (id: any) => {
+                return Promise.resolve({ headers: () => { }, data: { group_for_friend: 'group1' } });
+            },
+            put: () => {
+                return Promise.resolve({ headers: () => { }, data: { group_for_friend: 'group1' } });
+            }
+        },
         registerService: {
             createAccount: (user: noosfero.User) => {
                 return Promise.resolve({ status: 201 });
             }
-        },      
+        },
         authService: {
             loginSuccess: {
                 subscribe: (fn: Function) => { },
@@ -421,7 +430,7 @@ export function getMocks() {
                     host: 'http://localhost'
                 };
             },
-            update: (environment: noosfero.Environment) => Promise.resolve({id: 2})
+            update: (environment: noosfero.Environment) => Promise.resolve({ id: 2 })
         },
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
@@ -561,11 +570,11 @@ export function getMocks() {
         },
         themeService: {
             verifyTheme: (theme: string) => { }
-        },
+        }/*,
         taskService: {
             getAllPending: () => {},
             get: (id: any) => { return Promise.resolve({})}
-        }
+        }*/
     };
     return mocks;
 };

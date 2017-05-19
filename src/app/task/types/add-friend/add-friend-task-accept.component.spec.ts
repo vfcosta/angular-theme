@@ -1,40 +1,60 @@
-import { Provider, provide, Component } from 'ng-forward';
+import { FormsModule } from '@angular/forms';
+import { Provider, Component } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
 import { AddFriendTaskAcceptComponent } from './add-friend-task-accept.component';
-
-const htmlTemplate: string = '<add-friend-task-accept [task]="ctrl.task" [confirmation-task]="ctrl.confirmationTask"></add-friend-task-accept>';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 
 describe("Components", () => {
 
     describe("Add Friend Task Accept Component", () => {
-
-        let helper: ComponentTestHelper<AddFriendTaskAcceptComponent>;
-        let task = <any>{ target: { id: 5 } };
         let confirmationTaskData = {
                 group_for_friend: 'group1'
             };
-        let taskService = jasmine.createSpyObj("taskService", ["put"]);
-        taskService.get = jasmine.createSpy("put").and.returnValue(Promise.resolve({ headers: () => { }, data: confirmationTaskData }));
+            
+        let mocks = helpers.getMocks();
+        let peopleToInvite = [<noosfero.Person>{ "id": 1, "name": "Person 1" }, <noosfero.Person>{ "id": 3, "name": "Person 3" }];
+        let fixture: ComponentFixture<AddFriendTaskAcceptComponent>;
+        let component: AddFriendTaskAcceptComponent;
 
-        beforeEach(angular.mock.module("templates"));
+        beforeEach(async(() => {
+            spyOn(mocks.taskService, 'get').and.callThrough();
 
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [AddFriendTaskAcceptComponent],
+            TestBed.configureTestingModule({
+                declarations: [AddFriendTaskAcceptComponent, TranslatePipe],
                 providers: [
-                    helpers.createProviderToValue("TaskService", taskService)
-                ].concat(helpers.provideFilters("translateFilter")),
-                properties: { task: task, confirmationTask: confirmationTaskData }
+                    { provide: "taskService", useValue: mocks.taskService },
+                    { provide: "translatorService", useValue: mocks.translatorService }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [FormsModule]
             });
-            helper = new ComponentTestHelper<AddFriendTaskAcceptComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(AddFriendTaskAcceptComponent);
+            component = fixture.componentInstance;
+            component.task = <any>{ target: { id: 5 } };
+            component.confirmationTask = <noosfero.AddFriend>confirmationTaskData;
+        }));
 
         it("should the add friend have a group named", () => {
             let group = 'group1';
-            expect(helper.component.confirmationTask.group_for_friend).toEqual(group);
+            expect(component.confirmationTask.group_for_friend).toEqual(group);
         });
+
+        it("should not call taskservice get if task target is setted", fakeAsync(() => {
+            component.task = <any>{ target: false };
+            component.ngOnInit();
+            fixture.detectChanges();
+            tick();
+            expect(mocks.taskService.get).not.toHaveBeenCalled();
+        }));
+
+        it("should set task when task target is setted", fakeAsync(() => {
+            component.ngOnInit();
+            fixture.detectChanges();
+            tick();
+            expect(component.task).toEqual(confirmationTaskData);
+        }));
     });
 
 });

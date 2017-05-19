@@ -39,7 +39,7 @@ import { BodyStateClassesService } from './../shared/services/body-state-classes
 import { HeaderService } from './../shared/services/header.service';
 import { TaskAcceptComponent } from './../task/task-list/task-accept.component';
 import { Component, Inject, provide } from 'ng-forward';
-
+import { TaskService } from './../../lib/ng-noosfero-api/http/task.service'
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
@@ -108,7 +108,7 @@ export class EnvironmentContent {
         ArticleEditorComponent, BasicOptionsComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
-        PermissionService, CommentParagraphEventService, CommentParagraphService, CommentService,
+        PermissionService, CommentParagraphEventService, CommentParagraphService, CommentService, TaskService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

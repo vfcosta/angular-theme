@@ -1,87 +1,92 @@
-import { ArticleIconComponent } from './article/article-icon/article-icon.component';
+import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { CommentComponent } from './article/comment/comment.component';
 import { CommentsComponent } from './article/comment/comments.component';
+import { ArticleIconComponent } from './article/article-icon/article-icon.component';
 import { ApproveCommentTaskAcceptComponent } from './task/types/approve-comment/approve-comment-task-accept.component';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
-import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
 import { AbuseComplaintTaskAcceptComponent } from './task/types/abuse-complaint/abuse-complaint-task-accept.component';
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
-import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
-import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
-import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
-import { ConfigBarComponent } from './layout/config-bar/config-bar.component';
-import { LayoutConfigComponent } from './layout/layout-config/layout-config.component';
-import { ContextBarComponent } from './layout/context-bar/context-bar.component';
-import { ProfileHeaderComponent } from "./profile/header/profile-header.component";
-import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
-import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
-import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
-import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
-import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
-import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
-import { EventPluginEventBlockComponent } from './../plugins/event/blocks/event-plugin-event/event-plugin-event-block.component';
-import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
-import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
-import { PersonTagsPluginInterestsBlockComponent } from './../plugins/person_tags/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component';
-import { RecentActivitiesPluginActivitiesBlockComponent } from './../plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.component';
-import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
-import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
-import { EditableLinkComponent } from './shared/components/editable-link/editable-link.component';
-import { LinkListBlockComponent } from './layout/blocks/link-list/link-list-block.component';
-import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
-import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
-import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
-import { EditCommunityComponent } from './profile/configuration/communities/edit-community.component';
-import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
-import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
-import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
-import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
-import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
-import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
-import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
-import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
-import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
-import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
-import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
-import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
-import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
-import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
-import { CommunityMembersComponent } from './profile/community-members/community-members.component';
-import { InviteComponent } from './profile/configuration/communities/invite.component';
-import { TaskListComponent } from './task/task-list/task-list.component';
-import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
-import { FooterComponent } from './layout/footer/footer.component';
-import { bundle, bootstrap, provide } from "ng-forward";
-import { noosferoModuleConfig } from "./index.config";
-import { noosferoAngularRunBlock } from "./index.run";
-import { MainComponent } from "./main/main.component";
-import { AuthEvents } from "./login/auth-events";
-
-import { NoosferoKnownEvents } from './known-events';
-
-import { AuthService } from "./login/auth.service";
-import { SessionService } from "./login/session.service";
-import { NotificationService } from "./shared/services/notification.service";
-import { BodyStateClassesService } from "./shared/services/body-state-classes.service";
-import { downgradeComponent } from '@angular/upgrade/static';
-import { ProfileImageComponent } from "./profile/image/profile-image.component";
-import { RawHTMLBlockComponent } from "./layout/blocks/raw-html/raw-html-block.component";
-import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
-import { ProfileListComponent } from './profile/profile-list/profile-list.component';
-import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
-import { RecentDocumentsBlockComponent } from "./layout/blocks/recent-documents/recent-documents-block.component";
-import { ProfileImageBlockComponent } from "./layout/blocks/profile-image/profile-image-block.component";
-
-// Plugins imports
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
-import { ProfileImagesBlockComponent } from '../plugins/profile_images/blocks/profile-images-block/profile-images-block.component';
-import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
+import {
+    ProfileImagesBlockComponent
+} from '../plugins/profile_images/blocks/profile-images-block/profile-images-block.component';
 import { SectionBlockComponent } from '../plugins/section_block/blocks/section-block/section-block.component';
 import { VideoBlockComponent } from '../plugins/video/blocks/video-block/video-block.component';
+import {
+    EventPluginEventBlockComponent
+} from './../plugins/event/blocks/event-plugin-event/event-plugin-event-block.component';
+import {
+    PersonTagsPluginInterestsBlockComponent
+} from './../plugins/person_tags/blocks/person-tags-plugin-interests/person-tags-plugin-interests-block.component';
+import {
+    RecentActivitiesPluginActivitiesBlockComponent
+} from './../plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.component';
+import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
+import { noosferoModuleConfig } from './index.config';
+import { noosferoAngularRunBlock } from './index.run';
+import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
+import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
+import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
+import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
+import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
+import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
+import { LinkListBlockComponent } from './layout/blocks/link-list/link-list-block.component';
+import { LoginBlockComponent } from './layout/blocks/login-block/login-block.component';
+import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
+import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
+import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
+import { ProfileImageBlockComponent } from './layout/blocks/profile-image/profile-image-block.component';
+import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
+import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
+import { StatisticsBlockComponent } from './layout/blocks/statistics/statistics-block.component';
+import { TagsBlockComponent } from './layout/blocks/tags/tags-block.component';
+import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
+import { ConfigBarComponent } from './layout/config-bar/config-bar.component';
+import { ContextBarComponent } from './layout/context-bar/context-bar.component';
+import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
+import { FooterComponent } from './layout/footer/footer.component';
+import { LanguageSelectorComponent } from './layout/language-selector/language-selector.component';
+import { LayoutConfigComponent } from './layout/layout-config/layout-config.component';
+import { AuthEvents } from './login/auth-events';
+import { MainComponent } from './main/main.component';
+import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
+import { CommunityMembersComponent } from './profile/community-members/community-members.component';
+import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
+import {
+    CommunityMembersMyProfileComponent
+} from './profile/configuration/communities/community-members-my-profile.component';
+import { EditCommunityComponent } from './profile/configuration/communities/edit-community.component';
+import { InviteComponent } from './profile/configuration/communities/invite.component';
+import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
+import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
+import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
+import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
+import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
+import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
+import { ProfileHeaderComponent } from './profile/header/profile-header.component';
+import { ProfileImageComponent } from './profile/image/profile-image.component';
+import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
+import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
+import { ProfileListComponent } from './profile/profile-list/profile-list.component';
+import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
+import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
+import { EditableLinkComponent } from './shared/components/editable-link/editable-link.component';
+import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
+import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
+import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
+import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
+import { TaskListComponent } from './task/task-list/task-list.component';
+import { AddFriendTaskAcceptComponent } from './task/types/add-friend/add-friend-task-accept.component';
+import { downgradeComponent } from '@angular/upgrade/static';
+import { bundle } from 'ng-forward';
+
+
+
+// Plugins imports
 
 declare var moment: any;
 
@@ -276,14 +281,16 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('tasksMenu',
         downgradeComponent({ component: TasksMenuComponent, inputs: ['taskTypes'] }) as angular.IDirectiveFactory
     ).
+    directive('addFriendTaskAccept',
+        downgradeComponent({ component: AddFriendTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
+    ).
     directive('searchForm',
         downgradeComponent({ component: SearchFormComponent }) as angular.IDirectiveFactory
     ).
-    directive('approveArticleTaskAccept',
-        downgradeComponent({ component: ApproveArticleTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
-    ).
     directive('abuseComplaintTaskAccept',
         downgradeComponent({ component: AbuseComplaintTaskAcceptComponent, inputs: ['task'] }) as angular.IDirectiveFactory
+    ).directive('approveArticleTaskAccept',
+        downgradeComponent({ component: ApproveArticleTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     ).
     directive('suggestArticleTaskAccept',
         downgradeComponent({ component: SuggestArticleTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
@@ -305,6 +312,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('approveCommentTaskAccept',
         downgradeComponent({ component: ApproveCommentTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
+    ).
+    directive('addFriendTaskAccept',
+        downgradeComponent({ component: AddFriendTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
