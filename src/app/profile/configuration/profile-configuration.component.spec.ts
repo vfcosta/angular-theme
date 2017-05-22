@@ -31,14 +31,11 @@ describe("Components", () => {
             profilePromise.resolve(profile);
 
             profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profilePromise.promise);
-
-            sessionServiceMock = jasmine.createSpyObj("sessionServiceMock", ["currentUser"]);
-            sessionServiceMock.currentUser = jasmine.createSpy("currentUser").and.returnValue( {id: 1, identifier: 'identifier'});
         });
 
         it("set profile service", (done => {
             $stateParams['parent_id'] = 1;
-            let component: ProfileConfigurationComponent = new ProfileConfigurationComponent(profileServiceMock, $stateParams, $state, sessionServiceMock);
+            let component: ProfileConfigurationComponent = new ProfileConfigurationComponent(profileServiceMock, $stateParams, $state);
             $rootScope.$apply();
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
             expect(component.profile.identifier).toEqual("identifier");
