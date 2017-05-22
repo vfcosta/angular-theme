@@ -1,56 +1,111 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DestroyProfileComponent } from './destroy-profile.component';
-import { ComponentTestHelper, createClass } from '../../../spec/component-test-helper';
 import * as helpers from "../../../spec/helpers";
-
-const htmlTemplate: string = '<destroy-profile></destroy-profile>';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
     describe("Destroy Profile Component", () => {
-
-        let stateMock: any;
-        let notificationMock: any;
-        let profileServiceMock: any;
         let profile = { id: 1, identifier: "profile" };
 
-        let helper: ComponentTestHelper<DestroyProfileComponent>;
-        beforeEach(angular.mock.module("templates"));
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<DestroyProfileComponent>;
+        let component: DestroyProfileComponent;
 
-        beforeEach((done) => {
-            stateMock = jasmine.createSpyObj("$state", ["go"]);
-            notificationMock = jasmine.createSpyObj("notificationService", ["confirmation", "success", "error"]);
-            profileServiceMock = jasmine.createSpyObj("profileService", ["getCurrentProfile", "remove"]);
-            profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(helpers.mocks.promiseResultTemplate(profile));
-            notificationMock.confirmation = (options: any, func: Function) => {
-                func();
-            };
-            spyOn(notificationMock, 'confirmation').and.callThrough();
-            profileServiceMock.remove = jasmine.createSpy("remove").and.returnValue(helpers.mocks.promiseResultTemplate({data: {success: true}}));
+        beforeEach(async(() => {
+            spyOn(mocks.$state, 'go').and.callThrough();
+            spyOn(mocks.notificationService, 'confirmation').and.callThrough();
+            spyOn(mocks.notificationService, 'success').and.callThrough();
+            spyOn(mocks.notificationService, 'error').and.callThrough();
+            spyOn(mocks.profileService, 'remove').and.callThrough();
+            spyOn(mocks.profileService, 'getCurrentProfile').and.callThrough();
 
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [DestroyProfileComponent],
+            TestBed.configureTestingModule({
+                declarations: [DestroyProfileComponent],
                 providers: [
-                    helpers.createProviderToValue('$state', stateMock),
-                    helpers.createProviderToValue('NotificationService', notificationMock),
-                    helpers.createProviderToValue('ProfileService', profileServiceMock)
-                ]
+                    { provide: "$state", useValue: mocks.$state },
+                    { provide: "notificationService", useValue: mocks.notificationService },
+                    { provide: "profileService", useValue: mocks.profileService },
+                    { provide: "authService", useValue: mocks.authService }
+                ],
+                schemas: [NO_ERRORS_SCHEMA]
             });
-            helper = new ComponentTestHelper<DestroyProfileComponent>(cls, done);
-        });
+        }));
 
-        it("display confirmation dialog", () => {
-            expect(notificationMock.confirmation).toHaveBeenCalled();
-        });
+        it("display confirmation dialog", fakeAsync(() => {
+            let fixture = TestBed.createComponent(DestroyProfileComponent);
+            let component = fixture.componentInstance;
+            fixture.detectChanges();
+            tick();
+            expect(mocks.notificationService.confirmation).toHaveBeenCalled();
+        }));
 
-        it("not display confirmation dialog when profile doesn't exists", () => {
-            profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(helpers.mocks.promiseResultTemplate(null));
-            notificationMock.confirmation = jasmine.createSpy("confirmation");
-            new DestroyProfileComponent(stateMock, notificationMock, profileServiceMock);
-            expect(notificationMock.confirmation).not.toHaveBeenCalled();
-        });
+        it("call remove in profile service when confirm", fakeAsync(() => {
+            let pS = TestBed.get('profileService');
+            let nS = TestBed.get('notificationService');
+            nS.confirmation = (p1, p2) => { p2() };
+            pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
 
-        it("call remove in profile service when confirm", () => {
-            expect(profileServiceMock.remove).toHaveBeenCalled();
-        });
+            let fixture = TestBed.createComponent(DestroyProfileComponent);
+            let component = fixture.componentInstance;
+
+            fixture.detectChanges();
+            tick();
+            tick();
+            expect(mocks.profileService.remove).toHaveBeenCalled();
+        }));
+
+        it("not display confirmation dialog when profile doesn't exists", fakeAsync(() => {
+            let pS = TestBed.get('profileService');
+            let nS = TestBed.get('notificationService');
+            nS.confirmation = (p1, p2) => { p2() };
+            pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve(null));
+
+            let fixture = TestBed.createComponent(DestroyProfileComponent);
+            let component = fixture.componentInstance;
+
+            fixture.detectChanges();
+            tick();
+            expect(mocks.notificationService.confirmation).not.toHaveBeenCalled();
+        }));
+
+        it("call notification success when remove is confirmed", fakeAsync(() => {
+            let pS = TestBed.get('profileService');
+            let nS = TestBed.get('notificationService');
+            let state = TestBed.get('$state');
+            nS.confirmation = (p1, p2) => { p2() };
+            pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
+            pS.remove = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ data: { success: true } }));
+            state.go = jasmine.createSpy("go").and.callThrough();
+
+            let fixture = TestBed.createComponent(DestroyProfileComponent);
+            let component = fixture.componentInstance;
+
+            fixture.detectChanges();
+            tick();
+            tick();
+            tick();
+            expect(mocks.notificationService.success).toHaveBeenCalled();
+        }));
+
+        it("call notification error when remove is not confirmed", fakeAsync(() => {
+            let pS = TestBed.get('profileService');
+            let nS = TestBed.get('notificationService');
+            let state = TestBed.get('$state');
+            let aS = TestBed.get('authService');
+            nS.confirmation = (p1, p2) => { p2() };
+            pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
+            pS.remove = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ data: { success: false } }));
+            state.go = jasmine.createSpy("go").and.callThrough();
+            aS.logout = jasmine.createSpy("logout").and.callThrough();
+
+            let fixture = TestBed.createComponent(DestroyProfileComponent);
+            let component = fixture.componentInstance;
+
+            fixture.detectChanges();
+            tick();
+            tick();
+            tick();
+            expect(mocks.notificationService.error).toHaveBeenCalled();
+        }));
     });
 });

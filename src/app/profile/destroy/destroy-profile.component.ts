@@ -1,4 +1,5 @@
-import { Component, Inject } from "ng-forward";
+import { AuthService } from '../../login';
+import { Component, Inject } from "@angular/core";
 import { NotificationService } from "../../shared/services/notification.service";
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 
@@ -6,10 +7,13 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
     selector: 'destroy-profile',
     template: "not-used",
 })
-@Inject("$state", NotificationService, ProfileService)
 export class DestroyProfileComponent {
 
-    constructor(private $state: ng.ui.IStateService, private notificationService: NotificationService, profileService: ProfileService) {
+    constructor(
+        @Inject("$state") private $state: ng.ui.IStateService,
+        @Inject('notificationService') private notificationService: NotificationService,
+        @Inject('profileService') private profileService: ProfileService,
+        @Inject('authService') private AuthService: AuthService) {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             if (!profile) return;
             notificationService.confirmation({ title: "profile.remove.confirmation.title", message: "profile.remove.confirmation.message" }, () => {
@@ -28,6 +32,7 @@ export class DestroyProfileComponent {
 
     handleSuccess(profile: noosfero.Profile) {
         this.$state.go("main.domain");
+        this.AuthService.logout();
         this.notificationService.success({ title: "profile.remove.success.title", message: "profile.remove.success.message" });
     }
 
