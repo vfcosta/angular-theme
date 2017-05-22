@@ -10,6 +10,7 @@ describe("Components", () => {
         let component: ProfileConfigurationComponent;
         let $stateParams = { profile: 'identifier' };
         let profileServiceMock: any;
+        let sessionServiceMock: any;
         let profile = { id: 1, identifier: 'identifier' };
         let $q: ng.IQService;
         let helper: ComponentTestHelper<ProfileConfigurationComponent>;
@@ -30,11 +31,14 @@ describe("Components", () => {
             profilePromise.resolve(profile);
 
             profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profilePromise.promise);
+
+            sessionServiceMock = jasmine.createSpyObj("sessionServiceMock", ["currentUser"]);
+            sessionServiceMock.currentUser = jasmine.createSpy("currentUser").and.returnValue( {id: 1, identifier: 'identifier'});
         });
 
         it("set profile service", (done => {
             $stateParams['parent_id'] = 1;
-            let component: ProfileConfigurationComponent = new ProfileConfigurationComponent(profileServiceMock, $stateParams, $state);
+            let component: ProfileConfigurationComponent = new ProfileConfigurationComponent(profileServiceMock, $stateParams, $state, sessionServiceMock);
             $rootScope.$apply();
             expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
             expect(component.profile.identifier).toEqual("identifier");
