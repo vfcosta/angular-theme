@@ -1,4 +1,5 @@
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
+import { SearchComponent } from './search/search.component';
 import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { CommentComponent } from './article/comment/comment.component';
 import { CommentsComponent } from './article/comment/comments.component';
@@ -315,6 +316,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('addFriendTaskAccept',
         downgradeComponent({ component: AddFriendTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
+    ).
+    directive('search',
+        downgradeComponent({ component: SearchComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

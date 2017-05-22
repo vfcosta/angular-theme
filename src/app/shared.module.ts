@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
+import { TruncatePipe } from './shared/pipes/truncate';
 
 @NgModule({
     exports: [TranslatePipe,
@@ -15,12 +16,14 @@ import { BlockSettingsComponent } from './layout/blocks/block-settings.component
         ImageUploadCropComponent,
         FormsModule,
         CommonModule,
-        BlockSettingsComponent
+        BlockSettingsComponent,
+        TruncatePipe
     ],
     declarations: [TranslatePipe,
         ImageUploadComponent,
         ImageUploadCropComponent,
-        BlockSettingsComponent
+        BlockSettingsComponent,
+        TruncatePipe
     ],
     entryComponents: [
         ImageUploadComponent,

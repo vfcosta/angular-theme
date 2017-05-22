@@ -1,4 +1,5 @@
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
+import { SearchComponent } from './search/search.component';
 import { CommentsComponent } from './article/comment/comments.component';
 import { CommentComponent } from './article/comment/comment.component';
 import { ArticleIconComponent } from './article/article-icon/article-icon.component';
@@ -176,6 +177,7 @@ import { SharedModule } from './shared.module';
         ArticleIconComponent,
         ApproveArticleTaskAcceptComponent,
         AddFriendTaskAcceptComponent,
+        SearchComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -240,6 +242,7 @@ import { SharedModule } from './shared.module';
         ArticleIconComponent,
         ApproveArticleTaskAcceptComponent,
         AddFriendTaskAcceptComponent,
+        SearchComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

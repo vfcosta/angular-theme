@@ -413,7 +413,8 @@ export function getMocks() {
                 };
             },
             setCurrent: (article: noosfero.Article) => { },
-            getCurrent: () => { return Promise.resolve({}); }
+            getCurrent: () => { return Promise.resolve({}); },
+            search: (filter: any) => { return Promise.resolve({}); }
         },
         environmentService: {
             getEnvironmentPeople: (params: any) => {

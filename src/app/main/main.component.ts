@@ -1,3 +1,4 @@
+import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 import { CommentService } from './../../lib/ng-noosfero-api/http/comment.service';
 import { CommentParagraphService } from './../../plugins/comment_paragraph/http/comment-paragraph.service';
 import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
@@ -16,7 +17,6 @@ import { PasswordComponent } from '../login/new-password.component';
 import { SessionService } from '../login/session.service';
 import { CustomContentComponent } from '../profile/custom-content/custom-content.component';
 import { ProfileComponent } from '../profile/profile.component';
-import { SearchComponent } from '../search/search.component';
 import { BootstrapResizableDirective } from '../shared/components/bootstrap-resizable/bootstrap-resizable.directive';
 import { EditableDirective } from '../shared/components/editable/editable.directive';
 import { PermissionDirective } from '../shared/components/permission/permission.directive';
@@ -100,15 +100,16 @@ export class EnvironmentContent {
     directives: [
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat, PasswordComponent,
-        CustomContentComponent, PermissionDirective, SearchComponent,
-        BlockComponent, RegisterComponent, TaskAcceptComponent,
+        CustomContentComponent, PermissionDirective,
+        BlockComponent, RegisterComponent,
+        TaskAcceptComponent,
         FolderComponent, BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
         ArticleEditorComponent, BasicOptionsComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
-        PermissionService, CommentParagraphEventService, CommentParagraphService, CommentService, TaskService,
+        PermissionService, CommentParagraphEventService, CommentParagraphService, CommentService, TaskService, ArticleService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
