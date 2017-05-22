@@ -82,7 +82,7 @@ gulp.task('html', ['inject', 'partials'], function () {
     .pipe($.useref())
     .pipe($.revReplace({prefix: noosferoThemePrefix}))
     .pipe(htmlFilter)
-    .pipe($.replace('/bower_components/ng-ckeditor/libs/ckeditor/', noosferoThemePrefix + 'ng-ckeditor/libs/ckeditor/'))
+    .pipe($.replace('/node_modules/ckeditor/', noosferoThemePrefix + 'ckeditor/'))
     .pipe($.minifyHtml({
       empty: true,
       spare: true,
@@ -104,8 +104,8 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('ckeditor', function () {
-  conf.wiredep.exclude.push(/bower_components\/ng-ckeditor\/libs\/ckeditor/); // exclude ckeditor from build to improve performance
-  return gulp.src(['bower_components/ng-ckeditor/**/*']).pipe(gulp.dest(path.join(conf.paths.dist, '/ng-ckeditor')));
+  conf.wiredep.exclude.push(/node_modules\/ckeditor/); // exclude ckeditor from build to improve performance
+  return gulp.src(['node_modules/ckeditor/**/*']).pipe(gulp.dest(path.join(conf.paths.dist, '/ckeditor')));
 });
 
 gulp.task('locale', function () {
