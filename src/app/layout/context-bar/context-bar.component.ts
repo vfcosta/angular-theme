@@ -71,6 +71,7 @@ export class ContextBarComponent {
         this.applyChanges().then(() => {
             this.originalLayout = this.owner.layout_template;
             this.notificationService.success({ title: "contextbar.edition.apply.success.title", message: "contextbar.edition.apply.success.message" });
+            this.designModeService.setInDesignMode(false);
         });
     }
 

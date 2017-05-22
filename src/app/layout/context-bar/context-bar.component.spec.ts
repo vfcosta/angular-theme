@@ -18,7 +18,7 @@ describe("Context Bar Component", () => {
         spyOn(mocks.profileService, 'update').and.returnValue(Promise.resolve(mocks.profile));
         spyOn(mocks.environmentService, 'update').and.callThrough();
         spyOn(mocks.notificationService, 'success').and.callThrough();
-        
+
         TestBed.configureTestingModule({
             declarations: [ContextBarComponent, TranslatePipe],
             providers: [
@@ -118,6 +118,14 @@ describe("Context Bar Component", () => {
         fixture.detectChanges();
         tick();
         expect(component['notificationService'].success).toHaveBeenCalledWith({ title: "contextbar.edition.apply.success.title", message: "contextbar.edition.apply.success.message" });
+    }));
+
+    it("disable edit mode when changes were applied successfully", fakeAsync(() => {
+        component.blocksChanged = <any>[{ id: 5, _destroy: true, box: { id: 6 } }];
+        component.apply();
+        TestBed.get('designModeService').setInDesignMode(true);
+        tick();
+        expect(TestBed.get('designModeService').isInDesignMode()).toBeFalsy();
     }));
 
     it("render template context-bar if block is marked for removal", () => {
