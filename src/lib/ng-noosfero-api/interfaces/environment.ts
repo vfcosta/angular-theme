@@ -67,5 +67,7 @@ namespace noosfero {
          * @returns string The environment theme
          */
         theme: string;
+
+        terms_of_use: string;
     }
 }
