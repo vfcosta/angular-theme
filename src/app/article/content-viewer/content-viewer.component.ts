@@ -24,7 +24,7 @@ export class ContentViewerComponent {
     profile: noosfero.Profile = null;
 
     constructor(
-        private articleService: ArticleService,
+        private ArticleService: ArticleService,
         private profileService: ProfileService,
         private $stateParams: angular.ui.IStateParamsService,
         private $state: ng.ui.IStateService) {
@@ -34,10 +34,10 @@ export class ContentViewerComponent {
     activate() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-            return this.articleService.getArticleByProfileAndPath(this.profile, this.$stateParams["page"]);
+            return this.ArticleService.getArticleByProfileAndPath(this.profile, this.$stateParams["page"]);
         }).then((result: noosfero.RestResult<any>) => {
             this.article = <noosfero.Article>result.data;
-            this.articleService.setCurrent(this.article);
+            this.ArticleService.setCurrent(this.article);
         });
     }
 }
