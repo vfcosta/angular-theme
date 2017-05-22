@@ -435,7 +435,8 @@ export function getMocks() {
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
             instant: () => { },
-            update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile)
+            update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile),
+            remove: () => { return Promise.resolve({data: {success: true}})}
         },
         personService: {
             search: () => Observable.of([mocks.profile]),
