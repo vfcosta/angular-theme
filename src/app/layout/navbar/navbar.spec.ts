@@ -36,7 +36,7 @@ describe("Components", () => {
             modalInstance = helpers.mocks.modalInstance;
             $modal = helpers.mocks.$modal;
             authService = helpers.mocks.authService;
-            stateService = jasmine.createSpyObj("$state", ["go"]);
+            stateService = jasmine.createSpyObj("$state", ["go", "transitionTo"]);
             sessionService = <any>helpers.mocks.sessionWithCurrentUser(user);
             designModeService = helpers.mocks.designModeService;
         });
@@ -125,6 +125,7 @@ describe("Components", () => {
                 try {
                     navbarComp.logout();
                     expect(authService.logout).toHaveBeenCalled();
+                    expect(stateService.transitionTo).toHaveBeenCalledWith('main.environment.home');
                     done();
                 } catch (e) {
                     console.error(e);
