@@ -57,7 +57,7 @@ export class Navbar {
 
     logout() {
         this.authService.logout();
-        this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
+        this.$state.transitionTo('main.environment.home');
     };
 
     activate() {
