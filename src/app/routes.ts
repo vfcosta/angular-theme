@@ -218,15 +218,14 @@ export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
         name: 'main.newPasswd',
         url: "/account/new_password/:code",
-        controller: PasswordComponent,
         views: {
             "content": {
-                templateUrl: "app/login/new-password.html",
-                controller: PasswordComponent,
-                controllerAs: "vm"
+                template: '<new-password [code]="ctrl.$stateParams[\'code\']"></new-password>',
+                controller: RouteNg2,
+                controllerAs: "ctrl"
             }
         }
-    });
+    });    
     $stateProvider.state({
         name: 'main.profile.members',
         url: "^/profile/:profile/members",

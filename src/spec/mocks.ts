@@ -305,8 +305,13 @@ export function getMocks() {
         },
         $state: {
             href: () => { },
-            go: () => { }
+            go: () => { },
+            transitionTo: () => { }
         },
+        $stateParams: {
+            href: () => { },
+            go: () => { }
+        },        
         $scope: {
             $watch: (param: string, f: Function) => { f(); },
             $apply: () => { }
@@ -528,6 +533,9 @@ export function getMocks() {
         },
         passwordService: {
             new_password: (param: any) => {
+                return Promise.resolve({ status: 201 });
+            },
+            newPassword: (param: any) => {
                 return Promise.resolve({ status: 201 });
             }
         },

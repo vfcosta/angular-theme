@@ -1,30 +1,35 @@
-import { Component, Inject, provide } from 'ng-forward';
+import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
+import { Component, Inject, Input, ViewChild } from '@angular/core';
 import { PasswordService } from "../../lib/ng-noosfero-api/http/password.service";
 import { NotificationService } from "./../shared/services/notification.service";
 import { AuthController } from "./auth.controller";
 @Component({
     selector: 'new-password',
-    templateUrl: 'app/login/new-password.html',
-    providers: [provide('passwordService', { useClass: PasswordService })]
+    template: require('app/login/new-password.html')
 })
-@Inject(PasswordService, "$state", "$stateParams", NotificationService)
 export class PasswordComponent {
-    code: string;
+    @Input() code: string;
     password: string;
     passwordConfirmation: string;
+    @ViewChild('passwordErrors') passwordErrors: ValidationMessageComponent;
+    @ViewChild('passwordConfirmErrors') passwordConfirmErrors: ValidationMessageComponent;
+
     constructor(
-        public passwordService: PasswordService,
-        private $state: ng.ui.IStateService,
-        private $stateParams: ng.ui.IStateParamsService,
-        private notificationService: NotificationService) {
-        this.code = this.$stateParams['code'];
-    }
+        @Inject('passwordService') public passwordService: PasswordService,
+        @Inject("$state") private $state: ng.ui.IStateService,
+        @Inject('notificationService') private notificationService: NotificationService) { }
+
     sendNewPassword() {
         this.passwordService.newPassword(this.code, this.password, this.passwordConfirmation).then((response) => {
             this.notificationService.success({ title: "new_password.success.title", message: "new_password.success.message" }, { timer: 5000 });
             this.$state.transitionTo('main.environment.home');
         }).catch((response) => {
-            this.notificationService.error({ title: "new_password.failed.title", message: "new_password.failed.message" });
+            if (response.status === 422) {
+                this.passwordErrors.setBackendErrors(response.data);
+                this.passwordConfirmErrors.setBackendErrors(response.data);
+            } else {
+                this.notificationService.error({ title: "new_password.failed.title", message: "new_password.failed.message" });
+            }
         });
     }
 }

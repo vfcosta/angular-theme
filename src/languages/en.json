@@ -1,5 +1,8 @@
 {
     "required": "Is required",
+    "blank": "Need to be filled",
+    "minlength": "Should contain more characters",
+    "not_available": "Not available",    
     "account.register.accountCreatingMessage": "By creating an account, you are agreeing with the ",
     "account.register.emailLabel": "Email",
     "account.register.errorMessagesTitle": "There were problems with the following fields:",
@@ -10,6 +13,7 @@
     "account.register.lastNameLabel": "Last name",
     "account.register.mandatoryField": "This field is mandatory",
     "account.register.passwordConfirmation.failed": "Wrong password confirmation",
+    "account.register.passwordConfirmation.confirmation": "Wrong password confirmation",    
     "account.register.passwordConfirmationLabel": "Password confirmation",
     "account.register.passwordLabel": "Password",
     "account.register.save.failed": "This account could not be created",
