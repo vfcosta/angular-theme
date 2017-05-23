@@ -1,3 +1,4 @@
+import { RegisterService } from '../../lib/ng-noosfero-api/http/register.service';
 import { PasswordService } from '../../lib/ng-noosfero-api/http/password.service';
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 import { CommentService } from './../../lib/ng-noosfero-api/http/comment.service';
@@ -103,7 +104,7 @@ export class EnvironmentContent {
         ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat,
         CustomContentComponent, PermissionDirective,
-        BlockComponent, RegisterComponent,
+        BlockComponent,
         TaskAcceptComponent,
         FolderComponent, BootstrapResizableDirective,
         EditableDirective,
@@ -111,7 +112,7 @@ export class EnvironmentContent {
         ArticleEditorComponent, BasicOptionsComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
-        PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService, TaskService, ArticleService,
+        PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService, TaskService, ArticleService, RegisterService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

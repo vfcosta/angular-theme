@@ -206,11 +206,10 @@ export function noosferoRoutes($stateProvider: any) {
     $stateProvider.state({
         name: 'main.register',
         url: "/account/signup",
-        controller: RegisterComponent,
         views: {
             "content": {
                 templateUrl: "app/account/register.html",
-                controller: RegisterComponent,
+                controller: RouteNg2,
                 controllerAs: "vm"
             }
         }

@@ -306,12 +306,12 @@ export function getMocks() {
         $state: {
             href: () => { },
             go: () => { },
-            transitionTo: () => { }
+            transitionTo: (param: string) => { }
         },
         $stateParams: {
             href: () => { },
             go: () => { }
-        },        
+        },
         $scope: {
             $watch: (param: string, f: Function) => { f(); },
             $apply: () => { }
@@ -436,7 +436,8 @@ export function getMocks() {
                     host: 'http://localhost'
                 };
             },
-            update: (environment: noosfero.Environment) => Promise.resolve({ id: 2 })
+            update: (environment: noosfero.Environment) => Promise.resolve({ id: 2 }),
+            get: (environment: string) => Promise.resolve({id: 2})
         },
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),

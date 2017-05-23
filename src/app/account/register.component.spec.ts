@@ -1,98 +1,84 @@
-import { ComponentTestHelper, createClass } from "../../spec/component-test-helper";
+import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import * as helpers from "../../spec/helpers";
 import { RegisterComponent } from "./register.component";
+import { By } from '@angular/platform-browser';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TranslatePipe } from '../shared/pipes/translate-pipe';
+import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 
 describe("Register Component", () => {
-    const htmlTemplate: string = '<noosfero-register></noosfero-register>';
+    let fixture: ComponentFixture<RegisterComponent>;
+    let component: RegisterComponent;
 
-    let helper: ComponentTestHelper<RegisterComponent>;
-    let registerService = helpers.mocks.registerService;
-    let stateService: angular.ui.IStateService;
-    let notificationService = helpers.mocks.notificationService;
-    notificationService.success = jasmine.createSpy('success');
-    notificationService.error = jasmine.createSpy('error');
+    let mocks = helpers.getMocks();
     let user_data: any;
-    let response: any;
-    let deferred: any;
-    let $rootScope: ng.IRootScopeService;
-    let $q: ng.IQService;
+    let nameErrors = jasmine.createSpyObj('nameErrors', ['setBackendErrors']);
+    let userNameErrors = jasmine.createSpyObj('userNameErrors', ['setBackendErrors']);
+    let emailErrors = jasmine.createSpyObj('emailErrors', ['setBackendErrors']);
+    let passwordErrors = jasmine.createSpyObj('passwordErrors', ['setBackendErrors']);
+    let passwordConfirmErrors = jasmine.createSpyObj('passwordConfirmErrors', ['setBackendErrors']);
+    beforeEach(async(() => {
+        spyOn(mocks.environmentService, 'get').and.returnValue(Promise.resolve({ data: { id: 1, name: 'Noosfero', terms_of_use: '' } }));
+        spyOn(mocks.registerService, 'createAccount').and.returnValue(Promise.resolve({ status: 201, data: {} }));
+        spyOn(mocks.$state, 'transitionTo').and.callThrough();
+        spyOn(mocks.notificationService, 'success').and.callThrough();
+        spyOn(mocks.notificationService, 'error').and.callThrough();
 
-    let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment"]);
-    environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(helpers.mocks.promiseResultTemplate({ id: 1, name: 'Noosfero' }));
-
-    beforeEach(() => {
-        stateService = jasmine.createSpyObj("$state", ["transitionTo"]);
-
-        angular.mock.module('templates');
-        angular.mock.module('ngSanitize');
-        angular.mock.module('ngMessages');
-        angular.mock.module('ngPassword');
-    });
-
-
-
-    beforeEach((done) => {
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [RegisterComponent],
+        TestBed.configureTestingModule({
+            imports: [FormsModule, ModalModule.forRoot()],
+            declarations: [RegisterComponent, TranslatePipe, ValidationMessageComponent],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [
-                helpers.createProviderToValue('$state', stateService),
-                helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
-                helpers.createProviderToValue('RegisterService', registerService),
-                helpers.createProviderToValue('NotificationService', notificationService),
-                helpers.createProviderToValue('EnvironmentService', environmentService)
+                { provide: "$state", useValue: mocks.$state },
+                { provide: "registerService", useValue: mocks.registerService },
+                { provide: "notificationService", useValue: mocks.notificationService },
+                { provide: "environmentService", useValue: mocks.environmentService },
+                { provide: "translatorService", useValue: mocks.translatorService }
             ]
         });
-        helper = new ComponentTestHelper<RegisterComponent>(cls, done);
-    });
 
-    beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
-        $rootScope = _$rootScope_;
-        $q = _$q_;
+    }));
+    function init() {
+        fixture = TestBed.createComponent(RegisterComponent);
+        component = fixture.componentInstance;
+        component.nameErrors = nameErrors;
+        component.emailErrors = emailErrors;
+        component.userNameErrors = userNameErrors;
+        component.passwordConfirmErrors = passwordConfirmErrors;
+        component.passwordErrors = passwordErrors;
+        fixture.detectChanges();
+        tick();
+    }
+    it('register page was rendered', fakeAsync(() => {
+        init();
+        expect(fixture.debugElement.queryAll(By.css('.register-page')).length).toEqual(1);
     }));
 
-    it('register page was rendered', () => {
-        expect(helper.debugElement.query('div.register-page').length).toEqual(1);
-    });
-
-    it("registers a new user", done => {
+    it("registers a new user", fakeAsync(() => {
+        init();
         user_data = { username: "username", password: "password", password_confirmation: "password", email: "user@company.com" };
-        response = {};
 
-        helper.component.account = user_data;
+        component.account = user_data;
 
-        deferred = $q.defer();
-        deferred.resolve({ data: response });
-        registerService.createAccount = jasmine.createSpy("createAccount").and.returnValue(deferred.promise);
+        component.signup();
+        tick();
+        expect(mocks.registerService.createAccount).toHaveBeenCalledWith(user_data);
+        expect(mocks.$state.transitionTo).toHaveBeenCalledWith("main.environment.home");
+        expect(mocks.notificationService.success).toHaveBeenCalled();
+    }));
 
-        helper.component.signup();
-        helper.detectChanges();
-
-        expect(registerService.createAccount).toHaveBeenCalledWith(user_data);
-        expect(stateService.transitionTo).toHaveBeenCalledWith("main.environment.home");
-        expect(notificationService.success).toHaveBeenCalled();
-
-        done();
-    });
-
-    it("gives error when registration fails", done => {
+    it("gives error when registration fails", fakeAsync(() => {
+        init();
         user_data = { password: "pas" };
-        response = { data: { message: '{ "password": ["is too short"] }' } };
-
-        helper.component.account = user_data;
-
-        deferred = $q.defer();
-        deferred.reject(response);
-        registerService.createAccount = jasmine.createSpy("createAccount").and.returnValue(deferred.promise);
-
-        helper.component.signup();
-        helper.detectChanges();
-
-        expect(registerService.createAccount).toHaveBeenCalledWith(user_data);
-
-        expect(stateService.transitionTo).not.toHaveBeenCalledWith("main.environment.home");
-        expect(notificationService.error).toHaveBeenCalled();
-
-        done();
-    });
+        component.account = user_data;
+        TestBed.get('registerService').createAccount = jasmine.createSpy('createAccount').and.returnValue(Promise.reject({ status: 422, errors: [] }));
+        fixture.detectChanges();
+        component.signup();
+        tick();
+        expect(TestBed.get('registerService').createAccount).toHaveBeenCalledWith(user_data);
+        expect(mocks.$state.transitionTo).not.toHaveBeenCalledWith("main.environment.home");
+        expect(component.nameErrors.setBackendErrors).toHaveBeenCalled();
+    }));
 });

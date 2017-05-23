@@ -1,3 +1,4 @@
+import { RegisterComponent } from './account/register.component';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchComponent } from './search/search.component';
 import { PasswordComponent } from './login/new-password.component';
@@ -180,6 +181,7 @@ import { SharedModule } from './shared.module';
         AddFriendTaskAcceptComponent,
         SearchComponent,
         PasswordComponent,
+        RegisterComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -246,6 +248,7 @@ import { SharedModule } from './shared.module';
         AddFriendTaskAcceptComponent,
         SearchComponent,
         PasswordComponent,
+        RegisterComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
@@ -280,7 +283,8 @@ import { SharedModule } from './shared.module';
         'ThemeService',
         'CommentParagraphEventService',
         'CommentParagraphService',
-        'PasswordService'
+        'PasswordService',
+        'RegisterService',
     ])
 })
 

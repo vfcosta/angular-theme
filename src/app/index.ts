@@ -1,3 +1,4 @@
+import { RegisterComponent } from './account';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { PasswordComponent } from './login/new-password.component';
 import { SearchComponent } from './search/search.component';
@@ -323,6 +324,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('newPassword',
         downgradeComponent({ component: PasswordComponent, inputs: ['code'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoRegister',
+        downgradeComponent({ component: RegisterComponent, inputs: ['account'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
