@@ -20,7 +20,6 @@ import { ValidationMessageComponent } from '../../../shared/components/validatio
 export class ChangePasswordComponent {
 
     @Input() profile: noosfero.Profile;
-    @Output() finished = new EventEmitter<any[]>();
 
     @ViewChild('currentPasswordValidation') currentPassword: ValidationMessageComponent;
     @ViewChild('newPasswordValidation') newPassword: ValidationMessageComponent;
@@ -54,9 +53,5 @@ export class ChangePasswordComponent {
                     this.newPasswordConfirmation.setBackendErrors(this.errors);
                 });
         }
-    }
-
-    cancel() {
-        this.finished.emit([this.current_password, this.new_password, this.new_password_confirmation]);
     }
 }
