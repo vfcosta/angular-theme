@@ -1,6 +1,7 @@
 {
     "blank": " é necessário o preenchimento",
     "required": "é requerido",
+    "minlength": "Deve conter mais caracteres",
     "not_available": "Não está disponível",
     "account.register.accountCreatingMessage": "Ao criar uma conta, você está concordando com os ",
     "account.register.emailLabel": "Email",
@@ -12,6 +13,7 @@
     "account.register.lastNameLabel": "Sobrenome",
     "account.register.mandatoryField": "Este campo é obrigatório",
     "account.register.passwordConfirmation.failed": "A confirmação de senha não corresponde à senha",
+    "account.register.passwordConfirmation.confirmation": "A confirmação de senha não corresponde à senha",
     "account.register.passwordConfirmationLabel": "Confirmar senha",
     "account.register.passwordLabel": "Senha",
     "account.register.save.failed": "A conta não pode ser criada",

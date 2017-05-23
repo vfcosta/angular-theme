@@ -1,3 +1,4 @@
+import { CamelizePipe, UnderscorePipe } from 'ngx-pipes/src/app/pipes/string';
 import { Inject } from '@angular/core';
 import { TranslatorService } from './../../services/translator.service';
 import { Component, Input } from '@angular/core';
@@ -5,7 +6,8 @@ import { NgModel } from '@angular/forms';
 
 @Component({
     selector: "validation-message",
-    template: require('app/shared/components/validation-message/validation-message.html')
+    template: require('app/shared/components/validation-message/validation-message.html'),
+    providers: [UnderscorePipe]
 })
 export class ValidationMessageComponent {
 
@@ -14,7 +16,9 @@ export class ValidationMessageComponent {
 
     private aditionalFields = [];
 
-    constructor( @Inject('translatorService') public translatorService: TranslatorService) { }
+    constructor( 
+        @Inject('translatorService') public translatorService: TranslatorService,
+        private underscorePipe: UnderscorePipe) { }
 
     getErrorKey(errorObject: any) {
         let error: string;
@@ -36,16 +40,15 @@ export class ValidationMessageComponent {
         let errorCollection = {};
         let fields = this.aditionalFields;
         fields.push(this.field.name);
-
         fields.forEach(name => {
-            if (errorObjects.errors && errorObjects.errors[name]) {
-                errorObjects.errors[name].forEach(errorObject => {
+            let item = errorObjects.errors[name] ? errorObjects.errors[name] : errorObjects.errors[this.underscorePipe.transform(name)];
+            if (errorObjects.errors && item) {
+                item.forEach(errorObject => {
                     let key = this.getErrorKey(errorObject);
                     errorCollection[key] = true;
                 });
-            }
+            } 
         });
-
         if (Object.keys(errorCollection).length > 0) this.field.control.setErrors(errorCollection);
     }
 

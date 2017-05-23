@@ -1,87 +1,79 @@
-import { ComponentTestHelper, createClass } from "../../spec/component-test-helper";
+import { FormsModule } from '@angular/forms';
+import { NgPipesModule } from 'ngx-pipes';
+import { TranslatePipe } from '../shared/pipes/translate-pipe';
 import * as helpers from "../../spec/helpers";
 import { PasswordComponent } from "./new-password.component";
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 describe("Password Component", () => {
-    const htmlTemplate: string = '<new-password></new-password>';
-
-    let helper: ComponentTestHelper<PasswordComponent>;
-    let passwordService = helpers.mocks.passwordService;
-    let stateService = jasmine.createSpyObj("$state", ["transitionTo"]);
-    let stateParams = jasmine.createSpyObj("$stateParams", ["code"]);
-    let notificationService = helpers.mocks.notificationService;
-    notificationService.success = jasmine.createSpy('success');
-    notificationService.error = jasmine.createSpy('error');
-
-
     let data: any;
+    let mocks = helpers.getMocks();
+    let fixture: ComponentFixture<PasswordComponent>;
+    let component: PasswordComponent;
 
-    beforeEach(() => {
-        angular.mock.module('templates');
-        angular.mock.module('ngSanitize');
-        angular.mock.module('ngMessages');
-        angular.mock.module('ngPassword');
-    });
+    beforeEach(async(() => {
+        spyOn(mocks.passwordService, 'newPassword').and.callThrough();
+        spyOn(mocks.notificationService, 'success').and.callThrough();
+        spyOn(mocks.notificationService, 'error').and.callThrough();
+        spyOn(mocks.$state, 'transitionTo').and.callThrough();
 
-    beforeEach((done) => {
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [PasswordComponent],
+        TestBed.configureTestingModule({
+            declarations: [PasswordComponent, TranslatePipe],
             providers: [
-                helpers.createProviderToValue('$state', stateService),
-                helpers.createProviderToValue('$stateParams', stateParams),
-                helpers.createProviderToValue('PasswordService', passwordService),
-                helpers.createProviderToValue('NotificationService', notificationService),
-            ]
+                { provide: "passwordService", useValue: mocks.passwordService },
+                { provide: "$state", useValue: mocks.$state },
+                { provide: "notificationService", useValue: mocks.notificationService },
+                { provide: "translatorService", useValue: mocks.translatorService }
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [NgPipesModule, FormsModule]
         });
-        helper = new ComponentTestHelper<PasswordComponent>(cls, done);
-    });
+        fixture = TestBed.createComponent(PasswordComponent);
+        component = fixture.componentInstance;
+    }));
+
 
     it('new password page was rendered', () => {
-        expect(helper.debugElement.query('div.new-password-page').length).toEqual(1);
+        expect(fixture.debugElement.queryAll(By.css('div.new-password-page')).length).toEqual(1);
     });
 
-    it("changes the user password", done => {
+    it("changes the user password", fakeAsync(() => {
         data = {
             code: '1234567890',
             password: 'test',
             passwordConfirmation: 'test'
         };
 
-        helper.component.code = data.code;
-        helper.component.password = data.password;
-        helper.component.passwordConfirmation = data.passwordConfirmation;
+        component.code = data.code;
+        component.password = data.password;
+        component.passwordConfirmation = data.passwordConfirmation;
+        fixture.detectChanges();
+        component.sendNewPassword();
+        tick();
+        expect(mocks.passwordService.newPassword).toHaveBeenCalledWith('1234567890', 'test', 'test');
+        expect(mocks.notificationService.success).toHaveBeenCalled();
+    }));
 
-        passwordService.newPassword = jasmine.createSpy("new_password").and.returnValue(Promise.resolve());
-
-        helper.component.sendNewPassword();
-        expect(passwordService.newPassword).toHaveBeenCalledWith('1234567890', 'test', 'test');
-
-        expect(notificationService.success).toHaveBeenCalled();
-
-        done();
-    });
-
-    it("fails when try to change the user password", done => {
+    it("fails when try to change the user password", fakeAsync(() => {
         data = {
             code: '1234567890',
             password: 'test',
             passwordConfirmation: 'test-invalid'
         };
+        component.code = data.code;
+        component.password = data.password;
+        component.passwordConfirmation = data.passwordConfirmation;
 
-        helper.component.code = data.code;
-        helper.component.password = data.password;
-        helper.component.passwordConfirmation = data.passwordConfirmation;
-
-        passwordService.newPassword = jasmine.createSpy("new_password").and.returnValue(Promise.reject({ data: { message: 'Error' } }));
-
-        helper.component.sendNewPassword();
-        expect(passwordService.newPassword).toHaveBeenCalledWith('1234567890', 'test', 'test-invalid');
-
-        expect(notificationService.error).toHaveBeenCalled();
-
-        done();
-    });
+        TestBed.get('passwordService').newPassword = jasmine.createSpy("newPassword").and.returnValue(Promise.reject({ data: { message: 'Error' } }));
+        component.passwordConfirmErrors = jasmine.createSpyObj("passwordConfirmErrors", ["setBackendErrors"]);
+        component.passwordErrors = jasmine.createSpyObj("passwordErrors", ["setBackendErrors"]);
+        fixture.detectChanges();
+        component.sendNewPassword();
+        tick();
+        expect(TestBed.get('passwordService').newPassword).toHaveBeenCalledWith('1234567890', 'test', 'test-invalid');
+        expect(mocks.notificationService.error).toHaveBeenCalled();
+    }));
 
 });

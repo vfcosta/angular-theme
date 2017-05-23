@@ -1,4 +1,5 @@
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
+import { PasswordComponent } from './login/new-password.component';
 import { SearchComponent } from './search/search.component';
 import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { CommentComponent } from './article/comment/comment.component';
@@ -319,6 +320,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('search',
         downgradeComponent({ component: SearchComponent }) as angular.IDirectiveFactory
+    ).
+    directive('newPassword',
+        downgradeComponent({ component: PasswordComponent, inputs: ['code'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

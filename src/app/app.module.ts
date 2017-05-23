@@ -1,5 +1,6 @@
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchComponent } from './search/search.component';
+import { PasswordComponent } from './login/new-password.component';
 import { CommentsComponent } from './article/comment/comments.component';
 import { CommentComponent } from './article/comment/comment.component';
 import { ArticleIconComponent } from './article/article-icon/article-icon.component';
@@ -102,7 +103,7 @@ import { SharedModule } from './shared.module';
         CollapseModule.forRoot(),
         BrowserAnimationsModule,
         TagCloudModule,
-        SharedModule
+        SharedModule,
     ],
     declarations: [
         FooterComponent,
@@ -178,6 +179,7 @@ import { SharedModule } from './shared.module';
         ApproveArticleTaskAcceptComponent,
         AddFriendTaskAcceptComponent,
         SearchComponent,
+        PasswordComponent,
     ].concat(plugins.ng2MainComponents),
     entryComponents: [
         FooterComponent,
@@ -243,6 +245,7 @@ import { SharedModule } from './shared.module';
         ApproveArticleTaskAcceptComponent,
         AddFriendTaskAcceptComponent,
         SearchComponent,
+        PasswordComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
@@ -276,7 +279,8 @@ import { SharedModule } from './shared.module';
         '$sce',
         'ThemeService',
         'CommentParagraphEventService',
-        'CommentParagraphService'
+        'CommentParagraphService',
+        'PasswordService'
     ])
 })
 
