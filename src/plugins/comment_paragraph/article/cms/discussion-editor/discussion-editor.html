@@ -1,35 +1,28 @@
 <form>
   <div class="form-group">
     <label for="titleInput">{{"article.basic_editor.title" | translate}}</label>
-    <input type="text" class="form-control" id="titleInput" placeholder="{{'article.basic_editor.title' | translate}}" ng-model="ctrl.article.name">
+    <input type="text" class="form-control" id="titleInput" placeholder="{{'article.basic_editor.title' | translate}}"
+      [(ngModel)]="article.name" name="name" #name="ngModel">
+    <validation-message #titleValidation [field]="name" [prefix]=""></validation-message>
   </div>
   <div class="form-group">
-  
-    <div class="form-inline">
-      <span class="start-date discussion-date">
+    <div class="form-inline row">
+      <div class="start-date discussion-date col-md-6">
         <label for="startDateInput">{{"comment-paragraph-plugin.discussion.editor.start_date.label" | translate}}</label>
-        <input id="startDateInput" type="text" class="form-control" uib-datepicker-popup ng-model="ctrl.start_date" 
-          is-open="startDateOpened" ng-required="true" close-text="Close" />
-        <span class="input-group-btn date-popup-button">
-          <button type="button" class="btn btn-default" ng-click="startDateOpened = true">
-            <i class="fa fa-calendar fa-fw"></i>
-          </button>
-        </span>
-      </span>
-      <span class="end-date discussion-date">
+        <my-date-picker class="date-picker" #startDate="ngModel" name="start_date" [(ngModel)]="start_date"
+          [locale]="locale" (dateChanged)="onDateChanged('start_date', $event)" required></my-date-picker>
+        <validation-message #startDateValidation [field]="startDate" [prefix]=""></validation-message>
+      </div>
+      <div class="end-date discussion-date col-md-6">
         <label for="endDateInput">{{"comment-paragraph-plugin.discussion.editor.end_date.label" | translate}}</label>
-        <input id="endDateInput" type="text" class="form-control" uib-datepicker-popup ng-model="ctrl.end_date" 
-          is-open="endDateOpened" ng-required="true" close-text="Close" />
-        <span class="date-popup-button">
-          <button type="button" class="btn btn-default" ng-click="endDateOpened = true">
-            <i class="fa fa-calendar fa-fw"></i>
-          </button>
-        </span>
-      </span>
+        <my-date-picker class="date-picker" #endDate="ngModel" name="end_date" [(ngModel)]="end_date"
+          [locale]="locale" (dateChanged)="onDateChanged('end_date', $event)" required></my-date-picker>
+        <validation-message #endDateValidation [field]="endDate" [prefix]=""></validation-message>
+      </div>
     </div>
   </div>
   <div class="form-group">
     <label for="bodyInput">{{"article.basic_editor.body" | translate}}</label>
-    <html-editor [(object)]="ctrl.article" [attribute]="'body'" [options]="ctrl.options"></html-editor>
+    <html-editor [(object)]="article" [attribute]="'body'" [options]="options"></html-editor>
   </div>
 </form>

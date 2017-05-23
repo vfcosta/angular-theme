@@ -1,14 +1,2 @@
 comment-paragraph-plugin-discussion-editor {
-  .discussion-date {
-      [uib-datepicker-popup-wrap] {
-        display: inline-block;
-      }
-      .date-popup-button {
-        @extend .input-group-btn;
-        display: inline-block;
-      }
-  }
-  .end-date {
-    margin-left: 60px;
-  }
 }

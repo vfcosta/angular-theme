@@ -1,4 +1,5 @@
 import { RegisterComponent } from './account';
+import { DiscussionEditorComponent } from './../plugins/comment_paragraph/article/cms/discussion-editor/discussion-editor.component';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { PasswordComponent } from './login/new-password.component';
 import { SearchComponent } from './search/search.component';
@@ -327,6 +328,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoRegister',
         downgradeComponent({ component: RegisterComponent, inputs: ['account'] }) as angular.IDirectiveFactory
+    ).
+    directive('commentParagraphPluginDiscussionEditor',
+        downgradeComponent({ component: DiscussionEditorComponent, inputs: ['article', 'options'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
