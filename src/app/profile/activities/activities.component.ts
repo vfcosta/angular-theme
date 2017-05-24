@@ -20,6 +20,7 @@ export class ActivitiesComponent {
     activities: any;
     page: number = 1;
     profile: noosfero.Profile;
+    hasActivities: boolean = false;
 
     constructor(private profileService: ProfileService) {
         this.init();
@@ -35,12 +36,16 @@ export class ActivitiesComponent {
             return this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page });
         }).then((response: restangular.IResponse) => {
             this.activities = response.data.plain();
+            if(this.activities.length > 0){
+                this.hasActivities = true;
+            }
         });
     }
 
     viewMore() {
         this.page++;
         this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page }).then((response: restangular.IResponse) => {
+            this.hasActivities = (response.data.plain().length > 0) ? true : false;
             angular.forEach(response.data.plain(), (value, key) => {
                 this.activities.push(value);
             });

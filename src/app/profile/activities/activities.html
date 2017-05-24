@@ -2,7 +2,7 @@
 	<div ng-repeat="activity in ctrl.activities | orderBy: 'created_at':true " class="">
 		<noosfero-activity [activity]="activity"></noosfero-activity>
 	</div>
-	<div class="row">
+	<div ng-if="ctrl.hasActivities" class="row">
 		<div class="col-md-12">
 			<button class="btn btn-primary btn-lg btn-view-more" (click)="ctrl.viewMore()">
 				{{ "activities.view_more" | translate }}
