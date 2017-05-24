@@ -34,6 +34,7 @@
     "activities.new_follower.description": "fez {profiles, plural, one{um novo seguidor} other{# novos seguidores}}",
     "activities.leave_scrap.description": "enviou uma mensagem para",
     "activities.title": "Atividades",
+    "activities.view_more": "Ver Mais",
     "activity.create_article.icon": "icone de criação de artigo",
     "activity.upload_image.icon": "icone de adição de imagem",
     "activity.add_member_in_community.icon": "icone de adição de membro em comunidade",

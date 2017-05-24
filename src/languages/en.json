@@ -34,6 +34,7 @@
     "activities.new_follower.description": "has made {profiles, plural, one{one new follower} other{# new followers}}",
     "activities.leave_scrap.description": "sent a message to",
     "activities.title": "Activities",
+    "activities.view_more": "View More",
     "activity.create_article.icon": "article creation icon",
     "activity.upload_image.icon": "upload image icon",
     "activity.add_member_in_community.icon": "Add community member icon",
