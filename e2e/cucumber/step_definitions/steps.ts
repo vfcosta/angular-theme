@@ -37,9 +37,9 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Given('I login with {stringInDoubleQuotes}, {stringInDoubleQuotes}', (user: string, password: string) => {
         return element(by.css('#navbar .login')).click().then(() => {
-            return element(by.css(".modal-dialog #email")).sendKeys("adminuser");
+            return element(by.css(".modal-dialog #email")).sendKeys(user);
         }).then(() => {
-            return element(by.css(".modal-dialog #passwd")).sendKeys("admin");
+            return element(by.css(".modal-dialog #passwd")).sendKeys(password);
         }).then(() => {
             return element(by.css(".btn-login")).click();
         });
@@ -69,5 +69,20 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
                 });
             }
         });
+    });
+
+    When('I change layout to {stringInDoubleQuotes}', function (stringInDoubleQuotes) {
+        let selector = "ul .layout-config > li .layout-" + stringInDoubleQuotes;
+        let btn = element(by.css("#layout-config-btn"));
+        let ret = btn.click().then(() => {
+             browser.sleep(1000).then(function(){
+                return element(by.css(selector)).click();
+             });
+        });
+        return ret;
+    });
+
+    Then('I don\'t see a {stringInDoubleQuotes} compoment on {stringInDoubleQuotes}', function (componentTag, divClass) {
+        return expect(element(by.css(divClass))).not.to.have.descendants(componentTag);
     });
 });
