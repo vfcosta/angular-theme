@@ -1,6 +1,7 @@
+import { EventsHubService } from './../../shared/services/events-hub.service';
 import {quickCreateComponent} from "../../../spec/helpers";
 import {CmsComponent} from "./cms.component";
-
+import * as helpers from "../../../spec/helpers";
 
 describe("Article Cms", () => {
 
@@ -13,7 +14,7 @@ describe("Article Cms", () => {
     let $window: any;
     let profile = { id: 1 };
     let notification: any;
-
+    let mocks = helpers.getMocks();
 
     beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
         $rootScope = _$rootScope_;
@@ -48,7 +49,7 @@ describe("Article Cms", () => {
 
     it("create an article in the current profile when save", done => {
         $stateParams['parent_id'] = 1;
-        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window, <any>mocks.eventsHubService);
         component.save();
         $rootScope.$apply();
         expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
@@ -58,7 +59,7 @@ describe("Article Cms", () => {
 
     it("got to the new article page and display an alert when saving sucessfully", done => {
         $stateParams['parent_id'] = 1;
-        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window, <any>mocks.eventsHubService);
         component.save();
         $rootScope.$apply();
         expect($state.go).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "profile" });
@@ -67,7 +68,7 @@ describe("Article Cms", () => {
     });
 
     it("go back when cancel article edition", done => {
-        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window, <any>mocks.eventsHubService);
         $window.history = { back: jasmine.createSpy('back') };
         component.cancel();
         expect($window.history.back).toHaveBeenCalled();
@@ -77,7 +78,7 @@ describe("Article Cms", () => {
     it("edit existing article when save", done => {
         $stateParams['parent_id'] = null;
         $stateParams['id'] = 2;
-        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window);
+        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window, <any>mocks.eventsHubService);
         $rootScope.$apply();
         component.save();
         $rootScope.$apply();

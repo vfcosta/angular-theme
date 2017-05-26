@@ -1,3 +1,4 @@
+import { EventsHubService } from './../../shared/services/events-hub.service';
 import { Component, Inject, provide } from 'ng-forward';
 import { ArticleService } from "../../../lib/ng-noosfero-api/http/article.service";
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
@@ -14,7 +15,7 @@ import { ArticleEditorComponent } from './article-editor/article-editor.componen
         provide('notificationService', { useClass: NotificationService })
     ]
 })
-@Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams", "$window")
+@Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams", "$window", EventsHubService)
 export class CmsComponent {
 
     article: noosfero.Article;
@@ -33,7 +34,8 @@ export class CmsComponent {
         private $state: ng.ui.IStateService,
         private notificationService: NotificationService,
         private $stateParams: ng.ui.IStateParamsService,
-        private $window: ng.IWindowService) {
+        private $window: ng.IWindowService,
+        private EventsHubService: EventsHubService) {
 
         this.parentId = this.$stateParams['parent_id'];
         this.profileIdentifier = this.$stateParams["profile"];
@@ -75,8 +77,9 @@ export class CmsComponent {
             let article = (<noosfero.Article>response.data);
             this.$state.go('main.profile.page', { page: article.path, profile: article.profile.identifier });
             this.notificationService.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message` });
-        }).catch(() => {
+        }).catch((error: any) => {
             this.loading = false;
+            this.EventsHubService.emitEvent(this.EventsHubService.knownEvents.ARTICLE_SAVE_ERROR, error);
             this.notificationService.error({ message: "article.basic_editor.save.failed" });
         });
     }

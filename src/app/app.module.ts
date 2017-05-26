@@ -84,6 +84,7 @@ import { InviteComponent } from './profile/configuration/communities/invite.comp
 import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
 import * as plugins from "../plugins";
 import { SharedModule } from './shared.module';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
     imports: [
@@ -105,6 +106,7 @@ import { SharedModule } from './shared.module';
         BrowserAnimationsModule,
         TagCloudModule,
         SharedModule,
+        MyDatePickerModule,
     ],
     declarations: [
         FooterComponent,
