@@ -35,9 +35,10 @@ var entries = {
       '@angular/animations']
 };
 
-var theme = process.env.npm_config_angular_theme_theme || "angular-default";
-
 module.exports = function(env) {
+    var theme = (env && env.theme) || process.env.npm_config_angular_theme_theme || "angular-default";
+    console.log("THEME", theme);
+
     if (env && env.production) {
         extension = ".min.js"
     }
