@@ -27,7 +27,7 @@ export class BreadcrumbsBlockComponent {
     }
 
     setNavigationState() {
-        this.blockService.getApiContent(this.block, this.$stateParams).then((content: any) => {
+        this.blockService.getApiContent(this.block, { profile: this.$stateParams['profile'], page: this.$stateParams['page'] }).then((content: any) => {
             this.links = content.links;
             this.block.hide = this.links.length <= 1;
             if (!this.block.hide) {
