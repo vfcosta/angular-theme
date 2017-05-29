@@ -1,3 +1,4 @@
+import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
 import * as theme from '../../themes';
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account/register.component';
@@ -187,6 +188,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         PasswordComponent,
         RegisterComponent,
         ThemeHeaderComponent,
+        ThemeFooterComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -255,6 +257,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         PasswordComponent,
         RegisterComponent,
         ThemeHeaderComponent,
+        ThemeFooterComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

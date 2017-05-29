@@ -1,3 +1,4 @@
+import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account';
 import { DiscussionEditorComponent } from './../plugins/comment_paragraph/article/cms/discussion-editor/discussion-editor.component';
@@ -335,6 +336,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('themeHeader',
         downgradeComponent({ component: ThemeHeaderComponent }) as angular.IDirectiveFactory
+    ).
+    directive('themeFooter',
+        downgradeComponent({ component: ThemeFooterComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
