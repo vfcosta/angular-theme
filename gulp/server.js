@@ -41,7 +41,8 @@ function browserSyncInit(baseDir, browser) {
     server: server,
     port: 3001,
     browser: browser,
-    notify: false
+    notify: false,
+    open: false
   });
 }
 

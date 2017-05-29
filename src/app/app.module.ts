@@ -1,3 +1,5 @@
+import * as theme from '../../themes';
+import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account/register.component';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchComponent } from './search/search.component';
@@ -184,7 +186,8 @@ import { MyDatePickerModule } from 'mydatepicker';
         SearchComponent,
         PasswordComponent,
         RegisterComponent,
-    ].concat(plugins.ng2MainComponents),
+        ThemeHeaderComponent,
+    ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
         LanguageSelectorComponent,
@@ -251,6 +254,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         SearchComponent,
         PasswordComponent,
         RegisterComponent,
+        ThemeHeaderComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
@@ -287,6 +291,10 @@ import { MyDatePickerModule } from 'mydatepicker';
         'CommentParagraphService',
         'PasswordService',
         'RegisterService',
+        'angularLoad',
+        '$location',
+        '$anchorScroll',
+        'bodyStateClassesService',
     ])
 })
 

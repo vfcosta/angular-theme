@@ -5,7 +5,6 @@ import { CommentService } from './../../lib/ng-noosfero-api/http/comment.service
 import { CommentParagraphService } from './../../plugins/comment_paragraph/http/comment-paragraph.service';
 import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import { PermissionService } from './../shared/services/permission.service';
-import * as theme from '../../../themes';
 import * as plugins from '../../plugins';
 import { RegisterComponent } from '../account/register.component';
 import { DomainComponent } from '../domain/domain.component';
@@ -110,9 +109,10 @@ export class EnvironmentContent {
         EditableDirective,
         DomainComponent,
         ArticleEditorComponent, BasicOptionsComponent, TranslateProfile
-    ].concat(plugins.mainComponents).concat(plugins.hotspots).concat(theme.components["angular-default"]),
+    ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
-        PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService, TaskService, ArticleService, RegisterService,
+        PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService,
+        TaskService, ArticleService, RegisterService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
@@ -124,7 +124,8 @@ export class EnvironmentContent {
         provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
         provide('headerService', { useClass: HeaderService }),
         provide('SettingsService', { useClass: SettingsService }),
-        provide('environmentService', { useClass: EnvironmentService })
+        provide('environmentService', { useClass: EnvironmentService }),
+        provide('eventsHubService', { useClass: EventsHubService })
     ]
 })
 @Inject(EnvironmentService)

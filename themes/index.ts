@@ -1,7 +1,2 @@
-import * as participa from "./angular-participa-consulta";
-
-export let components: any = {
-    'angular-participa-consulta': participa.components,
-    'angular-default': [],
-    'angular-rede-brasil': []
-};
+import * as theme from "./angular-default";
+export let components = theme.components;

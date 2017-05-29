@@ -31,8 +31,11 @@ var entries = {
     'noosfero-specs': testFiles, // './src/specs.ts',
     'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng2-img-cropper',
       'ng-forward/cjs/testing/test-component-builder', 'zone.js', 'moment',
-      '@angular/core','@angular/upgrade/static', '@angular/platform-browser-dynamic']
+      '@angular/core','@angular/upgrade/static', '@angular/platform-browser-dynamic',
+      '@angular/animations']
 };
+
+var theme = process.env.npm_config_angular_theme_theme || "angular-default";
 
 module.exports = function(env) {
     if (env && env.production) {
@@ -62,7 +65,7 @@ module.exports = function(env) {
         resolve: {
             // Add `.ts` and `.tsx` as a resolvable extension.
             extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js'],
-            modules: ['src', 'node_modules']
+            modules: ['themes/' + theme, 'src', 'node_modules']
         },
         // Source maps support (or 'inline-source-map' also works)
         devtool: 'source-map',
@@ -79,6 +82,13 @@ module.exports = function(env) {
             }, {
                 test: /.(png|woff(2)?|eot|ttf|svg)(\?[a-z0-9=\.]+)?$/,
                 loader: 'url-loader?limit=100000'
+            }, {
+                test: /themes\/index.ts$/,
+                loader: 'string-replace-loader',
+                query: {
+                    search: 'angular-default',
+                    replace: theme
+                }
             }, {
                 test: /\.tsx?$/,
                 loader: 'awesome-typescript-loader',

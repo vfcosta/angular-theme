@@ -1,3 +1,4 @@
+import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account';
 import { DiscussionEditorComponent } from './../plugins/comment_paragraph/article/cms/discussion-editor/discussion-editor.component';
 import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
@@ -331,6 +332,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('commentParagraphPluginDiscussionEditor',
         downgradeComponent({ component: DiscussionEditorComponent, inputs: ['article', 'options'] }) as angular.IDirectiveFactory
+    ).
+    directive('themeHeader',
+        downgradeComponent({ component: ThemeHeaderComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

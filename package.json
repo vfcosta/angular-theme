@@ -134,6 +134,7 @@
     "remap-istanbul": "~0.8.4",
     "replace": "^0.3.0",
     "static-server": "^2.0.1",
+    "string-replace-loader": "^1.2.0",
     "ts-loader": "^0.8.2",
     "ts-node": "^1.7.0",
     "tslint": "^3.5.0",

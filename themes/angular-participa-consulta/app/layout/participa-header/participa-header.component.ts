@@ -1,27 +1,23 @@
-import { Component, Inject, provide } from "ng-forward";
+import { Component, Inject } from "@angular/core";
 import { EventsHubService } from "../../../../../src/app/shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../../../../src/app/known-events";
 import { BodyStateClassesService } from "../../../../../src/app/shared/services/body-state-classes.service";
 
 @Component({
     selector: "participa-header",
-    templateUrl: "app/layout/participa-header/participa-header.html",
-    providers: [
-        provide('eventsHubService', { useClass: EventsHubService })
-    ]
+    template: require("app/layout/participa-header/participa-header.html")
 })
-@Inject(EventsHubService, "angularLoad", "$location", "$anchorScroll", BodyStateClassesService)
 export class ParticipaHeaderComponent {
 
     eventsNames: NoosferoKnownEvents;
     defaultSkin = 'skin-yellow';
     highContrastSkin = 'skin-high-contrast';
 
-    constructor(private eventsHubService: EventsHubService,
-        private angularLoad: any,
-        private $location: any,
-        private $anchorScroll: any,
-        private bodyStateClassesService: BodyStateClassesService) {
+    constructor(@Inject("eventsHubService") private eventsHubService: EventsHubService,
+        @Inject("angularLoad") private angularLoad: any,
+        @Inject("$location") private $location: any,
+        @Inject("$anchorScroll") private $anchorScroll: any,
+        @Inject("bodyStateClassesService") private bodyStateClassesService: BodyStateClassesService) {
         this.eventsNames = new NoosferoKnownEvents();
     }
 
