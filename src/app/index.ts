@@ -1,3 +1,4 @@
+import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account';
@@ -339,6 +340,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('themeFooter',
         downgradeComponent({ component: ThemeFooterComponent }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoBreadcrumbsPluginContentBreadcrumbsBlock',
+        downgradeComponent({ component: BreadcrumbsBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
