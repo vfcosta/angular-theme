@@ -19,10 +19,10 @@
           color: $panel-default-text;
           border: none;
           text-transform: uppercase;
-          padding: 15px 40px;
+          margin: 15px 40px;
+          padding: 0px;
           font-size: 14px;
           font-weight: 500;
-          z-index: 1;
         }
         &.active > a,  > a:hover {
           border: none;
@@ -54,7 +54,6 @@
           background-color: white;
           color: dimgray;
           font-size: 11px;
-          z-index: 10;
         }
       }
     }
