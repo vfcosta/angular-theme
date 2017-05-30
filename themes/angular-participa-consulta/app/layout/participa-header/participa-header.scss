@@ -37,6 +37,9 @@ participa-header {
           }
         }
       }
+      li + li {
+          padding-left: 15px;
+      }
     }
   }
 
