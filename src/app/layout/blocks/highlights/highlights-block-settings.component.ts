@@ -28,7 +28,7 @@ export class HighlightsBlockSettingsComponent implements OnInit {
     }
 
     addSlide() {
-        this.images.push({ image_src: "", title: this.translatorService.translate("edit.inline.title"), address: "http://" });
+        this.images.push({ image_src: "", title: "", address: "http://" });
         this.parentBlock.block.hide = false;
     }
 
