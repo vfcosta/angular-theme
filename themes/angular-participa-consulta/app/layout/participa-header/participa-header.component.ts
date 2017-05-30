@@ -14,7 +14,6 @@ export class ParticipaHeaderComponent {
     highContrastSkin = 'skin-high-contrast';
 
     constructor(@Inject("eventsHubService") private eventsHubService: EventsHubService,
-        @Inject("angularLoad") private angularLoad: any,
         @Inject("$location") private $location: any,
         @Inject("$anchorScroll") private $anchorScroll: any,
         @Inject("bodyStateClassesService") private bodyStateClassesService: BodyStateClassesService) {
@@ -22,8 +21,15 @@ export class ParticipaHeaderComponent {
     }
 
     ngOnInit() {
-        this.angularLoad.loadScript('//barra.brasil.gov.br/barra.js');
+        this.loadScript('//barra.brasil.gov.br/barra.js');
         this.setupBarraBrasil();
+    }
+
+    loadScript(url) {
+        let script = document.createElement('script');
+        script.src = url;
+        script.type = 'text/javascript';
+        document.body.appendChild(script);
     }
 
     scrollTo(anchor: string) {
