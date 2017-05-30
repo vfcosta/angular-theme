@@ -9,5 +9,5 @@ import {DiscussionPeriodComponent} from "./article/discussion-period/discussion-
 
 export let mainComponents: any = [DiscussionBlockComponent, DiscussionPeriodComponent];
 export let ng2MainComponents: any = [AllowCommentComponent, SideCommentsComponent, DiscussionEditorComponent];
-export let hotspots: any = [ExportCommentButtonHotspotComponent, CommentParagraphArticleContentHotspotComponent];
-export let ng2Hotspots: any = [CommentParagraphFormHotspotComponent];
+export let hotspots: any = [CommentParagraphArticleContentHotspotComponent];
+export let ng2Hotspots: any = [CommentParagraphFormHotspotComponent, ExportCommentButtonHotspotComponent];

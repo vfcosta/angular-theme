@@ -1,25 +1,28 @@
-import {Component, Input, Inject} from "ng-forward";
+import { HotspotModule } from './hotspot.module';
+import { Component, Input, Inject, NgModuleFactory, Compiler } from "@angular/core";
+import { PluginHotspot } from "./plugin-hotspot";
 import * as plugins from "../../plugins";
-import {dasherize} from "ng-forward/cjs/util/helpers";
-import {PluginHotspot} from "./plugin-hotspot";
 
 @Component({
     selector: "noosfero-hotspot-article-toolbar",
-    template: "<span></span>"
+    template: `<ng-container *ngIf="myModule && hotspotComponent">
+                <ng-container *ngComponentOutlet="hotspotComponent; ngModuleFactory: myModule;"></ng-container>
+               </ng-container>`
 })
-@Inject("$element", "$scope", "$compile")
 export class ArticleToolbarHotspotComponent extends PluginHotspot {
 
     @Input() article: noosfero.Article;
+    hotspotComponent: any;
+    myModule: NgModuleFactory<any>;
 
-    constructor(
-        private $element: any,
-        private $scope: ng.IScope,
-        private $compile: ng.ICompileService) {
+    constructor(private compiler: Compiler) {
         super("article_extra_toolbar_buttons");
+        compiler.compileModuleAsync(HotspotModule).then(value => {
+            this.myModule = value;
+        });
     }
 
-    addHotspot(directiveName: string) {
-        this.$element.append(this.$compile('<' + directiveName + ' [article]="ctrl.article"></' + directiveName + '>')(this.$scope));
+    addHotspot(directiveName: string, component: any) {
+        this.hotspotComponent = component;
     }
 }

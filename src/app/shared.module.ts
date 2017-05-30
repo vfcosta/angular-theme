@@ -1,3 +1,4 @@
+import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
 import { NgModule } from '@angular/core';
 import { TranslatePipe } from './shared/pipes/translate-pipe';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
@@ -17,13 +18,15 @@ import { TruncatePipe } from './shared/pipes/truncate';
         FormsModule,
         CommonModule,
         BlockSettingsComponent,
-        TruncatePipe
+        TruncatePipe,
+        PermissionNg2Directive,
     ],
     declarations: [TranslatePipe,
         ImageUploadComponent,
         ImageUploadCropComponent,
         BlockSettingsComponent,
-        TruncatePipe
+        TruncatePipe,
+        PermissionNg2Directive,
     ],
     entryComponents: [
         ImageUploadComponent,

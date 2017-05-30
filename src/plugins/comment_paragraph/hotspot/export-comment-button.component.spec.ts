@@ -1,58 +1,56 @@
-import {ExportCommentButtonHotspotComponent} from "./export-comment-button.component";
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
+import { hotspots } from './../../recent_activities/index';
+import { ArticleToolbarHotspotComponent } from './../../../app/hotspot/article-toolbar-hotspot.component';
+import { SharedModule } from './../../../app/shared.module';
+import { By } from '@angular/platform-browser';
+import { TranslatePipe } from './../../../app/shared/pipes/translate-pipe';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ExportCommentButtonHotspotComponent } from "./export-comment-button.component";
 import * as helpers from "../../../spec/helpers";
-import {Provider} from 'ng-forward';
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-import {PermissionDirective} from '../../../app/shared/components/permission/permission.directive';
-
-let htmlTemplate = '<export-comment-button-hotspot [article]="ctrl.article"></export-comment-button-hotspot>';
+import { PermissionDirective } from '../../../app/shared/components/permission/permission.directive';
 
 describe("Components", () => {
     describe("Export Comment Button Hotspot Component", () => {
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<ArticleToolbarHotspotComponent>;
+        let component: ArticleToolbarHotspotComponent;
 
-        let serviceMock = jasmine.createSpyObj("CommentParagraphService", ["getArticle"]);
-
-        let providers = [new Provider('CommentParagraphService', { useValue: serviceMock })]
-            .concat(helpers.provideFilters('translateFilter'));
-        let helper: ComponentTestHelper<ExportCommentButtonHotspotComponent>;
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [ExportCommentButtonHotspotComponent, PermissionDirective],
-                providers: providers,
-                properties: {
-                    article: {}
-                }
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [ArticleToolbarHotspotComponent],
+                providers: [
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [SharedModule]
             });
-            helper = new ComponentTestHelper<ExportCommentButtonHotspotComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(ArticleToolbarHotspotComponent);
+            component = fixture.componentInstance;
+            component.article = <noosfero.Article>{};
+        }));
 
         it('return true when comment paragraph is active', () => {
-            helper.component.article = <noosfero.Article>{ setting: { comment_paragraph_plugin_activate: true } };
-            helper.detectChanges();
-            expect(helper.component.isActivated()).toBeTruthy();
-            expect(helper.all('.export-comment-button').length).toEqual(1);
+            component.article = <noosfero.Article>{ setting: { comment_paragraph_plugin_activate: true } };
+            fixture.detectChanges();
+            let hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
+            expect(hotspotComponent.isActivated()).toBeTruthy();
+            expect(fixture.debugElement.queryAll(By.css('.export-comment-button')).length).toEqual(1);
         });
 
         it('return false when comment paragraph is not active', () => {
-            expect(helper.component.isActivated()).toBeFalsy();
-            expect(helper.all('.export-comment-button').length).toEqual(0);
+            fixture.detectChanges();
+            let hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
+            expect(hotspotComponent.isActivated()).toBeFalsy();
+            expect(fixture.debugElement.queryAll(By.css('.export-comment-button')).length).toEqual(0);
         });
 
         it('return false when article has no setting attribute', () => {
-            helper.component.article = <noosfero.Article>{};
-            helper.detectChanges();
-            expect(helper.component.isActivated()).toBeFalsy();
-            expect(helper.all('.export-comment-button').length).toEqual(0);
-        });
-
-        it('not display export comment button when user does not have permission', () => {
-            helper.component.article = <noosfero.Article>{ setting: { comment_paragraph_plugin_activate: true } };
-            helper.detectChanges();
-            expect(helper.find('.export-comment-button').attr('style').trim()).toEqual("display: none !important");
+            component.article = <noosfero.Article>{};
+            fixture.detectChanges();
+            let hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
+            expect(hotspotComponent.isActivated()).toBeFalsy();
+            expect(fixture.debugElement.queryAll(By.css('.export-comment-button')).length).toEqual(0);
         });
     });
 });

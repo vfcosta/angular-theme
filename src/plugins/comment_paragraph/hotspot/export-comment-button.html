@@ -1,5 +1,5 @@
-<a href='{{ctrl.exportCommentPath}}' target="_self" 
-    class="btn btn-default btn-xs export-comment-button" ng-if="ctrl.isActivated()"
-    permission="ctrl.article.permissions" permission-action="allow_edit">
+<a [href]="exportCommentPath" target="_self"
+    class="btn btn-default btn-xs export-comment-button" *ngIf="isActivated()"
+    [permission]="article.permissions" permissionAction="allow_edit">
   <i class="fa fa-fw fa-download"></i> {{"comment-paragraph-plugin.export" | translate}}
 </a>

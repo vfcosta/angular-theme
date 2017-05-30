@@ -1,3 +1,4 @@
+import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
 import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
 import * as theme from '../../themes';
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
@@ -50,7 +51,6 @@ import { PersonFriendsComponent } from './profile/configuration/friends/person-f
 import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
-import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
 import { DateFormatPipe } from './shared/pipes/date-format.ng2.filter';
 import { NoosferoUrlPipe } from './shared/pipes/noosfero-url.ng2.filter';
 import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
@@ -137,17 +137,14 @@ import { MyDatePickerModule } from 'mydatepicker';
         ProfileListEditionComponent,
         NewCommunityComponent,
         ChangePasswordComponent,
-        PermissionNg2Directive,
         PersonFriendsComponent,
         CommunityMembersMyProfileComponent,
         EditCommunityComponent,
         PersonCommunitiesComponent,
         MenuBlockComponent,
-        PermissionNg2Directive,
         InviteComponent,
         MainBlockUpgradeDirective,
         ProfileSummaryComponent,
-        PermissionNg2Directive,
         LoginBlockComponent,
         LinkListBlockComponent,
         EditableLinkComponent,
@@ -189,6 +186,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         RegisterComponent,
         ThemeHeaderComponent,
         ThemeFooterComponent,
+        ArticleToolbarHotspotComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -258,6 +256,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         RegisterComponent,
         ThemeHeaderComponent,
         ThemeFooterComponent,
+        ArticleToolbarHotspotComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
