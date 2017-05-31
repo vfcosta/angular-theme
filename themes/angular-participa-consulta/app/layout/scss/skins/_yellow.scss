@@ -5,4 +5,7 @@
 	$navbar-inverse-bg: #f9c404;
 	// include bootstrap
 	@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+	.noosfero-block {
+		padding: 0;
+	}
 }

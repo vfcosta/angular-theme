@@ -36,3 +36,8 @@ $selected-color: #f6c445;
   border-color: transparent;
 }
 
+#navbar {
+  &.navbar-static-top {
+    margin: 0;
+  }
+}
