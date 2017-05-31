@@ -1,21 +1,21 @@
-<div class="discussion-header" ng-if="ctrl.isDiscussion()">
+<div class="discussion-header" *ngIf="isDiscussion()">
   <div class="period">
-    <div ng-if="ctrl.notOpened()" class="description not-opened">
-      {{"comment-paragraph-plugin.discussion.notOpened.header" | translate:{date: (ctrl.article.start_date | dateFormat | amTimeAgo)} }}
+    <div *ngIf="notOpened()" class="description not-opened">
+      {{"comment-paragraph-plugin.discussion.notOpened.header" | translate:{date: (article.start_date | dateFormat | amTimeAgo)} }}
     </div>
-    <div ng-if="ctrl.available()" class="description available">
-      <div ng-if="ctrl.article.end_date" class="with-end-date">
-        {{"comment-paragraph-plugin.discussion.available.header" | translate:{date: (ctrl.article.end_date | dateFormat | amTimeAgo)} }}
+    <div *ngIf="available()" class="description available">
+      <div *ngIf="article.end_date" class="with-end-date">
+        {{"comment-paragraph-plugin.discussion.available.header" | translate:{date: (article.end_date | dateFormat | amTimeAgo)} }}
       </div>
-      <div ng-if="!ctrl.article.end_date" class="without-end-date">
+      <div *ngIf="!article.end_date" class="without-end-date">
         {{"comment-paragraph-plugin.discussion.available.without-end.header" | translate}}
       </div>
     </div>
-    <div ng-if="ctrl.closed()" class="description closed">
-      {{"comment-paragraph-plugin.discussion.closed.header" | translate:{date: (ctrl.article.end_date | dateFormat | amTimeAgo)} }}
+    <div *ngIf="closed()" class="description closed">
+      {{"comment-paragraph-plugin.discussion.closed.header" | translate:{date: (article.end_date | dateFormat | amTimeAgo)} }}
     </div>
   </div>
   <div class="icon">
-    <i alt='{{"calendar.icon.description" | translate}}' class="fa fa-calendar fa-fw fa-lg"></i>
+    <i [title]="'calendar.icon.description' | translate" class="fa fa-calendar fa-fw fa-lg"></i>
   </div>
 </div>

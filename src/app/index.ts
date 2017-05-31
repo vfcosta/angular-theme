@@ -1,3 +1,4 @@
+import { DiscussionPeriodComponent } from './../plugins/comment_paragraph/article/discussion-period/discussion-period.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
 import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
@@ -351,6 +352,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('articleBasicOptions',
         downgradeComponent({ component: BasicOptionsComponent, inputs: ['article'] }) as angular.IDirectiveFactory
+    ).
+    directive('discussionPeriod',
+        downgradeComponent({ component: DiscussionPeriodComponent, inputs: ['article'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

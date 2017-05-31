@@ -1,78 +1,85 @@
-import {DiscussionPeriodComponent} from './discussion-period.component';
-import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
-
-const htmlTemplate: string = '<discussion-period [article]="ctrl.article"></discussion-period>';
+import { DateFormatPipe } from './../../../../app/shared/pipes/date-format.ng2.filter';
+import { MomentModule } from 'angular2-moment';
+import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
+import { DiscussionPeriodComponent } from './discussion-period.component';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import * as helpers from "../../../../spec/helpers";
 
 describe("Components", () => {
     describe("Discussion Period Component", () => {
+        let fixture: ComponentFixture<DiscussionPeriodComponent>;
+        let component: DiscussionPeriodComponent;
+        let mocks = helpers.getMocks();
 
-        let helper: ComponentTestHelper<DiscussionPeriodComponent>;
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let properties = { article: {} };
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [DiscussionPeriodComponent],
-                properties: properties
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                declarations: [DiscussionPeriodComponent, TranslatePipe, DateFormatPipe],
+                providers: [
+                    { provide: "translatorService", useValue: mocks.translatorService }
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [MomentModule]
             });
-            helper = new ComponentTestHelper<DiscussionPeriodComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(DiscussionPeriodComponent);
+            component = fixture.componentInstance;
+            component.article = <noosfero.Article>{};
+        }));
 
         it("return false in isDiscussion when no type was specified", () => {
-            expect(helper.component.isDiscussion()).toBeFalsy();
+            expect(component.isDiscussion()).toBeFalsy();
         });
 
         it("return false in isDiscussion when other type was specified", () => {
-            helper.changeProperties({ article: { type: "TextArticle" } });
-            expect(helper.component.isDiscussion()).toBeFalsy();
+            component.article = <noosfero.Article>{ type: "TextArticle" };
+            expect(component.isDiscussion()).toBeFalsy();
         });
 
         it("return true in isDiscussion when discussion type was specified", () => {
-            helper.changeProperties({ article: { type: "CommentParagraphPlugin::Discussion" } });
-            expect(helper.component.isDiscussion()).toBeTruthy();
+            component.article = <noosfero.Article>{ type: "CommentParagraphPlugin::Discussion" };
+            expect(component.isDiscussion()).toBeTruthy();
         });
 
         it("return true in notOpened when start date is after today", () => {
             let date = new Date();
             date.setDate(date.getDate() + 1);
-            helper.changeProperties({ article: { start_date: date.toISOString() } });
-            expect(helper.component.notOpened()).toBeTruthy();
-            expect(helper.component.available()).toBeFalsy();
-            expect(helper.component.closed()).toBeFalsy();
+            component.article = <noosfero.Article>{ start_date: date.toISOString() };
+            expect(component.notOpened()).toBeTruthy();
+            expect(component.available()).toBeFalsy();
+            expect(component.closed()).toBeFalsy();
         });
 
         it("return false in notOpened when start date is before today", () => {
             let date = new Date();
             date.setDate(date.getDate() - 1);
-            helper.changeProperties({ article: { start_date: date.toISOString() } });
-            expect(helper.component.notOpened()).toBeFalsy();
+            component.article = <noosfero.Article>{ start_date: date.toISOString() };
+            expect(component.notOpened()).toBeFalsy();
         });
 
         it("return false in notOpened when start date is null", () => {
-            helper.changeProperties({ article: { start_date: null } });
-            expect(helper.component.notOpened()).toBeFalsy();
+            component.article = <noosfero.Article>{ start_date: null };
+            expect(component.notOpened()).toBeFalsy();
         });
 
         it("return true in closed when end date is before today", () => {
             let date = new Date();
             date.setDate(date.getDate() - 1);
-            helper.changeProperties({ article: { end_date: date.toISOString() } });
-            expect(helper.component.closed()).toBeTruthy();
-            expect(helper.component.available()).toBeFalsy();
-            expect(helper.component.notOpened()).toBeFalsy();
+            component.article = <noosfero.Article>{ end_date: date.toISOString() };
+            expect(component.closed()).toBeTruthy();
+            expect(component.available()).toBeFalsy();
+            expect(component.notOpened()).toBeFalsy();
         });
 
         it("return false in closed when start date is after today", () => {
             let date = new Date();
             date.setDate(date.getDate() + 1);
-            helper.changeProperties({ article: { end_date: date.toISOString() } });
-            expect(helper.component.closed()).toBeFalsy();
+            component.article = <noosfero.Article>{ end_date: date.toISOString() };
+            expect(component.closed()).toBeFalsy();
         });
 
         it("return false in closed when end date is null", () => {
-            helper.changeProperties({ article: { start_date: null } });
-            expect(helper.component.closed()).toBeFalsy();
+            component.article = <noosfero.Article>{ start_date: null };
+            expect(component.closed()).toBeFalsy();
         });
 
         it("return true in available when start date is before today and end date is after", () => {
@@ -81,30 +88,30 @@ describe("Components", () => {
             let startDate = date.toISOString();
             date.setDate(date.getDate() + 3);
             let endDate = date.toISOString();
-            helper.changeProperties({ article: { start_date: startDate, end_date: endDate } });
-            expect(helper.component.available()).toBeTruthy();
-            expect(helper.component.closed()).toBeFalsy();
-            expect(helper.component.notOpened()).toBeFalsy();
+            component.article = <noosfero.Article>{ start_date: startDate, end_date: endDate };
+            expect(component.available()).toBeTruthy();
+            expect(component.closed()).toBeFalsy();
+            expect(component.notOpened()).toBeFalsy();
         });
 
         it("return true in available when start date is before today and end date is null", () => {
             let date = new Date();
             date.setDate(date.getDate() - 1);
             let startDate = date.toISOString();
-            helper.changeProperties({ article: { start_date: startDate, end_date: null } });
-            expect(helper.component.available()).toBeTruthy();
-            expect(helper.component.closed()).toBeFalsy();
-            expect(helper.component.notOpened()).toBeFalsy();
+            component.article = <noosfero.Article>{ start_date: startDate, end_date: null };
+            expect(component.available()).toBeTruthy();
+            expect(component.closed()).toBeFalsy();
+            expect(component.notOpened()).toBeFalsy();
         });
 
         it("return true in available when start date is null and end date is after today", () => {
             let date = new Date();
             date.setDate(date.getDate() + 3);
             let endDate = date.toISOString();
-            helper.changeProperties({ article: { start_date: null, end_date: endDate } });
-            expect(helper.component.available()).toBeTruthy();
-            expect(helper.component.closed()).toBeFalsy();
-            expect(helper.component.notOpened()).toBeFalsy();
+            component.article = <noosfero.Article>{ start_date: null, end_date: endDate };
+            expect(component.available()).toBeTruthy();
+            expect(component.closed()).toBeFalsy();
+            expect(component.notOpened()).toBeFalsy();
         });
     });
 });
