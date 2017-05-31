@@ -33,7 +33,6 @@ import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.servi
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { ArticleViewComponent } from './../article/article-default-view.component';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
-import { BasicOptionsComponent } from './../article/cms/basic-options/basic-options.component';
 import { ArticleBlogComponent } from './../article/types/blog/blog.component';
 import { FolderComponent } from './../article/types/folder/folder.component';
 import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
@@ -108,7 +107,7 @@ export class EnvironmentContent {
         FolderComponent, BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
-        ArticleEditorComponent, BasicOptionsComponent, TranslateProfile
+        ArticleEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService,

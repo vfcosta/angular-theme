@@ -3,11 +3,11 @@
     <div class="panel-heading">{{"article.basic_editor.visibility" | translate}}</div>
     <div class="panel-body">
       <div>
-        <input type="radio" ng-model="ctrl.article.published" ng-value="true"> 
+        <input type="radio" [(ngModel)]="article.published" [value]="true"> 
         <i class="fa fa-unlock fa-fw"></i> {{"article.basic_editor.visibility.public" | translate}}
       </div>
       <div>
-        <input type="radio" ng-model="ctrl.article.published" ng-value="false">
+        <input type="radio" [(ngModel)]="article.published" [value]="false">
         <i class="fa fa-lock fa-fw"></i> {{"article.basic_editor.visibility.private" | translate}}
       </div>
     </div>

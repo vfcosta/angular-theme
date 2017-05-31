@@ -1,8 +1,8 @@
-import {Component, Input} from 'ng-forward';
+import {Component, Input} from "@angular/core";
 
 @Component({
     selector: 'article-basic-options',
-    templateUrl: "app/article/cms/basic-options/basic-options.html"
+    template: require("app/article/cms/basic-options/basic-options.html")
 })
 export class BasicOptionsComponent {
 

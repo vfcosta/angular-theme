@@ -1,3 +1,4 @@
+import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
 import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
 import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
 import * as theme from '../../themes';
@@ -187,6 +188,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         ThemeHeaderComponent,
         ThemeFooterComponent,
         ArticleToolbarHotspotComponent,
+        BasicOptionsComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -257,6 +259,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         ThemeHeaderComponent,
         ThemeFooterComponent,
         ArticleToolbarHotspotComponent,
+        BasicOptionsComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
