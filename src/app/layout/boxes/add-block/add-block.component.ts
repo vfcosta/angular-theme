@@ -16,7 +16,7 @@ export class AddBlockComponent {
     search: string;
     whitelist = ['RawHTMLBlock', 'CommunitiesBlock', 'HighlightsBlock', 'DisplayContentBlock', 'LinkListBlock', 'LoginBlock',
                  'MembersBlock', 'MenuBlock', 'PeopleBlock', 'ProfileImageBlock', 'RecentDocumentsBlock', 'StatisticsBlock',
-                 'TagsBlock', 'BreadcrumbsPlugin::ContentBreadcrumbsBlock', 'CommentParagraphPlugin::DiscussionBlock',
+                 'BreadcrumbsPlugin::ContentBreadcrumbsBlock', 'CommentParagraphPlugin::DiscussionBlock',
                  'EventPlugin::EventBlock', 'FriendsBlock', 'InterestTagsBlock', 'ProfileImagesPlugin::ProfileImagesBlock',
                  'RecentActivitiesPlugin::ActivitiesBlock', 'SectionBlockPlugin::SectionBlock', 'VideoPlugin::VideoBlock'];
     blocks: noosfero.BlockDefinition[];
