@@ -12,6 +12,7 @@ export let mainComponents: any = [];
 export let ng2MainComponents: any = [];
 export let hotspots: any = [];
 export let ng2Hotspots: any = [];
+export let ng2SharedComponents: any = [];
 
 let enabledPlugins = [
     commentParagraph,
@@ -27,6 +28,7 @@ let enabledPlugins = [
 enabledPlugins.forEach((plugin: any) => {
     mainComponents = mainComponents.concat(plugin.mainComponents);
     ng2MainComponents = ng2MainComponents.concat(plugin.ng2MainComponents);
+    if (plugin.ng2SharedComponents) ng2SharedComponents = ng2SharedComponents.concat(plugin.ng2SharedComponents);
     hotspots = hotspots.concat(plugin.hotspots);
     if (plugin.ng2Hotspots) ng2Hotspots = ng2Hotspots.concat(plugin.ng2Hotspots);
 });

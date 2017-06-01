@@ -1,12 +1,20 @@
-import { Input, Inject, Component } from "ng-forward";
-import {Hotspot} from "../../../../app/hotspot/hotspot.decorator";
+import { ArticleContentHotspotComponent } from './../../../../app/hotspot/article-content-hotspot.component';
+import { Input, Inject, Injector, Component } from "@angular/core";
+import { Hotspot } from "../../../../app/hotspot/hotspot.decorator";
 
 @Component({
     selector: "comment-paragraph-article-content-hotspot",
-    templateUrl: "plugins/comment_paragraph/hotspot/article-content/article-content.html",
+    template: "<discussion-period [article]='article'></discussion-period>"
 })
 @Hotspot("article_extra_content")
 export class CommentParagraphArticleContentHotspotComponent {
 
-    @Input() article: noosfero.Article;
+    article: noosfero.Article;
+
+    parent: ArticleContentHotspotComponent;
+
+    constructor(injector: Injector) {
+        this.parent = injector.get(ArticleContentHotspotComponent);
+        this.article = this.parent.article;
+    }
 }

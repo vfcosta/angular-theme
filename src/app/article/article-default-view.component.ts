@@ -1,7 +1,6 @@
 import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
 import {ArticleBlogComponent} from "./types/blog/blog.component";
 import {MacroDirective} from "./macro/macro.directive";
-import {ArticleContentHotspotComponent} from "../hotspot/article-content-hotspot.component";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 import { NotificationService } from "./../shared/services/notification.service";
 import {PermissionDirective} from '../shared/components/permission/permission.directive';
@@ -57,9 +56,7 @@ export class ArticleDefaultViewComponent {
 @Component({
     selector: 'noosfero-article',
     template: 'not-used',
-    directives: [ArticleDefaultViewComponent, ArticleBlogComponent,
-        MacroDirective,
-        ArticleContentHotspotComponent]
+    directives: [ArticleDefaultViewComponent, ArticleBlogComponent, MacroDirective]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class ArticleViewComponent {

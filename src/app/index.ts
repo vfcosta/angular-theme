@@ -1,3 +1,4 @@
+import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { DiscussionPeriodComponent } from './../plugins/comment_paragraph/article/discussion-period/discussion-period.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
 import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
@@ -349,6 +350,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoHotspotArticleToolbar',
         downgradeComponent({ component: ArticleToolbarHotspotComponent, inputs: ['article'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoHotspotArticleContent',
+        downgradeComponent({ component: ArticleContentHotspotComponent, inputs: ['article'] }) as angular.IDirectiveFactory
     ).
     directive('articleBasicOptions',
         downgradeComponent({ component: BasicOptionsComponent, inputs: ['article'] }) as angular.IDirectiveFactory

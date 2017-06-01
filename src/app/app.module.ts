@@ -1,3 +1,4 @@
+import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
 import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
 import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
@@ -52,7 +53,6 @@ import { PersonFriendsComponent } from './profile/configuration/friends/person-f
 import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
-import { DateFormatPipe } from './shared/pipes/date-format.ng2.filter';
 import { NoosferoUrlPipe } from './shared/pipes/noosfero-url.ng2.filter';
 import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
@@ -75,7 +75,6 @@ import { ProfileImageComponent } from "./profile/image/profile-image.component";
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 import { UpgradeUtils } from "./shared/upgrade-utils";
-import { MomentModule } from 'angular2-moment';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
@@ -95,7 +94,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         FormsModule,
         BrowserModule,
         UpgradeModule,
-        MomentModule,
         ModalModule.forRoot(),
         ImageCropperModule,
         NgPipesModule,
@@ -133,7 +131,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         HtmlEditorComponent,
         ProfileConfigurationMenuComponent,
         ProfilePersonalDataComponent,
-        DateFormatPipe,
         NoosferoUrlPipe,
         ProfileListEditionComponent,
         NewCommunityComponent,
@@ -189,6 +186,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         ThemeFooterComponent,
         ArticleToolbarHotspotComponent,
         BasicOptionsComponent,
+        ArticleContentHotspotComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -260,6 +258,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         ThemeFooterComponent,
         ArticleToolbarHotspotComponent,
         BasicOptionsComponent,
+        ArticleContentHotspotComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
