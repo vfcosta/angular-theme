@@ -1,3 +1,4 @@
+import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import * as helpers from "../../../../spec/helpers";
@@ -14,12 +15,14 @@ describe("Components", () => {
         let task = <any>{ target: { id: 5 } };
         beforeEach(async(() => {
             spyOn(mocks.roleService, "getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: roles }));
+            let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 declarations: [AddMemberTaskAcceptComponent, TranslatePipe],
                 providers: [
                     { provide: "translatorService", useValue: mocks.translatorService },
                     { provide: "articleService", useValue: mocks.articleService },
-                    { provide: "roleService", useValue: mocks.roleService }
+                    { provide: "roleService", useValue: mocks.roleService },
+                    { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [FormsModule]
@@ -34,14 +37,14 @@ describe("Components", () => {
             fixture.detectChanges();
             let role = { id: 1 };
             component.toggleSelection(<any>role);
-            expect(component.confirmationTask.roles).toEqual([role.id]);
+            expect(component.confirmationTask['roles']).toEqual([role.id]);
         });
 
         it("remove role id from roles list when toggle selection", () => {
             let role = { id: 1 };
-            component.confirmationTask.roles = [role.id];
+            component.confirmationTask['roles'] = [role.id];
             component.toggleSelection(<any>role);
-            expect(component.confirmationTask.roles).toEqual([]);
+            expect(component.confirmationTask['roles']).toEqual([]);
         });
     });
 });

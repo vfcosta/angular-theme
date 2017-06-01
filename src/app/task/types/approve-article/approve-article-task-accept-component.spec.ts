@@ -1,3 +1,4 @@
+import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import * as helpers from "../../../../spec/helpers";
@@ -15,11 +16,13 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             spyOn(mocks.articleService, "getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: articles }));
+            let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 declarations: [ApproveArticleTaskAcceptComponent, TranslatePipe],
                 providers: [
                     { provide: "translatorService", useValue: mocks.translatorService },
-                    { provide: "articleService", useValue: mocks.articleService }
+                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [FormsModule]

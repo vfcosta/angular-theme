@@ -14,7 +14,7 @@
     <div class="title">{{comment.title}}</div>
     <div class="body">{{comment.body}}</div>
     <div class="actions" *ngIf="displayActions">
-      <a href="#" (click)="reply()" class="action small text-muted reply" *ngIf="article.accept_comments">
+      <a href="#" (click)="reply()" class="action small text-muted reply" *ngIf="article?.accept_comments">
         <span class="bullet-separator">•</span>
         {{"comment.reply" | translate}}
       </a>

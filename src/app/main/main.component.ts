@@ -39,9 +39,8 @@ import { FolderComponent } from './../article/types/folder/folder.component';
 import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { HeaderService } from './../shared/services/header.service';
-import { TaskAcceptComponent } from './../task/task-list/task-accept.component';
 import { Component, Inject, provide } from 'ng-forward';
-import { TaskService } from './../../lib/ng-noosfero-api/http/task.service'
+import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
@@ -104,7 +103,6 @@ export class EnvironmentContent {
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat,
         CustomContentComponent, PermissionDirective,
         BlockComponent,
-        TaskAcceptComponent,
         FolderComponent, BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,

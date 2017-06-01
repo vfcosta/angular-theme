@@ -1,33 +1,35 @@
-import { Provider, provide, Component } from 'ng-forward';
-import * as helpers from "../../../spec/helpers";
+import { By } from '@angular/platform-browser';
+import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { TaskAcceptComponent } from './task-accept.component';
-
-const htmlTemplate: string = '<task-accept [task]="ctrl.task"></task-accept>';
+import * as helpers from "../../../spec/helpers";
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Task Accept Component", () => {
+        let mocks = helpers.getMocks();
+        let task = <noosfero.Task>{ id: 1, type: "AddMember" };
+        let fixture: ComponentFixture<TaskAcceptComponent>;
+        let component: TaskAcceptComponent;
 
-        let task = { id: 1, type: "AddMember" };
-        let roleService = jasmine.createSpyObj("roleService", ["getByProfile"]);
-
-        beforeEach(angular.mock.module("templates"));
-
-        function createComponent() {
-            return helpers.quickCreateComponent({
-                template: htmlTemplate,
-                directives: [TaskAcceptComponent],
-                properties: { task: task },
+        beforeEach(async(() => {
+            let taskAcceptComponent = {task: task, confirmationTask: {}};
+            TestBed.configureTestingModule({
+                declarations: [TaskAcceptComponent],
                 providers: [
-                    helpers.createProviderToValue("RoleService", roleService)
-                ].concat(helpers.provideFilters("translateFilter"))
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: "roleService", useValue: mocks.roleService },
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
             });
-        }
+            fixture = TestBed.createComponent(TaskAcceptComponent);
+            component = fixture.componentInstance;
+            component.task = task;
+        }));
 
-        it("replace element with the specific task accept component", (done: Function) => {
-            createComponent().then(fixture => {
-                expect(fixture.debugElement.queryAll("add-member-task-accept").length).toBe(1);
-                done();
-            });
+        it("replace element with the specific task accept component", () => {
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('add-member-task-accept')).length).toEqual(1);
         });
     });
 });

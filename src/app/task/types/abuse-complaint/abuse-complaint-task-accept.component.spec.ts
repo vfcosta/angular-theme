@@ -1,3 +1,4 @@
+import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { Provider, Component } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -21,17 +22,18 @@ describe("Components", () => {
         let fixture: ComponentFixture<AbuseComplaintTaskAcceptComponent>;
         let component: AbuseComplaintTaskAcceptComponent;
         let mocks = helpers.getMocks();
-        
+
         beforeEach(async(() => {
             spyOn(mocks.taskService, 'get').and.returnValue(Promise.resolve( task ));
-
+            let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 imports: [NgPipesModule, MomentModule],
                 declarations: [AbuseComplaintTaskAcceptComponent, TranslatePipe, DateFormatPipe],
                 providers: [
                     { provide: "taskService", useValue: mocks.taskService },
                     { provide: "translatorService", useValue: mocks.translatorService },
-                    { provide: "amParseFilter", useValue: mocks.amParseFilter }
+                    { provide: "amParseFilter", useValue: mocks.amParseFilter },
+                    { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });
@@ -43,28 +45,27 @@ describe("Components", () => {
 
         it("should the abuse complaint have an abuse report with an reason message", () => {
             let reason = 'Testing reason message!';
-            expect(component.task.abuse_reports[0].reason).toEqual(reason);
+            expect(component.task['abuse_reports'][0].reason).toEqual(reason);
         });
 
         it("should the abuse complaint have an abuse report with an reporter", () => {
             let reporter_name = 'User Tester 1';
-            expect(component.task.abuse_reports[0].reporter.name).toEqual(reporter_name);
+            expect(component.task['abuse_reports'][0].reporter.name).toEqual(reporter_name);
         });
 
         it("should the abuse complaint have an abuse report with an create date", () => {
             let created_at = '2016-01-02 12:30:00';
-            expect(component.task.abuse_reports[0].reporter.created_at).toEqual(created_at);
+            expect(component.task['abuse_reports'][0].reporter.created_at).toEqual(created_at);
         });
 
         it("should the abuse complaint have more than one abuse report", () => {
-            expect(component.task.abuse_reports.length).toBeGreaterThan(1);
+            expect(component.task['abuse_reports'].length).toBeGreaterThan(1);
         });
 
         it("should not call taskservice get if task target is setted", fakeAsync(() => {
             component.task = <any>{ target: false };
-            component.ngOnInit();
             fixture.detectChanges();
-            tick();
+            tick(2000);
             expect(mocks.taskService.get).not.toHaveBeenCalled();
         }));
 

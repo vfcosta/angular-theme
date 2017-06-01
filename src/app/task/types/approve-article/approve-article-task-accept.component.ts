@@ -1,20 +1,21 @@
-import { Component, Input, Inject, OnInit } from "@angular/core";
+import { TaskAcceptTypeComponent } from './../task-accept-type.component';
+import { Component, Injector, Inject } from "@angular/core";
 import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
     selector: "approve-article-task-accept",
     template: require("app/task/types/approve-article/approve-article-accept.html"),
 })
-export class ApproveArticleTaskAcceptComponent implements OnInit {
-
-    @Input() task: noosfero.ApproveArticleTask;
-    @Input() confirmationTask: noosfero.ApproveArticleTask;
+export class ApproveArticleTaskAcceptComponent extends TaskAcceptTypeComponent {
 
     folders: Array<any>;
 
-    constructor(@Inject("articleService") private articleService: ArticleService) { }
+    constructor(@Inject("articleService") private articleService: ArticleService, injector: Injector) {
+        super(injector);
+    }
 
     ngOnInit() {
+        super.ngOnInit();
         let targetProfile = <noosfero.Profile>this.task.target;
         let root = targetProfile.identifier;
         this.confirmationTask.data = { create_link: true, article_id: this.task.data.article_id, name: this.task.data.name };
