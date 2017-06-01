@@ -1,3 +1,4 @@
+import { TaskAcceptComponent } from './task/task-list/task-accept.component';
 import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
 import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
@@ -5,20 +6,12 @@ import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.compone
 import * as theme from '../../themes';
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account/register.component';
-import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { SearchComponent } from './search/search.component';
 import { PasswordComponent } from './login/new-password.component';
-import { CommentsComponent } from './article/comment/comments.component';
-import { CommentComponent } from './article/comment/comment.component';
 import { ArticleIconComponent } from './article/article-icon/article-icon.component';
-import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
-import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
-import { AbuseComplaintTaskAcceptComponent } from "./task/types/abuse-complaint/abuse-complaint-task-accept.component";
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
-import { AddFriendTaskAcceptComponent } from './task/types/add-friend/add-friend-task-accept.component';
-import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
 import { TaskComponent } from './task/task.component';
 import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
 import { DesignModeTogglerComponent } from './layout/design-mode-toggler/design-mode-toggler.component';
@@ -26,8 +19,6 @@ import { ConfigBarComponent } from './layout/config-bar/config-bar.component';
 import { LayoutConfigComponent } from './layout/layout-config/layout-config.component';
 import { ContextBarComponent } from './layout/context-bar/context-bar.component';
 import { ProfileHeaderComponent } from './profile/header/profile-header.component';
-import { CommentFormHotspotComponent } from './hotspot/comment-form-hotspot.component';
-import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
 import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
@@ -55,10 +46,8 @@ import { ProfilePersonalDataComponent } from './profile/configuration/personal-d
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { NoosferoUrlPipe } from './shared/pipes/noosfero-url.ng2.filter';
 import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
-import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
-import { UiSrefDirective } from './shared/directives/ui-sref-directive';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
 import { PeopleBlockComponent } from './layout/blocks/people/people-block.component';
@@ -71,16 +60,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { UpgradeModule } from '@angular/upgrade/static';
-import { ProfileImageComponent } from "./profile/image/profile-image.component";
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
 import { UpgradeUtils } from "./shared/upgrade-utils";
 import { ImageCropperModule } from 'ng2-img-cropper';
-import { PopoverModule, ModalModule, TypeaheadModule, PaginationModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
+import { PopoverModule, ModalModule, TypeaheadModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
 import { ProfileJoinComponent } from './profile/profile-join/profile-join.component';
-import { NgPipesModule } from 'ngx-pipes';
-import { CKEditorModule } from 'ng2-ckeditor';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InviteComponent } from './profile/configuration/communities/invite.component';
@@ -96,9 +82,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         UpgradeModule,
         ModalModule.forRoot(),
         ImageCropperModule,
-        NgPipesModule,
-        CKEditorModule,
-        PaginationModule.forRoot(),
         PopoverModule.forRoot(),
         DragulaModule,
         TypeaheadModule.forRoot(),
@@ -116,19 +99,16 @@ import { MyDatePickerModule } from 'mydatepicker';
         RawHTMLBlockComponent,
         RecentDocumentsBlockComponent,
         StatisticsBlockComponent,
-        ProfileImageComponent,
         TaskListComponent,
         CommunitiesBlockComponent,
         MembersBlockComponent,
         PeopleBlockComponent,
         ProfileImageBlockComponent,
         CommunityMembersComponent,
-        UiSrefDirective,
         ProfileFastEditionComponent,
         ValidationMessageComponent,
         ProfileListComponent,
         ProfileJoinComponent,
-        HtmlEditorComponent,
         ProfileConfigurationMenuComponent,
         ProfilePersonalDataComponent,
         NoosferoUrlPipe,
@@ -156,8 +136,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         BlockEditionComponent,
         AddBlockComponent,
         TopProfileImageComponent,
-        PostCommentComponent,
-        CommentFormHotspotComponent,
         ProfileHeaderComponent,
         ContextBarComponent,
         LayoutConfigComponent,
@@ -165,20 +143,10 @@ import { MyDatePickerModule } from 'mydatepicker';
         ConfigBarComponent,
         DesignModeTogglerComponent,
         TaskComponent,
-        ProfileLinkComponent,
         TasksComponent,
         TasksMenuComponent,
-        AddFriendTaskAcceptComponent,
         SearchFormComponent,
-        AbuseComplaintTaskAcceptComponent,
-        ApproveArticleTaskAcceptComponent,
-        SuggestArticleTaskAcceptComponent,
-        BasicEditorComponent,
-        CommentComponent,
-        CommentsComponent,
         ArticleIconComponent,
-        ApproveArticleTaskAcceptComponent,
-        AddFriendTaskAcceptComponent,
         SearchComponent,
         PasswordComponent,
         RegisterComponent,
@@ -186,6 +154,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         ThemeFooterComponent,
         ArticleToolbarHotspotComponent,
         BasicOptionsComponent,
+        TaskAcceptComponent,
         ArticleContentHotspotComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
@@ -194,7 +163,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         RawHTMLBlockComponent,
         RecentDocumentsBlockComponent,
         StatisticsBlockComponent,
-        ProfileImageComponent,
         TaskListComponent,
         CommunitiesBlockComponent,
         MembersBlockComponent,
@@ -202,7 +170,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         ProfileImageBlockComponent,
         CommunityMembersComponent,
         ProfileFastEditionComponent,
-        HtmlEditorComponent,
         ProfileConfigurationMenuComponent,
         ProfilePersonalDataComponent,
         ProfileListComponent,
@@ -230,27 +197,16 @@ import { MyDatePickerModule } from 'mydatepicker';
         BlockEditionComponent,
         AddBlockComponent,
         TopProfileImageComponent,
-        PostCommentComponent,
         ProfileHeaderComponent,
         ContextBarComponent,
         LayoutConfigComponent,
         ProfileActionsComponent,
         ConfigBarComponent,
         DesignModeTogglerComponent,
-        ProfileLinkComponent,
         TasksComponent,
         TasksMenuComponent,
-        AddFriendTaskAcceptComponent,
         SearchFormComponent,
-        AbuseComplaintTaskAcceptComponent,
-        ApproveArticleTaskAcceptComponent,
-        SuggestArticleTaskAcceptComponent,
-        BasicEditorComponent,
-        CommentComponent,
-        CommentsComponent,
         ArticleIconComponent,
-        ApproveArticleTaskAcceptComponent,
-        AddFriendTaskAcceptComponent,
         SearchComponent,
         PasswordComponent,
         RegisterComponent,
@@ -258,6 +214,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         ThemeFooterComponent,
         ArticleToolbarHotspotComponent,
         BasicOptionsComponent,
+        TaskAcceptComponent,
         ArticleContentHotspotComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([

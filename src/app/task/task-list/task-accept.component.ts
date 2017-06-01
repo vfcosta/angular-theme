@@ -1,24 +1,31 @@
-import { Input, Inject, Component } from 'ng-forward';
-import { AddMemberTaskAcceptComponent } from "../types/add-member/add-member-task-accept.component";
-import { ApproveCommentTaskAcceptComponent } from "../types/approve-comment/approve-comment-task-accept.component";
-import { AddFriendTaskAcceptComponent } from "../types/add-friend/add-friend-task-accept.component";
+import { TaskModule } from './../task.module';
+import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
+import { Component, Input, Inject, Compiler, NgModuleFactory } from "@angular/core";
+import * as types from '../types';
 
 @Component({
     selector: 'task-accept',
-    template: '<div></div>',
-    directives: [AddMemberTaskAcceptComponent]//, /*ApproveCommentTaskAcceptComponent, */ApproveArticleTaskAcceptComponent, AbuseComplaintTaskAcceptComponent, SuggestArticleTaskAcceptComponent]
+    template: `<ng-container *ngIf="myModule && taskComponent">
+                 <ng-container *ngComponentOutlet="taskComponent; ngModuleFactory: myModule;"></ng-container>
+               </ng-container>`
 })
-@Inject("$element", "$scope", "$injector", "$compile")
 export class TaskAcceptComponent {
 
     @Input() task: noosfero.Task;
     @Input() confirmationTask: noosfero.Task;
+    myModule: NgModuleFactory<any>;
+    taskComponent: any;
 
-    ngOnInit() {
-        let componentName = this.task.type.replace(/::/, '').replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-        componentName += "-task-accept";
-        this.$element.replaceWith(this.$compile(`<${componentName} [task]="ctrl.task" [confirmation-task]="ctrl.confirmationTask"></${componentName}>`)(this.$scope));
+    constructor(private compiler: Compiler) {
+        compiler.compileModuleAsync(TaskModule).then(value => {
+            this.myModule = value;
+        });
     }
 
-    constructor(private $element: any, private $scope: ng.IScope, private $injector: ng.auto.IInjectorService, private $compile: ng.ICompileService) { }
+    ngOnInit() {
+        let taskType = `${this.task.type}TaskAcceptComponent`;
+        if (types[taskType]) {
+            this.taskComponent = types[taskType];
+        }
+    }
 }

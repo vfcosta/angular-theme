@@ -1,3 +1,4 @@
+import { RoleService } from './../../lib/ng-noosfero-api/http/role.service';
 import { RegisterService } from '../../lib/ng-noosfero-api/http/register.service';
 import { PasswordService } from '../../lib/ng-noosfero-api/http/password.service';
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
@@ -38,9 +39,8 @@ import { FolderComponent } from './../article/types/folder/folder.component';
 import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { HeaderService } from './../shared/services/header.service';
-import { TaskAcceptComponent } from './../task/task-list/task-accept.component';
 import { Component, Inject, provide } from 'ng-forward';
-import { TaskService } from './../../lib/ng-noosfero-api/http/task.service'
+import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
@@ -103,7 +103,6 @@ export class EnvironmentContent {
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat,
         CustomContentComponent, PermissionDirective,
         BlockComponent,
-        TaskAcceptComponent,
         FolderComponent, BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
@@ -111,7 +110,7 @@ export class EnvironmentContent {
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService,
-        TaskService, ArticleService, RegisterService,
+        TaskService, ArticleService, RegisterService, RoleService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

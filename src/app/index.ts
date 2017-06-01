@@ -1,3 +1,4 @@
+import { TaskAcceptComponent } from './task/task-list/task-accept.component';
 import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { DiscussionPeriodComponent } from './../plugins/comment_paragraph/article/discussion-period/discussion-period.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
@@ -7,7 +8,6 @@ import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.compone
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account';
 import { DiscussionEditorComponent } from './../plugins/comment_paragraph/article/cms/discussion-editor/discussion-editor.component';
-import { ApproveArticleTaskAcceptComponent } from './task/types/approve-article/approve-article-task-accept.component';
 import { PasswordComponent } from './login/new-password.component';
 import { SearchComponent } from './search/search.component';
 import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
@@ -16,9 +16,7 @@ import { CommentsComponent } from './article/comment/comments.component';
 import { ArticleIconComponent } from './article/article-icon/article-icon.component';
 import { ApproveCommentTaskAcceptComponent } from './task/types/approve-comment/approve-comment-task-accept.component';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
-import { SuggestArticleTaskAcceptComponent } from './task/types/suggest-article/suggest-article-task-accept.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
-import { AbuseComplaintTaskAcceptComponent } from './task/types/abuse-complaint/abuse-complaint-task-accept.component';
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
 import { TasksComponent } from './task/tasks/tasks.component';
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
@@ -91,7 +89,6 @@ import { IconPickerComponent } from './shared/components/icon-picker/icon-picker
 import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
-import { AddFriendTaskAcceptComponent } from './task/types/add-friend/add-friend-task-accept.component';
 import { downgradeComponent } from '@angular/upgrade/static';
 import { bundle } from 'ng-forward';
 
@@ -292,19 +289,8 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('tasksMenu',
         downgradeComponent({ component: TasksMenuComponent, inputs: ['taskTypes'] }) as angular.IDirectiveFactory
     ).
-    directive('addFriendTaskAccept',
-        downgradeComponent({ component: AddFriendTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
-    ).
     directive('searchForm',
         downgradeComponent({ component: SearchFormComponent }) as angular.IDirectiveFactory
-    ).
-    directive('abuseComplaintTaskAccept',
-        downgradeComponent({ component: AbuseComplaintTaskAcceptComponent, inputs: ['task'] }) as angular.IDirectiveFactory
-    ).directive('approveArticleTaskAccept',
-        downgradeComponent({ component: ApproveArticleTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
-    ).
-    directive('suggestArticleTaskAccept',
-        downgradeComponent({ component: SuggestArticleTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     ).
     directive('articleBasicEditor',
         downgradeComponent({ component: BasicEditorComponent, inputs: ['article', 'options'] }) as angular.IDirectiveFactory
@@ -323,9 +309,6 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('approveCommentTaskAccept',
         downgradeComponent({ component: ApproveCommentTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
-    ).
-    directive('addFriendTaskAccept',
-        downgradeComponent({ component: AddFriendTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     ).
     directive('search',
         downgradeComponent({ component: SearchComponent }) as angular.IDirectiveFactory
@@ -359,6 +342,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('discussionPeriod',
         downgradeComponent({ component: DiscussionPeriodComponent, inputs: ['article'] }) as angular.IDirectiveFactory
+    ).
+    directive('taskAccept',
+        downgradeComponent({ component: TaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

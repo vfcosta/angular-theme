@@ -1,3 +1,4 @@
+import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { UiSrefDirective } from '../../../shared/directives/ui-sref-directive';
 import { Provider, Component } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
@@ -19,14 +20,15 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             spyOn(mocks.articleService, 'get').and.returnValue(Promise.resolve({ headers: () => { }, data: article }));
-
+            let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 declarations: [ApproveCommentTaskAcceptComponent, TranslatePipe, UiSrefDirective],
                 providers: [
                     { provide: "articleService", useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "$transitions", useValue: mocks.$transitions },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });

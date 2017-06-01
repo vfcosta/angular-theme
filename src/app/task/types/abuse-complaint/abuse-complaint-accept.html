@@ -1,6 +1,6 @@
 <div class="abuse-complaint-details">
     <ul class="abuse-reports">
-        <li class="abuse-report" *ngFor="let abuse_report of task.abuse_reports">
+        <li class="abuse-report" *ngFor="let abuse_report of task?.abuse_reports">
             <div class="reason">{{abuse_report.reason}}</div>
             <div class="info">
                 {{"tasks.abuse_report.reported_by" | translate}} 

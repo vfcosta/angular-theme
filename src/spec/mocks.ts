@@ -581,11 +581,10 @@ export function getMocks() {
         },
         themeService: {
             verifyTheme: (theme: string) => { }
-        }/*,
-        taskService: {
-            getAllPending: () => {},
-            get: (id: any) => { return Promise.resolve({})}
-        }*/
+        },
+        roleService: {
+            getByProfile: (profileId: number, params: any = {}) => { }
+        }
     };
     return mocks;
 };

@@ -1,8 +1,8 @@
 <div class="add-member-details">
   <label>{{"tasks.add_member.accept.select_role" | translate}}</label>
   <div class="form-group roles">
-    <div class="checkbox-nice" ng-repeat="role in ctrl.roles">
-      <input type="checkbox" id="role_{{role.name}}" (click)="ctrl.toggleSelection(role)">
+    <div class="checkbox-nice" *ngFor="let role of roles">
+      <input type="checkbox" id="role_{{role.name}}" (click)="toggleSelection(role)">
       <label for="role_{{role.name}}">
         {{role.name}}
       </label>
