@@ -1,3 +1,4 @@
+import { AddMemberTaskAcceptComponent } from './task/types/add-member/add-member-task-accept.component';
 import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
 import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
@@ -168,7 +169,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         ProfileLinkComponent,
         TasksComponent,
         TasksMenuComponent,
-        AddFriendTaskAcceptComponent,
         SearchFormComponent,
         AbuseComplaintTaskAcceptComponent,
         ApproveArticleTaskAcceptComponent,
@@ -187,6 +187,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         ArticleToolbarHotspotComponent,
         BasicOptionsComponent,
         ArticleContentHotspotComponent,
+        AddMemberTaskAcceptComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -240,7 +241,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         ProfileLinkComponent,
         TasksComponent,
         TasksMenuComponent,
-        AddFriendTaskAcceptComponent,
         SearchFormComponent,
         AbuseComplaintTaskAcceptComponent,
         ApproveArticleTaskAcceptComponent,
@@ -259,6 +259,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         ArticleToolbarHotspotComponent,
         BasicOptionsComponent,
         ArticleContentHotspotComponent,
+        AddMemberTaskAcceptComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

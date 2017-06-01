@@ -1,3 +1,4 @@
+import { RoleService } from './../../lib/ng-noosfero-api/http/role.service';
 import { RegisterService } from '../../lib/ng-noosfero-api/http/register.service';
 import { PasswordService } from '../../lib/ng-noosfero-api/http/password.service';
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
@@ -111,7 +112,7 @@ export class EnvironmentContent {
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService,
-        TaskService, ArticleService, RegisterService,
+        TaskService, ArticleService, RegisterService, RoleService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

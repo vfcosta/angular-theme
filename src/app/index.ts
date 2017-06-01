@@ -1,3 +1,4 @@
+import { AddMemberTaskAcceptComponent } from './task/types/add-member/add-member-task-accept.component';
 import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { DiscussionPeriodComponent } from './../plugins/comment_paragraph/article/discussion-period/discussion-period.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
@@ -326,6 +327,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('addFriendTaskAccept',
         downgradeComponent({ component: AddFriendTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
+    ).
+    directive('addMemberTaskAccept',
+        downgradeComponent({ component: AddMemberTaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
     ).
     directive('search',
         downgradeComponent({ component: SearchComponent }) as angular.IDirectiveFactory

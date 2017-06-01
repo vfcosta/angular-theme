@@ -1,44 +1,47 @@
-import { Provider, provide, Component } from 'ng-forward';
+import { FormsModule } from '@angular/forms';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import * as helpers from "../../../../spec/helpers";
-import { ComponentTestHelper, createClass } from '../../../../spec/component-test-helper';
 import { AddMemberTaskAcceptComponent } from './add-member-task-accept.component';
-
-const htmlTemplate: string = '<add-member-task-accept [task]="ctrl.task" [confirmation-task]="ctrl.confirmationTask"></add-member-task-accept>';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Add Member Task Accept Component", () => {
-
-        let helper: ComponentTestHelper<AddMemberTaskAcceptComponent>;
-        let roleService = jasmine.createSpyObj("roleService", ["getByProfile"]);
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<AddMemberTaskAcceptComponent>;
+        let component: AddMemberTaskAcceptComponent;
         let roles = [{ id: 1 }, { id: 2 }];
         let task = <any>{ target: { id: 5 } };
-        roleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: roles }));
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [AddMemberTaskAcceptComponent],
+        beforeEach(async(() => {
+            spyOn(mocks.roleService, "getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: roles }));
+            TestBed.configureTestingModule({
+                declarations: [AddMemberTaskAcceptComponent, TranslatePipe],
                 providers: [
-                    helpers.createProviderToValue("RoleService", roleService)
-                ].concat(helpers.provideFilters("translateFilter")),
-                properties: { task: task, confirmationTask: task }
+                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: "roleService", useValue: mocks.roleService }
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
+                imports: [FormsModule]
             });
-            helper = new ComponentTestHelper<AddMemberTaskAcceptComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(AddMemberTaskAcceptComponent);
+            component = fixture.componentInstance;
+            component.task = task;
+            component.confirmationTask = task;
+        }));
 
         it("insert role id in roles list when toggle selection", () => {
+            fixture.detectChanges();
             let role = { id: 1 };
-            helper.component.toggleSelection(<any>role);
-            expect(helper.component.confirmationTask.roles).toEqual([role.id]);
+            component.toggleSelection(<any>role);
+            expect(component.confirmationTask.roles).toEqual([role.id]);
         });
 
         it("remove role id from roles list when toggle selection", () => {
             let role = { id: 1 };
-            helper.component.confirmationTask.roles = [role.id];
-            helper.component.toggleSelection(<any>role);
-            expect(helper.component.confirmationTask.roles).toEqual([]);
+            component.confirmationTask.roles = [role.id];
+            component.toggleSelection(<any>role);
+            expect(component.confirmationTask.roles).toEqual([]);
         });
     });
 });
