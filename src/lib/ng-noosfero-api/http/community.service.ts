@@ -76,11 +76,11 @@ export class CommunityService extends RestangularService<noosfero.Community> {
         };
         let invitations = [];
         for (let invitation of people) {
-            invitations.push(invitation.id);
+            invitations.push(`${invitation.id}`);
         }
         let params = { 'contacts': invitations };
 
-        let deferred = this.$q.defer();;
+        let deferred = this.$q.defer();
         let restRequest = this.getElement(communityId).customPOST(params, "invite", null, headers);
         restRequest.then(this.getHandleSuccessFunction(deferred)).catch(this.getHandleErrorFunction(deferred));
         return Observable.from(deferred.promise).map((ret: any) => {
