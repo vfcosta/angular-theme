@@ -80,6 +80,18 @@ describe("Components", () => {
             blocksSavedFn();
             expect((<any>component.originalBlock.settings).display).toBe("never");
         });
-    });
+
+        it("add never option for blocks of other type than main block", () => {
+            expect(component.options.display).toContain('never');
+        });
+
+        it("not add never option for main block", () => {
+            fixture = TestBed.createComponent(BlockEditionComponent);
+            component = fixture.componentInstance;
+            component.block = <noosfero.Block>{ id: 1, settings: <any>{}, type: "MainBlock" };
+            fixture.detectChanges();
+            expect(component.options.display).not.toContain('never');
+        });
+   });
 
 });
