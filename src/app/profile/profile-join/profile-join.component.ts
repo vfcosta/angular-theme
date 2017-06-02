@@ -14,8 +14,8 @@ export class ProfileJoinComponent {
     @Input() profile: noosfero.Profile;
 
     private isMember: boolean;
+    private membershipState: number; // 0 - Is not member, 1 - Waiting Membership, 2 - Is Member
 
-    // @Inject(ProfileService, SessionService, NotificationService)
     constructor( @Inject('profileService') private profileService: ProfileService,
         @Inject('sessionService') private session: SessionService,
         @Inject('notificationService') private notificationService: NotificationService,
@@ -23,17 +23,20 @@ export class ProfileJoinComponent {
     }
 
     ngOnInit() {
-        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, (isMember: boolean) => {
-            this.isMember = isMember;
+        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, (membershipState: number) => {
+            this.isMember = false;
+            if (membershipState === 2) {
+                this.isMember = true;
+            }
         });
         this.loadMembership();
     }
 
     loadMembership() {
         let person = this.session.currentUser() ? this.session.currentUser().person : null;
-        this.profileService.isMember(person, this.profile).then((val: boolean) => {
-            this.isMember = val;
-            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, val);
+        this.profileService.getMembershipState(person, this.profile).then((membershipState: number) => {
+            this.membershipState = membershipState;
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, membershipState);
         });
     }
 
@@ -70,6 +73,10 @@ export class ProfileJoinComponent {
 
     isEnterprise(): boolean {
         return this.profile.type === 'Enterprise';
+    }
+
+    isWaitingMembershipApproval(): boolean {
+        return this.membershipState === 1;
     }
 
 }

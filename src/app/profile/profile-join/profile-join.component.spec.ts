@@ -7,8 +7,6 @@ import { ProfileJoinComponent } from './profile-join.component';
 import * as helpers from "./../../../spec/helpers";
 import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 
-// const htmlTemplate: string = '<profile-join  [profile]="ctrl.profile"></profile-join>';
-
 describe("Components", () => {
 
     describe("Profile Join Component", () => {
@@ -21,10 +19,11 @@ describe("Components", () => {
 
         let retorno: any;
         let translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
-        let profileService = jasmine.createSpyObj("profileService", ["isMember", "addMember", "removeMember"]);
+        let profileService = jasmine.createSpyObj("profileService", ["isMember", "addMember", "removeMember", "getMembershipState"]);
         profileService.isMember = jasmine.createSpy("isMember").and.returnValue(Promise.resolve(true));
         profileService.addMember = jasmine.createSpy("addMember").and.returnValue(Promise.resolve({ data: {} }));
         profileService.removeMember = jasmine.createSpy("removeMember").and.returnValue(Promise.resolve({ data: {} }));
+        profileService.getMembershipState = jasmine.createSpy("getMembershipState").and.returnValue(Promise.resolve({ data: {} }));
         let session = helpers.mocks.sessionWithCurrentUser({});
         session.currentUser().person = <any>{};
 
@@ -80,6 +79,20 @@ describe("Components", () => {
             let compiled = fixture.debugElement;
             component.leave();
             expect(profileService.removeMember).toHaveBeenCalled();
+        });
+
+        it("get membership state", () => {
+            let compiled = fixture.debugElement;
+            component.loadMembership();
+            expect(profileService.getMembershipState).toHaveBeenCalled();
+        });
+
+        it("display wait button when user is waiting membership approval", () => {
+            let compiled = fixture.debugElement;
+            component['isMember'] = false;
+            component['membershipState'] = 1;
+            fixture.detectChanges();
+            expect(compiled.queryAll(By.css('.actions .wait')).length).toEqual(1);
         });
     });
 });
