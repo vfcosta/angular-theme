@@ -25,7 +25,7 @@ export class BlockEditionComponent {
         @Inject("$scope") private $scope: ng.IScope,
         @Inject("eventsHubService") private eventsHubService: EventsHubService) {
         this.options = {
-            display: ["always", "home_page_only", "except_home_page", "never"],
+            display: ["always", "home_page_only", "except_home_page"],
             display_user: ["all", "logged", "not_logged"]
         };
     }
@@ -40,6 +40,9 @@ export class BlockEditionComponent {
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, (owner: noosfero.Profile | noosfero.Environment) => {
             this.originalBlock = angular.copy(this.block);
         });
+
+        if (this.block.type !== 'MainBlock')
+            this.options.display.push('never');
     }
 
     selectOption(optionKey: string, option: string) {
@@ -68,7 +71,7 @@ export class BlockEditionComponent {
         if (this.block._destroy !== this.originalBlock._destroy) {
             blockDiff._destroy = this.block._destroy;
         }
-        blockDiff.box = <noosfero.Box>{id: this.box.id};
+        blockDiff.box = <noosfero.Box>{ id: this.box.id };
         if (!this.block.id) blockDiff.type = this.block.type;
         this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
     }
@@ -79,11 +82,11 @@ export class BlockEditionComponent {
     }
 
     optionsKeys() {
-       return Object.keys(this.options);
+        return Object.keys(this.options);
     }
 
     optionsValues(optionKey: string) {
-       return this.options[optionKey];
+        return this.options[optionKey];
     }
 
     @HostListener('document:click', ['$event'])
