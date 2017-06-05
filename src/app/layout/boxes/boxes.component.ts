@@ -38,6 +38,14 @@ export class BoxesComponent {
         });
     }
 
+    showButton(column: any) {
+        return this.designMode && this.isNotParent(column);
+    }
+
+    isNotParent(column: any) {
+        return column['subcolumns'] === undefined;
+    }
+
     ngOnInit() {
         if (!this.layout) {
             this.setupColumns();
@@ -68,7 +76,9 @@ export class BoxesComponent {
     }
 
     getBoxClass(column: any) {
-        return `col-md-${column['size']}`;
+        let boxClass = `col-md-${column['size']}`;
+        if (!this.isNotParent(column)) boxClass += ` box-column-parent`;
+        return boxClass;
     }
 
     addBlock(box: noosfero.Box, block: noosfero.Block) {
