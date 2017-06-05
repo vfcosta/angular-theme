@@ -38,6 +38,7 @@ export class TaskListComponent {
     ngOnInit() {
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.TASK_CLOSED, (task: noosfero.Task) => {
             Arrays.remove(this.tasks, task);
+            this.tasksGroups = _.values(_.groupBy(this.tasks, 'target.name'));
         });
     }
 

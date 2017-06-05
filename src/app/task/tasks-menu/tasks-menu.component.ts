@@ -17,7 +17,7 @@ export class TasksMenuComponent {
     perPage = 5;
     person: noosfero.Person;
 
-    constructor(@Inject("taskService") private taskService: TaskService,
+    constructor( @Inject("taskService") private taskService: TaskService,
         @Inject("sessionService") private session: SessionService,
         @Inject("authService") private authService: AuthService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService) {
