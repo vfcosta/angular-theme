@@ -1,5 +1,19 @@
 $navbar-font-color: #fff;
 
+.navbar-inverse .navbar-nav {
+  > .open {
+    > a {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    > a:focus {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    > a:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }    
+  }
+}
+
 .navbar {
 
   tasks-menu {
