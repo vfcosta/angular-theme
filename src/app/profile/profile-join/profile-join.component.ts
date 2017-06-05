@@ -24,6 +24,7 @@ export class ProfileJoinComponent {
 
     ngOnInit() {
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, (membershipState: number) => {
+            this.membershipState = membershipState;
             this.isMember = false;
             if (membershipState === 2) {
                 this.isMember = true;
@@ -35,7 +36,6 @@ export class ProfileJoinComponent {
     loadMembership() {
         let person = this.session.currentUser() ? this.session.currentUser().person : null;
         this.profileService.getMembershipState(person, this.profile).then((membershipState: number) => {
-            this.membershipState = membershipState;
             this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, membershipState);
         });
     }
@@ -47,8 +47,8 @@ export class ProfileJoinComponent {
                 this.notificationService.success({ title: "profile.join.moderation.title", message: "profile.join.moderation.message" });
             } else {
                 this.notificationService.success({ title: "profile.join.moderation.title", message: "profile.join.success.message" });
-                this.loadMembership();
             }
+            this.loadMembership();
         });
     }
 
