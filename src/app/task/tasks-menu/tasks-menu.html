@@ -7,7 +7,7 @@
   <div class="dropdown-menu task-panel" *dropdownMenu>
     <div class="task-menu-header">{{"tasks.menu.header" | translate:{tasks: total}:"messageformat"}}</div>
     <task-list [tasks]="tasks"></task-list>
-    <a uiSref="main.profile.tasks" [uiParams]="{profile: person.identifier, taskTypes: taskTypes}" class="all-tasks btn btn-default btn-xs">
+    <a uiSref="main.profile.tasks" [uiParams]="{profile: person.identifier, types: taskTypes.join(',')}" class="all-tasks btn btn-default btn-xs">
       {{"tasks.menu.all" | translate}}
     </a>
   </div>

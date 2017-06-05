@@ -180,10 +180,10 @@ export function noosferoRoutes($stateProvider: any) {
     });
     $stateProvider.state({
         name: 'main.profile.tasks',
-        url: "^/myprofile/:profile/tasks/:taskTypes",
+        url: "^/myprofile/:profile/tasks?types",
         views: {
             "mainBlockContent": {
-                template: '<tasks [task-types]="ctrl.$stateParams[\'taskTypes\']"></tasks>',
+                template: '<tasks [task-types]="ctrl.$stateParams[\'types\']"></tasks>',
                 controllerAs: "ctrl",
                 controller: RouteNg2
             }
