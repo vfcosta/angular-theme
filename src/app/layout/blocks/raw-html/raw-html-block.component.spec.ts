@@ -11,7 +11,7 @@ describe("Components", () => {
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 declarations: [RawHTMLBlockComponent]
-            }).compileComponents();
+            });
         }));
 
         it('display html stored in block settings', () => {

@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -10,12 +10,16 @@ export class RawHTMLBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @ViewChild("container") container;
 
     constructor(private sanitizer: DomSanitizer) { }
 
-    html() {
+    ngOnInit() {
         if (this.block && this.block.settings) {
-            return this.sanitizer.bypassSecurityTrustHtml(this.block.settings.html);
+            const range = document.createRange();
+            range.selectNode(this.container.nativeElement);
+            const fragment = range.createContextualFragment(this.block.settings.html);
+            this.container.nativeElement.appendChild(fragment);
         }
     }
 
