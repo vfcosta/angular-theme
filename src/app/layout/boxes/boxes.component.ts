@@ -76,7 +76,9 @@ export class BoxesComponent {
     }
 
     getBoxClass(column: any) {
-        return `col-md-${column['size']} box-column-parent-` + !this.isNotParent(column);
+        let boxClass = `col-md-${column['size']}`;
+        if (!this.isNotParent(column)) boxClass += ` box-column-parent`;
+        return boxClass;
     }
 
     addBlock(box: noosfero.Box, block: noosfero.Block) {

@@ -5,6 +5,7 @@ Feature: login
 
   Scenario: login from portal homepage
     Given I go to the homepage
+    And I am logged out
     And I follow "Login"
     And I fill in the following:
       | .modal-dialog #email | adminuser |

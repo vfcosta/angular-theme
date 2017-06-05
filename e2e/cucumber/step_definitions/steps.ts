@@ -71,18 +71,13 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         });
     });
 
-    When('I change layout to {stringInDoubleQuotes}', function (stringInDoubleQuotes) {
-        let selector = "ul .layout-config > li .layout-" + stringInDoubleQuotes;
-        let btn = element(by.css("#layout-config-btn"));
-        let ret = btn.click().then(() => {
-             browser.sleep(1000).then(function(){
-                return element(by.css(selector)).click();
-             });
+    When('I change layout to {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
+        return element(by.css("#layout-config-btn")).click().then(() => {
+            return element(by.css(`.layout-config .dropdown-menu .layout-${stringInDoubleQuotes} a.dropdown-item`)).click();
         });
-        return ret;
     });
 
-    Then('I don\'t see a {stringInDoubleQuotes} compoment on {stringInDoubleQuotes}', function (componentTag, divClass) {
-        return expect(element(by.css(divClass))).not.to.have.descendants(componentTag);
+    Then('I see {stringInDoubleQuotes} {int} times', (selector, amount) => {
+        return expect(element.all(by.css(selector)).count()).to.eventually.equal(amount);
     });
 });

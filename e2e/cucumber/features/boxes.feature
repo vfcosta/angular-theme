@@ -11,4 +11,4 @@ Feature: boxes
 
   Scenario: change layout
     When I change layout to "lefttopright"
-    Then I don't see a "add-block" compoment on "box-column-parent-true"
+    Then I see "add-block" 4 times
