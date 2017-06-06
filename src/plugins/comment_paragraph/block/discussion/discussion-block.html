@@ -1,16 +1,20 @@
-<div ng-repeat="card in ctrl.documents" class="">
-  <div ng-if="!ctrl.presentFullContent()" class="a-card panel media" ng-click="ctrl.openDocument(card);">
-    <div class="author media-left" ng-show="card.author.image">
-      <img ng-src="{{card.author.image.url}}" class="img-circle">
+<div *ngFor="let card of documents" class="documents">
+  <div *ngIf="!presentFullContent()" class="a-card panel media">
+    <div class="author media-left" *ngIf="card.author?.image">
+      <img [src]="card.author.image.url" class="img-circle">
     </div>
     <div class="header media-body">
-      <h4 class="title media-heading" ng-bind="card.title"></h4>
+      <h4 class="title media-heading">
+        <a uiSref="main.profile.page" [uiParams]="{ page: card.path, profile: card.profile?.identifier }">
+          {{card.title}}
+        </a>
+      </h4>
       <div class="subheader">
         <discussion-period [article]="card"></discussion-period>
       </div>
-      <div ng-if="ctrl.presentAbstract()" class="abstract media-heading" ng-bind="card.abstract"></div>
+      <div *ngIf="presentAbstract()" class="abstract media-heading" [innerHTML]="card.abstract"></div>
     </div>
-    <img ng-show="card.image" ng-src="{{card.image.url}}" class="img-responsive article-image">
+    <img *ngIf="card.image" [src]="card.image.url" class="img-responsive article-image">
   </div>
-  <noosfero-article ng-if="ctrl.presentFullContent() && card" [article]="card" [profile]="ctrl.profile"></noosfero-article>
+  <!--<noosfero-article *ngIf="presentFullContent() && card" [article]="card" [profile]="profile"></noosfero-article>-->
 </div>

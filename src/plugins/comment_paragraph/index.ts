@@ -7,8 +7,8 @@ import {CommentParagraphArticleContentHotspotComponent} from "./hotspot/article-
 import {DiscussionBlockComponent} from "./block/discussion/discussion-block.component";
 import {DiscussionPeriodComponent} from "./article/discussion-period/discussion-period.component";
 
-export let mainComponents: any = [DiscussionBlockComponent];
-export let ng2MainComponents: any = [AllowCommentComponent, SideCommentsComponent, DiscussionEditorComponent];
+export let mainComponents: any = [];
+export let ng2MainComponents: any = [AllowCommentComponent, SideCommentsComponent, DiscussionEditorComponent, DiscussionBlockComponent];
 export let hotspots: any = [];
 export let ng2Hotspots: any = [CommentParagraphFormHotspotComponent, ExportCommentButtonHotspotComponent, CommentParagraphArticleContentHotspotComponent];
 export let ng2SharedComponents = [DiscussionPeriodComponent];

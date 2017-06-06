@@ -1,3 +1,4 @@
+import { DiscussionBlockComponent } from './../plugins/comment_paragraph/block/discussion/discussion-block.component';
 import { TaskAcceptComponent } from './task/task-list/task-accept.component';
 import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { DiscussionPeriodComponent } from './../plugins/comment_paragraph/article/discussion-period/discussion-period.component';
@@ -345,6 +346,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('taskAccept',
         downgradeComponent({ component: TaskAcceptComponent, inputs: ['task', 'confirmationTask'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoCommentParagraphPluginDiscussionBlock',
+        downgradeComponent({ component: DiscussionBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

@@ -1,4 +1,4 @@
-import {Component, Inject, Input} from "ng-forward";
+import {Component, Inject, Input} from "@angular/core";
 import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
 import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
 import {Arrays} from "./../../../../lib/util/arrays";
@@ -11,9 +11,8 @@ enum PRESENTATION_MODES {
 
 @Component({
     selector: "noosfero-comment-paragraph-plugin-discussion-block",
-    templateUrl: 'plugins/comment_paragraph/block/discussion/discussion-block.html'
+    template: require('plugins/comment_paragraph/block/discussion/discussion-block.html')
 })
-@Inject(BlockService, "$state", ArticleService)
 export class DiscussionBlockComponent {
 
     @Input() block: any;
@@ -25,7 +24,7 @@ export class DiscussionBlockComponent {
 
     static PRESENTATION_MODES = PRESENTATION_MODES;
 
-    constructor(private blockService: BlockService, private $state: any, public articleService: ArticleService) { }
+    constructor(@Inject("blockService") private blockService: BlockService, @Inject("articleService") public articleService: ArticleService) { }
 
     ngOnInit() {
         this.profile = this.owner;
@@ -44,10 +43,6 @@ export class DiscussionBlockComponent {
         this.articleService.subscribeToModelRemoved((article: noosfero.Article) => {
             Arrays.remove(this.documents, article);
         });
-    }
-
-    openDocument(article: any) {
-        this.$state.go("main.profile.page", { page: article.path, profile: article.profile.identifier });
     }
 
     presentAbstract() {

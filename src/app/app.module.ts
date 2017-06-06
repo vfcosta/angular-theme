@@ -21,7 +21,6 @@ import { ContextBarComponent } from './layout/context-bar/context-bar.component'
 import { ProfileHeaderComponent } from './profile/header/profile-header.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
-import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
 import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
@@ -132,7 +131,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         DisplayContentBlockComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
-        DiscussionBlockUpgradeDirective,
         BlockEditionComponent,
         AddBlockComponent,
         TopProfileImageComponent,
