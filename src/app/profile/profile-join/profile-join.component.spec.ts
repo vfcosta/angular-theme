@@ -19,11 +19,12 @@ describe("Components", () => {
 
         let retorno: any;
         let translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
-        let profileService = jasmine.createSpyObj("profileService", ["isMember", "addMember", "removeMember", "getMembershipState"]);
+        let profileService = jasmine.createSpyObj("profileService", ["isMember", "addMember", "removeMember"]);
+        let communityService = jasmine.createSpyObj("communityService", ["getMembershipState"]);
         profileService.isMember = jasmine.createSpy("isMember").and.returnValue(Promise.resolve(true));
         profileService.addMember = jasmine.createSpy("addMember").and.returnValue(Promise.resolve({ data: {} }));
         profileService.removeMember = jasmine.createSpy("removeMember").and.returnValue(Promise.resolve({ data: {} }));
-        profileService.getMembershipState = jasmine.createSpy("getMembershipState").and.returnValue(Promise.resolve({ data: {} }));
+        communityService.getMembershipState = jasmine.createSpy("getMembershipState").and.returnValue(Promise.resolve({ data: {} }));
         let session = helpers.mocks.sessionWithCurrentUser({});
         session.currentUser().person = <any>{};
 
@@ -37,7 +38,8 @@ describe("Components", () => {
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "$uibModal", useValue: helpers.mocks.$modal },
-                    { provide: "translatorService", useValue: translatorService }
+                    { provide: "translatorService", useValue: translatorService },
+                    { provide: "communityService", useValue: communityService }
                 ]
             });
             fixture = TestBed.createComponent(ProfileJoinComponent);
@@ -84,7 +86,7 @@ describe("Components", () => {
         it("get membership state", () => {
             let compiled = fixture.debugElement;
             component.loadMembership();
-            expect(profileService.getMembershipState).toHaveBeenCalled();
+            expect(communityService.getMembershipState).toHaveBeenCalled();
         });
 
         it("display wait button when user is waiting membership approval", () => {

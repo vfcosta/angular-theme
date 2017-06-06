@@ -9,7 +9,7 @@ declare var _: any;
 @Inject("Restangular", "$q", "$log", PersonService)
 export class CommunityService extends RestangularService<noosfero.Community> {
 
-    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected personService: PersonService) {
+    constructor(private Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected personService: PersonService) {
         super(Restangular, $q, $log);
     }
 
@@ -87,4 +87,24 @@ export class CommunityService extends RestangularService<noosfero.Community> {
             return ret.data;
         });
     }
+
+    getCommunityElement(communityId: number): restangular.IElement {
+        return this.Restangular.one('communities', communityId);
+    }
+
+
+
+    getMembershipState(person: noosfero.Person, profile: noosfero.Profile) {
+        let deferred = this.$q.defer();
+        if (person) {
+            this.getCommunityElement(profile.id).customGET('membership', { identifier: person.identifier }).then((result: any) => {
+                deferred.resolve(result.data.membership_state);
+            });
+        } else {
+            deferred.resolve(0);
+        }
+        return deferred.promise;
+    }
+
+
 }

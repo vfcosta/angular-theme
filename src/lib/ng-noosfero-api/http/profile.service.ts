@@ -94,18 +94,6 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         return p.customGET('members', params);
     }
 
-    getMembershipState(person: noosfero.Person, profile: noosfero.Profile) {
-        let deferred = this.$q.defer();
-        if (person) {
-            this.getProfileElement(profile.id).customGET('membership', { identifier: person.identifier }).then((result: any) => {
-                deferred.resolve(result.data.membership_state);
-            });
-        } else {
-            deferred.resolve(0);
-        }
-        return deferred.promise;
-    }
-
     isMember(person: noosfero.Person, profile: noosfero.Profile) {
         let deferred = this.$q.defer();
         if (person) {
