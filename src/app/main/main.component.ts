@@ -35,7 +35,6 @@ import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.servi
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { ArticleViewComponent } from './../article/article-default-view.component';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
-import { FolderComponent } from './../article/types/folder/folder.component';
 import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { HeaderService } from './../shared/services/header.service';
@@ -103,7 +102,7 @@ export class EnvironmentContent {
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat,
         CustomContentComponent, PermissionDirective,
         BlockComponent,
-        FolderComponent, BootstrapResizableDirective,
+        BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
         ArticleEditorComponent, TranslateProfile

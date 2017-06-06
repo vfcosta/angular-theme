@@ -1,3 +1,4 @@
+import { FolderComponent } from './article/types/folder/folder.component';
 import { ArticleBlogComponent } from './article/types/blog/blog.component';
 import { DiscussionBlockComponent } from './../plugins/comment_paragraph/block/discussion/discussion-block.component';
 import { TaskAcceptComponent } from './task/task-list/task-accept.component';
@@ -353,6 +354,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoBlog',
         downgradeComponent({ component: ArticleBlogComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoFolder',
+        downgradeComponent({ component: FolderComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
