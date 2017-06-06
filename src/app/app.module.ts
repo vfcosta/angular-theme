@@ -1,3 +1,4 @@
+import { ArticleBlogComponent } from './article/types/blog/blog.component';
 import { TaskAcceptComponent } from './task/task-list/task-accept.component';
 import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
@@ -154,6 +155,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         BasicOptionsComponent,
         TaskAcceptComponent,
         ArticleContentHotspotComponent,
+        ArticleBlogComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -214,6 +216,7 @@ import { MyDatePickerModule } from 'mydatepicker';
         BasicOptionsComponent,
         TaskAcceptComponent,
         ArticleContentHotspotComponent,
+        ArticleBlogComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

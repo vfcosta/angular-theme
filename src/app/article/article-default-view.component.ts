@@ -1,5 +1,4 @@
 import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
-import {ArticleBlogComponent} from "./types/blog/blog.component";
 import {MacroDirective} from "./macro/macro.directive";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 import { NotificationService } from "./../shared/services/notification.service";
@@ -56,7 +55,7 @@ export class ArticleDefaultViewComponent {
 @Component({
     selector: 'noosfero-article',
     template: 'not-used',
-    directives: [ArticleDefaultViewComponent, ArticleBlogComponent, MacroDirective]
+    directives: [ArticleDefaultViewComponent, MacroDirective]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class ArticleViewComponent {

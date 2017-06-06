@@ -1,3 +1,4 @@
+import { ArticleBlogComponent } from './article/types/blog/blog.component';
 import { DiscussionBlockComponent } from './../plugins/comment_paragraph/block/discussion/discussion-block.component';
 import { TaskAcceptComponent } from './task/task-list/task-accept.component';
 import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
@@ -349,6 +350,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoCommentParagraphPluginDiscussionBlock',
         downgradeComponent({ component: DiscussionBlockComponent, inputs: ['block', 'owner'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoBlog',
+        downgradeComponent({ component: ArticleBlogComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
