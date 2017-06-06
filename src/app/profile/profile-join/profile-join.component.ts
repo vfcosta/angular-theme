@@ -1,5 +1,5 @@
 import { Inject, Input, Component, EventEmitter, Output } from '@angular/core';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService, MemebershipStates } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { SessionService } from "./../../login";
 import { NotificationService } from "../../shared/services/notification.service";
 import { EventsHubService } from '../../shared/services/events-hub.service';
@@ -26,7 +26,7 @@ export class ProfileJoinComponent {
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, (membershipState: number) => {
             this.membershipState = membershipState;
             this.isMember = false;
-            if (membershipState === 2) {
+            if (membershipState === MemebershipStates.Member) {
                 this.isMember = true;
             }
         });
@@ -76,7 +76,7 @@ export class ProfileJoinComponent {
     }
 
     isWaitingMembershipApproval(): boolean {
-        return this.membershipState === 1;
+        return this.membershipState === MemebershipStates.WaitingForApproval;
     }
 
 }
