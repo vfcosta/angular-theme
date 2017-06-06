@@ -88,10 +88,10 @@ describe("Components", () => {
         });
 
         it("presentAbstract display full content", () => {
-            // component.block = { settings: { presentation_mode: 'full_content' } };
-            // component.ngOnInit();
-            // fixture.detectChanges();
-            // expect(fixture.debugElement.queryAll(By.css('noosfero-article')).length).toEqual(1);
+            component.block = { settings: { presentation_mode: 'full_content' } };
+            component.ngOnInit();
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('noosfero-default-article')).length).toEqual(1);
         });
 
         /**

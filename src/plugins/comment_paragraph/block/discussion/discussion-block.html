@@ -16,5 +16,5 @@
     </div>
     <img *ngIf="card.image" [src]="card.image.url" class="img-responsive article-image">
   </div>
-  <!--<noosfero-article *ngIf="presentFullContent() && card" [article]="card" [profile]="profile"></noosfero-article>-->
+  <noosfero-default-article *ngIf="presentFullContent() && card" [article]="card" [profile]="profile"></noosfero-default-article>
 </div>
