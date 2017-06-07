@@ -1,5 +1,4 @@
-import {Component, Input, Inject} from "ng-forward";
-
+import {Component, Input, Inject} from "@angular/core";
 import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
 
 /**
@@ -10,9 +9,8 @@ import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.servi
  */
 @Component({
     selector: "noosfero-blog",
-    templateUrl: "app/article/types/blog/blog.html"
+    template: require("app/article/types/blog/blog.html")
 })
-@Inject(ArticleService)
 export class ArticleBlogComponent {
 
     @Input() article: noosfero.Article;
@@ -23,17 +21,17 @@ export class ArticleBlogComponent {
     private currentPage: number;
     private totalPosts: number = 0;
 
-    constructor(private articleService: ArticleService) { }
+    constructor(@Inject("articleService") private articleService: ArticleService) { }
 
     ngOnInit() {
-        this.loadPage();
+        this.loadPage({ page: 1 });
     }
 
-    loadPage() {
+    loadPage($event: any) {
         let filters = {
             content_type: "TextArticle",
             per_page: this.perPage,
-            page: this.currentPage
+            page: $event.page
         };
 
         this.articleService

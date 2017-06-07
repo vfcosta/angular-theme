@@ -1,3 +1,8 @@
+import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
+import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
+import { ArticleDefaultViewComponent } from './article/types/default/article-default.component';
+import { FolderComponent } from './article/types/folder/folder.component';
+import { ArticleBlogComponent } from './article/types/blog/blog.component';
 import { TaskAcceptComponent } from './task/task-list/task-accept.component';
 import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspot.component';
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
@@ -21,7 +26,6 @@ import { ContextBarComponent } from './layout/context-bar/context-bar.component'
 import { ProfileHeaderComponent } from './profile/header/profile-header.component';
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
-import { DiscussionBlockUpgradeDirective } from './../plugins/comment_paragraph/block/discussion/discussion-block.upgrade.directive';
 import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
@@ -46,7 +50,6 @@ import { ProfilePersonalDataComponent } from './profile/configuration/personal-d
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
 import { NoosferoUrlPipe } from './shared/pipes/noosfero-url.ng2.filter';
 import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
-import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';
 import { MembersBlockComponent } from './layout/blocks/members/members-block.component';
@@ -74,6 +77,7 @@ import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/
 import * as plugins from "../plugins";
 import { SharedModule } from './shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
+import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
 
 @NgModule({
     imports: [
@@ -92,6 +96,9 @@ import { MyDatePickerModule } from 'mydatepicker';
         TagCloudModule,
         SharedModule,
         MyDatePickerModule,
+        DynamicHTMLModule.forRoot({
+            components: plugins.macros
+        }),
     ],
     declarations: [
         FooterComponent,
@@ -132,7 +139,6 @@ import { MyDatePickerModule } from 'mydatepicker';
         DisplayContentBlockComponent,
         TagsBlockComponent,
         BreadcrumbsBlockComponent,
-        DiscussionBlockUpgradeDirective,
         BlockEditionComponent,
         AddBlockComponent,
         TopProfileImageComponent,
@@ -156,6 +162,9 @@ import { MyDatePickerModule } from 'mydatepicker';
         BasicOptionsComponent,
         TaskAcceptComponent,
         ArticleContentHotspotComponent,
+        ArticleBlogComponent,
+        FolderComponent,
+        ArticleDefaultViewComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -216,6 +225,9 @@ import { MyDatePickerModule } from 'mydatepicker';
         BasicOptionsComponent,
         TaskAcceptComponent,
         ArticleContentHotspotComponent,
+        ArticleBlogComponent,
+        FolderComponent,
+        ArticleDefaultViewComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

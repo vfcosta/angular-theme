@@ -1,127 +1,104 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Provider, Input, provide, Component} from 'ng-forward';
+import { By } from '@angular/platform-browser';
 import {provideFilters} from '../../../../spec/helpers';
 import {DiscussionBlockComponent} from './discussion-block.component';
-import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import * as helpers from "./../../../../spec/helpers";
-
-const htmlTemplate: string = '<noosfero-comment-paragraph-plugin-discussion-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-comment-paragraph-plugin-discussion-block>';
-
-const tcb = new TestComponentBuilder();
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
     describe("Discussion Block Component", () => {
-
-        let helper: ComponentTestHelper<DiscussionBlockComponent>;
+        let mocks = helpers.getMocks();
         let settingsObj = {};
         let article = <noosfero.Article>{ name: "article1" };
-        let mockedBlockService = {
-            getApiContent: (content: any): any => {
-                return Promise.resolve({ articles: [article], headers: (name: string) => { return name; } });
-            }
-        };
-
-        let articleService: any = helpers.mocks.articleService;
         let profile = { name: 'profile-name' };
+        let fixture: ComponentFixture<DiscussionBlockComponent>;
+        let component: DiscussionBlockComponent;
+        let onRemove: Function;
 
-        let state = jasmine.createSpyObj("state", ["go"]);
-
-        let providers = [
-            new Provider('$state', { useValue: state }),
-            new Provider('BlockService', {
-                useValue: mockedBlockService
-            }),
-            new Provider('ArticleService', { useValue: articleService })
-        ].concat(provideFilters("truncateFilter", "stripTagsFilter", "translateFilter", "amDateFormatFilter"));
-
-        beforeEach(angular.mock.module("templates"));
-
-        beforeEach((done) => {
-            let cls = createClass({
-                template: htmlTemplate,
-                directives: [DiscussionBlockComponent],
-                providers: providers,
-                properties: { block: {} }
+        beforeEach(async(() => {
+            spyOn(mocks.blockService, "getApiContent").and.returnValue(Promise.resolve({ articles: [article], headers: (name: string) => { return name; } }));
+            mocks.articleService.subscribeToModelRemoved = (fn: Function) => { onRemove = fn; };
+            TestBed.configureTestingModule({
+                declarations: [DiscussionBlockComponent],
+                providers: [
+                    { provide: "blockService", useValue: mocks.blockService },
+                    { provide: "articleService", useValue: mocks.articleService },
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
             });
-            helper = new ComponentTestHelper<DiscussionBlockComponent>(cls, done);
-        });
+            fixture = TestBed.createComponent(DiscussionBlockComponent);
+            component = fixture.componentInstance;
+            component.block = {};
+            fixture.detectChanges();
+        }));
 
         it("get discussions from the block service", () => {
-            expect(helper.component.documents).toEqual([jasmine.objectContaining({ name: "article1" })]);
-            expect(helper.component.block.hide).toEqual(false);
+            expect(component.documents).toEqual([jasmine.objectContaining({ name: "article1" })]);
+            expect(component.block.hide).toEqual(false);
         });
 
-        it("go to article page when open a document", () => {
-            let block = helper.component;
-            block.openDocument({ path: "path", profile: { identifier: "identifier" } });
-            expect(state.go).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "identifier" });
-        });
-
-        it("verify removed article has been removed from list", () => {
-            expect(helper.component.documents.length).toEqual(1);
+        it("verify removed article has been removed from list", fakeAsync(() => {
+            tick();
+            expect(component.documents.length).toEqual(1);
             simulateRemovedEvent();
-            expect(helper.component.documents.length).toEqual(0);
-        });
+            expect(component.documents.length).toEqual(0);
+        }));
 
         it("presentAbstract return true if block presentation mode is title_and_abstract", () => {
-
-            helper.component.block = { settings: { presentation_mode: 'title_and_abstract' } };
-            helper.component.ngOnInit();
-            expect(helper.component.presentAbstract()).toEqual(true);
+            component.block = { settings: { presentation_mode: 'title_and_abstract' } };
+            component.ngOnInit();
+            expect(component.presentAbstract()).toEqual(true);
         });
 
         it("presentAbstract return false if block presentation mode is title_only", () => {
-
-            helper.component.block = { settings: { presentation_mode: 'title_only' } };
-            helper.component.ngOnInit();
-            expect(helper.component.presentAbstract()).toEqual(false);
+            component.block = { settings: { presentation_mode: 'title_only' } };
+            component.ngOnInit();
+            expect(component.presentAbstract()).toEqual(false);
         });
 
         it("presentAbstract return true if block presentation mode is full_content", () => {
-
-            helper.component.block = { settings: { presentation_mode: 'full_content' } };
-            helper.component.ngOnInit();
-            expect(helper.component.presentAbstract()).toEqual(false);
+            component.block = { settings: { presentation_mode: 'full_content' } };
+            component.ngOnInit();
+            expect(component.presentAbstract()).toEqual(false);
         });
 
         it("presentAbstract display abstract content", () => {
-            helper.component.block = { settings: { presentation_mode: 'title_and_abstract' } };
-            helper.component.ngOnInit();
-            helper.detectChanges();
-            expect(helper.all(".abstract").length).toEqual(1);
+            component.block = { settings: { presentation_mode: 'title_and_abstract' } };
+            component.ngOnInit();
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('.abstract')).length).toEqual(1);
         });
 
         it("presentFullContent return true if block presentation mode is full_content", () => {
-            helper.component.block = { settings: { presentation_mode: 'full_content' } };
-            helper.component.ngOnInit();
-            expect(helper.component.presentFullContent()).toEqual(true);
+            component.block = { settings: { presentation_mode: 'full_content' } };
+            component.ngOnInit();
+            expect(component.presentFullContent()).toEqual(true);
         });
 
         it("presentFullContent return false if block presentation mode is title_only", () => {
-            helper.component.block = { settings: { presentation_mode: 'title_only' } };
-            helper.component.ngOnInit();
-            expect(helper.component.presentFullContent()).toEqual(false);
+            component.block = { settings: { presentation_mode: 'title_only' } };
+            component.ngOnInit();
+            expect(component.presentFullContent()).toEqual(false);
         });
 
         it("presentFullContent return true if block presentation mode is title_and_abstract", () => {
-            helper.component.block = { settings: { presentation_mode: 'title_and_abstract' } };
-            helper.component.ngOnInit();
-            expect(helper.component.presentFullContent()).toEqual(false);
+            component.block = { settings: { presentation_mode: 'title_and_abstract' } };
+            component.ngOnInit();
+            expect(component.presentFullContent()).toEqual(false);
         });
 
         it("presentAbstract display full content", () => {
-            helper.component.block = { settings: { presentation_mode: 'full_content' } };
-            helper.component.ngOnInit();
-            helper.detectChanges();
-
-            expect(helper.all("noosfero-article").length).toEqual(1);
+            component.block = { settings: { presentation_mode: 'full_content' } };
+            component.ngOnInit();
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('noosfero-default-article')).length).toEqual(1);
         });
 
         /**
          * Simulate the ArticleService ArticleEvent.removed event
          */
         function simulateRemovedEvent() {
-            helper.component.articleService["modelRemovedEventEmitter"].next(article);
+            onRemove(article);
         }
     });
 });

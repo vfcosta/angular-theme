@@ -1,22 +1,18 @@
 $balloon-selected-color: #50BF68;
 $balloon-color: #c4c4c4;
 
-comment-paragraph-plugin-allow-comment {
+.macro.article_comments.paragraph_comment  {
   .paragraph {
     width: 100%;
     &.active {
       width: 80%;
     }
-    .popover {
-      &.right > .arrow {
-      }
-    }
     .paragraph-content {
-      width: 94%;
+      width: 90%;
       display: inline-block;
     }
     .paragraph-actions {
-      width: 3%;
+      width: 4%;
       display: inline-block;
       vertical-align: top;
       margin-left: 10px;

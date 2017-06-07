@@ -1,59 +1,40 @@
-import { providers } from 'ng-forward/cjs/testing/providers';
-import { Input, provide, Component } from 'ng-forward';
+import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
+import { MomentModule } from 'angular2-moment';
+import { By } from '@angular/platform-browser';
 import { FolderComponent } from './folder.component';
-import { ComponentTestHelper, createClass } from './../../../../spec/component-test-helper';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { NgPipesModule } from 'ngx-pipes';
 import * as helpers from "../../../../spec/helpers";
 
-const htmlTemplate: string = '<noosfero-folder [article]="ctrl.article" [profile]="ctrl.profile"></noosfero-folder>';
-
 describe("Folder Component", () => {
+    let fixture: ComponentFixture<FolderComponent>;
+    let component: FolderComponent;
+    let mocks = helpers.getMocks();
+    let article1 = <noosfero.Article>{ id: 1, title: 'The article test' };
+    let article2 = <noosfero.Article>{ id: 1, title: 'The article test' };
+    let articles = [ article1, article2 ];
 
-    let article1 = <noosfero.Article>{
-        id: 1,
-        title: 'The article test'
-    };
-
-    let article2 = <noosfero.Article>{
-        id: 1,
-        title: 'The article test'
-    };
-
-    let articles = [article1, article2];
-
-    let articleService = {
-        getChildren: (article_id: number, filters: {}) => {
-            return helpers.mocks.promiseResultTemplate({ data: articles, headers: (attr: String) => { return 2; } });
-        }
-    };
-
-    let helper: ComponentTestHelper<FolderComponent>;
-
-    beforeEach(angular.mock.module("templates"));
-
-    beforeEach((done) => {
-
-        providers((provide: any) => {
-            return <any>[
-                provide('ArticleService', {
-                    useValue: articleService
-                })
-            ];
+    beforeEach(async(() => {
+        spyOn(mocks.articleService, "getChildren").and.returnValue(Promise.resolve({ data: articles, headers: (attr: String) => { return 2; } }));
+        TestBed.configureTestingModule({
+            declarations: [FolderComponent, DateFormatPipe],
+            providers: [
+                { provide: "articleService", useValue: mocks.articleService },
+                { provide: "amParseFilter", useValue: mocks.amParseFilter }
+            ],
+            schemas: [NO_ERRORS_SCHEMA],
+            imports: [NgPipesModule, MomentModule]
         });
-        let providersHelper = [
-            provide('ArticleService', { useValue: articleService })
-        ];
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [FolderComponent],
-            providers: providersHelper,
-            properties: {
-                posts: articles
-            }
-        });
-        helper = new ComponentTestHelper<FolderComponent>(cls, done);
-    });
+        fixture = TestBed.createComponent(FolderComponent);
+        component = fixture.componentInstance;
+        component.article = <noosfero.Article>{};
+        component.profile = <noosfero.Profile>{};
+        component['posts'] = articles;
+    }));
 
     it("renders the folder content", () => {
-        expect(helper.all('.folder .media').length).toEqual(2);
+        fixture.detectChanges();
+        expect(fixture.debugElement.queryAll(By.css('.folder .media')).length).toEqual(2);
     });
 });

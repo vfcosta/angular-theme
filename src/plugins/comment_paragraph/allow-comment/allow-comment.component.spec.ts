@@ -28,11 +28,14 @@ describe("Components", () => {
         };
         let fixture: ComponentFixture<AllowCommentComponent>;
         let component: AllowCommentComponent;
+        let article = <any>{setting: {comment_paragraph_plugin_activate: true}, accept_comments: true};
 
         beforeEach(async(() => {
+            spyOn(mocks.articleService, "getCurrent").and.returnValue(Promise.resolve(article));
             TestBed.configureTestingModule({
                 declarations: [AllowCommentComponent],
                 providers: [
+                    { provide: "articleService", useValue: mocks.articleService },
                     { provide: "commentService", useValue: mocks.commentService },
                     { provide: "permissionService", useValue: mocks.permissionService },
                     { provide: "commentParagraphService", useValue: serviceMock },
@@ -45,7 +48,7 @@ describe("Components", () => {
             component = fixture.componentInstance;
             component.content = "";
             component.paragraphUuid = "uuid";
-            component.article = <any>{setting: {comment_paragraph_plugin_activate: true}, accept_comments: true};
+            component.article = article;
             fixture.detectChanges();
         }));
 

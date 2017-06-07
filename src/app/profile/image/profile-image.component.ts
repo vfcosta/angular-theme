@@ -40,7 +40,6 @@ export class ProfileImageComponent {
 
     constructor( @Inject("profileService") private profileService: ProfileService,
         @Inject("permissionService") private permissionService: PermissionService,
-        @Inject("$scope") private $scope: ng.IScope,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
         @Inject("notificationService") private notificationService: NotificationService) {
     }

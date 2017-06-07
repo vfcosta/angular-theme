@@ -1,5 +1,4 @@
-import { Component, Input, Inject } from "ng-forward";
-
+import { Component, Input, Inject } from "@angular/core";
 import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
 
 /**
@@ -10,9 +9,8 @@ import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.ser
  */
 @Component({
     selector: "noosfero-folder",
-    templateUrl: "app/article/types/folder/folder.html"
+    template: require("app/article/types/folder/folder.html")
 })
-@Inject(ArticleService)
 export class FolderComponent {
 
     @Input() article: noosfero.Article;
@@ -23,24 +21,20 @@ export class FolderComponent {
     private currentPage: number;
     private totalPosts: number = 0;
 
-    constructor(private articleService: ArticleService) { }
+    constructor(@Inject("articleService") private articleService: ArticleService) { }
 
     ngOnInit() {
-        this.loadPage();
+        this.loadPage({ page: 1 });
     }
 
-    loadPage() {
+    loadPage($event: any) {
         let filters = {
             per_page: this.perPage,
-            page: this.currentPage
+            page: $event.page
         };
-
-        this.articleService
-            .getChildren(this.article, filters)
-            .then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                this.totalPosts = <number>result.headers("total");
-                this.posts = result.data;
-            });
+        this.articleService.getChildren(this.article, filters).then((result: noosfero.RestResult<noosfero.Article[]>) => {
+            this.totalPosts = <number>result.headers("total");
+            this.posts = result.data;
+        });
     }
-
 }

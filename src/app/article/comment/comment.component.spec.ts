@@ -21,7 +21,6 @@ describe("Components", () => {
                     { provide: "commentService", useValue: mocks.commentService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter },
-                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

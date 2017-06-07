@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
 import {Component, HostListener, Input, Inject, ViewChild, ElementRef} from "@angular/core";
 import {SideCommentsComponent} from "../side-comments/side-comments.component";
 import {CommentParagraphEventService} from "../events/comment-paragraph-event.service";
@@ -6,7 +7,7 @@ import {CommentService} from "./../../../lib/ng-noosfero-api/http/comment.servic
 import {PermissionService} from "../../../app/shared/services/permission.service";
 
 @Component({
-    selector: "comment-paragraph-plugin-allow-comment",
+    selector: '[data-macro="comment_paragraph_plugin\/allow_comment"]',
     template: require("plugins/comment_paragraph/allow-comment/allow-comment.html"),
 })
 export class AllowCommentComponent {
@@ -22,15 +23,25 @@ export class AllowCommentComponent {
         @Inject("commentParagraphService") private commentParagraphService: CommentParagraphService,
         @Inject("commentService") private commentService: CommentService,
         @Inject("permissionService") private permissionService: PermissionService,
+        @Inject("articleService") private articleService: ArticleService,
         private elementRef: ElementRef
     ) { }
+
+    dynamicOnMount(attr: Map<string, string>, content: string) {
+        this.paragraphUuid = attr.get('data-macro-paragraph_uuid');
+        this.content = content;
+    }
 
     ngOnInit() {
         this.commentParagraphEventService.subscribeToggleCommentParagraph((article: noosfero.Article) => {
             this.article = article;
         });
-        this.commentParagraphService.commentParagraphCount(this.article, this.paragraphUuid).then((count: number) => {
-            this.commentsCount = count ? count : 0;
+        this.articleService.getCurrent().then((article: noosfero.Article) => {
+            this.article = article;
+        }).then(() => {
+            this.commentParagraphService.commentParagraphCount(this.article, this.paragraphUuid).then((count: number) => {
+                this.commentsCount = count ? count : 0;
+            });
         });
 
         this.commentService.subscribeToModelAdded((comment: noosfero.CommentParagraph) => {

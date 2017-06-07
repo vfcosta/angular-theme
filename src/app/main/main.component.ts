@@ -1,3 +1,4 @@
+import { BlockService } from './../../lib/ng-noosfero-api/http/block.service';
 import { RoleService } from './../../lib/ng-noosfero-api/http/role.service';
 import { RegisterService } from '../../lib/ng-noosfero-api/http/register.service';
 import { PasswordService } from '../../lib/ng-noosfero-api/http/password.service';
@@ -34,8 +35,6 @@ import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.servi
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { ArticleViewComponent } from './../article/article-default-view.component';
 import { ArticleEditorComponent } from './../article/cms/article-editor/article-editor.component';
-import { ArticleBlogComponent } from './../article/types/blog/blog.component';
-import { FolderComponent } from './../article/types/folder/folder.component';
 import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { HeaderService } from './../shared/services/header.service';
@@ -99,18 +98,18 @@ export class EnvironmentContent {
     selector: 'main',
     template: '<ui-view/>',
     directives: [
-        ArticleBlogComponent, ArticleViewComponent, BoxesComponent, BlockContentComponent,
+        ArticleViewComponent, BoxesComponent, BlockContentComponent,
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat,
         CustomContentComponent, PermissionDirective,
         BlockComponent,
-        FolderComponent, BootstrapResizableDirective,
+        BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
         ArticleEditorComponent, TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService,
-        TaskService, ArticleService, RegisterService, RoleService,
+        TaskService, ArticleService, RegisterService, RoleService, BlockService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

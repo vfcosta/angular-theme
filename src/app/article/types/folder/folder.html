@@ -1,26 +1,25 @@
 <div class="folder">
-  <div class="page-header" ng-show="!ctrl.article.image">
-    <h1 ng-bind="ctrl.article.title"></h1>
+  <div class="page-header" *ngIf="!article?.image">
+    <h1>{{article.title}}</h1>
   </div>
-
   <div>
-    <div ng-repeat="child in ctrl.posts | orderBy: 'created_at':true" class="media">
+    <div *ngFor="let child of posts | orderBy: 'created_at':true" class="media">
       <div class="media-left">
         <noosfero-article-icon [article]="child"></noosfero-article-icon>
       </div>
       <div class="media-body">
-        <a class="title" ui-sref="main.profile.page({profile: ctrl.profile.identifier, page: child.path})">
-          <h4 class="media-heading" ng-bind="child.title"></h4>
+        <a class="title" uiSref="main.profile.page" [uiParams]="{profile: profile.identifier, page: child.path}">
+          <h4 class="media-heading">{{child.title}}</h4>
         </a>
         <span class="time">
-          <i class="fa fa-clock-o"></i> <span am-time-ago="child.created_at | dateFormat"></span>
+          <i class="fa fa-clock-o"></i> <span>{{child.created_at | dateFormat | amTimeAgo}}</span>
         </span>
       </div>
     </div>
   </div>
 
-  <uib-pagination ng-model="ctrl.currentPage" total-items="ctrl.totalPosts" class="pagination-sm center-block"
-    boundary-links="true" items-per-page="ctrl.perPage" ng-change="ctrl.loadPage()"
-    first-text="«" last-text="»" previous-text="‹" next-text="›">
-  </uib-pagination>
+  <pagination *ngIf="totalPosts>0" [totalItems]="totalPosts" [itemsPerPage]="perPage"
+    [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
+    firstText="«" lastText="»" previousText="‹" nextText="›"
+    class="pagination-sm center-block"></pagination>
 </div>

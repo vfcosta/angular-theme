@@ -25,7 +25,6 @@ describe("Components", () => {
                     { provide: "commentService", useValue: mocks.commentService },
                     { provide: "postCommentEventService", useValue: postCommentEventService },
                     { provide: "translatorService", useValue: mocks.translatorService },
-                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [NgPipesModule]

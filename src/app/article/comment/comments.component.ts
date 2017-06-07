@@ -21,8 +21,7 @@ export class CommentsComponent {
     newComment = <noosfero.Comment>{};
 
     constructor(
-        @Inject('commentService') protected commentService: CommentService,
-        @Inject("$scope") private $scope: ng.IScope) { }
+        @Inject('commentService') protected commentService: CommentService) { }
 
     ngOnInit() {
         if (this.parent) {

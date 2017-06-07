@@ -1,24 +1,26 @@
 <div class="blog">
-  <div class="blog-cover" ng-show="ctrl.article.image">
-    <img ng-src="{{ctrl.article.image.url}}" class="img-responsive">
-    <h3 ng-bind="ctrl.article.title"></h3>
+  <div class="blog-cover" *ngIf="article.image">
+    <img [src]="article.image.url" class="img-responsive">
+    <h3>{{article.title}}</h3>
   </div>
 
-  <div class="page-header" ng-show="!ctrl.article.image">
-    <h1 ng-bind="ctrl.article.title"></h1>
+  <div class="page-header" *ngIf="!article.image">
+    <h1>{{article.title}}</h1>
   </div>
 
   <div>
-    <div ng-repeat="child in ctrl.posts | orderBy: 'created_at':true">
+    <div *ngFor="let child of posts | orderBy: 'created_at':true">
       <div class="page-header">
-        <a class="title" ui-sref="main.profile.page({profile: ctrl.profile.identifier, page: child.path})"><h2 ng-bind="child.title"></h2></a>
-        <div class="post-lead" ng-bind-html="child.body | truncate: 500: '...': true"></div>
+        <a class="title" uiSref="main.profile.page" [uiParams]="{profile: profile.identifier, page: child.path}">
+          <h2>{{child.title}}</h2>
+        </a>
+        <div class="post-lead">{{child.body | stripTags | shorten: 500: '...': true}}</div>
       </div>
     </div>
   </div>
 
-  <uib-pagination ng-model="ctrl.currentPage" total-items="ctrl.totalPosts" class="pagination-sm center-block"
-    boundary-links="true" items-per-page="ctrl.perPage" ng-change="ctrl.loadPage()"
-    first-text="«" last-text="»" previous-text="‹" next-text="›">
-  </uib-pagination>
+<pagination *ngIf="totalPosts>0" [totalItems]="totalPosts" [itemsPerPage]="perPage"
+  [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
+  firstText="«" lastText="»" previousText="‹" nextText="›"
+  class="pagination-sm center-block"></pagination>
 </div>

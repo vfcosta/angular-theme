@@ -1,0 +1,32 @@
+<div class="article" *ngIf="article">
+    <div class="page-header">
+        <h1>{{article.title}}</h1>
+    </div>
+    <div class="sub-header clearfix">
+        <div class="article-toolbar">
+            <a href="#" [permission]="article.permissions" permissionAction="allow_edit" class="btn btn-default btn-xs edit-article"
+                uiSref="main.cmsEdit" [uiParams]="{profile: profile.identifier, id: article.id}">
+                <i class="fa fa-pencil-square-o fa-fw fa-lg"></i> {{"article.actions.edit" | translate}}
+            </a>
+            <a href="#" [permission]="article.permissions" permissionAction="allow_delete" class="btn btn-default btn-xs delete-article"
+                (click)="delete()">
+                <i class="fa fa-remove fa-fw fa-lg"></i> {{"article.actions.delete" | translate}}
+            </a>
+            <noosfero-hotspot-article-toolbar [article]="article"></noosfero-hotspot-article-toolbar>
+        </div>
+        <div class="page-info pull-right small text-muted">
+            <span class="time">
+                <i class="fa fa-clock-o"></i> <span am-time-ago="article.created_at | dateFormat"></span>
+            </span>
+            <span class="author" *ngIf="article.author">
+                <i class="fa fa-user"></i>
+                <profile-link [profile]="article.author"></profile-link>
+            </span>
+        </div>
+    </div>
+    <noosfero-hotspot-article-content [article]="article"></noosfero-hotspot-article-content>
+    <div class="page-body">
+        <dynamic-html [content]="article.body"></dynamic-html>
+    </div>
+    <noosfero-comments [article]="article"></noosfero-comments>
+</div>
