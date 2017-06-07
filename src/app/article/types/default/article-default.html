@@ -26,7 +26,7 @@
     </div>
     <noosfero-hotspot-article-content [article]="article"></noosfero-hotspot-article-content>
     <div class="page-body">
-        <div [innerHTML]="article.body"></div>
+        <dynamic-html [content]="article.body"></dynamic-html>
     </div>
     <noosfero-comments [article]="article"></noosfero-comments>
 </div>

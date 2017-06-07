@@ -13,6 +13,7 @@ export let ng2MainComponents: any = [];
 export let hotspots: any = [];
 export let ng2Hotspots: any = [];
 export let ng2SharedComponents: any = [];
+export let macros: any = [];
 
 let enabledPlugins = [
     commentParagraph,
@@ -31,4 +32,5 @@ enabledPlugins.forEach((plugin: any) => {
     if (plugin.ng2SharedComponents) ng2SharedComponents = ng2SharedComponents.concat(plugin.ng2SharedComponents);
     hotspots = hotspots.concat(plugin.hotspots);
     if (plugin.ng2Hotspots) ng2Hotspots = ng2Hotspots.concat(plugin.ng2Hotspots);
+    if (plugin.macros) macros = macros.concat(plugin.macros);
 });

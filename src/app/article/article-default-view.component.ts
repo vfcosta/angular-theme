@@ -1,5 +1,4 @@
 import { bundle, Input, Inject, Component, Directive } from 'ng-forward';
-import {MacroDirective} from "./macro/macro.directive";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 import { NotificationService } from "./../shared/services/notification.service";
 import {PermissionDirective} from '../shared/components/permission/permission.directive';
@@ -14,7 +13,6 @@ import {PermissionDirective} from '../shared/components/permission/permission.di
 @Component({
     selector: 'noosfero-article',
     template: 'not-used',
-    directives: [MacroDirective]
 })
 @Inject("$element", "$scope", "$injector", "$compile")
 export class ArticleViewComponent {

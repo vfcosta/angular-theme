@@ -1,5 +1,5 @@
+import { DomSanitizer } from '@angular/platform-browser';
 import { Input, Inject, Component, Directive } from '@angular/core';
-import {MacroDirective} from "../../macro/macro.directive";
 import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
 import { NotificationService } from "../../../shared/services/notification.service";
 import {PermissionDirective} from '../../../shared/components/permission/permission.directive';
@@ -22,7 +22,8 @@ export class ArticleDefaultViewComponent {
 
     constructor(@Inject("$state") private $state: ng.ui.IStateService,
         @Inject("articleService") public articleService: ArticleService,
-        @Inject("notificationService") public notificationService: NotificationService) {
+        @Inject("notificationService") public notificationService: NotificationService,
+        private sanitizer: DomSanitizer) {
         // Subscribe to the Article Removed Event
         this.articleService.subscribeToModelRemoved((article: noosfero.Article) => {
             if (this.article.parent) {

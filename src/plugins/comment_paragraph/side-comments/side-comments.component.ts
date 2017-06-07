@@ -14,9 +14,8 @@ export class SideCommentsComponent extends CommentsComponent {
     @Input() fullPagination = true;
 
     constructor(@Inject('commentService') commentService: CommentService,
-        @Inject('$scope') $scope: ng.IScope,
         @Inject("commentParagraphService") private commentParagraphService: CommentParagraphService) {
-        super(commentService, $scope);
+        super(commentService);
     }
 
     ngOnInit() {

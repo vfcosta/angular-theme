@@ -12,3 +12,4 @@ export let ng2MainComponents: any = [AllowCommentComponent, SideCommentsComponen
 export let hotspots: any = [];
 export let ng2Hotspots: any = [CommentParagraphFormHotspotComponent, ExportCommentButtonHotspotComponent, CommentParagraphArticleContentHotspotComponent];
 export let ng2SharedComponents = [DiscussionPeriodComponent];
+export let macros = [{component: AllowCommentComponent, selector: '[data-macro="comment_paragraph_plugin\/allow_comment"]'}];

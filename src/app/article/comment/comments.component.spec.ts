@@ -24,7 +24,6 @@ describe("Components", () => {
                 declarations: [CommentsComponent, TranslatePipe],
                 providers: [
                     { provide: "commentService", useValue: mocks.commentService },
-                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
