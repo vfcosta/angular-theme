@@ -1,10 +1,16 @@
 import { Injectable, Inject } from "ng-forward";
 import { RestangularService } from "./restangular_service";
 
+export const MemebershipStatus = {
+    NotMember: 0,
+    WaitingForApproval: 1,
+    Member: 2
+};
 
 @Injectable()
 @Inject("Restangular", "$q")
 export class ProfileService extends RestangularService<noosfero.Profile> {
+
 
     private _currentProfilePromise: ng.IDeferred<noosfero.Profile>;
 

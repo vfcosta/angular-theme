@@ -1,9 +1,10 @@
 <div class="actions" [hidden]="isMember==null">
-  <div class="organization-actions" *ngIf="displayOrganizationActions()">
-    <a *ngIf="!isMember" (click)="join()" class="btn btn-primary btn-sm join" href="#"><i class="fa fa-plus"></i> 
-    {{isCommunity() ? ('profile.join.community' | translate) : (isEnterprise() ? ("profile.join.enterprise" | translate) : "")}}
-    </a>
-    <a *ngIf="isMember" (click)="leave()" class="btn btn-warning btn-sm leave" href="#"><i class="fa fa-minus"></i> 
-    {{isCommunity() ? ("profile.leave.community" | translate) : (isEnterprise() ? ("profile.leave.enterprise" | translate) : "") }}</a>
-  </div>
+    <div class="organization-actions" *ngIf="displayOrganizationActions()">
+        <a *ngIf="!isMember && !isWaitingMembershipApproval()" (click)="join()" class="btn btn-primary btn-sm join" href="#"><i class="fa fa-plus"></i>
+        {{isCommunity() ? ('profile.join.community' | translate) : (isEnterprise() ? ("profile.join.enterprise" | translate) : "")}}
+        </a>
+        <i *ngIf="isWaitingMembershipApproval()" class="btn btn-info btn-sm wait">{{"profile.wait.membership.approval" | translate}} <i class="fa fa-exclamation"></i></i>
+        <a *ngIf="isMember" (click)="leave()" class="btn btn-warning btn-sm leave" href="#"><i class="fa fa-minus"></i>
+        {{isCommunity() ? ("profile.leave.community" | translate) : (isEnterprise() ? ("profile.leave.enterprise" | translate) : "") }}</a>
+    </div>
 </div>
