@@ -1,6 +1,3 @@
 <div class="custom-content">
-  <div class="actions" permission="ctrl.profile.permissions" permission-action="allow_edit" ng-show="ctrl.inEditMode()">
-    <button type="submit" class="btn btn-xs btn-default" ng-click="ctrl.openEdit()"><i class="fa fa-edit fa-fw"></i> {{ctrl.label | translate}}</button>
-  </div>
-  <div class="content" ng-bind-html="ctrl.content"></div>
+  <div class="content" [innerHTML]="content()"></div>
 </div>

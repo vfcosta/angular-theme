@@ -1,3 +1,4 @@
+import { CustomContentComponent } from './profile/custom-content/custom-content.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
 import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { ArticleDefaultViewComponent } from './article/types/default/article-default.component';
@@ -165,6 +166,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         ArticleBlogComponent,
         FolderComponent,
         ArticleDefaultViewComponent,
+        CustomContentComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -228,6 +230,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         ArticleBlogComponent,
         FolderComponent,
         ArticleDefaultViewComponent,
+        CustomContentComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',

@@ -1,3 +1,4 @@
+import { CustomContentComponent } from './profile/custom-content/custom-content.component';
 import { ArticleDefaultViewComponent } from './article/types/default/article-default.component';
 import { FolderComponent } from './article/types/folder/folder.component';
 import { ArticleBlogComponent } from './article/types/blog/blog.component';
@@ -361,6 +362,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoDefaultArticle',
         downgradeComponent({ component: ArticleDefaultViewComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('customContent',
+        downgradeComponent({ component: CustomContentComponent, inputs: ['attribute', 'profile', 'label'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

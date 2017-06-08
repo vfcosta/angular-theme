@@ -18,7 +18,6 @@ import { Navbar } from '../layout/navbar/navbar';
 import { AuthService } from '../login/auth.service';
 import { PasswordComponent } from '../login/new-password.component';
 import { SessionService } from '../login/session.service';
-import { CustomContentComponent } from '../profile/custom-content/custom-content.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { SearchComponent } from '../search/search.component';
 import { BootstrapResizableDirective } from '../shared/components/bootstrap-resizable/bootstrap-resizable.directive';
@@ -100,7 +99,7 @@ export class EnvironmentContent {
     directives: [
         ArticleViewComponent, BoxesComponent, BlockContentComponent,
         ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat,
-        CustomContentComponent, PermissionDirective,
+        PermissionDirective,
         BlockComponent,
         BootstrapResizableDirective,
         EditableDirective,
