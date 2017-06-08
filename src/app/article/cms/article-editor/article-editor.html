@@ -1,0 +1,4 @@
+<ng-container [ngSwitch]="article.type">
+    <comment-paragraph-plugin-discussion-editor *ngSwitchCase="'CommentParagraphPlugin::Discussion'" [article]="article" [options]="options"></comment-paragraph-plugin-discussion-editor>
+    <article-basic-editor *ngSwitchDefault [article]="article" [options]="options"></article-basic-editor>
+</ng-container>

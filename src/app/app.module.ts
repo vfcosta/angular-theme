@@ -1,3 +1,4 @@
+import { ArticleEditorComponent } from './article/cms/article-editor/article-editor.component';
 import { ActivityHeaderComponent } from './profile/activities/activity/header/activity-header.component';
 import { CustomContentComponent } from './profile/custom-content/custom-content.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
@@ -169,6 +170,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         ArticleDefaultViewComponent,
         CustomContentComponent,
         ActivityHeaderComponent,
+        ArticleEditorComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -234,6 +236,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         ArticleDefaultViewComponent,
         CustomContentComponent,
         ActivityHeaderComponent,
+        ArticleEditorComponent,
     ].concat(plugins.ng2MainComponents),
     providers: UpgradeUtils.provideAngular1Services([
         'AuthService',
@@ -274,6 +277,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         '$location',
         '$anchorScroll',
         'bodyStateClassesService',
+        '$window',
     ])
 })
 

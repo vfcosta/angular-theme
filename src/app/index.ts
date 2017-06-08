@@ -1,3 +1,4 @@
+import { ArticleEditorComponent } from './article/cms/article-editor/article-editor.component';
 import { ActivityHeaderComponent } from './profile/activities/activity/header/activity-header.component';
 import { CustomContentComponent } from './profile/custom-content/custom-content.component';
 import { ArticleDefaultViewComponent } from './article/types/default/article-default.component';
@@ -369,6 +370,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoActivityHeader',
         downgradeComponent({ component: ActivityHeaderComponent, inputs: ['activity', 'desc', 'profiles', 'iconalt', 'iconclass'] }) as angular.IDirectiveFactory
+    ).
+    directive('articleEditor',
+        downgradeComponent({ component: ArticleEditorComponent, inputs: ['article', 'profile', 'path'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();
