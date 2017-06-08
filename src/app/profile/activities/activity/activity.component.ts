@@ -1,11 +1,9 @@
 import {Component, Input, Inject} from "ng-forward";
 import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
-import { ActivityHeaderComponent } from "./activityheader.component";
 
 @Component({
     selector: "noosfero-activity",
     templateUrl: 'app/profile/activities/activity/activity.html',
-    directives: [ActivityHeaderComponent]
 })
 @Inject(EnvironmentService)
 export class ActivityComponent {

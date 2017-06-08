@@ -1,0 +1,10 @@
+<noosfero-profile-image [profile]="activity.user" class="avatar"></noosfero-profile-image>
+<div class="panel-body">
+    <div class="card-title">
+      <profile-link [profile]="activity.user" [truncate]="false"></profile-link>
+    </div>
+    <div class="card-type">
+      <i [title]="iconalt | translate" class="{{iconclass}}"></i>
+      <span> {{desc | translate:{profiles:profiles}:"messageformat" }} </span>          
+    </div>
+</div>
