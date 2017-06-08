@@ -1,7 +1,6 @@
 import { HotspotModule } from './hotspot.module';
 import {Component, Input, Inject, NgModuleFactory, Compiler} from "@angular/core";
 import * as plugins from "../../plugins";
-import {dasherize} from "ng-forward/cjs/util/helpers";
 import {PluginHotspot} from "./plugin-hotspot";
 
 @Component({
