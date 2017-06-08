@@ -62,8 +62,8 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I am logged out', () => {
-        return element(by.css("#navbar .profile-menu > .profile-link")).isDisplayed().then((visible) => {
-            if (visible) {
+        return element(by.css("#navbar .profile-menu > .profile-link")).isPresent().then((present) => {
+            if (present) {
                 return element(by.css("#navbar .profile-menu > .profile-link")).click().then(() => {
                     return element(by.css("#navbar .btn-logout")).click();
                 });
