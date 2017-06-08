@@ -1,3 +1,4 @@
+import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ArticleEditorComponent } from './article/cms/article-editor/article-editor.component';
 import { ActivityHeaderComponent } from './profile/activities/activity/header/activity-header.component';
 import { CustomContentComponent } from './profile/custom-content/custom-content.component';
@@ -373,6 +374,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('articleEditor',
         downgradeComponent({ component: ArticleEditorComponent, inputs: ['article', 'profile', 'path'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoNavbar',
+        downgradeComponent({ component: NavbarComponent }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

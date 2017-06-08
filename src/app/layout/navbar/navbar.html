@@ -11,53 +11,50 @@
       </button>
       <a class="navbar-brand" ui-sref="main.domain">
         <span class="noosfero-logo"> </span>
-        <h1 class="noosfero-name">{{ ctrl.currentEnvironment.name }}</h1>
+        <h1 class="noosfero-name">{{ currentEnvironment.name }}</h1>
       </a>
     </div>
 
-    <div uib-collapse="navCollapsed" class="navbar-collapse collapse" id="navbar-collapse">
+    <div [collapse]="navCollapsed" class="navbar-collapse collapse" id="navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li>
           <search-form></search-form>
         </li>
         <li>
-          <tasks-menu [task-types]="['AddFriend']" class="friendship-menu navbar-nav pull-right"></tasks-menu>
+          <tasks-menu [taskTypes]="['AddFriend']" class="friendship-menu navbar-nav pull-right"></tasks-menu>
         </li>
         <li>
           <tasks-menu class="navbar-nav pull-right"></tasks-menu>
         </li>
-        <li class="btn-nav" ng-show="!ctrl.currentUser">
-          <a ng-href="#" class="login" ng-click="ctrl.openLogin()">{{"navbar.login" | translate}}</a>
+        <li class="btn-nav" *ngIf="!currentUser">
+          <a href="#" class="login" (click)="openLogin()">{{"navbar.login" | translate}}</a>
         </li>
 
-        <li ng-show="!ctrl.currentUser">
-          <a ui-sref="main.register" class="signup">{{"navbar.signup.button" | translate}}</a>
+        <li *ngIf="!currentUser">
+          <a uiSref="main.register" class="signup">{{"navbar.signup.button" | translate}}</a>
         </li>
-        <li>
-          <div ui-view="actions" class="custom-actions"></div>
-        </li>
-        <li class="dropdown profile-menu" ng-show="ctrl.currentUser" uib-dropdown auto-close="outsideClick">
+        <li class="dropdown profile-menu" *ngIf="currentUser" dropdown>
 
-          <a href="#" class="dropdown-toggle profile-link" aria-expanded="false" uib-dropdown-toggle>
-            <noosfero-profile-image [profile]="ctrl.currentUser.person" class="dropdown-profile-image"></noosfero-profile-image>
-            <span class="truncated-profile-name" ng-bind="ctrl.currentUser.person.name"></span>
+          <a href="#" class="dropdown-toggle profile-link" aria-expanded="false" dropdownToggle>
+            <noosfero-profile-image [profile]="currentUser.person" class="dropdown-profile-image"></noosfero-profile-image>
+            <span class="truncated-profile-name">{{currentUser.person.name}}</span>
             <i class="fa fa-fw fa-chevron-down"></i>
           </a>
 
-          <ul class="dropdown-menu dropdown-menu-profile" uib-dropdown-menu>
+          <ul class="dropdown-menu dropdown-menu-profile" *dropdownMenu>
             <li>
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-xs-4 col-sm-4 col-md-4 text-center">
-                    <profile-link [profile]="ctrl.currentUser.person" [display-name]="false" [display-image]="true"></profile-link>
+                    <profile-link [profile]="currentUser.person" [displayName]="false" [displayImage]="true"></profile-link>
                   </div>
                   <div class="col-xs-8 col-sm-8 col-md-8 profile-menu-info">
                     <div class="row name">
-                      <profile-link [profile]="ctrl.currentUser.person" [truncate]="false"></profile-link>
+                      <profile-link [profile]="currentUser.person" [truncate]="false"></profile-link>
                     </div>
-                    <div class="row email" ng-bind="ctrl.currentUser.email"></div>
+                    <div class="row email">{{currentUser.email}}</div>
                     <div class="row text-center">
-                      <a class="btn btn-default btn-edit" ui-sref="main.myprofile({profile: ctrl.currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
+                      <a class="btn btn-default btn-edit" ui-sref="main.myprofile({profile: currentUser.person.identifier})"> {{"navbar.profile" | translate}}</a>
                     </div>
                   </div>
                 </div>
@@ -66,7 +63,7 @@
                 </div>
                 <div class="row">
                   <div class="profile-menu-logout">
-                    <a class="btn btn-default btn-logout" href="#" ng-click="ctrl.logout()">{{"navbar.logout" | translate}}</a>
+                    <a class="btn btn-default btn-logout" href="#" (click)="logout()">{{"navbar.logout" | translate}}</a>
                   </div>
                 </div>
               </div>
@@ -76,7 +73,4 @@
       </ul>
     </div>
   </div>
-  </div>
 </nav>
-<div ui-view="toolbar">
-</div>

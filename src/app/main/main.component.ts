@@ -14,7 +14,6 @@ import { BlockContentComponent } from '../layout/blocks/block-content.component'
 import { BlockComponent } from '../layout/blocks/block.component';
 import { MainBlockComponent } from '../layout/blocks/main/main-block.component';
 import { BoxesComponent } from '../layout/boxes/boxes.component';
-import { Navbar } from '../layout/navbar/navbar';
 import { AuthService } from '../login/auth.service';
 import { PasswordComponent } from '../login/new-password.component';
 import { SessionService } from '../login/session.service';
@@ -97,7 +96,7 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         ArticleViewComponent, BoxesComponent, BlockContentComponent,
-        ProfileComponent, MainBlockComponent, Navbar, NoosferoTemplate, NoosferoUrl, DateFormat,
+        ProfileComponent, MainBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
         PermissionDirective,
         BlockComponent,
         BootstrapResizableDirective,
