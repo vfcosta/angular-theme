@@ -2,7 +2,6 @@ import * as helpers from "./../../../spec/helpers";
 import {Injectable, Provider, provide} from "ng-forward";
 import {providers} from 'ng-forward/cjs/testing/providers';
 import {ProfileAboutComponent} from "./profile-about.component";
-import {TranslateProfile} from '../../shared/pipes/translate-profile.filter';
 import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 
 let htmlTemplate = '<profile-about></profile-about>';

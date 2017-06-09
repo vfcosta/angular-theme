@@ -30,7 +30,6 @@ import { CommunityService } from './../../lib/ng-noosfero-api/http/community.ser
 import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.service';
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
-import { TranslateProfile } from './../shared/pipes/translate-profile.filter';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { HeaderService } from './../shared/services/header.service';
 import { Component, Inject, provide } from 'ng-forward';
@@ -100,7 +99,6 @@ export class EnvironmentContent {
         BootstrapResizableDirective,
         EditableDirective,
         DomainComponent,
-        TranslateProfile
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService,
