@@ -1,4 +1,4 @@
-import { NoosferoUrlPipe } from './../../../../app/shared/pipes/noosfero-url.ng2.filter';
+import { NoosferoUrlPipe } from './../../../../app/shared/pipes/noosfero-url.pipe';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import {EventPluginEventBlockComponent} from './event-plugin-event-block.component';

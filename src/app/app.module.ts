@@ -54,7 +54,7 @@ import { PersonFriendsComponent } from './profile/configuration/friends/person-f
 import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
 import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
-import { NoosferoUrlPipe } from './shared/pipes/noosfero-url.ng2.filter';
+import { NoosferoUrlPipe } from './shared/pipes/noosfero-url.pipe';
 import { ProfileListEditionComponent } from './profile/profile-list/edition/profile-list-edition.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { CommunitiesBlockComponent } from './layout/blocks/communities/communities-block.component';

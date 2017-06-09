@@ -24,7 +24,6 @@ import { EditableDirective } from '../shared/components/editable/editable.direct
 import { PermissionDirective } from '../shared/components/permission/permission.directive';
 import { DateFormat } from '../shared/pipes/date-format.filter';
 import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
-import { NoosferoUrl } from '../shared/pipes/noosfero-url.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
 import { NotificationService } from '../shared/services/notification.service';
 import { CommunityService } from './../../lib/ng-noosfero-api/http/community.service';
@@ -95,7 +94,7 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         BoxesComponent, BlockContentComponent,
-        ProfileComponent, MainBlockComponent, NoosferoTemplate, NoosferoUrl, DateFormat,
+        ProfileComponent, MainBlockComponent, NoosferoTemplate, DateFormat,
         PermissionDirective,
         BlockComponent,
         BootstrapResizableDirective,

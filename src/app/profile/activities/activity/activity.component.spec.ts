@@ -1,5 +1,5 @@
 import { NgPipesModule } from 'ngx-pipes';
-import { NoosferoUrlPipe } from './../../../shared/pipes/noosfero-url.ng2.filter';
+import { NoosferoUrlPipe } from './../../../shared/pipes/noosfero-url.pipe';
 import { By } from '@angular/platform-browser';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
