@@ -1,3 +1,4 @@
+import { ActivityComponent } from './profile/activities/activity/activity.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { ArticleEditorComponent } from './article/cms/article-editor/article-editor.component';
 import { ActivityHeaderComponent } from './profile/activities/activity/header/activity-header.component';
@@ -377,6 +378,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoNavbar',
         downgradeComponent({ component: NavbarComponent }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoActivity',
+        downgradeComponent({ component: ActivityComponent, inputs: ['activity'] }) as angular.IDirectiveFactory
     );
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

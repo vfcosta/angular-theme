@@ -1,5 +1,4 @@
 import { Component, Input, Inject } from "ng-forward";
-import { ActivityComponent } from "./activity/activity.component";
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 
 /**
@@ -12,7 +11,6 @@ const LIMIT = 10;
 @Component({
     selector: "noosfero-activities",
     templateUrl: 'app/profile/activities/activities.html',
-    directives: [ActivityComponent]
 })
 @Inject(ProfileService)
 export class ActivitiesComponent {

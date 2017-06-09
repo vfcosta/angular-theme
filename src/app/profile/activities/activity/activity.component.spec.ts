@@ -1,163 +1,137 @@
-import {TestComponentBuilder} from 'ng-forward/cjs/testing/test-component-builder';
-import {Pipe, Input, provide, Component} from 'ng-forward';
+import { NgPipesModule } from 'ngx-pipes';
+import { NoosferoUrlPipe } from './../../../shared/pipes/noosfero-url.ng2.filter';
+import { By } from '@angular/platform-browser';
+import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import {provideFilters} from '../../../../spec/helpers';
 import * as helpers from "../../../../spec/helpers";
-
 import {ActivityComponent} from './activity.component';
 
-const tcb = new TestComponentBuilder();
-
-const htmlTemplate: string = '<noosfero-activity [activity]="ctrl.activity"></noosfero-activity>';
-
-
 describe("Components", () => {
-
     describe("Noosfero Activity", () => {
-        let activity = { name: "activity1", verb: "create_article", params: {} };
+        let activity = <any>{ name: "activity1", verb: "create_article", params: {} };
         let environmentService = {
             getCurrentEnvironment: (filters: any): any => {
                 return Promise.resolve({ id: 1, name: 'Nosofero' });
             }
         };
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<ActivityComponent>;
+        let component: ActivityComponent;
 
-        beforeEach(angular.mock.module("templates"));
+        beforeEach(async(() => {
+            spyOn(mocks.environmentService, "getCurrentEnvironment").and.returnValue(Promise.resolve({}));
+            TestBed.configureTestingModule({
+                declarations: [ActivityComponent, TranslatePipe, NoosferoUrlPipe],
+                providers: [
+                    { provide: "environmentService", useValue: mocks.environmentService },
+                    { provide: "translatorService", useValue: mocks.translatorService }
+                ],
+                schemas: [NO_ERRORS_SCHEMA],
+                imports: [NgPipesModule]
+            });
+            fixture = TestBed.createComponent(ActivityComponent);
+            component = fixture.componentInstance;
+        }));
 
-        @Component({
-            selector: 'test-container-component',
-            template: htmlTemplate,
-            directives: [ActivityComponent],
-            providers: [
-                helpers.createProviderToValue('EnvironmentService', environmentService)
-            ].concat(provideFilters("truncateFilter", "stripTagsFilter", "translateFilter"))
-        })
-
-        class BlockContainerComponent {
-            activity = activity;
-        }
-
-        it("verify no profiles for create article activity verb", done => {
-            activity = { name: "activity1", verb: "create_article", 
+        it("verify no profiles for create article activity verb", () => {
+            activity = { name: "activity1", verb: "create_article",
                 // The component should ignore this
-                params: { 
-                    'follower_name': ['follower1_name', 'follower2_name'], 
+                params: {
+                    'follower_name': ['follower1_name', 'follower2_name'],
+                    'follower_profile_custom_icon': ['follower1_icon', 'follower2_icon'],
+                    'follower_url': [ { 'profile': 'follower1_url' }, { 'profile': 'follower2_url' } ]
+                },
+                target: { profile: {}, body: "" }
+            };
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            expect(component.profiles.length).toEqual(0);
+        });
+
+        it("verify two profiles for new follower activity verb", () => {
+            activity = { name: "activity1", verb: "new_follower",
+                params: {
+                    'follower_name': ['follower1_name', 'follower2_name'],
                     'follower_profile_custom_icon': ['follower1_icon', 'follower2_icon'],
                     'follower_url': [ { 'profile': 'follower1_url' }, { 'profile': 'follower2_url' } ]
                 }
             };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(component.profiles.length).toEqual(0);
-                done();
-            });
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            expect(component.profiles.length).toEqual(2);
         });
 
-        it("verify two profiles for new follower activity verb", done => {
-            activity = { name: "activity1", verb: "new_follower", 
-                params: { 
-                    'follower_name': ['follower1_name', 'follower2_name'], 
-                    'follower_profile_custom_icon': ['follower1_icon', 'follower2_icon'],
-                    'follower_url': [ { 'profile': 'follower1_url' }, { 'profile': 'follower2_url' } ]
-                }
-            };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(component.profiles.length).toEqual(2);
-                done();
-            });
-        });
-
-        it("verify the profile has been correctly created", done => {
-            activity = { name: "activity1", verb: "new_follower", 
-                params: { 
-                    'follower_name': ['follower1_name', 'follower2_name'], 
+        it("verify the profile has been correctly created", () => {
+            activity = { name: "activity1", verb: "new_follower",
+                params: {
+                    'follower_name': ['follower1_name', 'follower2_name'],
                     'follower_profile_custom_icon': [ 'follower1_icon', 'follower2_icon' ],
                     'follower_url': [ { 'profile': 'follower1_url' }, { 'profile': 'follower2_url' } ]
                 }
             };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                let profiles = component.profiles;
-                expect(profiles[0].name).toEqual('follower1_name');
-                expect(profiles[0].identifier).toEqual('follower1_url');
-                expect(profiles[0].image.url).toEqual('follower1_icon');
-                done();
-            });
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            let profiles = component.profiles;
+            expect(profiles[0].name).toEqual('follower1_name');
+            expect(profiles[0].identifier).toEqual('follower1_url');
+            expect(profiles[0].image.url).toEqual('follower1_icon');
         });
 
-        it("render the specific template for an activity verb", done => {
-            activity = { name: "activity1", verb: "create_article", params: {} };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(component.getActivityTemplate()).toEqual('app/profile/activities/activity/create_article.html');
-                done();
-            });
+        it("render create article template correctly", () => {
+            activity = { name: "activity1", verb: "create_article", params: {}, target: { profile: {}, body: "" } };
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('.activity.create_article')).length).toEqual(1);
         });
 
-        it("render create article template correctly", done => {
-            activity = { name: "activity1", verb: "create_article", params: {} };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(fixture.debugElement.queryAll(".activity.create_article").length).toEqual(1);
-                done();
-            });
-        });
-
-        it("render add_member_in_community template correctly", done => {
+        it("render add_member_in_community template correctly", () => {
             activity = { name: "add_member_in_community1", verb: "add_member_in_community", params: {} };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(fixture.debugElement.queryAll(".activity.add_member_in_community").length).toEqual(1);
-                done();
-            });
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('.activity.add_member_in_community')).length).toEqual(1);
         });
 
-        it("render new_friendship template correctly", done => {
-            activity = { name: "new_friendship1", verb: "new_friendship", 
-                params: { 
-                    'friend_name': ['friend1_name'], 
+        it("render new_friendship template correctly", () => {
+            activity = { name: "new_friendship1", verb: "new_friendship",
+                params: {
+                    'friend_name': ['friend1_name'],
                     'friend_profile_custom_icon': ['friend1_icon'],
                     'friend_url': [ { 'profile': 'friend1_url' } ]
                 }
             };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(component.profiles.length).toEqual(1);
-                expect(fixture.debugElement.queryAll(".activity.new_friendship").length).toEqual(1);
-                done();
-            });
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            expect(component.profiles.length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css('.activity.new_friendship')).length).toEqual(1);
         });
 
-        it("render leave scrap template correctly", done => {
-            activity = { name: "scrap1", verb: "leave_scrap", params: {} };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(fixture.debugElement.queryAll(".activity.leave_scrap").length).toEqual(1);
-                done();
-            });
+        it("render leave scrap template correctly", () => {
+            activity = { name: "scrap1", verb: "leave_scrap", params: { receiver_url: {} } };
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('.activity.leave_scrap')).length).toEqual(1);
         });
 
-        it("render new_follower template correctly", done => {
-            activity = { name: "follower_one", verb: "new_follower", 
-                params: { 
-                    'follower_name': ['follower1_name', 'follower2_name'], 
+        it("render new_follower template correctly", () => {
+            activity = { name: "follower_one", verb: "new_follower",
+                params: {
+                    'follower_name': ['follower1_name', 'follower2_name'],
                     'follower_profile_custom_icon': ['follower1_icon', 'follower2_icon'],
                     'follower_url': [ { 'profile': 'follower1_url' }, { 'profile': 'follower2_url' } ]
                 }
             };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(fixture.debugElement.queryAll(".activity.new_follower").length).toEqual(1);
-                done();
-            });
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('.activity.new_follower')).length).toEqual(1);
         });
 
-        it("render upload_image template correctly", done => {
+        it("render upload_image template correctly", () => {
             activity = { name: "some_image", verb: "upload_image", params: {} };
-            tcb.createAsync(BlockContainerComponent).then(fixture => {
-                let component: ActivityComponent = fixture.debugElement.componentViewChildren[0].componentInstance;
-                expect(fixture.debugElement.queryAll(".activity.upload_image").length).toEqual(1);
-                done();
-            });
+            component.activity = <any>activity;
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css('.activity.upload_image')).length).toEqual(1);
         });
     });
 

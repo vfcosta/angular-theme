@@ -1,11 +1,10 @@
-import {Component, Input, Inject} from "ng-forward";
+import {Component, Input, Inject} from "@angular/core";
 import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
 
 @Component({
     selector: "noosfero-activity",
-    templateUrl: 'app/profile/activities/activity/activity.html',
+    template: require('app/profile/activities/activity/activity.html'),
 })
-@Inject(EnvironmentService)
 export class ActivityComponent {
 
     @Input() activity: noosfero.Activity;
@@ -30,7 +29,7 @@ export class ActivityComponent {
 
     environment: noosfero.Environment;
 
-    constructor(private environmentService: EnvironmentService) {
+    constructor(@Inject("environmentService") private environmentService: EnvironmentService) {
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
         });
@@ -41,13 +40,9 @@ export class ActivityComponent {
     * causes errors on Angular
     */
     ngOnInit() {
-        if (this.activity.verb == 'new_follower' || this.activity.verb == 'new_friendship') {
+        if (this.activity.verb === 'new_follower' || this.activity.verb === 'new_friendship') {
             this.profiles_list(this.activity.verb);
         }
-    }
-
-    getActivityTemplate() {
-        return 'app/profile/activities/activity/' + this.activity.verb + '.html';
     }
 
     /**
@@ -55,9 +50,9 @@ export class ActivityComponent {
     */
     private profiles_list(type: string) {
         let profiles_attribute = this.profile_attribute();
-        for (var i = 0; i < this.activity.params[profiles_attribute].length; i++) {
+        for (let i = 0; i < this.activity.params[profiles_attribute].length; i++) {
             let profile = {
-                name: this.name(i), 
+                name: this.name(i),
                 identifier: this.url(i),
                 image: { url: this.icon(i) }
             };

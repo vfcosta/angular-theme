@@ -1,1 +1,115 @@
-<ng-include src="ctrl.getActivityTemplate()"></ng-include>
+<ng-container *ngIf="environment" [ngSwitch]="activity.verb">
+
+<div *ngSwitchCase="'add_member_in_community'" class="activity {{activity.verb}}">
+    <noosfero-activity-header 
+      [activity]="activity" 
+      [desc]="'activities.add_member_in_community.description'"
+      [iconalt]="'activity.add_member_in_community.icon'"
+      [iconclass]="'fa fa-user-plus'">
+    </noosfero-activity-header>
+</div>
+
+<div *ngSwitchCase="'create_article'" class="activity {{activity.verb}}">
+    <noosfero-activity-header 
+      [activity]="activity" 
+      [desc]="'activities.create_article.description'"
+      [iconalt]="'activity.create_article.icon'"
+      [iconclass]="'fa fa-file-text'">
+    </noosfero-activity-header>
+    <div class="panel-body">
+      <span>
+        <div class="article">
+          <div class="title">
+            <a uiSref="main.profile.page" [uiParams]="{profile: activity.target.profile.identifier, page: activity.target.path}">
+              {{activity.target.title}}
+            </a>
+          </div>
+          <p class="lead small" [innerHTML]="activity.target.body | stripTags | shorten: 600 : '...': true"></p>
+        </div>
+      </span>
+    </div>
+</div>
+
+<div *ngSwitchCase="'join_community'" class="activity {{activity.verb}}">
+    <noosfero-activity-header 
+    	[activity]="activity" 
+    	[desc]="'activities.add_member_in_community.description'"
+    	[profiles]="activity.params.add_member_in_community?.length"
+    	[iconalt]="'activity.add_member_in_community.icon'"
+    	[iconclass]="'fa fa-users'">
+    </noosfero-activity-header>
+    <div class="panel-body">
+    	<profile-list [profiles]="profiles"></profile-list>
+    </div>
+</div>
+
+<div *ngSwitchCase="'leave_scrap'" class="activity {{activity.verb}}">
+    <noosfero-activity-header 
+    	[activity]="activity" 
+    	[desc]="'activities.leave_scrap.description'"
+    	[iconalt]="'activity.leave_scrap.icon'"
+    	[iconclass]="'fa fa-commenting-o'">
+    </noosfero-activity-header>
+    <div class="panel-body">
+		<span class="title">
+			<a *ngIf="!activity.target" class="separated-item" uiSref="main.profile.info" [uiParams]="{profile: activity.params.receiver_url.profile}">
+			  <span>{{activity.params.receiver_name}}</span>
+			</a>
+			<a *ngIf="activity.target" class="separated-item" uiSref="main.profile.info" [uiParams]="{profile: activity.target.identifier}">
+			  <span>{{activity.target.name}}</span>
+			</a>			
+		</span>
+		<span>
+			<div class="scrap">
+			  <div *ngIf="activity.params.content" [innerHTML]="activity.params.content | stripTags | shorten: 100 : '...': true"></div>
+			  <div *ngIf="activity.content" [innerHTML]="activity.content | stripTags | shorten: 100 : '...': true"></div>
+			</div>
+		</span>
+
+    </div>
+</div>
+
+<div *ngSwitchCase="'new_follower'" class="activity {{activity.verb}}">
+    <noosfero-activity-header 
+    	[activity]="activity" 
+    	[desc]="'activities.new_follower.description'"
+    	[profiles]="activity.params.follower_name?.length"
+    	[iconalt]="'activity.new_follower.icon'"
+    	[iconclass]="'fa fa-users'">
+    </noosfero-activity-header>
+    <div class="panel-body">
+    	<profile-list [profiles]="profiles"></profile-list>
+    </div>
+</div>
+
+<div *ngSwitchCase="'new_friendship'" class="activity {{activity.verb}}">
+    <noosfero-activity-header 
+    	[activity]="activity" 
+    	[desc]="'activities.new_friendship.description'"
+    	[profiles]="activity.params.friend_name?.length"
+    	[iconalt]="'activity.new_friendship.icon'"
+    	[iconclass]="'fa fa-user-plus'">
+    </noosfero-activity-header>
+    <div class="panel-body">
+    	<profile-list [profiles]="profiles"></profile-list>
+    </div>
+</div>
+
+<div *ngSwitchCase="'upload_image'" class="activity {{activity.verb}}">
+    <noosfero-activity-header 
+      [activity]="activity" 
+      [desc]="'activities.upload_image.description'"
+      [iconalt]="'activity.upload_image.icon'"
+      [iconclass]="'fa fa-file-text'">
+    </noosfero-activity-header>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6" *ngFor="let path of activity.params.thumbnail_path; let index = index">
+      <a class="thumbnail" [href]="activity.params.view_url[index] | noosferoUrl">
+        <img [src]="environment.host + path" alt="descricao da imagem">
+      </a>
+    </div>
+  </div>
+</div>
+
+</ng-container>
