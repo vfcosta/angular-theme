@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="article.type">
+    <noosfero-blog *ngSwitchCase="'Blog'" [article]="article" [profile]="profile"></noosfero-blog>
+    <noosfero-folder *ngSwitchCase="'Folder'" [article]="article" [profile]="profile"></noosfero-folder>
+    <noosfero-default-article *ngSwitchDefault [article]="article" [profile]="profile"></noosfero-default-article>
+</ng-container>

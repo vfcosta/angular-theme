@@ -1,4 +1,3 @@
-import {ArticleViewComponent} from "./../article-default-view.component";
 import {Input, Component, Inject, provide} from "ng-forward";
 
 import {ArticleService} from "../../../lib/ng-noosfero-api/http/article.service";
@@ -7,7 +6,6 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
 @Component({
     selector: "content-viewer",
     templateUrl: "app/article/content-viewer/page.html",
-    directives: [ArticleViewComponent],
     providers: [
         provide('articleService', { useClass: ArticleService }),
         provide('profileService', { useClass: ProfileService })
