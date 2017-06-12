@@ -20,7 +20,6 @@ import { SessionService } from '../login/session.service';
 import { ProfileComponent } from '../profile/profile.component';
 import { SearchComponent } from '../search/search.component';
 import { BootstrapResizableDirective } from '../shared/components/bootstrap-resizable/bootstrap-resizable.directive';
-import { EditableDirective } from '../shared/components/editable/editable.directive';
 import { PermissionDirective } from '../shared/components/permission/permission.directive';
 import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
@@ -94,7 +93,6 @@ export class EnvironmentContent {
         PermissionDirective,
         BlockComponent,
         BootstrapResizableDirective,
-        EditableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
