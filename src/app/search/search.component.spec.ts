@@ -7,7 +7,6 @@ import { NgPipesModule } from 'ngx-pipes';
 import { By } from '@angular/platform-browser';
 import { TranslatePipe } from './../shared/pipes/translate-pipe';
 import { DateFormatPipe } from './../shared/pipes/date-format.pipe';
-import { TruncatePipe } from '../shared/pipes/truncate';
 import { ArticleService } from './../../lib/ng-noosfero-api/http/article.service';
 import { UiSrefDirective } from '../shared/directives/ui-sref-directive';
 import {SearchComponent} from "./search.component";
@@ -35,7 +34,7 @@ describe("Components", () => {
             spyOn(mocks.articleService, 'search').and.returnValue(result);
 
             TestBed.configureTestingModule({
-                declarations: [SearchComponent, TranslatePipe, TruncatePipe, DateFormatPipe, UiSrefDirective],
+                declarations: [SearchComponent, TranslatePipe, DateFormatPipe, UiSrefDirective],
                 providers: [
                     { provide: "articleService", useValue: mocks.articleService },
                     { provide: "$stateParams", useValue: stateParams },

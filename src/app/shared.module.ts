@@ -23,7 +23,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
-import { TruncatePipe } from './shared/pipes/truncate';
 import * as plugins from "../plugins";
 
 @NgModule({
@@ -33,7 +32,6 @@ import * as plugins from "../plugins";
         FormsModule,
         CommonModule,
         BlockSettingsComponent,
-        TruncatePipe,
         PermissionNg2Directive,
         UiSrefDirective,
         CommentComponent,
@@ -53,7 +51,6 @@ import * as plugins from "../plugins";
         ImageUploadComponent,
         ImageUploadCropComponent,
         BlockSettingsComponent,
-        TruncatePipe,
         PermissionNg2Directive,
         UiSrefDirective,
         CommentComponent,
