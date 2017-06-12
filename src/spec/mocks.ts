@@ -584,6 +584,9 @@ export function getMocks() {
         },
         roleService: {
             getByProfile: (profileId: number, params: any = {}) => { }
+        },
+        headerService: {
+            setEnvironmentTitle: () => {}
         }
     };
     return mocks;

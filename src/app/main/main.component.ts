@@ -30,7 +30,6 @@ import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment
 import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.service';
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
-import { HeaderService } from './../shared/services/header.service';
 import { Component, Inject, provide } from 'ng-forward';
 import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
 /**
@@ -48,14 +47,13 @@ import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
     templateUrl: "app/main/main.html",
     providers: [AuthService, SessionService]
 })
-@Inject(BodyStateClassesService, HeaderService)
+@Inject(BodyStateClassesService)
 export class MainContentComponent {
 
     public themeSkin: string = 'skin-default';
 
     constructor(
         private bodyStateClassesService: BodyStateClassesService,
-        private headerService: HeaderService,
         eventsHubService: EventsHubService) {
         bodyStateClassesService.start({
             skin: this.themeSkin
@@ -111,7 +109,6 @@ export class EnvironmentContent {
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
         provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
-        provide('headerService', { useClass: HeaderService }),
         provide('SettingsService', { useClass: SettingsService }),
         provide('environmentService', { useClass: EnvironmentService }),
         provide('eventsHubService', { useClass: EventsHubService })

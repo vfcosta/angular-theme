@@ -1,3 +1,4 @@
+import { HeaderService } from './../../shared/services/header.service';
 import { CollapseModule } from 'ngx-bootstrap';
 import { NavbarComponent } from './navbar.component';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
@@ -31,6 +32,7 @@ describe("Components", () => {
                     { provide: "sessionService", useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "environmentService", useValue: mocks.environmentService },
+                    { provide: HeaderService, useValue: mocks.headerService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

@@ -1,3 +1,4 @@
+import { HeaderService } from './../../shared/services/header.service';
 import { Component, Inject, EventEmitter, Input } from "@angular/core";
 import { SessionService, AuthService, AuthController, AuthEvents } from "./../../login";
 import { EnvironmentService } from "./../../../lib/ng-noosfero-api/http/environment.service";
@@ -15,6 +16,7 @@ export class NavbarComponent {
     public currentEnvironment: noosfero.Environment = <any>{ name: '' };
 
     constructor(
+        headerService: HeaderService,
         @Inject("$uibModal") private $uibModal: ng.ui.bootstrap.IModalService,
         @Inject("authService") public authService: AuthService,
         @Inject("sessionService") private session: SessionService,

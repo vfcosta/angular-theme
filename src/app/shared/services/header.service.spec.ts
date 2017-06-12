@@ -7,10 +7,9 @@ describe("Header Service", () => {
     let environmentPromise = { then: (func: Function) => { resolveEnvironmentPromise = func; } };
     environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(environmentPromise);
 
-    let $rootScope: ng.IRootScopeService = <any>{};
-    let $document: ng.IDocumentService = <any>{};
+    let document = <any>{};
     let createComponent = (): HeaderService => {
-        return new HeaderService($rootScope, $document, environmentService);
+        return new HeaderService(document, environmentService);
     };
 
     it("should set the header title element", () => {

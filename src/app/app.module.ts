@@ -1,3 +1,4 @@
+import { HeaderService } from './shared/services/header.service';
 import { ArticleViewComponent } from './article/article-view.component';
 import { ActivityComponent } from './profile/activities/activity/activity.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -247,7 +248,9 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         ActivityComponent,
         ArticleViewComponent,
     ].concat(plugins.ng2MainComponents),
-    providers: UpgradeUtils.provideAngular1Services([
+    providers: [
+        HeaderService,
+    ].concat(UpgradeUtils.provideAngular1Services([
         'AuthService',
         'SessionService',
         '$state',
@@ -273,7 +276,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         'RoleService',
         'PersonService',
         'UserService',
-        'EnvironmentService',
+        'environmentService',
         'CommentService',
         'DesignModeService',
         '$sce',
@@ -287,7 +290,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         '$anchorScroll',
         'bodyStateClassesService',
         '$window',
-    ])
+    ]))
 })
 
 export class AppModule {
