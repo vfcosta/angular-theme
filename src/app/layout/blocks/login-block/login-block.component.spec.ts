@@ -1,3 +1,5 @@
+import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
+import { MomentModule } from 'angular2-moment';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
@@ -24,7 +26,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [LoginBlockComponent, TranslatePipe, UiSrefDirective],
+                declarations: [LoginBlockComponent, TranslatePipe, UiSrefDirective, DateFormatPipe],
                 providers: [
                     { provide: "sessionService", useValue: sessionService },
                     { provide: "$state", useValue: mocks.stateService },
@@ -32,11 +34,10 @@ describe("Components", () => {
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [FormsModule]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(LoginBlockComponent);
-                component = fixture.componentInstance;
+                imports: [FormsModule, MomentModule]
             });
+            fixture = TestBed.createComponent(LoginBlockComponent);
+            component = fixture.componentInstance;
         }));
 
         it("expect person to be null with no logged in user", () => {
@@ -63,9 +64,9 @@ describe("Components", () => {
          */
         function doComponentLogout() {
             // Create a mock for the AuthService logout method
-            spyOn(component['authService'], "logout");
+            spyOn(component.authService, "logout");
             component.logout();
-            expect(component['authService'].logout).toHaveBeenCalled();
+            expect(component.authService.logout).toHaveBeenCalled();
             // After the component logout method execution, fire the
             // AuthService event
             simulateLogoutEvent();
@@ -76,9 +77,9 @@ describe("Components", () => {
          */
         function doComponentLogin() {
             // Create a mock for the AuthService login method
-            spyOn(component['authService'], "login");
+            spyOn(component.authService, "login");
             component.login();
-            expect(component['authService'].login).toHaveBeenCalled();
+            expect(component.authService.login).toHaveBeenCalled();
             // After the component login method execution, fire the
             // AuthService event
             simulateLoginEvent();

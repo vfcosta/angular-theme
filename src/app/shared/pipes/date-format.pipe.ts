@@ -1,12 +1,11 @@
 import { Pipe, Inject } from '@angular/core';
 
+declare var moment;
+
 @Pipe({name: 'dateFormat', pure: false})
 export class DateFormatPipe {
 
-    constructor(@Inject("amParseFilter") private amParseFilter: any) { }
-
     transform(date: string, options: any) {
-        return this.amParseFilter(date, "YYYY/MM/DD HH:mm:ss").toISOString();
+        return moment(date, "YYYY/MM/DD HH:mm:ss").toISOString();
     }
-
 }

@@ -4,7 +4,7 @@ import * as helpers from "../../../../spec/helpers";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
-import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
+import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { AbuseComplaintTaskAcceptComponent } from './abuse-complaint-task-accept.component';
 import { NgPipesModule } from 'ngx-pipes';
 import { MomentModule } from 'angular2-moment';
@@ -24,7 +24,7 @@ describe("Components", () => {
         let mocks = helpers.getMocks();
 
         beforeEach(async(() => {
-            spyOn(mocks.taskService, 'get').and.returnValue(Promise.resolve( task ));
+            spyOn(mocks.taskService, 'get').and.returnValue(Promise.resolve( { data: task } ));
             let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 imports: [NgPipesModule, MomentModule],
@@ -63,16 +63,16 @@ describe("Components", () => {
         });
 
         it("should not call taskservice get if task target is setted", fakeAsync(() => {
-            component.task = <any>{ target: false };
+            component.parent.task = <any>{ target: null };
             fixture.detectChanges();
-            tick(2000);
+            tick();
             expect(mocks.taskService.get).not.toHaveBeenCalled();
         }));
 
         it("should set task when task target is setted", fakeAsync(() => {
-            component.ngOnInit();
+            component.parent.task = <any>{ target: { identifier: 'test' } };
             fixture.detectChanges();
-            tick(2000);
+            tick();
             expect(component.task).toEqual(task);
         }));
     });

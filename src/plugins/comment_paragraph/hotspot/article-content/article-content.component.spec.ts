@@ -1,4 +1,4 @@
-import { DateFormatPipe } from './../../../../app/shared/pipes/date-format.ng2.filter';
+import { DateFormatPipe } from './../../../../app/shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { DiscussionPeriodComponent } from './../../article/discussion-period/discussion-period.component';

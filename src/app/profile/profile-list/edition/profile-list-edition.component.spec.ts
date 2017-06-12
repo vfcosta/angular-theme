@@ -1,5 +1,5 @@
 import { PopoverModule } from 'ngx-bootstrap';
-import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
+import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { ProfileListEditionComponent } from './profile-list-edition.component';

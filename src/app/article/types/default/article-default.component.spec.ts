@@ -1,3 +1,5 @@
+import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
+import { MomentModule } from 'angular2-moment';
 import { PermissionNg2Directive } from './../../../shared/components/permission/permission.ng2.directive';
 import { By } from '@angular/platform-browser';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -19,21 +21,18 @@ describe("Components", () => {
             spyOn(mocks.articleService, "getChildren").and.returnValue(Promise.resolve(null));
             spyOn(mocks.articleService, "remove").and.callThrough();
             spyOn(mocks.$state, "transitionTo").and.callThrough();
-            spyOn(mocks.$scope, "$watch").and.callFake((value: any, func: Function) => {
-                watchFunctions.push(func);
-            });
             spyOn(mocks.articleService, "subscribeToModelRemoved").and.callFake((fn: Function) => { articleRemoved = fn; } );
             spyOn(mocks.notificationService, 'confirmation').and.callThrough();
             TestBed.configureTestingModule({
-                declarations: [ArticleDefaultViewComponent, TranslatePipe, PermissionNg2Directive],
+                declarations: [ArticleDefaultViewComponent, TranslatePipe, PermissionNg2Directive, DateFormatPipe],
                 providers: [
                     { provide: "articleService", useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "$scope", useValue: mocks.$scope },
                     { provide: "translatorService", useValue: mocks.translatorService },
                     { provide: "notificationService", useValue: mocks.notificationService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
+                imports: [MomentModule]
             });
             fixture = TestBed.createComponent(ArticleDefaultViewComponent);
             component = fixture.componentInstance;
@@ -67,12 +66,12 @@ describe("Components", () => {
             expect(fixture.debugElement.query(By.css('.article-toolbar .edit-article')).styles['display'].trim()).toEqual("");
         });
 
-        it("show button to delete article when user has permission", fakeAsync(() => {
+        it("show button to delete article when user has permission", () => {
             component.article.permissions = ['allow_delete'];
             fixture.detectChanges();
             watchFunctions.forEach( (func: Function) => func());
             expect(fixture.debugElement.query(By.css('.article-toolbar .delete-article')).styles['display'].trim()).toEqual("");
-        }));
+        });
 
         /**
          * Execute the delete method on the target component

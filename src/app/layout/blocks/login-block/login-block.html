@@ -3,7 +3,7 @@
     <ul>
         <li>{{"blocks.login.user-since" | translate}}
             <span class="time">
-                <span am-time-ago="currentUser.person.created_at | dateFormat"></span>
+                <span>{{currentUser.person.created_at | dateFormat | amTimeAgo}}</span>
             </span>        
         </li>
       <li>

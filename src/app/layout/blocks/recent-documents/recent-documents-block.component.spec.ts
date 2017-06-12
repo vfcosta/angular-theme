@@ -1,4 +1,4 @@
-import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
+import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { RecentDocumentsBlockComponent } from './recent-documents-block.component';
 import * as helpers from "./../../../../spec/helpers";

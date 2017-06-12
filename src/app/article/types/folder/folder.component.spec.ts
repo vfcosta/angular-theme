@@ -1,4 +1,4 @@
-import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
+import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { By } from '@angular/platform-browser';
 import { FolderComponent } from './folder.component';

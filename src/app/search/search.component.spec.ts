@@ -6,7 +6,7 @@ import { MomentModule } from 'angular2-moment';
 import { NgPipesModule } from 'ngx-pipes';
 import { By } from '@angular/platform-browser';
 import { TranslatePipe } from './../shared/pipes/translate-pipe';
-import { DateFormatPipe } from './../shared/pipes/date-format.ng2.filter';
+import { DateFormatPipe } from './../shared/pipes/date-format.pipe';
 import { TruncatePipe } from '../shared/pipes/truncate';
 import { ArticleService } from './../../lib/ng-noosfero-api/http/article.service';
 import { UiSrefDirective } from '../shared/directives/ui-sref-directive';
@@ -56,10 +56,9 @@ describe("Components", () => {
             expect(mocks.articleService.search).toHaveBeenCalledWith({ query: 'query', per_page: 20, page: 0 });
         });
 
-        it("display search results", fakeAsync(() => {
+        it("display search results", () => {
             fixture.detectChanges();
-            tick(1000);
             expect(fixture.debugElement.queryAll(By.css(".result")).length).toEqual(1);
-        }));
+        });
     });
 });

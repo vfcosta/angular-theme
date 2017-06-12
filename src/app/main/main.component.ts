@@ -22,7 +22,6 @@ import { SearchComponent } from '../search/search.component';
 import { BootstrapResizableDirective } from '../shared/components/bootstrap-resizable/bootstrap-resizable.directive';
 import { EditableDirective } from '../shared/components/editable/editable.directive';
 import { PermissionDirective } from '../shared/components/permission/permission.directive';
-import { DateFormat } from '../shared/pipes/date-format.filter';
 import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
 import { NotificationService } from '../shared/services/notification.service';
@@ -78,7 +77,7 @@ export class EnvironmentContent {
  * @name main.Main
  * @requires AuthService, Session, Notification, ArticleBlog, ArticleView, Boxes, Block, LinkListBlock,
  * MainBlock, RecentDocumentsBlock, Navbar, ProfileImageBlock, MembersBlock,
- * NoosferoTemplate, DateFormat, RawHTMLBlock, PersonTagsPluginInterestsBlock,
+ * NoosferoTemplate, RawHTMLBlock, PersonTagsPluginInterestsBlock,
  * RecentActivitiesPluginActivitiesBlock, ProfileImagesPluginProfileImages, EventPluginEvent
  * @description
  *  The Main controller for the Noosfero Angular Theme application.
@@ -93,7 +92,7 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         BoxesComponent, BlockContentComponent,
-        ProfileComponent, MainBlockComponent, NoosferoTemplate, DateFormat,
+        ProfileComponent, MainBlockComponent, NoosferoTemplate,
         PermissionDirective,
         BlockComponent,
         BootstrapResizableDirective,

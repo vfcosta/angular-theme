@@ -6,7 +6,7 @@ import { ProfileImageComponent } from './profile/image/profile-image.component';
 import { PaginationModule } from 'ngx-bootstrap/ng2-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
 import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
-import { DateFormatPipe } from './shared/pipes/date-format.ng2.filter';
+import { DateFormatPipe } from './shared/pipes/date-format.pipe';
 import { ProfileLinkComponent } from './profile/profile-link/profile-link.component';
 import { MomentModule } from 'angular2-moment';
 import { CommentsComponent } from './article/comment/comments.component';

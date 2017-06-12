@@ -1,4 +1,4 @@
-import { DateFormatPipe } from './../../../shared/pipes/date-format.ng2.filter';
+import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { NgPipesModule } from 'ngx-pipes';
 import { MomentModule } from 'angular2-moment';
 import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
