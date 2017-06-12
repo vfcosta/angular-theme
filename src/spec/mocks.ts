@@ -454,7 +454,8 @@ export function getMocks() {
             createNewCommunity: (community: noosfero.Community) => Promise.resolve({})
         },
         sessionService: {
-            currentUser: () => <noosfero.User>{ person: { id: 1, identifier: 'test_user' } }
+            currentUser: () => <noosfero.User>{ person: { id: 1, identifier: 'test_user' } },
+            currentPerson: () => <noosfero.Person>{ id: 1 }
         },
         commentService: {
             subscribeToModelRemoved: (fn: Function) => { },
