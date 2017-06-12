@@ -98,7 +98,7 @@ export class CommunityService extends RestangularService<noosfero.Community> {
         let deferred = this.$q.defer();
         if (person) {
             this.getCommunityElement(profile.id).customGET('membership', { identifier: person.identifier }).then((result: any) => {
-                deferred.resolve(result.data.membership_state);
+                deferred.resolve(result.data);
             });
         } else {
             deferred.resolve(0);

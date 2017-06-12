@@ -1,5 +1,5 @@
 import { Inject, Input, Component, EventEmitter, Output } from '@angular/core';
-import { ProfileService, MemebershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
+import { ProfileService, MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { SessionService } from "./../../login";
 import { NotificationService } from "../../shared/services/notification.service";
 import { EventsHubService } from '../../shared/services/events-hub.service';
@@ -13,8 +13,7 @@ import { CommunityService } from '../../../lib/ng-noosfero-api/http/community.se
 export class ProfileJoinComponent {
 
     @Input() profile: noosfero.Profile;
-
-    private isMember: boolean;
+    
     private membershipState: number; // 0 - Is not member, 1 - Waiting Membership, 2 - Is Member
 
     constructor( @Inject('profileService') private profileService: ProfileService,
@@ -25,26 +24,22 @@ export class ProfileJoinComponent {
     }
 
     ngOnInit() {
-        this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, (membershipState: number) => {
-            this.membershipState = membershipState;
-            this.isMember = false;
-            if (membershipState === MemebershipStatus.Member) {
-                this.isMember = true;
-            }
-        });
-        this.loadMembership();
+        if(!this.isPerson()){
+            this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, (membershipState: number) => {            
+                this.membershipState = membershipState;
+            });
+            this.loadMembership();
+        }
     }
 
     loadMembership() {
-        let person = this.session.currentUser() ? this.session.currentUser().person : null;
-        this.communityService.getMembershipState(person, this.profile).then((membershipState: number) => {
-            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, membershipState);
+        this.communityService.getMembershipState(this.session.currentPerson(), this.profile).then((response: noosfero.DefaultResponse) => {
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, response.code);
         });
     }
 
     join() {
-        let person = this.session.currentUser() ? this.session.currentUser().person : null;
-        this.profileService.addMember(person, this.profile).then((result: any) => {
+        this.profileService.addMember(this.session.currentPerson(), this.profile).then((result: any) => {
             if (result.data.pending) {
                 this.notificationService.success({ title: "profile.join.moderation.title", message: "profile.join.moderation.message" });
             } else {
@@ -55,30 +50,25 @@ export class ProfileJoinComponent {
     }
 
     leave() {
-        let person = this.session.currentUser() ? this.session.currentUser().person : null;
-        this.profileService.removeMember(person, this.profile).then(() => {
+        this.profileService.removeMember(this.session.currentPerson(), this.profile).then(() => {
             this.loadMembership();
         });
-    }
-
-    displayOrganizationActions() {
-        return !this.isPerson();
     }
 
     isPerson(): boolean {
         return this.profile.type === 'Person';
     }
 
-    isCommunity(): boolean {
-        return this.profile.type === 'Community';
-    }
-
-    isEnterprise(): boolean {
-        return this.profile.type === 'Enterprise';
-    }
-
     isWaitingMembershipApproval(): boolean {
-        return this.membershipState === MemebershipStatus.WaitingForApproval;
+        return this.membershipState === MembershipStatus.WaitingForApproval;
+    }
+
+    isNotMember(): boolean {
+        return this.membershipState === MembershipStatus.NotMember;
+    }
+
+    isMember(): boolean {
+        return this.membershipState === MembershipStatus.Member;
     }
 
 }

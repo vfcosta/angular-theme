@@ -1,7 +1,7 @@
 import { Injectable, Inject } from "ng-forward";
 import { RestangularService } from "./restangular_service";
 
-export const MemebershipStatus = {
+export const MembershipStatus = {
     NotMember: 0,
     WaitingForApproval: 1,
     Member: 2

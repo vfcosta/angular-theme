@@ -60,6 +60,12 @@ describe("Services", () => {
             expect(personService.getLoggedPerson).toHaveBeenCalled();
             expect(mocks.localStorageService.get('currentUser')).toBeUndefined();
         });
+
+        it("method 'currentPerson()' returns the person recorded on mocks.localStorageService service", () => {
+            let session = new SessionService(mocks.localStorageService, $log, personService);
+            mocks.localStorageService.set('currentUser', <noosfero.User>fixtures.user);
+            expect(session.currentPerson()).toEqual(mocks.localStorageService.get('currentUser').person);
+        });
     });
 
 });

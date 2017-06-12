@@ -1,21 +1,19 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { Pipe, Input, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
-
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService, MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { ProfileJoinComponent } from './profile-join.component';
 import * as helpers from "./../../../spec/helpers";
 import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 
 describe("Components", () => {
 
-    describe("Profile Join Component", () => {
+    fdescribe("Profile Join Component", () => {
 
         let mocks = helpers.getMocks();
 
         let fixture: ComponentFixture<ProfileJoinComponent>;
         let component: ProfileJoinComponent;
-        let compiled: any;
 
         let retorno: any;
         let translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
@@ -25,16 +23,16 @@ describe("Components", () => {
         profileService.addMember = jasmine.createSpy("addMember").and.returnValue(Promise.resolve({ data: {} }));
         profileService.removeMember = jasmine.createSpy("removeMember").and.returnValue(Promise.resolve({ data: {} }));
         communityService.getMembershipState = jasmine.createSpy("getMembershipState").and.returnValue(Promise.resolve({ data: {} }));
-        let session = helpers.mocks.sessionWithCurrentUser({});
-        session.currentUser().person = <any>{};
 
         beforeEach(async(() => {
+            spyOn(mocks.sessionService, 'currentPerson').and.callThrough();
+
             TestBed.configureTestingModule({
                 declarations: [ProfileJoinComponent, TranslatePipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: "profileService", useValue: profileService },
-                    { provide: "sessionService", useValue: session },
+                    { provide: "sessionService", useValue: mocks.sessionService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "$uibModal", useValue: helpers.mocks.$modal },
@@ -44,29 +42,26 @@ describe("Components", () => {
             });
             fixture = TestBed.createComponent(ProfileJoinComponent);
             component = fixture.componentInstance;
-            component.profile = <any>{ name: 'profile-name' };
+            component.profile = <any>{ name: 'profile-name', type: 'Community' };
         }));
 
         it("display button to join community", () => {
-            fixture.detectChanges();
-            let compiled = fixture.debugElement;
-            expect(component.displayOrganizationActions()).toBeTruthy();
-            expect(compiled.queryAll(By.css(".comment .actions .reply")).length).toEqual(0);
-            expect(compiled.queryAll(By.css(".comment .actions .reply")).length).toEqual(0);
-            expect(compiled.queryAll(By.css('.actions .organization-actions .join')).length).toEqual(1);
+            component.isPerson = jasmine.createSpy("isPerson").and.returnValue(false);
+            component.isNotMember = jasmine.createSpy("isNotMember").and.returnValue(true);
+            fixture.detectChanges();            
+            expect(fixture.debugElement.queryAll(By.css('.actions .organization-actions .join')).length).toEqual(1);
         });
 
-        it("not display button to join community for person", () => {
-            component.profile = <any>{ name: 'person-name', type: 'Person' };
-            let compiled = fixture.debugElement;
-            fixture.detectChanges();
-            expect(component.displayOrganizationActions()).toBeFalsy();
-            expect(compiled.queryAll(By.css('.actions .organization-actions .join')).length).toEqual(0);
+        it("not display button to join community for person", () => {            
+            component.isPerson = jasmine.createSpy("isPerson").and.returnValue(true);
+            fixture.detectChanges();            
+            expect(component.isPerson()).toBeTruthy();
+            expect(fixture.debugElement.queryAll(By.css('.actions .organization-actions .join')).length).toEqual(0);
         });
 
-        it("display button to leave community", () => {
+        it("display button to leave community for members", () => {
             let compiled = fixture.debugElement;
-            component['isMember'] = true;
+            component['membershipState'] = MembershipStatus.Member;
             fixture.detectChanges();
             expect(compiled.queryAll(By.css('.actions .leave')).length).toEqual(1);
         });
@@ -90,11 +85,56 @@ describe("Components", () => {
         });
 
         it("display wait button when user is waiting membership approval", () => {
-            let compiled = fixture.debugElement;
-            component['isMember'] = false;
-            component['membershipState'] = 1;
+            let compiled = fixture.debugElement;            
+            component['membershipState'] = MembershipStatus.WaitingForApproval;
             fixture.detectChanges();
             expect(compiled.queryAll(By.css('.actions .wait')).length).toEqual(1);
         });
+
+        it("should isMember return true when member state is Member", () => {
+            component['membershipState'] = MembershipStatus.Member;
+            expect(component.isMember()).toEqual(true);
+        });
+
+        it("should isMember return false when member state is WaitingForApproval", () => {
+            component['membershipState'] = MembershipStatus.WaitingForApproval;
+            expect(component.isMember()).toEqual(false);
+        });
+
+        it("should isMember return false when member state is NotMember", () => {
+            component['membershipState'] = MembershipStatus.NotMember;
+            expect(component.isMember()).toEqual(false);
+        });
+
+        it("should isNotMember return true when member state is NotMember", () => {
+            component['membershipState'] = MembershipStatus.NotMember;
+            expect(component.isNotMember()).toEqual(true);
+        });
+
+        it("should isNotMember return false when member state is WaitingForApproval", () => {
+            component['membershipState'] = MembershipStatus.WaitingForApproval;
+            expect(component.isNotMember()).toEqual(false);
+        });
+
+        it("should isNotMember return false when member state is Member", () => {
+            component['membershipState'] = MembershipStatus.Member;
+            expect(component.isNotMember()).toEqual(false);
+        });
+
+        it("should isWaitingMembershipApproval return true when member state is WaitingForApproval", () => {
+            component['membershipState'] = MembershipStatus.WaitingForApproval;
+            expect(component.isWaitingMembershipApproval()).toEqual(true);
+        });
+
+        it("should isWaitingMembershipApproval return false when member state is NotMember", () => {
+            component['membershipState'] = MembershipStatus.NotMember;
+            expect(component.isWaitingMembershipApproval()).toEqual(false);
+        });
+
+        it("should isWaitingMembershipApproval return false when member state is Member", () => {
+            component['membershipState'] = MembershipStatus.Member;
+            expect(component.isWaitingMembershipApproval()).toEqual(false);
+        });
+
     });
 });

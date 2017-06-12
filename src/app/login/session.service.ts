@@ -33,4 +33,8 @@ export class SessionService {
         return this.localStorageService.get('currentUser');
     };
 
+    currentPerson(): noosfero.Person {
+        return this.currentUser() ? this.currentUser().person : null;        
+    };
+
 }
