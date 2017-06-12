@@ -8,7 +8,7 @@ import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 
 describe("Components", () => {
 
-    fdescribe("Profile Join Component", () => {
+    describe("Profile Join Component", () => {
 
         let mocks = helpers.getMocks();
 
