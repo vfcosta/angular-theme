@@ -1,7 +1,9 @@
+import { SessionService } from './../../login/session.service.ng2';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { Pipe, Input, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { ProfileService, MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
+import { MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { ProfileJoinComponent } from './profile-join.component';
 import * as helpers from "./../../../spec/helpers";
 import { TranslatePipe } from '../../shared/pipes/translate-pipe';
@@ -31,8 +33,8 @@ describe("Components", () => {
                 declarations: [ProfileJoinComponent, TranslatePipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
-                    { provide: "profileService", useValue: profileService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: ProfileService, useValue: profileService },
+                    { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "$uibModal", useValue: helpers.mocks.$modal },

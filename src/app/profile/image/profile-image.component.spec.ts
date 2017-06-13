@@ -1,3 +1,4 @@
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -27,7 +28,7 @@ describe("Components", () => {
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "profileService", useValue: profileService },
+                    { provide: ProfileService, useValue: profileService },
                     { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "permissionService", useValue: permissionService },
                     { provide: "sessionService", useValue: helpers.mocks.sessionService },

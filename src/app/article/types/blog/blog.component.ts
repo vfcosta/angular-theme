@@ -1,5 +1,5 @@
 import {Component, Input, Inject} from "@angular/core";
-import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
+import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service.ng2";
 
 /**
  * @ngdoc controller
@@ -21,7 +21,7 @@ export class ArticleBlogComponent {
     private currentPage: number;
     private totalPosts: number = 0;
 
-    constructor(@Inject("articleService") private articleService: ArticleService) { }
+    constructor(private articleService: ArticleService) { }
 
     ngOnInit() {
         this.loadPage({ page: 1 });
@@ -37,7 +37,7 @@ export class ArticleBlogComponent {
         this.articleService
             .getChildren(this.article, filters)
             .then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                this.totalPosts = <number>result.headers("total");
+                this.totalPosts = <number>(<any>result.headers).get("total");
                 this.posts = result.data;
             });
     }

@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/platform-browser';
 import { Directive, Inject, Injectable } from "@angular/core";
-import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
+import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service.ng2";
 
 @Injectable()
 export class HeaderService {
@@ -9,7 +9,7 @@ export class HeaderService {
     environment: noosfero.Environment;
 
     constructor(@Inject(DOCUMENT) private document: any,
-        @Inject("environmentService") private environmentService: EnvironmentService) {
+        private environmentService: EnvironmentService) {
 
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;

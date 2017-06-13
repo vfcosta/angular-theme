@@ -1,3 +1,4 @@
+import { SessionService } from './../../login/session.service.ng2';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import * as helpers from "../../../spec/helpers";
 import { TasksMenuComponent } from './tasks-menu.component';
@@ -19,7 +20,7 @@ describe("Components", () => {
                 providers: [
                     { provide: "translatorService", useValue: mocks.translatorService },
                     { provide: "taskService", useValue: mocks.taskService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "authService", useValue: mocks.authService },
                     { provide: "eventsHubService", useValue: mocks.eventsHubService }
                 ],

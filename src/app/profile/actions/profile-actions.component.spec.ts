@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { Input, Component } from '@angular/core';
 import * as helpers from "../../../spec/helpers";
 import { ProfileActionsComponent } from './profile-actions.component';
@@ -17,7 +18,7 @@ describe('Profile Actions Component', () => {
             imports: [BsDropdownModule.forRoot()],
             declarations: [ProfileActionsComponent, TranslatePipe],
             providers: [
-                { provide: "articleService", useValue: helpers.mocks.articleService },
+                { provide: ArticleService, useValue: helpers.mocks.articleService },
                 { provide: "translatorService", useValue: mocks.translatorService }
             ],
             schemas: [NO_ERRORS_SCHEMA]
@@ -26,7 +27,7 @@ describe('Profile Actions Component', () => {
         component = fixture.componentInstance;
         component.profile = <noosfero.Profile>{ id: 1, identifier: 'adminuser', type: "Person", permissions: ['allow_edit'] };
     }));
-    
+
     it('renders content viewer actions directive', () => {
         expect(queryAll(".profile-menu").length).toEqual(1);
     });

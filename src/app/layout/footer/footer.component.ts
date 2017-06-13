@@ -1,5 +1,6 @@
+import { SessionService } from './../../login/session.service.ng2';
 import { Component, Inject } from '@angular/core';
-import { AuthService, SessionService } from "./../../login";
+import { AuthService } from "./../../login";
 
 @Component({
     selector: "noosfero-footer",
@@ -10,7 +11,7 @@ export class FooterComponent {
     private currentUser: noosfero.User;
 
     constructor(@Inject('authService') private authService: AuthService,
-        @Inject('sessionService') private session: SessionService,
+        private session: SessionService,
         @Inject('$state') private $state: ng.ui.IStateService) {
       this.currentUser = this.session.currentUser();
     }

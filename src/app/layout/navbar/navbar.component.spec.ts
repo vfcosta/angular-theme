@@ -1,3 +1,5 @@
+import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service.ng2';
+import { SessionService } from './../../login/session.service.ng2';
 import { HeaderService } from './../../shared/services/header.service';
 import { CollapseModule } from 'ngx-bootstrap';
 import { NavbarComponent } from './navbar.component';
@@ -29,9 +31,9 @@ describe("Components", () => {
                 providers: [
                     { provide: "$uibModal", useValue: mocks.$modal },
                     { provide: "authService", useValue: mocks.authService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "environmentService", useValue: mocks.environmentService },
+                    { provide: EnvironmentService, useValue: mocks.environmentService },
                     { provide: HeaderService, useValue: mocks.headerService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],

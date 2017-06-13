@@ -1,3 +1,4 @@
+import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service.ng2';
 import { NgPipesModule } from 'ngx-pipes';
 import { NoosferoUrlPipe } from './../../../shared/pipes/noosfero-url.pipe';
 import { By } from '@angular/platform-browser';
@@ -25,7 +26,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ActivityComponent, TranslatePipe, NoosferoUrlPipe],
                 providers: [
-                    { provide: "environmentService", useValue: mocks.environmentService },
+                    { provide: EnvironmentService, useValue: mocks.environmentService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

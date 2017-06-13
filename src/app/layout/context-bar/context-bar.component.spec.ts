@@ -1,3 +1,5 @@
+import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service.ng2';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { Component } from '@angular/core';
 import { ContextBarComponent } from './context-bar.component';
 import * as helpers from "../../../spec/helpers";
@@ -28,8 +30,8 @@ describe("Context Bar Component", () => {
                 { provide: "blockService", useValue: mocks.blockService },
                 { provide: "notificationService", useValue: mocks.notificationService },
                 { provide: "designModeService", useValue: mocks.designModeService },
-                { provide: 'profileService', useValue: mocks.profileService },
-                { provide: 'environmentService', useValue: mocks.environmentService },
+                { provide: ProfileService, useValue: mocks.profileService },
+                { provide: EnvironmentService, useValue: mocks.environmentService },
                 { provide: 'translatorService', useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]

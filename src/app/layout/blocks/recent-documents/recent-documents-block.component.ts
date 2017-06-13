@@ -1,6 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
+import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service.ng2";
 import {Arrays} from "./../../../../lib/util/arrays";
 
 @Component({
@@ -17,7 +17,7 @@ export class RecentDocumentsBlockComponent {
 
     constructor( @Inject('blockService') private blockService: BlockService,
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject('articleService') private articleService: ArticleService) { }
+        private articleService: ArticleService) { }
 
 
     ngOnInit() {

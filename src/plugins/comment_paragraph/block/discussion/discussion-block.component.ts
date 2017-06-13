@@ -1,6 +1,6 @@
 import {Component, Inject, Input} from "@angular/core";
 import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
+import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service.ng2";
 import {Arrays} from "./../../../../lib/util/arrays";
 
 enum PRESENTATION_MODES {
@@ -24,7 +24,7 @@ export class DiscussionBlockComponent {
 
     static PRESENTATION_MODES = PRESENTATION_MODES;
 
-    constructor(@Inject("blockService") private blockService: BlockService, @Inject("articleService") public articleService: ArticleService) { }
+    constructor(@Inject("blockService") private blockService: BlockService, public articleService: ArticleService) { }
 
     ngOnInit() {
         this.profile = this.owner;

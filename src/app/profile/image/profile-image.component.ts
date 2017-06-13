@@ -1,7 +1,7 @@
 import { SessionService } from './../../login/session.service';
 import { NotificationService } from './../../shared/services/notification.service';
 import { Inject, Input, Component } from '@angular/core';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service.ng2";
 import { PermissionService } from "../../shared/services/permission.service";
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
@@ -38,7 +38,7 @@ export class ProfileImageComponent {
     @Input() iconSize: string;
     @Input() editable: boolean;
 
-    constructor( @Inject("profileService") private profileService: ProfileService,
+    constructor(private profileService: ProfileService,
         @Inject("permissionService") private permissionService: PermissionService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
         @Inject("notificationService") private notificationService: NotificationService,

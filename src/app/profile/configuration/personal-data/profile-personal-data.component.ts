@@ -1,6 +1,6 @@
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
-import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
 
 /**
@@ -26,7 +26,7 @@ export class ProfilePersonalDataComponent {
 
     errors: any;
 
-    constructor( @Inject("profileService") private profileService: ProfileService,
+    constructor(private profileService: ProfileService,
         @Inject("notificationService") private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService,
         @Inject("translatorService") private translatorService: TranslatorService) { }

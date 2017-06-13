@@ -1,3 +1,5 @@
+import { CommentParagraphService } from './../http/comment-paragraph.service';
+import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { TranslatePipe } from './../../../app/shared/pipes/translate-pipe';
 import { NgPipesModule } from 'ngx-pipes';
 import { SideCommentsComponent } from "./side-comments.component";
@@ -21,8 +23,8 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [SideCommentsComponent, TranslatePipe],
                 providers: [
-                    { provide: "commentParagraphService", useValue: serviceMock },
-                    { provide: "commentService", useValue: mocks.commentService },
+                    { provide: CommentParagraphService, useValue: serviceMock },
+                    { provide: CommentService, useValue: mocks.commentService },
                     { provide: "postCommentEventService", useValue: postCommentEventService },
                     { provide: "translatorService", useValue: mocks.translatorService },
                 ],

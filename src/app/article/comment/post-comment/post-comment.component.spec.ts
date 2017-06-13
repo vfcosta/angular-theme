@@ -1,3 +1,5 @@
+import { SessionService } from './../../../login/session.service.ng2';
+import { CommentService } from './../../../../lib/ng-noosfero-api/http/comment.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../../spec/helpers";
@@ -17,8 +19,8 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [PostCommentComponent, TranslatePipe],
                 providers: [
-                    { provide: "commentService", useValue: mocks.commentService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: CommentService, useValue: mocks.commentService },
+                    { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "translatorService", useValue: mocks.translatorService },
                 ],

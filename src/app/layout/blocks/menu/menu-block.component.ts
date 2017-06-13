@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { Component, Input, Inject, HostListener, ElementRef, ViewChild } from "@angular/core";
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { TypeaheadMatch } from 'ngx-bootstrap';
@@ -34,7 +34,7 @@ export class MenuBlockComponent {
     constructor(private elementRef: ElementRef,
         @Inject('translatorService') private translatorService: TranslatorService,
         @Inject("$scope") private $scope: ng.IScope,
-        @Inject('articleService') private articleService: ArticleService,
+        private articleService: ArticleService,
         private dragulaService: DragulaService) {
     }
 

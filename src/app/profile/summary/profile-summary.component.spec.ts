@@ -1,7 +1,8 @@
+import { SessionService } from './../../login/session.service.ng2';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import { UiSrefDirective } from '../../shared/directives/ui-sref-directive';
 import { PopoverModule } from 'ngx-bootstrap';
-import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
+import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service.ng2";
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -31,8 +32,8 @@ describe("Components", () => {
                 imports: [FormsModule, PopoverModule.forRoot()],
                 declarations: [ProfileSummaryComponent, TranslatePipe, UiSrefDirective, PermissionNg2Directive],
                 providers: [
-                    { provide: "environmentService", useValue: environmentService},
-                    { provide: "sessionService", useValue: sessionService },
+                    { provide: EnvironmentService, useValue: environmentService},
+                    { provide: SessionService, useValue: sessionService },
                     { provide: "personService", useValue: personService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "designModeService", useValue: mocks.designModeService },
@@ -41,7 +42,7 @@ describe("Components", () => {
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
-            })
+            });
             fixture = TestBed.createComponent(ProfileSummaryComponent);
             component = fixture.componentInstance;
             component.profile = <noosfero.Profile>{ id: 1, identifier: 'adminuser', type: "Person", permissions: ['allow_edit'] };

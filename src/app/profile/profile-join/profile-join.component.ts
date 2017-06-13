@@ -1,6 +1,6 @@
+import { SessionService } from './../../login/session.service.ng2';
 import { Inject, Input, Component, EventEmitter, Output } from '@angular/core';
-import { ProfileService, MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
-import { SessionService } from "./../../login";
+import { ProfileService, MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { NotificationService } from "../../shared/services/notification.service";
 import { EventsHubService } from '../../shared/services/events-hub.service';
 import { NoosferoKnownEvents } from '../../known-events';
@@ -13,11 +13,10 @@ import { CommunityService } from '../../../lib/ng-noosfero-api/http/community.se
 export class ProfileJoinComponent {
 
     @Input() profile: noosfero.Profile;
-    
     private membershipState: number; // 0 - Is not member, 1 - Waiting Membership, 2 - Is Member
 
-    constructor( @Inject('profileService') private profileService: ProfileService,
-        @Inject('sessionService') private session: SessionService,
+    constructor(private profileService: ProfileService,
+        private session: SessionService,
         @Inject('notificationService') private notificationService: NotificationService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
         @Inject('communityService') private communityService: CommunityService) {

@@ -1,5 +1,5 @@
 import { Input, Inject, Component } from "@angular/core";
-import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
+import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service.ng2";
 
 @Component({
     selector: "noosfero-display-content-block",
@@ -16,7 +16,7 @@ export class DisplayContentBlockComponent {
 
     documentsLoaded: boolean = false;
 
-    constructor(@Inject('articleService') private articleService: ArticleService) { }
+    constructor(private articleService: ArticleService) { }
 
     ngOnInit() {
         this.profile = this.owner;

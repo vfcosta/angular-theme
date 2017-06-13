@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { RecentDocumentsBlockComponent } from './recent-documents-block.component';
@@ -25,7 +26,7 @@ describe("Components", () => {
                 providers: [
                     { provide: "blockService", useValue: mocks.blockService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

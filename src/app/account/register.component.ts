@@ -1,7 +1,7 @@
 import { Inject, Input, Component, Output, EventEmitter, ViewChild } from '@angular/core';
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 import { NotificationService } from "./../shared/services/notification.service";
-import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
+import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service.ng2";
 import { AuthController, SessionService } from './../login';
 import { IModalComponent } from "../shared/components/interfaces";
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
@@ -24,7 +24,7 @@ export class RegisterComponent {
         @Inject('$state') private $state: ng.ui.IStateService,
         @Inject('registerService') public RegisterService: RegisterService,
         @Inject('notificationService') private notificationService: NotificationService,
-        @Inject('environmentService') private environmentService: EnvironmentService) {
+        private environmentService: EnvironmentService) {
         this.account = {};
     }
 

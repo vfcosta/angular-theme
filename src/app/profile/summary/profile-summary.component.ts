@@ -1,9 +1,9 @@
 import { NotificationService } from './../../shared/services/notification.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
-import { SessionService } from './../../login/session.service';
+import { SessionService } from './../../login/session.service.ng2';
 import { Inject, Input, Component, HostListener, ElementRef, ViewChild  } from "@angular/core";
-import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
+import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service.ng2";
 import { ProfileJoinComponent } from "./../../profile/profile-join/profile-join.component";
 
 
@@ -24,8 +24,8 @@ export class ProfileSummaryComponent {
     @ViewChild("popover") popover;
 
     constructor(private elementRef: ElementRef,
-        @Inject('environmentService') private environmentService: EnvironmentService,
-        @Inject('sessionService') private session: SessionService,
+        private environmentService: EnvironmentService,
+        private session: SessionService,
         @Inject('personService') private personService: PersonService,
         @Inject('notificationService') private notificationService: NotificationService,
         @Inject('designModeService') private designModeService: DesignModeService) {

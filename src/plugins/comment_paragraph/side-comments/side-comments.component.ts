@@ -13,8 +13,8 @@ export class SideCommentsComponent extends CommentsComponent {
     @Input() paragraphUuid: string;
     @Input() fullPagination = true;
 
-    constructor(@Inject('commentService') commentService: CommentService,
-        @Inject("commentParagraphService") private commentParagraphService: CommentParagraphService) {
+    constructor(commentService: CommentService,
+        private commentParagraphService: CommentParagraphService) {
         super(commentService);
     }
 

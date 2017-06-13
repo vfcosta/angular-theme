@@ -3,8 +3,6 @@ import { RoleService } from './../../lib/ng-noosfero-api/http/role.service';
 import { RegisterService } from '../../lib/ng-noosfero-api/http/register.service';
 import { PasswordService } from '../../lib/ng-noosfero-api/http/password.service';
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
-import { CommentService } from './../../lib/ng-noosfero-api/http/comment.service';
-import { CommentParagraphService } from './../../plugins/comment_paragraph/http/comment-paragraph.service';
 import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import { PermissionService } from './../shared/services/permission.service';
 import * as plugins from '../../plugins';
@@ -96,7 +94,7 @@ export class EnvironmentContent {
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
-        PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService,
+        PermissionService, PasswordService, CommentParagraphEventService,
         TaskService, ArticleService, RegisterService, RoleService, BlockService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",

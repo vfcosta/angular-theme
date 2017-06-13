@@ -1,6 +1,6 @@
 import { ValidationMessageComponent } from './../../shared/components/validation-message/validation-message.component';
 import { NotificationService } from './../../shared/services/notification.service';
-import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { Component, Inject, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 
 @Component({
@@ -20,7 +20,7 @@ export class ProfileFastEditionComponent {
 
     errors: any;
 
-    constructor( @Inject("profileService") private profileService: ProfileService,
+    constructor(private profileService: ProfileService,
         @Inject("notificationService") private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService) { }
 

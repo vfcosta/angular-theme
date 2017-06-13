@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { By } from '@angular/platform-browser';
 import { ArticleBlogComponent } from './blog.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -18,7 +19,7 @@ describe("Blog Component", () => {
         TestBed.configureTestingModule({
             declarations: [ArticleBlogComponent],
             providers: [
-                { provide: "articleService", useValue: mocks.articleService },
+                { provide: ArticleService, useValue: mocks.articleService },
             ],
             schemas: [NO_ERRORS_SCHEMA],
             imports: [NgPipesModule]

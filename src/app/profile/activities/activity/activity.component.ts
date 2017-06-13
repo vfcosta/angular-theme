@@ -1,5 +1,5 @@
 import {Component, Input, Inject} from "@angular/core";
-import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
+import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service.ng2";
 
 @Component({
     selector: "noosfero-activity",
@@ -29,7 +29,7 @@ export class ActivityComponent {
 
     environment: noosfero.Environment;
 
-    constructor(@Inject("environmentService") private environmentService: EnvironmentService) {
+    constructor(private environmentService: EnvironmentService) {
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
         });

@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { PermissionNg2Directive } from './../../../shared/components/permission/permission.ng2.directive';
@@ -26,7 +27,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ArticleDefaultViewComponent, TranslatePipe, PermissionNg2Directive, DateFormatPipe],
                 providers: [
-                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "translatorService", useValue: mocks.translatorService },
                     { provide: "notificationService", useValue: mocks.notificationService }
@@ -92,7 +93,7 @@ describe("Components", () => {
          */
         function simulateRemovedEvent() {
             TestBed.get('notificationService').confirmation({ title: "Title", message: "Message" }, () => { });
-            TestBed.get('articleService').modelRemovedEventEmitter.next(article);
+            TestBed.get(ArticleService).modelRemovedEventEmitter.next(article);
         }
     });
 

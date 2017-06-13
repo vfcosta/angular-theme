@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -21,7 +22,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [SuggestArticleTaskAcceptComponent, TranslatePipe],
                 providers: [
-                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "translatorService", useValue: mocks.translatorService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
@@ -36,7 +37,7 @@ describe("Components", () => {
 
         it("set folder array with folders as options", fakeAsync(() => {
             fixture.detectChanges();
-            expect(TestBed.get('articleService').getByProfile).toHaveBeenCalled();
+            expect(TestBed.get(ArticleService).getByProfile).toHaveBeenCalled();
             tick();
             expect(component.folders.map((f) => { return f.id; })).toEqual([null, 1, 2]);
             expect(component.folders.map((f) => { return f.path; })).toEqual(["profile", "profile/folder1", "profile/folder2"]);

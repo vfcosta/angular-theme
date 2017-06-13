@@ -1,3 +1,4 @@
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { TopProfileImageComponent } from './top-profile-image.component';
 import * as helpers from "../../../spec/helpers";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -14,7 +15,7 @@ describe("Components", () => {
                 declarations: [TopProfileImageComponent],
                 providers: [
                     { provide: "permissionService", useValue: mocks.permissionService },
-                    { provide: "profileService", useValue: mocks.profileService }
+                    { provide: ProfileService, useValue: mocks.profileService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });

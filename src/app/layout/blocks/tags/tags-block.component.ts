@@ -1,6 +1,6 @@
 import {Inject, Component, Input} from "@angular/core";
 import { CloudData } from 'angular-tag-cloud-module';
-import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
+import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service.ng2";
 
 @Component({
     selector: "noosfero-tags-cloud-block",
@@ -14,7 +14,7 @@ export class TagsBlockComponent {
     tags: Array<CloudData> = [];
 
     constructor(
-      @Inject("environmentService") private environmentService: EnvironmentService,
+      private environmentService: EnvironmentService,
       @Inject("$state") private $state: ng.ui.IStateService) {
         this.loadTags();
     }

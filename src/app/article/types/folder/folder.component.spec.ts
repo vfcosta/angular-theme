@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { By } from '@angular/platform-browser';
@@ -20,7 +21,7 @@ describe("Folder Component", () => {
         TestBed.configureTestingModule({
             declarations: [FolderComponent, DateFormatPipe],
             providers: [
-                { provide: "articleService", useValue: mocks.articleService },
+                { provide: ArticleService, useValue: mocks.articleService },
                 { provide: "amParseFilter", useValue: mocks.amParseFilter }
             ],
             schemas: [NO_ERRORS_SCHEMA],

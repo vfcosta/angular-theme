@@ -1,5 +1,5 @@
 import { Inject, Input, Component } from "@angular/core";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service.ng2";
 import { PermissionService } from "../../shared/services/permission.service";
 
 @Component({
@@ -12,7 +12,7 @@ export class TopProfileImageComponent {
     @Input() editable: boolean;
     picFile: any;
 
-    constructor( @Inject('profileService') private profileService: ProfileService,
+    constructor(private profileService: ProfileService,
         @Inject('permissionService') private permissionService: PermissionService) { }
 
     upload(data: any) {

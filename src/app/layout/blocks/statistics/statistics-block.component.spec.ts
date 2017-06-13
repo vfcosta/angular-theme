@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { StatisticsBlockComponent } from './statistics-block.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { TranslatePipe } from '../../../shared/pipes/translate-pipe';
@@ -14,7 +15,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [StatisticsBlockComponent, TranslatePipe],
                 providers: [
-                    { provide: 'articleService', useValue: articleService },
+                    { provide: ArticleService, useValue: articleService },
                     { provide: 'blockService', useValue: blockService },
                     { provide: 'translatorService', useValue: translatorService }
                 ]

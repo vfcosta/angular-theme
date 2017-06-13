@@ -1,3 +1,4 @@
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { InviteComponent } from './invite.component';
 import * as helpers from "../../../../spec/helpers";
@@ -27,7 +28,7 @@ describe("Components", () => {
                 declarations: [InviteComponent, TranslatePipe],
                 providers: [
                     { provide: "personService", useValue: mocks.personService },
-                    { provide: "profileService", useValue: mocks.profileService },
+                    { provide: ProfileService, useValue: mocks.profileService },
                     { provide: "communityService", useValue: mocks.communityService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "translatorService", useValue: mocks.translatorService }

@@ -1,7 +1,7 @@
 import { AuthService } from '../../login';
 import { Component, Inject } from "@angular/core";
 import { NotificationService } from "../../shared/services/notification.service";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service.ng2";
 
 @Component({
     selector: 'destroy-profile',
@@ -12,7 +12,7 @@ export class DestroyProfileComponent {
     constructor(
         @Inject("$state") private $state: ng.ui.IStateService,
         @Inject('notificationService') private notificationService: NotificationService,
-        @Inject('profileService') private profileService: ProfileService,
+        private profileService: ProfileService,
         @Inject('authService') private AuthService: AuthService) {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             if (!profile) return;

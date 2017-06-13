@@ -1,3 +1,4 @@
+import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service.ng2';
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import * as helpers from "../../spec/helpers";
@@ -34,7 +35,7 @@ describe("Register Component", () => {
                 { provide: "$state", useValue: mocks.$state },
                 { provide: "registerService", useValue: mocks.registerService },
                 { provide: "notificationService", useValue: mocks.notificationService },
-                { provide: "environmentService", useValue: mocks.environmentService },
+                { provide: EnvironmentService, useValue: mocks.environmentService },
                 { provide: "translatorService", useValue: mocks.translatorService }
             ]
         });

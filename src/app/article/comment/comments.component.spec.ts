@@ -1,3 +1,4 @@
+import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/ng2-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
@@ -23,7 +24,7 @@ describe("Components", () => {
                 imports: [NgPipesModule, PaginationModule.forRoot(), FormsModule],
                 declarations: [CommentsComponent, TranslatePipe],
                 providers: [
-                    { provide: "commentService", useValue: mocks.commentService },
+                    { provide: CommentService, useValue: mocks.commentService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]

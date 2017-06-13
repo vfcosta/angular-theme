@@ -1,3 +1,11 @@
+import { CommentParagraphService } from './../plugins/comment_paragraph/http/comment-paragraph.service';
+import { NotificationService } from './shared/services/notification.service';
+import { TranslatorService } from './shared/services/translator.service';
+import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service.ng2';
+import { ProfileService } from './../lib/ng-noosfero-api/http/profile.service.ng2';
+import { SessionService } from './login/session.service.ng2';
+import { ArticleService } from './../lib/ng-noosfero-api/http/article.service.ng2';
+import { CommentService } from './../lib/ng-noosfero-api/http/comment.service';
 import { HeaderService } from './shared/services/header.service';
 import { ArticleViewComponent } from './article/article-view.component';
 import { ActivityComponent } from './profile/activities/activity/activity.component';
@@ -85,6 +93,24 @@ import * as plugins from "../plugins";
 import { SharedModule } from './shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
 import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
+import { RestangularModule, Restangular } from 'ngx-restangular';
+
+
+export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, TranslatorService, NotificationService) {
+    RestangularProvider.setBaseUrl("/api/v1");
+    RestangularProvider.setFullResponse(true);
+    RestangularProvider.addFullRequestInterceptor((element, operation, path, url, headers, params) => {
+        if (sessionService.currentUser()) {
+            (<any>headers)["Private-Token"] = sessionService.currentUser().private_token;
+        }
+        (<any>headers)["Accept-Language"] = TranslatorService.currentLanguage();
+        return <any>{ headers: <any>headers };
+    });
+    RestangularProvider.addErrorInterceptor((response, subject, responseHandler) => {
+        NotificationService.httpError(response.status, response.data);
+        return true; // return true to continue the promise chain and call catch
+    });
+}
 
 @NgModule({
     imports: [
@@ -106,6 +132,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         DynamicHTMLModule.forRoot({
             components: plugins.macros
         }),
+        RestangularModule.forRoot([SessionService, "translatorService", "notificationService"], RestangularConfigFactory),
     ],
     declarations: [
         FooterComponent,
@@ -250,15 +277,22 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
     ].concat(plugins.ng2MainComponents),
     providers: [
         HeaderService,
+        CommentService,
+        ArticleService,
+        SessionService,
+        ProfileService,
+        EnvironmentService,
+        CommentParagraphService,
     ].concat(UpgradeUtils.provideAngular1Services([
+        'ProfileService',
+        'EnvironmentService',
+        'ArticleService',
         'AuthService',
         'SessionService',
         '$state',
         'TranslatorService',
-        'ArticleService',
         'BlockService',
         'SettingsService',
-        'profileService',
         'PersonService',
         'CommunityService',
         'PermissionService',
@@ -276,13 +310,10 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         'RoleService',
         'PersonService',
         'UserService',
-        'environmentService',
-        'CommentService',
         'DesignModeService',
         '$sce',
         'ThemeService',
         'CommentParagraphEventService',
-        'CommentParagraphService',
         'PasswordService',
         'RegisterService',
         'angularLoad',
@@ -290,6 +321,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         '$anchorScroll',
         'bodyStateClassesService',
         '$window',
+        'localStorageService'
     ]))
 })
 

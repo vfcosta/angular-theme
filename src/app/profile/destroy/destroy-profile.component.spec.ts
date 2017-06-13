@@ -1,3 +1,4 @@
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DestroyProfileComponent } from './destroy-profile.component';
 import * as helpers from "../../../spec/helpers";
@@ -24,7 +25,7 @@ describe("Components", () => {
                 providers: [
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "profileService", useValue: mocks.profileService },
+                    { provide: ProfileService, useValue: mocks.profileService },
                     { provide: "authService", useValue: mocks.authService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA]
@@ -40,9 +41,9 @@ describe("Components", () => {
         }));
 
         it("call remove in profile service when confirm", fakeAsync(() => {
-            let pS = TestBed.get('profileService');
+            let pS = TestBed.get(ProfileService);
             let nS = TestBed.get('notificationService');
-            nS.confirmation = (p1, p2) => { p2() };
+            nS.confirmation = (p1, p2) => { p2(); };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
 
             let fixture = TestBed.createComponent(DestroyProfileComponent);
@@ -55,7 +56,7 @@ describe("Components", () => {
         }));
 
         it("not display confirmation dialog when profile doesn't exists", fakeAsync(() => {
-            let pS = TestBed.get('profileService');
+            let pS = TestBed.get(ProfileService);
             let nS = TestBed.get('notificationService');
             nS.confirmation = (p1, p2) => { p2() };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve(null));
@@ -69,7 +70,7 @@ describe("Components", () => {
         }));
 
         it("call notification success when remove is confirmed", fakeAsync(() => {
-            let pS = TestBed.get('profileService');
+            let pS = TestBed.get(ProfileService);
             let nS = TestBed.get('notificationService');
             let state = TestBed.get('$state');
             nS.confirmation = (p1, p2) => { p2() };
@@ -88,7 +89,7 @@ describe("Components", () => {
         }));
 
         it("call notification error when remove is not confirmed", fakeAsync(() => {
-            let pS = TestBed.get('profileService');
+            let pS = TestBed.get(ProfileService);
             let nS = TestBed.get('notificationService');
             let state = TestBed.get('$state');
             let aS = TestBed.get('authService');

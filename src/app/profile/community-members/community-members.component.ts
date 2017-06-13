@@ -1,5 +1,5 @@
 import { Component, Inject, Input } from '@angular/core';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service.ng2";
 
 @Component({
     selector: "noosfero-community-members",
@@ -13,7 +13,7 @@ export class CommunityMembersComponent {
     private totalMembers: number;
     private profile: noosfero.Profile;
 
-    constructor( @Inject('profileService') private profileService: ProfileService) {
+    constructor(private profileService: ProfileService) {
         this.members = [];
         this.currentPage = 1;
         this.membersPerPage = 20;
@@ -32,7 +32,7 @@ export class CommunityMembersComponent {
             this.profile = profile;
             return this.profileService.getMembers(profile, filters);
         }).then((result: any) => {
-            this.totalMembers = <number>result.headers("total");
+            this.totalMembers = <number>(<any>result.headers).get("total");
             this.members = result.data;
         });
     }

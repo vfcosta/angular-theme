@@ -1,5 +1,5 @@
 import { Input, Inject, Component } from '@angular/core';
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
+import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service.ng2";
 import {BlockService} from "./../../../../lib/ng-noosfero-api/http/block.service";
 
 @Component({
@@ -11,7 +11,7 @@ export class StatisticsBlockComponent {
     @Input() owner: any;
 
 
-    constructor( @Inject("articleService") articleService: ArticleService, @Inject("blockService") blockService: BlockService) {
+    constructor(articleService: ArticleService, @Inject("blockService") blockService: BlockService) {
         // watches for article being removed
         // to update comments and tag statistics, which would
         // changed after removing an article

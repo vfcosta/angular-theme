@@ -1,3 +1,5 @@
+import { SessionService } from './../../../login/session.service.ng2';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { ValidationMessageComponent } from './../../../shared/components/validation-message/validation-message.component';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { NewCommunityComponent } from './new-community.component';
@@ -18,10 +20,10 @@ describe("Components", () => {
                 imports: [FormsModule],
                 declarations: [NewCommunityComponent, TranslatePipe, ValidationMessageComponent],
                 providers: [
-                    { provide: "profileService", useValue: mocks.profileService },
+                    { provide: ProfileService, useValue: mocks.profileService },
                     { provide: "communityService", useValue: mocks.communityService },
                     { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "translatorService", useValue: mocks.translatorService },
                 ],

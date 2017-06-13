@@ -1,3 +1,4 @@
+import { SessionService } from './../../../login/session.service.ng2';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -15,7 +16,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ArticleEditorComponent],
                 providers: [
-                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$window", useValue: window },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

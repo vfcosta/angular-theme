@@ -1,4 +1,4 @@
-import { SessionService } from './../../../login/session.service';
+import { SessionService } from './../../../login/session.service.ng2';
 import {Component, Input, Inject} from '@angular/core';
 
 @Component({
@@ -13,7 +13,7 @@ export class ArticleEditorComponent {
     options: any;
 
     constructor(@Inject("$window") private $window: ng.IWindowService,
-        @Inject("sessionService") private sessionService: SessionService) { }
+        private sessionService: SessionService) { }
 
     ngOnInit() {
         this.$window['uploadUrl'] = '/api/v1/profiles/' + this.profile.id + '/articles';

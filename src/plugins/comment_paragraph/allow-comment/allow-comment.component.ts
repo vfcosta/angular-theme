@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
+import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service.ng2';
 import {Component, HostListener, Input, Inject, ViewChild, ElementRef} from "@angular/core";
 import {SideCommentsComponent} from "../side-comments/side-comments.component";
 import {CommentParagraphEventService} from "../events/comment-paragraph-event.service";
@@ -20,10 +20,10 @@ export class AllowCommentComponent {
     @ViewChild("popover") popover: any;
 
     constructor(@Inject("commentParagraphEventService") private commentParagraphEventService: CommentParagraphEventService,
-        @Inject("commentParagraphService") private commentParagraphService: CommentParagraphService,
-        @Inject("commentService") private commentService: CommentService,
+        private commentParagraphService: CommentParagraphService,
+        private commentService: CommentService,
         @Inject("permissionService") private permissionService: PermissionService,
-        @Inject("articleService") private articleService: ArticleService,
+        private articleService: ArticleService,
         private elementRef: ElementRef
     ) { }
 

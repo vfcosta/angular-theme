@@ -1,7 +1,7 @@
+import { SessionService } from './../../../login/session.service.ng2';
 import { ViewChild } from '@angular/core';
-import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { TranslatorService } from './../../../shared/services/translator.service';
-import { SessionService } from './../../../login/session.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -19,11 +19,11 @@ export abstract class AbstractFormCommunity {
     public sessionProfile: noosfero.Profile;
 
     constructor(@Inject("notificationService") public notificationService: NotificationService,
-    @Inject('communityService') public communityService: CommunityService,
-    @Inject('profileService') public profileService: ProfileService,
-    @Inject('sessionService') public sessionService: SessionService,
-    @Inject('$state') public $state: ng.ui.IStateService,
-    @Inject('translatorService') public translatorService: TranslatorService) {}
+        @Inject('communityService') public communityService: CommunityService,
+        @Inject(ProfileService) public profileService: ProfileService,
+        @Inject(SessionService) public sessionService: SessionService,
+        @Inject('$state') public $state: ng.ui.IStateService,
+        @Inject('translatorService') public translatorService: TranslatorService) {}
 
     abstract getTitle();
     abstract save();

@@ -1,7 +1,7 @@
 import { Component, Inject, Input, NgZone } from '@angular/core';
 import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
 import { CommunityService } from "../../../../lib/ng-noosfero-api/http/community.service";
-import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service.ng2";
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { NotificationService } from '../../../shared/services/notification.service';
 
@@ -22,7 +22,7 @@ export class InviteComponent {
 
     constructor( @Inject('personService') private personService: PersonService,
         @Inject('communityService') private communityService: CommunityService,
-        @Inject('profileService') private profileService: ProfileService,
+        private profileService: ProfileService,
         @Inject('translatorService') private translatorService: TranslatorService,
         @Inject("notificationService") public notificationService: NotificationService,
         private zone: NgZone) {

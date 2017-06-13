@@ -1,6 +1,6 @@
 import { TaskAcceptTypeComponent } from './../task-accept-type.component';
 import { Component, Injector, Inject } from "@angular/core";
-import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
+import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service.ng2";
 
 @Component({
     selector: "approve-article-task-accept",
@@ -10,7 +10,7 @@ export class ApproveArticleTaskAcceptComponent extends TaskAcceptTypeComponent {
 
     folders: Array<any>;
 
-    constructor(@Inject("articleService") private articleService: ArticleService, injector: Injector) {
+    constructor(private articleService: ArticleService, injector: Injector) {
         super(injector);
     }
 

@@ -1,10 +1,10 @@
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProfileFastEditionComponent } from './profile-fast-edition.component';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import * as helpers from "../../../spec/helpers";
 
 describe("Components", () => {
@@ -22,7 +22,7 @@ describe("Components", () => {
                 declarations: [ProfileFastEditionComponent, TranslatePipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
-                    { provide: "profileService", useValue: profileService },
+                    { provide: ProfileService, useValue: profileService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "translatorService", useValue: helpers.mocks.translatorService },
                     { provide: "$state", useValue: state }

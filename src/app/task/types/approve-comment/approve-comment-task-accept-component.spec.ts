@@ -1,3 +1,4 @@
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { UiSrefDirective } from '../../../shared/directives/ui-sref-directive';
 import { Provider, Component } from '@angular/core';
@@ -24,7 +25,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ApproveCommentTaskAcceptComponent, TranslatePipe, UiSrefDirective],
                 providers: [
-                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "$transitions", useValue: mocks.$transitions },
                     { provide: "translatorService", useValue: mocks.translatorService },

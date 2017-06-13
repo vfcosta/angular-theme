@@ -1,8 +1,9 @@
 import { Component, Inject, Input } from "@angular/core";
 import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
-import { AuthService, SessionService, AuthEvents } from "./../../login";
+import { AuthService, AuthEvents } from "./../../login";
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
+import { SessionService } from '../../login/session.service.ng2';
 
 @Component({
     selector: "tasks-menu",
@@ -18,7 +19,7 @@ export class TasksMenuComponent {
     person: noosfero.Person;
 
     constructor( @Inject("taskService") private taskService: TaskService,
-        @Inject("sessionService") private session: SessionService,
+        private session: SessionService,
         @Inject("authService") private authService: AuthService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService) {
     }
