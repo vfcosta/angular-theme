@@ -16,9 +16,13 @@ export class CommunitiesBlockComponent {
 
     ngOnInit() {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
-        this.blockService.getApiContent(this.block).then((content: any) => {
-            this.profiles = content['communities'];
-            this.block.api_content = content;
-        });
+        if(this.block.api_content) {
+          this.profiles =  this.block.api_content['communities'];
+        } else {
+            this.blockService.getApiContent(this.block).then((content: any) => {
+                this.profiles = content['communities'];
+                this.block.api_content = content;
+            });
+        }
     }
 }

@@ -23,9 +23,13 @@ export class RecentDocumentsBlockComponent {
     ngOnInit() {
         this.profile = this.owner;
         this.documents = [];
-        this.blockService.getApiContent(this.block).then((content: any) => {
-            this.documents = content.articles;
-        });
+        if(this.block.api_content) {
+            this.documents = this.block.api_content.articles;
+        } else {
+            this.blockService.getApiContent(this.block).then((content: any) => {
+                this.documents = content.articles;
+            });
+        }
         this.articleService.subscribeToModelRemoved((article: noosfero.Article) => {
             Arrays.remove(this.documents, article);
         });

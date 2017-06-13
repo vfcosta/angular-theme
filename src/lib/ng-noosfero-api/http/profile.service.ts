@@ -133,4 +133,9 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
             .catch(this.getHandleErrorFunction(deferred));
         return deferred.promise;
     }
+
+    getBlockTemplate(id: number, blockType: string) {
+        let params = { 'block_type': blockType };
+        return this.getProfileElement(id).customGET("blocks/preview", params);
+    }
 }
