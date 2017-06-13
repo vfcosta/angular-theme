@@ -443,7 +443,8 @@ export function getMocks() {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
             instant: () => { },
             update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile),
-            remove: () => { return Promise.resolve({data: {success: true}})}
+            remove: () => { return Promise.resolve({data: {success: true}}); },
+            getBlockTemplate: (id: any, type: string) => { return   Promise.resolve({api_content: [] }); }
         },
         personService: {
             search: () => Observable.of([mocks.profile]),
