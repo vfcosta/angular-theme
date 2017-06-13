@@ -23,7 +23,7 @@ export class RecentDocumentsBlockComponent {
     ngOnInit() {
         this.profile = this.owner;
         this.documents = [];
-        if(this.block.api_content) {
+        if (this.block.api_content) {
             this.documents = this.block.api_content.articles;
         } else {
             this.blockService.getApiContent(this.block).then((content: any) => {
