@@ -30,6 +30,7 @@ describe("Components", () => {
                     { provide: "profileService", useValue: profileService },
                     { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "permissionService", useValue: permissionService },
+                    { provide: "sessionService", useValue: helpers.mocks.sessionService },
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(ProfileImageComponent);
