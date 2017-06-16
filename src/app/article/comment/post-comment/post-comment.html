@@ -1,7 +1,7 @@
 <form class="clearfix post-comment" *ngIf="article.accept_comments" (ngSubmit)="save()">
   <div class="form-group post-comment-logged-in" *ngIf="loggedIn()">
     <div class="comment media">
-      <div class="media-left">
+      <div class="media-left col-md-2">
         <profile-link [profile]="currentUser.person" [displayName]="false" [displayImage]="true"></profile-link>
       </div>
       <div class="media-body">
