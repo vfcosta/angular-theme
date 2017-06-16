@@ -1,5 +1,4 @@
 import { BlockService } from './../../lib/ng-noosfero-api/http/block.service';
-import { RoleService } from './../../lib/ng-noosfero-api/http/role.service';
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import * as plugins from '../../plugins';
@@ -92,7 +91,7 @@ export class EnvironmentContent {
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
         CommentParagraphEventService,
-        TaskService, ArticleService, RoleService, BlockService,
+        TaskService, ArticleService, BlockService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

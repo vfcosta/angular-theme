@@ -1,3 +1,4 @@
+import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,7 @@ describe("Components", () => {
                 providers: [
                     { provide: "translatorService", useValue: mocks.translatorService },
                     { provide: ArticleService, useValue: mocks.articleService },
-                    { provide: "roleService", useValue: mocks.roleService },
+                    { provide: RoleService, useValue: mocks.roleService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

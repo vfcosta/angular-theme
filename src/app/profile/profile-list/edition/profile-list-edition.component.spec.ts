@@ -1,3 +1,4 @@
+import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
 import { PopoverModule } from 'ngx-bootstrap';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
@@ -36,7 +37,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ProfileListEditionComponent, TranslatePipe, DateFormatPipe],
                 providers: [
-                    { provide: "roleService", useValue: roleService },
+                    { provide: RoleService, useValue: roleService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "translatorService", useValue: helpers.mocks.translatorService },
                     { provide: "amParseFilter", useValue: amParseFilter }

@@ -1,3 +1,4 @@
+import { RoleService } from './../lib/ng-noosfero-api/http/role.service';
 import { RegisterService } from './../lib/ng-noosfero-api/http/register.service';
 import { PasswordService } from './../lib/ng-noosfero-api/http/password.service';
 import { PermissionService } from './shared/services/permission.service';
@@ -289,6 +290,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         PermissionService,
         PasswordService,
         RegisterService,
+        RoleService,
     ].concat(UpgradeUtils.provideAngular1Services([
         'ProfileService',
         'EnvironmentService',
@@ -312,7 +314,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$transitions',
         '$stateParams',
         'amParseFilter',
-        'RoleService',
         'PersonService',
         'UserService',
         'DesignModeService',
