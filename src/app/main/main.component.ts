@@ -20,7 +20,6 @@ import { EventsHubService } from '../shared/services/events-hub.service';
 import { NotificationService } from '../shared/services/notification.service';
 import { CommunityService } from './../../lib/ng-noosfero-api/http/community.service';
 import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
-import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.service';
 import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { Component, Inject, provide } from 'ng-forward';
@@ -101,7 +100,6 @@ export class EnvironmentContent {
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
         provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
-        provide('SettingsService', { useClass: SettingsService }),
         provide('environmentService', { useClass: EnvironmentService }),
         provide('eventsHubService', { useClass: EventsHubService })
     ]
