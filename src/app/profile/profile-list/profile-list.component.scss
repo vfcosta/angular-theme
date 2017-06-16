@@ -24,6 +24,7 @@
   @extend .row;
 
   .profile-item {
+    position: relative;
     display: block;
     float: left;
     max-width: 65px;
