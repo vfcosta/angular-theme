@@ -15,7 +15,7 @@ export class PasswordComponent {
     @ViewChild('passwordConfirmErrors') passwordConfirmErrors: ValidationMessageComponent;
 
     constructor(
-        @Inject('passwordService') public passwordService: PasswordService,
+        public passwordService: PasswordService,
         @Inject("$state") private $state: ng.ui.IStateService,
         @Inject('notificationService') private notificationService: NotificationService) { }
 

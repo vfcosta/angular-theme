@@ -1,3 +1,4 @@
+import { PasswordService } from './../lib/ng-noosfero-api/http/password.service';
 import { PermissionService } from './shared/services/permission.service';
 import { CommentParagraphService } from './../plugins/comment_paragraph/http/comment-paragraph.service';
 import { NotificationService } from './shared/services/notification.service';
@@ -285,6 +286,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         EnvironmentService,
         CommentParagraphService,
         PermissionService,
+        PasswordService,
     ].concat(UpgradeUtils.provideAngular1Services([
         'ProfileService',
         'EnvironmentService',
@@ -315,7 +317,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$sce',
         'ThemeService',
         'CommentParagraphEventService',
-        'PasswordService',
         'RegisterService',
         'angularLoad',
         '$location',

@@ -1,3 +1,4 @@
+import { PasswordService } from './../../lib/ng-noosfero-api/http/password.service';
 import { FormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
 import { TranslatePipe } from '../shared/pipes/translate-pipe';
@@ -22,7 +23,7 @@ describe("Password Component", () => {
         TestBed.configureTestingModule({
             declarations: [PasswordComponent, TranslatePipe],
             providers: [
-                { provide: "passwordService", useValue: mocks.passwordService },
+                { provide: PasswordService, useValue: mocks.passwordService },
                 { provide: "$state", useValue: mocks.$state },
                 { provide: "notificationService", useValue: mocks.notificationService },
                 { provide: "translatorService", useValue: mocks.translatorService }
@@ -66,13 +67,13 @@ describe("Password Component", () => {
         component.password = data.password;
         component.passwordConfirmation = data.passwordConfirmation;
 
-        TestBed.get('passwordService').newPassword = jasmine.createSpy("newPassword").and.returnValue(Promise.reject({ data: { message: 'Error' } }));
+        TestBed.get(PasswordService).newPassword = jasmine.createSpy("newPassword").and.returnValue(Promise.reject({ data: { message: 'Error' } }));
         component.passwordConfirmErrors = jasmine.createSpyObj("passwordConfirmErrors", ["setBackendErrors"]);
         component.passwordErrors = jasmine.createSpyObj("passwordErrors", ["setBackendErrors"]);
         fixture.detectChanges();
         component.sendNewPassword();
         tick();
-        expect(TestBed.get('passwordService').newPassword).toHaveBeenCalledWith('1234567890', 'test', 'test-invalid');
+        expect(TestBed.get(PasswordService).newPassword).toHaveBeenCalledWith('1234567890', 'test', 'test-invalid');
         expect(mocks.notificationService.error).toHaveBeenCalled();
     }));
 
