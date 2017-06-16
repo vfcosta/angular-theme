@@ -1,3 +1,4 @@
+import { PermissionService } from './../../../app/shared/services/permission.service';
 import { CommentParagraphService } from './../http/comment-paragraph.service';
 import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service.ng2';
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
@@ -40,7 +41,7 @@ describe("Components", () => {
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: CommentService, useValue: mocks.commentService },
-                    { provide: "permissionService", useValue: mocks.permissionService },
+                    { provide: PermissionService, useValue: mocks.permissionService },
                     { provide: CommentParagraphService, useValue: serviceMock },
                     { provide: "commentParagraphEventService", useValue: eventServiceMock },
                 ],

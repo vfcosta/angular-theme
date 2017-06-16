@@ -29,7 +29,6 @@ describe("Components", () => {
             spyOn(mocks.$modal, 'open');
             let scope = helpers.mocks.scopeWithEvents;
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
-            let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
 
             TestBed.configureTestingModule({
                 imports: [MomentModule],

@@ -13,7 +13,7 @@ export class TopProfileImageComponent {
     picFile: any;
 
     constructor(private profileService: ProfileService,
-        @Inject('permissionService') private permissionService: PermissionService) { }
+        private permissionService: PermissionService) { }
 
     upload(data: any) {
         this.profileService.uploadImage(this.profile, data, 'top').then((result: noosfero.RestResult<noosfero.Profile>) => {

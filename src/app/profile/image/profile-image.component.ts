@@ -39,7 +39,7 @@ export class ProfileImageComponent {
     @Input() editable: boolean;
 
     constructor(private profileService: ProfileService,
-        @Inject("permissionService") private permissionService: PermissionService,
+        private permissionService: PermissionService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
         @Inject("notificationService") private notificationService: NotificationService,
         @Inject("sessionService") private session: SessionService) {

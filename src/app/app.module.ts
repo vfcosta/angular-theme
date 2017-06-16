@@ -1,3 +1,4 @@
+import { PermissionService } from './shared/services/permission.service';
 import { CommentParagraphService } from './../plugins/comment_paragraph/http/comment-paragraph.service';
 import { NotificationService } from './shared/services/notification.service';
 import { TranslatorService } from './shared/services/translator.service';
@@ -283,6 +284,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         ProfileService,
         EnvironmentService,
         CommentParagraphService,
+        PermissionService,
     ].concat(UpgradeUtils.provideAngular1Services([
         'ProfileService',
         'EnvironmentService',
@@ -295,7 +297,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         'SettingsService',
         'PersonService',
         'CommunityService',
-        'PermissionService',
         'EventsHubService',
         '$uibModal',
         '$scope',

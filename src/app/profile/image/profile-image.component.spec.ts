@@ -30,7 +30,7 @@ describe("Components", () => {
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: ProfileService, useValue: profileService },
                     { provide: "eventsHubService", useValue: mocks.eventsHubService },
-                    { provide: "permissionService", useValue: permissionService },
+                    { provide: PermissionService, useValue: permissionService },
                     { provide: "sessionService", useValue: helpers.mocks.sessionService },
                 ]
             }).compileComponents().then(() => {

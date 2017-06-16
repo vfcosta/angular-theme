@@ -22,7 +22,7 @@ export class AllowCommentComponent {
     constructor(@Inject("commentParagraphEventService") private commentParagraphEventService: CommentParagraphEventService,
         private commentParagraphService: CommentParagraphService,
         private commentService: CommentService,
-        @Inject("permissionService") private permissionService: PermissionService,
+        private permissionService: PermissionService,
         private articleService: ArticleService,
         private elementRef: ElementRef
     ) { }

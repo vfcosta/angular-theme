@@ -1,3 +1,4 @@
+import { PermissionService } from './../../shared/services/permission.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { TopProfileImageComponent } from './top-profile-image.component';
 import * as helpers from "../../../spec/helpers";
@@ -14,7 +15,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [TopProfileImageComponent],
                 providers: [
-                    { provide: "permissionService", useValue: mocks.permissionService },
+                    { provide: PermissionService, useValue: mocks.permissionService },
                     { provide: ProfileService, useValue: mocks.profileService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
