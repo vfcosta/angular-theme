@@ -1,3 +1,4 @@
+import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { SessionService } from './../../../login/session.service.ng2';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { ValidationMessageComponent } from './../../../shared/components/validation-message/validation-message.component';
@@ -21,7 +22,7 @@ describe("Components", () => {
                 declarations: [NewCommunityComponent, TranslatePipe, ValidationMessageComponent],
                 providers: [
                     { provide: ProfileService, useValue: mocks.profileService },
-                    { provide: "communityService", useValue: mocks.communityService },
+                    { provide: CommunityService, useValue: mocks.communityService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },

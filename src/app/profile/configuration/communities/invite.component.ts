@@ -21,7 +21,7 @@ export class InviteComponent {
     public searchToken: string;
 
     constructor( @Inject('personService') private personService: PersonService,
-        @Inject('communityService') private communityService: CommunityService,
+        private communityService: CommunityService,
         private profileService: ProfileService,
         @Inject('translatorService') private translatorService: TranslatorService,
         @Inject("notificationService") public notificationService: NotificationService,

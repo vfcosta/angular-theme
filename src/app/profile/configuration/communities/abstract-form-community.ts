@@ -19,7 +19,7 @@ export abstract class AbstractFormCommunity {
     public sessionProfile: noosfero.Profile;
 
     constructor(@Inject("notificationService") public notificationService: NotificationService,
-        @Inject('communityService') public communityService: CommunityService,
+        @Inject(CommunityService) public communityService: CommunityService,
         @Inject(ProfileService) public profileService: ProfileService,
         @Inject(SessionService) public sessionService: SessionService,
         @Inject('$state') public $state: ng.ui.IStateService,

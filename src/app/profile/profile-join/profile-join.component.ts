@@ -19,7 +19,7 @@ export class ProfileJoinComponent {
         private session: SessionService,
         @Inject('notificationService') private notificationService: NotificationService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
-        @Inject('communityService') private communityService: CommunityService) {
+        private communityService: CommunityService) {
     }
 
     ngOnInit() {

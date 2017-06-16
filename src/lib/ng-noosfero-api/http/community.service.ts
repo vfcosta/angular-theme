@@ -1,16 +1,16 @@
-import { Injectable, Inject } from "ng-forward";
-import { RestangularService } from "./restangular_service";
+import { Restangular } from 'ngx-restangular';
+import { Injectable, Inject } from "@angular/core";
+import { RestangularService } from "./restangular_service.ng2";
 import { PersonService } from "./person.service";
 import { Observable } from 'rxjs/Observable';
 
 declare var _: any;
 
 @Injectable()
-@Inject("Restangular", "$q", "$log", PersonService)
 export class CommunityService extends RestangularService<noosfero.Community> {
 
-    constructor(private Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected personService: PersonService) {
-        super(Restangular, $q, $log);
+    constructor(protected restangular: Restangular, @Inject("personService") protected personService: PersonService) {
+        super(restangular);
     }
 
     getResourcePath() {
@@ -28,14 +28,11 @@ export class CommunityService extends RestangularService<noosfero.Community> {
         let headers = {
             'Content-Type': 'application/json'
         };
-        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Community>>();
         let attributesToUpdate: any = {
             community: Object.assign({}, _.omitBy(_.pick(community, ['name', 'closed']), _.isNull))
         };
-        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Community>> = this.getElement(null).customPOST(attributesToUpdate, null, null, headers);
-        restRequest.then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-        return deferred.promise;
+        let restRequest = this.getElement(null).customPOST(attributesToUpdate, null, null, headers);
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     updateCommunity(community: noosfero.Community) {
@@ -45,11 +42,8 @@ export class CommunityService extends RestangularService<noosfero.Community> {
         let attributesToUpdate: any = {
             community: Object.assign({}, _.omitBy(_.pick(community, ['name', 'closed']), _.isNull))
         };
-        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Community>>();
-        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Community>> = this.getElement(community.id).customOperation("patch", null, null, headers, attributesToUpdate);
-        restRequest.then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-        return deferred.promise;
+        let restRequest = this.getElement(community.id).customOperation("patch", null, null, headers, attributesToUpdate);
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     getByOwner(owner: any, params?: any) {
@@ -79,32 +73,23 @@ export class CommunityService extends RestangularService<noosfero.Community> {
             invitations.push(`${invitation.id}`);
         }
         let params = { 'contacts': invitations };
-
-        let deferred = this.$q.defer();
         let restRequest = this.getElement(communityId).customPOST(params, "invite", null, headers);
-        restRequest.then(this.getHandleSuccessFunction(deferred)).catch(this.getHandleErrorFunction(deferred));
-        return Observable.from(deferred.promise).map((ret: any) => {
+        return restRequest.map((ret: any) => {
             return ret.data;
         });
     }
 
-    getCommunityElement(communityId: number): restangular.IElement {
-        return this.Restangular.one('communities', communityId);
+    getCommunityElement(communityId: number) {
+        return this.restangular.one('communities', communityId);
     }
-
-
 
     getMembershipState(person: noosfero.Person, profile: noosfero.Profile) {
-        let deferred = this.$q.defer();
         if (person) {
-            this.getCommunityElement(profile.id).customGET('membership', { identifier: person.identifier }).then((result: any) => {
-                deferred.resolve(result.data);
+            return this.getCommunityElement(profile.id).customGET('membership', { identifier: person.identifier }).toPromise().then((result: any) => {
+                return Promise.resolve(result.data);
             });
         } else {
-            deferred.resolve(0);
+            return Promise.resolve(0);
         }
-        return deferred.promise;
     }
-
-
 }

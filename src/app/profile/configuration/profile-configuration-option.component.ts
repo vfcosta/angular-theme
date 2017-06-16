@@ -1,4 +1,3 @@
-import { CommunityService } from './../../../lib/ng-noosfero-api/http/community.service';
 import { Component, Inject } from 'ng-forward';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 

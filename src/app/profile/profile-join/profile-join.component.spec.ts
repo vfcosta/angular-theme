@@ -1,3 +1,4 @@
+import { CommunityService } from './../../../lib/ng-noosfero-api/http/community.service';
 import { SessionService } from './../../login/session.service.ng2';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
@@ -39,7 +40,7 @@ describe("Components", () => {
                     { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: "$uibModal", useValue: helpers.mocks.$modal },
                     { provide: "translatorService", useValue: translatorService },
-                    { provide: "communityService", useValue: communityService }
+                    { provide: CommunityService, useValue: communityService }
                 ]
             });
             fixture = TestBed.createComponent(ProfileJoinComponent);

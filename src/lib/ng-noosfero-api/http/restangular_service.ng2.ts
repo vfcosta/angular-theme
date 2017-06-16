@@ -239,11 +239,11 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     /**
      * Returns a Restangular IElement representing the
      */
-    public getElement(id: number, rootElement?: noosfero.RestModel): noosfero.RestModel {
+    public getElement(id: number, rootElement?: noosfero.RestModel) {
         if (rootElement) {
-            return <noosfero.RestModel>rootElement.one(this.getResourcePath(), id);
+            return rootElement.one(this.getResourcePath(), id);
         } else {
-            return <noosfero.RestModel>this.restangular.one(this.getResourcePath(), id);
+            return this.restangular.one(this.getResourcePath(), id);
         }
     }
 

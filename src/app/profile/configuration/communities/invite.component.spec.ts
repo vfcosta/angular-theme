@@ -1,3 +1,4 @@
+import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { InviteComponent } from './invite.component';
@@ -29,7 +30,7 @@ describe("Components", () => {
                 providers: [
                     { provide: "personService", useValue: mocks.personService },
                     { provide: ProfileService, useValue: mocks.profileService },
-                    { provide: "communityService", useValue: mocks.communityService },
+                    { provide: CommunityService, useValue: mocks.communityService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
