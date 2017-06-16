@@ -41,7 +41,8 @@ export class ProfileImageComponent {
     constructor( @Inject("profileService") private profileService: ProfileService,
         @Inject("permissionService") private permissionService: PermissionService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
-        @Inject("notificationService") private notificationService: NotificationService) {
+        @Inject("notificationService") private notificationService: NotificationService,
+        @Inject("sessionService") private session: SessionService) {
     }
 
     upload(data: any) {
@@ -71,6 +72,7 @@ export class ProfileImageComponent {
 
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.IMAGE_PROFILE_UPDATED, (profile: noosfero.Profile) => {
             if (this.profile.id === profile.id) {
+                this.session.reloadUser();
                 this.profile = profile;
             }
         });

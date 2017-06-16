@@ -12,7 +12,9 @@ export class SessionService {
     reloadUser() {
         if (this.currentUser() && this.currentUser().person) {
             this.personService.getLoggedPerson().then((result: noosfero.RestResult<noosfero.Person>) => {
-                this.currentUser().person = result.data;
+                let user = this.currentUser();
+                user.person = result.data;
+                this.create(user);
             }).catch((error: any) => {
                 this.destroy();
             });
@@ -34,7 +36,7 @@ export class SessionService {
     };
 
     currentPerson(): noosfero.Person {
-        return this.currentUser() ? this.currentUser().person : null;        
+        return this.currentUser() ? this.currentUser().person : null;
     };
 
 }
