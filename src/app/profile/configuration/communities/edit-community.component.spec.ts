@@ -1,6 +1,6 @@
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { SessionService } from './../../../login/session.service.ng2';
-import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { ValidationMessageComponent } from './../../../shared/components/validation-message/validation-message.component';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { EditCommunityComponent } from './edit-community.component';

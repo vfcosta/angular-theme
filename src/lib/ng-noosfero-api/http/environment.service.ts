@@ -1,16 +1,15 @@
-import { Injectable, Inject } from "ng-forward";
-import { RestangularService } from "./restangular_service";
-
+import { Restangular } from 'ngx-restangular';
+import { Injectable, Inject } from "@angular/core";
+import { RestangularService } from "./restangular_service.ng2";
 
 @Injectable()
-@Inject("Restangular", "$q")
 export class EnvironmentService extends RestangularService<noosfero.Environment> {
 
     private _currentEnvironmentPromise: ng.IDeferred<noosfero.Environment>;
     private _environment: noosfero.Environment;
 
-    constructor(private restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
-        super(restangular, $q, $log);
+    constructor(protected restangular: Restangular) {
+        super(restangular);
         this.resetCurrentEnvironment();
     }
 
@@ -26,35 +25,35 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
     }
 
     private resetCurrentEnvironment() {
-        this._currentEnvironmentPromise = this.$q.defer();
+        this.resetCurrent();
     }
 
-    getCurrentEnvironment(): ng.IPromise<noosfero.Environment> {
-        return this._currentEnvironmentPromise.promise;
+    getCurrentEnvironment(): Promise<noosfero.Environment> {
+        return this.getCurrent();
     }
 
     setCurrentEnvironment(environment: noosfero.Environment) {
-        this._currentEnvironmentPromise.resolve(environment);
+        this.setCurrent(environment);
     }
 
-    getEnvironmentElement(environmentId: number | string): restangular.IElement {
+    getEnvironmentElement(environmentId: number | string) {
         return this.restangular.one('environments', <any>environmentId);
     }
 
     getBoxes(environmentId: number | string): restangular.IPromise<restangular.IResponse> {
-        return this.getEnvironmentElement(environmentId).customGET('boxes');
+        return this.getEnvironmentElement(environmentId).customGET('boxes').toPromise();
     }
 
     getTags(environmentId: number | string): restangular.IPromise<any> {
-        return this.getEnvironmentElement(environmentId).customGET('tags');
+        return this.getEnvironmentElement(environmentId).customGET('tags').toPromise();
     }
 
     getEnvironmentPeople(environmentId: number | string, params?: any): restangular.IPromise<any> {
-        return this.getEnvironmentElement(environmentId).customGET('people', params);
+        return this.getEnvironmentElement(environmentId).customGET('people', params).toPromise();
     }
 
     update(environment: noosfero.Environment) {
         let headers = { 'Content-Type': 'application/json' };
-        return this.getEnvironmentElement(environment.id).customPOST({ environment: environment }, null, null, headers);
+        return this.getEnvironmentElement(environment.id).customPOST({ environment: environment }, null, null, headers).toPromise();
     }
 }

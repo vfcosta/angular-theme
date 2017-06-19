@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { By } from '@angular/platform-browser';
 import {provideFilters} from '../../../../spec/helpers';
 import {DiscussionBlockComponent} from './discussion-block.component';

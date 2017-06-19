@@ -1,6 +1,6 @@
 import { TaskAcceptTypeComponent } from './../task-accept-type.component';
 import { Component, Injector, Inject } from "@angular/core";
-import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service.ng2";
+import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
     selector: "approve-article-task-accept",

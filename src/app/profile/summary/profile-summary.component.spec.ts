@@ -2,7 +2,7 @@ import { SessionService } from './../../login/session.service.ng2';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import { UiSrefDirective } from '../../shared/directives/ui-sref-directive';
 import { PopoverModule } from 'ngx-bootstrap';
-import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service.ng2";
+import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';

@@ -1,7 +1,7 @@
 import { Component, Inject, Input, NgZone } from '@angular/core';
 import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
 import { CommunityService } from "../../../../lib/ng-noosfero-api/http/community.service";
-import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service.ng2";
+import { ProfileService } from "../../../../lib/ng-noosfero-api/http/profile.service";
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { NotificationService } from '../../../shared/services/notification.service';
 

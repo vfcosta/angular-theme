@@ -1,5 +1,5 @@
 import {Component, Input, Inject} from "@angular/core";
-import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service.ng2";
+import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
 
 @Component({
     selector: "noosfero-activity",

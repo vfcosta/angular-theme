@@ -1,4 +1,4 @@
-import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service.ng2';
+import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
 import { SessionService } from './../../login/session.service.ng2';
 import { HeaderService } from './../../shared/services/header.service';
 import { CollapseModule } from 'ngx-bootstrap';

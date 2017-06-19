@@ -1,5 +1,5 @@
 import { Component, Inject, Input } from '@angular/core';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service.ng2";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
     selector: "noosfero-community-members",

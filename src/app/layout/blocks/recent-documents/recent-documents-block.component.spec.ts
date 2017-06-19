@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { RecentDocumentsBlockComponent } from './recent-documents-block.component';

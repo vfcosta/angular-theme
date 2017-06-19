@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { PermissionNg2Directive } from './../../../shared/components/permission/permission.ng2.directive';

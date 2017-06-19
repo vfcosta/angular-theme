@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';

@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/platform-browser';
 import { Directive, Inject, Injectable } from "@angular/core";
-import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service.ng2";
+import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
 
 @Injectable()
 export class HeaderService {

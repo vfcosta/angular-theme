@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { By } from '@angular/platform-browser';
 import { ArticleBlogComponent } from './blog.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';

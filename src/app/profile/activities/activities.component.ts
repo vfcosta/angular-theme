@@ -12,7 +12,7 @@ const LIMIT = 10;
     selector: "noosfero-activities",
     templateUrl: 'app/profile/activities/activities.html',
 })
-@Inject(ProfileService)
+@Inject("profileService")
 export class ActivitiesComponent {
 
     activities: any;

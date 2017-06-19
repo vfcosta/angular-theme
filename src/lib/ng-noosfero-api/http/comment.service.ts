@@ -1,7 +1,7 @@
 import { Restangular } from 'ngx-restangular';
 import { Injectable, Inject } from "@angular/core";
 import { RestangularService } from "./restangular_service.ng2";
-import { ArticleService } from "./article.service.ng2";
+import { ArticleService } from "./article.service";
 
 @Injectable()
 export class CommentService extends RestangularService<noosfero.Comment> {

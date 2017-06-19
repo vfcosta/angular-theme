@@ -1,7 +1,7 @@
-import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service.ng2';
-import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { BrowserModule } from '@angular/platform-browser';
-import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import {MockBackend, MockConnection} from '@angular/http/testing';

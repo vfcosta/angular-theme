@@ -21,7 +21,7 @@ import { Component, Inject, provide } from 'ng-forward';
         provide('themeService', { useClass: ThemeService }),
     ]
 })
-@Inject(EnvironmentService, "$state", NotificationService, AuthService, DesignModeService, ThemeService)
+@Inject("environmentService", "$state", NotificationService, AuthService, DesignModeService, ThemeService)
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];

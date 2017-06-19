@@ -1,7 +1,7 @@
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
-import { EnvironmentService } from './environment.service.ng2';
-import { ProfileService } from './profile.service.ng2';
-import { ArticleService } from './article.service.ng2';
+import { EnvironmentService } from './environment.service';
+import { ProfileService } from './profile.service';
+import { ArticleService } from './article.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import {CommentService} from "./comment.service";

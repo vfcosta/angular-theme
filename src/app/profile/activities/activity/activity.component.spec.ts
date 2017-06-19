@@ -1,4 +1,4 @@
-import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service.ng2';
+import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service';
 import { NgPipesModule } from 'ngx-pipes';
 import { NoosferoUrlPipe } from './../../../shared/pipes/noosfero-url.pipe';
 import { By } from '@angular/platform-browser';

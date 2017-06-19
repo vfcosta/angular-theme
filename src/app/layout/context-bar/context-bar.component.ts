@@ -2,8 +2,8 @@ import { Inject, Input, Component } from '@angular/core';
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
 import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
-import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service.ng2';
-import { EnvironmentService } from '../../../lib/ng-noosfero-api/http/environment.service.ng2';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
+import { EnvironmentService } from '../../../lib/ng-noosfero-api/http/environment.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { DesignModeService } from "../../shared/services/design-mode.service";
 

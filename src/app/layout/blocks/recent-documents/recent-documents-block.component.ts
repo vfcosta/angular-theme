@@ -1,6 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service.ng2";
+import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
 import {Arrays} from "./../../../../lib/util/arrays";
 
 @Component({

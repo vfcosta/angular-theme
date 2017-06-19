@@ -1,6 +1,6 @@
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
-import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
 
 /**

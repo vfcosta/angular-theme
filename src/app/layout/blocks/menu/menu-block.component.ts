@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { Component, Input, Inject, HostListener, ElementRef, ViewChild } from "@angular/core";
 import { TranslatorService } from "../../../shared/services/translator.service";
 import { TypeaheadMatch } from 'ngx-bootstrap';

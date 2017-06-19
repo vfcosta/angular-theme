@@ -8,10 +8,10 @@ import { PermissionService } from './shared/services/permission.service';
 import { CommentParagraphService } from './../plugins/comment_paragraph/http/comment-paragraph.service';
 import { NotificationService } from './shared/services/notification.service';
 import { TranslatorService } from './shared/services/translator.service';
-import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service.ng2';
-import { ProfileService } from './../lib/ng-noosfero-api/http/profile.service.ng2';
+import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service';
+import { ProfileService } from './../lib/ng-noosfero-api/http/profile.service';
 import { SessionService } from './login/session.service.ng2';
-import { ArticleService } from './../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../lib/ng-noosfero-api/http/article.service';
 import { CommentService } from './../lib/ng-noosfero-api/http/comment.service';
 import { HeaderService } from './shared/services/header.service';
 import { ArticleViewComponent } from './article/article-view.component';
@@ -298,9 +298,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         CommunityService,
         UserService,
     ].concat(UpgradeUtils.provideAngular1Services([
-        'ProfileService',
-        'EnvironmentService',
-        'ArticleService',
         'AuthService',
         'SessionService',
         '$state',

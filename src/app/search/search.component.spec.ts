@@ -7,7 +7,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { By } from '@angular/platform-browser';
 import { TranslatePipe } from './../shared/pipes/translate-pipe';
 import { DateFormatPipe } from './../shared/pipes/date-format.pipe';
-import { ArticleService } from './../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../lib/ng-noosfero-api/http/article.service';
 import { UiSrefDirective } from '../shared/directives/ui-sref-directive';
 import {SearchComponent} from "./search.component";
 import * as helpers from "../../spec/helpers";

@@ -111,9 +111,9 @@ export function noosferoRoutes($stateProvider: any) {
         },
         params: { currentProfile: {} },
         resolve: {
-            environment: (EnvironmentService: EnvironmentService) => {
-                return EnvironmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
-                    EnvironmentService.setCurrentEnvironment(result.data);
+            environment: (environmentService: EnvironmentService) => {
+                return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                    environmentService.setCurrentEnvironment(result.data);
                     return result.data;
                 });
             }

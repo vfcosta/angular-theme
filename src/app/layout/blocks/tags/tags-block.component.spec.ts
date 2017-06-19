@@ -1,4 +1,4 @@
-import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service.ng2';
+import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../../spec/helpers";

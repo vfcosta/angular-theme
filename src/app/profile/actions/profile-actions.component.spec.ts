@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
 import { Input, Component } from '@angular/core';
 import * as helpers from "../../../spec/helpers";
 import { ProfileActionsComponent } from './profile-actions.component';

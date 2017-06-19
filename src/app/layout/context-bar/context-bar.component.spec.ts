@@ -1,5 +1,5 @@
-import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service.ng2';
-import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { Component } from '@angular/core';
 import { ContextBarComponent } from './context-bar.component';
 import * as helpers from "../../../spec/helpers";

@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
 import {Component, HostListener, Input, Inject, ViewChild, ElementRef} from "@angular/core";
 import {SideCommentsComponent} from "../side-comments/side-comments.component";
 import {CommentParagraphEventService} from "../events/comment-paragraph-event.service";

@@ -1,4 +1,4 @@
-import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { UiSrefDirective } from './../../shared/directives/ui-sref-directive';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';

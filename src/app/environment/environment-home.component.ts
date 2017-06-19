@@ -12,11 +12,10 @@ import {NotificationService} from "../shared/services/notification.service";
     selector: 'environment-home',
     templateUrl: "app/environment/environment-home.html",
     providers: [
-        provide('environmentService', { useClass: EnvironmentService }),
         provide('notificationService', { useClass: NotificationService })
     ]
 })
-@Inject(EnvironmentService, "$log", "$sce")
+@Inject("environmentService", "$log", "$sce")
 export class EnvironmentHomeComponent {
 
     environment: noosfero.Environment;

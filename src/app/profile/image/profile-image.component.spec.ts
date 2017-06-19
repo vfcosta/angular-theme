@@ -1,4 +1,5 @@
-import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { PermissionService } from './../../shared/services/permission.service';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';

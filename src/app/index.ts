@@ -1,3 +1,6 @@
+import { ProfileService } from './../lib/ng-noosfero-api/http/profile.service';
+import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service';
+import { ArticleService } from './../lib/ng-noosfero-api/http/article.service';
 import { ArticleViewComponent } from './article/article-view.component';
 import { ActivityComponent } from './profile/activities/activity/activity.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -99,7 +102,7 @@ import { IconPickerComponent } from './shared/components/icon-picker/icon-picker
 import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
-import { downgradeComponent } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { bundle } from 'ng-forward';
 
 
@@ -385,6 +388,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoArticle',
         downgradeComponent({ component: ArticleViewComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
-    );
+    )
+    .factory('articleService', downgradeInjectable(ArticleService))
+    .factory('environmentService', downgradeInjectable(EnvironmentService))
+    .factory('profileService', downgradeInjectable(ProfileService));
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

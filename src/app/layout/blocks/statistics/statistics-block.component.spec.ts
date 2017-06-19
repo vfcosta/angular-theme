@@ -1,4 +1,4 @@
-import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service.ng2';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { StatisticsBlockComponent } from './statistics-block.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { TranslatePipe } from '../../../shared/pipes/translate-pipe';

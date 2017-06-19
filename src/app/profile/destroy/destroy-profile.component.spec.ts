@@ -1,4 +1,4 @@
-import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DestroyProfileComponent } from './destroy-profile.component';
 import * as helpers from "../../../spec/helpers";

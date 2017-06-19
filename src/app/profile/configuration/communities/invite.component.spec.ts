@@ -1,5 +1,5 @@
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
-import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { InviteComponent } from './invite.component';
 import * as helpers from "../../../../spec/helpers";

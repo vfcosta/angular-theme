@@ -1,6 +1,6 @@
 import {Inject, Component, Input} from "@angular/core";
 import { CloudData } from 'angular-tag-cloud-module';
-import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service.ng2";
+import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
 
 @Component({
     selector: "noosfero-tags-cloud-block",

@@ -1,5 +1,5 @@
 import { RegisterService } from './../../lib/ng-noosfero-api/http/register.service';
-import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service.ng2';
+import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import * as helpers from "../../spec/helpers";

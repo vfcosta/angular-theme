@@ -5,7 +5,7 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
     selector: 'profile-about',
     templateUrl: "app/profile/about/profile-about.html",
 })
-@Inject(ProfileService)
+@Inject("profileService")
 export class ProfileAboutComponent {
 
     profile: noosfero.Profile;

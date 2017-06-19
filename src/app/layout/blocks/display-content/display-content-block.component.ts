@@ -1,5 +1,5 @@
 import { Input, Inject, Component } from "@angular/core";
-import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service.ng2";
+import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
 
 @Component({
     selector: "noosfero-display-content-block",

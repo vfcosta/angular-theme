@@ -10,7 +10,7 @@ import { Component, Inject, provide } from 'ng-forward';
         provide('domainService', { useClass: DomainService }),
     ]
 })
-@Inject(DomainService, "$state", "$stateParams", "contextResult", AuthService, EnvironmentService)
+@Inject(DomainService, "$state", "$stateParams", "contextResult", AuthService, "EnvironmentService")
 export class DomainComponent {
 
     owner: noosfero.Environment | noosfero.Profile;

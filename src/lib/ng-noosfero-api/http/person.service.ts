@@ -4,11 +4,11 @@ import { ProfileService } from "./profile.service";
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-@Inject("Restangular", "$q", "$log", ProfileService)
+@Inject("Restangular", "$q", "$log")
 export class PersonService extends RestangularService<noosfero.Person> {
 
-    constructor(private restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected profileService: ProfileService) {
-        super(restangular, $q, $log);
+    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
+        super(Restangular, $q, $log);
     }
 
     getResourcePath() {
@@ -47,7 +47,7 @@ export class PersonService extends RestangularService<noosfero.Person> {
     }
 
     getTags(profile: noosfero.Profile): ng.IPromise<noosfero.RestResult<any>> {
-        let p = this.restangular.one('profiles', <number>profile.id).customGET('tags');
+        let p = this.getElement(<number>profile.id).customGET('tags');
         let deferred = this.$q.defer<noosfero.RestResult<any>>();
         p.then(this.getHandleSuccessFunction<noosfero.RestResult<any>>(deferred));
         p.catch(this.getHandleErrorFunction<noosfero.RestResult<any>>(deferred));

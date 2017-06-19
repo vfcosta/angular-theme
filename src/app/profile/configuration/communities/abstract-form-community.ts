@@ -1,6 +1,6 @@
 import { SessionService } from './../../../login/session.service.ng2';
 import { ViewChild } from '@angular/core';
-import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service.ng2';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';

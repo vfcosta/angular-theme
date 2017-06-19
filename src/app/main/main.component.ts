@@ -1,5 +1,4 @@
 import { BlockService } from './../../lib/ng-noosfero-api/http/block.service';
-import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import * as plugins from '../../plugins';
 import { RegisterComponent } from '../account/register.component';
@@ -18,7 +17,6 @@ import { PermissionDirective } from '../shared/components/permission/permission.
 import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
 import { NotificationService } from '../shared/services/notification.service';
-import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { Component, Inject, provide } from 'ng-forward';
 import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
@@ -88,7 +86,7 @@ export class EnvironmentContent {
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         CommentParagraphEventService,
-        TaskService, ArticleService, BlockService,
+        TaskService, BlockService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
@@ -98,11 +96,10 @@ export class EnvironmentContent {
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
         provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
-        provide('environmentService', { useClass: EnvironmentService }),
         provide('eventsHubService', { useClass: EventsHubService })
     ]
 })
-@Inject(EnvironmentService)
+@Inject("environmentService")
 export class MainComponent {
 
 }
