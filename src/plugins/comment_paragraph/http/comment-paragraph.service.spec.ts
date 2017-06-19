@@ -19,9 +19,9 @@ describe("Services", () => {
                 imports: [HttpModule, RestangularModule, BrowserModule],
                 providers: [
                     ArticleService, CommentParagraphService, ProfileService, EnvironmentService,
-                    { provide: "articleService", useValue: mocks.articleService},
-                    { provide: "profileService", useValue: mocks.profileService},
-                    { provide: "environmentService", useValue: mocks.environmentService},
+                    { provide: ArticleService, useValue: mocks.articleService},
+                    { provide: ProfileService, useValue: mocks.profileService},
+                    { provide: EnvironmentService, useValue: mocks.environmentService},
                 ].concat(helpers.provideMockBackend()),
             });
             TestBed.get(Restangular).provider.setFullResponse(true);

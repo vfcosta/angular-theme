@@ -456,7 +456,8 @@ export function getMocks() {
         },
         sessionService: {
             currentUser: () => <noosfero.User>{ person: { id: 1, identifier: 'test_user' } },
-            currentPerson: () => <noosfero.Person>{ id: 1 }
+            currentPerson: () => <noosfero.Person>{ id: 1 },
+            destroy: () => {}
         },
         commentService: {
             subscribeToModelRemoved: (fn: Function) => { },

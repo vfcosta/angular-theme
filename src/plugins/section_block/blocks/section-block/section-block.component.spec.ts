@@ -1,3 +1,4 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { SectionBlockComponent } from './section-block.component';
 import * as helpers from "./../../../../spec/helpers";
@@ -23,7 +24,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [SectionBlockComponent, TranslatePipe],
                 providers: [
-                    { provide: "blockService", useValue: blockService },
+                    { provide: BlockService, useValue: blockService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

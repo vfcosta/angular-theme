@@ -1,3 +1,4 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { DragulaModule } from 'ng2-dragula';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { HighlightsBlockSettingsComponent } from './highlights-block-settings.component';
@@ -23,7 +24,7 @@ describe("Highlights Block Settings Component", () => {
         TestBed.configureTestingModule({
             declarations: [HighlightsBlockSettingsComponent, TranslatePipe],
             providers: [
-                { provide: "blockService", useValue: mocks.blockService },
+                { provide: BlockService, useValue: mocks.blockService },
                 { provide: Injector, useValue: mocks.injector },
                 { provide: "translatorService", useValue: mocks.translatorService },
                 { provide: BlockSettingsComponent, useValue: blockSettingsComponent },

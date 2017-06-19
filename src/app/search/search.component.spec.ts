@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { PaginationModule } from 'ngx-bootstrap/ng2-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap';
 import { MomentModule } from 'angular2-moment';
 import { NgPipesModule } from 'ngx-pipes';
 import { By } from '@angular/platform-browser';

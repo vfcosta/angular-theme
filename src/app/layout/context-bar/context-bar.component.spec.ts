@@ -1,3 +1,4 @@
+import { BlockService } from './../../../lib/ng-noosfero-api/http/block.service';
 import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { Component } from '@angular/core';
@@ -27,7 +28,7 @@ describe("Context Bar Component", () => {
                 { provide: "$state", useValue: state },
                 { provide: "$scope", useValue: mocks.scopeWithEvents() },
                 { provide: "eventsHubService", useValue: mocks.eventsHubService },
-                { provide: "blockService", useValue: mocks.blockService },
+                { provide: BlockService, useValue: mocks.blockService },
                 { provide: "notificationService", useValue: mocks.notificationService },
                 { provide: "designModeService", useValue: mocks.designModeService },
                 { provide: ProfileService, useValue: mocks.profileService },

@@ -28,7 +28,6 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * @param {Restangular} Restangular (description)
      */
     constructor(protected restangular: Restangular) {
-        console.log("restangular", restangular);
         this.baseResource = restangular.all(this.getResourcePath());
         this.resetCurrent();
     }
@@ -256,9 +255,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
          * @param {restangular.IResponse} response (description)
          */
         let successFunction = (response: restangular.IResponse) => {
-            console.log("Handle success", response);
             let resultModel: noosfero.RestResult<T> = <any>this.extractData(response);
-            console.log("resultModel", resultModel);
             // emits the event if a successEmiter was provided in the successEmitter parameter
             if (successEmitter !== null) {
                 if (successEmitter !== this.modelRemovedEventEmitter) {

@@ -1,3 +1,4 @@
+import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
 import { SessionService } from './../../login/session.service';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import { UiSrefDirective } from '../../shared/directives/ui-sref-directive';
@@ -34,7 +35,7 @@ describe("Components", () => {
                 providers: [
                     { provide: EnvironmentService, useValue: environmentService},
                     { provide: SessionService, useValue: sessionService },
-                    { provide: "personService", useValue: personService },
+                    { provide: PersonService, useValue: personService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "designModeService", useValue: mocks.designModeService },
                     { provide: "$state", useValue: mocks.$state },

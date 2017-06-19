@@ -20,9 +20,9 @@ describe("Services", () => {
                 imports: [HttpModule, RestangularModule, BrowserModule],
                 providers: [
                     ProfileService, EnvironmentService, ArticleService, CommentService,
-                    { provide: "profileService", useValue: mocks.profileService},
-                    { provide: "environmentService", useValue: mocks.environmentService},
-                    { provide: "articleService", useValue: mocks.articleService},
+                    { provide: ProfileService, useValue: mocks.profileService},
+                    { provide: EnvironmentService, useValue: mocks.environmentService},
+                    { provide: ArticleService, useValue: mocks.articleService},
                 ].concat(helpers.provideMockBackend()),
             });
             TestBed.get(Restangular).provider.setFullResponse(true);
@@ -38,12 +38,8 @@ describe("Services", () => {
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/articles/${articleId}/comments?without_reply=true`,
                     {comments: [{ name: "comment1" }]}, {'total': 1}, 200);
                 commentService.getByArticle(<noosfero.Article>{ id: articleId }).then((result: noosfero.RestResult<noosfero.Comment[]>) => {
-                    console.log("PROMISE");
-                    console.log("PROMISE", result);
                     expect(result.data).toEqual([{ name: "comment1" }]);
                 });
-                // tick();
-                // tick();
             });
 
             xit("should create a comment in an article", (done) => {

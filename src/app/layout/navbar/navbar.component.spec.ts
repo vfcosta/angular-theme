@@ -1,3 +1,4 @@
+import { AuthService } from './../../login/auth.service';
 import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
 import { SessionService } from './../../login/session.service';
 import { HeaderService } from './../../shared/services/header.service';
@@ -30,7 +31,7 @@ describe("Components", () => {
                 declarations: [NavbarComponent, TranslatePipe],
                 providers: [
                     { provide: "$uibModal", useValue: mocks.$modal },
-                    { provide: "authService", useValue: mocks.authService },
+                    { provide: AuthService, useValue: mocks.authService },
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: EnvironmentService, useValue: mocks.environmentService },

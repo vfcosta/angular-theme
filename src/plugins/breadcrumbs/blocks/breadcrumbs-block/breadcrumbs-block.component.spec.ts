@@ -1,3 +1,4 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -23,7 +24,7 @@ describe("Components", () => {
                 declarations: [BreadcrumbsBlockComponent, TranslatePipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
-                    { provide: "blockService", useValue: mockedBlockService },
+                    { provide: BlockService, useValue: mockedBlockService },
                     { provide: "$state", useValue: state },
                     { provide: "$stateParams", useValue: stateParams },
                     { provide: "$transitions", useValue: transitions },

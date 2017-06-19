@@ -44,7 +44,7 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
         return this.getEnvironmentElement(environmentId).customGET('boxes').toPromise();
     }
 
-    getTags(environmentId: number | string): restangular.IPromise<any> {
+    getTags(environmentId: number | string): Promise<noosfero.RestResult<noosfero.Tag[]>> {
         return this.getEnvironmentElement(environmentId).customGET('tags').toPromise();
     }
 

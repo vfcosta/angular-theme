@@ -1,3 +1,4 @@
+import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -28,7 +29,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [InviteComponent, TranslatePipe],
                 providers: [
-                    { provide: "personService", useValue: mocks.personService },
+                    { provide: PersonService, useValue: mocks.personService },
                     { provide: ProfileService, useValue: mocks.profileService },
                     { provide: CommunityService, useValue: mocks.communityService },
                     { provide: "notificationService", useValue: mocks.notificationService },

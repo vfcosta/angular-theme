@@ -1,3 +1,4 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { NoosferoUrlPipe } from './../../../../app/shared/pipes/noosfero-url.pipe';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -28,7 +29,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [EventPluginEventBlockComponent, NoosferoUrlPipe],
                 providers: [
-                    { provide: "blockService", useValue: mocks.blockService },
+                    { provide: BlockService, useValue: mocks.blockService },
                     { provide: "$state", useValue: mocks.stateService },
                     { provide: "$scope", useValue: mocks.scopeWithEvents() }
                 ],
@@ -42,7 +43,7 @@ describe("Components", () => {
 
         it("get events from the block service", (fakeAsync(() => {
             fixture.detectChanges();
-            expect(TestBed.get("blockService").getApiContent).toHaveBeenCalled();
+            expect(TestBed.get(BlockService).getApiContent).toHaveBeenCalled();
             tick();
             expect(component.events).toEqual(events);
         })));

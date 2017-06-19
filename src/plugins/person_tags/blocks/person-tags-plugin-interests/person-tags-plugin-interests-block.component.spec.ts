@@ -1,3 +1,4 @@
+import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import {PersonTagsPluginInterestsBlockComponent} from './person-tags-plugin-interests-block.component';
 import * as helpers from "./../../../../spec/helpers";
@@ -19,7 +20,7 @@ describe("Components", () => {
                 declarations: [PersonTagsPluginInterestsBlockComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: "personService", useValue: mocks.personService },
+                    { provide: PersonService, useValue: mocks.personService },
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(PersonTagsPluginInterestsBlockComponent);

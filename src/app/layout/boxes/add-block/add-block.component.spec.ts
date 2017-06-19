@@ -1,3 +1,5 @@
+import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { SettingsService } from './../../../../lib/ng-noosfero-api/http/settings.service';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
@@ -20,8 +22,8 @@ describe("Components", () => {
                 declarations: [AddBlockComponent, TranslatePipe],
                 providers: [
                     { provide: SettingsService, useValue: mocks.settingsService },
-                    { provide: "profileService", useValue: mocks.profileService },
-                    { provide: "environmentService", useValue: mocks.environmentService },
+                    { provide: ProfileService, useValue: mocks.profileService },
+                    { provide: EnvironmentService, useValue: mocks.environmentService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
@@ -38,11 +40,11 @@ describe("Components", () => {
 
         it("emit event when add block", fakeAsync(() => {
             spyOn(component.onAdd, 'emit');
-            TestBed.get('profileService').getBlockTemplate = jasmine.createSpy('createAccount').and.returnValue(Promise.resolve({api_content: [] }));
+            TestBed.get(ProfileService).getBlockTemplate = jasmine.createSpy('createAccount').and.returnValue(Promise.resolve({api_content: [] }));
             component.owner = <any>{id: 54};
             component.addBlock(<noosfero.Block>{ type: 'RecentDocumentsBlock'});
             tick();
-            expect(TestBed.get('profileService').getBlockTemplate).toHaveBeenCalledWith(component.owner.id, 'RecentDocumentsBlock');
+            expect(TestBed.get(ProfileService).getBlockTemplate).toHaveBeenCalledWith(component.owner.id, 'RecentDocumentsBlock');
             expect(component.onAdd.emit).toHaveBeenCalled();
         }));
 

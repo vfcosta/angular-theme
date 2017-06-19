@@ -1,5 +1,5 @@
+import { AuthService } from './../../login/auth.service';
 import { PermissionService } from './../../shared/services/permission.service';
-import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -32,14 +32,13 @@ describe("Components", () => {
                     { provide: ProfileService, useValue: profileService },
                     { provide: "eventsHubService", useValue: mocks.eventsHubService },
                     { provide: PermissionService, useValue: permissionService },
-                    { provide: "sessionService", useValue: helpers.mocks.sessionService },
+                    { provide: AuthService, useValue: helpers.mocks.authService },
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(ProfileImageComponent);
-                component = fixture.componentInstance;
-                component.profile = <any>{ custom_footer: "footer" };
-                component.editable = true;
             });
+            fixture = TestBed.createComponent(ProfileImageComponent);
+            component = fixture.componentInstance;
+            component.profile = <any>{ custom_footer: "footer" };
+            component.editable = true;
         }));
 
         it("show community users image if profile is not Person", () => {

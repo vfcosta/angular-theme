@@ -47,7 +47,7 @@ describe("Components", () => {
                 providers:
                 [
                     helpers.createProviderToValue('EnvironmentService', environmentService),
-                    helpers.createProviderToValue('ProfileService', profileService)
+                    helpers.createProviderToValue('profileService', profileService)
                 ].concat(provideFilters("truncateFilter", "stripTagsFilter", "translateFilter"))
             });
             helper = new ComponentTestHelper<ActivitiesComponent>(cls, done);

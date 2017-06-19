@@ -1,3 +1,4 @@
+import { AuthService } from './../../login/auth.service';
 import { SessionService } from './../../login/session.service';
 import { NotificationService } from './../../shared/services/notification.service';
 import { Inject, Input, Component } from '@angular/core';
@@ -42,7 +43,7 @@ export class ProfileImageComponent {
         private permissionService: PermissionService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
         @Inject("notificationService") private notificationService: NotificationService,
-        @Inject("sessionService") private session: SessionService) {
+        private authService: AuthService) {
     }
 
     upload(data: any) {
@@ -72,7 +73,7 @@ export class ProfileImageComponent {
 
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.IMAGE_PROFILE_UPDATED, (profile: noosfero.Profile) => {
             if (this.profile.id === profile.id) {
-                this.session.reloadUser();
+                this.authService.reloadUser();
                 this.profile = profile;
             }
         });

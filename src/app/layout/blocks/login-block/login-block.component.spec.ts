@@ -1,3 +1,4 @@
+import { AuthService } from './../../../login/auth.service';
 import { SessionService } from './../../../login/session.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
@@ -31,7 +32,7 @@ describe("Components", () => {
                 providers: [
                     { provide: SessionService, useValue: sessionService },
                     { provide: "$state", useValue: mocks.stateService },
-                    { provide: "authService", useValue: mocks.authService },
+                    { provide: AuthService, useValue: mocks.authService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

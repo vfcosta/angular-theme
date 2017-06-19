@@ -1,6 +1,6 @@
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { FormsModule } from '@angular/forms';
-import { PaginationModule } from 'ngx-bootstrap/ng2-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
 import { Provider, Component } from '@angular/core';
 import { By } from '@angular/platform-browser';

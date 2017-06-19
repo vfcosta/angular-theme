@@ -1,3 +1,4 @@
+import { TaskService } from './../../../../lib/ng-noosfero-api/http/task.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
 import { Provider, Component } from '@angular/core';
@@ -25,7 +26,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [AddFriendTaskAcceptComponent, TranslatePipe],
                 providers: [
-                    { provide: "taskService", useValue: mocks.taskService },
+                    { provide: TaskService, useValue: mocks.taskService },
                     { provide: "translatorService", useValue: mocks.translatorService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],

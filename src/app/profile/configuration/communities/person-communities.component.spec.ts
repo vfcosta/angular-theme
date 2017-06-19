@@ -8,12 +8,11 @@ import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.servi
 import * as helpers from "../../../../spec/helpers";
 
 describe("Components", () => {
-
     describe("Person Communities Component", () => {
         let fixture: ComponentFixture<PersonCommunitiesComponent>;
         let component: PersonCommunitiesComponent;
         let personService = jasmine.createSpyObj("PersonService", ["getCommunities"]);
-        personService.getCommunities = jasmine.createSpy("getCommunities").and.returnValue(Promise.resolve({ headers: () => {} }));
+        personService.getCommunities = jasmine.createSpy("getCommunities").and.returnValue(Promise.resolve({ headers: { get: () => {} }}));
         let stateParams = {};
 
         beforeEach(async(() => {
@@ -22,15 +21,14 @@ describe("Components", () => {
                 declarations: [PersonCommunitiesComponent, TranslatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: "personService", useValue: personService },
+                    { provide: PersonService, useValue: personService },
                     { provide: "$stateParams", useValue: stateParams },
                     { provide: "translatorService", useValue: helpers.mocks.translatorService }
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(PersonCommunitiesComponent);
-                component = fixture.componentInstance;
-                component.profile = <noosfero.Profile>{ id: 1 };
             });
+            fixture = TestBed.createComponent(PersonCommunitiesComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>{ id: 1 };
         }));
 
         it("load first page of communities on init", () => {

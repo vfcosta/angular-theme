@@ -1,3 +1,4 @@
+import { AuthService } from './../../login/auth.service';
 import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 import * as helpers from '../../../spec/helpers';
 import { DesignModeTogglerComponent } from './design-mode-toggler.component';
@@ -18,7 +19,7 @@ describe('DesignModeToggler Component', () => {
             declarations: [DesignModeTogglerComponent, TranslatePipe],
             providers: [
                 { provide: "designModeService", useValue: mocks.designModeService },
-                { provide: "authService", useValue: mocks.authService },
+                { provide: AuthService, useValue: mocks.authService },
                 { provide: "translatorService", useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]

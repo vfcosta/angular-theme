@@ -1,3 +1,4 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { StatisticsBlockComponent } from './statistics-block.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -16,7 +17,7 @@ describe("Components", () => {
                 declarations: [StatisticsBlockComponent, TranslatePipe],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
-                    { provide: 'blockService', useValue: blockService },
+                    { provide: BlockService, useValue: blockService },
                     { provide: 'translatorService', useValue: translatorService }
                 ]
             }).compileComponents();

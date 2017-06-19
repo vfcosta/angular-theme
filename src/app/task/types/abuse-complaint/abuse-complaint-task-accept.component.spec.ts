@@ -1,3 +1,4 @@
+import { TaskService } from './../../../../lib/ng-noosfero-api/http/task.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { Provider, Component } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
@@ -30,7 +31,7 @@ describe("Components", () => {
                 imports: [NgPipesModule, MomentModule],
                 declarations: [AbuseComplaintTaskAcceptComponent, TranslatePipe, DateFormatPipe],
                 providers: [
-                    { provide: "taskService", useValue: mocks.taskService },
+                    { provide: TaskService, useValue: mocks.taskService },
                     { provide: "translatorService", useValue: mocks.translatorService },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },

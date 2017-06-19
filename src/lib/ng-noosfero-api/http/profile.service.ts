@@ -48,7 +48,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
     }
 
     getHomePage(profileId: number, params?: any) {
-        return this.getProfileElement(profileId).customGET("home_page", params);
+        return this.getProfileElement(profileId).customGET("home_page", params).toPromise();
     }
 
     getByIdentifier(identifier: string): Promise<noosfero.Profile> {

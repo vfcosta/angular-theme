@@ -1,3 +1,4 @@
+import { AuthService } from './../../login/auth.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DestroyProfileComponent } from './destroy-profile.component';
@@ -26,7 +27,7 @@ describe("Components", () => {
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: ProfileService, useValue: mocks.profileService },
-                    { provide: "authService", useValue: mocks.authService }
+                    { provide: AuthService, useValue: mocks.authService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA]
             });
@@ -92,7 +93,7 @@ describe("Components", () => {
             let pS = TestBed.get(ProfileService);
             let nS = TestBed.get('notificationService');
             let state = TestBed.get('$state');
-            let aS = TestBed.get('authService');
+            let aS = TestBed.get(AuthService);
             nS.confirmation = (p1, p2) => { p2() };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
             pS.remove = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ data: { success: false } }));
