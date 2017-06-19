@@ -6,6 +6,6 @@ declare var moment;
 export class DateFormatPipe {
 
     transform(date: string, options: any) {
-        return moment(date, "YYYY/MM/DD HH:mm:ss").toISOString();
+    	return date;
     }
 }
