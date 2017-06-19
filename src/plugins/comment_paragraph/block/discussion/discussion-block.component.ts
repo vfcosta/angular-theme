@@ -28,10 +28,14 @@ export class DiscussionBlockComponent {
 
     ngOnInit() {
         this.profile = this.owner;
-        this.blockService.getApiContent(this.block).then((content: any) => {
-            this.documents = content.articles;
-            this.block.hide = !this.documents || this.documents.length === 0;
-        });
+        if(this.block.api_content) {
+            this.documents =  this.block.api_content['articles'];
+        } else {
+            this.blockService.getApiContent(this.block).then((content: any) => {
+                this.documents = content.articles;
+                this.block.hide = !this.documents || this.documents.length === 0;
+            });
+        }
         this.presentation_mode = PRESENTATION_MODES.TITLE_ONLY;
         if (this.block && this.block.settings && this.block.settings.presentation_mode) {
             this.presentation_mode = this.block.settings.presentation_mode;
