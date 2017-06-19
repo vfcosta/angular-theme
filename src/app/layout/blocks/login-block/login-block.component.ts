@@ -34,7 +34,7 @@ export class LoginBlockComponent {
 
     constructor(private session: SessionService,
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject("authService") public authService: AuthService) {
+        public authService: AuthService) {
 
         this.currentUser = this.session.currentUser();
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {

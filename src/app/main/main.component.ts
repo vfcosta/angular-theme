@@ -6,7 +6,6 @@ import { BlockContentComponent } from '../layout/blocks/block-content.component'
 import { BlockComponent } from '../layout/blocks/block.component';
 import { MainBlockComponent } from '../layout/blocks/main/main-block.component';
 import { BoxesComponent } from '../layout/boxes/boxes.component';
-import { AuthService } from '../login/auth.service';
 import { PasswordComponent } from '../login/new-password.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { SearchComponent } from '../search/search.component';
@@ -20,7 +19,6 @@ import { Component, Inject, provide } from 'ng-forward';
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
- * @requires AuthService, Session
  * @descrition
  *  This controller actually contains the main content of Noosfero Angular Theme:
  *  - the navbar
@@ -30,7 +28,6 @@ import { Component, Inject, provide } from 'ng-forward';
 @Component({
     selector: 'main-content',
     templateUrl: "app/main/main.html",
-    providers: [AuthService]
 })
 @Inject(BodyStateClassesService)
 export class MainContentComponent {
@@ -49,7 +46,6 @@ export class MainContentComponent {
 @Component({
     selector: 'environment-content',
     templateUrl: "app/main/main.html",
-    providers: [AuthService]
 })
 export class EnvironmentContent {
 
@@ -81,8 +77,8 @@ export class EnvironmentContent {
         BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [AuthService, NotificationService, BodyStateClassesService, CommentParagraphEventService,
-        "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
+    providers: [NotificationService, BodyStateClassesService, CommentParagraphEventService,
+        "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",

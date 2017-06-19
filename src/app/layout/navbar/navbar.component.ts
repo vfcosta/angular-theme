@@ -20,7 +20,7 @@ export class NavbarComponent {
     constructor(
         headerService: HeaderService,
         @Inject("$uibModal") private $uibModal: ng.ui.bootstrap.IModalService,
-        @Inject("authService") public authService: AuthService,
+        public authService: AuthService,
         private session: SessionService,
         @Inject("$state") private $state: ng.ui.IStateService,
         private environmentService: EnvironmentService

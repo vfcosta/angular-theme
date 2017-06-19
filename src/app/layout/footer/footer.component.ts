@@ -10,7 +10,7 @@ export class FooterComponent {
 
     private currentUser: noosfero.User;
 
-    constructor(@Inject('authService') private authService: AuthService,
+    constructor(private authService: AuthService,
         private session: SessionService,
         @Inject('$state') private $state: ng.ui.IStateService) {
       this.currentUser = this.session.currentUser();

@@ -7,12 +7,12 @@ import { NotificationService } from "./shared/services/notification.service";
 
 export function noosferoAngularRunBlock(
     $log: ng.ILogService,
-    AuthService: AuthService,
+    authService: AuthService,
     NotificationService: NotificationService,
     editableOptions: angular.xeditable.IEditableOptions,
     TranslatorService: TranslatorService
 
 ) {
-    AuthService.reloadUser();
+    authService.reloadUser();
     editableOptions.theme = 'bs3';
 }

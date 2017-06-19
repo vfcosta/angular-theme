@@ -20,7 +20,7 @@ export class TasksMenuComponent {
 
     constructor(private taskService: TaskService,
         private session: SessionService,
-        @Inject("authService") private authService: AuthService,
+        private authService: AuthService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService) {
     }
 

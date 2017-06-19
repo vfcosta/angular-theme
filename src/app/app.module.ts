@@ -1,3 +1,5 @@
+import { HttpModule, JsonpModule } from '@angular/http';
+import { AuthService } from './login/auth.service';
 import { DomainService } from './../lib/ng-noosfero-api/http/domain.service';
 import { SessionService } from './login/session.service';
 import { PersonService } from './../lib/ng-noosfero-api/http/person.service';
@@ -144,6 +146,8 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
             components: plugins.macros
         }),
         RestangularModule.forRoot([SessionService, "translatorService", "notificationService"], RestangularConfigFactory),
+        HttpModule,
+        JsonpModule,
     ],
     declarations: [
         FooterComponent,
@@ -305,8 +309,8 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         TaskService,
         PersonService,
         DomainService,
+        AuthService,
     ].concat(UpgradeUtils.provideAngular1Services([
-        'AuthService',
         '$state',
         'TranslatorService',
         'EventsHubService',

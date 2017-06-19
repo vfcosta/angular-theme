@@ -31,8 +31,8 @@ export function noosferoRoutes($stateProvider: any) {
         abstract: true,
         name: 'main',
         resolve: {
-            currentUser: function(AuthService: AuthService) {
-                return AuthService.loginFromCookie();
+            currentUser: function(authService: AuthService) {
+                return authService.loginFromCookie();
             }
         }
     });

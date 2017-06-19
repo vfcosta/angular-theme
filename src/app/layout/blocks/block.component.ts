@@ -9,7 +9,7 @@ import { DesignModeService } from "../../shared/services/design-mode.service";
     templateUrl: 'app/layout/blocks/block.html'
 })
 @Inject("$uibModal", "$scope", "$state", "$rootScope", NotificationService,
-    AuthService, "sessionService", TranslatorService, DesignModeService, "$transitions")
+    "authService", "sessionService", TranslatorService, DesignModeService, "$transitions")
 export class BlockComponent {
 
     @Input() block: noosfero.Block;

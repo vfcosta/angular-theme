@@ -1,30 +1,27 @@
+import { Restangular } from 'ngx-restangular';
 import { PersonService } from './../../lib/ng-noosfero-api/http/person.service';
-import { Injectable, Inject, EventEmitter } from "ng-forward";
-import { NoosferoRootScope } from "./../shared/models/interfaces";
+import { Injectable, Inject, EventEmitter } from "@angular/core";
 import { SessionService } from "./session.service";
-import { AuthEvents } from "./auth-events";
+import { Http, Jsonp, Response } from '@angular/http';
 
 @Injectable()
-@Inject("$http", "sessionService", "$log", "Restangular", "personService")
 export class AuthService {
 
     public loginSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
     public loginFailed: EventEmitter<ng.IHttpPromiseCallbackArg<any>> = new EventEmitter<ng.IHttpPromiseCallbackArg<any>>();
     public logoutSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
 
-    constructor(private $http: ng.IHttpService,
+    constructor(private http: Http,
+        private jsonp: Jsonp,
         private sessionService: SessionService,
-        private $log: ng.ILogService,
-        private Restangular: restangular.IService,
+        private restangular: Restangular,
         private personService: PersonService
-    ) {
-        this.Restangular = Restangular;
-    }
+    ) { }
 
     loginFromCookie() {
         if (this.sessionService.currentUser()) return;
         let url: string = '/api/v1/login_from_cookie';
-        return this.$http.post(url, null).then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
+        return this.http.post(url, null).toPromise().then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
     }
 
     reloadUser() {
@@ -38,11 +35,8 @@ export class AuthService {
     }
 
     private loginSuccessCallback(response: ng.IHttpPromiseCallbackArg<noosfero.User>) {
-        // FIXME set only in debug mode
-        // this.$log.debug('AuthService.login [SUCCESS] response', response);
         let currentUser: noosfero.User = this.sessionService.create(response.data);
         this.loginSuccess.next(currentUser);
-
         return currentUser;
     }
 
@@ -50,8 +44,8 @@ export class AuthService {
         let data = new FormData();
         data.append('login', credentials.username);
         data.append('password', credentials.password);
-        return this.Restangular.all("")
-            .customPOST(data, "login", null, { 'Content-Type': undefined }).then(
+        return this.restangular.all("")
+            .customPOST(data, "login", null, { 'Content-Type': undefined }).toPromise().then(
             (response: any) => this.loginSuccessCallback(response)).catch(
             (e: any) => {
                 this.loginFailedCallback(e);
@@ -60,7 +54,6 @@ export class AuthService {
     }
 
     private loginFailedCallback(response: ng.IHttpPromiseCallbackArg<any>): any {
-        this.$log.debug('AuthService.login [FAIL] response', response);
         this.loginFailed.next(response);
         return null;
     }
@@ -70,7 +63,7 @@ export class AuthService {
         this.sessionService.destroy();
 
         this.logoutSuccess.next(user);
-        this.$http.jsonp('/account/logout'); // FIXME logout from noosfero to sync login state
+        this.jsonp.get('/account/logout'); // FIXME logout from noosfero to sync login state
     }
 
     public isAuthenticated() {
@@ -99,7 +92,7 @@ export class AuthService {
     }
 
     forgotPassword(value: string): ng.IPromise<noosfero.RestResult<any>> {
-        return this.Restangular.all("").customPOST("", "forgot_password", { value: value });
+        return this.restangular.all("").customPOST("", "forgot_password", { value: value }).toPromise();
     }
 
 }
