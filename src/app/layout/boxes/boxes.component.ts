@@ -83,8 +83,6 @@ export class BoxesComponent {
 
     addBlock(box: noosfero.Box, block: noosfero.Block) {
         block.permissions = ["allow_edit"];
-        block.api_content = {};
-        block.settings = <any>{};
         box.blocks.forEach((block: noosfero.Block) => {
             if (!block._destroy) block.position++;
         });

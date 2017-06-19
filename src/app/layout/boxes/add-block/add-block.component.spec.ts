@@ -19,6 +19,8 @@ describe("Components", () => {
                 declarations: [AddBlockComponent, TranslatePipe],
                 providers: [
                     { provide: "settingsService", useValue: mocks.settingsService },
+                    { provide: "profileService", useValue: mocks.profileService },
+                    { provide: "environmentService", useValue: mocks.environmentService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
@@ -33,11 +35,15 @@ describe("Components", () => {
             expect(TestBed.get('settingsService').getAvailableBlocks).toHaveBeenCalled();
         });
 
-        it("emit event when add block", () => {
+        it("emit event when add block", fakeAsync(() => {
             spyOn(component.onAdd, 'emit');
-            component.addBlock(<noosfero.Block>{});
+            TestBed.get('profileService').getBlockTemplate = jasmine.createSpy('createAccount').and.returnValue(Promise.resolve({api_content: [] }));
+            component.owner = <any>{id: 54};
+            component.addBlock(<noosfero.Block>{ type: 'RecentDocumentsBlock'});
+            tick();
+            expect(TestBed.get('profileService').getBlockTemplate).toHaveBeenCalledWith(component.owner.id, 'RecentDocumentsBlock');
             expect(component.onAdd.emit).toHaveBeenCalled();
-        });
+        }));
 
         it("filter blocks by whitelist when load available blocks", fakeAsync(() => {
             TestBed.get('settingsService').getAvailableBlocks = jasmine.createSpy("getAvailableBlocks").and.returnValue(Promise.resolve({
