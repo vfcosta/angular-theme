@@ -1,13 +1,13 @@
-Feature: manage recent activities
+Feature: recent activities plugins
   As a user
-  I want manage recent activities
+  I want to use recent activities plugin
 
   Background:
-  	Given the "recent_activities" plugin is enabled
+    Given the "recent_activities" plugin is enabled
     Given the "recent_activities" block is enabled
     Given I go to the homepage
     And I am logged out
-    And I login with "adminuser", "admin"
+    And I login with "adminuser"
     And I go to "adminuser" profile
 
   Scenario: create a new article and see it in recent activities with label and date

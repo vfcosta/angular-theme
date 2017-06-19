@@ -1,4 +1,4 @@
-Feature: person tags
+Feature: person tags plugin
   As a user
   I want to see my fields of interest
 

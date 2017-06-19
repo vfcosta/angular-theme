@@ -12,3 +12,10 @@ Feature: login
       | .modal-dialog #passwd | admin |
     When I press ".btn-login"
     Then I should be logged in as "adminuser"
+
+
+   Scenario: login as the new user
+
+   Scenario: successfully signup as a new user
+
+   Scenario: see error message when trying to signup without a name
