@@ -1,4 +1,4 @@
-Feature: video block feature
+Feature: video block plugin
   As a user
   I want to see the video block
 
