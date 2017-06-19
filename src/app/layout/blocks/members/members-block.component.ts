@@ -1,4 +1,4 @@
-import { Component, Inject, Input, NgZone } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
