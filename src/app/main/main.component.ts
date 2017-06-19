@@ -19,7 +19,6 @@ import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
 import { NotificationService } from '../shared/services/notification.service';
 import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
-import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { Component, Inject, provide } from 'ng-forward';
 import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
@@ -87,7 +86,7 @@ export class EnvironmentContent {
         BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, UserService,
+    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
         CommentParagraphEventService,
         TaskService, ArticleService, BlockService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",

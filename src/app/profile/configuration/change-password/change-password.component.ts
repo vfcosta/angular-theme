@@ -30,7 +30,7 @@ export class ChangePasswordComponent {
     new_password_confirmation: string;
     errors: any;
 
-    constructor( @Inject("userService") private userService: UserService,
+    constructor(private userService: UserService,
         @Inject("notificationService") private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService) { }
 

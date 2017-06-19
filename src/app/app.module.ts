@@ -1,3 +1,4 @@
+import { UserService } from './../lib/ng-noosfero-api/http/user.service';
 import { CommunityService } from './../lib/ng-noosfero-api/http/community.service';
 import { SettingsService } from './../lib/ng-noosfero-api/http/settings.service';
 import { RoleService } from './../lib/ng-noosfero-api/http/role.service';
@@ -295,6 +296,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         RoleService,
         SettingsService,
         CommunityService,
+        UserService,
     ].concat(UpgradeUtils.provideAngular1Services([
         'ProfileService',
         'EnvironmentService',
@@ -317,7 +319,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$stateParams',
         'amParseFilter',
         'PersonService',
-        'UserService',
         'DesignModeService',
         '$sce',
         'ThemeService',
