@@ -1,12 +1,11 @@
+import { PersonService } from './../../lib/ng-noosfero-api/http/person.service';
 import { Injectable, Inject, EventEmitter } from "ng-forward";
-
 import { NoosferoRootScope } from "./../shared/models/interfaces";
 import { SessionService } from "./session.service";
-
 import { AuthEvents } from "./auth-events";
 
 @Injectable()
-@Inject("$http", SessionService, "$log", "Restangular")
+@Inject("$http", "sessionService", "$log", "Restangular", "personService")
 export class AuthService {
 
     public loginSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
@@ -16,7 +15,8 @@ export class AuthService {
     constructor(private $http: ng.IHttpService,
         private sessionService: SessionService,
         private $log: ng.ILogService,
-        private Restangular: restangular.IService
+        private Restangular: restangular.IService,
+        private personService: PersonService
     ) {
         this.Restangular = Restangular;
     }
@@ -27,6 +27,15 @@ export class AuthService {
         return this.$http.post(url, null).then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
     }
 
+    reloadUser() {
+        if (this.currentUser() && this.currentUser().person) {
+            this.personService.getLoggedPerson().then((result: noosfero.RestResult<noosfero.Person>) => {
+                this.currentUser().person = result.data;
+            }).catch((error: any) => {
+                this.sessionService.destroy();
+            });
+        }
+    }
 
     private loginSuccessCallback(response: ng.IHttpPromiseCallbackArg<noosfero.User>) {
         // FIXME set only in debug mode

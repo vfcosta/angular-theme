@@ -12,7 +12,7 @@ export class CommunitiesBlockComponent {
 
     profiles: any = [];
 
-    constructor(@Inject('blockService') private blockService: BlockService) { }
+    constructor(private blockService: BlockService) { }
 
     ngOnInit() {
         let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;

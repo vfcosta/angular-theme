@@ -1,7 +1,7 @@
 import { NotificationService } from './../../shared/services/notification.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
-import { SessionService } from './../../login/session.service.ng2';
+import { SessionService } from './../../login/session.service';
 import { Inject, Input, Component, HostListener, ElementRef, ViewChild  } from "@angular/core";
 import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
 import { ProfileJoinComponent } from "./../../profile/profile-join/profile-join.component";
@@ -26,7 +26,7 @@ export class ProfileSummaryComponent {
     constructor(private elementRef: ElementRef,
         private environmentService: EnvironmentService,
         private session: SessionService,
-        @Inject('personService') private personService: PersonService,
+        private personService: PersonService,
         @Inject('notificationService') private notificationService: NotificationService,
         @Inject('designModeService') private designModeService: DesignModeService) {
 

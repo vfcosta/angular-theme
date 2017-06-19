@@ -1,3 +1,8 @@
+import { DomainService } from './../lib/ng-noosfero-api/http/domain.service';
+import { SessionService } from './login/session.service';
+import { PersonService } from './../lib/ng-noosfero-api/http/person.service';
+import { TaskService } from './../lib/ng-noosfero-api/http/task.service';
+import { BlockService } from './../lib/ng-noosfero-api/http/block.service';
 import { UserService } from './../lib/ng-noosfero-api/http/user.service';
 import { CommunityService } from './../lib/ng-noosfero-api/http/community.service';
 import { SettingsService } from './../lib/ng-noosfero-api/http/settings.service';
@@ -10,7 +15,6 @@ import { NotificationService } from './shared/services/notification.service';
 import { TranslatorService } from './shared/services/translator.service';
 import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service';
 import { ProfileService } from './../lib/ng-noosfero-api/http/profile.service';
-import { SessionService } from './login/session.service.ng2';
 import { ArticleService } from './../lib/ng-noosfero-api/http/article.service';
 import { CommentService } from './../lib/ng-noosfero-api/http/comment.service';
 import { HeaderService } from './shared/services/header.service';
@@ -297,13 +301,14 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         SettingsService,
         CommunityService,
         UserService,
+        BlockService,
+        TaskService,
+        PersonService,
+        DomainService,
     ].concat(UpgradeUtils.provideAngular1Services([
         'AuthService',
-        'SessionService',
         '$state',
         'TranslatorService',
-        'BlockService',
-        'PersonService',
         'EventsHubService',
         '$uibModal',
         '$scope',
@@ -311,11 +316,9 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$log',
         'SweetAlert',
         'toastr',
-        'TaskService',
         '$transitions',
         '$stateParams',
         'amParseFilter',
-        'PersonService',
         'DesignModeService',
         '$sce',
         'ThemeService',

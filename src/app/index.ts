@@ -1,3 +1,7 @@
+import { SessionService } from './login/session.service';
+import { PersonService } from './../lib/ng-noosfero-api/http/person.service';
+import { BlockService } from './../lib/ng-noosfero-api/http/block.service';
+import { DomainService } from './../lib/ng-noosfero-api/http/domain.service';
 import { ProfileService } from './../lib/ng-noosfero-api/http/profile.service';
 import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service';
 import { ArticleService } from './../lib/ng-noosfero-api/http/article.service';
@@ -391,6 +395,10 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     )
     .factory('articleService', downgradeInjectable(ArticleService))
     .factory('environmentService', downgradeInjectable(EnvironmentService))
-    .factory('profileService', downgradeInjectable(ProfileService));
+    .factory('profileService', downgradeInjectable(ProfileService))
+    .factory('domainService', downgradeInjectable(DomainService))
+    .factory('blockService', downgradeInjectable(BlockService))
+    .factory('personService', downgradeInjectable(PersonService))
+    .factory('sessionService', downgradeInjectable(SessionService));
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

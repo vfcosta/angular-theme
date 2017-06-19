@@ -1,4 +1,4 @@
-import { SessionService } from './../../../login/session.service.ng2';
+import { SessionService } from './../../../login/session.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { FormsModule } from '@angular/forms';

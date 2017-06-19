@@ -1,4 +1,4 @@
-import { SessionService } from './../../login/session.service.ng2';
+import { SessionService } from './../../login/session.service';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import * as helpers from "../../../spec/helpers";
 import { TasksMenuComponent } from './tasks-menu.component';

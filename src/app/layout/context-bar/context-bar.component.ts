@@ -28,7 +28,7 @@ export class ContextBarComponent {
         @Inject("$state") private $state: ng.ui.IStateService,
         @Inject("$scope") private $scope: ng.IScope,
         @Inject('eventsHubService') private eventsHubService: EventsHubService,
-        @Inject('blockService') private blockService: BlockService,
+        private blockService: BlockService,
         @Inject('notificationService') private notificationService: NotificationService,
         @Inject('designModeService') private designModeService: DesignModeService,
         private profileService: ProfileService,

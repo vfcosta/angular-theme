@@ -20,7 +20,7 @@ export class InviteComponent {
     public listOfPeople: any[];
     public searchToken: string;
 
-    constructor( @Inject('personService') private personService: PersonService,
+    constructor(private personService: PersonService,
         private communityService: CommunityService,
         private profileService: ProfileService,
         @Inject('translatorService') private translatorService: TranslatorService,

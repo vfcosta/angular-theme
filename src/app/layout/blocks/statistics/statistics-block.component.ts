@@ -11,7 +11,7 @@ export class StatisticsBlockComponent {
     @Input() owner: any;
 
 
-    constructor(articleService: ArticleService, @Inject("blockService") blockService: BlockService) {
+    constructor(articleService: ArticleService, blockService: BlockService) {
         // watches for article being removed
         // to update comments and tag statistics, which would
         // changed after removing an article

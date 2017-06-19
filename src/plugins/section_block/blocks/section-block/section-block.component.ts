@@ -17,7 +17,7 @@ export class SectionBlockComponent {
     fontColor: string;
     backgroundColor: string;
 
-    constructor( @Inject('blockService') private blockService: BlockService) { }
+    constructor(private blockService: BlockService) { }
 
     ngOnInit() {
         if (this.block && this.block.settings) {

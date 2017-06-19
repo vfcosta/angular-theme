@@ -1,25 +1,11 @@
-import { Injectable, Inject } from "ng-forward";
+import { Injectable, Inject } from "@angular/core";
 import { INoosferoLocalStorage } from "./../shared/models/interfaces";
 import { PersonService } from "../../lib/ng-noosfero-api/http/person.service";
 
 @Injectable()
-@Inject("localStorageService", "$log", PersonService)
 export class SessionService {
 
-    constructor(private localStorageService: any, private $log: ng.ILogService, private personService: PersonService) {
-    }
-
-    reloadUser() {
-        if (this.currentUser() && this.currentUser().person) {
-            this.personService.getLoggedPerson().then((result: noosfero.RestResult<noosfero.Person>) => {
-                let user = this.currentUser();
-                user.person = result.data;
-                this.create(user);
-            }).catch((error: any) => {
-                this.destroy();
-            });
-        }
-    }
+    constructor(@Inject("localStorageService") private localStorageService: any) { }
 
     create(user: noosfero.User): noosfero.User {
         this.localStorageService.set('currentUser', user);
@@ -36,7 +22,7 @@ export class SessionService {
     };
 
     currentPerson(): noosfero.Person {
-        return this.currentUser() ? this.currentUser().person : null;
+        return this.currentUser() ? this.currentUser().person : null;        
     };
 
 }

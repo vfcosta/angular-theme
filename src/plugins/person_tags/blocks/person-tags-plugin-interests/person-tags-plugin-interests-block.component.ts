@@ -14,7 +14,7 @@ export class PersonTagsPluginInterestsBlockComponent {
     profile: any;
     tags: any;
 
-    constructor(@Inject("personService") private personService: PersonService) { }
+    constructor(private personService: PersonService) { }
 
     ngOnInit() {
         this.profile = this.owner;

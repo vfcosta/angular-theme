@@ -1,4 +1,4 @@
-import { SessionService } from './../../login/session.service.ng2';
+import { SessionService } from './../../login/session.service';
 import { Component, Inject } from '@angular/core';
 import { AuthService } from "./../../login";
 

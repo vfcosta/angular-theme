@@ -13,7 +13,7 @@ export class BreadcrumbsBlockComponent {
     profile: noosfero.Profile;
     links: any[] = [];
 
-    constructor(@Inject('blockService') private blockService: BlockService,
+    constructor(private blockService: BlockService,
         @Inject("$state") private $state: ng.ui.IStateService,
         @Inject("$stateParams") private $stateParams: ng.ui.IStateParamsService,
         @Inject("$transitions") private $transitions: any) { }

@@ -3,7 +3,7 @@ import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
 import { AuthService, AuthEvents } from "./../../login";
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
-import { SessionService } from '../../login/session.service.ng2';
+import { SessionService } from '../../login/session.service';
 
 @Component({
     selector: "tasks-menu",
@@ -18,7 +18,7 @@ export class TasksMenuComponent {
     perPage = 5;
     person: noosfero.Person;
 
-    constructor( @Inject("taskService") private taskService: TaskService,
+    constructor(private taskService: TaskService,
         private session: SessionService,
         @Inject("authService") private authService: AuthService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService) {
@@ -41,7 +41,7 @@ export class TasksMenuComponent {
         this.person = this.session.currentUser().person;
 
         this.taskService.getAllPending({ content_type: this.taskTypes.join(), per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
-            this.total = result.headers('total');
+            this.total = result.headers.get('total');
             this.tasks = result.data;
         });
     }

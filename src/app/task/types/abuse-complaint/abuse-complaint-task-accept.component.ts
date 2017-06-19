@@ -8,7 +8,7 @@ import { TaskService } from "../../../../lib/ng-noosfero-api/http/task.service";
 })
 export class AbuseComplaintTaskAcceptComponent extends TaskAcceptTypeComponent {
 
-    constructor( @Inject('taskService') private taskService: TaskService, injector: Injector) {
+    constructor(private taskService: TaskService, injector: Injector) {
         super(injector);
     }
 

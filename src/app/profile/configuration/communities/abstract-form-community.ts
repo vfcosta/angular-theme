@@ -1,4 +1,4 @@
-import { SessionService } from './../../../login/session.service.ng2';
+import { SessionService } from './../../../login/session.service';
 import { ViewChild } from '@angular/core';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { TranslatorService } from './../../../shared/services/translator.service';

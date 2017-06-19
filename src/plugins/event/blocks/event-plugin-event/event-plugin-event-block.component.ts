@@ -15,8 +15,7 @@ export class EventPluginEventBlockComponent {
     options: any;
     monthEvents: any;
 
-    constructor(
-        @Inject("blockService") private blockService: BlockService,
+    constructor(private blockService: BlockService,
         @Inject("$state") private $state: any,
         @Inject("$scope") private $scope: any) { }
 

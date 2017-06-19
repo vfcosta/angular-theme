@@ -9,7 +9,7 @@ import { DesignModeService } from "../../shared/services/design-mode.service";
     templateUrl: 'app/layout/blocks/block.html'
 })
 @Inject("$uibModal", "$scope", "$state", "$rootScope", NotificationService,
-    AuthService, SessionService, TranslatorService, DesignModeService, "$transitions")
+    AuthService, "sessionService", TranslatorService, DesignModeService, "$transitions")
 export class BlockComponent {
 
     @Input() block: noosfero.Block;
@@ -28,18 +28,18 @@ export class BlockComponent {
         private $rootScope: ng.IRootScopeService,
         private notificationService: NotificationService,
         private authService: AuthService,
-        private session: SessionService,
+        private sessionService: SessionService,
         private translatorService: TranslatorService,
         private designModeService: DesignModeService,
         private $transitions) {
 
-        this.currentUser = this.session.currentUser();
+        this.currentUser = this.sessionService.currentUser();
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
-            this.currentUser = this.session.currentUser();
+            this.currentUser = this.sessionService.currentUser();
             this.verifyHomepage();
         });
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
-            this.currentUser = this.session.currentUser();
+            this.currentUser = this.sessionService.currentUser();
             this.verifyHomepage();
         });
         this.$transitions.onSuccess({}, (trans) => {

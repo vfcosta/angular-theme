@@ -1,4 +1,4 @@
-import { SessionService } from './../../login/session.service.ng2';
+import { SessionService } from './../../login/session.service';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import { UiSrefDirective } from '../../shared/directives/ui-sref-directive';
 import { PopoverModule } from 'ngx-bootstrap';

@@ -1,4 +1,3 @@
-import { BlockService } from './../../lib/ng-noosfero-api/http/block.service';
 import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import * as plugins from '../../plugins';
 import { RegisterComponent } from '../account/register.component';
@@ -9,7 +8,6 @@ import { MainBlockComponent } from '../layout/blocks/main/main-block.component';
 import { BoxesComponent } from '../layout/boxes/boxes.component';
 import { AuthService } from '../login/auth.service';
 import { PasswordComponent } from '../login/new-password.component';
-import { SessionService } from '../login/session.service';
 import { ProfileComponent } from '../profile/profile.component';
 import { SearchComponent } from '../search/search.component';
 import { BootstrapResizableDirective } from '../shared/components/bootstrap-resizable/bootstrap-resizable.directive';
@@ -19,7 +17,6 @@ import { EventsHubService } from '../shared/services/events-hub.service';
 import { NotificationService } from '../shared/services/notification.service';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { Component, Inject, provide } from 'ng-forward';
-import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
@@ -33,7 +30,7 @@ import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
 @Component({
     selector: 'main-content',
     templateUrl: "app/main/main.html",
-    providers: [AuthService, SessionService]
+    providers: [AuthService]
 })
 @Inject(BodyStateClassesService)
 export class MainContentComponent {
@@ -52,7 +49,7 @@ export class MainContentComponent {
 @Component({
     selector: 'environment-content',
     templateUrl: "app/main/main.html",
-    providers: [AuthService, SessionService]
+    providers: [AuthService]
 })
 export class EnvironmentContent {
 
@@ -84,9 +81,7 @@ export class EnvironmentContent {
         BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService,
-        CommentParagraphEventService,
-        TaskService, BlockService,
+    providers: [AuthService, NotificationService, BodyStateClassesService, CommentParagraphEventService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

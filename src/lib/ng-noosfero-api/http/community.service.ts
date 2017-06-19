@@ -1,6 +1,6 @@
 import { Restangular } from 'ngx-restangular';
 import { Injectable, Inject } from "@angular/core";
-import { RestangularService } from "./restangular_service.ng2";
+import { RestangularService } from "./restangular_service";
 import { PersonService } from "./person.service";
 import { Observable } from 'rxjs/Observable';
 
@@ -9,7 +9,7 @@ declare var _: any;
 @Injectable()
 export class CommunityService extends RestangularService<noosfero.Community> {
 
-    constructor(protected restangular: Restangular, @Inject("personService") protected personService: PersonService) {
+    constructor(protected restangular: Restangular, protected personService: PersonService) {
         super(restangular);
     }
 

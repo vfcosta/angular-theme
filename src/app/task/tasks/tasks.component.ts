@@ -13,7 +13,7 @@ export class TasksComponent implements OnInit {
     perPage = 5;
     @Input() taskTypes: string;
 
-    constructor(@Inject("taskService") private taskService: TaskService) { }
+    constructor(private taskService: TaskService) { }
 
     ngOnInit() {
         this.loadPage({ page: 1 });
@@ -21,7 +21,7 @@ export class TasksComponent implements OnInit {
 
     loadPage($event: any) {
         this.taskService.getAllPending({content_type: this.taskTypes, page: $event.page, per_page: this.perPage }).then((result: noosfero.RestResult<noosfero.Task[]>) => {
-            this.total = result.headers('total');
+            this.total = result.headers.get('total');
             this.tasks = result.data;
         });
     }

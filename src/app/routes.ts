@@ -80,8 +80,8 @@ export function noosferoRoutes($stateProvider: any) {
             }
         },
         resolve: {
-            contextResult: (DomainService: DomainService) => {
-                return DomainService.get("context");
+            contextResult: (domainService: DomainService) => {
+                return domainService.get("context");
             }
         }
     });

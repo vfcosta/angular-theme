@@ -1,5 +1,5 @@
 import { CommunityService } from './../../../lib/ng-noosfero-api/http/community.service';
-import { SessionService } from './../../login/session.service.ng2';
+import { SessionService } from './../../login/session.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { Pipe, Input, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

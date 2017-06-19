@@ -14,7 +14,7 @@ export class RecentActivitiesPluginActivitiesBlockComponent {
     profile: any;
     activities: any;
 
-    constructor(@Inject("blockService") private blockService: BlockService) { }
+    constructor(private blockService: BlockService) { }
 
     getActivityTemplate(activity: any) {
         if (activity.label === 'events') {

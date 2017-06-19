@@ -4,7 +4,7 @@ import { AuthService, AuthController, AuthEvents } from "./../../login";
 import { EnvironmentService } from "./../../../lib/ng-noosfero-api/http/environment.service";
 import { BodyStateClassesService } from '../../shared/services/body-state-classes.service';
 import { DesignModeTogglerComponent } from '../design-mode-toggler/design-mode-toggler.component';
-import { SessionService } from '../../login/session.service.ng2';
+import { SessionService } from '../../login/session.service';
 
 
 @Component({

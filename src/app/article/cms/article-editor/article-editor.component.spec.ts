@@ -1,4 +1,4 @@
-import { SessionService } from './../../../login/session.service.ng2';
+import { SessionService } from './../../../login/session.service';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';

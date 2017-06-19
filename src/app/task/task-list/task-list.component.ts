@@ -31,7 +31,7 @@ export class TaskListComponent {
     constructor( @Inject("notificationService") private notificationService: NotificationService,
         @Inject("$scope") private $scope: ng.IScope,
         @Inject("$uibModal") private $uibModal: any,
-        @Inject("taskService") private taskService: TaskService,
+        private taskService: TaskService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService) {
     }
 

@@ -1,7 +1,7 @@
 import { Inject, Input, Output, EventEmitter, Component } from '@angular/core';
 import { CommentService } from "../../../../lib/ng-noosfero-api/http/comment.service";
 import { NotificationService } from "../../../shared/services/notification.service";
-import { SessionService } from './../../../login/session.service.ng2';
+import { SessionService } from './../../../login/session.service';
 
 @Component({
     selector: 'noosfero-post-comment',

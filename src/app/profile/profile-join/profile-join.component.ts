@@ -1,4 +1,4 @@
-import { SessionService } from './../../login/session.service.ng2';
+import { SessionService } from './../../login/session.service';
 import { Inject, Input, Component, EventEmitter, Output } from '@angular/core';
 import { ProfileService, MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { NotificationService } from "../../shared/services/notification.service";

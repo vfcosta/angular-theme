@@ -1,6 +1,6 @@
 import {Inject, Component} from "@angular/core";
 import { AuthService, AuthEvents} from "../../../login";
-import { SessionService } from '../../../login/session.service.ng2';
+import { SessionService } from '../../../login/session.service';
 
 /**
  * @ngdoc controller

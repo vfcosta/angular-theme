@@ -15,7 +15,7 @@ export class RecentDocumentsBlockComponent {
     profile: any;
     documents: any;
 
-    constructor( @Inject('blockService') private blockService: BlockService,
+    constructor(private blockService: BlockService,
         @Inject("$state") private $state: ng.ui.IStateService,
         private articleService: ArticleService) { }
 

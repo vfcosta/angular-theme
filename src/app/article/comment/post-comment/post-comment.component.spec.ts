@@ -1,4 +1,4 @@
-import { SessionService } from './../../../login/session.service.ng2';
+import { SessionService } from './../../../login/session.service';
 import { CommentService } from './../../../../lib/ng-noosfero-api/http/comment.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';

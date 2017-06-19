@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/platform-browser';
 import { Restangular } from 'ngx-restangular';
 import { Injectable, Inject, EventEmitter } from "@angular/core";
-import { RestangularService } from "./restangular_service.ng2";
+import { RestangularService } from "./restangular_service";
 import { ProfileService } from "./profile.service";
 import { EnvironmentService } from './environment.service';
 
