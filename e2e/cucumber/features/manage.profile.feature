@@ -13,6 +13,8 @@ Feature: manage profile
   Scenario: go to the profile homepage
 
   Scenario: change top image
+    When I upload "top-profile-image.jpg" to ".image-upload-input"
+    Then I see "top-profile-image.jpg" as top image
 
   Scenario: delete the profile
 
