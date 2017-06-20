@@ -31,7 +31,12 @@ export class PersonFriendsComponent {
     }
 
     loadPage($event: any) {
-        let filters = { per_page: this.perPage, page: $event.page, search: this.search };
+        let filters = { 
+            per_page: this.perPage, 
+            page: $event.page, 
+            search: this.search,
+            order: 'name ASC'
+        };
         this.personService.getFriends(this.profile.id, filters).then((result: noosfero.RestResult<noosfero.Person[]>) => {
             this.total = <number>result.headers("total");
             this.friends = result.data;
