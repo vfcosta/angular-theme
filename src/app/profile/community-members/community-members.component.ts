@@ -25,7 +25,8 @@ export class CommunityMembersComponent {
     loadPage($event: any) {
         let filters = {
             per_page: this.membersPerPage,
-            page: $event.page
+            page: $event.page,
+            order: 'name ASC'
         };
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
