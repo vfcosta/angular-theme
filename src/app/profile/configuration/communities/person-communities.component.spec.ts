@@ -35,19 +35,20 @@ describe("Components", () => {
 
         it("load first page of communities on init", () => {
             fixture.detectChanges();
-            expect(personService.getCommunities).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined });
+            expect(personService.getCommunities).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined, order: 'name ASC' });
         });
 
         it("load communities when save", () => {
             component.searchCommunities();
-            expect(personService.getCommunities).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined });
+            expect(personService.getCommunities).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined, order: 'name ASC' });
         });
 
         it("search for communities when change search text", (fakeAsync(() => {
             component.searchChanged.next("john");
             tick(300);
             expect(component.search).toEqual("john");
-            expect(personService.getCommunities).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: "john" });
+            expect(personService.getCommunities).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: "john", order: 'name ASC' });
         })));
+        
     });
 });

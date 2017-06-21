@@ -35,19 +35,20 @@ describe("Components", () => {
 
         it("load first page of friends on init", () => {
             fixture.detectChanges();
-            expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined });
+            expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined, order: 'name ASC' });
         });
 
         it("load friends when save", () => {
             component.searchFriends();
-            expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined });
+            expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined, order: 'name ASC' });
         });
 
         it("search for friends when change search text", (fakeAsync(() => {
             component.searchChanged.next("john");
             tick(300);
             expect(component.search).toEqual("john");
-            expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: "john" });
+            expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: "john", order: 'name ASC' });
         })));
+        
     });
 });

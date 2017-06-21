@@ -57,7 +57,7 @@ describe("Components", () => {
         });
 
         it("load profile members with parameters", () => {
-            expect(profileService.getMembers).toHaveBeenCalledWith({ data: { id: 1 } }, { page: 1, per_page: 20 });
+            expect(profileService.getMembers).toHaveBeenCalledWith({ data: { id: 1 } }, { page: 1, per_page: 20, order: 'name ASC' });
         });
 
     });
