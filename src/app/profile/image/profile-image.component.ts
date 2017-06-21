@@ -41,7 +41,7 @@ export class ProfileImageComponent {
 
     constructor(private profileService: ProfileService,
         private permissionService: PermissionService,
-        @Inject("eventsHubService") private eventsHubService: EventsHubService,
+        private eventsHubService: EventsHubService,
         @Inject("notificationService") private notificationService: NotificationService,
         private authService: AuthService) {
     }

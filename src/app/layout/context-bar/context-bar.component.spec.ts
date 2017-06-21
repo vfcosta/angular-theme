@@ -1,3 +1,4 @@
+import { EventsHubService } from './../../shared/services/events-hub.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { BlockService } from './../../../lib/ng-noosfero-api/http/block.service';
 import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
@@ -28,7 +29,7 @@ describe("Context Bar Component", () => {
             providers: [
                 { provide: "$state", useValue: state },
                 { provide: "$scope", useValue: mocks.scopeWithEvents() },
-                { provide: "eventsHubService", useValue: mocks.eventsHubService },
+                { provide: EventsHubService, useValue: mocks.eventsHubService },
                 { provide: BlockService, useValue: mocks.blockService },
                 { provide: "notificationService", useValue: mocks.notificationService },
                 { provide: DesignModeService, useValue: mocks.designModeService },

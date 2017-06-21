@@ -12,7 +12,7 @@ import { BasicOptionsComponent } from './basic-options/basic-options.component';
         provide('notificationService', { useClass: NotificationService })
     ]
 })
-@Inject("articleService", "profileService", "$state", NotificationService, "$stateParams", "$window", EventsHubService)
+@Inject("articleService", "profileService", "$state", NotificationService, "$stateParams", "$window", "eventsHubService")
 export class CmsComponent {
 
     article: noosfero.Article;

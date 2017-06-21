@@ -18,7 +18,7 @@ export class ProfileJoinComponent {
     constructor(private profileService: ProfileService,
         private session: SessionService,
         @Inject('notificationService') private notificationService: NotificationService,
-        @Inject("eventsHubService") private eventsHubService: EventsHubService,
+        private eventsHubService: EventsHubService,
         private communityService: CommunityService) {
     }
 

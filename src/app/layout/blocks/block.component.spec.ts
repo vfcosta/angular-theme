@@ -34,7 +34,7 @@ describe("Block Component", () => {
                 helpers.createProviderToValue('authService', helpers.mocks.authService),
                 helpers.createProviderToValue('sessionService', helpers.mocks.sessionWithCurrentUser({})),
                 helpers.createProviderToValue('TranslatorService', translatorService),
-                helpers.createProviderToValue("EventsHubService", mocks.eventsHubService),
+                helpers.createProviderToValue("eventsHubService", mocks.eventsHubService),
                 helpers.createProviderToValue('designModeService', helpers.mocks.designModeService),
                 helpers.createProviderToValue('noosferoTemplateFilter', helpers.mocks.noosferoTemplateFilter),
                 helpers.createProviderToValue('$transitions', transitions),

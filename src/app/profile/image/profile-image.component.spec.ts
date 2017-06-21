@@ -1,3 +1,4 @@
+import { EventsHubService } from './../../shared/services/events-hub.service';
 import { AuthService } from './../../login/auth.service';
 import { PermissionService } from './../../shared/services/permission.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -30,7 +31,7 @@ describe("Components", () => {
                 providers: [
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: ProfileService, useValue: profileService },
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
+                    { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: PermissionService, useValue: permissionService },
                     { provide: AuthService, useValue: helpers.mocks.authService },
                 ]

@@ -28,7 +28,7 @@ import { Component, Inject, provide } from 'ng-forward';
     selector: 'main-content',
     templateUrl: "app/main/main.html",
 })
-@Inject("bodyStateClassesService")
+@Inject("bodyStateClassesService", "eventsHubService")
 export class MainContentComponent {
 
     public themeSkin: string = 'skin-default';
@@ -84,8 +84,7 @@ export class EnvironmentContent {
         "noosfero.init", "ngFileUpload", "ngImgCrop", "angular-ladda", "focus-if",
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
-        "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
-        provide('eventsHubService', { useClass: EventsHubService })
+        "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar"
     ]
 })
 @Inject("environmentService")

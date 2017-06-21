@@ -1,3 +1,4 @@
+import { EventsHubService } from './shared/services/events-hub.service';
 import { CommentParagraphEventService } from './../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import { ThemeService } from './shared/services/theme.service';
 import { BodyStateClassesService } from './shared/services/body-state-classes.service';
@@ -322,10 +323,10 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         BodyStateClassesService,
         ThemeService,
         CommentParagraphEventService,
+        EventsHubService,
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
         'TranslatorService',
-        'EventsHubService',
         '$uibModal',
         '$scope',
         'NotificationService',

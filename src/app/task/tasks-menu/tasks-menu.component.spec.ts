@@ -1,3 +1,4 @@
+import { EventsHubService } from './../../shared/services/events-hub.service';
 import { AuthService } from './../../login/auth.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
 import { SessionService } from './../../login/session.service';
@@ -24,7 +25,7 @@ describe("Components", () => {
                     { provide: TaskService, useValue: mocks.taskService },
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: AuthService, useValue: mocks.authService },
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService }
+                    { provide: EventsHubService, useValue: mocks.eventsHubService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: []

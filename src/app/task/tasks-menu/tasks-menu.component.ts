@@ -21,7 +21,7 @@ export class TasksMenuComponent {
     constructor(private taskService: TaskService,
         private session: SessionService,
         private authService: AuthService,
-        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
+        private eventsHubService: EventsHubService) {
     }
 
     ngOnInit() {

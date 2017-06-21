@@ -1,3 +1,4 @@
+import { EventsHubService } from './../../../shared/services/events-hub.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { PopoverModule } from 'ngx-bootstrap';
@@ -26,7 +27,7 @@ describe("Components", () => {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: "$scope", useValue: mocks.scopeWithEvents() },
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
+                    { provide: EventsHubService, useValue: mocks.eventsHubService },
                 ]
             });
 

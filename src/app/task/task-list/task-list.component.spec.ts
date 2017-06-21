@@ -1,3 +1,4 @@
+import { EventsHubService } from './../../shared/services/events-hub.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
 import { TaskComponent } from './../task.component';
 import { MomentModule } from 'angular2-moment';
@@ -36,7 +37,7 @@ describe("Components", () => {
                 declarations: [TaskListComponent, TranslatePipe, ProfileImageComponent, DynamicComponentMock],
                 providers: [
                     { provide: TaskService, useValue: taskService },
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
+                    { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: "$uibModal", useValue: mocks.$modal },
                     { provide: "$scope", useValue: helpers.mocks.scopeWithEvents }

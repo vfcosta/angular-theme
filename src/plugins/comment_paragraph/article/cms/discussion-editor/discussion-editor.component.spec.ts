@@ -1,3 +1,4 @@
+import { EventsHubService } from './../../../../../app/shared/services/events-hub.service';
 import { By } from '@angular/platform-browser';
 import { MyDatePickerModule } from 'mydatepicker';
 import { ValidationMessageComponent } from './../../../../../app/shared/components/validation-message/validation-message.component';
@@ -18,7 +19,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [DiscussionEditorComponent, TranslatePipe, ValidationMessageComponent],
                 providers: [
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
+                    { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: "translatorService", useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

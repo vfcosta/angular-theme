@@ -24,7 +24,7 @@ export class DiscussionEditorComponent implements OnInit {
     @ViewChild('endDateValidation') endDateValidation: ValidationMessageComponent;
     locale: string;
 
-    constructor(@Inject("eventsHubService") private eventsHubService: EventsHubService,
+    constructor(private eventsHubService: EventsHubService,
         @Inject("translatorService") private translatorService: TranslatorService) {
         eventsHubService.subscribeToEvent(eventsHubService.knownEvents.ARTICLE_SAVE_ERROR, (error: any) => {
             this.titleValidation.setBackendErrors(error.data);

@@ -32,7 +32,7 @@ export class TaskListComponent {
         @Inject("$scope") private $scope: ng.IScope,
         @Inject("$uibModal") private $uibModal: any,
         private taskService: TaskService,
-        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
+        private eventsHubService: EventsHubService) {
     }
 
     ngOnInit() {
