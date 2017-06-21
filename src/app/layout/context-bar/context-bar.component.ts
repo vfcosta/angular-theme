@@ -49,7 +49,6 @@ export class ContextBarComponent {
             if (!block.id || block.title != null || Object.keys(block).length > 3 || (block.api_content && Object.keys(block.api_content).length >= 1)) {
                 this.blocksChanged.push(block);
             }
-            this.$scope.$apply();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;

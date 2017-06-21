@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { UiSrefDirective } from '../../../shared/directives/ui-sref-directive';
@@ -28,7 +29,7 @@ describe("Components", () => {
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "$transitions", useValue: mocks.$transitions },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]

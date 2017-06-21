@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
 import { Input, Component } from '@angular/core';
 import * as helpers from "../../../spec/helpers";
@@ -19,7 +20,7 @@ describe('Profile Actions Component', () => {
             declarations: [ProfileActionsComponent, TranslatePipe],
             providers: [
                 { provide: ArticleService, useValue: helpers.mocks.articleService },
-                { provide: "translatorService", useValue: mocks.translatorService }
+                { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [NO_ERRORS_SCHEMA]
         });

@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
@@ -21,7 +22,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [AddMemberTaskAcceptComponent, TranslatePipe],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: RoleService, useValue: mocks.roleService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },

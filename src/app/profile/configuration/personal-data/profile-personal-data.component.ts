@@ -29,7 +29,7 @@ export class ProfilePersonalDataComponent {
     constructor(private profileService: ProfileService,
         @Inject("notificationService") private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject("translatorService") private translatorService: TranslatorService) { }
+        private translatorService: TranslatorService) { }
 
     ngOnInit() {
         this.cloneProfile();

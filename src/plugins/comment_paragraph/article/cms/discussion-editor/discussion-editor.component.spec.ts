@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../../../app/shared/services/translator.service';
 import { EventsHubService } from './../../../../../app/shared/services/events-hub.service';
 import { By } from '@angular/platform-browser';
 import { MyDatePickerModule } from 'mydatepicker';
@@ -20,7 +21,7 @@ describe("Components", () => {
                 declarations: [DiscussionEditorComponent, TranslatePipe, ValidationMessageComponent],
                 providers: [
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [FormsModule, MyDatePickerModule]

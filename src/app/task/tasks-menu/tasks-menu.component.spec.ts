@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { AuthService } from './../../login/auth.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
@@ -21,7 +22,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [TasksMenuComponent, TranslatePipe],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: TaskService, useValue: mocks.taskService },
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: AuthService, useValue: mocks.authService },

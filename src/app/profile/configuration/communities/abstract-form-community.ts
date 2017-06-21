@@ -23,7 +23,7 @@ export abstract class AbstractFormCommunity {
         @Inject(ProfileService) public profileService: ProfileService,
         @Inject(SessionService) public sessionService: SessionService,
         @Inject('$state') public $state: ng.ui.IStateService,
-        @Inject('translatorService') public translatorService: TranslatorService) {}
+        @Inject(TranslatorService) public translatorService: TranslatorService) {}
 
     abstract getTitle();
     abstract save();

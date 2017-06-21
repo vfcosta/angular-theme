@@ -1,3 +1,4 @@
+import { TranslatorService } from './../shared/services/translator.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -41,7 +42,7 @@ describe("Components", () => {
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$stateParams", useValue: stateParams },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: "$transitions", useValue: mocks.$transitions },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter }
                 ],

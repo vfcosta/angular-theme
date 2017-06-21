@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { BlockService } from './../../../lib/ng-noosfero-api/http/block.service';
@@ -35,7 +36,7 @@ describe("Context Bar Component", () => {
                 { provide: DesignModeService, useValue: mocks.designModeService },
                 { provide: ProfileService, useValue: mocks.profileService },
                 { provide: EnvironmentService, useValue: mocks.environmentService },
-                { provide: 'translatorService', useValue: mocks.translatorService }
+                { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         });

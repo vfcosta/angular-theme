@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { SessionService } from './../../../login/session.service';
 import { CommentService } from './../../../../lib/ng-noosfero-api/http/comment.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -22,7 +23,7 @@ describe("Components", () => {
                     { provide: CommentService, useValue: mocks.commentService },
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [FormsModule]

@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
 import { MomentModule } from 'angular2-moment';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
@@ -23,7 +24,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [TasksComponent, TranslatePipe],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: TaskService, useValue: mocks.taskService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

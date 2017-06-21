@@ -1,3 +1,4 @@
+import { TranslatorService } from './../shared/services/translator.service';
 import { RegisterService } from './../../lib/ng-noosfero-api/http/register.service';
 import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
@@ -37,7 +38,7 @@ describe("Register Component", () => {
                 { provide: RegisterService, useValue: mocks.registerService },
                 { provide: "notificationService", useValue: mocks.notificationService },
                 { provide: EnvironmentService, useValue: mocks.environmentService },
-                { provide: "translatorService", useValue: mocks.translatorService }
+                { provide: TranslatorService, useValue: mocks.translatorService }
             ]
         });
 

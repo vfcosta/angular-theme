@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
@@ -28,7 +29,7 @@ describe("Components", () => {
                     { provide: "$state", useValue: state },
                     { provide: "$stateParams", useValue: stateParams },
                     { provide: "$transitions", useValue: transitions },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(BreadcrumbsBlockComponent);

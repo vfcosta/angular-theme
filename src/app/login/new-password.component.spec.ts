@@ -1,3 +1,4 @@
+import { TranslatorService } from './../shared/services/translator.service';
 import { PasswordService } from './../../lib/ng-noosfero-api/http/password.service';
 import { FormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
@@ -26,7 +27,7 @@ describe("Password Component", () => {
                 { provide: PasswordService, useValue: mocks.passwordService },
                 { provide: "$state", useValue: mocks.$state },
                 { provide: "notificationService", useValue: mocks.notificationService },
-                { provide: "translatorService", useValue: mocks.translatorService }
+                { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [NgPipesModule, FormsModule]

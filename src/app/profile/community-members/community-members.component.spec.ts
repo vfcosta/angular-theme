@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { UiSrefDirective } from './../../shared/directives/ui-sref-directive';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
@@ -42,7 +43,7 @@ describe("Components", () => {
                 providers: [
                     { provide: ProfileService, useValue: profileService },
                     { provide: "$state", useValue: state },
-                    { provide: "translatorService", useValue: translatorService }
+                    { provide: TranslatorService, useValue: translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA]
             });

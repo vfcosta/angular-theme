@@ -33,7 +33,7 @@ describe("Block Component", () => {
                 helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
                 helpers.createProviderToValue('authService', helpers.mocks.authService),
                 helpers.createProviderToValue('sessionService', helpers.mocks.sessionWithCurrentUser({})),
-                helpers.createProviderToValue('TranslatorService', translatorService),
+                helpers.createProviderToValue('translatorService', translatorService),
                 helpers.createProviderToValue("eventsHubService", mocks.eventsHubService),
                 helpers.createProviderToValue('designModeService', helpers.mocks.designModeService),
                 helpers.createProviderToValue('noosferoTemplateFilter', helpers.mocks.noosferoTemplateFilter),

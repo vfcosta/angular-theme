@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
 import { SessionService } from './../../login/session.service';
@@ -41,7 +42,7 @@ describe("Components", () => {
                     { provide: DesignModeService, useValue: mocks.designModeService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "$transitions", useValue: $transitions },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });

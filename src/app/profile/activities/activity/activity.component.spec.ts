@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service';
 import { NgPipesModule } from 'ngx-pipes';
 import { NoosferoUrlPipe } from './../../../shared/pipes/noosfero-url.pipe';
@@ -27,7 +28,7 @@ describe("Components", () => {
                 declarations: [ActivityComponent, TranslatePipe, NoosferoUrlPipe],
                 providers: [
                     { provide: EnvironmentService, useValue: mocks.environmentService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [NgPipesModule]

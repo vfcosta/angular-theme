@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { StatisticsBlockComponent } from './statistics-block.component';
@@ -18,7 +19,7 @@ describe("Components", () => {
                 providers: [
                     { provide: ArticleService, useValue: articleService },
                     { provide: BlockService, useValue: blockService },
-                    { provide: 'translatorService', useValue: translatorService }
+                    { provide: TranslatorService, useValue: translatorService }
                 ]
             }).compileComponents();
         }));

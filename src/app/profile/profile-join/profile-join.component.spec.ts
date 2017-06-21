@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { CommunityService } from './../../../lib/ng-noosfero-api/http/community.service';
 import { SessionService } from './../../login/session.service';
@@ -40,7 +41,7 @@ describe("Components", () => {
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: "$uibModal", useValue: helpers.mocks.$modal },
-                    { provide: "translatorService", useValue: translatorService },
+                    { provide: TranslatorService, useValue: translatorService },
                     { provide: CommunityService, useValue: communityService }
                 ]
             });

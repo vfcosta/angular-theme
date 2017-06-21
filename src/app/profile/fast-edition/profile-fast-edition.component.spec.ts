@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -24,7 +25,7 @@ describe("Components", () => {
                 providers: [
                     { provide: ProfileService, useValue: profileService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
                     { provide: "$state", useValue: state }
                 ]
             }).compileComponents().then(() => {

@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { UserService } from './../../../../lib/ng-noosfero-api/http/user.service';
 import { ChangePasswordComponent } from './change-password.component';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -30,7 +31,7 @@ describe("Components", () => {
                 providers: [
                     { provide: UserService, useValue: userService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
                     { provide: "$state", useValue: $state },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]

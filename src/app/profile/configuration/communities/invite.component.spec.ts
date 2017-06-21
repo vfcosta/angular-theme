@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
@@ -33,7 +34,7 @@ describe("Components", () => {
                     { provide: ProfileService, useValue: mocks.profileService },
                     { provide: CommunityService, useValue: mocks.communityService },
                     { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule]

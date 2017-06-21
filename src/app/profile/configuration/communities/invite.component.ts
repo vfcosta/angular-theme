@@ -23,7 +23,7 @@ export class InviteComponent {
     constructor(private personService: PersonService,
         private communityService: CommunityService,
         private profileService: ProfileService,
-        @Inject('translatorService') private translatorService: TranslatorService,
+        private translatorService: TranslatorService,
         @Inject("notificationService") public notificationService: NotificationService,
         private zone: NgZone) {
         this.peopleToInvite = [];

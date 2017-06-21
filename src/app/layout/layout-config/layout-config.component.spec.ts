@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { Component } from '@angular/core';
 import { LayoutConfigComponent } from './layout-config.component';
 import * as helpers from "../../../spec/helpers";
@@ -18,7 +19,7 @@ describe("Layout Config Component", () => {
             imports: [BsDropdownModule.forRoot()],
             declarations: [LayoutConfigComponent, TranslatePipe, KeysPipe],
             providers: [
-                { provide: 'translatorService', useValue: mocks.translatorService }
+                { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         });

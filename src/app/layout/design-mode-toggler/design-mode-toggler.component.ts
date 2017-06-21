@@ -1,7 +1,6 @@
 import {Component, Inject, Input} from '@angular/core';
 import {DesignModeService} from '../../shared/services/design-mode.service';
 import {AuthService, AuthEvents} from '../../login';
-import { TranslatorService } from "../../shared/services/translator.service";
 
 @Component({
     selector: 'design-toggler',

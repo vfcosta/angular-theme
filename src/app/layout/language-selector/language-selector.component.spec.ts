@@ -12,7 +12,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ LanguageSelectorComponent ],
                 providers: [
-                    { provide: 'translatorService', useValue: translatorServiceMock }
+                    { provide: TranslatorService, useValue: translatorServiceMock }
                 ]
             }).compileComponents();
         }));

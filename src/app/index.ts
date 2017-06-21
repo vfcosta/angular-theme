@@ -1,3 +1,5 @@
+import { EventsHubService } from './shared/services/events-hub.service';
+import { TranslatorService } from './shared/services/translator.service';
 import { ThemeService } from './shared/services/theme.service';
 import { BodyStateClassesService } from './shared/services/body-state-classes.service';
 import { DesignModeService } from './shared/services/design-mode.service';
@@ -407,6 +409,8 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     .factory('authService', downgradeInjectable(AuthService))
     .factory('designModeService', downgradeInjectable(DesignModeService))
     .factory('bodyStateClassesService', downgradeInjectable(BodyStateClassesService))
-    .factory('themeService', downgradeInjectable(ThemeService));
+    .factory('themeService', downgradeInjectable(ThemeService))
+    .factory('eventsHubService', downgradeInjectable(EventsHubService))
+    .factory('translatorService', downgradeInjectable(TranslatorService));
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

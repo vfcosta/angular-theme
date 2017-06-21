@@ -7,7 +7,7 @@ enum NotificationType {
 }
 
 @Injectable()
-@Inject("$log", "SweetAlert", TranslatorService, "toastr")
+@Inject("$log", "SweetAlert", "translatorService", "toastr")
 export class NotificationService {
 
     static get NotificationType() {

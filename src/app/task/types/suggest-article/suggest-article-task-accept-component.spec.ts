@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +24,7 @@ describe("Components", () => {
                 declarations: [SuggestArticleTaskAcceptComponent, TranslatePipe],
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
@@ -29,7 +30,7 @@ describe("Components", () => {
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: "notificationService", useValue: mocks.notificationService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

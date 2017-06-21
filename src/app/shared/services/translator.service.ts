@@ -1,9 +1,7 @@
-import {Injectable, Inject} from "ng-forward";
+import {Injectable, Inject} from "@angular/core";
 import * as moment from 'moment';
 
-
 @Injectable()
-@Inject("$translate", "tmhDynamicLocale", "amMoment", "angularLoad", "$rootScope")
 export class TranslatorService {
 
     availableLanguages = {
@@ -18,11 +16,11 @@ export class TranslatorService {
         // "it" : "Italiano"
     };
 
-    constructor(private $translate: angular.translate.ITranslateService,
-        private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
-        private amMoment: any,
-        private angularLoad: any,
-        private $rootScope: any) {
+    constructor(@Inject("$translate") private $translate: angular.translate.ITranslateService,
+        @Inject("tmhDynamicLocale") private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
+        @Inject("amMoment") private amMoment: any,
+        @Inject("angularLoad") private angularLoad: any,
+        @Inject("$rootScope") private $rootScope: any) {
 
         this.$rootScope.$on("$localeChangeSuccess", () => {
             this.changeLanguage(tmhDynamicLocale.get() || $translate.use());

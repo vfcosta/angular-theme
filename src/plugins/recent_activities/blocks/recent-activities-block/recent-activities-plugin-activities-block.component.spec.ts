@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import {RecentActivitiesPluginActivitiesBlockComponent} from './recent-activities-plugin-activities-block.component';
@@ -24,7 +25,7 @@ describe("Components", () => {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: BlockService, useValue: mocks.blockService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(RecentActivitiesPluginActivitiesBlockComponent);

@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { NgPipesModule } from 'ngx-pipes';
@@ -38,7 +39,7 @@ describe("Components", () => {
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(DisplayContentBlockComponent);

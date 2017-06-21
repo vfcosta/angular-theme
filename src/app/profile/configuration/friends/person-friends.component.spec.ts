@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { PersonFriendsComponent } from './person-friends.component';
 import { By } from '@angular/platform-browser';
@@ -24,7 +25,7 @@ describe("Components", () => {
                 providers: [
                     { provide: PersonService, useValue: personService },
                     { provide: "$stateParams", useValue: stateParams },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(PersonFriendsComponent);

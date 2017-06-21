@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import { DateFormatPipe } from './../../shared/pipes/date-format.pipe';
@@ -22,7 +23,7 @@ describe("Components", () => {
                     { provide: CommentService, useValue: mocks.commentService },
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [MomentModule]

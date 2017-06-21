@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../app/shared/services/translator.service';
 import { CommentParagraphService } from './../http/comment-paragraph.service';
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { TranslatePipe } from './../../../app/shared/pipes/translate-pipe';
@@ -26,7 +27,7 @@ describe("Components", () => {
                     { provide: CommentParagraphService, useValue: serviceMock },
                     { provide: CommentService, useValue: mocks.commentService },
                     { provide: "postCommentEventService", useValue: postCommentEventService },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [NgPipesModule]

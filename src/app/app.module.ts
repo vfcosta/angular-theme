@@ -114,14 +114,14 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 import { LocalStorageModule } from 'angular-2-local-storage';
 
-export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, TranslatorService, NotificationService) {
+export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
     RestangularProvider.setFullResponse(true);
     RestangularProvider.addFullRequestInterceptor((element, operation, path, url, headers, params) => {
         if (sessionService.currentUser()) {
             (<any>headers)["Private-Token"] = sessionService.currentUser().private_token;
         }
-        (<any>headers)["Accept-Language"] = TranslatorService.currentLanguage();
+        (<any>headers)["Accept-Language"] = translatorService.currentLanguage();
         return <any>{ headers: <any>headers };
     });
     RestangularProvider.addErrorInterceptor((response, subject, responseHandler) => {
@@ -150,7 +150,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         DynamicHTMLModule.forRoot({
             components: plugins.macros
         }),
-        RestangularModule.forRoot([SessionService, "translatorService", "notificationService"], RestangularConfigFactory),
+        RestangularModule.forRoot([SessionService, TranslatorService, "notificationService"], RestangularConfigFactory),
         HttpModule,
         JsonpModule,
         LocalStorageModule.withConfig({
@@ -324,9 +324,9 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         ThemeService,
         CommentParagraphEventService,
         EventsHubService,
+        TranslatorService,
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
-        'TranslatorService',
         '$uibModal',
         '$scope',
         'NotificationService',
@@ -341,6 +341,9 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$location',
         '$anchorScroll',
         '$window',
+        '$translate',
+        'tmhDynamicLocale',
+        'amMoment',
     ]))
 })
 

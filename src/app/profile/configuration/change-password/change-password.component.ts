@@ -1,5 +1,4 @@
 import { UserService } from './../../../../lib/ng-noosfero-api/http/user.service';
-import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
 import { ValidationMessageComponent } from '../../../shared/components/validation-message/validation-message.component';

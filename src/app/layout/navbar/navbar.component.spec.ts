@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { AuthService } from './../../login/auth.service';
 import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
 import { SessionService } from './../../login/session.service';
@@ -36,7 +37,7 @@ describe("Components", () => {
                     { provide: "$state", useValue: mocks.$state },
                     { provide: EnvironmentService, useValue: mocks.environmentService },
                     { provide: HeaderService, useValue: mocks.headerService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [CollapseModule.forRoot()]

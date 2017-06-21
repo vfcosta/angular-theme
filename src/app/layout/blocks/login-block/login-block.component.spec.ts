@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { AuthService } from './../../../login/auth.service';
 import { SessionService } from './../../../login/session.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
@@ -33,7 +34,7 @@ describe("Components", () => {
                     { provide: SessionService, useValue: sessionService },
                     { provide: "$state", useValue: mocks.stateService },
                     { provide: AuthService, useValue: mocks.authService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [FormsModule, MomentModule]

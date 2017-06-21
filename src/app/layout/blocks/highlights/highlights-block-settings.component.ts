@@ -15,7 +15,7 @@ export class HighlightsBlockSettingsComponent implements OnInit {
 
     constructor(
         injector: Injector,
-        @Inject("translatorService") private translatorService: TranslatorService,
+        private translatorService: TranslatorService,
         private blockService: BlockService) {
         this.parentBlock = injector.get(BlockSettingsComponent);
     }

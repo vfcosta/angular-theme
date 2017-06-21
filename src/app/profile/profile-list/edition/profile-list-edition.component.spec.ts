@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
 import { PopoverModule } from 'ngx-bootstrap';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
@@ -39,7 +40,7 @@ describe("Components", () => {
                 providers: [
                     { provide: RoleService, useValue: roleService },
                     { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
                     { provide: "amParseFilter", useValue: amParseFilter }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

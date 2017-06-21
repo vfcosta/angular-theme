@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { SessionService } from './../../../login/session.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
@@ -29,7 +30,7 @@ describe("Components", () => {
                     { provide: "notificationService", useValue: mocks.notificationService },
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });

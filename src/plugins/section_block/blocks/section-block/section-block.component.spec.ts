@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { SectionBlockComponent } from './section-block.component';
@@ -25,7 +26,7 @@ describe("Components", () => {
                 declarations: [SectionBlockComponent, TranslatePipe],
                 providers: [
                     { provide: BlockService, useValue: blockService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [PopoverModule.forRoot(), FormsModule]
