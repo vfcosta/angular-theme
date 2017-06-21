@@ -1,6 +1,6 @@
 
 /** @ngInject */
-export function noosferoModuleConfig($logProvider: ng.ILogProvider,
+export function noosferoModuleConfig(
     $locationProvider: ng.ILocationProvider,
     $httpProvider: ng.IHttpProvider,
     $provide: ng.auto.IProvideService,
@@ -9,7 +9,6 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
     $urlMatcherFactoryProvider: angular.ui.IUrlMatcherFactory,
     $urlRouterProvider: angular.ui.IUrlRouterProvider) {
 
-    $logProvider.debugEnabled(true);
     $locationProvider.html5Mode({ enabled: true });
 
     (<any>$httpProvider.defaults.headers.post)["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";

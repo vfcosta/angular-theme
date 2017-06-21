@@ -11,7 +11,7 @@ import {EnvironmentService} from "../../lib/ng-noosfero-api/http/environment.ser
     selector: 'environment-home',
     templateUrl: "app/environment/environment-home.html",
 })
-@Inject("environmentService", "$log", "$sce")
+@Inject("environmentService", "$sce")
 export class EnvironmentHomeComponent {
 
     environment: noosfero.Environment;

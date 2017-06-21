@@ -261,9 +261,6 @@ export var mocks: any = {
             catch: catchCallback
         };
     },
-    $log: {
-        debug: () => { }
-    },
     translatorService: {
         currentLanguage: () => { },
         changeLanguage: (lang: string) => { },
@@ -525,9 +522,6 @@ export function getMocks() {
                 finally: callback,
                 catch: callback
             };
-        },
-        $log: {
-            debug: () => { }
         },
         translatorService: {
             currentLanguage: () => { },

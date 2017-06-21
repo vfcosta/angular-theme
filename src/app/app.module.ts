@@ -330,7 +330,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$state',
         '$uibModal',
         '$scope',
-        '$log',
         'SweetAlert',
         'toastr',
         '$transitions',

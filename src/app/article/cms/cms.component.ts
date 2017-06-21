@@ -23,7 +23,7 @@ export class CmsComponent {
     path: string;
 
 
-    constructor(private ArticleService: ArticleService,
+    constructor(private articleService: ArticleService,
         private profileService: ProfileService,
         private $state: ng.ui.IStateService,
         private notificationService: NotificationService,
@@ -42,12 +42,12 @@ export class CmsComponent {
         });
 
         if (this.parentId) {
-            this.ArticleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
+            this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
                 this.parent = result.data;
             });
         }
         if (this.id) {
-            this.ArticleService.get(this.id).then((result: noosfero.RestResult<noosfero.Article>) => {
+            this.articleService.get(this.id).then((result: noosfero.RestResult<noosfero.Article>) => {
                 this.article = result.data;
                 this.article.name = this.article.title; // FIXME
             });
@@ -61,11 +61,11 @@ export class CmsComponent {
 
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             if (this.id) {
-                return this.ArticleService.updateArticle(this.article);
+                return this.articleService.updateArticle(this.article);
             } else if (this.parentId) {
-                return this.ArticleService.createInParent(this.parentId, this.article);
+                return this.articleService.createInParent(this.parentId, this.article);
             } else {
-                return this.ArticleService.createInProfile(profile, this.article);
+                return this.articleService.createInProfile(profile, this.article);
             }
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
