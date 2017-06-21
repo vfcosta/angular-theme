@@ -1,4 +1,3 @@
-import { Component } from "ng-forward";
 import { SessionService } from "./session.service";
 import { fixtures, createComponentFromClass, createProviderToValue } from "./../../spec/helpers";
 import { INoosferoLocalStorage } from "./../shared/models/interfaces";

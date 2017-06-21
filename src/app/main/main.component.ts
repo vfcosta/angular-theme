@@ -29,7 +29,7 @@ import { Component, Inject, provide } from 'ng-forward';
     selector: 'main-content',
     templateUrl: "app/main/main.html",
 })
-@Inject(BodyStateClassesService)
+@Inject("bodyStateClassesService")
 export class MainContentComponent {
 
     public themeSkin: string = 'skin-default';
@@ -77,7 +77,7 @@ export class EnvironmentContent {
         BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [NotificationService, BodyStateClassesService, CommentParagraphEventService,
+    providers: [NotificationService, CommentParagraphEventService,
         "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
@@ -86,7 +86,6 @@ export class EnvironmentContent {
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
-        provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
         provide('eventsHubService', { useClass: EventsHubService })
     ]
 })
