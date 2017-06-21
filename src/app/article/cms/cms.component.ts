@@ -29,7 +29,7 @@ export class CmsComponent {
         private notificationService: NotificationService,
         private $stateParams: ng.ui.IStateParamsService,
         private $window: ng.IWindowService,
-        private EventsHubService: EventsHubService) {
+        private eventsHubService: EventsHubService) {
 
         this.parentId = this.$stateParams['parent_id'];
         this.profileIdentifier = this.$stateParams["profile"];
@@ -73,7 +73,7 @@ export class CmsComponent {
             this.notificationService.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message` });
         }).catch((error: any) => {
             this.loading = false;
-            this.EventsHubService.emitEvent(this.EventsHubService.knownEvents.ARTICLE_SAVE_ERROR, error);
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.ARTICLE_SAVE_ERROR, error);
             this.notificationService.error({ message: "article.basic_editor.save.failed" });
         });
     }
