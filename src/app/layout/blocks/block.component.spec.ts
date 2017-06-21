@@ -30,7 +30,7 @@ describe("Block Component", () => {
             providers: [
                 helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
                 helpers.createProviderToValue('$state', state),
-                helpers.createProviderToValue('NotificationService', helpers.mocks.notificationService),
+                helpers.createProviderToValue('notificationService', helpers.mocks.notificationService),
                 helpers.createProviderToValue('authService', helpers.mocks.authService),
                 helpers.createProviderToValue('sessionService', helpers.mocks.sessionWithCurrentUser({})),
                 helpers.createProviderToValue('translatorService', translatorService),

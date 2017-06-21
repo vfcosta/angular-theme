@@ -1,3 +1,4 @@
+import { NotificationService } from './../../shared/services/notification.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { AuthService } from './../../login/auth.service';
 import { PermissionService } from './../../shared/services/permission.service';
@@ -29,7 +30,7 @@ describe("Components", () => {
                 declarations: [ProfileImageComponent, TranslatePipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
+                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
                     { provide: ProfileService, useValue: profileService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: PermissionService, useValue: permissionService },

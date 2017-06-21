@@ -1,3 +1,4 @@
+import { NotificationService } from './../../shared/services/notification.service';
 import { AuthService } from './../../login/auth.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -25,7 +26,7 @@ describe("Components", () => {
                 declarations: [DestroyProfileComponent],
                 providers: [
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "notificationService", useValue: mocks.notificationService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: ProfileService, useValue: mocks.profileService },
                     { provide: AuthService, useValue: mocks.authService }
                 ],
@@ -43,7 +44,7 @@ describe("Components", () => {
 
         it("call remove in profile service when confirm", fakeAsync(() => {
             let pS = TestBed.get(ProfileService);
-            let nS = TestBed.get('notificationService');
+            let nS = TestBed.get(NotificationService);
             nS.confirmation = (p1, p2) => { p2(); };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
 
@@ -58,7 +59,7 @@ describe("Components", () => {
 
         it("not display confirmation dialog when profile doesn't exists", fakeAsync(() => {
             let pS = TestBed.get(ProfileService);
-            let nS = TestBed.get('notificationService');
+            let nS = TestBed.get(NotificationService);
             nS.confirmation = (p1, p2) => { p2() };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve(null));
 
@@ -72,7 +73,7 @@ describe("Components", () => {
 
         it("call notification success when remove is confirmed", fakeAsync(() => {
             let pS = TestBed.get(ProfileService);
-            let nS = TestBed.get('notificationService');
+            let nS = TestBed.get(NotificationService);
             let state = TestBed.get('$state');
             nS.confirmation = (p1, p2) => { p2() };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
@@ -91,7 +92,7 @@ describe("Components", () => {
 
         it("call notification error when remove is not confirmed", fakeAsync(() => {
             let pS = TestBed.get(ProfileService);
-            let nS = TestBed.get('notificationService');
+            let nS = TestBed.get(NotificationService);
             let state = TestBed.get('$state');
             let aS = TestBed.get(AuthService);
             nS.confirmation = (p1, p2) => { p2() };

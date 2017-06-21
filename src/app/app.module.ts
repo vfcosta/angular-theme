@@ -114,7 +114,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 import { LocalStorageModule } from 'angular-2-local-storage';
 
-export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, NotificationService) {
+export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
     RestangularProvider.setFullResponse(true);
     RestangularProvider.addFullRequestInterceptor((element, operation, path, url, headers, params) => {
@@ -125,7 +125,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         return <any>{ headers: <any>headers };
     });
     RestangularProvider.addErrorInterceptor((response, subject, responseHandler) => {
-        NotificationService.httpError(response.status, response.data);
+        notificationService.httpError(response.status, response.data);
         return true; // return true to continue the promise chain and call catch
     });
 }
@@ -150,7 +150,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         DynamicHTMLModule.forRoot({
             components: plugins.macros
         }),
-        RestangularModule.forRoot([SessionService, TranslatorService, "notificationService"], RestangularConfigFactory),
+        RestangularModule.forRoot([SessionService, TranslatorService, NotificationService], RestangularConfigFactory),
         HttpModule,
         JsonpModule,
         LocalStorageModule.withConfig({
@@ -325,11 +325,11 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         CommentParagraphEventService,
         EventsHubService,
         TranslatorService,
+        NotificationService,
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
         '$uibModal',
         '$scope',
-        'NotificationService',
         '$log',
         'SweetAlert',
         'toastr',
@@ -344,6 +344,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$translate',
         'tmhDynamicLocale',
         'amMoment',
+        'SweetAlert',
     ]))
 })
 

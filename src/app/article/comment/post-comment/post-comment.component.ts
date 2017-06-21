@@ -18,8 +18,7 @@ export class PostCommentComponent {
     @Input() comment = <noosfero.Comment>{};
     private currentUser: noosfero.User;
 
-    constructor(private commentService: CommentService,
-        @Inject("notificationService") private notificationService: NotificationService,
+    constructor(private commentService: CommentService, private notificationService: NotificationService,
         private session: SessionService) {
         this.currentUser = this.session.currentUser();
     }

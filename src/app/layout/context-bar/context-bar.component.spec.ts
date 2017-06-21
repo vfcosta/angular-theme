@@ -1,3 +1,4 @@
+import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
@@ -32,7 +33,7 @@ describe("Context Bar Component", () => {
                 { provide: "$scope", useValue: mocks.scopeWithEvents() },
                 { provide: EventsHubService, useValue: mocks.eventsHubService },
                 { provide: BlockService, useValue: mocks.blockService },
-                { provide: "notificationService", useValue: mocks.notificationService },
+                { provide: NotificationService, useValue: mocks.notificationService },
                 { provide: DesignModeService, useValue: mocks.designModeService },
                 { provide: ProfileService, useValue: mocks.profileService },
                 { provide: EnvironmentService, useValue: mocks.environmentService },

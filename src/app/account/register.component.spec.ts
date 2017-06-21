@@ -1,3 +1,4 @@
+import { NotificationService } from './../shared/services/notification.service';
 import { TranslatorService } from './../shared/services/translator.service';
 import { RegisterService } from './../../lib/ng-noosfero-api/http/register.service';
 import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
@@ -36,7 +37,7 @@ describe("Register Component", () => {
             providers: [
                 { provide: "$state", useValue: mocks.$state },
                 { provide: RegisterService, useValue: mocks.registerService },
-                { provide: "notificationService", useValue: mocks.notificationService },
+                { provide: NotificationService, useValue: mocks.notificationService },
                 { provide: EnvironmentService, useValue: mocks.environmentService },
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ]

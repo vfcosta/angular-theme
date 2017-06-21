@@ -15,11 +15,8 @@ import { Component, Inject, provide } from 'ng-forward';
 @Component({
     selector: 'environment',
     templateUrl: "app/environment/environment.html",
-    providers: [
-        provide('notificationService', { useClass: NotificationService }),
-    ]
 })
-@Inject("environmentService", "$state", NotificationService, "authService", "designModeService", "themeService")
+@Inject("environmentService", "$state", "notificationService", "authService", "designModeService", "themeService")
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];

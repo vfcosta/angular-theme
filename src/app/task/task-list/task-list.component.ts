@@ -28,7 +28,7 @@ export class TaskListComponent {
 
     tasksGroups: noosfero.Task[];
 
-    constructor( @Inject("notificationService") private notificationService: NotificationService,
+    constructor(private notificationService: NotificationService,
         @Inject("$scope") private $scope: ng.IScope,
         @Inject("$uibModal") private $uibModal: any,
         private taskService: TaskService,

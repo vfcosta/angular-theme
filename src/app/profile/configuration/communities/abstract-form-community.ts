@@ -18,7 +18,7 @@ export abstract class AbstractFormCommunity {
     public acceptBefore: boolean = true;
     public sessionProfile: noosfero.Profile;
 
-    constructor(@Inject("notificationService") public notificationService: NotificationService,
+    constructor(@Inject(NotificationService) public notificationService: NotificationService,
         @Inject(CommunityService) public communityService: CommunityService,
         @Inject(ProfileService) public profileService: ProfileService,
         @Inject(SessionService) public sessionService: SessionService,

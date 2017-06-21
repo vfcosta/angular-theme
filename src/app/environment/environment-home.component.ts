@@ -1,6 +1,5 @@
 import {Component, Inject, provide} from 'ng-forward';
 import {EnvironmentService} from "../../lib/ng-noosfero-api/http/environment.service";
-import {NotificationService} from "../shared/services/notification.service";
 
 /**
  * @ngdoc controller
@@ -11,9 +10,6 @@ import {NotificationService} from "../shared/services/notification.service";
 @Component({
     selector: 'environment-home',
     templateUrl: "app/environment/environment-home.html",
-    providers: [
-        provide('notificationService', { useClass: NotificationService })
-    ]
 })
 @Inject("environmentService", "$log", "$sce")
 export class EnvironmentHomeComponent {

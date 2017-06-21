@@ -1,3 +1,4 @@
+import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { By } from '@angular/platform-browser';
@@ -24,7 +25,7 @@ describe("Components", () => {
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ProfileService, useValue: profileService },
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
+                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
                     { provide: TranslatorService, useValue: helpers.mocks.translatorService },
                     { provide: "$state", useValue: state }
                 ]

@@ -27,7 +27,7 @@ export class ProfilePersonalDataComponent {
     errors: any;
 
     constructor(private profileService: ProfileService,
-        @Inject("notificationService") private notificationService: NotificationService,
+        private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService,
         private translatorService: TranslatorService) { }
 

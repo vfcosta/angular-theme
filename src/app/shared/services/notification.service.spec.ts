@@ -1,14 +1,7 @@
-import { TestComponentBuilder, ComponentFixture } from 'ng-forward/cjs/testing/test-component-builder';
-import { Pipe, Input, provide, Component } from 'ng-forward';
-
 import * as helpers from "../../../spec/helpers";
-
 import { NotificationService } from "./notification.service";
 
-const tcb = new TestComponentBuilder();
-
 describe("Components", () => {
-
     describe("Profile Image Component", () => {
 
         let sweetAlert: any;
@@ -22,12 +15,7 @@ describe("Components", () => {
         });
 
         function createComponent() {
-            return new NotificationService(
-                <any>helpers.mocks.$log,
-                <any>sweetAlert,
-                <any>helpers.mocks.translatorService,
-                <any>toastr
-            );
+            return new NotificationService(<any>sweetAlert, <any>helpers.mocks.translatorService, <any>toastr);
         }
 
         it("display a sweet error message when notify an error with SweetAlert", done => {
@@ -121,14 +109,14 @@ describe("Components", () => {
         });
 
         it("translate toast success message when call notification success", done => {
-            let component: NotificationService = new NotificationService(<any>helpers.mocks.$log, <any>sweetAlert, <any>translatorService, <any>toastr);
+            let component: NotificationService = new NotificationService(<any>sweetAlert, <any>translatorService, <any>toastr);
             component.success({ title: "some title", message: "some message", notificationType: NotificationService.NotificationType.Toast });
             expect(translatorService.translate).toHaveBeenCalledWith("some message");
             done();
         });
 
         it("translate toast success title when call notification success", done => {
-            let component: NotificationService = new NotificationService(<any>helpers.mocks.$log, <any>sweetAlert, <any>translatorService, <any>toastr);
+            let component: NotificationService = new NotificationService(<any>sweetAlert, <any>translatorService, <any>toastr);
             component.success({ title: "some title", message: "some message", notificationType: NotificationService.NotificationType.Toast });
             expect(translatorService.translate).toHaveBeenCalledWith("some title");
             done();

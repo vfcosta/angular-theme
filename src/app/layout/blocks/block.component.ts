@@ -8,7 +8,7 @@ import { DesignModeService } from "../../shared/services/design-mode.service";
     selector: 'noosfero-block',
     templateUrl: 'app/layout/blocks/block.html'
 })
-@Inject("$uibModal", "$scope", "$state", "$rootScope", NotificationService,
+@Inject("$uibModal", "$scope", "$state", "$rootScope", "notificationService",
     "authService", "sessionService", "translatorService", "designModeService", "$transitions")
 export class BlockComponent {
 

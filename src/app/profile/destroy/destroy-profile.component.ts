@@ -11,7 +11,7 @@ export class DestroyProfileComponent {
 
     constructor(
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject('notificationService') private notificationService: NotificationService,
+        private notificationService: NotificationService,
         private profileService: ProfileService,
         private authService: AuthService) {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {

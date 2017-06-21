@@ -12,7 +12,6 @@ import { BootstrapResizableDirective } from '../shared/components/bootstrap-resi
 import { PermissionDirective } from '../shared/components/permission/permission.directive';
 import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
-import { NotificationService } from '../shared/services/notification.service';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { Component, Inject, provide } from 'ng-forward';
 /**
@@ -76,7 +75,7 @@ export class EnvironmentContent {
         BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [NotificationService,
+    providers: [
         "ngAnimate", "ngCookies", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",

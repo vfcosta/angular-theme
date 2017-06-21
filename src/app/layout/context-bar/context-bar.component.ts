@@ -29,7 +29,7 @@ export class ContextBarComponent {
         @Inject("$scope") private $scope: ng.IScope,
         private eventsHubService: EventsHubService,
         private blockService: BlockService,
-        @Inject('notificationService') private notificationService: NotificationService,
+        private notificationService: NotificationService,
         private designModeService: DesignModeService,
         private profileService: ProfileService,
         private environmentService: EnvironmentService) {

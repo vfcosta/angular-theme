@@ -27,8 +27,7 @@ export class ChangePasswordComponent {
     new_password_confirmation: string;
     errors: any;
 
-    constructor(private userService: UserService,
-        @Inject("notificationService") private notificationService: NotificationService,
+    constructor(private userService: UserService, private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService) { }
 
     save(event: Event) {

@@ -23,7 +23,7 @@ export class RegisterComponent {
     constructor(
         @Inject('$state') private $state: ng.ui.IStateService,
         public RegisterService: RegisterService,
-        @Inject('notificationService') private notificationService: NotificationService,
+        private notificationService: NotificationService,
         private environmentService: EnvironmentService) {
         this.account = {};
     }

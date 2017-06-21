@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
@@ -31,7 +32,7 @@ describe("Components", () => {
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: TranslatorService, useValue: mocks.translatorService },
-                    { provide: "notificationService", useValue: mocks.notificationService }
+                    { provide: NotificationService, useValue: mocks.notificationService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [MomentModule]
@@ -93,7 +94,7 @@ describe("Components", () => {
          * notifyArticleRemovedListeners event
          */
         function simulateRemovedEvent() {
-            TestBed.get('notificationService').confirmation({ title: "Title", message: "Message" }, () => { });
+            TestBed.get(NotificationService).confirmation({ title: "Title", message: "Message" }, () => { });
             TestBed.get(ArticleService).modelRemovedEventEmitter.next(article);
         }
     });

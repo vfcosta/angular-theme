@@ -24,7 +24,7 @@ export class InviteComponent {
         private communityService: CommunityService,
         private profileService: ProfileService,
         private translatorService: TranslatorService,
-        @Inject("notificationService") public notificationService: NotificationService,
+        public notificationService: NotificationService,
         private zone: NgZone) {
         this.peopleToInvite = [];
         this.listOfPeople = Observable.create((observer: any) => {

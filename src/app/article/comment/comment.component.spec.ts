@@ -1,3 +1,4 @@
+import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
@@ -21,7 +22,7 @@ describe("Components", () => {
                 declarations: [CommentComponent, TranslatePipe, DateFormatPipe, PermissionNg2Directive],
                 providers: [
                     { provide: CommentService, useValue: mocks.commentService },
-                    { provide: "notificationService", useValue: mocks.notificationService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter },
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
@@ -75,7 +76,7 @@ describe("Components", () => {
         });
 
         it("call comment service to remove comment", () => {
-            TestBed.get('notificationService').confirmation = (params: any, func: Function) => { func(); };
+            TestBed.get(NotificationService).confirmation = (params: any, func: Function) => { func(); };
             TestBed.get(CommentService).removeFromArticle = jasmine.createSpy("removeFromArticle").and.returnValue(Promise.resolve());
             component.remove();
             expect(TestBed.get(CommentService).removeFromArticle).toHaveBeenCalled();

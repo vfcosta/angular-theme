@@ -20,8 +20,7 @@ export class CommentComponent {
         return this.comment && this.comment.__show_reply === true;
     }
 
-    constructor(private commentService: CommentService,
-        @Inject("notificationService") private notificationService: NotificationService) { }
+    constructor(private commentService: CommentService, private notificationService: NotificationService) { }
 
     reply() {
         this.comment.__show_reply = !this.comment.__show_reply;

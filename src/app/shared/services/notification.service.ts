@@ -1,4 +1,4 @@
-import { Injectable, Inject } from "ng-forward";
+import { Injectable, Inject } from "@angular/core";
 import { TranslatorService } from "./translator.service";
 
 enum NotificationType {
@@ -7,7 +7,6 @@ enum NotificationType {
 }
 
 @Injectable()
-@Inject("$log", "SweetAlert", "translatorService", "toastr")
 export class NotificationService {
 
     static get NotificationType() {
@@ -15,10 +14,9 @@ export class NotificationService {
     }
 
     constructor(
-        private $log: ng.ILogService,
-        private SweetAlert: any,
+        @Inject("sweetAlert") private sweetAlert: any,
         private translatorService: TranslatorService,
-        private toastr: angular.toastr.IToastrService
+        @Inject("toastr") private toastr: angular.toastr.IToastrService
     ) { }
 
     public static DEFAULT_ERROR_TITLE = "notification.error.default.title";
@@ -87,8 +85,7 @@ export class NotificationService {
     }
 
     private showMessage({ title = '', text = '', type = "success", timer = NotificationService.DEFAULT_SUCCESS_TIMER, showConfirmButton = true, showCancelButton = false, closeOnConfirm = true }, confirmationFunction: Function = null) {
-        this.$log.debug("Notification message:", title, text, type, this.translatorService.currentLanguage());
-        this.SweetAlert.swal({
+        this.sweetAlert.swal({
             title: this.translatorService.translate(title),
             text: this.translatorService.translate(text),
             type: type,

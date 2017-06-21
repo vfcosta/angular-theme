@@ -1,3 +1,4 @@
+import { NotificationService } from './../shared/services/notification.service';
 import { TranslatorService } from './../shared/services/translator.service';
 import { PasswordService } from './../../lib/ng-noosfero-api/http/password.service';
 import { FormsModule } from '@angular/forms';
@@ -26,7 +27,7 @@ describe("Password Component", () => {
             providers: [
                 { provide: PasswordService, useValue: mocks.passwordService },
                 { provide: "$state", useValue: mocks.$state },
-                { provide: "notificationService", useValue: mocks.notificationService },
+                { provide: NotificationService, useValue: mocks.notificationService },
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],

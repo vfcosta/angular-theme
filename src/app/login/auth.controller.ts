@@ -3,7 +3,7 @@ import { NotificationService } from "./../shared/services/notification.service";
 
 export class AuthController {
 
-    static $inject = ["$log", "$stateParams", "authService", "$uibModal", "NotificationService"];
+    static $inject = ["$log", "$stateParams", "authService", "$uibModal", "notificationService"];
     modalInstance: ng.ui.bootstrap.IModalServiceInstance;
 
     constructor(

@@ -8,11 +8,8 @@ import { BasicOptionsComponent } from './basic-options/basic-options.component';
 @Component({
     selector: 'article-cms',
     templateUrl: "app/article/cms/cms.html",
-    providers: [
-        provide('notificationService', { useClass: NotificationService })
-    ]
 })
-@Inject("articleService", "profileService", "$state", NotificationService, "$stateParams", "$window", "eventsHubService")
+@Inject("articleService", "profileService", "$state", "notificationService", "$stateParams", "$window", "eventsHubService")
 export class CmsComponent {
 
     article: noosfero.Article;

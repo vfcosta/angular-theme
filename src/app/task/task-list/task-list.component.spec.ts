@@ -1,3 +1,4 @@
+import { NotificationService } from './../../shared/services/notification.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
 import { TaskComponent } from './../task.component';
@@ -38,7 +39,7 @@ describe("Components", () => {
                 providers: [
                     { provide: TaskService, useValue: taskService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
+                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
                     { provide: "$uibModal", useValue: mocks.$modal },
                     { provide: "$scope", useValue: helpers.mocks.scopeWithEvents }
                 ],

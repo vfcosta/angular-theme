@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
@@ -33,7 +34,7 @@ describe("Components", () => {
                     { provide: PersonService, useValue: mocks.personService },
                     { provide: ProfileService, useValue: mocks.profileService },
                     { provide: CommunityService, useValue: mocks.communityService },
-                    { provide: "notificationService", useValue: mocks.notificationService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,8 +1,4 @@
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-import {provide} from 'ng-forward';
-
 import {TranslatorService} from './translator.service';
-
 import * as helpers from "../../../spec/helpers";
 
 describe("Services", () => {

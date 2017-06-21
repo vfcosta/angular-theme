@@ -1,3 +1,4 @@
+import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
 import { PopoverModule } from 'ngx-bootstrap';
@@ -39,7 +40,7 @@ describe("Components", () => {
                 declarations: [ProfileListEditionComponent, TranslatePipe, DateFormatPipe],
                 providers: [
                     { provide: RoleService, useValue: roleService },
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
+                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
                     { provide: TranslatorService, useValue: helpers.mocks.translatorService },
                     { provide: "amParseFilter", useValue: amParseFilter }
                 ],

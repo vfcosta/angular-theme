@@ -1,3 +1,4 @@
+import { NotificationService } from './shared/services/notification.service';
 import { EventsHubService } from './shared/services/events-hub.service';
 import { TranslatorService } from './shared/services/translator.service';
 import { ThemeService } from './shared/services/theme.service';
@@ -411,6 +412,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     .factory('bodyStateClassesService', downgradeInjectable(BodyStateClassesService))
     .factory('themeService', downgradeInjectable(ThemeService))
     .factory('eventsHubService', downgradeInjectable(EventsHubService))
-    .factory('translatorService', downgradeInjectable(TranslatorService));
+    .factory('translatorService', downgradeInjectable(TranslatorService))
+    .factory('notificationService', downgradeInjectable(NotificationService));
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

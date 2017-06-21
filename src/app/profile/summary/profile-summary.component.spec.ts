@@ -1,3 +1,4 @@
+import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
@@ -38,7 +39,7 @@ describe("Components", () => {
                     { provide: EnvironmentService, useValue: environmentService},
                     { provide: SessionService, useValue: sessionService },
                     { provide: PersonService, useValue: personService },
-                    { provide: "notificationService", useValue: mocks.notificationService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: DesignModeService, useValue: mocks.designModeService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "$transitions", useValue: $transitions },

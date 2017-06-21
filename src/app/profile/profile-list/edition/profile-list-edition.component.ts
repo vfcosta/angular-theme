@@ -18,7 +18,7 @@ export class ProfileListEditionComponent {
 
     constructor(private elementRef: ElementRef,
         private roleService: RoleService,
-        @Inject('notificationService') private notificationService: NotificationService) { }
+        private notificationService: NotificationService) { }
 
     ngOnInit () {
 

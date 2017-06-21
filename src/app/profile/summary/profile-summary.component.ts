@@ -27,7 +27,7 @@ export class ProfileSummaryComponent {
         private environmentService: EnvironmentService,
         private session: SessionService,
         private personService: PersonService,
-        @Inject('notificationService') private notificationService: NotificationService,
+        private notificationService: NotificationService,
         private designModeService: DesignModeService) {
 
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {

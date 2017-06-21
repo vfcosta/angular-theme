@@ -17,7 +17,7 @@ export class PasswordComponent {
     constructor(
         public passwordService: PasswordService,
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject('notificationService') private notificationService: NotificationService) { }
+        private notificationService: NotificationService) { }
 
     sendNewPassword() {
         this.passwordService.newPassword(this.code, this.password, this.passwordConfirmation).then((response) => {
