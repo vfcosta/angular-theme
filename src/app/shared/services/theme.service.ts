@@ -1,12 +1,11 @@
-import { Injectable, Output, EventEmitter, Inject } from 'ng-forward';
+import { Injectable, Output, EventEmitter, Inject } from '@angular/core';
 
 @Injectable()
-@Inject("$window")
 export class ThemeService {
 
     currentTheme: string;
 
-    constructor(private $window: ng.IWindowService) { }
+    constructor(@Inject("$window") private $window: ng.IWindowService) { }
 
     verifyTheme(theme: string) {
         let reload = theme && this.currentTheme && this.currentTheme !== theme;

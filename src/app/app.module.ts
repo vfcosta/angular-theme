@@ -1,3 +1,4 @@
+import { ThemeService } from './shared/services/theme.service';
 import { BodyStateClassesService } from './shared/services/body-state-classes.service';
 import { DesignModeService } from './shared/services/design-mode.service';
 import { HttpModule, JsonpModule } from '@angular/http';
@@ -318,6 +319,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         AuthService,
         DesignModeService,
         BodyStateClassesService,
+        ThemeService,
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
         'TranslatorService',
@@ -332,7 +334,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$stateParams',
         'amParseFilter',
         '$sce',
-        'ThemeService',
         'CommentParagraphEventService',
         'angularLoad',
         '$location',
