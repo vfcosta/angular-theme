@@ -25,11 +25,10 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
     directives: [ActivitiesComponent],
     providers: [
         provide('notificationService', { useClass: NotificationService }),
-        provide('designModeService', { useClass: DesignModeService }),
         provide('themeService', { useClass: ThemeService }),
     ]
 })
-@Inject("profileService", "$stateParams", "$state", NotificationService, DesignModeService, ThemeService)
+@Inject("profileService", "$stateParams", "$state", NotificationService, "designModeService", ThemeService)
 export class ProfileComponent {
 
     boxes: noosfero.Box[];

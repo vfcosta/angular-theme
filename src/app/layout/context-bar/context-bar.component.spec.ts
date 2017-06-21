@@ -1,3 +1,4 @@
+import { DesignModeService } from './../../shared/services/design-mode.service';
 import { BlockService } from './../../../lib/ng-noosfero-api/http/block.service';
 import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
@@ -30,7 +31,7 @@ describe("Context Bar Component", () => {
                 { provide: "eventsHubService", useValue: mocks.eventsHubService },
                 { provide: BlockService, useValue: mocks.blockService },
                 { provide: "notificationService", useValue: mocks.notificationService },
-                { provide: "designModeService", useValue: mocks.designModeService },
+                { provide: DesignModeService, useValue: mocks.designModeService },
                 { provide: ProfileService, useValue: mocks.profileService },
                 { provide: EnvironmentService, useValue: mocks.environmentService },
                 { provide: 'translatorService', useValue: mocks.translatorService }
@@ -126,9 +127,9 @@ describe("Context Bar Component", () => {
     it("disable edit mode when changes were applied successfully", fakeAsync(() => {
         component.blocksChanged = <any>[{ id: 5, _destroy: true, box: { id: 6 } }];
         component.apply();
-        TestBed.get('designModeService').setInDesignMode(true);
+        TestBed.get(DesignModeService).setInDesignMode(true);
         tick();
-        expect(TestBed.get('designModeService').isInDesignMode()).toBeFalsy();
+        expect(TestBed.get(DesignModeService).isInDesignMode()).toBeFalsy();
     }));
 
     it("render template context-bar if block is marked for removal", () => {

@@ -1,3 +1,4 @@
+import { DesignModeService } from './../../shared/services/design-mode.service';
 import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
 import { SessionService } from './../../login/session.service';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
@@ -37,7 +38,7 @@ describe("Components", () => {
                     { provide: SessionService, useValue: sessionService },
                     { provide: PersonService, useValue: personService },
                     { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "designModeService", useValue: mocks.designModeService },
+                    { provide: DesignModeService, useValue: mocks.designModeService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "$transitions", useValue: $transitions },
                     { provide: "translatorService", useValue: mocks.translatorService }

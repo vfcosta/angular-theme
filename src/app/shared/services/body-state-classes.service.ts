@@ -24,7 +24,7 @@ export interface StartParams {
  *         - full-content
  */
 @Injectable()
-@Inject("$document", "$state", "authService", DesignModeService, "localStorageService", "$transitions")
+@Inject("$document", "$state", "authService", "designModeService", "localStorageService", "$transitions")
 export class BodyStateClassesService {
 
     private started: boolean = false;

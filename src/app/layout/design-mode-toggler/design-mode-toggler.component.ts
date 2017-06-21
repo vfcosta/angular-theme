@@ -12,7 +12,7 @@ export class DesignModeTogglerComponent {
     private _inDesignMode: boolean = false;
 
     constructor(
-        @Inject('designModeService') private designModeService: DesignModeService,
+        private designModeService: DesignModeService,
         private authService: AuthService) {
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.designModeService.destroy();

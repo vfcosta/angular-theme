@@ -37,7 +37,7 @@ describe("Boxes Component", () => {
             properties: properties,
             providers: [
                 helpers.createProviderToValue("$scope", scope),
-                helpers.createProviderToValue("DesignModeService", mocks.designModeService),
+                helpers.createProviderToValue("designModeService", mocks.designModeService),
                 helpers.createProviderToValue("EventsHubService", mocks.eventsHubService)
             ]
         });

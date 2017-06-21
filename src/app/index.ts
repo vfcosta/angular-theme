@@ -1,3 +1,4 @@
+import { DesignModeService } from './shared/services/design-mode.service';
 import { AuthService } from './login/auth.service';
 import { SessionService } from './login/session.service';
 import { PersonService } from './../lib/ng-noosfero-api/http/person.service';
@@ -401,6 +402,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     .factory('blockService', downgradeInjectable(BlockService))
     .factory('personService', downgradeInjectable(PersonService))
     .factory('sessionService', downgradeInjectable(SessionService))
-    .factory('authService', downgradeInjectable(AuthService));
+    .factory('authService', downgradeInjectable(AuthService))
+    .factory('designModeService', downgradeInjectable(DesignModeService));
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

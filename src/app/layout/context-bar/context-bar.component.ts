@@ -30,7 +30,7 @@ export class ContextBarComponent {
         @Inject('eventsHubService') private eventsHubService: EventsHubService,
         private blockService: BlockService,
         @Inject('notificationService') private notificationService: NotificationService,
-        @Inject('designModeService') private designModeService: DesignModeService,
+        private designModeService: DesignModeService,
         private profileService: ProfileService,
         private environmentService: EnvironmentService) {
     }

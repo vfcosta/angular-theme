@@ -1,3 +1,4 @@
+import { DesignModeService } from './shared/services/design-mode.service';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { AuthService } from './login/auth.service';
 import { DomainService } from './../lib/ng-noosfero-api/http/domain.service';
@@ -310,6 +311,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         PersonService,
         DomainService,
         AuthService,
+        DesignModeService,
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
         'TranslatorService',
@@ -323,7 +325,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$transitions',
         '$stateParams',
         'amParseFilter',
-        'DesignModeService',
         '$sce',
         'ThemeService',
         'CommentParagraphEventService',
