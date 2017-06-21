@@ -109,7 +109,7 @@ import { SharedModule } from './shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
 import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
 import { RestangularModule, Restangular } from 'ngx-restangular';
-
+import { LocalStorageModule } from 'angular-2-local-storage';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, TranslatorService, NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -150,6 +150,10 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         RestangularModule.forRoot([SessionService, "translatorService", "notificationService"], RestangularConfigFactory),
         HttpModule,
         JsonpModule,
+        LocalStorageModule.withConfig({
+            prefix: 'noosfero',
+            storageType: 'localStorage'
+        }),
     ],
     declarations: [
         FooterComponent,
@@ -334,7 +338,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$location',
         '$anchorScroll',
         '$window',
-        'localStorageService'
     ]))
 })
 

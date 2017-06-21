@@ -1,17 +1,17 @@
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Injectable, Output, EventEmitter, Inject } from '@angular/core';
-import { INoosferoLocalStorage } from "../models/interfaces";
 
 @Injectable()
 export class DesignModeService {
 
-    constructor(@Inject("localStorageService") private localStorageService: any) {
+    constructor(private localStorageService: LocalStorageService) {
         this.onToggle.next(this.isInDesignMode());
     }
 
     @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     isInDesignMode(): boolean {
-        return this.localStorageService.get('designModeOn');
+        return this.localStorageService.get<boolean>('designModeOn');
     }
 
     destroy() {

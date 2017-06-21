@@ -3,14 +3,12 @@ import { AuthService } from './../../login/auth.service';
 import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 import * as helpers from '../../../spec/helpers';
 import { DesignModeTogglerComponent } from './design-mode-toggler.component';
-import { INoosferoLocalStorage } from "./../../shared/models/interfaces";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 describe('DesignModeToggler Component', () => {
 
-    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
     let mocks = helpers.getMocks();
     let fixture: ComponentFixture<DesignModeTogglerComponent>;
     let component: DesignModeTogglerComponent;

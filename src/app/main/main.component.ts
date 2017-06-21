@@ -78,7 +78,7 @@ export class EnvironmentContent {
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [NotificationService, CommentParagraphEventService,
-        "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
+        "ngAnimate", "ngCookies", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",

@@ -7,11 +7,8 @@ export function noosferoModuleConfig($logProvider: ng.ILogProvider,
     $translateProvider: angular.translate.ITranslateProvider,
     tmhDynamicLocaleProvider: any,
     $urlMatcherFactoryProvider: angular.ui.IUrlMatcherFactory,
-    $urlRouterProvider: angular.ui.IUrlRouterProvider,
-    localStorageServiceProvider: any) {
+    $urlRouterProvider: angular.ui.IUrlRouterProvider) {
 
-    localStorageServiceProvider.setStorageType('localStorage');
-    localStorageServiceProvider.setPrefix('noosfero');
     $logProvider.debugEnabled(true);
     $locationProvider.html5Mode({ enabled: true });
 

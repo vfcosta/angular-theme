@@ -1,11 +1,10 @@
+import { LocalStorageService } from 'angular-2-local-storage';
 import { Directive, Inject, Injectable } from "@angular/core";
 import { DOCUMENT } from '@angular/platform-browser';
 import { AuthEvents } from "../../login/auth-events";
 import { AuthService } from "./../../login/auth.service";
 import { HtmlUtils } from "../html-utils";
-import { INgForwardJQuery } from 'ng-forward/cjs/util/jqlite-extensions';
 import { DesignModeService } from './design-mode.service';
-import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 export interface StartParams {
     skin?: string;
@@ -42,7 +41,7 @@ export class BodyStateClassesService {
         @Inject("$state") private $state: ng.ui.IStateService,
         private authService: AuthService,
         private designModeService: DesignModeService,
-        @Inject("localStorageService") private localStorageService: any,
+        private localStorageService: LocalStorageService,
         @Inject("$transitions") private $transitions: any
     ) {
     }
@@ -53,7 +52,7 @@ export class BodyStateClassesService {
             this.setupStateClassToggle();
             this.setupDesignModeClassToggle();
             if (config) {
-                this.setThemeSkin(this.localStorageService.get('skin') || config.skin);
+                this.setThemeSkin(this.localStorageService.get<string>('skin') || config.skin);
             }
             this.started = true;
         }
@@ -66,7 +65,7 @@ export class BodyStateClassesService {
     }
 
     getThemeSkin() {
-        return this.localStorageService.get('skin');
+        return this.localStorageService.get<string>('skin');
     }
 
     addBodyClass(className: string) {
@@ -157,8 +156,8 @@ export class BodyStateClassesService {
         return this.bodyElement;
     }
 
-    private getContentWrapper(selector?: string): INgForwardJQuery {
-        let doc = <INgForwardJQuery>angular.element(this.document);
+    private getContentWrapper(selector?: string) {
+        let doc = angular.element(this.document);
         return doc.query(selector || '.content-wrapper');
     }
 }

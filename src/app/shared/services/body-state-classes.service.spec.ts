@@ -4,7 +4,6 @@ import { AuthService } from "./../../login/auth.service";
 import { AuthEvents } from "./../../login/auth-events";
 import { EventEmitter } from '@angular/core';
 import { DesignModeService } from './design-mode.service';
-import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 describe("BodyStateClasses Service", () => {
 
@@ -20,7 +19,7 @@ describe("BodyStateClasses Service", () => {
         authService: any = helpers.mocks.authService,
         bodyEl: { className: string },
         bodyElJq: any,
-        designModeService = new DesignModeService(mocks.localStorageService);
+        designModeService = new DesignModeService(<any>mocks.localStorageService);
 
     let transitionFunction: Function;
     let $transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
@@ -29,7 +28,7 @@ describe("BodyStateClasses Service", () => {
     };
 
     let getService = (): BodyStateClassesService => {
-        return new BodyStateClassesService($document, $state, authService, designModeService, mocks.localStorageService, $transitions);
+        return new BodyStateClassesService($document, $state, authService, designModeService, <any>mocks.localStorageService, $transitions);
     };
 
     beforeEach(() => {

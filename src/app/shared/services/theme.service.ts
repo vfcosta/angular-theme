@@ -1,5 +1,4 @@
 import { Injectable, Output, EventEmitter, Inject } from 'ng-forward';
-import { INoosferoLocalStorage } from "..//models/interfaces";
 
 @Injectable()
 @Inject("$window")
