@@ -1,3 +1,4 @@
+import { CommentParagraphEventService } from './../events/comment-paragraph-event.service';
 import { PermissionService } from './../../../app/shared/services/permission.service';
 import { CommentParagraphService } from './../http/comment-paragraph.service';
 import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
@@ -43,7 +44,7 @@ describe("Components", () => {
                     { provide: CommentService, useValue: mocks.commentService },
                     { provide: PermissionService, useValue: mocks.permissionService },
                     { provide: CommentParagraphService, useValue: serviceMock },
-                    { provide: "commentParagraphEventService", useValue: eventServiceMock },
+                    { provide: CommentParagraphEventService, useValue: eventServiceMock },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [PopoverModule.forRoot()]

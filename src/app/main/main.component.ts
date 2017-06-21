@@ -1,4 +1,3 @@
-import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import * as plugins from '../../plugins';
 import { RegisterComponent } from '../account/register.component';
 import { DomainComponent } from '../domain/domain.component';
@@ -77,7 +76,7 @@ export class EnvironmentContent {
         BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [NotificationService, CommentParagraphEventService,
+    providers: [NotificationService,
         "ngAnimate", "ngCookies", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
