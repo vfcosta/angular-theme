@@ -1,8 +1,10 @@
 <div *ngIf="isEditable()">
-    <div class="profile-image-wrap" title="{{profile.name}}" ng-mouseenter="showChange(true)" ng-mouseleave="showChange(false)">
+    <div class="profile-image-wrap" title="{{profile.name}}" ng-mouseenter="showChange(true)" 
+        ng-mouseleave="showChange(false)">
         <div class="hovereffect">
-            <i *ngIf="!profile.image" class="fa {{defaultIcon}} {{iconSize}} profile-image"></i>
-            <img *ngIf="profile.image" [alt]='"profile.image.description" | translate' [src]="profile.image.url" class="img-responsive profile-image img-circle">
+            <i *ngIf="showAlternativePofileIcon()" class="fa {{defaultIcon}} {{iconSize}} profile-image"></i>
+            <img *ngIf="!showAlternativePofileIcon()" [alt]='"profile.image.description" | translate' [src]="profile.image.url" 
+                class="img-responsive profile-image img-circle" (error)="nullImageFromApi=true;">
             <div class='container-camera'>
                 <image-upload #imageUpload (finished)="upload($event)"></image-upload>
             </div>
@@ -11,6 +13,8 @@
     </div>
 </div>
 <div *ngIf="!isEditable() && profile" class="profile-image-wrap" title="{{profile.name}}">
-    <img *ngIf="profile.image" [alt]='"profile.image.description" | translate' [src]="profile.image.url" class="item-avatar-img img-responsive  img-circle img-profile-nav-popup">
-    <i *ngIf="!profile.image" class="item-avatar-img fa {{defaultIcon}} fa-5x"></i>
+    <img *ngIf="!showAlternativePofileIcon()" [alt]='"profile.image.description" | translate' 
+        [src]="profile.image.url" class="item-avatar-img img-responsive  img-circle img-profile-nav-popup"
+        (error)="nullImageFromApi=true;">
+    <i *ngIf="showAlternativePofileIcon()" class="item-avatar-img fa {{defaultIcon}} fa-5x"></i>
 </div>

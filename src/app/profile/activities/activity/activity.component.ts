@@ -1,4 +1,4 @@
-import {Component, Input, Inject} from "@angular/core";
+import { Component, Input, Inject } from "@angular/core";
 import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
 
 @Component({
@@ -29,7 +29,7 @@ export class ActivityComponent {
 
     environment: noosfero.Environment;
 
-    constructor(@Inject("environmentService") private environmentService: EnvironmentService) {
+    constructor( @Inject("environmentService") private environmentService: EnvironmentService) {
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
         });
@@ -54,7 +54,7 @@ export class ActivityComponent {
             let profile = {
                 name: this.name(i),
                 identifier: this.url(i),
-                image: { url: this.icon(i) }
+                image: { url: '/api/v1/profiles/' + this.url(i) + '/icon?key=identifier' }
             };
             this.profiles.push(profile);
         }

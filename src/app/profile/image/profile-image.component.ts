@@ -38,6 +38,8 @@ export class ProfileImageComponent {
     @Input() iconSize: string;
     @Input() editable: boolean;
 
+    nullImageFromApi = false;
+
     constructor( @Inject("profileService") private profileService: ProfileService,
         @Inject("permissionService") private permissionService: PermissionService,
         @Inject("eventsHubService") private eventsHubService: EventsHubService,
@@ -77,4 +79,9 @@ export class ProfileImageComponent {
             }
         });
     }
+
+    showAlternativePofileIcon() {
+        return this.nullImageFromApi || !this.profile.image;
+    }
+
 }
