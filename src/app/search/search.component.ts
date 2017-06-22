@@ -14,7 +14,7 @@ export class SearchComponent {
     currentPage: number = 0;
 
     constructor(
-        @Inject("articleService") protected articleService: ArticleService,
+        protected articleService: ArticleService,
         @Inject("$stateParams") private $stateParams: ng.ui.IStateParamsService,
         @Inject("$state") private $state: ng.ui.IStateService) {
         this.query = this.$stateParams['query'];
@@ -33,7 +33,7 @@ export class SearchComponent {
             page: this.currentPage
         };
         this.articleService.search(filters).then((result: noosfero.RestResult<noosfero.Article[]>) => {
-            this.totalResults = <number>result.headers("total");
+            this.totalResults = <number>(<any>result.headers).get("total");
             this.articles = result.data;
         });
     }

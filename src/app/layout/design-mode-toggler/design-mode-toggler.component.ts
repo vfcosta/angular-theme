@@ -1,7 +1,6 @@
 import {Component, Inject, Input} from '@angular/core';
 import {DesignModeService} from '../../shared/services/design-mode.service';
 import {AuthService, AuthEvents} from '../../login';
-import { TranslatorService } from "../../shared/services/translator.service";
 
 @Component({
     selector: 'design-toggler',
@@ -12,8 +11,8 @@ export class DesignModeTogglerComponent {
     private _inDesignMode: boolean = false;
 
     constructor(
-        @Inject('designModeService') private designModeService: DesignModeService,
-        @Inject('authService') private authService: AuthService) {
+        private designModeService: DesignModeService,
+        private authService: AuthService) {
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.designModeService.destroy();
         });

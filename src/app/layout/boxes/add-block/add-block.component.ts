@@ -23,9 +23,9 @@ export class AddBlockComponent {
                  'RecentActivitiesPlugin::ActivitiesBlock', 'SectionBlockPlugin::SectionBlock', 'VideoPlugin::VideoBlock'];
     blocks: noosfero.BlockDefinition[];
 
-    constructor(@Inject("settingsService") private settingsService: SettingsService,
-                @Inject("profileService") private profileService: ProfileService,
-                @Inject("environmentService") private environmentService: EnvironmentService) { }
+    constructor(private settingsService: SettingsService,
+                private profileService: ProfileService,
+                private environmentService: EnvironmentService) { }
 
     loadAvailableBlocks() {
         this.settingsService.getAvailableBlocks(this.owner).then((result: noosfero.RestResult<noosfero.BlockDefinition[]>) => {

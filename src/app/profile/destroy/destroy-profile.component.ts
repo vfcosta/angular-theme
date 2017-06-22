@@ -11,9 +11,9 @@ export class DestroyProfileComponent {
 
     constructor(
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject('notificationService') private notificationService: NotificationService,
-        @Inject('profileService') private profileService: ProfileService,
-        @Inject('authService') private AuthService: AuthService) {
+        private notificationService: NotificationService,
+        private profileService: ProfileService,
+        private authService: AuthService) {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             if (!profile) return;
             notificationService.confirmation({ title: "profile.remove.confirmation.title", message: "profile.remove.confirmation.message" }, () => {
@@ -32,7 +32,7 @@ export class DestroyProfileComponent {
 
     handleSuccess(profile: noosfero.Profile) {
         this.$state.go("main.domain");
-        this.AuthService.logout();
+        this.authService.logout();
         this.notificationService.success({ title: "profile.remove.success.title", message: "profile.remove.success.message" });
     }
 

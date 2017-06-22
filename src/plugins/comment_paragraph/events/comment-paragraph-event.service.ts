@@ -1,4 +1,4 @@
-import {Injectable, EventEmitter} from "ng-forward";
+import {Injectable, EventEmitter} from "@angular/core";
 
 @Injectable()
 export class CommentParagraphEventService {

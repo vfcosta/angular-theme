@@ -1,4 +1,4 @@
-import {Injectable, Inject} from "ng-forward";
+import {Injectable} from "@angular/core";
 
 @Injectable()
 export class PermissionService {

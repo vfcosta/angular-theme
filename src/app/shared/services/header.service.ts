@@ -9,7 +9,7 @@ export class HeaderService {
     environment: noosfero.Environment;
 
     constructor(@Inject(DOCUMENT) private document: any,
-        @Inject("environmentService") private environmentService: EnvironmentService) {
+        private environmentService: EnvironmentService) {
 
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;

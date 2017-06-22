@@ -1,3 +1,6 @@
+import { NotificationService } from './../../shared/services/notification.service';
+import { EventsHubService } from './../../shared/services/events-hub.service';
+import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
 import { TaskComponent } from './../task.component';
 import { MomentModule } from 'angular2-moment';
 import { Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -29,15 +32,14 @@ describe("Components", () => {
             spyOn(mocks.$modal, 'open');
             let scope = helpers.mocks.scopeWithEvents;
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
-            let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
 
             TestBed.configureTestingModule({
                 imports: [MomentModule],
                 declarations: [TaskListComponent, TranslatePipe, ProfileImageComponent, DynamicComponentMock],
                 providers: [
-                    { provide: "taskService", useValue: taskService },
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
+                    { provide: TaskService, useValue: taskService },
+                    { provide: EventsHubService, useValue: mocks.eventsHubService },
+                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
                     { provide: "$uibModal", useValue: mocks.$modal },
                     { provide: "$scope", useValue: helpers.mocks.scopeWithEvents }
                 ],

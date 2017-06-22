@@ -1,18 +1,21 @@
-import { EventEmitter } from "ng-forward";
+import { EventEmitter, Inject } from "@angular/core";
+import { Restangular } from 'ngx-restangular';
+
 /**
- * @name RestangularService
+ * @name Restangular
  * Base class to be extended by classes which will provide access
  * to te Noosfero REST API
  *
- * @export RestangularService
+ * @export Restangular
  * @abstract
- * @class RestangularService
+ * @class Restangular
  * @template T
  */
 export abstract class RestangularService<T extends noosfero.RestModel> {
 
-    private baseResource: restangular.IElement;
-    private currentPromise: ng.IDeferred<T>;
+    private baseResource: any;
+    private currentPromise: Promise<T>;
+    private resolveCurrentPromise;
 
     protected modelFoundEventEmitter: EventEmitter<T> = new EventEmitter<any>();
     protected modelAddedEventEmitter: EventEmitter<T> = new EventEmitter<any>();
@@ -20,25 +23,13 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     protected modelUpdatedEventEmitter: EventEmitter<T> = new EventEmitter<any>();
 
     /**
-     * Creates an instance of RestangularService.
+     * Creates an instance of Restangular.
      *
-     * @param {restangular.IService} Restangular (description)
-     * @param {ng.IQService} $q (description)
-     * @param {ng.ILogService} $log (description)
+     * @param {Restangular} Restangular (description)
      */
-    constructor(protected restangularService: restangular.IService, protected $q: ng.IQService, protected $log: ng.ILogService) {
-        this.baseResource = restangularService.all(this.getResourcePath());
+    constructor(protected restangular: Restangular) {
+        this.baseResource = restangular.all(this.getResourcePath());
         this.resetCurrent();
-        // TODO
-        // this.restangularService.setResponseInterceptor((data, operation, what, url, response, deferred) => {
-        //     let transformedData: any = data;
-        //     if (operation === "getList" && url.endsWith("/" + this.getDataKeys().plural)) {
-        //         transformedData = data[this.getDataKeys()["plural"]];
-        //         return transformedData;
-        //     } else {
-        //         return data;
-        //     }
-        // });
     }
 
     subscribeToModelRemoved(fn: ((model: T) => void)) {
@@ -58,18 +49,20 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     }
 
     public resetCurrent() {
-        this.currentPromise = this.$q.defer();
+        this.currentPromise = new Promise((resolve, reject) => {
+            this.resolveCurrentPromise = resolve;
+        });
     }
 
-    public getCurrent(): ng.IPromise<T> {
-        return this.currentPromise.promise;
+    public getCurrent(): Promise<T> {
+        return this.currentPromise;
     }
 
     public setCurrent(object: T) {
-        this.currentPromise.resolve(object);
+        this.resolveCurrentPromise(object);
     }
 
-    protected extractData(response: restangular.IResponse): noosfero.RestResult<T> {
+    protected extractData(response: restangular.IResponse): noosfero.RestResult<any> {
         let dataKey: string;
         if (response.data && this.getDataKeys()) {
             if ((<Object>response.data).hasOwnProperty(this.getDataKeys().singular)) {
@@ -121,21 +114,13 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
      */
     public get(id: number | string, rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
-        let deferred = this.$q.defer<noosfero.RestResult<T>>();
-
-        let restRequest: ng.IPromise<noosfero.RestResult<T>>;
-
+        let restRequest: any;
         if (rootElement) {
             restRequest = rootElement.one(this.getResourcePath(), <any>id).get(queryParams, headers);
         } else {
-            restRequest = this.restangularService.one(this.getResourcePath(), <any>id).get(queryParams, headers);
+            restRequest = this.restangular.one(this.getResourcePath(), <any>id).get(queryParams, headers);
         }
-
-        restRequest.then(this.getHandleSuccessFunction(deferred, this.modelFoundEventEmitter))
-            .catch(this.getHandleErrorFunction(deferred));
-
-
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction(this.modelFoundEventEmitter));
     }
 
     /**
@@ -145,24 +130,14 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * @param {number} id (description)
      * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
      */
-    public list(rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T[]>> {
-        let deferred = this.$q.defer<noosfero.RestResult<T[]>>();
-
-        let restRequest: ng.IPromise<any>;
-
+    public list(rootElement?: any, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T[]>> {
+        let restRequest: any;
         if (rootElement) {
             restRequest = rootElement.customGET(this.getResourcePath(), queryParams, headers);
         } else {
             restRequest = this.baseResource.customGET("", queryParams, headers);
         }
-
-
-        restRequest
-            .then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-
-
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     /**
@@ -173,34 +148,21 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
      */
     public getSub(rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
-        let deferred = this.$q.defer<noosfero.RestResult<T>>();
-
-        let restRequest: ng.IPromise<any>;
-
+        let restRequest: any;
         if (rootElement) {
             restRequest = rootElement.customGET(this.getResourcePath(), queryParams, headers);
         } else {
             restRequest = this.baseResource.customGET("", queryParams, headers);
         }
-
-
-        restRequest
-            .then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-
-
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     public listSubElements<C>(obj: T, subElement: string, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<C>> {
-        let deferred = this.$q.defer<noosfero.RestResult<C>>();
-        let restRequest: ng.IPromise<noosfero.RestResult<T>>;
+        let restRequest: any;
         let objElement = this.getElement(obj.id);
         objElement.id = obj.id;
         restRequest = objElement.customGET(subElement, queryParams, headers);
-        restRequest.then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     /**
@@ -209,26 +171,14 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      */
     public remove(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
         let restangularObj: restangular.IElement;
-
-
-
         if (rootElement) {
             restangularObj = rootElement.one(this.getResourcePath(), obj.id);
         } else {
-            restangularObj = this.restangularService.one(this.getResourcePath(), obj.id);
+            restangularObj = this.restangular.one(this.getResourcePath(), obj.id);
         }
-
-        let deferred = this.$q.defer<noosfero.RestResult<T>>();
-
-        let restRequest: ng.IPromise<noosfero.RestResult<T>>;
-
+        let restRequest: any;
         restRequest = restangularObj.remove(queryParams, headers);
-
-        restRequest
-            .then(this.getHandleSuccessFunction(deferred, this.modelRemovedEventEmitter, obj))
-            .catch(this.getHandleErrorFunction(deferred));
-
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction(this.modelRemovedEventEmitter, obj));
     }
 
     /**
@@ -236,24 +186,16 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * calls PUT /resourcePath/:resourceId   {object}
      */
     public update(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
-        let deferred = this.$q.defer<noosfero.RestResult<T>>();
-
-        let restRequest: ng.IPromise<noosfero.RestResult<T>>;
-
+        let restRequest: any;
         let restangularObj: restangular.IElement;
 
         if (rootElement) {
             restangularObj = rootElement.one(this.getResourcePath(), obj.id);
         } else {
-            restangularObj = this.restangularService.one(this.getResourcePath(), obj.id);
+            restangularObj = this.restangular.one(this.getResourcePath(), obj.id);
         }
-
         restRequest = restangularObj.put(queryParams, headers);
-
-        restRequest.then(this.getHandleSuccessFunction(deferred, this.modelUpdatedEventEmitter))
-            .catch(this.getHandleErrorFunction(deferred));
-
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction(this.modelUpdatedEventEmitter));
     }
 
     /**
@@ -261,9 +203,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * calls POST /resourcePath
      */
     public create(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any, isSub: boolean = true, path?: string): ng.IPromise<noosfero.RestResult<T>> {
-        let deferred = this.$q.defer<noosfero.RestResult<T>>();
-
-        let restRequest: ng.IPromise<noosfero.RestResult<T>>;
+        let restRequest: any;
 
         let data = <any>{};
         if (isSub) {
@@ -278,65 +218,44 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         } else {
             restRequest = this.baseResource.post(data, queryParams, headers);
         }
-
-        restRequest.then(this.getHandleSuccessFunction(deferred, this.modelAddedEventEmitter))
-            .catch(this.getHandleErrorFunction(deferred));
-
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction(this.modelAddedEventEmitter));
     }
 
     public patch(data?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
-        let deferred = this.$q.defer<noosfero.RestResult<T>>();
         let restRequest = this.baseResource.patch(data, headers);
-        restRequest
-            .then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     public post(path: string, rootElement?: restangular.IElement, data?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
-        let deferred = this.$q.defer<noosfero.RestResult<T>>();
-        let restRequest: ng.IPromise<any>;
-
+        let restRequest: any;
         if (rootElement) {
             restRequest = rootElement.customPOST(data, path, null, headers);
         } else {
             restRequest = this.baseResource.customPOST(data, path, headers);
         }
-        restRequest
-            .then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-        return deferred.promise;
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     /**
      * Returns a Restangular IElement representing the
      */
-    public getElement(id: number, rootElement?: noosfero.RestModel): noosfero.RestModel {
+    public getElement(id: number, rootElement?: noosfero.RestModel) {
         if (rootElement) {
-            return <noosfero.RestModel>rootElement.one(this.getResourcePath(), id);
+            return rootElement.one(this.getResourcePath(), id);
         } else {
-            return <noosfero.RestModel>this.restangularService.one(this.getResourcePath(), id);
+            return this.restangular.one(this.getResourcePath(), id);
         }
     }
 
     /** HANDLERS */
-    protected getHandleSuccessFunction<C>(deferred: ng.IDeferred<noosfero.RestResult<C | T | any>>, successEmitter: EventEmitter<T> = null, currentModel: T = null): (response: restangular.IResponse) => void {
-        let self = this;
-
+    protected getHandleSuccessFunction<C>(successEmitter: EventEmitter<T> = null, currentModel: T = null): (response: restangular.IResponse) => noosfero.RestResult<any> {
         /**
          * (description)
          *
          * @param {restangular.IResponse} response (description)
          */
-        let successFunction = (response: restangular.IResponse): void => {
-            if (self.$log) {
-                // FIXME set only in debug mode
-                // self.$log.debug("Request successfull executed", response.data, self, response);
-            }
+        let successFunction = (response: restangular.IResponse) => {
             let resultModel: noosfero.RestResult<T> = <any>this.extractData(response);
-            // resolve the promise with the model returned from the Noosfero API
-            deferred.resolve(resultModel);
             // emits the event if a successEmiter was provided in the successEmitter parameter
             if (successEmitter !== null) {
                 if (successEmitter !== this.modelRemovedEventEmitter) {
@@ -345,32 +264,9 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
                     successEmitter.next(currentModel !== null ? currentModel : resultModel.data);
                 }
             }
+            // resolve the promise with the model returned from the Noosfero API
+            return resultModel;
         };
         return successFunction;
     }
-
-    /**
-     * (description)
-     *
-     * @template T
-     * @param {ng.IDeferred<T>} deferred (description)
-     * @returns {(response: restangular.IResponse) => void} (description)
-     */
-    getHandleErrorFunction<T>(deferred: ng.IDeferred<T>): (response: restangular.IResponse) => void {
-        let self = this;
-        /**
-         * (description)
-         *
-         * @param {restangular.IResponse} response (description)
-         */
-        let successFunction = (response: restangular.IResponse): void => {
-            if (self.$log) {
-                self.$log.error("Error executing request", self, response);
-            }
-            deferred.reject(response);
-        };
-        return successFunction;
-    }
-    /** END HANDLERS */
-
 }

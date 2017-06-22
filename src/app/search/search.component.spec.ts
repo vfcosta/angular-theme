@@ -1,7 +1,8 @@
+import { TranslatorService } from './../shared/services/translator.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { PaginationModule } from 'ngx-bootstrap/ng2-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap';
 import { MomentModule } from 'angular2-moment';
 import { NgPipesModule } from 'ngx-pipes';
 import { By } from '@angular/platform-browser';
@@ -27,7 +28,9 @@ describe("Components", () => {
                      created_at: '',
                      body: '',
                      profile: { identifier: 'profile' } }],
-            headers: (param: string) => { return 1; }
+            headers: {
+                get: (param: string) => { return 1; }
+            }
         });
 
         beforeEach(async(() => {
@@ -36,10 +39,10 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [SearchComponent, TranslatePipe, DateFormatPipe, UiSrefDirective],
                 providers: [
-                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$stateParams", useValue: stateParams },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: "$transitions", useValue: mocks.$transitions },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter }
                 ],

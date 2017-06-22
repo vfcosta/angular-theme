@@ -13,10 +13,10 @@ export class ParticipaHeaderComponent {
     defaultSkin = 'skin-yellow';
     highContrastSkin = 'skin-high-contrast';
 
-    constructor(@Inject("eventsHubService") private eventsHubService: EventsHubService,
+    constructor(private eventsHubService: EventsHubService,
         @Inject("$location") private $location: any,
         @Inject("$anchorScroll") private $anchorScroll: any,
-        @Inject("bodyStateClassesService") private bodyStateClassesService: BodyStateClassesService) {
+        private bodyStateClassesService: BodyStateClassesService) {
         this.eventsNames = new NoosferoKnownEvents();
     }
 

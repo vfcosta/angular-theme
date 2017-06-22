@@ -1,3 +1,6 @@
+import { NotificationService } from './../../../shared/services/notification.service';
+import { TranslatorService } from './../../../shared/services/translator.service';
+import { UserService } from './../../../../lib/ng-noosfero-api/http/user.service';
 import { ChangePasswordComponent } from './change-password.component';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
@@ -27,9 +30,9 @@ describe("Components", () => {
                 imports: [FormsModule],
                 declarations: [ChangePasswordComponent, TranslatePipe],
                 providers: [
-                    { provide: "userService", useValue: userService },
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: UserService, useValue: userService },
+                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
                     { provide: "$state", useValue: $state },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]

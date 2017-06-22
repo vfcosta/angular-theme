@@ -1,5 +1,6 @@
 import {Inject, Component} from "@angular/core";
-import {SessionService, AuthService, AuthEvents} from "./../../../login";
+import { AuthService, AuthEvents} from "../../../login";
+import { SessionService } from '../../../login/session.service';
 
 /**
  * @ngdoc controller
@@ -31,9 +32,9 @@ export class LoginBlockComponent {
      */
     credentials = <noosfero.Credentials>{};
 
-    constructor(@Inject("sessionService") private session: SessionService,
+    constructor(private session: SessionService,
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject("authService") public authService: AuthService) {
+        public authService: AuthService) {
 
         this.currentUser = this.session.currentUser();
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {

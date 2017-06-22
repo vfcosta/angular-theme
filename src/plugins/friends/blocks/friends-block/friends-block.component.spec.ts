@@ -1,3 +1,4 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { UiSrefDirective } from './../../../../app/shared/directives/ui-sref-directive';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { ProfileImageComponent } from './../../../../app/profile/image/profile-image.component';
@@ -20,7 +21,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [FriendsBlockComponent, TranslatePipe, UiSrefDirective],
                 providers: [
-                    { provide: "blockService", useValue: blockService },
+                    { provide: BlockService, useValue: blockService },
                     { provide: "$state", useValue: state }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]

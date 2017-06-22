@@ -1,7 +1,7 @@
 import { Inject, Input, Output, EventEmitter, Component } from '@angular/core';
 import { CommentService } from "../../../../lib/ng-noosfero-api/http/comment.service";
 import { NotificationService } from "../../../shared/services/notification.service";
-import { SessionService } from "../../../login";
+import { SessionService } from './../../../login/session.service';
 
 @Component({
     selector: 'noosfero-post-comment',
@@ -18,9 +18,8 @@ export class PostCommentComponent {
     @Input() comment = <noosfero.Comment>{};
     private currentUser: noosfero.User;
 
-    constructor(@Inject("commentService") private commentService: CommentService,
-        @Inject("notificationService") private notificationService: NotificationService,
-        @Inject("sessionService") private session: SessionService) {
+    constructor(private commentService: CommentService, private notificationService: NotificationService,
+        private session: SessionService) {
         this.currentUser = this.session.currentUser();
     }
 

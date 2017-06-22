@@ -11,7 +11,7 @@ export class ProfileActionsComponent {
     article: noosfero.Article;
     parentId: number;
 
-    constructor(@Inject('articleService') articleService: ArticleService) {
+    constructor(articleService: ArticleService) {
         articleService.getCurrent().then((article: noosfero.Article) => {
             this.article = article;
             this.parentId = this.getArticleContainer(article);

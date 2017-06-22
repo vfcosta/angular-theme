@@ -1,3 +1,8 @@
+import { NotificationService } from './../../shared/services/notification.service';
+import { TranslatorService } from './../../shared/services/translator.service';
+import { DesignModeService } from './../../shared/services/design-mode.service';
+import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
+import { SessionService } from './../../login/session.service';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import { UiSrefDirective } from '../../shared/directives/ui-sref-directive';
 import { PopoverModule } from 'ngx-bootstrap';
@@ -31,17 +36,17 @@ describe("Components", () => {
                 imports: [FormsModule, PopoverModule.forRoot()],
                 declarations: [ProfileSummaryComponent, TranslatePipe, UiSrefDirective, PermissionNg2Directive],
                 providers: [
-                    { provide: "environmentService", useValue: environmentService},
-                    { provide: "sessionService", useValue: sessionService },
-                    { provide: "personService", useValue: personService },
-                    { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "designModeService", useValue: mocks.designModeService },
+                    { provide: EnvironmentService, useValue: environmentService},
+                    { provide: SessionService, useValue: sessionService },
+                    { provide: PersonService, useValue: personService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
+                    { provide: DesignModeService, useValue: mocks.designModeService },
                     { provide: "$state", useValue: mocks.$state },
                     { provide: "$transitions", useValue: $transitions },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
-            })
+            });
             fixture = TestBed.createComponent(ProfileSummaryComponent);
             component = fixture.componentInstance;
             component.profile = <noosfero.Profile>{ id: 1, identifier: 'adminuser', type: "Person", permissions: ['allow_edit'] };
