@@ -17,9 +17,7 @@ export class SectionBlockComponent implements OnChanges {
     fontColor: string;
     backgroundColor: string;
 
-    constructor(
-        @Inject('blockService') private blockService: BlockService
-    ) { }
+    constructor(private blockService: BlockService) { }
 
     ngOnInit() {
         if (this.block && this.block.settings) {
@@ -45,14 +43,14 @@ export class SectionBlockComponent implements OnChanges {
     }
 
     setStyles() {
-        let backgroundColor = (this.backgroundColor ? '#' + this.backgroundColor : 'inherit');
-        let fontColor = (this.fontColor ? '#' + this.fontColor : 'inherit');
+        let backgroundColor = (this.backgroundColor ? '#' + this.backgroundColor : 'inherit' );
+        let fontColor = (this.fontColor ? '#' + this.fontColor : 'inherit' );
 
         let styles = {
-            'background-color': backgroundColor,
-            'color': fontColor
+          'background-color': backgroundColor,
+          'color': fontColor
         };
-
+        
         return styles;
     }
 

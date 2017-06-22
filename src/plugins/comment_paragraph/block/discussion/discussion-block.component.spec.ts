@@ -1,3 +1,5 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { By } from '@angular/platform-browser';
 import {provideFilters} from '../../../../spec/helpers';
 import {DiscussionBlockComponent} from './discussion-block.component';
@@ -21,8 +23,8 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [DiscussionBlockComponent],
                 providers: [
-                    { provide: "blockService", useValue: mocks.blockService },
-                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: BlockService, useValue: mocks.blockService },
+                    { provide: ArticleService, useValue: mocks.articleService },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
             });

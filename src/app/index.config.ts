@@ -1,22 +1,15 @@
 
 /** @ngInject */
-export function noosferoModuleConfig($logProvider: ng.ILogProvider,
+export function noosferoModuleConfig(
     $locationProvider: ng.ILocationProvider,
-    RestangularProvider: restangular.IProvider,
     $httpProvider: ng.IHttpProvider,
     $provide: ng.auto.IProvideService,
     $translateProvider: angular.translate.ITranslateProvider,
     tmhDynamicLocaleProvider: any,
     $urlMatcherFactoryProvider: angular.ui.IUrlMatcherFactory,
-    $urlRouterProvider: angular.ui.IUrlRouterProvider,
-    localStorageServiceProvider: any) {
+    $urlRouterProvider: angular.ui.IUrlRouterProvider) {
 
-    localStorageServiceProvider.setStorageType('localStorage');
-    localStorageServiceProvider.setPrefix('noosfero');
-    $logProvider.debugEnabled(true);
     $locationProvider.html5Mode({ enabled: true });
-    RestangularProvider.setBaseUrl("/api/v1");
-    RestangularProvider.setFullResponse(true);
 
     (<any>$httpProvider.defaults.headers.post)["Content-Type"] = "application/x-www-form-urlencoded; charset=utf-8";
 

@@ -1,6 +1,4 @@
 import { Input, Inject, Component, Directive } from '@angular/core';
-import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
-import { NotificationService } from "./../shared/services/notification.service";
 import {PermissionDirective} from '../shared/components/permission/permission.directive';
 
 /**

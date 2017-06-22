@@ -12,8 +12,8 @@ export class TopProfileImageComponent {
     @Input() editable: boolean;
     picFile: any;
 
-    constructor( @Inject('profileService') private profileService: ProfileService,
-        @Inject('permissionService') private permissionService: PermissionService) { }
+    constructor(private profileService: ProfileService,
+        private permissionService: PermissionService) { }
 
     upload(data: any) {
         this.profileService.uploadImage(this.profile, data, 'top').then((result: noosfero.RestResult<noosfero.Profile>) => {

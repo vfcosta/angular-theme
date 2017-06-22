@@ -1,3 +1,4 @@
+import { DesignModeService } from './../../shared/services/design-mode.service';
 import * as helpers from "../../../spec/helpers";
 import { ProfileHeaderComponent } from './profile-header.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -20,7 +21,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ProfileHeaderComponent],
                 providers: [
-                    { provide: "designModeService", useValue: mocks.designModeService }
+                    { provide: DesignModeService, useValue: mocks.designModeService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule]

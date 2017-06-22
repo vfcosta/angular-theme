@@ -24,7 +24,7 @@ export class DiscussionBlockComponent {
 
     static PRESENTATION_MODES = PRESENTATION_MODES;
 
-    constructor(@Inject("blockService") private blockService: BlockService, @Inject("articleService") public articleService: ArticleService) { }
+    constructor(private blockService: BlockService, public articleService: ArticleService) { }
 
     ngOnInit() {
         this.profile = this.owner;

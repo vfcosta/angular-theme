@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../services/translator.service';
 import { TranslatePipe } from './../../pipes/translate-pipe';
 import { ValidationMessageComponent } from './validation-message.component';
 import { By } from '@angular/platform-browser';
@@ -36,7 +37,7 @@ describe("Components", () => {
                 imports: [FormsModule],
                 declarations: [ValidationMessageComponent, TranslatePipe, FormTemplateTestComponet],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(ValidationMessageComponent);

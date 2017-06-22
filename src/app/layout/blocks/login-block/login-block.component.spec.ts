@@ -1,3 +1,6 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
+import { AuthService } from './../../../login/auth.service';
+import { SessionService } from './../../../login/session.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { FormsModule } from '@angular/forms';
@@ -8,7 +11,7 @@ import {Injectable, Provider, provide} from "ng-forward";
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import {LoginBlockComponent} from './login-block.component';
 import * as helpers from "./../../../../spec/helpers";
-import {SessionService, AuthService, AuthController, AuthEvents} from "./../../../login";
+import { AuthService, AuthController, AuthEvents } from "./../../../login";
 import { UiSrefDirective } from "../../../shared/directives/ui-sref-directive";
 
 const htmlTemplate: string = '<noosfero-login-block></noosfero-login-block>';
@@ -28,10 +31,10 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [LoginBlockComponent, TranslatePipe, UiSrefDirective, DateFormatPipe],
                 providers: [
-                    { provide: "sessionService", useValue: sessionService },
+                    { provide: SessionService, useValue: sessionService },
                     { provide: "$state", useValue: mocks.stateService },
-                    { provide: "authService", useValue: mocks.authService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: AuthService, useValue: mocks.authService },
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [FormsModule, MomentModule]

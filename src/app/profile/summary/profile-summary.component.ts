@@ -24,11 +24,11 @@ export class ProfileSummaryComponent {
     @ViewChild("popover") popover;
 
     constructor(private elementRef: ElementRef,
-        @Inject('environmentService') private environmentService: EnvironmentService,
-        @Inject('sessionService') private session: SessionService,
-        @Inject('personService') private personService: PersonService,
-        @Inject('notificationService') private notificationService: NotificationService,
-        @Inject('designModeService') private designModeService: DesignModeService) {
+        private environmentService: EnvironmentService,
+        private session: SessionService,
+        private personService: PersonService,
+        private notificationService: NotificationService,
+        private designModeService: DesignModeService) {
 
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;

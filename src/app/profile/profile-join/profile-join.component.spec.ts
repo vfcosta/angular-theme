@@ -1,7 +1,13 @@
+import { NotificationService } from './../../shared/services/notification.service';
+import { TranslatorService } from './../../shared/services/translator.service';
+import { EventsHubService } from './../../shared/services/events-hub.service';
+import { CommunityService } from './../../../lib/ng-noosfero-api/http/community.service';
+import { SessionService } from './../../login/session.service';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { Pipe, Input, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { ProfileService, MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
+import { MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { ProfileJoinComponent } from './profile-join.component';
 import * as helpers from "./../../../spec/helpers";
 import { TranslatePipe } from '../../shared/pipes/translate-pipe';
@@ -31,13 +37,13 @@ describe("Components", () => {
                 declarations: [ProfileJoinComponent, TranslatePipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
-                    { provide: "profileService", useValue: profileService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
+                    { provide: ProfileService, useValue: profileService },
+                    { provide: SessionService, useValue: mocks.sessionService },
+                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
+                    { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: "$uibModal", useValue: helpers.mocks.$modal },
-                    { provide: "translatorService", useValue: translatorService },
-                    { provide: "communityService", useValue: communityService }
+                    { provide: TranslatorService, useValue: translatorService },
+                    { provide: CommunityService, useValue: communityService }
                 ]
             });
             fixture = TestBed.createComponent(ProfileJoinComponent);

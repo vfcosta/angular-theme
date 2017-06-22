@@ -20,8 +20,7 @@ export class CommentsComponent {
 
     newComment = <noosfero.Comment>{};
 
-    constructor(
-        @Inject('commentService') protected commentService: CommentService) { }
+    constructor(protected commentService: CommentService) { }
 
     ngOnInit() {
         if (this.parent) {
@@ -78,7 +77,7 @@ export class CommentsComponent {
                 this.comments = this.comments.concat(result.data);
                 this.page++;
             }
-            this.total = result.headers ? result.headers("total") : this.comments.length;
+            this.total = result.headers ? (<any>result.headers).get("total") : this.comments.length;
         });
     }
 

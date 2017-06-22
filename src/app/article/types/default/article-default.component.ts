@@ -21,8 +21,7 @@ export class ArticleDefaultViewComponent {
     @Input() profile: noosfero.Profile;
 
     constructor(@Inject("$state") private $state: ng.ui.IStateService,
-        @Inject("articleService") public articleService: ArticleService,
-        @Inject("notificationService") public notificationService: NotificationService,
+        public articleService: ArticleService, public notificationService: NotificationService,
         private sanitizer: DomSanitizer) {
         // Subscribe to the Article Removed Event
         this.articleService.subscribeToModelRemoved((article: noosfero.Article) => {

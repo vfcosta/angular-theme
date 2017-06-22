@@ -1,5 +1,4 @@
 import {DesignModeService} from './design-mode.service';
-import {INoosferoLocalStorage} from "../models/interfaces";
 import * as helpers from "../../../spec/helpers";
 
 describe('DesignMode Service', () => {
@@ -7,7 +6,7 @@ describe('DesignMode Service', () => {
     let service: DesignModeService;
 
     beforeEach(() => {
-        service = new DesignModeService(mocks.localStorageService);
+        service = new DesignModeService(<any>mocks.localStorageService);
     });
 
     it('has the designModeOn equals false as default', () => {

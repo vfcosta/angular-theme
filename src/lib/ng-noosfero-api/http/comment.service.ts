@@ -1,13 +1,13 @@
-import { Injectable, Inject } from "ng-forward";
-import {RestangularService} from "./restangular_service";
-import {ArticleService} from "./article.service";
+import { Restangular } from 'ngx-restangular';
+import { Injectable, Inject } from "@angular/core";
+import { RestangularService } from "./restangular_service";
+import { ArticleService } from "./article.service";
 
 @Injectable()
-@Inject("Restangular", "$q", "$log", ArticleService)
 export class CommentService extends RestangularService<noosfero.Comment> {
 
-    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService, protected articleService: ArticleService) {
-        super(Restangular, $q, $log);
+    constructor(protected restangular: Restangular, protected articleService: ArticleService) {
+        super(restangular);
     }
 
     getResourcePath() {
