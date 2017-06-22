@@ -13,7 +13,6 @@ Feature: manage community
       When I press ".profile-edition-link"
       And I enter text "teste cucumber" to "#name" input
       And I press ".save-fast-edtion"
-      And I pause
       Then I see "teste cucumber" as "noosfero-profile-summary profile-link .profile-name" value
 
   Scenario: invite a people to join the community
