@@ -22,6 +22,7 @@ export class PersonTagsPluginInterestsBlockComponent {
         this.tags = [];
         this.profileService.getTags(this.owner).then((result: noosfero.RestResult<any>) => {
             this.tags = result.data;
+            this.block.hide = (<any>this.tags.length === 0);
         });
     }
 }

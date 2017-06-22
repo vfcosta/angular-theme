@@ -34,5 +34,14 @@ describe("Components", () => {
             expect(component.tags).toEqual(['foo', 'bar']);
         }));
 
+        it("don't show tags block if it have no tags", fakeAsync(() => {
+            TestBed.get(ProfileService).getTags = jasmine.createSpy("getTags").and.returnValue(
+                Promise.resolve({ data: [], headers: (name: string) => { return name; } })
+            );
+            fixture.detectChanges();
+            tick();
+            expect(component.block.hide).toBeTruthy();
+        }));
+
     });
 });
