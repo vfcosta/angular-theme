@@ -78,7 +78,7 @@ export class EnvironmentContent {
     providers: [
         "ngAnimate", "ngCookies", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
         "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
-        "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
+        "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",
         "noosfero.init", "ngFileUpload", "ngImgCrop", "angular-ladda", "focus-if",
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",

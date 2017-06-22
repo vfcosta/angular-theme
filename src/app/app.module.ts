@@ -1,3 +1,4 @@
+import swal from 'sweetalert2';
 import { EventsHubService } from './shared/services/events-hub.service';
 import { CommentParagraphEventService } from './../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import { ThemeService } from './shared/services/theme.service';
@@ -113,6 +114,7 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 import { LocalStorageModule } from 'angular-2-local-storage';
+import { SweetAlert2Module } from '@toverux/ngsweetalert2';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -157,6 +159,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
             prefix: 'noosfero',
             storageType: 'localStorage'
         }),
+        SweetAlert2Module,
     ],
     declarations: [
         FooterComponent,
@@ -326,11 +329,11 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         EventsHubService,
         TranslatorService,
         NotificationService,
+        { provide: "sweetAlert", useValue: swal },
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
         '$uibModal',
         '$scope',
-        'SweetAlert',
         'toastr',
         '$transitions',
         '$stateParams',
@@ -343,7 +346,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$translate',
         'tmhDynamicLocale',
         'amMoment',
-        'SweetAlert',
     ]))
 })
 
