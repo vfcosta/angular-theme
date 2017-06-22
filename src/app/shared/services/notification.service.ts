@@ -1,6 +1,7 @@
-import { Injectable, Inject } from "@angular/core";
+import { ViewContainerRef, Injectable, Inject } from "@angular/core";
 import { TranslatorService } from "./translator.service";
 import { SweetAlertType } from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 enum NotificationType {
     Toast = 1,
@@ -14,7 +15,8 @@ export class NotificationService {
         return NotificationType;
     }
 
-    constructor(@Inject("sweetAlert") private sweetAlert: Function, private translatorService: TranslatorService, @Inject("toastr") private toastr: angular.toastr.IToastrService) { }
+    constructor(@Inject("sweetAlert") private sweetAlert: Function, private translatorService: TranslatorService,
+        private toastr: ToastrService) { }
 
     public static DEFAULT_ERROR_TITLE = "notification.error.default.title";
     public static DEFAULT_ERROR_MESSAGE = "notification.error.default.message";

@@ -115,6 +115,7 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
 import { RestangularModule, Restangular } from 'ngx-restangular';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
+import { ToastrModule } from 'ngx-toastr';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -160,6 +161,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
             storageType: 'localStorage'
         }),
         SweetAlert2Module,
+        ToastrModule.forRoot(),
     ],
     declarations: [
         FooterComponent,
@@ -334,7 +336,6 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$state',
         '$uibModal',
         '$scope',
-        'toastr',
         '$transitions',
         '$stateParams',
         'amParseFilter',

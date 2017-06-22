@@ -77,7 +77,7 @@ export class EnvironmentContent {
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [
         "ngAnimate", "ngCookies", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
-        "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
+        "ui.router", "ui.bootstrap", "angular-bind-html-compile", "angularMoment",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll",
         "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",
         "noosfero.init", "ngFileUpload", "ngImgCrop", "angular-ladda", "focus-if",
