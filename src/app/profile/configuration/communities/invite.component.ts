@@ -35,7 +35,7 @@ export class InviteComponent {
     ngOnInit() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-        })
+        });
     }
 
     sendInvitations() {
@@ -49,7 +49,6 @@ export class InviteComponent {
             }
         }, error => {
             this.notificationService.error({ title: "invite.send.error.title", message: "invite.send.error.message" });
-            console.log(error)
         });
     }
 

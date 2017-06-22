@@ -28,7 +28,7 @@
                 <profile-join *ngIf='currentUser' [profile]="profile"></profile-join>
             </div>
             <div class="profile-setup action">
-                <a href="#" class="btn btn-default btn-sm" uiSref="main.myprofile" [uiParams]="{profile: profile.identifier}" *ngIf="showConfig">
+                <a href="#" class="open-setup btn btn-default btn-sm" uiSref="main.myprofile" [uiParams]="{profile: profile.identifier}" *ngIf="showConfig">
                     <i class="fa fa-cog" aria-hidden="true"></i> {{"myprofile.configuration.title" | translate}}
                 </a>
             </div>

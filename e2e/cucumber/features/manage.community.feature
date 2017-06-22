@@ -16,6 +16,13 @@ Feature: manage community
       Then I see "teste cucumber" as "noosfero-profile-summary profile-link .profile-name" value
 
   Scenario: invite a people to join the community
+      Given I go to "save-the-environment" profile
+      And I press ".open-setup"
+      When I press "ul li .members"
+      And I enter text "paula" to "#names" input
+      And I choose one element from typeahead "typeahead-container li:nth-child(1)>a"
+      When I press "noosfero-invite-component button"
+      Then I expect to see success message "#toast-container"
 
   Scenario: configure the community to accept join request without approval
 

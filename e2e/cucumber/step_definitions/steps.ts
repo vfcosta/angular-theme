@@ -1,5 +1,6 @@
 import { defineSupportCode } from 'cucumber';
-import { browser, element, by } from "protractor";
+import { browser, by, element } from 'protractor';
+import { protractor } from 'protractor/built';
 
 let path = require('path');
 let chai = require('chai');
@@ -100,7 +101,20 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return element(by.css(field)).clear().then( () => { return element(by.css(field)).sendKeys(text); } );
     });
 
+    When('I choose one element from typeahead {stringInDoubleQuotes}', (field) => {
+        return element(by.css(field)).click();
+    });
+
+    Given('I wait', () => {
+        browser.driver.sleep(1000);
+        browser.waitForAngular();
+    });
+
     Then('I see {stringInDoubleQuotes} as {stringInDoubleQuotes} value', (text, selector) => {
         return expect(element(by.css(selector)).getText()).to.eventually.equal(text);
+    });
+
+    Then('I expect to see success message {stringInDoubleQuotes}', (selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.contain("sucesso");
     });
 });
