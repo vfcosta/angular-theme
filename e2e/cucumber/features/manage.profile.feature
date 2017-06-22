@@ -5,6 +5,9 @@ Feature: manage profile
   Background:
     Given I go to the homepage
     And I am logged out
+    And I login with "adminuser", "admin"
+    And I go to "adminuser" profile
+    And I enter in edit mode
 
   Scenario: change layout
     When I change layout to "lefttopright"
