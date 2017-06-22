@@ -105,16 +105,17 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return element(by.css(field)).click();
     });
 
-    Given('I wait', () => {
-        browser.driver.sleep(1000);
-        browser.waitForAngular();
-    });
-
     Then('I see {stringInDoubleQuotes} as {stringInDoubleQuotes} value', (text, selector) => {
         return expect(element(by.css(selector)).getText()).to.eventually.equal(text);
     });
 
-    Then('I expect to see success message {stringInDoubleQuotes}', (selector) => {
+    Then('I should see success message {stringInDoubleQuotes}', (selector) => {
         return expect(element(by.css(selector)).getText()).to.eventually.contain("sucesso");
+    });
+
+    Then('I should see the list {stringInDoubleQuotes}', (selector) => {
+        return element.all(by.css(selector)).count().then( total => {
+            return expect(element.all(by.css(selector)).count()).to.eventually.equal(total);
+        });
     });
 });
