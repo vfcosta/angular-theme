@@ -95,4 +95,12 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     Then('I see {stringInDoubleQuotes}', (selector) => {
         return expect(element.all(by.css(selector)).count()).to.eventually.equal(1);
     });
+
+    Given('I enter text {stringInDoubleQuotes} to {stringInDoubleQuotes} input', (text, field) => {
+        return element(by.css(field)).clear().then( () => { return element(by.css(field)).sendKeys(text); } );
+    });
+
+    Then('I see {stringInDoubleQuotes} as {stringInDoubleQuotes} value', (text, selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.equal(text);
+    });
 });
