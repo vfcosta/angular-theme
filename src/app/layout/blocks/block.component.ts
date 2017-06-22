@@ -47,7 +47,7 @@ export class BlockComponent {
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
-            this.$scope.$apply();
+            // this.$scope.$apply();
         });
     }
 

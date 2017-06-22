@@ -1,4 +1,4 @@
-import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
+import { ProfileService } from '../../../../lib/ng-noosfero-api/http/profile.service';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import {PersonTagsPluginInterestsBlockComponent} from './person-tags-plugin-interests-block.component';
 import * as helpers from "./../../../../spec/helpers";
@@ -12,7 +12,7 @@ describe("Components", () => {
         let mocks = helpers.getMocks();
 
          beforeEach(async(() => {
-            spyOn(mocks.personService, 'getTags').and.returnValue(
+            spyOn(mocks.profileService, 'getTags').and.returnValue(
                 Promise.resolve({ data: ['foo', 'bar'], headers: (name: string) => { return name; } })
             );
 
@@ -20,16 +20,15 @@ describe("Components", () => {
                 declarations: [PersonTagsPluginInterestsBlockComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: PersonService, useValue: mocks.personService },
+                    { provide: ProfileService, useValue: mocks.profileService },
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(PersonTagsPluginInterestsBlockComponent);
-                component = fixture.componentInstance;
-                component.block = { type: 'Block', settings: {} };
             });
+            fixture = TestBed.createComponent(PersonTagsPluginInterestsBlockComponent);
+            component = fixture.componentInstance;
+            component.block = { type: 'Block', settings: {} };
         }));
 
-        it("get tags from the person service", fakeAsync(() => {
+        it("get tags from the profile service", fakeAsync(() => {
             fixture.detectChanges();
             tick();
             expect(component.tags).toEqual(['foo', 'bar']);

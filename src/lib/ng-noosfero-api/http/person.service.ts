@@ -46,11 +46,6 @@ export class PersonService extends RestangularService<noosfero.Person> {
         return this.getElement(profileId).customDELETE("friends", params).toPromise();
     }
 
-    getTags(profile: noosfero.Profile): ng.IPromise<noosfero.RestResult<any>> {
-        let p = this.getElement(<number>profile.id).customGET('tags');
-        return p.toPromise().then(this.getHandleSuccessFunction<noosfero.RestResult<any>>());
-    }
-
     uploadImage(profile: noosfero.Profile, base64ImageJson: any) {
         let headers = { 'Content-Type': 'application/json' };
         // TODO dynamically copy the selected attributes to update

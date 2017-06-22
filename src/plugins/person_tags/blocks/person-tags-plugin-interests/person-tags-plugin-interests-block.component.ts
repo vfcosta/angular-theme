@@ -1,6 +1,7 @@
 import {Component, Inject, Input} from "@angular/core";
-import {PersonService} from "./../../../../lib/ng-noosfero-api/http/person.service";
-import {Arrays} from "./../../../../lib/util/arrays";
+import { ProfileService } from '../../../../lib/ng-noosfero-api/http/profile.service';
+import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
+import { Arrays } from './../../../../lib/util/arrays';
 
 @Component({
     selector: "noosfero-interest-tags-block",
@@ -14,12 +15,12 @@ export class PersonTagsPluginInterestsBlockComponent {
     profile: any;
     tags: any;
 
-    constructor(private personService: PersonService) { }
+    constructor(private profileService: ProfileService) { }
 
     ngOnInit() {
         this.profile = this.owner;
         this.tags = [];
-        this.personService.getTags(this.owner).then((result: noosfero.RestResult<any>) => {
+        this.profileService.getTags(this.owner).then((result: noosfero.RestResult<any>) => {
             this.tags = result.data;
         });
     }

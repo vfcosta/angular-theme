@@ -80,6 +80,14 @@ describe("Services", () => {
                 });
             });
 
+            it("should return the tags for a profile", () => {
+                let profile = <noosfero.Profile>{ id: 1, identifier: "profile1" };
+                helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profile.id}/tags`, [{ name: "teste", count: 1 }], {}, 200);
+                service.getTags(profile).then((response: restangular.IResponse) => {
+                    expect(response.data).toEqual(jasmine.objectContaining([{ name: "teste", count: 1 }]));
+                });
+            });
+
             it("should find the profile by identifier, set and resolve the current profile", () => {
                 let identifier = 'profile1';
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${identifier}?key=identifier`, { name: "profile1" }, {}, 200);

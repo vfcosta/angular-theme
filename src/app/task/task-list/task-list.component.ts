@@ -89,7 +89,8 @@ export class TaskListComponent {
         this.taskService.closeTask(this.confirmationTask, action).then(() => {
             this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.TASK_CLOSED, this.currentTask);
             this.notificationService.success({ title: title, message: message });
-        }).finally(() => {
+            this.cancel();
+        }).catch(() => {
             this.cancel();
         });
     }

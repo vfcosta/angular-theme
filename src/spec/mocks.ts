@@ -436,11 +436,11 @@ export function getMocks() {
             instant: () => { },
             update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile),
             remove: () => { return Promise.resolve({data: {success: true}}); },
-            getBlockTemplate: (id: any, type: string) => { return   Promise.resolve({api_content: [] }); }
+            getBlockTemplate: (id: any, type: string) => { return   Promise.resolve({api_content: [] }); },
+            getTags: () => { }
         },
         personService: {
-            search: () => Observable.of([mocks.profile]),
-            getTags: () => { }
+            search: () => Observable.of([mocks.profile])
         },
         communityService: {
             sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),

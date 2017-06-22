@@ -126,6 +126,13 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
 
     getBlockTemplate(id: number, blockType: string) {
         let params = { 'block_type': blockType };
-        return this.getProfileElement(id).customGET("blocks/preview", params);
+        let restRequest = this.getProfileElement(id).customGET("blocks/preview", params);
+        return restRequest.toPromise().then(this.getHandleSuccessFunction<noosfero.RestResult<noosfero.Block>>());
+    }
+
+
+    getTags(profile: noosfero.Profile): ng.IPromise<noosfero.RestResult<any>> {
+        let p = this.getProfileElement(<number>profile.id).customGET('tags');
+        return p.toPromise().then(this.getHandleSuccessFunction<noosfero.RestResult<any>>());
     }
 }
