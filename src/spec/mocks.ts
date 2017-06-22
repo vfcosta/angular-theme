@@ -240,11 +240,6 @@ export var mocks: any = {
     amMoment: {
         changeLocale: () => { }
     },
-    angularLoad: {
-        loadScript: (script?: string) => {
-            return Promise.resolve();
-        }
-    },
     promiseResultTemplate: (response?: {}, callCatch = true) => {
         let callback = (func?: (response: any) => any) => {
             if (func) {
@@ -503,11 +498,6 @@ export function getMocks() {
         },
         amMoment: {
             changeLocale: () => { }
-        },
-        angularLoad: {
-            loadScript: (script?: string) => {
-                return Promise.resolve();
-            }
         },
         promiseResultTemplate: (response?: {}) => {
             let callback = (func?: (response: any) => any) => {

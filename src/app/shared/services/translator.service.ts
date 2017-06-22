@@ -18,8 +18,6 @@ export class TranslatorService {
 
     constructor(@Inject("$translate") private $translate: angular.translate.ITranslateService,
         @Inject("tmhDynamicLocale") private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
-        @Inject("amMoment") private amMoment: any,
-        @Inject("angularLoad") private angularLoad: any,
         @Inject("$rootScope") private $rootScope: any) {
 
         this.$rootScope.$on("$localeChangeSuccess", () => {
@@ -36,7 +34,7 @@ export class TranslatorService {
             console.log("WARN: language undefined");
             return;
         }
-        this.changeMomentLocale(language);
+        moment.locale(language);
         this.tmhDynamicLocale.set(language);
         return this.$translate.use(language);
     }
@@ -47,16 +45,5 @@ export class TranslatorService {
 
     hasTranslation(text: string): boolean {
         return text !== this.translate(text);
-    }
-
-    private changeMomentLocale(language: string) {
-        let localePromise = Promise.resolve();
-        if (language !== "en") {
-            localePromise = this.angularLoad.loadScript(`/bower_components/moment/locale/${language}.js`);
-        }
-        localePromise.then(() => {
-            this.amMoment.changeLocale(language);
-            moment.locale(language);
-        });
     }
 }

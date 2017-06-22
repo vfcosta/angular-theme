@@ -116,12 +116,6 @@ import { TaskListComponent } from './task/task-list/task-list.component';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { bundle } from 'ng-forward';
 
-
-
-// Plugins imports
-
-declare var moment: any;
-
 // FIXME see a better way to declare template modules for dev mode
 try {
     angular.module('noosfero.templates.app');
@@ -137,7 +131,6 @@ try {
 angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.plugins']).
     config(noosferoModuleConfig).
     run(noosferoAngularRunBlock).
-    constant("moment", moment).
     constant("AuthEvents", AuthEvents).
     directive('noosferoFooter',
     downgradeComponent({ component: FooterComponent }) as angular.IDirectiveFactory

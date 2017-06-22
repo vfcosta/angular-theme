@@ -338,15 +338,12 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         '$scope',
         '$transitions',
         '$stateParams',
-        'amParseFilter',
         '$sce',
-        'angularLoad',
         '$location',
         '$anchorScroll',
         '$window',
         '$translate',
         'tmhDynamicLocale',
-        'amMoment',
     ]))
 })
 
