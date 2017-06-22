@@ -1,11 +1,11 @@
-import { Component, Inject, Input, ViewChild } from '@angular/core';
+import { Component, Inject, Input, ViewChild, OnChanges } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-section-block-plugin-section-block",
     template: require('plugins/section_block/blocks/section-block/section-block.html')
 })
-export class SectionBlockComponent {
+export class SectionBlockComponent implements OnChanges {
 
     @Input() block: any;
     @Input() owner: any;
@@ -25,6 +25,21 @@ export class SectionBlockComponent {
             this.backgroundColor = this.block.settings.background_color;
         }
         this.copyLink();
+        this.applyVisibility();
+    }
+
+    ngOnChanges() {
+        this.applyVisibility();
+    }
+
+    applyVisibility() {
+        if (this.block) {
+            if (this.block.title || this.block.settings.name || this.block.settings.description || this.getSectionImage()) {
+                this.block.hide = false;
+            } else {
+                this.block.hide = true;
+            }
+        }
     }
 
     setStyles() {
@@ -39,7 +54,6 @@ export class SectionBlockComponent {
         return styles;
     }
 
-
     upload(data: any) {
         this.blockService.uploadImages(this.block, [data]).then((result: noosfero.RestResult<noosfero.Block>) => {
             this.block = result.data;
@@ -50,6 +64,7 @@ export class SectionBlockComponent {
         this.block.settings.name = this.modifiedLink.name;
         this.block.settings.description = this.modifiedLink.description;
         this.popover.hide();
+        this.applyVisibility();
     }
 
     cancel() {

@@ -15,9 +15,16 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return browser.get('/');
     });
 
+    Then('I should be on the homepage', () => {
+        return expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:3001/');
+    });
+
+    Then('I should be on {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
+        return expect(browser.getCurrentUrl()).to.eventually.equal(`http://localhost:3001${stringInDoubleQuotes}`);
+    });
+
     Given('I follow {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
-        element(by.css('#navbar .login')).click();
-        return expect(element.all(by.css('.modal-body .login-form')).count()).to.eventually.equal(1);
+        return element(by.css(stringInDoubleQuotes)).click();
     });
 
     Given('I fill in the following:', (table, callback) => {
@@ -25,6 +32,10 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
             element(by.css(line[0])).sendKeys(line[1]);
         };
         callback();
+    });
+
+    Given('I pause', (callback) => {
+        browser.pause();
     });
 
     When('I press {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
@@ -79,5 +90,9 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Then('I see {stringInDoubleQuotes} {int} times', (selector, amount) => {
         return expect(element.all(by.css(selector)).count()).to.eventually.equal(amount);
+    });
+
+    Then('I see {stringInDoubleQuotes}', (selector) => {
+        return expect(element.all(by.css(selector)).count()).to.eventually.equal(1);
     });
 });
