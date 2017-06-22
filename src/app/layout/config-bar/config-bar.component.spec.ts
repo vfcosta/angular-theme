@@ -1,3 +1,4 @@
+import { DesignModeService } from './../../shared/services/design-mode.service';
 import { Component } from '@angular/core';
 import { ConfigBarComponent } from './config-bar.component';
 import * as helpers from "../../../spec/helpers";
@@ -18,17 +19,17 @@ describe("ConfigBar Component", () => {
             declarations: [ConfigBarComponent, PermissionNg2Directive],
             providers: [
                 { provide: "$scope", useValue: $scope },
-                { provide: "designModeService", useValue: mocks.designModeService }
+                { provide: DesignModeService, useValue: mocks.designModeService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
         });
         fixture = TestBed.createComponent(ConfigBarComponent);
-        component = fixture.componentInstance;        
+        component = fixture.componentInstance;
         component.owner = <noosfero.Profile> {id: 1, permissions: ['allow_edit']};
     }));
 
     it('verify if on toggle subscribe is called', fakeAsync( () => {
-        TestBed.get("designModeService").setInDesignMode(false);
+        TestBed.get(DesignModeService).setInDesignMode(false);
         mocks.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             expect(designModeOn).toBeTruthy();
         });

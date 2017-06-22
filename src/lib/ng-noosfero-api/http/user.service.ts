@@ -1,13 +1,12 @@
-import { Injectable, Inject } from "ng-forward";
+import { Restangular } from 'ngx-restangular';
+import { Injectable, Inject } from "@angular/core";
 import { RestangularService } from "./restangular_service";
 
-
 @Injectable()
-@Inject("Restangular", "$q")
 export class UserService extends RestangularService<noosfero.User> {
 
-    constructor(private restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
-        super(restangular, $q, $log);
+    constructor(protected restangular: Restangular) {
+        super(restangular);
     }
 
     getResourcePath() {
@@ -26,6 +25,6 @@ export class UserService extends RestangularService<noosfero.User> {
         new_password: string,
         new_password_confirmation: string): ng.IPromise<noosfero.RestResult<noosfero.User>> {
         let params = {current_password: current_password, new_password: new_password, new_password_confirmation: new_password_confirmation };
-        return this.getElement(profile.id).customOperation("patch", null, null, null, params);
+        return this.getElement(profile.id).customOperation("patch", null, null, null, params).toPromise();
     }
 }

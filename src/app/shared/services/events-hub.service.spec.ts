@@ -1,6 +1,4 @@
-import { OpaqueToken } from 'ng-forward';
 import { EventsHubService } from './events-hub.service';
-
 
 describe("EventsHubService", () => {
     let eventsHubService: EventsHubService;

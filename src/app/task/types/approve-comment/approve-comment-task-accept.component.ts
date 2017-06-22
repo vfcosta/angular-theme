@@ -11,7 +11,7 @@ export class ApproveCommentTaskAcceptComponent extends TaskAcceptTypeComponent {
     comment = <noosfero.Comment>{};
     article = <noosfero.Article>{};
 
-    constructor( @Inject('articleService') private articleService: ArticleService, injector: Injector) {
+    constructor(private articleService: ArticleService, injector: Injector) {
         super(injector);
     }
 

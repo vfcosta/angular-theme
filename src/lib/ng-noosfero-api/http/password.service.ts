@@ -1,14 +1,11 @@
-import { Injectable, Inject } from "ng-forward";
-import { RestangularService } from "./restangular_service";
+import { Restangular } from 'ngx-restangular';
+import { Injectable, Inject } from "@angular/core";
 
 @Injectable()
-@Inject("Restangular")
 export class PasswordService {
-    constructor(private Restangular: restangular.IService) {
-        this.Restangular = Restangular;
-    }
+    constructor(protected restangular: Restangular) { }
 
-    newPassword(code: string, password: string, password_confirmation: string): ng.IPromise<noosfero.RestResult<noosfero.User>> {
-        return this.Restangular.all("").customOperation("patch", "new_password", { code: code, password: password, password_confirmation: password_confirmation });
+    newPassword(code: string, password: string, password_confirmation: string): Promise<noosfero.RestResult<noosfero.User>> {
+        return this.restangular.all("").customOperation("patch", "new_password", { code: code, password: password, password_confirmation: password_confirmation }).toPromise();
     }
 }

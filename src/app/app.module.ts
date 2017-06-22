@@ -1,3 +1,30 @@
+import swal from 'sweetalert2';
+import { EventsHubService } from './shared/services/events-hub.service';
+import { CommentParagraphEventService } from './../plugins/comment_paragraph/events/comment-paragraph-event.service';
+import { ThemeService } from './shared/services/theme.service';
+import { BodyStateClassesService } from './shared/services/body-state-classes.service';
+import { DesignModeService } from './shared/services/design-mode.service';
+import { HttpModule, JsonpModule } from '@angular/http';
+import { AuthService } from './login/auth.service';
+import { DomainService } from './../lib/ng-noosfero-api/http/domain.service';
+import { SessionService } from './login/session.service';
+import { PersonService } from './../lib/ng-noosfero-api/http/person.service';
+import { TaskService } from './../lib/ng-noosfero-api/http/task.service';
+import { BlockService } from './../lib/ng-noosfero-api/http/block.service';
+import { UserService } from './../lib/ng-noosfero-api/http/user.service';
+import { CommunityService } from './../lib/ng-noosfero-api/http/community.service';
+import { SettingsService } from './../lib/ng-noosfero-api/http/settings.service';
+import { RoleService } from './../lib/ng-noosfero-api/http/role.service';
+import { RegisterService } from './../lib/ng-noosfero-api/http/register.service';
+import { PasswordService } from './../lib/ng-noosfero-api/http/password.service';
+import { PermissionService } from './shared/services/permission.service';
+import { CommentParagraphService } from './../plugins/comment_paragraph/http/comment-paragraph.service';
+import { NotificationService } from './shared/services/notification.service';
+import { TranslatorService } from './shared/services/translator.service';
+import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service';
+import { ProfileService } from './../lib/ng-noosfero-api/http/profile.service';
+import { ArticleService } from './../lib/ng-noosfero-api/http/article.service';
+import { CommentService } from './../lib/ng-noosfero-api/http/comment.service';
 import { HeaderService } from './shared/services/header.service';
 import { ArticleViewComponent } from './article/article-view.component';
 import { ActivityComponent } from './profile/activities/activity/activity.component';
@@ -85,6 +112,26 @@ import * as plugins from "../plugins";
 import { SharedModule } from './shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
 import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { LocalStorageModule } from 'angular-2-local-storage';
+import { SweetAlert2Module } from '@toverux/ngsweetalert2';
+import { ToastrModule } from 'ngx-toastr';
+
+export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
+    RestangularProvider.setBaseUrl("/api/v1");
+    RestangularProvider.setFullResponse(true);
+    RestangularProvider.addFullRequestInterceptor((element, operation, path, url, headers, params) => {
+        if (sessionService.currentUser()) {
+            (<any>headers)["Private-Token"] = sessionService.currentUser().private_token;
+        }
+        (<any>headers)["Accept-Language"] = translatorService.currentLanguage();
+        return <any>{ headers: <any>headers };
+    });
+    RestangularProvider.addErrorInterceptor((response, subject, responseHandler) => {
+        notificationService.httpError(response.status, response.data);
+        return true; // return true to continue the promise chain and call catch
+    });
+}
 
 @NgModule({
     imports: [
@@ -106,6 +153,15 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
         DynamicHTMLModule.forRoot({
             components: plugins.macros
         }),
+        RestangularModule.forRoot([SessionService, TranslatorService, NotificationService], RestangularConfigFactory),
+        HttpModule,
+        JsonpModule,
+        LocalStorageModule.withConfig({
+            prefix: 'noosfero',
+            storageType: 'localStorage'
+        }),
+        SweetAlert2Module,
+        ToastrModule.forRoot(),
     ],
     declarations: [
         FooterComponent,
@@ -250,46 +306,44 @@ import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
     ].concat(plugins.ng2MainComponents),
     providers: [
         HeaderService,
+        CommentService,
+        ArticleService,
+        SessionService,
+        ProfileService,
+        EnvironmentService,
+        CommentParagraphService,
+        PermissionService,
+        PasswordService,
+        RegisterService,
+        RoleService,
+        SettingsService,
+        CommunityService,
+        UserService,
+        BlockService,
+        TaskService,
+        PersonService,
+        DomainService,
+        AuthService,
+        DesignModeService,
+        BodyStateClassesService,
+        ThemeService,
+        CommentParagraphEventService,
+        EventsHubService,
+        TranslatorService,
+        NotificationService,
+        { provide: "sweetAlert", useValue: swal },
     ].concat(UpgradeUtils.provideAngular1Services([
-        'AuthService',
-        'SessionService',
         '$state',
-        'TranslatorService',
-        'ArticleService',
-        'BlockService',
-        'SettingsService',
-        'profileService',
-        'PersonService',
-        'CommunityService',
-        'PermissionService',
-        'EventsHubService',
         '$uibModal',
         '$scope',
-        'NotificationService',
-        '$log',
-        'SweetAlert',
-        'toastr',
-        'TaskService',
         '$transitions',
         '$stateParams',
-        'amParseFilter',
-        'RoleService',
-        'PersonService',
-        'UserService',
-        'environmentService',
-        'CommentService',
-        'DesignModeService',
         '$sce',
-        'ThemeService',
-        'CommentParagraphEventService',
-        'CommentParagraphService',
-        'PasswordService',
-        'RegisterService',
-        'angularLoad',
         '$location',
         '$anchorScroll',
-        'bodyStateClassesService',
         '$window',
+        '$translate',
+        'tmhDynamicLocale',
     ]))
 })
 

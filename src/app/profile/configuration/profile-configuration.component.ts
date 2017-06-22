@@ -12,7 +12,7 @@ import { SessionService } from "./../../login";
     selector: "noosfero-profile-configuration",
     templateUrl: 'app/profile/configuration/profile-configuration.html',
 })
-@Inject(ProfileService, '$stateParams', '$state')
+@Inject("profileService", '$stateParams', '$state')
 export class ProfileConfigurationComponent {
     profile: noosfero.Profile;
     profileIdentifier: string;

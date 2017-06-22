@@ -11,7 +11,7 @@ export class MembersBlockComponent {
     @Input() owner: noosfero.Profile;
 
     profiles: any = [];
-    constructor( @Inject('blockService') private blockService: BlockService) { }
+    constructor(private blockService: BlockService) { }
 
 
     ngOnInit() {

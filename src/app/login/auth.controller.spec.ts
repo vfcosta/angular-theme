@@ -20,7 +20,7 @@ describe("Controllers", () => {
                 forgotPassword: jasmine.createSpy('forgotPassword').and.returnValue(Promise.resolve())
             };
             notificationService = jasmine.createSpyObj("NotificationService", ["info", "error"]);
-            authController = new AuthController(null, null, AuthServiceMock, $modal, notificationService);
+            authController = new AuthController(null, AuthServiceMock, $modal, notificationService);
         });
 
         it("calls authenticate on AuthService when login called", () => {

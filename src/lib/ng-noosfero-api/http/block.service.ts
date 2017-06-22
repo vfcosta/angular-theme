@@ -1,12 +1,12 @@
-import { Injectable, Inject } from "ng-forward";
+import { Restangular } from 'ngx-restangular';
+import { Injectable, Inject } from "@angular/core";
 import { RestangularService } from "./restangular_service";
 
 @Injectable()
-@Inject("Restangular", "$q", "$log")
 export class BlockService extends RestangularService<noosfero.Block> {
 
-    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
-        super(Restangular, $q, $log);
+    constructor(protected restangular: Restangular) {
+        super(restangular);
     }
 
     getResourcePath() {
@@ -22,29 +22,23 @@ export class BlockService extends RestangularService<noosfero.Block> {
 
     getApiContent(block: noosfero.Block, params?: any) {
         if (!block.id) return Promise.resolve({}); // return empty when block is not persisted yet
-        let apiContentPromise = this.$q.defer();
         if (block) {
             if (block.api_content) {
-                apiContentPromise.resolve(block.api_content);
+                return Promise.resolve(block.api_content);
             } else {
-                this.get(block.id, null, params)
+                return this.get(block.id, null, params)
                     .then((result: noosfero.RestResult<noosfero.Block>) => {
                         block = result.data;
-                        apiContentPromise.resolve(block.api_content);
+                        return Promise.resolve(block.api_content);
                     });
             }
         }
-        return apiContentPromise.promise;
     }
 
-    getBlock<T extends noosfero.Block>(blockId: number): ng.IPromise<T> {
-        let deferred = this.$q.defer<T>();
-        this.get(blockId)
-            .then((result: noosfero.RestResult<T>) => {
-                deferred.resolve(result.data);
-            })
-            .catch(reason => deferred.reject(reason));
-        return deferred.promise;
+    getBlock<T extends noosfero.Block>(blockId: number): Promise<T> {
+        return this.get(blockId).then((result: any) => {
+            return Promise.resolve(result.data);
+        });
     }
 
     update(block: noosfero.Block) {
@@ -74,10 +68,10 @@ export class BlockService extends RestangularService<noosfero.Block> {
     getAvailableBlocks(owner: noosfero.Profile | noosfero.Environment): ng.IPromise<noosfero.RestResult<noosfero.BlockDefinition[]>> {
         let restRequest;
         if (owner.type === 'Environment') {
-            restRequest = this.restangularService.one("environments", owner.id);
+            restRequest = this.restangular.one("environments", owner.id);
         } else {
-            restRequest = this.restangularService.one("profiles", owner.id);
+            restRequest = this.restangular.one("profiles", owner.id);
         }
-        return restRequest.all("blocks").get("available_blocks");
+        return restRequest.all("blocks").get("available_blocks").toPromise();
     }
 }

@@ -7,11 +7,10 @@ import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service"
     selector: "content-viewer",
     templateUrl: "app/article/content-viewer/page.html",
     providers: [
-        provide('articleService', { useClass: ArticleService }),
         provide('profileService', { useClass: ProfileService })
     ]
 })
-@Inject(ArticleService, ProfileService, "$stateParams", "$state")
+@Inject("articleService", "profileService", "$stateParams", "$state")
 export class ContentViewerComponent {
 
     @Input()
@@ -21,7 +20,7 @@ export class ContentViewerComponent {
     profile: noosfero.Profile = null;
 
     constructor(
-        private ArticleService: ArticleService,
+        private articleService: ArticleService,
         private profileService: ProfileService,
         private $stateParams: angular.ui.IStateParamsService,
         private $state: ng.ui.IStateService) {
@@ -31,10 +30,10 @@ export class ContentViewerComponent {
     activate() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-            return this.ArticleService.getArticleByProfileAndPath(this.profile, this.$stateParams["page"]);
+            return this.articleService.getArticleByProfileAndPath(this.profile, this.$stateParams["page"]);
         }).then((result: noosfero.RestResult<any>) => {
             this.article = <noosfero.Article>result.data;
-            this.ArticleService.setCurrent(this.article);
+            this.articleService.setCurrent(this.article);
         });
     }
 }

@@ -1,3 +1,8 @@
+import { CommentParagraphEventService } from './../events/comment-paragraph-event.service';
+import { PermissionService } from './../../../app/shared/services/permission.service';
+import { CommentParagraphService } from './../http/comment-paragraph.service';
+import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
+import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { PopoverModule } from 'ngx-bootstrap';
 import { By } from '@angular/platform-browser';
 import {AllowCommentComponent} from "./allow-comment.component";
@@ -35,11 +40,11 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [AllowCommentComponent],
                 providers: [
-                    { provide: "articleService", useValue: mocks.articleService },
-                    { provide: "commentService", useValue: mocks.commentService },
-                    { provide: "permissionService", useValue: mocks.permissionService },
-                    { provide: "commentParagraphService", useValue: serviceMock },
-                    { provide: "commentParagraphEventService", useValue: eventServiceMock },
+                    { provide: ArticleService, useValue: mocks.articleService },
+                    { provide: CommentService, useValue: mocks.commentService },
+                    { provide: PermissionService, useValue: mocks.permissionService },
+                    { provide: CommentParagraphService, useValue: serviceMock },
+                    { provide: CommentParagraphEventService, useValue: eventServiceMock },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [PopoverModule.forRoot()]

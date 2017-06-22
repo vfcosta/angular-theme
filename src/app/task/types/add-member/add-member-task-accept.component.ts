@@ -10,7 +10,7 @@ export class AddMemberTaskAcceptComponent extends TaskAcceptTypeComponent {
 
     roles: noosfero.Role[];
 
-    constructor(@Inject("roleService") private roleService: RoleService, injector: Injector) {
+    constructor(private roleService: RoleService, injector: Injector) {
         super(injector);
     }
 

@@ -17,8 +17,8 @@ export class ProfileListEditionComponent {
     roles: noosfero.Role[];
 
     constructor(private elementRef: ElementRef,
-        @Inject('roleService') private roleService: RoleService,
-        @Inject('notificationService') private notificationService: NotificationService) { }
+        private roleService: RoleService,
+        private notificationService: NotificationService) { }
 
     ngOnInit () {
 

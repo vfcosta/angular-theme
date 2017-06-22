@@ -16,9 +16,7 @@ export class ValidationMessageComponent {
 
     private aditionalFields = [];
 
-    constructor( 
-        @Inject('translatorService') public translatorService: TranslatorService,
-        private underscorePipe: UnderscorePipe) { }
+    constructor(public translatorService: TranslatorService, private underscorePipe: UnderscorePipe) { }
 
     getErrorKey(errorObject: any) {
         let error: string;

@@ -15,19 +15,14 @@ import { Component, Inject, provide } from 'ng-forward';
 @Component({
     selector: 'environment',
     templateUrl: "app/environment/environment.html",
-    providers: [
-        provide('notificationService', { useClass: NotificationService }),
-        provide('designModeService', { useClass: DesignModeService }),
-        provide('themeService', { useClass: ThemeService }),
-    ]
 })
-@Inject(EnvironmentService, "$state", NotificationService, AuthService, DesignModeService, ThemeService)
+@Inject("environmentService", "$state", "notificationService", "authService", "designModeService", "themeService")
 export class EnvironmentComponent {
 
     boxes: noosfero.Box[];
 
     constructor(private environmentService: EnvironmentService, private $state: ng.ui.IStateService, private notificationService: NotificationService,
-        private AuthService: AuthService, private designModeService: DesignModeService,
+        private authService: AuthService, private designModeService: DesignModeService,
         private themeService: ThemeService, private environment: noosfero.Environment) {
 
         if (themeService.verifyTheme(this.environment.theme)) return;
@@ -40,12 +35,12 @@ export class EnvironmentComponent {
             this.notificationService.error({ message: "notification.environment.not_found" });
         });
 
-        this.AuthService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
                 Object.assign(this.environment, result.data);
             });
         });
-        this.AuthService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
                 Object.assign(this.environment, result.data);
                 this.environment.permissions = undefined;

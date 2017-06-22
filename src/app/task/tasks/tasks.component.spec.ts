@@ -1,3 +1,5 @@
+import { TranslatorService } from './../../shared/services/translator.service';
+import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
 import { MomentModule } from 'angular2-moment';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { FormsModule } from '@angular/forms';
@@ -22,8 +24,8 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [TasksComponent, TranslatePipe],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
-                    { provide: "taskService", useValue: mocks.taskService }
+                    { provide: TranslatorService, useValue: mocks.translatorService },
+                    { provide: TaskService, useValue: mocks.taskService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [PaginationModule.forRoot(), FormsModule]
@@ -34,13 +36,13 @@ describe("Components", () => {
 
         it("load person tasks", () => {
             fixture.detectChanges();
-            expect(TestBed.get('taskService').getAllPending).toHaveBeenCalled();
+            expect(TestBed.get(TaskService).getAllPending).toHaveBeenCalled();
         });
 
         it("load person tasks with page parameter", () => {
             component.taskTypes = "AddFriend";
             fixture.detectChanges();
-            expect(TestBed.get('taskService').getAllPending).toHaveBeenCalledWith({ content_type: component.taskTypes, page: 1, per_page: 5 });
+            expect(TestBed.get(TaskService).getAllPending).toHaveBeenCalledWith({ content_type: component.taskTypes, page: 1, per_page: 5 });
         });
     });
 });

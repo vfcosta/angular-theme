@@ -1,3 +1,7 @@
+import { NotificationService } from './../shared/services/notification.service';
+import { TranslatorService } from './../shared/services/translator.service';
+import { RegisterService } from './../../lib/ng-noosfero-api/http/register.service';
+import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import * as helpers from "../../spec/helpers";
@@ -32,10 +36,10 @@ describe("Register Component", () => {
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [
                 { provide: "$state", useValue: mocks.$state },
-                { provide: "registerService", useValue: mocks.registerService },
-                { provide: "notificationService", useValue: mocks.notificationService },
-                { provide: "environmentService", useValue: mocks.environmentService },
-                { provide: "translatorService", useValue: mocks.translatorService }
+                { provide: RegisterService, useValue: mocks.registerService },
+                { provide: NotificationService, useValue: mocks.notificationService },
+                { provide: EnvironmentService, useValue: mocks.environmentService },
+                { provide: TranslatorService, useValue: mocks.translatorService }
             ]
         });
 
@@ -73,11 +77,11 @@ describe("Register Component", () => {
         init();
         user_data = { password: "pas" };
         component.account = user_data;
-        TestBed.get('registerService').createAccount = jasmine.createSpy('createAccount').and.returnValue(Promise.reject({ status: 422, errors: [] }));
+        TestBed.get(RegisterService).createAccount = jasmine.createSpy('createAccount').and.returnValue(Promise.reject({ status: 422, errors: [] }));
         fixture.detectChanges();
         component.signup();
         tick();
-        expect(TestBed.get('registerService').createAccount).toHaveBeenCalledWith(user_data);
+        expect(TestBed.get(RegisterService).createAccount).toHaveBeenCalledWith(user_data);
         expect(mocks.$state.transitionTo).not.toHaveBeenCalledWith("main.environment.home");
         expect(component.nameErrors.setBackendErrors).toHaveBeenCalled();
     }));

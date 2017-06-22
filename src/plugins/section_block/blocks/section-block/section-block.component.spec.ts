@@ -1,3 +1,5 @@
+import { TranslatorService } from './../../../../app/shared/services/translator.service';
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { SectionBlockComponent } from './section-block.component';
 import * as helpers from "./../../../../spec/helpers";
@@ -23,8 +25,8 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [SectionBlockComponent, TranslatePipe],
                 providers: [
-                    { provide: "blockService", useValue: blockService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: BlockService, useValue: blockService },
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [PopoverModule.forRoot(), FormsModule]
@@ -33,7 +35,6 @@ describe("Components", () => {
             component = fixture.componentInstance;
             component.owner = person;
             component.designMode = true;
-
 
             block = {
                 id: 1,
@@ -53,6 +54,63 @@ describe("Components", () => {
             spyOn(component.popover, 'hide').and.callThrough();
         }));
 
+        it("should hide if there is no image, name, description or title", () => {
+            component.block = {
+                id: 1,
+                title: undefined,
+                settings: { name: undefined, description: undefined },
+                images: []
+            };
+            component.ngOnChanges();
+            expect(component.block.hide).toBeTruthy();
+        });
+
+        it("should show if there is a title", () => {
+            component.block = {
+                id: 1,
+                title: 'Section Block',
+                settings: { name: undefined, description: undefined },
+                images: []
+            };
+            component.ngOnChanges();
+            expect(component.block.hide).toBeFalsy();
+        });
+
+        it("should show if there is a name", () => {
+            component.block = {
+                id: 1,
+                title: undefined,
+                settings: { name: 'mariko', description: undefined },
+                images: []
+            };
+            component.ngOnChanges();
+            expect(component.block.hide).toBeFalsy();
+        });
+
+        it("should show if there is a descriton", () => {
+            component.block = {
+                id: 1,
+                title: undefined,
+                settings: { name: undefined, description: 'nice manga' },
+                images: []
+            };
+            component.ngOnChanges();
+            expect(component.block.hide).toBeFalsy();
+        });
+
+        it("should show if there is an image", () => {
+            component.block = {
+                id: 1,
+                title: undefined,
+                settings: { name: undefined, description: undefined },
+                images: [{
+                    id: 1, filename: "file1.png",
+                    url: "/image_uploads/0000/0005/file1.png"
+                }]
+            };
+            component.ngOnChanges();
+            expect(component.block.hide).toBeFalsy();
+        });
 
         it("initialize modifiedLink link", fakeAsync(() => {
             component.ngOnInit();
@@ -76,7 +134,6 @@ describe("Components", () => {
             component.block.images = [];
             expect(component.getSectionImage()).toBeNull();
         });
-
 
         it("should return null if images block attribute is null", () => {
             component.block.images = null;

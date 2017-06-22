@@ -1,8 +1,4 @@
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
-import {provide} from 'ng-forward';
-
 import {TranslatorService} from './translator.service';
-
 import * as helpers from "../../../spec/helpers";
 
 describe("Services", () => {
@@ -18,20 +14,13 @@ describe("Services", () => {
         }));
 
         function createComponent() {
-            return new TranslatorService(
-                <any>helpers.mocks.$translate,
-                <any>helpers.mocks.tmhDynamicLocale,
-                <any>helpers.mocks.amMoment,
-                <any>helpers.mocks.angularLoad,
-                $rootScope
-            );
+            return new TranslatorService(<any>helpers.mocks.$translate, <any>helpers.mocks.tmhDynamicLocale, $rootScope);
         }
 
         it("change the language", (done) => {
             let component: TranslatorService = createComponent();
             let loadScripPromise = $q.defer();
             loadScripPromise.resolve();
-            component["angularLoad"].loadScript = jasmine.createSpy("loadScript").and.returnValue(loadScripPromise.promise);
             component["tmhDynamicLocale"].set = jasmine.createSpy("set");
             component["tmhDynamicLocale"].get = jasmine.createSpy("get").and.returnValue("en");
             component["$translate"].use = jasmine.createSpy("use");
@@ -39,29 +28,18 @@ describe("Services", () => {
             component.changeLanguage('pt');
             $rootScope.$digest();
 
-            expect(component["angularLoad"].loadScript).toHaveBeenCalledWith("/bower_components/moment/locale/pt.js");
             expect(component["tmhDynamicLocale"].set).toHaveBeenCalledWith("pt");
             expect(component["$translate"].use).toHaveBeenCalledWith("pt");
             done();
         });
 
-        it("do not load moment locale when change the language to english", (done) => {
-            let component: TranslatorService = createComponent();
-            component["angularLoad"].loadScript = jasmine.createSpy("loadScript").and.returnValue($q.defer().promise);
-            component.changeLanguage('en');
-            expect(component["angularLoad"].loadScript).not.toHaveBeenCalledWith("/bower_components/moment/locale/pt.js");
-            done();
-        });
-
         it("do nothing when call change language with null", (done) => {
             let component: TranslatorService = createComponent();
-            component["angularLoad"].loadScript = jasmine.createSpy("loadScript");
             component["tmhDynamicLocale"].set = jasmine.createSpy("set");
             component["$translate"].use = jasmine.createSpy("use");
 
             component.changeLanguage(null);
 
-            expect(component["angularLoad"].loadScript).not.toHaveBeenCalled();
             expect(component["tmhDynamicLocale"].set).not.toHaveBeenCalled();
             expect(component["$translate"].use).not.toHaveBeenCalled();
             done();

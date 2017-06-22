@@ -32,9 +32,9 @@ export class MenuBlockComponent {
     selectedArticle: noosfero.Article;
 
     constructor(private elementRef: ElementRef,
-        @Inject('translatorService') private translatorService: TranslatorService,
+        private translatorService: TranslatorService,
         @Inject("$scope") private $scope: ng.IScope,
-        @Inject('articleService') private articleService: ArticleService,
+        private articleService: ArticleService,
         private dragulaService: DragulaService) {
     }
 

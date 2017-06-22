@@ -28,11 +28,11 @@ export class TaskListComponent {
 
     tasksGroups: noosfero.Task[];
 
-    constructor( @Inject("notificationService") private notificationService: NotificationService,
+    constructor(private notificationService: NotificationService,
         @Inject("$scope") private $scope: ng.IScope,
         @Inject("$uibModal") private $uibModal: any,
-        @Inject("taskService") private taskService: TaskService,
-        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
+        private taskService: TaskService,
+        private eventsHubService: EventsHubService) {
     }
 
     ngOnInit() {
@@ -89,7 +89,8 @@ export class TaskListComponent {
         this.taskService.closeTask(this.confirmationTask, action).then(() => {
             this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.TASK_CLOSED, this.currentTask);
             this.notificationService.success({ title: title, message: message });
-        }).finally(() => {
+            this.cancel();
+        }).catch(() => {
             this.cancel();
         });
     }

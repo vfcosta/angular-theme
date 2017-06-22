@@ -1,25 +1,22 @@
-import { Injectable, Inject, EventEmitter } from "ng-forward";
+import { DOCUMENT } from '@angular/platform-browser';
+import { Restangular } from 'ngx-restangular';
+import { Injectable, Inject, EventEmitter } from "@angular/core";
 import { RestangularService } from "./restangular_service";
 import { ProfileService } from "./profile.service";
-import { NoosferoRootScope } from "./../../../app/shared/models/interfaces";
 import { EnvironmentService } from './environment.service';
 
 declare var _: any;
 
 @Injectable()
-@Inject("Restangular", "$q", "$log", ProfileService, "$document", "environmentService")
 export class ArticleService extends RestangularService<noosfero.Article> {
     environment: noosfero.Environment;
 
-    constructor(
-        Restangular: restangular.IService,
-        $q: ng.IQService,
-        $log: ng.ILogService,
+    constructor(protected restangular: Restangular,
         protected profileService: ProfileService,
-        private $document: ng.IDocumentService,
+        @Inject(DOCUMENT) private document: any,
         private environmentService: EnvironmentService
     ) {
-        super(Restangular, $q, $log);
+        super(restangular);
     }
 
     getResourcePath() {
@@ -33,26 +30,14 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         };
     }
 
-    // removeArticle(article: noosfero.Article) {
-    //     // let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Article>> = this.remove(article);
-    //     // let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
-    //     // restRequest.then((result: any) => {
-    //     //     this.notifyArticleRemovedListeners(article);
-    //     // }).catch(this.getHandleErrorFunction(deferred));
-    //     // return deferred.promise;
-    // }
-
     /**
      * Notify listeners that this article has been removed
      */
-    // private notifyArticleRemovedListeners(article: noosfero.Article) {
-    //     this.modelRemovedEventEmitter.next(article);
-    // }
     setCurrent(article: noosfero.Article) {
         super.setCurrent(article);
         this.environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
-            this.$document.prop('title', this.environment.name + ' - ' + article.title);
+            angular.element(this.document).prop('title', this.environment.name + ' - ' + article.title);
         });
     }
 
@@ -60,14 +45,11 @@ export class ArticleService extends RestangularService<noosfero.Article> {
         let headers = {
             'Content-Type': 'application/json'
         };
-        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
         let attributesToUpdate: any = {
             article: Object.assign({}, _.omitBy(_.pick(article, ['name', 'body', 'published', 'start_date', 'end_date']), _.isNull))
         };
-        let restRequest: ng.IPromise<noosfero.RestResult<noosfero.Article>> = this.getElement(article.id).customPOST(attributesToUpdate, null, null, headers);
-        restRequest.then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-        return deferred.promise;
+        let restRequest = this.getElement(article.id).customPOST(attributesToUpdate, null, null, headers);
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     createInProfile(profile: noosfero.Profile, article: noosfero.Article): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
@@ -94,22 +76,10 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     }
 
     getArticleByProfileAndPath(profile: noosfero.Profile, path: string): ng.IPromise<noosfero.RestResult<noosfero.Article>> {
-        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article>>();
         let profileElement = this.profileService.getProfileElement(<number>profile.id);
-
-        let restRequest: ng.IPromise<any>;
-
         let params = { path: path };
-
-        restRequest = profileElement.customGET(this.getResourcePath(), params);
-
-
-        restRequest
-            .then(this.getHandleSuccessFunction(deferred))
-            .catch(this.getHandleErrorFunction(deferred));
-
-
-        return deferred.promise;
+        let restRequest = profileElement.customGET(this.getResourcePath(), params);
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     getChildren<T>(article: noosfero.Article, params?: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {
@@ -119,10 +89,7 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     }
 
     search(params: any): ng.IPromise<noosfero.RestResult<noosfero.Article[]>> {
-        let deferred = this.$q.defer<noosfero.RestResult<noosfero.Article[]>>();
-        let restRequest = this.restangularService.all("search").customGET('article', params);
-        restRequest.then(this.getHandleSuccessFunction(deferred)).catch(this.getHandleErrorFunction(deferred));
-        return deferred.promise;
+        let restRequest = this.restangular.all("search").customGET('article', params);
+        return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
-
 }

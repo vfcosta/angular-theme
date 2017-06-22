@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { PersonFriendsComponent } from './person-friends.component';
 import { By } from '@angular/platform-browser';
@@ -13,7 +14,7 @@ describe("Components", () => {
         let fixture: ComponentFixture<PersonFriendsComponent>;
         let component: PersonFriendsComponent;
         let personService = jasmine.createSpyObj("PersonService", ["getFriends"]);
-        personService.getFriends = jasmine.createSpy("getFriends").and.returnValue(Promise.resolve({ headers: () => {} }));
+        personService.getFriends = jasmine.createSpy("getFriends").and.returnValue(Promise.resolve({ headers: { get: () => {} }}));
         let stateParams = {};
 
         beforeEach(async(() => {
@@ -22,15 +23,14 @@ describe("Components", () => {
                 declarations: [PersonFriendsComponent, TranslatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: "personService", useValue: personService },
+                    { provide: PersonService, useValue: personService },
                     { provide: "$stateParams", useValue: stateParams },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(PersonFriendsComponent);
-                component = fixture.componentInstance;
-                component.profile = <noosfero.Profile>{ id: 1 };
             });
+            fixture = TestBed.createComponent(PersonFriendsComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>{ id: 1 };
         }));
 
         it("load first page of friends on init", () => {
@@ -43,12 +43,11 @@ describe("Components", () => {
             expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: undefined, order: 'name ASC' });
         });
 
-        it("search for friends when change search text", (fakeAsync(() => {
+        it("search for friends when change search text", fakeAsync(() => {
             component.searchChanged.next("john");
             tick(300);
             expect(component.search).toEqual("john");
             expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: "john", order: 'name ASC' });
-        })));
-        
+        }));
     });
 });

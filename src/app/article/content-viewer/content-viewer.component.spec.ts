@@ -24,10 +24,10 @@ describe('Content Viewer Component', () => {
 
         providers((provide: any) => {
             return <any>[
-                provide('ArticleService', {
+                provide('articleService', {
                     useValue: mocks.articleService
                 }),
-                provide('ProfileService', {
+                provide('profileService', {
                     useValue: mocks.profileService
                 }),
                 provide('$stateParams', {

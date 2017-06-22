@@ -1,3 +1,5 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { RecentDocumentsBlockComponent } from './recent-documents-block.component';
@@ -23,9 +25,9 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [RecentDocumentsBlockComponent, TranslatePipe, DateFormatPipe],
                 providers: [
-                    { provide: "blockService", useValue: mocks.blockService },
+                    { provide: BlockService, useValue: mocks.blockService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "amParseFilter", useValue: mocks.amParseFilter }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

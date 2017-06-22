@@ -27,12 +27,12 @@ export class ContextBarComponent {
     constructor(
         @Inject("$state") private $state: ng.ui.IStateService,
         @Inject("$scope") private $scope: ng.IScope,
-        @Inject('eventsHubService') private eventsHubService: EventsHubService,
-        @Inject('blockService') private blockService: BlockService,
-        @Inject('notificationService') private notificationService: NotificationService,
-        @Inject('designModeService') private designModeService: DesignModeService,
-        @Inject('profileService') private profileService: ProfileService,
-        @Inject('environmentService') private environmentService: EnvironmentService) {
+        private eventsHubService: EventsHubService,
+        private blockService: BlockService,
+        private notificationService: NotificationService,
+        private designModeService: DesignModeService,
+        private profileService: ProfileService,
+        private environmentService: EnvironmentService) {
     }
 
     ngOnInit() {
@@ -49,7 +49,6 @@ export class ContextBarComponent {
             if (!block.id || block.title != null || Object.keys(block).length > 3 || (block.api_content && Object.keys(block.api_content).length >= 1)) {
                 this.blocksChanged.push(block);
             }
-            this.$scope.$apply();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;

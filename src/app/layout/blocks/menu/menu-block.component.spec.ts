@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { PopoverModule } from 'ngx-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
@@ -33,9 +34,9 @@ describe("Components", () => {
                 declarations: [MenuBlockComponent, TranslatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: "articleService", useValue: articleService },
+                    { provide: ArticleService, useValue: articleService },
                     { provide: "$scope", useValue: scope },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(MenuBlockComponent);

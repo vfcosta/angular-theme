@@ -31,8 +31,8 @@ export function noosferoRoutes($stateProvider: any) {
         abstract: true,
         name: 'main',
         resolve: {
-            currentUser: function(AuthService: AuthService) {
-                return AuthService.loginFromCookie();
+            currentUser: function(authService: AuthService) {
+                return authService.loginFromCookie();
             }
         }
     });
@@ -80,8 +80,8 @@ export function noosferoRoutes($stateProvider: any) {
             }
         },
         resolve: {
-            contextResult: (DomainService: DomainService) => {
-                return DomainService.get("context");
+            contextResult: (domainService: DomainService) => {
+                return domainService.get("context");
             }
         }
     });
@@ -111,9 +111,9 @@ export function noosferoRoutes($stateProvider: any) {
         },
         params: { currentProfile: {} },
         resolve: {
-            environment: (EnvironmentService: EnvironmentService) => {
-                return EnvironmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
-                    EnvironmentService.setCurrentEnvironment(result.data);
+            environment: (environmentService: EnvironmentService) => {
+                return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+                    environmentService.setCurrentEnvironment(result.data);
                     return result.data;
                 });
             }

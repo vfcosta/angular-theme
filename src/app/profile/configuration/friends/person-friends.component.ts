@@ -16,7 +16,7 @@ export class PersonFriendsComponent {
     private total: number;
     searchChanged: Subject<string> = new Subject<string>();
 
-    constructor(@Inject('personService') private personService: PersonService,
+    constructor(private personService: PersonService,
                 @Inject('$stateParams') $stateParams: ng.ui.IStateParamsService) {
 
         this.search = $stateParams['search'];
@@ -38,7 +38,7 @@ export class PersonFriendsComponent {
             order: 'name ASC'
         };
         this.personService.getFriends(this.profile.id, filters).then((result: noosfero.RestResult<noosfero.Person[]>) => {
-            this.total = <number>result.headers("total");
+            this.total = <number>result.headers.get("total");
             this.friends = result.data;
         });
     }
