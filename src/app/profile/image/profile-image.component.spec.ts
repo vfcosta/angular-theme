@@ -1,3 +1,7 @@
+import { NotificationService } from './../../shared/services/notification.service';
+import { EventsHubService } from './../../shared/services/events-hub.service';
+import { AuthService } from './../../login/auth.service';
+import { PermissionService } from './../../shared/services/permission.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -26,18 +30,17 @@ describe("Components", () => {
                 declarations: [ProfileImageComponent, TranslatePipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
-                    { provide: "notificationService", useValue: helpers.mocks.notificationService },
-                    { provide: "profileService", useValue: profileService },
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService },
-                    { provide: "permissionService", useValue: permissionService },
-                    { provide: "sessionService", useValue: helpers.mocks.sessionService },
+                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
+                    { provide: ProfileService, useValue: profileService },
+                    { provide: EventsHubService, useValue: mocks.eventsHubService },
+                    { provide: PermissionService, useValue: permissionService },
+                    { provide: AuthService, useValue: helpers.mocks.authService },
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(ProfileImageComponent);
-                component = fixture.componentInstance;
-                component.profile = <any>{ custom_footer: "footer" };
-                component.editable = true;
             });
+            fixture = TestBed.createComponent(ProfileImageComponent);
+            component = fixture.componentInstance;
+            component.profile = <any>{ custom_footer: "footer" };
+            component.editable = true;
         }));
 
         it("show community users image if profile is not Person", () => {

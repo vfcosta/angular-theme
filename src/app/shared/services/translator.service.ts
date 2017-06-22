@@ -1,9 +1,7 @@
-import {Injectable, Inject} from "ng-forward";
+import {Injectable, Inject} from "@angular/core";
 import * as moment from 'moment';
 
-
 @Injectable()
-@Inject("$translate", "tmhDynamicLocale", "amMoment", "angularLoad", "$rootScope")
 export class TranslatorService {
 
     availableLanguages = {
@@ -18,11 +16,9 @@ export class TranslatorService {
         // "it" : "Italiano"
     };
 
-    constructor(private $translate: angular.translate.ITranslateService,
-        private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
-        private amMoment: any,
-        private angularLoad: any,
-        private $rootScope: any) {
+    constructor(@Inject("$translate") private $translate: angular.translate.ITranslateService,
+        @Inject("tmhDynamicLocale") private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
+        @Inject("$rootScope") private $rootScope: any) {
 
         this.$rootScope.$on("$localeChangeSuccess", () => {
             this.changeLanguage(tmhDynamicLocale.get() || $translate.use());
@@ -38,7 +34,7 @@ export class TranslatorService {
             console.log("WARN: language undefined");
             return;
         }
-        this.changeMomentLocale(language);
+        moment.locale(language);
         this.tmhDynamicLocale.set(language);
         return this.$translate.use(language);
     }
@@ -49,16 +45,5 @@ export class TranslatorService {
 
     hasTranslation(text: string): boolean {
         return text !== this.translate(text);
-    }
-
-    private changeMomentLocale(language: string) {
-        let localePromise = Promise.resolve();
-        if (language !== "en") {
-            localePromise = this.angularLoad.loadScript(`/bower_components/moment/locale/${language}.js`);
-        }
-        localePromise.then(() => {
-            this.amMoment.changeLocale(language);
-            moment.locale(language);
-        });
     }
 }

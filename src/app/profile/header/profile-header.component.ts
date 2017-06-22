@@ -10,7 +10,7 @@ export class ProfileHeaderComponent {
     @Input() profile: noosfero.Profile;
     designMode = false;
 
-    constructor(@Inject('designModeService') public designModeService: DesignModeService) { }
+    constructor(public designModeService: DesignModeService) { }
      ngOnInit() {
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;

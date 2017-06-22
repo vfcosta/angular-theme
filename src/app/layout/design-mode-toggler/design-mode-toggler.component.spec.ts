@@ -1,14 +1,15 @@
+import { TranslatorService } from './../../shared/services/translator.service';
+import { DesignModeService } from './../../shared/services/design-mode.service';
+import { AuthService } from './../../login/auth.service';
 import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 import * as helpers from '../../../spec/helpers';
 import { DesignModeTogglerComponent } from './design-mode-toggler.component';
-import { INoosferoLocalStorage } from "./../../shared/models/interfaces";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 describe('DesignModeToggler Component', () => {
 
-    let $localStorage = <INoosferoLocalStorage>{ currentUser: null, settings: { designMode: false } };
     let mocks = helpers.getMocks();
     let fixture: ComponentFixture<DesignModeTogglerComponent>;
     let component: DesignModeTogglerComponent;
@@ -17,9 +18,9 @@ describe('DesignModeToggler Component', () => {
         TestBed.configureTestingModule({
             declarations: [DesignModeTogglerComponent, TranslatePipe],
             providers: [
-                { provide: "designModeService", useValue: mocks.designModeService },
-                { provide: "authService", useValue: mocks.authService },
-                { provide: "translatorService", useValue: mocks.translatorService }
+                { provide: DesignModeService, useValue: mocks.designModeService },
+                { provide: AuthService, useValue: mocks.authService },
+                { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         });
@@ -29,14 +30,13 @@ describe('DesignModeToggler Component', () => {
     }));
 
     it('display preview button if design mode is edit mode', () => {
-        TestBed.get("designModeService").setInDesignMode(true);
+        TestBed.get(DesignModeService).setInDesignMode(true);
         fixture.detectChanges();
         expect(all(".button-preview-mode").length).toEqual(1);
     });
 
     it('display edit button if design mode is not in edit mode', () => {
-        //mocks.designModeService.setInDesignMode(false);
-        TestBed.get("designModeService").setInDesignMode(false);
+        TestBed.get(DesignModeService).setInDesignMode(false);
         fixture.detectChanges();
         expect(all(".button-edit-mode").length).toEqual(1);
     });

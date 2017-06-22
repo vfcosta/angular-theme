@@ -1,10 +1,10 @@
-import { Directive, Inject, Injectable } from "ng-forward";
+import { LocalStorageService } from 'angular-2-local-storage';
+import { Directive, Inject, Injectable } from "@angular/core";
+import { DOCUMENT } from '@angular/platform-browser';
 import { AuthEvents } from "../../login/auth-events";
 import { AuthService } from "./../../login/auth.service";
 import { HtmlUtils } from "../html-utils";
-import { INgForwardJQuery } from 'ng-forward/cjs/util/jqlite-extensions';
 import { DesignModeService } from './design-mode.service';
-import { INoosferoLocalStorage } from "../../shared/models/interfaces";
 
 export interface StartParams {
     skin?: string;
@@ -24,7 +24,6 @@ export interface StartParams {
  *         - full-content
  */
 @Injectable()
-@Inject("$document", "$state", AuthService, DesignModeService, "localStorageService", "$transitions")
 export class BodyStateClassesService {
 
     private started: boolean = false;
@@ -38,12 +37,12 @@ export class BodyStateClassesService {
     private bodyElement: ng.IAugmentedJQuery = null;
 
     constructor(
-        private $document: ng.IDocumentService,
-        private $state: ng.ui.IStateService,
+        @Inject(DOCUMENT) private document: any,
+        @Inject("$state") private $state: ng.ui.IStateService,
         private authService: AuthService,
         private designModeService: DesignModeService,
-        private localStorageService: any,
-        private $transitions: any
+        private localStorageService: LocalStorageService,
+        @Inject("$transitions") private $transitions: any
     ) {
     }
 
@@ -53,7 +52,7 @@ export class BodyStateClassesService {
             this.setupStateClassToggle();
             this.setupDesignModeClassToggle();
             if (config) {
-                this.setThemeSkin(this.localStorageService.get('skin') || config.skin);
+                this.setThemeSkin(this.localStorageService.get<string>('skin') || config.skin);
             }
             this.started = true;
         }
@@ -66,7 +65,7 @@ export class BodyStateClassesService {
     }
 
     getThemeSkin() {
-        return this.localStorageService.get('skin');
+        return this.localStorageService.get<string>('skin');
     }
 
     addBodyClass(className: string) {
@@ -152,13 +151,13 @@ export class BodyStateClassesService {
      */
     private getBodyElement(): ng.IAugmentedJQuery {
         if (this.bodyElement === null) {
-            this.bodyElement = angular.element(this.$document.find("body"));
+            this.bodyElement = angular.element(angular.element(this.document).find("body"));
         }
         return this.bodyElement;
     }
 
-    private getContentWrapper(selector?: string): INgForwardJQuery {
-        let doc = <INgForwardJQuery>angular.element(this.$document);
+    private getContentWrapper(selector?: string) {
+        let doc = angular.element(this.document);
         return doc.query(selector || '.content-wrapper');
     }
 }

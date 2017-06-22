@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../shared/services/translator.service';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
@@ -17,7 +18,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [SearchFormComponent, TranslatePipe],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: "$state", useValue: mocks.$state }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

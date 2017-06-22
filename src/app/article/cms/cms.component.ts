@@ -8,13 +8,8 @@ import { BasicOptionsComponent } from './basic-options/basic-options.component';
 @Component({
     selector: 'article-cms',
     templateUrl: "app/article/cms/cms.html",
-    providers: [
-        provide('articleService', { useClass: ArticleService }),
-        provide('profileService', { useClass: ProfileService }),
-        provide('notificationService', { useClass: NotificationService })
-    ]
 })
-@Inject(ArticleService, ProfileService, "$state", NotificationService, "$stateParams", "$window", EventsHubService)
+@Inject("articleService", "profileService", "$state", "notificationService", "$stateParams", "$window", "eventsHubService")
 export class CmsComponent {
 
     article: noosfero.Article;
@@ -28,13 +23,13 @@ export class CmsComponent {
     path: string;
 
 
-    constructor(private ArticleService: ArticleService,
+    constructor(private articleService: ArticleService,
         private profileService: ProfileService,
         private $state: ng.ui.IStateService,
         private notificationService: NotificationService,
         private $stateParams: ng.ui.IStateParamsService,
         private $window: ng.IWindowService,
-        private EventsHubService: EventsHubService) {
+        private eventsHubService: EventsHubService) {
 
         this.parentId = this.$stateParams['parent_id'];
         this.profileIdentifier = this.$stateParams["profile"];
@@ -47,12 +42,12 @@ export class CmsComponent {
         });
 
         if (this.parentId) {
-            this.ArticleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
+            this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
                 this.parent = result.data;
             });
         }
         if (this.id) {
-            this.ArticleService.get(this.id).then((result: noosfero.RestResult<noosfero.Article>) => {
+            this.articleService.get(this.id).then((result: noosfero.RestResult<noosfero.Article>) => {
                 this.article = result.data;
                 this.article.name = this.article.title; // FIXME
             });
@@ -66,11 +61,11 @@ export class CmsComponent {
 
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             if (this.id) {
-                return this.ArticleService.updateArticle(this.article);
+                return this.articleService.updateArticle(this.article);
             } else if (this.parentId) {
-                return this.ArticleService.createInParent(this.parentId, this.article);
+                return this.articleService.createInParent(this.parentId, this.article);
             } else {
-                return this.ArticleService.createInProfile(profile, this.article);
+                return this.articleService.createInProfile(profile, this.article);
             }
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
@@ -78,7 +73,7 @@ export class CmsComponent {
             this.notificationService.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message` });
         }).catch((error: any) => {
             this.loading = false;
-            this.EventsHubService.emitEvent(this.EventsHubService.knownEvents.ARTICLE_SAVE_ERROR, error);
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.ARTICLE_SAVE_ERROR, error);
             this.notificationService.error({ message: "article.basic_editor.save.failed" });
         });
     }

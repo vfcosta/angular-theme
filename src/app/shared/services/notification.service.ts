@@ -1,5 +1,7 @@
-import { Injectable, Inject } from "ng-forward";
+import { ViewContainerRef, Injectable, Inject } from "@angular/core";
 import { TranslatorService } from "./translator.service";
+import { SweetAlertType } from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 enum NotificationType {
     Toast = 1,
@@ -7,19 +9,14 @@ enum NotificationType {
 }
 
 @Injectable()
-@Inject("$log", "SweetAlert", TranslatorService, "toastr")
 export class NotificationService {
 
     static get NotificationType() {
         return NotificationType;
     }
 
-    constructor(
-        private $log: ng.ILogService,
-        private SweetAlert: any,
-        private translatorService: TranslatorService,
-        private toastr: angular.toastr.IToastrService
-    ) { }
+    constructor(@Inject("sweetAlert") private sweetAlert: Function, private translatorService: TranslatorService,
+        private toastr: ToastrService) { }
 
     public static DEFAULT_ERROR_TITLE = "notification.error.default.title";
     public static DEFAULT_ERROR_MESSAGE = "notification.error.default.message";
@@ -87,18 +84,17 @@ export class NotificationService {
     }
 
     private showMessage({ title = '', text = '', type = "success", timer = NotificationService.DEFAULT_SUCCESS_TIMER, showConfirmButton = true, showCancelButton = false, closeOnConfirm = true }, confirmationFunction: Function = null) {
-        this.$log.debug("Notification message:", title, text, type, this.translatorService.currentLanguage());
-        this.SweetAlert.swal({
+        this.sweetAlert({
             title: this.translatorService.translate(title),
             text: this.translatorService.translate(text),
-            type: type,
+            type: <SweetAlertType>type,
             timer: timer,
             showConfirmButton: showConfirmButton,
             showCancelButton: showCancelButton,
-            closeOnConfirm: closeOnConfirm
-        }, confirmationFunction ? (isConfirm: boolean) => {
-            if (isConfirm) confirmationFunction();
-        } : null);
+        }).then(
+            (success) => { if (confirmationFunction) confirmationFunction(); },
+            (dismiss) => {}
+        );
     }
 
     private toastrOptions(options = {}) {

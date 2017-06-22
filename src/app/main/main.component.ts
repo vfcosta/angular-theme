@@ -1,12 +1,3 @@
-import { BlockService } from './../../lib/ng-noosfero-api/http/block.service';
-import { RoleService } from './../../lib/ng-noosfero-api/http/role.service';
-import { RegisterService } from '../../lib/ng-noosfero-api/http/register.service';
-import { PasswordService } from '../../lib/ng-noosfero-api/http/password.service';
-import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
-import { CommentService } from './../../lib/ng-noosfero-api/http/comment.service';
-import { CommentParagraphService } from './../../plugins/comment_paragraph/http/comment-paragraph.service';
-import { CommentParagraphEventService } from './../../plugins/comment_paragraph/events/comment-paragraph-event.service';
-import { PermissionService } from './../shared/services/permission.service';
 import * as plugins from '../../plugins';
 import { RegisterComponent } from '../account/register.component';
 import { DomainComponent } from '../domain/domain.component';
@@ -14,27 +5,18 @@ import { BlockContentComponent } from '../layout/blocks/block-content.component'
 import { BlockComponent } from '../layout/blocks/block.component';
 import { MainBlockComponent } from '../layout/blocks/main/main-block.component';
 import { BoxesComponent } from '../layout/boxes/boxes.component';
-import { AuthService } from '../login/auth.service';
 import { PasswordComponent } from '../login/new-password.component';
-import { SessionService } from '../login/session.service';
 import { ProfileComponent } from '../profile/profile.component';
 import { SearchComponent } from '../search/search.component';
 import { BootstrapResizableDirective } from '../shared/components/bootstrap-resizable/bootstrap-resizable.directive';
 import { PermissionDirective } from '../shared/components/permission/permission.directive';
 import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
-import { NotificationService } from '../shared/services/notification.service';
-import { CommunityService } from './../../lib/ng-noosfero-api/http/community.service';
-import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
-import { SettingsService } from './../../lib/ng-noosfero-api/http/settings.service';
-import { UserService } from './../../lib/ng-noosfero-api/http/user.service';
 import { BodyStateClassesService } from './../shared/services/body-state-classes.service';
 import { Component, Inject, provide } from 'ng-forward';
-import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
 /**
  * @ngdoc controller
  * @name main.MainContentComponent
- * @requires AuthService, Session
  * @descrition
  *  This controller actually contains the main content of Noosfero Angular Theme:
  *  - the navbar
@@ -44,9 +26,8 @@ import { TaskService } from './../../lib/ng-noosfero-api/http/task.service';
 @Component({
     selector: 'main-content',
     templateUrl: "app/main/main.html",
-    providers: [AuthService, SessionService]
 })
-@Inject(BodyStateClassesService)
+@Inject("bodyStateClassesService", "eventsHubService")
 export class MainContentComponent {
 
     public themeSkin: string = 'skin-default';
@@ -63,7 +44,6 @@ export class MainContentComponent {
 @Component({
     selector: 'environment-content',
     templateUrl: "app/main/main.html",
-    providers: [AuthService, SessionService]
 })
 export class EnvironmentContent {
 
@@ -95,24 +75,18 @@ export class EnvironmentContent {
         BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
-    providers: [AuthService, SessionService, NotificationService, BodyStateClassesService, CommunityService, UserService,
-        PermissionService, PasswordService, CommentParagraphEventService, CommentParagraphService, CommentService,
-        TaskService, ArticleService, RegisterService, RoleService, BlockService,
-        "ngAnimate", "ngCookies", "LocalStorageModule", "ngTouch", "ngSanitize", "ngMessages", "ngAria", "restangular",
-        "ui.router", "ui.bootstrap", "toastr", "angular-bind-html-compile", "angularMoment",
-        "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll", "oitozero.ngSweetAlert",
-        "pascalprecht.translate", "tmh.dynamicLocale", "angularLoad", "angular-click-outside", "ngTagCloud",
+    providers: [
+        "ngAnimate", "ngCookies", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
+        "ui.router", "ui.bootstrap", "angular-bind-html-compile",
+        "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll",
+        "pascalprecht.translate", "tmh.dynamicLocale", "angular-click-outside", "ngTagCloud",
         "noosfero.init", "ngFileUpload", "ngImgCrop", "angular-ladda", "focus-if",
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
-        "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar",
-        provide('bodyStateClassesService', { useClass: BodyStateClassesService }),
-        provide('SettingsService', { useClass: SettingsService }),
-        provide('environmentService', { useClass: EnvironmentService }),
-        provide('eventsHubService', { useClass: EventsHubService })
+        "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar"
     ]
 })
-@Inject(EnvironmentService)
+@Inject("environmentService")
 export class MainComponent {
 
 }

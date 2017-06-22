@@ -27,7 +27,7 @@ describe('Profile about component', () => {
             template: htmlTemplate,
             directives: [ProfileAboutComponent],
             providers: [
-                helpers.createProviderToValue('ProfileService', profileService)
+                helpers.createProviderToValue('profileService', profileService)
             ]
         });
         helper = new ComponentTestHelper<ProfileAboutComponent>(cls, done);

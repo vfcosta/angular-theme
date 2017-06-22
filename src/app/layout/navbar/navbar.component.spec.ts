@@ -1,3 +1,7 @@
+import { TranslatorService } from './../../shared/services/translator.service';
+import { AuthService } from './../../login/auth.service';
+import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
+import { SessionService } from './../../login/session.service';
 import { HeaderService } from './../../shared/services/header.service';
 import { CollapseModule } from 'ngx-bootstrap';
 import { NavbarComponent } from './navbar.component';
@@ -28,12 +32,12 @@ describe("Components", () => {
                 declarations: [NavbarComponent, TranslatePipe],
                 providers: [
                     { provide: "$uibModal", useValue: mocks.$modal },
-                    { provide: "authService", useValue: mocks.authService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: AuthService, useValue: mocks.authService },
+                    { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "environmentService", useValue: mocks.environmentService },
+                    { provide: EnvironmentService, useValue: mocks.environmentService },
                     { provide: HeaderService, useValue: mocks.headerService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [CollapseModule.forRoot()]

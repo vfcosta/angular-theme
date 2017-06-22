@@ -1,3 +1,4 @@
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { ProfileImageBlockComponent } from './profile-image-block.component';
 import * as helpers from "./../../../../spec/helpers";
 import { By } from '@angular/platform-browser';
@@ -15,7 +16,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ProfileImageBlockComponent],
                 providers: [
-                    { provide: "blockService", useValue: mocks.blockService }
+                    { provide: BlockService, useValue: mocks.blockService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA]
             }).compileComponents().then(() => {

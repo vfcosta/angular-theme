@@ -1,12 +1,12 @@
-import { Injectable, Inject } from "ng-forward";
+import { Restangular } from 'ngx-restangular';
+import { Injectable } from "@angular/core";
 import { RestangularService } from "./restangular_service";
 
 @Injectable()
-@Inject("Restangular", "$q", "$log")
 export class DomainService extends RestangularService<noosfero.Domain> {
 
-    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
-        super(Restangular, $q, $log);
+    constructor(protected restangular: Restangular) {
+        super(restangular);
     }
 
     getResourcePath() {
@@ -19,5 +19,4 @@ export class DomainService extends RestangularService<noosfero.Domain> {
             plural: 'domains'
         };
     }
-
 }

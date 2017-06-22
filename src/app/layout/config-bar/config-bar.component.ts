@@ -12,7 +12,7 @@ export class ConfigBarComponent {
 
     designModeOn = false;
 
-    constructor( @Inject("$scope") public $scope: ng.IScope, @Inject('designModeService') public designModeService: DesignModeService) {
+    constructor( @Inject("$scope") public $scope: ng.IScope, public designModeService: DesignModeService) {
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;
             this.$scope.$apply();

@@ -29,7 +29,7 @@ export class ActivityComponent {
 
     environment: noosfero.Environment;
 
-    constructor(@Inject("environmentService") private environmentService: EnvironmentService) {
+    constructor(private environmentService: EnvironmentService) {
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
         });

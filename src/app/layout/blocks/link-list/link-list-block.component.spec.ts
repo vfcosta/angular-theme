@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
 import { NoosferoTemplatePipe } from './../../../shared/pipes/noosfero-template.ng2.filter';
 import { provideFilters } from '../../../../spec/helpers';
 import * as helpers from "../../../../spec/helpers";
@@ -20,7 +21,7 @@ describe("Components", () => {
                 declarations: [LinkListBlockComponent, TranslatePipe, NoosferoTemplatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService },
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
                     { provide: "noosferoTemplate", useValue: noosferoTemplate }
                 ]
             });

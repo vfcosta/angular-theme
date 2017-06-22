@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { DateFormatPipe } from './../../../../app/shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
@@ -20,7 +21,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [CommentParagraphArticleContentHotspotComponent, DiscussionPeriodComponent, TranslatePipe, DateFormatPipe],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: ArticleContentHotspotComponent, useValue: articleContentHotspotComponent }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

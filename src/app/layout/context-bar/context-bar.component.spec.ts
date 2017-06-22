@@ -1,3 +1,10 @@
+import { NotificationService } from './../../shared/services/notification.service';
+import { TranslatorService } from './../../shared/services/translator.service';
+import { EventsHubService } from './../../shared/services/events-hub.service';
+import { DesignModeService } from './../../shared/services/design-mode.service';
+import { BlockService } from './../../../lib/ng-noosfero-api/http/block.service';
+import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { Component } from '@angular/core';
 import { ContextBarComponent } from './context-bar.component';
 import * as helpers from "../../../spec/helpers";
@@ -24,13 +31,13 @@ describe("Context Bar Component", () => {
             providers: [
                 { provide: "$state", useValue: state },
                 { provide: "$scope", useValue: mocks.scopeWithEvents() },
-                { provide: "eventsHubService", useValue: mocks.eventsHubService },
-                { provide: "blockService", useValue: mocks.blockService },
-                { provide: "notificationService", useValue: mocks.notificationService },
-                { provide: "designModeService", useValue: mocks.designModeService },
-                { provide: 'profileService', useValue: mocks.profileService },
-                { provide: 'environmentService', useValue: mocks.environmentService },
-                { provide: 'translatorService', useValue: mocks.translatorService }
+                { provide: EventsHubService, useValue: mocks.eventsHubService },
+                { provide: BlockService, useValue: mocks.blockService },
+                { provide: NotificationService, useValue: mocks.notificationService },
+                { provide: DesignModeService, useValue: mocks.designModeService },
+                { provide: ProfileService, useValue: mocks.profileService },
+                { provide: EnvironmentService, useValue: mocks.environmentService },
+                { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]
         });
@@ -123,9 +130,9 @@ describe("Context Bar Component", () => {
     it("disable edit mode when changes were applied successfully", fakeAsync(() => {
         component.blocksChanged = <any>[{ id: 5, _destroy: true, box: { id: 6 } }];
         component.apply();
-        TestBed.get('designModeService').setInDesignMode(true);
+        TestBed.get(DesignModeService).setInDesignMode(true);
         tick();
-        expect(TestBed.get('designModeService').isInDesignMode()).toBeFalsy();
+        expect(TestBed.get(DesignModeService).isInDesignMode()).toBeFalsy();
     }));
 
     it("render template context-bar if block is marked for removal", () => {

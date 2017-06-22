@@ -1,3 +1,8 @@
+import { NotificationService } from './../../../shared/services/notification.service';
+import { TranslatorService } from './../../../shared/services/translator.service';
+import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
+import { SessionService } from './../../../login/session.service';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { ValidationMessageComponent } from './../../../shared/components/validation-message/validation-message.component';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { EditCommunityComponent } from './edit-community.component';
@@ -21,12 +26,12 @@ describe("Components", () => {
                 imports: [FormsModule],
                 declarations: [EditCommunityComponent, TranslatePipe, ValidationMessageComponent],
                 providers: [
-                    { provide: "profileService", useValue: mocks.profileService },
-                    { provide: "communityService", useValue: mocks.communityService },
-                    { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
+                    { provide: ProfileService, useValue: mocks.profileService },
+                    { provide: CommunityService, useValue: mocks.communityService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
+                    { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });

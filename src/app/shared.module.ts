@@ -3,7 +3,7 @@ import { HtmlEditorComponent } from './shared/components/html-editor/html-editor
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { CommentFormHotspotComponent } from './hotspot/comment-form-hotspot.component';
 import { ProfileImageComponent } from './profile/image/profile-image.component';
-import { PaginationModule } from 'ngx-bootstrap/ng2-bootstrap';
+import { PaginationModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
 import { PostCommentComponent } from './article/comment/post-comment/post-comment.component';
 import { DateFormatPipe } from './shared/pipes/date-format.pipe';

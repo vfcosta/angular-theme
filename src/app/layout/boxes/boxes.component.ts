@@ -6,7 +6,7 @@ import { EventsHubService } from "../../shared/services/events-hub.service";
     selector: "noosfero-boxes",
     templateUrl: "app/layout/boxes/boxes.html"
 })
-@Inject("$scope", DesignModeService, EventsHubService)
+@Inject("$scope", "designModeService", "eventsHubService")
 export class BoxesComponent {
 
     @Input() boxes: noosfero.Box[];
