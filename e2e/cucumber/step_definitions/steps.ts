@@ -44,6 +44,10 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return element(by.css(stringInDoubleQuotes)).click();
     });
 
+    When('I press first {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
+        return element.all(by.css(stringInDoubleQuotes)).first().click();
+    });
+
     Then('I should be logged in as {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
         return expect(element(by.css('#navbar .profile-link .truncated-profile-name')).getText()).to.eventually.equal(stringInDoubleQuotes);
     });
@@ -60,6 +64,10 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Given('I go to {stringInDoubleQuotes} profile', (profile) => {
         return browser.setLocation(`/${profile}`);
+    });
+
+    Given('I go to {stringInDoubleQuotes}', (page) => {
+        return browser.setLocation(page);
     });
 
     Given('I enter in edit mode', () => {
@@ -112,6 +120,10 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Then('I should see success message {stringInDoubleQuotes}', (selector) => {
         return expect(element(by.css(selector)).getText()).to.eventually.contain("sucesso");
+    });
+
+    Then('I should see {stringInDoubleQuotes} as message', (message) => {
+        return expect(element(by.css("#toast-container")).getText()).to.eventually.contain(message);
     });
 
     Then('I should see welcome message {stringInDoubleQuotes}', (selector) => {
@@ -168,5 +180,9 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
                 });
             }
         });
+    });
+
+    When('I press ok on confirmation dialog', () => {
+        return element(by.css(".swal2-confirm")).click();
     });
 });
