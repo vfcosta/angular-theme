@@ -22,7 +22,8 @@ Feature: manage profile
     Then I see "top-profile-image.jpg" as top image
 
   Scenario: create a new post for profile
-    Given I press ".profile-menu .new-item-button"
+    Given article "new-article-from-e2e-test" doesn't exists on "adminuser"
+    And I press ".profile-menu .new-item-button"
     And I press ".profile-menu .new-post"
     When I fill in the following:
       | #titleInput | New article from e2e test |
@@ -30,7 +31,8 @@ Feature: manage profile
     Then I should be on "/adminuser/new-article-from-e2e-test"
 
   Scenario: create a new discussion on profile
-    Given I press ".profile-menu .new-item-button"
+    Given article "new-discussion-from-e2e-test" doesn't exists on "adminuser"
+    And I press ".profile-menu .new-item-button"
     And I press ".profile-menu .new-discussion"
     When I fill in the following:
       | #titleInput | New discussion from e2e test |
@@ -40,4 +42,4 @@ Feature: manage profile
   Scenario: delete the profile
     Given I press ".profile-setup .btn"
     When I press ".destroy-profile"
-    Then I see ".showSweetAlert.visible"
+    Then I see ".swal2-container.swal2-shown"

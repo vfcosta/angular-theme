@@ -21,6 +21,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Then('I should be on {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
+        browser.waitForAngular();
         return expect(browser.getCurrentUrl()).to.eventually.equal(`http://localhost:3001${stringInDoubleQuotes}`);
     });
 
@@ -116,6 +117,19 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     Then('I should see the list {stringInDoubleQuotes}', (selector) => {
         return element.all(by.css(selector)).count().then( total => {
             return expect(element.all(by.css(selector)).count()).to.eventually.equal(total);
+        });
+    });
+
+    Given('article {stringInDoubleQuotes} doesn\'t exists on {stringInDoubleQuotes}', (article, profile) => {
+        return browser.get(`/${profile}/${article}`).then(() => {
+            return browser.getCurrentUrl();
+        }).then((url) => {
+            if (url === `http://localhost:3001/${profile}/${article}`) {
+                browser.waitForAngular();
+                return element(by.css(".delete-article")).click().then(() => {
+                    return element(by.css(".swal2-confirm")).click();
+                });
+            }
         });
     });
 });
