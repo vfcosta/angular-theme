@@ -16,7 +16,10 @@ Feature: login
     Then I should be logged in as "adminuser"
 
   Scenario: successfully signup as a new user
-    Given I follow "#navbar .signup"
+    Given I login with "adminuser", "admin"
+    And profile "josesilva" doesn't exists
+    And I am logged out
+    And I follow "#navbar .signup"
     And I fill in the following:
       | #name | José Silva |
       | #login| josesilva |
@@ -24,6 +27,7 @@ Feature: login
       | #password| 123456 |
       | #passwordConfirm| 123456 |
     And I press ".submit-button"
+    And I wait for angular to render
     Then I should be on the homepage
 
   Scenario: see error message when trying to signup with an existing username

@@ -44,6 +44,10 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return element(by.css(stringInDoubleQuotes)).click();
     });
 
+    When('I press first {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
+        return element.all(by.css(stringInDoubleQuotes)).first().click();
+    });
+
     Then('I should be logged in as {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
         return expect(element(by.css('#navbar .profile-link .truncated-profile-name')).getText()).to.eventually.equal(stringInDoubleQuotes);
     });
@@ -60,6 +64,10 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Given('I go to {stringInDoubleQuotes} profile', (profile) => {
         return browser.setLocation(`/${profile}`);
+    });
+
+    Given('I go to {stringInDoubleQuotes}', (page) => {
+        return browser.setLocation(page);
     });
 
     Given('I enter in edit mode', () => {
@@ -114,6 +122,27 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return expect(element(by.css(selector)).getText()).to.eventually.contain("sucesso");
     });
 
+    Then('I should see {stringInDoubleQuotes} as message', (message) => {
+        return expect(element(by.css("#toast-container")).getText()).to.eventually.contain(message);
+    });
+
+    Then('I should see welcome message {stringInDoubleQuotes}', (selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.contain("Bem vindo");
+    });
+
+    Given('I wait for angular to render', () => {
+        return browser.waitForAngular();
+    });
+
+    Then('I should see enter community button {stringInDoubleQuotes}', (selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.contain("Entrar");
+    });
+
+    Then('I should see profile removed message {stringInDoubleQuotes}', (selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.contain("Perfil removido");
+    });
+
+
     Then('I should see the list {stringInDoubleQuotes}', (selector) => {
         return element.all(by.css(selector)).count().then( total => {
             return expect(element.all(by.css(selector)).count()).to.eventually.equal(total);
@@ -131,5 +160,40 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
                 });
             }
         });
+    });
+
+    Given('profile {stringInDoubleQuotes} doesn\'t exists', (profile) => {
+        return browser.get(`/myprofile/${profile}/destroy_profile`).then(() => {
+            browser.waitForAngular();
+            return element(by.css(".swal2-confirm")).isPresent().then((present) => {
+                if (present) {
+                    return element(by.css(".swal2-confirm")).click();
+                }
+            });
+        });
+    });
+
+    Given('I create community to destroy', () => {
+        return browser.get('/e2e-community').then(() => {
+            return browser.getCurrentUrl();
+        }).then( (url) => {
+            if (url === 'http://localhost:3001') {
+                return browser.get('/myprofile/adminuser').then( () => {
+                    return element(by.css('ul li .communities')).click().then( () => {
+                        return element(by.css('.create-community')).click().then( () => {
+                            return element(by.css('#name')).sendKeys('E2e community').then( () => {
+                                return element(by.css('#acceptAfter')).click().then( () => {
+                                    return element(by.css('.save-community')).click();
+                                });
+                            });
+                        });
+                    });
+                });
+            }
+        });
+    });
+
+    When('I press ok on confirmation dialog', () => {
+        return element(by.css(".swal2-confirm")).click();
     });
 });
