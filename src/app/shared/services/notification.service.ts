@@ -67,7 +67,7 @@ export class NotificationService {
     }
 
     confirmation({ title = '', message = '', showCancelButton = true, type = "warning" }, confirmationFunction: Function) {
-        this.showMessage({ title: title, text: message, showCancelButton: showCancelButton, type: type, closeOnConfirm: true }, confirmationFunction);
+        this.showMessage({ title: title, text: message, showCancelButton: showCancelButton, type: type, closeOnConfirm: true, timer: null }, confirmationFunction);
     }
 
     info({
