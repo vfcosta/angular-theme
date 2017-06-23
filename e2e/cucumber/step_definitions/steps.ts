@@ -1,4 +1,5 @@
 import { defineSupportCode } from 'cucumber';
+import { Http, Response } from '@angular/http';
 import { browser, by, element } from 'protractor';
 import { protractor } from 'protractor/built';
 
@@ -115,6 +116,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Then('I see {stringInDoubleQuotes} as {stringInDoubleQuotes} value', (text, selector) => {
+        browser.waitForAngular();
         return expect(element(by.css(selector)).getText()).to.eventually.equal(text);
     });
 
@@ -174,22 +176,16 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I create community to destroy', () => {
-        return browser.get('/e2e-community').then(() => {
-            return browser.getCurrentUrl();
-        }).then( (url) => {
-            if (url === 'http://localhost:3001') {
-                return browser.get('/myprofile/adminuser').then( () => {
-                    return element(by.css('ul li .communities')).click().then( () => {
-                        return element(by.css('.create-community')).click().then( () => {
-                            return element(by.css('#name')).sendKeys('E2e community').then( () => {
-                                return element(by.css('#acceptAfter')).click().then( () => {
-                                    return element(by.css('.save-community')).click();
-                                });
-                            });
+        return browser.get('/myprofile/adminuser').then( () => {
+            return element(by.css('ul li .communities')).click().then( () => {
+                return element(by.css('.create-community')).click().then( () => {
+                    return element(by.css('#name')).sendKeys('E2e community').then( () => {
+                        return element(by.css('#acceptAfter')).click().then( () => {
+                            return element(by.css('.save-community')).click();
                         });
                     });
                 });
-            }
+            });
         });
     });
 
