@@ -8,6 +8,8 @@ $fa-font-path: "../../bower_components/font-awesome/fonts";
 @import "../../bower_components/font-awesome/scss/font-awesome.scss";
 @import "layout/scss/variables";
 @import "../../node_modules/dragula/dist/dragula.css";
+@import "../../node_modules/sweetalert2/dist/sweetalert2.min.css";
+@import '../../node_modules/ngx-toastr/toastr';
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject

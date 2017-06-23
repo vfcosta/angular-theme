@@ -1,3 +1,7 @@
+import { NotificationService } from './../../../shared/services/notification.service';
+import { TranslatorService } from './../../../shared/services/translator.service';
+import { SessionService } from './../../../login/session.service';
+import { CommentService } from './../../../../lib/ng-noosfero-api/http/comment.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../../spec/helpers";
@@ -17,10 +21,10 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [PostCommentComponent, TranslatePipe],
                 providers: [
-                    { provide: "commentService", useValue: mocks.commentService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
-                    { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: CommentService, useValue: mocks.commentService },
+                    { provide: SessionService, useValue: mocks.sessionService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [FormsModule]

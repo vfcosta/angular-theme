@@ -26,10 +26,10 @@ export class ProfilePersonalDataComponent {
 
     errors: any;
 
-    constructor( @Inject("profileService") private profileService: ProfileService,
-        @Inject("notificationService") private notificationService: NotificationService,
+    constructor(private profileService: ProfileService,
+        private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject("translatorService") private translatorService: TranslatorService) { }
+        private translatorService: TranslatorService) { }
 
     ngOnInit() {
         this.cloneProfile();

@@ -7,7 +7,7 @@ import { TranslatorService } from "../../shared/services/translator.service";
 })
 export class LanguageSelectorComponent {
 
-    constructor(@Inject("translatorService") private translatorService: TranslatorService) { }
+    constructor(private translatorService: TranslatorService) { }
 
     currentLanguage() {
         return this.translatorService.currentLanguage();

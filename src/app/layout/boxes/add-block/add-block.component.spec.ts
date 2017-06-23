@@ -1,3 +1,7 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
+import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
+import { SettingsService } from './../../../../lib/ng-noosfero-api/http/settings.service';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
@@ -18,10 +22,10 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [AddBlockComponent, TranslatePipe],
                 providers: [
-                    { provide: "settingsService", useValue: mocks.settingsService },
-                    { provide: "profileService", useValue: mocks.profileService },
-                    { provide: "environmentService", useValue: mocks.environmentService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: SettingsService, useValue: mocks.settingsService },
+                    { provide: ProfileService, useValue: mocks.profileService },
+                    { provide: EnvironmentService, useValue: mocks.environmentService },
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [NgPipesModule, ModalModule.forRoot(), FormsModule]
@@ -32,21 +36,21 @@ describe("Components", () => {
 
         it("load available blocks", () => {
             component.loadAvailableBlocks();
-            expect(TestBed.get('settingsService').getAvailableBlocks).toHaveBeenCalled();
+            expect(TestBed.get(SettingsService).getAvailableBlocks).toHaveBeenCalled();
         });
 
         it("emit event when add block", fakeAsync(() => {
             spyOn(component.onAdd, 'emit');
-            TestBed.get('profileService').getBlockTemplate = jasmine.createSpy('createAccount').and.returnValue(Promise.resolve({api_content: [] }));
+            TestBed.get(ProfileService).getBlockTemplate = jasmine.createSpy('createAccount').and.returnValue(Promise.resolve({api_content: [] }));
             component.owner = <any>{id: 54};
             component.addBlock(<noosfero.Block>{ type: 'RecentDocumentsBlock'});
             tick();
-            expect(TestBed.get('profileService').getBlockTemplate).toHaveBeenCalledWith(component.owner.id, 'RecentDocumentsBlock');
+            expect(TestBed.get(ProfileService).getBlockTemplate).toHaveBeenCalledWith(component.owner.id, 'RecentDocumentsBlock');
             expect(component.onAdd.emit).toHaveBeenCalled();
         }));
 
         it("filter blocks by whitelist when load available blocks", fakeAsync(() => {
-            TestBed.get('settingsService').getAvailableBlocks = jasmine.createSpy("getAvailableBlocks").and.returnValue(Promise.resolve({
+            TestBed.get(SettingsService).getAvailableBlocks = jasmine.createSpy("getAvailableBlocks").and.returnValue(Promise.resolve({
                 data: [
                     {type: 'RawHTMLBlock'},
                     {type: 'OtherInvalidBlock'},

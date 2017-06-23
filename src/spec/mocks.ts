@@ -240,11 +240,6 @@ export var mocks: any = {
     amMoment: {
         changeLocale: () => { }
     },
-    angularLoad: {
-        loadScript: (script?: string) => {
-            return Promise.resolve();
-        }
-    },
     promiseResultTemplate: (response?: {}, callCatch = true) => {
         let callback = (func?: (response: any) => any) => {
             if (func) {
@@ -260,9 +255,6 @@ export var mocks: any = {
             finally: callback,
             catch: catchCallback
         };
-    },
-    $log: {
-        debug: () => { }
     },
     translatorService: {
         currentLanguage: () => { },
@@ -444,11 +436,11 @@ export function getMocks() {
             instant: () => { },
             update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile),
             remove: () => { return Promise.resolve({data: {success: true}}); },
-            getBlockTemplate: (id: any, type: string) => { return   Promise.resolve({api_content: [] }); }
+            getBlockTemplate: (id: any, type: string) => { return   Promise.resolve({api_content: [] }); },
+            getTags: () => { }
         },
         personService: {
-            search: () => Observable.of([mocks.profile]),
-            getTags: () => { }
+            search: () => Observable.of([mocks.profile])
         },
         communityService: {
             sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),
@@ -456,7 +448,8 @@ export function getMocks() {
         },
         sessionService: {
             currentUser: () => <noosfero.User>{ person: { id: 1, identifier: 'test_user' } },
-            currentPerson: () => <noosfero.Person>{ id: 1 }
+            currentPerson: () => <noosfero.Person>{ id: 1 },
+            destroy: () => {}
         },
         commentService: {
             subscribeToModelRemoved: (fn: Function) => { },
@@ -506,11 +499,6 @@ export function getMocks() {
         amMoment: {
             changeLocale: () => { }
         },
-        angularLoad: {
-            loadScript: (script?: string) => {
-                return Promise.resolve();
-            }
-        },
         promiseResultTemplate: (response?: {}) => {
             let callback = (func?: (response: any) => any) => {
                 if (func) {
@@ -524,9 +512,6 @@ export function getMocks() {
                 finally: callback,
                 catch: callback
             };
-        },
-        $log: {
-            debug: () => { }
         },
         translatorService: {
             currentLanguage: () => { },

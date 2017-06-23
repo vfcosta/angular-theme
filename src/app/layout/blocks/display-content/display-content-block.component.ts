@@ -16,7 +16,7 @@ export class DisplayContentBlockComponent {
 
     documentsLoaded: boolean = false;
 
-    constructor(@Inject('articleService') private articleService: ArticleService) { }
+    constructor(private articleService: ArticleService) { }
 
     ngOnInit() {
         this.profile = this.owner;

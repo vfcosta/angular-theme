@@ -1,3 +1,5 @@
+import { TranslatorService } from './../../shared/services/translator.service';
+import { RoleService } from './../../../lib/ng-noosfero-api/http/role.service';
 import { By } from '@angular/platform-browser';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { TaskAcceptComponent } from './task-accept.component';
@@ -17,8 +19,8 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [TaskAcceptComponent],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
-                    { provide: "roleService", useValue: mocks.roleService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
+                    { provide: RoleService, useValue: mocks.roleService },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
             });

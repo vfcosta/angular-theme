@@ -1,3 +1,6 @@
+import { NotificationService } from './../../../shared/services/notification.service';
+import { TranslatorService } from './../../../shared/services/translator.service';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { PermissionNg2Directive } from './../../../shared/components/permission/permission.ng2.directive';
@@ -26,10 +29,10 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ArticleDefaultViewComponent, TranslatePipe, PermissionNg2Directive, DateFormatPipe],
                 providers: [
-                    { provide: "articleService", useValue: mocks.articleService },
+                    { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
-                    { provide: "translatorService", useValue: mocks.translatorService },
-                    { provide: "notificationService", useValue: mocks.notificationService }
+                    { provide: TranslatorService, useValue: mocks.translatorService },
+                    { provide: NotificationService, useValue: mocks.notificationService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [MomentModule]
@@ -91,8 +94,8 @@ describe("Components", () => {
          * notifyArticleRemovedListeners event
          */
         function simulateRemovedEvent() {
-            TestBed.get('notificationService').confirmation({ title: "Title", message: "Message" }, () => { });
-            TestBed.get('articleService').modelRemovedEventEmitter.next(article);
+            TestBed.get(NotificationService).confirmation({ title: "Title", message: "Message" }, () => { });
+            TestBed.get(ArticleService).modelRemovedEventEmitter.next(article);
         }
     });
 

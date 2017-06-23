@@ -7,7 +7,7 @@ exports.config = {
   rootElement: 'body',
   cucumberOpts: {
     require: ['e2e/cucumber/step_definitions/**/*.ts'],  // require step definition files before executing features
-    tags: [],                      // <string[]> (expression) only execute the features or scenarios with tags matching the expression
+    tags: '~@skip',                      // <string[]> (expression) only execute the features or scenarios with tags matching the expression
     strict: true,                  // <boolean> fail if there are any undefined or pending steps
     format: ["pretty"],            // <string[]> (type[:path]) specify the output format, optionally supply PATH to redirect formatter output (repeatable)
     dryRun: false,                 // <boolean> invoke formatters without executing steps

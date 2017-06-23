@@ -1,3 +1,5 @@
+import { TranslatorService } from './../../shared/services/translator.service';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { UiSrefDirective } from './../../shared/directives/ui-sref-directive';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
@@ -26,7 +28,9 @@ describe("Components", () => {
 
         profileService.getMembers = jasmine.createSpy("getMembers").and.returnValue(
             Promise.resolve({
-                headers: () => { },
+                headers: {
+                    get: (key: string) => { },
+                },
                 data: members
             }));
 
@@ -37,15 +41,14 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [CommunityMembersComponent, TranslatePipe, UiSrefDirective],
                 providers: [
-                    { provide: "profileService", useValue: profileService },
+                    { provide: ProfileService, useValue: profileService },
                     { provide: "$state", useValue: state },
-                    { provide: "translatorService", useValue: translatorService }
+                    { provide: TranslatorService, useValue: translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(CommunityMembersComponent);
-                component = fixture.componentInstance;
             });
+            fixture = TestBed.createComponent(CommunityMembersComponent);
+            component = fixture.componentInstance;
         }));
 
         it("load current profile", () => {

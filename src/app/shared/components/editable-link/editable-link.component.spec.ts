@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../services/translator.service';
 import { async, TestBed, ComponentFixture, fakeAsync, tick } from '@angular/core/testing';
 import { EditableLinkComponent } from './editable-link.component';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
@@ -22,7 +23,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 imports: [PopoverModule.forRoot(), FormsModule],
                 declarations: [EditableLinkComponent, TranslatePipe, NoosferoTemplatePipe],
-                providers: [{ provide: 'translatorService', useValue: helpers.mocks.translatorService }]
+                providers: [{ provide: TranslatorService, useValue: helpers.mocks.translatorService }]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(EditableLinkComponent);
                 component = fixture.componentInstance;

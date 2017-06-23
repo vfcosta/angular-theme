@@ -1,8 +1,9 @@
-
+import { MockBackend, MockConnection } from '@angular/http/testing';
 import {ngClass, TestComponentBuilder, ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 import {providers} from  'ng-forward/cjs/testing/providers';
 import {Injectable, Inject, Provider, Input, Output, EventEmitter, provide, Component} from 'ng-forward';
-
+import {ResponseOptions, Response, Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from "@angular/http";
+import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 
 export var ngforward = {
     providers: providers,
@@ -97,6 +98,41 @@ export class AngularServiceFactory {
     getHttpBackendService(): ng.IHttpBackendService {
         return this.getAngularService<ng.IHttpBackendService>("$httpBackend");
     }
+}
+
+export function provideMockBackend() {
+    return <any>[
+        BaseRequestOptions, MockBackend,
+        {
+            provide: RestangularHttp,
+            useFactory: (http: Http) => {
+                return new RestangularHttp(http);
+            },
+            deps: [Http]
+        },
+        {
+            provide: Http,
+            useFactory: (backendInstance: MockBackend, defaultOptions: BaseRequestOptions) => {
+                return new Http(backendInstance, defaultOptions);
+            },
+            deps: [MockBackend, BaseRequestOptions]
+        },
+    ];
+}
+
+export function mockBackendConnection(backend: MockBackend, url, body: any = {}, headers: any = {}, status: number = 200) {
+    backend.connections.subscribe((connection: MockConnection) => {
+        if (connection.request.url === url) {
+            let options = {
+                // body: JSON.stringify(body),
+                body: body,
+                headers: new Headers(headers),
+                status: status,
+            };
+            const response = new Response(new ResponseOptions(options));
+            connection.mockRespond(response);
+        }
+    });
 }
 
 export function getAngularServiceFactory() {

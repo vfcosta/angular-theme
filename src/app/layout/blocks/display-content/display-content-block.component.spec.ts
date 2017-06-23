@@ -1,3 +1,5 @@
+import { TranslatorService } from './../../../shared/services/translator.service';
+import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { NgPipesModule } from 'ngx-pipes';
 import { MomentModule } from 'angular2-moment';
@@ -36,8 +38,8 @@ describe("Components", () => {
                 declarations: [DisplayContentBlockComponent, TranslatePipe, UiSrefDirective, DateFormatPipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
-                    { provide: "articleService", useValue: articleService },
-                    { provide: "translatorService", useValue: helpers.mocks.translatorService }
+                    { provide: ArticleService, useValue: articleService },
+                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(DisplayContentBlockComponent);

@@ -1,3 +1,17 @@
+import { NotificationService } from './shared/services/notification.service';
+import { EventsHubService } from './shared/services/events-hub.service';
+import { TranslatorService } from './shared/services/translator.service';
+import { ThemeService } from './shared/services/theme.service';
+import { BodyStateClassesService } from './shared/services/body-state-classes.service';
+import { DesignModeService } from './shared/services/design-mode.service';
+import { AuthService } from './login/auth.service';
+import { SessionService } from './login/session.service';
+import { PersonService } from './../lib/ng-noosfero-api/http/person.service';
+import { BlockService } from './../lib/ng-noosfero-api/http/block.service';
+import { DomainService } from './../lib/ng-noosfero-api/http/domain.service';
+import { ProfileService } from './../lib/ng-noosfero-api/http/profile.service';
+import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service';
+import { ArticleService } from './../lib/ng-noosfero-api/http/article.service';
 import { ArticleViewComponent } from './article/article-view.component';
 import { ActivityComponent } from './profile/activities/activity/activity.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
@@ -99,14 +113,8 @@ import { IconPickerComponent } from './shared/components/icon-picker/icon-picker
 import { ImageUploadCropComponent } from './shared/components/image-upload/image-upload-crop.component';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
 import { TaskListComponent } from './task/task-list/task-list.component';
-import { downgradeComponent } from '@angular/upgrade/static';
+import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { bundle } from 'ng-forward';
-
-
-
-// Plugins imports
-
-declare var moment: any;
 
 // FIXME see a better way to declare template modules for dev mode
 try {
@@ -123,7 +131,6 @@ try {
 angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.plugins']).
     config(noosferoModuleConfig).
     run(noosferoAngularRunBlock).
-    constant("moment", moment).
     constant("AuthEvents", AuthEvents).
     directive('noosferoFooter',
     downgradeComponent({ component: FooterComponent }) as angular.IDirectiveFactory
@@ -385,6 +392,20 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoArticle',
         downgradeComponent({ component: ArticleViewComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
-    );
+    )
+    .factory('articleService', downgradeInjectable(ArticleService))
+    .factory('environmentService', downgradeInjectable(EnvironmentService))
+    .factory('profileService', downgradeInjectable(ProfileService))
+    .factory('domainService', downgradeInjectable(DomainService))
+    .factory('blockService', downgradeInjectable(BlockService))
+    .factory('personService', downgradeInjectable(PersonService))
+    .factory('sessionService', downgradeInjectable(SessionService))
+    .factory('authService', downgradeInjectable(AuthService))
+    .factory('designModeService', downgradeInjectable(DesignModeService))
+    .factory('bodyStateClassesService', downgradeInjectable(BodyStateClassesService))
+    .factory('themeService', downgradeInjectable(ThemeService))
+    .factory('eventsHubService', downgradeInjectable(EventsHubService))
+    .factory('translatorService', downgradeInjectable(TranslatorService))
+    .factory('notificationService', downgradeInjectable(NotificationService));
 
 export let noosferoApp = bundle('main', MainComponent, []).publish();

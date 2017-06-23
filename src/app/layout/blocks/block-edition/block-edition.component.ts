@@ -23,7 +23,7 @@ export class BlockEditionComponent {
     constructor(
         private elementRef: ElementRef,
         @Inject("$scope") private $scope: ng.IScope,
-        @Inject("eventsHubService") private eventsHubService: EventsHubService) {
+        private eventsHubService: EventsHubService) {
         this.options = {
             display: ["always", "home_page_only", "except_home_page"],
             display_user: ["all", "logged", "not_logged"]

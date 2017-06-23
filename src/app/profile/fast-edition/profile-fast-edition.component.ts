@@ -20,8 +20,7 @@ export class ProfileFastEditionComponent {
 
     errors: any;
 
-    constructor( @Inject("profileService") private profileService: ProfileService,
-        @Inject("notificationService") private notificationService: NotificationService,
+    constructor(private profileService: ProfileService, private notificationService: NotificationService,
         @Inject("$state") private $state: ng.ui.IStateService) { }
 
     ngOnInit() {

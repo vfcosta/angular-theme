@@ -10,7 +10,7 @@ export class SuggestArticleTaskAcceptComponent extends TaskAcceptTypeComponent {
 
     folders: Array<any>;
 
-    constructor(@Inject("articleService") private articleService: ArticleService, injector: Injector) {
+    constructor(private articleService: ArticleService, injector: Injector) {
         super(injector);
     }
 

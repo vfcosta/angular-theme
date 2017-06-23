@@ -14,7 +14,7 @@ export class CommunityMembersComponent {
     private profile: noosfero.Profile;
     private style: string;
 
-    constructor( @Inject('profileService') private profileService: ProfileService) {
+    constructor(private profileService: ProfileService) {
         this.members = [];
         this.currentPage = 1;
         this.membersPerPage = 20;
@@ -38,7 +38,7 @@ export class CommunityMembersComponent {
             this.profile = profile;
             return this.profileService.getMembers(profile, filters);
         }).then((result: any) => {
-            this.totalMembers = <number>result.headers("total");
+            this.totalMembers = <number>(<any>result.headers).get("total");
             this.members = result.data;
         });
     }

@@ -1,12 +1,12 @@
-import { Injectable, Inject } from "ng-forward";
+import { Restangular } from 'ngx-restangular';
+import { Injectable, Inject } from "@angular/core";
 import { RestangularService } from "./restangular_service";
 
 @Injectable()
-@Inject("Restangular", "$q", "$log")
 export class SettingsService extends RestangularService<noosfero.Block> {
 
-    constructor(Restangular: restangular.IService, $q: ng.IQService, $log: ng.ILogService) {
-        super(Restangular, $q, $log);
+    constructor(protected restangular: Restangular) {
+        super(restangular);
     }
 
     getResourcePath() {
@@ -23,10 +23,10 @@ export class SettingsService extends RestangularService<noosfero.Block> {
     getAvailableBlocks(owner: noosfero.Profile | noosfero.Environment): ng.IPromise<noosfero.RestResult<noosfero.BlockDefinition[]>> {
         let restRequest;
         if (owner.type === 'Environment') {
-            restRequest = this.restangularService.one("environments", owner.id);
+            restRequest = this.restangular.one("environments", owner.id);
         } else {
-            restRequest = this.restangularService.one("profiles", owner.id);
+            restRequest = this.restangular.one("profiles", owner.id);
         }
-        return restRequest.all("settings").get("available_blocks");
+        return restRequest.all("settings").get("available_blocks").toPromise();
     }
 }

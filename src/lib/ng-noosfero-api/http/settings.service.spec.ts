@@ -1,29 +1,36 @@
+import { MockBackend } from '@angular/http/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
+import { Restangular, RestangularModule } from 'ngx-restangular';
 import { SettingsService } from "./settings.service";
+import * as helpers from "../../../spec/helpers";
 
 describe("Services", () => {
     describe("Settings Service", () => {
+        let service: SettingsService;
+        let mocks = helpers.getMocks();
 
-        let $httpBackend: ng.IHttpBackendService;
-        let settingsService: SettingsService;
-
-        beforeEach(angular.mock.module("main", ($translateProvider: angular.translate.ITranslateProvider) => {
-            $translateProvider.translations('en', {});
-        }));
-
-        beforeEach(inject((_$httpBackend_: ng.IHttpBackendService, _SettingsService_: SettingsService) => {
-            $httpBackend = _$httpBackend_;
-            settingsService = _SettingsService_;
+        beforeEach(async(() => {
+            TestBed.configureTestingModule({
+                imports: [HttpModule, RestangularModule, BrowserModule],
+                providers: [
+                    SettingsService,
+                ].concat(helpers.provideMockBackend()),
+            });
+            TestBed.get(Restangular).provider.setFullResponse(true);
+            TestBed.get(Restangular).provider.setBaseUrl("/api/v1");
+            service = TestBed.get(SettingsService);
         }));
 
         describe("Succesfull requests", () => {
-            it("should return available blocks", (done) => {
+            xit("should return available blocks", (done) => {
                 let profileId = 1;
-                $httpBackend.expectGET(`/api/v1/profiles/${profileId}/settings/available_blocks`).respond(200, [{type: "RawHTMLBlock"}] );
-                settingsService.getAvailableBlocks(<noosfero.Profile>{ id: profileId }).then((content: any) => {
+                helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/settings/available_blocks`,
+                    [{type: "RawHTMLBlock"}], {}, 200);
+                service.getAvailableBlocks(<noosfero.Profile>{ id: profileId }).then((content: any) => {
                     expect(content.data[0].type).toEqual("RawHTMLBlock");
-                    done();
                 });
-                $httpBackend.flush();
             });
         });
     });

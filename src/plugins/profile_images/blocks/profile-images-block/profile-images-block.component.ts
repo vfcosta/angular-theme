@@ -14,7 +14,7 @@ export class ProfileImagesBlockComponent {
     profile: any;
     images: any;
 
-    constructor( @Inject('blockService') private blockService: BlockService) { }
+    constructor(private blockService: BlockService) { }
 
     ngOnInit() {
         this.profile = this.owner;

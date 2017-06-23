@@ -1,3 +1,8 @@
+import { NotificationService } from './../../../shared/services/notification.service';
+import { TranslatorService } from './../../../shared/services/translator.service';
+import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
+import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
+import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
 import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { InviteComponent } from './invite.component';
 import * as helpers from "../../../../spec/helpers";
@@ -26,11 +31,11 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [InviteComponent, TranslatePipe],
                 providers: [
-                    { provide: "personService", useValue: mocks.personService },
-                    { provide: "profileService", useValue: mocks.profileService },
-                    { provide: "communityService", useValue: mocks.communityService },
-                    { provide: "notificationService", useValue: mocks.notificationService },
-                    { provide: "translatorService", useValue: mocks.translatorService }
+                    { provide: PersonService, useValue: mocks.personService },
+                    { provide: ProfileService, useValue: mocks.profileService },
+                    { provide: CommunityService, useValue: mocks.communityService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule]

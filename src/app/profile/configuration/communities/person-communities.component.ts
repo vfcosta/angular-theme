@@ -17,7 +17,7 @@ export class PersonCommunitiesComponent {
     searchChanged: Subject<string> = new Subject<string>();
     displayStyle = 'card';
 
-    constructor(@Inject('personService') private personService: PersonService,
+    constructor(private personService: PersonService,
                 @Inject('$stateParams') $stateParams: ng.ui.IStateParamsService) {
 
         this.search = $stateParams['search'];
@@ -39,7 +39,7 @@ export class PersonCommunitiesComponent {
             order: 'name ASC'
         };
         this.personService.getCommunities(this.profile.id, filters).then((result: noosfero.RestResult<noosfero.Community[]>) => {
-            this.total = <number>result.headers("total");
+            this.total = <number>result.headers.get("total");
             this.communities = result.data;
         });
     }

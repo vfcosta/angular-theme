@@ -1,14 +1,11 @@
-import { Injectable, Inject } from "ng-forward";
-import { RestangularService } from "./restangular_service";
+import { Restangular } from 'ngx-restangular';
+import { Injectable } from "@angular/core";
 
 @Injectable()
-@Inject("Restangular")
 export class RegisterService {
-    constructor(private Restangular: restangular.IService) {
-        this.Restangular = Restangular;
-    }
+    constructor(protected restangular: Restangular) { }
 
-    createAccount(user: noosfero.User): ng.IPromise<noosfero.RestResult<noosfero.User>> {
-        return this.Restangular.all("").customPOST(user, "register", user);
+    createAccount(user: noosfero.User): Promise<noosfero.RestResult<noosfero.User>> {
+        return this.restangular.all("").customPOST(user, "register", user).toPromise();
     }
 }

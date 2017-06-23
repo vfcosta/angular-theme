@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../../app/shared/services/translator.service';
 import { hotspots } from './../../recent_activities/index';
 import { ArticleToolbarHotspotComponent } from './../../../app/hotspot/article-toolbar-hotspot.component';
 import { SharedModule } from './../../../app/shared.module';
@@ -19,7 +20,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [ArticleToolbarHotspotComponent],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: "$scope", useValue: mocks.scopeWithEvents() },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],

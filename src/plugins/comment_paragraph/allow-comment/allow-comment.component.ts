@@ -19,11 +19,11 @@ export class AllowCommentComponent {
     display = false;
     @ViewChild("popover") popover: any;
 
-    constructor(@Inject("commentParagraphEventService") private commentParagraphEventService: CommentParagraphEventService,
-        @Inject("commentParagraphService") private commentParagraphService: CommentParagraphService,
-        @Inject("commentService") private commentService: CommentService,
-        @Inject("permissionService") private permissionService: PermissionService,
-        @Inject("articleService") private articleService: ArticleService,
+    constructor(private commentParagraphEventService: CommentParagraphEventService,
+        private commentParagraphService: CommentParagraphService,
+        private commentService: CommentService,
+        private permissionService: PermissionService,
+        private articleService: ArticleService,
         private elementRef: ElementRef
     ) { }
 

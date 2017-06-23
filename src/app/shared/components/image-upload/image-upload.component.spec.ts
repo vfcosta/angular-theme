@@ -1,3 +1,4 @@
+import { TranslatorService } from './../../services/translator.service';
 import { By } from '@angular/platform-browser';
 import { TranslatePipe } from './../../pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -23,7 +24,7 @@ describe("Components", () => {
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [ModalModule.forRoot()],
                 providers: [
-                    { provide: "translatorService", useValue: translatorService },
+                    { provide: TranslatorService, useValue: translatorService },
                 ]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(ImageUploadComponent);

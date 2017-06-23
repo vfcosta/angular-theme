@@ -20,11 +20,11 @@ export class InviteComponent {
     public listOfPeople: any[];
     public searchToken: string;
 
-    constructor( @Inject('personService') private personService: PersonService,
-        @Inject('communityService') private communityService: CommunityService,
-        @Inject('profileService') private profileService: ProfileService,
-        @Inject('translatorService') private translatorService: TranslatorService,
-        @Inject("notificationService") public notificationService: NotificationService,
+    constructor(private personService: PersonService,
+        private communityService: CommunityService,
+        private profileService: ProfileService,
+        private translatorService: TranslatorService,
+        public notificationService: NotificationService,
         private zone: NgZone) {
         this.peopleToInvite = [];
         this.listOfPeople = Observable.create((observer: any) => {
@@ -35,7 +35,7 @@ export class InviteComponent {
     ngOnInit() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-        })
+        });
     }
 
     sendInvitations() {
@@ -49,7 +49,6 @@ export class InviteComponent {
             }
         }, error => {
             this.notificationService.error({ title: "invite.send.error.title", message: "invite.send.error.message" });
-            console.log(error)
         });
     }
 

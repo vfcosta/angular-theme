@@ -1,7 +1,6 @@
 import { ArticleToolbarHotspotComponent } from './../../../app/hotspot/article-toolbar-hotspot.component';
 import { Input, Inject, Injector, Component } from "@angular/core";
 import { Hotspot } from "../../../app/hotspot/hotspot.decorator";
-import { CommentParagraphService } from "../http/comment-paragraph.service";
 
 @Component({
     selector: "export-comment-button-hotspot",

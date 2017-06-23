@@ -1,5 +1,7 @@
 import { defineSupportCode } from 'cucumber';
-import { browser, element, by } from "protractor";
+import { Http, Response } from '@angular/http';
+import { browser, by, element } from 'protractor';
+import { protractor } from 'protractor/built';
 
 let path = require('path');
 let chai = require('chai');
@@ -15,9 +17,17 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return browser.get('/');
     });
 
+    Then('I should be on the homepage', () => {
+        return expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:3001/');
+    });
+
+    Then('I should be on {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
+        browser.waitForAngular();
+        return expect(browser.getCurrentUrl()).to.eventually.equal(`http://localhost:3001${stringInDoubleQuotes}`);
+    });
+
     Given('I follow {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
-        element(by.css('#navbar .login')).click();
-        return expect(element.all(by.css('.modal-body .login-form')).count()).to.eventually.equal(1);
+        return element(by.css(stringInDoubleQuotes)).click();
     });
 
     Given('I fill in the following:', (table, callback) => {
@@ -27,8 +37,16 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         callback();
     });
 
+    Given('I pause', (callback) => {
+        browser.pause();
+    });
+
     When('I press {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
         return element(by.css(stringInDoubleQuotes)).click();
+    });
+
+    When('I press first {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
+        return element.all(by.css(stringInDoubleQuotes)).first().click();
     });
 
     Then('I should be logged in as {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
@@ -47,6 +65,10 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Given('I go to {stringInDoubleQuotes} profile', (profile) => {
         return browser.setLocation(`/${profile}`);
+    });
+
+    Given('I go to {stringInDoubleQuotes}', (page) => {
+        return browser.setLocation(page);
     });
 
     Given('I enter in edit mode', () => {
@@ -79,5 +101,95 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Then('I see {stringInDoubleQuotes} {int} times', (selector, amount) => {
         return expect(element.all(by.css(selector)).count()).to.eventually.equal(amount);
+    });
+
+    Then('I see {stringInDoubleQuotes}', (selector) => {
+        return expect(element.all(by.css(selector)).count()).to.eventually.equal(1);
+    });
+
+    Given('I enter text {stringInDoubleQuotes} to {stringInDoubleQuotes} input', (text, field) => {
+        return element(by.css(field)).clear().then( () => { return element(by.css(field)).sendKeys(text); } );
+    });
+
+    When('I choose one element from typeahead {stringInDoubleQuotes}', (field) => {
+        return element(by.css(field)).click();
+    });
+
+    Then('I see {stringInDoubleQuotes} as {stringInDoubleQuotes} value', (text, selector) => {
+        browser.waitForAngular();
+        return expect(element(by.css(selector)).getText()).to.eventually.equal(text);
+    });
+
+    Then('I should see success message {stringInDoubleQuotes}', (selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.contain("sucesso");
+    });
+
+    Then('I should see {stringInDoubleQuotes} as message', (message) => {
+        return expect(element(by.css("#toast-container")).getText()).to.eventually.contain(message);
+    });
+
+    Then('I should see welcome message {stringInDoubleQuotes}', (selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.contain("Bem vindo");
+    });
+
+    Given('I wait for angular to render', () => {
+        return browser.waitForAngular();
+    });
+
+    Then('I should see enter community button {stringInDoubleQuotes}', (selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.contain("Entrar");
+    });
+
+    Then('I should see profile removed message {stringInDoubleQuotes}', (selector) => {
+        return expect(element(by.css(selector)).getText()).to.eventually.contain("Perfil removido");
+    });
+
+
+    Then('I should see the list {stringInDoubleQuotes}', (selector) => {
+        return element.all(by.css(selector)).count().then( total => {
+            return expect(element.all(by.css(selector)).count()).to.eventually.equal(total);
+        });
+    });
+
+    Given('article {stringInDoubleQuotes} doesn\'t exists on {stringInDoubleQuotes}', (article, profile) => {
+        return browser.get(`/${profile}/${article}`).then(() => {
+            return browser.getCurrentUrl();
+        }).then((url) => {
+            if (url === `http://localhost:3001/${profile}/${article}`) {
+                browser.waitForAngular();
+                return element(by.css(".delete-article")).click().then(() => {
+                    return element(by.css(".swal2-confirm")).click();
+                });
+            }
+        });
+    });
+
+    Given('profile {stringInDoubleQuotes} doesn\'t exists', (profile) => {
+        return browser.get(`/myprofile/${profile}/destroy_profile`).then(() => {
+            browser.waitForAngular();
+            return element(by.css(".swal2-confirm")).isPresent().then((present) => {
+                if (present) {
+                    return element(by.css(".swal2-confirm")).click();
+                }
+            });
+        });
+    });
+
+    Given('I create community to destroy', () => {
+        return browser.get('/myprofile/adminuser').then( () => {
+            return element(by.css('ul li .communities')).click().then( () => {
+                return element(by.css('.create-community')).click().then( () => {
+                    return element(by.css('#name')).sendKeys('E2e community').then( () => {
+                        return element(by.css('#acceptAfter')).click().then( () => {
+                            return element(by.css('.save-community')).click();
+                        });
+                    });
+                });
+            });
+        });
+    });
+
+    When('I press ok on confirmation dialog', () => {
+        return element(by.css(".swal2-confirm")).click();
     });
 });

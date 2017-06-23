@@ -1,3 +1,8 @@
+import { TranslatorService } from './../../shared/services/translator.service';
+import { EventsHubService } from './../../shared/services/events-hub.service';
+import { AuthService } from './../../login/auth.service';
+import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
+import { SessionService } from './../../login/session.service';
 import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import * as helpers from "../../../spec/helpers";
 import { TasksMenuComponent } from './tasks-menu.component';
@@ -17,11 +22,11 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [TasksMenuComponent, TranslatePipe],
                 providers: [
-                    { provide: "translatorService", useValue: mocks.translatorService },
-                    { provide: "taskService", useValue: mocks.taskService },
-                    { provide: "sessionService", useValue: mocks.sessionService },
-                    { provide: "authService", useValue: mocks.authService },
-                    { provide: "eventsHubService", useValue: mocks.eventsHubService }
+                    { provide: TranslatorService, useValue: mocks.translatorService },
+                    { provide: TaskService, useValue: mocks.taskService },
+                    { provide: SessionService, useValue: mocks.sessionService },
+                    { provide: AuthService, useValue: mocks.authService },
+                    { provide: EventsHubService, useValue: mocks.eventsHubService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: []
@@ -32,7 +37,7 @@ describe("Components", () => {
 
         it("load person tasks", () => {
             fixture.detectChanges();
-            expect(TestBed.get('taskService').getAllPending).toHaveBeenCalled();
+            expect(TestBed.get(TaskService).getAllPending).toHaveBeenCalled();
         });
 
         it("load person tasks when receive a login event", () => {
@@ -45,7 +50,7 @@ describe("Components", () => {
         it("load person tasks with page parameter", () => {
             component.taskTypes = ['AddFriend'];
             fixture.detectChanges();
-            expect(TestBed.get('taskService').getAllPending).toHaveBeenCalledWith({content_type: 'AddFriend', per_page: 5 });
+            expect(TestBed.get(TaskService).getAllPending).toHaveBeenCalledWith({content_type: 'AddFriend', per_page: 5 });
         });
     });
 });
