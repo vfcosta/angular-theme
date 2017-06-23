@@ -12,14 +12,20 @@ export class CommunityMembersComponent {
     private membersPerPage: number;
     private totalMembers: number;
     private profile: noosfero.Profile;
+    private style: string;
 
     constructor( @Inject('profileService') private profileService: ProfileService) {
         this.members = [];
         this.currentPage = 1;
         this.membersPerPage = 20;
         this.totalMembers = 0;
+        this.style = 'card';
 
         this.loadPage({ page: 1 });
+    }
+
+    getStyle() {
+        return this.style;
     }
 
     loadPage($event: any) {

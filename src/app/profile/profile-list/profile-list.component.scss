@@ -3,8 +3,8 @@
   .profile-image-wrap{
     display: inherit;
     padding: 2px;
-    width: 72px;
-    height: 72px;
+    width: 68px;
+    height: 68px;
     overflow: hidden;
     .item-avatar-img{
       padding: 0px;
@@ -13,12 +13,12 @@
   .image-block  img {
     width: inherit;
     height: inherit;
-    min-height: 72px;
+    min-height: 68px;
   }
 
   .profile-image-wrap  i {
-    width: 72px;
-    height: 72px;
+    width: 68px;
+    height: 68px;
   }
   @extend .container-fluid;
   @extend .row;
@@ -27,14 +27,14 @@
     position: relative;
     display: block;
     float: left;
-    max-width: 65px;
-    margin-bottom: 10px;
+    max-width: 68px;
+    // margin-bottom: 10px;
 
     @media (min-width: 1380px) {
       width: 33.3%
     }
 
-    min-height: 100px;
+    min-height: 68px;
     .media-body {
       display: block;
       width: 100%;
@@ -100,4 +100,34 @@
       }
     }
   }
+
+  .profile-item-card {
+    margin: 10px;
+    max-width: 175px;
+
+    .profile-image-wrap {
+      width: 175px;
+      height: 175px;
+    }
+
+    .profile-image-wrap i {
+      width: 175px;
+      height: 175px;
+    }
+
+    .profile-link {
+      .profile-image {
+        i.item-avatar-img {
+          line-height: 175px;
+          padding: 8px;
+          font-size: 52px;
+        }
+      }
+      .profile-name {
+        height: 32px;
+        overflow: hidden;
+      }
+    }
+  }
+
 }

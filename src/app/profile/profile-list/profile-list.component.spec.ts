@@ -64,6 +64,28 @@ describe("Components", () => {
             expect(fixture.debugElement.queryAll(By.css(".profile-item")).length).toEqual(2);
         });
 
+        it("has default style type *avatar*", () => {
+            expect(component.style).toEqual('avatar');
+        });
+
+        it("check current style type", () => {
+            component.style = 'card';
+            fixture.detectChanges();
+            expect(component.isCurrentStyle('avatar')).toBeFalsy();
+            expect(component.isCurrentStyle('card')).toBeTruthy();
+        });
+
+        it("not render profile name when style type is avatar", () => {
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css(".profile-name")).length).toEqual(0);
+        });
+
+        it("render profile name when style type is card", () => {
+            component.style = 'card';
+            fixture.detectChanges();
+            expect(fixture.debugElement.queryAll(By.css(".profile-name")).length).toEqual(2);
+        });
+
     });
 
 });

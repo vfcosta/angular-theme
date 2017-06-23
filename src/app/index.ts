@@ -183,7 +183,7 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     downgradeComponent({ component: ImageUploadComponent, inputs: ['cropEnabled'], outputs: ['finished'] }) as angular.IDirectiveFactory
     ).
     directive('profileList',
-    downgradeComponent({ component: ProfileListComponent, inputs: ['profiles'] }) as angular.IDirectiveFactory
+    downgradeComponent({ component: ProfileListComponent, inputs: ['profiles', 'style'] }) as angular.IDirectiveFactory
     ).
     directive('profileJoin',
     downgradeComponent({ component: ProfileJoinComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
