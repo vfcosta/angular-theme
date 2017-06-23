@@ -9,7 +9,7 @@
                 </a>
             </li>
             <li role="presentation" class="">
-                <a href="#" uiSrefActive="active" uiSref="main.myprofile.communities" [uiParams]="{profile: profile.identifier}">
+                <a href="#" class="communities" uiSrefActive="active" uiSref="main.myprofile.communities" [uiParams]="{profile: profile.identifier}">
                     <i class="fa fa-users" aria-hidden="true"></i>
                     {{ 'myprofile.configuration.communities' | translate}}
                 </a>
@@ -53,7 +53,7 @@
                 <hr />
             </li>
             <li role="presentation" class="">
-                <a href="#" uiSrefActive="active" uiSref="main.myprofile.destroy" [uiParams]="{profile: profile.identifier}">
+                <a href="#" class="destroy-community" uiSrefActive="active" uiSref="main.myprofile.destroy" [uiParams]="{profile: profile.identifier}">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                     {{ 'myprofile.configuration.community.delete' | translate}}
                 </a>
