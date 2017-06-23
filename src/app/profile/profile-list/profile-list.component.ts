@@ -7,13 +7,13 @@ import {Component, Input} from '@angular/core';
 export class ProfileListComponent {
     @Input() profiles: noosfero.Profile[];
     @Input() owner: noosfero.Profile;
-    @Input() style: string;
+    @Input() displayStyle: string;
 
     constructor() {
-        this.style = 'avatar';
+        this.displayStyle = 'avatar';
     }
 
     isCurrentStyle(style: string) {
-        return (style === this.style);
+        return (style === this.displayStyle);
     }
 }

@@ -1,5 +1,5 @@
 <div class="profile-list">
-  <div *ngFor="let profile of profiles" class="profile-item profile-item-{{style}}">
+  <div *ngFor="let profile of profiles" class="profile-item profile-item-{{displayStyle}}">
     <profile-list-edition [permission]="owner.permissions" permissionAction="allow_edit" *ngIf="owner" [profile]="profile"
       [owner]="owner"></profile-list-edition>
     <div class="media-body">

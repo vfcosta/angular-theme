@@ -50,8 +50,8 @@ describe("Components", () => {
             expect(personService.getCommunities).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: "john", order: 'name ASC' });
         })));
 
-        it("has default style type *card*", () => {
-            expect(component.getStyle()).toEqual('card');
+        it("has default display style equal to *card*", () => {
+            expect(component.displayStyle).toEqual('card');
         });
         
     });

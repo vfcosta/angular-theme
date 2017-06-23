@@ -15,7 +15,7 @@ export class PersonFriendsComponent {
     private perPage = 20;
     private total: number;
     searchChanged: Subject<string> = new Subject<string>();
-    private style: string;
+    displayStyle = 'card';
 
     constructor(@Inject('personService') private personService: PersonService,
                 @Inject('$stateParams') $stateParams: ng.ui.IStateParamsService) {
@@ -25,7 +25,6 @@ export class PersonFriendsComponent {
             this.search = search;
             this.loadPage({page: this.currentPage});
         });
-        this.style = 'card';
     }
 
     ngOnInit() {
@@ -47,10 +46,6 @@ export class PersonFriendsComponent {
 
     searchFriends() {
         this.loadPage({page: this.currentPage});
-    }
-
-    getStyle() {
-        return this.style;
     }
 
 }

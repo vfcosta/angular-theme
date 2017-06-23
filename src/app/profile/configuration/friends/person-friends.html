@@ -12,7 +12,7 @@
         </div>
     </form>
 
-    <profile-list [profiles]="friends" [style]="getStyle()"></profile-list>
+    <profile-list [profiles]="friends" [displayStyle]="displayStyle"></profile-list>
 
     <pagination *ngIf="total>0" [totalItems]="total" [itemsPerPage]="perPage"
     [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
