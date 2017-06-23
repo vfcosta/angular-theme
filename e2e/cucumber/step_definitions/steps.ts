@@ -162,6 +162,17 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         });
     });
 
+    Given('profile {stringInDoubleQuotes} doesn\'t exists', (profile) => {
+        return browser.get(`/myprofile/${profile}/destroy_profile`).then(() => {
+            browser.waitForAngular();
+            return element(by.css(".swal2-confirm")).isPresent().then((present) => {
+                if (present) {
+                    return element(by.css(".swal2-confirm")).click();
+                }
+            });
+        });
+    });
+
     Given('I create community to destroy', () => {
         return browser.get('/e2e-community').then(() => {
             return browser.getCurrentUrl();
