@@ -44,7 +44,7 @@ describe("Components", () => {
             expect(component.block.hide).toBeTruthy();
         });
 
-        it("should show if there is at least one", () => {
+        it("should show if there is at least one link", () => {
             component.removeLink(0);
             fixture.componentInstance.ngOnChanges();
             expect(component.block.hide).toBeFalsy();
