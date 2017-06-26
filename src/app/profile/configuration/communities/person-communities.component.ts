@@ -1,6 +1,7 @@
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { Component, Input, Inject } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { DisplayStyles } from '../../profile-list/profile-list.component';
 
 @Component({
     selector: "person-communities",
@@ -15,7 +16,7 @@ export class PersonCommunitiesComponent {
     private perPage = 20;
     private total: number;
     searchChanged: Subject<string> = new Subject<string>();
-    displayStyle = 'card';
+    displayStyle = DisplayStyles.card;
 
     constructor(private personService: PersonService,
                 @Inject('$stateParams') $stateParams: ng.ui.IStateParamsService) {

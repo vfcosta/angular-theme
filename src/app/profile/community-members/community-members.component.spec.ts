@@ -64,7 +64,7 @@ describe("Components", () => {
         });
 
         it("has default style type *card*", () => {
-            expect(component.getStyle()).toEqual('card');
+            expect(component.getDisplayStyle()).toEqual('card');
         });
 
     });

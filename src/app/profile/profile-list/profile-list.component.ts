@@ -1,4 +1,9 @@
-import {Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+export const DisplayStyles = {
+    avatar: 'avatar',
+    card: 'card'
+};
 
 @Component({
     selector: 'profile-list',
@@ -10,7 +15,7 @@ export class ProfileListComponent {
     @Input() displayStyle: string;
 
     constructor() {
-        this.displayStyle = 'avatar';
+        this.displayStyle = DisplayStyles.avatar;
     }
 
     isCurrentStyle(style: string) {

@@ -13,7 +13,7 @@ describe("Components", () => {
         let fixture: ComponentFixture<PersonCommunitiesComponent>;
         let component: PersonCommunitiesComponent;
         let personService = jasmine.createSpyObj("PersonService", ["getCommunities"]);
-        personService.getCommunities = jasmine.createSpy("getCommunities").and.returnValue(Promise.resolve({ headers: { get: () => {} }}));
+        personService.getCommunities = jasmine.createSpy("getCommunities").and.returnValue(Promise.resolve({ headers: { get: () => { } } }));
         let stateParams = {};
 
         beforeEach(async(() => {
@@ -52,6 +52,6 @@ describe("Components", () => {
         it("has default display style equal to *card*", () => {
             expect(component.displayStyle).toEqual('card');
         });
-        
+
     });
 });
