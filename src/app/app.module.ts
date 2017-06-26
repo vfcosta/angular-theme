@@ -345,6 +345,7 @@ export function HttpLoaderFactory(http: Http) {
         TranslatorService,
         NotificationService,
         { provide: "sweetAlert", useValue: swal },
+        { provide: 'Window',  useValue: window },
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
         '$uibModal',
@@ -354,7 +355,6 @@ export function HttpLoaderFactory(http: Http) {
         '$sce',
         '$location',
         '$anchorScroll',
-        '$window',
     ]))
 })
 

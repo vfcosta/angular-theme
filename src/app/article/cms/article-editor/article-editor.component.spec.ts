@@ -17,7 +17,7 @@ describe("Components", () => {
                 declarations: [ArticleEditorComponent],
                 providers: [
                     { provide: SessionService, useValue: mocks.sessionService },
-                    { provide: "$window", useValue: window },
+                    { provide: "Window", useValue: window },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
             });
