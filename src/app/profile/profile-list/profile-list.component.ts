@@ -21,4 +21,8 @@ export class ProfileListComponent {
     isCurrentStyle(style: string) {
         return (style === this.displayStyle);
     }
+
+    displayName() {
+        return this.isCurrentStyle('card');
+    }
 }
