@@ -29,6 +29,22 @@ describe("Components", () => {
             fixture.detectChanges();
             expect(fixture.debugElement.nativeElement.querySelector(".raw-html-block #test").innerHTML).toEqual('block content');
         });
+
+        it("should hide if there is no html content", () => {
+            const fixture = TestBed.createComponent(RawHTMLBlockComponent);
+            fixture.componentInstance.block = { settings: {} };
+            fixture.componentInstance.owner = { name: 'profile-name' };
+            fixture.componentInstance.ngOnChanges();
+            expect(fixture.componentInstance.block.hide).toBeTruthy();
+        });
+
+        it("should show if there is html content", () => {
+            const fixture = TestBed.createComponent(RawHTMLBlockComponent);
+            fixture.componentInstance.block = { settings: { html: '<p>block content</p>' } };
+            fixture.componentInstance.owner = { name: 'profile-name' };
+            fixture.componentInstance.ngOnChanges();
+            expect(fixture.componentInstance.block.hide).toBeFalsy();
+        });
     });
 
 });

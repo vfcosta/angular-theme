@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, OnChanges } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     template: require('app/layout/blocks/raw-html/raw-html-block.html')
 })
 
-export class RawHTMLBlockComponent {
+export class RawHTMLBlockComponent implements OnChanges{
 
     @Input() block: any;
     @Input() owner: any;
@@ -15,11 +15,27 @@ export class RawHTMLBlockComponent {
     constructor(private sanitizer: DomSanitizer) { }
 
     ngOnInit() {
+        this.applyVisibility();
         if (this.block && this.block.settings) {
             const range = document.createRange();
             range.selectNode(this.container.nativeElement);
-            const fragment = range.createContextualFragment(this.block.settings.html);
+            const html = this.block.settings.html ? this.block.settings.html : '';
+            const fragment = range.createContextualFragment(html);
             this.container.nativeElement.appendChild(fragment);
+        }
+    }
+
+    ngOnChanges() {
+        this.applyVisibility();
+    }
+
+    applyVisibility() {
+        if (this.block) {
+            if (this.block.settings && this.block.settings.html) {
+                this.block.hide = false;
+            } else {
+                this.block.hide = true;
+            }
         }
     }
 
