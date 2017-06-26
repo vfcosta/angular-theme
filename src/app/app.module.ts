@@ -118,6 +118,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -175,6 +176,7 @@ export function HttpLoaderFactory(http: Http) {
                 deps: [Http]
             }
         }),
+        Ng2PageScrollModule.forRoot(),
     ],
     declarations: [
         FooterComponent,
@@ -352,9 +354,6 @@ export function HttpLoaderFactory(http: Http) {
         '$scope',
         '$transitions',
         '$stateParams',
-        '$sce',
-        '$location',
-        '$anchorScroll',
     ]))
 })
 
