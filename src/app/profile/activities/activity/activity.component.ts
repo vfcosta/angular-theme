@@ -54,7 +54,7 @@ export class ActivityComponent {
             let profile = {
                 name: this.name(i),
                 identifier: this.url(i),
-                image: { url: '/api/v1/profiles/' + this.url(i) + '/icon?key=identifier' }
+                image: { url: '/api/v1/profiles/' + this.url(i) + '/thumb?key=identifier' }
             };
             this.profiles.push(profile);
         }
