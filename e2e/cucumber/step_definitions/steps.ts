@@ -42,7 +42,8 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     When('I press {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
-        return element(by.css(stringInDoubleQuotes)).click();
+        element(by.css(stringInDoubleQuotes)).click();
+        return browser.waitForAngular();
     });
 
     When('I press first {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
@@ -73,6 +74,14 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Given('I enter in edit mode', () => {
         return element(by.css(".button-edit-mode")).click();
+    });
+
+    Given('I enter in profile setup', () => {
+        return element(by.css(".open-setup")).click();
+    });
+
+    Given('I enter members menu', () => {
+        return element(by.css("ul li .members")).click();
     });
 
     Given('I upload {stringInDoubleQuotes} to {stringInDoubleQuotes}', (file, selector) => {
@@ -111,25 +120,24 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return element(by.css(field)).clear().then( () => { return element(by.css(field)).sendKeys(text); } );
     });
 
-    When('I choose one element from typeahead {stringInDoubleQuotes}', (field) => {
-        return element(by.css(field)).click();
+    When('I choose first element from typeahead', () => {
+        return element(by.css("typeahead-container li:nth-child(1)>a")).click();
     });
 
     Then('I see {stringInDoubleQuotes} as {stringInDoubleQuotes} value', (text, selector) => {
-        browser.waitForAngular();
         return expect(element(by.css(selector)).getText()).to.eventually.equal(text);
     });
 
-    Then('I should see success message {stringInDoubleQuotes}', (selector) => {
-        return expect(element(by.css(selector)).getText()).to.eventually.contain("sucesso");
+    Then('I should see success message', () => {
+        return expect(element(by.css("#toast-container")).getText()).to.eventually.contain("sucesso");
     });
 
     Then('I should see {stringInDoubleQuotes} as message', (message) => {
         return expect(element(by.css("#toast-container")).getText()).to.eventually.contain(message);
     });
 
-    Then('I should see welcome message {stringInDoubleQuotes}', (selector) => {
-        return expect(element(by.css(selector)).getText()).to.eventually.contain("Bem vindo");
+    Then('I should see welcome message', () => {
+        return expect(element(by.css("#toast-container")).getText()).to.eventually.contain("Bem vindo");
     });
 
     Given('I wait for angular to render', () => {
@@ -140,8 +148,8 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return expect(element(by.css(selector)).getText()).to.eventually.contain("Entrar");
     });
 
-    Then('I should see profile removed message {stringInDoubleQuotes}', (selector) => {
-        return expect(element(by.css(selector)).getText()).to.eventually.contain("Perfil removido");
+    Then('I should see profile removed message', () => {
+        return expect(element(by.css("#toast-container")).getText()).to.eventually.contain("Perfil removido");
     });
 
 
@@ -191,5 +199,11 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     When('I press ok on confirmation dialog', () => {
         return element(by.css(".swal2-confirm")).click();
+    });
+
+    Then('I wait for success', () => {
+        return browser.waitForAngular().then(() => {
+            return expect(element(by.css(".toast-success")).isPresent()).to.eventually.equal(true);
+        });
     });
 });
