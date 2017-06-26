@@ -81,7 +81,7 @@ export class ProfileImageComponent {
         });
     }
 
-    showAlternativePofileIcon() {
+    showAlternativeProfileIcon() {
         return this.nullImageFromApi || !this.profile.image;
     }
 
