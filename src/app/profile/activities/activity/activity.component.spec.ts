@@ -78,7 +78,7 @@ describe("Components", () => {
             let profiles = component.profiles;
             expect(profiles[0].name).toEqual('follower1_name');
             expect(profiles[0].identifier).toEqual('follower1_url');
-            expect(profiles[0].image.url).toEqual('/api/v1/profiles/follower1_url/icon?key=identifier');
+            expect(profiles[0].image.url).toEqual('/api/v1/profiles/follower1_url/thumb?key=identifier');
         });
 
         it("render create article template correctly", () => {
