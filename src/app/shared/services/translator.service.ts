@@ -1,4 +1,6 @@
-import {Injectable, Inject} from "@angular/core";
+import { Injectable, Inject } from "@angular/core";
+import { TranslateService } from '@ngx-translate/core';
+import { LocalStorageService } from 'angular-2-local-storage';
 import * as moment from 'moment';
 
 @Injectable()
@@ -16,17 +18,12 @@ export class TranslatorService {
         // "it" : "Italiano"
     };
 
-    constructor(@Inject("$translate") private $translate: angular.translate.ITranslateService,
-        @Inject("tmhDynamicLocale") private tmhDynamicLocale: angular.dynamicLocale.tmhDynamicLocaleService,
-        @Inject("$rootScope") private $rootScope: any) {
-
-        this.$rootScope.$on("$localeChangeSuccess", () => {
-            this.changeLanguage(tmhDynamicLocale.get() || $translate.use());
-        });
+    constructor(private translateService: TranslateService, private localStorageService: LocalStorageService) {
+        translateService.setDefaultLang(localStorageService.get<string>("language") || translateService.getBrowserLang() || 'en');
     }
 
     currentLanguage() {
-        return this.$translate.use();
+        return this.translateService.currentLang;
     }
 
     changeLanguage(language: string) {
@@ -35,12 +32,12 @@ export class TranslatorService {
             return;
         }
         moment.locale(language);
-        this.tmhDynamicLocale.set(language);
-        return this.$translate.use(language);
+        this.localStorageService.set("language", language);
+        return this.translateService.use(language);
     }
 
     translate(text: string, interpolateParams?: any, interpolationId?: string) {
-        return this.$translate.instant(text, interpolateParams, interpolationId);
+        return this.translateService.instant(text, interpolateParams);
     }
 
     hasTranslation(text: string): boolean {

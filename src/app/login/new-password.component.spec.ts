@@ -1,9 +1,9 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../shared/services/notification.service';
 import { TranslatorService } from './../shared/services/translator.service';
 import { PasswordService } from './../../lib/ng-noosfero-api/http/password.service';
 import { FormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
-import { TranslatePipe } from '../shared/pipes/translate-pipe';
 import * as helpers from "../../spec/helpers";
 import { PasswordComponent } from "./new-password.component";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -23,7 +23,7 @@ describe("Password Component", () => {
         spyOn(mocks.$state, 'transitionTo').and.callThrough();
 
         TestBed.configureTestingModule({
-            declarations: [PasswordComponent, TranslatePipe],
+            declarations: [PasswordComponent],
             providers: [
                 { provide: PasswordService, useValue: mocks.passwordService },
                 { provide: "$state", useValue: mocks.$state },
@@ -31,7 +31,7 @@ describe("Password Component", () => {
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [NgPipesModule, FormsModule]
+            imports: [NgPipesModule, FormsModule, TranslateModule.forRoot()]
         });
         fixture = TestBed.createComponent(PasswordComponent);
         component = fixture.componentInstance;

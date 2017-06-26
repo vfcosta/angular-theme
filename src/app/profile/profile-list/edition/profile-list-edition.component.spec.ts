@@ -1,10 +1,10 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
 import { PopoverModule } from 'ngx-bootstrap';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { ProfileListEditionComponent } from './profile-list-edition.component';
 import { By } from '@angular/platform-browser';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -37,7 +37,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [ProfileListEditionComponent, TranslatePipe, DateFormatPipe],
+                declarations: [ProfileListEditionComponent, DateFormatPipe],
                 providers: [
                     { provide: RoleService, useValue: roleService },
                     { provide: NotificationService, useValue: helpers.mocks.notificationService },
@@ -45,7 +45,7 @@ describe("Components", () => {
                     { provide: "amParseFilter", useValue: amParseFilter }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [MomentModule, PopoverModule.forRoot()]
+                imports: [MomentModule, PopoverModule.forRoot(), TranslateModule.forRoot()]
             }).compileComponents().then(() => {
                 fixture = TestBed.createComponent(ProfileListEditionComponent);
                 component = fixture.componentInstance;

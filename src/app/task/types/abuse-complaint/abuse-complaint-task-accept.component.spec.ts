@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { TaskService } from './../../../../lib/ng-noosfero-api/http/task.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
@@ -5,7 +6,6 @@ import { Provider, Component } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { AbuseComplaintTaskAcceptComponent } from './abuse-complaint-task-accept.component';
 import { NgPipesModule } from 'ngx-pipes';
@@ -29,8 +29,8 @@ describe("Components", () => {
             spyOn(mocks.taskService, 'get').and.returnValue(Promise.resolve( { data: task } ));
             let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
-                imports: [NgPipesModule, MomentModule],
-                declarations: [AbuseComplaintTaskAcceptComponent, TranslatePipe, DateFormatPipe],
+                imports: [NgPipesModule, MomentModule, TranslateModule.forRoot()],
+                declarations: [AbuseComplaintTaskAcceptComponent, DateFormatPipe],
                 providers: [
                     { provide: TaskService, useValue: mocks.taskService },
                     { provide: TranslatorService, useValue: mocks.translatorService },

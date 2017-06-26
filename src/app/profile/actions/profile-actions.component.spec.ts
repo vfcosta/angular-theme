@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
 import { Input, Component } from '@angular/core';
@@ -5,7 +6,6 @@ import * as helpers from "../../../spec/helpers";
 import { ProfileActionsComponent } from './profile-actions.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
@@ -16,8 +16,8 @@ describe('Profile Actions Component', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [BsDropdownModule.forRoot()],
-            declarations: [ProfileActionsComponent, TranslatePipe],
+            imports: [BsDropdownModule.forRoot(), TranslateModule.forRoot()],
+            declarations: [ProfileActionsComponent],
             providers: [
                 { provide: ArticleService, useValue: helpers.mocks.articleService },
                 { provide: TranslatorService, useValue: mocks.translatorService }

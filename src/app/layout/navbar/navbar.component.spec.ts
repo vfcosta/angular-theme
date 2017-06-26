@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { AuthService } from './../../login/auth.service';
 import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
@@ -5,7 +6,6 @@ import { SessionService } from './../../login/session.service';
 import { HeaderService } from './../../shared/services/header.service';
 import { CollapseModule } from 'ngx-bootstrap';
 import { NavbarComponent } from './navbar.component';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import * as helpers from "./../../../spec/helpers";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -29,7 +29,7 @@ describe("Components", () => {
             });
             spyOn(mocks.$state, "transitionTo").and.callThrough();
             TestBed.configureTestingModule({
-                declarations: [NavbarComponent, TranslatePipe],
+                declarations: [NavbarComponent],
                 providers: [
                     { provide: "$uibModal", useValue: mocks.$modal },
                     { provide: AuthService, useValue: mocks.authService },
@@ -40,7 +40,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [CollapseModule.forRoot()]
+                imports: [CollapseModule.forRoot(), TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(NavbarComponent);
             component = fixture.componentInstance;

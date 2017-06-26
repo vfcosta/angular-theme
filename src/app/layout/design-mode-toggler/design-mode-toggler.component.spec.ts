@@ -1,7 +1,7 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { AuthService } from './../../login/auth.service';
-import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 import * as helpers from '../../../spec/helpers';
 import { DesignModeTogglerComponent } from './design-mode-toggler.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -16,13 +16,14 @@ describe('DesignModeToggler Component', () => {
     beforeEach(async(() => {
         spyOn(mocks.designModeService, 'isInDesignMode').and.callThrough();
         TestBed.configureTestingModule({
-            declarations: [DesignModeTogglerComponent, TranslatePipe],
+            declarations: [DesignModeTogglerComponent],
             providers: [
                 { provide: DesignModeService, useValue: mocks.designModeService },
                 { provide: AuthService, useValue: mocks.authService },
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [TranslateModule.forRoot()]
         });
         fixture = TestBed.createComponent(DesignModeTogglerComponent);
         component = fixture.componentInstance;

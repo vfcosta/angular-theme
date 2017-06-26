@@ -1,12 +1,11 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
-import { AuthService } from './../../../login/auth.service';
 import { SessionService } from './../../../login/session.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import {Injectable, Provider, provide} from "ng-forward";
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import {LoginBlockComponent} from './login-block.component';
@@ -29,7 +28,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [LoginBlockComponent, TranslatePipe, UiSrefDirective, DateFormatPipe],
+                declarations: [LoginBlockComponent, UiSrefDirective, DateFormatPipe],
                 providers: [
                     { provide: SessionService, useValue: sessionService },
                     { provide: "$state", useValue: mocks.stateService },
@@ -37,7 +36,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [FormsModule, MomentModule]
+                imports: [FormsModule, MomentModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(LoginBlockComponent);
             component = fixture.componentInstance;

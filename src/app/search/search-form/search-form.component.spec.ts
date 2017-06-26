@@ -1,7 +1,7 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { SearchFormComponent } from "./search-form.component";
 import * as helpers from "../../../spec/helpers";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -16,13 +16,13 @@ describe("Components", () => {
         beforeEach(async(() => {
             spyOn(mocks.$state, "go");
             TestBed.configureTestingModule({
-                declarations: [SearchFormComponent, TranslatePipe],
+                declarations: [SearchFormComponent],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: "$state", useValue: mocks.$state }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [FormsModule]
+                imports: [FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(SearchFormComponent);
             component = fixture.componentInstance;

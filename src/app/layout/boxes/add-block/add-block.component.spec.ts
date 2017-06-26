@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
@@ -5,7 +6,6 @@ import { SettingsService } from './../../../../lib/ng-noosfero-api/http/settings
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { AddBlockComponent } from './add-block.component';
 import * as helpers from "../../../../spec/helpers";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -20,7 +20,7 @@ describe("Components", () => {
         beforeEach(async(() => {
             spyOn(mocks.settingsService, 'getAvailableBlocks').and.returnValue(Promise.resolve({data: []}));
             TestBed.configureTestingModule({
-                declarations: [AddBlockComponent, TranslatePipe],
+                declarations: [AddBlockComponent],
                 providers: [
                     { provide: SettingsService, useValue: mocks.settingsService },
                     { provide: ProfileService, useValue: mocks.profileService },
@@ -28,7 +28,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [NgPipesModule, ModalModule.forRoot(), FormsModule]
+                imports: [NgPipesModule, ModalModule.forRoot(), FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(AddBlockComponent);
             component = fixture.componentInstance;

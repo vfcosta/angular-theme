@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
@@ -5,7 +6,6 @@ import { TaskComponent } from './../task.component';
 import { MomentModule } from 'angular2-moment';
 import { Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../spec/helpers";
 import { TaskListComponent } from './task-list.component';
@@ -34,8 +34,8 @@ describe("Components", () => {
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
 
             TestBed.configureTestingModule({
-                imports: [MomentModule],
-                declarations: [TaskListComponent, TranslatePipe, ProfileImageComponent, DynamicComponentMock],
+                imports: [MomentModule, TranslateModule.forRoot()],
+                declarations: [TaskListComponent, ProfileImageComponent, DynamicComponentMock],
                 providers: [
                     { provide: TaskService, useValue: taskService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },

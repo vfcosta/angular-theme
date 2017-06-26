@@ -1,7 +1,7 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../app/shared/services/translator.service';
 import { CommentParagraphService } from './../http/comment-paragraph.service';
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
-import { TranslatePipe } from './../../../app/shared/pipes/translate-pipe';
 import { NgPipesModule } from 'ngx-pipes';
 import { SideCommentsComponent } from "./side-comments.component";
 import * as helpers from "../../../spec/helpers";
@@ -13,7 +13,6 @@ describe("Components", () => {
         let mocks = helpers.getMocks();
         let fixture: ComponentFixture<SideCommentsComponent>;
         let component: SideCommentsComponent;
-
         let serviceMock = jasmine.createSpyObj("CommentParagraphService", ["getByArticle"]);
         serviceMock.getByArticle = jasmine.createSpy("getByArticle").and.returnValue(Promise.resolve({ data: [] }));
 
@@ -22,7 +21,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [SideCommentsComponent, TranslatePipe],
+                declarations: [SideCommentsComponent],
                 providers: [
                     { provide: CommentParagraphService, useValue: serviceMock },
                     { provide: CommentService, useValue: mocks.commentService },
@@ -30,7 +29,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [NgPipesModule]
+                imports: [NgPipesModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(SideCommentsComponent);
             component = fixture.componentInstance;

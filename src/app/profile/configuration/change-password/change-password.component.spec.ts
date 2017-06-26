@@ -1,8 +1,8 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { UserService } from './../../../../lib/ng-noosfero-api/http/user.service';
 import { ChangePasswordComponent } from './change-password.component';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -27,8 +27,8 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule],
-                declarations: [ChangePasswordComponent, TranslatePipe],
+                imports: [FormsModule, TranslateModule.forRoot()],
+                declarations: [ChangePasswordComponent],
                 providers: [
                     { provide: UserService, useValue: userService },
                     { provide: NotificationService, useValue: helpers.mocks.notificationService },
@@ -36,11 +36,10 @@ describe("Components", () => {
                     { provide: "$state", useValue: $state },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(ChangePasswordComponent);
-                component = fixture.componentInstance;
-                component.profile = <noosfero.Profile>{ id: 1, identifier: 'profile1' };
             });
+            fixture = TestBed.createComponent(ChangePasswordComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>{ id: 1, identifier: 'profile1' };
         }));
 
         it("change password successfully", fakeAsync(done => {

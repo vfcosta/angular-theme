@@ -1,13 +1,13 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { Component } from '@angular/core';
 import { LayoutConfigComponent } from './layout-config.component';
 import * as helpers from "../../../spec/helpers";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { BsDropdownModule } from 'ngx-bootstrap';
-import { KeysPipe } from '../../shared/pipes/keys.filter'
+import { KeysPipe } from '../../shared/pipes/keys.filter';
 
 describe("Layout Config Component", () => {
     let mocks = helpers.getMocks();
@@ -16,8 +16,8 @@ describe("Layout Config Component", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            imports: [BsDropdownModule.forRoot()],
-            declarations: [LayoutConfigComponent, TranslatePipe, KeysPipe],
+            imports: [BsDropdownModule.forRoot(), TranslateModule.forRoot()],
+            declarations: [LayoutConfigComponent, KeysPipe],
             providers: [
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ],
@@ -31,7 +31,7 @@ describe("Layout Config Component", () => {
                 identifier: 'profile-name',
                 type: 'Person',
                 layout_template: 'default'
-            }
+            };
         fixture.detectChanges();
     }));
 

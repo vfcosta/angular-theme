@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { DesignModeService } from './../../shared/services/design-mode.service';
@@ -7,7 +8,6 @@ import { PermissionNg2Directive } from '../../shared/components/permission/permi
 import { UiSrefDirective } from '../../shared/directives/ui-sref-directive';
 import { PopoverModule } from 'ngx-bootstrap';
 import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -33,8 +33,8 @@ describe("Components", () => {
         let $transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, PopoverModule.forRoot()],
-                declarations: [ProfileSummaryComponent, TranslatePipe, UiSrefDirective, PermissionNg2Directive],
+                imports: [FormsModule, PopoverModule.forRoot(), TranslateModule.forRoot()],
+                declarations: [ProfileSummaryComponent, UiSrefDirective, PermissionNg2Directive],
                 providers: [
                     { provide: EnvironmentService, useValue: environmentService},
                     { provide: SessionService, useValue: sessionService },

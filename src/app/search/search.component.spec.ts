@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../shared/services/translator.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -6,7 +7,6 @@ import { PaginationModule } from 'ngx-bootstrap';
 import { MomentModule } from 'angular2-moment';
 import { NgPipesModule } from 'ngx-pipes';
 import { By } from '@angular/platform-browser';
-import { TranslatePipe } from './../shared/pipes/translate-pipe';
 import { DateFormatPipe } from './../shared/pipes/date-format.pipe';
 import { ArticleService } from './../../lib/ng-noosfero-api/http/article.service';
 import { UiSrefDirective } from '../shared/directives/ui-sref-directive';
@@ -37,7 +37,7 @@ describe("Components", () => {
             spyOn(mocks.articleService, 'search').and.returnValue(result);
 
             TestBed.configureTestingModule({
-                declarations: [SearchComponent, TranslatePipe, DateFormatPipe, UiSrefDirective],
+                declarations: [SearchComponent, DateFormatPipe, UiSrefDirective],
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$stateParams", useValue: stateParams },
@@ -47,7 +47,7 @@ describe("Components", () => {
                     { provide: "amParseFilter", useValue: mocks.amParseFilter }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [MomentModule, NgPipesModule, PaginationModule.forRoot(), FormsModule]
+                imports: [MomentModule, NgPipesModule, PaginationModule.forRoot(), FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(SearchComponent);
             component = fixture.componentInstance;

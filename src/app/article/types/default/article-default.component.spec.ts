@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
@@ -5,7 +6,6 @@ import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { PermissionNg2Directive } from './../../../shared/components/permission/permission.ng2.directive';
 import { By } from '@angular/platform-browser';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { Input, Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ArticleDefaultViewComponent } from './article-default.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -27,7 +27,7 @@ describe("Components", () => {
             spyOn(mocks.articleService, "subscribeToModelRemoved").and.callFake((fn: Function) => { articleRemoved = fn; } );
             spyOn(mocks.notificationService, 'confirmation').and.callThrough();
             TestBed.configureTestingModule({
-                declarations: [ArticleDefaultViewComponent, TranslatePipe, PermissionNg2Directive, DateFormatPipe],
+                declarations: [ArticleDefaultViewComponent, PermissionNg2Directive, DateFormatPipe],
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
@@ -35,7 +35,7 @@ describe("Components", () => {
                     { provide: NotificationService, useValue: mocks.notificationService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [MomentModule]
+                imports: [MomentModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ArticleDefaultViewComponent);
             component = fixture.componentInstance;

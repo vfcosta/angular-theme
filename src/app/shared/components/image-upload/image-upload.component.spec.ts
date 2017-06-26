@@ -1,6 +1,6 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../services/translator.service';
 import { By } from '@angular/platform-browser';
-import { TranslatePipe } from './../../pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ModalModule } from 'ngx-bootstrap';
@@ -20,9 +20,9 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [ ImageUploadComponent, TranslatePipe ],
+                declarations: [ ImageUploadComponent ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [ModalModule.forRoot()],
+                imports: [ModalModule.forRoot(), TranslateModule.forRoot()],
                 providers: [
                     { provide: TranslatorService, useValue: translatorService },
                 ]

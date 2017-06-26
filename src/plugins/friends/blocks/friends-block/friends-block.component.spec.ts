@@ -1,6 +1,5 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { UiSrefDirective } from './../../../../app/shared/directives/ui-sref-directive';
-import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { ProfileImageComponent } from './../../../../app/profile/image/profile-image.component';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -19,7 +18,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [FriendsBlockComponent, TranslatePipe, UiSrefDirective],
+                declarations: [FriendsBlockComponent, UiSrefDirective],
                 providers: [
                     { provide: BlockService, useValue: blockService },
                     { provide: "$state", useValue: state }

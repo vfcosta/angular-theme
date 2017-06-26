@@ -1,10 +1,9 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { StatisticsBlockComponent } from './statistics-block.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { TranslatePipe } from '../../../shared/pipes/translate-pipe';
-
 import * as helpers from "../../../../spec/helpers";
 
 describe("Components", () => {
@@ -15,13 +14,14 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [StatisticsBlockComponent, TranslatePipe],
+                declarations: [StatisticsBlockComponent],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
                     { provide: BlockService, useValue: blockService },
                     { provide: TranslatorService, useValue: translatorService }
-                ]
-            }).compileComponents();
+                ],
+                imports: [TranslateModule.forRoot()]
+            });
         }));
 
         it("shows statistics marked with display equals 'true'", () => {

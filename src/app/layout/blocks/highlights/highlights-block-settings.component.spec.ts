@@ -1,7 +1,7 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { DragulaModule } from 'ng2-dragula';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { HighlightsBlockSettingsComponent } from './highlights-block-settings.component';
 import * as helpers from "../../../../spec/helpers";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -23,7 +23,7 @@ describe("Highlights Block Settings Component", () => {
         let blockSettingsComponent = { block: {}, owner: {} };
 
         TestBed.configureTestingModule({
-            declarations: [HighlightsBlockSettingsComponent, TranslatePipe],
+            declarations: [HighlightsBlockSettingsComponent],
             providers: [
                 { provide: BlockService, useValue: mocks.blockService },
                 { provide: Injector, useValue: mocks.injector },
@@ -31,7 +31,7 @@ describe("Highlights Block Settings Component", () => {
                 { provide: BlockSettingsComponent, useValue: blockSettingsComponent },
             ],
             schemas: [NO_ERRORS_SCHEMA],
-            imports: [DragulaModule]
+            imports: [DragulaModule, TranslateModule.forRoot()]
         });
         fixture = TestBed.createComponent(HighlightsBlockSettingsComponent);
         component = fixture.componentInstance;

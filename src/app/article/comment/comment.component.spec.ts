@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
@@ -5,7 +6,6 @@ import { PermissionNg2Directive } from '../../shared/components/permission/permi
 import { DateFormatPipe } from './../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { By } from '@angular/platform-browser';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../spec/helpers";
 import { CommentComponent } from './comment.component';
@@ -19,7 +19,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [CommentComponent, TranslatePipe, DateFormatPipe, PermissionNg2Directive],
+                declarations: [CommentComponent, DateFormatPipe, PermissionNg2Directive],
                 providers: [
                     { provide: CommentService, useValue: mocks.commentService },
                     { provide: NotificationService, useValue: mocks.notificationService },
@@ -27,7 +27,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [MomentModule]
+                imports: [MomentModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(CommentComponent);
             component = fixture.componentInstance;

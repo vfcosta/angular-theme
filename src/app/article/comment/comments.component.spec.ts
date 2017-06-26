@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { FormsModule } from '@angular/forms';
@@ -5,7 +6,6 @@ import { PaginationModule } from 'ngx-bootstrap';
 import { NgPipesModule } from 'ngx-pipes';
 import { Provider, Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../spec/helpers";
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -22,8 +22,8 @@ describe("Components", () => {
             spyOn(mocks.commentService, 'getByArticle').and.returnValue( Promise.resolve(  [<noosfero.CommentViewModel>{ id: 2 }, <noosfero.CommentViewModel>{ id: 3 }] ) );
 
             TestBed.configureTestingModule({
-                imports: [NgPipesModule, PaginationModule.forRoot(), FormsModule],
-                declarations: [CommentsComponent, TranslatePipe],
+                imports: [NgPipesModule, PaginationModule.forRoot(), FormsModule, TranslateModule.forRoot()],
+                declarations: [CommentsComponent],
                 providers: [
                     { provide: CommentService, useValue: mocks.commentService },
                     { provide: TranslatorService, useValue: mocks.translatorService }

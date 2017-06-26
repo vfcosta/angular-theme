@@ -1,8 +1,8 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { EventsHubService } from './../../../shared/services/events-hub.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { PopoverModule } from 'ngx-bootstrap';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { BlockEditionComponent } from './block-edition.component';
 import * as helpers from "../../../../spec/helpers";
 
@@ -22,8 +22,8 @@ describe("Components", () => {
         beforeEach(async(() => {
             spyOn(mocks.eventsHubService, "emitEvent");
             TestBed.configureTestingModule({
-                imports: [PopoverModule.forRoot()],
-                declarations: [BlockEditionComponent, TranslatePipe],
+                imports: [PopoverModule.forRoot(), TranslateModule.forRoot()],
+                declarations: [BlockEditionComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: "$scope", useValue: mocks.scopeWithEvents() },

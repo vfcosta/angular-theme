@@ -1,7 +1,7 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { RoleService } from './../../../lib/ng-noosfero-api/http/role.service';
 import { By } from '@angular/platform-browser';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { TaskAcceptComponent } from './task-accept.component';
 import * as helpers from "../../../spec/helpers";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -23,6 +23,7 @@ describe("Components", () => {
                     { provide: RoleService, useValue: mocks.roleService },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
+                imports: [TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(TaskAcceptComponent);
             component = fixture.componentInstance;

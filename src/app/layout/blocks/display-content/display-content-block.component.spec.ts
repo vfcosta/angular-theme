@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
@@ -6,7 +7,6 @@ import { MomentModule } from 'angular2-moment';
 import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
 import { DisplayContentBlockComponent } from './display-content-block.component';
 import * as helpers from './../../../../spec/helpers';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -34,21 +34,18 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [NgPipesModule, MomentModule],
-                declarations: [DisplayContentBlockComponent, TranslatePipe, UiSrefDirective, DateFormatPipe],
+                imports: [NgPipesModule, MomentModule, TranslateModule.forRoot()],
+                declarations: [DisplayContentBlockComponent, UiSrefDirective, DateFormatPipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
                     { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(DisplayContentBlockComponent);
-                component = fixture.componentInstance;
-                component.owner = <noosfero.Profile>{ id: 1, name: 'profile-name', identifier: 'profile-name' };
-                component.block = <noosfero.Block>{id: 1, type: 'DisplayContentBlock', settings: settings};
-            }).catch( error => {
-                console.log(error);
             });
+            fixture = TestBed.createComponent(DisplayContentBlockComponent);
+            component = fixture.componentInstance;
+            component.owner = <noosfero.Profile>{ id: 1, name: 'profile-name', identifier: 'profile-name' };
+            component.block = <noosfero.Block>{id: 1, type: 'DisplayContentBlock', settings: settings};
         }));
 
         it("verify abstract is displayed", () => {

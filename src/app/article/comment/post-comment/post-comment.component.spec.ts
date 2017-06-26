@@ -1,8 +1,8 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { SessionService } from './../../../login/session.service';
 import { CommentService } from './../../../../lib/ng-noosfero-api/http/comment.service';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../../spec/helpers";
 import { PostCommentComponent } from './post-comment.component';
@@ -19,7 +19,7 @@ describe("Components", () => {
         beforeEach(async(() => {
             spyOn(mocks.commentService, "createInArticle").and.callThrough();
             TestBed.configureTestingModule({
-                declarations: [PostCommentComponent, TranslatePipe],
+                declarations: [PostCommentComponent],
                 providers: [
                     { provide: CommentService, useValue: mocks.commentService },
                     { provide: SessionService, useValue: mocks.sessionService },
@@ -27,7 +27,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [FormsModule]
+                imports: [FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(PostCommentComponent);
             component = fixture.componentInstance;

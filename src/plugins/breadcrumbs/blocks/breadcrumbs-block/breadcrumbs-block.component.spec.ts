@@ -1,6 +1,5 @@
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
-import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -22,7 +21,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [BreadcrumbsBlockComponent, TranslatePipe],
+                declarations: [BreadcrumbsBlockComponent],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: BlockService, useValue: mockedBlockService },

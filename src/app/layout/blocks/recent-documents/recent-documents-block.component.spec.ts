@@ -1,7 +1,6 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { RecentDocumentsBlockComponent } from './recent-documents-block.component';
 import * as helpers from "./../../../../spec/helpers";
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -23,7 +22,7 @@ describe("Components", () => {
             spyOn(mocks.$state, 'go');
 
             TestBed.configureTestingModule({
-                declarations: [RecentDocumentsBlockComponent, TranslatePipe, DateFormatPipe],
+                declarations: [RecentDocumentsBlockComponent, DateFormatPipe],
                 providers: [
                     { provide: BlockService, useValue: mocks.blockService },
                     { provide: "$state", useValue: mocks.$state },

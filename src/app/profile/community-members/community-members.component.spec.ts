@@ -1,7 +1,6 @@
 import { TranslatorService } from './../../shared/services/translator.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { UiSrefDirective } from './../../shared/directives/ui-sref-directive';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -39,7 +38,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [CommunityMembersComponent, TranslatePipe, UiSrefDirective],
+                declarations: [CommunityMembersComponent, UiSrefDirective],
                 providers: [
                     { provide: ProfileService, useValue: profileService },
                     { provide: "$state", useValue: state },

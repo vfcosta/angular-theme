@@ -1,4 +1,3 @@
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { Component, Input, Inject } from '@angular/core';
 
 /**

@@ -1,9 +1,9 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import * as helpers from "../../../../spec/helpers";
 import { AddMemberTaskAcceptComponent } from './add-member-task-accept.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -20,7 +20,7 @@ describe("Components", () => {
             spyOn(mocks.roleService, "getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: roles }));
             let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
-                declarations: [AddMemberTaskAcceptComponent, TranslatePipe],
+                declarations: [AddMemberTaskAcceptComponent],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: ArticleService, useValue: mocks.articleService },
@@ -28,7 +28,7 @@ describe("Components", () => {
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [FormsModule]
+                imports: [FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(AddMemberTaskAcceptComponent);
             component = fixture.componentInstance;

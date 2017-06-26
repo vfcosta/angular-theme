@@ -2,83 +2,41 @@ import {TranslatorService} from './translator.service';
 import * as helpers from "../../../spec/helpers";
 
 describe("Services", () => {
-
     describe("Translator Service", () => {
-
-        let $rootScope: ng.IScope;
-        let $q: ng.IQService;
-
-        beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
-            $rootScope = _$rootScope_;
-            $q = _$q_;
-        }));
+        let mocks = helpers.getMocks();
 
         function createComponent() {
-            return new TranslatorService(<any>helpers.mocks.$translate, <any>helpers.mocks.tmhDynamicLocale, $rootScope);
+            return new TranslatorService(<any>mocks.translateService, <any>mocks.localStorageService);
         }
 
-        it("change the language", (done) => {
+        it("change the language", () => {
             let component: TranslatorService = createComponent();
-            let loadScripPromise = $q.defer();
-            loadScripPromise.resolve();
-            component["tmhDynamicLocale"].set = jasmine.createSpy("set");
-            component["tmhDynamicLocale"].get = jasmine.createSpy("get").and.returnValue("en");
-            component["$translate"].use = jasmine.createSpy("use");
+            component["localStorageService"].set = jasmine.createSpy("set");
+            component["localStorageService"].get = jasmine.createSpy("get").and.returnValue("en");
+            component["translateService"].use = jasmine.createSpy("use");
 
             component.changeLanguage('pt');
-            $rootScope.$digest();
 
-            expect(component["tmhDynamicLocale"].set).toHaveBeenCalledWith("pt");
-            expect(component["$translate"].use).toHaveBeenCalledWith("pt");
-            done();
+            expect(component["localStorageService"].set).toHaveBeenCalledWith("language", "pt");
+            expect(component["translateService"].use).toHaveBeenCalledWith("pt");
         });
 
-        it("do nothing when call change language with null", (done) => {
+        it("do nothing when call change language with null", () => {
             let component: TranslatorService = createComponent();
-            component["tmhDynamicLocale"].set = jasmine.createSpy("set");
-            component["$translate"].use = jasmine.createSpy("use");
+            component["localStorageService"].set = jasmine.createSpy("set");
+            component["translateService"].use = jasmine.createSpy("use");
 
             component.changeLanguage(null);
 
-            expect(component["tmhDynamicLocale"].set).not.toHaveBeenCalled();
-            expect(component["$translate"].use).not.toHaveBeenCalled();
-            done();
+            expect(component["localStorageService"].set).not.toHaveBeenCalled();
+            expect(component["translateService"].use).not.toHaveBeenCalled();
         });
 
-        it("return the current language used by the translator", (done) => {
+        it("call translate service when translate a text", () => {
             let component: TranslatorService = createComponent();
-            component["$translate"].use = jasmine.createSpy("use").and.returnValue("en");
-            expect(component.currentLanguage()).toEqual("en");
-            expect(component["$translate"].use).toHaveBeenCalled();
-            done();
-        });
-
-        it("call translate service when translate a text", (done) => {
-            let component: TranslatorService = createComponent();
-            component["$translate"].instant = jasmine.createSpy("instant");
+            component["translateService"].instant = jasmine.createSpy("instant");
             component.translate("text");
-            expect(component["$translate"].instant).toHaveBeenCalledWith("text", undefined, undefined);
-            done();
-        });
-
-        it("change the language when receive an event", (done) => {
-            let component: TranslatorService = createComponent();
-            component.changeLanguage = jasmine.createSpy("changeLanguage");
-            $rootScope.$emit("$localeChangeSuccess");
-            expect(component.changeLanguage).toHaveBeenCalled();
-            done();
-        });
-
-        it("use the translate language when receive a change language event and there is no language previously selected", (done) => {
-            let component: TranslatorService = createComponent();
-            component.changeLanguage = jasmine.createSpy("changeLanguage");
-            component["tmhDynamicLocale"].get = jasmine.createSpy("get").and.returnValue(null);
-            component["$translate"].use = jasmine.createSpy("use").and.returnValue("en");
-
-            $rootScope.$emit("$localeChangeSuccess");
-            expect(component["$translate"].use).toHaveBeenCalled();
-            expect(component.changeLanguage).toHaveBeenCalledWith("en");
-            done();
+            expect(component["translateService"].instant).toHaveBeenCalledWith("text", undefined);
         });
     });
 });

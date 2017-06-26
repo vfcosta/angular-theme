@@ -1,6 +1,6 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { PersonCommunitiesComponent } from './person-communities.component';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -18,8 +18,8 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule],
-                declarations: [PersonCommunitiesComponent, TranslatePipe],
+                imports: [FormsModule, TranslateModule.forRoot()],
+                declarations: [PersonCommunitiesComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: PersonService, useValue: personService },
@@ -48,6 +48,5 @@ describe("Components", () => {
             expect(component.search).toEqual("john");
             expect(personService.getCommunities).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: "john", order: 'name ASC' });
         })));
-        
     });
 });
