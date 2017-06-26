@@ -51,7 +51,7 @@ describe("Components", () => {
         }));
 
         it("has default display style equal to *card*", () => {
-            expect(component.displayStyle).toEqual('card');
+            expect(component.getDisplayStyle()).toEqual('card');
         });
     });
 });

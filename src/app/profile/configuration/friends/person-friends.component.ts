@@ -16,7 +16,7 @@ export class PersonFriendsComponent {
     private perPage = 20;
     private total: number;
     searchChanged: Subject<string> = new Subject<string>();
-    displayStyle = DisplayStyles.card;
+    private displayStyle: string = DisplayStyles.card;
 
     constructor(private personService: PersonService,
         @Inject('$stateParams') $stateParams: ng.ui.IStateParamsService) {
@@ -47,6 +47,10 @@ export class PersonFriendsComponent {
 
     searchFriends() {
         this.loadPage({ page: this.currentPage });
+    }
+
+    getDisplayStyle() {
+        return this.displayStyle;
     }
 
 }

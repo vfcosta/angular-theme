@@ -13,20 +13,14 @@ export class CommunityMembersComponent {
     private membersPerPage: number;
     private totalMembers: number;
     private profile: noosfero.Profile;
-    private displayStyle: string;
+    private displayStyle: string = DisplayStyles.card;
 
     constructor(private profileService: ProfileService) {
         this.members = [];
         this.currentPage = 1;
         this.membersPerPage = 20;
         this.totalMembers = 0;
-        this.displayStyle = DisplayStyles.card;
-
         this.loadPage({ page: 1 });
-    }
-
-    getDisplayStyle() {
-        return this.displayStyle;
     }
 
     loadPage($event: any) {
@@ -42,6 +36,10 @@ export class CommunityMembersComponent {
             this.totalMembers = <number>(<any>result.headers).get("total");
             this.members = result.data;
         });
+    }
+
+    getDisplayStyle() {
+        return this.displayStyle;
     }
 
 }
