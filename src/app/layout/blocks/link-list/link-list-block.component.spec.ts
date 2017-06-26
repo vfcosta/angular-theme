@@ -37,19 +37,6 @@ describe("Components", () => {
             fixture.detectChanges();
         }));
 
-        it("should hide if there are no links", () => {
-            component.removeLink(0);
-            component.removeLink(0);
-            fixture.componentInstance.ngOnChanges();
-            expect(component.block.hide).toBeTruthy();
-        });
-
-        it("should show if there is at least one", () => {
-            component.removeLink(0);
-            fixture.componentInstance.ngOnChanges();
-            expect(component.block.hide).toBeFalsy();
-        });
-
         it("receives the block and the owner as inputs", () => {
             expect(component.block.type).toEqual("Block");
             expect(component.owner.name).toEqual("profile-name");

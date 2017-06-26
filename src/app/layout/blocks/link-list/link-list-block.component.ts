@@ -1,10 +1,10 @@
-import { Component, Input, Inject, OnChanges } from "@angular/core";
+import { Component, Input, Inject } from "@angular/core";
 
 @Component({
     selector: "noosfero-link-list-block",
     template: require("app/layout/blocks/link-list/link-list-block.html")
 })
-export class LinkListBlockComponent implements OnChanges {
+export class LinkListBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
@@ -26,7 +26,6 @@ export class LinkListBlockComponent implements OnChanges {
         if (!this.block.settings) this.block.settings = {};
         if (!this.block.settings.links) this.block.settings.links = [];
         this.links = this.block.settings.links;
-        this.applyVisibility();
     }
 
 
@@ -52,13 +51,4 @@ export class LinkListBlockComponent implements OnChanges {
     removeLink(index: number) {
         this.links.splice(index, 1);
     }
-
-    ngOnChanges() {
-        this.applyVisibility();
-    }
-
-    applyVisibility() {
-        this.block.hide = this.links.length < 1;
-    }
-
 }
