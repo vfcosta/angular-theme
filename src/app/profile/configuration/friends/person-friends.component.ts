@@ -1,6 +1,7 @@
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { Component, Input, Inject } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
+import { DisplayStyles } from '../../profile-list/profile-list.component';
 
 @Component({
     selector: "person-friends",
@@ -15,14 +16,15 @@ export class PersonFriendsComponent {
     private perPage = 20;
     private total: number;
     searchChanged: Subject<string> = new Subject<string>();
+    private displayStyle: string = DisplayStyles.card;
 
     constructor(private personService: PersonService,
-                @Inject('$stateParams') $stateParams: ng.ui.IStateParamsService) {
+        @Inject('$stateParams') $stateParams: ng.ui.IStateParamsService) {
 
         this.search = $stateParams['search'];
         this.searchChanged.debounceTime(300).subscribe((search: string) => {
             this.search = search;
-            this.loadPage({page: this.currentPage});
+            this.loadPage({ page: this.currentPage });
         });
     }
 
@@ -31,9 +33,9 @@ export class PersonFriendsComponent {
     }
 
     loadPage($event: any) {
-        let filters = { 
-            per_page: this.perPage, 
-            page: $event.page, 
+        let filters = {
+            per_page: this.perPage,
+            page: $event.page,
             search: this.search,
             order: 'name ASC'
         };
@@ -44,7 +46,11 @@ export class PersonFriendsComponent {
     }
 
     searchFriends() {
-        this.loadPage({page: this.currentPage});
+        this.loadPage({ page: this.currentPage });
+    }
+
+    getDisplayStyle() {
+        return this.displayStyle;
     }
 
 }
