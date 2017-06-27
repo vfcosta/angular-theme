@@ -35,7 +35,6 @@ describe("Components", () => {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
-                    { provide: "$scope", useValue: scope },
                     { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
             });

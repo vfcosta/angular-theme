@@ -33,7 +33,6 @@ export class MenuBlockComponent {
 
     constructor(private elementRef: ElementRef,
         private translatorService: TranslatorService,
-        @Inject("$scope") private $scope: ng.IScope,
         private articleService: ArticleService,
         private dragulaService: DragulaService) {
     }

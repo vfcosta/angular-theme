@@ -26,7 +26,6 @@ describe("Components", () => {
                 declarations: [BlockEditionComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
                 ]
             });
@@ -90,6 +89,7 @@ describe("Components", () => {
             fixture = TestBed.createComponent(BlockEditionComponent);
             component = fixture.componentInstance;
             component.block = <noosfero.Block>{ id: 1, settings: <any>{}, type: "MainBlock" };
+            component.box = <noosfero.Box>{ id: 2 };
             fixture.detectChanges();
             expect(component.options.display).not.toContain('never');
         });

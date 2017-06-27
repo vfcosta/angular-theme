@@ -26,7 +26,6 @@ export class ContextBarComponent {
 
     constructor(
         @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject("$scope") private $scope: ng.IScope,
         private eventsHubService: EventsHubService,
         private blockService: BlockService,
         private notificationService: NotificationService,
@@ -52,7 +51,6 @@ export class ContextBarComponent {
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;
-            this.$scope.$apply();
         });
         this.designModeOn = this.designModeService.isInDesignMode();
     }

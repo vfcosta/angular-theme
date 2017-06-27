@@ -30,7 +30,6 @@ describe("Context Bar Component", () => {
             declarations: [ContextBarComponent],
             providers: [
                 { provide: "$state", useValue: state },
-                { provide: "$scope", useValue: mocks.scopeWithEvents() },
                 { provide: EventsHubService, useValue: mocks.eventsHubService },
                 { provide: BlockService, useValue: mocks.blockService },
                 { provide: NotificationService, useValue: mocks.notificationService },

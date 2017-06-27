@@ -31,7 +31,6 @@ describe("Components", () => {
                 providers: [
                     { provide: BlockService, useValue: mocks.blockService },
                     { provide: "$state", useValue: mocks.stateService },
-                    { provide: "$scope", useValue: mocks.scopeWithEvents() }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
             });

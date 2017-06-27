@@ -354,7 +354,6 @@ export function HttpLoaderFactory(http: Http) {
         { provide: 'Window',  useValue: window },
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
-        '$scope',
         '$transitions',
         '$stateParams',
     ]))

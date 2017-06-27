@@ -10,7 +10,6 @@ describe("ConfigBar Component", () => {
     let mocks = helpers.getMocks();
     let fixture: ComponentFixture<ConfigBarComponent>;
     let component: ConfigBarComponent;
-    let $scope = jasmine.createSpyObj("$scope", ["$watch", "$apply"]);
 
     beforeEach(async(() => {
         spyOn(mocks.designModeService, 'isInDesignMode').and.returnValue(false);
@@ -18,7 +17,6 @@ describe("ConfigBar Component", () => {
         TestBed.configureTestingModule({
             declarations: [ConfigBarComponent, PermissionNg2Directive],
             providers: [
-                { provide: "$scope", useValue: $scope },
                 { provide: DesignModeService, useValue: mocks.designModeService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -21,7 +21,6 @@ describe("Components", () => {
                 declarations: [ArticleToolbarHotspotComponent],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService },
-                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 imports: [SharedModule, TranslateModule.forRoot()]
