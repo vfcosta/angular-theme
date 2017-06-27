@@ -9,6 +9,7 @@ export class DisplayContentBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
+    @Input() designMode: boolean;
 
     profile: noosfero.Profile;
     articles: noosfero.Article[];

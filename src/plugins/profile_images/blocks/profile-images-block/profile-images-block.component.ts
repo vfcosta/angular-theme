@@ -4,12 +4,12 @@ import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service
 @Component({
     selector: "noosfero-profile-images-plugin-profile-images-block",
     template: require('plugins/profile_images/blocks/profile-images-block/profile-images-block.html')
-
 })
 export class ProfileImagesBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     profile: any;
     images: any;

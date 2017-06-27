@@ -1,0 +1,26 @@
+<ng-container [ngSwitch]="block.type">
+    <noosfero-communities-block *ngSwitchCase="'CommunitiesBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-communities-block>
+    <noosfero-display-content-block *ngSwitchCase="'DisplayContentBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-display-content-block>
+    <noosfero-highlights-block *ngSwitchCase="'HighlightsBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-highlights-block>
+    <noosfero-link-list-block *ngSwitchCase="'LinkListBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-link-list-block>
+    <noosfero-login-block *ngSwitchCase="'LoginBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-login-block>
+    <noosfero-main-block *ngSwitchCase="'MainBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-main-block>
+    <noosfero-members-block *ngSwitchCase="'MembersBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-members-block>
+    <noosfero-menu-block *ngSwitchCase="'MenuBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-menu-block>
+    <noosfero-people-block *ngSwitchCase="'PeopleBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-people-block>
+    <noosfero-profile-image-block *ngSwitchCase="'ProfileImageBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-profile-image-block>
+    <noosfero-raw-htmlblock *ngSwitchCase="'RawHTMLBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-raw-htmlblock>
+    <noosfero-recent-documents-block *ngSwitchCase="'RecentDocumentsBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-recent-documents-block>
+    <noosfero-statistics-block *ngSwitchCase="'StatisticsBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-statistics-block>
+    <noosfero-tags-cloud-block *ngSwitchCase="'TagsBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-tags-cloud-block>
+
+    <noosfero-video-plugin-video-block *ngSwitchCase="'VideoPlugin::VideoBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-video-plugin-video-block>
+    <noosfero-section-block-plugin-section-block *ngSwitchCase="'SectionBlockPlugin::SectionBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-section-block-plugin-section-block>
+    <noosfero-recent-activities-plugin-activities-block *ngSwitchCase="'RecentActivitiesPlugin::ActivitiesBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-recent-activities-plugin-activities-block>
+    <noosfero-profile-images-plugin-profile-images-block *ngSwitchCase="'ProfileImagesPlugin::ProfileImagesBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-profile-images-plugin-profile-images-block>
+    <noosfero-interest-tags-block *ngSwitchCase="'InterestTagsBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-interest-tags-block>
+    <noosfero-friends-block *ngSwitchCase="'FriendsBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-friends-block>
+    <noosfero-event-plugin-event-block *ngSwitchCase="'EventPlugin::EventBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-event-plugin-event-block>
+    <noosfero-breadcrumbs-plugin-content-breadcrumbs-block *ngSwitchCase="'BreadCrumbsPlugin::ContentBreadcrumbsBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-breadcrumbs-plugin-content-breadcrumbs-block>
+    <noosfero-comment-paragraph-plugin-discussion-block *ngSwitchCase="'CommentParagraphPlugin::DiscussionBlock'" [block]="block" [owner]="owner" [designMode]="designMode"></noosfero-comment-paragraph-plugin-discussion-block>
+</ng-container>

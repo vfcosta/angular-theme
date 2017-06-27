@@ -1,3 +1,6 @@
+import { BoxesComponent } from './layout/boxes/boxes.component';
+import { BlockComponent } from './layout/blocks/block.component';
+import { BlockContentComponent } from './layout/blocks/block-content.component';
 import { NotificationService } from './shared/services/notification.service';
 import { EventsHubService } from './shared/services/events-hub.service';
 import { TranslatorService } from './shared/services/translator.service';
@@ -392,6 +395,15 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoArticle',
         downgradeComponent({ component: ArticleViewComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoBlockContent',
+        downgradeComponent({ component: BlockContentComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoBlock',
+        downgradeComponent({ component: BlockComponent, inputs: ['block', 'owner', 'box'] }) as angular.IDirectiveFactory
+    ).
+    directive('noosferoBoxes',
+        downgradeComponent({ component: BoxesComponent, inputs: ['boxes', 'owner', 'layout', 'columns', 'startIndex'] }) as angular.IDirectiveFactory
     )
     .factory('articleService', downgradeInjectable(ArticleService))
     .factory('environmentService', downgradeInjectable(EnvironmentService))

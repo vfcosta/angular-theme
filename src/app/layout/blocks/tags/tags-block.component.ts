@@ -10,6 +10,7 @@ export class TagsBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Environment;
+    @Input() designMode: boolean;
 
     tags: Array<CloudData> = [];
 

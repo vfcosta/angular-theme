@@ -2,10 +2,6 @@ import { TranslatePipe } from './../shared/pipes/translate-pipe';
 import * as plugins from '../../plugins';
 import { RegisterComponent } from '../account/register.component';
 import { DomainComponent } from '../domain/domain.component';
-import { BlockContentComponent } from '../layout/blocks/block-content.component';
-import { BlockComponent } from '../layout/blocks/block.component';
-import { MainBlockComponent } from '../layout/blocks/main/main-block.component';
-import { BoxesComponent } from '../layout/boxes/boxes.component';
 import { PasswordComponent } from '../login/new-password.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { SearchComponent } from '../search/search.component';
@@ -69,10 +65,8 @@ export class EnvironmentContent {
     selector: 'main',
     template: '<ui-view/>',
     directives: [
-        BoxesComponent, BlockContentComponent,
-        ProfileComponent, MainBlockComponent, NoosferoTemplate, TranslatePipe,
+        ProfileComponent, NoosferoTemplate, TranslatePipe,
         PermissionDirective,
-        BlockComponent,
         BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),

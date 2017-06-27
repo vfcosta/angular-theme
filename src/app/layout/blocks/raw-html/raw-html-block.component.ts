@@ -10,6 +10,7 @@ export class RawHTMLBlockComponent implements OnChanges{
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
     @ViewChild("container") container;
 
     constructor(private sanitizer: DomSanitizer) { }

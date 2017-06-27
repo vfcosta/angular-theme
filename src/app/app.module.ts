@@ -1,3 +1,8 @@
+import { BoxComponent } from './layout/boxes/box.component';
+import { BoxesComponent } from './layout/boxes/boxes.component';
+import { BlockComponent } from './layout/blocks/block.component';
+import { BlockContentComponent } from './layout/blocks/block-content.component';
+import { MainBlockComponent } from './layout/blocks/main/main-block.component';
 import { ForgotPasswordComponent } from './login/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import swal from 'sweetalert2';
@@ -208,7 +213,6 @@ export function HttpLoaderFactory(http: Http) {
         PersonCommunitiesComponent,
         MenuBlockComponent,
         InviteComponent,
-        MainBlockUpgradeDirective,
         ProfileSummaryComponent,
         LoginBlockComponent,
         LinkListBlockComponent,
@@ -253,6 +257,11 @@ export function HttpLoaderFactory(http: Http) {
         ArticleViewComponent,
         LoginComponent,
         ForgotPasswordComponent,
+        MainBlockComponent,
+        BlockContentComponent,
+        BlockComponent,
+        BoxesComponent,
+        BoxComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -322,6 +331,9 @@ export function HttpLoaderFactory(http: Http) {
         NavbarComponent,
         ActivityComponent,
         ArticleViewComponent,
+        BlockContentComponent,
+        BlockComponent,
+        BoxesComponent,
     ].concat(plugins.ng2MainComponents),
     providers: [
         HeaderService,

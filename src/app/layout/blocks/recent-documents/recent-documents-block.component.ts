@@ -11,6 +11,7 @@ export class RecentDocumentsBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     profile: any;
     documents: any;

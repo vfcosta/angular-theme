@@ -9,6 +9,7 @@ export class FriendsBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
+    @Input() designMode: boolean;
 
     profiles: any = [];
     constructor(private blockService: BlockService) { }
