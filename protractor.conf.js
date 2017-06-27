@@ -1,8 +1,15 @@
 exports.config = {
+  capabilities: {
+    browserName: 'chrome',
+
+    chromeOptions: {
+      args: [ "--headless", "--disable-gpu" ]
+    }
+  },
   framework: 'custom',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   specs: ['e2e/cucumber/features/**/*.feature'],
-  directConnect: true,
+  directConnect: false,
   baseUrl: 'http://localhost:3001',
   rootElement: 'body',
   cucumberOpts: {

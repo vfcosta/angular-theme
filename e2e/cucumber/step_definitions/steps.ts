@@ -2,6 +2,7 @@ import { defineSupportCode } from 'cucumber';
 import { Http, Response } from '@angular/http';
 import { browser, by, element } from 'protractor';
 import { protractor } from 'protractor/built';
+import * as utils from './utils';
 
 let path = require('path');
 let chai = require('chai');
@@ -11,7 +12,7 @@ chai.use(chaiAsPromised);
 let expect = chai.expect;
 
 defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
-    setDefaultTimeout(10000);
+    setDefaultTimeout(30000);
 
     Given('I go to the homepage', () => {
         return browser.get('/');
@@ -27,7 +28,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I follow {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
-        return element(by.css(stringInDoubleQuotes)).click();
+        return utils.pressButton(stringInDoubleQuotes);
     });
 
     Given('I fill in the following:', (table, callback) => {
@@ -42,7 +43,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     When('I press {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
-        element(by.css(stringInDoubleQuotes)).click();
+        utils.pressButton(stringInDoubleQuotes);
         return browser.waitForAngular();
     });
 
@@ -55,12 +56,12 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I login with {stringInDoubleQuotes}, {stringInDoubleQuotes}', (user: string, password: string) => {
-        return element(by.css('#navbar .login')).click().then(() => {
+        return utils.pressButton('#navbar .login').then(() => {
             return element(by.css(".modal-dialog #email")).sendKeys(user);
         }).then(() => {
             return element(by.css(".modal-dialog #passwd")).sendKeys(password);
         }).then(() => {
-            return element(by.css(".btn-login")).click();
+            return utils.pressButton(".btn-login");
         });
     });
 
@@ -73,15 +74,15 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I enter in edit mode', () => {
-        return element(by.css(".button-edit-mode")).click();
+        return utils.pressButton(".button-edit-mode");
     });
 
     Given('I enter in profile setup', () => {
-        return element(by.css(".open-setup")).click();
+        return utils.pressButton(".open-setup");
     });
 
     Given('I enter members menu', () => {
-        return element(by.css("ul li .members")).click();
+        return utils.pressButton("ul li .members");
     });
 
     Given('I upload {stringInDoubleQuotes} to {stringInDoubleQuotes}', (file, selector) => {
@@ -95,16 +96,16 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     Given('I am logged out', () => {
         return element(by.css("#navbar .profile-menu > .profile-link")).isPresent().then((present) => {
             if (present) {
-                return element(by.css("#navbar .profile-menu > .profile-link")).click().then(() => {
-                    return element(by.css("#navbar .btn-logout")).click();
+                return utils.pressButton("#navbar .profile-menu > .profile-link").then(() => {
+                    return utils.pressButton("#navbar .btn-logout");
                 });
             }
         });
     });
 
     When('I change layout to {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
-        return element(by.css("#layout-config-btn")).click().then(() => {
-            return element(by.css(`.layout-config .dropdown-menu .layout-${stringInDoubleQuotes} a.dropdown-item`)).click();
+        return utils.pressButton("#layout-config-btn").then(() => {
+            return utils.pressButton(`.layout-config .dropdown-menu .layout-${stringInDoubleQuotes} a.dropdown-item`);
         });
     });
 
@@ -121,7 +122,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     When('I choose first element from typeahead', () => {
-        return element(by.css("typeahead-container li:nth-child(1)>a")).click();
+        return utils.pressButton("typeahead-container li:nth-child(1)>a");
     });
 
     Then('I see {stringInDoubleQuotes} as {stringInDoubleQuotes} value', (text, selector) => {
@@ -129,7 +130,18 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Then('I should see success message', () => {
-        return expect(element(by.css("#toast-container")).getText()).to.eventually.contain("sucesso");
+        return browser.wait(() => {
+            browser.actions().sendKeys(protractor.Key.ESCAPE).perform();
+            return element(by.css(".toast-success")).isPresent();
+        }, 5000).then(b => {
+            return expect(b).to.be.equal(true);
+        });
+    });
+
+    Then('I eventually should see success message', () => {
+        return browser.waitForAngular().then(() => {
+            return expect(element(by.css(".toast-success")).isPresent()).to.eventually.equal(true);
+        });
     });
 
     Then('I should see {stringInDoubleQuotes} as message', (message) => {
@@ -142,10 +154,6 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Given('I wait for angular to render', () => {
         return browser.waitForAngular();
-    });
-
-    Then('I should see enter community button {stringInDoubleQuotes}', (selector) => {
-        return expect(element(by.css(selector)).getText()).to.eventually.contain("Entrar");
     });
 
     Then('I should see profile removed message', () => {
@@ -165,45 +173,46 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         }).then((url) => {
             if (url === `http://localhost:3001/${profile}/${article}`) {
                 browser.waitForAngular();
-                return element(by.css(".delete-article")).click().then(() => {
-                    return element(by.css(".swal2-confirm")).click();
+                return utils.pressButton(".delete-article").then(() => {
+                    return utils.pressButton(".swal2-confirm");
                 });
             }
         });
     });
 
     Given('profile {stringInDoubleQuotes} doesn\'t exists', (profile) => {
-        return browser.get(`/myprofile/${profile}/destroy_profile`).then(() => {
-            browser.waitForAngular();
-            return element(by.css(".swal2-confirm")).isPresent().then((present) => {
-                if (present) {
-                    return element(by.css(".swal2-confirm")).click();
-                }
-            });
-        });
+        return utils.destroy(profile);
     });
 
-    Given('I create community to destroy', () => {
-        return browser.get('/myprofile/adminuser').then( () => {
-            return element(by.css('ul li .communities')).click().then( () => {
-                return element(by.css('.create-community')).click().then( () => {
-                    return element(by.css('#name')).sendKeys('E2e community').then( () => {
-                        return element(by.css('#acceptAfter')).click().then( () => {
-                            return element(by.css('.save-community')).click();
-                        });
-                    });
-                });
-            });
+    Given('I press delete profile', () => {
+        browser.waitForAngular().then(() => {
+            return utils.pressButton('ul li .destroy-community');
+        }).then(() => {
+            return utils.pressButton(".swal2-confirm");
         });
     });
 
     When('I press ok on confirmation dialog', () => {
-        return element(by.css(".swal2-confirm")).click();
+        return utils.pressButton(".swal2-confirm");
+    });
+
+    When('I press the invite button', () => {
+        return utils.pressButton("noosfero-invite-component button");
     });
 
     Then('I wait for success', () => {
         return browser.waitForAngular().then(() => {
             return expect(element(by.css(".toast-success")).isPresent()).to.eventually.equal(true);
+        });
+    });
+
+    When('I edit the profile name', () => {
+        return utils.pressButton(".profile-edition-link").then( () => {
+            return element(by.css("#name")).clear().then( () => {
+                return element(by.css("#name")).sendKeys("E2e fast edtion").then(() => {
+                    return utils.pressButton(".save-fast-edtion");
+                });
+            });
         });
     });
 });
