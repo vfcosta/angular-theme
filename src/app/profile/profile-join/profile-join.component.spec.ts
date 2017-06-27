@@ -41,7 +41,6 @@ describe("Components", () => {
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: NotificationService, useValue: helpers.mocks.notificationService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
-                    { provide: "$uibModal", useValue: helpers.mocks.$modal },
                     { provide: TranslatorService, useValue: translatorService },
                     { provide: CommunityService, useValue: communityService }
                 ],

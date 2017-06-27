@@ -360,7 +360,8 @@ export function getMocks() {
             subscribe: (eventName: string, fn: Function) => {
                 mocks.authService[eventName].subscribe(fn);
             },
-            isAuthenticated: () => { }
+            isAuthenticated: () => { },
+            forgotPassword: () => {}
         },
         articleService: {
             subscribeToModelRemoved: (fn: Function) => { },

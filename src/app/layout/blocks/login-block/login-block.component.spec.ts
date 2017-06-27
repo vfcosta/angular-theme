@@ -10,7 +10,7 @@ import {Injectable, Provider, provide} from "ng-forward";
 import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import {LoginBlockComponent} from './login-block.component';
 import * as helpers from "./../../../../spec/helpers";
-import { AuthService, AuthController, AuthEvents } from "./../../../login";
+import { AuthService, AuthEvents } from "./../../../login";
 import { UiSrefDirective } from "../../../shared/directives/ui-sref-directive";
 
 const htmlTemplate: string = '<noosfero-login-block></noosfero-login-block>';

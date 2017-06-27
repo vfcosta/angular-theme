@@ -28,7 +28,6 @@ describe("Block Component", () => {
             directives: [BlockComponent],
             properties: properties,
             providers: [
-                helpers.createProviderToValue('$uibModal', helpers.mocks.$modal),
                 helpers.createProviderToValue('$state', state),
                 helpers.createProviderToValue('notificationService', helpers.mocks.notificationService),
                 helpers.createProviderToValue('authService', helpers.mocks.authService),

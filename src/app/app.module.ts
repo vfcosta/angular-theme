@@ -1,3 +1,5 @@
+import { ForgotPasswordComponent } from './login/forgot-password.component';
+import { LoginComponent } from './login/login.component';
 import swal from 'sweetalert2';
 import { EventsHubService } from './shared/services/events-hub.service';
 import { CommentParagraphEventService } from './../plugins/comment_paragraph/events/comment-paragraph-event.service';
@@ -249,6 +251,8 @@ export function HttpLoaderFactory(http: Http) {
         NavbarComponent,
         ActivityComponent,
         ArticleViewComponent,
+        LoginComponent,
+        ForgotPasswordComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -350,10 +354,10 @@ export function HttpLoaderFactory(http: Http) {
         { provide: 'Window',  useValue: window },
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
-        '$uibModal',
         '$scope',
         '$transitions',
         '$stateParams',
+        '$uibModal'
     ]))
 })
 

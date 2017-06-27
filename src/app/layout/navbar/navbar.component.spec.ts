@@ -22,7 +22,6 @@ describe("Components", () => {
             authSubscribe = [];
             spyOn(mocks.environmentService, "getCurrentEnvironment").and.returnValue(Promise.resolve({}));
             spyOn(mocks.sessionService, "currentUser").and.returnValue(user);
-            spyOn(mocks.$modal, "open").and.callThrough();
             spyOn(mocks.authService, "logout").and.callThrough();
             spyOn(mocks.authService, "subscribe").and.callFake((ev: string, fn: Function) => {
                 authSubscribe.push(fn);
@@ -31,7 +30,6 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 declarations: [NavbarComponent],
                 providers: [
-                    { provide: "$uibModal", useValue: mocks.$modal },
                     { provide: AuthService, useValue: mocks.authService },
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: "$state", useValue: mocks.$state },
@@ -52,7 +50,7 @@ describe("Components", () => {
 
         it('should open on click', () => {
             component.openLogin();
-            expect(mocks.$modal.open).toHaveBeenCalled();
+            expect(component.showLoginModal).toBeTruthy();
         });
 
         it('should logout', () => {
@@ -61,23 +59,20 @@ describe("Components", () => {
             expect(mocks.$state.transitionTo).toHaveBeenCalledWith('main.environment.home');
         });
 
-        it('should not activate user when logged in', () => {
+        it('should not open modal user when logged in', () => {
             component.activate();
-            expect(mocks.$modal.open).not.toHaveBeenCalled();
+            expect(component.showLoginModal).toBeFalsy();
         });
 
-        it('should activate when user not logged in', () => {
+        it('should open modal when user not logged in', () => {
             component['currentUser'] = null;
             component.activate();
-            expect(mocks.$modal.open).toHaveBeenCalled();
+            expect(component.showLoginModal).toBeTruthy();
         });
 
         it('closes the modal after login', () => {
-            let modalInstance = jasmine.createSpyObj("modalInstance", ["close"]);
-            modalInstance.close = jasmine.createSpy("close");
-            component['modalInstance'] = modalInstance;
             authSubscribe[0]();
-            expect(modalInstance.close).toHaveBeenCalled();
+            expect(component.showLoginModal).toBeFalsy();
         });
     });
 });
