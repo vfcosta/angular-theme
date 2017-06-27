@@ -2,7 +2,6 @@ import { AddFriendTaskComponent } from './../types/add-friend/add-friend-task.co
 import { TaskModule } from './../task.module';
 import { NgModuleFactory } from '@angular/core';
 import { Compiler } from '@angular/core';
-import { TaskModal } from './task-modal';
 import { components } from './../../../../themes/index';
 import { AppModule } from './../../app.module';
 import { Component, Input, Inject } from '@angular/core';
@@ -24,13 +23,11 @@ export class TaskListComponent {
 
     currentTask: noosfero.Task;
     confirmationTask: noosfero.Task;
-    private modalInstance: any = null;
-
     tasksGroups: noosfero.Task[];
+    showAcceptModal = false;
+    showRejectModal = false;
 
     constructor(private notificationService: NotificationService,
-        @Inject("$scope") private $scope: ng.IScope,
-        @Inject("$uibModal") private $uibModal: any,
         private taskService: TaskService,
         private eventsHubService: EventsHubService) {
     }
@@ -48,30 +45,18 @@ export class TaskListComponent {
     }
 
     accept(task: noosfero.Task) {
-        this.closeTask(task, task.accept_details, "app/task/task-list/accept.html", () => { this.callAccept(); });
+        this.closeTask(task, task.accept_details, "showAcceptModal", () => { this.callAccept(); });
     }
 
     reject(task: noosfero.Task) {
-        this.closeTask(task, task.reject_details, "app/task/task-list/reject.html", () => { this.callReject(); });
+        this.closeTask(task, task.reject_details, "showRejectModal", () => { this.callReject(); });
     }
 
-    private closeTask(task: noosfero.Task, hasDetails: boolean, templateUrl: string, confirmationFunction: Function) {
+    private closeTask(task: noosfero.Task, hasDetails: boolean, attribute: string, confirmationFunction: Function) {
         this.currentTask = task;
         this.confirmationTask = <any>{ id: task.id };
         if (hasDetails) {
-            this.modalInstance = this.$uibModal.open({
-                templateUrl: templateUrl,
-                controller: TaskModal,
-                controllerAs: 'modal',
-                bindToController: true,
-                scope: this.$scope,
-                resolve: {
-                    currentTask: this.currentTask,
-                    confirmationTask: this.confirmationTask,
-                    taskList: this
-                }
-
-            });
+            this[attribute] = true;
         } else {
             confirmationFunction();
         }
@@ -96,10 +81,8 @@ export class TaskListComponent {
     }
 
     cancel() {
-        if (this.modalInstance) {
-            this.modalInstance.close();
-            this.modalInstance = null;
-        }
+        this.showAcceptModal = false;
+        this.showRejectModal = false;
         this.currentTask = null;
         this.confirmationTask = null;
     }

@@ -357,7 +357,6 @@ export function HttpLoaderFactory(http: Http) {
         '$scope',
         '$transitions',
         '$stateParams',
-        '$uibModal'
     ]))
 })
 
