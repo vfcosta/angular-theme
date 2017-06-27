@@ -133,7 +133,7 @@
     "contextbar.edition.apply.success.title": "Bom trabalho!",
     "contextbar.edition.discard.success.message": "Suas alterações foram descartadas!",
     "contextbar.edition.discard.success.title": "Bom trabalho!",
-    "contextbar.edition.has_changes": "Você possui modificações não salvas {{ apply }}",
+    "contextbar.edition.has_changes": "Você possui modificações não salvas",
     "custom-content.edition.cancel.button": "Cancelar",
     "custom-content.edition.preview.button": "Simular",
     "custom-content.edition.save.button": "Salvar",

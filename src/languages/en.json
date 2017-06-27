@@ -134,7 +134,7 @@
     "contextbar.edition.apply.success.title": "Good job!",
     "contextbar.edition.discard.success.message": "Your changes have been discarted!",
     "contextbar.edition.discard.success.title": "Good job!",
-    "contextbar.edition.has_changes": "You have unsaved changes {{ apply }}",
+    "contextbar.edition.has_changes": "You have unsaved changes",
     "custom-content.edition.cancel.button": "Cancel",
     "custom-content.edition.preview.button": "Preview",
     "custom-content.edition.save.button": "Save",
