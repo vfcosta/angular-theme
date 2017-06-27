@@ -3,8 +3,9 @@
     <h3 id="query" class="search-box-title">{{query}}</h3>
 </form>
 <div class="search-results">
-    <div class="summary">
-        {{"search.results.summary" | translate:{results: totalResults}:"messageformat"}}
+    <div class="summary" [ngPlural]="totalResults">
+        <ng-template ngPluralCase="=1">{{"search.results.summary.one" | translate}}</ng-template>
+        <ng-template ngPluralCase="other">{{"search.results.summary.other" | translate:{results: totalResults} }}</ng-template>
     </div>
     <div *ngFor="let article of articles | orderBy: 'created_at'" class="result">
         <a class="title" uiSref="main.profile.page" [uiParams]="{profile: article.profile.identifier, page: article.path}"><h4>{{article.title}}</h4></a>
