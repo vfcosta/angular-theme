@@ -31,7 +31,7 @@ export class DestroyProfileComponent {
 
     handleSuccess(profile: noosfero.Profile) {
         this.$state.go("main.domain");
-        if(profile.type !== "Community") {
+        if (profile && profile.type !== "Community") {
             this.authService.logout();
         }
         this.notificationService.success({ title: "profile.remove.success.title", message: "profile.remove.success.message" });
