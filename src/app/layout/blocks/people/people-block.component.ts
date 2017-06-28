@@ -8,9 +8,8 @@ import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service
 export class PeopleBlockComponent {
 
     @Input() block: noosfero.Block;
-    // @Input() owner: noosfero.Profile;
     @Input() owner: noosfero.Environment;
-    // private type: string = "people";
+    @Input() designMode: boolean;
 
     profiles: any = [];
 

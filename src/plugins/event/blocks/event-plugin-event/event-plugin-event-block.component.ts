@@ -10,6 +10,7 @@ export class EventPluginEventBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
+    @Input() designMode: boolean;
 
     events: any;
     options: any;

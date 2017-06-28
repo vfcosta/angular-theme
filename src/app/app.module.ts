@@ -1,3 +1,8 @@
+import { BoxComponent } from './layout/boxes/box.component';
+import { BoxesComponent } from './layout/boxes/boxes.component';
+import { BlockComponent } from './layout/blocks/block.component';
+import { BlockContentComponent } from './layout/blocks/block-content.component';
+import { MainBlockComponent } from './layout/blocks/main/main-block.component';
 import { ForgotPasswordComponent } from './login/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import swal from 'sweetalert2';
@@ -72,7 +77,6 @@ import { NoosferoTemplatePipe } from './shared/pipes/noosfero-template.ng2.filte
 import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
 import { EditableLinkComponent } from './shared/components/editable-link/editable-link.component';
 import { LinkListBlockComponent } from './layout/blocks/link-list/link-list-block.component';
-import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
 import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
@@ -209,7 +213,6 @@ export function HttpLoaderFactory(http: Http) {
         PersonCommunitiesComponent,
         MenuBlockComponent,
         InviteComponent,
-        MainBlockUpgradeDirective,
         BootstrapResizableDirective,
         ProfileSummaryComponent,
         LoginBlockComponent,
@@ -255,6 +258,11 @@ export function HttpLoaderFactory(http: Http) {
         ArticleViewComponent,
         LoginComponent,
         ForgotPasswordComponent,
+        MainBlockComponent,
+        BlockContentComponent,
+        BlockComponent,
+        BoxesComponent,
+        BoxComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -324,6 +332,9 @@ export function HttpLoaderFactory(http: Http) {
         NavbarComponent,
         ActivityComponent,
         ArticleViewComponent,
+        BlockContentComponent,
+        BlockComponent,
+        BoxesComponent,
     ].concat(plugins.ng2MainComponents),
     providers: [
         HeaderService,

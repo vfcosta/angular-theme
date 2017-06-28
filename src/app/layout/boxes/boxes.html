@@ -1,14 +1,6 @@
-<div ng-repeat="column in ctrl.columns">
-  <div class="{{ctrl.getBoxClass(column)}} box"  ng-init="box = ctrl.getBox($index); sortedBlocks = box.blocks | orderBy: 'position'">
-    <add-block ng-if="ctrl.showButton(column)" (on-add)="ctrl.addBlock(box, $event)" [box]="box" [owner]="ctrl.owner"></add-block>
-
-    <noosfero-block ng-if="!column['subcolumns']" ng-repeat="block in sortedBlocks"
-      [block]="block" [owner]="ctrl.owner" [box]="box">
-    </noosfero-block>
-
-    <noosfero-boxes ng-if="column['subcolumns']" [columns]="column['subcolumns']"
-      [boxes]="ctrl.boxes" [owner]="ctrl.owner" [start-index]="ctrl.lastIndex"></noosfero-boxes>
-
-    <div class="dndPlaceholder"></div>
+<div *ngFor="let column of columns; let index=index">
+  <div class="{{getBoxClass(column)}} box">
+    <noosfero-box [startIndex]="lastIndex" [boxes]="boxes" [box]="getBox(index)"
+      [designMode]="designMode" [column]="column" [owner]="owner"></noosfero-box>
   </div>
 </div>

@@ -10,6 +10,7 @@ export class RecentActivitiesPluginActivitiesBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     profile: any;
     activities: any;

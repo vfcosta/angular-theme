@@ -9,6 +9,7 @@ export class BreadcrumbsBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     profile: noosfero.Profile;
     links: any[] = [];

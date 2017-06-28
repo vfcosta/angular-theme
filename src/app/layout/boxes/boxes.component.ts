@@ -1,12 +1,11 @@
-import { Inject, Input, Component } from 'ng-forward';
+import { Inject, Input, Component } from '@angular/core';
 import { DesignModeService } from "../../shared/services/design-mode.service";
 import { EventsHubService } from "../../shared/services/events-hub.service";
 
 @Component({
     selector: "noosfero-boxes",
-    templateUrl: "app/layout/boxes/boxes.html"
+    template: require("app/layout/boxes/boxes.html")
 })
-@Inject("$scope", "designModeService", "eventsHubService")
 export class BoxesComponent {
 
     @Input() boxes: noosfero.Box[];
@@ -32,34 +31,29 @@ export class BoxesComponent {
         "nosidebars": [{ size: 12, main: true }]
     };
 
-    constructor(private $scope: ng.IScope, private designModeService: DesignModeService, private eventsHubService: EventsHubService) {
+    constructor(private designModeService: DesignModeService, private eventsHubService: EventsHubService) {
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
         });
     }
 
-    showButton(column: any) {
-        return this.designMode && this.isNotParent(column);
-    }
-
-    isNotParent(column: any) {
-        return column['subcolumns'] === undefined;
+    ngOnChanges() {
+        if (this.layout) this.columns = null;
+        this.setupColumns();
     }
 
     ngOnInit() {
         if (!this.layout) {
             this.setupColumns();
-        } else {
-            this.$scope.$watch("ctrl.layout", () => {
-                this.columns = null;
-                this.setupColumns();
-            });
         }
         this.designMode = this.designModeService.isInDesignMode();
     }
 
     setupColumns() {
-        if (!this.columns) this.columns = (<any>BoxesComponent.layouts)[this.layout];
+        if (!this.columns) {
+            if (!this.layout) return;
+            this.columns = (<any>BoxesComponent.layouts)[this.layout];
+        }
         this.mainColumn = this.columns.findIndex((el: any) => {
             return el.main;
         });
@@ -75,19 +69,14 @@ export class BoxesComponent {
         return this.boxes[index + this.startIndex];
     }
 
+    isNotParent(column: any) {
+        return column['subcolumns'] === undefined;
+    }
+
     getBoxClass(column: any) {
         let boxClass = `col-md-${column['size']}`;
         if (!this.isNotParent(column)) boxClass += ` box-column-parent`;
         return boxClass;
-    }
-
-    addBlock(box: noosfero.Box, block: noosfero.Block) {
-        block.permissions = ["allow_edit"];
-        box.blocks.forEach((block: noosfero.Block) => {
-            if (!block._destroy) block.position++;
-        });
-        block.position = 1;
-        box.blocks.unshift(block);
     }
 
     updatePosition(sortedBlocks: noosfero.Block[]) {

@@ -1,33 +1,33 @@
-<div bootstrap-resizable="ctrl.designMode" bootstrap-resizable-columns="ctrl.block.settings.visualization.columns" 
-    ng-show="ctrl.canDisplay()"
-    ng-class="{'invisible-block': !ctrl.visible(), 'animated bounceInDown': !ctrl.block.id, 'animated bounceOutUp': ctrl.block._destroy}"
-    class="noosfero-block col-md-{{ctrl.block.settings.visualization.columns || 12}}">
-    <div ng-show="ctrl.designMode" class="actions block-actions" permission="ctrl.block.permissions" permission-action="allow_edit">
-        <a class="action visibility" href="#" ng-if="ctrl.canDelete()" (click)="ctrl.markForDeletion()">
+<div bootstrap-resizable="designMode" bootstrap-resizable-columns="block.settings.visualization.columns" 
+    [hidden]="!canDisplay()"
+    [ngClass]="{'invisible-block': !visible(), 'animated bounceInDown': !block.id, 'animated bounceOutUp': block._destroy}"
+    class="noosfero-block col-md-{{block.settings?.visualization?.columns || 12}}">
+    <div [hidden]="!designMode" class="actions block-actions" [permission]="block.permissions" permissionAction="allow_edit">
+        <a class="action visibility" href="#" *ngIf="canDelete()" (click)="markForDeletion()">
             <i class="fa fa-remove fa-fw fa-lg"></i>
         </a>
-        <noosfero-block-edition [box]="ctrl.box" [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-edition>
+        <noosfero-block-edition [box]="box" [block]="block" [owner]="owner"></noosfero-block-edition>
     </div>
-    <div class="panel panel-default block {{ctrl.blockClass()}}">
-        <div class="panel-heading" ng-show="ctrl.designMode || ctrl.block.title">
+    <div class="panel panel-default block {{blockClass()}}">
+        <div class="panel-heading" [hidden]="!designMode && !block.title">
             <h3 class="panel-title">
                 <div class="popover-wrapper">
-                    <span ng-hide="!textBtnForm.$visible" ng-if="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}'>
-            {{ (ctrl.block.title | noosferoTemplate:ctrl.block.api_content ) || ("edit.inline.title" | translate) }}</span>
-                    <span editable-text="ctrl.block.title" e-placeholder='{{"edit.inline.title" | translate}}' e-form="textBtnForm">
-            {{ (ctrl.block.title | noosferoTemplate:ctrl.block.api_content ) || ("edit.inline.title" | translate) }}</span>
-                    <a id="edit-pen" ng-if="ctrl.designMode" permission="ctrl.block.permissions" permission-action="allow_edit"
-                        href="#" class="pencil-icon pencil-icon-block" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible">
-                    </a>
+                    <!--<span [hidden]="!textBtnForm.$visible" *ngIf="block.title" e-placeholder='{{"edit.inline.title" | translate}}'>
+            {{ (block.title | noosferoTemplate:block.api_content ) || ("edit.inline.title" | translate) }}</span>
+                    <span editable-text="block.title" e-placeholder='{{"edit.inline.title" | translate}}' e-form="textBtnForm">
+            {{ (block.title | noosferoTemplate:block.api_content ) || ("edit.inline.title" | translate) }}</span>-->
+                    <!--<a id="edit-pen" *ngIf="designMode" [permission]="block.permissions" permissionAction="allow_edit"
+                        href="#" class="pencil-icon pencil-icon-block" (click)="textBtnForm.$show()" [hidden]="textBtnForm.$visible">
+                    </a>-->
                 </div>
             </h3>
         </div>
-        <div class="panel-body {{ctrl.blockClass()}}">
-            <noosfero-block-content [design-mode]="ctrl.designMode" [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-content>
+        <div class="panel-body {{blockClass()}}">
+            <noosfero-block-content [designMode]="designMode" [block]="block" [owner]="owner"></noosfero-block-content>
         </div>
-        <div class="panel-footer {{ctrl.blockClass()}}" ng-if='ctrl.designMode'>
-            <div class="block-name">{{ctrl.block.definition.name}}</div>
-            <noosfero-block-settings [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-settings>
+        <div class="panel-footer {{blockClass()}}" *ngIf='designMode'>
+            <div class="block-name">{{block.definition.name}}</div>
+            <noosfero-block-settings [block]="block" [owner]="owner"></noosfero-block-settings>
         </div>
     </div>
 </div>

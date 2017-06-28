@@ -1,4 +1,4 @@
-import { Input, Component, Inject } from 'ng-forward';
+import { Input, Component, Inject } from '@angular/core';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService, SessionService, AuthEvents } from "../../login";
 import { TranslatorService } from "../../shared/services/translator.service";
@@ -6,10 +6,8 @@ import { DesignModeService } from "../../shared/services/design-mode.service";
 
 @Component({
     selector: 'noosfero-block',
-    templateUrl: 'app/layout/blocks/block.html'
+    template: require('app/layout/blocks/block.html')
 })
-@Inject("$scope", "$state", "$rootScope", "notificationService",
-    "authService", "sessionService", "translatorService", "designModeService", "$transitions")
 export class BlockComponent {
 
     @Input() block: noosfero.Block;
@@ -20,17 +18,14 @@ export class BlockComponent {
     isHomepage = true;
     designMode = false;
 
-
     constructor(
-        private $scope: ng.IScope,
-        private $state: ng.ui.IStateService,
-        private $rootScope: ng.IRootScopeService,
+        @Inject("$state") private $state: ng.ui.IStateService,
         private notificationService: NotificationService,
         private authService: AuthService,
         private sessionService: SessionService,
         private translatorService: TranslatorService,
         private designModeService: DesignModeService,
-        private $transitions) {
+        @Inject("$transitions") private $transitions) {
 
         this.currentUser = this.sessionService.currentUser();
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
@@ -46,7 +41,6 @@ export class BlockComponent {
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
-            // this.$scope.$apply();
         });
     }
 

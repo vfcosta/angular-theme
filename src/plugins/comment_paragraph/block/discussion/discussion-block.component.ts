@@ -17,6 +17,7 @@ export class DiscussionBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     profile: noosfero.Profile;
     documents: Array<noosfero.Article>;

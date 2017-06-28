@@ -10,5 +10,6 @@ export class ProfileImageBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
+    @Input() designMode: boolean;
 
 }
