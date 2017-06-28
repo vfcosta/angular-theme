@@ -1,7 +1,7 @@
 <add-block *ngIf="showButton(column)" (onAdd)="addBlock(box, $event)" [box]="box" [owner]="owner"></add-block>
 
 <ng-container *ngIf="!column?.subcolumns">
-    <noosfero-block *ngFor="let block of box.blocks | orderBy: 'position'" [block]="block" [owner]="owner" [box]="box">
+    <noosfero-block *ngFor="let block of box?.blocks | orderBy: 'position'" [block]="block" [owner]="owner" [box]="box">
     </noosfero-block>
 </ng-container>
 
