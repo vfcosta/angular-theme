@@ -22,7 +22,7 @@ export class ArticleEditorComponent {
         this.window['renameUrl'] = '/api/v1/articles';
         this.window['privateToken'] = this.sessionService.currentUser().private_token;
         this.window['baseUrl'] = this.getDomanWithPort();
-        this.options = { allowedContent: true, removeFormatAttributes: '', filebrowserBrowseUrl: '/ng2-filemanager?editor=CKEditor'};
+        this.options = { allowedContent: true, removeFormatAttributes: '', filebrowserBrowseUrl: '/ngx-filemanager?editor=CKEditor'};
     }
 
     getDomanWithPort() {

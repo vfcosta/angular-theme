@@ -1,7 +1,7 @@
 <a *ngIf="profile" uiSref="main.profile.home" [uiParams]="{profile: profile.identifier}" title="{{profile.name}}" class="profile-link">
     <noosfero-profile-image *ngIf="displayImage" [profile]="profile" class="profile-image"></noosfero-profile-image>
     <ng-container *ngIf="displayName">
-        <span *ngIf="truncate" class="profile-name truncated">{{profile.name | shorten: 12: '...' }}</span>
+        <span *ngIf="truncate" class="profile-name truncated">{{profile.name | shorten: 27: '...' }}</span>
         <span *ngIf="!truncate" class="profile-name">{{profile.name}}</span>
     </ng-container>
     <span class="profile-extra">

@@ -1,5 +1,6 @@
 import { Component, Inject, Input } from '@angular/core';
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { DisplayStyles } from '../profile-list/profile-list.component';
 
 @Component({
     selector: "noosfero-community-members",
@@ -12,13 +13,13 @@ export class CommunityMembersComponent {
     private membersPerPage: number;
     private totalMembers: number;
     private profile: noosfero.Profile;
+    private displayStyle: string = DisplayStyles.card;
 
     constructor(private profileService: ProfileService) {
         this.members = [];
         this.currentPage = 1;
         this.membersPerPage = 20;
         this.totalMembers = 0;
-
         this.loadPage({ page: 1 });
     }
 
@@ -35,6 +36,10 @@ export class CommunityMembersComponent {
             this.totalMembers = <number>(<any>result.headers).get("total");
             this.members = result.data;
         });
+    }
+
+    getDisplayStyle() {
+        return this.displayStyle;
     }
 
 }

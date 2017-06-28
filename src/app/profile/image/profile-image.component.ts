@@ -39,6 +39,8 @@ export class ProfileImageComponent {
     @Input() iconSize: string;
     @Input() editable: boolean;
 
+    nullImageFromApi = false;
+
     constructor(private profileService: ProfileService,
         private permissionService: PermissionService,
         private eventsHubService: EventsHubService,
@@ -78,4 +80,9 @@ export class ProfileImageComponent {
             }
         });
     }
+
+    showAlternativeProfileIcon() {
+        return this.nullImageFromApi || !this.profile.image;
+    }
+
 }
