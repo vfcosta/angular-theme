@@ -9,7 +9,6 @@ import { BoxesComponent } from '../layout/boxes/boxes.component';
 import { PasswordComponent } from '../login/new-password.component';
 import { ProfileComponent } from '../profile/profile.component';
 import { SearchComponent } from '../search/search.component';
-import { BootstrapResizableDirective } from '../shared/components/bootstrap-resizable/bootstrap-resizable.directive';
 import { PermissionDirective } from '../shared/components/permission/permission.directive';
 import { NoosferoTemplate } from '../shared/pipes/noosfero-template.filter';
 import { EventsHubService } from '../shared/services/events-hub.service';
@@ -73,7 +72,6 @@ export class EnvironmentContent {
         ProfileComponent, MainBlockComponent, NoosferoTemplate, TranslatePipe,
         PermissionDirective,
         BlockComponent,
-        BootstrapResizableDirective,
         DomainComponent,
     ].concat(plugins.mainComponents).concat(plugins.hotspots),
     providers: [

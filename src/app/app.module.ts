@@ -121,6 +121,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -209,6 +210,7 @@ export function HttpLoaderFactory(http: Http) {
         MenuBlockComponent,
         InviteComponent,
         MainBlockUpgradeDirective,
+        BootstrapResizableDirective,
         ProfileSummaryComponent,
         LoginBlockComponent,
         LinkListBlockComponent,

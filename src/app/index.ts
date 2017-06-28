@@ -115,6 +115,7 @@ import { ImageUploadComponent } from './shared/components/image-upload/image-upl
 import { TaskListComponent } from './task/task-list/task-list.component';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { bundle } from 'ng-forward';
+import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
 
 // FIXME see a better way to declare template modules for dev mode
 try {
@@ -392,6 +393,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoArticle',
         downgradeComponent({ component: ArticleViewComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
+    ).
+    directive('bootstrapResizable',
+        downgradeComponent({ component: BootstrapResizableDirective, inputs: ['bootstrapResizable'], outputs: ['bootstrapResizableColumns'] }) as angular.IDirectiveFactory
     )
     .factory('articleService', downgradeInjectable(ArticleService))
     .factory('environmentService', downgradeInjectable(EnvironmentService))

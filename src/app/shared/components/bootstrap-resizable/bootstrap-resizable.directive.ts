@@ -1,4 +1,5 @@
-import { Directive, Input, Inject } from 'ng-forward';
+import { Directive, Input, Inject, ElementRef, Output } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 
 /**
  * Based on https://github.com/Reklino/angular-resizable
@@ -6,9 +7,10 @@ import { Directive, Input, Inject } from 'ng-forward';
 @Directive({
     selector: '[bootstrap-resizable]'
 })
-@Inject('$attrs', '$scope', '$element', "$window")
 export class BootstrapResizableDirective {
 
+    @Input() bootstrapResizable;
+    @Output() bootstrapResizableColumns;
     style: CSSStyleDeclaration;
     start: number;
     w: number;
@@ -18,35 +20,33 @@ export class BootstrapResizableDirective {
     mouseUpFn = (e: MouseEvent) => this.dragEnd(e);
     mouseMoveFn = (e: MouseEvent) => this.dragging(e);
 
-    constructor(private $attrs: ng.IAttributes,
-        private $scope: ng.IScope,
-        private $element: ng.IAugmentedJQuery,
-        private $window: ng.IWindowService) {
+    constructor(private elementRef: ElementRef,
+        @Inject(DOCUMENT) private document: any,
+        @Inject('Window') private window: Window) {
 
-        this.$element.append('<div class="bootstrap-resize-tool"></div>');
-        let resizeTool = this.$element[0].querySelector('.bootstrap-resize-tool');
+        console.log('##### bootstrapResizableColumns');
+        
+        this.elementRef.nativeElement.append('<div class="bootstrap-resize-tool"></div>');
+        let resizeTool = this.elementRef.nativeElement[0].querySelector('.bootstrap-resize-tool');
         resizeTool.addEventListener('mousedown', (e: MouseEvent) => this.mouseDown(e), false);
         resizeTool.addEventListener('touchstart', (e: MouseEvent) => this.mouseDown(e), false);
 
-        this.style = $window.getComputedStyle($element[0], null);
+        this.style = window.getComputedStyle(this.elementRef.nativeElement[0], null);
 
-        $scope.$watch(() => { return this.isEnabled(); }, () => {
-            if (this.isEnabled()) {
-                this.$element.addClass('boostrap-resizable');
-                this.$element.removeClass('boostrap-resizable-disabled');
-            } else {
-                this.$element.removeClass('boostrap-resizable');
-                this.$element.addClass('boostrap-resizable-disabled');
-            }
-        });
     }
 
-    isEnabled() {
-        return this.$scope.$eval(this.$attrs['bootstrapResizable']) === true;
+    ngOnChanges() {
+        if (this.bootstrapResizable) {
+            this.elementRef.nativeElement.addClass('boostrap-resizable');
+            this.elementRef.nativeElement.removeClass('boostrap-resizable-disabled');
+        } else {
+            this.elementRef.nativeElement.removeClass('boostrap-resizable');
+            this.elementRef.nativeElement.addClass('boostrap-resizable-disabled');
+        }
     }
 
     mouseDown(e: MouseEvent) {
-        if (this.isEnabled() && (e.which === 1 || (<any>e).touches)) {
+        if (this.bootstrapResizable && (e.which === 1 || (<any>e).touches)) {
             this.dragStart(e); // left mouse click or touch screen
         }
     }
@@ -66,11 +66,11 @@ export class BootstrapResizableDirective {
         if (e.preventDefault) e.preventDefault();
         e.cancelBubble = true;
         e.returnValue = false;
-        this.$element.addClass('bootstrap-resizing');
+        this.elementRef.nativeElement.addClass('bootstrap-resizing');
     }
 
     getCurrentColumns() {
-        let classes = this.$element[0].className.split(' ');
+        let classes = this.elementRef.nativeElement[0].className.split(' ');
         let columns = 12;
         classes.forEach((cl: string) => {
             if (cl.startsWith(this.prefix)) {
@@ -82,16 +82,15 @@ export class BootstrapResizableDirective {
     }
 
     replaceColumnClass(currentColumns: number, newColumns: number) {
-        this.$element.removeClass(this.prefix + currentColumns);
-        this.$element.addClass(this.prefix + newColumns);
-        this.$scope.$eval(`${this.$attrs['bootstrapResizableColumns']} = ${newColumns}`);
-        this.$scope.$apply();
+        this.elementRef.nativeElement.removeClass(this.prefix + currentColumns);
+        this.elementRef.nativeElement.addClass(this.prefix + newColumns);
+        this.bootstrapResizableColumns = newColumns;
     }
 
     dragging(e: MouseEvent) {
         let offset = this.start - this.getClientX(e);
         let currentColumns = this.getCurrentColumns();
-        let newColumns = Math.round((currentColumns * (this.w - offset)) / this.$element[0].clientWidth);
+        let newColumns = Math.round((currentColumns * (this.w - offset)) / this.elementRef.nativeElement[0].clientWidth);
         newColumns = Math.max(1, Math.min(12, newColumns));
         this.replaceColumnClass(currentColumns, newColumns);
     }
@@ -101,7 +100,7 @@ export class BootstrapResizableDirective {
         document.removeEventListener('mousemove', this.mouseMoveFn, false);
         document.removeEventListener('touchend', this.mouseUpFn, false);
         document.removeEventListener('touchmove', this.mouseMoveFn, false);
-        this.$element.removeClass('bootstrap-resizing');
+        this.elementRef.nativeElement.removeClass('bootstrap-resizing');
     }
 
     private getClientX(e: MouseEvent) {
