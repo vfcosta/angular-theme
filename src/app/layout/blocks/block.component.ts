@@ -1,12 +1,14 @@
-import { Input, Component, Inject } from '@angular/core';
+import { state, style, transition, animate, trigger, Input, Component, Inject } from '@angular/core';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService, SessionService, AuthEvents } from "../../login";
 import { TranslatorService } from "../../shared/services/translator.service";
 import { DesignModeService } from "../../shared/services/design-mode.service";
+import { animateFactory } from 'ng2-animate';
 
 @Component({
     selector: 'noosfero-block',
-    template: require('app/layout/blocks/block.html')
+    template: require('app/layout/blocks/block.html'),
+    animations: [animateFactory(500, 0, 'ease-in')]
 })
 export class BlockComponent {
 
@@ -17,6 +19,7 @@ export class BlockComponent {
     currentUser: noosfero.User;
     isHomepage = true;
     designMode = false;
+    animation: string;
 
     constructor(
         @Inject("$state") private $state: ng.ui.IStateService,
@@ -50,6 +53,9 @@ export class BlockComponent {
         if (!this.block.settings) this.block.settings = <noosfero.Settings>{};
         if (!this.block.settings.visualization) {
             this.block.settings.visualization = {};
+        }
+        if (!this.block.id) {
+            this.animation = "zoomInDown";
         }
     }
 
@@ -100,6 +106,7 @@ export class BlockComponent {
 
     markForDeletion() {
         this.block._destroy = true;
+        this.animation = "zoomOutUp";
     }
 
     canDelete() {

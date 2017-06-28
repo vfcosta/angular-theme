@@ -27,6 +27,7 @@
     "mydatepicker": "^2.0.13",
     "ng-dynamic": "^3.0.2",
     "ng-forward": "0.0.1-alpha.12",
+    "ng2-animate": "^1.2.1",
     "ng2-ckeditor": "^1.1.6",
     "ng2-dragula": "^1.3.0",
     "ng2-img-cropper": "^0.8.6",

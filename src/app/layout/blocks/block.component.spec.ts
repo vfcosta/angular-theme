@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PermissionNg2Directive } from './../../shared/components/permission/permission.ng2.directive';
 import { By } from '@angular/platform-browser';
 import { DesignModeService } from './../../shared/services/design-mode.service';
@@ -30,6 +31,7 @@ describe("Block Component", () => {
                 { provide: DesignModeService, useValue: mocks.designModeService },
                 { provide: "$transitions", useValue: mocks.$transitions },
             ],
+            imports: [BrowserAnimationsModule]
         });
         fixture = TestBed.createComponent(BlockComponent);
         component = fixture.componentInstance;
@@ -165,7 +167,6 @@ describe("Block Component", () => {
     it("hides block if marked for removal", () => {
         component.block = <any>{ id: 1};
         component.markForDeletion();
-        fixture.detectChanges();
-        expect(fixture.debugElement.queryAll(By.css('.noosfero-block.ng-hide')).length).toEqual(1);
+        expect(component.animation).toEqual("zoomOutUp");
     });
 });
