@@ -15,7 +15,6 @@ export class DestroyProfileComponent {
         private profileService: ProfileService,
         private authService: AuthService) {
         profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
-            if (!profile) return;
             notificationService.confirmation({ title: "profile.remove.confirmation.title", message: "profile.remove.confirmation.message" }, () => {
                 profileService.remove(profile).then((response: noosfero.RestResult<any>) => {
                     if (response.data.success) {
@@ -32,7 +31,9 @@ export class DestroyProfileComponent {
 
     handleSuccess(profile: noosfero.Profile) {
         this.$state.go("main.domain");
-        this.authService.logout();
+        if(profile.type !== "Community") {
+            this.authService.logout();
+        }
         this.notificationService.success({ title: "profile.remove.success.title", message: "profile.remove.success.message" });
     }
 
