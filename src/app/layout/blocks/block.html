@@ -1,4 +1,4 @@
-<div bootstrap-resizable="designMode" bootstrap-resizable-columns="block.settings.visualization.columns" 
+<div bootstrap-resizable [designMode]="designMode" [(bootstrapResizableColumns)]="block.settings.visualization.columns" 
     [hidden]="!canDisplay()"
     [ngClass]="{'invisible-block': !visible(), 'animated bounceInDown': !block.id, 'animated bounceOutUp': block._destroy}"
     class="noosfero-block col-md-{{block.settings?.visualization?.columns || 12}}">

@@ -397,9 +397,6 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('noosferoArticle',
         downgradeComponent({ component: ArticleViewComponent, inputs: ['article', 'profile'] }) as angular.IDirectiveFactory
     ).
-    directive('bootstrapResizable',
-        downgradeComponent({ component: BootstrapResizableDirective, inputs: ['bootstrapResizable'], outputs: ['bootstrapResizableColumns'] }) as angular.IDirectiveFactory
-    ).
     directive('noosferoBlockContent',
         downgradeComponent({ component: BlockContentComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
     ).

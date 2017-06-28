@@ -5,5 +5,6 @@ namespace noosfero {
     export interface Settings {
         sections: noosfero.Section[];
         limit: number;
+        visualization: any;
     }
 }

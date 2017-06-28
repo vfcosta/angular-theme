@@ -47,12 +47,15 @@ export class BlockComponent {
     ngOnInit() {
         this.verifyHomepage();
         this.designMode = this.designModeService.isInDesignMode();
+        if (!this.block.settings.visualization) {
+            this.block.settings.visualization = {};
+        }
     }
 
     canDisplay() {
         if (this.block._destroy) return false;
         if (this.designMode) return true;
-        return  this.visible() && this.displayToUser() &&
+        return this.visible() && this.displayToUser() &&
             this.displayOnLanguage(this.translatorService.currentLanguage()) &&
             !this.block.hide;
     }
