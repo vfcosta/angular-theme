@@ -5,7 +5,7 @@ import { async } from '@angular/core/testing';
 
 const htmlTemplate: string = '<div bootstrap-resizable="ctrl.enabled" bootstrap-resizable-columns="ctrl.columns"></div>';
 
-fdescribe("Bootstrap Resizable Directive", () => {
+describe("Bootstrap Resizable Directive", () => {
 
     let elementRef: any = { nativeElement: { className: 'other-class col-md-12' } };
 
