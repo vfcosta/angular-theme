@@ -20,7 +20,7 @@ describe("Components", () => {
             { value: 'abstract', checked: 'abstract' },
             { value: 'title', checked: 'title' }
         ];
-        let settings: noosfero.Settings = {
+        let settings: any = {
             limit: 6,
             sections: sections
         };

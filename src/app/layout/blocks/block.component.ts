@@ -47,6 +47,7 @@ export class BlockComponent {
     ngOnInit() {
         this.verifyHomepage();
         this.designMode = this.designModeService.isInDesignMode();
+        if (!this.block.settings) this.block.settings = <noosfero.Settings>{};
         if (!this.block.settings.visualization) {
             this.block.settings.visualization = {};
         }
