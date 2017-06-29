@@ -1,107 +1,89 @@
-import { Input, provide, Component } from 'ng-forward';
+import { Input, Component } from '@angular/core';
 import { BootstrapResizableDirective } from "./bootstrap-resizable.directive";
 import * as helpers from "../../../../spec/helpers";
+import { async } from '@angular/core/testing';
 
 const htmlTemplate: string = '<div bootstrap-resizable="ctrl.enabled" bootstrap-resizable-columns="ctrl.columns"></div>';
 
 describe("Bootstrap Resizable Directive", () => {
 
-    let element: any = { className: 'other-class col-md-12' };
-    element.querySelector = jasmine.createSpy("querySelector");
+    let elementRef: any = { nativeElement: { className: 'other-class col-md-12' } };
+
     let subElement = { style: { height: 0 } };
     (<any>subElement).addEventListener = jasmine.createSpy("addEventListener");
-    let elements: any = [element];
 
-    elements.append = jasmine.createSpy("append");
-    elements.removeClass = jasmine.createSpy("removeClass");
-    elements.addClass = jasmine.createSpy("addClass");
-    element.querySelector = jasmine.createSpy("querySelector").and.returnValue(subElement);
+    elementRef.nativeElement.querySelector = jasmine.createSpy("querySelector").and.returnValue(subElement);
+    elementRef.nativeElement.insertAdjacentHTML = jasmine.createSpy("insertAdjacentHTML");
 
-    let scope = jasmine.createSpyObj("$scope", ["$watch", "$eval", "$apply"]);
     let style = jasmine.createSpyObj("style", ["getPropertyValue"]);
-    let window = jasmine.createSpyObj("$window", ["getComputedStyle"]);
+    let window = jasmine.createSpyObj("window", ["getComputedStyle"]);
     window.getComputedStyle = jasmine.createSpy("getComputedStyle").and.returnValue(style);
+    let renderer = jasmine.createSpyObj("renderer", ["setElementClass"]);
+    renderer.setElementClass = jasmine.createSpy("setElementClass");
+    let directive: any;
 
-    scope.$watch = (param: string, f: Function) => { f(); };
-    scope.$eval = (param: any) => { return param; };
+    beforeEach(async(() => {
+        elementRef.nativeElement.classList = ['col-md-12'];
+        directive = new BootstrapResizableDirective(elementRef, document, window, renderer);
+        directive.designMode = true;
+    }));
 
-    it("be enabled when bootstrapResizable is true", (done: Function) => {
-        let attrs: any = { bootstrapResizable: true, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
-        expect(directive.isEnabled()).toBeTruthy();
-        expect(elements.addClass).toHaveBeenCalledWith('boostrap-resizable');
-        expect(elements.removeClass).toHaveBeenCalledWith('boostrap-resizable-disabled');
-        done();
+
+    it("be enabled when designMode is true", () => {
+        directive.designMode = true;
+        directive.ngOnChanges();
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'boostrap-resizable', true);
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'boostrap-resizable-disabled', false);
     });
 
-    it("be disabled when bootstrapResizable is false", (done: Function) => {
-        let attrs: any = { bootstrapResizable: false, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
-        expect(directive.isEnabled()).toBeFalsy();
-        expect(elements.removeClass).toHaveBeenCalledWith('boostrap-resizable');
-        expect(elements.addClass).toHaveBeenCalledWith('boostrap-resizable-disabled');
-        done();
+    it("be disabled when designMode is false", () => {
+        directive.designMode = false;
+        directive.ngOnChanges();
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'boostrap-resizable', false);
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'boostrap-resizable-disabled', true);
     });
 
-    it("return current columns based on element class", (done: Function) => {
-        let attrs: any = { bootstrapResizable: false, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
+    it("return current columns based on element class", () => {
         expect(directive.getCurrentColumns()).toEqual(12);
-        done();
+
     });
 
-    it("change class when call replace columns", (done: Function) => {
-        let attrs: any = { bootstrapResizable: false, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
+    it("change class when call replace columns", () => {
         directive.replaceColumnClass(12, 6);
-        expect(elements.addClass).toHaveBeenCalledWith('col-md-6');
-        expect(elements.removeClass).toHaveBeenCalledWith('col-md-12');
-        done();
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'col-md-6', true);
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'col-md-12', false);
     });
 
-    it("do nothing when click and the directive is disabled", (done: Function) => {
-        let attrs: any = { bootstrapResizable: false, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
+    it("do nothing when click and the directive is disabled", () => {
+        directive.designMode = false;
         let event: any = { which: 1 };
         directive.mouseDown(event);
-        expect(elements.addClass).not.toHaveBeenCalledWith('bootstrap-resizing');
-        done();
+        expect(renderer.setElementClass).not.toHaveBeenCalledWith(elementRef.nativeElement, 'bootstrap-resizing', true);
     });
 
-    it("add class when resizing with mouse click", (done: Function) => {
-        let attrs: any = { bootstrapResizable: true, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
+    it("add class when resizing with mouse click", () => {
         let event: any = { which: 1 };
         directive.mouseDown(event);
-        expect(elements.addClass).toHaveBeenCalledWith('bootstrap-resizing');
-        done();
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'bootstrap-resizing', true);
+
     });
 
-    it("add class when resizing with touch", (done: Function) => {
-        let attrs: any = { bootstrapResizable: true, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
+    it("add class when resizing with touch", () => {
         let event: any = { touches: [{ clientX: 1 }] };
         directive.mouseDown(event);
-        expect(elements.addClass).toHaveBeenCalledWith('bootstrap-resizing');
-        done();
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'bootstrap-resizing', true);
     });
 
-    it("remove class when end resizing", (done: Function) => {
-        let attrs: any = { bootstrapResizable: true, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
+    it("remove class when end resizing", () => {
         let event: any = {};
         directive.dragEnd(event);
-        expect(elements.removeClass).toHaveBeenCalledWith('bootstrap-resizing');
-        done();
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'bootstrap-resizing', false);
     });
 
-    it("change class when dragging", (done: Function) => {
-        let attrs: any = { bootstrapResizable: false, bootstrapResizableColumns: 12 };
-        let directive = new BootstrapResizableDirective(<any>attrs, scope, <any>elements, window);
+    it("change class when dragging", () => {
         let event: any = {};
         directive.dragging(event);
-        expect(elements.addClass).toHaveBeenCalledWith('col-md-6');
-        expect(elements.removeClass).toHaveBeenCalledWith('col-md-12');
-        done();
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'col-md-6', true);
+        expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'col-md-12', false);
     });
 });

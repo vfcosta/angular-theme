@@ -27,8 +27,6 @@ export class BootstrapResizableDirective {
         private renderer: Renderer
     ) {
 
-        console.log('##### bootstrapResizable nativeElement:', this.elementRef.nativeElement);
-
         this.elementRef.nativeElement.insertAdjacentHTML('beforeend', '<div class="bootstrap-resize-tool"></div>');
         let resizeTool = this.elementRef.nativeElement.querySelector('.bootstrap-resize-tool');
         resizeTool.addEventListener('mousedown', (e: MouseEvent) => this.mouseDown(e), false);
@@ -39,7 +37,6 @@ export class BootstrapResizableDirective {
     }
 
     ngOnChanges() {
-        console.log('##### ngOnChanges this.bootstrapResizable:', this.designMode);
         this.renderer.setElementClass(this.elementRef.nativeElement, 'boostrap-resizable', this.designMode);
         this.renderer.setElementClass(this.elementRef.nativeElement, 'boostrap-resizable-disabled', !this.designMode);
     }
