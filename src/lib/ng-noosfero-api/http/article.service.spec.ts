@@ -10,7 +10,6 @@ describe("Services", () => {
     describe("Article Service", () => {
         let service: ArticleService;
         let mocks = helpers.getMocks();
-        let $window: any;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

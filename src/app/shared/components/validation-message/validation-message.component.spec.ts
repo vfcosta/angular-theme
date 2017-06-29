@@ -1,12 +1,12 @@
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { TranslatorService } from './../../services/translator.service';
-import { TranslatePipe } from './../../pipes/translate-pipe';
 import { ValidationMessageComponent } from './validation-message.component';
 import { By } from '@angular/platform-browser';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule, FormControl } from '@angular/forms';
 import * as helpers from "../../../../spec/helpers";
 import { fixtures } from '../../../../spec/helpers';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, Pipe, PipeTransform } from '@angular/core';
 
 
 @Component({
@@ -22,44 +22,44 @@ class FormTemplateTestComponet {
     @ViewChild('currentPasswordInput') currentPassword: ElementRef;
 }
 
+let translatedText = "";
+@Pipe({name: 'translate'})
+class MockTranslationPipe implements PipeTransform {
+    transform(value: string): string {
+        return translatedText;
+    }
+}
 
 describe("Components", () => {
-
     describe("Validation Message Component", () => {
         let fixture: ComponentFixture<ValidationMessageComponent>;
         let formFixture: ComponentFixture<FormTemplateTestComponet>;
         let component: ValidationMessageComponent;
         let formComponent: FormTemplateTestComponet;
         let mocks = helpers.getMocks();
+        let translationPipe = jasmine.createSpyObj("TranslatePipe", ["transform"]);
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule],
-                declarations: [ValidationMessageComponent, TranslatePipe, FormTemplateTestComponet],
+                declarations: [ValidationMessageComponent, FormTemplateTestComponet, MockTranslationPipe],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(ValidationMessageComponent);
-
             component = fixture.componentInstance;
             component.field = jasmine.createSpyObj("field", ["valid", "pristine"]);
             component.field.update = jasmine.createSpyObj("update", ["subscribe"]);
-
             formFixture = TestBed.createComponent(FormTemplateTestComponet);
             formComponent = formFixture.componentInstance;
-
         }));
 
         it("get full translation of error message", () => {
             formFixture.detectChanges();
-
             formComponent.currentPasswordValidation.setBackendErrors({ errors: { current_password: [{ error: 'blank', full_message: 'cant be blank' }] } });
-            formComponent.currentPasswordValidation['translatorService'].hasTranslation = jasmine.createSpy("hasTranslation").and.returnValue(true);
-            formComponent.currentPasswordValidation['translatorService'].translate = jasmine.createSpy("translate").and.returnValue("Name is required");
-
+            translatedText = "Name is required";
             formFixture.detectChanges();
-
             expect(formFixture.debugElement.nativeElement.querySelector(".field-error").innerHTML).toContain('Name is required');
         });
 

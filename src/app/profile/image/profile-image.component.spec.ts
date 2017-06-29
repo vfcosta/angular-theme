@@ -1,9 +1,9 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { AuthService } from './../../login/auth.service';
 import { PermissionService } from './../../shared/services/permission.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import * as helpers from "../../../spec/helpers";
@@ -27,7 +27,7 @@ describe("Components", () => {
             let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
 
             TestBed.configureTestingModule({
-                declarations: [ProfileImageComponent, TranslatePipe],
+                declarations: [ProfileImageComponent],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: NotificationService, useValue: helpers.mocks.notificationService },
@@ -35,7 +35,8 @@ describe("Components", () => {
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: PermissionService, useValue: permissionService },
                     { provide: AuthService, useValue: helpers.mocks.authService },
-                ]
+                ],
+                imports: [TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ProfileImageComponent);
             component = fixture.componentInstance;

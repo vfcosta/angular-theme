@@ -1,9 +1,8 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
-import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { InviteComponent } from './invite.component';
 import * as helpers from "../../../../spec/helpers";
 import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
@@ -29,7 +28,7 @@ describe("Components", () => {
             spyOn(mocks.personService, 'search').and.callThrough();
 
             TestBed.configureTestingModule({
-                declarations: [InviteComponent, TranslatePipe],
+                declarations: [InviteComponent],
                 providers: [
                     { provide: PersonService, useValue: mocks.personService },
                     { provide: ProfileService, useValue: mocks.profileService },
@@ -38,7 +37,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule]
+                imports: [NgPipesModule, TypeaheadModule.forRoot(), FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(InviteComponent);
             component = fixture.componentInstance;

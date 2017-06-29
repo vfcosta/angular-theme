@@ -2,7 +2,7 @@ import { ValidationMessageComponent } from '../shared/components/validation-mess
 import { Component, Inject, Input, ViewChild } from '@angular/core';
 import { PasswordService } from "../../lib/ng-noosfero-api/http/password.service";
 import { NotificationService } from "./../shared/services/notification.service";
-import { AuthController } from "./auth.controller";
+
 @Component({
     selector: 'new-password',
     template: require('app/login/new-password.html')

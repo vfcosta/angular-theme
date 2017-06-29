@@ -98,18 +98,11 @@ $task-action-reject-color: #d64e18;
     }
   }
 }
-.task-confirmation {
-  @extend .form-group;
-  .confirmation-details {
-    margin-bottom: 20px;
-  }
-  .confirmation-title {
-    text-align: center;
-    font-size: 30px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  .actions {
-    text-align: center;
+task-list {
+  .modal {
+    .actions {
+      margin-top: 10px;
+      text-align: center;
+    }
   }
 }

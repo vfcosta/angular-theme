@@ -1,6 +1,6 @@
 import { HeaderService } from './../../shared/services/header.service';
 import { Component, Inject, EventEmitter, Input } from "@angular/core";
-import { AuthService, AuthController, AuthEvents } from "./../../login";
+import { AuthService, AuthEvents } from "./../../login";
 import { EnvironmentService } from "./../../../lib/ng-noosfero-api/http/environment.service";
 import { DesignModeTogglerComponent } from '../design-mode-toggler/design-mode-toggler.component';
 import { SessionService } from '../../login/session.service';
@@ -13,12 +13,11 @@ import { SessionService } from '../../login/session.service';
 export class NavbarComponent {
 
     private currentUser: noosfero.User;
-    private modalInstance: ng.ui.bootstrap.IModalServiceInstance;
     public currentEnvironment: noosfero.Environment = <any>{ name: '' };
+    showLoginModal = false;
 
     constructor(
         headerService: HeaderService,
-        @Inject("$uibModal") private $uibModal: ng.ui.bootstrap.IModalService,
         public authService: AuthService,
         private session: SessionService,
         @Inject("$state") private $state: ng.ui.IStateService,
@@ -30,10 +29,7 @@ export class NavbarComponent {
         });
 
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
-            if (this.modalInstance) {
-                this.modalInstance.close();
-                this.modalInstance = null;
-            }
+            this.showLoginModal = false;
             this.currentUser = this.session.currentUser();
             this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
         });
@@ -41,27 +37,20 @@ export class NavbarComponent {
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.currentUser = this.session.currentUser();
         });
-
     }
-
-    openLogin() {
-        this.modalInstance = this.$uibModal.open({
-            templateUrl: 'app/login/login.html',
-            controller: AuthController,
-            controllerAs: 'vm',
-            bindToController: true
-        });
-    };
 
     logout() {
         this.authService.logout();
         this.$state.transitionTo('main.environment.home');
     };
 
+    openLogin() {
+        this.showLoginModal = true;
+    }
+
     activate() {
         if (!this.currentUser) {
             this.openLogin();
         }
     }
-
 }

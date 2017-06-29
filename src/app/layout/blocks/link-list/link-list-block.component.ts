@@ -58,7 +58,9 @@ export class LinkListBlockComponent implements OnChanges {
     }
 
     applyVisibility() {
-        this.block.hide = this.links.length < 1;
+        if (this.links) {
+            this.block.hide = this.links.length < 1;
+        }
     }
 
 }

@@ -1,6 +1,5 @@
 import { SessionService } from './../../../login/session.service';
 import { NotificationService } from './../../../shared/services/notification.service';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
 import { AbstractFormCommunity } from './abstract-form-community';
 

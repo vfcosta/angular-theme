@@ -60,7 +60,7 @@ describe("Components", () => {
         it("not display confirmation dialog when profile doesn't exists", fakeAsync(() => {
             let pS = TestBed.get(ProfileService);
             let nS = TestBed.get(NotificationService);
-            nS.confirmation = (p1, p2) => { p2() };
+            nS.confirmation = (p1, p2) => { p2(); };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve(null));
 
             let fixture = TestBed.createComponent(DestroyProfileComponent);

@@ -1,7 +1,7 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
 import { MomentModule } from 'angular2-moment';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { FormsModule } from '@angular/forms';
 import { TaskListComponent } from './../task-list/task-list.component';
 import { PaginationModule } from 'ngx-bootstrap';
@@ -22,13 +22,13 @@ describe("Components", () => {
         beforeEach(async(() => {
             spyOn(mocks.taskService, 'getAllPending').and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
             TestBed.configureTestingModule({
-                declarations: [TasksComponent, TranslatePipe],
+                declarations: [TasksComponent],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: TaskService, useValue: mocks.taskService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [PaginationModule.forRoot(), FormsModule]
+                imports: [PaginationModule.forRoot(), FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(TasksComponent);
             component = fixture.componentInstance;

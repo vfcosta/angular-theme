@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { TaskService } from './../../../../lib/ng-noosfero-api/http/task.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
@@ -7,7 +8,6 @@ import * as helpers from "../../../../spec/helpers";
 import { AddFriendTaskAcceptComponent } from './add-friend-task-accept.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 
 describe("Components", () => {
 
@@ -25,14 +25,14 @@ describe("Components", () => {
             let taskAcceptComponent = {task: {target: { id: 5 }} , confirmationTask: {}};
 
             TestBed.configureTestingModule({
-                declarations: [AddFriendTaskAcceptComponent, TranslatePipe],
+                declarations: [AddFriendTaskAcceptComponent],
                 providers: [
                     { provide: TaskService, useValue: mocks.taskService },
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [FormsModule]
+                imports: [FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(AddFriendTaskAcceptComponent);
             component = fixture.componentInstance;

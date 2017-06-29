@@ -1,9 +1,9 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../app/shared/services/translator.service';
 import { hotspots } from './../../recent_activities/index';
 import { ArticleToolbarHotspotComponent } from './../../../app/hotspot/article-toolbar-hotspot.component';
 import { SharedModule } from './../../../app/shared.module';
 import { By } from '@angular/platform-browser';
-import { TranslatePipe } from './../../../app/shared/pipes/translate-pipe';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ExportCommentButtonHotspotComponent } from "./export-comment-button.component";
@@ -21,10 +21,9 @@ describe("Components", () => {
                 declarations: [ArticleToolbarHotspotComponent],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService },
-                    { provide: "$scope", useValue: mocks.scopeWithEvents() },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [SharedModule]
+                imports: [SharedModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ArticleToolbarHotspotComponent);
             component = fixture.componentInstance;

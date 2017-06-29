@@ -3,7 +3,6 @@ import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/envir
 import { NgPipesModule } from 'ngx-pipes';
 import { NoosferoUrlPipe } from './../../../shared/pipes/noosfero-url.pipe';
 import { By } from '@angular/platform-browser';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import {provideFilters} from '../../../../spec/helpers';
@@ -25,7 +24,7 @@ describe("Components", () => {
         beforeEach(async(() => {
             spyOn(mocks.environmentService, "getCurrentEnvironment").and.returnValue(Promise.resolve({}));
             TestBed.configureTestingModule({
-                declarations: [ActivityComponent, TranslatePipe, NoosferoUrlPipe],
+                declarations: [ActivityComponent, NoosferoUrlPipe],
                 providers: [
                     { provide: EnvironmentService, useValue: mocks.environmentService },
                     { provide: TranslatorService, useValue: mocks.translatorService }

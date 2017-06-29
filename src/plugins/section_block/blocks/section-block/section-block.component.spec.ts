@@ -1,6 +1,5 @@
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
-import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { SectionBlockComponent } from './section-block.component';
 import * as helpers from "./../../../../spec/helpers";
 import { PopoverModule } from 'ngx-bootstrap';
@@ -9,6 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
+import { TranslateModule } from '@ngx-translate/core';
 
 describe("Components", () => {
     describe("Section Block Component", () => {
@@ -23,13 +23,13 @@ describe("Components", () => {
             blockService.uploadImages = jasmine.createSpy("uploadImages").and.returnValue(Promise.resolve({}));
 
             TestBed.configureTestingModule({
-                declarations: [SectionBlockComponent, TranslatePipe],
+                declarations: [SectionBlockComponent],
                 providers: [
                     { provide: BlockService, useValue: blockService },
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [PopoverModule.forRoot(), FormsModule]
+                imports: [PopoverModule.forRoot(), FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(SectionBlockComponent);
             component = fixture.componentInstance;

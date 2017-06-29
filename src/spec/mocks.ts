@@ -227,7 +227,7 @@ export var mocks: any = {
         },
         isInDesignMode: () => { return false; }
     },
-    $translate: {
+    translateService: {
         use: (lang?: string) => {
             return lang ? Promise.resolve(lang) : "en";
         },
@@ -360,7 +360,8 @@ export function getMocks() {
             subscribe: (eventName: string, fn: Function) => {
                 mocks.authService[eventName].subscribe(fn);
             },
-            isAuthenticated: () => { }
+            isAuthenticated: () => { },
+            forgotPassword: () => {}
         },
         articleService: {
             subscribeToModelRemoved: (fn: Function) => { },
@@ -486,11 +487,13 @@ export function getMocks() {
             isInDesignMode: () => { return mocks.inDesignMode; },
             setInDesignMode: (value: boolean) => { mocks.inDesignMode = value; }
         },
-        $translate: {
+        translateService: {
             use: (lang?: string) => {
                 return lang ? Promise.resolve(lang) : "en";
             },
-            instant: (text: string) => { return text; }
+            instant: (text: string) => { return text; },
+            getBrowserLang: () => { return 'en'; },
+            setDefaultLang: (lang: string) => { },
         },
         tmhDynamicLocale: {
             get: () => { },

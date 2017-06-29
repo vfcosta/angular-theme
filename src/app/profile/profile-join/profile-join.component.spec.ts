@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
@@ -10,7 +11,6 @@ import { By } from '@angular/platform-browser';
 import { MembershipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { ProfileJoinComponent } from './profile-join.component';
 import * as helpers from "./../../../spec/helpers";
-import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 
 describe("Components", () => {
 
@@ -34,17 +34,17 @@ describe("Components", () => {
             spyOn(mocks.sessionService, 'currentPerson').and.callThrough();
 
             TestBed.configureTestingModule({
-                declarations: [ProfileJoinComponent, TranslatePipe],
+                declarations: [ProfileJoinComponent],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ProfileService, useValue: profileService },
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: NotificationService, useValue: helpers.mocks.notificationService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
-                    { provide: "$uibModal", useValue: helpers.mocks.$modal },
                     { provide: TranslatorService, useValue: translatorService },
                     { provide: CommunityService, useValue: communityService }
-                ]
+                ],
+                imports: [TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ProfileJoinComponent);
             component = fixture.componentInstance;

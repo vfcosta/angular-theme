@@ -1,10 +1,10 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../../../app/shared/services/translator.service';
 import { EventsHubService } from './../../../../../app/shared/services/events-hub.service';
 import { By } from '@angular/platform-browser';
 import { MyDatePickerModule } from 'mydatepicker';
 import { ValidationMessageComponent } from './../../../../../app/shared/components/validation-message/validation-message.component';
 import { FormsModule } from '@angular/forms';
-import { TranslatePipe } from './../../../../../app/shared/pipes/translate-pipe';
 import {DiscussionEditorComponent} from './discussion-editor.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -18,13 +18,13 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [DiscussionEditorComponent, TranslatePipe, ValidationMessageComponent],
+                declarations: [DiscussionEditorComponent, ValidationMessageComponent],
                 providers: [
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [FormsModule, MyDatePickerModule]
+                imports: [FormsModule, MyDatePickerModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(DiscussionEditorComponent);
             component = fixture.componentInstance;

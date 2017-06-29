@@ -1,11 +1,14 @@
-<div class="btn-nav tasks-menu" dropdown [hidden]="total==0" *ngIf="total">
-  <a href="#" dropdownToggle class="tasks-menu-link">
+<div class="btn-nav tasks-menu" dropdown [hidden]="total==0" *ngIf="total" [autoClose]="false" [isOpen]="open">
+  <a href="#" class="tasks-menu-link" #menuButton>
     <i [title]="'tasks.icon.description' | translate" class="tasks-icon fa fa-bell-o fa-fw fa-2x"></i>
     <span class="badge">{{total}}</span>
     <span class="read-aloud">{{"tasks.header" | translate}}</span>
   </a>
-  <div class="dropdown-menu task-panel" *dropdownMenu>
-    <div class="task-menu-header">{{"tasks.menu.header" | translate:{tasks: total}:"messageformat"}}</div>
+  <div class="dropdown-menu task-panel" *dropdownMenu #taskPanel>
+    <div class="task-menu-header" [ngPlural]="total">
+      <ng-template ngPluralCase="=1">{{"tasks.menu.header.one" | translate}}</ng-template>
+      <ng-template ngPluralCase="other">{{"tasks.menu.header.other" | translate:{tasks: total} }}</ng-template>
+    </div>
     <task-list [tasks]="tasks"></task-list>
     <a uiSref="main.profile.tasks" [uiParams]="{profile: person.identifier, types: taskTypes.join(',')}" class="all-tasks btn btn-default btn-xs">
       {{"tasks.menu.all" | translate}}

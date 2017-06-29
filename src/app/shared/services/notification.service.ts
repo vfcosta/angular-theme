@@ -50,7 +50,7 @@ export class NotificationService {
     }
 
     success({
-        title = '',
+        title = 'toast.title.success',
         message = '',
         notificationType = NotificationType.Toast
     }, options = {}) {

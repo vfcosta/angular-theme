@@ -1,8 +1,9 @@
 import { TranslatorService } from './../services/translator.service';
-import { Pipe, PipeTransform, Inject } from '@angular/core';
+import { Pipe, Inject } from "ng-forward";
 
-@Pipe({name: 'translate', pure: false})
-export class TranslatePipe implements PipeTransform {
+@Pipe('translate')
+@Inject("translatorService")
+export class TranslatePipe {
 
   constructor(private translatorService: TranslatorService) { }
 

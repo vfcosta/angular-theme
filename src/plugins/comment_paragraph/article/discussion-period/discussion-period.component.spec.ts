@@ -1,7 +1,7 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { DateFormatPipe } from './../../../../app/shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
-import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { DiscussionPeriodComponent } from './discussion-period.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -15,12 +15,12 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [DiscussionPeriodComponent, TranslatePipe, DateFormatPipe],
+                declarations: [DiscussionPeriodComponent, DateFormatPipe],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [MomentModule]
+                imports: [MomentModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(DiscussionPeriodComponent);
             component = fixture.componentInstance;

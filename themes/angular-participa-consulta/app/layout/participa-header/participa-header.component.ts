@@ -2,6 +2,8 @@ import { Component, Inject } from "@angular/core";
 import { EventsHubService } from "../../../../../src/app/shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../../../../src/app/known-events";
 import { BodyStateClassesService } from "../../../../../src/app/shared/services/body-state-classes.service";
+import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
+import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
     selector: "participa-header",
@@ -14,8 +16,8 @@ export class ParticipaHeaderComponent {
     highContrastSkin = 'skin-high-contrast';
 
     constructor(private eventsHubService: EventsHubService,
-        @Inject("$location") private $location: any,
-        @Inject("$anchorScroll") private $anchorScroll: any,
+        private pageScrollService: PageScrollService,
+        @Inject(DOCUMENT) private document: any,
         private bodyStateClassesService: BodyStateClassesService) {
         this.eventsNames = new NoosferoKnownEvents();
     }
@@ -33,9 +35,8 @@ export class ParticipaHeaderComponent {
     }
 
     scrollTo(anchor: string) {
-        this.$location.hash(anchor);
-        this.$anchorScroll();
-        this.$location.hash(null);
+        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, `#${anchor}`);
+        this.pageScrollService.start(pageScrollInstance);
     };
 
     toggleHighContrast() {

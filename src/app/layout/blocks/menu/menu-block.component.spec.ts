@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { PopoverModule } from 'ngx-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
@@ -5,7 +6,6 @@ import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.s
 import { provideFilters } from '../../../../spec/helpers';
 import { MenuBlockComponent } from './menu-block.component';
 import * as helpers from "../../../../spec/helpers";
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -30,44 +30,41 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, DragulaModule, PopoverModule.forRoot()],
-                declarations: [MenuBlockComponent, TranslatePipe],
+                imports: [FormsModule, DragulaModule, PopoverModule.forRoot(), TranslateModule.forRoot()],
+                declarations: [MenuBlockComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
-                    { provide: "$scope", useValue: scope },
                     { provide: TranslatorService, useValue: helpers.mocks.translatorService }
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(MenuBlockComponent);
-                component = fixture.componentInstance;
-                component.owner = <noosfero.Profile>{ id: 1, name: 'profile-name', identifier: 'profile-name' };
-                component.block = {
-                    id: 1,
-                    type: 'MenuBlock',
-                    api_content: {
-                        enabled_items: [
-                            { "title": "Activities", "controller": "profile", "action": "activities" },
-                            { "title": "About", "controller": "profile", "action": "about" }
-                        ],
-                        available_items: [
-                            { "title": "Communities", "controller": "memberships", "action": "index" },
-                            { "title": "People", "controller": "friends", "action": "index" }
-                        ]
-                    }
-                };
-                component.links = [
-                    { title: 'blocks.menu.activities', url: 'main.profile.info', urlParams: { profile: component.owner.identifier }, controller: 'profile', action: 'index' },
-                    { title: 'blocks.menu.about', url: 'main.profile.about', urlParams: { profile: component.owner.identifier }, controller: 'profile', action: 'index' }
-                ];
-                component.linksAvailable = [];
-                component.articles = [
-                    { title: 'Article 1', url: 'main.profile.page', urlParams: { page: 'article-1', profile: component.owner.identifier }, path: 'article-1' },
-                    { title: 'Article 2', url: 'main.profile.page', urlParams: { page: 'article-2', profile: component.owner.identifier }, path: 'article-2' }
-                ];
             });
+            fixture = TestBed.createComponent(MenuBlockComponent);
+            component = fixture.componentInstance;
+            component.owner = <noosfero.Profile>{ id: 1, name: 'profile-name', identifier: 'profile-name' };
+            component.block = {
+                id: 1,
+                type: 'MenuBlock',
+                api_content: {
+                    enabled_items: [
+                        { "title": "Activities", "controller": "profile", "action": "activities" },
+                        { "title": "About", "controller": "profile", "action": "about" }
+                    ],
+                    available_items: [
+                        { "title": "Communities", "controller": "memberships", "action": "index" },
+                        { "title": "People", "controller": "friends", "action": "index" }
+                    ]
+                }
+            };
+            component.links = [
+                { title: 'blocks.menu.activities', url: 'main.profile.info', urlParams: { profile: component.owner.identifier }, controller: 'profile', action: 'index' },
+                { title: 'blocks.menu.about', url: 'main.profile.about', urlParams: { profile: component.owner.identifier }, controller: 'profile', action: 'index' }
+            ];
+            component.linksAvailable = [];
+            component.articles = [
+                { title: 'Article 1', url: 'main.profile.page', urlParams: { page: 'article-1', profile: component.owner.identifier }, path: 'article-1' },
+                { title: 'Article 2', url: 'main.profile.page', urlParams: { page: 'article-2', profile: component.owner.identifier }, path: 'article-2' }
+            ];
         }));
-
 
         it("receives the block and the owner as inputs", () => {
             fixture.detectChanges();

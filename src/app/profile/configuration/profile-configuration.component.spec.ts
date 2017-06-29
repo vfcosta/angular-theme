@@ -1,5 +1,4 @@
 import { ComponentTestHelper, createClass } from './../../../spec/component-test-helper';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { UiSrefDirective } from './../../shared/directives/ui-sref-directive';
 import { ProfileConfigurationComponent } from './profile-configuration.component';
 import * as helpers from "../../../spec/helpers";

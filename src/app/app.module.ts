@@ -1,10 +1,11 @@
+import { ForgotPasswordComponent } from './login/forgot-password.component';
+import { LoginComponent } from './login/login.component';
 import swal from 'sweetalert2';
 import { EventsHubService } from './shared/services/events-hub.service';
 import { CommentParagraphEventService } from './../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import { ThemeService } from './shared/services/theme.service';
 import { BodyStateClassesService } from './shared/services/body-state-classes.service';
 import { DesignModeService } from './shared/services/design-mode.service';
-import { HttpModule, JsonpModule } from '@angular/http';
 import { AuthService } from './login/auth.service';
 import { DomainService } from './../lib/ng-noosfero-api/http/domain.service';
 import { SessionService } from './login/session.service';
@@ -116,6 +117,10 @@ import { RestangularModule, Restangular } from 'ngx-restangular';
 import { LocalStorageModule } from 'angular-2-local-storage';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
 import { ToastrModule } from 'ngx-toastr';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpModule, JsonpModule, Http } from '@angular/http';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -131,6 +136,10 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         notificationService.httpError(response.status, response.data);
         return true; // return true to continue the promise chain and call catch
     });
+}
+
+export function HttpLoaderFactory(http: Http) {
+    return new TranslateHttpLoader(http, '/languages/', '.json');
 }
 
 @NgModule({
@@ -154,14 +163,22 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
             components: plugins.macros
         }),
         RestangularModule.forRoot([SessionService, TranslatorService, NotificationService], RestangularConfigFactory),
-        HttpModule,
-        JsonpModule,
         LocalStorageModule.withConfig({
             prefix: 'noosfero',
             storageType: 'localStorage'
         }),
         SweetAlert2Module,
         ToastrModule.forRoot(),
+        HttpModule,
+        JsonpModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: HttpLoaderFactory,
+                deps: [Http]
+            }
+        }),
+        Ng2PageScrollModule.forRoot(),
     ],
     declarations: [
         FooterComponent,
@@ -234,6 +251,8 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         NavbarComponent,
         ActivityComponent,
         ArticleViewComponent,
+        LoginComponent,
+        ForgotPasswordComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -332,18 +351,11 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
         TranslatorService,
         NotificationService,
         { provide: "sweetAlert", useValue: swal },
+        { provide: 'Window',  useValue: window },
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
-        '$uibModal',
-        '$scope',
         '$transitions',
         '$stateParams',
-        '$sce',
-        '$location',
-        '$anchorScroll',
-        '$window',
-        '$translate',
-        'tmhDynamicLocale',
     ]))
 })
 

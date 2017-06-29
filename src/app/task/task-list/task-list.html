@@ -24,3 +24,43 @@
     </div>
   </li>
 </ul>
+
+<div class="modal reject fade" bsModal #rejectModal="bs-modal" *ngIf="showRejectModal" [config]="{ show: true, backdrop: true }"
+     tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{"tasks.actions.reject.confirmation.title" | translate}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="reject-fields confirmation-details">
+          <input [(ngModel)]="confirmationTask.reject_explanation" name="reject_explanation" id="rejectionExplanationInput" type="text" placeholder="{{'tasks.actions.reject.explanation.label' | translate}}" class="rejection-explanation form-control">
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn btn-default" (click)="callReject()">{{"tasks.actions.confirmation.yes" | translate}}</button>
+          <button type="button" class="btn btn-warning" (click)="cancel()">{{"tasks.actions.confirmation.cancel" | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal accept fade" bsModal #acceptModal="bs-modal" *ngIf="showAcceptModal" [config]="{ show: true, backdrop: true }"
+    tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">{{"tasks.actions.accept.confirmation.title" | translate}}</h4>
+      </div>
+      <div class="modal-body">
+        <div class="accept-fields confirmation-details">
+          <task-accept *ngIf="currentTask.accept_details" [task]="currentTask" [confirmationTask]="confirmationTask"></task-accept>
+        </div>
+        <div class="actions">
+          <button type="submit" class="btn btn-default" (click)="callAccept()">{{"tasks.actions.confirmation.yes" | translate}}</button>
+          <button type="button" class="btn btn-warning" (click)="cancel()">{{"tasks.actions.confirmation.cancel" | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

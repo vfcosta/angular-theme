@@ -2,7 +2,6 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { NoosferoTemplatePipe } from './../../../shared/pipes/noosfero-template.ng2.filter';
 import { provideFilters } from '../../../../spec/helpers';
 import * as helpers from "../../../../spec/helpers";
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -18,7 +17,7 @@ describe("Components", () => {
         };
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [LinkListBlockComponent, TranslatePipe, NoosferoTemplatePipe],
+                declarations: [LinkListBlockComponent, NoosferoTemplatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: TranslatorService, useValue: helpers.mocks.translatorService },

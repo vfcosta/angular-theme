@@ -8,7 +8,10 @@
         </div>
         <div class="card-type">
             <i [title]="iconalt | translate" class="{{iconclass}}"></i>
-            <span> {{desc | translate:{profiles:profiles}:"messageformat" }} </span>
+            <span [ngPlural]="count()">
+                <ng-template ngPluralCase="=1">{{getDesc() | translate}}</ng-template>
+                <ng-template ngPluralCase="other">{{getDesc() | translate:{value:profiles} }}</ng-template>
+            </span>
         </div>
     </div>
 </div>

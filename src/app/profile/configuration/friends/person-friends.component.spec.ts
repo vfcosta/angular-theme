@@ -1,5 +1,5 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { PersonFriendsComponent } from './person-friends.component';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
@@ -19,8 +19,8 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule],
-                declarations: [PersonFriendsComponent, TranslatePipe],
+                imports: [FormsModule, TranslateModule.forRoot()],
+                declarations: [PersonFriendsComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: PersonService, useValue: personService },

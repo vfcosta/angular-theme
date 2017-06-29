@@ -4,7 +4,6 @@ import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.s
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
 import { ValidationMessageComponent } from '../../../shared/components/validation-message/validation-message.component';
 

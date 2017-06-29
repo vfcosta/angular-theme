@@ -12,16 +12,16 @@ export class ArticleEditorComponent {
     @Input() path: string;
     options: any;
 
-    constructor(@Inject("$window") private $window: ng.IWindowService,
+    constructor(@Inject("Window") private window: Window,
         private sessionService: SessionService) { }
 
     ngOnInit() {
-        this.$window['uploadUrl'] = '/api/v1/profiles/' + this.profile.id + '/articles';
-        this.$window['listUrl'] = '/api/v1/profiles/' + this.profile.id + '/articles?content_type=Folder,UploadedFile&parent_id=';
-        this.$window['deleteUrl'] = '/api/v1/articles';
-        this.$window['renameUrl'] = '/api/v1/articles';
-        this.$window['privateToken'] = this.sessionService.currentUser().private_token;
-        this.$window['baseUrl'] = this.getDomanWithPort();
+        this.window['uploadUrl'] = '/api/v1/profiles/' + this.profile.id + '/articles';
+        this.window['listUrl'] = '/api/v1/profiles/' + this.profile.id + '/articles?content_type=Folder,UploadedFile&parent_id=';
+        this.window['deleteUrl'] = '/api/v1/articles';
+        this.window['renameUrl'] = '/api/v1/articles';
+        this.window['privateToken'] = this.sessionService.currentUser().private_token;
+        this.window['baseUrl'] = this.getDomanWithPort();
         this.options = { allowedContent: true, removeFormatAttributes: '', filebrowserBrowseUrl: '/ngx-filemanager?editor=CKEditor'};
     }
 

@@ -1,4 +1,4 @@
-import { Inject, Input, Component, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { SimpleChanges, Inject, Input, Component, HostListener, ElementRef, ViewChild } from '@angular/core';
 import { EventsHubService } from "../../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../../known-events";
 
@@ -22,7 +22,6 @@ export class BlockEditionComponent {
 
     constructor(
         private elementRef: ElementRef,
-        @Inject("$scope") private $scope: ng.IScope,
         private eventsHubService: EventsHubService) {
         this.options = {
             display: ["always", "home_page_only", "except_home_page"],
@@ -30,13 +29,12 @@ export class BlockEditionComponent {
         };
     }
 
+    ngDoCheck() {
+        this.emitChanges();
+    }
+
     ngOnInit() {
         this.originalBlock = angular.copy(this.block);
-        this.$scope.$watch(() => {
-            return this.block;
-        }, () => {
-            this.emitChanges();
-        }, true);
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, (owner: noosfero.Profile | noosfero.Environment) => {
             this.originalBlock = angular.copy(this.block);
         });

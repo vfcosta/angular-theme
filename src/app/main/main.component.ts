@@ -1,3 +1,4 @@
+import { TranslatePipe } from './../shared/pipes/translate-pipe';
 import * as plugins from '../../plugins';
 import { RegisterComponent } from '../account/register.component';
 import { DomainComponent } from '../domain/domain.component';
@@ -69,7 +70,7 @@ export class EnvironmentContent {
     template: '<ui-view/>',
     directives: [
         BoxesComponent, BlockContentComponent,
-        ProfileComponent, MainBlockComponent, NoosferoTemplate,
+        ProfileComponent, MainBlockComponent, NoosferoTemplate, TranslatePipe,
         PermissionDirective,
         BlockComponent,
         BootstrapResizableDirective,
@@ -79,7 +80,7 @@ export class EnvironmentContent {
         "ngAnimate", "ngCookies", "ngTouch", "ngSanitize", "ngMessages", "ngAria",
         "ui.router", "ui.bootstrap", "angular-bind-html-compile",
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll",
-        "pascalprecht.translate", "tmh.dynamicLocale", "angular-click-outside", "ngTagCloud",
+        "angular-click-outside", "ngTagCloud",
         "noosfero.init", "ngFileUpload", "ngImgCrop", "angular-ladda", "focus-if",
         "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",

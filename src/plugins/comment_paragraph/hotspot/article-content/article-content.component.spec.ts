@@ -1,7 +1,7 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { DateFormatPipe } from './../../../../app/shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
-import { TranslatePipe } from './../../../../app/shared/pipes/translate-pipe';
 import { DiscussionPeriodComponent } from './../../article/discussion-period/discussion-period.component';
 import { By } from '@angular/platform-browser';
 import { ArticleContentHotspotComponent } from './../../../../app/hotspot/article-content-hotspot.component';
@@ -19,13 +19,13 @@ describe("Components", () => {
         beforeEach(async(() => {
             let articleContentHotspotComponent = {};
             TestBed.configureTestingModule({
-                declarations: [CommentParagraphArticleContentHotspotComponent, DiscussionPeriodComponent, TranslatePipe, DateFormatPipe],
+                declarations: [CommentParagraphArticleContentHotspotComponent, DiscussionPeriodComponent, DateFormatPipe],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: ArticleContentHotspotComponent, useValue: articleContentHotspotComponent }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [MomentModule]
+                imports: [MomentModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(CommentParagraphArticleContentHotspotComponent);
             component = fixture.componentInstance;

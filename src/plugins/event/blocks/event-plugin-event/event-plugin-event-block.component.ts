@@ -16,8 +16,7 @@ export class EventPluginEventBlockComponent {
     monthEvents: any;
 
     constructor(private blockService: BlockService,
-        @Inject("$state") private $state: any,
-        @Inject("$scope") private $scope: any) { }
+        @Inject("$state") private $state: any) { }
 
     populateMonthEvents(month: number, year: number) {
         let events: any = [];
@@ -38,7 +37,6 @@ export class EventPluginEventBlockComponent {
         this.options = {
             changeMonth(month: any, year: number) {
                 this.populateMonthEvents(month.index, year);
-                this.$scope.$apply();
             }
         };
 

@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
@@ -5,7 +6,6 @@ import { UiSrefDirective } from '../../../shared/directives/ui-sref-directive';
 import { Provider, Component } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
 import { ApproveCommentTaskAcceptComponent } from './approve-comment-task-accept.component';
-import { TranslatePipe } from '../../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
@@ -24,7 +24,7 @@ describe("Components", () => {
             spyOn(mocks.articleService, 'get').and.returnValue(Promise.resolve({ headers: () => { }, data: article }));
             let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
-                declarations: [ApproveCommentTaskAcceptComponent, TranslatePipe, UiSrefDirective],
+                declarations: [ApproveCommentTaskAcceptComponent, UiSrefDirective],
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },
@@ -32,7 +32,8 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
-                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ApproveCommentTaskAcceptComponent);
             component = fixture.componentInstance;

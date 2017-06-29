@@ -35,7 +35,11 @@
       <div class="form-group">
         <span>{{"highlights-block.edition.transition.label" | translate}}</span>
         <input type="number" [(ngModel)]="parentBlock.block.settings.interval" class="interval">
-        <span>{{"highlights-block.edition.transition.seconds" | translate:{interval: parentBlock.block.settings.interval}:"messageformat"}}</span>
+        <span [ngPlural]="parentBlock.block.settings.interval">
+          <ng-template ngPluralCase="=0">{{"highlights-block.edition.transition.seconds.zero" | translate}}</ng-template>
+          <ng-template ngPluralCase="=1">{{"highlights-block.edition.transition.seconds.one" | translate}}</ng-template>
+          <ng-template ngPluralCase="other">{{"highlights-block.edition.transition.seconds.other" | translate}}</ng-template>
+        </span>
       </div>
     </div>
 

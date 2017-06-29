@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
@@ -10,7 +11,6 @@ import { ContextBarComponent } from './context-bar.component';
 import * as helpers from "../../../spec/helpers";
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { TranslatePipe } from '../../shared/pipes/translate-pipe';
 import { By } from '@angular/platform-browser';
 
 describe("Context Bar Component", () => {
@@ -27,10 +27,9 @@ describe("Context Bar Component", () => {
         spyOn(mocks.notificationService, 'success').and.callThrough();
 
         TestBed.configureTestingModule({
-            declarations: [ContextBarComponent, TranslatePipe],
+            declarations: [ContextBarComponent],
             providers: [
                 { provide: "$state", useValue: state },
-                { provide: "$scope", useValue: mocks.scopeWithEvents() },
                 { provide: EventsHubService, useValue: mocks.eventsHubService },
                 { provide: BlockService, useValue: mocks.blockService },
                 { provide: NotificationService, useValue: mocks.notificationService },
@@ -39,7 +38,8 @@ describe("Context Bar Component", () => {
                 { provide: EnvironmentService, useValue: mocks.environmentService },
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [TranslateModule.forRoot()]
         });
         fixture = TestBed.createComponent(ContextBarComponent);
         component = fixture.componentInstance;

@@ -1,3 +1,5 @@
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
@@ -5,7 +7,6 @@ import { TaskComponent } from './../task.component';
 import { MomentModule } from 'angular2-moment';
 import { Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
-import { TranslatePipe } from './../../shared/pipes/translate-pipe';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from "../../../spec/helpers";
 import { TaskListComponent } from './task-list.component';
@@ -29,19 +30,15 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             spyOn(mocks.eventsHubService, 'emitEvent');
-            spyOn(mocks.$modal, 'open');
-            let scope = helpers.mocks.scopeWithEvents;
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
 
             TestBed.configureTestingModule({
-                imports: [MomentModule],
-                declarations: [TaskListComponent, TranslatePipe, ProfileImageComponent, DynamicComponentMock],
+                imports: [MomentModule, TranslateModule.forRoot(), ModalModule.forRoot()],
+                declarations: [TaskListComponent, ProfileImageComponent, DynamicComponentMock],
                 providers: [
                     { provide: TaskService, useValue: taskService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: NotificationService, useValue: helpers.mocks.notificationService },
-                    { provide: "$uibModal", useValue: mocks.$modal },
-                    { provide: "$scope", useValue: helpers.mocks.scopeWithEvents }
                 ],
                 schemas: [NO_ERRORS_SCHEMA]
             });
@@ -53,13 +50,13 @@ describe("Components", () => {
         it("open confirmation modal when it has details to accept a task", () => {
             let task = { accept_details: true };
             component.accept(<any>task);
-            expect(mocks.$modal.open).toHaveBeenCalled();
+            expect(component.showAcceptModal).toBeTruthy();
         });
 
         it("open confirmation modal when it has details to reject a task", () => {
             let task = { reject_details: true };
             component.reject(<any>task);
-            expect(mocks.$modal.open).toHaveBeenCalled();
+            expect(component.showRejectModal).toBeTruthy();
         });
 
         it("call api directly when it has no details to accept a task", () => {
@@ -97,16 +94,14 @@ describe("Components", () => {
         });
 
         it("reset currentTask and close modal when call cancel", () => {
-            let modalInstance = jasmine.createSpyObj("modalInstance", ["close"]);
-            component["modalInstance"] = modalInstance;
             component.currentTask = <any>{ id: 1 };
             component.cancel();
-            expect(modalInstance.close).toHaveBeenCalled();
+            expect(component.showAcceptModal).toBeFalsy();
+            expect(component.showRejectModal).toBeFalsy();
             expect(component.currentTask).toBeNull();
         });
 
         it("not fail when call cancel with no modalInstance", () => {
-            component["modalInstance"] = null;
             component.currentTask = null;
             component.cancel();
         });

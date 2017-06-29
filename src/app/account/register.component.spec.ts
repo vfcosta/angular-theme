@@ -1,3 +1,4 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../shared/services/notification.service';
 import { TranslatorService } from './../shared/services/translator.service';
 import { RegisterService } from './../../lib/ng-noosfero-api/http/register.service';
@@ -8,7 +9,6 @@ import * as helpers from "../../spec/helpers";
 import { RegisterComponent } from "./register.component";
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { TranslatePipe } from '../shared/pipes/translate-pipe';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
@@ -31,8 +31,8 @@ describe("Register Component", () => {
         spyOn(mocks.notificationService, 'error').and.callThrough();
 
         TestBed.configureTestingModule({
-            imports: [FormsModule, ModalModule.forRoot()],
-            declarations: [RegisterComponent, TranslatePipe, ValidationMessageComponent],
+            imports: [FormsModule, ModalModule.forRoot(), TranslateModule.forRoot()],
+            declarations: [RegisterComponent, ValidationMessageComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [
                 { provide: "$state", useValue: mocks.$state },

@@ -1,8 +1,8 @@
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
-import { TranslatePipe } from './../../../shared/pipes/translate-pipe';
 import * as helpers from "../../../../spec/helpers";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { ApproveArticleTaskAcceptComponent } from './approve-article-task-accept.component';
@@ -20,14 +20,14 @@ describe("Components", () => {
             spyOn(mocks.articleService, "getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: articles }));
             let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
-                declarations: [ApproveArticleTaskAcceptComponent, TranslatePipe],
+                declarations: [ApproveArticleTaskAcceptComponent],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: TaskAcceptComponent, useValue: taskAcceptComponent },
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [FormsModule]
+                imports: [FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ApproveArticleTaskAcceptComponent);
             component = fixture.componentInstance;
