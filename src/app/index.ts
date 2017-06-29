@@ -119,6 +119,7 @@ import { TaskListComponent } from './task/task-list/task-list.component';
 import { downgradeComponent, downgradeInjectable } from '@angular/upgrade/static';
 import { bundle } from 'ng-forward';
 import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
+import { ɵa as ProgressComponent } from 'ngx-progressbar';
 
 // FIXME see a better way to declare template modules for dev mode
 try {
@@ -405,6 +406,9 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoBoxes',
         downgradeComponent({ component: BoxesComponent, inputs: ['boxes', 'owner', 'layout', 'columns', 'startIndex'] }) as angular.IDirectiveFactory
+    ).
+    directive('ngProgress',
+        downgradeComponent({ component: ProgressComponent }) as angular.IDirectiveFactory
     )
     .factory('articleService', downgradeInjectable(ArticleService))
     .factory('environmentService', downgradeInjectable(EnvironmentService))

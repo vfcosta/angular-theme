@@ -126,6 +126,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
+import { NgProgressModule, NgProgressBrowserXhr } from 'ngx-progressbar';
+import { BrowserXhr } from '@angular/http';
+import { ɵa as ProgressComponent } from 'ngx-progressbar';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -184,6 +187,7 @@ export function HttpLoaderFactory(http: Http) {
             }
         }),
         Ng2PageScrollModule.forRoot(),
+        NgProgressModule,
     ],
     declarations: [
         FooterComponent,
@@ -335,6 +339,7 @@ export function HttpLoaderFactory(http: Http) {
         BlockContentComponent,
         BlockComponent,
         BoxesComponent,
+        ProgressComponent,
     ].concat(plugins.ng2MainComponents),
     providers: [
         HeaderService,
@@ -365,6 +370,7 @@ export function HttpLoaderFactory(http: Http) {
         NotificationService,
         { provide: "sweetAlert", useValue: swal },
         { provide: 'Window',  useValue: window },
+        { provide: BrowserXhr, useClass: NgProgressBrowserXhr },
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
         '$transitions',
