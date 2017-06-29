@@ -82,9 +82,9 @@ import * as plugins from "../plugins";
         FormsModule,
         MomentModule,
         NgPipesModule,
-        PaginationModule.forRoot(),
+    PaginationModule.forRoot(),
         CKEditorModule,
-        TranslateModule.forChild()
+    TranslateModule.forChild(),
     ]
 })
 export class SharedModule { }

@@ -74,7 +74,7 @@ export class EnvironmentContent {
         "angular.filter", "akoenig.deckgrid", "angular-timeline", "duScroll",
         "angular-click-outside", "ngTagCloud",
         "noosfero.init", "ngFileUpload", "ngImgCrop", "angular-ladda", "focus-if",
-        "xeditable", "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
+        "com.2fdevs.videogular", "com.2fdevs.videogular.plugins.controls", "com.2fdevs.videogular.plugins.overlayplay",
         "com.2fdevs.videogular.plugins.poster", "com.2fdevs.videogular.plugins.buffering",
         "info.vietnamcode.nampnq.videogular.plugins.youtube", "dndLists", "angular-loading-bar"
     ]

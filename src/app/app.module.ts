@@ -126,8 +126,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
+import { InlineEditorModule } from '@qontu/ngx-inline-editor';
 
-export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
+export function RestangularConfigFactory(RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
     RestangularProvider.setFullResponse(true);
     RestangularProvider.addFullRequestInterceptor((element, operation, path, url, headers, params) => {
@@ -184,6 +185,7 @@ export function HttpLoaderFactory(http: Http) {
             }
         }),
         Ng2PageScrollModule.forRoot(),
+        InlineEditorModule,
     ],
     declarations: [
         FooterComponent,
@@ -364,7 +366,7 @@ export function HttpLoaderFactory(http: Http) {
         TranslatorService,
         NotificationService,
         { provide: "sweetAlert", useValue: swal },
-        { provide: 'Window',  useValue: window },
+        { provide: 'Window', useValue: window },
     ].concat(UpgradeUtils.provideAngular1Services([
         '$state',
         '$transitions',

@@ -3,7 +3,6 @@ import { Inject } from '@angular/core';
 
 /** @ngInject */
 
-export function noosferoAngularRunBlock(authService: AuthService, editableOptions: angular.xeditable.IEditableOptions) {
+export function noosferoAngularRunBlock(authService: AuthService) {
     authService.reloadUser();
-    editableOptions.theme = 'bs3';
 }

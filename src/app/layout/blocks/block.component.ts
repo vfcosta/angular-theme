@@ -17,6 +17,7 @@ export class BlockComponent {
     currentUser: noosfero.User;
     isHomepage = true;
     designMode = false;
+    blockTitle = 'Meu titulo';
 
     constructor(
         @Inject("$state") private $state: ng.ui.IStateService,
@@ -105,4 +106,5 @@ export class BlockComponent {
     canDelete() {
         return this.block.type !== 'MainBlock';
     }
+    
 }
