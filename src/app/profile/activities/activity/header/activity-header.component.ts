@@ -12,4 +12,10 @@ export class ActivityHeaderComponent {
     @Input() iconalt: any;
     @Input() iconclass: any;
 
+    getDesc() {
+        return (this.profiles && this.profiles > 1) ? this.desc + ".plural" : this.desc; 
+    }
+    count() {
+        return this.profiles ? this.profiles : 1;
+    }
 }

@@ -62,5 +62,9 @@ describe("Components", () => {
             expect(profileService.getMembers).toHaveBeenCalledWith({ data: { id: 1 } }, { page: 1, per_page: 20, order: 'name ASC' });
         });
 
+        it("has default style type *card*", () => {
+            expect(component.getDisplayStyle()).toEqual('card');
+        });
+
     });
 });

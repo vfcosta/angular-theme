@@ -33,7 +33,7 @@ function browserSyncInit(baseDir, browser) {
                        proxyMiddleware('http://localhost:3000/image_uploads', {changeOrigin:false}),
                        proxyMiddleware('http://localhost:3000/articles', {changeOrigin:false}),
                        proxyMiddleware('http://localhost:3000/account/logout', {changeOrigin:false}),
-                       proxyMiddleware('/ng2-filemanager', { target: 'http://localhost:4200' }),
+                       proxyMiddleware('/ngx-filemanager', { target: 'http://localhost:4200' }),
                        proxyMiddleware('http://localhost:3000/images', {changeOrigin:false})];                       
 
   browserSync.instance = browserSync.init({
