@@ -1,0 +1,17 @@
+<span *ngIf="designMode">
+  <ng-template #popoverTemplate>
+    <form (ngSubmit)="save()">
+      <div class="form editable-field-form">
+        <div class="form-group">
+          <label class="control-label">{{ modifiedText || ("edit.inline.title" | translate) }}</label>
+          <input type="text" class="form-control input-sm" [(ngModel)]="modifiedText" #text="ngModel" id="text" name="text">
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" (click)="save()"><span class="fa fa-check"></span></button>
+          <button type="button" class="btn btn-default" (click)="cancel()"><span class="fa fa-close"></span></button>
+        </div>
+      </div>
+    </form>
+  </ng-template>  
+  <a href="#" #popover="bs-popover" triggers="click" [popover]="popoverTemplate" (click)="copyText()"><i class="pencil-icon"></i></a>
+</span>

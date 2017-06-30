@@ -112,4 +112,8 @@ export class BlockComponent {
     canDelete() {
         return this.block.type !== 'MainBlock';
     }
+    
+    updateText(event){
+        this.block.title = event;
+    }
 }

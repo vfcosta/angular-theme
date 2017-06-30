@@ -1,3 +1,4 @@
+import { EditableFieldComponent } from './shared/components/editable-field/editable-field.component';
 import { BoxComponent } from './layout/boxes/box.component';
 import { BoxesComponent } from './layout/boxes/boxes.component';
 import { BlockComponent } from './layout/blocks/block.component';
@@ -130,7 +131,7 @@ import { NgProgressModule, NgProgressBrowserXhr } from 'ngx-progressbar';
 import { BrowserXhr } from '@angular/http';
 import { ɵa as ProgressComponent } from 'ngx-progressbar';
 
-export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
+export function RestangularConfigFactory(RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
     RestangularProvider.setFullResponse(true);
     RestangularProvider.addFullRequestInterceptor((element, operation, path, url, headers, params) => {
@@ -222,6 +223,7 @@ export function HttpLoaderFactory(http: Http) {
         LoginBlockComponent,
         LinkListBlockComponent,
         EditableLinkComponent,
+        EditableFieldComponent,
         IconPickerComponent,
         NoosferoTemplatePipe,
         HighlightsBlockComponent,
@@ -340,6 +342,7 @@ export function HttpLoaderFactory(http: Http) {
         BlockComponent,
         BoxesComponent,
         ProgressComponent,
+        EditableFieldComponent,
     ].concat(plugins.ng2MainComponents),
     providers: [
         HeaderService,

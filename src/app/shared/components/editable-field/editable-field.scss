@@ -1,0 +1,17 @@
+.editable-link-popover {
+  &.popover {
+    min-width: 300px;
+  }
+}
+
+.editable-link {
+    border-bottom: dashed 1px #428bca;
+    text-decoration: none;
+}
+
+.editable-link-form {
+  .actions {
+    @extend .pull-right;
+    margin-bottom: 10px;
+  }
+}
