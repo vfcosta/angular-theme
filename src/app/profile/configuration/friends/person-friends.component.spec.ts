@@ -49,5 +49,9 @@ describe("Components", () => {
             expect(component.search).toEqual("john");
             expect(personService.getFriends).toHaveBeenCalledWith(1, { per_page: 20, page: 1, search: "john", order: 'name ASC' });
         }));
+
+        it("has default display style equal to *card*", () => {
+            expect(component.getDisplayStyle()).toEqual('card');
+        });
     });
 });
