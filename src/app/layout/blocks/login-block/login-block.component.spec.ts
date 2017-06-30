@@ -31,7 +31,6 @@ describe("Components", () => {
                 declarations: [LoginBlockComponent, UiSrefDirective, DateFormatPipe],
                 providers: [
                     { provide: SessionService, useValue: sessionService },
-                    { provide: "$state", useValue: mocks.stateService },
                     { provide: AuthService, useValue: mocks.authService },
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],

@@ -1,16 +1,16 @@
-<noosfero-profile-header [profile]="ctrl.profile" ng-if="ctrl.profile"></noosfero-profile-header>
+<noosfero-profile-header [profile]="profile" *ngIf="profile"></noosfero-profile-header>
 <div class="boxes-container profile-container">
   <div class="row">
     <custom-content class="profile-header"
                     [label]="'profile.custom_header.label'"
                     [attribute]="'custom_header'"
-                    [profile]="ctrl.profile">
+                    [profile]="profile">
     </custom-content>
-    <noosfero-boxes ng-if="ctrl.boxes"
-                    [layout]="ctrl.profile.layout_template"
-                    [boxes]="ctrl.boxes"
-                    [owner]="ctrl.profile">
+    <noosfero-boxes *ngIf="profile"
+                    [layout]="profile.layout_template"
+                    [boxes]="profile.boxes"
+                    [owner]="profile">
     </noosfero-boxes>
-    <custom-content class="profile-footer" [label]="'profile.custom_footer.label'" [attribute]="'custom_footer'" [profile]="ctrl.profile"></custom-content>
+    <custom-content class="profile-footer" [label]="'profile.custom_footer.label'" [attribute]="'custom_footer'" [profile]="profile"></custom-content>
   </div>
 </div>

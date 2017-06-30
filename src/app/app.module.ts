@@ -1,4 +1,13 @@
+import { ProfileAboutComponent } from './profile/about/profile-about.component';
+import { DomainComponent } from './domain/domain.component';
 import { EditableFieldComponent } from './shared/components/editable-field/editable-field.component';
+import { EnvironmentHomeComponent } from './environment/environment-home.component';
+import { ActivitiesComponent } from './profile/activities/activities.component';
+import { ProfileHomeComponent } from './profile/profile-home.component';
+import { ContentViewerComponent } from './article/content-viewer/content-viewer.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EnvironmentComponent } from './environment/environment.component';
+import { AppComponent } from './app.component';
 import { BoxComponent } from './layout/boxes/box.component';
 import { BoxesComponent } from './layout/boxes/boxes.component';
 import { BlockComponent } from './layout/blocks/block.component';
@@ -102,10 +111,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
-import { UpgradeUtils } from "./shared/upgrade-utils";
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { PopoverModule, ModalModule, TypeaheadModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
@@ -129,9 +136,9 @@ import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
 import { NgProgressModule, NgProgressBrowserXhr } from 'ngx-progressbar';
 import { BrowserXhr } from '@angular/http';
-import { ɵa as ProgressComponent } from 'ngx-progressbar';
+import { AppRoutingModule } from './app-routing.module';
 
-export function RestangularConfigFactory(RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
+export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
     RestangularProvider.setFullResponse(true);
     RestangularProvider.addFullRequestInterceptor((element, operation, path, url, headers, params) => {
@@ -155,7 +162,6 @@ export function HttpLoaderFactory(http: Http) {
     imports: [
         FormsModule,
         BrowserModule,
-        UpgradeModule,
         ModalModule.forRoot(),
         ImageCropperModule,
         PopoverModule.forRoot(),
@@ -189,6 +195,7 @@ export function HttpLoaderFactory(http: Http) {
         }),
         Ng2PageScrollModule.forRoot(),
         NgProgressModule,
+        AppRoutingModule,
     ],
     declarations: [
         FooterComponent,
@@ -244,7 +251,6 @@ export function HttpLoaderFactory(http: Http) {
         TasksMenuComponent,
         SearchFormComponent,
         ArticleIconComponent,
-        SearchComponent,
         PasswordComponent,
         RegisterComponent,
         ThemeHeaderComponent,
@@ -269,6 +275,16 @@ export function HttpLoaderFactory(http: Http) {
         BlockComponent,
         BoxesComponent,
         BoxComponent,
+        AppComponent,
+        EnvironmentComponent,
+        ProfileComponent,
+        ContentViewerComponent,
+        ProfileHomeComponent,
+        ActivitiesComponent,
+        EnvironmentHomeComponent,
+        DomainComponent,
+        SearchComponent,
+        ProfileAboutComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -320,7 +336,6 @@ export function HttpLoaderFactory(http: Http) {
         TasksMenuComponent,
         SearchFormComponent,
         ArticleIconComponent,
-        SearchComponent,
         PasswordComponent,
         RegisterComponent,
         ThemeHeaderComponent,
@@ -341,7 +356,6 @@ export function HttpLoaderFactory(http: Http) {
         BlockContentComponent,
         BlockComponent,
         BoxesComponent,
-        ProgressComponent,
         EditableFieldComponent,
     ].concat(plugins.ng2MainComponents),
     providers: [
@@ -374,11 +388,8 @@ export function HttpLoaderFactory(http: Http) {
         { provide: "sweetAlert", useValue: swal },
         { provide: 'Window',  useValue: window },
         { provide: BrowserXhr, useClass: NgProgressBrowserXhr },
-    ].concat(UpgradeUtils.provideAngular1Services([
-        '$state',
-        '$transitions',
-        '$stateParams',
-    ]))
+    ],
+    bootstrap: [ AppComponent ]
 })
 
 export class AppModule {

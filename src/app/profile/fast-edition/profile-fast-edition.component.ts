@@ -20,8 +20,7 @@ export class ProfileFastEditionComponent {
 
     errors: any;
 
-    constructor(private profileService: ProfileService, private notificationService: NotificationService,
-        @Inject("$state") private $state: ng.ui.IStateService) { }
+    constructor(private profileService: ProfileService, private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.cloneProfile();
@@ -36,7 +35,7 @@ export class ProfileFastEditionComponent {
             this.finished.emit(this.profile);
             if (this.allowChangeIdentifier() && identifierChanged) {
                 // go to the state with the new identifier url
-                this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
+                // this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
             }
         }).catch((response) => {
             this.errors = response.data;

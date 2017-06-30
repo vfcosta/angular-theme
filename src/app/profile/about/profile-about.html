@@ -1,27 +1,27 @@
-<div class="profile-about">
+<div class="profile-about" *ngIf="profile">
   <!-- Basic data -->
-  <div class="main-box-body clearfix" ng-if="ctrl.profile.email">
+  <div class="main-box-body clearfix" *ngIf="profile.email">
     <form class="form-horizontal">
-      <div class="form-group" ng-repeat="(field, value) in ctrl.profileFields">
+      <div class="form-group" *ngFor="let field of profileFields | keys">
         <label class="col-sm-3 control-label">{{"profile." + field | translate}}</label>
         <div class="col-sm-9">
-          <p class="form-control-static">{{value}}</p>
+          <p class="form-control-static">{{profileFields[field]}}</p>
         </div>
       </div>
     </form>
   </div>
 
   <!-- Custom Fields -->
-  <div class="main-box clearfix profile-custom-fields" ng-if="ctrl.hasCustomFields()">
+  <div class="main-box clearfix profile-custom-fields" *ngIf="hasCustomFields()">
     <header class="main-box-header clearfix">
       <h2>{{"profile.others_info" | translate}}</h2>
     </header>
     <div class="main-box-body clearfix">
       <form class="form-horizontal">
-        <div class="form-group" ng-repeat="(field, value) in ctrl.profile.additional_data">
+        <div class="form-group" *ngFor="let field of profile.additional_data | keys">
           <label class="col-sm-3 control-label">{{ field }}</label>
           <div class="col-sm-9">
-            <p class="form-control-static">{{ value }}</p>
+            <p class="form-control-static">{{profileFields[field]}}</p>
           </div>
         </div>
       </form>

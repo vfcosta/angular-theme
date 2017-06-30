@@ -1,11 +1,10 @@
-import { Component, Inject, provide } from 'ng-forward';
+import { Component, Inject } from '@angular/core';
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
     selector: 'profile-about',
-    templateUrl: "app/profile/about/profile-about.html",
+    template: require("app/profile/about/profile-about.html"),
 })
-@Inject("profileService")
 export class ProfileAboutComponent {
 
     profile: noosfero.Profile;

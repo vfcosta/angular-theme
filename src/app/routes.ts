@@ -24,136 +24,136 @@ import { CommunityMembersProfileComponent } from './profile/community-members/co
 /** @ngInject */
 export function noosferoRoutes($stateProvider: any) {
 
-    $stateProvider.state({
-        controller: MainContentComponent,
-        url: '',
-        templateUrl: "app/main/main.html",
-        abstract: true,
-        name: 'main',
-        resolve: {
-            currentUser: function(authService: AuthService) {
-                return authService.loginFromCookie();
-            }
-        }
-    });
-    $stateProvider.state({
-        controller: EnvironmentComponent,
-        url: '/',
-        name: 'main.environment',
-        views: {
-            "content": {
-                templateUrl: "app/environment/environment.html",
-                controller: EnvironmentComponent,
-                controllerAs: "ctrl"
-            }
-        },
-        resolve: {
-            environment: (environmentService: EnvironmentService) => {
-                return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
-                    environmentService.setCurrentEnvironment(result.data);
-                    return result.data;
-                });
-            }
-        }
-    });
-    $stateProvider.state({
-        controller: EnvironmentHomeComponent,
-        url: '',
-        name: 'main.environment.home',
-        views: {
-            "mainBlockContent": {
-                templateUrl: "app/environment/environment-home.html",
-                controller: EnvironmentHomeComponent,
-                controllerAs: "vm"
-            }
-        }
-    });
-    $stateProvider.state({
-        controller: DomainComponent,
-        url: '/',
-        name: 'main.domain',
-        views: {
-            "content": {
-                template: "<div></div>",
-                controller: DomainComponent,
-                controllerAs: "ctrl"
-            }
-        },
-        resolve: {
-            contextResult: (domainService: DomainService) => {
-                return domainService.get("context");
-            }
-        }
-    });
-    $stateProvider.state({
-        controller: RouteNg2,
-        url: '^/search?query&per_page',
-        name: 'main.environment.search',
-        views: {
-            "mainBlockContent": {
-                template: "<search></search>",
-                controller: RouteNg2,
-                controllerAs: "ctrl"
-            }
-        }
-    });
-    $stateProvider.state({
-        url: "^/:profile",
-        abstract: true,
-        controller: ProfileComponent,
-        name: 'main.profile',
-        views: {
-            "content": {
-                templateUrl: "app/profile/profile.html",
-                controller: ProfileComponent,
-                controllerAs: "ctrl"
-            }
-        },
-        params: { currentProfile: {} },
-        resolve: {
-            environment: (environmentService: EnvironmentService) => {
-                return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
-                    environmentService.setCurrentEnvironment(result.data);
-                    return result.data;
-                });
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.profile.info',
-        url: "^/profile/:profile",
-        controller: ActivitiesComponent,
-        views: {
-            "mainBlockContent": {
-                templateUrl: "app/profile/activities/activities.html",
-                controller: ActivitiesComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.profile.home',
-        url: "",
-        controller: ProfileHomeComponent,
-        views: {
-            "mainBlockContent": {
-                controller: ProfileHomeComponent,
-                controllerAs: "vm"
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.profile.about',
-        url: "^/profile/:profile/about",
-        controller: ProfileAboutComponent,
-        views: {
-            "mainBlockContent": {
-                templateUrl: "app/profile/about/profile-about.html",
-                controller: ProfileAboutComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     controller: MainContentComponent,
+    //     url: '',
+    //     templateUrl: "app/main/main.html",
+    //     abstract: true,
+    //     name: 'main',
+    //     resolve: {
+    //         currentUser: function(authService: AuthService) {
+    //             return authService.loginFromCookie();
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     controller: EnvironmentComponent,
+    //     url: '/',
+    //     name: 'main.environment',
+    //     views: {
+    //         "content": {
+    //             templateUrl: "app/environment/environment.html",
+    //             controller: EnvironmentComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     },
+    //     resolve: {
+    //         environment: (environmentService: EnvironmentService) => {
+    //             return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+    //                 environmentService.setCurrentEnvironment(result.data);
+    //                 return result.data;
+    //             });
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     controller: EnvironmentHomeComponent,
+    //     url: '',
+    //     name: 'main.environment.home',
+    //     views: {
+    //         "mainBlockContent": {
+    //             templateUrl: "app/environment/environment-home.html",
+    //             controller: EnvironmentHomeComponent,
+    //             controllerAs: "vm"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     controller: DomainComponent,
+    //     url: '/',
+    //     name: 'main.domain',
+    //     views: {
+    //         "content": {
+    //             template: "<div></div>",
+    //             controller: DomainComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     },
+    //     resolve: {
+    //         contextResult: (domainService: DomainService) => {
+    //             return domainService.get("context");
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     controller: RouteNg2,
+    //     url: '^/search?query&per_page',
+    //     name: 'main.environment.search',
+    //     views: {
+    //         "mainBlockContent": {
+    //             template: "<search></search>",
+    //             controller: RouteNg2,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     url: "^/:profile",
+    //     abstract: true,
+    //     controller: ProfileComponent,
+    //     name: 'main.profile',
+    //     views: {
+    //         "content": {
+    //             templateUrl: "app/profile/profile.html",
+    //             controller: ProfileComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     },
+    //     params: { currentProfile: {} },
+    //     resolve: {
+    //         environment: (environmentService: EnvironmentService) => {
+    //             return environmentService.get('default').then((result: noosfero.RestResult<noosfero.Environment>) => {
+    //                 environmentService.setCurrentEnvironment(result.data);
+    //                 return result.data;
+    //             });
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.profile.info',
+    //     url: "^/profile/:profile",
+    //     controller: ActivitiesComponent,
+    //     views: {
+    //         "mainBlockContent": {
+    //             templateUrl: "app/profile/activities/activities.html",
+    //             controller: ActivitiesComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.profile.home',
+    //     url: "",
+    //     controller: ProfileHomeComponent,
+    //     views: {
+    //         "mainBlockContent": {
+    //             controller: ProfileHomeComponent,
+    //             controllerAs: "vm"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.profile.about',
+    //     url: "^/profile/:profile/about",
+    //     controller: ProfileAboutComponent,
+    //     views: {
+    //         "mainBlockContent": {
+    //             templateUrl: "app/profile/about/profile-about.html",
+    //             controller: ProfileAboutComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
     $stateProvider.state({
         name: 'main.cms',
         url: "^/myprofile/:profile/cms?parent_id&type",
@@ -334,18 +334,18 @@ export function noosferoRoutes($stateProvider: any) {
         }
     });
 
-    $stateProvider.state({
-        name: 'main.profile.page',
-        url: "/{page:any}",
-        controller: ContentViewerComponent,
-        views: {
-            "mainBlockContent": {
-                templateUrl: "app/article/content-viewer/page.html",
-                controller: ContentViewerComponent,
-                controllerAs: "vm"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.profile.page',
+    //     url: "/{page:any}",
+    //     controller: ContentViewerComponent,
+    //     views: {
+    //         "mainBlockContent": {
+    //             templateUrl: "app/article/content-viewer/page.html",
+    //             controller: ContentViewerComponent,
+    //             controllerAs: "vm"
+    //         }
+    //     }
+    // });
 
     $stateProvider.state({
         name: 'main.myprofile.change_password',

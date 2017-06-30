@@ -37,7 +37,6 @@ export class LoginBlockComponent {
     credentials = <noosfero.Credentials>{};
 
     constructor(private session: SessionService,
-        @Inject("$state") private $state: ng.ui.IStateService,
         public authService: AuthService) {
 
         this.currentUser = this.session.currentUser();

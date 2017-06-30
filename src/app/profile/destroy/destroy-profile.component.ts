@@ -10,7 +10,6 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
 export class DestroyProfileComponent {
 
     constructor(
-        @Inject("$state") private $state: ng.ui.IStateService,
         private notificationService: NotificationService,
         private profileService: ProfileService,
         private authService: AuthService) {
@@ -30,7 +29,7 @@ export class DestroyProfileComponent {
     }
 
     handleSuccess(profile: noosfero.Profile) {
-        this.$state.go("main.domain");
+        // this.$state.go("main.domain");
         if (profile && profile.type !== "Community") {
             this.authService.logout();
         }
@@ -38,7 +37,7 @@ export class DestroyProfileComponent {
     }
 
     handleError(profile: noosfero.Profile) {
-        this.$state.go("main.myprofile", { profile: profile.identifier });
+        // this.$state.go("main.myprofile", { profile: profile.identifier });
         this.notificationService.error({ title: "profile.remove.failed.title" });
     }
 }

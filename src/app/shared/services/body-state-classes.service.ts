@@ -38,13 +38,9 @@ export class BodyStateClassesService {
 
     constructor(
         @Inject(DOCUMENT) private document: any,
-        @Inject("$state") private $state: ng.ui.IStateService,
         private authService: AuthService,
         private designModeService: DesignModeService,
-        private localStorageService: LocalStorageService,
-        @Inject("$transitions") private $transitions: any
-    ) {
-    }
+        private localStorageService: LocalStorageService) { }
 
     start(config?: StartParams) {
         if (!this.started) {
@@ -117,10 +113,10 @@ export class BodyStateClassesService {
 
     private setupStateClassToggle() {
         let bodyElement = this.getBodyElement();
-        bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + this.$state.current.name);
-        this.$transitions.onSuccess({}, (trans) => {
-            this.switchStateClasses(bodyElement, trans.$to());
-        });
+        // bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + this.$state.current.name);
+        // this.$transitions.onSuccess({}, (trans) => {
+        //     this.switchStateClasses(bodyElement, trans.$to());
+        // });
     }
 
     /**

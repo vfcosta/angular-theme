@@ -21,7 +21,6 @@ describe("Components", () => {
                 declarations: [PeopleBlockComponent, UiSrefDirective],
                 providers: [
                     { provide: BlockService, useValue: blockService },
-                    { provide: "$state", useValue: state }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             }).compileComponents().then(() => {

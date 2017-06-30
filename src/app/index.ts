@@ -406,9 +406,6 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('noosferoBoxes',
         downgradeComponent({ component: BoxesComponent, inputs: ['boxes', 'owner', 'layout', 'columns', 'startIndex'] }) as angular.IDirectiveFactory
-    ).
-    directive('ngProgress',
-        downgradeComponent({ component: ProgressComponent }) as angular.IDirectiveFactory
     )
     .factory('articleService', downgradeInjectable(ArticleService))
     .factory('environmentService', downgradeInjectable(EnvironmentService))

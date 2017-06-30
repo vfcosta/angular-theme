@@ -28,7 +28,7 @@ export class NewCommunityComponent extends AbstractFormCommunity {
         this.community.type = 'Community';
         this.communityService.createNewCommunity(this.community).then((result) => {
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
-            this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
+            // this.$state.go('main.myprofile.communities', { profile: this.profile.identifier });
         }).catch(response => {
             let errors = response.data;
             if(response.status === 422) {
@@ -40,6 +40,6 @@ export class NewCommunityComponent extends AbstractFormCommunity {
     }
 
     cancel() {
-        this.$state.go('main.myprofile.communities', { profile: this.sessionProfile.identifier });
+        // this.$state.go('main.myprofile.communities', { profile: this.sessionProfile.identifier });
     }
 }

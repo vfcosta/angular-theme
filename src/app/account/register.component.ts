@@ -19,7 +19,6 @@ export class RegisterComponent {
     @ViewChild('passwordConfirmErrors') passwordConfirmErrors: ValidationMessageComponent;
 
     constructor(
-        @Inject('$state') private $state: ng.ui.IStateService,
         public RegisterService: RegisterService,
         private notificationService: NotificationService,
         private environmentService: EnvironmentService) {
@@ -37,7 +36,7 @@ export class RegisterComponent {
         let errors: any;
         let field = '';
         this.RegisterService.createAccount(this.account).then( () => {
-            this.$state.transitionTo('main.environment.home');
+            // this.$state.transitionTo('main.environment.home');
             this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
         }).catch( response => {
             if (response.status === 422) {

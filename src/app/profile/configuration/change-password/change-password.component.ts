@@ -27,8 +27,7 @@ export class ChangePasswordComponent {
     new_password_confirmation: string;
     errors: any;
 
-    constructor(private userService: UserService, private notificationService: NotificationService,
-        @Inject("$state") private $state: ng.ui.IStateService) { }
+    constructor(private userService: UserService, private notificationService: NotificationService) { }
 
     save(event: Event) {
         event.preventDefault();
@@ -40,7 +39,7 @@ export class ChangePasswordComponent {
                 .then(response => {
                     this.errors = null;
                     this.notificationService.success({ title: "profile.edition.success.title", message: "new_password.success.message" });
-                    this.$state.go('main.myprofile', { profile: this.profile.identifier });
+                    // this.$state.go('main.myprofile', { profile: this.profile.identifier });
                 })
                 .catch(error => {
                     this.errors = error.data;

@@ -16,13 +16,12 @@ export class PasswordComponent {
 
     constructor(
         public passwordService: PasswordService,
-        @Inject("$state") private $state: ng.ui.IStateService,
         private notificationService: NotificationService) { }
 
     sendNewPassword() {
         this.passwordService.newPassword(this.code, this.password, this.passwordConfirmation).then((response) => {
             this.notificationService.success({ title: "new_password.success.title", message: "new_password.success.message" }, { timer: 5000 });
-            this.$state.transitionTo('main.environment.home');
+            // this.$state.transitionTo('main.environment.home');
         }).catch((response) => {
             if (response.status === 422) {
                 this.passwordErrors.setBackendErrors(response.data);

@@ -21,7 +21,6 @@ export abstract class AbstractFormCommunity {
         @Inject(CommunityService) public communityService: CommunityService,
         @Inject(ProfileService) public profileService: ProfileService,
         @Inject(SessionService) public sessionService: SessionService,
-        @Inject('$state') public $state: ng.ui.IStateService,
         @Inject(TranslatorService) public translatorService: TranslatorService) {}
 
     abstract getTitle();

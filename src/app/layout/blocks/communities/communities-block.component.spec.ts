@@ -12,7 +12,6 @@ describe("Components", () => {
     describe("Community Block Component", () => {
         let fixture: ComponentFixture<CommunitiesBlockComponent>;
         let component: CommunitiesBlockComponent;
-        let state = jasmine.createSpyObj("$state", ["href"]);
         let blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
         blockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ communities: [{ identifier: "community1" }] }));
 
@@ -21,7 +20,6 @@ describe("Components", () => {
                 declarations: [CommunitiesBlockComponent, UiSrefDirective],
                 providers: [
                     { provide: BlockService, useValue: blockService },
-                    { provide: "$state", useValue: state }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             }).compileComponents().then(() => {

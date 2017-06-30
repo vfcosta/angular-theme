@@ -4,9 +4,9 @@ import { Component, Inject } from 'ng-forward';
     selector: "route-ng2",
     template: '<div></div>',
 })
-@Inject("$stateParams")
+// @Inject("$stateParams")
 export class RouteNg2 {
 
-    constructor(private $stateParams: ng.ui.IStateParamsService) { }
+    // constructor(private $stateParams: ng.ui.IStateParamsService) { }
 
 }

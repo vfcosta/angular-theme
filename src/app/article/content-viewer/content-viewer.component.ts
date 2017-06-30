@@ -1,16 +1,12 @@
-import {Input, Component, Inject, provide} from "ng-forward";
-
-import {ArticleService} from "../../../lib/ng-noosfero-api/http/article.service";
-import {ProfileService} from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ActivatedRoute } from '@angular/router';
+import { Input, Component } from "@angular/core";
+import { ArticleService } from "../../../lib/ng-noosfero-api/http/article.service";
+import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 
 @Component({
     selector: "content-viewer",
-    templateUrl: "app/article/content-viewer/page.html",
-    providers: [
-        provide('profileService', { useClass: ProfileService })
-    ]
+    template: require("app/article/content-viewer/page.html"),
 })
-@Inject("articleService", "profileService", "$stateParams", "$state")
 export class ContentViewerComponent {
 
     @Input()
@@ -19,18 +15,15 @@ export class ContentViewerComponent {
     @Input()
     profile: noosfero.Profile = null;
 
-    constructor(
-        private articleService: ArticleService,
-        private profileService: ProfileService,
-        private $stateParams: angular.ui.IStateParamsService,
-        private $state: ng.ui.IStateService) {
+    constructor(private articleService: ArticleService, private profileService: ProfileService, private route: ActivatedRoute) {
         this.activate();
     }
 
     activate() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-            return this.articleService.getArticleByProfileAndPath(this.profile, this.$stateParams["page"]);
+            let page = this.route.snapshot.url.map(p => p.path).join("/");
+            return this.articleService.getArticleByProfileAndPath(this.profile, page);
         }).then((result: noosfero.RestResult<any>) => {
             this.article = <noosfero.Article>result.data;
             this.articleService.setCurrent(this.article);

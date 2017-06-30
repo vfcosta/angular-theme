@@ -41,7 +41,6 @@ describe("Components", () => {
                 declarations: [CommunityMembersComponent, UiSrefDirective],
                 providers: [
                     { provide: ProfileService, useValue: profileService },
-                    { provide: "$state", useValue: state },
                     { provide: TranslatorService, useValue: translatorService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA]

@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, Inject } from "@angular/core";
 import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
 
@@ -13,17 +14,14 @@ export class SearchComponent {
     perPage = 10;
     currentPage: number = 0;
 
-    constructor(
-        protected articleService: ArticleService,
-        @Inject("$stateParams") private $stateParams: ng.ui.IStateParamsService,
-        @Inject("$state") private $state: ng.ui.IStateService) {
-        this.query = this.$stateParams['query'];
-        this.perPage = this.$stateParams['per_page'] || this.perPage;
+    constructor(protected articleService: ArticleService, private router: Router, private route: ActivatedRoute) {
+        this.query = route.snapshot.queryParams['query'];
+        this.perPage = route.snapshot.queryParams['per_page'] || this.perPage;
         this.loadPage();
     }
 
     search() {
-        this.$state.go('main.environment.search', { query: this.query });
+        this.router.navigate(['search'], { queryParams: { query: this.query } });
     }
 
     loadPage() {

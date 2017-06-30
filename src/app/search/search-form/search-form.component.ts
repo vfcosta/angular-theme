@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Inject } from "@angular/core";
 
 @Component({
@@ -8,13 +9,13 @@ export class SearchFormComponent {
 
     query: string;
 
-    constructor(@Inject("$state") private $state: ng.ui.IStateService) { }
+    constructor(private route: ActivatedRoute, private router: Router) { }
 
     ngOnInit() {
-        this.query = this.$state.params['query'];
+        this.query = this.route.snapshot.queryParams['query'];
     }
 
     search() {
-        this.$state.go('main.environment.search', { query: this.query });
+        this.router.navigate(['search'], { queryParams: { query: this.query } });
     }
 }

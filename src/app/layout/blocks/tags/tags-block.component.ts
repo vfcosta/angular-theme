@@ -15,8 +15,7 @@ export class TagsBlockComponent {
     tags: Array<CloudData> = [];
 
     constructor(
-      private environmentService: EnvironmentService,
-      @Inject("$state") private $state: ng.ui.IStateService) {
+      private environmentService: EnvironmentService) {
         this.loadTags();
     }
 

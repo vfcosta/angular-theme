@@ -27,7 +27,6 @@ describe("Components", () => {
                 declarations: [TagsBlockComponent],
                 providers: [
                     { provide: EnvironmentService, useValue: environmentService},
-                    { provide: "$state", useValue: mocks.stateService },
                 ],
                 schemas: [NO_ERRORS_SCHEMA]
             }).compileComponents().then(() => {

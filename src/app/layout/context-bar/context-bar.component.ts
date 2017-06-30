@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Inject, Input, Component } from '@angular/core';
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
@@ -25,7 +26,7 @@ export class ContextBarComponent {
     originalCustomFooter: string;
 
     constructor(
-        @Inject("$state") private $state: ng.ui.IStateService,
+        private router: Router,
         private eventsHubService: EventsHubService,
         private blockService: BlockService,
         private notificationService: NotificationService,
@@ -73,7 +74,8 @@ export class ContextBarComponent {
     }
 
     discard() {
-        this.$state.reload();
+        // FIXME
+        // this.router. 
         this.notificationService.info({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
     }
 

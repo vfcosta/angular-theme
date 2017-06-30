@@ -18,10 +18,8 @@ export class PersonCommunitiesComponent {
     searchChanged: Subject<string> = new Subject<string>();
     private displayStyle: string = DisplayStyles.card;
 
-    constructor(private personService: PersonService,
-                @Inject('$stateParams') $stateParams: ng.ui.IStateParamsService) {
-
-        this.search = $stateParams['search'];
+    constructor(private personService: PersonService) {
+        // this.search = $stateParams['search'];
         this.searchChanged.debounceTime(300).subscribe((search: string) => {
             this.search = search;
             this.loadPage({page: this.currentPage});

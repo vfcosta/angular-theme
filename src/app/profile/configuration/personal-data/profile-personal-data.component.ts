@@ -28,7 +28,6 @@ export class ProfilePersonalDataComponent {
 
     constructor(private profileService: ProfileService,
         private notificationService: NotificationService,
-        @Inject("$state") private $state: ng.ui.IStateService,
         private translatorService: TranslatorService) { }
 
     ngOnInit() {
@@ -44,7 +43,7 @@ export class ProfilePersonalDataComponent {
             this.finished.emit(this.profile);
             if (identifierChanged) {
                 // go to the state with the new identifier url
-                this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
+                // this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
             }
         }).catch((response) => {
             this.errors = response.data.error;

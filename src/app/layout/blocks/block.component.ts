@@ -1,3 +1,5 @@
+import { ActivitiesComponent } from './../../profile/activities/activities.component';
+import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
 import { state, style, transition, animate, trigger, Input, Component, Inject } from '@angular/core';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService, SessionService, AuthEvents } from "../../login";
@@ -22,13 +24,12 @@ export class BlockComponent {
     animation: string;
 
     constructor(
-        @Inject("$state") private $state: ng.ui.IStateService,
         private notificationService: NotificationService,
         private authService: AuthService,
         private sessionService: SessionService,
         private translatorService: TranslatorService,
         private designModeService: DesignModeService,
-        @Inject("$transitions") private $transitions) {
+        private router: Router, private route: ActivatedRoute) {
 
         this.currentUser = this.sessionService.currentUser();
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
@@ -39,8 +40,8 @@ export class BlockComponent {
             this.currentUser = this.sessionService.currentUser();
             this.verifyHomepage();
         });
-        this.$transitions.onSuccess({}, (trans) => {
-            this.verifyHomepage();
+        router.events.subscribe((event: Event) => {
+             if (event instanceof NavigationEnd) this.verifyHomepage();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
@@ -90,17 +91,15 @@ export class BlockComponent {
     }
 
     protected verifyHomepage() {
-        if (this.owner && ["Profile", "Community", "Person"].indexOf((<any>this.owner)['type']) >= 0) {
+        if (this.owner && this.owner.type !== "Environment") {
             let profile = <noosfero.Profile>this.owner;
-            this.isHomepage = this.$state.current.name === "main.profile.home";
             if (profile.homepage) {
-                this.isHomepage = this.isHomepage ||
-                    (this.$state.current.name === "main.profile.page" && profile.homepage === this.$state.params['page']);
+                this.isHomepage = this.router.url === profile.homepage;
             } else {
-                this.isHomepage = this.isHomepage || this.$state.current.name === "main.profile.info";
+                this.isHomepage = this.route.snapshot.component === ActivitiesComponent;
             }
         } else {
-            this.isHomepage = this.$state.current.name === "main.environment.home";
+            this.isHomepage = this.router.url === "/";
         }
     }
 
@@ -112,8 +111,8 @@ export class BlockComponent {
     canDelete() {
         return this.block.type !== 'MainBlock';
     }
-    
-    updateText(event){
+
+    updateText(event) {
         this.block.title = event;
     }
 }

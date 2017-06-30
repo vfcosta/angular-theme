@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HeaderService } from './../../shared/services/header.service';
 import { Component, Inject, EventEmitter, Input } from "@angular/core";
 import { AuthService, AuthEvents } from "./../../login";
@@ -20,7 +21,7 @@ export class NavbarComponent {
         headerService: HeaderService,
         public authService: AuthService,
         private session: SessionService,
-        @Inject("$state") private $state: ng.ui.IStateService,
+        private router: Router,
         private environmentService: EnvironmentService
     ) {
         this.currentUser = this.session.currentUser();
@@ -31,7 +32,7 @@ export class NavbarComponent {
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             this.showLoginModal = false;
             this.currentUser = this.session.currentUser();
-            this.$state.go(this.$state.current, {}, { reload: true });  // TODO move to auth
+            // this.router.navigate(this.$state.current, {}, { reload: true });  // TODO move to auth
         });
 
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
@@ -41,7 +42,7 @@ export class NavbarComponent {
 
     logout() {
         this.authService.logout();
-        this.$state.transitionTo('main.environment.home');
+        // this.$state.transitionTo('main.environment.home');
     };
 
     openLogin() {

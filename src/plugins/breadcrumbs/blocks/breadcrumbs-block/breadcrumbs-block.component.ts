@@ -14,27 +14,24 @@ export class BreadcrumbsBlockComponent {
     profile: noosfero.Profile;
     links: any[] = [];
 
-    constructor(private blockService: BlockService,
-        @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject("$stateParams") private $stateParams: ng.ui.IStateParamsService,
-        @Inject("$transitions") private $transitions: any) { }
+    constructor(private blockService: BlockService) { }
 
     ngOnInit() {
-        this.$transitions.onSuccess({}, (trans) => {
-            this.setNavigationState();
-        });
+        // this.$transitions.onSuccess({}, (trans) => {
+        //     this.setNavigationState();
+        // });
         this.setNavigationState();
         this.profile = this.owner;
     }
 
     setNavigationState() {
-        this.blockService.getApiContent(this.block, { profile: this.$stateParams['profile'], page: this.$stateParams['page'] }).then((content: any) => {
-            this.links = content.links;
-            this.block.hide = this.links.length <= 1;
-            if (!this.block.hide) {
-                this.links[this.links.length - 1]['active'] = true;
-            }
-        });
+        // this.blockService.getApiContent(this.block, { profile: this.$stateParams['profile'], page: this.$stateParams['page'] }).then((content: any) => {
+        //     this.links = content.links;
+        //     this.block.hide = this.links.length <= 1;
+        //     if (!this.block.hide) {
+        //         this.links[this.links.length - 1]['active'] = true;
+        //     }
+        // });
     };
 
     getDisplayName(state: any) {
@@ -45,6 +42,6 @@ export class BreadcrumbsBlockComponent {
     }
 
     isCurrent(state: any) {
-        return (<any>this.$state.$current)['name'] === state.name;
+        // return (<any>this.$state.$current)['name'] === state.name;
     }
 }

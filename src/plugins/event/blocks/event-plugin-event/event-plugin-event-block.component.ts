@@ -16,8 +16,7 @@ export class EventPluginEventBlockComponent {
     options: any;
     monthEvents: any;
 
-    constructor(private blockService: BlockService,
-        @Inject("$state") private $state: any) { }
+    constructor(private blockService: BlockService) { }
 
     populateMonthEvents(month: number, year: number) {
         let events: any = [];

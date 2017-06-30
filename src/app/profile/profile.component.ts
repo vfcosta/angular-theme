@@ -1,6 +1,6 @@
-import { ThemeService } from './../shared/services/theme.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DesignModeService } from './../shared/services/design-mode.service';
-import { Component, Inject, provide, Input } from 'ng-forward';
+import { Component, Inject, Input } from '@angular/core';
 import { ProfileHomeComponent } from './profile-home.component';
 import { CmsComponent } from '../article/cms/cms.component';
 import { ContentViewerComponent } from "../article/content-viewer/content-viewer.component";
@@ -21,37 +21,22 @@ import { ProfileActionsComponent } from "./actions/profile-actions.component";
  */
 @Component({
     selector: 'profile',
-    templateUrl: "app/profile/profile.html",
-    directives: [ActivitiesComponent],
+    template: require("app/profile/profile.html"),
 })
-@Inject("profileService", "$stateParams", "$state", "notificationService", "designModeService", "themeService")
 export class ProfileComponent {
 
-    boxes: noosfero.Box[];
     @Input() profile: noosfero.Profile;
 
-    constructor(private profileService: ProfileService, $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService,
+    constructor(private profileService: ProfileService, private route: ActivatedRoute,
         private notificationService: NotificationService, private designModeService: DesignModeService,
-        private themeService: ThemeService) {
+        private router: Router) {
+
         designModeService.setInDesignMode(false);
-        let profilePromise: Promise<noosfero.Profile>;
-        if (this.$state.params['currentProfile'].id) {
-            this.profile = this.$state.params['currentProfile'];
-            profilePromise = Promise.resolve(this.profile);
-        } else {
-            profilePromise = profileService.setCurrentProfileByIdentifier($stateParams["profile"]);
-        }
-        profilePromise.then((profile: noosfero.Profile) => {
-            if (themeService.verifyTheme(profile.theme)) return <Promise<restangular.IResponse>>new Promise(() => {}); // return an empty promise to break promise chain
-            this.profile = profile;
-            profileService.setCurrentProfile(this.profile);
-            return this.profileService.getBoxes(<number>this.profile.id);
-        }).then((response: restangular.IResponse) => {
-            this.profile.boxes = response.data;
-            this.boxes = response.data;
-        }).catch(() => {
-            this.$state.transitionTo('main.domain');
-            this.notificationService.error({ message: "notification.profile.not_found" });
-        });
+        this.profile = route.snapshot.data['profile'];
+        //     if (themeService.verifyTheme(profile.theme)) return <Promise<restangular.IResponse>>new Promise(() => {}); // return an empty promise to break promise chain
+        // }).catch(() => {
+        //     this.router.navigate(['/']);
+        //     this.notificationService.error({ message: "notification.profile.not_found" });
+        // });
     }
 }

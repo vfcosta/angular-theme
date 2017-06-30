@@ -11,14 +11,13 @@ export class FooterComponent {
     private currentUser: noosfero.User;
 
     constructor(private authService: AuthService,
-        private session: SessionService,
-        @Inject('$state') private $state: ng.ui.IStateService) {
+        private session: SessionService) {
       this.currentUser = this.session.currentUser();
     }
 
     logout() {
         this.authService.logout();
-        this.$state.go(this.$state.current, {}, { reload: true });
+        // this.$state.go(this.$state.current, {}, { reload: true });
     };
 
 }

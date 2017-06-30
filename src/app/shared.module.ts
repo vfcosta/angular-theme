@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
@@ -82,9 +83,10 @@ import * as plugins from "../plugins";
         FormsModule,
         MomentModule,
         NgPipesModule,
-    PaginationModule.forRoot(),
+        PaginationModule.forRoot(),
         CKEditorModule,
-    TranslateModule.forChild(),
+        TranslateModule.forChild(),
+        RouterModule,
     ]
 })
 export class SharedModule { }
