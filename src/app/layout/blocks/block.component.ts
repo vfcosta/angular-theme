@@ -108,7 +108,6 @@ export class BlockComponent {
     }
     
     updateText(event){
-        console.log(" KKKKKKKKKKKK", event);
         this.block.title = event;
     }
 }
