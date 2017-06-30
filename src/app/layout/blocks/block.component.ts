@@ -107,4 +107,8 @@ export class BlockComponent {
         return this.block.type !== 'MainBlock';
     }
     
+    updateText(event){
+        console.log(" KKKKKKKKKKKK", event);
+        this.block.title = event;
+    }
 }

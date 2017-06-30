@@ -1,7 +1,5 @@
-<div bootstrap-resizable [designMode]="designMode" [(bootstrapResizableColumns)]="block.settings.visualization.columns" 
-    [hidden]="!canDisplay()"
-    [ngClass]="{'invisible-block': !visible(), 'animated bounceInDown': !block.id, 'animated bounceOutUp': block._destroy}"
-    class="noosfero-block col-md-{{block.settings?.visualization?.columns || 12}}"
+<div bootstrap-resizable [designMode]="designMode" [(bootstrapResizableColumns)]="block.settings.visualization.columns" [hidden]="!canDisplay()"
+    [ngClass]="{'invisible-block': !visible(), 'animated bounceInDown': !block.id, 'animated bounceOutUp': block._destroy}" class="noosfero-block col-md-{{block.settings?.visualization?.columns || 12}}"
     [class.ng-hide]="!canDisplay()">
     <div [hidden]="!designMode" class="actions block-actions" [permission]="block.permissions" permissionAction="allow_edit">
         <a class="action visibility" href="#" *ngIf="canDelete()" (click)="markForDeletion()">
@@ -12,21 +10,10 @@
     <div class="panel panel-default block {{blockClass()}}">
         <div class="panel-heading" [hidden]="!designMode && !block.title">
             <h3 class="panel-title">
-                <div class="popover-wrapper">
-                    <!--<span editable-text="block.title" e-placeholder='{{"edit.inline.title" | translate}}' e-form="textBtnForm">
-            {{ (block.title | noosferoTemplate:block.api_content ) || ("edit.inline.title" | translate) }}</span>-->
-
-                    <!--<span [hidden]="!textBtnForm.$visible" *ngIf="block.title">-->
-            {{ (block.title | noosferoTemplate:block.api_content ) }} ######
-            {{ "edit.inline.title" | translate }}
-            <!--</span>-->
-                    <inline-editor type="text" [(ngModel)]="blockTitle" (onSave)="saveEditable($event)" name="editableText1" size="8">
-                        {{ (block.title | noosferoTemplate:block.api_content ) || ("edit.inline.title" | translate) }}
-                    </inline-editor>
-                    <a id="edit-pen" *ngIf="designMode" [permission]="block.permissions" permissionAction="allow_edit"
-                        href="#" class="pencil-icon pencil-icon-block" (click)="textBtnForm.$show()" [hidden]="textBtnForm.$visible">
-                    </a>
-                  </div>
+                <span>
+                    {{ (block.title | noosferoTemplate:block.api_content ) || ("edit.inline.title" | translate) }}
+                </span>
+                <noosfero-editable-field *ngIf="designMode" [text]="block.title" (textChange)="updateText($event)" [owner]="owner" [designMode]="designMode"></noosfero-editable-field>
             </h3>
         </div>
         <div class="panel-body {{blockClass()}}">
