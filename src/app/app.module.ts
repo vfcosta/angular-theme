@@ -1,3 +1,4 @@
+import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
 import { DestroyProfileComponent } from './profile/destroy/destroy-profile.component';
 import { ProfileEditionComponent } from './profile/configuration/profile-edition.component';
 import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
@@ -293,6 +294,7 @@ export function HttpLoaderFactory(http: Http) {
         ProfileConfigurationComponent,
         ProfileEditionComponent,
         DestroyProfileComponent,
+        CommunityMembersProfileComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,

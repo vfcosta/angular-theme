@@ -1,3 +1,4 @@
+import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
 import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
 import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
 import { DestroyProfileComponent } from './profile/destroy/destroy-profile.component';
@@ -111,6 +112,14 @@ const routes: Routes = [
             {
               path: 'about',
               component: ProfileAboutComponent,
+            },
+            {
+              path: 'members',
+              component: CommunityMembersProfileComponent,
+            },
+            {
+              path: 'friends',
+              component: PersonFriendsComponent,
             },
         ]
     },

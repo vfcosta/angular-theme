@@ -224,31 +224,31 @@ export function noosferoRoutes($stateProvider: any) {
                 controllerAs: "ctrl"
             }
         }
-    });    
-    $stateProvider.state({
-        name: 'main.profile.members',
-        url: "^/profile/:profile/members",
-        controller: CommunityMembersProfileComponent,
-        views: {
-            "mainBlockContent": {
-                templateUrl: "app/profile/community-members/community-members-profile.html",
-                controller: CommunityMembersProfileComponent,
-                controllerAs: "ctrl"
-            }
-        }
     });
-    $stateProvider.state({
-        name: 'main.profile.friends',
-        url: "^/profile/:profile/friends",
-        controller: ProfileConfigurationOptionComponent,
-        views: {
-            "mainBlockContent": {
-                template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
-                controller: ProfileConfigurationOptionComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.profile.members',
+    //     url: "^/profile/:profile/members",
+    //     controller: CommunityMembersProfileComponent,
+    //     views: {
+    //         "mainBlockContent": {
+    //             templateUrl: "app/profile/community-members/community-members-profile.html",
+    //             controller: CommunityMembersProfileComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.profile.friends',
+    //     url: "^/profile/:profile/friends",
+    //     controller: ProfileConfigurationOptionComponent,
+    //     views: {
+    //         "mainBlockContent": {
+    //             template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
+    //             controller: ProfileConfigurationOptionComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
     // $stateProvider.state({
     //     name: 'main.myprofile',
     //     url: "^/myprofile/:profile",
