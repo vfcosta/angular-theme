@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
@@ -7,18 +9,14 @@ import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
-import {
-    FormsModule, NG_VALIDATORS, AbstractControl,
-    NgForm, FormControl
-} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {
-
     describe("Change user password", () => {
+        let mocks = helpers.getMocks();
         let fixture: ComponentFixture<ChangePasswordComponent>;
         let component: ChangePasswordComponent;
         let userService = jasmine.createSpyObj("userService", ["changePassword"]);
-        let $state = jasmine.createSpyObj("$state", ["go"]);
         let $event = jasmine.createSpyObj("$event", ["preventDefault"]);
         $event.preventDefault = jasmine.createSpy("preventDefault");
         userService.changePassword = jasmine.createSpy("changePassword").and.returnValue(Promise.resolve({}));
@@ -26,27 +24,27 @@ describe("Components", () => {
         newPasswordConfirmation.pushError = jasmine.createSpy("pushError");
 
         beforeEach(async(() => {
+            mocks.route.parent.snapshot.data = { profile: <noosfero.Profile>{ id: 1, identifier: 'profile1' } };
             TestBed.configureTestingModule({
-                imports: [FormsModule, TranslateModule.forRoot()],
+                imports: [RouterTestingModule, FormsModule, TranslateModule.forRoot()],
                 declarations: [ChangePasswordComponent],
                 providers: [
                     { provide: UserService, useValue: userService },
-                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
-                    { provide: "$state", useValue: $state },
+                    { provide: NotificationService, useValue: mocks.notificationService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
+                    { provide: ActivatedRoute, useValue: mocks.route },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });
             fixture = TestBed.createComponent(ChangePasswordComponent);
             component = fixture.componentInstance;
-            component.profile = <noosfero.Profile>{ id: 1, identifier: 'profile1' };
         }));
 
         it("change password successfully", fakeAsync(done => {
+            spyOn(component['router'], 'navigate');
             component.current_password = 'teste';
             component.new_password = 'teste123';
             component.new_password_confirmation = 'teste123';
-             // component.newPasswordConfirmation = newPasswordConfirmation;
             fixture.detectChanges();
             component.save($event);
             tick();

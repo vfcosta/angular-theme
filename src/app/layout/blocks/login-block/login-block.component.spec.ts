@@ -11,7 +11,6 @@ import {ComponentTestHelper, createClass} from './../../../../spec/component-tes
 import {LoginBlockComponent} from './login-block.component';
 import * as helpers from "./../../../../spec/helpers";
 import { AuthService, AuthEvents } from "./../../../login";
-import { UiSrefDirective } from "../../../shared/directives/ui-sref-directive";
 
 const htmlTemplate: string = '<noosfero-login-block></noosfero-login-block>';
 
@@ -28,7 +27,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [LoginBlockComponent, UiSrefDirective, DateFormatPipe],
+                declarations: [LoginBlockComponent, DateFormatPipe],
                 providers: [
                     { provide: SessionService, useValue: sessionService },
                     { provide: AuthService, useValue: mocks.authService },

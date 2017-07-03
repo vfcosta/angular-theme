@@ -12,7 +12,6 @@ import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core
 import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {
-
     describe("Menu Block Component", () => {
         let fixture: ComponentFixture<MenuBlockComponent>;
         let component: MenuBlockComponent;
@@ -77,19 +76,19 @@ describe("Components", () => {
         });
 
         it("generate correct url for activities", () => {
-            let url = { translatedTitle: 'blocks.menu.activities', title: 'Activities', url: 'main.profile.info', urlParams: '{profile: owner.identifier}', controller: 'profile', action: 'activities', path: '' };
-            expect(component.makeUrl({ "title": "Activities", "controller": "profile", "action": "activities" })).toEqual(url);
+            let url = [ '/', 'profile-name' ];
+            expect(component.makeUrl({ "title": "Activities", "controller": "profile", "action": "activities" }).url).toEqual(url);
         });
 
         it("generate correct url for about", () => {
-            let url = { translatedTitle: 'blocks.menu.about', url: 'main.profile.about', urlParams: '{profile: owner.identifier}', title: 'About', controller: 'profile', action: 'about', path: '' };
-            expect(component.makeUrl({ "title": "About", "controller": "profile", "action": "about" })).toEqual(url);
+            let url = [ '/profile', 'profile-name', 'about' ];
+            expect(component.makeUrl({ "title": "About", "controller": "profile", "action": "about" }).url).toEqual(url);
         });
 
         it("generate correct url for friends", () => {
             component.owner = <noosfero.Person>{ id: 1, name: 'person-name', identifier: 'person-name', type: 'Person' };
-            let url = { translatedTitle: 'blocks.menu.friends', url: 'main.profile.friends', urlParams: '{profile: owner.identifier}', title: 'People', controller: 'friends', action: 'index', path: '' };
-            expect(component.makeUrl({ "title": "People", "controller": "friends", "action": "index" })).toEqual(url);
+            let url = [ '/profile', 'person-name', 'friends' ];
+            expect(component.makeUrl({ "title": "People", "controller": "friends", "action": "index" }).url).toEqual(url);
         });
 
         it("initialize links variable", () => {

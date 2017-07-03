@@ -1,3 +1,9 @@
+import { ProfileComponent } from './../../profile/profile.component';
+import { ActivitiesComponent } from './../../profile/activities/activities.component';
+import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NoosferoTemplatePipe } from './../../shared/pipes/noosfero-template.ng2.filter';
+import { RouterTestingModule } from '@angular/router/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PermissionNg2Directive } from './../../shared/components/permission/permission.ng2.directive';
 import { By } from '@angular/platform-browser';
@@ -6,7 +12,6 @@ import { SessionService } from './../../login/session.service';
 import { AuthService } from './../../login/auth.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { NotificationService } from './../../shared/services/notification.service';
-import { Component } from 'ng-forward';
 import { BlockComponent } from './block.component';
 import * as helpers from "../../../spec/helpers";
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -20,24 +25,21 @@ describe("Block Component", () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [BlockComponent, PermissionNg2Directive],
+            declarations: [BlockComponent, PermissionNg2Directive, NoosferoTemplatePipe],
             schemas: [NO_ERRORS_SCHEMA],
             providers: [
-                { provide: "$state", useValue: mocks.stateService },
                 { provide: NotificationService, useValue: mocks.notificationService },
                 { provide: AuthService, useValue: mocks.authService },
                 { provide: SessionService, useValue: mocks.sessionService },
                 { provide: TranslatorService, useValue: mocks.translatorService },
                 { provide: DesignModeService, useValue: mocks.designModeService },
-                { provide: "$transitions", useValue: mocks.$transitions },
             ],
-            imports: [BrowserAnimationsModule]
+            imports: [RouterTestingModule, BrowserAnimationsModule, TranslateModule.forRoot()]
         });
         fixture = TestBed.createComponent(BlockComponent);
         component = fixture.componentInstance;
         component.block = <noosfero.Block>{ id: 1, settings: { visualization: { columns: 7 } } };
         component.owner = <noosfero.Profile>{ id: 1, identifier: 'profile-name', type: 'Person' };
-        TestBed.get("$state").current = {};
     }));
 
     it("set isHomepage as false by default", () => {
@@ -46,29 +48,27 @@ describe("Block Component", () => {
     });
 
     it("set isHomepage as true when in profile home page", () => {
-        TestBed.get("$state").current = { name: "main.profile.home" };
-        component.ngOnInit();
+        TestBed.get(ActivatedRoute).snapshot.component = ProfileComponent;
+        fixture.detectChanges();
         expect(component.isHomepage).toBeTruthy();
     });
 
     it("set isHomepage as true when in profile info page", () => {
-        TestBed.get("$state").current = { name: "main.profile.info" };
-        component.ngOnInit();
+        TestBed.get(ActivatedRoute).snapshot.component = ActivitiesComponent;
+        fixture.detectChanges();
         expect(component.isHomepage).toBeTruthy();
     });
 
     it("set isHomepage as true when in profile page", () => {
-        TestBed.get("$state").current = { name: "main.profile.page" };
-        TestBed.get("$state").params = { page: "/page" };
+        spyOnProperty(TestBed.get(Router), 'url', 'get').and.returnValue('/page');
         (<noosfero.Profile>component.owner).homepage = '/page';
-        component.ngOnInit();
+        fixture.detectChanges();
         expect(component.isHomepage).toBeTruthy();
     });
 
     it("set isHomepage as true when in environment home page", () => {
-        TestBed.get("$state").current = { name: "main.environment.home" };
-        component.owner = <noosfero.Environment>{};
-        component.ngOnInit();
+        component.owner = <noosfero.Environment>{ type: "Environment"};
+        fixture.detectChanges();
         expect(component.isHomepage).toBeTruthy();
     });
 
@@ -89,7 +89,7 @@ describe("Block Component", () => {
 
     it("return false in canDisplay with home_page_only outside homepage", () => {
         component.block = <any>{ settings: { display_user: "home_page_only" } };
-        TestBed.get("$state").current = { name: "main.environment.search" };
+        spyOnProperty(TestBed.get(Router), 'url', 'get').and.returnValue('/search');
         component.ngOnInit();
         expect(component.canDisplay()).toEqual(false);
     });

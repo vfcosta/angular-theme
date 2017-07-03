@@ -16,6 +16,6 @@ export class SearchFormComponent {
     }
 
     search() {
-        this.router.navigate(['search'], { queryParams: { query: this.query } });
+        this.router.navigate(['/search'], { queryParams: { query: this.query } });
     }
 }

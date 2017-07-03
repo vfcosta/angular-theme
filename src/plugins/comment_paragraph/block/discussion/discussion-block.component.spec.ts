@@ -35,7 +35,7 @@ describe("Components", () => {
         }));
 
         it("get discussions from the block service", () => {
-            expect(component.documents).toEqual([jasmine.objectContaining({ name: "article1" })]);
+            expect(component.documents).toEqual(<any>[jasmine.objectContaining({ name: "article1" })]);
             expect(component.block.hide).toEqual(false);
         });
 

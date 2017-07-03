@@ -22,7 +22,6 @@ import { ImageCropperModule } from 'ng2-img-cropper';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
 import * as plugins from "../plugins";
 
 @NgModule({
@@ -31,7 +30,6 @@ import * as plugins from "../plugins";
         ImageUploadCropComponent,
         FormsModule,
         CommonModule,
-        BlockSettingsComponent,
         PermissionNg2Directive,
         CommentComponent,
         CommentsComponent,
@@ -50,7 +48,6 @@ import * as plugins from "../plugins";
     declarations: [
         ImageUploadComponent,
         ImageUploadCropComponent,
-        BlockSettingsComponent,
         PermissionNg2Directive,
         CommentComponent,
         CommentsComponent,
@@ -65,7 +62,6 @@ import * as plugins from "../plugins";
     entryComponents: [
         ImageUploadComponent,
         ImageUploadCropComponent,
-        BlockSettingsComponent,
         CommentComponent,
         CommentsComponent,
         ProfileLinkComponent,

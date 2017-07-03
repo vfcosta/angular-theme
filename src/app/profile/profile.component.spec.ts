@@ -1,3 +1,10 @@
+import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { NotificationService } from './../shared/services/notification.service';
+import { ProfileService } from './../../lib/ng-noosfero-api/http/profile.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ThemeService } from './../shared/services/theme.service';
 import { DesignModeService } from './../shared/services/design-mode.service';
 import { quickCreateComponent } from "../../spec/helpers";
@@ -6,82 +13,34 @@ import * as helpers from "../../spec/helpers";
 
 describe("Components", () => {
     describe("Profile Component", () => {
-
-        let $rootScope: ng.IRootScopeService;
-        let $q: ng.IQService;
-        let profileServiceMock: any;
-        let notificationMock: any;
-        let $stateParams: any;
-        let $state: any;
         let mocks = helpers.getMocks();
-        let designModeServiceMock = <DesignModeService>mocks.designModeService;
-        let themeServiceMock = <ThemeService>mocks.themeService;
 
-        beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
-            $rootScope = _$rootScope_;
-            $q = _$q_;
+        let fixture: ComponentFixture<ProfileComponent>;
+        let component: ProfileComponent;
+
+        beforeEach(async(() => {
+            mocks.route.snapshot.data = { profile: { id: 1, boxes: [{ id: 2 }] }};
+            spyOn(mocks.designModeService, "setInDesignMode");
+            TestBed.configureTestingModule({
+                imports: [RouterTestingModule, TranslateModule.forRoot()],
+                declarations: [ProfileComponent],
+                providers: [
+                    { provide: ProfileService, useValue: mocks.profileService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
+                    { provide: DesignModeService, useValue: mocks.designModeService },
+                    { provide: Router, useValue: mocks.router },
+                    { provide: ActivatedRoute, useValue: mocks.route },
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            });
+            fixture = TestBed.createComponent(ProfileComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>mocks.profile;
+            fixture.detectChanges();
         }));
 
-        beforeEach(() => {
-            $state = jasmine.createSpyObj("$state", ["transitionTo"]);
-            $state.params = { currentProfile: {} };
-            $stateParams = jasmine.createSpyObj("$stateParams", ["profile"]);
-            profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfile", "setCurrentProfileByIdentifier", "getBoxes"]);
-            notificationMock = jasmine.createSpyObj("notificationMock", ["error"]);
-
-            let profileResponse = $q.defer();
-            profileResponse.resolve({ id: 1 });
-            let getBoxesResponse = $q.defer();
-            getBoxesResponse.resolve({ data: [{ id: 2 }] });
-
-            profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profileResponse.promise);
-            profileServiceMock.getBoxes = jasmine.createSpy("getBoxes").and.returnValue(getBoxesResponse.promise);
-        });
-
-        it("get the profile from state params when it's setted", done => {
-            $state.params = { currentProfile: { id: 2 } };
-            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock, designModeServiceMock, themeServiceMock);
-            $rootScope.$apply();
-            expect(profileServiceMock.setCurrentProfileByIdentifier).not.toHaveBeenCalled();
-            expect(component.profile).toEqual({ id: 2 });
-            done();
-        });
-
-        it("get the profile and store in profile service", done => {
-            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock, designModeServiceMock, themeServiceMock);
-            $rootScope.$apply();
-            expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
-            expect(component.profile.id).toEqual(1);
-            done();
-        });
-
-        it("get the profile boxes", done => {
-            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock, designModeServiceMock, themeServiceMock);
-            $rootScope.$apply();
-            expect(profileServiceMock.getBoxes).toHaveBeenCalled();
-            expect(component.boxes).toEqual([{ id: 2 }]);
-            done();
-        });
-
-        it("display notification error when the profile wasn't found", done => {
-            let profileResponse = $q.defer();
-            profileResponse.reject();
-            profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profileResponse.promise);
-
-            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock, designModeServiceMock, themeServiceMock);
-            $rootScope.$apply();
-
-            expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
-            expect(notificationMock.error).toHaveBeenCalled();
-            expect(component.profile).toBeUndefined();
-            done();
-        });
-
-        it("reset design mode", done => {
-            spyOn(designModeServiceMock, "setInDesignMode");
-            let component: ProfileComponent = new ProfileComponent(profileServiceMock, $stateParams, $state, notificationMock, designModeServiceMock, themeServiceMock);
-            expect(designModeServiceMock.setInDesignMode).toHaveBeenCalledWith(false);
-            done();
+        it("reset design mode", () => {
+            expect(mocks.designModeService.setInDesignMode).toHaveBeenCalledWith(false);
         });
     });
 });

@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { By } from '@angular/platform-browser';
@@ -14,12 +15,13 @@ describe("Components", () => {
         let component: SearchFormComponent;
 
         beforeEach(async(() => {
-            spyOn(mocks.$state, "go");
+            spyOn(mocks.router, "navigate");
             TestBed.configureTestingModule({
                 declarations: [SearchFormComponent],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService },
-                    { provide: "$state", useValue: mocks.$state }
+                    { provide: ActivatedRoute, useValue: mocks.route },
+                    { provide: Router, useValue: mocks.router }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
                 imports: [FormsModule, TranslateModule.forRoot()]
@@ -35,7 +37,7 @@ describe("Components", () => {
         it("go to search page when click on search button", () => {
             component.query = 'query';
             component.search();
-            expect(TestBed.get('$state').go).toHaveBeenCalledWith('main.environment.search', { query: 'query' });
+            expect(TestBed.get(Router).navigate).toHaveBeenCalledWith(['/search'], { queryParams: { query: 'query' } });
         });
     });
 });

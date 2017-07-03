@@ -1,4 +1,3 @@
-import { Router } from '@angular/router';
 import { HeaderService } from './../../shared/services/header.service';
 import { Component, Inject, EventEmitter, Input } from "@angular/core";
 import { AuthService, AuthEvents } from "./../../login";

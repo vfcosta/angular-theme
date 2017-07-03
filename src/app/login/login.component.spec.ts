@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { FormsModule } from '@angular/forms';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NotificationService } from './../shared/services/notification.service';
@@ -25,7 +26,7 @@ describe("Components", () => {
                     { provide: NotificationService, useValue: mocks.notificationService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [TranslateModule.forRoot(), ModalModule.forRoot(), FormsModule]
+                imports: [RouterTestingModule, TranslateModule.forRoot(), ModalModule.forRoot(), FormsModule]
             });
             fixture = TestBed.createComponent(LoginComponent);
             component = fixture.componentInstance;

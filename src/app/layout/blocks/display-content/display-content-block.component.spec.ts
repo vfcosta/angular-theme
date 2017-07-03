@@ -1,10 +1,10 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
 import { NgPipesModule } from 'ngx-pipes';
 import { MomentModule } from 'angular2-moment';
-import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
 import { DisplayContentBlockComponent } from './display-content-block.component';
 import * as helpers from './../../../../spec/helpers';
 import { By } from '@angular/platform-browser';
@@ -34,8 +34,8 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [NgPipesModule, MomentModule, TranslateModule.forRoot()],
-                declarations: [DisplayContentBlockComponent, UiSrefDirective, DateFormatPipe],
+                imports: [RouterTestingModule, NgPipesModule, MomentModule, TranslateModule.forRoot()],
+                declarations: [DisplayContentBlockComponent, DateFormatPipe],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ArticleService, useValue: articleService },

@@ -1,6 +1,7 @@
+import { ProfileComponent } from './../../profile/profile.component';
 import { ActivitiesComponent } from './../../profile/activities/activities.component';
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
-import { state, style, transition, animate, trigger, Input, Component, Inject } from '@angular/core';
+import { Input, Component } from '@angular/core';
 import { NotificationService } from '../../shared/services/notification.service';
 import { AuthService, SessionService, AuthEvents } from "../../login";
 import { TranslatorService } from "../../shared/services/translator.service";
@@ -96,7 +97,7 @@ export class BlockComponent {
             if (profile.homepage) {
                 this.isHomepage = this.router.url === profile.homepage;
             } else {
-                this.isHomepage = this.route.snapshot.component === ActivitiesComponent;
+                this.isHomepage = [ActivitiesComponent, ProfileComponent].indexOf(<any>this.route.snapshot.component) >= 0;
             }
         } else {
             this.isHomepage = this.router.url === "/";

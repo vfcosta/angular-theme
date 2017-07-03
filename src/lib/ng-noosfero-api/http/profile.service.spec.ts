@@ -119,7 +119,7 @@ describe("Services", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/members`, [{id: 2}], {}, 200);
                 service.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
-                    expect(response).toEqual(true);
+                    expect(response.data).toEqual([{id: 2}]);
                 });
             });
 
@@ -127,7 +127,7 @@ describe("Services", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/members`, [], {}, 200);
                 service.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
-                    expect(response).toEqual(false);
+                    expect(response.data).toEqual([]);
                 });
             });
 

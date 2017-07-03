@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
@@ -20,15 +22,15 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, TranslateModule.forRoot()],
+                imports: [RouterTestingModule, FormsModule, TranslateModule.forRoot()],
                 declarations: [NewCommunityComponent, ValidationMessageComponent],
                 providers: [
                     { provide: ProfileService, useValue: mocks.profileService },
                     { provide: CommunityService, useValue: mocks.communityService },
                     { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: SessionService, useValue: mocks.sessionService },
-                    { provide: "$state", useValue: mocks.$state },
                     { provide: TranslatorService, useValue: mocks.translatorService },
+                    { provide: Router, useValue: mocks.router },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });
@@ -50,7 +52,7 @@ describe("Components", () => {
             let currentUser = { person: { identifier: 'profile1' } };
             component['sessionService'].currentUser = jasmine.createSpy("currentUser").and.returnValue(currentUser);
             component.ngOnInit();
-            expect(component.sessionProfile).toEqual(currentUser.person);
+            expect(component.sessionProfile).toEqual(<noosfero.Profile>currentUser.person);
         });
 
         it("verify if translate service is called with correct parameters ", () => {
@@ -60,9 +62,9 @@ describe("Components", () => {
         });
 
         it("verify if changes the page after cancel is called ", () => {
-            spyOn(component.$state, 'go');
+            spyOn(TestBed.get(Router), 'navigate');
             component.cancel();
-            expect(component.$state.go).toHaveBeenCalledWith('main.myprofile.communities', { profile: component.sessionProfile.identifier });
+            expect(TestBed.get(Router).navigate).toHaveBeenCalledWith(['/myprofile', mocks.profile.identifier, 'communities']);
         });
 
         it("verify if community type is defined after save is called ", () => {
@@ -85,10 +87,10 @@ describe("Components", () => {
         }));
 
         it("verify if changes page after community is successfuly created ", fakeAsync(() => {
-            spyOn(component.$state, 'go').and.callThrough();
+            spyOn(TestBed.get(Router), 'navigate');
             component.save();
             tick();
-            expect(component.$state.go).toHaveBeenCalledWith('main.myprofile.communities', { profile: component.profile.identifier });
+            expect(TestBed.get(Router).navigate).toHaveBeenCalled();
         }));
 
         it("verify if set name error when the save is rejected by the server ", fakeAsync(() => {

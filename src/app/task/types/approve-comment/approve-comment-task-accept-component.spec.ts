@@ -2,7 +2,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
-import { UiSrefDirective } from '../../../shared/directives/ui-sref-directive';
 import { Provider, Component } from '@angular/core';
 import * as helpers from "../../../../spec/helpers";
 import { ApproveCommentTaskAcceptComponent } from './approve-comment-task-accept.component';
@@ -24,7 +23,7 @@ describe("Components", () => {
             spyOn(mocks.articleService, 'get').and.returnValue(Promise.resolve({ headers: () => { }, data: article }));
             let taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
-                declarations: [ApproveCommentTaskAcceptComponent, UiSrefDirective],
+                declarations: [ApproveCommentTaskAcceptComponent],
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
                     { provide: "$state", useValue: mocks.$state },

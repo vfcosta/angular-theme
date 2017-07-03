@@ -19,7 +19,6 @@ export class BlockSettingsComponent {
         compiler.compileModuleAsync(BlockSettingsTemplateModule).then(value => {
             this.myModule = value;
         });
-
     }
 
     ngAfterContentInit() {

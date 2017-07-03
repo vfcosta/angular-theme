@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../shared/services/translator.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -9,18 +11,14 @@ import { NgPipesModule } from 'ngx-pipes';
 import { By } from '@angular/platform-browser';
 import { DateFormatPipe } from './../shared/pipes/date-format.pipe';
 import { ArticleService } from './../../lib/ng-noosfero-api/http/article.service';
-import { UiSrefDirective } from '../shared/directives/ui-sref-directive';
 import {SearchComponent} from "./search.component";
 import * as helpers from "../../spec/helpers";
 
 describe("Components", () => {
     describe("Search Component", () => {
-
         let mocks = helpers.getMocks();
         let fixture: ComponentFixture<SearchComponent>;
         let component: SearchComponent;
-
-        let stateParams = { query: 'query', per_page: 20 };
         let result = Promise.resolve({
             data: [{ id: 1,
                      identifier: 'article-1',
@@ -35,19 +33,16 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             spyOn(mocks.articleService, 'search').and.returnValue(result);
-
+            mocks.route.snapshot.queryParams = { query: 'query', per_page: 20 };
             TestBed.configureTestingModule({
-                declarations: [SearchComponent, DateFormatPipe, UiSrefDirective],
+                declarations: [SearchComponent, DateFormatPipe],
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
-                    { provide: "$stateParams", useValue: stateParams },
-                    { provide: "$state", useValue: mocks.$state },
                     { provide: TranslatorService, useValue: mocks.translatorService },
-                    { provide: "$transitions", useValue: mocks.$transitions },
-                    { provide: "amParseFilter", useValue: mocks.amParseFilter }
+                    { provide: ActivatedRoute, useValue: mocks.route }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [MomentModule, NgPipesModule, PaginationModule.forRoot(), FormsModule, TranslateModule.forRoot()]
+                imports: [RouterTestingModule, MomentModule, NgPipesModule, PaginationModule.forRoot(), FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(SearchComponent);
             component = fixture.componentInstance;

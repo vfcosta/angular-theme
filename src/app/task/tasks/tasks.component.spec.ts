@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
@@ -20,7 +21,7 @@ describe("Components", () => {
         let tasks = [{ id: 1 }, { id: 2 }];
 
         beforeEach(async(() => {
-            spyOn(mocks.taskService, 'getAllPending').and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
+            spyOn(mocks.taskService, 'getAllPending').and.returnValue(Promise.resolve({ headers: { get: () => { } }, data: tasks }));
             TestBed.configureTestingModule({
                 declarations: [TasksComponent],
                 providers: [
@@ -28,7 +29,7 @@ describe("Components", () => {
                     { provide: TaskService, useValue: mocks.taskService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [PaginationModule.forRoot(), FormsModule, TranslateModule.forRoot()]
+                imports: [RouterTestingModule, PaginationModule.forRoot(), FormsModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(TasksComponent);
             component = fixture.componentInstance;
@@ -40,9 +41,9 @@ describe("Components", () => {
         });
 
         it("load person tasks with page parameter", () => {
-            component.taskTypes = "AddFriend";
+            component.types = "AddFriend";
             fixture.detectChanges();
-            expect(TestBed.get(TaskService).getAllPending).toHaveBeenCalledWith({ content_type: component.taskTypes, page: 1, per_page: 5 });
+            expect(TestBed.get(TaskService).getAllPending).toHaveBeenCalledWith({ content_type: component.types, page: 1, per_page: 5 });
         });
     });
 });

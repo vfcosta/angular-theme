@@ -25,7 +25,7 @@ export class ContextBarComponent {
     originalCustomHeader: string;
     originalCustomFooter: string;
 
-    constructor(
+    constructor(@Inject("Window") private window: Window,
         private router: Router,
         private eventsHubService: EventsHubService,
         private blockService: BlockService,
@@ -74,8 +74,7 @@ export class ContextBarComponent {
     }
 
     discard() {
-        // FIXME
-        // this.router. 
+        this.window.location.reload();
         this.notificationService.info({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
     }
 

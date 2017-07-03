@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
@@ -23,14 +24,13 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, TranslateModule.forRoot()],
+                imports: [RouterTestingModule, FormsModule, TranslateModule.forRoot()],
                 declarations: [EditCommunityComponent, ValidationMessageComponent],
                 providers: [
                     { provide: ProfileService, useValue: mocks.profileService },
                     { provide: CommunityService, useValue: mocks.communityService },
                     { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: SessionService, useValue: mocks.sessionService },
-                    { provide: "$state", useValue: mocks.$state },
                     { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
@@ -44,7 +44,7 @@ describe("Components", () => {
         it("verify if community is initialized with close true ", () => {
             component.community = undefined;
             component.ngOnInit();
-            expect(component.community).toEqual(component.profile);
+            expect(component.community).toEqual(<noosfero.Community>component.profile);
         });
 
         it("verify if session profile is initialized with current user ", () => {
@@ -52,7 +52,7 @@ describe("Components", () => {
             let currentUser = { person: { identifier: 'profile1' } };
             component['sessionService'].currentUser = jasmine.createSpy("currentUser").and.returnValue(currentUser);
             component.ngOnInit();
-            expect(component.sessionProfile).toEqual(currentUser.person);
+            expect(component.sessionProfile).toEqual(<noosfero.Person>currentUser.person);
         });
 
         it("verify if translate service is called with correct parameters ", () => {

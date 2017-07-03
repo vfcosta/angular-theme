@@ -20,7 +20,7 @@ export class RegisterComponent {
     @ViewChild('passwordConfirmErrors') passwordConfirmErrors: ValidationMessageComponent;
 
     constructor(private router: Router,
-        public RegisterService: RegisterService,
+        public registerService: RegisterService,
         private notificationService: NotificationService,
         private environmentService: EnvironmentService) {
         this.account = {};
@@ -36,7 +36,7 @@ export class RegisterComponent {
         let error = '';
         let errors: any;
         let field = '';
-        this.RegisterService.createAccount(this.account).then( () => {
+        this.registerService.createAccount(this.account).then( () => {
             this.router.navigate(['/']);
             this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
         }).catch( response => {

@@ -1,5 +1,4 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
-import { UiSrefDirective } from './../../../shared/directives/ui-sref-directive';
 import { ProfileImageComponent } from './../../../profile/image/profile-image.component';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -18,7 +17,7 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [PeopleBlockComponent, UiSrefDirective],
+                declarations: [PeopleBlockComponent],
                 providers: [
                     { provide: BlockService, useValue: blockService },
                 ],

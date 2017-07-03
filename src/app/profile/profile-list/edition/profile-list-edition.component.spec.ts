@@ -67,7 +67,7 @@ describe("Components", () => {
 
         it("load roles", () => {
             component.loadRoles();
-            expect(component.roles).toEqual([{ id: 10 }, { id: 11 }]);
+            expect(component.roles).toEqual(<noosfero.Role[]>[{ id: 10 }, { id: 11 }]);
         });
     });
 

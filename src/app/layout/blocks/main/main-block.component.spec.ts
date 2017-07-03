@@ -18,7 +18,7 @@ describe("Components", () => {
         }));
 
         it("check if the main block has a tag with ui-view attribute", () => {
-            expect(fixture.debugElement.queryAll(By.css('[ui-view="mainBlockContent"]')).length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css('router-outlet')).length).toEqual(1);
         });
     });
 });

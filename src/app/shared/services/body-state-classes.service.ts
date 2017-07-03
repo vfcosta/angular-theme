@@ -115,13 +115,15 @@ export class BodyStateClassesService {
     private setupStateClassToggle() {
         let bodyElement = this.getBodyElement();
         this.router.events.subscribe((event: Event) => {
-            let lastComponent: any = this.route.component;
-            for (let child of this.route.children) {
-                if (child.component) lastComponent = child.component;
+            if (event instanceof NavigationEnd) {
+                let lastComponent: any = this.route.component;
+                for (let child of this.route.children) {
+                    if (child.component) lastComponent = child.component;
+                }
+                let stateName = "";
+                if (lastComponent) stateName = lastComponent.name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+                this.switchStateClasses(bodyElement, stateName);
             }
-            let stateName = "";
-            if (lastComponent) stateName = lastComponent.name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-            if (event instanceof NavigationEnd) this.switchStateClasses(bodyElement, stateName);
         });
     }
 
@@ -136,14 +138,16 @@ export class BodyStateClassesService {
         // add add the css class when the user is authenticated
         if (this.authService.isAuthenticated()) {
             bodyElement.addClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
+        } else {
+            bodyElement.removeClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         }
 
         // to switch the css class which indicates user logged in
-        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
+        this.authService.loginSuccess.subscribe(() => {
             bodyElement.addClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         });
 
-        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
+        this.authService.logoutSuccess.subscribe(() => {
             bodyElement.removeClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         });
     }

@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
@@ -17,7 +18,6 @@ describe("Context Bar Component", () => {
     let mocks = helpers.getMocks();
     let fixture: ComponentFixture<ContextBarComponent>;
     let component: ContextBarComponent;
-    let state = jasmine.createSpyObj("$state", ["reload"]);
     let eventFunction: Function;
     mocks.eventsHubService.subscribeToEvent = <any>((ev: string, fn: Function) => { eventFunction = fn; });
 
@@ -25,11 +25,12 @@ describe("Context Bar Component", () => {
         spyOn(mocks.profileService, 'update').and.returnValue(Promise.resolve(mocks.profile));
         spyOn(mocks.environmentService, 'update').and.callThrough();
         spyOn(mocks.notificationService, 'success').and.callThrough();
+        spyOn(mocks.window.location, 'reload').and.callThrough();
 
         TestBed.configureTestingModule({
             declarations: [ContextBarComponent],
             providers: [
-                { provide: "$state", useValue: state },
+                { provide: "Window", useValue: mocks.window },
                 { provide: EventsHubService, useValue: mocks.eventsHubService },
                 { provide: BlockService, useValue: mocks.blockService },
                 { provide: NotificationService, useValue: mocks.notificationService },
@@ -39,20 +40,19 @@ describe("Context Bar Component", () => {
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [TranslateModule.forRoot()]
+            imports: [RouterTestingModule, TranslateModule.forRoot()]
         });
         fixture = TestBed.createComponent(ContextBarComponent);
         component = fixture.componentInstance;
         component.originalLayout = 'default';
         component.blocksChanged = [];
-        component.owner = 
-            <noosfero.Profile>{
+        component.owner = <noosfero.Profile>{
                 id: 1,
                 identifier: 'profile-name',
                 type: 'Person',
                 layout_template: 'default',
                 boxes: [{ id: 6, blocks: [{ id: 5, box: { id: 6 } }] }]
-            }
+            };
         fixture.detectChanges();
     }));
 
@@ -116,7 +116,7 @@ describe("Context Bar Component", () => {
 
     it("call state reload when discard changes", () => {
         component.discard();
-        expect(state.reload).toHaveBeenCalled();
+        expect(mocks.window.location.reload).toHaveBeenCalled();
     });
 
     it("call notification success when apply changes", fakeAsync(() => {

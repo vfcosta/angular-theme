@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../app/shared/services/translator.service';
 import { hotspots } from './../../recent_activities/index';
@@ -23,7 +24,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [SharedModule, TranslateModule.forRoot()]
+                imports: [RouterTestingModule, SharedModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ArticleToolbarHotspotComponent);
             component = fixture.componentInstance;

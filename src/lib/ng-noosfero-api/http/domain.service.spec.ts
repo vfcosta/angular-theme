@@ -33,7 +33,7 @@ describe("Services", () => {
             it("should return all domains", () => {
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/domains`, domains, {}, 200);
                 service.list().then((content: noosfero.RestResult<noosfero.Domain[]>) => {
-                    expect(angular.copy(content.data)).toEqual(domains);
+                    expect(angular.copy(content.data)).toEqual(<noosfero.Domain[]>domains);
                 });
             });
         });

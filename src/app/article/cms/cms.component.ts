@@ -51,7 +51,6 @@ export class CmsComponent {
 
     save() {
         this.loading = true;
-
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             if (this.id) {
                 return this.articleService.updateArticle(this.article);

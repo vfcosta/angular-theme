@@ -1,5 +1,4 @@
 import { Input, Inject, Component, OnInit, forwardRef, Injector } from '@angular/core';
-import { TranslatorService } from "../../../shared/services/translator.service";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 import { BlockSettingsComponent } from '../block-settings.component';
 
@@ -15,7 +14,6 @@ export class HighlightsBlockSettingsComponent implements OnInit {
 
     constructor(
         injector: Injector,
-        private translatorService: TranslatorService,
         private blockService: BlockService) {
         this.parentBlock = injector.get(BlockSettingsComponent);
     }

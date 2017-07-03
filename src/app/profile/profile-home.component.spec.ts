@@ -1,58 +1,51 @@
-import {quickCreateComponent} from "../../spec/helpers";
+import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { ProfileService } from './../../lib/ng-noosfero-api/http/profile.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import * as helpers from "../../spec/helpers";
 import {ProfileHomeComponent} from "./profile-home.component";
 
 describe("Components", () => {
     describe("Profile Home Component", () => {
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<ProfileHomeComponent>;
+        let component: ProfileHomeComponent;
 
-        let $rootScope: ng.IRootScopeService;
-        let $q: ng.IQService;
-        let homePageResponse: ng.IDeferred<any>;
-        let profileServiceMock: any;
-        let $state: any;
-
-        beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
-            $rootScope = _$rootScope_;
-            $q = _$q_;
+        beforeEach(async(() => {
+            spyOn(mocks.router, 'navigate');
+            mocks.route.snapshot.data['profile'] = mocks.profile;
+            TestBed.configureTestingModule({
+                imports: [RouterTestingModule, TranslateModule.forRoot()],
+                declarations: [ProfileHomeComponent],
+                providers: [
+                    { provide: ProfileService, useValue: mocks.profileService },
+                    { provide: Router, useValue: mocks.router },
+                    { provide: ActivatedRoute, useValue: mocks.route },
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            });
         }));
 
-        beforeEach(() => {
-            $state = jasmine.createSpyObj("$state", ["transitionTo"]);
-            profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["getCurrentProfile", "getHomePage"]);
+        it("transition to profile homepage when there is a homepage setted", fakeAsync(() => {
+            spyOn(mocks.profileService, 'getHomePage').and.returnValue(Promise.resolve({ data: { path: "something" } }));
+            fixture = TestBed.createComponent(ProfileHomeComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>mocks.profile;
+            expect(mocks.profileService.getHomePage).toHaveBeenCalled();
+            tick();
+            expect(mocks.router.navigate).toHaveBeenCalledWith(['/', 'profile-id', 'something']);
+        }));
 
-            let currentProfileResponse = $q.defer();
-            currentProfileResponse.resolve({ identifier: "profile" });
-            homePageResponse = $q.defer();
-
-            profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(currentProfileResponse.promise);
-            profileServiceMock.getHomePage = jasmine.createSpy("getHomePage").and.returnValue(homePageResponse.promise);
-        });
-
-        it("transition to profile homepage when there is a homepage setted", done => {
-            homePageResponse.resolve({ data: { path: "something" } });
-
-            let component: ProfileHomeComponent = new ProfileHomeComponent(profileServiceMock, $state);
-            $rootScope.$apply();
-            expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
-            expect(profileServiceMock.getHomePage).toHaveBeenCalled();
-
-            expect($state.transitionTo).
-                toHaveBeenCalledWith("main.profile.page",
-                { page: "something", profile: "profile" }, { location: false });
-            done();
-        });
-
-        it("transition to profile info page when there is no homepage setted", done => {
-            homePageResponse.resolve({ data: {} });
-
-            let component: ProfileHomeComponent = new ProfileHomeComponent(profileServiceMock, $state);
-            $rootScope.$apply();
-            expect(profileServiceMock.getCurrentProfile).toHaveBeenCalled();
-            expect(profileServiceMock.getHomePage).toHaveBeenCalled();
-
-            expect($state.transitionTo).
-                toHaveBeenCalledWith("main.profile.info",
-                { profile: "profile" }, { location: false });
-            done();
-        });
+        it("transition to profile info page when there is no homepage setted", fakeAsync(() => {
+            spyOn(mocks.profileService, 'getHomePage').and.returnValue(Promise.resolve({ data: {} }));
+            fixture = TestBed.createComponent(ProfileHomeComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>mocks.profile;
+            expect(mocks.profileService.getHomePage).toHaveBeenCalled();
+            tick();
+            expect(mocks.router.navigate).toHaveBeenCalledWith(['/', 'profile-id']);
+        }));
     });
 });

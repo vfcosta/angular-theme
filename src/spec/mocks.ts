@@ -412,7 +412,9 @@ export function getMocks() {
             },
             setCurrent: (article: noosfero.Article) => { },
             getCurrent: () => { return Promise.resolve({}); },
-            search: (filter: any) => { return Promise.resolve({}); }
+            search: (filter: any) => { return Promise.resolve({}); },
+            createInParent: () => { },
+            updateArticle: () => { },
         },
         environmentService: {
             getEnvironmentPeople: (params: any) => {
@@ -430,7 +432,8 @@ export function getMocks() {
                 };
             },
             update: (environment: noosfero.Environment) => Promise.resolve({ id: 2 }),
-            get: (environment: string) => Promise.resolve({id: 2})
+            get: (environment: string) => Promise.resolve({id: 2}),
+            getBoxes: () => {}
         },
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
@@ -438,7 +441,9 @@ export function getMocks() {
             update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile),
             remove: () => { return Promise.resolve({data: {success: true}}); },
             getBlockTemplate: (id: any, type: string) => { return   Promise.resolve({api_content: [] }); },
-            getTags: () => { }
+            getTags: () => { },
+            getHomePage: () => {},
+            getNetworkActivities: () => {},
         },
         personService: {
             search: () => Observable.of([mocks.profile])
@@ -577,6 +582,21 @@ export function getMocks() {
         },
         headerService: {
             setEnvironmentTitle: () => {}
+        },
+        route: {
+            snapshot: { data: {}, queryParams: {}, params: {} },
+            parent: {
+                snapshot: { data: {}, queryParams: {}, params: {} }
+            }
+        },
+        window: {
+            location: {
+                reload: () => {},
+                pathname: ""
+            }
+        },
+        router: {
+            navigate: () => {}
         }
     };
     return mocks;

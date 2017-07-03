@@ -97,7 +97,7 @@ describe("Components", () => {
             let comment = { id: 1 };
             component.comments = <any>[comment];
             component.commentRemoved(<any>{ id: 2 });
-            expect(component.comments).toEqual([comment]);
+            expect(component.comments).toEqual(<noosfero.Comment[]>[comment]);
         }));
     });
 });

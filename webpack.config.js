@@ -27,7 +27,7 @@ var testingFiles = glob.sync("./src/app/**/*.spec.ts");
 
 var entries = {
     noosfero: './src/app/boot.ts',
-    'noosfero-test': ['./src/app/index.ts', './karma.entry.js'],
+    'noosfero-test': ['./karma.entry.js'],
     'noosfero-specs': testFiles, // './src/specs.ts',
     'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng2-img-cropper',
       'ng-forward/cjs/testing/test-component-builder', 'zone.js', 'moment',
