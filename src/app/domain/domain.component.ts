@@ -20,11 +20,10 @@ export class DomainComponent {
         this.owner = this.domain.owner;
 
         if (this.isProfile()) {
-            this.router.navigate([(<noosfero.Profile>this.owner).identifier]);
-            // $state.go('main.profile.home', { currentProfile: this.owner }, { inherit: false });
+            this.router.navigate(['/', (<noosfero.Profile>this.owner).identifier]);
         } else {
             environmentService.setCurrentEnvironment(<noosfero.Environment>this.owner);
-            // $state.go('main.environment.home');
+            this.router.navigate(['/']);
         }
     }
 

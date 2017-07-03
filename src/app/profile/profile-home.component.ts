@@ -15,10 +15,10 @@ export class ProfileHomeComponent {
         profileService.getHomePage(<number>this.profile.id, { fields: 'path' }).then((response: restangular.IResponse) => {
             if (response.data && response.data.path) {
                 this.profile.homepage = response.data.path;
-                // $state.transitionTo('main.profile.page', { page: response.data.path, profile: this.profile.identifier }, { location: false });
+                router.navigate(['/', this.profile.identifier, response.data.path]);
             } else {
                 this.profile.homepage = null;
-                // $state.transitionTo('main.profile.info', { profile: this.profile.identifier }, { location: false });
+                router.navigate(['/', this.profile.identifier]);
             }
         });
     }

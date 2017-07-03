@@ -1,3 +1,4 @@
+import { Router, Event, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, Inject, Input } from "@angular/core";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 
@@ -14,24 +15,28 @@ export class BreadcrumbsBlockComponent {
     profile: noosfero.Profile;
     links: any[] = [];
 
-    constructor(private blockService: BlockService) { }
+    constructor(private blockService: BlockService, private router: Router, private route: ActivatedRoute,
+        @Inject("Window") private window: Window) { }
 
     ngOnInit() {
-        // this.$transitions.onSuccess({}, (trans) => {
-        //     this.setNavigationState();
-        // });
+        this.router.events.subscribe((event: Event) => {
+             if (event instanceof NavigationEnd) this.setNavigationState();
+        });
         this.setNavigationState();
         this.profile = this.owner;
     }
 
     setNavigationState() {
-        // this.blockService.getApiContent(this.block, { profile: this.$stateParams['profile'], page: this.$stateParams['page'] }).then((content: any) => {
-        //     this.links = content.links;
-        //     this.block.hide = this.links.length <= 1;
-        //     if (!this.block.hide) {
-        //         this.links[this.links.length - 1]['active'] = true;
-        //     }
-        // });
+        let paths = this.window.location.pathname.replace(/%2F/g, '/').split('/');
+        let page = paths.length > 2 ? paths.splice(2).join("/") : null;
+        let contextParams = { profile: this.route.snapshot.params['profile'], page: page };
+        this.blockService.getApiContent(this.block, contextParams).then((content: any) => {
+            this.links = content.links;
+            this.block.hide = this.links.length <= 1;
+            if (!this.block.hide) {
+                this.links[this.links.length - 1]['active'] = true;
+            }
+        });
     };
 
     getDisplayName(state: any) {
@@ -39,9 +44,5 @@ export class BreadcrumbsBlockComponent {
             return state.data.displayName;
         }
         return state.name;
-    }
-
-    isCurrent(state: any) {
-        // return (<any>this.$state.$current)['name'] === state.name;
     }
 }

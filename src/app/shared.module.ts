@@ -13,7 +13,6 @@ import { ProfileLinkComponent } from './profile/profile-link/profile-link.compon
 import { MomentModule } from 'angular2-moment';
 import { CommentsComponent } from './article/comment/comments.component';
 import { CommentComponent } from './article/comment/comment.component';
-import { UiSrefDirective } from './shared/directives/ui-sref-directive';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
 import { NgModule } from '@angular/core';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
@@ -34,7 +33,6 @@ import * as plugins from "../plugins";
         CommonModule,
         BlockSettingsComponent,
         PermissionNg2Directive,
-        UiSrefDirective,
         CommentComponent,
         CommentsComponent,
         ProfileLinkComponent,
@@ -54,7 +52,6 @@ import * as plugins from "../plugins";
         ImageUploadCropComponent,
         BlockSettingsComponent,
         PermissionNg2Directive,
-        UiSrefDirective,
         CommentComponent,
         CommentsComponent,
         ProfileLinkComponent,

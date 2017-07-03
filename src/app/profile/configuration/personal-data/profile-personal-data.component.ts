@@ -1,4 +1,4 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
@@ -29,7 +29,7 @@ export class ProfilePersonalDataComponent {
 
     constructor(private profileService: ProfileService,
         private notificationService: NotificationService,
-        private translatorService: TranslatorService) { }
+        private translatorService: TranslatorService, private router: Router) { }
 
     ngOnInit() {
         this.cloneProfile();
@@ -43,8 +43,7 @@ export class ProfilePersonalDataComponent {
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
             this.finished.emit(this.profile);
             if (identifierChanged) {
-                // go to the state with the new identifier url
-                // this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
+                this.router.navigate(['/', this.profile.identifier]); // go to the state with the new identifier url
             }
         }).catch((response) => {
             this.errors = response.data.error;

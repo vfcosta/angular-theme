@@ -5,7 +5,7 @@
     </div>
     <div class="header media-body">
       <h4 class="title media-heading">
-        <a uiSref="main.profile.page" [uiParams]="{ page: card.path, profile: card.profile?.identifier }">
+        <a [routerLink]="['/', card.profile?.identifier, card.path]">
           {{card.title}}
         </a>
       </h4>

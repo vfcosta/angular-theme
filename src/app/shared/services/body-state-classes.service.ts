@@ -1,3 +1,4 @@
+import { Router, NavigationEnd, Event, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Directive, Inject, Injectable } from "@angular/core";
 import { DOCUMENT } from '@angular/platform-browser';
@@ -36,7 +37,7 @@ export class BodyStateClassesService {
 
     private bodyElement: ng.IAugmentedJQuery = null;
 
-    constructor(
+    constructor(private router: Router, private route: ActivatedRoute,
         @Inject(DOCUMENT) private document: any,
         private authService: AuthService,
         private designModeService: DesignModeService,
@@ -87,9 +88,9 @@ export class BodyStateClassesService {
         return this;
     }
 
-    private switchStateClasses(bodyElement: ng.IAugmentedJQuery, state: ng.ui.IState) {
+    private switchStateClasses(bodyElement: ng.IAugmentedJQuery, stateName: string) {
         HtmlUtils.removeCssClassByPrefix(bodyElement[0], BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX);
-        bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + state.name);
+        bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + stateName);
     }
 
     /**
@@ -113,10 +114,15 @@ export class BodyStateClassesService {
 
     private setupStateClassToggle() {
         let bodyElement = this.getBodyElement();
-        // bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + this.$state.current.name);
-        // this.$transitions.onSuccess({}, (trans) => {
-        //     this.switchStateClasses(bodyElement, trans.$to());
-        // });
+        this.router.events.subscribe((event: Event) => {
+            let lastComponent: any = this.route.component;
+            for (let child of this.route.children) {
+                if (child.component) lastComponent = child.component;
+            }
+            let stateName = "";
+            if (lastComponent) stateName = lastComponent.name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+            if (event instanceof NavigationEnd) this.switchStateClasses(bodyElement, stateName);
+        });
     }
 
     /**

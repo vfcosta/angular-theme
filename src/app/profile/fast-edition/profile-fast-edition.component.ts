@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ValidationMessageComponent } from './../../shared/components/validation-message/validation-message.component';
 import { NotificationService } from './../../shared/services/notification.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
@@ -20,7 +21,7 @@ export class ProfileFastEditionComponent {
 
     errors: any;
 
-    constructor(private profileService: ProfileService, private notificationService: NotificationService) { }
+    constructor(private profileService: ProfileService, private notificationService: NotificationService, private router: Router) { }
 
     ngOnInit() {
         this.cloneProfile();
@@ -34,8 +35,7 @@ export class ProfileFastEditionComponent {
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
             this.finished.emit(this.profile);
             if (this.allowChangeIdentifier() && identifierChanged) {
-                // go to the state with the new identifier url
-                // this.$state.go(this.$state.current, { profile: this.profile.identifier }, { reload: true });
+                this.router.navigate(['/', this.profile.identifier]); // go to the state with the new identifier url
             }
         }).catch((response) => {
             this.errors = response.data;

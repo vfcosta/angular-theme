@@ -96,28 +96,21 @@ export class MenuBlockComponent {
     }
 
     makeUrl(params: any) {
-        let link: { translatedTitle: string, url: string, urlParams: any, title: string, controller: string, action: string; path: string } = { translatedTitle: '', url: '', urlParams: {}, title: '', controller: '', action: '', path: '' };
+        let link: { translatedTitle: string, url: any[], urlParams: any, title: string, controller: string, action: string; path: string } = { translatedTitle: '', url: [], urlParams: {}, title: '', controller: '', action: '', path: '' };
         let urlMapping: any = {
-            'about': 'main.profile.about',
-            'activities': 'main.profile.info',
-            'index': this.owner.type == 'Person' ? 'main.profile.friends' : 'main.profile.members'
-        };
-        let urlParamsMapping: any = {
-            'about': '{profile: owner.identifier}',
-            'activities': '{profile: owner.identifier}',
-            'index': '{profile: owner.identifier}'
+            'about': ['/profile', this.owner.identifier, 'about'],
+            'activities': ['/', this.owner.identifier],
+            'index': this.owner.type === 'Person' ? ['/profile', this.owner.identifier, 'friends'] : ['/profile', this.owner.identifier, 'members']
         };
         if (params.controller) {
             link.translatedTitle = this.titleTranslator[params.controller + '_' + params.action];
             link.url = urlMapping[params.action];
-            link.urlParams = urlParamsMapping[params.action];
             link.title = params.title;
             link.controller = params.controller;
             link.action = params.action;
         } else {
             link.translatedTitle = params.title;
-            link.url = 'main.profile.page';
-            link.urlParams = { page: params.path, profile: this.owner.identifier };
+            link.url = ['/', this.owner.identifier, params.path];
             link.title = params.title;
             link.path = params.path;
         }

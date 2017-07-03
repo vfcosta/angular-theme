@@ -8,7 +8,7 @@
         <noosfero-article-icon [article]="child"></noosfero-article-icon>
       </div>
       <div class="media-body">
-        <a class="title" uiSref="main.profile.page" [uiParams]="{profile: profile.identifier, page: child.path}">
+        <a class="title" [routerLink]="['/', profile.identifier, child.path]">
           <h4 class="media-heading">{{child.title}}</h4>
         </a>
         <span class="time">

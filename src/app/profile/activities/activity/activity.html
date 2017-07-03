@@ -20,7 +20,7 @@
       <span>
         <div class="article">
           <div class="title">
-            <a uiSref="main.profile.page" [uiParams]="{profile: activity.target.profile.identifier, page: activity.target.path}">
+            <a [routerLink]="['/', activity.target.profile.identifier, activity.target.path]">
               {{activity.target.title}}
             </a>
           </div>
@@ -52,10 +52,10 @@
     </noosfero-activity-header>
     <div class="panel-body">
 		<span class="title">
-			<a *ngIf="!activity.target" class="separated-item" uiSref="main.profile.info" [uiParams]="{profile: activity.params.receiver_url.profile}">
+			<a *ngIf="!activity.target" class="separated-item" [routerLink]="['/', activity.params.receiver_url.profile]">
 			  <span>{{activity.params.receiver_name}}</span>
 			</a>
-			<a *ngIf="activity.target" class="separated-item" uiSref="main.profile.info" [uiParams]="{profile: activity.target.identifier}">
+			<a *ngIf="activity.target" class="separated-item" [routerLink]="['/', activity.target.identifier]">
 			  <span>{{activity.target.name}}</span>
 			</a>			
 		</span>

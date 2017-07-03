@@ -1,5 +1,5 @@
 <div class="{{block.type}}-block">
-  <div *ngFor="let article of articles" uiSref="main.profile.page" [uiParams]="{profile: profile.identifier, page: article.path}"  class="article">
+  <div *ngFor="let article of articles" [routerLink]="['/', profile.identifier, article.path]"  class="article">
     <!-- Article Title -->
     <div class="page-header" *ngIf="display('title')">
         <h5 class="title media-heading" [innerHtml]="article.title"></h5>
@@ -9,7 +9,7 @@
         <!-- Article Abstract and Read More Link -->
         <div class="post-lead" *ngIf="display('abstract')">
             <div [innerHtml]="article.abstract"></div>
-            <a href="#" uiSref="main.profile.page" [uiParams]="{profile: profile.identifier, page: article.path}">
+            <a [routerLink]="['/', profile.identifier, article.path]">
                 <i class="fa fa-pencil-square-o fa-fw fa-lg"></i> {{"article.actions.read_more" | translate}}
             </a>
         </div>
