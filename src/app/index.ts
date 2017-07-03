@@ -33,9 +33,7 @@ import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspo
 import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
-import { RegisterComponent } from './account';
 import { DiscussionEditorComponent } from './../plugins/comment_paragraph/article/cms/discussion-editor/discussion-editor.component';
-import { PasswordComponent } from './login/new-password.component';
 import { SearchComponent } from './search/search.component';
 import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { CommentComponent } from './article/comment/comment.component';
@@ -304,12 +302,6 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('search',
         downgradeComponent({ component: SearchComponent }) as angular.IDirectiveFactory
-    ).
-    directive('newPassword',
-        downgradeComponent({ component: PasswordComponent, inputs: ['code'] }) as angular.IDirectiveFactory
-    ).
-    directive('noosferoRegister',
-        downgradeComponent({ component: RegisterComponent, inputs: ['account'] }) as angular.IDirectiveFactory
     ).
     directive('commentParagraphPluginDiscussionEditor',
         downgradeComponent({ component: DiscussionEditorComponent, inputs: ['article', 'options'] }) as angular.IDirectiveFactory

@@ -29,7 +29,7 @@
           <button type="submit" class="btn-login" (click)="login()">{{"auth.form.login_button" | translate}}</button>
         </form>
         <div class="text-center">
-          <a uiSref="main.register" (click)="hide()">{{"auth.createAccount" | translate}}</a>
+          <a [routerLink]="['/account/signup']" (click)="hide()">{{"auth.createAccount" | translate}}</a>
         </div>
       </div>
     </div>

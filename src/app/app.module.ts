@@ -338,8 +338,6 @@ export function HttpLoaderFactory(http: Http) {
         TasksMenuComponent,
         SearchFormComponent,
         ArticleIconComponent,
-        PasswordComponent,
-        RegisterComponent,
         ThemeHeaderComponent,
         ThemeFooterComponent,
         ArticleToolbarHotspotComponent,

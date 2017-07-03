@@ -203,28 +203,28 @@ export function noosferoRoutes($stateProvider: any) {
     //     }
     // });
 
-    $stateProvider.state({
-        name: 'main.register',
-        url: "/account/signup",
-        views: {
-            "content": {
-                templateUrl: "app/account/register.html",
-                controller: RouteNg2,
-                controllerAs: "vm"
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.newPasswd',
-        url: "/account/new_password/:code",
-        views: {
-            "content": {
-                template: '<new-password [code]="ctrl.$stateParams[\'code\']"></new-password>',
-                controller: RouteNg2,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.register',
+    //     url: "/account/signup",
+    //     views: {
+    //         "content": {
+    //             templateUrl: "app/account/register.html",
+    //             controller: RouteNg2,
+    //             controllerAs: "vm"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.newPasswd',
+    //     url: "/account/new_password/:code",
+    //     views: {
+    //         "content": {
+    //             template: '<new-password [code]="ctrl.$stateParams[\'code\']"></new-password>',
+    //             controller: RouteNg2,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
     // $stateProvider.state({
     //     name: 'main.profile.members',
     //     url: "^/profile/:profile/members",

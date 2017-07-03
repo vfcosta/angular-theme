@@ -1,81 +1,89 @@
-<div class="register-page">
-  <div class="welcome-message">
-    <h1>{{"account.register.welcomeMessageTitle" | translate }}</h1>
-    <div class="environment-signup-intro" *ngIf="environment" [innerHTML]="environment.signup_intro"></div>
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+
+    <div class="register-page">
+      <div class="welcome-message">
+        <h1>{{"account.register.welcomeMessageTitle" | translate }}</h1>
+        <div class="environment-signup-intro" *ngIf="environment" [innerHTML]="environment.signup_intro"></div>
+      </div>
+
+      <form name="signupForm" #signupForm="ngForm">
+        <div class="row">
+          <div class="col-md-12 register-field name-field">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-male"></i><i class="fa fa-female"></i></span>
+              <input type="text" class="form-control" id="name" name="name" placeholder="{{'account.register.fullNameLabel' | translate }}" 
+              [(ngModel)]="account.name" #name='ngModel'>
+            </div>
+            <validation-message #nameErrors [field]="name" [prefix]="'profile.edition.name'"></validation-message>
+          </div>
+
+          <div class="form-group col-md-12 register-field login-field" [ngClass]=" {'has-error': usrName.touched && usrName.invalid } ">
+            <div class="input-group">
+              <span class="input-group-addon" style="font-weight: bold;" *ngIf="environment"><i class="fa fa-globe"></i>&nbsp;{{ environment.host }}</span>
+              <input type="text" id="login" name="login" class="form-control" placeholder="{{'account.register.usernameLabel' | translate }}" 
+              [(ngModel)]="account.login" required #usrName='ngModel'>
+            </div>
+            <validation-message #userNameErrors [field]="usrName" [prefix]="'profile.edition.username'"></validation-message>
+          </div>
+
+          <div class="form-group col-md-12 register-field email-field" [ngClass]="{'has-error': eMail.touched && eMail.invalid }">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+              <input type="email" class="form-control" id="email" name="email" placeholder="{{'account.register.emailLabel' | translate }}"
+              [(ngModel)]="account.email" required #eMail='ngModel'>
+            </div>
+            <validation-message #emailErrors [field]="eMail" [prefix]="'profile.edition.email'"></validation-message>
+          </div>
+
+          <div class="form-group col-md-6 register-field password-field" [ngClass]="{'has-error': passwd.touched && passwd.invalid }">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+              <input type="password" class="form-control" id="password" name="password" placeholder="{{'account.register.passwordLabel' | translate }}" 
+              [(ngModel)]="account.password" #passwd='ngModel' required minlength="4">
+            </div>
+            <validation-message #passwordErrors [field]="passwd" [prefix]="'profile.edition.password'"></validation-message>
+          </div>
+
+          <div class="form-group col-md-6 register-field password-confirmation-field" [ngClass]="{'has-error': passwdConfirm.touched && passwdConfirm.invalid }">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+              <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" match-password="password" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" 
+              [(ngModel)]="account.passwordConfirmation" #passwdConfirm='ngModel' required>
+            </div>
+            <validation-message #passwordConfirmErrors [field]="passwdConfirm" [prefix]="'profile.edition.passwordConfirm'"></validation-message>
+          </div>
+
+          <div class="col-md-12 terms-of-use-field" *ngIf="environment?.terms_of_use">
+            <p class="terms-info">{{"account.register.accountCreatingMessage" | translate}} 
+              <a (click)="termsModal.show()" href="#">{{"account.register.termsOfUseMessage" | translate}}</a>.
+            </p>
+          </div>
+
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-default submit-button" [disabled]="signupForm.invalid" (click)="signup()">{{"account.register.signupMessage" | translate}}</button> 
+          </div>
+
+        </div>
+      </form>
+
+      <a class="already-registered-message" href="#" (click)="openLogin()">{{"account.register.haveAccountMessage" | translate}}</a>
+    </div>
+
+    <div class=" modal fade" bsModal #termsModal="bs-modal" [config]="{backdrop: 'static'}">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title" *ngIf="environment">{{ "account.register.termsOfUseTitle" | translate }} - {{ environment.name }}</h3>
+          </div>
+          <!--<div class="modal-body modal-body-overflow" *ngIf="environment" [innerHtml]="environment.terms_of_use"></div>-->
+          <div class="modal-footer">
+              <button class="btn btn-primary" type="button" (click)="termsModal.hide()">OK</button>
+          </div>
+        </div>
+    </div>
+
   </div>
-
-  <form name="signupForm" #signupForm="ngForm">
-    <div class="row">
-      <div class="col-md-12 register-field name-field">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-male"></i><i class="fa fa-female"></i></span>
-          <input type="text" class="form-control" id="name" name="name" placeholder="{{'account.register.fullNameLabel' | translate }}" 
-          [(ngModel)]="account.name" #name='ngModel'>
-        </div>
-        <validation-message #nameErrors [field]="name" [prefix]="'profile.edition.name'"></validation-message>
-      </div>
-
-      <div class="form-group col-md-12 register-field login-field" [ngClass]=" {'has-error': usrName.touched && usrName.invalid } ">
-        <div class="input-group">
-          <span class="input-group-addon" style="font-weight: bold;" *ngIf="environment"><i class="fa fa-globe"></i>&nbsp;{{ environment.host }}</span>
-          <input type="text" id="login" name="login" class="form-control" placeholder="{{'account.register.usernameLabel' | translate }}" 
-          [(ngModel)]="account.login" required #usrName='ngModel'>
-        </div>
-        <validation-message #userNameErrors [field]="usrName" [prefix]="'profile.edition.username'"></validation-message>
-      </div>
-
-      <div class="form-group col-md-12 register-field email-field" [ngClass]="{'has-error': eMail.touched && eMail.invalid }">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-          <input type="email" class="form-control" id="email" name="email" placeholder="{{'account.register.emailLabel' | translate }}"
-           [(ngModel)]="account.email" required #eMail='ngModel'>
-        </div>
-        <validation-message #emailErrors [field]="eMail" [prefix]="'profile.edition.email'"></validation-message>
-      </div>
-
-      <div class="form-group col-md-6 register-field password-field" [ngClass]="{'has-error': passwd.touched && passwd.invalid }">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-          <input type="password" class="form-control" id="password" name="password" placeholder="{{'account.register.passwordLabel' | translate }}" 
-          [(ngModel)]="account.password" #passwd='ngModel' required minlength="4">
-        </div>
-        <validation-message #passwordErrors [field]="passwd" [prefix]="'profile.edition.password'"></validation-message>
-      </div>
-
-      <div class="form-group col-md-6 register-field password-confirmation-field" [ngClass]="{'has-error': passwdConfirm.touched && passwdConfirm.invalid }">
-        <div class="input-group">
-          <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-          <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" match-password="password" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" 
-          [(ngModel)]="account.passwordConfirmation" #passwdConfirm='ngModel' required>
-        </div>
-        <validation-message #passwordConfirmErrors [field]="passwdConfirm" [prefix]="'profile.edition.passwordConfirm'"></validation-message>
-      </div>
-
-      <div class="col-md-12 terms-of-use-field" *ngIf="environment?.terms_of_use">
-        <p class="terms-info">{{"account.register.accountCreatingMessage" | translate}} 
-          <a (click)="termsModal.show()" href="#">{{"account.register.termsOfUseMessage" | translate}}</a>.
-        </p>
-      </div>
-
-      <div class="col-md-12">
-        <button type="submit" class="btn btn-default submit-button" [disabled]="signupForm.invalid" (click)="signup()">{{"account.register.signupMessage" | translate}}</button> 
-      </div>
-
-    </div>
-  </form>
-
-  <a class="already-registered-message" href="#" (click)="openLogin()">{{"account.register.haveAccountMessage" | translate}}</a>
-</div>
-
-<div class=" modal fade" bsModal #termsModal="bs-modal" [config]="{backdrop: 'static'}">
-<div class="modal-dialog modal-sm">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3 class="modal-title" *ngIf="environment">{{ "account.register.termsOfUseTitle" | translate }} - {{ environment.name }}</h3>
-      </div>
-      <!--<div class="modal-body modal-body-overflow" *ngIf="environment" [innerHtml]="environment.terms_of_use"></div>-->
-      <div class="modal-footer">
-          <button class="btn btn-primary" type="button" (click)="termsModal.hide()">OK</button>
-      </div>
-    </div>
+  <div class="col-md-3"></div>
 </div>

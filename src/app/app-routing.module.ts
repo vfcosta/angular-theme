@@ -1,3 +1,5 @@
+import { PasswordComponent } from './login/new-password.component';
+import { RegisterComponent } from './account/register.component';
 import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
 import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
 import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
@@ -46,6 +48,19 @@ const routes: Routes = [
               path: 'search',
               component: SearchComponent
           }
+        ]
+    },
+    {
+        path: 'account',
+        children: [
+            {
+                path: 'signup',
+                component: RegisterComponent
+            },
+            {
+                path: 'new_password/:code',
+                component: PasswordComponent
+            }
         ]
     },
     {

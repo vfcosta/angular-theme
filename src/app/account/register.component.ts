@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Inject, Input, Component, Output, EventEmitter, ViewChild } from '@angular/core';
 import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
 import { NotificationService } from "./../shared/services/notification.service";
@@ -18,7 +19,7 @@ export class RegisterComponent {
     @ViewChild('passwordErrors') passwordErrors: ValidationMessageComponent;
     @ViewChild('passwordConfirmErrors') passwordConfirmErrors: ValidationMessageComponent;
 
-    constructor(
+    constructor(private router: Router,
         public RegisterService: RegisterService,
         private notificationService: NotificationService,
         private environmentService: EnvironmentService) {
@@ -36,7 +37,7 @@ export class RegisterComponent {
         let errors: any;
         let field = '';
         this.RegisterService.createAccount(this.account).then( () => {
-            // this.$state.transitionTo('main.environment.home');
+            this.router.navigate(['/']);
             this.notificationService.success({ title: "account.register.success.title", message: "account.register.success.message" });
         }).catch( response => {
             if (response.status === 422) {
