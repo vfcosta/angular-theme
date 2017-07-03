@@ -1,3 +1,15 @@
+import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
+import { CommunityMembersMyProfileComponent } from './profile/configuration/communities/community-members-my-profile.component';
+import { DestroyProfileComponent } from './profile/destroy/destroy-profile.component';
+import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
+import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
+import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
+import { ProfileEditionComponent } from './profile/configuration/profile-edition.component';
+import { EditCommunityComponent } from './profile/configuration/communities/edit-community.component';
+import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
+import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
+import { TasksComponent } from './task/tasks/tasks.component';
+import { CmsComponent } from './article/cms/cms.component';
 import { ProfileAboutComponent } from './profile/about/profile-about.component';
 import { SearchComponent } from './search/search.component';
 import { DomainResolver } from './shared/resolvers/domain.resolver';
@@ -33,6 +45,58 @@ const routes: Routes = [
               path: 'search',
               component: SearchComponent
           }
+        ]
+    },
+    {
+        path: 'myprofile/:profile',
+        resolve: { environment: EnvironmentResolver, profile: ProfileResolver },
+        children: [
+            {
+                path: '',
+                component: ProfileConfigurationComponent,
+                children: [
+                    {
+                        path: '',
+                        component: ProfileEditionComponent,
+                    },
+                    {
+                        path: 'friends',
+                        component: PersonFriendsComponent,
+                    },
+                    {
+                        path: 'communities',
+                        component: PersonCommunitiesComponent,
+                    },
+                    {
+                        path: 'change_password',
+                        component: ChangePasswordComponent,
+                    },
+                    {
+                        path: 'destroy_profile',
+                        component: DestroyProfileComponent,
+                    },
+                    {
+                        path: 'members',
+                        component: CommunityMembersMyProfileComponent,
+                    },
+                    {
+                        path: 'community/new',
+                        component: NewCommunityComponent,
+                    },
+                ]
+            },
+            {
+                path: 'cms',
+                component: CmsComponent
+            },
+            {
+                path: 'cms/edit/:id',
+                component: CmsComponent
+            },
+            {
+                path: 'tasks',
+                component: TasksComponent
+            },
         ]
     },
     {

@@ -4,10 +4,10 @@
     </div>
     <div class="sub-header clearfix">
         <div class="article-toolbar">
-            <a href="#" [permission]="article.permissions" permissionAction="allow_edit" class="btn btn-default btn-xs edit-article"
-                uiSref="main.cmsEdit" [uiParams]="{profile: profile.identifier, id: article.id}">
+            <button [permission]="article.permissions" permissionAction="allow_edit" class="btn btn-default btn-xs edit-article"
+                [routerLink]="['/myprofile', profile.identifier, 'cms', 'edit', article.id]">
                 <i class="fa fa-pencil-square-o fa-fw fa-lg"></i> {{"article.actions.edit" | translate}}
-            </a>
+            </button>
             <a href="#" [permission]="article.permissions" permissionAction="allow_delete" class="btn btn-default btn-xs delete-article"
                 (click)="delete()">
                 <i class="fa fa-remove fa-fw fa-lg"></i> {{"article.actions.delete" | translate}}

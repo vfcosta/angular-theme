@@ -1,5 +1,6 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { EventsHubService } from './../../shared/services/events-hub.service';
-import { Component, Inject, provide } from 'ng-forward';
+import { Component, Inject } from '@angular/core';
 import { ArticleService } from "../../../lib/ng-noosfero-api/http/article.service";
 import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
 import { NotificationService } from "../../shared/services/notification.service";
@@ -7,9 +8,8 @@ import { BasicOptionsComponent } from './basic-options/basic-options.component';
 
 @Component({
     selector: 'article-cms',
-    templateUrl: "app/article/cms/cms.html",
+    template: require("app/article/cms/cms.html"),
 })
-@Inject("articleService", "profileService", "$state", "notificationService", "$stateParams", "$window", "eventsHubService")
 export class CmsComponent {
 
     article: noosfero.Article;
@@ -23,23 +23,16 @@ export class CmsComponent {
     path: string;
 
 
-    constructor(private articleService: ArticleService,
-        private profileService: ProfileService,
-        private $state: ng.ui.IStateService,
-        private notificationService: NotificationService,
-        private $stateParams: ng.ui.IStateParamsService,
-        private $window: ng.IWindowService,
-        private eventsHubService: EventsHubService) {
+    constructor(private articleService: ArticleService, private profileService: ProfileService,
+        private notificationService: NotificationService, @Inject("Window") private window: Window,
+        private eventsHubService: EventsHubService, private route: ActivatedRoute, private router: Router) {
 
-        this.parentId = this.$stateParams['parent_id'];
-        this.profileIdentifier = this.$stateParams["profile"];
-        this.id = this.$stateParams['id'];
+        this.parentId = route.snapshot.queryParams['parent_id'];
+        this.profileIdentifier = route.snapshot.params["profile"];
+        this.id = route.snapshot.params['id'];
 
-        this.path = $window.location.pathname;
-
-        this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
-            this.profile = profile;
-        });
+        this.path = window.location.pathname;
+        this.profile = route.snapshot.data['profile'];
 
         if (this.parentId) {
             this.articleService.get(this.parentId).then((result: noosfero.RestResult<noosfero.Article>) => {
@@ -52,7 +45,7 @@ export class CmsComponent {
                 this.article.name = this.article.title; // FIXME
             });
         } else {
-            this.article = <noosfero.Article>{ type: this.$stateParams['type'] || "TextArticle", published: true };
+            this.article = <noosfero.Article>{ type: route.snapshot.queryParams['type'] || "TextArticle", published: true };
         }
     }
 
@@ -69,7 +62,7 @@ export class CmsComponent {
             }
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
             let article = (<noosfero.Article>response.data);
-            this.$state.go('main.profile.page', { page: article.path, profile: article.profile.identifier });
+            this.router.navigate([article.profile.identifier, article.path]);
             this.notificationService.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message` });
         }).catch((error: any) => {
             this.loading = false;
@@ -79,7 +72,7 @@ export class CmsComponent {
     }
 
     cancel() {
-        this.$window.history.back();
+        this.window.history.back();
     }
 
 }

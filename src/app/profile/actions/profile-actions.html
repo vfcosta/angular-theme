@@ -4,13 +4,13 @@
     </button>
     <ul *dropdownMenu class="dropdown-menu">
         <li class="profile-actions-item">
-            <a href="#" uiSref="main.cms" [uiParams]="{profile: profile.identifier, parent_id: parentId}" class="new-post">
+            <a [routerLink]="['/myprofile', profile.identifier, 'cms']" [queryParams]="parentId ? {parent_id: parentId} : {}" class="new-post">
                 <i class="fa fa-file fa-fw fa-lg"></i> {{"profile.actions.new_post" | translate}}
             </a>
         </li>
         <!-- FIXED HERE BUT SHOULD BE A HOTSPOT TO INCLUDE LINKS FROM THE PLUGIN -->
         <li class="profile-actions-item">
-            <a href="#" uiSref="main.cms" [uiParams]="{profile: profile.identifier, parent_id: parentId, type: 'CommentParagraphPlugin::Discussion'}" class="new-discussion">
+            <a [routerLink]="['/myprofile', profile.identifier, 'cms']" [queryParams]="parentId ? {parent_id: parentId, type: 'CommentParagraphPlugin::Discussion'} : {type: 'CommentParagraphPlugin::Discussion'}" class="new-discussion">
                 <i class="fa fa-file fa-fw fa-lg"></i> {{"profile.actions.new_discussion" | translate}}
             </a>
         </li>

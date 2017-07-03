@@ -13,6 +13,7 @@ declare var _: any;
     template: require('app/profile/configuration/communities/form-community.html'),
 })
 export class EditCommunityComponent extends AbstractFormCommunity {
+
     ngOnInit() {
         this.sessionProfile = this.sessionService.currentUser().person;
         this.community = <noosfero.Community>this.profile;

@@ -35,11 +35,11 @@
         </li>
         <li class="dropdown profile-menu" *ngIf="currentUser" dropdown>
 
-          <a href="#" class="dropdown-toggle profile-link" aria-expanded="false" dropdownToggle>
+          <button class="btn btn-link dropdown-toggle profile-link" aria-expanded="false" dropdownToggle>
             <noosfero-profile-image [profile]="currentUser.person" class="dropdown-profile-image"></noosfero-profile-image>
             <span class="truncated-profile-name">{{currentUser.person.name}}</span>
             <i class="fa fa-fw fa-chevron-down"></i>
-          </a>
+          </button>
 
           <ul class="dropdown-menu dropdown-menu-profile" *dropdownMenu>
             <li>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="row email">{{currentUser.email}}</div>
                     <div class="row text-center">
-                      <a class="btn btn-default btn-edit" uiSref="main.myprofile" [uiParams]="{profile: currentUser.person.identifier}"> {{"navbar.profile" | translate}}</a>
+                      <a class="btn btn-default btn-edit" [routerLink]="['/myprofile', currentUser.person.identifier]"> {{"navbar.profile" | translate}}</a>
                     </div>
                   </div>
                 </div>

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { Component, Input, Inject } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
@@ -9,7 +10,7 @@ import { DisplayStyles } from '../../profile-list/profile-list.component';
 })
 export class PersonFriendsComponent {
 
-    @Input() profile: noosfero.Profile;
+    profile: noosfero.Profile;
     friends: noosfero.Person[];
     search: string;
     private currentPage = 1;
@@ -18,12 +19,13 @@ export class PersonFriendsComponent {
     searchChanged: Subject<string> = new Subject<string>();
     private displayStyle: string = DisplayStyles.card;
 
-    constructor(private personService: PersonService) {
-        // this.search = $stateParams['search'];
+    constructor(private personService: PersonService, route: ActivatedRoute) {
+        this.search = route.snapshot.queryParams['search'];
         this.searchChanged.debounceTime(300).subscribe((search: string) => {
             this.search = search;
             this.loadPage({ page: this.currentPage });
         });
+        this.profile = route.parent.snapshot.data['profile'];
     }
 
     ngOnInit() {

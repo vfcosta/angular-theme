@@ -1,3 +1,7 @@
+import { DestroyProfileComponent } from './profile/destroy/destroy-profile.component';
+import { ProfileEditionComponent } from './profile/configuration/profile-edition.component';
+import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
+import { CmsComponent } from './article/cms/cms.component';
 import { ProfileAboutComponent } from './profile/about/profile-about.component';
 import { DomainComponent } from './domain/domain.component';
 import { EditableFieldComponent } from './shared/components/editable-field/editable-field.component';
@@ -285,6 +289,10 @@ export function HttpLoaderFactory(http: Http) {
         DomainComponent,
         SearchComponent,
         ProfileAboutComponent,
+        CmsComponent,
+        ProfileConfigurationComponent,
+        ProfileEditionComponent,
+        DestroyProfileComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -300,17 +308,10 @@ export function HttpLoaderFactory(http: Http) {
         CommunityMembersComponent,
         ProfileFastEditionComponent,
         ProfileConfigurationMenuComponent,
-        ProfilePersonalDataComponent,
         ProfileListComponent,
         ProfileJoinComponent,
-        NewCommunityComponent,
         EditCommunityComponent,
-        PersonFriendsComponent,
-        CommunityMembersMyProfileComponent,
-        PersonCommunitiesComponent,
-        ChangePasswordComponent,
         MenuBlockComponent,
-        PersonCommunitiesComponent,
         ProfileJoinComponent,
         InviteComponent,
         ProfileSummaryComponent,
@@ -332,7 +333,6 @@ export function HttpLoaderFactory(http: Http) {
         ProfileActionsComponent,
         ConfigBarComponent,
         DesignModeTogglerComponent,
-        TasksComponent,
         TasksMenuComponent,
         SearchFormComponent,
         ArticleIconComponent,

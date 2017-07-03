@@ -45,7 +45,6 @@ import { ApproveCommentTaskAcceptComponent } from './task/types/approve-comment/
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { SearchFormComponent } from './search/search-form/search-form.component';
 import { TasksMenuComponent } from './task/tasks-menu/tasks-menu.component';
-import { TasksComponent } from './task/tasks/tasks.component';
 import { FriendsBlockComponent } from '../plugins/friends/blocks/friends-block/friends-block.component';
 import {
     ProfileImagesBlockComponent
@@ -91,17 +90,9 @@ import { AuthEvents } from './login/auth-events';
 import { MainComponent } from './main/main.component';
 import { ProfileActionsComponent } from './profile/actions/profile-actions.component';
 import { CommunityMembersComponent } from './profile/community-members/community-members.component';
-import { ChangePasswordComponent } from './profile/configuration/change-password/change-password.component';
-import {
-    CommunityMembersMyProfileComponent
-} from './profile/configuration/communities/community-members-my-profile.component';
 import { EditCommunityComponent } from './profile/configuration/communities/edit-community.component';
 import { InviteComponent } from './profile/configuration/communities/invite.component';
-import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
-import { PersonCommunitiesComponent } from './profile/configuration/communities/person-communities.component';
-import { PersonFriendsComponent } from './profile/configuration/friends/person-friends.component';
 import { ProfileConfigurationMenuComponent } from './profile/configuration/menu/profile-configuration-menu.component';
-import { ProfilePersonalDataComponent } from './profile/configuration/personal-data/profile-personal-data.component';
 import { ProfileFastEditionComponent } from './profile/fast-edition/profile-fast-edition.component';
 import { ProfileHeaderComponent } from './profile/header/profile-header.component';
 import { ProfileImageComponent } from './profile/image/profile-image.component';
@@ -206,29 +197,11 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     directive('profileConfigurationMenu',
     downgradeComponent({ component: ProfileConfigurationMenuComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
-    directive('profilePersonalData',
-    downgradeComponent({ component: ProfilePersonalDataComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
-    ).
-    directive('personFriends',
-    downgradeComponent({ component: PersonFriendsComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
-    ).
-    directive('noosferoCommunityMembersMyProfile',
-    downgradeComponent({ component: CommunityMembersMyProfileComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
-    ).
-    directive('newCommunity',
-    downgradeComponent({ component: NewCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
-    ).
     directive('editCommunity',
     downgradeComponent({ component: EditCommunityComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
-    directive('personCommunities',
-    downgradeComponent({ component: PersonCommunitiesComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
-    ).
     directive('noosferoProfileSummary',
     downgradeComponent({ component: ProfileSummaryComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
-    ).
-    directive('changePassword',
-    downgradeComponent({ component: ChangePasswordComponent, inputs: ['profile'] }) as angular.IDirectiveFactory
     ).
     directive('noosferoMenuBlock',
     downgradeComponent({ component: MenuBlockComponent, inputs: ['block', 'owner', 'designMode'] }) as angular.IDirectiveFactory
@@ -304,9 +277,6 @@ angular.module('noosfero.init', ['noosfero.templates.app', 'noosfero.templates.p
     ).
     directive('profileLink',
         downgradeComponent({ component: ProfileLinkComponent, inputs: ['profile', 'displayImage', 'displayName', 'truncate'] }) as angular.IDirectiveFactory
-    ).
-    directive('tasks',
-        downgradeComponent({ component: TasksComponent, inputs: ['taskTypes'] }) as angular.IDirectiveFactory
     ).
     directive('tasksMenu',
         downgradeComponent({ component: TasksMenuComponent, inputs: ['taskTypes'] }) as angular.IDirectiveFactory

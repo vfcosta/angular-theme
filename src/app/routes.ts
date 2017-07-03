@@ -154,54 +154,54 @@ export function noosferoRoutes($stateProvider: any) {
     //         }
     //     }
     // });
-    $stateProvider.state({
-        name: 'main.cms',
-        url: "^/myprofile/:profile/cms?parent_id&type",
-        controller: CmsComponent,
-        views: {
-            "content": {
-                templateUrl: "app/article/cms/cms.html",
-                controller: CmsComponent,
-                controllerAs: "vm"
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.cmsEdit',
-        url: "^/myprofile/:profile/cms/edit/:id",
-        controller: CmsComponent,
-        views: {
-            "content": {
-                templateUrl: "app/article/cms/cms.html",
-                controller: CmsComponent,
-                controllerAs: "vm"
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.profile.tasks',
-        url: "^/myprofile/:profile/tasks?types",
-        views: {
-            "mainBlockContent": {
-                template: '<tasks [task-types]="ctrl.$stateParams[\'types\']"></tasks>',
-                controllerAs: "ctrl",
-                controller: RouteNg2
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.cms',
+    //     url: "^/myprofile/:profile/cms?parent_id&type",
+    //     controller: CmsComponent,
+    //     views: {
+    //         "content": {
+    //             templateUrl: "app/article/cms/cms.html",
+    //             controller: CmsComponent,
+    //             controllerAs: "vm"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.cmsEdit',
+    //     url: "^/myprofile/:profile/cms/edit/:id",
+    //     controller: CmsComponent,
+    //     views: {
+    //         "content": {
+    //             templateUrl: "app/article/cms/cms.html",
+    //             controller: CmsComponent,
+    //             controllerAs: "vm"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.profile.tasks',
+    //     url: "^/myprofile/:profile/tasks?types",
+    //     views: {
+    //         "mainBlockContent": {
+    //             template: '<tasks [task-types]="ctrl.$stateParams[\'types\']"></tasks>',
+    //             controllerAs: "ctrl",
+    //             controller: RouteNg2
+    //         }
+    //     }
+    // });
 
-    $stateProvider.state({
-        name: 'main.myprofile.destroy',
-        url: "/destroy_profile",
-        controller: DestroyProfileComponent,
-        views: {
-            "myprofileContent": {
-                template: "<div></div>",
-                controller: DestroyProfileComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.myprofile.destroy',
+    //     url: "/destroy_profile",
+    //     controller: DestroyProfileComponent,
+    //     views: {
+    //         "myprofileContent": {
+    //             template: "<div></div>",
+    //             controller: DestroyProfileComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
 
     $stateProvider.state({
         name: 'main.register',
@@ -249,90 +249,90 @@ export function noosferoRoutes($stateProvider: any) {
             }
         }
     });
-    $stateProvider.state({
-        name: 'main.myprofile',
-        url: "^/myprofile/:profile",
-        controller: ProfileConfigurationComponent,
-        views: {
-            "content": {
-                templateUrl: "app/profile/configuration/profile-configuration.html",
-                controller: ProfileConfigurationComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.myprofile.personal_data',
-        url: "/personal_data",
-        controller: ProfileConfigurationOptionComponent,
-        views: {
-            "myprofileContent": {
-                template: "<profile-personal-data ng-if='ctrl.profile' [profile]='ctrl.profile'></profile-personal-data>",
-                controller: ProfileConfigurationOptionComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.myprofile.communities',
-        url: "/communities?search",
-        controller: ProfileConfigurationOptionComponent,
-        views: {
-            "myprofileContent": {
-                template: "<person-communities ng-if='ctrl.profile' [profile]='ctrl.profile'></person-communities>",
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.myprofile.friends',
-        url: "/friends?search",
-        controller: ProfileConfigurationOptionComponent,
-        views: {
-            "myprofileContent": {
-                template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
-                controller: ProfileConfigurationOptionComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
-    $stateProvider.state({
-        name: 'main.myprofile.members',
-        url: "/members?search",
-        controller: ProfileConfigurationOptionComponent,
-        views: {
-            "myprofileContent": {
-                template: "<noosfero-community-members-my-profile ng-if='ctrl.profile' [profile]='ctrl.profile'></noosfero-community-members-my-profile>",
-                controller: ProfileConfigurationOptionComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.myprofile',
+    //     url: "^/myprofile/:profile",
+    //     controller: ProfileConfigurationComponent,
+    //     views: {
+    //         "content": {
+    //             templateUrl: "app/profile/configuration/profile-configuration.html",
+    //             controller: ProfileConfigurationComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.myprofile.personal_data',
+    //     url: "/personal_data",
+    //     controller: ProfileConfigurationOptionComponent,
+    //     views: {
+    //         "myprofileContent": {
+    //             template: "<profile-personal-data ng-if='ctrl.profile' [profile]='ctrl.profile'></profile-personal-data>",
+    //             controller: ProfileConfigurationOptionComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.myprofile.communities',
+    //     url: "/communities?search",
+    //     controller: ProfileConfigurationOptionComponent,
+    //     views: {
+    //         "myprofileContent": {
+    //             template: "<person-communities ng-if='ctrl.profile' [profile]='ctrl.profile'></person-communities>",
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.myprofile.friends',
+    //     url: "/friends?search",
+    //     controller: ProfileConfigurationOptionComponent,
+    //     views: {
+    //         "myprofileContent": {
+    //             template: "<person-friends ng-if='ctrl.profile' [profile]='ctrl.profile'></person-friends>",
+    //             controller: ProfileConfigurationOptionComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
+    // $stateProvider.state({
+    //     name: 'main.myprofile.members',
+    //     url: "/members?search",
+    //     controller: ProfileConfigurationOptionComponent,
+    //     views: {
+    //         "myprofileContent": {
+    //             template: "<noosfero-community-members-my-profile ng-if='ctrl.profile' [profile]='ctrl.profile'></noosfero-community-members-my-profile>",
+    //             controller: ProfileConfigurationOptionComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
 
-    $stateProvider.state({
-        name: 'main.myprofile.community_new',
-        url: "/community/new",
-        controller: ProfileConfigurationOptionComponent,
-        views: {
-            "myprofileContent": {
-                template: "<new-community ng-if='ctrl.profile' [profile]='ctrl.profile'></new-community>",
-                controller: ProfileConfigurationOptionComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.myprofile.community_new',
+    //     url: "/community/new",
+    //     controller: ProfileConfigurationOptionComponent,
+    //     views: {
+    //         "myprofileContent": {
+    //             template: "<new-community ng-if='ctrl.profile' [profile]='ctrl.profile'></new-community>",
+    //             controller: ProfileConfigurationOptionComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
 
-    $stateProvider.state({
-        name: 'main.myprofile.community_edit',
-        url: "/community/edit",
-        controller: ProfileConfigurationOptionComponent,
-        views: {
-            "myprofileContent": {
-                template: "<edit-community ng-if='ctrl.profile' [profile]='ctrl.profile'></edit-community>",
-                controller: ProfileConfigurationOptionComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.myprofile.community_edit',
+    //     url: "/community/edit",
+    //     controller: ProfileConfigurationOptionComponent,
+    //     views: {
+    //         "myprofileContent": {
+    //             template: "<edit-community ng-if='ctrl.profile' [profile]='ctrl.profile'></edit-community>",
+    //             controller: ProfileConfigurationOptionComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
 
     // $stateProvider.state({
     //     name: 'main.profile.page',
@@ -347,16 +347,16 @@ export function noosferoRoutes($stateProvider: any) {
     //     }
     // });
 
-    $stateProvider.state({
-        name: 'main.myprofile.change_password',
-        url: "/change_password",
-        controller: ProfileConfigurationOptionComponent,
-        views: {
-            "myprofileContent": {
-                template: "<change-password ng-if='ctrl.profile' [profile]='ctrl.profile'></change-password>",
-                controller: ProfileConfigurationOptionComponent,
-                controllerAs: "ctrl"
-            }
-        }
-    });
+    // $stateProvider.state({
+    //     name: 'main.myprofile.change_password',
+    //     url: "/change_password",
+    //     controller: ProfileConfigurationOptionComponent,
+    //     views: {
+    //         "myprofileContent": {
+    //             template: "<change-password ng-if='ctrl.profile' [profile]='ctrl.profile'></change-password>",
+    //             controller: ProfileConfigurationOptionComponent,
+    //             controllerAs: "ctrl"
+    //         }
+    //     }
+    // });
 }
