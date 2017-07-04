@@ -1,9 +1,9 @@
 <div class="btn-nav tasks-menu" dropdown [hidden]="total==0" *ngIf="total" [autoClose]="false" [isOpen]="open">
-  <button class="btn btn-link tasks-menu-link" #menuButton>
+  <a href="#" class="tasks-menu-link" #menuButton>
     <i [title]="'tasks.icon.description' | translate" class="tasks-icon fa fa-bell-o fa-fw fa-2x"></i>
     <span class="badge">{{total}}</span>
     <span class="read-aloud">{{"tasks.header" | translate}}</span>
-  </button>
+  </a>
   <div class="dropdown-menu task-panel" *dropdownMenu #taskPanel>
     <div class="task-menu-header" [ngPlural]="total">
       <ng-template ngPluralCase="=1">{{"tasks.menu.header.one" | translate}}</ng-template>

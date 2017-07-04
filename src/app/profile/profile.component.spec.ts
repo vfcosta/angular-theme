@@ -7,7 +7,6 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ThemeService } from './../shared/services/theme.service';
 import { DesignModeService } from './../shared/services/design-mode.service';
-import { quickCreateComponent } from "../../spec/helpers";
 import { ProfileComponent } from "./profile.component";
 import * as helpers from "../../spec/helpers";
 

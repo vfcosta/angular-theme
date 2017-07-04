@@ -1,5 +1,4 @@
 import { Input, Inject, Component, Directive } from '@angular/core';
-import {PermissionDirective} from '../shared/components/permission/permission.directive';
 
 /**
  * @ngdoc controller

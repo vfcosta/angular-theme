@@ -1,7 +1,6 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { By } from '@angular/platform-browser';
-import {provideFilters} from '../../../../spec/helpers';
 import {DiscussionBlockComponent} from './discussion-block.component';
 import * as helpers from "./../../../../spec/helpers";
 import { NO_ERRORS_SCHEMA } from '@angular/core';

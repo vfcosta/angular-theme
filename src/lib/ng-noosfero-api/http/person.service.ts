@@ -22,27 +22,27 @@ export class PersonService extends RestangularService<noosfero.Person> {
         };
     }
 
-    getLoggedPerson(): restangular.IPromise<any> {
+    getLoggedPerson(): Promise<any> {
         return this.getElement(<any>'me').get().toPromise();
     }
 
-    getFriends(profileId: number, params?: any): restangular.IPromise<any> {
+    getFriends(profileId: number, params?: any): Promise<any> {
         return this.getElement(profileId).customGET("friends", params).toPromise();
     }
 
-    getCommunities(profileId: number, params?: any): restangular.IPromise<any> {
+    getCommunities(profileId: number, params?: any): Promise<any> {
         return this.getElement(profileId).customGET("communities", params).toPromise();
     }
 
-    isFriend(profileId: number, friendId: number, params?: any): restangular.IPromise<any> {
+    isFriend(profileId: number, friendId: number, params?: any): Promise<any> {
         return this.getElement(profileId).customGET("friends/" + friendId, params).toPromise();
     }
 
-    addFriend(profileId: number, params?: any): restangular.IPromise<any> {
+    addFriend(profileId: number, params?: any): Promise<any> {
         return this.getElement(profileId).customPOST(params, "friends").toPromise();
     }
 
-    removeFriend(profileId: number, params?: any): restangular.IPromise<any> {
+    removeFriend(profileId: number, params?: any): Promise<any> {
         return this.getElement(profileId).customDELETE("friends", params).toPromise();
     }
 

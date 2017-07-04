@@ -1,4 +1,4 @@
-import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../services/translator.service';
 import { ValidationMessageComponent } from './validation-message.component';
 import { By } from '@angular/platform-browser';
@@ -37,7 +37,6 @@ describe("Components", () => {
         let component: ValidationMessageComponent;
         let formComponent: FormTemplateTestComponet;
         let mocks = helpers.getMocks();
-        let translationPipe = jasmine.createSpyObj("TranslatePipe", ["transform"]);
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

@@ -3,7 +3,6 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { PopoverModule } from 'ngx-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
-import { provideFilters } from '../../../../spec/helpers';
 import { MenuBlockComponent } from './menu-block.component';
 import * as helpers from "../../../../spec/helpers";
 import { By } from '@angular/platform-browser';

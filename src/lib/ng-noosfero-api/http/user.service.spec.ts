@@ -35,7 +35,7 @@ describe("Services", () => {
                 };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), '/api/v1/users/1',
                     [{ success: true }], {}, 201);
-                service.changePassword(profile, '1234567890', 'test', 'test').then((response: restangular.IResponse) => {
+                service.changePassword(profile, '1234567890', 'test', 'test').then((response: any) => {
                     expect(response.data[0].success).toBeTruthy();
                 });
             });

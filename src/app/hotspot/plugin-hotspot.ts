@@ -1,5 +1,4 @@
 import * as plugins from "../../plugins";
-import {dasherize} from "ng-forward/cjs/util/helpers";
 
 export abstract class PluginHotspot {
 
@@ -8,11 +7,10 @@ export abstract class PluginHotspot {
     ngAfterContentInit() {
         for (let component of plugins.hotspots.concat(plugins.ng2Hotspots)) {
             if (component.hotspot === this.hotspot) {
-                let directiveName = dasherize(component.name.replace('Component', ''));
-                this.addHotspot(directiveName, component);
+                this.addHotspot(component);
             }
         }
     }
 
-    abstract addHotspot(directiveName: string, component?: any): any;
+    abstract addHotspot(component?: any): any;
 }

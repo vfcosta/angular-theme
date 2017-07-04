@@ -43,7 +43,7 @@ describe("Services", () => {
             it("should return the members of a profile", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/members`, [{ name: "profile1" }], {}, 200);
-                service.getProfileMembers(profileId).then((response: restangular.IResponse) => {
+                service.getProfileMembers(profileId).then((response: any) => {
                     expect(response.data[0]).toEqual({ name: "profile1" });
                 });
             });
@@ -51,7 +51,7 @@ describe("Services", () => {
             it("should return the boxes of a profile", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/boxes`, [{ position: 1 }], {}, 200);
-                service.getBoxes(profileId).then((response: restangular.IResponse) => {
+                service.getBoxes(profileId).then((response: any) => {
                     expect(response.data[0]).toEqual({ position: 1 });
                 });
             });
@@ -59,7 +59,7 @@ describe("Services", () => {
             it("should return activities of a profile", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/activities`, [{ verb: "create_article" }], {}, 200);
-                service.getActivities(profileId).then((response: restangular.IResponse) => {
+                service.getActivities(profileId).then((response: any) => {
                     expect(response.data[0]).toEqual({ verb: "create_article" });
                 });
             });
@@ -75,7 +75,7 @@ describe("Services", () => {
             it("should return the profile home page", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/home_page`, { path: "/something" }, {}, 200);
-                service.getHomePage(profileId).then((response: restangular.IResponse) => {
+                service.getHomePage(profileId).then((response: any) => {
                     expect(response.data).toEqual(jasmine.objectContaining({ path: "/something" }));
                 });
             });
@@ -83,7 +83,7 @@ describe("Services", () => {
             it("should return the tags for a profile", () => {
                 let profile = <noosfero.Profile>{ id: 1, identifier: "profile1" };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profile.id}/tags`, [{ name: "teste", count: 1 }], {}, 200);
-                service.getTags(profile).then((response: restangular.IResponse) => {
+                service.getTags(profile).then((response: any) => {
                     expect(response.data).toEqual(jasmine.objectContaining([{ name: "teste", count: 1 }]));
                 });
             });
@@ -102,7 +102,7 @@ describe("Services", () => {
             it("should update the profile attributes", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}`, { custom_header: "something" }, {}, 200);
-                service.update(<any>{ id: profileId, custom_header: "something" }).then((response: restangular.IResponse) => {
+                service.update(<any>{ id: profileId, custom_header: "something" }).then((response: any) => {
                     expect(response.data.custom_header).toEqual("something");
                 });
             });
@@ -110,7 +110,7 @@ describe("Services", () => {
             it("should return the profile members", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/members`, [{id: 2}], {}, 200);
-                service.getMembers(<any>{ id: profileId }).then((response: restangular.IResponse) => {
+                service.getMembers(<any>{ id: profileId }).then((response: any) => {
                     expect(response.data).toEqual(jasmine.objectContaining([{ id: 2 }]));
                 });
             });
@@ -118,7 +118,7 @@ describe("Services", () => {
             it("should return true if the person is a profile member", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/members`, [{id: 2}], {}, 200);
-                service.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
+                service.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: any) => {
                     expect(response.data).toEqual([{id: 2}]);
                 });
             });
@@ -126,7 +126,7 @@ describe("Services", () => {
             it("should return false if the person is a profile member", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/members`, [], {}, 200);
-                service.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
+                service.isMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: any) => {
                     expect(response.data).toEqual([]);
                 });
             });
@@ -134,7 +134,7 @@ describe("Services", () => {
             it("should add member to profile", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/members`, {pending: false}, {}, 200);
-                service.addMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
+                service.addMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: any) => {
                     expect(response.data.pending).toEqual(false);
                 });
             });
@@ -142,7 +142,7 @@ describe("Services", () => {
             it("should remove member from profile", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/members`, {id: 2}, {}, 200);
-                service.removeMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: restangular.IResponse) => {
+                service.removeMember(<any>{ id: 2 }, <any>{ id: profileId }).then((response: any) => {
                     expect(response.data).toEqual(jasmine.objectContaining({ id: 2 }));
                 });
             });

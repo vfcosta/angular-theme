@@ -13,6 +13,7 @@ import { DesignModeService } from './design-mode.service';
 describe("BodyStateClasses Service", () => {
     let mocks = helpers.getMocks();
     let service: BodyStateClassesService;
+
     beforeEach(async(() => {
         mocks.authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
         mocks.authService.loginSuccess = new EventEmitter();
@@ -31,7 +32,7 @@ describe("BodyStateClasses Service", () => {
 
     it("should add the class noosfero-user-logged to the body element if the user is authenticated", () => {
         service.start();
-        expect(service['getBodyElement']().hasClass(BodyStateClassesService.USER_LOGGED_CLASSNAME)).toBeTruthy();
+        expect(service.bodyClasses).toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
     });
 
     it("should add the class noosfero-route-[currentStateName] in body element", fakeAsync(() => {
@@ -39,27 +40,27 @@ describe("BodyStateClasses Service", () => {
         TestBed.get(ActivatedRoute).component = { name: "MyComponent"  };
         service['router'].navigate(['/']);
         tick();
-        expect(service['getBodyElement']().hasClass("noosfero-route-my-component")).toBeTruthy();
+        expect(service.bodyClasses).toContain("noosfero-route-my-component");
     }));
 
     it("should capture loginSuccess event and add noosfero-user-logged class to the body element", fakeAsync(() => {
         TestBed.get(AuthService).isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(false);
         service.start();
-        expect(service['getBodyElement']().hasClass(BodyStateClassesService.USER_LOGGED_CLASSNAME)).toBeFalsy();
+        expect(service.bodyClasses).not.toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         TestBed.get(AuthService).loginSuccess.next(null);
         tick();
-        expect(service['getBodyElement']().hasClass(BodyStateClassesService.USER_LOGGED_CLASSNAME)).toBeTruthy();
+        expect(service.bodyClasses).toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
     }));
 
     it("should capture logoutSuccess event and remove noosfero-user-logged class from the body element", () => {
         // triggers the service start
         service.start();
         // because the user is already authenticated
-        expect(service['getBodyElement']().hasClass(BodyStateClassesService.USER_LOGGED_CLASSNAME)).toBeTruthy();
+        expect(service.bodyClasses).toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         // emit the event logoutSuccess
         TestBed.get(AuthService).logoutSuccess.next(null);
         // and check now if body hasn't user logged class
-        expect(service['getBodyElement']().hasClass(BodyStateClassesService.USER_LOGGED_CLASSNAME)).toBeFalsy();
+        expect(service.bodyClasses).not.toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
     });
 
     it("add a css class theme skin to body element", () => {
@@ -67,37 +68,21 @@ describe("BodyStateClasses Service", () => {
         service.start({
             skin: skinClass
         });
-        expect(service['getBodyElement']().hasClass(skinClass)).toBeTruthy();
-    });
-
-    it("add a css class to content wrapper element", () => {
-        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"]);
-        service["getContentWrapper"] = jasmine.createSpy("getContentWrapper").and.returnValue(contentWrapperMock);
-        service.addContentClass(true);
-
-        expect(contentWrapperMock.addClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
-    });
-
-    it("remove a css class from content wrapper element", () => {
-        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"]);
-        service["getContentWrapper"] = jasmine.createSpy("getContentWrapper").and.returnValue(contentWrapperMock);
-        service.addContentClass(false);
-
-        expect(contentWrapperMock.removeClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
+        expect(service.bodyClasses).toContain(skinClass);
     });
 
     it("should add class noosfero-design-on when designMode is changed to true", () => {
         TestBed.get(DesignModeService).onToggle = new EventEmitter();
         service.start();
         TestBed.get(DesignModeService).onToggle.next(true);
-        expect(service['getBodyElement']().hasClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME)).toBeTruthy();
+        expect(service.bodyClasses).toContain(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
     });
 
     it("should remove class noosfero-design-on when designMode is changed to false", () => {
         TestBed.get(DesignModeService).onToggle = new EventEmitter();
         service.start();
         TestBed.get(DesignModeService).onToggle.next(false);
-        expect(service['getBodyElement']().hasClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME)).toBeFalsy();
+        expect(service.bodyClasses).not.toContain(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
     });
 
     it("save skin into settings at local storage", () => {

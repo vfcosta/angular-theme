@@ -50,6 +50,7 @@ export class TasksMenuComponent {
 
     @HostListener('document:click', ['$event'])
     onClick($event: any) {
+        if (!this.menuButton) return;
         if (this.menuButton.nativeElement.contains($event.target)) {
             this.open = !this.open;
         } else if (this.open && !this.taskPanel.nativeElement.contains($event.target)) {

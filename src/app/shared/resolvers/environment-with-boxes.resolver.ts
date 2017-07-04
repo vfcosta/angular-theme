@@ -13,7 +13,7 @@ export class EnvironmentWithBoxesResolver implements Resolve<noosfero.Environmen
             environment = result.data;
             this.environmentService.setCurrentEnvironment(environment);
             return this.environmentService.getBoxes(environment.id);
-        }).then((response: restangular.IResponse) => {
+        }).then((response: any) => {
             environment.boxes = response.data;
             return environment;
         });

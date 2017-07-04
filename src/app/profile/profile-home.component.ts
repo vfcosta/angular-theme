@@ -12,7 +12,7 @@ export class ProfileHomeComponent {
 
     constructor(profileService: ProfileService, router: Router, private route: ActivatedRoute) {
         this.profile = route.snapshot.data['profile'];
-        profileService.getHomePage(<number>this.profile.id, { fields: 'path' }).then((response: restangular.IResponse) => {
+        profileService.getHomePage(<number>this.profile.id, { fields: 'path' }).then((response: any) => {
             if (response.data && response.data.path) {
                 this.profile.homepage = response.data.path;
                 router.navigate(['/', this.profile.identifier, response.data.path]);

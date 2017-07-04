@@ -11,7 +11,6 @@ import * as helpers from "../../../spec/helpers";
 
 describe("Services", () => {
     describe("Comment Service", () => {
-        let $httpBackend: ng.IHttpBackendService;
         let commentService: CommentService;
         let mocks = helpers.getMocks();
 
@@ -42,27 +41,27 @@ describe("Services", () => {
                 });
             });
 
-            xit("should create a comment in an article", (done) => {
-                let articleId = 1;
-                let comment: noosfero.Comment = <any>{ id: null };
-                $httpBackend.expectPOST(`/api/v1/articles/${articleId}/comments`, comment).respond(200, { comment: { id: 2 } });
-                commentService.createInArticle(<noosfero.Article>{ id: articleId }, comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
-                    expect(result.data).toEqual(<any>{ id: 2 });
-                    done();
-                });
-                $httpBackend.flush();
-            });
+            // xit("should create a comment in an article", (done) => {
+            //     let articleId = 1;
+            //     let comment: noosfero.Comment = <any>{ id: null };
+            //     $httpBackend.expectPOST(`/api/v1/articles/${articleId}/comments`, comment).respond(200, { comment: { id: 2 } });
+            //     commentService.createInArticle(<noosfero.Article>{ id: articleId }, comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
+            //         expect(result.data).toEqual(<any>{ id: 2 });
+            //         done();
+            //     });
+            //     $httpBackend.flush();
+            // });
 
-            xit("should remove a comment from an article", (done) => {
-                let articleId = 1;
-                let comment: noosfero.Comment = <any>{ id: 2 };
-                $httpBackend.expectDELETE(`/api/v1/articles/${articleId}/comments/${comment.id}`).respond(200, { comment: { id: 2 } });
-                commentService.removeFromArticle(<noosfero.Article>{ id: articleId }, comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
-                    expect(result.data).toEqual(<any>{ id: 2 });
-                    done();
-                });
-                $httpBackend.flush();
-            });
+            // xit("should remove a comment from an article", (done) => {
+            //     let articleId = 1;
+            //     let comment: noosfero.Comment = <any>{ id: 2 };
+            //     $httpBackend.expectDELETE(`/api/v1/articles/${articleId}/comments/${comment.id}`).respond(200, { comment: { id: 2 } });
+            //     commentService.removeFromArticle(<noosfero.Article>{ id: articleId }, comment).then((result: noosfero.RestResult<noosfero.Comment>) => {
+            //         expect(result.data).toEqual(<any>{ id: 2 });
+            //         done();
+            //     });
+            //     $httpBackend.flush();
+            // });
         });
     });
 });

@@ -1,23 +1,30 @@
+import { Title } from '@angular/platform-browser';
+import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
+import { EventEmitter } from '@angular/core';
+import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import * as helpers from '../../../spec/helpers';
 import { HeaderService } from "./header.service";
 
 describe("Header Service", () => {
-    let environmentService = jasmine.createSpyObj("EnvironmentService", ["getCurrentEnvironment"]);
-    let resolveEnvironmentPromise;
-    let environmentPromise = { then: (func: Function) => { resolveEnvironmentPromise = func; } };
-    environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(environmentPromise);
+    let mocks = helpers.getMocks();
+    let service: HeaderService;
+    let titleService;
 
-    let document = <any>{};
-    let createComponent = (): HeaderService => {
-        return new HeaderService(document, environmentService);
-    };
+    beforeEach(async(() => {
+        spyOn(mocks.environmentService, "getCurrentEnvironment").and.returnValue(Promise.resolve({ id: 1, name: 'Noosfero' }));
+        TestBed.configureTestingModule({
+            providers: [
+                HeaderService,
+                { provide: EnvironmentService, useValue: mocks.environmentService },
+            ]
+        });
+        service = TestBed.get(HeaderService);
+        titleService = TestBed.get(Title);
+        spyOn(titleService, "setTitle");
+    }));
 
-    it("should set the header title element", () => {
-        let component: HeaderService = createComponent();
-        let titleElJq = jasmine.createSpyObj("titleElement", ["text"]);
-        titleElJq.text = jasmine.createSpy("text");
-        component["titleElement"] = titleElJq;
-        resolveEnvironmentPromise({ id: 1, name: 'Noosfero' });
-        expect(titleElJq.text).toHaveBeenCalledWith('Noosfero');
-    });
+    it("should set the header title element", fakeAsync(() => {
+        tick();
+        expect(titleService.setTitle).toHaveBeenCalledWith('Noosfero');
+    }));
 });

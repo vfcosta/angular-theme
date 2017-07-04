@@ -6,7 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProfileConfigurationComponent } from './profile-configuration.component';
 import * as helpers from "../../../spec/helpers";
-import { provideFilters } from '../../../spec/helpers';
 
 describe("Components", () => {
     describe("Profile Configuration Component", () => {

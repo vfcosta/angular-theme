@@ -23,7 +23,7 @@ export class CommentFormHotspotComponent extends PluginHotspot {
         });
     }
 
-    addHotspot(directiveName: string, component: any) {
+    addHotspot(component: any) {
         this.hotspotComponent = component;
     }
 }

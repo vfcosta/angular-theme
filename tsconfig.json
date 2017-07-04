@@ -8,14 +8,19 @@
         "experimentalDecorators": true,
         "removeComments": false,
         "noImplicitAny": false,
-        "suppressImplicitAnyIndexErrors": true
+        "suppressImplicitAnyIndexErrors": true,
+        "lib": [
+            "es5",
+            "es6",
+            "es2015.promise",
+            "dom"
+        ]
     },
     "exclude": [
         "dev-scripts",
         "node_modules",
         "typings/main",
-        "typings/main.d.ts",
-        "node_modules/ng-forward/cjs/util/jqlite-extensions.d.ts"
+        "typings/main.d.ts"
     ],
     "compileOnSave": false,
     "atom": {

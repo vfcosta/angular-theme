@@ -1,11 +1,12 @@
 import { Router, NavigationEnd, Event, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { Directive, Inject, Injectable } from "@angular/core";
+import { Directive, Inject, Injectable, EventEmitter } from "@angular/core";
 import { DOCUMENT } from '@angular/platform-browser';
 import { AuthEvents } from "../../login/auth-events";
 import { AuthService } from "./../../login/auth.service";
-import { HtmlUtils } from "../html-utils";
 import { DesignModeService } from './design-mode.service';
+
+declare var _: any;
 
 export interface StartParams {
     skin?: string;
@@ -28,14 +29,14 @@ export interface StartParams {
 export class BodyStateClassesService {
 
     private started: boolean = false;
-    private skin: string;
+    public skin: string;
+    public bodyClasses: string[] = [];
+    public changeClasses = new EventEmitter<string[]>();
 
     public static get DESIGN_MODE_ON_CLASSNAME(): string { return "noosfero-design-on"; }
     public static get USER_LOGGED_CLASSNAME(): string { return "noosfero-user-logged"; }
     public static get ROUTE_STATE_CLASSNAME_PREFIX(): string { return "noosfero-route-"; }
     public static get CONTENT_WRAPPER_FULL(): string { return "full-content"; }
-
-    private bodyElement: ng.IAugmentedJQuery = null;
 
     constructor(private router: Router, private route: ActivatedRoute,
         @Inject(DOCUMENT) private document: any,
@@ -56,8 +57,9 @@ export class BodyStateClassesService {
     }
 
     setThemeSkin(skin: string) {
-        this.getBodyElement().removeClass(this.getThemeSkin());
-        this.getBodyElement().addClass(skin);
+        this.removeBodyClass(this.skin);
+        this.skin = skin;
+        this.addBodyClass(this.skin);
         this.localStorageService.set('skin', skin);
     }
 
@@ -66,31 +68,20 @@ export class BodyStateClassesService {
     }
 
     addBodyClass(className: string) {
-        this.getBodyElement().addClass(className);
+        this.bodyClasses.push(className);
+        this.changeClasses.next(this.bodyClasses);
     }
 
     removeBodyClass(className: string) {
-        this.getBodyElement().removeClass(className);
+        _.remove(this.bodyClasses, (cl: string) => { return cl === className; });
+        this.changeClasses.next(this.bodyClasses);
     }
 
-    addContentClass(addClass: boolean, className?: string): BodyStateClassesService {
-
-        let fullContentClass: string = className || BodyStateClassesService.CONTENT_WRAPPER_FULL;
-        let contentWrapper = this.getContentWrapper();
-
-        if (contentWrapper) {
-            if (addClass) {
-                contentWrapper.addClass(fullContentClass);
-            } else {
-                contentWrapper.removeClass(fullContentClass);
-            }
-        }
-        return this;
-    }
-
-    private switchStateClasses(bodyElement: ng.IAugmentedJQuery, stateName: string) {
-        HtmlUtils.removeCssClassByPrefix(bodyElement[0], BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX);
-        bodyElement.addClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + stateName);
+    private switchStateClasses(stateName: string) {
+        _.remove(this.bodyClasses, (cl: string) => {
+            return cl.startsWith(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX);
+        });
+        this.addBodyClass(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + stateName);
     }
 
     /**
@@ -106,14 +97,13 @@ export class BodyStateClassesService {
 
     private toggleDesignModeClass(designOn: boolean) {
         if (designOn) {
-            this.getBodyElement().addClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+            this.addBodyClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
         } else {
-            this.getBodyElement().removeClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+            this.removeBodyClass(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
         }
     }
 
     private setupStateClassToggle() {
-        let bodyElement = this.getBodyElement();
         this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd) {
                 let lastComponent: any = this.route.component;
@@ -122,7 +112,7 @@ export class BodyStateClassesService {
                 }
                 let stateName = "";
                 if (lastComponent) stateName = lastComponent.name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-                this.switchStateClasses(bodyElement, stateName);
+                this.switchStateClasses(stateName);
             }
         });
     }
@@ -132,38 +122,21 @@ export class BodyStateClassesService {
      * and adds events handlers to switch this class when the login events happens
      */
     private setupUserLoggedClassToggle() {
-        let bodyElement = this.getBodyElement();
-
         // get initial logged information from the AuthService
         // add add the css class when the user is authenticated
         if (this.authService.isAuthenticated()) {
-            bodyElement.addClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
+            this.addBodyClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         } else {
-            bodyElement.removeClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
+            this.removeBodyClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         }
 
         // to switch the css class which indicates user logged in
         this.authService.loginSuccess.subscribe(() => {
-            bodyElement.addClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
+            this.addBodyClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         });
 
         this.authService.logoutSuccess.subscribe(() => {
-            bodyElement.removeClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
+            this.removeBodyClass(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         });
-    }
-
-    /**
-     * Returns the user 'body' html Element
-     */
-    private getBodyElement(): ng.IAugmentedJQuery {
-        if (this.bodyElement === null) {
-            this.bodyElement = angular.element(angular.element(this.document).find("body"));
-        }
-        return this.bodyElement;
-    }
-
-    private getContentWrapper(selector?: string) {
-        let doc = angular.element(this.document);
-        return doc.query(selector || '.content-wrapper');
     }
 }

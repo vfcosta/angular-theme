@@ -38,9 +38,9 @@ export class ProfileSummaryComponent {
 
     ngOnInit() {
         if (this.profile.type === "Person" && this.currentUser && this.currentUser.person && this.currentUser.person.id !== this.profile.id) {
-            this.personService.isFriend(<number>this.currentUser.person.id, <number>this.profile.id).then((response: restangular.IResponse) => {
+            this.personService.isFriend(<number>this.currentUser.person.id, <number>this.profile.id).then((response: any) => {
                 this.showRemoveFriend = true;
-            }).catch((response: restangular.IResponse) => {
+            }).catch((response: any) => {
                 this.showAddFriend = true;
             });
         } else {
@@ -68,9 +68,9 @@ export class ProfileSummaryComponent {
     }
 
     addFriend() {
-        this.personService.addFriend(<number>this.profile.id).then((response: restangular.IResponse) => {
+        this.personService.addFriend(<number>this.profile.id).then((response: any) => {
             this.notificationService.success({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.message" });
-        }).catch((response: restangular.IResponse) => {
+        }).catch((response: any) => {
             if (response.data.message.target_id[0].error === 'taken') {
                 this.notificationService.error({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.taken.error.message" });
             } else {
@@ -80,11 +80,11 @@ export class ProfileSummaryComponent {
     }
 
     removeFriend() {
-        this.personService.removeFriend(<number>this.profile.id).then((response: restangular.IResponse) => {
+        this.personService.removeFriend(<number>this.profile.id).then((response: any) => {
             this.showRemoveFriend = false;
             this.showAddFriend = true;
             this.notificationService.success({ title: "profile.actions.add_friend.title", message: "profile.actions.remove_friend.message" });
-        }).catch((response: restangular.IResponse) => {
+        }).catch((response: any) => {
             this.notificationService.error({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.error.message" });
         });
     }

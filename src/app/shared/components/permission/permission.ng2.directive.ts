@@ -13,9 +13,9 @@ export class PermissionNg2Directive implements OnChanges {
     constructor(private element: ElementRef, private renderer: Renderer) { }
 
     ngOnChanges(changes: any) {
-        if(_.isEmpty(_.intersectionBy(this.permission, this.permissionAction.split(',')))){
+        if (_.isEmpty(_.intersectionBy(this.permission, this.permissionAction.split(',')))) {
             this.renderer.setElementStyle(this.element.nativeElement, "display", "none");
-        } else{
+        } else {
             this.renderer.setElementStyle(this.element.nativeElement, "display", "");
         }
     }

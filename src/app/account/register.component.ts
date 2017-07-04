@@ -12,7 +12,7 @@ import { ValidationMessageComponent } from '../shared/components/validation-mess
 export class RegisterComponent {
     @Input() account: any;
     environment: noosfero.Environment;
-    modalInstance: ng.ui.bootstrap.IModalServiceInstance;
+
     @ViewChild('nameErrors') nameErrors: ValidationMessageComponent;
     @ViewChild('userNameErrors') userNameErrors: ValidationMessageComponent;
     @ViewChild('emailErrors') emailErrors: ValidationMessageComponent;

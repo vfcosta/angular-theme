@@ -31,7 +31,7 @@ export class ActivitiesComponent {
             }
 
             return this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page });
-        }).then((response: restangular.IResponse) => {
+        }).then((response: any) => {
             this.activities = response.data.plain();
             if (this.activities.length > 0) {
                 this.hasActivities = true;
@@ -41,9 +41,9 @@ export class ActivitiesComponent {
 
     viewMore() {
         this.page++;
-        this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page }).then((response: restangular.IResponse) => {
+        this.profileService.getNetworkActivities(<number>this.profile.id, { page: this.page }).then((response: any) => {
             this.hasActivities = (response.data.plain().length > 0) ? true : false;
-            angular.forEach(response.data.plain(), (value, key) => {
+            response.data.plain().forEach((value, key) => {
                 this.activities.push(value);
             });
         });

@@ -3,7 +3,7 @@ import { ThemeService } from './theme.service';
 describe("Theme Service", () => {
 
     let location = jasmine.createSpyObj("location", ["reload"]);
-    let window = <ng.IWindowService>{location: location};
+    let window = <Window>{location: location};
 
     it("not reload location when current theme is null", () => {
         let service = new ThemeService(window);

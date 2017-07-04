@@ -11,10 +11,10 @@ export class ProfileResolver implements Resolve<noosfero.Profile> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         let profileWithBoxes: noosfero.Profile;
         return this.profileService.setCurrentProfileByIdentifier(route.params["profile"]).then((profile: noosfero.Profile) => {
-            if (this.themeService.verifyTheme(profile.theme)) return <Promise<restangular.IResponse>>new Promise(() => {}); // return an empty promise to break promise chain
+            if (this.themeService.verifyTheme(profile.theme)) return <Promise<any>>new Promise(() => {}); // return an empty promise to break promise chain
             profileWithBoxes = profile;
             return this.profileService.getBoxes(<number>profile.id);
-        }).then((response: restangular.IResponse) => {
+        }).then((response: any) => {
             profileWithBoxes.boxes = response.data;
             this.profileService.setCurrentProfile(profileWithBoxes);
             return profileWithBoxes;

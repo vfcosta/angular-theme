@@ -6,6 +6,8 @@ import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, 
 import { BrowserModule } from '@angular/platform-browser';
 import * as helpers from "../../../spec/helpers";
 
+declare var _: any;
+
 describe("Services", () => {
     describe("Domain Service", () => {
         let service: DomainService;
@@ -33,7 +35,7 @@ describe("Services", () => {
             it("should return all domains", () => {
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/domains`, domains, {}, 200);
                 service.list().then((content: noosfero.RestResult<noosfero.Domain[]>) => {
-                    expect(angular.copy(content.data)).toEqual(<noosfero.Domain[]>domains);
+                    expect(_.cloneDeep(content.data)).toEqual(<noosfero.Domain[]>domains);
                 });
             });
         });

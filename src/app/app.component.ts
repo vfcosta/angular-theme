@@ -8,10 +8,17 @@ import { Component } from '@angular/core';
 export class AppComponent {
 
     public themeSkin: string = 'skin-default';
+    private appClasses = "";
 
-    constructor(bodyStateClassesService: BodyStateClassesService) {
+    constructor(private bodyStateClassesService: BodyStateClassesService) {
         bodyStateClassesService.start({
             skin: this.themeSkin
+        });
+    }
+
+    ngAfterViewInit() {
+        this.bodyStateClassesService.changeClasses.subscribe((classes: string[]) => {
+            this.appClasses = classes.join(" ");
         });
     }
 }

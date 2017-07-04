@@ -62,7 +62,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         this.resolveCurrentPromise(object);
     }
 
-    protected extractData(response: restangular.IResponse): noosfero.RestResult<any> {
+    protected extractData(response: any): noosfero.RestResult<any> {
         let dataKey: string;
         if (response.data && this.getDataKeys()) {
             if ((<Object>response.data).hasOwnProperty(this.getDataKeys().singular)) {
@@ -78,13 +78,6 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         };
     };
 
-    protected buildResult(response: restangular.IResponse): noosfero.RestResult<T> {
-        return {
-            data: response.data,
-            headers: response.headers,
-            status: response.status
-        };
-    };
     /**
      * Abstract getPath() method is used to mount the url
      * on REST Operations
@@ -111,9 +104,9 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      *
      * @protected
      * @param {number} id The resource id
-     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
+     * @returns {Promise<T>} Returns a Promise to the Generic Type
      */
-    public get(id: number | string, rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public get(id: number | string, rootElement?: any, queryParams?: any, headers?: any): Promise<noosfero.RestResult<T>> {
         let restRequest: any;
         if (rootElement) {
             restRequest = rootElement.one(this.getResourcePath(), <any>id).get(queryParams, headers);
@@ -128,9 +121,9 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      *
      * @protected
      * @param {number} id (description)
-     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
+     * @returns {Promise<T>} Returns a Promise to the Generic Type
      */
-    public list(rootElement?: any, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T[]>> {
+    public list(rootElement?: any, queryParams?: any, headers?: any): Promise<noosfero.RestResult<T[]>> {
         let restRequest: any;
         if (rootElement) {
             restRequest = rootElement.customGET(this.getResourcePath(), queryParams, headers);
@@ -145,9 +138,9 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      *
      * @protected
      * @param {number} id (description)
-     * @returns {ng.IPromise<T>} Returns a Promise to the Generic Type
+     * @returns {Promise<T>} Returns a Promise to the Generic Type
      */
-    public getSub(rootElement?: restangular.IElement, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public getSub(rootElement?: any, queryParams?: any, headers?: any): Promise<noosfero.RestResult<T>> {
         let restRequest: any;
         if (rootElement) {
             restRequest = rootElement.customGET(this.getResourcePath(), queryParams, headers);
@@ -157,7 +150,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
-    public listSubElements<C>(obj: T, subElement: string, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<C>> {
+    public listSubElements<C>(obj: T, subElement: string, queryParams?: any, headers?: any): Promise<noosfero.RestResult<C>> {
         let restRequest: any;
         let objElement = this.getElement(obj.id);
         objElement.id = obj.id;
@@ -169,8 +162,8 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * Removes the object provided from the resource collection,
      * calls DELETE /resourcepath/:resourceId
      */
-    public remove(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
-        let restangularObj: restangular.IElement;
+    public remove(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): Promise<noosfero.RestResult<T>> {
+        let restangularObj: any;
         if (rootElement) {
             restangularObj = rootElement.one(this.getResourcePath(), obj.id);
         } else {
@@ -185,9 +178,9 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * Updates the object into the resource collection
      * calls PUT /resourcePath/:resourceId   {object}
      */
-    public update(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public update(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any): Promise<noosfero.RestResult<T>> {
         let restRequest: any;
-        let restangularObj: restangular.IElement;
+        let restangularObj: any;
 
         if (rootElement) {
             restangularObj = rootElement.one(this.getResourcePath(), obj.id);
@@ -202,7 +195,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
      * Creates a new Resource into the resource collection
      * calls POST /resourcePath
      */
-    public create(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any, isSub: boolean = true, path?: string): ng.IPromise<noosfero.RestResult<T>> {
+    public create(obj: T, rootElement?: noosfero.RestModel, queryParams?: any, headers?: any, isSub: boolean = true, path?: string): Promise<noosfero.RestResult<T>> {
         let restRequest: any;
 
         let data = <any>{};
@@ -221,12 +214,12 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
         return restRequest.toPromise().then(this.getHandleSuccessFunction(this.modelAddedEventEmitter));
     }
 
-    public patch(data?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public patch(data?: any, headers?: any): Promise<noosfero.RestResult<T>> {
         let restRequest = this.baseResource.patch(data, headers);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
-    public post(path: string, rootElement?: restangular.IElement, data?: any, headers?: any): ng.IPromise<noosfero.RestResult<T>> {
+    public post(path: string, rootElement?: any, data?: any, headers?: any): Promise<noosfero.RestResult<T>> {
         let restRequest: any;
         if (rootElement) {
             restRequest = rootElement.customPOST(data, path, null, headers);
@@ -248,13 +241,13 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     }
 
     /** HANDLERS */
-    protected getHandleSuccessFunction<C>(successEmitter: EventEmitter<T> = null, currentModel: T = null): (response: restangular.IResponse) => noosfero.RestResult<any> {
+    protected getHandleSuccessFunction<C>(successEmitter: EventEmitter<T> = null, currentModel: T = null): (response: any) => noosfero.RestResult<any> {
         /**
          * (description)
          *
-         * @param {restangular.IResponse} response (description)
+         * @param {any} response (description)
          */
-        let successFunction = (response: restangular.IResponse) => {
+        let successFunction = (response: any) => {
             let resultModel: noosfero.RestResult<T> = <any>this.extractData(response);
             // emits the event if a successEmiter was provided in the successEmitter parameter
             if (successEmitter !== null) {

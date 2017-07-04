@@ -1,5 +1,5 @@
 import { SessionService } from "./session.service";
-import { fixtures, createComponentFromClass, createProviderToValue } from "./../../spec/helpers";
+import { fixtures } from "./../../spec/helpers";
 import { PersonService } from "../../lib/ng-noosfero-api/http/person.service";
 import * as helpers from "../../spec/helpers";
 

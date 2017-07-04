@@ -34,9 +34,9 @@ export class BlockEditionComponent {
     }
 
     ngOnInit() {
-        this.originalBlock = angular.copy(this.block);
+        this.originalBlock = _.cloneDeep(this.block);
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, (owner: noosfero.Profile | noosfero.Environment) => {
-            this.originalBlock = angular.copy(this.block);
+            this.originalBlock = _.cloneDeep(this.block);
         });
 
         if (this.block.type !== 'MainBlock')
@@ -50,12 +50,12 @@ export class BlockEditionComponent {
     emitChanges() {
         let blockDiff = <noosfero.Block>{ id: this.block.id, api_content: {} };
         for (let k in this.block.settings) {
-            if (!angular.equals((<any>this.block.settings)[k], (<any>this.originalBlock.settings)[k])) {
+            if (!_.isEqual((<any>this.block.settings)[k], (<any>this.originalBlock.settings)[k])) {
                 (<any>blockDiff)[k] = (<any>this.block.settings)[k];
             }
         }
         for (let k in this.block.api_content) {
-            if (this.originalBlock.api_content && !angular.equals((<any>this.block.api_content)[k], (<any>this.originalBlock.api_content)[k])) {
+            if (this.originalBlock.api_content && !_.isEqual((<any>this.block.api_content)[k], (<any>this.originalBlock.api_content)[k])) {
                 (<any>blockDiff.api_content)[k] = (<any>this.block.api_content)[k];
             }
         }

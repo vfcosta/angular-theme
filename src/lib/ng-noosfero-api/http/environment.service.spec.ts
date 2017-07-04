@@ -28,7 +28,7 @@ describe("Services", () => {
             it("should return the boxes of environment ", () => {
                 let environmentId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/environments/${environmentId}/boxes`, [{ position: 1 }], {}, 200);
-                service.getBoxes(environmentId).then((response: restangular.IResponse) => {
+                service.getBoxes(environmentId).then((response: any) => {
                     expect(response.data[0]).toEqual({ position: 1 });
                 });
             });
@@ -36,7 +36,7 @@ describe("Services", () => {
             it("should return the tags of environment ", () => {
                 let environmentId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/environments/${environmentId}/tags`, [{ position: 1 }], {}, 200);
-                service.getTags(environmentId).then((response: restangular.IResponse) => {
+                service.getTags(environmentId).then((response: any) => {
                     expect(response.data[0]).toEqual({ position: 1 });
                 });
             });
@@ -52,7 +52,7 @@ describe("Services", () => {
             it("should return all people of environment", () => {
                 let environmentId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/environments/${environmentId}/people`, [{ id: 2 }], {}, 200);
-                service.getEnvironmentPeople(environmentId).then((response: restangular.IResponse) => {
+                service.getEnvironmentPeople(environmentId).then((response: any) => {
                     expect(response.data).toEqual(jasmine.objectContaining([{ id: 2 }]));
                 });
             });

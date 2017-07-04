@@ -32,7 +32,7 @@ describe("Services", () => {
                 };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/new_password?code=${data.code}&password=${data.password}&password_confirmation=${data.password_confirmation}`,
                     [{ login: "test" }], {}, 201);
-                service.newPassword('1234567890', 'test', 'test').then((response: restangular.IResponse) => {
+                service.newPassword('1234567890', 'test', 'test').then((response: any) => {
                     expect(response.data[0].login).toEqual("test");
                 });
             });

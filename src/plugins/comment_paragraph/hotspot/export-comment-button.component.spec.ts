@@ -9,7 +9,6 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ExportCommentButtonHotspotComponent } from "./export-comment-button.component";
 import * as helpers from "../../../spec/helpers";
-import { PermissionDirective } from '../../../app/shared/components/permission/permission.directive';
 
 describe("Components", () => {
     describe("Export Comment Button Hotspot Component", () => {
