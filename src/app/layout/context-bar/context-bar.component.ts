@@ -46,9 +46,7 @@ export class ContextBarComponent {
             this.blocksChanged = this.blocksChanged.filter((b: noosfero.Block) => {
                 return block.id !== b.id;
             });
-            if (!block.id || block.title != null || Object.keys(block).length > 3 || (block.api_content && Object.keys(block.api_content).length >= 1)) {
-                this.blocksChanged.push(block);
-            }
+            this.blocksChanged.push(block);
             this.ref.detectChanges();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {

@@ -95,12 +95,6 @@ describe("Context Bar Component", () => {
         expect(component.blocksChanged).toEqual([blockChanged]);
     });
 
-    it("not add block to blocksChanged when there is no changes in block", () => {
-        let blockChanged = <noosfero.Block>{ id: 2 };
-        eventFunction(blockChanged);
-        expect(component.blocksChanged).toEqual([]);
-    });
-
     it("call profile service to update template when apply", () => {
         component.owner.layout_template = "leftbar";
         component.applyChanges();

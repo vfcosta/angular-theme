@@ -71,7 +71,10 @@ export class BlockEditionComponent {
         }
         blockDiff.box = <noosfero.Box>{ id: this.box.id };
         if (!this.block.id) blockDiff.type = this.block.type;
-        this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
+
+        if (!blockDiff.id || blockDiff.title != null || Object.keys(blockDiff).length > 3 || (blockDiff.api_content && Object.keys(blockDiff.api_content).length >= 1)) {
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
+        }
     }
 
     isOptionSelected(optionKey: string, option: string) {
