@@ -30,7 +30,7 @@ export class BlockEditionComponent {
     }
 
     ngDoCheck() {
-        this.emitChanges();
+        if (this.block && this.originalBlock) this.emitChanges();
     }
 
     ngOnInit() {

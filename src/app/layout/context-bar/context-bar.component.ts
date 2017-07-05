@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Inject, Input, Component } from '@angular/core';
+import { Inject, Input, Component, ChangeDetectorRef } from '@angular/core';
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
 import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
@@ -25,7 +25,7 @@ export class ContextBarComponent {
     originalCustomHeader: string;
     originalCustomFooter: string;
 
-    constructor(@Inject("Window") private window: Window,
+    constructor(private ref: ChangeDetectorRef, @Inject("Window") private window: Window,
         private router: Router,
         private eventsHubService: EventsHubService,
         private blockService: BlockService,
@@ -49,6 +49,7 @@ export class ContextBarComponent {
             if (!block.id || block.title != null || Object.keys(block).length > 3 || (block.api_content && Object.keys(block.api_content).length >= 1)) {
                 this.blocksChanged.push(block);
             }
+            this.ref.detectChanges();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;
