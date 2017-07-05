@@ -32,7 +32,6 @@ export class BoxComponent {
         });
         block.position = 1;
         box.blocks.unshift(block);
-        box.blocks = box.blocks.slice(); // force reload
     }
 
     updatePosition(sortedBlocks: noosfero.Block[]) {

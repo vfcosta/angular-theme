@@ -27,6 +27,7 @@ describe("Components", () => {
                     { provide: ProfileService, useValue: mocks.profileService },
                     { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: DesignModeService, useValue: mocks.designModeService },
+                    { provide: ThemeService, useValue: mocks.themeService },
                     { provide: Router, useValue: mocks.router },
                     { provide: ActivatedRoute, useValue: mocks.route },
                 ],
