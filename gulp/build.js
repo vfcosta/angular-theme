@@ -16,54 +16,18 @@ var $ = require('gulp-load-plugins')({
   pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
 });
 
-gulp.task('partials', function () {
-  var merged = merge();
-  ['app', conf.paths.plugins].forEach(function(partialPath) {
-    var srcPaths = [path.join(conf.paths.tmp, '/serve/app/**/*.html')];
-    conf.paths.allSources.forEach(function(src) {
-      srcPaths.push(path.join(src, partialPath, '/**/*.html'));
-    });
-    merged.add(gulp.src(srcPaths)
-      .pipe($.minifyHtml({
-        empty: true,
-        spare: true,
-        quotes: true
-      }))
-      .pipe($.angularTemplatecache('templateCacheHtml-'+partialPath+'.js', {
-        module: 'noosfero.templates.' + partialPath,
-        standalone: true,
-        root: partialPath
-      }))
-      .pipe(gulp.dest(conf.paths.tmp + '/partials/')));
-  });
-  return merged;
-});
-
-gulp.task('html', ['inject', 'partials'], function () {
-  var partialsInjectFile = gulp.src([
-    path.join(conf.paths.tmp, '/partials/templateCacheHtml-app.js'),
-    path.join(conf.paths.tmp, '/partials/templateCacheHtml-plugins.js')], { read: false });
-  var partialsInjectOptions = {
-    starttag: '<!-- inject:partials -->',
-    ignorePath: path.join(conf.paths.tmp, '/partials'),
-    addRootSlash: false
-  };
-
+gulp.task('html', ['inject'], function () {
   var htmlFilter = $.filter('*.html', { restore: true });
   var jsFilter = $.filter('**/*.js', { restore: true });
   var cssFilter = $.filter('**/*.css', { restore: true });
   var assets;
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
-    .pipe($.inject(partialsInjectFile, partialsInjectOptions))
     .pipe(assets = $.useref.assets())
     .pipe($.rev())
     .pipe(jsFilter)
     .pipe($.replace('assets/images/', noosferoThemePrefix + 'assets/images/'))
     .pipe($.replace('/languages/', noosferoThemePrefix + 'languages/'))
-    .pipe($.replace('bower_components/angular-i18n/', noosferoThemePrefix + 'locale/angular-i18n/'))
-    .pipe($.replace('bower_components/moment/', noosferoThemePrefix + 'locale/moment/'))
-    .pipe($.replace('bower_components/messageformat/', noosferoThemePrefix + 'locale/messageformat/'))
     .pipe($.sourcemaps.init())
     .pipe($.ngAnnotate())
     // TODO - check how to make uglify work with ngforward
@@ -108,15 +72,6 @@ gulp.task('ckeditor', function () {
   return gulp.src(['node_modules/ckeditor/**/*']).pipe(gulp.dest(path.join(conf.paths.dist, '/ckeditor')));
 });
 
-gulp.task('locale', function () {
-  return gulp.src([
-    path.join("bower_components/angular-i18n", '*.js'),
-    path.join("bower_components/moment/locale", '*.js'),
-    path.join("bower_components/messageformat/locale", '*.js'),
-  ], {base: 'bower_components/'})
-    .pipe(gulp.dest(path.join(conf.paths.dist, '/locale/')));
-});
-
 gulp.task('other', function () {
   var fileFilter = $.filter(function (file) {
     return file.stat.isFile();
@@ -139,7 +94,7 @@ gulp.task('clean-docs', [], function() {
     return $.del([path.join(conf.paths.docs, '/')]);
 });
 
-gulp.task('plugin-languages', ['locale'], function() {
+gulp.task('plugin-languages', [], function() {
   return languages.pluginLanguages(conf.paths.dist);
 });
 
@@ -159,4 +114,4 @@ gulp.task('inject-build', ['html'], function () {
   gulp.start('inject-theme-options');
 });
 
-gulp.task('build', ['ckeditor', 'fonts', 'other', 'locale', 'plugin-languages', 'noosfero', 'inject-build']);
+gulp.task('build', ['ckeditor', 'fonts', 'other', 'plugin-languages', 'noosfero', 'inject-build']);
