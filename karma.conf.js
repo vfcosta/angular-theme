@@ -44,7 +44,6 @@ var karmaPlugins = [
     'karma-phantomjs-shim',
     'karma-jasmine',
     'karma-spec-reporter',
-    'karma-ng-html2js-preprocessor',
     'karma-sourcemap-loader',
     'karma-coverage',
     'karma-coverage-istanbul-reporter',
@@ -53,11 +52,6 @@ var karmaPlugins = [
 
 var _ = require('lodash');
 var wiredep = require('wiredep');
-
-var pathSrcHtml = [
-    path.join('./src/**/!(language-selector)/*.html')
-];
-
 var glob = require("glob");
 
 function listFiles() {
@@ -67,8 +61,7 @@ function listFiles() {
     });
 
     var patterns = [].concat(wiredep(wiredepOptions).js)
-        .concat(projectFiles)
-        .concat(pathSrcHtml);
+        .concat(projectFiles);
 
     var files = vendorFiles;
     var pFiles = patterns.map(function (pattern) {
@@ -99,10 +92,6 @@ module.exports = function (config) {
         webpack: webpackConfig,
         webpackServer: {
             quite: true
-        },
-        ngHtml2JsPreprocessor: {
-            stripPrefix: conf.paths.src + '/',
-            moduleName: 'templates'
         },
         frameworks: ['jasmine', 'phantomjs-shim'],
         angularFilesort: {
@@ -139,9 +128,5 @@ module.exports = function (config) {
     if(config.grep) {
       configuration.client = { args: ['--grep', config.grep] };
     }
-
-    pathSrcHtml.forEach(function (path) {
-        configuration.preprocessors[path] = ['ng-html2js'];
-    });
     config.set(configuration);
 };
