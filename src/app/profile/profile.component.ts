@@ -1,3 +1,4 @@
+import { ThemeService } from './../shared/services/theme.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DesignModeService } from './../shared/services/design-mode.service';
 import { Component, Inject, Input } from '@angular/core';
@@ -28,14 +29,10 @@ export class ProfileComponent {
 
     constructor(private profileService: ProfileService, private route: ActivatedRoute,
         private notificationService: NotificationService, private designModeService: DesignModeService,
-        private router: Router) {
+        private router: Router, private themeService: ThemeService) {
 
         designModeService.setInDesignMode(false);
         this.profile = route.snapshot.data['profile'];
-        //     if (themeService.verifyTheme(profile.theme)) return <Promise<any>>new Promise(() => {}); // return an empty promise to break promise chain
-        // }).catch(() => {
-        //     this.router.navigate(['/']);
-        //     this.notificationService.error({ message: "notification.profile.not_found" });
-        // });
+        this.themeService.verifyTheme(this.profile.theme);
     }
 }
