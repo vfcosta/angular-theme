@@ -18,6 +18,7 @@ export class NewCommunityComponent extends AbstractFormCommunity {
         this.sessionProfile = this.sessionService.currentUser().person;
         this.community = <noosfero.Community>{ closed: true };
         this.nameErrors.pushAditionalField('identifier');
+        this.profile = this.route.parent.snapshot.data['profile'];
     }
 
     getTitle() {

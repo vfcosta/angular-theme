@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { SessionService } from './../../../login/session.service';
 import { ViewChild } from '@angular/core';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
@@ -23,7 +23,8 @@ export abstract class AbstractFormCommunity {
         @Inject(ProfileService) public profileService: ProfileService,
         @Inject(SessionService) public sessionService: SessionService,
         @Inject(TranslatorService) public translatorService: TranslatorService,
-        @Inject(Router) protected router: Router) {}
+        @Inject(Router) protected router: Router,
+        @Inject(ActivatedRoute) protected route: ActivatedRoute) {}
 
     abstract getTitle();
     abstract save();

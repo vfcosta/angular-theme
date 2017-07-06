@@ -1,4 +1,4 @@
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
@@ -21,6 +21,7 @@ describe("Components", () => {
         let component: NewCommunityComponent;
 
         beforeEach(async(() => {
+            mocks.route.parent.snapshot.data['profile'] = <noosfero.Profile>mocks.profile;
             TestBed.configureTestingModule({
                 imports: [RouterTestingModule, FormsModule, TranslateModule.forRoot()],
                 declarations: [NewCommunityComponent, ValidationMessageComponent],
@@ -31,12 +32,12 @@ describe("Components", () => {
                     { provide: SessionService, useValue: mocks.sessionService },
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: Router, useValue: mocks.router },
+                    { provide: ActivatedRoute, useValue: mocks.route },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]
             });
             fixture = TestBed.createComponent(NewCommunityComponent);
             component = fixture.componentInstance;
-            component.profile = <noosfero.Profile>mocks.profile;
             fixture.detectChanges();
         }));
 
