@@ -1,13 +1,8 @@
-<div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-11">
-    <h1>{{"tasks.header" | translate}}</h1>
+<h1>{{"tasks.header" | translate}}</h1>
 
-    <task-list [tasks]="tasks"></task-list>
+<task-list [tasks]="tasks"></task-list>
 
-    <pagination *ngIf="total>0" [totalItems]="total" [itemsPerPage]="perPage"
-      [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
-      firstText="«" lastText="»" previousText="‹" nextText="›"
-      class="pagination-sm center-block"></pagination>
-  </div>
-</div>
+<pagination *ngIf="total>0" [totalItems]="total" [itemsPerPage]="perPage"
+  [(ngModel)]="currentPage" (pageChanged)="loadPage($event)" boundaryLinks="true"
+  firstText="«" lastText="»" previousText="‹" nextText="›"
+  class="pagination-sm center-block"></pagination>

@@ -110,6 +110,13 @@ const routes: Routes = [
                 path: 'cms/edit/:id',
                 component: CmsComponent
             },
+        ]
+    },
+    {
+        path: 'myprofile/:profile',
+        component: ProfileComponent,
+        resolve: { environment: EnvironmentResolver, profile: ProfileResolver },
+        children: [
             {
                 path: 'tasks',
                 component: TasksComponent
