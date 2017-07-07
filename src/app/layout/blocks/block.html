@@ -1,7 +1,7 @@
 <div bootstrap-resizable [designMode]="designMode" [(bootstrapResizableColumns)]="block.settings.visualization.columns" 
     [class.invisible-block]="!visible()" class="noosfero-block col-md-{{block.settings?.visualization?.columns || 12}}"
     [@animate]="animation">
-    <div [hidden]="!designMode" class="actions block-actions" [permission]="block.permissions" permissionAction="allow_edit">
+    <div *ngIf="designMode" class="actions block-actions" [permission]="block.permissions" permissionAction="allow_edit">
         <a class="action visibility" href="#" *ngIf="canDelete()" (click)="markForDeletion()">
             <i class="fa fa-remove fa-fw fa-lg"></i>
         </a>

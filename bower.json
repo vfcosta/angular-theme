@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "dependencies": {
     "bootstrap-sass": "~3.3.6",
-    "animate.css": "~3.4.0",
     "font-awesome": "fontawesome#~4.7.0",
     "lodash": "4.17.4",
     "roboto-fontface": "^0.6.0"

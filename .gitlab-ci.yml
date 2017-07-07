@@ -4,7 +4,6 @@ variables:
 
 cache:
   key: "$CI_BUILD_REF_NAME"
-  untracked: true
   paths:
     - node_modules/
     - bower_components/

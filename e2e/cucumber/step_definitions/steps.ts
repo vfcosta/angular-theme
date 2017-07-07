@@ -12,7 +12,7 @@ chai.use(chaiAsPromised);
 let expect = chai.expect;
 
 defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
-    setDefaultTimeout(30000);
+    setDefaultTimeout(50000);
 
     Given('I go to the homepage', () => {
         return browser.get('/');

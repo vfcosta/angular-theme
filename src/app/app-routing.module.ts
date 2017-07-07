@@ -1,3 +1,4 @@
+import { CustomReuseStrategy } from './shared/custom-reuse-strategy';
 import { PasswordComponent } from './login/new-password.component';
 import { RegisterComponent } from './account/register.component';
 import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
@@ -26,7 +27,7 @@ import { ContentViewerComponent } from './article/content-viewer/content-viewer.
 import { ProfileComponent } from './profile/profile.component';
 import { EnvironmentComponent } from './environment/environment.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, RouteReuseStrategy } from '@angular/router';
 import { EnvironmentResolver } from "./shared/resolvers/environment.resolver";
 
 const routes: Routes = [
@@ -109,6 +110,13 @@ const routes: Routes = [
                 path: 'cms/edit/:id',
                 component: CmsComponent
             },
+        ]
+    },
+    {
+        path: 'myprofile/:profile',
+        component: ProfileComponent,
+        resolve: { environment: EnvironmentResolver, profile: ProfileResolver },
+        children: [
             {
                 path: 'tasks',
                 component: TasksComponent
@@ -163,6 +171,7 @@ const routes: Routes = [
         ProfileResolver,
         EnvironmentWithBoxesResolver,
         DomainResolver,
+        { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }
     ]
 })
 export class AppRoutingModule { }

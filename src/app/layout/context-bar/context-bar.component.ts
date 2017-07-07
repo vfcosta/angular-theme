@@ -24,6 +24,7 @@ export class ContextBarComponent {
     originalLayout: string;
     originalCustomHeader: string;
     originalCustomFooter: string;
+    destroyed = false;
 
     constructor(private ref: ChangeDetectorRef, @Inject("Window") private window: Window,
         private router: Router,
@@ -51,12 +52,16 @@ export class ContextBarComponent {
                 (block.api_content && Object.keys(block.api_content).length >= 1))) {
                 this.blocksChanged.push(block);
             }
-            this.ref.detectChanges();
+            if (!this.destroyed) this.ref.detectChanges();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;
         });
         this.designModeOn = this.designModeService.isInDesignMode();
+    }
+
+    ngOnDestroy() {
+        this.destroyed = true;
     }
 
     private callOwnerService(obj: noosfero.Profile | noosfero.Environment) {

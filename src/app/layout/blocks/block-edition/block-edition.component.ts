@@ -19,6 +19,7 @@ export class BlockEditionComponent {
 
     originalBlock: noosfero.Block;
     blockChanged = false;
+    lastBlockDiff = null;
 
     constructor(
         private elementRef: ElementRef,
@@ -70,7 +71,11 @@ export class BlockEditionComponent {
         }
         blockDiff.box = <noosfero.Box>{ id: this.box.id };
         if (!this.block.id) blockDiff.type = this.block.type;
-        this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
+
+        if (this.lastBlockDiff && !_.isEqual(blockDiff, this.lastBlockDiff)) {
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
+        }
+        this.lastBlockDiff = blockDiff;
     }
 
     isOptionSelected(optionKey: string, option: string) {
