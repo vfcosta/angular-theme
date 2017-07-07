@@ -132,7 +132,8 @@ describe("Block Component", () => {
     });
 
     it("display block actions in design mode", () => {
-        component.block = <any>{ id: 1, hide: false };
+        component.block = <any>{ id: 1, hide: false, definition: {} };
+        fixture.detectChanges();
         component.designMode = true;
         fixture.detectChanges();
         expect(fixture.debugElement.queryAll(By.css('.block-actions')).length).toEqual(1);
@@ -142,7 +143,7 @@ describe("Block Component", () => {
         component.block = <any>{ id: 1, hide: false };
         component.designMode = false;
         fixture.detectChanges();
-        expect(fixture.debugElement.query(By.css('.block-actions')).styles['display']).toEqual('none');
+        expect(fixture.debugElement.query(By.css('.block-actions'))).toBeNull();
     });
 
     it("set block columns according to visualization settings", () => {
