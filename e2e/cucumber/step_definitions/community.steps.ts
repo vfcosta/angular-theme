@@ -12,8 +12,6 @@ chai.use(chaiAsPromised);
 let expect = chai.expect;
 
 defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
-    setDefaultTimeout(10000);
-
     Given('I choose to moderate members of the community before', () => {
         return utils.pressButton("#acceptBefore");
     });
