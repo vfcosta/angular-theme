@@ -110,7 +110,6 @@ export class BlockComponent {
         this.block._destroy = true;
         this.animation = "zoomOutUp";
         this.onRemove.next(this.block);
-        this.ref.detectChanges();
     }
 
     canDelete() {

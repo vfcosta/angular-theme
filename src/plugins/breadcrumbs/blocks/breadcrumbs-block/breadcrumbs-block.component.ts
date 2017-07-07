@@ -1,5 +1,6 @@
 import { Router, Event, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, Inject, Input } from "@angular/core";
+import { Subscription } from "rxjs";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 
 @Component({
@@ -14,16 +15,20 @@ export class BreadcrumbsBlockComponent {
 
     profile: noosfero.Profile;
     links: any[] = [];
+    routerEventSubscription: Subscription;
 
     constructor(private blockService: BlockService, private router: Router, private route: ActivatedRoute,
         @Inject("Window") private window: Window) { }
 
     ngOnInit() {
-        this.router.events.subscribe((event: Event) => {
+        this.routerEventSubscription = this.router.events.subscribe((event: Event) => {
              if (event instanceof NavigationEnd) this.setNavigationState();
         });
-        this.setNavigationState();
         this.profile = this.owner;
+    }
+
+    ngOnDestroy() {
+        this.routerEventSubscription.unsubscribe();
     }
 
     setNavigationState() {
