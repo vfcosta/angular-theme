@@ -19,12 +19,12 @@
         <br>
         <div class="actions">
             <div class="add-friend action">
-                <div *ngIf="showAddFriend">
+                <!--<div *ngIf="showAddFriend">
                     <button class="btn btn-primary" (click)="addFriend()"><i class="fa fa-plus" aria-hidden="true"></i> {{"profile.actions.add_friend" | translate}} </button>
                 </div>
                 <div *ngIf="showRemoveFriend">
                     <button class="btn btn-warning" (click)="removeFriend()"><i class="fa fa-minus" aria-hidden="true"></i> {{"profile.actions.remove_friend" | translate}} </button>
-                </div>
+                </div>-->
                 <profile-join *ngIf='currentUser' [profile]="profile"></profile-join>
             </div>
             <div class="profile-setup action">

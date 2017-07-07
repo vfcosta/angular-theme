@@ -56,6 +56,16 @@ export class PersonService extends RestangularService<noosfero.Person> {
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
+    getFriendshipState(person: noosfero.Person, friend: noosfero.Profile) {
+        if (person) {
+            return this.getElement(person.id).customGET('friendship', { friend_id: friend.id }).toPromise().then((result: any) => {
+                return Promise.resolve(result.data);
+            });
+        } else {
+            return Promise.resolve(0);
+        }
+    }
+
     search(params: any): any {
         return this.restangular.all("people").customGET('', params).map(ret => {
             return ret.data;

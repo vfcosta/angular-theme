@@ -73,12 +73,5 @@ describe("Components", () => {
             expect(component.editPopoverOpen).toBeFalsy();
         });
 
-        it("not display add/remove button when view the current user profile", () => {
-            fixture.detectChanges();
-            component.profile.id = 0;
-            component.ngOnInit();
-            expect(component.showRemoveFriend).toBeFalsy();
-            expect(component.showAddFriend).toBeFalsy();
-        });
     });
 });

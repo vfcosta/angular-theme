@@ -3,9 +3,15 @@ import { Injectable, Inject } from "@angular/core";
 import { RestangularService } from "./restangular_service";
 
 export const MembershipStatus = {
-    NotMember: 0,
-    WaitingForApproval: 1,
-    Member: 2
+    NotMember: 297,
+    WaitingForApproval: 296,
+    Member: 295
+};
+
+export const FriendshipStatus = {
+    NotFriend: 294,
+    WaitingForApproval: 293,
+    Friend: 292
 };
 
 @Injectable()

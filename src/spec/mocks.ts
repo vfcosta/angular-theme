@@ -444,13 +444,21 @@ export function getMocks() {
             getTags: () => { },
             getHomePage: () => {},
             getNetworkActivities: () => {},
+            isMember: () => { return Promise.resolve(true)},
+            addMember: () => {return Promise.resolve({ data: {} })},            
+            removeMember: () => {return Promise.resolve({ data: {} })}            
+            // getMembershipState: (profileId: noosfero.Person, friendId: noosfero.Profile) => { return Promise.resolve({ }) }
         },
         personService: {
-            search: () => Observable.of([mocks.profile])
+            search: () => Observable.of([mocks.profile]),
+            getFriendshipState: () => { return Promise.resolve({ }) },
+            addFriend: () => {return Promise.resolve({ data: {} })},
+            removeFriend: () => {return Promise.resolve({ data: {} })}
         },
         communityService: {
             sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),
-            createNewCommunity: (community: noosfero.Community) => Promise.resolve({})
+            createNewCommunity: (community: noosfero.Community) => Promise.resolve({}),
+            getMembershipState: () => { return Promise.resolve({ }) }
         },
         sessionService: {
             currentUser: () => <noosfero.User>{ person: { id: 1, identifier: 'test_user' } },

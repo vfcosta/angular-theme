@@ -27,12 +27,12 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I press button leave community', () => {
-        utils.pressButton("profile-join .actions .organization-actions .leave");
+        utils.pressButton("profile-join .actions .profile-actions .leave");
         return browser.waitForAngular();
     });
 
     Given('I press button join community', () => {
-        return utils.pressButton("profile-join .actions .organization-actions .join");
+        return utils.pressButton("profile-join .actions .profile-actions .join");
     });
 
     Given('I prepare community to run tests', () => {
@@ -56,6 +56,6 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         });
     });
     Then('I should see join community button', () => {
-        return expect(element(by.css("profile-join .actions .organization-actions .join")).isPresent()).to.eventually.equal(true);
+        return expect(element(by.css("profile-join .actions .profile-actions .join")).isPresent()).to.eventually.equal(true);
     });
 });
