@@ -35,7 +35,7 @@ describe("Components", () => {
             component.profile = <noosfero.Profile>mocks.profile;
             expect(mocks.profileService.getHomePage).toHaveBeenCalled();
             tick();
-            expect(mocks.router.navigate).toHaveBeenCalledWith(['/', 'profile-id', 'something']);
+            expect(mocks.router.navigate).toHaveBeenCalledWith(['/', 'profile-id', 'something'], { skipLocationChange: true });
         }));
 
         it("transition to profile info page when there is no homepage setted", fakeAsync(() => {

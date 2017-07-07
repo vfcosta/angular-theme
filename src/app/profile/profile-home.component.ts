@@ -15,7 +15,7 @@ export class ProfileHomeComponent {
         profileService.getHomePage(<number>this.profile.id, { fields: 'path' }).then((response: any) => {
             if (response.data && response.data.path) {
                 this.profile.homepage = response.data.path;
-                router.navigate(['/', this.profile.identifier, response.data.path]);
+                router.navigate(['/', this.profile.identifier, response.data.path], { skipLocationChange: true });
             } else {
                 this.profile.homepage = null;
                 router.navigate(['/', this.profile.identifier]);
