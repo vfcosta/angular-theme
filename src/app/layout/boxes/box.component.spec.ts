@@ -29,8 +29,8 @@ describe("Box Component", () => {
     }));
 
     it("insert block into blocks list when receive event", () => {
-        let box = <noosfero.Box>{ id: 1, blocks: []};
-        component.addBlock(box, <noosfero.Block>{});
-        expect(box.blocks.length).toEqual(1);
+        component.box = <noosfero.Box>{ id: 1, blocks: []};
+        component.addBlock(<noosfero.Block>{});
+        expect(component.box.blocks.length).toEqual(1);
     });
 });

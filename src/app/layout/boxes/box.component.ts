@@ -25,14 +25,28 @@ export class BoxComponent {
         return column && column['subcolumns'] === undefined;
     }
 
-    addBlock(box: noosfero.Box, block: noosfero.Block) {
-        block.permissions = ["allow_edit"];
-        box.blocks.forEach((block: noosfero.Block) => {
-            if (!block._destroy) block.position++;
+    removeBlock(removedBlock: noosfero.Block) {
+        this.box.blocks = this.box.blocks.filter((block: noosfero.Block) => {
+            return block.id !== removedBlock.id;
         });
-        block.position = 1;
-        box.blocks.unshift(block);
-        box.blocks = box.blocks.slice(); // force reload
+        this.resetBlockPositions();
+        this.box.blocks = this.box.blocks.slice(); // force reload
+    }
+
+    addBlock(block: noosfero.Block) {
+        this.box.blocks.unshift(block);
+        this.resetBlockPositions();
+        this.box.blocks = this.box.blocks.slice(); // force reload
+    }
+
+    resetBlockPositions() {
+        let position = 1;
+        this.box.blocks.forEach((block: noosfero.Block) => {
+            if (!block._destroy) {
+                block.position = position;
+                position++;
+            }
+        });
     }
 
     updatePosition(sortedBlocks: noosfero.Block[]) {

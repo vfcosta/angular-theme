@@ -164,7 +164,7 @@ describe("Block Component", () => {
     });
 
     it("hides block if marked for removal", () => {
-        component.block = <any>{ id: 1};
+        component.block = <any>{ id: 1, settings: { visualization: {} }};
         component.markForDeletion();
         expect(component.animation).toEqual("zoomOutUp");
     });

@@ -37,6 +37,8 @@ export class AddBlockComponent {
 
     addBlock(block: noosfero.Block) {
         this.profileService.getBlockTemplate(this.owner.id, block.type).then((result: noosfero.RestResult<noosfero.Block>) => {
+            result.data.permissions = ["allow_edit"];
+            result.data.position = 1;
             this.onAdd.emit(Object.assign({}, result.data));
         });
     }

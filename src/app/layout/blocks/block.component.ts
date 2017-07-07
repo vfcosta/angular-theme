@@ -1,3 +1,4 @@
+import { Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
 import { ProfileComponent } from './../../profile/profile.component';
 import { ActivitiesComponent } from './../../profile/activities/activities.component';
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
@@ -18,13 +19,14 @@ export class BlockComponent {
     @Input() block: noosfero.Block;
     @Input() box: noosfero.Box;
     @Input() owner: noosfero.Profile | noosfero.Environment;
+    @Output() onRemove = new EventEmitter<noosfero.Block>();
 
     currentUser: noosfero.User;
     isHomepage = true;
     designMode = false;
     animation: string;
 
-    constructor(
+    constructor(private ref: ChangeDetectorRef,
         private notificationService: NotificationService,
         private authService: AuthService,
         private sessionService: SessionService,
@@ -107,6 +109,8 @@ export class BlockComponent {
     markForDeletion() {
         this.block._destroy = true;
         this.animation = "zoomOutUp";
+        this.onRemove.next(this.block);
+        this.ref.detectChanges();
     }
 
     canDelete() {

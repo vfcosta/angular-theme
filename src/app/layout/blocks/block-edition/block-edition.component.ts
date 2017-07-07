@@ -62,19 +62,15 @@ export class BlockEditionComponent {
         if (this.block.title !== this.originalBlock.title) {
             blockDiff.title = this.block.title;
         }
-        if (this.block.position !== this.originalBlock.position) {
+        if (this.block.position !== this.originalBlock.position || !this.block.id) {
             blockDiff.position = this.block.position;
         }
-        // if (!this.block.id && !blockDiff.position) blockDiff.position = 1; // initialize block position for new blocks
         if (this.block._destroy !== this.originalBlock._destroy) {
             blockDiff._destroy = this.block._destroy;
         }
         blockDiff.box = <noosfero.Box>{ id: this.box.id };
         if (!this.block.id) blockDiff.type = this.block.type;
-
-        if (!blockDiff.id || blockDiff.title != null || Object.keys(blockDiff).length > 3 || (blockDiff.api_content && Object.keys(blockDiff.api_content).length >= 1)) {
-            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
-        }
+        this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
     }
 
     isOptionSelected(optionKey: string, option: string) {
