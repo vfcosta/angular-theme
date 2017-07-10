@@ -1,3 +1,5 @@
+import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
+import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
 import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
 import { DestroyProfileComponent } from './profile/destroy/destroy-profile.component';
 import { ProfileEditionComponent } from './profile/configuration/profile-edition.component';
@@ -295,6 +297,8 @@ export function HttpLoaderFactory(http: Http) {
         ProfileEditionComponent,
         DestroyProfileComponent,
         CommunityMembersProfileComponent,
+        BlockSettingsComponent,
+        HighlightsBlockSettingsComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,

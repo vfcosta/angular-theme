@@ -35,7 +35,7 @@ describe("Highlights Block Settings Component", () => {
         });
         fixture = TestBed.createComponent(HighlightsBlockSettingsComponent);
         component = fixture.componentInstance;
-        component.parentBlock.block = <any>{
+        component.block = <any>{
             id: 1,
             settings: { interval: 2, shuffle: true },
             api_content: { slides: [{ image_src: "image.png" }] }
@@ -43,6 +43,7 @@ describe("Highlights Block Settings Component", () => {
     }));
 
     it("display block settings", () => {
+        fixture.detectChanges();
         expect(fixture.debugElement.queryAll(By.css(".highlights-block-settings")).length).toEqual(1);
     });
 
@@ -63,11 +64,11 @@ describe("Highlights Block Settings Component", () => {
 
     it("update active slide on selection", () => {
         component.selectSlide(1);
-        expect((<any>component.parentBlock.block).active).toEqual(1);
+        expect((<any>component.block).active).toEqual(1);
     });
 
     it("default to empty array when there is no block images", () => {
-        component.parentBlock.block.api_content = { slides: null };
+        component.block.api_content = { slides: null };
         component.ngOnInit();
         expect(component.images).toEqual([]);
     });
