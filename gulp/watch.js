@@ -12,9 +12,6 @@ function isOnlyChange(event) {
 }
 
 gulp.task('watch', ['inject'], function () {
-
-  gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject-reload']);
-
   var stylePaths = [path.join(conf.paths.src, conf.paths.plugins, '/**/*.scss')];
   conf.paths.allSources.forEach(function(src) {
     stylePaths.push(path.join(src, '/app/**/*.css'));
@@ -42,10 +39,6 @@ gulp.task('watch', ['inject'], function () {
   });
 
   var watchPaths = [];
-  conf.paths.allSources.forEach(function(src) {
-    watchPaths.push(path.join(src, '/app/**/*.html'));
-    watchPaths.push(path.join(src, conf.paths.plugins, '/**/*.html'));
-  });
   gulp.watch(watchPaths, function(event) {
     browserSync.reload(event.path);
   });
