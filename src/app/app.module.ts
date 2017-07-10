@@ -1,3 +1,25 @@
+import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
+import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
+import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
+import { DestroyProfileComponent } from './profile/destroy/destroy-profile.component';
+import { ProfileEditionComponent } from './profile/configuration/profile-edition.component';
+import { ProfileConfigurationComponent } from './profile/configuration/profile-configuration.component';
+import { CmsComponent } from './article/cms/cms.component';
+import { ProfileAboutComponent } from './profile/about/profile-about.component';
+import { DomainComponent } from './domain/domain.component';
+import { EditableFieldComponent } from './shared/components/editable-field/editable-field.component';
+import { EnvironmentHomeComponent } from './environment/environment-home.component';
+import { ActivitiesComponent } from './profile/activities/activities.component';
+import { ProfileHomeComponent } from './profile/profile-home.component';
+import { ContentViewerComponent } from './article/content-viewer/content-viewer.component';
+import { ProfileComponent } from './profile/profile.component';
+import { EnvironmentComponent } from './environment/environment.component';
+import { AppComponent } from './app.component';
+import { BoxComponent } from './layout/boxes/box.component';
+import { BoxesComponent } from './layout/boxes/boxes.component';
+import { BlockComponent } from './layout/blocks/block.component';
+import { BlockContentComponent } from './layout/blocks/block-content.component';
+import { MainBlockComponent } from './layout/blocks/main/main-block.component';
 import { ForgotPasswordComponent } from './login/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import swal from 'sweetalert2';
@@ -72,7 +94,6 @@ import { NoosferoTemplatePipe } from './shared/pipes/noosfero-template.ng2.filte
 import { IconPickerComponent } from './shared/components/icon-picker/icon-picker.component';
 import { EditableLinkComponent } from './shared/components/editable-link/editable-link.component';
 import { LinkListBlockComponent } from './layout/blocks/link-list/link-list-block.component';
-import { MainBlockUpgradeDirective } from './layout/blocks/main/main-block.upgrade.directive';
 import { MenuBlockComponent } from './layout/blocks/menu/menu-block.component';
 import { ProfileSummaryComponent } from './profile/summary/profile-summary.component';
 import { NewCommunityComponent } from './profile/configuration/communities/new-community.component';
@@ -97,10 +118,8 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { UpgradeModule } from '@angular/upgrade/static';
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
 import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
-import { UpgradeUtils } from "./shared/upgrade-utils";
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { PopoverModule, ModalModule, TypeaheadModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
@@ -121,6 +140,10 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
+import { NgProgressModule, NgProgressBrowserXhr } from 'ngx-progressbar';
+import { BrowserXhr } from '@angular/http';
+import { AppRoutingModule } from './app-routing.module';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -146,7 +169,6 @@ export function HttpLoaderFactory(http: Http) {
     imports: [
         FormsModule,
         BrowserModule,
-        UpgradeModule,
         ModalModule.forRoot(),
         ImageCropperModule,
         PopoverModule.forRoot(),
@@ -179,6 +201,8 @@ export function HttpLoaderFactory(http: Http) {
             }
         }),
         Ng2PageScrollModule.forRoot(),
+        NgProgressModule,
+        AppRoutingModule,
     ],
     declarations: [
         FooterComponent,
@@ -208,11 +232,12 @@ export function HttpLoaderFactory(http: Http) {
         PersonCommunitiesComponent,
         MenuBlockComponent,
         InviteComponent,
-        MainBlockUpgradeDirective,
+        BootstrapResizableDirective,
         ProfileSummaryComponent,
         LoginBlockComponent,
         LinkListBlockComponent,
         EditableLinkComponent,
+        EditableFieldComponent,
         IconPickerComponent,
         NoosferoTemplatePipe,
         HighlightsBlockComponent,
@@ -233,7 +258,6 @@ export function HttpLoaderFactory(http: Http) {
         TasksMenuComponent,
         SearchFormComponent,
         ArticleIconComponent,
-        SearchComponent,
         PasswordComponent,
         RegisterComponent,
         ThemeHeaderComponent,
@@ -253,6 +277,28 @@ export function HttpLoaderFactory(http: Http) {
         ArticleViewComponent,
         LoginComponent,
         ForgotPasswordComponent,
+        MainBlockComponent,
+        BlockContentComponent,
+        BlockComponent,
+        BoxesComponent,
+        BoxComponent,
+        AppComponent,
+        EnvironmentComponent,
+        ProfileComponent,
+        ContentViewerComponent,
+        ProfileHomeComponent,
+        ActivitiesComponent,
+        EnvironmentHomeComponent,
+        DomainComponent,
+        SearchComponent,
+        ProfileAboutComponent,
+        CmsComponent,
+        ProfileConfigurationComponent,
+        ProfileEditionComponent,
+        DestroyProfileComponent,
+        CommunityMembersProfileComponent,
+        BlockSettingsComponent,
+        HighlightsBlockSettingsComponent,
     ].concat(plugins.ng2MainComponents).concat(theme.components),
     entryComponents: [
         FooterComponent,
@@ -268,17 +314,10 @@ export function HttpLoaderFactory(http: Http) {
         CommunityMembersComponent,
         ProfileFastEditionComponent,
         ProfileConfigurationMenuComponent,
-        ProfilePersonalDataComponent,
         ProfileListComponent,
         ProfileJoinComponent,
-        NewCommunityComponent,
         EditCommunityComponent,
-        PersonFriendsComponent,
-        CommunityMembersMyProfileComponent,
-        PersonCommunitiesComponent,
-        ChangePasswordComponent,
         MenuBlockComponent,
-        PersonCommunitiesComponent,
         ProfileJoinComponent,
         InviteComponent,
         ProfileSummaryComponent,
@@ -300,13 +339,9 @@ export function HttpLoaderFactory(http: Http) {
         ProfileActionsComponent,
         ConfigBarComponent,
         DesignModeTogglerComponent,
-        TasksComponent,
         TasksMenuComponent,
         SearchFormComponent,
         ArticleIconComponent,
-        SearchComponent,
-        PasswordComponent,
-        RegisterComponent,
         ThemeHeaderComponent,
         ThemeFooterComponent,
         ArticleToolbarHotspotComponent,
@@ -322,6 +357,10 @@ export function HttpLoaderFactory(http: Http) {
         NavbarComponent,
         ActivityComponent,
         ArticleViewComponent,
+        BlockContentComponent,
+        BlockComponent,
+        BoxesComponent,
+        EditableFieldComponent,
     ].concat(plugins.ng2MainComponents),
     providers: [
         HeaderService,
@@ -352,11 +391,9 @@ export function HttpLoaderFactory(http: Http) {
         NotificationService,
         { provide: "sweetAlert", useValue: swal },
         { provide: 'Window',  useValue: window },
-    ].concat(UpgradeUtils.provideAngular1Services([
-        '$state',
-        '$transitions',
-        '$stateParams',
-    ]))
+        { provide: BrowserXhr, useClass: NgProgressBrowserXhr },
+    ],
+    bootstrap: [ AppComponent ]
 })
 
 export class AppModule {

@@ -18,7 +18,7 @@ describe("Components", () => {
         let tasks = [{ id: 1 }, { id: 2 }];
 
         beforeEach(async(() => {
-            spyOn(mocks.taskService, 'getAllPending').and.returnValue(Promise.resolve({ headers: () => { }, data: tasks }));
+            spyOn(mocks.taskService, 'getAllPending').and.returnValue(Promise.resolve({ headers: { get: () => { } }, data: tasks }));
             TestBed.configureTestingModule({
                 declarations: [TasksMenuComponent],
                 providers: [

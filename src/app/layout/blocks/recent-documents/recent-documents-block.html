@@ -5,7 +5,7 @@
         <profile-link [profile]="card.author" [displayName]="false" [displayImage]="true"></profile-link>
       </div>
       <div class="header media-body">
-        <a class="page-link" uiSref="main.profile.page" [uiParams]="{profile: card.profile.identifier, page: card.path}">
+        <a class="page-link" [routerLink]="['/', card.profile.identifier, card.path]">
           <h5 class="title media-heading">{{card.title}}</h5>
         </a>
         <div class="subheader">

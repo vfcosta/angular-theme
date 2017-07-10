@@ -6,12 +6,9 @@ import { MomentModule } from 'angular2-moment';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import {Injectable, Provider, provide} from "ng-forward";
-import {ComponentTestHelper, createClass} from './../../../../spec/component-test-helper';
 import {LoginBlockComponent} from './login-block.component';
 import * as helpers from "./../../../../spec/helpers";
 import { AuthService, AuthEvents } from "./../../../login";
-import { UiSrefDirective } from "../../../shared/directives/ui-sref-directive";
 
 const htmlTemplate: string = '<noosfero-login-block></noosfero-login-block>';
 
@@ -28,10 +25,9 @@ describe("Components", () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                declarations: [LoginBlockComponent, UiSrefDirective, DateFormatPipe],
+                declarations: [LoginBlockComponent, DateFormatPipe],
                 providers: [
                     { provide: SessionService, useValue: sessionService },
-                    { provide: "$state", useValue: mocks.stateService },
                     { provide: AuthService, useValue: mocks.authService },
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],

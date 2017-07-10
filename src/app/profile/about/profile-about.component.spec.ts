@@ -1,44 +1,47 @@
+import { NgPipesModule } from 'ngx-pipes';
+import { By } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
+import { RouterTestingModule } from '@angular/router/testing';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import * as helpers from "./../../../spec/helpers";
-import {Injectable, Provider, provide} from "ng-forward";
-import {providers} from 'ng-forward/cjs/testing/providers';
 import {ProfileAboutComponent} from "./profile-about.component";
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
-
-let htmlTemplate = '<profile-about></profile-about>';
 
 describe('Profile about component', () => {
-
-    let profileService: any;
     let profile = {
         id: 1,
         identifier: "profile-test",
         type: 'Person',
         additional_data: { 'Address': 'Street A, Number 102' }
     };
+    let mocks = helpers.getMocks();
+    let fixture: ComponentFixture<ProfileAboutComponent>;
+    let component: ProfileAboutComponent;
 
-    let helper: ComponentTestHelper<ProfileAboutComponent>;
-    beforeEach(angular.mock.module("templates"));
-
-    beforeEach((done) => {
-        profileService = jasmine.createSpyObj("profileService", ["getCurrentProfile"]);
-        profileService.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(helpers.mocks.promiseResultTemplate(profile));
-
-        let cls = createClass({
-            template: htmlTemplate,
-            directives: [ProfileAboutComponent],
+    beforeEach(async(() => {
+        spyOn(mocks.profileService, "getCurrentProfile").and.returnValue(Promise.resolve(profile));
+        TestBed.configureTestingModule({
+            imports: [RouterTestingModule, TranslateModule.forRoot(), NgPipesModule],
+            declarations: [ProfileAboutComponent],
             providers: [
-                helpers.createProviderToValue('profileService', profileService)
-            ]
+                { provide: ProfileService, useValue: mocks.profileService },
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
         });
-        helper = new ComponentTestHelper<ProfileAboutComponent>(cls, done);
-    });
+        fixture = TestBed.createComponent(ProfileAboutComponent);
+        component = fixture.componentInstance;
+    }));
 
-    it("renders profile-about directive", () => {
-        expect(helper.all("div.profile-about").length).toEqual(1);
-    });
+    it("renders profile-about directive", fakeAsync(() => {
+        tick();
+        fixture.detectChanges();
+        expect(fixture.debugElement.queryAll(By.css('div.profile-about')).length).toEqual(1);
+    }));
 
-    it('renders profile-about directive with custom fields', () => {
-        expect(helper.all("div.profile-custom-fields").length).toEqual(1);
-    });
-
+    it('renders profile-about directive with custom fields', fakeAsync(() => {
+        tick();
+        fixture.detectChanges();
+        expect(fixture.debugElement.queryAll(By.css('div.profile-custom-fields')).length).toEqual(1);
+    }));
 });

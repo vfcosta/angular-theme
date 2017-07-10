@@ -11,6 +11,7 @@ export class PersonTagsPluginInterestsBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     profile: any;
     tags: any;

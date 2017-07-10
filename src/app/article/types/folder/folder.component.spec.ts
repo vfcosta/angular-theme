@@ -17,7 +17,7 @@ describe("Folder Component", () => {
     let articles = [ article1, article2 ];
 
     beforeEach(async(() => {
-        spyOn(mocks.articleService, "getChildren").and.returnValue(Promise.resolve({ data: articles, headers: (attr: String) => { return 2; } }));
+        spyOn(mocks.articleService, "getChildren").and.returnValue(Promise.resolve({ data: articles, headers: { get: (attr: String) => { return 2; } }}));
         TestBed.configureTestingModule({
             declarations: [FolderComponent, DateFormatPipe],
             providers: [

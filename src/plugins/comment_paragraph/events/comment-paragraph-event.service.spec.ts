@@ -1,7 +1,5 @@
 import {CommentParagraphEventService} from "./comment-paragraph-event.service";
-import {ComponentTestHelper, createClass} from '../../../spec/component-test-helper';
 import * as helpers from "../../../spec/helpers";
-import {ComponentFixture} from 'ng-forward/cjs/testing/test-component-builder';
 
 describe("Services", () => {
     describe("Comment Paragraph Event Service", () => {

@@ -35,7 +35,7 @@ export class BlockService extends RestangularService<noosfero.Block> {
         }
     }
 
-    getBlock<T extends noosfero.Block>(blockId: number): Promise<T> {
+    getBlock<T extends noosfero.Block>(blockId: number) {
         return this.get(blockId).then((result: any) => {
             return Promise.resolve(result.data);
         });
@@ -65,7 +65,7 @@ export class BlockService extends RestangularService<noosfero.Block> {
         return this.post(null, element, attributesToUpdate, headers);
     }
 
-    getAvailableBlocks(owner: noosfero.Profile | noosfero.Environment): ng.IPromise<noosfero.RestResult<noosfero.BlockDefinition[]>> {
+    getAvailableBlocks(owner: noosfero.Profile | noosfero.Environment): Promise<noosfero.RestResult<noosfero.BlockDefinition[]>> {
         let restRequest;
         if (owner.type === 'Environment') {
             restRequest = this.restangular.one("environments", owner.id);

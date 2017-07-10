@@ -1,5 +1,8 @@
 namespace noosfero {
-    export interface RestModel extends restangular.IElement {
+    export interface RestModel {
         id: number;
+        one: any;
+        get: any;
+        all: any;
     }
 }

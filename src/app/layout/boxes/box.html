@@ -1,0 +1,11 @@
+<add-block *ngIf="showButton(column)" (onAdd)="addBlock($event)" [box]="box" [owner]="owner"></add-block>
+
+<ng-container *ngIf="!column?.subcolumns">
+    <noosfero-block *ngFor="let block of box?.blocks | orderBy: 'position'" [block]="block"
+        [owner]="owner" [box]="box" (onRemove)="removeBlock($event)"></noosfero-block>
+</ng-container>
+
+<noosfero-boxes *ngIf="column?.subcolumns" [columns]="column.subcolumns"
+    [boxes]="boxes" [owner]="owner" [startIndex]="startIndex"></noosfero-boxes>
+
+<div class="dndPlaceholder"></div>

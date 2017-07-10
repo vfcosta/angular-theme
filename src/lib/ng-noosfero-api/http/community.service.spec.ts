@@ -30,7 +30,7 @@ describe("Services", () => {
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/communities`,
                     { communities: [{ name: "community1" }] }, {}, 200);
                 service.getByEnvironment().then((result: noosfero.RestResult<noosfero.Community[]>) => {
-                    expect(result.data).toEqual([{ name: "community1" }]);
+                    expect(result.data).toEqual(<noosfero.Community[]>[{ name: "community1" }]);
                 });
             });
 

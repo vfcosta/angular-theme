@@ -1,4 +1,4 @@
-<div class="container-fluid configuration" ng-if="ctrl.profile">
+<div class="container-fluid configuration" *ngIf="profile">
     <div class="row header">
         <div class="col-md-12">
             <h1>{{ 'myprofile.configuration.title' | translate}}</h1>
@@ -7,10 +7,10 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <profile-configuration-menu [profile]="ctrl.profile"></profile-configuration-menu>
+            <profile-configuration-menu [profile]="profile"></profile-configuration-menu>
         </div>
         <div class="col-md-9">
-            <div ui-view="myprofileContent" class="my-profile-content"></div>
+            <router-outlet class="my-profile-content"></router-outlet>
         </div>
     </div>
 </div>

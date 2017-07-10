@@ -1,4 +1,6 @@
+import { Router, Event, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, Inject, Input } from "@angular/core";
+import { Subscription } from "rxjs";
 import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
 
 @Component({
@@ -9,25 +11,31 @@ export class BreadcrumbsBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     profile: noosfero.Profile;
     links: any[] = [];
+    routerEventSubscription: Subscription;
 
-    constructor(private blockService: BlockService,
-        @Inject("$state") private $state: ng.ui.IStateService,
-        @Inject("$stateParams") private $stateParams: ng.ui.IStateParamsService,
-        @Inject("$transitions") private $transitions: any) { }
+    constructor(private blockService: BlockService, private router: Router, private route: ActivatedRoute,
+        @Inject("Window") private window: Window) { }
 
     ngOnInit() {
-        this.$transitions.onSuccess({}, (trans) => {
-            this.setNavigationState();
+        this.routerEventSubscription = this.router.events.subscribe((event: Event) => {
+             if (event instanceof NavigationEnd) this.setNavigationState();
         });
-        this.setNavigationState();
         this.profile = this.owner;
     }
 
+    ngOnDestroy() {
+        this.routerEventSubscription.unsubscribe();
+    }
+
     setNavigationState() {
-        this.blockService.getApiContent(this.block, { profile: this.$stateParams['profile'], page: this.$stateParams['page'] }).then((content: any) => {
+        let paths = this.window.location.pathname.replace(/%2F/g, '/').split('/');
+        let page = paths.length > 2 ? paths.splice(2).join("/") : null;
+        let contextParams = { profile: this.route.snapshot.params['profile'], page: page };
+        this.blockService.getApiContent(this.block, contextParams).then((content: any) => {
             this.links = content.links;
             this.block.hide = this.links.length <= 1;
             if (!this.block.hide) {
@@ -41,9 +49,5 @@ export class BreadcrumbsBlockComponent {
             return state.data.displayName;
         }
         return state.name;
-    }
-
-    isCurrent(state: any) {
-        return (<any>this.$state.$current)['name'] === state.name;
     }
 }

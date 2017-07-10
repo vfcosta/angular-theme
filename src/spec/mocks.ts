@@ -412,7 +412,9 @@ export function getMocks() {
             },
             setCurrent: (article: noosfero.Article) => { },
             getCurrent: () => { return Promise.resolve({}); },
-            search: (filter: any) => { return Promise.resolve({}); }
+            search: (filter: any) => { return Promise.resolve({}); },
+            createInParent: () => { },
+            updateArticle: () => { },
         },
         environmentService: {
             getEnvironmentPeople: (params: any) => {
@@ -430,7 +432,8 @@ export function getMocks() {
                 };
             },
             update: (environment: noosfero.Environment) => Promise.resolve({ id: 2 }),
-            get: (environment: string) => Promise.resolve({id: 2})
+            get: (environment: string) => Promise.resolve({id: 2}),
+            getBoxes: () => {}
         },
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
@@ -438,14 +441,24 @@ export function getMocks() {
             update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile),
             remove: () => { return Promise.resolve({data: {success: true}}); },
             getBlockTemplate: (id: any, type: string) => { return   Promise.resolve({api_content: [] }); },
-            getTags: () => { }
+            getTags: () => { },
+            getHomePage: () => {},
+            getNetworkActivities: () => {},
+            isMember: () => { return Promise.resolve(true)},
+            addMember: () => {return Promise.resolve({ data: {} })},            
+            removeMember: () => {return Promise.resolve({ data: {} })}            
+            // getMembershipState: (profileId: noosfero.Person, friendId: noosfero.Profile) => { return Promise.resolve({ }) }
         },
         personService: {
-            search: () => Observable.of([mocks.profile])
+            search: () => Observable.of([mocks.profile]),
+            getFriendshipState: () => { return Promise.resolve({ }) },
+            addFriend: () => {return Promise.resolve({ data: {} })},
+            removeFriend: () => {return Promise.resolve({ data: {} })}
         },
         communityService: {
             sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),
-            createNewCommunity: (community: noosfero.Community) => Promise.resolve({})
+            createNewCommunity: (community: noosfero.Community) => Promise.resolve({}),
+            getMembershipState: () => { return Promise.resolve({ }) }
         },
         sessionService: {
             currentUser: () => <noosfero.User>{ person: { id: 1, identifier: 'test_user' } },
@@ -577,6 +590,21 @@ export function getMocks() {
         },
         headerService: {
             setEnvironmentTitle: () => {}
+        },
+        route: {
+            snapshot: { data: {}, queryParams: {}, params: {} },
+            parent: {
+                snapshot: { data: {}, queryParams: {}, params: {} }
+            }
+        },
+        window: {
+            location: {
+                reload: () => {},
+                pathname: ""
+            }
+        },
+        router: {
+            navigate: () => {}
         }
     };
     return mocks;

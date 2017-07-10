@@ -1,8 +1,8 @@
 <div class="menu-block collapse navbar-collapse">
   <ul class="nav navbar-nav nav-pills" [dragula]='"bag-links"' [dragulaModel]='links' [dragulaOptions]="dragulaOptions">
-    <li class="menu-link" *ngFor="let link of links; let i = index" uiSrefActive="active">
+    <li class="menu-link" *ngFor="let link of links; let i = index" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
       <span class="badge" (click)='remove(i)' *ngIf="designMode"><i class="fa fa-fw fa-remove"></i></span>
-      <a [uiSref]="link['url']" [uiParams]="link['urlParams']">
+      <a [routerLink]="link['url']">
         <span>{{link['translatedTitle']}}</span>
       </a>
     </li>

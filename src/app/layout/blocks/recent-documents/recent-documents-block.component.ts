@@ -11,12 +11,12 @@ export class RecentDocumentsBlockComponent {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     profile: any;
     documents: any;
 
     constructor(private blockService: BlockService,
-        @Inject("$state") private $state: ng.ui.IStateService,
         private articleService: ArticleService) { }
 
 

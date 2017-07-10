@@ -12,7 +12,7 @@ chai.use(chaiAsPromised);
 let expect = chai.expect;
 
 defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
-    setDefaultTimeout(30000);
+    setDefaultTimeout(50000);
 
     Given('I go to the homepage', () => {
         return browser.get('/');
@@ -43,8 +43,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     When('I press {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
-        utils.pressButton(stringInDoubleQuotes);
-        return browser.waitForAngular();
+        return utils.pressButton(stringInDoubleQuotes);
     });
 
     When('I press first {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
@@ -66,11 +65,13 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I go to {stringInDoubleQuotes} profile', (profile) => {
-        return browser.setLocation(`/${profile}`);
+        browser.waitForAngular();
+        return browser.driver.get(`http://localhost:3001/${profile}`);
     });
 
     Given('I go to {stringInDoubleQuotes}', (page) => {
-        return browser.setLocation(page);
+        browser.waitForAngular();
+        return browser.driver.get(`http://localhost:3001${page}`);
     });
 
     Given('I enter in edit mode', () => {
@@ -130,12 +131,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Then('I should see success message', () => {
-        return browser.wait(() => {
-            browser.actions().sendKeys(protractor.Key.ESCAPE).perform();
-            return element(by.css(".toast-success")).isPresent();
-        }, 5000).then(b => {
-            return expect(b).to.be.equal(true);
-        });
+        return element(by.css(".toast-success")).isPresent();
     });
 
     Then('I eventually should see success message', () => {

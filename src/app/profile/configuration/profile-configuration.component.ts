@@ -1,4 +1,5 @@
-import { Component, Inject } from 'ng-forward';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Inject } from '@angular/core';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { SessionService } from "./../../login";
 
@@ -10,26 +11,15 @@ import { SessionService } from "./../../login";
  */
 @Component({
     selector: "noosfero-profile-configuration",
-    templateUrl: 'app/profile/configuration/profile-configuration.html',
+    template: require('app/profile/configuration/profile-configuration.html')
 })
-@Inject("profileService", '$stateParams', '$state')
 export class ProfileConfigurationComponent {
     profile: noosfero.Profile;
     profileIdentifier: string;
     showComponent: string = "";
 
-    constructor(private profileService: ProfileService, private $stateParams: ng.ui.IStateParamsService, private $state: ng.ui.IStateService) {
-        this.profileIdentifier = this.$stateParams["profile"];
-        this.profileService.setCurrentProfileByIdentifier(this.profileIdentifier).then((profile: noosfero.Profile) => {
-            this.profile = profile;
-            if (this.$state.is('main.myprofile')) {
-                if (this.profile.type === 'Community') {
-                    this.$state.go('main.myprofile.community_edit', { profile: this.profile.identifier });
-                }
-                else {
-                    this.$state.go('main.myprofile.personal_data', { profile: this.profile.identifier });
-                }
-            }
-        });
+    constructor(private profileService: ProfileService, route: ActivatedRoute, router: Router) {
+        this.profileIdentifier = route.snapshot.params["profile"];
+        this.profile = route.snapshot.data["profile"];
     }
 }

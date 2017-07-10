@@ -1,18 +1,17 @@
 <div class="cms">
   <div class="row">
     <div class="col-md-9">
-      <article-editor ng-if="vm.article && vm.profile" [article]="vm.article" [path]="vm.path" [profile]="vm.profile"></article-editor>
+      <article-editor *ngIf="article && profile" [article]="article" [path]="path" [profile]="profile"></article-editor>
     </div>
     <div class="col-md-3">
-      <article-basic-options ng-if="vm.article" [article]="vm.article"></article-basic-options>
+      <article-basic-options *ngIf="article" [article]="article"></article-basic-options>
     </div>
   </div>
   <div class="row">
     <div class="col-md-9">
-      <button type="submit" ladda="vm.loading" data-style="expand-left" data-size="l"
-       class="btn btn-default save-button" ng-click="vm.save()">{{"article.basic_editor.save" | translate}}</button>
-      <button type="button" class="btn btn-warning" ng-click="vm.cancel()">{{"article.basic_editor.cancel" | translate}}</button>
+      <button type="submit" ladda="loading" data-style="expand-left" data-size="l"
+       class="btn btn-default save-button" (click)="save()">{{"article.basic_editor.save" | translate}}</button>
+      <button type="button" class="btn btn-warning" (click)="cancel()">{{"article.basic_editor.cancel" | translate}}</button>
     </div>
   </div>
-
 </div>

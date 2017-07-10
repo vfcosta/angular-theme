@@ -13,6 +13,6 @@ Feature: manage tasks
     And I am logged out
     And I login with "adminuser", "admin"
     And I go to "/myprofile/adminuser/tasks"
-    When I press first "noosfero-main-block .task-group .accept"
-    And I press ".modal-dialog .task-accept .actions button[type='submit']"
+    When I press first "tasks .task-group .accept"
+    And I press ".modal-dialog .actions button[type='submit']"
     Then I should see "Tarefa Aceita" as message

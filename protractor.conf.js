@@ -1,11 +1,11 @@
 exports.config = {
   capabilities: {
     browserName: 'chrome',
-
     chromeOptions: {
       args: [ "--headless", "--disable-gpu" ]
     }
   },
+  useAllAngular2AppRoots: true,
   framework: 'custom',
   frameworkPath: require.resolve('protractor-cucumber-framework'),
   specs: ['e2e/cucumber/features/**/*.feature'],

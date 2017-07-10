@@ -28,7 +28,7 @@ describe("Services", () => {
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/1/roles`,
                     { roles: [{ id: 1 }] }, {}, 200);
                 service.getByProfile(1).then((result: noosfero.RestResult<noosfero.Role[]>) => {
-                    expect(result.data).toEqual([{ id: 1 }]);
+                    expect(result.data).toEqual(<noosfero.Role[]>[{ id: 1 }]);
                 });
             });
         });

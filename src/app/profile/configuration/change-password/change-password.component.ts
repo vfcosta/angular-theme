@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './../../../../lib/ng-noosfero-api/http/user.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
@@ -16,7 +17,7 @@ import { ValidationMessageComponent } from '../../../shared/components/validatio
 })
 export class ChangePasswordComponent {
 
-    @Input() profile: noosfero.Profile;
+    profile: noosfero.Profile;
 
     @ViewChild('currentPasswordValidation') currentPassword: ValidationMessageComponent;
     @ViewChild('newPasswordValidation') newPassword: ValidationMessageComponent;
@@ -28,7 +29,9 @@ export class ChangePasswordComponent {
     errors: any;
 
     constructor(private userService: UserService, private notificationService: NotificationService,
-        @Inject("$state") private $state: ng.ui.IStateService) { }
+        route: ActivatedRoute, private router: Router) {
+        this.profile = route.parent.snapshot.data['profile'];
+    }
 
     save(event: Event) {
         event.preventDefault();
@@ -40,7 +43,7 @@ export class ChangePasswordComponent {
                 .then(response => {
                     this.errors = null;
                     this.notificationService.success({ title: "profile.edition.success.title", message: "new_password.success.message" });
-                    this.$state.go('main.myprofile', { profile: this.profile.identifier });
+                    this.router.navigate(['/myprofile', this.profile.identifier]);
                 })
                 .catch(error => {
                     this.errors = error.data;

@@ -27,12 +27,10 @@ var testingFiles = glob.sync("./src/app/**/*.spec.ts");
 
 var entries = {
     noosfero: './src/app/boot.ts',
-    'noosfero-test': ['./src/app/index.ts', './karma.entry.js'],
+    'noosfero-test': ['./karma.entry.js'],
     'noosfero-specs': testFiles, // './src/specs.ts',
-    'vendor.bundle': ['core-js', 'reflect-metadata', 'ng-forward', 'ng2-img-cropper',
-      'ng-forward/cjs/testing/test-component-builder', 'zone.js', 'moment',
-      '@angular/core','@angular/upgrade/static', '@angular/platform-browser-dynamic',
-      '@angular/animations']
+    'vendor.bundle': ['core-js', 'reflect-metadata', 'ng2-img-cropper', 'zone.js', 'moment',
+      '@angular/core', '@angular/platform-browser-dynamic', '@angular/animations']
 };
 
 module.exports = function(env) {
@@ -92,10 +90,7 @@ module.exports = function(env) {
                 }
             }, {
                 test: /\.tsx?$/,
-                loader: 'awesome-typescript-loader',
-                options: {
-                    ignoreDiagnostics: [2300, 2374, 2375, 2403, 2304, 2428]
-                }
+                loader: 'awesome-typescript-loader'
             },{
                 test: /\.html$/,
                 loader: 'html-loader'

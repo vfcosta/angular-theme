@@ -1,44 +1,37 @@
-import { ComponentTestHelper, createClass } from './../../../spec/component-test-helper';
-import { UiSrefDirective } from './../../shared/directives/ui-sref-directive';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ProfileConfigurationComponent } from './profile-configuration.component';
 import * as helpers from "../../../spec/helpers";
-import { provideFilters } from '../../../spec/helpers';
 
 describe("Components", () => {
     describe("Profile Configuration Component", () => {
+        let mocks = helpers.getMocks();
+        let fixture: ComponentFixture<ProfileConfigurationComponent>;
         let component: ProfileConfigurationComponent;
-        let $stateParams = { profile: 'identifier' };
-        let profileServiceMock: any;
-        let sessionServiceMock: any;
-        let profile = { id: 1, identifier: 'identifier' };
-        let $q: ng.IQService;
-        let helper: ComponentTestHelper<ProfileConfigurationComponent>;
-        let $rootScope: ng.IRootScopeService;
-        let $state: ng.ui.IStateService;
 
-        beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
-            $rootScope = _$rootScope_;
-            $q = _$q_;
+        beforeEach(async(() => {
+            mocks.route.snapshot.data["profile"] = { id: 1};
+            mocks.route.snapshot.params["profile"] = "identifier";
+            TestBed.configureTestingModule({
+                imports: [RouterTestingModule, TranslateModule.forRoot()],
+                declarations: [ProfileConfigurationComponent],
+                providers: [
+                    { provide: ProfileService, useValue: mocks.profileService },
+                    { provide: ActivatedRoute, useValue: mocks.route },
+                ],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA]
+            });
+            fixture = TestBed.createComponent(ProfileConfigurationComponent);
+            component = fixture.componentInstance;
         }));
 
-        beforeEach(() => {
-            profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier"]);
-            $state = jasmine.createSpyObj("$state", ["go"]);
-            $state.go = jasmine.createSpy("go").and.returnValue($q.defer().resolve(''));
-            $state.is = jasmine.createSpy("is");
-            let profilePromise = $q.defer();
-            profilePromise.resolve(profile);
-
-            profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profilePromise.promise);
+        it("set profile", () => {
+            expect(component.profileIdentifier).toEqual("identifier");
+            expect(component.profile).toEqual(<noosfero.Profile>{ id: 1 });
         });
-
-        it("set profile service", (done => {
-            $stateParams['parent_id'] = 1;
-            let component: ProfileConfigurationComponent = new ProfileConfigurationComponent(profileServiceMock, $stateParams, $state);
-            $rootScope.$apply();
-            expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
-            expect(component.profile.identifier).toEqual("identifier");
-            done();
-        }));
     });
 });

@@ -34,7 +34,7 @@ describe("Services", () => {
                 let articleId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/articles/${articleId}/children`, { articles: [{ name: "article1" }] }, {}, 200);
                 service.getChildren(<noosfero.Article>{ id: articleId }).then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                    expect(result.data).toEqual([{ name: "article1" }]);
+                    expect(result.data).toEqual(<noosfero.Article[]>[{ name: "article1" }]);
                 });
             });
 
@@ -42,7 +42,7 @@ describe("Services", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/articles`, { articles: [{ name: "article1" }] }, {}, 200);
                 service.getByProfile(<noosfero.Profile>{ id: profileId }).then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                    expect(result.data).toEqual([{ name: "article1" }]);
+                    expect(result.data).toEqual(<noosfero.Article[]>[{ name: "article1" }]);
                 });
             });
 
@@ -50,7 +50,7 @@ describe("Services", () => {
                 let profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/articles?path=test`, { articles: [{ name: "article1" }] }, {}, 200);
                 service.getByProfile(<noosfero.Profile>{ id: profileId }, { path: 'test' }).then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                    expect(result.data).toEqual([{ name: "article1" }]);
+                    expect(result.data).toEqual(<noosfero.Article[]>[{ name: "article1" }]);
                 });
             });
 
@@ -58,7 +58,7 @@ describe("Services", () => {
                 let articleId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/articles/${articleId}/children?path=test`, { articles: [{ name: "article1" }] }, {}, 200);
                 service.getChildren(<noosfero.Article>{ id: articleId }, { path: 'test' }).then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                    expect(result.data).toEqual([{ name: "article1" }]);
+                    expect(result.data).toEqual(<noosfero.Article[]>[{ name: "article1" }]);
                 });
             });
 
@@ -67,7 +67,7 @@ describe("Services", () => {
                 let article: noosfero.Article = <any>{ id: null };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/articles`, { article: { id: 2 }}, {}, 200);
                 service.createInProfile(<noosfero.Profile>{ id: profileId }, article).then((result: noosfero.RestResult<noosfero.Article>) => {
-                    expect(result.data).toEqual({ id: 2 });
+                    expect(result.data).toEqual(<noosfero.Article>{ id: 2 });
                 });
             });
 
@@ -76,7 +76,7 @@ describe("Services", () => {
                 let article: noosfero.Article = <any>{ id: null };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/search/article?query=query`, { articles: [{ id: 2 }] }, {}, 200);
                 service.search({ query: 'query' }).then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                    expect(result.data).toEqual([{ id: 2 }]);
+                    expect(result.data).toEqual(<noosfero.Article[]>[{ id: 2 }]);
                 });
             });
 
@@ -84,7 +84,7 @@ describe("Services", () => {
                 let article: noosfero.Article = <any>{ id: 10, name: "article name" };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/articles/10`, { article: { id: 2 }}, {}, 200);
                 service.updateArticle(article).then((result: noosfero.RestResult<noosfero.Article>) => {
-                    expect(result.data).toEqual({ id: 2 });
+                    expect(result.data).toEqual(<noosfero.Article>{ id: 2 });
                 });
             });
         });

@@ -3,9 +3,15 @@ import { Injectable, Inject } from "@angular/core";
 import { RestangularService } from "./restangular_service";
 
 export const MembershipStatus = {
-    NotMember: 0,
-    WaitingForApproval: 1,
-    Member: 2
+    NotMember: 297,
+    WaitingForApproval: 296,
+    Member: 295
+};
+
+export const FriendshipStatus = {
+    NotFriend: 294,
+    WaitingForApproval: 293,
+    Friend: 292
 };
 
 @Injectable()
@@ -53,7 +59,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
 
     getByIdentifier(identifier: string): Promise<noosfero.Profile> {
         let p = this.restangular.one('profiles', identifier).get({ key: "identifier" }).toPromise();
-        return p.then((response: restangular.IResponse) => {
+        return p.then((response: any) => {
             if (response.status === 404) {
                 return Promise.reject(p);
             }
@@ -65,15 +71,15 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         return this.getProfileElement(profileId).customGET("members", params).toPromise();
     }
 
-    getBoxes(profileId: number): Promise<restangular.IResponse> {
+    getBoxes(profileId: number): Promise<any> {
         return this.getProfileElement(profileId).customGET('boxes').toPromise();
     }
 
-    getActivities(profileId: number, params?: any): Promise<restangular.IResponse> {
+    getActivities(profileId: number, params?: any): Promise<any> {
         return this.getProfileElement(profileId).customGET("activities", params).toPromise();
     }
 
-    getNetworkActivities(profileId: number, params?: any): Promise<restangular.IResponse> {
+    getNetworkActivities(profileId: number, params?: any): Promise<any> {
         return this.getProfileElement(profileId).customGET("network_activities", params).toPromise();
     }
 
@@ -131,7 +137,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
     }
 
 
-    getTags(profile: noosfero.Profile): ng.IPromise<noosfero.RestResult<any>> {
+    getTags(profile: noosfero.Profile): Promise<noosfero.RestResult<any>> {
         let p = this.getProfileElement(<number>profile.id).customGET('tags');
         return p.toPromise().then(this.getHandleSuccessFunction<noosfero.RestResult<any>>());
     }

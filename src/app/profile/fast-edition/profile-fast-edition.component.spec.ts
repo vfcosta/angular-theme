@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../shared/services/notification.service';
 import { TranslatorService } from './../../shared/services/translator.service';
@@ -16,25 +18,22 @@ describe("Components", () => {
         let component: ProfileFastEditionComponent;
         let profileService = jasmine.createSpyObj("profileService", ["update"]);
         profileService.update = jasmine.createSpy("update").and.returnValue(Promise.resolve({}));
-        let state = jasmine.createSpyObj("$state", ["go"]);
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, TranslateModule.forRoot()],
+                imports: [RouterTestingModule, FormsModule, TranslateModule.forRoot()],
                 declarations: [ProfileFastEditionComponent],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ProfileService, useValue: profileService },
                     { provide: NotificationService, useValue: helpers.mocks.notificationService },
                     { provide: TranslatorService, useValue: helpers.mocks.translatorService },
-                    { provide: "$state", useValue: state }
                 ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(ProfileFastEditionComponent);
-                component = fixture.componentInstance;
-                component.profile = <noosfero.Profile>{ id: 1, name: "Test", identifier: "test" };
-                component.environment = <noosfero.Environment>{ id: 2, settings: {} };
             });
+            fixture = TestBed.createComponent(ProfileFastEditionComponent);
+            component = fixture.componentInstance;
+            component.profile = <noosfero.Profile>{ id: 1, name: "Test", identifier: "test" };
+            component.environment = <noosfero.Environment>{ id: 2, settings: {} };
         }));
 
         it("copy input profile when init", () => {
@@ -60,21 +59,23 @@ describe("Components", () => {
         });
 
         it("not reload page when identifier change is not allowed", (fakeAsync(() => {
+            spyOn(TestBed.get(Router), 'navigate');
             fixture.detectChanges();
             component.save();
             tick();
             expect(profileService.update).toHaveBeenCalled();
-            expect(state.go).not.toHaveBeenCalled();
+            expect(TestBed.get(Router).navigate).not.toHaveBeenCalled();
         })));
 
         it("reload page when identifier was changed", (fakeAsync(() => {
+            spyOn(TestBed.get(Router), 'navigate');
             fixture.detectChanges();
             component.profile = <noosfero.Profile>{ id: 1, name: "Test", identifier: "test", type: "Person" };
             component.environment = <noosfero.Environment>{ id: 2, settings: { enable_profile_url_change_enabled: true } };
             component.save();
             tick();
             expect(profileService.update).toHaveBeenCalled();
-            expect(state.go).toHaveBeenCalled();
+            expect(TestBed.get(Router).navigate).toHaveBeenCalled();
         })));
 
         it("display person edition of identifier when allowed", () => {

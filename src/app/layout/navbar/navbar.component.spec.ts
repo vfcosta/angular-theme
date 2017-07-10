@@ -26,13 +26,12 @@ describe("Components", () => {
             spyOn(mocks.authService, "subscribe").and.callFake((ev: string, fn: Function) => {
                 authSubscribe.push(fn);
             });
-            spyOn(mocks.$state, "transitionTo").and.callThrough();
             TestBed.configureTestingModule({
                 declarations: [NavbarComponent],
                 providers: [
                     { provide: AuthService, useValue: mocks.authService },
                     { provide: SessionService, useValue: mocks.sessionService },
-                    { provide: "$state", useValue: mocks.$state },
+                    { provide: "Window", useValue: mocks.window },
                     { provide: EnvironmentService, useValue: mocks.environmentService },
                     { provide: HeaderService, useValue: mocks.headerService },
                     { provide: TranslatorService, useValue: mocks.translatorService }
@@ -56,7 +55,6 @@ describe("Components", () => {
         it('should logout', () => {
             component.logout();
             expect(mocks.authService.logout).toHaveBeenCalled();
-            expect(mocks.$state.transitionTo).toHaveBeenCalledWith('main.environment.home');
         });
 
         it('should not open modal user when logged in', () => {

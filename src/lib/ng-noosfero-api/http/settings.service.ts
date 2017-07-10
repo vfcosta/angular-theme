@@ -20,7 +20,7 @@ export class SettingsService extends RestangularService<noosfero.Block> {
         };
     }
 
-    getAvailableBlocks(owner: noosfero.Profile | noosfero.Environment): ng.IPromise<noosfero.RestResult<noosfero.BlockDefinition[]>> {
+    getAvailableBlocks(owner: noosfero.Profile | noosfero.Environment): Promise<noosfero.RestResult<noosfero.BlockDefinition[]>> {
         let restRequest;
         if (owner.type === 'Environment') {
             restRequest = this.restangular.one("environments", owner.id);

@@ -30,7 +30,6 @@ describe("Components", () => {
                 declarations: [EventPluginEventBlockComponent, NoosferoUrlPipe],
                 providers: [
                     { provide: BlockService, useValue: mocks.blockService },
-                    { provide: "$state", useValue: mocks.stateService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
             });

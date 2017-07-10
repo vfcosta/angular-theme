@@ -1,3 +1,8 @@
+import { DOCUMENT } from '@angular/platform-browser';
+import { LocalStorageService } from 'angular-2-local-storage';
+import { RouterTestingModule } from '@angular/router/testing';
+import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as helpers from '../../../spec/helpers';
 import { BodyStateClassesService } from "./body-state-classes.service";
 import { AuthService } from "./../../login/auth.service";
@@ -6,208 +11,87 @@ import { EventEmitter } from '@angular/core';
 import { DesignModeService } from './design-mode.service';
 
 describe("BodyStateClasses Service", () => {
-
     let mocks = helpers.getMocks();
-    let currentStateName = "main";
-    let bodyStateClasseService: BodyStateClassesService;
-    let $document: ng.IDocumentService = <any>{},
-        $state: ng.ui.IStateService = <any>{
-            current: {
-                name: currentStateName
-            }
-        },
-        authService: any = helpers.mocks.authService,
-        bodyEl: { className: string },
-        bodyElJq: any,
-        designModeService = new DesignModeService(<any>mocks.localStorageService);
+    let service: BodyStateClassesService;
 
-    let transitionFunction: Function;
-    let $transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
-    $transitions.onSuccess = (obj, func: Function) => {
-        transitionFunction = func;
-    };
-
-    let getService = (): BodyStateClassesService => {
-        return new BodyStateClassesService($document, $state, authService, designModeService, <any>mocks.localStorageService, $transitions);
-    };
-
-    beforeEach(() => {
-        authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
-        bodyEl = { className: "" };
-        bodyElJq = [bodyEl];
-    });
+    beforeEach(async(() => {
+        mocks.authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
+        mocks.authService.loginSuccess = new EventEmitter();
+        mocks.authService.logoutSuccess = new EventEmitter();
+        TestBed.configureTestingModule({
+            imports: [RouterTestingModule],
+            providers: [
+                BodyStateClassesService,
+                { provide: AuthService, useValue: mocks.authService },
+                { provide: DesignModeService, useValue: mocks.designModeService },
+                { provide: LocalStorageService, useValue: mocks.localStorageService }
+            ]
+        });
+        service = TestBed.get(BodyStateClassesService);
+    }));
 
     it("should add the class noosfero-user-logged to the body element if the user is authenticated", () => {
-        authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
-
-        let service = getService();
-
-        bodyElJq.addClass = jasmine.createSpy("addClass");
-        bodyElJq.removeClass = jasmine.createSpy("removeClass");
-        service["bodyElement"] = bodyElJq;
-
         service.start();
-        expect(bodyElJq.addClass).toHaveBeenCalledWith(BodyStateClassesService.USER_LOGGED_CLASSNAME);
+        expect(service.bodyClasses).toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
     });
 
-    it("should add the class noosfero-route-[currentStateName] the body element", () => {
-        let service = getService();
-
-        bodyElJq.addClass = jasmine.createSpy("addClass");
-        bodyElJq.removeClass = jasmine.createSpy("removeClass");
-        service["bodyElement"] = bodyElJq;
-
+    it("should add the class noosfero-route-[currentStateName] in body element", fakeAsync(() => {
         service.start();
-        let stateClassName = BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + currentStateName;
-        expect(bodyElJq.addClass).toHaveBeenCalledWith(stateClassName);
-    });
+        TestBed.get(ActivatedRoute).component = { name: "MyComponent"  };
+        service['router'].navigate(['/']);
+        tick();
+        expect(service.bodyClasses).toContain("noosfero-route-my-component");
+    }));
 
-    it("should capture loginSuccess event and add noosfero-user-logged class to the body element", () => {
-        let userLoggedClassName = BodyStateClassesService.USER_LOGGED_CLASSNAME;
-
-        bodyElJq.addClass = jasmine.createSpy("addClass");
-        bodyElJq.removeClass = jasmine.createSpy("removeClass");
-        authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(false);
-        let service = getService();
-
-        service["bodyElement"] = bodyElJq;
-
-        // triggers the service start
+    it("should capture loginSuccess event and add noosfero-user-logged class to the body element", fakeAsync(() => {
+        TestBed.get(AuthService).isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(false);
         service.start();
-        // check if the the body element addClass was not called yet,
-        // because the user is not authenticated
-        expect(bodyElJq.addClass).not.toHaveBeenCalledWith(userLoggedClassName);
-
-        // emit the event loginSuccess
-        authService.loginSuccess.next(null);
-
-        // and check now if the addClass was called passing the userLogged class
-        // to the body Element
-        expect(bodyElJq.addClass).toHaveBeenCalledWith(userLoggedClassName);
-    });
+        expect(service.bodyClasses).not.toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
+        TestBed.get(AuthService).loginSuccess.next(null);
+        tick();
+        expect(service.bodyClasses).toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
+    }));
 
     it("should capture logoutSuccess event and remove noosfero-user-logged class from the body element", () => {
-        let userLoggedClassName = BodyStateClassesService.USER_LOGGED_CLASSNAME;
-
-        authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(true);
-
-        bodyElJq.addClass = jasmine.createSpy("addClass");
-        bodyElJq.removeClass = jasmine.createSpy("removeClass");
-
-        let service = getService();
-        service["bodyElement"] = bodyElJq;
-
         // triggers the service start
         service.start();
-
-        // check if the the body element addClass was called
         // because the user is already authenticated
-        expect(bodyElJq.addClass).toHaveBeenCalledWith(userLoggedClassName);
-
+        expect(service.bodyClasses).toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
         // emit the event logoutSuccess
-        authService.logoutSuccess.next(null);
-
-        // and check now if the removeClass was called passing the userLogged class
-        // to the body Element
-        expect(bodyElJq.removeClass).toHaveBeenCalledWith(userLoggedClassName);
-    });
-
-    it("should capture transition event and switch route class in the body element", () => {
-        let userLoggedClassName = BodyStateClassesService.USER_LOGGED_CLASSNAME;
-
-        authService.isAuthenticated = jasmine.createSpy("isAuthenticated").and.returnValue(false);
-        bodyElJq.addClass = (className: string) => {
-            bodyEl.className = className;
-        };
-        bodyElJq.removeClass = jasmine.createSpy("removeClass");
-
-        let service = getService();
-        service["bodyElement"] = bodyElJq;
-
-        // triggers the service start
-        service.start();
-
-        // checks if the bodyEl has a class indicating the currentState
-        expect(bodyEl.className).toEqual(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + currentStateName);
-
-        // call the transition function
-        transitionFunction({$to: () => { return {name: 'new-route' }; }});
-
-        // and check now if the bodyEl has a class indicating the new state route
-        expect(bodyEl.className).toEqual(BodyStateClassesService.ROUTE_STATE_CLASSNAME_PREFIX + "new-route");
+        TestBed.get(AuthService).logoutSuccess.next(null);
+        // and check now if body hasn't user logged class
+        expect(service.bodyClasses).not.toContain(BodyStateClassesService.USER_LOGGED_CLASSNAME);
     });
 
     it("add a css class theme skin to body element", () => {
-        let service = getService();
         let skinClass: string = 'skin-test';
-
-        bodyElJq.addClass = jasmine.createSpy("addClass");
-        bodyElJq.removeClass = jasmine.createSpy("removeClass");
-        service["bodyElement"] = bodyElJq;
-
         service.start({
             skin: skinClass
         });
-
-        expect(bodyElJq.addClass).toHaveBeenCalledWith(skinClass);
+        expect(service.bodyClasses).toContain(skinClass);
     });
 
-    it("add a css class to content wrapper element", () => {
-        let service = getService();
-
-        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"]);
-        service["getContentWrapper"] = jasmine.createSpy("getContentWrapper").and.returnValue(contentWrapperMock);
-        service.addContentClass(true);
-
-        expect(contentWrapperMock.addClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
-    });
-
-    it("remove a css class from content wrapper element", () => {
-        let service = getService();
-
-        let contentWrapperMock = jasmine.createSpyObj("contentWrapperMock", ["addClass", "removeClass"]);
-        service["getContentWrapper"] = jasmine.createSpy("getContentWrapper").and.returnValue(contentWrapperMock);
-        service.addContentClass(false);
-
-        expect(contentWrapperMock.removeClass).toHaveBeenCalledWith(BodyStateClassesService.CONTENT_WRAPPER_FULL);
-    });
-
-    it("should add the class noosfero-design-on when designMode is changed to true", () => {
-        let fnOnToggle: Function = null;
-        designModeService.onToggle = <any>{
-            subscribe: (fn: Function) => {
-                fnOnToggle = fn;
-            },
-            next: (value: boolean) => {
-                fnOnToggle.apply(designModeService, [value]);
-            }
-        };
-
-        let service = getService();
-
-        bodyElJq.addClass = jasmine.createSpy("addClass");
-        bodyElJq.removeClass = jasmine.createSpy("removeClass");
-        service["bodyElement"] = bodyElJq;
-
+    it("should add class noosfero-design-on when designMode is changed to true", () => {
+        TestBed.get(DesignModeService).onToggle = new EventEmitter();
         service.start();
+        TestBed.get(DesignModeService).onToggle.next(true);
+        expect(service.bodyClasses).toContain(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+    });
 
-        designModeService.setInDesignMode(true);
-
-
-        expect(bodyElJq.addClass).toHaveBeenCalledWith(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
+    it("should remove class noosfero-design-on when designMode is changed to false", () => {
+        TestBed.get(DesignModeService).onToggle = new EventEmitter();
+        service.start();
+        TestBed.get(DesignModeService).onToggle.next(false);
+        expect(service.bodyClasses).not.toContain(BodyStateClassesService.DESIGN_MODE_ON_CLASSNAME);
     });
 
     it("save skin into settings at local storage", () => {
-        let service = getService();
-        bodyElJq.addClass = jasmine.createSpy("addClass");
-        bodyElJq.removeClass = jasmine.createSpy("removeClass");
-        service["bodyElement"] = bodyElJq;
         service.setThemeSkin('skin-test2');
-        expect(mocks.localStorageService.get('skin')).toEqual('skin-test2');
+        expect(TestBed.get(LocalStorageService).get('skin')).toEqual('skin-test2');
     });
 
     it("get theme skin from local storage", () => {
         mocks.localStorageService.set('skin', 'skin-test3');
-        expect(getService().getThemeSkin()).toEqual('skin-test3');
+        expect(service.getThemeSkin()).toEqual('skin-test3');
     });
 });

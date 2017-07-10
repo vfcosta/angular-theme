@@ -30,7 +30,7 @@ describe("Services", () => {
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/tasks?all_pending=true&content_type=AddMember,ApproveComment,ApproveArticle,AbuseComplaint,SuggestArticle,CreateCommunity,AddFriend&status=1`,
                     { tasks: [{ id: 1 }]}, {}, 200);
                 service.getAllPending().then((result: noosfero.RestResult<noosfero.Task[]>) => {
-                    expect(result.data).toEqual([{ id: 1 }]);
+                    expect(result.data).toEqual(<noosfero.Task[]>[{ id: 1 }]);
                 });
             });
 
@@ -39,7 +39,7 @@ describe("Services", () => {
                 let task: noosfero.Task = <any>{ id: taskId };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/tasks/${taskId}/finish`, { task: { id: taskId } }, {}, 200);
                 service.finishTask(task).then((result: noosfero.RestResult<noosfero.Task>) => {
-                    expect(result.data).toEqual({ id: 1 });
+                    expect(result.data).toEqual(<noosfero.Task>{ id: 1 });
                 });
             });
 
@@ -48,7 +48,7 @@ describe("Services", () => {
                 let task: noosfero.Task = <any>{ id: taskId };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/tasks/${taskId}/cancel`, { task: { id: taskId } }, {}, 200);
                 service.cancelTask(task).then((result: noosfero.RestResult<noosfero.Task>) => {
-                    expect(result.data).toEqual({ id: 1 });
+                    expect(result.data).toEqual(<noosfero.Task>{ id: 1 });
                 });
             });
         });

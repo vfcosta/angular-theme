@@ -35,7 +35,7 @@ describe("Services", () => {
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/articles/${articleId}/comment_paragraph_plugin/comments?without_reply=true`,
                     { comments: [{ body: "comment1" }] }, {}, 200);
                 service.getByArticle(<noosfero.Article>{ id: articleId }).then((result: noosfero.RestResult<noosfero.Comment[]>) => {
-                    expect(result.data).toEqual([{ body: "comment1" }]);
+                    expect(result.data).toEqual(<noosfero.Comment[]>[{ body: "comment1" }]);
                 });
             });
 

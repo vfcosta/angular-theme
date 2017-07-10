@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../shared/services/notification.service';
 import { TranslatorService } from './../shared/services/translator.service';
@@ -26,12 +27,11 @@ describe("Password Component", () => {
             declarations: [PasswordComponent],
             providers: [
                 { provide: PasswordService, useValue: mocks.passwordService },
-                { provide: "$state", useValue: mocks.$state },
                 { provide: NotificationService, useValue: mocks.notificationService },
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [NgPipesModule, FormsModule, TranslateModule.forRoot()]
+            imports: [RouterTestingModule, NgPipesModule, FormsModule, TranslateModule.forRoot()]
         });
         fixture = TestBed.createComponent(PasswordComponent);
         component = fixture.componentInstance;

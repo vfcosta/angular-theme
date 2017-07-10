@@ -1,5 +1,5 @@
 <div class="approve-comment-accept-title">
   {{"tasks.approve_comment.accept.message" | translate}}
-  <a uiSref="main.profile.page" [uiParams]="{profile: task.target.identifier, page: article.path}">{{article.title}}</a>:
+  <!--<a [routerLink]="['/', task.target.identifier, article.path]">{{article.title}}</a>:-->
 </div>
 <noosfero-comment [comment]="comment"></noosfero-comment>

@@ -30,9 +30,9 @@ export class NotificationService {
         notificationType = NotificationType.Toast
     } = {}, options = {}) {
         if (notificationType === NotificationType.Toast) {
-            this.toastr.error(this.translatorService.translate(message), this.translatorService.translate(title), angular.extend(this.toastrOptions(), options));
+            this.toastr.error(this.translatorService.translate(message), this.translatorService.translate(title), Object.assign(this.toastrOptions(), options));
         } else {
-            this.showMessage(angular.extend({ title: title, text: message, showConfirmButton: true, type: "error" }, options));
+            this.showMessage(Object.assign({ title: title, text: message, showConfirmButton: true, type: "error" }, options));
         }
 
     }
@@ -55,13 +55,13 @@ export class NotificationService {
         notificationType = NotificationType.Toast
     }, options = {}) {
         if (notificationType === NotificationType.Toast) {
-            options = angular.extend({ timeOut: NotificationService.DEFAULT_SUCCESS_TIMER });
+            options = Object.assign({ timeOut: NotificationService.DEFAULT_SUCCESS_TIMER });
             this.toastr.success(this.translatorService.translate(message),
                 this.translatorService.translate(title),
-                angular.extend(this.toastrOptions(), options)
+                Object.assign(this.toastrOptions(), options)
             );
         } else {
-            this.showMessage(angular.extend({ title: title, text: message, timer: NotificationService.DEFAULT_SUCCESS_TIMER }, options));
+            this.showMessage(Object.assign({ title: title, text: message, timer: NotificationService.DEFAULT_SUCCESS_TIMER }, options));
         }
 
     }
@@ -76,9 +76,9 @@ export class NotificationService {
         notificationType = NotificationType.Toast
     } = {}, options = {}) {
         if (notificationType === NotificationType.Toast) {
-            this.toastr.info(this.translatorService.translate(message), this.translatorService.translate(title), angular.extend(this.toastrOptions(), options));
+            this.toastr.info(this.translatorService.translate(message), this.translatorService.translate(title), Object.assign(this.toastrOptions(), options));
         } else {
-            this.showMessage(angular.extend({ title: title, text: message, showConfirmButton: true, type: "info" }, options));
+            this.showMessage(Object.assign({ title: title, text: message, showConfirmButton: true, type: "info" }, options));
         }
 
     }

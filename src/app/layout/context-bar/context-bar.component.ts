@@ -1,4 +1,5 @@
-import { Inject, Input, Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Inject, Input, Component, ChangeDetectorRef } from '@angular/core';
 import { EventsHubService } from "../../shared/services/events-hub.service";
 import { NoosferoKnownEvents } from "../../known-events";
 import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
@@ -23,9 +24,10 @@ export class ContextBarComponent {
     originalLayout: string;
     originalCustomHeader: string;
     originalCustomFooter: string;
+    destroyed = false;
 
-    constructor(
-        @Inject("$state") private $state: ng.ui.IStateService,
+    constructor(private ref: ChangeDetectorRef, @Inject("Window") private window: Window,
+        private router: Router,
         private eventsHubService: EventsHubService,
         private blockService: BlockService,
         private notificationService: NotificationService,
@@ -45,14 +47,21 @@ export class ContextBarComponent {
             this.blocksChanged = this.blocksChanged.filter((b: noosfero.Block) => {
                 return block.id !== b.id;
             });
-            if (!block.id || block.title != null || Object.keys(block).length > 3 || (block.api_content && Object.keys(block.api_content).length >= 1)) {
+            if ((block.id || !block._destroy) &&
+                (block.title != null || Object.keys(block).length > 3 ||
+                (block.api_content && Object.keys(block.api_content).length >= 1))) {
                 this.blocksChanged.push(block);
             }
+            if (!this.destroyed) this.ref.detectChanges();
         });
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designModeOn = designModeOn;
         });
         this.designModeOn = this.designModeService.isInDesignMode();
+    }
+
+    ngOnDestroy() {
+        this.destroyed = true;
     }
 
     private callOwnerService(obj: noosfero.Profile | noosfero.Environment) {
@@ -73,7 +82,7 @@ export class ContextBarComponent {
     }
 
     discard() {
-        this.$state.reload();
+        this.window.location.reload();
         this.notificationService.info({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
     }
 

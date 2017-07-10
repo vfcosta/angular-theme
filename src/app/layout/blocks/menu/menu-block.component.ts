@@ -1,3 +1,5 @@
+import { Subscription } from "rxjs";
+import { DesignModeService } from './../../../shared/services/design-mode.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { Component, Input, Inject, HostListener, ElementRef, ViewChild } from "@angular/core";
 import { TranslatorService } from "../../../shared/services/translator.service";
@@ -30,11 +32,35 @@ export class MenuBlockComponent {
     articles: any[];
     dragulaOptions: any;
     selectedArticle: noosfero.Article;
+    designModeSubscription: Subscription;
 
     constructor(private elementRef: ElementRef,
         private translatorService: TranslatorService,
         private articleService: ArticleService,
-        private dragulaService: DragulaService) {
+        private dragulaService: DragulaService,
+        private designModeService: DesignModeService) {
+
+        this.designModeSubscription = designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            if (designModeOn && !this.articles) {
+                this.articles = [];
+                this.articleService.getByProfile(this.owner, { per_page: 100 })
+                    .then((result: noosfero.RestResult<noosfero.Article[]>) => {
+                        for (let article of <noosfero.Article[]>result.data) {
+                            this.articles.push({
+                                translatedTitle: article.name,
+                                url: 'main.profile.page',
+                                urlParams: {page: article.path, profile: this.owner.identifier},
+                                title: article.name,
+                                path: article.path
+                            });
+                        }
+                    });
+            }
+        });
+    }
+
+    ngOnDestroy() {
+        this.designModeSubscription.unsubscribe();
     }
 
     ngOnInit() {
@@ -59,20 +85,6 @@ export class MenuBlockComponent {
             }
         });
 
-        this.articles = [];
-        this.articleService.getByProfile(this.owner, { per_page: 100 })
-            .then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                for (let article of <noosfero.Article[]>result.data) {
-                    this.articles.push({
-                        translatedTitle: article.name,
-                        url: 'main.profile.page',
-                        urlParams: {page: article.path, profile: this.owner.identifier},
-                        title: article.name,
-                        path: article.path
-                    });
-                }
-            });
-
         this.links = [];
         this.linksAvailable = [];
         this.block.hide = true;
@@ -96,28 +108,21 @@ export class MenuBlockComponent {
     }
 
     makeUrl(params: any) {
-        let link: { translatedTitle: string, url: string, urlParams: any, title: string, controller: string, action: string; path: string } = { translatedTitle: '', url: '', urlParams: {}, title: '', controller: '', action: '', path: '' };
+        let link: { translatedTitle: string, url: any[], urlParams: any, title: string, controller: string, action: string; path: string } = { translatedTitle: '', url: [], urlParams: {}, title: '', controller: '', action: '', path: '' };
         let urlMapping: any = {
-            'about': 'main.profile.about',
-            'activities': 'main.profile.info',
-            'index': this.owner.type == 'Person' ? 'main.profile.friends' : 'main.profile.members'
-        };
-        let urlParamsMapping: any = {
-            'about': '{profile: owner.identifier}',
-            'activities': '{profile: owner.identifier}',
-            'index': '{profile: owner.identifier}'
+            'about': ['/profile', this.owner.identifier, 'about'],
+            'activities': ['/profile', this.owner.identifier],
+            'index': this.owner.type === 'Person' ? ['/profile', this.owner.identifier, 'friends'] : ['/profile', this.owner.identifier, 'members']
         };
         if (params.controller) {
             link.translatedTitle = this.titleTranslator[params.controller + '_' + params.action];
             link.url = urlMapping[params.action];
-            link.urlParams = urlParamsMapping[params.action];
             link.title = params.title;
             link.controller = params.controller;
             link.action = params.action;
         } else {
             link.translatedTitle = params.title;
-            link.url = 'main.profile.page';
-            link.urlParams = { page: params.path, profile: this.owner.identifier };
+            link.url = ['/', this.owner.identifier, params.path];
             link.title = params.title;
             link.path = params.path;
         }

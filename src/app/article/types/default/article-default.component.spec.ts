@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { TranslatorService } from './../../../shared/services/translator.service';
@@ -23,19 +25,17 @@ describe("Components", () => {
         beforeEach(async(() => {
             spyOn(mocks.articleService, "getChildren").and.returnValue(Promise.resolve(null));
             spyOn(mocks.articleService, "remove").and.callThrough();
-            spyOn(mocks.$state, "transitionTo").and.callThrough();
             spyOn(mocks.articleService, "subscribeToModelRemoved").and.callFake((fn: Function) => { articleRemoved = fn; } );
             spyOn(mocks.notificationService, 'confirmation').and.callThrough();
             TestBed.configureTestingModule({
                 declarations: [ArticleDefaultViewComponent, PermissionNg2Directive, DateFormatPipe],
                 providers: [
                     { provide: ArticleService, useValue: mocks.articleService },
-                    { provide: "$state", useValue: mocks.$state },
                     { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: NotificationService, useValue: mocks.notificationService }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],
-                imports: [MomentModule, TranslateModule.forRoot()]
+                imports: [RouterTestingModule, MomentModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ArticleDefaultViewComponent);
             component = fixture.componentInstance;
@@ -44,10 +44,11 @@ describe("Components", () => {
         }));
 
         it("it should delete article when delete is activated", () => {
+            spyOn(TestBed.get(Router), "navigate");
             expect(component.article).toEqual(article);
             doDeleteArticle();
             articleRemoved();
-            expect(mocks.$state.transitionTo).toHaveBeenCalled();
+            expect(TestBed.get(Router).navigate).toHaveBeenCalled();
         });
 
         it("hide button to delete article when user doesn't have permission", () => {

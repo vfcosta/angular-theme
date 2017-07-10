@@ -8,7 +8,7 @@ import { Http, Jsonp, Response } from '@angular/http';
 export class AuthService {
 
     public loginSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
-    public loginFailed: EventEmitter<ng.IHttpPromiseCallbackArg<any>> = new EventEmitter<ng.IHttpPromiseCallbackArg<any>>();
+    public loginFailed: EventEmitter<any> = new EventEmitter<any>();
     public logoutSuccess: EventEmitter<noosfero.User> = new EventEmitter<noosfero.User>();
 
     constructor(private http: Http,
@@ -34,13 +34,13 @@ export class AuthService {
         }
     }
 
-    private loginSuccessCallback(response: ng.IHttpPromiseCallbackArg<noosfero.User>) {
+    private loginSuccessCallback(response: any) {
         let currentUser: noosfero.User = this.sessionService.create(response.data);
         this.loginSuccess.next(currentUser);
         return currentUser;
     }
 
-    login(credentials: noosfero.Credentials): ng.IPromise<noosfero.User> {
+    login(credentials: noosfero.Credentials): Promise<noosfero.User> {
         let data = new FormData();
         data.append('login', credentials.username);
         data.append('password', credentials.password);
@@ -53,7 +53,7 @@ export class AuthService {
             });
     }
 
-    private loginFailedCallback(response: ng.IHttpPromiseCallbackArg<any>): any {
+    private loginFailedCallback(response: any): any {
         this.loginFailed.next(response);
         return null;
     }
@@ -75,7 +75,7 @@ export class AuthService {
     }
 
     public isAuthorized(authorizedRoles: string | string[]) {
-        if (!angular.isArray(authorizedRoles)) {
+        if (!(authorizedRoles instanceof Array)) {
             authorizedRoles = [<string>authorizedRoles];
         }
         return (this.isAuthenticated() && authorizedRoles.indexOf(this.sessionService.currentUser().userRole) !== -1);
@@ -91,7 +91,7 @@ export class AuthService {
         }
     }
 
-    forgotPassword(value: string): ng.IPromise<noosfero.RestResult<any>> {
+    forgotPassword(value: string): Promise<noosfero.RestResult<any>> {
         return this.restangular.all("").customPOST("", "forgot_password", { value: value }).toPromise();
     }
 

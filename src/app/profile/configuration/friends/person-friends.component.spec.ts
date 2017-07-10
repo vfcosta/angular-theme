@@ -1,3 +1,5 @@
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { PersonFriendsComponent } from './person-friends.component';
@@ -16,16 +18,17 @@ describe("Components", () => {
         let personService = jasmine.createSpyObj("PersonService", ["getFriends"]);
         personService.getFriends = jasmine.createSpy("getFriends").and.returnValue(Promise.resolve({ headers: { get: () => {} }}));
         let stateParams = {};
+        let mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [FormsModule, TranslateModule.forRoot()],
+                imports: [RouterTestingModule, FormsModule, TranslateModule.forRoot()],
                 declarations: [PersonFriendsComponent],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: PersonService, useValue: personService },
-                    { provide: "$stateParams", useValue: stateParams },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
+                    { provide: ActivatedRoute, useValue: mocks.route },
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(PersonFriendsComponent);

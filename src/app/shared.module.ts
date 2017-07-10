@@ -1,6 +1,8 @@
+import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
+import { EmptyLink } from './shared/components/empty-link/empty-link.directive';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { CommentFormHotspotComponent } from './hotspot/comment-form-hotspot.component';
 import { ProfileImageComponent } from './profile/image/profile-image.component';
@@ -12,7 +14,6 @@ import { ProfileLinkComponent } from './profile/profile-link/profile-link.compon
 import { MomentModule } from 'angular2-moment';
 import { CommentsComponent } from './article/comment/comments.component';
 import { CommentComponent } from './article/comment/comment.component';
-import { UiSrefDirective } from './shared/directives/ui-sref-directive';
 import { PermissionNg2Directive } from './shared/components/permission/permission.ng2.directive';
 import { NgModule } from '@angular/core';
 import { ImageUploadComponent } from './shared/components/image-upload/image-upload.component';
@@ -22,7 +23,6 @@ import { ImageCropperModule } from 'ng2-img-cropper';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
 import * as plugins from "../plugins";
 
 @NgModule({
@@ -31,9 +31,7 @@ import * as plugins from "../plugins";
         ImageUploadCropComponent,
         FormsModule,
         CommonModule,
-        BlockSettingsComponent,
         PermissionNg2Directive,
-        UiSrefDirective,
         CommentComponent,
         CommentsComponent,
         ProfileLinkComponent,
@@ -47,13 +45,12 @@ import * as plugins from "../plugins";
         BasicEditorComponent,
         HtmlEditorComponent,
         TranslateModule,
+        EmptyLink,
     ].concat(plugins.ng2SharedComponents),
     declarations: [
         ImageUploadComponent,
         ImageUploadCropComponent,
-        BlockSettingsComponent,
         PermissionNg2Directive,
-        UiSrefDirective,
         CommentComponent,
         CommentsComponent,
         ProfileLinkComponent,
@@ -63,11 +60,11 @@ import * as plugins from "../plugins";
         CommentFormHotspotComponent,
         BasicEditorComponent,
         HtmlEditorComponent,
+        EmptyLink,
     ].concat(plugins.ng2SharedComponents),
     entryComponents: [
         ImageUploadComponent,
         ImageUploadCropComponent,
-        BlockSettingsComponent,
         CommentComponent,
         CommentsComponent,
         ProfileLinkComponent,
@@ -84,7 +81,8 @@ import * as plugins from "../plugins";
         NgPipesModule,
         PaginationModule.forRoot(),
         CKEditorModule,
-        TranslateModule.forChild()
+        TranslateModule.forChild(),
+        RouterModule,
     ]
 })
 export class SharedModule { }

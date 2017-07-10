@@ -36,7 +36,7 @@ describe("Services", () => {
                 let blockId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/blocks/${blockId}`, { block: { id: blockId } }, {}, 200);
                 service.update(<any>{ id: blockId, display: 'never' }).then((result: noosfero.RestResult<noosfero.Block>) => {
-                    expect(result.data).toEqual({ id: blockId });
+                    expect(result.data).toEqual(<noosfero.Block>{ id: blockId });
                 });
             });
         });

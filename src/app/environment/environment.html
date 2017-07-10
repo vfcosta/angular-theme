@@ -1,15 +1,15 @@
 <div class="container">
   <div class="row">
-    <context-bar class="col-md-12" ng-if="ctrl.environment" [owner]="ctrl.environment" [permission-action]="'edit_environment_design'"></context-bar>
+    <context-bar class="col-md-12" *ngIf="environment" [owner]="environment" [permissionAction]="'edit_environment_design'"></context-bar>
   </div>
 </div>
 
 <div class="boxes-container environment-container">
   <div class="row">
-    <noosfero-boxes ng-if="ctrl.boxes"
-                    [layout]="ctrl.environment.layout_template"
-                    [boxes]="ctrl.boxes"
-                    [owner]="ctrl.environment">
+    <noosfero-boxes *ngIf="environment"
+                    [layout]="environment.layout_template"
+                    [boxes]="environment.boxes"
+                    [owner]="environment">
     </noosfero-boxes>
   </div>
 </div>

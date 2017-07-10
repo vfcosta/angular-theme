@@ -1,6 +1,6 @@
 <ol class="breadcrumb">
   <li *ngFor="let link of links" [class]="{'active': link.active}">
-    <a *ngIf="!link.active" [href]="link.url">{{link.name}}</a>
+    <a *ngIf="!link.active" [routerLink]="[link.url]">{{link.name}}</a>
     <span *ngIf="link.active">{{link.name}}</span>
   </li>
 </ol>

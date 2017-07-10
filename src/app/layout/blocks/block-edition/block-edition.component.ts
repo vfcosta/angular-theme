@@ -19,6 +19,7 @@ export class BlockEditionComponent {
 
     originalBlock: noosfero.Block;
     blockChanged = false;
+    lastBlockDiff = null;
 
     constructor(
         private elementRef: ElementRef,
@@ -30,13 +31,13 @@ export class BlockEditionComponent {
     }
 
     ngDoCheck() {
-        this.emitChanges();
+        if (this.block && this.originalBlock) this.emitChanges();
     }
 
     ngOnInit() {
-        this.originalBlock = angular.copy(this.block);
+        this.originalBlock = _.cloneDeep(this.block);
         this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, (owner: noosfero.Profile | noosfero.Environment) => {
-            this.originalBlock = angular.copy(this.block);
+            this.originalBlock = _.cloneDeep(this.block);
         });
 
         if (this.block.type !== 'MainBlock')
@@ -50,28 +51,31 @@ export class BlockEditionComponent {
     emitChanges() {
         let blockDiff = <noosfero.Block>{ id: this.block.id, api_content: {} };
         for (let k in this.block.settings) {
-            if (!angular.equals((<any>this.block.settings)[k], (<any>this.originalBlock.settings)[k])) {
+            if (!_.isEqual((<any>this.block.settings)[k], (<any>this.originalBlock.settings)[k])) {
                 (<any>blockDiff)[k] = (<any>this.block.settings)[k];
             }
         }
         for (let k in this.block.api_content) {
-            if (this.originalBlock.api_content && !angular.equals((<any>this.block.api_content)[k], (<any>this.originalBlock.api_content)[k])) {
+            if (this.originalBlock.api_content && !_.isEqual((<any>this.block.api_content)[k], (<any>this.originalBlock.api_content)[k])) {
                 (<any>blockDiff.api_content)[k] = (<any>this.block.api_content)[k];
             }
         }
         if (this.block.title !== this.originalBlock.title) {
             blockDiff.title = this.block.title;
         }
-        if (this.block.position !== this.originalBlock.position) {
+        if (this.block.position !== this.originalBlock.position || !this.block.id) {
             blockDiff.position = this.block.position;
         }
-        // if (!this.block.id && !blockDiff.position) blockDiff.position = 1; // initialize block position for new blocks
         if (this.block._destroy !== this.originalBlock._destroy) {
             blockDiff._destroy = this.block._destroy;
         }
         blockDiff.box = <noosfero.Box>{ id: this.box.id };
         if (!this.block.id) blockDiff.type = this.block.type;
-        this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
+
+        if (this.lastBlockDiff && !_.isEqual(blockDiff, this.lastBlockDiff)) {
+            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
+        }
+        this.lastBlockDiff = blockDiff;
     }
 
     isOptionSelected(optionKey: string, option: string) {

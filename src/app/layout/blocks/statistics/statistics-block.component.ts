@@ -9,7 +9,7 @@ import {BlockService} from "./../../../../lib/ng-noosfero-api/http/block.service
 export class StatisticsBlockComponent {
     @Input() block: any;
     @Input() owner: any;
-
+    @Input() designMode: boolean;
 
     constructor(articleService: ArticleService, blockService: BlockService) {
         // watches for article being removed

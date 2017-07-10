@@ -25,5 +25,6 @@ export class ProfileActionsComponent {
         } else if (article.parent) {
             return article.parent.id;
         }
+        return null;
     }
 }

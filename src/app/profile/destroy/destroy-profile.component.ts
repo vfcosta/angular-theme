@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../login';
 import { Component, Inject } from "@angular/core";
 import { NotificationService } from "../../shared/services/notification.service";
@@ -5,32 +6,30 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
 
 @Component({
     selector: 'destroy-profile',
-    template: "not-used",
+    template: "<div></div>",
 })
 export class DestroyProfileComponent {
 
-    constructor(
-        @Inject("$state") private $state: ng.ui.IStateService,
-        private notificationService: NotificationService,
-        private profileService: ProfileService,
-        private authService: AuthService) {
-        profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
-            notificationService.confirmation({ title: "profile.remove.confirmation.title", message: "profile.remove.confirmation.message" }, () => {
-                profileService.remove(profile).then((response: noosfero.RestResult<any>) => {
-                    if (response.data.success) {
-                        this.handleSuccess(profile);
-                    } else {
-                        this.handleError(profile);
-                    }
-                }).catch(() => {
+    constructor(private notificationService: NotificationService,
+        private profileService: ProfileService, private router: Router,
+        private authService: AuthService, route: ActivatedRoute) {
+
+        let profile = route.parent.snapshot.data['profile'];
+        notificationService.confirmation({ title: "profile.remove.confirmation.title", message: "profile.remove.confirmation.message" }, () => {
+            profileService.remove(profile).then((response: noosfero.RestResult<any>) => {
+                if (response.data.success) {
+                    this.handleSuccess(profile);
+                } else {
                     this.handleError(profile);
-                });
+                }
+            }).catch(() => {
+                this.handleError(profile);
             });
         });
     }
 
     handleSuccess(profile: noosfero.Profile) {
-        this.$state.go("main.domain");
+        this.router.navigate(['/']);
         if (profile && profile.type !== "Community") {
             this.authService.logout();
         }
@@ -38,7 +37,7 @@ export class DestroyProfileComponent {
     }
 
     handleError(profile: noosfero.Profile) {
-        this.$state.go("main.myprofile", { profile: profile.identifier });
+        this.router.navigate(['/myprofile', profile.identifier]);
         this.notificationService.error({ title: "profile.remove.failed.title" });
     }
 }

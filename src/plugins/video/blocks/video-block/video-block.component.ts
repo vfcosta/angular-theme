@@ -9,6 +9,7 @@ export class VideoBlockComponent implements OnInit {
 
     @Input() block: any;
     @Input() owner: any;
+    @Input() designMode: boolean;
 
     config: any;
 

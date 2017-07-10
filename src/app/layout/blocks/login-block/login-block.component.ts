@@ -1,5 +1,5 @@
-import {Inject, Component} from "@angular/core";
-import { AuthService, AuthEvents} from "../../../login";
+import { Input, Inject, Component } from "@angular/core";
+import { AuthService, AuthEvents } from "../../../login";
 import { SessionService } from '../../../login/session.service';
 
 /**
@@ -13,6 +13,10 @@ import { SessionService } from '../../../login/session.service';
     template: require('app/layout/blocks/login-block/login-block.html')
 })
 export class LoginBlockComponent {
+
+    @Input() block: any;
+    @Input() owner: any;
+    @Input() designMode: boolean;
 
     /**
      * @ngdoc property
@@ -33,7 +37,6 @@ export class LoginBlockComponent {
     credentials = <noosfero.Credentials>{};
 
     constructor(private session: SessionService,
-        @Inject("$state") private $state: ng.ui.IStateService,
         public authService: AuthService) {
 
         this.currentUser = this.session.currentUser();

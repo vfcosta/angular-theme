@@ -6,7 +6,7 @@ import {ArticleService} from "../../../lib/ng-noosfero-api/http/article.service"
 @Injectable()
 export class CommentParagraphService extends RestangularService<noosfero.Comment> {
 
-    private commentParagraphCountsPromise: ng.IPromise<any>;
+    private commentParagraphCountsPromise: Promise<any>;
 
     constructor(protected restangular: Restangular, protected articleService: ArticleService) {
         super(restangular);
@@ -23,13 +23,13 @@ export class CommentParagraphService extends RestangularService<noosfero.Comment
         };
     }
 
-    getByArticle(article: noosfero.Article, params: any = {}): ng.IPromise<noosfero.RestResult<noosfero.Comment[]>> {
+    getByArticle(article: noosfero.Article, params: any = {}): Promise<noosfero.RestResult<noosfero.Comment[]>> {
         params['without_reply'] = true;
         let articleElement = this.articleService.getElement(<number>article.id);
         return this.list(articleElement, params);
     }
 
-    createInArticle(article: noosfero.Article, comment: noosfero.Comment): ng.IPromise<noosfero.RestResult<noosfero.Comment>> {
+    createInArticle(article: noosfero.Article, comment: noosfero.Comment): Promise<noosfero.RestResult<noosfero.Comment>> {
         let articleElement = this.articleService.getElement(<number>article.id);
         return this.create(comment, articleElement, null, { 'Content-Type': 'application/json' }, false);
     }
@@ -53,7 +53,7 @@ export class CommentParagraphService extends RestangularService<noosfero.Comment
     private commentParagraphCounts(article: noosfero.Article) {
         if (!this.commentParagraphCountsPromise) {
             let articleElement = this.articleService.getElement(<number>article.id);
-            this.commentParagraphCountsPromise = (<any>articleElement).customGET("comment_paragraph_plugin/comments/count").toPromise().then((response: restangular.IResponse) => {
+            this.commentParagraphCountsPromise = (<any>articleElement).customGET("comment_paragraph_plugin/comments/count").toPromise().then((response: any) => {
                 return response.data;
             }).catch(() => {
                 this.commentParagraphCountsPromise = null;

@@ -1,89 +1,73 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
+import { NotificationService } from './../../shared/services/notification.service';
+import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { EventsHubService } from './../../shared/services/events-hub.service';
-import {quickCreateComponent} from "../../../spec/helpers";
-import {CmsComponent} from "./cms.component";
+import { CmsComponent } from "./cms.component";
 import * as helpers from "../../../spec/helpers";
 
-describe("Article Cms", () => {
-
-    let $rootScope: ng.IRootScopeService;
-    let $q: ng.IQService;
-    let articleServiceMock: any;
-    let profileServiceMock: any;
-    let $state: any;
-    let $stateParams: any;
-    let $window: any;
+describe("Cms Component", () => {
     let profile = { id: 1 };
-    let notification: any;
     let mocks = helpers.getMocks();
+    let fixture: ComponentFixture<CmsComponent>;
+    let component: CmsComponent;
 
-    beforeEach(inject((_$rootScope_: ng.IRootScopeService, _$q_: ng.IQService) => {
-        $rootScope = _$rootScope_;
-        $q = _$q_;
+    beforeEach(async(() => {
+        spyOn(mocks.profileService, "getCurrentProfile").and.returnValue(Promise.resolve(profile));
+        spyOn(mocks.articleService, "createInParent").and.returnValue(Promise.resolve({ data: { path: "path", type: "TextArticle", profile: { identifier: "profile" } } }));
+        spyOn(mocks.articleService, "updateArticle").and.returnValue(Promise.resolve({ data: { path: "path", type: "TextArticle", profile: { identifier: "profile" } } }));
+        spyOn(mocks.articleService, "get").and.returnValue({ data: { path: "parent-path", type: "TextArticle", profile: { identifier: "profile" } } });
+        spyOn(mocks.router, "navigate");
+        spyOn(mocks.notificationService, "success");
+        TestBed.configureTestingModule({
+            imports: [RouterTestingModule, FormsModule, TranslateModule.forRoot()],
+            declarations: [CmsComponent],
+            providers: [
+                { provide: ArticleService, useValue: mocks.articleService },
+                { provide: NotificationService, useValue: mocks.notificationService },
+                { provide: ProfileService, useValue: mocks.profileService },
+                { provide: "Window", useValue: mocks.window },
+                { provide: EventsHubService, useValue: mocks.eventsHubService },
+                { provide: ActivatedRoute, useValue: mocks.route },
+                { provide: Router, useValue: mocks.router },
+            ],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA]
+        });
+        fixture = TestBed.createComponent(CmsComponent);
+        component = fixture.componentInstance;
     }));
 
-    beforeEach(() => {
-        $window = jasmine.createSpyObj("$window", ["back"]);
-        $window.location = {pathname: ''};
-        $state = jasmine.createSpyObj("$state", ["go"]);
-        notification = jasmine.createSpyObj("notification", ["success"]);
-        profileServiceMock = jasmine.createSpyObj("profileServiceMock", ["setCurrentProfileByIdentifier", "getCurrentProfile"]);
-        articleServiceMock = jasmine.createSpyObj("articleServiceMock", ["createInParent", "updateArticle", "get"]);
-
-        $stateParams = { profile: "profile" };
-
-        let profilePromise = $q.defer();
-        profilePromise.resolve(profile);
-
-        let articleCreate = $q.defer();
-        articleCreate.resolve({ data: { path: "path", type: "TextArticle", profile: { identifier: "profile" } } });
-
-        let articleGet = $q.defer();
-        articleGet.resolve({ data: { path: "parent-path", type: "TextArticle", profile: { identifier: "profile" } } });
-
-        profileServiceMock.setCurrentProfileByIdentifier = jasmine.createSpy("setCurrentProfileByIdentifier").and.returnValue(profilePromise.promise);
-        profileServiceMock.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(profilePromise.promise);
-        articleServiceMock.createInParent = jasmine.createSpy("createInParent").and.returnValue(articleCreate.promise);
-        articleServiceMock.updateArticle = jasmine.createSpy("updateArticle").and.returnValue(articleCreate.promise);
-        articleServiceMock.get = jasmine.createSpy("get").and.returnValue(articleGet.promise);
-    });
-
-    it("create an article in the current profile when save", done => {
-        $stateParams['parent_id'] = 1;
-        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window, <any>mocks.eventsHubService);
+    it("create an article in the current profile when save", fakeAsync(() => {
+        component.parentId = 1;
         component.save();
-        $rootScope.$apply();
-        expect(profileServiceMock.setCurrentProfileByIdentifier).toHaveBeenCalled();
-        expect(articleServiceMock.createInParent).toHaveBeenCalledWith(1, component.article);
-        done();
-    });
+        tick();
+        expect(mocks.articleService.createInParent).toHaveBeenCalledWith(1, component.article);
+    }));
 
-    it("got to the new article page and display an alert when saving sucessfully", done => {
-        $stateParams['parent_id'] = 1;
-        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window, <any>mocks.eventsHubService);
+    it("got to the new article page and display an alert when saving sucessfully", fakeAsync(() => {
+        component.parentId = 1;
         component.save();
-        $rootScope.$apply();
-        expect($state.go).toHaveBeenCalledWith("main.profile.page", { page: "path", profile: "profile" });
-        expect(notification.success).toHaveBeenCalled();
-        done();
-    });
+        tick();
+        expect(mocks.router.navigate).toHaveBeenCalledWith(["profile", "path"]);
+        expect(mocks.notificationService.success).toHaveBeenCalled();
+    }));
 
-    it("go back when cancel article edition", done => {
-        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window, <any>mocks.eventsHubService);
-        $window.history = { back: jasmine.createSpy('back') };
+    it("go back when cancel article edition", () => {
+        TestBed.get("Window").history = { back: jasmine.createSpy('back') };
         component.cancel();
-        expect($window.history.back).toHaveBeenCalled();
-        done();
+        expect(TestBed.get("Window").history.back).toHaveBeenCalled();
     });
 
-    it("edit existing article when save", done => {
-        $stateParams['parent_id'] = null;
-        $stateParams['id'] = 2;
-        let component: CmsComponent = new CmsComponent(articleServiceMock, profileServiceMock, $state, notification, $stateParams, $window, <any>mocks.eventsHubService);
-        $rootScope.$apply();
+    it("edit existing article when save", fakeAsync(() => {
+        component.parentId = 1;
+        component.id = 2;
         component.save();
-        $rootScope.$apply();
-        expect(articleServiceMock.updateArticle).toHaveBeenCalledWith(component.article);
-        done();
-    });
-
+        tick();
+        expect(mocks.articleService.updateArticle).toHaveBeenCalledWith(component.article);
+    }));
 });

@@ -55,7 +55,7 @@ describe("Components", () => {
             component.ngOnInit();
             fixture.detectChanges();
             tick();
-            expect(component.task).toEqual(confirmationTaskData);
+            expect(component.task).toEqual(<any>confirmationTaskData);
         }));
     });
 

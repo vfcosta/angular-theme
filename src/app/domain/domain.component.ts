@@ -1,29 +1,29 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { DomainService } from '../../lib/ng-noosfero-api/http/domain.service';
 import { EnvironmentService } from '../../lib/ng-noosfero-api/http/environment.service';
 import { AuthService } from '../login';
-import { Component, Inject, provide } from 'ng-forward';
+import { Component, Inject } from '@angular/core';
 
 @Component({
     selector: 'domain',
-    templateUrl: "app/domain/domain.html",
+    template: "<div></div>",
 })
-@Inject("domainService", "$state", "$stateParams", "contextResult", "authService", "EnvironmentService")
 export class DomainComponent {
 
     owner: noosfero.Environment | noosfero.Profile;
     domain: noosfero.Domain;
 
-    constructor(private domainService: DomainService, private $state: ng.ui.IStateService, $stateParams: ng.ui.IStateParamsService, contextResult: noosfero.RestResult<noosfero.Domain>,
-        private environmentService: EnvironmentService) {
-        this.domain = contextResult.data;
-        this.owner = contextResult.data.owner;
+    constructor(private domainService: DomainService, private environmentService: EnvironmentService,
+        private router: Router, private route: ActivatedRoute) {
+
+        this.domain = route.snapshot.data['domain'];
+        this.owner = this.domain.owner;
 
         if (this.isProfile()) {
-            $state.go('main.profile.home', { currentProfile: this.owner }, { inherit: false });
+            this.router.navigate(['/', (<noosfero.Profile>this.owner).identifier]);
         } else {
             environmentService.setCurrentEnvironment(<noosfero.Environment>this.owner);
-            $state.go('main.environment.home');
-
+            this.router.navigate(['/']);
         }
     }
 

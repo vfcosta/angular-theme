@@ -10,12 +10,12 @@ export class TagsBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Environment;
+    @Input() designMode: boolean;
 
     tags: Array<CloudData> = [];
 
     constructor(
-      private environmentService: EnvironmentService,
-      @Inject("$state") private $state: ng.ui.IStateService) {
+      private environmentService: EnvironmentService) {
         this.loadTags();
     }
 

@@ -28,7 +28,7 @@ describe("Services", () => {
             xit("should creaet a new account", () => {
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/register?email=${user.email}&id=${user.id}&login=${user.login}`,
                     [{ login: "test" }], {}, 201);
-                service.createAccount(user).then((response: restangular.IResponse) => {
+                service.createAccount(user).then((response: any) => {
                     expect(response.data[0].login).toEqual("test");
                 });
             });

@@ -5,9 +5,7 @@ import { Component, Input, Inject } from '@angular/core';
     template: require('app/profile/configuration/communities/community-members-my-profile.html')
 })
 export class CommunityMembersMyProfileComponent {
-    @Input() profile: noosfero.Profile;
 
-    constructor() {
-    }
+    profile: noosfero.Profile;
 
 }

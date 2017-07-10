@@ -1,10 +1,10 @@
 <div class="activities-list">
-	<div ng-repeat="activity in ctrl.activities | orderBy: 'created_at':true " class="">
+	<div *ngFor="let activity of activities | orderBy: 'created_at':true " class="">
 		<noosfero-activity [activity]="activity"></noosfero-activity>
 	</div>
-	<div ng-if="ctrl.hasActivities" class="row">
+	<div *ngIf="hasActivities" class="row">
 		<div class="col-md-12">
-			<button class="btn btn-primary btn-lg btn-view-more" (click)="ctrl.viewMore()">
+			<button class="btn btn-primary btn-lg btn-view-more" (click)="viewMore()">
 				{{ "activities.view_more" | translate }}
 			</button>
 		</div>

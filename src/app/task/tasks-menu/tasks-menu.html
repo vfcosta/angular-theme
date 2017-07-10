@@ -10,7 +10,7 @@
       <ng-template ngPluralCase="other">{{"tasks.menu.header.other" | translate:{tasks: total} }}</ng-template>
     </div>
     <task-list [tasks]="tasks"></task-list>
-    <a uiSref="main.profile.tasks" [uiParams]="{profile: person.identifier, types: taskTypes.join(',')}" class="all-tasks btn btn-default btn-xs">
+    <a [routerLink]="['/myprofile', person.identifier, 'tasks']" [queryParams]="{types: taskTypes.join(',')}" class="all-tasks btn btn-default btn-xs">
       {{"tasks.menu.all" | translate}}
     </a>
   </div>

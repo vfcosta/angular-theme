@@ -41,7 +41,7 @@ describe("Components", () => {
 
         it("emit event when add block", fakeAsync(() => {
             spyOn(component.onAdd, 'emit');
-            TestBed.get(ProfileService).getBlockTemplate = jasmine.createSpy('createAccount').and.returnValue(Promise.resolve({api_content: [] }));
+            TestBed.get(ProfileService).getBlockTemplate = jasmine.createSpy('createAccount').and.returnValue(Promise.resolve({data: { api_content: [] }}));
             component.owner = <any>{id: 54};
             component.addBlock(<noosfero.Block>{ type: 'RecentDocumentsBlock'});
             tick();

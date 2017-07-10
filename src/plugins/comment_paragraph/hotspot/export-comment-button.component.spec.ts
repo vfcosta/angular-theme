@@ -1,3 +1,4 @@
+import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../app/shared/services/translator.service';
 import { hotspots } from './../../recent_activities/index';
@@ -8,7 +9,6 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ExportCommentButtonHotspotComponent } from "./export-comment-button.component";
 import * as helpers from "../../../spec/helpers";
-import { PermissionDirective } from '../../../app/shared/components/permission/permission.directive';
 
 describe("Components", () => {
     describe("Export Comment Button Hotspot Component", () => {
@@ -23,7 +23,7 @@ describe("Components", () => {
                     { provide: TranslatorService, useValue: mocks.translatorService },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                imports: [SharedModule, TranslateModule.forRoot()]
+                imports: [RouterTestingModule, SharedModule, TranslateModule.forRoot()]
             });
             fixture = TestBed.createComponent(ArticleToolbarHotspotComponent);
             component = fixture.componentInstance;

@@ -10,13 +10,13 @@ export class EventPluginEventBlockComponent {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
+    @Input() designMode: boolean;
 
     events: any;
     options: any;
     monthEvents: any;
 
-    constructor(private blockService: BlockService,
-        @Inject("$state") private $state: any) { }
+    constructor(private blockService: BlockService) { }
 
     populateMonthEvents(month: number, year: number) {
         let events: any = [];

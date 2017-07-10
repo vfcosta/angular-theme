@@ -1,15 +1,17 @@
 <div class="navbar navbar-default">
     <div class="container-fluid" *ngIf="profile.type === 'Person'">
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class=""><a href="#" uiSrefActive="active" uiSref="main.myprofile.personal_data" [uiParams]="{profile: profile.identifier}"><i class="fa fa-flag" aria-hidden="true"></i> {{ 'myprofile.configuration.personal_data' | translate}}</a></li>
             <li role="presentation" class="">
-                <a href="#" uiSrefActive="active" uiSref="main.myprofile.friends" [uiParams]="{profile: profile.identifier}">
+                <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/myprofile', profile.identifier]"><i class="fa fa-flag" aria-hidden="true"></i> {{ 'myprofile.configuration.personal_data' | translate}}</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#" routerLinkActive="active" [routerLink]="['/myprofile', profile.identifier, 'friends']">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     {{ 'myprofile.configuration.people' | translate}}
                 </a>
             </li>
             <li role="presentation" class="">
-                <a href="#" class="communities" uiSrefActive="active" uiSref="main.myprofile.communities" [uiParams]="{profile: profile.identifier}">
+                <a href="#" class="communities" routerLinkActive="active" [routerLink]="['/myprofile', profile.identifier, 'communities']">
                     <i class="fa fa-users" aria-hidden="true"></i>
                     {{ 'myprofile.configuration.communities' | translate}}
                 </a>
@@ -18,13 +20,13 @@
                 <hr />
             </li>
             <li role="presentation">
-                <a href="#" uiSrefActive="active" uiSref="main.myprofile.change_password" [uiParams]="{profile: profile.identifier}">
+                <a href="#" routerLinkActive="active" [routerLink]="['/myprofile', profile.identifier, 'change_password']">
                     <i class="fa fa-lock" aria-hidden="true"></i>
                      {{ 'myprofile.configuration.password' | translate}}
                 </a>
             </li>
             <li role="presentation" class="">
-                <a href="#" uiSrefActive="active" uiSref="main.myprofile.destroy" [uiParams]="{profile: profile.identifier}" class="destroy-profile">
+                <a href="#" routerLinkActive="active" [routerLink]="['/myprofile', profile.identifier, 'destroy_profile']" class="destroy-profile">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                      {{ 'myprofile.configuration.delete_account' | translate}}
                 </a>
@@ -33,7 +35,7 @@
                 <hr />
             </li>
             <li role="presentation" class="">
-                <a uiSref="main.profile.info" [uiParams]="{profile: profile.identifier}">
+                <a [routerLink]="['/', profile.identifier]">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     {{"myprofile.configuration.user-homepage" | translate}}
                 </a>
@@ -42,9 +44,11 @@
     </div>
     <div class="container-fluid" *ngIf="profile.type === 'Community'">
         <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class=""><a href="#" uiSrefActive="active" uiSref="main.myprofile.community_edit" [uiParams]="{profile: profile.identifier}"><i class="fa fa-flag" aria-hidden="true"></i> {{ 'myprofile.configuration.community_data' | translate}}</a></li>
             <li role="presentation" class="">
-                <a href="#" class="members" uiSrefActive="active" uiSref="main.myprofile.members" [uiParams]="{profile: profile.identifier}">
+                <a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" [routerLink]="['/myprofile', profile.identifier]"><i class="fa fa-flag" aria-hidden="true"></i> {{ 'myprofile.configuration.community_data' | translate}}</a>
+            </li>
+            <li role="presentation" class="">
+                <a href="#" class="members" routerLinkActive="active" [routerLink]="['/myprofile', profile.identifier, 'members']">
                     <i class="fa fa-user" aria-hidden="true"></i>
                     {{ 'myprofile.configuration.community.members' | translate}}
                 </a>
@@ -53,7 +57,7 @@
                 <hr />
             </li>
             <li role="presentation" class="">
-                <a href="#" class="destroy-community" uiSrefActive="active" uiSref="main.myprofile.destroy" [uiParams]="{profile: profile.identifier}">
+                <a href="#" class="destroy-community" routerLinkActive="active"  [routerLink]="['/myprofile', profile.identifier, 'destroy_profile']">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                     {{ 'myprofile.configuration.community.delete' | translate}}
                 </a>
@@ -62,7 +66,7 @@
                 <hr />
             </li>
             <li role="presentation" class="">
-                <a uiSref="main.profile.info" [uiParams]="{profile: profile.identifier}">
+                <a [routerLink]="['/', profile.identifier]">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     {{"myprofile.configuration.community-homepage" | translate}}
                 </a>

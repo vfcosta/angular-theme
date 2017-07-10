@@ -1,14 +1,20 @@
+import { By } from '@angular/platform-browser';
+import { BlockService } from './../../../lib/ng-noosfero-api/http/block.service';
+import { TranslatorService } from './../../shared/services/translator.service';
+import * as helpers from "../../../spec/helpers";
+import { TranslateModule } from '@ngx-translate/core';
+import { HighlightsBlockComponent } from './highlights/highlights-block.component';
+import { HighlightsBlockSettingsComponent } from './highlights/highlights-block-settings.component';
+import { BlockSettingsComponent } from './block-settings.component';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { Input, Component } from '@angular/core';
-
-import { BlockSettingsComponent } from './block-settings.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-
-const htmlTemplate: string = '<noosfero-block-settings [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-block-settings>';
+const htmlTemplate: string = '<noosfero-block-settings [block]="block" [owner]="owner"></noosfero-block-settings>';
 
 describe("Components", () => {
-    describe("Block Component", () => {
+    describe("Block Settings Component", () => {
+        let mocks = helpers.getMocks();
 
         it("receives the block and the owner as inputs", () => {
             // Creating a container component (BlockContainerComponent) to include
@@ -17,8 +23,6 @@ describe("Components", () => {
             class BlockContainerComponent {
                 block = { type: 'Block' };
                 owner = { name: 'profile-name' };
-                constructor() {
-                }
             }
 
             let fixture: ComponentFixture<BlockContainerComponent>;
@@ -28,45 +32,39 @@ describe("Components", () => {
                 declarations: [BlockContainerComponent],
                 providers: [],
                 schemas: [NO_ERRORS_SCHEMA],
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(BlockContainerComponent);
-                component = fixture.componentInstance;
-                expect(component.block.type).toEqual("Block");
-                expect(component.owner.name).toEqual("profile-name");
             });
+            fixture = TestBed.createComponent(BlockContainerComponent);
+            component = fixture.componentInstance;
+            expect(component.block.type).toEqual("Block");
+            expect(component.owner.name).toEqual("profile-name");
         });
 
-        it("renders a component which matches to the block type", () => {
-            @Component({ selector: 'noosfero-custom-block-settings', template: "<h1>My Custom Block</h1>" })
-            class CustomBlockSettings {
-                @Input() block: any;
-                @Input() owner: any;
-            }
-
+        it("renders a component which matches to the block type", fakeAsync(() => {
             @Component({ selector: 'test-container-component', template: htmlTemplate })
             class CustomBlockType {
-                block = { type: 'CustomBlock' };
+                block = { type: 'HighlightsBlock', settings: { interval: 1 } };
                 owner = { name: 'profile-name' };
-                constructor() {
-                }
             }
-
             let fixture: ComponentFixture<CustomBlockType>;
             let component: CustomBlockType;
 
             TestBed.configureTestingModule({
-                declarations: [CustomBlockType],
-                providers: [],
+                declarations: [CustomBlockType, BlockSettingsComponent],
+                imports: [TranslateModule.forRoot()],
+                providers: [
+                    { provide: BlockService, useValue: mocks.blockService },
+                ],
                 schemas: [NO_ERRORS_SCHEMA],
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(CustomBlockType);
-                component = fixture.componentInstance;
-                expect(component.block.type).toEqual("CustomBlock");
-                expect(fixture.debugElement.children[0].attributes['text']).toEqual("My Custom Block");
             });
-        });
+            fixture = TestBed.createComponent(CustomBlockType);
+            component = fixture.componentInstance;
+            tick();
+            fixture.detectChanges();
+            expect(component.block.type).toEqual("HighlightsBlock");
+            expect(fixture.debugElement.queryAll(By.css('noosfero-highlights-block-settings')).length).toEqual(1);
+        }));
 
-        it("renders the default block when hasn't defined a block type", () => {
+        it("renders nothing when block type is not defined", () => {
             @Component({ selector: 'test-container-component', template: htmlTemplate })
             class CustomBlockType {
                 block: any = { type: null };
@@ -82,13 +80,11 @@ describe("Components", () => {
                 declarations: [CustomBlockType],
                 providers: [],
                 schemas: [NO_ERRORS_SCHEMA],
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(CustomBlockType);
-                component = fixture.componentInstance;
-                expect(component.block.type).toBeNull();
-                expect(!!fixture.debugElement.nativeElement.querySelector("noosfero-default-block-settings")).toBeTruthy();
             });
+            fixture = TestBed.createComponent(CustomBlockType);
+            component = fixture.componentInstance;
+            expect(component.block.type).toBeNull();
+            expect(fixture.debugElement.query(By.css('noosfero-block-settings')).nativeElement.innerHTML).toEqual("");
         });
-
     });
 });

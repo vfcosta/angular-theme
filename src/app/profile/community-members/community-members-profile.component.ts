@@ -1,8 +1,8 @@
-import { Component, Inject, provide } from 'ng-forward';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'community-members-route',
-    templateUrl: "app/profile/community-members/community-members-profile.html"
+    template: require("app/profile/community-members/community-members-profile.html")
 })
 export class CommunityMembersProfileComponent {
 

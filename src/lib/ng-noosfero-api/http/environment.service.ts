@@ -5,7 +5,6 @@ import { RestangularService } from "./restangular_service";
 @Injectable()
 export class EnvironmentService extends RestangularService<noosfero.Environment> {
 
-    private _currentEnvironmentPromise: ng.IDeferred<noosfero.Environment>;
     private _environment: noosfero.Environment;
 
     constructor(protected restangular: Restangular) {
@@ -40,7 +39,7 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
         return this.restangular.one('environments', <any>environmentId);
     }
 
-    getBoxes(environmentId: number | string): restangular.IPromise<restangular.IResponse> {
+    getBoxes(environmentId: number | string): Promise<any> {
         return this.getEnvironmentElement(environmentId).customGET('boxes').toPromise();
     }
 
@@ -48,7 +47,7 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
         return this.getEnvironmentElement(environmentId).customGET('tags').toPromise();
     }
 
-    getEnvironmentPeople(environmentId: number | string, params?: any): restangular.IPromise<any> {
+    getEnvironmentPeople(environmentId: number | string, params?: any): Promise<any> {
         return this.getEnvironmentElement(environmentId).customGET('people', params).toPromise();
     }
 

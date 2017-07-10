@@ -1,3 +1,5 @@
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { By } from '@angular/platform-browser';
@@ -18,6 +20,7 @@ describe("Components", () => {
         let state = jasmine.createSpyObj("state", ["go"]);
         let stateParams = {};
         let transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
+        let mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -25,20 +28,16 @@ describe("Components", () => {
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: BlockService, useValue: mockedBlockService },
-                    { provide: "$state", useValue: state },
-                    { provide: "$stateParams", useValue: stateParams },
-                    { provide: "$transitions", useValue: transitions },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
-                ]
-            }).compileComponents().then(() => {
-                fixture = TestBed.createComponent(BreadcrumbsBlockComponent);
-                component = fixture.componentInstance;
-                component.owner = <noosfero.Profile>{ id: 1, name: 'profile-name', identifier: 'profile-name' };
-                component.block = {};
-                component.links = links;
-            }).catch( error => {
-                console.log(error);
+                    { provide: "Window", useValue: mocks.window },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
+                ],
+                imports: [RouterTestingModule]
             });
+            fixture = TestBed.createComponent(BreadcrumbsBlockComponent);
+            component = fixture.componentInstance;
+            component.owner = <noosfero.Profile>{ id: 1, name: 'profile-name', identifier: 'profile-name' };
+            component.block = {};
+            component.links = links;
         }));
 
         it("call api to get links when set navigation state", () => {
