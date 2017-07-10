@@ -1,3 +1,5 @@
+import { Subscription } from "rxjs";
+import { DesignModeService } from './../../../shared/services/design-mode.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { Component, Input, Inject, HostListener, ElementRef, ViewChild } from "@angular/core";
 import { TranslatorService } from "../../../shared/services/translator.service";
@@ -30,11 +32,35 @@ export class MenuBlockComponent {
     articles: any[];
     dragulaOptions: any;
     selectedArticle: noosfero.Article;
+    designModeSubscription: Subscription;
 
     constructor(private elementRef: ElementRef,
         private translatorService: TranslatorService,
         private articleService: ArticleService,
-        private dragulaService: DragulaService) {
+        private dragulaService: DragulaService,
+        private designModeService: DesignModeService) {
+
+        this.designModeSubscription = designModeService.onToggle.subscribe((designModeOn: boolean) => {
+            if (designModeOn && !this.articles) {
+                this.articles = [];
+                this.articleService.getByProfile(this.owner, { per_page: 100 })
+                    .then((result: noosfero.RestResult<noosfero.Article[]>) => {
+                        for (let article of <noosfero.Article[]>result.data) {
+                            this.articles.push({
+                                translatedTitle: article.name,
+                                url: 'main.profile.page',
+                                urlParams: {page: article.path, profile: this.owner.identifier},
+                                title: article.name,
+                                path: article.path
+                            });
+                        }
+                    });
+            }
+        });
+    }
+
+    ngOnDestroy() {
+        this.designModeSubscription.unsubscribe();
     }
 
     ngOnInit() {
@@ -58,20 +84,6 @@ export class MenuBlockComponent {
                 this.block.api_content.enabled_items = enabled;
             }
         });
-
-        this.articles = [];
-        this.articleService.getByProfile(this.owner, { per_page: 100 })
-            .then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                for (let article of <noosfero.Article[]>result.data) {
-                    this.articles.push({
-                        translatedTitle: article.name,
-                        url: 'main.profile.page',
-                        urlParams: {page: article.path, profile: this.owner.identifier},
-                        title: article.name,
-                        path: article.path
-                    });
-                }
-            });
 
         this.links = [];
         this.linksAvailable = [];
