@@ -15,7 +15,7 @@ import * as helpers from "./../../../spec/helpers";
 
 describe("Components", () => {
 
-    fdescribe("Profile Join Component", () => {
+    describe("Profile Join Component", () => {
 
         let mocks = helpers.getMocks();
 
