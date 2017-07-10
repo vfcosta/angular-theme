@@ -29,61 +29,59 @@ export class ProfileJoinComponent {
             this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_FRIENDSHIP_CHANGED, (friendshipState: number) => {
                 this.relationshipState = friendshipState;
             });
-            this.loadFriendship();
         }else{
             this.eventsHubService.subscribeToEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, (membershipState: number) => {
                 this.relationshipState = membershipState;
+            });            
+        }
+        this.loadRelationship();
+    }
+
+    loadRelationship() {
+        if(this.isPerson()){
+            this.personService.getFriendshipState(this.session.currentPerson(), this.profile).then((response: noosfero.DefaultResponse) => {            
+                this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_FRIENDSHIP_CHANGED, response.code);
             });
-            this.loadMembership();
+        }else{
+            this.communityService.getMembershipState(this.session.currentPerson(), this.profile).then((response: noosfero.DefaultResponse) => {            
+                this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, response.code);
+            });
         }
     }
 
-    loadMembership() {
-        this.communityService.getMembershipState(this.session.currentPerson(), this.profile).then((response: noosfero.DefaultResponse) => {            
-            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_MEMBERSHIP_CHANGED, response.code);
-        });
-    }
+    addRelationship() {
+        let promiseResponse;
+        if(this.isPerson()){
+            promiseResponse = this.personService.addFriend(<number>this.profile.id);
+        } else{
+            promiseResponse = this.profileService.addMember(this.session.currentPerson(), this.profile);
 
-    loadFriendship() {
-        this.personService.getFriendshipState(this.session.currentPerson(), this.profile).then((response: noosfero.DefaultResponse) => {            
-            this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.PROFILE_FRIENDSHIP_CHANGED, response.code);
-        });
-    }
-
-    join() {
-        this.profileService.addMember(this.session.currentPerson(), this.profile).then((result: any) => {
-            if (result.data.pending) {
-                this.notificationService.success({ title: "profile.join.title", message: "profile.join.moderation.message" });
-            } else {
-                this.notificationService.success({ title: "profile.join.title", message: "profile.join.success.message" });
-            }
-            this.loadMembership();
-        });
-    }
-
-    leave() {
-        this.profileService.removeMember(this.session.currentPerson(), this.profile).then(() => {
-            this.loadMembership();
-        });
-    }
-
-    addFriend() {
-        this.personService.addFriend(<number>this.profile.id).then((response: any) => {
+        }            
+        promiseResponse.then((response: any) => {
             if (response.data.pending) {
-                this.notificationService.success({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.moderation.messag" });
+                this.notificationService.success({ title: 'profile.actions.add_in_'+ this.profileType() + '.title', message: 'profile.actions.add_in_'+ this.profile.type.toLowerCase() + '.moderation.message' });
             } else {
-                this.notificationService.success({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.success.message" });
+                this.notificationService.success({ title: 'profile.actions.add_in_'+ this.profileType() + '.title', message: 'profile.actions.add_in_' + this.profile.type.toLowerCase() + '.success.message' });
             }
+            this.loadRelationship();
         }).catch((response: any) => {
-            this.notificationService.error({ title: "profile.actions.add_friend.title", message: "profile.actions.add_friend.error.message" });
+            this.notificationService.error({ title: 'profile.actions.add_in_'+ this.profileType() + '.error.title', message: 'profile.actions.add_in_' + this.profile.type.toLowerCase() + '.error.message' });
         });
     }
 
-    removeFriend() {
-        this.personService.removeFriend(<number>this.profile.id).then((response: any) => {
-            this.notificationService.success({ title: "profile.actions.add_friend.title", message: "profile.actions.remove_friend.message" });
+    removeRelationship() {
+        let promiseResponse;
+        if(this.isPerson()){
+            promiseResponse = this.personService.removeFriend(<number>this.profile.id);
+        } else{
+            promiseResponse = this.profileService.removeMember(this.session.currentPerson(), this.profile);
+        }
+
+        promiseResponse.then((response: any) => {
+            this.notificationService.success({ title: 'profile.actions.remove_of_' + this.profileType() + '.title', message: 'profile.actions.remove_of_' + this.profileType() + '.message' });
+            this.loadRelationship();
         }).catch((response: any) => {
-            this.notificationService.error({ title: "profile.actions.add_friend.title", message: "profile.actions.remove_friend.error.message" });
+            this.notificationService.error({ title: 'profile.actions.remove_of_' + this.profileType() + '.title', message: 'profile.actions.remove_of_' + this.profileType() + '.error.message' });
         });
     }
 
@@ -91,30 +89,26 @@ export class ProfileJoinComponent {
         return this.profile.type === 'Person';
     }
 
-    isWaitingMembershipApproval(): boolean {
-        return this.relationshipState === MembershipStatus.WaitingForApproval;
+    profileType(): string {        
+        return this.profile.type.toLowerCase();
+    }
+    
+    hasNoRelationship(): boolean {
+        let is_not_friend = (this.relationshipState === FriendshipStatus.NotFriend) && ((this.currentUser && this.currentUser.person) && (this.currentUser.person.id !== this.profile.id));
+        let is_not_member = this.relationshipState === MembershipStatus.NotMember;
+        return (is_not_member) || (is_not_friend);
     }
 
-    isNotMember(): boolean {
-        return this.relationshipState === MembershipStatus.NotMember;
+    hasRelationship(): boolean {
+        let is_member = this.relationshipState === MembershipStatus.Member;
+        let is_friend = this.relationshipState === FriendshipStatus.Friend;
+        return (is_member) || (is_friend);
     }
 
-    isMember(): boolean {
-        return this.relationshipState === MembershipStatus.Member;
+    isWaitingApproval(): boolean {
+        let is_waiting_friend_approval = this.relationshipState === FriendshipStatus.WaitingForApproval;
+        let is_waiting_community_approval = this.relationshipState === MembershipStatus.WaitingForApproval;
+        return (is_waiting_community_approval) || (is_waiting_friend_approval);
     }
-
-    isWaitingFriendshipApproval(): boolean {
-        return this.relationshipState === FriendshipStatus.WaitingForApproval;
-    }
-
-    isNotFriend(): boolean {        
-        return (this.relationshipState === FriendshipStatus.NotFriend) && ((this.currentUser && this.currentUser.person) && (this.currentUser.person.id !== this.profile.id));
-    }
-
-    isFriend(): boolean {
-        return this.relationshipState === FriendshipStatus.Friend
-        ;
-    }
-
 
 }

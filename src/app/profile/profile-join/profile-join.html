@@ -1,28 +1,16 @@
 <div class="actions">    
     <div class="profile-actions">
-        <a *ngIf="isNotMember()" (click)="join()" class="btn btn-primary btn-sm join" href="#">
+        <a *ngIf="hasNoRelationship()" (click)="addRelationship()" class="btn btn-primary btn-sm" [ngClass]="'add-in-' + profileType()" href="#">
             <i class="fa fa-plus"></i>
-            {{'profile.join.community' | translate }}
+            {{ 'profile.actions.add_in_' + profileType() | translate }}
         </a>
-        <a *ngIf="isNotFriend()" (click)="addFriend()" class="btn btn-primary btn-sm add-friend" href="#">
-            <i class="fa fa-plus"></i>
-            {{'profile.actions.add_friend' | translate }}
-        </a>
-        <i *ngIf="isWaitingMembershipApproval()" class="btn btn-info btn-sm wait">
-            {{"profile.wait.membership.approval" | translate}}
+        <i *ngIf="isWaitingApproval()" class="btn btn-info btn-sm" [ngClass]="'wait-' + profileType()">
+            {{ 'profile.actions.wait_' + profileType() + '.approval'| translate}}
             <i class="fa fa-exclamation"></i>
-        </i>
-        <i *ngIf="isWaitingFriendshipApproval()" class="btn btn-info btn-sm wait">
-            {{"profile.actions.add_friend.approval" | translate}}
-            <i class="fa fa-exclamation"></i>
-        </i>
-        <a *ngIf="isMember()" (click)="leave()" class="btn btn-warning btn-sm leave" href="#">
+        </i>        
+        <a *ngIf="hasRelationship()" (click)="removeRelationship()" class="btn btn-warning btn-sm" [ngClass]="'remove-of-' + profileType()" href="#">
             <i class="fa fa-minus"></i>
-            {{'profile.leave.community' | translate }}            
-        </a>
-        <a *ngIf="isFriend()" (click)="removeFriend()" class="btn btn-warning btn-sm remove-friend" href="#">
-            <i class="fa fa-minus"></i>
-            {{'profile.actions.remove_friend' | translate }}            
+            {{ 'profile.actions.remove_of_' + profileType() | translate }}            
         </a>
     </div>
 </div>
