@@ -1,3 +1,4 @@
+import { DesignModeService } from './../../../shared/services/design-mode.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { PopoverModule } from 'ngx-bootstrap';
@@ -12,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {
     describe("Menu Block Component", () => {
+        let mocks = helpers.getMocks();
         let fixture: ComponentFixture<MenuBlockComponent>;
         let component: MenuBlockComponent;
         let articles = [
@@ -33,7 +35,8 @@ describe("Components", () => {
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
+                    { provide: DesignModeService, useValue: mocks.designModeService },
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(MenuBlockComponent);
@@ -75,7 +78,7 @@ describe("Components", () => {
         });
 
         it("generate correct url for activities", () => {
-            let url = [ '/', 'profile-name' ];
+            let url = [ '/profile', 'profile-name' ];
             expect(component.makeUrl({ "title": "Activities", "controller": "profile", "action": "activities" }).url).toEqual(url);
         });
 

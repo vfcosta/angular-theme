@@ -8,26 +8,26 @@ import { BlockSettingsComponent } from '../block-settings.component';
 })
 export class HighlightsBlockSettingsComponent implements OnInit {
 
+    @Input() block: noosfero.Block;
+    @Input() owner: noosfero.Profile | noosfero.Environment;
+
     isCollapsed: any;
     images: any;
-    parentBlock: BlockSettingsComponent;
 
     constructor(
         injector: Injector,
         private blockService: BlockService) {
-        this.parentBlock = injector.get(BlockSettingsComponent);
     }
 
     ngOnInit() {
         this.isCollapsed = true;
-        this.images = (<any>this.parentBlock.block.api_content || {}).slides || [];
-        (<any>this.parentBlock.block.settings).block_images = this.images;
-
+        this.images = (<any>this.block.api_content || {}).slides || [];
+        (<any>this.block.settings).block_images = this.images;
     }
 
     addSlide() {
         this.images.push({ image_src: "", title: "", address: "http://" });
-        this.parentBlock.block.hide = false;
+        this.block.hide = false;
     }
 
     removeSlide(index: number) {
@@ -35,17 +35,21 @@ export class HighlightsBlockSettingsComponent implements OnInit {
     }
 
     selectSlide(index: number) {
-        (<any>this.parentBlock.block)['active'] = index;
+        (<any>this.block)['active'] = index;
     }
 
     upload(data: any, slide: any) {
-        this.blockService.uploadImages(this.parentBlock.block, [data]).then((result: any) => {
-            this.parentBlock.block.images = result.data.images;
-            if (this.parentBlock.block.images.length > 0) {
-                let image = this.parentBlock.block.images[this.parentBlock.block.images.length - 1];
+        this.blockService.uploadImages(this.block, [data]).then((result: any) => {
+            this.block.images = result.data.images;
+            if (this.block.images.length > 0) {
+                let image = this.block.images[this.block.images.length - 1];
                 slide.image_id = image.id;
                 slide.image_src = image.url;
             }
         });
+    }
+
+    getInterval() {
+        return this.block &&  this.block.settings &&  this.block.settings['interval'] ? this.block.settings['interval'] : 0;
     }
 }

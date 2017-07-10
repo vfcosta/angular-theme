@@ -13,7 +13,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 const htmlTemplate: string = '<noosfero-block-settings [block]="block" [owner]="owner"></noosfero-block-settings>';
 
 describe("Components", () => {
-    describe("Block Component", () => {
+    describe("Block Settings Component", () => {
         let mocks = helpers.getMocks();
 
         it("receives the block and the owner as inputs", () => {
@@ -61,7 +61,7 @@ describe("Components", () => {
             tick();
             fixture.detectChanges();
             expect(component.block.type).toEqual("HighlightsBlock");
-            expect(fixture.debugElement.queryAll(By.css('noosfero-highlights-block-settings .highlights-block-settings')).length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css('noosfero-highlights-block-settings')).length).toEqual(1);
         }));
 
         it("renders nothing when block type is not defined", () => {

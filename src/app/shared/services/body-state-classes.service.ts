@@ -103,13 +103,21 @@ export class BodyStateClassesService {
         }
     }
 
+    private getLastChildRoute(current: any) {
+        for (let child of current.children) {
+            if (child.children.length > 0) {
+                return this.getLastChildRoute(child);
+            } else {
+                return child;
+            }
+        }
+        return current;
+    }
+
     private setupStateClassToggle() {
         this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd) {
-                let lastComponent: any = this.route.component;
-                for (let child of this.route.children) {
-                    if (child.component) lastComponent = child.component;
-                }
+                let lastComponent = this.getLastChildRoute(this.router.routerState.root).component;
                 let stateName = "";
                 if (lastComponent) stateName = lastComponent.name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
                 this.switchStateClasses(stateName);

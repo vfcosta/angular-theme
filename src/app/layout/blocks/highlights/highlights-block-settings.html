@@ -1,4 +1,4 @@
-<div class="highlights-block-settings">
+<div class="highlights-block-settings" *ngIf="block">
   <button (click)="isCollapsed = !isCollapsed" class="extra-settings-btn btn btn-link">
     <i class="fa fa-caret-down"></i> {{ "block.edition.extra_config" | translate }}
   </button>
@@ -34,8 +34,8 @@
     <div class="transition-setting form-inline">
       <div class="form-group">
         <span>{{"highlights-block.edition.transition.label" | translate}}</span>
-        <input type="number" [(ngModel)]="parentBlock.block.settings.interval" class="interval">
-        <span [ngPlural]="parentBlock.block.settings.interval">
+        <input type="number" [(ngModel)]="block.settings.interval" class="interval">
+        <span [ngPlural]="getInterval()">
           <ng-template ngPluralCase="=0">{{"highlights-block.edition.transition.seconds.zero" | translate}}</ng-template>
           <ng-template ngPluralCase="=1">{{"highlights-block.edition.transition.seconds.one" | translate}}</ng-template>
           <ng-template ngPluralCase="other">{{"highlights-block.edition.transition.seconds.other" | translate}}</ng-template>
