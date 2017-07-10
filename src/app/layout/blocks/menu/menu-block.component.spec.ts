@@ -75,7 +75,7 @@ describe("Components", () => {
         });
 
         it("generate correct url for activities", () => {
-            let url = [ '/', 'profile-name' ];
+            let url = [ '/profile', 'profile-name' ];
             expect(component.makeUrl({ "title": "Activities", "controller": "profile", "action": "activities" }).url).toEqual(url);
         });
 

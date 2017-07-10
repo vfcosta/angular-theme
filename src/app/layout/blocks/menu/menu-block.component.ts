@@ -99,7 +99,7 @@ export class MenuBlockComponent {
         let link: { translatedTitle: string, url: any[], urlParams: any, title: string, controller: string, action: string; path: string } = { translatedTitle: '', url: [], urlParams: {}, title: '', controller: '', action: '', path: '' };
         let urlMapping: any = {
             'about': ['/profile', this.owner.identifier, 'about'],
-            'activities': ['/', this.owner.identifier],
+            'activities': ['/profile', this.owner.identifier],
             'index': this.owner.type === 'Person' ? ['/profile', this.owner.identifier, 'friends'] : ['/profile', this.owner.identifier, 'members']
         };
         if (params.controller) {
