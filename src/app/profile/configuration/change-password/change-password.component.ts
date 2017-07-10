@@ -13,7 +13,8 @@ import { ValidationMessageComponent } from '../../../shared/components/validatio
  */
 @Component({
     selector: "change-password",
-    template: require('app/profile/configuration/change-password/change-password.html')
+    templateUrl: './change-password.html',
+    styleUrls: ['./change-password.scss']
 })
 export class ChangePasswordComponent {
 

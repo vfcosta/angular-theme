@@ -20,5 +20,5 @@ export function destroy(profile: string) {
 
 export function goTo(profile: string) {
     browser.waitForAngular();
-    return browser.driver.get(`http://localhost:3001/${profile}`);
+    return browser.driver.get(`http://localhost:49152/${profile}`);
 }

@@ -4,7 +4,7 @@ import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.servi
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { StatisticsBlockComponent } from './statistics-block.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Statistics Block Component", () => {

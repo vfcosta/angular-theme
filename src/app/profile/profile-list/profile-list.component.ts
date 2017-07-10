@@ -7,7 +7,8 @@ export const DisplayStyles = {
 
 @Component({
     selector: 'profile-list',
-    template: require("app/profile/profile-list/profile-list.component.html")
+    templateUrl: './profile-list.component.html',
+    styleUrls: ['./profile-list.component.scss']
 })
 export class ProfileListComponent {
     @Input() profiles: noosfero.Profile[];

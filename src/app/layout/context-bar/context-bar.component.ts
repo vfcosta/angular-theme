@@ -1,18 +1,18 @@
 import { Router } from '@angular/router';
 import { Inject, Input, Component, ChangeDetectorRef } from '@angular/core';
-import { EventsHubService } from "../../shared/services/events-hub.service";
-import { NoosferoKnownEvents } from "../../known-events";
+import { EventsHubService } from '../../shared/services/events-hub.service';
+import { NoosferoKnownEvents } from '../../known-events';
 import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
 import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { EnvironmentService } from '../../../lib/ng-noosfero-api/http/environment.service';
 import { NotificationService } from '../../shared/services/notification.service';
-import { DesignModeService } from "../../shared/services/design-mode.service";
-
-declare var _: any;
+import { DesignModeService } from '../../shared/services/design-mode.service';
+import * as _ from "lodash";
 
 @Component({
     selector: "context-bar",
-    template: require("app/layout/context-bar/context-bar.html")
+    templateUrl: './context-bar.html',
+    styleUrls: ['./context-bar.scss']
 })
 export class ContextBarComponent {
 

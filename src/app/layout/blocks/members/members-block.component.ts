@@ -3,7 +3,8 @@ import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service
 
 @Component({
     selector: "noosfero-members-block",
-    template: require('app/layout/blocks/members/members-block.html')
+    templateUrl: './members-block.html',
+    styleUrls: ['./members-block.scss']
 })
 export class MembersBlockComponent {
 

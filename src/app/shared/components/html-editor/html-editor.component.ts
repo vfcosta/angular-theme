@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'html-editor',
-    template: require("app/shared/components/html-editor/html-editor.html"),
+    templateUrl: './html-editor.html',
 })
 export class HtmlEditorComponent {
 

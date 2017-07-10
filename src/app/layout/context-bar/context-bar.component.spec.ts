@@ -9,7 +9,7 @@ import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environm
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { Component } from '@angular/core';
 import { ContextBarComponent } from './context-bar.component';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';

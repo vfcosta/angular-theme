@@ -4,15 +4,16 @@ import { ActivitiesComponent } from './../../profile/activities/activities.compo
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
 import { Input, Component } from '@angular/core';
 import { NotificationService } from '../../shared/services/notification.service';
-import { AuthService, SessionService, AuthEvents } from "../../login";
-import { TranslatorService } from "../../shared/services/translator.service";
-import { DesignModeService } from "../../shared/services/design-mode.service";
+import { AuthService, SessionService, AuthEvents } from '../../login';
+import { TranslatorService } from '../../shared/services/translator.service';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 import { animateFactory } from 'ng2-animate';
 
 @Component({
     selector: 'noosfero-block',
-    template: require('app/layout/blocks/block.html'),
-    animations: [animateFactory(500, 0, 'ease-in')]
+    templateUrl: './block.html',
+    animations: [animateFactory(500, 0, 'ease-in')],
+    styleUrls: ['./block.scss']
 })
 export class BlockComponent {
 

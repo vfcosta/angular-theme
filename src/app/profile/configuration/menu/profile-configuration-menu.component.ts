@@ -8,7 +8,8 @@ import { Component, Input, Inject } from '@angular/core';
  */
 @Component({
     selector: "profile-configuration-menu",
-    template: require('app/profile/configuration/menu/profile-configuration-menu.html'),
+    templateUrl: './profile-configuration-menu.html',
+    styleUrls: ['./profile-configuration-menu.scss']
 })
 export class ProfileConfigurationMenuComponent {
     @Input() profile: noosfero.Profile;

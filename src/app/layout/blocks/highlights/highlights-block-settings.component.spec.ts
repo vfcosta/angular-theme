@@ -3,7 +3,7 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { DragulaModule } from 'ng2-dragula';
 import { HighlightsBlockSettingsComponent } from './highlights-block-settings.component';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA, Injector } from '@angular/core';

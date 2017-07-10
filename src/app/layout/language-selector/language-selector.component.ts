@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { TranslatorService } from "../../shared/services/translator.service";
+import { TranslatorService } from '../../shared/services/translator.service';
 
 @Component({
     selector: "language-selector",
-    template: require('app/layout/language-selector/language-selector.html')
+    templateUrl: './language-selector.html',
+    styleUrls: ['./language-selector.scss']
 })
 export class LanguageSelectorComponent {
 

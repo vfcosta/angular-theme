@@ -9,7 +9,7 @@ import { ProfileListEditionComponent } from './profile-list-edition.component';
 import { By } from '@angular/platform-browser';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 export class MockDateFormatPipe {
     transform() {

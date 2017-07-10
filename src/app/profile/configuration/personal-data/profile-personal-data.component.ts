@@ -12,7 +12,8 @@ import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angu
  */
 @Component({
     selector: "profile-personal-data",
-    template: require('app/profile/configuration/personal-data/profile-personal-data.html')
+    templateUrl: './profile-personal-data.html',
+    styleUrls: ['./profile-personal-data.scss']
 })
 export class ProfilePersonalDataComponent {
 

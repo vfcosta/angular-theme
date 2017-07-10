@@ -3,7 +3,8 @@ import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service
 
 @Component({
     selector: "noosfero-people-block",
-    template: require('app/layout/blocks/people/people-block.html')
+    templateUrl: './people-block.html',
+    styleUrls: ['./people-block.scss']
 })
 export class PeopleBlockComponent {
 

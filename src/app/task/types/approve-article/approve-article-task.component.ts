@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: "approve-article-task",
-    template: require("app/task/types/approve-article/approve-article.html")
+    templateUrl: "./approve-article.html",
+    styleUrls: ['./approve-article.scss']
 })
 export class ApproveArticleTaskComponent extends TaskTypeComponent {
 

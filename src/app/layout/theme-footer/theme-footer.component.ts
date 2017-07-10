@@ -1,8 +1,9 @@
-import { Component } from "@angular/core";
+import { Component } from '@angular/core';
 
 @Component({
     selector: "theme-footer",
-    template: require("app/layout/theme-footer/theme-footer.html")
+    templateUrl: './theme-footer.html',
+    styleUrls: ['./theme-footer.scss']
 })
 export class ThemeFooterComponent {
 

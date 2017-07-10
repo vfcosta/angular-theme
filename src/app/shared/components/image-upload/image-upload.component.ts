@@ -3,7 +3,8 @@ import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     selector: "image-upload",
-    template: require('app/shared/components/image-upload/image-upload.html')
+    templateUrl: './image-upload.html',
+    styleUrls: ['./image-upload.scss']
 })
 export class ImageUploadComponent {
 

@@ -2,7 +2,8 @@ import { Component, Input, Inject } from '@angular/core';
 
 @Component({
     selector: 'custom-content',
-    template: require("app/profile/custom-content/custom-content.html"),
+    templateUrl: './custom-content.html',
+    styleUrls: ['./custom-content.scss']
 })
 export class CustomContentComponent {
 

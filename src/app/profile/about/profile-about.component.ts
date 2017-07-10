@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 
 @Component({
     selector: 'profile-about',
-    template: require("app/profile/about/profile-about.html"),
+    templateUrl: './profile-about.html',
+    styleUrls: ['./profile-about.scss']
 })
 export class ProfileAboutComponent {
 

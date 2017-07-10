@@ -1,7 +1,7 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
-import {RestangularService} from "../../../lib/ng-noosfero-api/http/restangular_service";
-import {ArticleService} from "../../../lib/ng-noosfero-api/http/article.service";
+import { Injectable, Inject } from '@angular/core';
+import {RestangularService} from '../../../lib/ng-noosfero-api/http/restangular_service';
+import {ArticleService} from '../../../lib/ng-noosfero-api/http/article.service';
 
 @Injectable()
 export class CommentParagraphService extends RestangularService<noosfero.Comment> {

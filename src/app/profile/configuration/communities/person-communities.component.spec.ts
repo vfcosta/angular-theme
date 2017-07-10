@@ -6,8 +6,8 @@ import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
-import * as helpers from "../../../../spec/helpers";
+import { PersonService } from '../../../../lib/ng-noosfero-api/http/person.service';
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Person Communities Component", () => {

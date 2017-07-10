@@ -3,7 +3,8 @@ import { DesignModeService } from '../../shared/services/design-mode.service';
 
 @Component({
     selector: "config-bar",
-    template: require("app/layout/config-bar/config-bar.html")
+    templateUrl: './config-bar.html',
+    styleUrls: ['./config-bar.scss']
 })
 export class ConfigBarComponent {
 

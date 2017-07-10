@@ -4,7 +4,7 @@ import { AuthService } from './../../login/auth.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DestroyProfileComponent } from './destroy-profile.component';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {

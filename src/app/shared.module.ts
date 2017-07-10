@@ -23,7 +23,7 @@ import { ImageCropperModule } from 'ng2-img-cropper';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import * as plugins from "../plugins";
+import * as plugins from '../plugins';
 
 @NgModule({
     exports: [

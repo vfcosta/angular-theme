@@ -6,7 +6,8 @@ import { DisplayStyles } from '../../profile-list/profile-list.component';
 
 @Component({
     selector: "person-communities",
-    template: require('app/profile/configuration/communities/person-communities.html'),
+    templateUrl: './person-communities.html',
+    styleUrls: ['./person-communities.scss']
 })
 export class PersonCommunitiesComponent {
 

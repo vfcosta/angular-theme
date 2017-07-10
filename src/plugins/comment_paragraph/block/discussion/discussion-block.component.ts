@@ -1,7 +1,7 @@
-import {Component, Inject, Input} from "@angular/core";
-import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
-import {Arrays} from "./../../../../lib/util/arrays";
+import {Component, Inject, Input} from '@angular/core';
+import {BlockService} from '../../../../lib/ng-noosfero-api/http/block.service';
+import {ArticleService} from './../../../../lib/ng-noosfero-api/http/article.service';
+import {Arrays} from './../../../../lib/util/arrays';
 
 enum PRESENTATION_MODES {
     TITLE_ONLY = <any>'title_only',
@@ -11,7 +11,8 @@ enum PRESENTATION_MODES {
 
 @Component({
     selector: "noosfero-comment-paragraph-plugin-discussion-block",
-    template: require('plugins/comment_paragraph/block/discussion/discussion-block.html')
+    templateUrl: './discussion-block.html',
+    styleUrls: ['./discussion-block.scss']
 })
 export class DiscussionBlockComponent {
 

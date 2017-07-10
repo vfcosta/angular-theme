@@ -1,12 +1,12 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
 import { Component, Inject, Input, ViewChild } from '@angular/core';
-import { PasswordService } from "../../lib/ng-noosfero-api/http/password.service";
-import { NotificationService } from "./../shared/services/notification.service";
+import { PasswordService } from '../../lib/ng-noosfero-api/http/password.service';
+import { NotificationService } from './../shared/services/notification.service';
 
 @Component({
     selector: 'new-password',
-    template: require('app/login/new-password.html')
+    templateUrl: './new-password.html'
 })
 export class PasswordComponent {
 

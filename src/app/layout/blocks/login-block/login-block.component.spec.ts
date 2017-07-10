@@ -7,8 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
 import {LoginBlockComponent} from './login-block.component';
-import * as helpers from "./../../../../spec/helpers";
-import { AuthService, AuthEvents } from "./../../../login";
+import * as helpers from './../../../../spec/helpers';
+import { AuthService, AuthEvents } from './../../../login';
 
 const htmlTemplate: string = '<noosfero-login-block></noosfero-login-block>';
 

@@ -2,14 +2,14 @@
  *  If you want to override some bootstrap variables, you have to change values here.
  *  The list of variables are listed here bower_components/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
  */
-$icon-font-path: "../../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+// @import '~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss';
+@import 'scss/variables';
+@import 'bootstrap';
+@import "font-awesome";
 
-$fa-font-path: "../../bower_components/font-awesome/fonts";
-@import "../../bower_components/font-awesome/scss/font-awesome.scss";
-@import "layout/scss/variables";
-@import "../../node_modules/dragula/dist/dragula.css";
-@import "../../node_modules/sweetalert2/dist/sweetalert2.min.css";
-@import '../../node_modules/ngx-toastr/toastr';
+@import "~dragula/dist/dragula.css";
+@import "~sweetalert2/dist/sweetalert2.min.css";
+@import '~ngx-toastr/toastr';
 
 /**
  *  Do not remove the comments below. It's the markers used by wiredep to inject
@@ -46,9 +46,10 @@ h1, h2, h3, h4, h5 {
 // injector
 // endinjector
 
-@import "layout/scss/mixins";
-@import "layout/scss/layout";
-@import "layout/scss/tables";
-@import "layout/scss/forms";
-@import "layout/scss/icons";
-@import "layout/scss/animations";
+@import "app/layout/scss/mixins";
+@import "app/layout/scss/layout";
+@import "app/layout/scss/tables";
+@import "app/layout/scss/forms";
+@import "app/layout/scss/icons";
+@import "app/layout/scss/animations";
+@import "app/shared/components/bootstrap-resizable/bootstrap-resizable.scss"

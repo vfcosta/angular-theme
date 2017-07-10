@@ -1,12 +1,11 @@
-import { DomainService } from "./domain.service";
+import { DomainService } from './domain.service';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, JsonpModule, HttpModule, BaseRequestOptions} from "@angular/http";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, JsonpModule, HttpModule, BaseRequestOptions} from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import * as helpers from "../../../spec/helpers";
-
-declare var _: any;
+import * as helpers from '../../../spec/helpers';
+import * as _ from "lodash";
 
 describe("Services", () => {
     describe("Domain Service", () => {

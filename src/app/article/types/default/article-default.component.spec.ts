@@ -11,7 +11,7 @@ import { By } from '@angular/platform-browser';
 import { Input, Component, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ArticleDefaultViewComponent } from './article-default.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Article Default View Component", () => {

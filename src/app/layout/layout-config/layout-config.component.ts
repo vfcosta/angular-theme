@@ -3,7 +3,8 @@ import { BoxesComponent } from '../boxes/boxes.component';
 
 @Component({
     selector: "layout-config",
-    template: require("app/layout/layout-config/layout-config.html")
+    templateUrl: './layout-config.html',
+    styleUrls: ['./layout-config.scss']
 })
 export class LayoutConfigComponent {
 

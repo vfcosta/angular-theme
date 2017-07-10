@@ -28,7 +28,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EnvironmentComponent } from './environment/environment.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, RouteReuseStrategy } from '@angular/router';
-import { EnvironmentResolver } from "./shared/resolvers/environment.resolver";
+import { EnvironmentResolver } from './shared/resolvers/environment.resolver';
 
 const routes: Routes = [
     // {

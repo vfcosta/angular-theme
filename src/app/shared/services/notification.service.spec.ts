@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import * as helpers from "../../../spec/helpers";
-import { NotificationService } from "./notification.service";
+import * as helpers from '../../../spec/helpers';
+import { NotificationService } from './notification.service';
 
 describe("Components", () => {
     describe("Profile Image Component", () => {

@@ -1,6 +1,6 @@
 import { TaskModule } from './../task.module';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
-import { Component, Input, Inject, Compiler, NgModuleFactory } from "@angular/core";
+import { Component, Input, Inject, Compiler, NgModuleFactory } from '@angular/core';
 import * as types from '../types';
 
 @Component({

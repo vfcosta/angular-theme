@@ -14,7 +14,8 @@ import { Router, ActivatedRoute } from '@angular/router';
  */
 @Component({
     selector: 'environment',
-    template: require("app/environment/environment.html")
+    templateUrl: './environment.html',
+    styleUrls: ['./environment.scss']
 })
 export class EnvironmentComponent {
 

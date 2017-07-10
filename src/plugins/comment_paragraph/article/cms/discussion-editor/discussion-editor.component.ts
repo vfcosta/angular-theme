@@ -1,16 +1,17 @@
+import { EventsHubService } from './../../../../../app/shared/services/events-hub.service';
 import { TranslatorService } from './../../../../../app/shared/services/translator.service';
+import { ValidationMessageComponent } from './../../../../../app/shared/components/validation-message/validation-message.component';
 import { NgModel } from '@angular/forms';
 import { Input } from '@angular/core';
 import { OnInit, Inject, Component } from '@angular/core';
-import { EventsHubService } from './../../../../../app/shared/services/events-hub.service';
-import { ValidationMessageComponent } from './../../../../../app/shared/components/validation-message/validation-message.component';
 import { ViewChild } from '@angular/core';
 import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
 import * as moment from 'moment';
 
 @Component({
     selector: 'comment-paragraph-plugin-discussion-editor',
-    template: require("plugins/comment_paragraph/article/cms/discussion-editor/discussion-editor.html")
+    templateUrl: './discussion-editor.html',
+    styleUrls: ['./discussion.scss']
 })
 export class DiscussionEditorComponent implements OnInit {
 

@@ -5,8 +5,8 @@ import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.serv
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { PopoverModule } from 'ngx-bootstrap';
 import { By } from '@angular/platform-browser';
-import {AllowCommentComponent} from "./allow-comment.component";
-import * as helpers from "../../../spec/helpers";
+import {AllowCommentComponent} from './allow-comment.component';
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 

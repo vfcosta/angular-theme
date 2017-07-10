@@ -1,10 +1,10 @@
-import {Component, Inject, Input} from "@angular/core";
-import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
-import {Arrays} from "./../../../../lib/util/arrays";
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
+import {Component, Inject, Input} from '@angular/core';
 
 @Component({
     selector: "noosfero-recent-activities-plugin-activities-block",
-    template: require('plugins/recent_activities/blocks/recent-activities-block/recent-activities-plugin-activities-block.html')
+    templateUrl: './recent-activities-plugin-activities-block.html',
+    styleUrls: ['./recent-activities-plugin-activities-block.scss']
 })
 export class RecentActivitiesPluginActivitiesBlockComponent {
 

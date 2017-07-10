@@ -1,5 +1,5 @@
-import {CommentParagraphEventService} from "./comment-paragraph-event.service";
-import * as helpers from "../../../spec/helpers";
+import {CommentParagraphEventService} from './comment-paragraph-event.service';
+import * as helpers from '../../../spec/helpers';
 
 describe("Services", () => {
     describe("Comment Paragraph Event Service", () => {

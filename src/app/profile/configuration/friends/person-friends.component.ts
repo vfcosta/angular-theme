@@ -6,7 +6,8 @@ import { DisplayStyles } from '../../profile-list/profile-list.component';
 
 @Component({
     selector: "person-friends",
-    template: require('app/profile/configuration/friends/person-friends.html'),
+    templateUrl: './person-friends.html',
+    styleUrls: ['./person-friends.scss']
 })
 export class PersonFriendsComponent {
 

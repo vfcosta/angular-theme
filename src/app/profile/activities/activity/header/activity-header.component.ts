@@ -1,8 +1,8 @@
-import {Component, Input, Inject} from "@angular/core";
+import {Component, Input, Inject} from '@angular/core';
 
 @Component({
     selector: "noosfero-activity-header",
-    template: require('app/profile/activities/activity/header/activity_header.html')
+    templateUrl: './activity_header.html'
 })
 export class ActivityHeaderComponent {
 

@@ -4,7 +4,8 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: "add-friend-task",
-    template: require("app/task/types/add-friend/add-friend.html")
+    templateUrl: './add-friend.html',
+    styleUrls: ['./add-friend.scss']
 })
 export class AddFriendTaskComponent extends TaskTypeComponent {
 

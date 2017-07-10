@@ -3,7 +3,8 @@ import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service
 
 @Component({
     selector: "noosfero-communities-block",
-    template: require('app/layout/blocks/communities/communities-block.html')
+    templateUrl: './communities-block.html',
+    styleUrls: ['./communities-block.scss']
 })
 export class CommunitiesBlockComponent {
 

@@ -1,5 +1,5 @@
-import {Component, Input, Inject} from "@angular/core";
-import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
+import {Component, Input, Inject} from '@angular/core';
+import {ArticleService} from '../../../../lib/ng-noosfero-api/http/article.service';
 
 /**
  * @ngdoc controller
@@ -9,7 +9,8 @@ import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.servi
  */
 @Component({
     selector: "noosfero-blog",
-    template: require("app/article/types/blog/blog.html")
+    templateUrl: './blog.html',
+    styleUrls: ['blog.scss']
 })
 export class ArticleBlogComponent {
 

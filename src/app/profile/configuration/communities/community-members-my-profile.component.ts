@@ -2,7 +2,8 @@ import { Component, Input, Inject } from '@angular/core';
 
 @Component({
     selector: 'noosfero-community-members-my-profile',
-    template: require('app/profile/configuration/communities/community-members-my-profile.html')
+    templateUrl: './community-members-my-profile.html',
+    styleUrls: ['./community-members-my-profile.scss']
 })
 export class CommunityMembersMyProfileComponent {
 

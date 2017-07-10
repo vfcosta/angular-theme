@@ -2,7 +2,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
 import { Input, Component } from '@angular/core';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { ProfileActionsComponent } from './profile-actions.component';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';

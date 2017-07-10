@@ -1,10 +1,10 @@
-import { Input, Inject, Component } from "@angular/core";
-
-declare var _: any;
+import { Input, Inject, Component } from '@angular/core';
+import * as _ from "lodash";
 
 @Component({
     selector: "noosfero-highlights-block",
-    template: require('app/layout/blocks/highlights/highlights-block.html'),
+    templateUrl: './highlights-block.html',
+    styleUrls: ['./highlights-block.scss']
 })
 export class HighlightsBlockComponent {
 

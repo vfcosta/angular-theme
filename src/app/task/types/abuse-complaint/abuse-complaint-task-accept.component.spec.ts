@@ -3,7 +3,7 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { TaskService } from './../../../../lib/ng-noosfero-api/http/task.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { Provider, Component } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';

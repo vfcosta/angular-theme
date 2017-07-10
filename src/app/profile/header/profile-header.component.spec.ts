@@ -1,5 +1,5 @@
 import { DesignModeService } from './../../shared/services/design-mode.service';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { ProfileHeaderComponent } from './profile-header.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';

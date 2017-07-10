@@ -1,6 +1,6 @@
 import { DomSanitizer } from '@angular/platform-browser';
 import {Component, Inject} from '@angular/core';
-import {EnvironmentService} from "../../lib/ng-noosfero-api/http/environment.service";
+import {EnvironmentService} from '../../lib/ng-noosfero-api/http/environment.service';
 
 /**
  * @ngdoc controller
@@ -10,7 +10,7 @@ import {EnvironmentService} from "../../lib/ng-noosfero-api/http/environment.ser
  */
 @Component({
     selector: 'environment-home',
-    template: require("app/environment/environment-home.html"),
+    templateUrl: './environment-home.html',
 })
 export class EnvironmentHomeComponent {
 

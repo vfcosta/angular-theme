@@ -4,7 +4,7 @@ import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.s
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { SuggestArticleTaskAcceptComponent } from './suggest-article-task-accept.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

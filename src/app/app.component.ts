@@ -1,9 +1,10 @@
 import { BodyStateClassesService } from './shared/services/body-state-classes.service';
-import { Component } from '@angular/core';
+import { ViewEncapsulation, Component } from '@angular/core';
 
 @Component({
   selector: 'noosfero-app',
-  template: require('app/app.html')
+  templateUrl: './app.component.html',
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent {
 

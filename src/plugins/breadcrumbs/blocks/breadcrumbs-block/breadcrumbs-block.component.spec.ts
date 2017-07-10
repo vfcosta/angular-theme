@@ -7,7 +7,7 @@ import { NO_ERRORS_SCHEMA, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BreadcrumbsBlockComponent } from './breadcrumbs-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Breadcrumbs Block Component", () => {

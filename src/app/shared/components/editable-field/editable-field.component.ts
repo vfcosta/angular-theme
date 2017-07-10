@@ -2,7 +2,8 @@ import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmi
 
 @Component({
     selector: "noosfero-editable-field",
-    template: require("app/shared/components/editable-field/editable-field.html")
+    templateUrl: './editable-field.html',
+    styleUrls: ['./editable-field.scss']
 })
 export class EditableFieldComponent {
 

@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ModalModule } from 'ngx-bootstrap';
-import { ImageUploadComponent } from "./image-upload.component";
+import { ImageUploadComponent } from './image-upload.component';
 
 describe("Components", () => {
 

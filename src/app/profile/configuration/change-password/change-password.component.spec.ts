@@ -8,7 +8,7 @@ import { ChangePasswordComponent } from './change-password.component';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {

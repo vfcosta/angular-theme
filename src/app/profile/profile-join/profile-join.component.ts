@@ -1,7 +1,7 @@
 import { SessionService } from './../../login/session.service';
 import { Inject, Input, Component, EventEmitter, Output } from '@angular/core';
 import { ProfileService, MembershipStatus, FriendshipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
-import { NotificationService } from "../../shared/services/notification.service";
+import { NotificationService } from '../../shared/services/notification.service';
 import { EventsHubService } from '../../shared/services/events-hub.service';
 import { NoosferoKnownEvents } from '../../known-events';
 import { CommunityService } from '../../../lib/ng-noosfero-api/http/community.service';
@@ -9,7 +9,8 @@ import { PersonService } from './../../../lib/ng-noosfero-api/http/person.servic
 
 @Component({
     selector: "profile-join",
-    template: require('app/profile/profile-join/profile-join.html')
+    templateUrl: './profile-join.html',
+    styleUrls: ['./profile-join.scss']
 })
 export class ProfileJoinComponent {
 

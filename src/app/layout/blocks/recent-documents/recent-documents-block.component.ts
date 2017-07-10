@@ -1,11 +1,12 @@
 import { Component, Inject, Input } from '@angular/core';
-import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
-import {Arrays} from "./../../../../lib/util/arrays";
+import {BlockService} from '../../../../lib/ng-noosfero-api/http/block.service';
+import {ArticleService} from './../../../../lib/ng-noosfero-api/http/article.service';
+import {Arrays} from './../../../../lib/util/arrays';
 
 @Component({
     selector: "noosfero-recent-documents-block",
-    template: require('app/layout/blocks/recent-documents/recent-documents-block.html')
+    templateUrl: './recent-documents-block.html',
+    styleUrls: ['./recent-documents-block.scss']
 })
 export class RecentDocumentsBlockComponent {
 

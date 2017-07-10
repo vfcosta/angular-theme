@@ -8,7 +8,7 @@ import { MomentModule } from 'angular2-moment';
 import { Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { TaskListComponent } from './task-list.component';
 
 

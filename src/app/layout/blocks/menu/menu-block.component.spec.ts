@@ -5,7 +5,7 @@ import { PopoverModule } from 'ngx-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { MenuBlockComponent } from './menu-block.component';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';

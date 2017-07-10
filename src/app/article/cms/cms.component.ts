@@ -1,14 +1,15 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventsHubService } from './../../shared/services/events-hub.service';
 import { Component, Inject } from '@angular/core';
-import { ArticleService } from "../../../lib/ng-noosfero-api/http/article.service";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
-import { NotificationService } from "../../shared/services/notification.service";
+import { ArticleService } from '../../../lib/ng-noosfero-api/http/article.service';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { BasicOptionsComponent } from './basic-options/basic-options.component';
 
 @Component({
     selector: 'article-cms',
-    template: require("app/article/cms/cms.html"),
+    templateUrl: './cms.html',
+    styleUrls: ['./cms.scss']
 })
 export class CmsComponent {
 

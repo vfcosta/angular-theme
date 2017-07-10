@@ -1,13 +1,14 @@
 import { Router } from '@angular/router';
 import { Inject, Input, Component, Output, EventEmitter, ViewChild } from '@angular/core';
-import { RegisterService } from "./../../lib/ng-noosfero-api/http/register.service";
-import { NotificationService } from "./../shared/services/notification.service";
-import { EnvironmentService } from "../../lib/ng-noosfero-api/http/environment.service";
+import { RegisterService } from './../../lib/ng-noosfero-api/http/register.service';
+import { NotificationService } from './../shared/services/notification.service';
+import { EnvironmentService } from '../../lib/ng-noosfero-api/http/environment.service';
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
 
 @Component({
     selector: 'noosfero-register',
-    template: require('app/account/register-component.html')
+    templateUrl: './register-component.html',
+    styleUrls: ['register.scss']
 })
 export class RegisterComponent {
     @Input() account: any;

@@ -1,10 +1,11 @@
 import { Inject, Input, Component, Output, EventEmitter } from '@angular/core';
-import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
-import { NotificationService } from "../../shared/services/notification.service";
+import { CommentService } from '../../../lib/ng-noosfero-api/http/comment.service';
+import { NotificationService } from '../../shared/services/notification.service';
 
 @Component({
     selector: 'noosfero-comment',
-    template: require('app/article/comment/comment.html')
+    templateUrl: './comment.html',
+    styleUrls: ['./comment.scss']
 })
 export class CommentComponent {
 

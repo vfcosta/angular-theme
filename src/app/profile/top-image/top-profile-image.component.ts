@@ -1,10 +1,11 @@
-import { Inject, Input, Component } from "@angular/core";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
-import { PermissionService } from "../../shared/services/permission.service";
+import { Inject, Input, Component } from '@angular/core';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
+import { PermissionService } from '../../shared/services/permission.service';
 
 @Component({
     selector: "noosfero-top-profile-image",
-    template: require('app/profile/top-image/top-profile-image.html')
+    templateUrl: './top-profile-image.html',
+    styleUrls: ['./top-profile-image.scss']
 })
 export class TopProfileImageComponent {
 

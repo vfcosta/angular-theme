@@ -5,9 +5,9 @@ import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.serv
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from "@angular/http";
-import * as helpers from "../../../spec/helpers";
-import {CommentParagraphService} from "./comment-paragraph.service";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from '@angular/http';
+import * as helpers from '../../../spec/helpers';
+import {CommentParagraphService} from './comment-paragraph.service';
 
 describe("Services", () => {
     describe("Comment Paragraph Service", () => {

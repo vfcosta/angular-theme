@@ -1,4 +1,4 @@
-// import { RestangularService } from "./restangular_service";
+// import { RestangularService } from './restangular_service';
 
 // interface ObjectModel extends noosfero.RestModel {
 // }

@@ -1,6 +1,6 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { ProfileImagesBlockComponent } from './profile-images-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NoosferoUrlPipe } from './../../../../app/shared/pipes/noosfero-url.pipe';

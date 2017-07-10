@@ -11,7 +11,7 @@ import { Pipe, Input, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MembershipStatus, FriendshipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { ProfileJoinComponent } from './profile-join.component';
-import * as helpers from "./../../../spec/helpers";
+import * as helpers from './../../../spec/helpers';
 
 describe("Components", () => {
 

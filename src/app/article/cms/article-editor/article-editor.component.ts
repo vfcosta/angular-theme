@@ -3,7 +3,7 @@ import {Component, Input, Inject} from '@angular/core';
 
 @Component({
     selector: 'article-editor',
-    template: require("app/article/cms/article-editor/article-editor.html")
+    templateUrl: './article-editor.html'
 })
 export class ArticleEditorComponent {
 

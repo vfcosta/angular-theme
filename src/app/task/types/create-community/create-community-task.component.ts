@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: "create-community-task",
-    template: require("app/task/types/create-community/create-community.html")
+    templateUrl: './create-community.html'
 })
 export class CreateCommunityTaskComponent extends TaskTypeComponent {
 

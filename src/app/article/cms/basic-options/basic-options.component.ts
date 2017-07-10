@@ -1,8 +1,9 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input} from '@angular/core';
 
 @Component({
     selector: 'article-basic-options',
-    template: require("app/article/cms/basic-options/basic-options.html")
+    templateUrl: './basic-options.html',
+    styleUrls: ['./basic-options.scss']
 })
 export class BasicOptionsComponent {
 

@@ -1,11 +1,12 @@
 import { Inject, Input, Component, ChangeDetectorRef } from '@angular/core';
-import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
-import { CommentComponent } from "./comment.component";
+import { CommentService } from '../../../lib/ng-noosfero-api/http/comment.service';
+import { CommentComponent } from './comment.component';
 
 @Component({
     selector: 'noosfero-comments',
-    template: require('app/article/comment/comments.html'),
-    outputs: ['commentAdded']
+    templateUrl: './comments.html',
+    outputs: ['commentAdded'],
+    styleUrls: ['./comments.scss']
 })
 export class CommentsComponent {
 

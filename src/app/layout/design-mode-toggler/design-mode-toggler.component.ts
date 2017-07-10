@@ -4,7 +4,8 @@ import {AuthService, AuthEvents} from '../../login';
 
 @Component({
     selector: 'design-toggler',
-    template: require('app/layout/design-mode-toggler/design-mode-toggler.html')
+    templateUrl: './design-mode-toggler.html',
+    styleUrls: ['./design-mode-toggler.scss']
 })
 export class DesignModeTogglerComponent {
 

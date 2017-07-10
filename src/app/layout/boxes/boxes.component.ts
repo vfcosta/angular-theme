@@ -1,10 +1,11 @@
 import { Inject, Input, Component } from '@angular/core';
-import { DesignModeService } from "../../shared/services/design-mode.service";
-import { EventsHubService } from "../../shared/services/events-hub.service";
+import { DesignModeService } from '../../shared/services/design-mode.service';
+import { EventsHubService } from '../../shared/services/events-hub.service';
 
 @Component({
     selector: "noosfero-boxes",
-    template: require("app/layout/boxes/boxes.html")
+    templateUrl: './boxes.html',
+    styleUrls: ['./boxes.scss']
 })
 export class BoxesComponent {
 

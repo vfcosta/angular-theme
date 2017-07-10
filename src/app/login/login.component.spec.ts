@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LoginComponent } from './login.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../spec/helpers";
+import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
     describe("Login Component", () => {

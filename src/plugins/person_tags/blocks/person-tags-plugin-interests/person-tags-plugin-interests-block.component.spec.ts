@@ -1,7 +1,7 @@
 import { ProfileService } from '../../../../lib/ng-noosfero-api/http/profile.service';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import {PersonTagsPluginInterestsBlockComponent} from './person-tags-plugin-interests-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {

@@ -1,4 +1,4 @@
-import * as plugins from "../../plugins";
+import * as plugins from '../../plugins';
 
 export abstract class PluginHotspot {
 

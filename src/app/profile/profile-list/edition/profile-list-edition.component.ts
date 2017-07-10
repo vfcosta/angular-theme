@@ -1,12 +1,12 @@
 import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
 import { Component, Input, Inject, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
-
-declare var _: any;
+import * as _ from "lodash";
 
 @Component({
     selector: 'profile-list-edition',
-    template: require("app/profile/profile-list/edition/profile-list-edition.component.html")
+    templateUrl: './profile-list-edition.component.html',
+    styleUrls: ['./profile-list-edition.component.scss']
 })
 export class ProfileListEditionComponent {
 

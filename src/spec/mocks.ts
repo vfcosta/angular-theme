@@ -1,3 +1,4 @@
+import { EventEmitter } from '@angular/core';
 import { NoosferoKnownEvents } from './../app/known-events';
 import { Observable } from 'rxjs/Observable';
 import "rxjs/add/observable/of";
@@ -423,13 +424,13 @@ export function getMocks() {
                 });
             },
             getCurrentEnvironment: (): any => {
-                return {
+                return Promise.resolve({
                     id: 1,
                     settings: {},
                     layout_template: '',
                     signup_intro: 'Welcome to Noosfero',
                     host: 'http://localhost'
-                };
+                });
             },
             update: (environment: noosfero.Environment) => Promise.resolve({ id: 2 }),
             get: (environment: string) => Promise.resolve({id: 2}),
@@ -605,6 +606,10 @@ export function getMocks() {
         },
         router: {
             navigate: () => {}
+        },
+        bodyStateClassesService: {
+            start: () => {},
+            changeClasses: new EventEmitter()
         }
     };
     return mocks;

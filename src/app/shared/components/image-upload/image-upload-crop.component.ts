@@ -3,7 +3,8 @@ import { CropperSettings } from 'ng2-img-cropper';
 
 @Component({
     selector: "image-upload-crop",
-    template: require('app/shared/components/image-upload/image-upload-crop.html')
+    templateUrl: './image-upload-crop.html',
+    styleUrls: ['./image-upload-crop.scss']
 })
 export class ImageUploadCropComponent implements OnInit {
 

@@ -24,7 +24,7 @@ import { ForgotPasswordComponent } from './login/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import swal from 'sweetalert2';
 import { EventsHubService } from './shared/services/events-hub.service';
-import { CommentParagraphEventService } from './../plugins/comment_paragraph/events/comment-paragraph-event.service';
+import { CommentParagraphEventService } from '../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import { ThemeService } from './shared/services/theme.service';
 import { BodyStateClassesService } from './shared/services/body-state-classes.service';
 import { DesignModeService } from './shared/services/design-mode.service';
@@ -41,7 +41,7 @@ import { RoleService } from './../lib/ng-noosfero-api/http/role.service';
 import { RegisterService } from './../lib/ng-noosfero-api/http/register.service';
 import { PasswordService } from './../lib/ng-noosfero-api/http/password.service';
 import { PermissionService } from './shared/services/permission.service';
-import { CommentParagraphService } from './../plugins/comment_paragraph/http/comment-paragraph.service';
+import { CommentParagraphService } from '../plugins/comment_paragraph/http/comment-paragraph.service';
 import { NotificationService } from './shared/services/notification.service';
 import { TranslatorService } from './shared/services/translator.service';
 import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service';
@@ -56,7 +56,7 @@ import { ArticleEditorComponent } from './article/cms/article-editor/article-edi
 import { ActivityHeaderComponent } from './profile/activities/activity/header/activity-header.component';
 import { CustomContentComponent } from './profile/custom-content/custom-content.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
-import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
+import { AllowCommentComponent } from '../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { ArticleDefaultViewComponent } from './article/types/default/article-default.component';
 import { FolderComponent } from './article/types/folder/folder.component';
 import { ArticleBlogComponent } from './article/types/blog/blog.component';
@@ -84,7 +84,7 @@ import { ProfileHeaderComponent } from './profile/header/profile-header.componen
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
 import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
-import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
+import { BreadcrumbsBlockComponent } from '../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { TagCloudModule } from 'angular-tag-cloud-module';
@@ -119,7 +119,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
-import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
+import { StatisticsBlockComponent } from './layout/blocks/statistics/statistics-block.component';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { PopoverModule, ModalModule, TypeaheadModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
@@ -128,7 +128,7 @@ import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InviteComponent } from './profile/configuration/communities/invite.component';
 import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
-import * as plugins from "../plugins";
+import * as plugins from '../plugins';
 import { SharedModule } from './shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
 import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
@@ -162,7 +162,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
 }
 
 export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http, '/languages/', '.json');
+    return new TranslateHttpLoader(http, './assets/languages/', '.json');
 }
 
 @NgModule({
@@ -396,7 +396,4 @@ export function HttpLoaderFactory(http: Http) {
     bootstrap: [ AppComponent ]
 })
 
-export class AppModule {
-    ngDoBootstrap() {
-    }
-}
+export class AppModule { }

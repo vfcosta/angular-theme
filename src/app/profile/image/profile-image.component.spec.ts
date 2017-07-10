@@ -5,9 +5,9 @@ import { AuthService } from './../../login/auth.service';
 import { PermissionService } from './../../shared/services/permission.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
-import * as helpers from "../../../spec/helpers";
-import { ProfileImageComponent } from "./profile-image.component";
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
+import * as helpers from '../../../spec/helpers';
+import { ProfileImageComponent } from './profile-image.component';
 
 describe("Components", () => {
 

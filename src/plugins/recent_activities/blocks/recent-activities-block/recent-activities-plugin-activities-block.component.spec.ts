@@ -2,7 +2,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import {RecentActivitiesPluginActivitiesBlockComponent} from './recent-activities-plugin-activities-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 

@@ -1,7 +1,7 @@
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { SectionBlockComponent } from './section-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { PopoverModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';

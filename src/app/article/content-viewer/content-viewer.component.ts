@@ -1,11 +1,11 @@
 import { ActivatedRoute } from '@angular/router';
-import { Input, Component } from "@angular/core";
-import { ArticleService } from "../../../lib/ng-noosfero-api/http/article.service";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { Input, Component } from '@angular/core';
+import { ArticleService } from '../../../lib/ng-noosfero-api/http/article.service';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 
 @Component({
     selector: "content-viewer",
-    template: require("app/article/content-viewer/page.html"),
+    templateUrl: './page.html',
 })
 export class ContentViewerComponent {
 

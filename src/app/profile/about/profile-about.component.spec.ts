@@ -5,8 +5,8 @@ import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.serv
 import { RouterTestingModule } from '@angular/router/testing';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "./../../../spec/helpers";
-import {ProfileAboutComponent} from "./profile-about.component";
+import * as helpers from './../../../spec/helpers';
+import {ProfileAboutComponent} from './profile-about.component';
 
 describe('Profile about component', () => {
     let profile = {

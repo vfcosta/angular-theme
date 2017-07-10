@@ -1,7 +1,7 @@
-import { SessionService } from "./session.service";
-import { fixtures } from "./../../spec/helpers";
-import { PersonService } from "../../lib/ng-noosfero-api/http/person.service";
-import * as helpers from "../../spec/helpers";
+import { SessionService } from './session.service';
+import { fixtures } from './../../spec/helpers';
+import { PersonService } from '../../lib/ng-noosfero-api/http/person.service';
+import * as helpers from '../../spec/helpers';
 
 describe("Services", () => {
     describe("Session Service", () => {

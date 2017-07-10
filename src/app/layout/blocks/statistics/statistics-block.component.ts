@@ -1,10 +1,11 @@
 import { Input, Inject, Component } from '@angular/core';
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
-import {BlockService} from "./../../../../lib/ng-noosfero-api/http/block.service";
+import {ArticleService} from './../../../../lib/ng-noosfero-api/http/article.service';
+import {BlockService} from './../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-statistics-block",
-    template: require('app/layout/blocks/statistics/statistics-block.html')
+    templateUrl: './statistics-block.html',
+    styleUrls: ['./statistics.scss']
 })
 export class StatisticsBlockComponent {
     @Input() block: any;

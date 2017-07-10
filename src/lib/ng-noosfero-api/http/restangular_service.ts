@@ -1,4 +1,4 @@
-import { EventEmitter, Inject } from "@angular/core";
+import { EventEmitter, Inject } from '@angular/core';
 import { Restangular } from 'ngx-restangular';
 
 /**

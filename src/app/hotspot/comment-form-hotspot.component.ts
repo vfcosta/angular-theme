@@ -1,7 +1,7 @@
 import { HotspotModule } from './hotspot.module';
-import {Component, Input, Inject, NgModuleFactory, Compiler} from "@angular/core";
-import * as plugins from "../../plugins";
-import {PluginHotspot} from "./plugin-hotspot";
+import {Component, Input, Inject, NgModuleFactory, Compiler} from '@angular/core';
+import * as plugins from '../../plugins';
+import {PluginHotspot} from './plugin-hotspot';
 
 @Component({
     selector: "noosfero-hotspot-comment-form",

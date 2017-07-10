@@ -7,7 +7,8 @@ import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
     selector: "participa-header",
-    template: require("app/layout/participa-header/participa-header.html")
+    template: require("app/layout/participa-header/participa-header.html"),
+    styleUrls: ['./participa-header.scss']
 })
 export class ParticipaHeaderComponent {
 

@@ -2,15 +2,16 @@ import { SessionService } from './../../../login/session.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
 import { AbstractFormCommunity } from './abstract-form-community';
+import * as _ from "lodash";
 
 /**
  * @ngdoc controller
  * @name AddCommunityComponent
  */
-declare var _: any;
 @Component({
     selector: "edit-community",
-    template: require('app/profile/configuration/communities/form-community.html'),
+    templateUrl: './form-community.html',
+    styleUrls: ['./form-community.scss']
 })
 export class EditCommunityComponent extends AbstractFormCommunity {
 

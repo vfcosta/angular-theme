@@ -1,11 +1,12 @@
 import { Router, Event, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Component, Inject, Input } from "@angular/core";
-import { Subscription } from "rxjs";
-import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
+import { Component, Inject, Input } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-breadcrumbs-plugin-content-breadcrumbs-block",
-    template: require('plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.html')
+    templateUrl: './breadcrumbs-block.html',
+    styleUrls: ['./breadcrumbs-block.scss']
 })
 export class BreadcrumbsBlockComponent {
 

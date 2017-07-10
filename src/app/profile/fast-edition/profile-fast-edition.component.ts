@@ -6,7 +6,8 @@ import { Component, Inject, Input, Output, EventEmitter, ViewChild } from '@angu
 
 @Component({
     selector: "profile-fast-edition",
-    template: require('app/profile/fast-edition/profile-fast-edition.html')
+    templateUrl: './profile-fast-edition.html',
+    styleUrls: ['./profile-fast-edition.scss']
 })
 export class ProfileFastEditionComponent {
 

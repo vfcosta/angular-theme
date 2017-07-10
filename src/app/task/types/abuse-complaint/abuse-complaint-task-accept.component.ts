@@ -1,10 +1,10 @@
 import { TaskAcceptTypeComponent } from './../task-accept-type.component';
-import { Component, Input, Inject, Injector } from "@angular/core";
-import { TaskService } from "../../../../lib/ng-noosfero-api/http/task.service";
+import { Component, Input, Inject, Injector } from '@angular/core';
+import { TaskService } from '../../../../lib/ng-noosfero-api/http/task.service';
 
 @Component({
     selector: "abuse-complaint-task-accept",
-    template: require("app/task/types/abuse-complaint/abuse-complaint-accept.html"),
+    templateUrl: './abuse-complaint-accept.html',
 })
 export class AbuseComplaintTaskAcceptComponent extends TaskAcceptTypeComponent {
 

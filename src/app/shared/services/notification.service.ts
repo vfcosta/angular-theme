@@ -1,5 +1,5 @@
-import { ViewContainerRef, Injectable, Inject } from "@angular/core";
-import { TranslatorService } from "./translator.service";
+import { ViewContainerRef, Injectable, Inject } from '@angular/core';
+import { TranslatorService } from './translator.service';
 import { SweetAlertType } from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 

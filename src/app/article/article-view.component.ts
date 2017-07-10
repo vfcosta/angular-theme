@@ -9,7 +9,8 @@ import { Input, Inject, Component, Directive } from '@angular/core';
  */
 @Component({
     selector: 'noosfero-article',
-    template: require('app/article/article-view.html'),
+    templateUrl: './article-view.html',
+    styleUrls: ['article.scss']
 })
 export class ArticleViewComponent {
 

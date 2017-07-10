@@ -1,5 +1,5 @@
-import { Component, Input, Inject } from "@angular/core";
-import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
+import { Component, Input, Inject } from '@angular/core';
+import { ArticleService } from '../../../../lib/ng-noosfero-api/http/article.service';
 
 /**
  * @ngdoc controller
@@ -9,7 +9,8 @@ import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.ser
  */
 @Component({
     selector: "noosfero-folder",
-    template: require("app/article/types/folder/folder.html")
+    templateUrl: './folder.html',
+    styleUrls: ['folder.scss']
 })
 export class FolderComponent {
 

@@ -3,7 +3,8 @@ import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service
 
 @Component({
     selector: "noosfero-section-block-plugin-section-block",
-    template: require('plugins/section_block/blocks/section-block/section-block.html')
+    templateUrl: './section-block.html',
+    styleUrls: ['./section-block.scss']
 })
 export class SectionBlockComponent implements OnChanges {
 

@@ -1,12 +1,11 @@
 import { Router, NavigationEnd, Event, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { Directive, Inject, Injectable, EventEmitter } from "@angular/core";
+import { Directive, Inject, Injectable, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import { AuthEvents } from "../../login/auth-events";
-import { AuthService } from "./../../login/auth.service";
+import { AuthEvents } from '../../login/auth-events';
+import { AuthService } from './../../login/auth.service';
 import { DesignModeService } from './design-mode.service';
-
-declare var _: any;
+import * as _ from "lodash";
 
 export interface StartParams {
     skin?: string;

@@ -1,6 +1,6 @@
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NoosferoTemplatePipe } from './../../../shared/pipes/noosfero-template.ng2.filter';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';

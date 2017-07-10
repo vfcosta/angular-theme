@@ -1,6 +1,6 @@
 import { NgModule, forwardRef } from '@angular/core';
 import { SharedModule } from '../shared.module';
-import * as plugins from "../../plugins";
+import * as plugins from '../../plugins';
 
 @NgModule({
     imports: [forwardRef(() => SharedModule)],

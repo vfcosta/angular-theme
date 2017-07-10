@@ -4,7 +4,7 @@ import { TaskService } from './../../../../lib/ng-noosfero-api/http/task.service
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
 import { Provider, Component } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { AddFriendTaskAcceptComponent } from './add-friend-task-accept.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';

@@ -1,9 +1,10 @@
-import { Input, Inject, Component } from "@angular/core";
-import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
+import { Input, Inject, Component } from '@angular/core';
+import { ArticleService } from '../../../../lib/ng-noosfero-api/http/article.service';
 
 @Component({
     selector: "noosfero-display-content-block",
-    template: require('app/layout/blocks/display-content/display-content-block.html')
+    templateUrl: './display-content-block.html',
+    styleUrls: ['./display-content-block.scss']
 })
 export class DisplayContentBlockComponent {
 

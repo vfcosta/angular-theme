@@ -2,7 +2,8 @@ import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmi
 
 @Component({
     selector: "noosfero-editable-link",
-    template: require("app/shared/components/editable-link/editable-link.html")
+    templateUrl: './editable-link.html',
+    styleUrls: ['./editable-link.scss']
 })
 export class EditableLinkComponent {
 

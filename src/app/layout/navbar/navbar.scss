@@ -1,3 +1,7 @@
+@import 'scss/variables';
+@import 'bootstrap';
+@import "font-awesome";
+
 $navbar-font-color: #fff;
 
 .navbar-inverse .navbar-nav {
@@ -28,7 +32,6 @@ $navbar-font-color: #fff;
     font-size: 19px;
     display: none;
   }
-  margin-bottom: 0px;
 
   .container {
     .navbar-header {
@@ -50,7 +53,7 @@ $navbar-font-color: #fff;
     }
     .navbar-brand {
       .noosfero-logo {
-        background: url("../assets/images/logo-noosfero.png") no-repeat;
+        background: url("../../../assets/images/logo-noosfero.png") no-repeat;
         padding: 20px 60px;
         background-position: 2px 16px;
       }

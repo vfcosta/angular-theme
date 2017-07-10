@@ -1,6 +1,6 @@
 import { Input, Component } from '@angular/core';
-import { BootstrapResizableDirective } from "./bootstrap-resizable.directive";
-import * as helpers from "../../../../spec/helpers";
+import { BootstrapResizableDirective } from './bootstrap-resizable.directive';
+import * as helpers from '../../../../spec/helpers';
 import { async } from '@angular/core/testing';
 
 const htmlTemplate: string = '<div bootstrap-resizable="ctrl.enabled" bootstrap-resizable-columns="ctrl.columns"></div>';

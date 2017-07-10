@@ -2,7 +2,8 @@ import { Component, Input } from '@angular/core';
 
 @Component({
     selector: 'article-basic-editor',
-    template: require("app/article/cms/basic-editor/basic-editor.html")
+    templateUrl: './basic-editor.html',
+    styleUrls: ['./basic-editor.scss']
 })
 export class BasicEditorComponent {
 

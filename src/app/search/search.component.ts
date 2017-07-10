@@ -1,10 +1,11 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, Inject } from "@angular/core";
-import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
+import { Component, Inject } from '@angular/core';
+import {ArticleService} from './../../lib/ng-noosfero-api/http/article.service';
 
 @Component({
     selector: 'search',
-    template: require('app/search/search.html'),
+    templateUrl: './search.html',
+    styleUrls: ['./search.scss']
 })
 export class SearchComponent {
 

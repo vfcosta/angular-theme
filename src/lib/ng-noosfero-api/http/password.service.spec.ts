@@ -2,9 +2,9 @@ import { MockBackend } from '@angular/http/testing';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from "@angular/http";
-import { PasswordService } from "./password.service";
-import * as helpers from "../../../spec/helpers";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from '@angular/http';
+import { PasswordService } from './password.service';
+import * as helpers from '../../../spec/helpers';
 
 describe("Services", () => {
     describe("Password Service", () => {

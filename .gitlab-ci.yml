@@ -16,7 +16,7 @@ before_script:
 build:
   stage: build
   script:
-    - npm run build-all
+    - npm run build
   artifacts:
     expire_in: 1 week
     paths:
@@ -25,7 +25,7 @@ build:
 unit_test:
   stage: test
   script:
-    - npm run test-single
+    - npm run test:ci
 
 staging:
   stage: deploy
