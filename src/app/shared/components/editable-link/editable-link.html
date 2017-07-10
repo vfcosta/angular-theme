@@ -22,5 +22,5 @@
 </span>
 
 <span *ngIf="!designMode">
-  <a [href]="modifiedLink.address | noosferoTemplate:{profile: owner.identifier}"> {{ modifiedLink.name }} </a>
+  <a [attr.href]="modifiedLink.address | noosferoTemplate:{profile: owner.identifier}"> {{ modifiedLink.name }} </a>
 </span>
