@@ -2,11 +2,7 @@ import { ViewContainerRef, Injectable, Inject } from '@angular/core';
 import { TranslatorService } from './translator.service';
 import { SweetAlertType } from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-
-enum NotificationType {
-    Toast = 1,
-    SweetAlert = 2
-}
+import { NotificationType } from './notification-type';
 
 @Injectable()
 export class NotificationService {
@@ -14,15 +10,15 @@ export class NotificationService {
     static get NotificationType() {
         return NotificationType;
     }
+    public static DEFAULT_ERROR_TITLE = 'notification.error.default.title';
+    public static DEFAULT_ERROR_MESSAGE = 'notification.error.default.message';
+    public static DEFAULT_SUCCESS_TIMER = 5000;
+    public static DEFAULT_INFO_TITLE = 'notification.info.default.title';
+    public static DEFAULT_INFO_MESSAGE = 'notification.info.default.message';
 
-    constructor(@Inject("sweetAlert") private sweetAlert: Function, private translatorService: TranslatorService,
+    constructor(@Inject('sweetAlert') private sweetAlert: Function, private translatorService: TranslatorService,
         private toastr: ToastrService) { }
 
-    public static DEFAULT_ERROR_TITLE = "notification.error.default.title";
-    public static DEFAULT_ERROR_MESSAGE = "notification.error.default.message";
-    public static DEFAULT_SUCCESS_TIMER = 5000;
-    public static DEFAULT_INFO_TITLE = "notification.info.default.title";
-    public static DEFAULT_INFO_MESSAGE = "notification.info.default.message";
 
     error({
         message = NotificationService.DEFAULT_ERROR_MESSAGE,

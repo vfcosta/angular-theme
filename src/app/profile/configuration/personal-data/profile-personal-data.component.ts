@@ -1,3 +1,4 @@
+import { PersonalDataDictionary } from './personal-data-dictionary';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
@@ -22,7 +23,7 @@ export class ProfilePersonalDataComponent {
 
     @ViewChild('identifierErrors') identifierErrors;
 
-    customFieldsDict: Dictionary;
+    customFieldsDict: PersonalDataDictionary;
 
     updatedProfile: noosfero.Profile;
 
@@ -75,8 +76,4 @@ export class ProfilePersonalDataComponent {
     fieldType(label) {
         return label.indexOf('date') >= 0 ? 'date' : 'text';
     }
-}
-
-interface Dictionary {
-    [index: string]: string;
 }

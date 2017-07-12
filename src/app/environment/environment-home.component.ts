@@ -22,12 +22,11 @@ export class EnvironmentHomeComponent {
         });
     }
 
-    getEnvironmentDescription() {
+    getEnvironmentDescription(): any {
         if (this.environment && this.environment.settings && this.environment.settings.description) {
             return this.sanitizer.bypassSecurityTrustHtml(this.environment.settings.description);
-        }
-        else {
-            return "";
+        } else {
+            return '';
         }
     }
 }

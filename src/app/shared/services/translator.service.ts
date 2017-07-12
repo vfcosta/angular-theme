@@ -26,7 +26,7 @@ export class TranslatorService {
         return this.translateService.currentLang;
     }
 
-    changeLanguage(language: string) {
+    changeLanguage(language: string): any {
         if (!language) {
             console.log("WARN: language undefined");
             return;

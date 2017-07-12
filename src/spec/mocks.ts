@@ -1,48 +1,11 @@
+import { ScopeWithEvents } from './scope-with-events';
 import { EventEmitter } from '@angular/core';
 import { NoosferoKnownEvents } from './../app/known-events';
 import { Observable } from 'rxjs/Observable';
-import "rxjs/add/observable/of";
+import 'rxjs/add/observable/of';
 
 const DEBUG = false;
 
-let log = (message: string, ...args: any[]) => {
-    if (DEBUG) {
-        console.log(message);
-    }
-};
-
-class ScopeWithEvents {
-    listeners = {};
-    constructor() {
-
-    }
-
-    public $on(eventName: string, func: Function) {
-        if ((<any>this.listeners)[eventName]) {
-            (<any>this.listeners)[eventName].push(func);
-        } else {
-            (<any>this.listeners)[eventName] = [func];
-        }
-    }
-
-    public $emit(message: string, ...args: any[]) {
-        log("Emitted " + message);
-        if ((<any>this.listeners)[message]) {
-            log("LISTENERS:", (<any>this.listeners)[message]);
-            (<any>this.listeners)[message].forEach((f: Function) => {
-                f.apply(this, args);
-            });
-        }
-    }
-
-    public $watch(fn1: Function, fn2: Function) {
-
-    }
-
-    public $apply() {
-
-    }
-}
 export var mocks: any = {
     scopeWithEvents: (): ScopeWithEvents => new ScopeWithEvents(),
     modalInstance: {

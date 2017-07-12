@@ -1,13 +1,13 @@
-import { Component, Inject } from "@angular/core";
-import { EventsHubService } from "../../../../../src/app/shared/services/events-hub.service";
-import { NoosferoKnownEvents } from "../../../../../src/app/known-events";
-import { BodyStateClassesService } from "../../../../../src/app/shared/services/body-state-classes.service";
+import { Component, Inject } from '@angular/core';
+import { EventsHubService } from '../../../../../src/app/shared/services/events-hub.service';
+import { NoosferoKnownEvents } from '../../../../../src/app/known-events';
+import { BodyStateClassesService } from '../../../../../src/app/shared/services/body-state-classes.service';
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
 
 @Component({
-    selector: "participa-header",
-    template: require("app/layout/participa-header/participa-header.html"),
+    selector: 'participa-header',
+    templateUrl: 'app/layout/participa-header/participa-header.html',
     styleUrls: ['./participa-header.scss']
 })
 export class ParticipaHeaderComponent {
