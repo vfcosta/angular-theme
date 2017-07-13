@@ -12,7 +12,8 @@
         "favicon.ico",
         "theme.yml",
         "layouts",
-        "index.html.erb"
+        "index.html.erb",
+        "theme/assets"
       ],
       "index": "index.html",
       "main": "main.ts",

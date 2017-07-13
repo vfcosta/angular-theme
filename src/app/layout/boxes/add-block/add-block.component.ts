@@ -6,7 +6,8 @@ import * as _ from "lodash";
 
 @Component({
     selector: "add-block",
-    templateUrl: './add-block.html'
+    templateUrl: './add-block.html',
+    styleUrls: ['./add-block.scss']
 })
 export class AddBlockComponent {
 

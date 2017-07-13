@@ -34,7 +34,7 @@
   &.membersblock {
     .panel-heading {
       @extend .block-head-with-icon;
-      background: #DAE1C4 url("../assets/icons/participa-consulta/pessoas.png") no-repeat 15px center;
+      background: #DAE1C4 url("./theme/assets/icons/participa-consulta/pessoas.png") no-repeat 15px center;
       color: #4F9CAC;
     }
   }
@@ -42,7 +42,7 @@
   &.statisticsblock {
     .panel-heading {
       @extend .block-head-with-icon;
-      background: #69677C url("../assets/icons/participa-consulta/indicadores.png") no-repeat 15px center;
+      background: #69677C url("./theme/assets/icons/participa-consulta/indicadores.png") no-repeat 15px center;
       color: #DAE1C4;
     }
   }
@@ -75,7 +75,7 @@
 
     div:first-child {
       padding: 15px 5px 15px 50px;
-      background: #69677C url("../assets/icons/participa-consulta/home.png") no-repeat 7px center;
+      background: #69677C url("./theme/assets/icons/participa-consulta/home.png") no-repeat 7px center;
       color: #FFF;
       background-size: 30px 30px;
     }

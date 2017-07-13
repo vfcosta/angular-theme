@@ -5,11 +5,20 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
-    "build": "ng build --base-href=/assets/designs/themes/angular-default/ --prod --aot=false",
+    "build": "ng build --deploy=/assets/designs/themes/$npm_package_config_theme/ --prod --aot=false -op=dist/$npm_package_config_theme",
+    "build-all": "for d in ./themes/*/ ; do (npm config set angular-theme:theme `basename $d` && npm run build); done",
     "test": "ng test",
     "test:ci": "ng test --browser=ChromeHeadless --code-coverage=true --single-run=true",
     "lint": "ng lint",
-    "e2e": "ng e2e --proxy-config proxy.conf.json"
+    "e2e": "ng e2e --proxy-config proxy.conf.json",
+    "theme:setup": "ln -sfn ../themes/$npm_package_config_theme src/theme",
+    "prestart": "npm run theme:setup",
+    "pretest": "npm run theme:setup",
+    "pretest:ci": "npm run theme:setup",
+    "prebuild": "npm run theme:setup"
+  },
+  "config": {
+    "theme": "angular-default"
   },
   "private": true,
   "dependencies": {

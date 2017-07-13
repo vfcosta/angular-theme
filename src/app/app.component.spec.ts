@@ -22,7 +22,7 @@ describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent, ThemeHeaderComponent, ThemeFooterComponent, NavbarComponent, FooterComponent
+        AppComponent, NavbarComponent, FooterComponent
       ],
       imports: [
         NgProgressModule, RouterTestingModule, TranslateModule.forRoot()

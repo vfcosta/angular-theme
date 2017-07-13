@@ -65,7 +65,7 @@ import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspo
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
 import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
 import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
-import * as theme from '../../themes';
+import * as theme from '../theme';
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account/register.component';
 import { SearchComponent } from './search/search.component';
@@ -144,6 +144,7 @@ import { BootstrapResizableDirective } from './shared/components/bootstrap-resiz
 import { NgProgressModule, NgProgressBrowserXhr } from 'ngx-progressbar';
 import { BrowserXhr } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
+import { environment } from '../environments/environment';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -162,7 +163,7 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
 }
 
 export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http, './assets/languages/', '.json');
+    return new TranslateHttpLoader(http, environment.languagesPath, '.json');
 }
 
 @NgModule({

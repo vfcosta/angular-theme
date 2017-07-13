@@ -4,12 +4,14 @@ import { NoosferoKnownEvents } from '../../../../../src/app/known-events';
 import { BodyStateClassesService } from '../../../../../src/app/shared/services/body-state-classes.service';
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
+import { Hotspot } from '../../../../../src/app/hotspot/hotspot.decorator';
 
 @Component({
     selector: 'participa-header',
-    templateUrl: 'app/layout/participa-header/participa-header.html',
+    templateUrl: './participa-header.html',
     styleUrls: ['./participa-header.scss']
 })
+@Hotspot('theme_header')
 export class ParticipaHeaderComponent {
 
     eventsNames: NoosferoKnownEvents;
