@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  languagesPath: './assets/languages/'
+  assetsPath: '/assets'
 };
