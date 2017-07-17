@@ -1,4 +1,4 @@
-{
+export const translation = {
   "comment-paragraph-plugin.title": "Paragraph Comments",
   "comment-paragraph-plugin.export": "Export Comments",
   "comment-paragraph-plugin.discussion.editor.start_date.label": "From",

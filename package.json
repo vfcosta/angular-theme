@@ -32,7 +32,6 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "@ngx-translate/core": "^7.0.0",
-    "@ngx-translate/http-loader": "^0.1.0",
     "@toverux/ngsweetalert2": "^1.2.2",
     "@types/lodash": "^4.14.68",
     "angular-2-local-storage": "^1.0.1",

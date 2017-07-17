@@ -1,3 +1,4 @@
+import { NoosferoTranslateLoader } from './shared/noosfero-translate.loader';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
 import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
@@ -137,7 +138,6 @@ import { LocalStorageModule } from 'angular-2-local-storage';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
@@ -162,8 +162,8 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
     });
 }
 
-export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http, environment.languagesPath, '.json');
+export function TranslateLoaderFactory() {
+    return new NoosferoTranslateLoader();
 }
 
 @NgModule({
@@ -197,7 +197,7 @@ export function HttpLoaderFactory(http: Http) {
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
+                useFactory: TranslateLoaderFactory,
                 deps: [Http]
             }
         }),

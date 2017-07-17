@@ -1,3 +1,4 @@
+import { translation } from './../../languages/pt';
 import { SideCommentsComponent } from './side-comments/side-comments.component';
 import {AllowCommentComponent} from './allow-comment/allow-comment.component';
 import {ExportCommentButtonHotspotComponent} from './hotspot/export-comment-button.component';
@@ -10,6 +11,8 @@ import {DiscussionPeriodComponent} from './article/discussion-period/discussion-
 export let mainComponents: any = [];
 export let ng2MainComponents: any = [AllowCommentComponent, SideCommentsComponent, DiscussionEditorComponent, DiscussionBlockComponent];
 export let hotspots: any = [];
-export let ng2Hotspots: any = [CommentParagraphFormHotspotComponent, ExportCommentButtonHotspotComponent, CommentParagraphArticleContentHotspotComponent];
+export let ng2Hotspots: any = [
+    CommentParagraphFormHotspotComponent, ExportCommentButtonHotspotComponent, CommentParagraphArticleContentHotspotComponent
+];
 export let ng2SharedComponents = [DiscussionPeriodComponent];
 export let macros = [{component: AllowCommentComponent, selector: '[data-macro="comment_paragraph_plugin\/allow_comment"]'}];
