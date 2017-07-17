@@ -12,8 +12,8 @@
         "favicon.ico",
         "theme.yml",
         "layouts",
-        "index.html.erb",
-        "theme/assets"
+        "theme/assets",
+        "assets/ckeditor"
       ],
       "index": "index.html",
       "main": "main.ts",
