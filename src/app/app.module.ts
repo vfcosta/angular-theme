@@ -390,9 +390,10 @@ export function HttpLoaderFactory(http: Http) {
         EventsHubService,
         TranslatorService,
         NotificationService,
-        { provide: "sweetAlert", useValue: swal },
+        { provide: 'sweetAlert', useValue: swal },
         { provide: 'Window',  useValue: window },
         { provide: BrowserXhr, useClass: NgProgressBrowserXhr },
+        { provide: 'environment', useValue: environment }
     ],
     bootstrap: [ AppComponent ]
 })

@@ -1,21 +1,23 @@
+import { TestBed } from '@angular/core/testing';
 import { ThemeService } from './theme.service';
 
-describe("Theme Service", () => {
+describe('Theme Service', () => {
 
-    let location = jasmine.createSpyObj("location", ["reload"]);
-    let window = <Window>{location: location};
+    const location = jasmine.createSpyObj('location', ['reload']);
+    const window = <Window>{location: location};
+    const environment = { production: true };
 
-    it("not reload location when current theme is null", () => {
-        let service = new ThemeService(window);
+    it('not reload location when current theme is null', () => {
+        const service = new ThemeService(window, environment);
         service.currentTheme = null;
-        service.verifyTheme("other-theme");
+        service.verifyTheme('other-theme');
         expect(location.reload).not.toHaveBeenCalled();
     });
 
-    it("reload location when theme is different than current theme", () => {
-        let service = new ThemeService(window);
-        service.currentTheme = "current-theme";
-        service.verifyTheme("other-theme");
+    it('reload location when theme is different than current theme', () => {
+        const service = new ThemeService(window, environment);
+        service.currentTheme = 'current-theme';
+        service.verifyTheme('other-theme');
         expect(location.reload).toHaveBeenCalled();
     });
 });
