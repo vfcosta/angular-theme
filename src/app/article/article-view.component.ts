@@ -1,4 +1,4 @@
-import { Input, Inject, Component, Directive } from '@angular/core';
+import { Input, Inject, Component, Directive, ViewEncapsulation } from '@angular/core';
 
 /**
  * @ngdoc controller
@@ -10,7 +10,8 @@ import { Input, Inject, Component, Directive } from '@angular/core';
 @Component({
     selector: 'noosfero-article',
     templateUrl: './article-view.html',
-    styleUrls: ['article.scss']
+    styleUrls: ['article.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ArticleViewComponent {
 

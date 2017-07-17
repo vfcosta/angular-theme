@@ -1,10 +1,11 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-communities-block",
     templateUrl: './communities-block.html',
-    styleUrls: ['./communities-block.scss']
+    styleUrls: ['./communities-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class CommunitiesBlockComponent {
 

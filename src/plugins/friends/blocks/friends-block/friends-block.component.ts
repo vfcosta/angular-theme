@@ -1,10 +1,11 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-friends-block",
     templateUrl: './friends-block.html',
-    styleUrls: ['./friends-block.scss']
+    styleUrls: ['./friends-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class FriendsBlockComponent {
 

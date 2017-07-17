@@ -1,9 +1,10 @@
-import { Input, Component, Inject } from '@angular/core';
+import { Input, Component, Inject, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'discussion-period',
     templateUrl: './discussion-period.html',
-    styleUrls: ['./discussion-period.scss']
+    styleUrls: ['./discussion-period.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DiscussionPeriodComponent {
 

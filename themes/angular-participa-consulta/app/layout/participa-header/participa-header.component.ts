@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { EventsHubService } from '../../../../../src/app/shared/services/events-hub.service';
 import { NoosferoKnownEvents } from '../../../../../src/app/known-events';
 import { BodyStateClassesService } from '../../../../../src/app/shared/services/body-state-classes.service';
@@ -9,7 +9,8 @@ import { Hotspot } from '../../../../../src/app/hotspot/hotspot.decorator';
 @Component({
     selector: 'participa-header',
     templateUrl: './participa-header.html',
-    styleUrls: ['./participa-header.scss']
+    styleUrls: ['./participa-header.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 @Hotspot('theme_header')
 export class ParticipaHeaderComponent {

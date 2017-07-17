@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-article-icon",
     templateUrl: "./article-icon.html",
-    styleUrls: ['article-icon.scss']
+    styleUrls: ['article-icon.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ArticleIconComponent {
 

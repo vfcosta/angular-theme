@@ -1,10 +1,11 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
 import { EnvironmentService } from '../../../../lib/ng-noosfero-api/http/environment.service';
 
 @Component({
     selector: "noosfero-activity",
     templateUrl: './activity.html',
-    styleUrls: ['./activity.scss']
+    styleUrls: ['./activity.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ActivityComponent {
 

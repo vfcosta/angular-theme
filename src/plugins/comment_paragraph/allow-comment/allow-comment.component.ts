@@ -1,5 +1,5 @@
 import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
-import {Component, HostListener, Input, Inject, ViewChild, ElementRef} from '@angular/core';
+import { Component, HostListener, Input, Inject, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import {SideCommentsComponent} from '../side-comments/side-comments.component';
 import {CommentParagraphEventService} from '../events/comment-paragraph-event.service';
 import {CommentParagraphService} from '../http/comment-paragraph.service';
@@ -9,7 +9,8 @@ import {PermissionService} from '../../../app/shared/services/permission.service
 @Component({
     selector: '[data-macro="comment_paragraph_plugin\/allow_comment"]',
     templateUrl: './allow-comment.html',
-    styleUrls: ['./allow-comment.scss']
+    styleUrls: ['./allow-comment.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class AllowCommentComponent {
 

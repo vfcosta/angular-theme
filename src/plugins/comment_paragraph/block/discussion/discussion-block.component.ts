@@ -1,4 +1,4 @@
-import {Component, Inject, Input} from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import {BlockService} from '../../../../lib/ng-noosfero-api/http/block.service';
 import {ArticleService} from './../../../../lib/ng-noosfero-api/http/article.service';
 import {Arrays} from './../../../../lib/util/arrays';
@@ -7,7 +7,8 @@ import {DiscussionPresentationMode} from './discussion-presentation-mode';
 @Component({
     selector: "noosfero-comment-paragraph-plugin-discussion-block",
     templateUrl: './discussion-block.html',
-    styleUrls: ['./discussion-block.scss']
+    styleUrls: ['./discussion-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DiscussionBlockComponent {
 

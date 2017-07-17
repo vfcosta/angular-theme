@@ -1,10 +1,11 @@
-import { Component, Inject, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, Inject, Input, ViewChild, OnChanges, ViewEncapsulation } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-section-block-plugin-section-block",
     templateUrl: './section-block.html',
-    styleUrls: ['./section-block.scss']
+    styleUrls: ['./section-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class SectionBlockComponent implements OnChanges {
 

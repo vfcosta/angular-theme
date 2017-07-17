@@ -1,10 +1,11 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { DesignModeService } from '../../shared/services/design-mode.service';
 
 @Component({
     selector: "config-bar",
     templateUrl: './config-bar.html',
-    styleUrls: ['./config-bar.scss']
+    styleUrls: ['./config-bar.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ConfigBarComponent {
 

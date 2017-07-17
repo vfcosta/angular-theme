@@ -1,4 +1,4 @@
-import { Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { ProfileComponent } from './../../profile/profile.component';
 import { ActivitiesComponent } from './../../profile/activities/activities.component';
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
@@ -13,7 +13,8 @@ import { animateFactory } from 'ng2-animate';
     selector: 'noosfero-block',
     templateUrl: './block.html',
     animations: [animateFactory(500, 0, 'ease-in')],
-    styleUrls: ['./block.scss']
+    styleUrls: ['./block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class BlockComponent {
 

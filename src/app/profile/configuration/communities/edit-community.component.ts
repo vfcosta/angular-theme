@@ -1,6 +1,6 @@
 import { SessionService } from './../../../login/session.service';
 import { NotificationService } from './../../../shared/services/notification.service';
-import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
+import { Component, Input, Output, Inject, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { AbstractFormCommunity } from './abstract-form-community';
 import * as _ from "lodash";
 
@@ -11,7 +11,8 @@ import * as _ from "lodash";
 @Component({
     selector: "edit-community",
     templateUrl: './form-community.html',
-    styleUrls: ['./form-community.scss']
+    styleUrls: ['./form-community.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class EditCommunityComponent extends AbstractFormCommunity {
 

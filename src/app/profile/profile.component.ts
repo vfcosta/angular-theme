@@ -1,7 +1,7 @@
 import { ThemeService } from './../shared/services/theme.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DesignModeService } from './../shared/services/design-mode.service';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { ProfileHomeComponent } from './profile-home.component';
 import { CmsComponent } from '../article/cms/cms.component';
 import { ContentViewerComponent } from '../article/content-viewer/content-viewer.component';
@@ -22,7 +22,8 @@ import { ProfileActionsComponent } from './actions/profile-actions.component';
 @Component({
     selector: 'profile',
     templateUrl: './profile.html',
-    styleUrls: ['./profile.scss']
+    styleUrls: ['./profile.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileComponent {
 

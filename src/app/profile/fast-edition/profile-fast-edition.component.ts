@@ -2,12 +2,13 @@ import { Router } from '@angular/router';
 import { ValidationMessageComponent } from './../../shared/components/validation-message/validation-message.component';
 import { NotificationService } from './../../shared/services/notification.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
-import { Component, Inject, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Inject, Input, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "profile-fast-edition",
     templateUrl: './profile-fast-edition.html',
-    styleUrls: ['./profile-fast-edition.scss']
+    styleUrls: ['./profile-fast-edition.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileFastEditionComponent {
 

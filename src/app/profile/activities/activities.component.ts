@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 
 /**
@@ -11,7 +11,8 @@ const LIMIT = 10;
 @Component({
     selector: "noosfero-activities",
     templateUrl: './activities.html',
-    styleUrls: ['./activities.scss']
+    styleUrls: ['./activities.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ActivitiesComponent {
 

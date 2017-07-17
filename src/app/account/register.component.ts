@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Inject, Input, Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Inject, Input, Component, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 import { RegisterService } from './../../lib/ng-noosfero-api/http/register.service';
 import { NotificationService } from './../shared/services/notification.service';
 import { EnvironmentService } from '../../lib/ng-noosfero-api/http/environment.service';
@@ -8,7 +8,8 @@ import { ValidationMessageComponent } from '../shared/components/validation-mess
 @Component({
     selector: 'noosfero-register',
     templateUrl: './register-component.html',
-    styleUrls: ['register.scss']
+    styleUrls: ['register.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class RegisterComponent {
     @Input() account: any;

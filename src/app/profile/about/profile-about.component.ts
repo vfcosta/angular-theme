@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 
 @Component({
     selector: 'profile-about',
     templateUrl: './profile-about.html',
-    styleUrls: ['./profile-about.scss']
+    styleUrls: ['./profile-about.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileAboutComponent {
 

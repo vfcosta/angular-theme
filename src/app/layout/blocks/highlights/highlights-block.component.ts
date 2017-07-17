@@ -1,10 +1,11 @@
-import { Input, Inject, Component } from '@angular/core';
+import { Input, Inject, Component, ViewEncapsulation } from '@angular/core';
 import * as _ from "lodash";
 
 @Component({
     selector: "noosfero-highlights-block",
     templateUrl: './highlights-block.html',
-    styleUrls: ['./highlights-block.scss']
+    styleUrls: ['./highlights-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class HighlightsBlockComponent {
 

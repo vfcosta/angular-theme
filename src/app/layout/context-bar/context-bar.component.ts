@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Inject, Input, Component, ChangeDetectorRef } from '@angular/core';
+import { Inject, Input, Component, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { EventsHubService } from '../../shared/services/events-hub.service';
 import { NoosferoKnownEvents } from '../../known-events';
 import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
@@ -12,7 +12,8 @@ import * as _ from "lodash";
 @Component({
     selector: "context-bar",
     templateUrl: './context-bar.html',
-    styleUrls: ['./context-bar.scss']
+    styleUrls: ['./context-bar.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ContextBarComponent {
 

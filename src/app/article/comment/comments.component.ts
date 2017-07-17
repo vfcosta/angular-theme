@@ -1,4 +1,4 @@
-import { Inject, Input, Component, ChangeDetectorRef } from '@angular/core';
+import { Inject, Input, Component, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { CommentService } from '../../../lib/ng-noosfero-api/http/comment.service';
 import { CommentComponent } from './comment.component';
 
@@ -6,7 +6,8 @@ import { CommentComponent } from './comment.component';
     selector: 'noosfero-comments',
     templateUrl: './comments.html',
     outputs: ['commentAdded'],
-    styleUrls: ['./comments.scss']
+    styleUrls: ['./comments.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class CommentsComponent {
 

@@ -1,10 +1,11 @@
-import { Input, Inject, Component } from '@angular/core';
+import { Input, Inject, Component, ViewEncapsulation } from '@angular/core';
 import { ArticleService } from '../../../../lib/ng-noosfero-api/http/article.service';
 
 @Component({
     selector: "noosfero-display-content-block",
     templateUrl: './display-content-block.html',
-    styleUrls: ['./display-content-block.scss']
+    styleUrls: ['./display-content-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DisplayContentBlockComponent {
 

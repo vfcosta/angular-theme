@@ -3,7 +3,7 @@ import { EnvironmentService } from '../../lib/ng-noosfero-api/http/environment.s
 import { AuthEvents, AuthService } from '../login';
 import { NotificationService } from '../shared/services/notification.service';
 import { DesignModeService } from './../shared/services/design-mode.service';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 /**
@@ -15,7 +15,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Component({
     selector: 'environment',
     templateUrl: './environment.html',
-    styleUrls: ['./environment.scss']
+    styleUrls: ['./environment.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class EnvironmentComponent {
 

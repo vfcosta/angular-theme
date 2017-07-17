@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventsHubService } from './../../shared/services/events-hub.service';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { ArticleService } from '../../../lib/ng-noosfero-api/http/article.service';
 import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { NotificationService } from '../../shared/services/notification.service';
@@ -9,7 +9,8 @@ import { BasicOptionsComponent } from './basic-options/basic-options.component';
 @Component({
     selector: 'article-cms',
     templateUrl: './cms.html',
-    styleUrls: ['./cms.scss']
+    styleUrls: ['./cms.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class CmsComponent {
 

@@ -1,9 +1,10 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'custom-content',
     templateUrl: './custom-content.html',
-    styleUrls: ['./custom-content.scss']
+    styleUrls: ['./custom-content.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class CustomContentComponent {
 

@@ -1,11 +1,12 @@
-import {Component, Inject, Input} from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import {DesignModeService} from '../../shared/services/design-mode.service';
 import {AuthService, AuthEvents} from '../../login';
 
 @Component({
     selector: 'design-toggler',
     templateUrl: './design-mode-toggler.html',
-    styleUrls: ['./design-mode-toggler.scss']
+    styleUrls: ['./design-mode-toggler.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DesignModeTogglerComponent {
 

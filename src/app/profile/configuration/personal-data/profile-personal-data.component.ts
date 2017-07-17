@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
-import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, Input, Inject, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 /**
  * @ngdoc controller
@@ -14,7 +14,8 @@ import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angu
 @Component({
     selector: "profile-personal-data",
     templateUrl: './profile-personal-data.html',
-    styleUrls: ['./profile-personal-data.scss']
+    styleUrls: ['./profile-personal-data.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfilePersonalDataComponent {
 

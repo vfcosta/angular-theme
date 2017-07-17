@@ -1,7 +1,7 @@
 .layout-config {
-  top: auto;
-  left: auto;
+  position: relative;
   ul {
+    margin-top: 8px;
     li {
       min-height: 30px !important;
       padding: 0;

@@ -1,11 +1,12 @@
-import { Inject, Input, Component } from '@angular/core';
+import { Inject, Input, Component, ViewEncapsulation } from '@angular/core';
 import { DesignModeService } from '../../shared/services/design-mode.service';
 import { EventsHubService } from '../../shared/services/events-hub.service';
 
 @Component({
     selector: "noosfero-boxes",
     templateUrl: './boxes.html',
-    styleUrls: ['./boxes.scss']
+    styleUrls: ['./boxes.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class BoxesComponent {
 

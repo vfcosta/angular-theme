@@ -1,10 +1,11 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
 import { ArticleService } from '../../../lib/ng-noosfero-api/http/article.service';
 
 @Component({
     selector: "profile-actions",
     templateUrl: './profile-actions.html',
-    styleUrls: ['./profile-actions.scss']
+    styleUrls: ['./profile-actions.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileActionsComponent {
 

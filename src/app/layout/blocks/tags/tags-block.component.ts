@@ -1,11 +1,12 @@
-import {Inject, Component, Input} from '@angular/core';
+import { Inject, Component, Input, ViewEncapsulation } from '@angular/core';
 import { CloudData } from 'angular-tag-cloud-module';
 import { EnvironmentService } from '../../../../lib/ng-noosfero-api/http/environment.service';
 
 @Component({
     selector: "noosfero-tags-cloud-block",
     templateUrl: './tags-block.html',
-    styleUrls: ['./tags-block.scss']
+    styleUrls: ['./tags-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class TagsBlockComponent {
 

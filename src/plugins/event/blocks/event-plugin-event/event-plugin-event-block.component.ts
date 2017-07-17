@@ -1,10 +1,11 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
-import {Component, Inject, Input} from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-event-plugin-event-block",
     templateUrl: './event-plugin-event-block.html',
-    styleUrls: ['./event-plugin-event-block.scss']
+    styleUrls: ['./event-plugin-event-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class EventPluginEventBlockComponent {
 

@@ -1,10 +1,11 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-profile-images-plugin-profile-images-block",
     templateUrl: './profile-images-block.html',
-    styleUrls: ['./profile-images-block.scss']
+    styleUrls: ['./profile-images-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileImagesBlockComponent {
 

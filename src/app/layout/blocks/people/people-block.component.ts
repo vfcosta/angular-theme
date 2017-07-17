@@ -1,10 +1,11 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-people-block",
     templateUrl: './people-block.html',
-    styleUrls: ['./people-block.scss']
+    styleUrls: ['./people-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class PeopleBlockComponent {
 

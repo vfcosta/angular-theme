@@ -1,11 +1,12 @@
 import { AuthService } from './auth.service';
 import { NotificationService } from './../shared/services/notification.service';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-login",
     templateUrl: './login.html',
-    styleUrls: ['./login.scss']
+    styleUrls: ['./login.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class LoginComponent {
     @Input("show") show = false;

@@ -1,10 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { TranslatorService } from '../../shared/services/translator.service';
 
 @Component({
     selector: "language-selector",
     templateUrl: './language-selector.html',
-    styleUrls: ['./language-selector.scss']
+    styleUrls: ['./language-selector.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class LanguageSelectorComponent {
 

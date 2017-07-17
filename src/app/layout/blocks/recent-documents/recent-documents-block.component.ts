@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import {BlockService} from '../../../../lib/ng-noosfero-api/http/block.service';
 import {ArticleService} from './../../../../lib/ng-noosfero-api/http/article.service';
 import {Arrays} from './../../../../lib/util/arrays';
@@ -6,7 +6,8 @@ import {Arrays} from './../../../../lib/util/arrays';
 @Component({
     selector: "noosfero-recent-documents-block",
     templateUrl: './recent-documents-block.html',
-    styleUrls: ['./recent-documents-block.scss']
+    styleUrls: ['./recent-documents-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class RecentDocumentsBlockComponent {
 

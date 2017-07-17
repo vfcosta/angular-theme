@@ -1,10 +1,11 @@
-import { Inject, Input, Output, Component } from '@angular/core';
+import { Inject, Input, Output, Component, ViewEncapsulation } from '@angular/core';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 
 @Component({
     selector: "noosfero-profile-header",
     templateUrl: './profile-header.html',
-    styleUrls: ['./profile-header.scss']
+    styleUrls: ['./profile-header.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileHeaderComponent {
 

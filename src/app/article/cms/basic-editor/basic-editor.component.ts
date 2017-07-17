@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'article-basic-editor',
     templateUrl: './basic-editor.html',
-    styleUrls: ['./basic-editor.scss']
+    styleUrls: ['./basic-editor.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class BasicEditorComponent {
 

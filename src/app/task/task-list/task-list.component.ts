@@ -1,6 +1,6 @@
 import { AddFriendTaskComponent } from './../types/add-friend/add-friend-task.component';
 import { TaskModule } from './../task.module';
-import { NgModuleFactory } from '@angular/core';
+import { NgModuleFactory, ViewEncapsulation } from '@angular/core';
 import { Compiler } from '@angular/core';
 import { components } from './../../../../themes/index';
 import { AppModule } from './../../app.module';
@@ -15,7 +15,8 @@ import * as _ from "lodash";
 @Component({
     selector: "task-list",
     templateUrl: './task-list.html',
-    styleUrls: ['./task-list.scss']
+    styleUrls: ['./task-list.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class TaskListComponent {
 

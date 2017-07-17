@@ -1,11 +1,12 @@
 import { SessionService } from './../../login/session.service';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { AuthService } from './../../login';
 
 @Component({
     selector: "noosfero-footer",
     templateUrl: './footer.html',
-    styleUrls: ['./footer.scss']
+    styleUrls: ['./footer.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class FooterComponent {
 

@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-icon-picker",
     templateUrl: './icon-picker.html',
-    styleUrls: ['./icon-picker.scss']
+    styleUrls: ['./icon-picker.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class IconPickerComponent {
 

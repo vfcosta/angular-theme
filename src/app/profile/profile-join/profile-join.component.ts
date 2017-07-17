@@ -1,5 +1,5 @@
 import { SessionService } from './../../login/session.service';
-import { Inject, Input, Component, EventEmitter, Output } from '@angular/core';
+import { Inject, Input, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { ProfileService, MembershipStatus, FriendshipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { NotificationService } from '../../shared/services/notification.service';
 import { EventsHubService } from '../../shared/services/events-hub.service';
@@ -10,7 +10,8 @@ import { PersonService } from './../../../lib/ng-noosfero-api/http/person.servic
 @Component({
     selector: "profile-join",
     templateUrl: './profile-join.html',
-    styleUrls: ['./profile-join.scss']
+    styleUrls: ['./profile-join.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileJoinComponent {
 

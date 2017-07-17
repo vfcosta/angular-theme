@@ -1,11 +1,12 @@
 import { TaskAcceptTypeComponent } from './../task-accept-type.component';
-import { Component, Injector, Inject } from '@angular/core';
+import { Component, Injector, Inject, ViewEncapsulation } from '@angular/core';
 import { ArticleService } from '../../../../lib/ng-noosfero-api/http/article.service';
 
 @Component({
     selector: "approve-article-task-accept",
     templateUrl: './approve-article-accept.html',
-    styleUrls: ['./approve-article-accept.scss']
+    styleUrls: ['./approve-article-accept.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ApproveArticleTaskAcceptComponent extends TaskAcceptTypeComponent {
 

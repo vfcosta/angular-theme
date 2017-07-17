@@ -1,11 +1,12 @@
 import { HotspotModule } from './../../hotspot/hotspot.module';
-import { Component, Input, Inject, NgModuleFactory, Compiler } from '@angular/core';
+import { Component, Input, Inject, NgModuleFactory, Compiler, ViewEncapsulation } from '@angular/core';
 import { PluginHotspot } from '../../hotspot/plugin-hotspot';
 
 @Component({
     selector: 'theme-footer',
     templateUrl: './theme-footer.html',
-    styleUrls: ['./theme-footer.scss']
+    styleUrls: ['./theme-footer.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ThemeFooterComponent extends PluginHotspot {
 

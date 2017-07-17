@@ -1,11 +1,12 @@
-import { Input, Inject, Component, OnInit, forwardRef, Injector } from '@angular/core';
+import { Input, Inject, Component, OnInit, forwardRef, Injector, ViewEncapsulation } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 import { BlockSettingsComponent } from '../block-settings.component';
 
 @Component({
     selector: "noosfero-highlights-block-settings",
     templateUrl: './highlights-block-settings.html',
-    styleUrls: ['./highlights-block-settings.scss']
+    styleUrls: ['./highlights-block-settings.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class HighlightsBlockSettingsComponent implements OnInit {
 

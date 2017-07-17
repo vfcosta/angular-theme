@@ -1,10 +1,11 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
-import {Component, Inject, Input} from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-recent-activities-plugin-activities-block",
     templateUrl: './recent-activities-plugin-activities-block.html',
-    styleUrls: ['./recent-activities-plugin-activities-block.scss']
+    styleUrls: ['./recent-activities-plugin-activities-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class RecentActivitiesPluginActivitiesBlockComponent {
 

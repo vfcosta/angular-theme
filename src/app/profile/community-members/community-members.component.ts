@@ -1,11 +1,12 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { DisplayStyles } from '../profile-list/profile-list.component';
 
 @Component({
     selector: "noosfero-community-members",
     templateUrl: './community-members.html',
-    styleUrls: ['./community-members.scss']
+    styleUrls: ['./community-members.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class CommunityMembersComponent {
 

@@ -1,4 +1,4 @@
-import { Component, Inject, Input, NgZone } from '@angular/core';
+import { Component, Inject, Input, NgZone, ViewEncapsulation } from '@angular/core';
 import { PersonService } from '../../../../lib/ng-noosfero-api/http/person.service';
 import { CommunityService } from '../../../../lib/ng-noosfero-api/http/community.service';
 import { ProfileService } from '../../../../lib/ng-noosfero-api/http/profile.service';
@@ -11,7 +11,8 @@ import { Observable } from 'rxjs/Observable';
 @Component({
     selector: "noosfero-invite-component",
     templateUrl: './invite.html',
-    styleUrls: ['./invite.scss']
+    styleUrls: ['./invite.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class InviteComponent {
 

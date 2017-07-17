@@ -1,5 +1,5 @@
 import { HeaderService } from './../../shared/services/header.service';
-import { Component, Inject, EventEmitter, Input } from '@angular/core';
+import { Component, Inject, EventEmitter, Input, ViewEncapsulation } from '@angular/core';
 import { AuthService, AuthEvents } from './../../login';
 import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environment.service';
 import { DesignModeTogglerComponent } from '../design-mode-toggler/design-mode-toggler.component';
@@ -9,7 +9,8 @@ import { SessionService } from '../../login/session.service';
 @Component({
     selector: "noosfero-navbar",
     templateUrl: './navbar.html',
-    styleUrls: ['./navbar.scss']
+    styleUrls: ['./navbar.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class NavbarComponent {
 

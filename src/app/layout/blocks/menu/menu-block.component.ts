@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { DesignModeService } from './../../../shared/services/design-mode.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
-import { Component, Input, Inject, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, Input, Inject, HostListener, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { TranslatorService } from '../../../shared/services/translator.service';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { DragulaService } from 'ng2-dragula';
@@ -9,7 +9,8 @@ import { DragulaService } from 'ng2-dragula';
 @Component({
     selector: "noosfero-menu-block",
     templateUrl: './menu-block.html',
-    styleUrls: ['./menu-block.scss']
+    styleUrls: ['./menu-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class MenuBlockComponent {
 

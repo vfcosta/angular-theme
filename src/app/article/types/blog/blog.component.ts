@@ -1,4 +1,4 @@
-import {Component, Input, Inject} from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
 import {ArticleService} from '../../../../lib/ng-noosfero-api/http/article.service';
 
 /**
@@ -10,7 +10,8 @@ import {ArticleService} from '../../../../lib/ng-noosfero-api/http/article.servi
 @Component({
     selector: "noosfero-blog",
     templateUrl: './blog.html',
-    styleUrls: ['blog.scss']
+    styleUrls: ['blog.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ArticleBlogComponent {
 

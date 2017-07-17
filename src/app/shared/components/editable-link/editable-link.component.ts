@@ -1,9 +1,10 @@
-import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-editable-link",
     templateUrl: './editable-link.html',
-    styleUrls: ['./editable-link.scss']
+    styleUrls: ['./editable-link.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class EditableLinkComponent {
 

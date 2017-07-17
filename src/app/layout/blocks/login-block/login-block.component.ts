@@ -1,4 +1,4 @@
-import { Input, Inject, Component } from '@angular/core';
+import { Input, Inject, Component, ViewEncapsulation } from '@angular/core';
 import { AuthService, AuthEvents } from '../../../login';
 import { SessionService } from '../../../login/session.service';
 
@@ -11,7 +11,8 @@ import { SessionService } from '../../../login/session.service';
 @Component({
     selector: "noosfero-login-block",
     templateUrl: './login-block.html',
-    styleUrls: ['./login-block.scss']
+    styleUrls: ['./login-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class LoginBlockComponent {
 
