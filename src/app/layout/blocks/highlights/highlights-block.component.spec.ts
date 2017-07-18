@@ -6,7 +6,7 @@ import { CarouselModule } from 'ngx-bootstrap';
 
 describe("Highlights Block Component", () => {
 
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<HighlightsBlockComponent>;
     let component: HighlightsBlockComponent;
 
