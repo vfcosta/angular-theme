@@ -11,6 +11,8 @@ describe("Components", () => {
     describe("Link List Block Component", () => {
         let fixture: ComponentFixture<LinkListBlockComponent>;
         let component: LinkListBlockComponent;
+        const mocks = helpers.getMocks();
+
         let noosferoTemplate: {
             transform: () => {};
         };
@@ -19,7 +21,7 @@ describe("Components", () => {
                 declarations: [LinkListBlockComponent, NoosferoTemplatePipe],
                 schemas: [NO_ERRORS_SCHEMA],
                 providers: [
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: "noosferoTemplate", useValue: noosferoTemplate }
                 ]
             });
@@ -76,8 +78,7 @@ describe("Components", () => {
         });
 
         function all(selector: string) {
-            let compiled = fixture.debugElement;
-            return compiled.queryAll(By.css(selector));
+            return fixture.debugElement.queryAll(By.css(selector));
         }
     });
 

@@ -37,9 +37,9 @@ export function mockBackendConnection(backend: MockBackend, url, body: any = {},
     });
 }
 
-export {mocks, getMocks} from "./mocks";
+export {getMocks} from "./mocks";
 
-export var fixtures = {
+export let fixtures = {
     user: {
         id: 1,
         login: 'user',

@@ -15,6 +15,7 @@ describe("Components", () => {
     describe("Display Content Block Component", () => {
         let fixture: ComponentFixture<DisplayContentBlockComponent>;
         let component: DisplayContentBlockComponent;
+        const mocks = helpers.getMocks();
 
         let sections: noosfero.Section[] = [
             { value: 'abstract', checked: 'abstract' },
@@ -39,7 +40,7 @@ describe("Components", () => {
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(DisplayContentBlockComponent);

@@ -10,7 +10,7 @@ import { By } from '@angular/platform-browser';
 import { BsDropdownModule } from 'ngx-bootstrap';
 
 describe('Profile Actions Component', () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<ProfileActionsComponent>;
     let component: ProfileActionsComponent;
 
@@ -19,7 +19,7 @@ describe('Profile Actions Component', () => {
             imports: [BsDropdownModule.forRoot(), TranslateModule.forRoot()],
             declarations: [ProfileActionsComponent],
             providers: [
-                { provide: ArticleService, useValue: helpers.mocks.articleService },
+                { provide: ArticleService, useValue: mocks.articleService },
                 { provide: TranslatorService, useValue: mocks.translatorService }
             ],
             schemas: [NO_ERRORS_SCHEMA]

@@ -22,13 +22,14 @@ describe("Components", () => {
         let fixture: ComponentFixture<ProfileListEditionComponent>;
         let component: ProfileListEditionComponent;
         let state = jasmine.createSpyObj("$state", ["href"]);
+        const mocks = helpers.getMocks();
 
         let owner = { id: 1, identifier: 'owner', type: 'Community' };
         let profile = { id: 2, identifier: 'profile' };
 
         let roleService = jasmine.createSpyObj("roleService", ["getByProfile", "assign"]);
-        roleService.assign = jasmine.createSpy("assign").and.returnValue(helpers.mocks.promiseResultTemplate());
-        roleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(helpers.mocks.promiseResultTemplate({ data: [{ id: 10 }, { id: 11 }] }));
+        roleService.assign = jasmine.createSpy("assign").and.returnValue(mocks.promiseResultTemplate());
+        roleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(mocks.promiseResultTemplate({ data: [{ id: 10 }, { id: 11 }] }));
         let amParseFilter = () => {
             return {
                 toISOString: () => {}
@@ -40,8 +41,8 @@ describe("Components", () => {
                 declarations: [ProfileListEditionComponent, DateFormatPipe],
                 providers: [
                     { provide: RoleService, useValue: roleService },
-                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                     { provide: "amParseFilter", useValue: amParseFilter }
                 ],
                 schemas: [NO_ERRORS_SCHEMA],

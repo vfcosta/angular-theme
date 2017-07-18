@@ -6,247 +6,8 @@ import 'rxjs/add/observable/of';
 
 const DEBUG = false;
 
-export var mocks: any = {
-    scopeWithEvents: (): ScopeWithEvents => new ScopeWithEvents(),
-    modalInstance: {
-        close: () => { }
-    },
-    $modal: {
-        open: (args: {}) => {
-            return this.modalInstance;
-        }
-    },
-    registerService: {
-        createAccount: (user: noosfero.User) => {
-            return Promise.resolve({ status: 201 });
-        }
-    },
-    authService: {
-        loginSuccess: {
-            event: Function,
-            subscribe: (fn: Function) => {
-                mocks.authService['loginSuccess'].event = fn;
-            },
-            next: (param: any) => {
-                mocks.authService['loginSuccess'].event(param);
-            }
-        },
-        loginFailed: {
-            event: Function,
-            subscribe: (fn: Function) => {
-                mocks.authService['loginFailed'].event = fn;
-            },
-            next: (param: any) => {
-                mocks.authService['loginFailed'].event(param);
-            }
-        },
-        logoutSuccess: {
-            event: Function,
-            subscribe: (fn: Function) => {
-                mocks.authService['logoutSuccess'].event = fn;
-            },
-            next: (param: any) => {
-                mocks.authService['logoutSuccess'].event(param);
-            }
-        },
-        login: () => { },
-        logout: () => { },
-        subscribe: (eventName: string, fn: Function) => {
-            mocks.authService[eventName].subscribe(fn);
-        },
-        isAuthenticated: () => { }
-    },
-    articleService: {
-        articleRemovedFn: null,
-        articleAddedFn: null,
-        subscribeToModelRemoved: (fn: Function) => {
-            mocks.articleService.articleRemovedFn = fn;
-        },
-        subscribeToModelAdded: (fn: Function) => {
-            mocks.articleService.articleAddedFn = fn;
-        },
-        modelRemovedEventEmitter:
-        {
-            subscribe: (fn: Function) => {
-                mocks.articleService.articleRemovedFn = fn;
-            },
-            next: (param: any) => {
-                mocks.articleService.articleRemovedFn(param);
-            }
-        }
-        ,
-        modelAddedEventEmitter:
-        {
-            subscribe: (fn: Function) => {
-                mocks.articleService.articleAddedFn = fn;
-            },
-            next: (param: any) => {
-                mocks.articleService.articleAddedFn(param);
-            }
-        }
-        ,
-        remove: (article: noosfero.Article) => {
-            return {
-                catch: (func?: Function) => {
-                }
-            };
-        },
-        getByProfile: (profileId: number, params?: any) => {
-            return {
-                then: (func?: Function) => {
-                    if (func) func({
-                        data: {
-                            article: null
-                        }
-                    });
-                }
-            };
-        },
-        getArticleByProfileAndPath: (profile: noosfero.Profile, path: string) => {
-            return {
-                then: (func?: Function) => {
-                    if (func) func({
-                        data: {
-                            article: null
-                        }
-                    });
-                }
-            };
-        },
-        getChildren: (articleId: number, params?: any) => {
-            return {
-                then: (func?: Function) => { if (func) func(); }
-            };
-        },
-        setCurrent: (article: noosfero.Article) => { },
-        getCurrent: () => { return Promise.resolve({}); }
-    },
-    environmentService: {
-        getEnvironmentPeople: (params: any) => {
-            return mocks.promiseResultTemplate({
-                people: {}
-            });
-        },
-        getCurrentEnvironment: (): any => {
-            return {
-                id: 1,
-                settings: {},
-                layout_template: '',
-                signup_intro: 'Welcome to Noosfero',
-                host: 'http://localhost'
-            };
-        }
-    },
-    communityService: {
-        sendInvitations: (communityId: number, people: noosfero.Person[]) => { }
-    },
-    commentService: {
-        commentRemovedFn: null,
-        commentAddedFn: null,
-        subscribeToModelRemoved: (fn: Function) => {
-            mocks.commentService.commentRemovedFn = fn;
-        },
-        subscribeToModelAdded: (fn: Function) => {
-            mocks.commentService.commentAddedFn = fn;
-        },
-        modelRemovedEventEmitter:
-        {
-            subscribe: (fn: Function) => {
-                mocks.commentService.commentRemovedFn = fn;
-            },
-            next: (param: any) => {
-                mocks.commentService.commentRemovedFn(param);
-            }
-        }
-        ,
-        modelAddedEventEmitter:
-        {
-            subscribe: (fn: Function) => {
-                mocks.articleService.commentAddedFn = fn;
-            },
-            next: (param: any) => {
-                mocks.articleService.commentAddedFn(param);
-            }
-        }
-        ,
-        getByArticle: (article: noosfero.Article) => {
-            return Promise.resolve({ data: {} });
-        }
-    },
-    sessionWithCurrentUser: (user: any) => {
-        return {
-            currentUser: () => { return user; },
-            localStorage: {}
-        };
-    },
-    designModeService: {
-        modeFn: null,
-        onToggle: {
-            subscribe: (fn: Function) => {
-                mocks.designModeService.modeFn = fn;
-            },
-            next: (param: any) => {
-                mocks.designModeService.modeFn(param);
-            }
-        },
-        isInDesignMode: () => { return false; }
-    },
-    translateService: {
-        use: (lang?: string) => {
-            return lang ? Promise.resolve(lang) : "en";
-        },
-        instant: (text: string) => { return text; }
-    },
-    tmhDynamicLocale: {
-        get: () => { },
-        set: (lang: string) => { }
-    },
-    amMoment: {
-        changeLocale: () => { }
-    },
-    promiseResultTemplate: (response?: {}, callCatch = true) => {
-        let callback = (func?: (response: any) => any) => {
-            if (func) {
-                let ret = func(response);
-                if (ret && typeof ret.then === "function") return ret;
-            }
-            return mocks.promiseResultTemplate(response, callCatch);
-        };
-        let catchCallback = callback;
-        if (!callCatch) catchCallback = () => { };
-        return {
-            then: callback,
-            finally: callback,
-            catch: catchCallback
-        };
-    },
-    translatorService: {
-        currentLanguage: () => { },
-        changeLanguage: (lang: string) => { },
-        translate: (text: string) => { return text; }
-    },
-    passwordService: {
-        new_password: (param: any) => {
-            return Promise.resolve({ status: 201 });
-        }
-    },
-    notificationService: {
-        success: () => { },
-        confirmation: () => { },
-        info: () => { },
-        error: () => { }
-    },
-    blockService: {
-        getBlock: (id: number) => { },
-        getAvailableBlocks: () => { }
-    },
-    noosferoTemplateFilter: (text: string, options: any) => {
-        return text;
-    }
-};
-
 export function getMocks() {
-    let mocks = {
+    const mocks = {
         scopeWithEvents: (): ScopeWithEvents => new ScopeWithEvents(),
         modalInstance: {
             close: () => { }
@@ -278,7 +39,7 @@ export function getMocks() {
             top_image: null
         },
         injector: {
-            get: (obj: any) => { return { block: { identifier: 'identifier', settings: '', api_content: '' } }; }
+            get: (obj: any) => ({ block: { identifier: 'identifier', settings: '', api_content: '' } })
         },
         community: {
             id: 1,
@@ -292,7 +53,7 @@ export function getMocks() {
         popover: {
             hide: () => { }
         },
-        taskService: {        
+        taskService: {
             getAllPending: () => {},
             get: (id: any) => {
                 return Promise.resolve({ headers: () => { }, data: { group_for_friend: 'group1' } });
@@ -330,7 +91,7 @@ export function getMocks() {
         articleService: {
             subscribeToModelRemoved: (fn: Function) => { },
             subscribeToModelAdded: (fn: Function) => { },
-            get: () => { return Promise.resolve({}) },
+            get: () => Promise.resolve({}),
             modelRemovedEventEmitter:
             {
                 subscribe: (fn: Function) => { },
@@ -350,22 +111,26 @@ export function getMocks() {
             getByProfile: (profileId: number, params?: any) => {
                 return {
                     then: (func?: Function) => {
-                        if (func) func({
-                            data: {
-                                article: null
-                            }
-                        });
+                        if (func) {
+                            func({
+                                data: {
+                                    article: null
+                                }
+                            });
+                        }
                     }
                 };
             },
             getArticleByProfileAndPath: (profile: noosfero.Profile, path: string) => {
                 return {
                     then: (func?: Function) => {
-                        if (func) func({
-                            data: {
-                                article: null
-                            }
-                        });
+                        if (func) {
+                            func({
+                                data: {
+                                    article: null
+                                }
+                            });
+                        }
                     }
                 };
             },
@@ -375,8 +140,8 @@ export function getMocks() {
                 };
             },
             setCurrent: (article: noosfero.Article) => { },
-            getCurrent: () => { return Promise.resolve({}); },
-            search: (filter: any) => { return Promise.resolve({}); },
+            getCurrent: () => Promise.resolve({}),
+            search: (filter: any) => Promise.resolve({}),
             createInParent: () => { },
             updateArticle: () => { },
         },
@@ -403,26 +168,26 @@ export function getMocks() {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
             instant: () => { },
             update: (profile: noosfero.Profile) => Promise.resolve(mocks.profile),
-            remove: () => { return Promise.resolve({data: {success: true}}); },
-            getBlockTemplate: (id: any, type: string) => { return   Promise.resolve({api_content: [] }); },
+            remove: () => Promise.resolve({data: {success: true}}),
+            getBlockTemplate: (id: any, type: string) => Promise.resolve({api_content: [] }),
             getTags: () => { },
             getHomePage: () => {},
             getNetworkActivities: () => {},
-            isMember: () => { return Promise.resolve(true)},
-            addMember: () => {return Promise.resolve({ data: {} })},            
-            removeMember: () => {return Promise.resolve({ data: {} })}            
+            isMember: () => Promise.resolve(true),
+            addMember: () => Promise.resolve({ data: {} }),
+            removeMember: () => Promise.resolve({ data: {} })
             // getMembershipState: (profileId: noosfero.Person, friendId: noosfero.Profile) => { return Promise.resolve({ }) }
         },
         personService: {
             search: () => Observable.of([mocks.profile]),
-            getFriendshipState: () => { return Promise.resolve({ }) },
-            addFriend: () => {return Promise.resolve({ data: {} })},
-            removeFriend: () => {return Promise.resolve({ data: {} })}
+            getFriendshipState: () => Promise.resolve({ }),
+            addFriend: () => Promise.resolve({ data: {} }),
+            removeFriend: () => Promise.resolve({ data: {} })
         },
         communityService: {
             sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),
             createNewCommunity: (community: noosfero.Community) => Promise.resolve({}),
-            getMembershipState: () => { return Promise.resolve({ }) }
+            getMembershipState: () => Promise.resolve({ })
         },
         sessionService: {
             currentUser: () => <noosfero.User>{ person: { id: 1, identifier: 'test_user' } },
@@ -451,25 +216,22 @@ export function getMocks() {
         },
         sessionWithCurrentUser: (user: any) => {
             return {
-                currentUser: () => { return user; },
+                currentUser: () => user,
                 localStorage: {}
             };
         },
         inDesignMode: false,
         designModeService: {
-            onToggle: {
-                subscribe: (fn: Function) => { },
-                next: (param: any) => { }
-            },
-            isInDesignMode: () => { return mocks.inDesignMode; },
+            onToggle: new EventEmitter(),
+            isInDesignMode: () => mocks.inDesignMode,
             setInDesignMode: (value: boolean) => { mocks.inDesignMode = value; }
         },
         translateService: {
             use: (lang?: string) => {
                 return lang ? Promise.resolve(lang) : "en";
             },
-            instant: (text: string) => { return text; },
-            getBrowserLang: () => { return 'en'; },
+            instant: (text: string) => text,
+            getBrowserLang: () => 'en',
             setDefaultLang: (lang: string) => { },
         },
         tmhDynamicLocale: {
@@ -480,9 +242,9 @@ export function getMocks() {
             changeLocale: () => { }
         },
         promiseResultTemplate: (response?: {}) => {
-            let callback = (func?: (response: any) => any) => {
+            const callback = (func?: (response: any) => any) => {
                 if (func) {
-                    let ret = func(response);
+                    const ret = func(response);
                     if (ret && typeof ret.then === "function") return ret;
                 }
                 return mocks.promiseResultTemplate(response);
@@ -496,8 +258,8 @@ export function getMocks() {
         translatorService: {
             currentLanguage: () => { },
             changeLanguage: (lang: string) => { },
-            translate: (text: string) => { return text; },
-            hasTranslation: (text: string) => { return text; }
+            translate: (text: string) => text,
+            hasTranslation: (text: string) => text
         },
         passwordService: {
             new_password: (param: any) => {
@@ -515,7 +277,7 @@ export function getMocks() {
         },
         blockService: {
             getBlock: (id: number) => { },
-            getApiContent: (block: noosfero.Block, params?: any) => { return Promise.resolve({}); },
+            getApiContent: (block: noosfero.Block, params?: any) => Promise.resolve({}),
             uploadImages: () => { },
         },
         settingsService: {
@@ -543,7 +305,7 @@ export function getMocks() {
         localStorageService: {
             storage: {},
             remove: (key: string) => { delete mocks.localStorageService.storage[key]; },
-            get: (key: string) => { return mocks.localStorageService.storage[key]; },
+            get: (key: string) => mocks.localStorageService.storage[key],
             set: (key: string, value: any) => { mocks.localStorageService.storage[key] = value; }
         },
         themeService: {

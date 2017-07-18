@@ -16,7 +16,7 @@ describe("Components", () => {
         let personService = jasmine.createSpyObj("PersonService", ["getCommunities"]);
         personService.getCommunities = jasmine.createSpy("getCommunities").and.returnValue(Promise.resolve({ headers: { get: () => { } } }));
         let stateParams = {};
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -26,7 +26,7 @@ describe("Components", () => {
                 providers: [
                     { provide: PersonService, useValue: personService },
                     { provide: ActivatedRoute, useValue: mocks.route },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(PersonCommunitiesComponent);

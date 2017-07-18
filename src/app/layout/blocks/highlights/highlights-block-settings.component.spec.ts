@@ -14,7 +14,7 @@ describe("Highlights Block Settings Component", () => {
     let expectedData = "iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAgAElEQ…Cm2OLHvfdNPte3zrH709Q0esN1LPQ0t7DL696ERpu+9/8BVPLIpElf7VYAAAAASUVORK5CYII=";
     let testDataUrl = "data:image/png;base64," + expectedData;
     let upload = jasmine.createSpyObj("Upload", ["dataUrl"]);
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<HighlightsBlockSettingsComponent>;
     let component: HighlightsBlockSettingsComponent;
 
@@ -79,7 +79,7 @@ describe("Highlights Block Settings Component", () => {
     });
 
     it("upload image when a file was selected", () => {
-        component['blockService'].uploadImages = jasmine.createSpy("uploadImages").and.returnValue(helpers.mocks.promiseResultTemplate({ data: { images: [{ id: 10, url: "url" }] } }));
+        component['blockService'].uploadImages = jasmine.createSpy("uploadImages").and.returnValue(mocks.promiseResultTemplate({ data: { images: [{ id: 10, url: "url" }] } }));
         component.upload(testDataUrl, {});
         expect(component['blockService'].uploadImages).toHaveBeenCalled();
     });

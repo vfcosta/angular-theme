@@ -13,6 +13,7 @@ describe("Components", () => {
 
         let fixture: ComponentFixture<EditableLinkComponent>;
         let component: EditableLinkComponent;
+        const mocks = helpers.getMocks();
 
         let linkChange = jasmine.createSpyObj("linkChange", ["emit"]);
         linkChange.emit = jasmine.createSpy("emit");
@@ -21,7 +22,7 @@ describe("Components", () => {
             TestBed.configureTestingModule({
                 imports: [PopoverModule.forRoot(), FormsModule, TranslateModule.forRoot()],
                 declarations: [EditableLinkComponent, NoosferoTemplatePipe],
-                providers: [{ provide: TranslatorService, useValue: helpers.mocks.translatorService }]
+                providers: [{ provide: TranslatorService, useValue: mocks.translatorService }]
             });
             fixture = TestBed.createComponent(EditableLinkComponent);
             component = fixture.componentInstance;

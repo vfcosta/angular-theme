@@ -8,6 +8,7 @@ describe("Components", () => {
         let sweetAlert: any;
         let toastr: any;
         let translatorService: any;
+        const mocks = helpers.getMocks();
 
         beforeEach(() => {
             sweetAlert = jasmine.createSpy("sweetAlert").and.returnValue(Promise.resolve());
@@ -16,7 +17,7 @@ describe("Components", () => {
         });
 
         function createComponent() {
-            return new NotificationService(<any>sweetAlert, <any>helpers.mocks.translatorService, <any>toastr);
+            return new NotificationService(<any>sweetAlert, <any>mocks.translatorService, <any>toastr);
         }
 
         it("display a sweet error message when notify an error with SweetAlert", () => {

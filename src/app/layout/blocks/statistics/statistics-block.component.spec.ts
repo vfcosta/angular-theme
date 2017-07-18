@@ -8,9 +8,10 @@ import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Statistics Block Component", () => {
-        let articleService = helpers.mocks.articleService;
-        let blockService = helpers.mocks.blockService;
-        let translatorService = helpers.mocks.translatorService;
+        const mocks = helpers.getMocks();
+        let articleService = mocks.articleService;
+        let blockService = mocks.blockService;
+        let translatorService = mocks.translatorService;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
