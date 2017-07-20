@@ -1,6 +1,6 @@
 import { environment } from './../environments/environment';
 import { BodyStateClassesService } from './shared/services/body-state-classes.service';
-import { AfterViewInit, Inject, ViewEncapsulation, Component } from '@angular/core';
+import { ChangeDetectorRef, AfterViewInit, Inject, ViewEncapsulation, Component } from '@angular/core';
 import * as utils from './shared/utils';
 
 @Component({
@@ -13,7 +13,7 @@ export class AppComponent implements AfterViewInit {
     public themeSkin = 'skin-default';
     private appClasses = "";
 
-    constructor(@Inject('Window') private window, private bodyStateClassesService: BodyStateClassesService) {
+    constructor(@Inject('Window') private window, private bodyStateClassesService: BodyStateClassesService, private cdr: ChangeDetectorRef) {
         bodyStateClassesService.start({
             skin: this.themeSkin
         });
@@ -24,6 +24,7 @@ export class AppComponent implements AfterViewInit {
     ngAfterViewInit() {
         this.bodyStateClassesService.changeClasses.subscribe((classes: string[]) => {
             this.appClasses = classes.join(" ");
+            this.cdr.detectChanges();
         });
     }
 }
