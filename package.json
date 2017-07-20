@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "ng serve --proxy-config proxy.conf.json --delete-output-path=false",
     "build": "ng build --deploy=/assets/designs/themes/$npm_package_config_theme/ --prod --aot=false -op=dist/$npm_package_config_theme",
     "build-all": "for d in ./themes/*/ ; do (npm config set angular-theme:theme `basename $d` && npm run build); done",
     "test": "ng test --browser=Chrome",
