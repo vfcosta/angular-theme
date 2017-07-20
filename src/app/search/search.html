@@ -16,7 +16,7 @@
                 <span>{{article.created_at | dateFormat | amTimeAgo}}</span>
             </span>
         </div>
-        <div class="post-lead">{{article.body | stripTags | shorten : 250: '...': true}}</div>
+        <div class="post-lead" *ngIf="article.body">{{article.body | stripTags | shorten : 250: '...': true}}</div>
     </div>
     <pagination [(ngModel)]="currentPage" [totalItems]="totalResults" class="pagination-sm center-block" [boundaryLinks]="true" (numPages)="perPage" (pageChanged)="loadPage()" firstText="«" lastText="»" previousText="‹" nextText="›">
     </pagination>
