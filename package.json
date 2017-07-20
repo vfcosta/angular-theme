@@ -5,13 +5,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json --delete-output-path=false",
-    "build": "ng build --deploy=/assets/designs/themes/$npm_package_config_theme/ --prod --aot=false -op=dist/$npm_package_config_theme",
+    "build": "ng build --deploy=/assets/designs/themes/$npm_package_config_theme/ --prod --aot=false -op=dist/$npm_package_config_theme --stats-json",
     "build-all": "for d in ./themes/*/ ; do (npm config set angular-theme:theme `basename $d` && npm run build); done",
     "test": "ng test --browser=Chrome",
     "test:ci": "ng test --browser=PhantomJS --code-coverage=true --single-run=true",
     "lint": "ng lint",
     "e2e": "ng e2e --proxy-config proxy.conf.json",
     "theme:setup": "ln -sfn ../themes/$npm_package_config_theme src/theme",
+    "bundle-report": "webpack-bundle-analyzer dist/angular-default/stats.json",
     "prestart": "npm run theme:setup",
     "pretest": "npm run theme:setup",
     "pretest:ci": "npm run theme:setup",
@@ -81,7 +82,8 @@
     "protractor-cucumber-framework": "^3.1.2",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.3.3",
+    "webpack-bundle-analyzer": "^2.8.3"
   },
   "description": "[![build status](https://gitlab.com/noosfero-themes/angular-theme/badges/master/build.svg)](https://gitlab.com/noosfero-themes/angular-theme/commits/master) [![coverage report](https://gitlab.com/noosfero-themes/angular-theme/badges/master/coverage.svg)](https://gitlab.com/noosfero-themes/angular-theme/commits/master)",
   "repository": {

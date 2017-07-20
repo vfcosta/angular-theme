@@ -1,5 +1,7 @@
 @import 'scss/variables';
-@import 'bootstrap';
+@import 'scss/bootstrap';
+@import 'bootstrap/type';
+@import 'bootstrap/scaffolding';
 
 noosfero-comment {
   .comment {
