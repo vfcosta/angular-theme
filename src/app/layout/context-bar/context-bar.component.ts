@@ -65,11 +65,11 @@ export class ContextBarComponent {
         this.destroyed = true;
     }
 
-    private callOwnerService(obj: noosfero.Profile | noosfero.Environment) {
+    private getOwnerService(): any {
         if (this.isProfile()) {
-            return this.profileService.update(<noosfero.Profile>obj);
+            return this.profileService;
         } else {
-            return this.environmentService.update(<noosfero.Environment>obj);
+            return this.environmentService;
         }
     }
 
@@ -88,23 +88,26 @@ export class ContextBarComponent {
     }
 
     applyChanges() {
-        let boxesHolder = { id: this.owner.id };
+        const boxesHolder = { id: this.owner.id };
         if (this.hasBlockChanges()) {
-            let groupedBoxesChanged = _.groupBy(this.blocksChanged, (block) => {
-                let boxId = block.box.id;
+            const groupedBoxesChanged = _.groupBy(this.blocksChanged, (block) => {
+                const boxId = block.box.id;
                 delete block.box;
                 return boxId;
             });
 
-            let boxes = [];
+            const boxes = [];
             Object.keys(groupedBoxesChanged).forEach(function (key) {
                 boxes.push ( { id: +key, blocks_attributes: groupedBoxesChanged[key] });
             });
             boxesHolder['boxes_attributes'] = boxes;
         }
         if (this.isLayoutTemplateChanged()) boxesHolder['layout_template'] = this.owner.layout_template;
-        return this.callOwnerService(<any> boxesHolder).then(() => {
+        return this.getOwnerService().update(boxesHolder).then(() => {
             this.blocksChanged = [];
+            return this.getOwnerService().getBoxes(boxesHolder.id);
+        }).then((result: noosfero.RestResult<noosfero.Box[]>) => {
+            this.owner.boxes = result.data;
             this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCKS_SAVED, this.owner);
         });
     }

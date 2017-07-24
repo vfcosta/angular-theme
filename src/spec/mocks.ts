@@ -162,7 +162,7 @@ export function getMocks() {
             },
             update: (environment: noosfero.Environment) => Promise.resolve({ id: 2 }),
             get: (environment: string) => Promise.resolve({id: 2}),
-            getBoxes: () => {}
+            getBoxes: () => Promise.resolve({})
         },
         profileService: {
             getCurrentProfile: () => Promise.resolve(mocks.profile),
@@ -175,8 +175,8 @@ export function getMocks() {
             getNetworkActivities: () => {},
             isMember: () => Promise.resolve(true),
             addMember: () => Promise.resolve({ data: {} }),
-            removeMember: () => Promise.resolve({ data: {} })
-            // getMembershipState: (profileId: noosfero.Person, friendId: noosfero.Profile) => { return Promise.resolve({ }) }
+            removeMember: () => Promise.resolve({ data: {} }),
+            getBoxes: () => Promise.resolve({})
         },
         personService: {
             search: () => Observable.of([mocks.profile]),
