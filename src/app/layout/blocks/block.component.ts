@@ -66,8 +66,8 @@ export class BlockComponent {
     }
 
     canDisplay() {
-        if (this.block._destroy) return false;
         if (this.designMode) return true;
+        if (this.block._destroy) return false;
         return this.visible() && this.displayToUser() &&
             this.displayOnLanguage(this.translatorService.currentLanguage()) &&
             !this.block.hide;

@@ -26,11 +26,7 @@ export class BoxComponent {
     }
 
     removeBlock(removedBlock: noosfero.Block) {
-        this.box.blocks = this.box.blocks.filter((block: noosfero.Block) => {
-            return block.id !== removedBlock.id;
-        });
         this.resetBlockPositions();
-        this.box.blocks = this.box.blocks.slice(); // force reload
     }
 
     addBlock(block: noosfero.Block) {
