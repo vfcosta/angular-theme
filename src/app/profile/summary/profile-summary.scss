@@ -2,6 +2,8 @@ noosfero-profile-summary {
   color: #fff;
   margin-bottom: 30px;
   .profile-summary {
+    position: relative;
+    overflow: inherit;
     .media-left {
       padding-right: 15px;
       noosfero-profile-image {
