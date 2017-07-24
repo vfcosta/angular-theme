@@ -114,9 +114,9 @@
       "camelCase"
     ],
     "component-selector": [
-      true,
+      false,
       "element",
-      "app",
+      "noosfero",
       "kebab-case"
     ],
     "use-input-property-decorator": true,
