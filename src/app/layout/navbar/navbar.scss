@@ -20,7 +20,7 @@ $navbar-font-color: #fff;
 }
 
 .navbar {
-
+  z-index: 1050;
   tasks-menu {
     &.friendship-menu {
       .tasks-icon {
