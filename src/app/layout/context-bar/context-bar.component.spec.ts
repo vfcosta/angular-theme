@@ -15,7 +15,7 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { By } from '@angular/platform-browser';
 
 describe("Context Bar Component", () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<ContextBarComponent>;
     let component: ContextBarComponent;
     let eventFunction: Function;
@@ -24,13 +24,12 @@ describe("Context Bar Component", () => {
     beforeEach(async(() => {
         spyOn(mocks.profileService, 'update').and.returnValue(Promise.resolve(mocks.profile));
         spyOn(mocks.environmentService, 'update').and.callThrough();
+        spyOn(mocks.profileService, 'getBoxes').and.callThrough();
         spyOn(mocks.notificationService, 'success').and.callThrough();
-        spyOn(mocks.window.location, 'reload').and.callThrough();
 
         TestBed.configureTestingModule({
             declarations: [ContextBarComponent],
             providers: [
-                { provide: "Window", useValue: mocks.window },
                 { provide: EventsHubService, useValue: mocks.eventsHubService },
                 { provide: BlockService, useValue: mocks.blockService },
                 { provide: NotificationService, useValue: mocks.notificationService },
@@ -82,7 +81,7 @@ describe("Context Bar Component", () => {
     });
 
     it("add block to blocksChanged when receive an event", () => {
-        let blockChanged = <noosfero.Block>{ id: 2, title: 'changed' };
+        const blockChanged = <noosfero.Block>{ id: 2, title: 'changed' };
         eventFunction(blockChanged);
         expect(component.blocksChanged).toEqual([blockChanged]);
     });
@@ -96,7 +95,7 @@ describe("Context Bar Component", () => {
     });
 
     it("not add block to blocksChanged when there is no changes in block", () => {
-        let blockChanged = <noosfero.Block>{ id: 2 };
+        const blockChanged = <noosfero.Block>{ id: 2 };
         eventFunction(blockChanged);
         expect(component.blocksChanged).toEqual([]);
     });
@@ -114,9 +113,9 @@ describe("Context Bar Component", () => {
         expect(mocks.environmentService.update).toHaveBeenCalledWith({ id: 2, layout_template: "rightbar" });
     });
 
-    it("call state reload when discard changes", () => {
+    it("load boxes when discard changes", () => {
         component.discard();
-        expect(mocks.window.location.reload).toHaveBeenCalled();
+        expect(mocks.profileService.getBoxes).toHaveBeenCalled();
     });
 
     it("call notification success when apply changes", fakeAsync(() => {
@@ -155,8 +154,6 @@ describe("Context Bar Component", () => {
     });
 
     function all(selector: string) {
-        let compiled = fixture.debugElement;
-        return compiled.queryAll(By.css(selector));
+        return fixture.debugElement.queryAll(By.css(selector));
     }
-
 });

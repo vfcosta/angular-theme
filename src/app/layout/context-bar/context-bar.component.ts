@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Inject, Input, Component, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Inject, Input, Component, ChangeDetectorRef, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { EventsHubService } from '../../shared/services/events-hub.service';
 import { NoosferoKnownEvents } from '../../known-events';
 import { BlockService } from '../../../lib/ng-noosfero-api/http/block.service';
@@ -15,7 +15,7 @@ import * as _ from "lodash";
     styleUrls: ['./context-bar.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ContextBarComponent {
+export class ContextBarComponent implements OnInit, OnDestroy {
 
     @Input() owner: noosfero.Profile | noosfero.Environment;
     @Input() permissionAction = 'allow_edit';
@@ -27,7 +27,7 @@ export class ContextBarComponent {
     originalCustomFooter: string;
     destroyed = false;
 
-    constructor(private ref: ChangeDetectorRef, @Inject("Window") private window: Window,
+    constructor(private ref: ChangeDetectorRef,
         private router: Router,
         private eventsHubService: EventsHubService,
         private blockService: BlockService,
@@ -83,8 +83,12 @@ export class ContextBarComponent {
     }
 
     discard() {
-        this.window.location.reload();
-        this.notificationService.info({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
+        this.getOwnerService().getBoxes(this.owner.id).then((result: noosfero.RestResult<noosfero.Box[]>) => {
+            this.owner.boxes = result.data;
+            this.blocksChanged = [];
+            this.owner.layout_template = this.originalLayout;
+            this.notificationService.info({ title: "contextbar.edition.discard.success.title", message: "contextbar.edition.discard.success.message" });
+        });
     }
 
     applyChanges() {
