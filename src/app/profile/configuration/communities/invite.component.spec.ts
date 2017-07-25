@@ -17,7 +17,7 @@ import 'rxjs/add/observable/throw';
 
 describe("Components", () => {
     describe("Invite Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let peopleToInvite = [<noosfero.Person>{ "id": 1, "name": "Person 1" }, <noosfero.Person>{ "id": 3, "name": "Person 3" }];
         let fixture: ComponentFixture<InviteComponent>;
         let component: InviteComponent;
@@ -74,7 +74,7 @@ describe("Components", () => {
         }));
 
         it("should put peopleToInvite as an empty array after call sendInvitations successfully", fakeAsync(() => {
-            let peopleToInvite = [<noosfero.Person>{ id: 1 }, <noosfero.Person>{ id: 2 }];
+            peopleToInvite = [<noosfero.Person>{ id: 1 }, <noosfero.Person>{ id: 2 }];
             component.peopleToInvite = peopleToInvite;
             component.ngOnInit();
             tick();
@@ -120,15 +120,15 @@ describe("Components", () => {
         });
 
         it("should not mark to invite None element", () => {
-            let person = <noosfero.Person>{ name: 'None' };
+            const person = <noosfero.Person>{ name: 'None' };
             component.markToInvite(person);
             expect(component.peopleToInvite).toEqual(peopleToInvite);
         });
 
         it("should mark to invite a new person", () => {
-            let person = <noosfero.Person>{ id: 100, name: 'Someone' };
+            const person = <noosfero.Person>{ id: 100, name: 'Someone' };
             component.markToInvite(person);
-            let expected = peopleToInvite;
+            const expected = peopleToInvite;
             expected.push(person);
             expect(component.peopleToInvite).toEqual(expected);
         });
@@ -140,23 +140,23 @@ describe("Components", () => {
 
         it("should remove a marked person of inviation list", () => {
             component.unmarkToInvite(peopleToInvite[1]);
-            let expected = peopleToInvite;
+            const expected = peopleToInvite;
             expected.pop();
             expect(component.peopleToInvite).toEqual(expected);
         });
 
         it("should nothing happen if an unexisting person be unmarked", () => {
-            let person = <noosfero.Person>{ id: 100, name: 'Someone' };
+            const person = <noosfero.Person>{ id: 100, name: 'Someone' };
             component.unmarkToInvite(person);
             expect(component.peopleToInvite).toEqual(peopleToInvite);
         });
 
         it("should call personService in search method passing key", fakeAsync(() => {
-            let key = 'some';
+            const key = 'some';
             component.searchPerson(key);
             tick();
 
-            let filters = { search: key, per_page: 10 };
+            const filters = { search: key, per_page: 10 };
             expect(mocks.personService.search).toHaveBeenCalledWith(filters);
         }));
 

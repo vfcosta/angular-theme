@@ -9,13 +9,13 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Task Accept Component", () => {
-        let mocks = helpers.getMocks();
-        let task = <noosfero.Task>{ id: 1, type: "AddMember" };
+        const mocks = helpers.getMocks();
+        const task = <noosfero.Task>{ id: 1, type: "AddMember" };
         let fixture: ComponentFixture<TaskAcceptComponent>;
         let component: TaskAcceptComponent;
 
         beforeEach(async(() => {
-            let taskAcceptComponent = {task: task, confirmationTask: {}};
+            const taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 declarations: [TaskAcceptComponent],
                 providers: [

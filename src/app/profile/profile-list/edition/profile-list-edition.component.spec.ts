@@ -21,16 +21,16 @@ describe("Components", () => {
     describe("Profile List Edition Component", () => {
         let fixture: ComponentFixture<ProfileListEditionComponent>;
         let component: ProfileListEditionComponent;
-        let state = jasmine.createSpyObj("$state", ["href"]);
+        const state = jasmine.createSpyObj("$state", ["href"]);
         const mocks = helpers.getMocks();
 
-        let owner = { id: 1, identifier: 'owner', type: 'Community' };
-        let profile = { id: 2, identifier: 'profile' };
+        const owner = { id: 1, identifier: 'owner', type: 'Community' };
+        const profile = { id: 2, identifier: 'profile' };
 
-        let roleService = jasmine.createSpyObj("roleService", ["getByProfile", "assign"]);
+        const roleService = jasmine.createSpyObj("roleService", ["getByProfile", "assign"]);
         roleService.assign = jasmine.createSpy("assign").and.returnValue(mocks.promiseResultTemplate());
         roleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(mocks.promiseResultTemplate({ data: [{ id: 10 }, { id: 11 }] }));
-        let amParseFilter = () => {
+        const amParseFilter = () => {
             return {
                 toISOString: () => {}
             };

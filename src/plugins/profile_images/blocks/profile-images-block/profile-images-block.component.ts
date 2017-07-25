@@ -1,5 +1,5 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
-import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: "noosfero-profile-images-plugin-profile-images-block",
@@ -7,7 +7,7 @@ import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./profile-images-block.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ProfileImagesBlockComponent {
+export class ProfileImagesBlockComponent implements OnInit {
 
     @Input() block: any;
     @Input() owner: any;

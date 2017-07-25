@@ -14,7 +14,7 @@ describe("Services", () => {
         let credentials: noosfero.Credentials;
         let user: noosfero.User;
         let service: AuthService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             spyOn(mocks.sessionService, "destroy");
@@ -35,7 +35,7 @@ describe("Services", () => {
         describe("Succesffull login", () => {
             beforeEach(() => {
                 credentials = { username: "user", password: "password" };
-                let data = new FormData();
+                const data = new FormData();
                 data.append('login', 'user');
                 data.append('password', 'password');
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/login`, user, {}, 200);
@@ -48,7 +48,7 @@ describe("Services", () => {
             }));
 
             xit("should emit event loggin successful with user logged data", (done: Function) => {
-                let successEvent: any = AuthEvents[AuthEvents.loginSuccess];
+                const successEvent: any = AuthEvents[AuthEvents.loginSuccess];
                 (<any>service)[successEvent].subscribe((userThroughEvent: noosfero.User): any => {
                     expect(userThroughEvent).toEqual(jasmine.objectContaining(user));
                     done();
@@ -58,7 +58,7 @@ describe("Services", () => {
 
             xit("should return the current logged in user", () => {
                 service.login(credentials);
-                let actual: noosfero.User = service.currentUser();
+                const actual: noosfero.User = service.currentUser();
                 expect(actual.person).toEqual(jasmine.objectContaining(user), "The returned user must be present");
             });
 

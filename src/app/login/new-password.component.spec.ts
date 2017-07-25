@@ -14,7 +14,7 @@ import { By } from '@angular/platform-browser';
 
 describe("New Password Component", () => {
     let data: any;
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<PasswordComponent>;
     let component: PasswordComponent;
 

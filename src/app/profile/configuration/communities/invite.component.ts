@@ -1,4 +1,4 @@
-import { Component, Inject, Input, NgZone, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, NgZone, ViewEncapsulation, OnInit } from '@angular/core';
 import { PersonService } from '../../../../lib/ng-noosfero-api/http/person.service';
 import { CommunityService } from '../../../../lib/ng-noosfero-api/http/community.service';
 import { ProfileService } from '../../../../lib/ng-noosfero-api/http/profile.service';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs/Observable';
     styleUrls: ['./invite.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class InviteComponent {
+export class InviteComponent implements OnInit {
 
     @Input() profile;
 
@@ -57,7 +57,7 @@ export class InviteComponent {
     markToInvite(person) {
         this.zone.run(() => {
             if (person && person.id) {
-                if (this.peopleToInvite.filter(e => e.id == person.id).length === 0) {
+                if (this.peopleToInvite.filter(e => e.id === person.id).length === 0) {
                     this.peopleToInvite.push(person);
                 }
             }
@@ -70,9 +70,9 @@ export class InviteComponent {
     }
 
     searchPerson(key: any) {
-        let filters = { search: key, per_page: 10 };
+        const filters = { search: key, per_page: 10 };
         return this.personService.search(filters).map(data => {
-            if (data.length == 0) {
+            if (data.length === 0) {
                 return [{ name: this.translatorService.translate("profile.members.invitations.none") }];
             } else {
                 return data;

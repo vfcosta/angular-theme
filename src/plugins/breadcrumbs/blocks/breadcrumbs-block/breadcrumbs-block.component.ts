@@ -1,6 +1,6 @@
 import { Router, Event, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Component, Inject, Input, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
@@ -36,9 +36,9 @@ export class BreadcrumbsBlockComponent implements OnInit, OnDestroy {
     }
 
     setNavigationState() {
-        let paths = this.window.location.pathname.replace(/%2F/g, '/').split('/');
-        let page = paths.length > 2 ? paths.splice(2).join("/") : null;
-        let contextParams = { profile: this.route.snapshot.params['profile'], page: page };
+        const paths = this.window.location.pathname.replace(/%2F/g, '/').split('/');
+        const page = paths.length > 2 ? paths.splice(2).join("/") : null;
+        const contextParams = { profile: this.route.snapshot.params['profile'], page: page };
         this.blockService.getApiContent(this.block, contextParams).then((content: any) => {
             this.links = content.links;
             this.block.hide = this.links.length <= 1;

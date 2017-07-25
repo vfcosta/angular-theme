@@ -7,7 +7,7 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 
 describe("ConfigBar Component", () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<ConfigBarComponent>;
     let component: ConfigBarComponent;
 

@@ -11,7 +11,7 @@ describe("Components", () => {
     describe("Discussion Period Component", () => {
         let fixture: ComponentFixture<DiscussionPeriodComponent>;
         let component: DiscussionPeriodComponent;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -42,7 +42,7 @@ describe("Components", () => {
         });
 
         it("return true in notOpened when start date is after today", () => {
-            let date = new Date();
+            const date = new Date();
             date.setDate(date.getDate() + 1);
             component.article = <noosfero.Article>{ start_date: date.toISOString() };
             expect(component.notOpened()).toBeTruthy();
@@ -51,7 +51,7 @@ describe("Components", () => {
         });
 
         it("return false in notOpened when start date is before today", () => {
-            let date = new Date();
+            const date = new Date();
             date.setDate(date.getDate() - 1);
             component.article = <noosfero.Article>{ start_date: date.toISOString() };
             expect(component.notOpened()).toBeFalsy();
@@ -63,7 +63,7 @@ describe("Components", () => {
         });
 
         it("return true in closed when end date is before today", () => {
-            let date = new Date();
+            const date = new Date();
             date.setDate(date.getDate() - 1);
             component.article = <noosfero.Article>{ end_date: date.toISOString() };
             expect(component.closed()).toBeTruthy();
@@ -72,7 +72,7 @@ describe("Components", () => {
         });
 
         it("return false in closed when start date is after today", () => {
-            let date = new Date();
+            const date = new Date();
             date.setDate(date.getDate() + 1);
             component.article = <noosfero.Article>{ end_date: date.toISOString() };
             expect(component.closed()).toBeFalsy();
@@ -84,11 +84,11 @@ describe("Components", () => {
         });
 
         it("return true in available when start date is before today and end date is after", () => {
-            let date = new Date();
+            const date = new Date();
             date.setDate(date.getDate() - 1);
-            let startDate = date.toISOString();
+            const startDate = date.toISOString();
             date.setDate(date.getDate() + 3);
-            let endDate = date.toISOString();
+            const endDate = date.toISOString();
             component.article = <noosfero.Article>{ start_date: startDate, end_date: endDate };
             expect(component.available()).toBeTruthy();
             expect(component.closed()).toBeFalsy();
@@ -96,9 +96,9 @@ describe("Components", () => {
         });
 
         it("return true in available when start date is before today and end date is null", () => {
-            let date = new Date();
+            const date = new Date();
             date.setDate(date.getDate() - 1);
-            let startDate = date.toISOString();
+            const startDate = date.toISOString();
             component.article = <noosfero.Article>{ start_date: startDate, end_date: null };
             expect(component.available()).toBeTruthy();
             expect(component.closed()).toBeFalsy();
@@ -106,9 +106,9 @@ describe("Components", () => {
         });
 
         it("return true in available when start date is null and end date is after today", () => {
-            let date = new Date();
+            const date = new Date();
             date.setDate(date.getDate() + 3);
-            let endDate = date.toISOString();
+            const endDate = date.toISOString();
             component.article = <noosfero.Article>{ start_date: null, end_date: endDate };
             expect(component.available()).toBeTruthy();
             expect(component.closed()).toBeFalsy();

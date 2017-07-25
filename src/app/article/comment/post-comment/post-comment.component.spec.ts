@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {
     describe("Post Comment Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<PostCommentComponent>;
         let component: PostCommentComponent;
 

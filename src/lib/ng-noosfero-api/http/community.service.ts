@@ -24,24 +24,24 @@ export class CommunityService extends RestangularService<noosfero.Community> {
     }
 
     createNewCommunity(community: noosfero.Community) {
-        let headers = {
+        const headers = {
             'Content-Type': 'application/json'
         };
-        let attributesToUpdate: any = {
+        const attributesToUpdate: any = {
             community: Object.assign({}, _.omitBy(_.pick(community, ['name', 'closed']), _.isNull))
         };
-        let restRequest = this.getElement(null).customPOST(attributesToUpdate, null, null, headers);
+        const restRequest = this.getElement(null).customPOST(attributesToUpdate, null, null, headers);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     updateCommunity(community: noosfero.Community) {
-        let headers = {
+        const headers = {
             'Content-Type': 'application/json'
         };
-        let attributesToUpdate: any = {
+        const attributesToUpdate: any = {
             community: Object.assign({}, _.omitBy(_.pick(community, ['name', 'closed']), _.isNull))
         };
-        let restRequest = this.getElement(community.id).customOperation("patch", null, null, headers, attributesToUpdate);
+        const restRequest = this.getElement(community.id).customOperation("patch", null, null, headers, attributesToUpdate);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
@@ -59,20 +59,20 @@ export class CommunityService extends RestangularService<noosfero.Community> {
     }
 
     getByPerson(person: noosfero.Person, params?: any) {
-        let personElement = this.personService.getElement(person.id);
+        const personElement = this.personService.getElement(person.id);
         return this.list(personElement, params);
     }
 
     sendInvitations(communityId: number, people: noosfero.Person[]) {
-        let headers = {
+        const headers = {
             'Content-Type': 'application/json'
         };
-        let invitations = [];
-        for (let invitation of people) {
+        const invitations = [];
+        for (const invitation of people) {
             invitations.push(`${invitation.id}`);
         }
-        let params = { 'contacts': invitations };
-        let restRequest = this.getElement(communityId).customPOST(params, "invite", null, headers);
+        const params = { 'contacts': invitations };
+        const restRequest = this.getElement(communityId).customPOST(params, "invite", null, headers);
         return restRequest.map((ret: any) => {
             return ret.data;
         });

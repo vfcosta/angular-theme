@@ -6,12 +6,12 @@ import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
     describe("Comment Paragraph Form Hotspot Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<CommentParagraphFormHotspotComponent>;
         let component: CommentParagraphFormHotspotComponent;
 
         beforeEach(async(() => {
-            let commentFormHotspotComponent = {comment: {}, parent: {}};
+            const commentFormHotspotComponent = {comment: {}, parent: {}};
             TestBed.configureTestingModule({
                 declarations: [CommentParagraphFormHotspotComponent],
                 providers: [

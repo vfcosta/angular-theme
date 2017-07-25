@@ -9,7 +9,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Services", () => {
     describe("Password Service", () => {
         let service: PasswordService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -25,7 +25,7 @@ describe("Services", () => {
 
         describe("Succesfull request", () => {
             xit("should change user password", () => {
-                let data = {
+                const data = {
                     code: '1234567890',
                     password: 'test',
                     password_confirmation: 'test'

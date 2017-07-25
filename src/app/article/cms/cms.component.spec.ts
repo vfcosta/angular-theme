@@ -12,8 +12,8 @@ import { CmsComponent } from './cms.component';
 import * as helpers from '../../../spec/helpers';
 
 describe("Cms Component", () => {
-    let profile = { id: 1 };
-    let mocks = helpers.getMocks();
+    const profile = { id: 1 };
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<CmsComponent>;
     let component: CmsComponent;
 

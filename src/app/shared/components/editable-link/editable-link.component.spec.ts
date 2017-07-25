@@ -15,7 +15,7 @@ describe("Components", () => {
         let component: EditableLinkComponent;
         const mocks = helpers.getMocks();
 
-        let linkChange = jasmine.createSpyObj("linkChange", ["emit"]);
+        const linkChange = jasmine.createSpyObj("linkChange", ["emit"]);
         linkChange.emit = jasmine.createSpy("emit");
 
         beforeEach(async(() => {
@@ -29,7 +29,7 @@ describe("Components", () => {
             component.name = 'link';
             component.address = 'address';
             component.designMode = true;
-            let popOver = { hide: () => { } };
+            const popOver = { hide: () => { } };
             component.popover = popOver;
             component.linkChange = linkChange;
         }));

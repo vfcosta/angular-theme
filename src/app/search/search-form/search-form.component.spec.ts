@@ -10,7 +10,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Search Form Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<SearchFormComponent>;
         let component: SearchFormComponent;
 

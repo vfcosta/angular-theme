@@ -16,10 +16,10 @@ import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
     describe("Search Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<SearchComponent>;
         let component: SearchComponent;
-        let result = Promise.resolve({
+        const result = Promise.resolve({
             data: [{ id: 1,
                      identifier: 'article-1',
                      path: 'path',
@@ -27,7 +27,7 @@ describe("Components", () => {
                      body: '',
                      profile: { identifier: 'profile' } }],
             headers: {
-                get: (param: string) => { return 1; }
+                get: (param: string) => 1
             }
         });
 

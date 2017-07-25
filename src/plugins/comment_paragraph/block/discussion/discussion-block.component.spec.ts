@@ -8,16 +8,16 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 
 describe("Components", () => {
     describe("Discussion Block Component", () => {
-        let mocks = helpers.getMocks();
-        let settingsObj = {};
-        let article = <noosfero.Article>{ name: "article1" };
-        let profile = { name: 'profile-name' };
+        const mocks = helpers.getMocks();
+        const settingsObj = {};
+        const article = <noosfero.Article>{ name: "article1" };
+        const profile = { name: 'profile-name' };
         let fixture: ComponentFixture<DiscussionBlockComponent>;
         let component: DiscussionBlockComponent;
         let onRemove: Function;
 
         beforeEach(async(() => {
-            spyOn(mocks.blockService, "getApiContent").and.returnValue(Promise.resolve({ articles: [article], headers: (name: string) => { return name; } }));
+            spyOn(mocks.blockService, "getApiContent").and.returnValue(Promise.resolve({ articles: [article], headers: (name: string) => name }));
             mocks.articleService.subscribeToModelRemoved = (fn: Function) => { onRemove = fn; };
             TestBed.configureTestingModule({
                 declarations: [DiscussionBlockComponent],

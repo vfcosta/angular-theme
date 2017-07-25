@@ -1,4 +1,4 @@
-import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import {BlockService} from '../../../../lib/ng-noosfero-api/http/block.service';
 import {ArticleService} from './../../../../lib/ng-noosfero-api/http/article.service';
 import {Arrays} from './../../../../lib/util/arrays';
@@ -9,7 +9,7 @@ import {Arrays} from './../../../../lib/util/arrays';
     styleUrls: ['./recent-documents-block.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class RecentDocumentsBlockComponent {
+export class RecentDocumentsBlockComponent implements OnInit {
 
     @Input() block: any;
     @Input() owner: any;

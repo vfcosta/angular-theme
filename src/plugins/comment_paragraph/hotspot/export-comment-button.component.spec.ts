@@ -12,7 +12,7 @@ import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
     describe("Export Comment Button Hotspot Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ArticleToolbarHotspotComponent>;
         let component: ArticleToolbarHotspotComponent;
 
@@ -33,14 +33,14 @@ describe("Components", () => {
         it('return true when comment paragraph is active', () => {
             component.article = <noosfero.Article>{ setting: { comment_paragraph_plugin_activate: true } };
             fixture.detectChanges();
-            let hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
+            const hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
             expect(hotspotComponent.isActivated()).toBeTruthy();
             expect(fixture.debugElement.queryAll(By.css('.export-comment-button')).length).toEqual(1);
         });
 
         it('return false when comment paragraph is not active', () => {
             fixture.detectChanges();
-            let hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
+            const hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
             expect(hotspotComponent.isActivated()).toBeFalsy();
             expect(fixture.debugElement.queryAll(By.css('.export-comment-button')).length).toEqual(0);
         });
@@ -48,7 +48,7 @@ describe("Components", () => {
         it('return false when article has no setting attribute', () => {
             component.article = <noosfero.Article>{};
             fixture.detectChanges();
-            let hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
+            const hotspotComponent = fixture.debugElement.query(By.css('export-comment-button-hotspot')).componentInstance;
             expect(hotspotComponent.isActivated()).toBeFalsy();
             expect(fixture.debugElement.queryAll(By.css('.export-comment-button')).length).toEqual(0);
         });

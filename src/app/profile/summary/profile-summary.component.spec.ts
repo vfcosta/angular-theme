@@ -19,15 +19,15 @@ describe("Components", () => {
     describe("Profile Summary Component", () => {
         let fixture: ComponentFixture<ProfileSummaryComponent>;
         let component: ProfileSummaryComponent;
-        let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment"]);
+        const environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment"]);
         environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(
             Promise.resolve({ id: 1, name: 'Nosofero', host: "https://noosfero.org" })
         );
-        let personService = jasmine.createSpyObj("personService", ["upload", "isFriend"]);
+        const personService = jasmine.createSpyObj("personService", ["upload", "isFriend"]);
         personService.isFriend = jasmine.createSpy("isFriend").and.returnValue(Promise.resolve(false));
-        let sessionService = jasmine.createSpyObj("sessionService", ["currentUser"]);
+        const sessionService = jasmine.createSpyObj("sessionService", ["currentUser"]);
         sessionService.currentUser = jasmine.createSpy("currentUser").and.returnValue({ person: { id: 1, identifier: 'adminuser', type: "Person" } });
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

@@ -62,7 +62,7 @@ export class CmsComponent {
                 return this.articleService.createInProfile(profile, this.article);
             }
         }).then((response: noosfero.RestResult<noosfero.Article>) => {
-            let article = (<noosfero.Article>response.data);
+            const article = (<noosfero.Article>response.data);
             this.router.navigate([article.profile.identifier, article.path]);
             this.notificationService.success({ message: `article.basic_editor.${article.type.replace(/.*::/, '')}.success.message` });
         }).catch((error: any) => {

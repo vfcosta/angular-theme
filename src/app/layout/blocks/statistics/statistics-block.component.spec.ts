@@ -9,9 +9,9 @@ import * as helpers from '../../../../spec/helpers';
 describe("Components", () => {
     describe("Statistics Block Component", () => {
         const mocks = helpers.getMocks();
-        let articleService = mocks.articleService;
-        let blockService = mocks.blockService;
-        let translatorService = mocks.translatorService;
+        const articleService = mocks.articleService;
+        const blockService = mocks.blockService;
+        const translatorService = mocks.translatorService;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -37,7 +37,7 @@ describe("Components", () => {
                 ]
             };
             fixture.detectChanges();
-            let compiled = fixture.debugElement.nativeElement;
+            const compiled = fixture.debugElement.nativeElement;
             expect(compiled.querySelectorAll('li.statistic').length).toEqual(2);
             expect(compiled.querySelector("span.users").innerHTML).toEqual("10");
             expect(compiled.querySelector("span.communities").innerHTML).toEqual("20");
@@ -49,7 +49,7 @@ describe("Components", () => {
                 statistics: [{ name: 'hits', display: false, quantity: null }]
             };
             fixture.detectChanges();
-            let compiled = fixture.debugElement.nativeElement;
+            const compiled = fixture.debugElement.nativeElement;
             expect(compiled.querySelectorAll("span.hits").length).toEqual(0);
         });
     });

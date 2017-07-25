@@ -5,7 +5,7 @@ import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 describe("Components", () => {
     describe("Language Selector Component", () => {
 
-        let translatorServiceMock = jasmine.createSpyObj('translatorService', ['currentLanguage', 'changeLanguage']);
+        const translatorServiceMock = jasmine.createSpyObj('translatorService', ['currentLanguage', 'changeLanguage']);
         translatorServiceMock.availableLanguages = { "en" : "English", "pt": "Português" };
 
         beforeEach(async(() => {
@@ -20,7 +20,7 @@ describe("Components", () => {
         it('should display language options', () => {
             const fixture = TestBed.createComponent(LanguageSelectorComponent);
             fixture.detectChanges();
-            let compiled = fixture.debugElement.nativeElement;
+            const compiled = fixture.debugElement.nativeElement;
             expect(compiled.querySelectorAll('li.language').length).toEqual(2);
         });
 

@@ -44,7 +44,7 @@ export class HighlightsBlockSettingsComponent implements OnInit {
         this.blockService.uploadImages(this.block, [data]).then((result: any) => {
             this.block.images = result.data.images;
             if (this.block.images.length > 0) {
-                let image = this.block.images[this.block.images.length - 1];
+                const image = this.block.images[this.block.images.length - 1];
                 slide.image_id = image.id;
                 slide.image_src = image.url;
             }

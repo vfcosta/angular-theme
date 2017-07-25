@@ -20,9 +20,9 @@ export class ProfileAboutComponent {
     }
 
     loadProfileFields() {
-        let fields = ['email', 'formation', 'schooling', 'nationality', 'country', 'state', 'city'];
+        const fields = ['email', 'formation', 'schooling', 'nationality', 'country', 'state', 'city'];
         this.profileFields = {};
-        for (let field of fields) {
+        for (const field of fields) {
             if (this.profile[field]) {
                 this.profileFields[field] = this.profile[field];
             }

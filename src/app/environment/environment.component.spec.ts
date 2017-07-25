@@ -12,8 +12,8 @@ import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
     describe("Environment Component", () => {
-        let defaultEnvironment = <any>{ id: 1, name: 'Noosfero', boxes: [ Object({ id: 2 }) ] };
-        let mocks = helpers.getMocks();
+        const defaultEnvironment = <any>{ id: 1, name: 'Noosfero', boxes: [ Object({ id: 2 }) ] };
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<EnvironmentComponent>;
         let component: EnvironmentComponent;
 

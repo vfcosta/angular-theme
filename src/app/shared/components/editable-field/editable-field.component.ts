@@ -1,4 +1,4 @@
-import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmitter, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: "noosfero-editable-field",
@@ -6,7 +6,7 @@ import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmi
     styleUrls: ['./editable-field.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class EditableFieldComponent {
+export class EditableFieldComponent implements OnInit {
 
     @Output() textChange = new EventEmitter<any>();
     @Input() text: string;

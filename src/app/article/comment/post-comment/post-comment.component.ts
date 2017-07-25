@@ -6,7 +6,6 @@ import { SessionService } from './../../../login/session.service';
 @Component({
     selector: 'noosfero-post-comment',
     templateUrl: './post-comment.html',
-    outputs: ['commentSaved'],
     styleUrls: ['./post-comment.scss'],
     encapsulation: ViewEncapsulation.None,
 })
@@ -26,6 +25,7 @@ export class PostCommentComponent {
     }
 
     save() {
+        console.log("SAVE");
         if (this.parent && this.comment) {
             this.comment.reply_of_id = this.parent.id;
         }

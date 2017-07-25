@@ -9,7 +9,7 @@ import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
     describe("Profile Configuration Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ProfileConfigurationComponent>;
         let component: ProfileConfigurationComponent;
 

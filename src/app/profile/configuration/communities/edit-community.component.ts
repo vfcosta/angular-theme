@@ -1,6 +1,6 @@
 import { SessionService } from './../../../login/session.service';
 import { NotificationService } from './../../../shared/services/notification.service';
-import { Component, Input, Output, Inject, EventEmitter, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, Inject, EventEmitter, ViewEncapsulation, OnInit } from '@angular/core';
 import { AbstractFormCommunity } from './abstract-form-community';
 import * as _ from "lodash";
 
@@ -14,7 +14,7 @@ import * as _ from "lodash";
     styleUrls: ['./form-community.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class EditCommunityComponent extends AbstractFormCommunity {
+export class EditCommunityComponent extends AbstractFormCommunity implements OnInit {
 
     ngOnInit() {
         this.sessionProfile = this.sessionService.currentUser().person;
@@ -28,11 +28,11 @@ export class EditCommunityComponent extends AbstractFormCommunity {
     }
 
     save() {
-        let profile: any = Object.assign({}, _.omitBy(_.pick(this.community, ['id', 'identifier', 'name', 'closed']), _.isNull));
+        const profile: any = Object.assign({}, _.omitBy(_.pick(this.community, ['id', 'identifier', 'name', 'closed']), _.isNull));
         this.profileService.update(profile).then((result) => {
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
         }).catch((response) => {
-            let errors = response.data;
+            const errors = response.data;
             if (response.status === 422) {
                 this.nameErrors.setBackendErrors(errors);
             } else {

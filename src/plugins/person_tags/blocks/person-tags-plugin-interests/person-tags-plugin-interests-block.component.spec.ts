@@ -9,11 +9,11 @@ describe("Components", () => {
 
         let fixture: ComponentFixture<PersonTagsPluginInterestsBlockComponent>;
         let component: PersonTagsPluginInterestsBlockComponent;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
          beforeEach(async(() => {
             spyOn(mocks.profileService, 'getTags').and.returnValue(
-                Promise.resolve({ data: ['foo', 'bar'], headers: (name: string) => { return name; } })
+                Promise.resolve({ data: ['foo', 'bar'], headers: (name: string) => name })
             );
 
             TestBed.configureTestingModule({
@@ -36,7 +36,7 @@ describe("Components", () => {
 
         it("don't show tags block if it have no tags", fakeAsync(() => {
             TestBed.get(ProfileService).getTags = jasmine.createSpy("getTags").and.returnValue(
-                Promise.resolve({ data: [], headers: (name: string) => { return name; } })
+                Promise.resolve({ data: [], headers: (name: string) => name })
             );
             fixture.detectChanges();
             tick();

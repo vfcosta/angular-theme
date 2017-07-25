@@ -12,16 +12,16 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 describe("Components", () => {
     describe("Approve Comment Task Accept Component", () => {
 
-        let article = { id: 1 };
-        let task = <any>{ target: { id: 5 }, data: { comment_attributes: "{\"body\":\"comment body\",\"source_id\":4}" } };
+        const article = { id: 1 };
+        const task = <any>{ target: { id: 5 }, data: { comment_attributes: "{\"body\":\"comment body\",\"source_id\":4}" } };
 
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ApproveCommentTaskAcceptComponent>;
         let component: ApproveCommentTaskAcceptComponent;
 
         beforeEach(async(() => {
             spyOn(mocks.articleService, 'get').and.returnValue(Promise.resolve({ headers: () => { }, data: article }));
-            let taskAcceptComponent = {task: task, confirmationTask: {}};
+            const taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 declarations: [ApproveCommentTaskAcceptComponent],
                 providers: [
@@ -61,7 +61,7 @@ describe("Components", () => {
         }));
 
         function all(selector: string) {
-            let compiled = fixture.debugElement;
+            const compiled = fixture.debugElement;
             return compiled.queryAll(By.css(selector));
         }
     });

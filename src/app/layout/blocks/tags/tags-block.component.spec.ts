@@ -6,19 +6,19 @@ import { TagsBlockComponent } from './tags-block.component';
 
 describe("Components", () => {
     describe("Tags Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         let fixture: ComponentFixture<TagsBlockComponent>;
         let component: TagsBlockComponent;
 
-        let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment", "getTags"]);
+        const environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment", "getTags"]);
 
         environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(
             Promise.resolve({ id: 1, name: 'Noosfero', host: "https://noosfero.org" })
         );
 
         environmentService.getTags = jasmine.createSpy("getTags").and.returnValue(
-            Promise.resolve({data:[{"name":"foo","count":10},{"name":"bar","count":20}]})
+            Promise.resolve({data: [{"name": "foo", "count": 10}, {"name": "bar", "count": 20}]})
         );
 
         beforeEach(async(() => {

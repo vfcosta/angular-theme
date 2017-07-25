@@ -14,7 +14,7 @@ import { CommentsComponent } from './comments.component';
 describe("Components", () => {
     describe("Comments Component", () => {
 
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<CommentsComponent>;
         let component: CommentsComponent;
 
@@ -51,7 +51,7 @@ describe("Components", () => {
             expect(fixture.debugElement.queryAll(By.css("noosfero-post-comment")).length).toEqual(1);
         }));
 
-        it("update comments list when receive an reply",fakeAsync(() => {
+        it("update comments list when receive an reply", fakeAsync(() => {
             fixture.detectChanges();
             component.ngOnInit();
             component.parent = <any>{ id: 3 };
@@ -61,7 +61,7 @@ describe("Components", () => {
             expect(fixture.debugElement.queryAll(By.css("noosfero-comment")).length).toEqual(3);
         }));
 
-        it("load comments for next page",fakeAsync(() => {
+        it("load comments for next page", fakeAsync(() => {
             fixture.detectChanges();
             component.loadNextPage();
             fixture.detectChanges();
@@ -71,7 +71,7 @@ describe("Components", () => {
             expect(component['total']).toEqual(4);
         }));
 
-        it("not display more when there is no more comments to load",fakeAsync(() => {
+        it("not display more when there is no more comments to load", fakeAsync(() => {
             fixture.detectChanges();
             component.ngOnInit();
             tick();
@@ -80,21 +80,21 @@ describe("Components", () => {
             expect(component.displayMore()).toBeFalsy();
         }));
 
-        it("remove comment when calling commentRemoved",fakeAsync(() => {
+        it("remove comment when calling commentRemoved", fakeAsync(() => {
             fixture.detectChanges();
             component.ngOnInit();
             tick();
-            let comment = { id: 1 };
+            const comment = { id: 1 };
             component.comments = <any>[comment];
             component.commentRemoved(<any>comment);
             expect(component.comments).toEqual([]);
         }));
 
-        it("do nothing when call commentRemoved with a comment that doesn't belongs to the comments list",fakeAsync(() => {
+        it("do nothing when call commentRemoved with a comment that doesn't belongs to the comments list", fakeAsync(() => {
             fixture.detectChanges();
             component.ngOnInit();
             tick();
-            let comment = { id: 1 };
+            const comment = { id: 1 };
             component.comments = <any>[comment];
             component.commentRemoved(<any>{ id: 2 });
             expect(component.comments).toEqual(<noosfero.Comment[]>[comment]);

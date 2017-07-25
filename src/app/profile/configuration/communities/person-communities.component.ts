@@ -1,6 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
-import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { DisplayStyles } from '../../profile-list/profile-list.component';
 
@@ -10,7 +10,7 @@ import { DisplayStyles } from '../../profile-list/profile-list.component';
     styleUrls: ['./person-communities.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class PersonCommunitiesComponent {
+export class PersonCommunitiesComponent implements OnInit {
 
     profile: noosfero.Profile;
     communities: noosfero.Community[];
@@ -35,7 +35,7 @@ export class PersonCommunitiesComponent {
     }
 
     loadPage($event: any) {
-        let filters = {
+        const filters = {
             per_page: this.perPage,
             page: $event.page,
             search: this.search,

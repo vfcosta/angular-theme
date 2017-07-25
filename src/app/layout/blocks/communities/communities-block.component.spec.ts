@@ -11,7 +11,7 @@ describe("Components", () => {
     describe("Community Block Component", () => {
         let fixture: ComponentFixture<CommunitiesBlockComponent>;
         let component: CommunitiesBlockComponent;
-        let blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
+        const blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
         blockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ communities: [{ identifier: "community1" }] }));
 
         beforeEach(async(() => {

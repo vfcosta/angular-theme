@@ -14,7 +14,7 @@ export class SearchComponent {
     query: string;
     totalResults = 0;
     perPage = 10;
-    currentPage: number = 0;
+    currentPage = 0;
 
     constructor(protected articleService: ArticleService, private router: Router, private route: ActivatedRoute) {
         this.query = route.snapshot.queryParams['query'];
@@ -27,7 +27,7 @@ export class SearchComponent {
     }
 
     loadPage() {
-        let filters = {
+        const filters = {
             query: this.query,
             per_page: this.perPage,
             page: this.currentPage

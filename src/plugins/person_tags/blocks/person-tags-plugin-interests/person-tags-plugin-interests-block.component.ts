@@ -1,4 +1,4 @@
-import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { ProfileService } from '../../../../lib/ng-noosfero-api/http/profile.service';
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
 import { Arrays } from './../../../../lib/util/arrays';
@@ -9,7 +9,7 @@ import { Arrays } from './../../../../lib/util/arrays';
     styleUrls: ['./person-tags-plugin-interests-block.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class PersonTagsPluginInterestsBlockComponent {
+export class PersonTagsPluginInterestsBlockComponent implements OnInit {
 
     @Input() block: any;
     @Input() owner: any;

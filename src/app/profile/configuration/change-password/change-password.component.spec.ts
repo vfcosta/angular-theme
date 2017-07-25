@@ -13,14 +13,14 @@ import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {
     describe("Change user password", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ChangePasswordComponent>;
         let component: ChangePasswordComponent;
-        let userService = jasmine.createSpyObj("userService", ["changePassword"]);
-        let $event = jasmine.createSpyObj("$event", ["preventDefault"]);
+        const userService = jasmine.createSpyObj("userService", ["changePassword"]);
+        const $event = jasmine.createSpyObj("$event", ["preventDefault"]);
         $event.preventDefault = jasmine.createSpy("preventDefault");
         userService.changePassword = jasmine.createSpy("changePassword").and.returnValue(Promise.resolve({}));
-        let newPasswordConfirmation = jasmine.createSpyObj("newPasswordConfirmation", ["setBackendErrors"]);
+        const newPasswordConfirmation = jasmine.createSpyObj("newPasswordConfirmation", ["setBackendErrors"]);
         newPasswordConfirmation.pushError = jasmine.createSpy("pushError");
 
         beforeEach(async(() => {

@@ -1,13 +1,13 @@
-import { Directive, Input, Inject, ElementRef, Output, Renderer, EventEmitter } from '@angular/core';
+import { Directive, Input, Inject, ElementRef, Output, Renderer, EventEmitter, OnChanges } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
 /**
  * Based on https://github.com/Reklino/angular-resizable
  */
 @Directive({
-    selector: '[bootstrap-resizable]'
+    selector: '[bootstrapResizable]'
 })
-export class BootstrapResizableDirective {
+export class BootstrapResizableDirective implements OnChanges {
 
     @Input() designMode;
     @Output() bootstrapResizableColumnsChange = new EventEmitter();
@@ -28,7 +28,7 @@ export class BootstrapResizableDirective {
     ) {
 
         this.elementRef.nativeElement.insertAdjacentHTML('beforeend', '<div class="bootstrap-resize-tool"></div>');
-        let resizeTool = this.elementRef.nativeElement.querySelector('.bootstrap-resize-tool');
+        const resizeTool = this.elementRef.nativeElement.querySelector('.bootstrap-resize-tool');
         resizeTool.addEventListener('mousedown', (e: MouseEvent) => this.mouseDown(e), false);
         resizeTool.addEventListener('touchstart', (e: MouseEvent) => this.mouseDown(e), false);
 
@@ -49,8 +49,8 @@ export class BootstrapResizableDirective {
 
     dragStart(e: MouseEvent) {
         this.start = this.getClientX(e);
-        this.w = parseInt(this.style.getPropertyValue('width'));
-        this.h = parseInt(this.style.getPropertyValue('height'));
+        this.w = parseInt(this.style.getPropertyValue('width'), 10);
+        this.h = parseInt(this.style.getPropertyValue('height'), 10);
 
         document.addEventListener('mouseup', this.mouseUpFn, false);
         document.addEventListener('mousemove', this.mouseMoveFn, false);
@@ -66,7 +66,7 @@ export class BootstrapResizableDirective {
     }
 
     getCurrentColumns() {
-        let classes = this.elementRef.nativeElement.classList;
+        const classes = this.elementRef.nativeElement.classList;
         let columns = 12;
         classes.forEach((cl: string) => {
             if (cl.startsWith(this.prefix)) {
@@ -84,8 +84,8 @@ export class BootstrapResizableDirective {
     }
 
     dragging(e: MouseEvent) {
-        let offset = this.start - this.getClientX(e);
-        let currentColumns = this.getCurrentColumns();
+        const offset = this.start - this.getClientX(e);
+        const currentColumns = this.getCurrentColumns();
         let newColumns = Math.round((currentColumns * (this.w - offset)) / this.elementRef.nativeElement.clientWidth);
         newColumns = Math.max(1, Math.min(12, newColumns));
         this.replaceColumnClass(currentColumns, newColumns);

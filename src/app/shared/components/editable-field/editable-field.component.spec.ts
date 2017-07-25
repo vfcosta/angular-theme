@@ -14,7 +14,7 @@ describe("Components", () => {
         let component: EditableFieldComponent;
         const mocks = helpers.getMocks();
 
-        let textChange = jasmine.createSpyObj("textChange", ["emit"]);
+        const textChange = jasmine.createSpyObj("textChange", ["emit"]);
         textChange.emit = jasmine.createSpy("emit");
 
         beforeEach(async(() => {
@@ -27,7 +27,7 @@ describe("Components", () => {
             component = fixture.componentInstance;
             component.text = 'link';
             component.designMode = true;
-            let popOver = { hide: () => { } };
+            const popOver = { hide: () => { } };
             component.popover = popOver;
             component.textChange = textChange;
         }));

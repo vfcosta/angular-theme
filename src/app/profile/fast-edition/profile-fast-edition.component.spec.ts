@@ -17,7 +17,7 @@ describe("Components", () => {
     describe("Profile Fast Edition Component", () => {
         let fixture: ComponentFixture<ProfileFastEditionComponent>;
         let component: ProfileFastEditionComponent;
-        let profileService = jasmine.createSpyObj("profileService", ["update"]);
+        const profileService = jasmine.createSpyObj("profileService", ["update"]);
         profileService.update = jasmine.createSpy("update").and.returnValue(Promise.resolve({}));
         const mocks = helpers.getMocks();
 

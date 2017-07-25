@@ -41,54 +41,54 @@ export class ArticleService extends RestangularService<noosfero.Article> {
     }
 
     updateArticle(article: noosfero.Article) {
-        let headers = {
+        const headers = {
             'Content-Type': 'application/json'
         };
-        let attributesToUpdate: any = {
+        const attributesToUpdate: any = {
             article: Object.assign({}, _.omitBy(_.pick(article, ['name', 'body', 'published', 'start_date', 'end_date']), _.isNull))
         };
-        let restRequest = this.getElement(article.id).customPOST(attributesToUpdate, null, null, headers);
+        const restRequest = this.getElement(article.id).customPOST(attributesToUpdate, null, null, headers);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     createInProfile(profile: noosfero.Profile, article: noosfero.Article): Promise<noosfero.RestResult<noosfero.Article>> {
-        let profileElement = this.profileService.getProfileElement(<number>profile.id);
+        const profileElement = this.profileService.getProfileElement(<number>profile.id);
         (<any>profileElement).id = profile.id;
-        let headers = {
+        const headers = {
             'Content-Type': 'application/json'
         };
         return this.create(article, <noosfero.RestModel>profileElement, null, headers);
     }
 
     createInParent(parentId: number, article: noosfero.Article): Promise<noosfero.RestResult<noosfero.Article>> {
-        let headers = {
+        const headers = {
             'Content-Type': 'application/json'
         };
 
-        let parent = this.getElement(parentId);
+        const parent = this.getElement(parentId);
         return this.create(article, parent, null, headers, true, "children");
     }
 
     getByProfile<T>(profile: noosfero.Profile, params?: any): Promise<noosfero.RestResult<noosfero.Article[]>> {
-        let profileElement = this.profileService.getProfileElement(<number>profile.id);
+        const profileElement = this.profileService.getProfileElement(<number>profile.id);
         return this.list(profileElement, params);
     }
 
     getArticleByProfileAndPath(profile: noosfero.Profile, path: string): Promise<noosfero.RestResult<noosfero.Article>> {
-        let profileElement = this.profileService.getProfileElement(<number>profile.id);
-        let params = { path: path };
-        let restRequest = profileElement.customGET(this.getResourcePath(), params);
+        const profileElement = this.profileService.getProfileElement(<number>profile.id);
+        const params = { path: path };
+        const restRequest = profileElement.customGET(this.getResourcePath(), params);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     getChildren<T>(article: noosfero.Article, params?: any): Promise<noosfero.RestResult<noosfero.Article[]>> {
-        let articleElement = this.getElement(article.id);
+        const articleElement = this.getElement(article.id);
         articleElement.id = article.id;
         return this.listSubElements(<noosfero.Article>articleElement, "children", params);
     }
 
     search(params: any): Promise<noosfero.RestResult<noosfero.Article[]>> {
-        let restRequest = this.restangular.all("search").customGET('article', params);
+        const restRequest = this.restangular.all("search").customGET('article', params);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 }

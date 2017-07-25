@@ -26,7 +26,7 @@ export class CommunityMembersComponent {
     }
 
     loadPage($event: any) {
-        let filters = {
+        const filters = {
             per_page: this.membersPerPage,
             page: $event.page,
             order: 'name ASC'

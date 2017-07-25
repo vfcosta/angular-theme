@@ -15,7 +15,7 @@ export abstract class AbstractFormCommunity {
     @ViewChild('nameErrors') nameErrors: ValidationMessageComponent;
 
     public errors: any;
-    public acceptBefore: boolean = true;
+    public acceptBefore = true;
     public sessionProfile: noosfero.Profile;
 
     constructor(@Inject(NotificationService) public notificationService: NotificationService,

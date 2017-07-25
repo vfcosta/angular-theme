@@ -9,8 +9,8 @@ import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, 
 describe("Services", () => {
     describe("Register Service", () => {
         let service: RegisterService;
-        let user: any = { id: 1, login: 'test', email: 'test@email.com' };
-        let mocks = helpers.getMocks();
+        const user: any = { id: 1, login: 'test', email: 'test@email.com' };
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

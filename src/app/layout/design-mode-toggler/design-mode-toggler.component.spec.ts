@@ -10,7 +10,7 @@ import { By } from '@angular/platform-browser';
 
 describe('DesignModeToggler Component', () => {
 
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<DesignModeTogglerComponent>;
     let component: DesignModeTogglerComponent;
     beforeEach(async(() => {
@@ -80,7 +80,7 @@ describe('DesignModeToggler Component', () => {
     }));
 
     function all(selector: string) {
-        let compiled = fixture.debugElement;
+        const compiled = fixture.debugElement;
         return compiled.queryAll(By.css(selector));
     }
 });

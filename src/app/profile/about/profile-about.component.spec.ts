@@ -9,13 +9,13 @@ import * as helpers from './../../../spec/helpers';
 import {ProfileAboutComponent} from './profile-about.component';
 
 describe('Profile about component', () => {
-    let profile = {
+    const profile = {
         id: 1,
         identifier: "profile-test",
         type: 'Person',
         additional_data: { 'Address': 'Street A, Number 102' }
     };
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<ProfileAboutComponent>;
     let component: ProfileAboutComponent;
 

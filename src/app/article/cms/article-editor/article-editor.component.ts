@@ -1,11 +1,11 @@
 import { SessionService } from './../../../login/session.service';
-import {Component, Input, Inject} from '@angular/core';
+import { Component, Input, Inject, OnInit } from '@angular/core';
 
 @Component({
     selector: 'article-editor',
     templateUrl: './article-editor.html'
 })
-export class ArticleEditorComponent {
+export class ArticleEditorComponent implements OnInit {
 
     @Input() article: noosfero.Article;
     @Input() profile: noosfero.Profile;

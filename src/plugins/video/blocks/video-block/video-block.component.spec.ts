@@ -6,7 +6,7 @@ import { Component, Inject, Input, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { By } from '@angular/platform-browser';
 
-const htmlTemplate: string = '<noosfero-video-plugin-video-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-video-plugin-video-block>';
+const htmlTemplate = '<noosfero-video-plugin-video-block [block]="ctrl.block" [owner]="ctrl.owner"></noosfero-video-plugin-video-block>';
 
 describe("Components", () => {
 
@@ -48,7 +48,7 @@ describe("Components", () => {
             spyOn(component['zone'], 'run').and.callThrough();
             component.ngOnInit();
             fixture.detectChanges();
-            let iframe = fixture.debugElement.query(By.css("iframe.video-block-center"));
+            const iframe = fixture.debugElement.query(By.css("iframe.video-block-center"));
             expect(iframe).not.toBeNull();
         }));
 
@@ -60,7 +60,7 @@ describe("Components", () => {
             spyOn(component['zone'], 'run').and.callThrough();
             component.ngOnInit();
             fixture.detectChanges();
-            let iframe = fixture.debugElement.query(By.css("iframe.video-block-center"));
+            const iframe = fixture.debugElement.query(By.css("iframe.video-block-center"));
             expect(iframe).not.toBeNull();
         }));
 
@@ -72,9 +72,9 @@ describe("Components", () => {
             spyOn(component['zone'], 'run').and.callThrough();
             component.ngOnInit();
             fixture.detectChanges();
-            let video = fixture.debugElement.query(By.css("video.video-block-center"));
+            const video = fixture.debugElement.query(By.css("video.video-block-center"));
             expect(video).not.toBeNull();
-            let iframe = fixture.debugElement.query(By.css("iframe.video-block-center"));
+            const iframe = fixture.debugElement.query(By.css("iframe.video-block-center"));
             expect(iframe).toBeNull();
         }));
     });

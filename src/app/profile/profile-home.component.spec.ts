@@ -9,7 +9,7 @@ import {ProfileHomeComponent} from './profile-home.component';
 
 describe("Components", () => {
     describe("Profile Home Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ProfileHomeComponent>;
         let component: ProfileHomeComponent;
 

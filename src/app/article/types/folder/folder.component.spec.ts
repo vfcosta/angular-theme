@@ -11,13 +11,13 @@ import * as helpers from '../../../../spec/helpers';
 describe("Folder Component", () => {
     let fixture: ComponentFixture<FolderComponent>;
     let component: FolderComponent;
-    let mocks = helpers.getMocks();
-    let article1 = <noosfero.Article>{ id: 1, title: 'The article test' };
-    let article2 = <noosfero.Article>{ id: 1, title: 'The article test' };
-    let articles = [ article1, article2 ];
+    const mocks = helpers.getMocks();
+    const article1 = <noosfero.Article>{ id: 1, title: 'The article test' };
+    const article2 = <noosfero.Article>{ id: 1, title: 'The article test' };
+    const articles = [ article1, article2 ];
 
     beforeEach(async(() => {
-        spyOn(mocks.articleService, "getChildren").and.returnValue(Promise.resolve({ data: articles, headers: { get: (attr: String) => { return 2; } }}));
+        spyOn(mocks.articleService, "getChildren").and.returnValue(Promise.resolve({ data: articles, headers: { get: (attr: String) => 2 }}));
         TestBed.configureTestingModule({
             declarations: [FolderComponent, DateFormatPipe],
             providers: [

@@ -21,10 +21,6 @@ export class ProfileListEditionComponent {
         private roleService: RoleService,
         private notificationService: NotificationService) { }
 
-    ngOnInit () {
-
-    }
-
     loadRoles() {
         this.roleService.getByProfile(this.owner.id, { person_id: this.profile.id }).then(
             (result: noosfero.RestResult<noosfero.Role[]>) => {
@@ -34,8 +30,8 @@ export class ProfileListEditionComponent {
     }
 
     save() {
-        let roleIds = _.map(_.filter(this.roles, 'assigned'), 'id');
-        let removeRoleIds = _.map(_.filter(this.roles, ['assigned', false]), 'id');
+        const roleIds = _.map(_.filter(this.roles, 'assigned'), 'id');
+        const removeRoleIds = _.map(_.filter(this.roles, ['assigned', false]), 'id');
         this.roleService.assign(this.owner.id, this.profile.id, roleIds, removeRoleIds).then((result: noosfero.RestResult<noosfero.Role[]>) => {
             this.notificationService.success({ title: "profile-list-edition.role.success.title", message: "profile-list-edition.role.success.message" });
             this.hidePopover();

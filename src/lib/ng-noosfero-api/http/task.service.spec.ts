@@ -9,7 +9,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Services", () => {
     describe("Task Service", () => {
         let service: TaskService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             spyOn(mocks.sessionService, "destroy");
@@ -35,8 +35,8 @@ describe("Services", () => {
             });
 
             it("finish a task", () => {
-                let taskId = 1;
-                let task: noosfero.Task = <any>{ id: taskId };
+                const taskId = 1;
+                const task: noosfero.Task = <any>{ id: taskId };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/tasks/${taskId}/finish`, { task: { id: taskId } }, {}, 200);
                 service.finishTask(task).then((result: noosfero.RestResult<noosfero.Task>) => {
                     expect(result.data).toEqual(<noosfero.Task>{ id: 1 });
@@ -44,8 +44,8 @@ describe("Services", () => {
             });
 
             it("cancel a task", () => {
-                let taskId = 1;
-                let task: noosfero.Task = <any>{ id: taskId };
+                const taskId = 1;
+                const task: noosfero.Task = <any>{ id: taskId };
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/tasks/${taskId}/cancel`, { task: { id: taskId } }, {}, 200);
                 service.cancelTask(task).then((result: noosfero.RestResult<noosfero.Task>) => {
                     expect(result.data).toEqual(<noosfero.Task>{ id: 1 });

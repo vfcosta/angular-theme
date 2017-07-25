@@ -18,7 +18,7 @@ import { SessionService } from './../../login';
 export class ProfileConfigurationComponent {
     profile: noosfero.Profile;
     profileIdentifier: string;
-    showComponent: string = "";
+    showComponent = "";
 
     constructor(private profileService: ProfileService, route: ActivatedRoute, router: Router) {
         this.profileIdentifier = route.snapshot.params["profile"];

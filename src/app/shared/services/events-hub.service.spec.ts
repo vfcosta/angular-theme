@@ -5,7 +5,7 @@ describe("EventsHubService", () => {
 
     it("emits events for the known events", (done) => {
 
-        let eventListener = () => {
+        const eventListener = () => {
         };
         // creates the events hub service which known the event "Event1"
         eventsHubService = new EventsHubService();
@@ -18,7 +18,7 @@ describe("EventsHubService", () => {
     });
 
     it("throws error when trying to emit an unknow event", () => {
-        let eventListener = () => {
+        const eventListener = () => {
         };
         // creates the events hub service which known the event "Event1"
         eventsHubService = new EventsHubService();
@@ -30,7 +30,7 @@ describe("EventsHubService", () => {
     });
 
     it("throws error when trying to subscribe to an unknow event", () => {
-        let eventListener = () => {
+        const eventListener = () => {
         };
         // creates the events hub service which known the event "Event1"
         eventsHubService = new EventsHubService();

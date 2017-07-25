@@ -20,7 +20,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 describe("Block Component", () => {
     let fixture: ComponentFixture<BlockComponent>;
     let component: BlockComponent;
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

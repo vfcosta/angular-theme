@@ -1,7 +1,7 @@
 import { AuthService } from './../../login/auth.service';
 import { SessionService } from './../../login/session.service';
 import { NotificationService } from './../../shared/services/notification.service';
-import { Inject, Input, Component, ViewEncapsulation } from '@angular/core';
+import { Inject, Input, Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { PermissionService } from '../../shared/services/permission.service';
 import { EventsHubService } from '../../shared/services/events-hub.service';
@@ -19,7 +19,7 @@ import { NoosferoKnownEvents } from '../../known-events';
     styleUrls: ['./profile-image.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ProfileImageComponent {
+export class ProfileImageComponent implements OnInit {
 
     /**
      * @ngdoc property

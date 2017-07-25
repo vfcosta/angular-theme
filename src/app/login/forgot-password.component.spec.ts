@@ -10,7 +10,7 @@ import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
     describe("Forgot Password Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ForgotPasswordComponent>;
         let component: ForgotPasswordComponent;
 

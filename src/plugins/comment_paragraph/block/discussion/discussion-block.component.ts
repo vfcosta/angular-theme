@@ -1,4 +1,4 @@
-import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import {BlockService} from '../../../../lib/ng-noosfero-api/http/block.service';
 import {ArticleService} from './../../../../lib/ng-noosfero-api/http/article.service';
 import {Arrays} from './../../../../lib/util/arrays';
@@ -10,7 +10,7 @@ import {DiscussionPresentationMode} from './discussion-presentation-mode';
     styleUrls: ['./discussion-block.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class DiscussionBlockComponent {
+export class DiscussionBlockComponent implements OnInit {
 
     @Input() block: any;
     @Input() owner: any;
@@ -24,7 +24,7 @@ export class DiscussionBlockComponent {
 
     ngOnInit() {
         this.profile = this.owner;
-        if(this.block.api_content) {
+        if (this.block.api_content) {
             this.documents =  this.block.api_content['articles'];
         } else {
             this.blockService.getApiContent(this.block).then((content: any) => {

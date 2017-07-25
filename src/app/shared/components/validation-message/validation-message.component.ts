@@ -35,17 +35,17 @@ export class ValidationMessageComponent {
     }
 
     setBackendErrors(errorObjects: any) {
-        let errorCollection = {};
-        let fields = this.aditionalFields;
+        const errorCollection = {};
+        const fields = this.aditionalFields;
         fields.push(this.field.name);
         fields.forEach(name => {
-            let item = errorObjects.errors[name] ? errorObjects.errors[name] : errorObjects.errors[this.underscorePipe.transform(name)];
+            const item = errorObjects.errors[name] ? errorObjects.errors[name] : errorObjects.errors[this.underscorePipe.transform(name)];
             if (errorObjects.errors && item) {
                 item.forEach(errorObject => {
-                    let key = this.getErrorKey(errorObject);
+                    const key = this.getErrorKey(errorObject);
                     errorCollection[key] = true;
                 });
-            } 
+            }
         });
         if (Object.keys(errorCollection).length > 0) this.field.control.setErrors(errorCollection);
     }

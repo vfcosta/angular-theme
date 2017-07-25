@@ -21,7 +21,7 @@ export class ImageUploadComponent {
 
     fileSelectedWithoutCrop($event: any) {
         this.fileSelected($event);
-        let reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = (e: any) => {
             this.finished.emit(this.getBase64ImageJson(e.target.result, this.file.name));
         };
@@ -30,7 +30,7 @@ export class ImageUploadComponent {
 
     fileSelected($event: any) {
         if (!$event) return;
-        let file: File = $event.target.files[0];
+        const file: File = $event.target.files[0];
         if (!file) return;
         this.file = file;
     }
@@ -42,7 +42,7 @@ export class ImageUploadComponent {
     }
 
     getBase64ImageJson(dataUrl: any, name: any): any {
-        let data = dataUrl.substring(dataUrl.indexOf('base64,') + 7);
+        const data = dataUrl.substring(dataUrl.indexOf('base64,') + 7);
         return {
             tempfile: data,
             filename: name
@@ -50,9 +50,9 @@ export class ImageUploadComponent {
     }
 
     getFilename() {
-        let element = this.elementRef.nativeElement.querySelector('img-cropper input');
+        const element = this.elementRef.nativeElement.querySelector('img-cropper input');
         if (!element) return null;
-        let file = this.elementRef.nativeElement.querySelector('img-cropper input').value.split('\\');
+        const file = this.elementRef.nativeElement.querySelector('img-cropper input').value.split('\\');
         return file[file.length - 1];
     }
 }

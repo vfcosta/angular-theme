@@ -12,7 +12,7 @@ describe("Components", () => {
 
         let fixture: ComponentFixture<IconPickerComponent>;
         let component: IconPickerComponent;
-        let dropdownMenu = {};
+        const dropdownMenu = {};
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -27,7 +27,7 @@ describe("Components", () => {
 
         function renderDynamicDropDownMenu() {
             fixture.detectChanges();
-            let toggleButton = fixture.nativeElement.querySelector('a');
+            const toggleButton = fixture.nativeElement.querySelector('a');
             toggleButton.click();
             tick();
             fixture.detectChanges();
@@ -45,7 +45,7 @@ describe("Components", () => {
         }));
 
         function all(selector: string) {
-            let compiled = fixture.debugElement;
+            const compiled = fixture.debugElement;
             return compiled.queryAll(By.css(selector));
         }
 

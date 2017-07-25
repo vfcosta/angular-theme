@@ -12,7 +12,7 @@ import 'rxjs/add/observable/throw';
 
 describe("Components", () => {
     describe("Profile Header Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ProfileHeaderComponent>;
         let component: ProfileHeaderComponent;
 

@@ -1,5 +1,6 @@
 import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';                                                                                                                                       import { TranslateModule } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { PersonCommunitiesComponent } from './person-communities.component';
 import { By } from '@angular/platform-browser';
@@ -13,9 +14,9 @@ describe("Components", () => {
     describe("Person Communities Component", () => {
         let fixture: ComponentFixture<PersonCommunitiesComponent>;
         let component: PersonCommunitiesComponent;
-        let personService = jasmine.createSpyObj("PersonService", ["getCommunities"]);
+        const personService = jasmine.createSpyObj("PersonService", ["getCommunities"]);
         personService.getCommunities = jasmine.createSpy("getCommunities").and.returnValue(Promise.resolve({ headers: { get: () => { } } }));
-        let stateParams = {};
+        const stateParams = {};
         const mocks = helpers.getMocks();
 
         beforeEach(async(() => {

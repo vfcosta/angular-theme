@@ -10,7 +10,7 @@ import {AuthService, AuthEvents} from '../../login';
 })
 export class DesignModeTogglerComponent {
 
-    private _inDesignMode: boolean = false;
+    private _inDesignMode = false;
 
     constructor(
         private designModeService: DesignModeService,
@@ -29,7 +29,7 @@ export class DesignModeTogglerComponent {
     };
 
     togleDesignMode() {
-        let value = this.designModeService.isInDesignMode();
+        const value = this.designModeService.isInDesignMode();
         this.designModeService.setInDesignMode(!value);
     }
 }

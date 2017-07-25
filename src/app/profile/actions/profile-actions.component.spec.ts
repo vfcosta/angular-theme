@@ -34,17 +34,17 @@ describe('Profile Actions Component', () => {
     });
 
     it('return article parent as container when it is not a folder', () => {
-        let article = <noosfero.Article>({ id: 1, type: 'TextArticle', parent: { id: 2 } });
+        const article = <noosfero.Article>({ id: 1, type: 'TextArticle', parent: { id: 2 } });
         expect(component.getArticleContainer(article)).toEqual(2);
     });
 
     it('return article as container when it is a folder', () => {
-        let article = <noosfero.Article>({ id: 1, type: 'Folder' });
+        const article = <noosfero.Article>({ id: 1, type: 'Folder' });
         expect(component.getArticleContainer(article)).toEqual(1);
     });
 
     it('return article as container when it is a blog', () => {
-        let article = <noosfero.Article>({ id: 1, type: 'Blog' });
+        const article = <noosfero.Article>({ id: 1, type: 'Blog' });
         expect(component.getArticleContainer(article)).toEqual(1);
     });
 
@@ -58,13 +58,13 @@ describe('Profile Actions Component', () => {
     }));
 
     function queryAll(selector: string) {
-        let compiled = fixture.debugElement;
+        const compiled = fixture.debugElement;
         return compiled.queryAll(By.css(selector));
     }
 
     function renderDynamicDropDownMenu() {
         fixture.detectChanges();
-        let toggleButton = fixture.nativeElement.querySelector('button');
+        const toggleButton = fixture.nativeElement.querySelector('button');
         toggleButton.click();
         tick();
         fixture.detectChanges();

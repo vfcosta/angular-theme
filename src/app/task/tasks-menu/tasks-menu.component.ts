@@ -1,4 +1,4 @@
-import { ElementRef, ViewChild, HostListener, Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { ElementRef, ViewChild, HostListener, Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { TaskService } from '../../../lib/ng-noosfero-api/http/task.service';
 import { AuthService, AuthEvents } from './../../login';
 import { EventsHubService } from '../../shared/services/events-hub.service';
@@ -11,7 +11,7 @@ import { SessionService } from '../../login/session.service';
     styleUrls: ['./tasks-menu.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class TasksMenuComponent {
+export class TasksMenuComponent implements OnInit {
 
     @Input() taskTypes = ['AddMember', 'ApproveComment', 'ApproveArticle', 'AbuseComplaint', 'SuggestArticle', 'CreateCommunity'];
     @ViewChild("taskPanel") taskPanel: any;

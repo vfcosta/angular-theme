@@ -13,7 +13,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Add Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<AddBlockComponent>;
         let component: AddBlockComponent;
 

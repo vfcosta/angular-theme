@@ -7,10 +7,10 @@ import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
     describe("Profile Image  Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ProfileImageBlockComponent>;
         let component: ProfileImageBlockComponent;
-        let person = <noosfero.Person>{ id: 1, identifier: 'some' };
+        const person = <noosfero.Person>{ id: 1, identifier: 'some' };
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

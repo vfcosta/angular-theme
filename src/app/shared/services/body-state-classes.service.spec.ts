@@ -11,7 +11,7 @@ import { EventEmitter } from '@angular/core';
 import { DesignModeService } from './design-mode.service';
 
 describe("BodyStateClasses Service", () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let service: BodyStateClassesService;
 
     beforeEach(async(() => {
@@ -64,7 +64,7 @@ describe("BodyStateClasses Service", () => {
     });
 
     it("add a css class theme skin to body element", () => {
-        let skinClass: string = 'skin-test';
+        const skinClass = 'skin-test';
         service.start({
             skin: skinClass
         });

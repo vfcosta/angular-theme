@@ -25,7 +25,7 @@ export function provideMockBackend() {
 export function mockBackendConnection(backend: MockBackend, url, body: any = {}, headers: any = {}, status: number = 200) {
     backend.connections.subscribe((connection: MockConnection) => {
         if (connection.request.url === url) {
-            let options = {
+            const options = {
                 // body: JSON.stringify(body),
                 body: body,
                 headers: new Headers(headers),

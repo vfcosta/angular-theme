@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { ValidationMessageComponent } from './../../shared/components/validation-message/validation-message.component';
 import { NotificationService } from './../../shared/services/notification.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
-import { Component, Inject, Input, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, Output, EventEmitter, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: "profile-fast-edition",
@@ -10,7 +10,7 @@ import { Component, Inject, Input, Output, EventEmitter, ViewChild, ViewEncapsul
     styleUrls: ['./profile-fast-edition.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ProfileFastEditionComponent {
+export class ProfileFastEditionComponent implements OnInit {
 
     @Input() profile: noosfero.Profile;
     @Input() environment: noosfero.Environment;
@@ -32,7 +32,7 @@ export class ProfileFastEditionComponent {
     save() {
         this.profileService.update(this.updatedProfile).then(() => {
             this.errors = null;
-            let identifierChanged = this.profile.identifier !== this.updatedProfile.identifier;
+            const identifierChanged = this.profile.identifier !== this.updatedProfile.identifier;
             this.profile = Object.assign(this.profile, this.updatedProfile);
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
             this.finished.emit(this.profile);
@@ -51,7 +51,7 @@ export class ProfileFastEditionComponent {
     }
 
     cloneProfile() {
-        let fields = ['id', 'name'];
+        const fields = ['id', 'name'];
         if (this.allowChangeIdentifier()) {
             fields.push('identifier');
         }
@@ -62,7 +62,7 @@ export class ProfileFastEditionComponent {
 
     getProfileLink() {
         if (!this.environment || !this.environment.host || !this.profile) return null;
-        let host = this.environment.host.replace(/https?:\/\//, "");
+        const host = this.environment.host.replace(/https?:\/\//, "");
         return `${host}/${this.updatedProfile.identifier}`;
     }
 

@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, OnChanges } from '@angular/core';
+import { Component, Input, ViewChild, OnChanges, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -6,7 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
     templateUrl: './raw-html-block.html'
 })
 
-export class RawHTMLBlockComponent implements OnChanges{
+export class RawHTMLBlockComponent implements OnChanges, OnInit {
 
     @Input() block: any;
     @Input() owner: any;

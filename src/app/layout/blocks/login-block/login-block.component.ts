@@ -6,7 +6,7 @@ import { SessionService } from '../../../login/session.service';
  * @ngdoc controller
  * @name layout.blocks.LoginBlockComponent
  * @description
- *  The Noosfero block responible for presenting a login form and user status 
+ *  The Noosfero block responible for presenting a login form and user status
  */
 @Component({
     selector: "noosfero-login-block",

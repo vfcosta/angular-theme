@@ -1,4 +1,4 @@
-import { Inject, Input, Output, Component, ViewEncapsulation } from '@angular/core';
+import { Inject, Input, Output, Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { DesignModeService } from './../../shared/services/design-mode.service';
 
 @Component({
@@ -7,13 +7,14 @@ import { DesignModeService } from './../../shared/services/design-mode.service';
     styleUrls: ['./profile-header.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ProfileHeaderComponent {
+export class ProfileHeaderComponent implements OnInit {
 
     @Input() profile: noosfero.Profile;
     designMode = false;
 
     constructor(public designModeService: DesignModeService) { }
-     ngOnInit() {
+
+    ngOnInit() {
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
         });

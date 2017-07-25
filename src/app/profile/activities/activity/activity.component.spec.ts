@@ -11,12 +11,12 @@ import {ActivityComponent} from './activity.component';
 describe("Components", () => {
     describe("Noosfero Activity", () => {
         let activity = <any>{ name: "activity1", verb: "create_article", params: {} };
-        let environmentService = {
+        const environmentService = {
             getCurrentEnvironment: (filters: any): any => {
                 return Promise.resolve({ id: 1, name: 'Nosofero' });
             }
         };
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ActivityComponent>;
         let component: ActivityComponent;
 
@@ -73,7 +73,7 @@ describe("Components", () => {
             };
             component.activity = <any>activity;
             fixture.detectChanges();
-            let profiles = component.profiles;
+            const profiles = component.profiles;
             expect(profiles[0].name).toEqual('follower1_name');
             expect(profiles[0].identifier).toEqual('follower1_url');
             expect(profiles[0].image.url).toEqual('/api/v1/profiles/follower1_url/thumb?key=identifier');

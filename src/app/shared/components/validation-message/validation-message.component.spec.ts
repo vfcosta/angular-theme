@@ -17,7 +17,7 @@ import { Component, ViewChild, ElementRef, Pipe, PipeTransform } from '@angular/
                 </form>
 `
 })
-class FormTemplateTestComponet {
+class FormTemplateTestComponent {
     @ViewChild('currentPasswordValidation') currentPasswordValidation: ValidationMessageComponent;
     @ViewChild('currentPasswordInput') currentPassword: ElementRef;
 }
@@ -33,15 +33,15 @@ class MockTranslationPipe implements PipeTransform {
 describe("Components", () => {
     describe("Validation Message Component", () => {
         let fixture: ComponentFixture<ValidationMessageComponent>;
-        let formFixture: ComponentFixture<FormTemplateTestComponet>;
+        let formFixture: ComponentFixture<FormTemplateTestComponent>;
         let component: ValidationMessageComponent;
-        let formComponent: FormTemplateTestComponet;
-        let mocks = helpers.getMocks();
+        let formComponent: FormTemplateTestComponent;
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [FormsModule],
-                declarations: [ValidationMessageComponent, FormTemplateTestComponet, MockTranslationPipe],
+                declarations: [ValidationMessageComponent, FormTemplateTestComponent, MockTranslationPipe],
                 providers: [
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
@@ -50,7 +50,7 @@ describe("Components", () => {
             component = fixture.componentInstance;
             component.field = jasmine.createSpyObj("field", ["valid", "pristine"]);
             component.field.update = jasmine.createSpyObj("update", ["subscribe"]);
-            formFixture = TestBed.createComponent(FormTemplateTestComponet);
+            formFixture = TestBed.createComponent(FormTemplateTestComponent);
             formComponent = formFixture.componentInstance;
         }));
 

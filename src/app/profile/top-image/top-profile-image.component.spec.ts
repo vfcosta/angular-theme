@@ -7,7 +7,7 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 
 describe("Components", () => {
     describe("Section Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<TopProfileImageComponent>;
         let component: TopProfileImageComponent;
 

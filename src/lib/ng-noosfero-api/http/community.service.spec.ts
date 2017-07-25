@@ -10,7 +10,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Services", () => {
     describe("Community Service", () => {
         let service: CommunityService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

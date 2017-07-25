@@ -19,18 +19,18 @@ export class DiscussionPeriodComponent {
     }
 
     notOpened() {
-        let now = new Date();
+        const now = new Date();
         return !!this.article.start_date && new Date(this.article.start_date) > now;
     }
 
     available() {
-        let now = new Date();
+        const now = new Date();
         return (!this.article.start_date || new Date(this.article.start_date) <= now) &&
             (!this.article.end_date || new Date(this.article.end_date) >= now);
     }
 
     closed() {
-        let now = new Date();
+        const now = new Date();
         return !!this.article.end_date && new Date(this.article.end_date) < now;
     }
 

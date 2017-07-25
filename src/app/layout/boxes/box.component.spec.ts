@@ -10,7 +10,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Box Component", () => {
     let fixture: ComponentFixture<BoxComponent>;
     let component: BoxComponent;
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

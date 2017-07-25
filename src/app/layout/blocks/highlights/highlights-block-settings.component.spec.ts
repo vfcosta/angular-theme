@@ -11,16 +11,16 @@ import { BlockSettingsComponent } from '../block-settings.component';
 
 describe("Highlights Block Settings Component", () => {
 
-    let expectedData = "iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAgAElEQ…Cm2OLHvfdNPte3zrH709Q0esN1LPQ0t7DL696ERpu+9/8BVPLIpElf7VYAAAAASUVORK5CYII=";
-    let testDataUrl = "data:image/png;base64," + expectedData;
-    let upload = jasmine.createSpyObj("Upload", ["dataUrl"]);
+    const expectedData = "iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAgAElEQ…Cm2OLHvfdNPte3zrH709Q0esN1LPQ0t7DL696ERpu+9/8BVPLIpElf7VYAAAAASUVORK5CYII=";
+    const testDataUrl = "data:image/png;base64," + expectedData;
+    const upload = jasmine.createSpyObj("Upload", ["dataUrl"]);
     const mocks = helpers.getMocks();
     let fixture: ComponentFixture<HighlightsBlockSettingsComponent>;
     let component: HighlightsBlockSettingsComponent;
 
     beforeEach(async(() => {
         spyOn(mocks.blockService, 'uploadImages').and.returnValue(Promise.resolve({data: { images: []}}));
-        let blockSettingsComponent = { block: {}, owner: {} };
+        const blockSettingsComponent = { block: {}, owner: {} };
 
         TestBed.configureTestingModule({
             declarations: [HighlightsBlockSettingsComponent],

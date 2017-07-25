@@ -9,7 +9,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Services", () => {
     describe("Role Service", () => {
         let service: RoleService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

@@ -1,4 +1,4 @@
-import { Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation, OnInit } from '@angular/core';
 import { ProfileComponent } from './../../profile/profile.component';
 import { ActivitiesComponent } from './../../profile/activities/activities.component';
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
@@ -16,7 +16,7 @@ import { animateFactory } from 'ng2-animate';
     styleUrls: ['./block.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class BlockComponent {
+export class BlockComponent implements OnInit {
 
     @Input() block: noosfero.Block;
     @Input() box: noosfero.Box;
@@ -79,25 +79,25 @@ export class BlockComponent {
     }
 
     protected visible() {
-        let display = this.block.settings ? (<any>this.block.settings)['display'] : null;
+        const display = this.block.settings ? (<any>this.block.settings)['display'] : null;
         return !display || ((this.isHomepage ? display !== "except_home_page" : display !== "home_page_only") && display !== "never");
     }
 
     protected displayToUser() {
-        let displayUser = this.block.settings ? (<any>this.block.settings)['display_user'] : null;
+        const displayUser = this.block.settings ? (<any>this.block.settings)['display_user'] : null;
         return !displayUser || displayUser === "all" ||
             (this.currentUser ? displayUser === "logged" : displayUser === "not_logged");
     }
 
     protected displayOnLanguage(language: string) {
-        let displayLanguage = this.block.settings ? (<any>this.block.settings)['language'] : null;
+        const displayLanguage = this.block.settings ? (<any>this.block.settings)['language'] : null;
         return !displayLanguage || displayLanguage === "all" ||
             language === displayLanguage;
     }
 
     protected verifyHomepage() {
         if (this.owner && this.owner.type !== "Environment") {
-            let profile = <noosfero.Profile>this.owner;
+            const profile = <noosfero.Profile>this.owner;
             if (profile.homepage) {
                 this.isHomepage = this.router.url === profile.homepage;
             } else {

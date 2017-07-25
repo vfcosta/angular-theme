@@ -52,7 +52,7 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
     }
 
     update(environment: noosfero.Environment) {
-        let headers = { 'Content-Type': 'application/json' };
+        const headers = { 'Content-Type': 'application/json' };
         return this.getEnvironmentElement(environment.id).customPOST({ environment: environment }, null, null, headers).toPromise();
     }
 }

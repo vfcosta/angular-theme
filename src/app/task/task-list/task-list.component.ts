@@ -1,6 +1,6 @@
 import { AddFriendTaskComponent } from './../types/add-friend/add-friend-task.component';
 import { TaskModule } from './../task.module';
-import { NgModuleFactory, ViewEncapsulation } from '@angular/core';
+import { NgModuleFactory, ViewEncapsulation, OnInit, OnChanges } from '@angular/core';
 import { Compiler } from '@angular/core';
 import { components } from './../../../../themes/index';
 import { AppModule } from './../../app.module';
@@ -18,7 +18,7 @@ import * as _ from "lodash";
     styleUrls: ['./task-list.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class TaskListComponent {
+export class TaskListComponent implements OnInit, OnChanges {
 
     @Input() tasks: noosfero.Task[];
 

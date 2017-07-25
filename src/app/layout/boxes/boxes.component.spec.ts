@@ -11,7 +11,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Boxes Component", () => {
     let fixture: ComponentFixture<BoxesComponent>;
     let component: BoxesComponent;
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

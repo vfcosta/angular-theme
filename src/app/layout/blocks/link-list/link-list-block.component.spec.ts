@@ -13,8 +13,8 @@ describe("Components", () => {
         let component: LinkListBlockComponent;
         const mocks = helpers.getMocks();
 
-        let noosferoTemplate: {
-            transform: () => {};
+        const noosferoTemplate = {
+            transform: () => {}
         };
         beforeEach(async(() => {
             TestBed.configureTestingModule({

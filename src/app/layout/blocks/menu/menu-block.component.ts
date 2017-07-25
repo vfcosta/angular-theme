@@ -1,7 +1,7 @@
-import { Subscription } from 'rxjs';
+import { Subscription } from 'rxjs/Subscription';
 import { DesignModeService } from './../../../shared/services/design-mode.service';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
-import { Component, Input, Inject, HostListener, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Inject, HostListener, ElementRef, ViewChild, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { TranslatorService } from '../../../shared/services/translator.service';
 import { TypeaheadMatch } from 'ngx-bootstrap';
 import { DragulaService } from 'ng2-dragula';
@@ -12,7 +12,7 @@ import { DragulaService } from 'ng2-dragula';
     styleUrls: ['./menu-block.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class MenuBlockComponent {
+export class MenuBlockComponent implements OnDestroy, OnInit {
 
     @Input() block: any;
     @Input() owner: any;
@@ -47,7 +47,7 @@ export class MenuBlockComponent {
                 this.articles = [];
                 this.articleService.getByProfile(this.owner, { per_page: 100 })
                     .then((result: noosfero.RestResult<noosfero.Article[]>) => {
-                        for (let article of <noosfero.Article[]>result.data) {
+                        for (const article of <noosfero.Article[]>result.data) {
                             this.articles.push({
                                 translatedTitle: article.name,
                                 url: 'main.profile.page',
@@ -74,12 +74,11 @@ export class MenuBlockComponent {
 
         this.dragulaService.dropModel.subscribe((value) => {
             if (this.designMode) {
-                let enabled = [];
-                for (let link of this.links) {
+                const enabled = [];
+                for (const link of this.links) {
                     if (link.path) {
                         enabled.push({ title: link.title, path: link.path });
-                    }
-                    else if (link.controller) {
+                    } else if (link.controller) {
                         enabled.push({ title: link.title, controller: link.controller, action: link.action });
                     }
                 }
@@ -91,13 +90,13 @@ export class MenuBlockComponent {
         this.linksAvailable = [];
         this.block.hide = true;
         if (this.block && this.block.api_content.enabled_items) {
-            for (let link of this.block.api_content.enabled_items) {
+            for (const link of this.block.api_content.enabled_items) {
                 this.add(link);
             }
             this.block.hide = false;
         }
         if (this.block && this.block.api_content.available_items) {
-            for (let link of this.block.api_content.available_items) {
+            for (const link of this.block.api_content.available_items) {
                 let i = 0;
                 for (i = 0; i < this.links.length; i++) {
                     if (this.links[i].title === link.title)
@@ -110,8 +109,8 @@ export class MenuBlockComponent {
     }
 
     makeUrl(params: any) {
-        let link: { translatedTitle: string, url: any[], urlParams: any, title: string, controller: string, action: string; path: string } = { translatedTitle: '', url: [], urlParams: {}, title: '', controller: '', action: '', path: '' };
-        let urlMapping: any = {
+        const link: { translatedTitle: string, url: any[], urlParams: any, title: string, controller: string, action: string; path: string } = { translatedTitle: '', url: [], urlParams: {}, title: '', controller: '', action: '', path: '' };
+        const urlMapping: any = {
             'about': ['/profile', this.owner.identifier, 'about'],
             'activities': ['/profile', this.owner.identifier],
             'index': this.owner.type === 'Person' ? ['/profile', this.owner.identifier, 'friends'] : ['/profile', this.owner.identifier, 'members']
@@ -140,7 +139,7 @@ export class MenuBlockComponent {
     }
 
     remove(index: number) {
-        let link = this.links[index];
+        const link = this.links[index];
         this.links.splice(index, 1);
         if (link.controller) {
             this.addAvailable(link);
@@ -156,7 +155,7 @@ export class MenuBlockComponent {
                 newLink = { title: link.title, path: link.path };
             }
         }
-        let block = this.block;
+        const block = this.block;
         block.api_content.available_items.push(newLink);
         for (let i = 0, a: any[] = block.api_content.enabled_items; i < a.length; i++) {
             if (a[i].title === newLink.title) {
@@ -193,7 +192,7 @@ export class MenuBlockComponent {
                         newLink = { title: link.title, path: link.path };
                     }
                 }
-                let block = this.block;
+                const block = this.block;
                 block.api_content.enabled_items.push(newLink);
                 for (let i = 0, a: any[] = block.api_content.available_items; i < a.length; i++) {
                     if (a[i].title === newLink.title) {
@@ -217,7 +216,7 @@ export class MenuBlockComponent {
     }
 
     public addArticle() {
-        let enabled = this.block.api_content.enabled_items;
+        const enabled = this.block.api_content.enabled_items;
         this.links.push(this.selectedArticle);
         enabled.push({ title: this.selectedArticle.title, path: this.selectedArticle.path });
         this.block.api_content.enabled_items = enabled;

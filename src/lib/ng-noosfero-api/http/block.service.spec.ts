@@ -9,7 +9,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Services", () => {
     describe("Block Service", () => {
         let service: BlockService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -25,7 +25,7 @@ describe("Services", () => {
 
         xdescribe("Succesfull requests", () => {
             it("should return api content of a block", () => {
-                let blockId = 1;
+                const blockId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/blocks/${blockId}`, { block: { api_content: [{ name: "article1" }] } }, {}, 200);
                 service.getApiContent(<noosfero.Block>{ id: blockId }).then((content: any) => {
                     expect(content).toEqual([{ name: "article1" }]);
@@ -33,7 +33,7 @@ describe("Services", () => {
             });
 
             it("update block settings", () => {
-                let blockId = 1;
+                const blockId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/blocks/${blockId}`, { block: { id: blockId } }, {}, 200);
                 service.update(<any>{ id: blockId, display: 'never' }).then((result: noosfero.RestResult<noosfero.Block>) => {
                     expect(result.data).toEqual(<noosfero.Block>{ id: blockId });

@@ -1,4 +1,4 @@
-import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation, OnInit } from '@angular/core';
 import {ArticleService} from '../../../../lib/ng-noosfero-api/http/article.service';
 
 /**
@@ -13,15 +13,15 @@ import {ArticleService} from '../../../../lib/ng-noosfero-api/http/article.servi
     styleUrls: ['blog.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class ArticleBlogComponent {
+export class ArticleBlogComponent implements OnInit {
 
     @Input() article: noosfero.Article;
     @Input() profile: noosfero.Profile;
 
     private posts: noosfero.Article[];
-    private perPage: number = 3;
+    private perPage = 3;
     private currentPage: number;
-    private totalPosts: number = 0;
+    private totalPosts = 0;
 
     constructor(private articleService: ArticleService) { }
 
@@ -30,7 +30,7 @@ export class ArticleBlogComponent {
     }
 
     loadPage($event: any) {
-        let filters = {
+        const filters = {
             content_type: "TextArticle",
             per_page: this.perPage,
             page: $event.page

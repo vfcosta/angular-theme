@@ -14,7 +14,7 @@ export class DestroyProfileComponent {
         private profileService: ProfileService, private router: Router,
         private authService: AuthService, route: ActivatedRoute) {
 
-        let profile = route.parent.snapshot.data['profile'];
+        const profile = route.parent.snapshot.data['profile'];
         notificationService.confirmation({ title: "profile.remove.confirmation.title", message: "profile.remove.confirmation.message" }, () => {
             profileService.remove(profile).then((response: noosfero.RestResult<any>) => {
                 if (response.data.success) {

@@ -14,10 +14,10 @@ describe("Components", () => {
     describe("Article Content Hotspot Component", () => {
         let fixture: ComponentFixture<CommentParagraphArticleContentHotspotComponent>;
         let component: CommentParagraphArticleContentHotspotComponent;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
-            let articleContentHotspotComponent = {};
+            const articleContentHotspotComponent = {};
             TestBed.configureTestingModule({
                 declarations: [CommentParagraphArticleContentHotspotComponent, DiscussionPeriodComponent, DateFormatPipe],
                 providers: [

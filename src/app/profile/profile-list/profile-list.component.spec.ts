@@ -19,9 +19,9 @@ describe("Components", () => {
 
         let fixture: ComponentFixture<ProfileListComponent>;
         let component: ProfileListComponent;
-        let state = jasmine.createSpyObj("$state", ["href"]);
+        const state = jasmine.createSpyObj("$state", ["href"]);
 
-        let profiles = [
+        const profiles = [
             { id: 1, identifier: 'profile1' },
             { id: 2, identifier: 'profile2' }
         ];

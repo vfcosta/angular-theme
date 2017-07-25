@@ -17,9 +17,9 @@ describe("Components", () => {
     describe("Article Default View Component", () => {
         let fixture: ComponentFixture<ArticleDefaultViewComponent>;
         let component: ArticleDefaultViewComponent;
-        let mocks = helpers.getMocks();
-        let article = <noosfero.Article>{ id: 1, profile: { identifier: "1" } };
-        let watchFunctions: Function[] = [];
+        const mocks = helpers.getMocks();
+        const article = <noosfero.Article>{ id: 1, profile: { identifier: "1" } };
+        const watchFunctions: Function[] = [];
         let articleRemoved: Function;
 
         beforeEach(async(() => {
@@ -91,7 +91,7 @@ describe("Components", () => {
         }
 
         /**
-         * Simulate the Notification Service confirmation and ArticleService 
+         * Simulate the Notification Service confirmation and ArticleService
          * notifyArticleRemovedListeners event
          */
         function simulateRemovedEvent() {

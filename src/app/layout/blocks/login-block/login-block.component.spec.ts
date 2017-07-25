@@ -10,18 +10,18 @@ import {LoginBlockComponent} from './login-block.component';
 import * as helpers from './../../../../spec/helpers';
 import { AuthService, AuthEvents } from './../../../login';
 
-const htmlTemplate: string = '<noosfero-login-block></noosfero-login-block>';
+const htmlTemplate = '<noosfero-login-block></noosfero-login-block>';
 
 describe("Components", () => {
 
     describe("Login Block Component", () => {
-        let person: any = null;
-        let mocks = helpers.getMocks();
+        const person: any = null;
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<LoginBlockComponent>;
         let component: LoginBlockComponent;
 
-        let user = <noosfero.User>{ person: person };
-        let sessionService = <any>mocks.sessionWithCurrentUser(user);
+        const user = <noosfero.User>{ person: person };
+        const sessionService = <any>mocks.sessionWithCurrentUser(user);
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -39,7 +39,7 @@ describe("Components", () => {
         }));
 
         it("expect person to be null with no logged in user", () => {
-            expect(component.currentUser).toBeNull;
+            expect(component.currentUser.person).toBeNull();
         });
 
         it("expect person to be defined when user login", () => {
@@ -54,7 +54,7 @@ describe("Components", () => {
             // The logout the user
             doComponentLogout();
             // Check if the current user was cleared
-            expect(component.currentUser).toBeNull;
+            expect(component.currentUser.person).toBeNull();
         });
 
         /**
@@ -87,7 +87,7 @@ describe("Components", () => {
          * Simulate the AuthService loginSuccess event
          */
         function simulateLoginEvent() {
-            let successEvent: string = AuthEvents[AuthEvents.loginSuccess];
+            const successEvent: string = AuthEvents[AuthEvents.loginSuccess];
 
             (<any>component.authService)[successEvent].next(user);
         }
@@ -96,7 +96,7 @@ describe("Components", () => {
          * Simulate the AuthService logoutSuccess event
          */
         function simulateLogoutEvent() {
-            let successEvent: string = AuthEvents[AuthEvents.logoutSuccess];
+            const successEvent: string = AuthEvents[AuthEvents.logoutSuccess];
 
             (<any>component.authService)[successEvent].next(user);
         }

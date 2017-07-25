@@ -10,7 +10,7 @@ import * as _ from "lodash";
 describe("Services", () => {
     describe("Domain Service", () => {
         let service: DomainService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -23,9 +23,9 @@ describe("Services", () => {
             TestBed.get(Restangular).provider.setBaseUrl("/api/v1");
             service = TestBed.get(DomainService);
         }));
-        let environment = <noosfero.Environment>{ id: 1 };
-        let profile = <noosfero.Profile>{ id: 1 };
-        let domains = [
+        const environment = <noosfero.Environment>{ id: 1 };
+        const profile = <noosfero.Profile>{ id: 1 };
+        const domains = [
             { id: 1, name: "somedomain.net", owner: environment, is_default: true },
             { id: 2, name: "someotherdomain.net", owner: profile, is_default: false }
         ];

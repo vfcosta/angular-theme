@@ -11,10 +11,10 @@ import { By } from '@angular/platform-browser';
 
 describe("Components", () => {
     describe("Recent Documents Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<RecentDocumentsBlockComponent>;
         let component: RecentDocumentsBlockComponent;
-        let article = <noosfero.Article>{ name: "article1" };
+        const article = <noosfero.Article>{ name: "article1" };
 
         beforeEach(async(() => {
             spyOn(mocks.articleService, 'subscribeToModelRemoved');
@@ -46,7 +46,7 @@ describe("Components", () => {
         }));
 
         it("set documents getting content from api ", fakeAsync(() => {
-            let articles = [{ id: 1 }];
+            const articles = [{ id: 1 }];
             component['blockService'].getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ articles: articles }));
             component.ngOnInit();
             tick();

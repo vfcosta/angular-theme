@@ -9,7 +9,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Services", () => {
     describe("User Service", () => {
         let service: UserService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -24,7 +24,7 @@ describe("Services", () => {
         }));
 
         let data: any;
-        let profile = <noosfero.Profile> {id: 1, identifier: 'profile1'};
+        const profile = <noosfero.Profile> {id: 1, identifier: 'profile1'};
 
         describe("Succesfull request", () => {
             xit("should change user password", () => {

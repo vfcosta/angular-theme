@@ -6,7 +6,7 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 
 describe("Components", () => {
     describe("Custom Content Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<CustomContentComponent>;
         let component: CustomContentComponent;
 

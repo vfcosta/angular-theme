@@ -9,7 +9,7 @@ import * as helpers from '../../../spec/helpers';
 describe("Services", () => {
     describe("Environment Service", () => {
         let service: EnvironmentService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             spyOn(mocks.sessionService, "destroy");
@@ -26,7 +26,7 @@ describe("Services", () => {
 
         xdescribe("Succesfull requests", () => {
             it("should return the boxes of environment ", () => {
-                let environmentId = 1;
+                const environmentId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/environments/${environmentId}/boxes`, [{ position: 1 }], {}, 200);
                 service.getBoxes(environmentId).then((response: any) => {
                     expect(response.data[0]).toEqual({ position: 1 });
@@ -34,7 +34,7 @@ describe("Services", () => {
             });
 
             it("should return the tags of environment ", () => {
-                let environmentId = 1;
+                const environmentId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/environments/${environmentId}/tags`, [{ position: 1 }], {}, 200);
                 service.getTags(environmentId).then((response: any) => {
                     expect(response.data[0]).toEqual({ position: 1 });
@@ -42,7 +42,7 @@ describe("Services", () => {
             });
 
             it("should resolve the current environment", () => {
-                let environment = { id: 1, identifier: "environment1" };
+                const environment = { id: 1, identifier: "environment1" };
                 service.getCurrentEnvironment().then((currentEnvironment: noosfero.Environment) => {
                     expect(currentEnvironment).toEqual(currentEnvironment);
                 });
@@ -50,7 +50,7 @@ describe("Services", () => {
             });
 
             it("should return all people of environment", () => {
-                let environmentId = 1;
+                const environmentId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/environments/${environmentId}/people`, [{ id: 2 }], {}, 200);
                 service.getEnvironmentPeople(environmentId).then((response: any) => {
                     expect(response.data).toEqual(jasmine.objectContaining([{ id: 2 }]));

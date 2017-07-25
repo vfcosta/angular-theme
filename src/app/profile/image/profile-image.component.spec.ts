@@ -22,9 +22,9 @@ describe("Components", () => {
         });
 
         beforeEach(async(() => {
-            let scope = mocks.scopeWithEvents;
-            let profileService = jasmine.createSpyObj("profileService", ["upload"]);
-            let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
+            const scope = mocks.scopeWithEvents;
+            const profileService = jasmine.createSpyObj("profileService", ["upload"]);
+            const permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
 
             TestBed.configureTestingModule({
                 declarations: [ProfileImageComponent],
@@ -45,14 +45,14 @@ describe("Components", () => {
         }));
 
         it("show community users image if profile is not Person", () => {
-            let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
+            const profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
             component.profile = profile;
             component.ngOnInit();
             expect(component.defaultIcon).toBe("fa-users", "The default icon should be community users");
         });
 
         it("show Person image if profile is Person", () => {
-            let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Person" };
+            const profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Person" };
             component.profile = profile;
             component.ngOnInit();
             expect(component.defaultIcon).toEqual("fa-user", "The default icon should be person user");
@@ -73,7 +73,7 @@ describe("Components", () => {
         });
 
         it("should not update profile with different id", () => {
-            let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
+            const profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
             component.profile.id = 99;
             imageProfileUpdateFn(component['eventsHubService'].knownEvents.IMAGE_PROFILE_UPDATED,
                 profile);
@@ -81,7 +81,7 @@ describe("Components", () => {
         });
 
         it("should update profile with same id", () => {
-            let profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
+            const profile = <noosfero.Profile>{ id: 1, identifier: "myprofile", type: "Community" };
             component.profile.id = 1;
             imageProfileUpdateFn(component['eventsHubService'].knownEvents.IMAGE_PROFILE_UPDATED,
                 profile);

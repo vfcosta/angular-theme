@@ -1,11 +1,9 @@
-import { Pipe, Inject } from '@angular/core';
-
-declare var moment;
+import { Pipe, Inject, PipeTransform } from '@angular/core';
 
 @Pipe({name: 'dateFormat', pure: false})
-export class DateFormatPipe {
+export class DateFormatPipe implements PipeTransform {
 
     transform(date: string, options: any) {
-    	return date;
+        return date;
     }
 }

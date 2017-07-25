@@ -1,4 +1,4 @@
-import { Component, Inject, Input, ViewChild, OnChanges, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, Input, ViewChild, OnChanges, ViewEncapsulation, OnInit } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
@@ -7,7 +7,7 @@ import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service
     styleUrls: ['./section-block.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class SectionBlockComponent implements OnChanges {
+export class SectionBlockComponent implements OnChanges, OnInit {
 
     @Input() block: any;
     @Input() owner: any;
@@ -45,14 +45,14 @@ export class SectionBlockComponent implements OnChanges {
     }
 
     setStyles() {
-        let backgroundColor = (this.backgroundColor ? '#' + this.backgroundColor : 'inherit' );
-        let fontColor = (this.fontColor ? '#' + this.fontColor : 'inherit' );
+        const backgroundColor = (this.backgroundColor ? '#' + this.backgroundColor : 'inherit' );
+        const fontColor = (this.fontColor ? '#' + this.fontColor : 'inherit' );
 
-        let styles = {
+        const styles = {
           'background-color': backgroundColor,
           'color': fontColor
         };
-        
+
         return styles;
     }
 

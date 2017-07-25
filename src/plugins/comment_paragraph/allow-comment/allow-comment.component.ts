@@ -1,5 +1,5 @@
 import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.service';
-import { Component, HostListener, Input, Inject, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Input, Inject, ViewChild, ElementRef, ViewEncapsulation, OnInit } from '@angular/core';
 import {SideCommentsComponent} from '../side-comments/side-comments.component';
 import {CommentParagraphEventService} from '../events/comment-paragraph-event.service';
 import {CommentParagraphService} from '../http/comment-paragraph.service';
@@ -12,12 +12,12 @@ import {PermissionService} from '../../../app/shared/services/permission.service
     styleUrls: ['./allow-comment.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class AllowCommentComponent {
+export class AllowCommentComponent implements OnInit {
 
     @Input() content: string;
     @Input() paragraphUuid: string;
     @Input() article: noosfero.Article;
-    commentsCount: number = 0;
+    commentsCount = 0;
     display = false;
     @ViewChild("popover") popover: any;
 

@@ -2,7 +2,7 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { HtmlEditorComponent } from './shared/components/html-editor/html-editor.component';
-import { EmptyLink } from './shared/components/empty-link/empty-link.directive';
+import { EmptyLinkDirective } from './shared/components/empty-link/empty-link.directive';
 import { BasicEditorComponent } from './article/cms/basic-editor/basic-editor.component';
 import { CommentFormHotspotComponent } from './hotspot/comment-form-hotspot.component';
 import { ProfileImageComponent } from './profile/image/profile-image.component';
@@ -45,7 +45,7 @@ import * as plugins from '../plugins';
         BasicEditorComponent,
         HtmlEditorComponent,
         TranslateModule,
-        EmptyLink,
+        EmptyLinkDirective,
     ].concat(plugins.ng2SharedComponents),
     declarations: [
         ImageUploadComponent,
@@ -60,7 +60,7 @@ import * as plugins from '../plugins';
         CommentFormHotspotComponent,
         BasicEditorComponent,
         HtmlEditorComponent,
-        EmptyLink,
+        EmptyLinkDirective,
     ].concat(plugins.ng2SharedComponents),
     entryComponents: [
         ImageUploadComponent,

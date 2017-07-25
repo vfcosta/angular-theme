@@ -10,13 +10,13 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Side Comments Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<SideCommentsComponent>;
         let component: SideCommentsComponent;
-        let serviceMock = jasmine.createSpyObj("CommentParagraphService", ["getByArticle"]);
+        const serviceMock = jasmine.createSpyObj("CommentParagraphService", ["getByArticle"]);
         serviceMock.getByArticle = jasmine.createSpy("getByArticle").and.returnValue(Promise.resolve({ data: [] }));
 
-        let postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["emit", "subscribe"]);
+        const postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["emit", "subscribe"]);
         postCommentEventService.subscribe = jasmine.createSpy("subscribe");
 
         beforeEach(async(() => {

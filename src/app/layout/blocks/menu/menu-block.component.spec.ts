@@ -16,7 +16,7 @@ describe("Components", () => {
         const mocks = helpers.getMocks();
         let fixture: ComponentFixture<MenuBlockComponent>;
         let component: MenuBlockComponent;
-        let articles = [
+        const articles = [
             {name: 'article 1', path: 'article-1'},
             {name: 'article 2', path: 'article-2'}
         ];
@@ -76,23 +76,23 @@ describe("Components", () => {
         });
 
         it("generate correct url for activities", () => {
-            let url = [ '/profile', 'profile-name' ];
+            const url = [ '/profile', 'profile-name' ];
             expect(component.makeUrl({ "title": "Activities", "controller": "profile", "action": "activities" }).url).toEqual(url);
         });
 
         it("generate correct url for about", () => {
-            let url = [ '/profile', 'profile-name', 'about' ];
+            const url = [ '/profile', 'profile-name', 'about' ];
             expect(component.makeUrl({ "title": "About", "controller": "profile", "action": "about" }).url).toEqual(url);
         });
 
         it("generate correct url for friends", () => {
             component.owner = <noosfero.Person>{ id: 1, name: 'person-name', identifier: 'person-name', type: 'Person' };
-            let url = [ '/profile', 'person-name', 'friends' ];
+            const url = [ '/profile', 'person-name', 'friends' ];
             expect(component.makeUrl({ "title": "People", "controller": "friends", "action": "index" }).url).toEqual(url);
         });
 
         it("initialize links variable", () => {
-            let profileLinks = [
+            const profileLinks = [
                 { title: 'blocks.menu.activities', url: 'main.profile.info', urlParams: { profile: component.owner.identifier }, controller: 'profile', action: 'index' },
                 { title: 'blocks.menu.about', url: 'main.profile.about', urlParams: { profile: component.owner.identifier }, controller: 'profile', action: 'index' }
             ];
@@ -118,8 +118,8 @@ describe("Components", () => {
         });
 
         it("add link to enabled list", () => {
-            let link = { title: 'Article 2', url: 'main.profile.page', urlParams: { page: 'article-2', profile: component.owner.identifier }, path: 'article-2' };
-            let links = component.links;
+            const link = { title: 'Article 2', url: 'main.profile.page', urlParams: { page: 'article-2', profile: component.owner.identifier }, path: 'article-2' };
+            const links = component.links;
             links.push(link);
             component.add(link);
             for (let i = 0; i < component.links.length; i++) {
@@ -128,8 +128,8 @@ describe("Components", () => {
         });
 
         it("remove link from enabled list", () => {
-            let links = component.links;
-            let linksAvailable = component.linksAvailable;
+            const links = component.links;
+            const linksAvailable = component.linksAvailable;
             linksAvailable.push(links[0]);
             links.splice(0, 1);
             component.remove(0);

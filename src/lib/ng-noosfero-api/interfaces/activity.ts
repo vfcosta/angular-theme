@@ -15,7 +15,7 @@ namespace noosfero {
         verb: string;
 
         user: noosfero.Profile;
-        
+
         params: any[];
     }
 }

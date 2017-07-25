@@ -3,22 +3,20 @@ import { BootstrapResizableDirective } from './bootstrap-resizable.directive';
 import * as helpers from '../../../../spec/helpers';
 import { async } from '@angular/core/testing';
 
-const htmlTemplate: string = '<div bootstrap-resizable="ctrl.enabled" bootstrap-resizable-columns="ctrl.columns"></div>';
-
 describe("Bootstrap Resizable Directive", () => {
 
-    let elementRef: any = { nativeElement: { className: 'other-class col-md-12' } };
+    const elementRef: any = { nativeElement: { className: 'other-class col-md-12' } };
 
-    let subElement = { style: { height: 0 } };
+    const subElement = { style: { height: 0 } };
     (<any>subElement).addEventListener = jasmine.createSpy("addEventListener");
 
     elementRef.nativeElement.querySelector = jasmine.createSpy("querySelector").and.returnValue(subElement);
     elementRef.nativeElement.insertAdjacentHTML = jasmine.createSpy("insertAdjacentHTML");
 
-    let style = jasmine.createSpyObj("style", ["getPropertyValue"]);
-    let window = jasmine.createSpyObj("window", ["getComputedStyle"]);
+    const style = jasmine.createSpyObj("style", ["getPropertyValue"]);
+    const window = jasmine.createSpyObj("window", ["getComputedStyle"]);
     window.getComputedStyle = jasmine.createSpy("getComputedStyle").and.returnValue(style);
-    let renderer = jasmine.createSpyObj("renderer", ["setElementClass"]);
+    const renderer = jasmine.createSpyObj("renderer", ["setElementClass"]);
     renderer.setElementClass = jasmine.createSpy("setElementClass");
     let directive: any;
 
@@ -56,32 +54,32 @@ describe("Bootstrap Resizable Directive", () => {
 
     it("do nothing when click and the directive is disabled", () => {
         directive.designMode = false;
-        let event: any = { which: 1 };
+        const event: any = { which: 1 };
         directive.mouseDown(event);
         expect(renderer.setElementClass).not.toHaveBeenCalledWith(elementRef.nativeElement, 'bootstrap-resizing', true);
     });
 
     it("add class when resizing with mouse click", () => {
-        let event: any = { which: 1 };
+        const event: any = { which: 1 };
         directive.mouseDown(event);
         expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'bootstrap-resizing', true);
 
     });
 
     it("add class when resizing with touch", () => {
-        let event: any = { touches: [{ clientX: 1 }] };
+        const event: any = { touches: [{ clientX: 1 }] };
         directive.mouseDown(event);
         expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'bootstrap-resizing', true);
     });
 
     it("remove class when end resizing", () => {
-        let event: any = {};
+        const event: any = {};
         directive.dragEnd(event);
         expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'bootstrap-resizing', false);
     });
 
     it("change class when dragging", () => {
-        let event: any = {};
+        const event: any = {};
         directive.dragging(event);
         expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'col-md-6', true);
         expect(renderer.setElementClass).toHaveBeenCalledWith(elementRef.nativeElement, 'col-md-12', false);

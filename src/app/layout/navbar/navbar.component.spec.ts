@@ -12,10 +12,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Navbar Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<NavbarComponent>;
         let component: NavbarComponent;
-        let user: noosfero.User = <noosfero.User>{ id: 1, login: "user" };
+        const user: noosfero.User = <noosfero.User>{ id: 1, login: "user" };
         let authSubscribe: Function[];
 
         beforeEach(async(() => {

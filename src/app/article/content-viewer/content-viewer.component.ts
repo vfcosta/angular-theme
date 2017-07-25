@@ -22,7 +22,7 @@ export class ContentViewerComponent {
     activate() {
         this.profileService.getCurrentProfile().then((profile: noosfero.Profile) => {
             this.profile = profile;
-            let page = this.route.snapshot.url.map(p => p.path).join("/");
+            const page = this.route.snapshot.url.map(p => p.path).join("/");
             return this.articleService.getArticleByProfileAndPath(this.profile, page);
         }).then((result: noosfero.RestResult<any>) => {
             this.article = <noosfero.Article>result.data;

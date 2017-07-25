@@ -62,7 +62,7 @@ export class ProfileJoinComponent implements OnInit {
         }
         promiseResponse.then((response: any) => {
             if (response.data.pending) {
-                this.notificationService.success({ title: 'profile.actions.add_in_' + this.profileType() + '.title', message: 'profile.actions.add_in_'+ this.profile.type.toLowerCase() + '.moderation.message' });
+                this.notificationService.success({ title: 'profile.actions.add_in_' + this.profileType() + '.title', message: 'profile.actions.add_in_' + this.profile.type.toLowerCase() + '.moderation.message' });
             } else {
                 this.notificationService.success({ title: 'profile.actions.add_in_' + this.profileType() + '.title', message: 'profile.actions.add_in_' + this.profile.type.toLowerCase() + '.success.message' });
             }

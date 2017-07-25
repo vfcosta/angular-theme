@@ -1,5 +1,5 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { Component, Inject, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: 'search-form',
@@ -7,7 +7,7 @@ import { Component, Inject, ViewEncapsulation } from '@angular/core';
     styleUrls: ['./search-form.scss'],
     encapsulation: ViewEncapsulation.None,
 })
-export class SearchFormComponent {
+export class SearchFormComponent implements OnInit {
 
     query: string;
 

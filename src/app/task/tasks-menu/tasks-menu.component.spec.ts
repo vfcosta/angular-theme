@@ -12,10 +12,10 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Task Menu Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<TasksMenuComponent>;
         let component: TasksMenuComponent;
-        let tasks = [{ id: 1 }, { id: 2 }];
+        const tasks = [{ id: 1 }, { id: 2 }];
 
         beforeEach(async(() => {
             spyOn(mocks.taskService, 'getAllPending').and.returnValue(Promise.resolve({ headers: { get: () => { } }, data: tasks }));

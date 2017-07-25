@@ -14,13 +14,13 @@ describe("Components", () => {
         let fixture: ComponentFixture<BreadcrumbsBlockComponent>;
         let component: BreadcrumbsBlockComponent;
 
-        let links: any[] = [{ name: 'link1', url: '/link1' }, { name: 'link2', url: '/link1/link2' }];
-        let mockedBlockService = jasmine.createSpyObj("BlockService", ["getApiContent"]);
+        const links: any[] = [{ name: 'link1', url: '/link1' }, { name: 'link2', url: '/link1/link2' }];
+        const mockedBlockService = jasmine.createSpyObj("BlockService", ["getApiContent"]);
         mockedBlockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ links: links }));
-        let state = jasmine.createSpyObj("state", ["go"]);
-        let stateParams = {};
-        let transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
-        let mocks = helpers.getMocks();
+        const state = jasmine.createSpyObj("state", ["go"]);
+        const stateParams = {};
+        const transitions = jasmine.createSpyObj("$transitions", ["onSuccess"]);
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

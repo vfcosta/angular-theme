@@ -10,12 +10,12 @@ import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
     describe("Activities Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ActivitiesComponent>;
         let component: ActivitiesComponent;
 
         beforeEach(async(() => {
-            spyOn(mocks.profileService, "getNetworkActivities").and.returnValue(Promise.resolve({ data: {plain: () => { return [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }]; } } }));
+            spyOn(mocks.profileService, "getNetworkActivities").and.returnValue(Promise.resolve({ data: {plain: () => [{ name: "activity1", verb: "create_article" }, { name: "activity2", verb: "create_article" }] } }));
             TestBed.configureTestingModule({
                 imports: [RouterTestingModule, TranslateModule.forRoot(), NgPipesModule],
                 declarations: [ActivitiesComponent],

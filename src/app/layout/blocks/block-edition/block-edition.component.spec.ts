@@ -10,8 +10,8 @@ describe("Components", () => {
 
     describe("Block Edition Component", () => {
 
-        let scope = {};
-        let mocks = helpers.getMocks();
+        const scope = {};
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<BlockEditionComponent>;
         let component: BlockEditionComponent;
         let blocksSavedFn: Function;

@@ -17,9 +17,9 @@ const LIMIT = 10;
 export class ActivitiesComponent {
 
     activities: any;
-    page: number = 1;
+    page = 1;
     profile: noosfero.Profile;
-    hasActivities: boolean = false;
+    hasActivities = false;
 
     constructor(private profileService: ProfileService) {
         this.init();
