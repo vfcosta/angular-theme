@@ -1,7 +1,7 @@
 import { By } from '@angular/platform-browser';
 import { BlockService } from './../../../lib/ng-noosfero-api/http/block.service';
 import { TranslatorService } from './../../shared/services/translator.service';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { TranslateModule } from '@ngx-translate/core';
 import { HighlightsBlockComponent } from './highlights/highlights-block.component';
 import { HighlightsBlockSettingsComponent } from './highlights/highlights-block-settings.component';

@@ -1,10 +1,10 @@
 import { ActivatedRoute } from '@angular/router';
-import { Component, Inject, Input, OnInit } from "@angular/core";
-import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { TaskService } from '../../../lib/ng-noosfero-api/http/task.service';
 
 @Component({
     selector: "tasks",
-    template: require("app/task/tasks/tasks.html")
+    templateUrl: './tasks.html'
 })
 export class TasksComponent implements OnInit {
 

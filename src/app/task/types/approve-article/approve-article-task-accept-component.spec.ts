@@ -3,7 +3,7 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { ApproveArticleTaskAcceptComponent } from './approve-article-task-accept.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';

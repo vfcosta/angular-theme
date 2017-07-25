@@ -1,9 +1,11 @@
-import { Input, Component } from '@angular/core';
+import { Input, Component, ViewEncapsulation } from '@angular/core';
 import { BoxesComponent } from '../boxes/boxes.component';
 
 @Component({
     selector: "layout-config",
-    template: require("app/layout/layout-config/layout-config.html")
+    templateUrl: './layout-config.html',
+    styleUrls: ['./layout-config.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class LayoutConfigComponent {
 

@@ -1,6 +1,6 @@
 import { CommentFormHotspotComponent } from './../../../app/hotspot/comment-form-hotspot.component';
-import { Inject, Input, Component, Injector } from "@angular/core";
-import { Hotspot } from "../../../app/hotspot/hotspot.decorator";
+import { Inject, Input, Component, Injector } from '@angular/core';
+import { Hotspot } from '../../../app/hotspot/hotspot.decorator';
 
 @Component({
     selector: "comment-paragraph-form-hotspot",

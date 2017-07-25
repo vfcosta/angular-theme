@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
-import { SessionService } from "./../../login";
+import { SessionService } from './../../login';
 
 /**
  * @ngdoc controller
@@ -11,7 +11,9 @@ import { SessionService } from "./../../login";
  */
 @Component({
     selector: "noosfero-profile-configuration",
-    template: require('app/profile/configuration/profile-configuration.html')
+    templateUrl: './profile-configuration.html',
+    styleUrls: ['./profile-configuration.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileConfigurationComponent {
     profile: noosfero.Profile;

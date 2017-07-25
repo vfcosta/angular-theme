@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../login';
-import { Component, Inject } from "@angular/core";
-import { NotificationService } from "../../shared/services/notification.service";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { Component, Inject } from '@angular/core';
+import { NotificationService } from '../../shared/services/notification.service';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 
 @Component({
     selector: 'destroy-profile',

@@ -4,7 +4,7 @@ import { ArticleBlogComponent } from './blog.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NgPipesModule } from 'ngx-pipes';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Blog Component", () => {
     let fixture: ComponentFixture<ArticleBlogComponent>;

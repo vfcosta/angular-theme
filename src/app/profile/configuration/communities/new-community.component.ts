@@ -10,7 +10,7 @@ import { AbstractFormCommunity } from './abstract-form-community';
  */
 @Component({
     selector: "new-community",
-    template: require('app/profile/configuration/communities/form-community.html'),
+    templateUrl: './form-community.html',
 })
 export class NewCommunityComponent extends AbstractFormCommunity {
 

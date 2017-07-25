@@ -1,11 +1,10 @@
 import { Title } from '@angular/platform-browser';
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject, EventEmitter } from "@angular/core";
-import { RestangularService } from "./restangular_service";
-import { ProfileService } from "./profile.service";
+import { Injectable, Inject, EventEmitter } from '@angular/core';
+import { RestangularService } from './restangular_service';
+import { ProfileService } from './profile.service';
 import { EnvironmentService } from './environment.service';
-
-declare var _: any;
+import * as _ from "lodash";
 
 @Injectable()
 export class ArticleService extends RestangularService<noosfero.Article> {

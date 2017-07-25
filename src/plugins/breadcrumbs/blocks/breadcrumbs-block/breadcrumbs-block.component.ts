@@ -1,13 +1,15 @@
 import { Router, Event, ActivatedRoute, NavigationEnd } from '@angular/router';
-import { Component, Inject, Input } from "@angular/core";
-import { Subscription } from "rxjs";
-import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
+import { Component, Inject, Input, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
-    selector: "noosfero-breadcrumbs-plugin-content-breadcrumbs-block",
-    template: require('plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.html')
+    selector: 'noosfero-breadcrumbs-plugin-content-breadcrumbs-block',
+    templateUrl: './breadcrumbs-block.html',
+    styleUrls: ['./breadcrumbs-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class BreadcrumbsBlockComponent {
+export class BreadcrumbsBlockComponent implements OnInit, OnDestroy {
 
     @Input() block: any;
     @Input() owner: any;
@@ -28,7 +30,9 @@ export class BreadcrumbsBlockComponent {
     }
 
     ngOnDestroy() {
-        this.routerEventSubscription.unsubscribe();
+        if (this.routerEventSubscription) {
+            this.routerEventSubscription.unsubscribe();
+        }
     }
 
     setNavigationState() {

@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { Restangular, RestangularModule } from 'ngx-restangular';
-import { SettingsService } from "./settings.service";
-import * as helpers from "../../../spec/helpers";
+import { SettingsService } from './settings.service';
+import * as helpers from '../../../spec/helpers';
 
 describe("Services", () => {
     describe("Settings Service", () => {

@@ -5,16 +5,16 @@ import { AuthService } from './../../login/auth.service';
 import { PermissionService } from './../../shared/services/permission.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
-import * as helpers from "../../../spec/helpers";
-import { ProfileImageComponent } from "./profile-image.component";
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
+import * as helpers from '../../../spec/helpers';
+import { ProfileImageComponent } from './profile-image.component';
 
 describe("Components", () => {
 
     describe("Profile Image Component", () => {
         let fixture: ComponentFixture<ProfileImageComponent>;
         let component: ProfileImageComponent;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         let imageProfileUpdateFn: Function;
         mocks.eventsHubService.subscribeToEvent = <any>((event: string, fn: Function) => {
@@ -22,7 +22,7 @@ describe("Components", () => {
         });
 
         beforeEach(async(() => {
-            let scope = helpers.mocks.scopeWithEvents;
+            let scope = mocks.scopeWithEvents;
             let profileService = jasmine.createSpyObj("profileService", ["upload"]);
             let permissionService = jasmine.createSpyObj("permissionService", ["isAllowed"]);
 
@@ -30,11 +30,11 @@ describe("Components", () => {
                 declarations: [ProfileImageComponent],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
-                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: ProfileService, useValue: profileService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: PermissionService, useValue: permissionService },
-                    { provide: AuthService, useValue: helpers.mocks.authService },
+                    { provide: AuthService, useValue: mocks.authService },
                 ],
                 imports: [TranslateModule.forRoot()]
             });

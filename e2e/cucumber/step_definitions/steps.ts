@@ -19,12 +19,12 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Then('I should be on the homepage', () => {
-        return expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:3001/');
+        return expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:49152/');
     });
 
     Then('I should be on {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
         browser.waitForAngular();
-        return expect(browser.getCurrentUrl()).to.eventually.equal(`http://localhost:3001${stringInDoubleQuotes}`);
+        return expect(browser.getCurrentUrl()).to.eventually.equal(`http://localhost:49152${stringInDoubleQuotes}`);
     });
 
     Given('I follow {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
@@ -66,12 +66,12 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Given('I go to {stringInDoubleQuotes} profile', (profile) => {
         browser.waitForAngular();
-        return browser.driver.get(`http://localhost:3001/${profile}`);
+        return browser.driver.get(`http://localhost:49152/${profile}`);
     });
 
     Given('I go to {stringInDoubleQuotes}', (page) => {
         browser.waitForAngular();
-        return browser.driver.get(`http://localhost:3001${page}`);
+        return browser.driver.get(`http://localhost:49152${page}`);
     });
 
     Given('I enter in edit mode', () => {
@@ -167,7 +167,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return browser.get(`/${profile}/${article}`).then(() => {
             return browser.getCurrentUrl();
         }).then((url) => {
-            if (url === `http://localhost:3001/${profile}/${article}`) {
+            if (url === `http://localhost:49152/${profile}/${article}`) {
                 browser.waitForAngular();
                 return utils.pressButton(".delete-article").then(() => {
                     return utils.pressButton(".swal2-confirm");

@@ -1,9 +1,11 @@
-import { Component, Inject, Input } from '@angular/core';
-import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-friends-block",
-    template: require('plugins/friends/blocks/friends-block/friends-block.html')
+    templateUrl: './friends-block.html',
+    styleUrls: ['./friends-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class FriendsBlockComponent {
 
@@ -15,7 +17,7 @@ export class FriendsBlockComponent {
     constructor(private blockService: BlockService) { }
 
     ngOnInit() {
-        let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;        
+        let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
 
         if (this.block.api_content) {
             this.profiles = this.block.api_content['people'];

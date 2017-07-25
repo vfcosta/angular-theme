@@ -1,13 +1,14 @@
 import { SettingsService } from './../../../../lib/ng-noosfero-api/http/settings.service';
-import { Inject, Component, Input, Output, EventEmitter } from "@angular/core";
+import { Inject, Component, Input, Output, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { ProfileService } from '../../../../lib/ng-noosfero-api/http/profile.service';
 import { EnvironmentService } from '../../../../lib/ng-noosfero-api/http/environment.service';
-
-declare var _: any;
+import * as _ from "lodash";
 
 @Component({
     selector: "add-block",
-    template: require("app/layout/boxes/add-block/add-block.html")
+    templateUrl: './add-block.html',
+    styleUrls: ['./add-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class AddBlockComponent {
 

@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import {ContentViewerComponent} from './content-viewer.component';
 
 describe('Content Viewer Component', () => {

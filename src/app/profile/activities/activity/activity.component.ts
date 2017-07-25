@@ -1,9 +1,11 @@
-import { Component, Input, Inject } from "@angular/core";
-import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
+import { EnvironmentService } from '../../../../lib/ng-noosfero-api/http/environment.service';
 
 @Component({
     selector: "noosfero-activity",
-    template: require('app/profile/activities/activity/activity.html'),
+    templateUrl: './activity.html',
+    styleUrls: ['./activity.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ActivityComponent {
 

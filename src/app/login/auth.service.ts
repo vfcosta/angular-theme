@@ -1,7 +1,7 @@
 import { Restangular } from 'ngx-restangular';
 import { PersonService } from './../../lib/ng-noosfero-api/http/person.service';
-import { Injectable, Inject, EventEmitter } from "@angular/core";
-import { SessionService } from "./session.service";
+import { Injectable, Inject, EventEmitter } from '@angular/core';
+import { SessionService } from './session.service';
 import { Http, Jsonp, Response } from '@angular/http';
 
 @Injectable()

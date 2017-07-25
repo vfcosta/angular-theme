@@ -1,9 +1,11 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-members-block",
-    template: require('app/layout/blocks/members/members-block.html')
+    templateUrl: './members-block.html',
+    styleUrls: ['./members-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class MembersBlockComponent {
 

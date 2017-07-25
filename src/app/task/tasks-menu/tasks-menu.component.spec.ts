@@ -4,9 +4,9 @@ import { EventsHubService } from './../../shared/services/events-hub.service';
 import { AuthService } from './../../login/auth.service';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
 import { SessionService } from './../../login/session.service';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { TasksMenuComponent } from './tasks-menu.component';
-import { AuthEvents } from "./../../login";
+import { AuthEvents } from './../../login';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 

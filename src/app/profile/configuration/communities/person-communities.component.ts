@@ -1,12 +1,14 @@
 import { ActivatedRoute } from '@angular/router';
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { DisplayStyles } from '../../profile-list/profile-list.component';
 
 @Component({
     selector: "person-communities",
-    template: require('app/profile/configuration/communities/person-communities.html'),
+    templateUrl: './person-communities.html',
+    styleUrls: ['./person-communities.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class PersonCommunitiesComponent {
 

@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from './../../../../lib/ng-noosfero-api/http/user.service';
 import { NotificationService } from './../../../shared/services/notification.service';
-import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, Input, Inject, Output, ViewChild, EventEmitter, ViewEncapsulation } from '@angular/core';
 import { ValidationMessageComponent } from '../../../shared/components/validation-message/validation-message.component';
 
 
@@ -13,7 +13,9 @@ import { ValidationMessageComponent } from '../../../shared/components/validatio
  */
 @Component({
     selector: "change-password",
-    template: require('app/profile/configuration/change-password/change-password.html')
+    templateUrl: './change-password.html',
+    styleUrls: ['./change-password.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ChangePasswordComponent {
 

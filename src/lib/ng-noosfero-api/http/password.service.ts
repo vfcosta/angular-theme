@@ -1,5 +1,5 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
+import { Injectable, Inject } from '@angular/core';
 
 @Injectable()
 export class PasswordService {

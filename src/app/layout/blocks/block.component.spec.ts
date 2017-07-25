@@ -13,7 +13,7 @@ import { AuthService } from './../../login/auth.service';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { NotificationService } from './../../shared/services/notification.service';
 import { BlockComponent } from './block.component';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 

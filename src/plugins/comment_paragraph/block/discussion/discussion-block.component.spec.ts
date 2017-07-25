@@ -2,7 +2,7 @@ import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.servi
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { By } from '@angular/platform-browser';
 import {DiscussionBlockComponent} from './discussion-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 

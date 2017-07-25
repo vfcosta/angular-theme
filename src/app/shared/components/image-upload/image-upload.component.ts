@@ -1,9 +1,11 @@
-import { Inject, Input, Output, Component, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Inject, Input, Output, Component, EventEmitter, ViewChild, ElementRef, ViewEncapsulation } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 
 @Component({
     selector: "image-upload",
-    template: require('app/shared/components/image-upload/image-upload.html')
+    templateUrl: './image-upload.html',
+    styleUrls: ['./image-upload.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ImageUploadComponent {
 

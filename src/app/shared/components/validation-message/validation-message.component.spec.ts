@@ -4,7 +4,7 @@ import { ValidationMessageComponent } from './validation-message.component';
 import { By } from '@angular/platform-browser';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule, FormControl } from '@angular/forms';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { fixtures } from '../../../../spec/helpers';
 import { Component, ViewChild, ElementRef, Pipe, PipeTransform } from '@angular/core';
 

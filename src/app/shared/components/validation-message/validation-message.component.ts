@@ -6,7 +6,7 @@ import { NgModel } from '@angular/forms';
 
 @Component({
     selector: "validation-message",
-    template: require('app/shared/components/validation-message/validation-message.html'),
+    templateUrl: './validation-message.html',
     providers: [UnderscorePipe]
 })
 export class ValidationMessageComponent {

@@ -1,6 +1,6 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { Component, Inject } from '@angular/core';
-import { ProfileService } from "../../lib/ng-noosfero-api/http/profile.service";
+import { ProfileService } from '../../lib/ng-noosfero-api/http/profile.service';
 
 @Component({
     selector: 'profile-home',

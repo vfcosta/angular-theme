@@ -1,12 +1,14 @@
-import { Inject, Input, Output, EventEmitter, Component } from '@angular/core';
-import { CommentService } from "../../../../lib/ng-noosfero-api/http/comment.service";
-import { NotificationService } from "../../../shared/services/notification.service";
+import { Inject, Input, Output, EventEmitter, Component, ViewEncapsulation } from '@angular/core';
+import { CommentService } from '../../../../lib/ng-noosfero-api/http/comment.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 import { SessionService } from './../../../login/session.service';
 
 @Component({
     selector: 'noosfero-post-comment',
-    template: require('app/article/comment/post-comment/post-comment.html'),
+    templateUrl: './post-comment.html',
     outputs: ['commentSaved'],
+    styleUrls: ['./post-comment.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class PostCommentComponent {
 

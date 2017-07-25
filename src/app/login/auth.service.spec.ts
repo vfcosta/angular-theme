@@ -1,13 +1,13 @@
 import { Observable } from 'rxjs/Observable';
 import { PersonService } from './../../lib/ng-noosfero-api/http/person.service';
-import {AuthService, AuthEvents} from "./";
+import {AuthService, AuthEvents} from './';
 import {SessionService} from './session.service';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, JsonpModule, HttpModule, BaseRequestOptions} from "@angular/http";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, JsonpModule, HttpModule, BaseRequestOptions} from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
-import * as helpers from "../../spec/helpers";
+import * as helpers from '../../spec/helpers';
 
 describe("Services", () => {
     describe("Auth Service", () => {

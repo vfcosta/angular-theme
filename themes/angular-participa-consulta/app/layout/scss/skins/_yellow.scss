@@ -1,10 +1,10 @@
 .skin-yellow {
 	// import noosfero custom definitions
-	@import "src/app/layout/scss/variables";
+	@import "scss/variables";
 	// override bootstrap variables here
 	$navbar-inverse-bg: #f9c404;
 	// include bootstrap
-	@import "bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
+	@import 'scss/bootstrap';
 	.noosfero-block {
 		padding: 0;
 	}

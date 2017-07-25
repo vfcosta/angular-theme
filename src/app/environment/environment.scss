@@ -1,3 +1,7 @@
+@import 'scss/variables';
+@import 'scss/bootstrap';
+@import 'bootstrap/grid';
+
 .environment-container {
   @extend .container;
   padding: 15px;

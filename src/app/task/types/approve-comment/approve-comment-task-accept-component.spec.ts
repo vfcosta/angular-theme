@@ -3,7 +3,7 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { Provider, Component } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { ApproveCommentTaskAcceptComponent } from './approve-comment-task-accept.component';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';

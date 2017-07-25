@@ -1,10 +1,10 @@
-import { RegisterService } from "./register.service";
-import * as helpers from "../../../spec/helpers";
+import { RegisterService } from './register.service';
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import {MockBackend, MockConnection} from '@angular/http/testing';
 import { BrowserModule } from '@angular/platform-browser';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from "@angular/http";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from '@angular/http';
 
 describe("Services", () => {
     describe("Register Service", () => {

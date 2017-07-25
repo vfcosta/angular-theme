@@ -1,15 +1,20 @@
-import { Component, Inject } from "@angular/core";
-import { EventsHubService } from "../../../../../src/app/shared/services/events-hub.service";
-import { NoosferoKnownEvents } from "../../../../../src/app/known-events";
-import { BodyStateClassesService } from "../../../../../src/app/shared/services/body-state-classes.service";
+import { OnInit, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { EventsHubService } from '../../../../../src/app/shared/services/events-hub.service';
+import { NoosferoKnownEvents } from '../../../../../src/app/known-events';
+import { BodyStateClassesService } from '../../../../../src/app/shared/services/body-state-classes.service';
 import { PageScrollConfig, PageScrollService, PageScrollInstance } from 'ng2-page-scroll';
 import { DOCUMENT } from '@angular/platform-browser';
+import { Hotspot } from '../../../../../src/app/hotspot/hotspot.decorator';
+import * as utils from '../../../../../src/app/shared/utils';
 
 @Component({
-    selector: "participa-header",
-    template: require("app/layout/participa-header/participa-header.html")
+    selector: 'participa-header',
+    templateUrl: './participa-header.html',
+    styleUrls: ['./participa-header.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class ParticipaHeaderComponent {
+@Hotspot('theme_header')
+export class ParticipaHeaderComponent implements OnInit {
 
     eventsNames: NoosferoKnownEvents;
     defaultSkin = 'skin-yellow';
@@ -23,19 +28,12 @@ export class ParticipaHeaderComponent {
     }
 
     ngOnInit() {
-        this.loadScript('//barra.brasil.gov.br/barra.js');
+        utils.loadScript('//barra.brasil.gov.br/barra.js');
         this.setupBarraBrasil();
     }
 
-    loadScript(url) {
-        let script = document.createElement('script');
-        script.src = url;
-        script.type = 'text/javascript';
-        document.body.appendChild(script);
-    }
-
     scrollTo(anchor: string) {
-        let pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, `#${anchor}`);
+        const pageScrollInstance: PageScrollInstance = PageScrollInstance.simpleInstance(this.document, `#${anchor}`);
         this.pageScrollService.start(pageScrollInstance);
     };
 

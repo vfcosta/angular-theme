@@ -1,10 +1,9 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
-import { RestangularService } from "./restangular_service";
-import { PersonService } from "./person.service";
+import { Injectable, Inject } from '@angular/core';
+import { RestangularService } from './restangular_service';
+import { PersonService } from './person.service';
 import { Observable } from 'rxjs/Observable';
-
-declare var _: any;
+import * as _ from "lodash";
 
 @Injectable()
 export class CommunityService extends RestangularService<noosfero.Community> {

@@ -1,5 +1,5 @@
+import { NoosferoKnownEvents } from './../../known-events';
 import { Injectable, Inject, OpaqueToken, EventEmitter } from '@angular/core';
-import { NoosferoKnownEvents } from "../../known-events";
 
 @Injectable()
 export class EventsHubService {

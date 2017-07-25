@@ -1,8 +1,8 @@
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { VideoBlockComponent } from './video-block.component';
-import { Component, Inject, Input, NgZone } from "@angular/core";
+import { Component, Inject, Input, NgZone } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { By } from '@angular/platform-browser';
 

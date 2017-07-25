@@ -1,3 +1,8 @@
+@import 'scss/variables';
+@import 'scss/bootstrap';
+@import 'scss/font-awesome';
+@import 'bootstrap/scaffolding';
+
 .membersblock {
   .panel-title {
     &:before {

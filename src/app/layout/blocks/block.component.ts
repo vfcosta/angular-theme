@@ -1,18 +1,20 @@
-import { Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { ProfileComponent } from './../../profile/profile.component';
 import { ActivitiesComponent } from './../../profile/activities/activities.component';
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
 import { Input, Component } from '@angular/core';
 import { NotificationService } from '../../shared/services/notification.service';
-import { AuthService, SessionService, AuthEvents } from "../../login";
-import { TranslatorService } from "../../shared/services/translator.service";
-import { DesignModeService } from "../../shared/services/design-mode.service";
+import { AuthService, SessionService, AuthEvents } from '../../login';
+import { TranslatorService } from '../../shared/services/translator.service';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 import { animateFactory } from 'ng2-animate';
 
 @Component({
     selector: 'noosfero-block',
-    template: require('app/layout/blocks/block.html'),
-    animations: [animateFactory(500, 0, 'ease-in')]
+    templateUrl: './block.html',
+    animations: [animateFactory(500, 0, 'ease-in')],
+    styleUrls: ['./block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class BlockComponent {
 
@@ -64,8 +66,8 @@ export class BlockComponent {
     }
 
     canDisplay() {
-        if (this.block._destroy) return false;
         if (this.designMode) return true;
+        if (this.block._destroy) return false;
         return this.visible() && this.displayToUser() &&
             this.displayOnLanguage(this.translatorService.currentLanguage()) &&
             !this.block.hide;

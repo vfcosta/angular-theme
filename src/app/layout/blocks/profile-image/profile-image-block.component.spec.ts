@@ -1,6 +1,6 @@
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { ProfileImageBlockComponent } from './profile-image-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';

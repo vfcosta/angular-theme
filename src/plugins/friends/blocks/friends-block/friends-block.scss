@@ -1,3 +1,8 @@
+@import 'scss/variables';
+@import 'scss/bootstrap';
+@import 'bootstrap/scaffolding';
+@import 'scss/font-awesome';
+
 .peopleblock {
   .panel-title {
     &:before {

@@ -1,8 +1,8 @@
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../../../spec/helpers";
-import { ActivityHeaderComponent } from "./activity-header.component";
+import * as helpers from '../../../../../spec/helpers';
+import { ActivityHeaderComponent } from './activity-header.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 describe("Components", () => {

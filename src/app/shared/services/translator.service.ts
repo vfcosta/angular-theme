@@ -1,4 +1,4 @@
-import { Injectable, Inject } from "@angular/core";
+import { Injectable, Inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 import * as moment from 'moment';
@@ -26,7 +26,7 @@ export class TranslatorService {
         return this.translateService.currentLang;
     }
 
-    changeLanguage(language: string) {
+    changeLanguage(language: string): any {
         if (!language) {
             console.log("WARN: language undefined");
             return;

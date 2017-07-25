@@ -1,3 +1,6 @@
+@import 'scss/variables';
+@import 'scss/font-awesome';
+
 noosfero-article-icon {
   .text-article {
     @extend .fa-file-text-o;

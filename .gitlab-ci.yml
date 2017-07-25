@@ -6,7 +6,6 @@ cache:
   key: "$CI_BUILD_REF_NAME"
   paths:
     - node_modules/
-    - bower_components/
 
 before_script:
     - git config --global url."https://".insteadOf git://
@@ -16,7 +15,7 @@ before_script:
 build:
   stage: build
   script:
-    - npm run build-all
+    - npm run build
   artifacts:
     expire_in: 1 week
     paths:
@@ -25,7 +24,7 @@ build:
 unit_test:
   stage: test
   script:
-    - npm run test-single
+    - npm run test:ci
 
 staging:
   stage: deploy

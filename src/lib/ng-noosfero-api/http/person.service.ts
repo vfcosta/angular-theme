@@ -1,7 +1,7 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
-import { RestangularService } from "./restangular_service";
-import { ProfileService } from "./profile.service";
+import { Injectable, Inject } from '@angular/core';
+import { RestangularService } from './restangular_service';
+import { ProfileService } from './profile.service';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()

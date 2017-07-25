@@ -10,7 +10,7 @@ import { EditCommunityComponent } from './edit-community.component';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import {
     FormsModule, NG_VALIDATORS, AbstractControl,
     NgForm, FormControl

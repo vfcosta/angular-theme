@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: "noosfero-raw-htmlblock",
-    template: require('app/layout/blocks/raw-html/raw-html-block.html')
+    templateUrl: './raw-html-block.html'
 })
 
 export class RawHTMLBlockComponent implements OnChanges{

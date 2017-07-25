@@ -1,0 +1,42 @@
+/**
+ *  If you want to override some bootstrap variables, you have to change values here.
+ *  The list of variables are listed here node_modules/bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss
+ */
+// @import '~bootstrap-sass/assets/stylesheets/bootstrap/_variables.scss';
+@import 'scss/variables';
+@import 'bootstrap';
+@import "font-awesome";
+
+@import "~dragula/dist/dragula.css";
+@import "~sweetalert2/dist/sweetalert2.min.css";
+@import '~ngx-toastr/toastr';
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+h1, h2, h3, h4, h5 {
+  color: #237394;
+}
+
+@media (min-width: 1380px) {
+  .container {
+    width: 1380px;
+  }
+}
+
+.full-content {
+  margin-left: 0px !important;
+}
+
+@import "app/layout/scss/mixins";
+@import "app/layout/scss/layout";
+@import "app/layout/scss/tables";
+@import "app/layout/scss/forms";
+@import "app/layout/scss/icons";
+@import "app/layout/scss/animations";
+@import "app/shared/components/bootstrap-resizable/bootstrap-resizable.scss";
+@import "theme/style";

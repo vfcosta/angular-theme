@@ -5,7 +5,7 @@ import { PopoverModule } from 'ngx-bootstrap';
 import { DragulaModule } from 'ng2-dragula';
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { MenuBlockComponent } from './menu-block.component';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -13,20 +13,18 @@ import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {
     describe("Menu Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<MenuBlockComponent>;
         let component: MenuBlockComponent;
         let articles = [
             {name: 'article 1', path: 'article-1'},
             {name: 'article 2', path: 'article-2'}
         ];
-        let articleService = jasmine.createSpyObj("ArticleService", ["getByProfile"]);
+        const articleService = jasmine.createSpyObj("ArticleService", ["getByProfile"]);
         articleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: articles }));
 
-        let dragulaService = jasmine.createSpyObj("DragulaService", ["dropModel"]);
+        const dragulaService = jasmine.createSpyObj("DragulaService", ["dropModel"]);
         dragulaService.dropModel = jasmine.createSpy("dropModel").and.returnValue(Promise.resolve({ headers: () => { } }));
-
-        let scope = {};
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

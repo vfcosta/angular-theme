@@ -7,7 +7,7 @@ import { NgPipesModule } from 'ngx-pipes';
 import { Provider, Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommentsComponent } from './comments.component';
 

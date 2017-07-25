@@ -7,8 +7,8 @@ import { SharedModule } from './../../../app/shared.module';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ExportCommentButtonHotspotComponent } from "./export-comment-button.component";
-import * as helpers from "../../../spec/helpers";
+import { ExportCommentButtonHotspotComponent } from './export-comment-button.component';
+import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
     describe("Export Comment Button Hotspot Component", () => {

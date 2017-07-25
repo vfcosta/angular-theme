@@ -26,7 +26,7 @@
 </ul>
 
 <div class="modal reject fade" bsModal #rejectModal="bs-modal" *ngIf="showRejectModal" [config]="{ show: true, backdrop: true }"
-     tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true">
+     tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="true" (onHide)="cancel()">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

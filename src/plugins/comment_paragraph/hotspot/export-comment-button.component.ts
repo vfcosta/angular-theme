@@ -1,10 +1,12 @@
 import { ArticleToolbarHotspotComponent } from './../../../app/hotspot/article-toolbar-hotspot.component';
-import { Input, Inject, Injector, Component } from "@angular/core";
-import { Hotspot } from "../../../app/hotspot/hotspot.decorator";
+import { Input, Inject, Injector, Component, ViewEncapsulation } from '@angular/core';
+import { Hotspot } from '../../../app/hotspot/hotspot.decorator';
 
 @Component({
     selector: "export-comment-button-hotspot",
-    template: require("plugins/comment_paragraph/hotspot/export-comment-button.html"),
+    templateUrl: './export-comment-button.html',
+    styleUrls: ['./export-comment-button.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 @Hotspot("article_extra_toolbar_buttons")
 export class ExportCommentButtonHotspotComponent {

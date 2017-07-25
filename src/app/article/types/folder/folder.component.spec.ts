@@ -6,7 +6,7 @@ import { FolderComponent } from './folder.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NgPipesModule } from 'ngx-pipes';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Folder Component", () => {
     let fixture: ComponentFixture<FolderComponent>;

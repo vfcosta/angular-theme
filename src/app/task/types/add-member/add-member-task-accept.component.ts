@@ -1,10 +1,10 @@
 import { TaskAcceptTypeComponent } from './../task-accept-type.component';
-import { Component, Input, Inject, Injector } from "@angular/core";
-import { RoleService } from "../../../../lib/ng-noosfero-api/http/role.service";
+import { Component, Input, Inject, Injector } from '@angular/core';
+import { RoleService } from '../../../../lib/ng-noosfero-api/http/role.service';
 
 @Component({
     selector: "add-member-task-accept",
-    template: require("app/task/types/add-member/add-member-accept.html"),
+    templateUrl: './add-member-accept.html',
 })
 export class AddMemberTaskAcceptComponent extends TaskAcceptTypeComponent {
 

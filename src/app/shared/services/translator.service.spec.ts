@@ -1,5 +1,5 @@
 import {TranslatorService} from './translator.service';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 
 describe("Services", () => {
     describe("Translator Service", () => {

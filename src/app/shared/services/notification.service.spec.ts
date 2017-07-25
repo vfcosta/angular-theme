@@ -1,6 +1,6 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import * as helpers from "../../../spec/helpers";
-import { NotificationService } from "./notification.service";
+import * as helpers from '../../../spec/helpers';
+import { NotificationService } from './notification.service';
 
 describe("Components", () => {
     describe("Profile Image Component", () => {
@@ -8,6 +8,7 @@ describe("Components", () => {
         let sweetAlert: any;
         let toastr: any;
         let translatorService: any;
+        const mocks = helpers.getMocks();
 
         beforeEach(() => {
             sweetAlert = jasmine.createSpy("sweetAlert").and.returnValue(Promise.resolve());
@@ -16,7 +17,7 @@ describe("Components", () => {
         });
 
         function createComponent() {
-            return new NotificationService(<any>sweetAlert, <any>helpers.mocks.translatorService, <any>toastr);
+            return new NotificationService(<any>sweetAlert, <any>mocks.translatorService, <any>toastr);
         }
 
         it("display a sweet error message when notify an error with SweetAlert", () => {

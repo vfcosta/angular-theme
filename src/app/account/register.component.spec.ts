@@ -7,8 +7,8 @@ import { RegisterService } from './../../lib/ng-noosfero-api/http/register.servi
 import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import * as helpers from "../../spec/helpers";
-import { RegisterComponent } from "./register.component";
+import * as helpers from '../../spec/helpers';
+import { RegisterComponent } from './register.component';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';

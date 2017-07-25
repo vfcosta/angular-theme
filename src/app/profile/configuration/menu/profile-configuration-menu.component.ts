@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
 
 /**
  * @ngdoc controller
@@ -8,7 +8,9 @@ import { Component, Input, Inject } from '@angular/core';
  */
 @Component({
     selector: "profile-configuration-menu",
-    template: require('app/profile/configuration/menu/profile-configuration-menu.html'),
+    templateUrl: './profile-configuration-menu.html',
+    styleUrls: ['./profile-configuration-menu.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileConfigurationMenuComponent {
     @Input() profile: noosfero.Profile;

@@ -1,10 +1,10 @@
 import { TaskAcceptTypeComponent } from './../task-accept-type.component';
-import { Component, Injector, Inject } from "@angular/core";
-import { TaskService } from "../../../../lib/ng-noosfero-api/http/task.service";
+import { Component, Injector, Inject } from '@angular/core';
+import { TaskService } from '../../../../lib/ng-noosfero-api/http/task.service';
 
 @Component({
     selector: "add-friend-task-accept",
-    template: require("app/task/types/add-friend/add-friend-accept.html"),
+    templateUrl: './add-friend-accept.html',
 })
 export class AddFriendTaskAcceptComponent extends TaskAcceptTypeComponent {
 

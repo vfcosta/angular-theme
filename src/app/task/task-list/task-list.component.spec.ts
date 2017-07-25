@@ -8,7 +8,7 @@ import { MomentModule } from 'angular2-moment';
 import { Directive, Input, NO_ERRORS_SCHEMA } from '@angular/core';
 import { ProfileImageComponent } from './../../profile/image/profile-image.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { TaskListComponent } from './task-list.component';
 
 
@@ -20,7 +20,7 @@ class DynamicComponentMock {
 
 describe("Components", () => {
     describe("Task List Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<TaskListComponent>;
         let component: TaskListComponent;
 
@@ -38,7 +38,7 @@ describe("Components", () => {
                 providers: [
                     { provide: TaskService, useValue: taskService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
-                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
                 ],
                 schemas: [NO_ERRORS_SCHEMA]
             });
@@ -75,7 +75,7 @@ describe("Components", () => {
 
         it("call cancel and emit event when accept was called successfully", () => {
             component.currentTask = <any>{ id: 1 };
-            let result = helpers.mocks.promiseResultTemplate({ data: { id: 1 } });
+            let result = mocks.promiseResultTemplate({ data: { id: 1 } });
             component['taskService'].closeTask = jasmine.createSpy("closeTask").and.returnValue(result);
             component.cancel = jasmine.createSpy("cancel");
             component.callAccept();
@@ -85,7 +85,7 @@ describe("Components", () => {
 
         it("call cancel and emit event when reject was called successfully", () => {
             component.currentTask = <any>{ id: 1 };
-            let result = helpers.mocks.promiseResultTemplate({ data: { id: 1 } });
+            let result = mocks.promiseResultTemplate({ data: { id: 1 } });
             component['taskService'].closeTask = jasmine.createSpy("closeTask").and.returnValue(result);
             component.cancel = jasmine.createSpy("cancel");
             component.callReject();

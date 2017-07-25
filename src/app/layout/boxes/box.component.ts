@@ -1,10 +1,10 @@
 import { Inject, Input, Component } from '@angular/core';
-import { DesignModeService } from "../../shared/services/design-mode.service";
-import { EventsHubService } from "../../shared/services/events-hub.service";
+import { DesignModeService } from '../../shared/services/design-mode.service';
+import { EventsHubService } from '../../shared/services/events-hub.service';
 
 @Component({
     selector: "noosfero-box",
-    template: require("app/layout/boxes/box.html")
+    templateUrl: './box.html'
 })
 export class BoxComponent {
 
@@ -26,11 +26,7 @@ export class BoxComponent {
     }
 
     removeBlock(removedBlock: noosfero.Block) {
-        this.box.blocks = this.box.blocks.filter((block: noosfero.Block) => {
-            return block.id !== removedBlock.id;
-        });
         this.resetBlockPositions();
-        this.box.blocks = this.box.blocks.slice(); // force reload
     }
 
     addBlock(block: noosfero.Block) {

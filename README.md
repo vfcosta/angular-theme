@@ -19,10 +19,7 @@ We've also set up vim and tmux to make the work easier.
 
 ### How to Install
 1. Install [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/)
-1. Install [Bower](http://bower.io/): `npm install -g bower`
-1. Install [Gulp](http://gulpjs.com/): `npm install -g gulp`
 1. Install Node.js dependencies: `npm install`
-1. Install bower dependencies: `bower install`
 1. Build the project: `npm run build`
 1. Build multiple themes: `npm run build-all`
 1. Run project tests: `npm run test`
@@ -36,9 +33,9 @@ noosfero `public/design/themes`.
 The folder structure of this project was sorted by feature.
 See some important folders bellow:
 
-- Directives for blocks: `src/app/layout/blocks`
-- Directives for articles: `src/app/article`
-- Directives for activities: `src/app/profile/activities`
+- Components for blocks: `src/app/layout/blocks`
+- Components for articles: `src/app/article`
+- Components for activities: `src/app/profile/activities`
 - Service to connect with Noosfero API: `src/lib/ng-noosfero-api`
 - Content viewer component: `src/app/article/content-viewer`
 - Profile component: `src/app/profile`
@@ -93,16 +90,6 @@ Example: _mycustom.
 ## Development environment
 
 ## Known Issues
-
-### Message Translation: angular-i18n
-
- - Plural  Interpolation only working when current language is En (English)
-
- `Plural Function not found for locale`
-
- For some reason the messageformat installed on bower_component directory was an older version. Removing the bower_components directory
-and runing `bower install` solved the problem
-
 
 ### Error watching files during npm serve
 

@@ -1,17 +1,14 @@
-import {Component, Inject, Input} from "@angular/core";
-import {BlockService} from "../../../../lib/ng-noosfero-api/http/block.service";
-import {ArticleService} from "./../../../../lib/ng-noosfero-api/http/article.service";
-import {Arrays} from "./../../../../lib/util/arrays";
-
-enum PRESENTATION_MODES {
-    TITLE_ONLY = <any>'title_only',
-    FULL_CONTENT = <any>'full_content',
-    TITLE_AND_ABSTRACT = <any>'title_and_abstract'
-}
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
+import {BlockService} from '../../../../lib/ng-noosfero-api/http/block.service';
+import {ArticleService} from './../../../../lib/ng-noosfero-api/http/article.service';
+import {Arrays} from './../../../../lib/util/arrays';
+import {DiscussionPresentationMode} from './discussion-presentation-mode';
 
 @Component({
     selector: "noosfero-comment-paragraph-plugin-discussion-block",
-    template: require('plugins/comment_paragraph/block/discussion/discussion-block.html')
+    templateUrl: './discussion-block.html',
+    styleUrls: ['./discussion-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DiscussionBlockComponent {
 
@@ -21,9 +18,7 @@ export class DiscussionBlockComponent {
 
     profile: noosfero.Profile;
     documents: Array<noosfero.Article>;
-    presentation_mode: PRESENTATION_MODES;
-
-    static PRESENTATION_MODES = PRESENTATION_MODES;
+    presentation_mode: DiscussionPresentationMode;
 
     constructor(private blockService: BlockService, public articleService: ArticleService) { }
 
@@ -37,7 +32,7 @@ export class DiscussionBlockComponent {
                 this.block.hide = !this.documents || this.documents.length === 0;
             });
         }
-        this.presentation_mode = PRESENTATION_MODES.TITLE_ONLY;
+        this.presentation_mode = DiscussionPresentationMode.TITLE_ONLY;
         if (this.block && this.block.settings && this.block.settings.presentation_mode) {
             this.presentation_mode = this.block.settings.presentation_mode;
         }
@@ -51,11 +46,11 @@ export class DiscussionBlockComponent {
     }
 
     presentAbstract() {
-        return this.presentation_mode === PRESENTATION_MODES.TITLE_AND_ABSTRACT;
+        return this.presentation_mode === DiscussionPresentationMode.TITLE_AND_ABSTRACT;
     }
 
     presentFullContent() {
-        return this.presentation_mode === PRESENTATION_MODES.FULL_CONTENT;
+        return this.presentation_mode === DiscussionPresentationMode.FULL_CONTENT;
     }
 
 }

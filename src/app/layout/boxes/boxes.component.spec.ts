@@ -6,7 +6,7 @@ import { DesignModeService } from './../../shared/services/design-mode.service';
 import { BoxesComponent } from './boxes.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 
 describe("Boxes Component", () => {
     let fixture: ComponentFixture<BoxesComponent>;

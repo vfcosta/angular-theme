@@ -1,10 +1,10 @@
-import { AuthService } from "./auth.service";
-import { NotificationService } from "./../shared/services/notification.service";
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import { AuthService } from './auth.service';
+import { NotificationService } from './../shared/services/notification.service';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: "noosfero-forgot-password",
-    template: require("app/login/forgot-password.html")
+    templateUrl: './forgot-password.html'
 })
 export class ForgotPasswordComponent {
     @Input("show") show = false;

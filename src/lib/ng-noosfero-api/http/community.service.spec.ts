@@ -2,10 +2,10 @@ import { PersonService } from './person.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
-import {CommunityService} from "./community.service";
+import {CommunityService} from './community.service';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from "@angular/http";
-import * as helpers from "../../../spec/helpers";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from '@angular/http';
+import * as helpers from '../../../spec/helpers';
 
 describe("Services", () => {
     describe("Community Service", () => {

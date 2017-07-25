@@ -1,12 +1,12 @@
 import { HighlightsBlockComponent } from './highlights-block.component';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CarouselModule } from 'ngx-bootstrap';
 
 describe("Highlights Block Component", () => {
 
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<HighlightsBlockComponent>;
     let component: HighlightsBlockComponent;
 

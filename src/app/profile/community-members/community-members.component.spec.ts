@@ -6,7 +6,7 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommunityMembersComponent } from './community-members.component';
 import { PaginationModule } from 'ngx-bootstrap';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
 
