@@ -9,6 +9,7 @@ before_script:
     - git config --global url."https://".insteadOf git://
     - export PATH=$PATH:node_modules/.bin
     - npm install --unsafe-perm
+    - mkdir dist
 
 build:
   stage: build
