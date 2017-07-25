@@ -73,7 +73,7 @@ export class BlockEditionComponent implements OnInit, DoCheck {
         blockDiff.box = <noosfero.Box>{ id: this.box.id };
         if (!this.block.id) blockDiff.type = this.block.type;
 
-        if (this.lastBlockDiff && !_.isEqual(blockDiff, this.lastBlockDiff)) {
+        if ((!blockDiff.id && !this.lastBlockDiff) || (this.lastBlockDiff && !_.isEqual(blockDiff, this.lastBlockDiff))) {
             this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
         }
         this.lastBlockDiff = blockDiff;
