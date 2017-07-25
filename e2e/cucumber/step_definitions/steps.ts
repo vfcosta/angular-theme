@@ -4,12 +4,12 @@ import { browser, by, element } from 'protractor';
 import { protractor } from 'protractor/built';
 import * as utils from './utils';
 
-let path = require('path');
-let chai = require('chai');
-let chaiAsPromised = require('chai-as-promised');
+const path = require('path');
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
-let expect = chai.expect;
+const expect = chai.expect;
 
 defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     setDefaultTimeout(50000);
@@ -32,7 +32,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I fill in the following:', (table, callback) => {
-        for (let line of table.raw()) {
+        for (const line of table.raw()) {
             element(by.css(line[0])).sendKeys(line[1]);
         };
         callback();
@@ -119,7 +119,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I enter text {stringInDoubleQuotes} to {stringInDoubleQuotes} input', (text, field) => {
-        return element(by.css(field)).clear().then( () => { return element(by.css(field)).sendKeys(text); } );
+        return element(by.css(field)).clear().then( () => element(by.css(field)).sendKeys(text) );
     });
 
     When('I choose first element from typeahead', () => {
