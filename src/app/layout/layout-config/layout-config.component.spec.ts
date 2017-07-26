@@ -2,7 +2,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { Component } from '@angular/core';
 import { LayoutConfigComponent } from './layout-config.component';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
@@ -10,7 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { KeysPipe } from '../../shared/pipes/keys.filter';
 
 describe("Layout Config Component", () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<LayoutConfigComponent>;
     let component: LayoutConfigComponent;
 
@@ -61,13 +61,13 @@ describe("Layout Config Component", () => {
     });
 
     function all(selector: string) {
-        let compiled = fixture.debugElement;
+        const compiled = fixture.debugElement;
         return compiled.queryAll(By.css(selector));
     }
 
     function renderDynamicDropDownMenu() {
         fixture.detectChanges();
-        let toggleButton = fixture.nativeElement.querySelector('button');
+        const toggleButton = fixture.nativeElement.querySelector('button');
         toggleButton.click();
         tick();
         fixture.detectChanges();

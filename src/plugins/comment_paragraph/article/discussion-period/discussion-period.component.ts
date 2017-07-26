@@ -1,8 +1,10 @@
-import { Input, Component, Inject } from '@angular/core';
+import { Input, Component, Inject, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'discussion-period',
-    template: require('plugins/comment_paragraph/article/discussion-period/discussion-period.html')
+    templateUrl: './discussion-period.html',
+    styleUrls: ['./discussion-period.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DiscussionPeriodComponent {
 
@@ -17,18 +19,18 @@ export class DiscussionPeriodComponent {
     }
 
     notOpened() {
-        let now = new Date();
+        const now = new Date();
         return !!this.article.start_date && new Date(this.article.start_date) > now;
     }
 
     available() {
-        let now = new Date();
+        const now = new Date();
         return (!this.article.start_date || new Date(this.article.start_date) <= now) &&
             (!this.article.end_date || new Date(this.article.end_date) >= now);
     }
 
     closed() {
-        let now = new Date();
+        const now = new Date();
         return !!this.article.end_date && new Date(this.article.end_date) < now;
     }
 

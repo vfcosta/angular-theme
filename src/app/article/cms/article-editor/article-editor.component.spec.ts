@@ -3,14 +3,14 @@ import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { ArticleEditorComponent } from './article-editor.component';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Article Editor Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ArticleEditorComponent>;
         let component: ArticleEditorComponent;
-        let window = {};
+        const window = {};
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

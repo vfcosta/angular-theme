@@ -2,16 +2,18 @@ import { NotificationService } from './../../shared/services/notification.servic
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { PersonService } from './../../../lib/ng-noosfero-api/http/person.service';
 import { SessionService } from './../../login/session.service';
-import { Inject, Input, Component, HostListener, ElementRef, ViewChild  } from "@angular/core";
-import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
-import { ProfileJoinComponent } from "./../../profile/profile-join/profile-join.component";
+import { Inject, Input, Component, HostListener, ElementRef, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
+import { EnvironmentService } from '../../../lib/ng-noosfero-api/http/environment.service';
+import { ProfileJoinComponent } from './../../profile/profile-join/profile-join.component';
 
 
 @Component({
     selector: "noosfero-profile-summary",
-    template: require('app/profile/summary/profile-summary.html')
+    templateUrl: './profile-summary.html',
+    styleUrls: ['./profile-summary.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class ProfileSummaryComponent {
+export class ProfileSummaryComponent implements OnInit {
 
     @Input() profile: noosfero.Profile;
     environment: noosfero.Environment;
@@ -45,7 +47,7 @@ export class ProfileSummaryComponent {
 
     profileLink() {
         if (!this.environment || !this.environment.host || !this.profile) return null;
-        let host = this.environment.host.replace(/https?:\/\//, "");
+        const host = this.environment.host.replace(/https?:\/\//, "");
         return `${host}/${this.profile.identifier}`;
     }
 

@@ -1,6 +1,6 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
-import { RestangularService } from "./restangular_service";
+import { Injectable, Inject } from '@angular/core';
+import { RestangularService } from './restangular_service';
 
 @Injectable()
 export class BlockService extends RestangularService<noosfero.Block> {
@@ -42,24 +42,24 @@ export class BlockService extends RestangularService<noosfero.Block> {
     }
 
     update(block: noosfero.Block) {
-        let element = this.getElement(block.id);
-        let headers = {
+        const element = this.getElement(block.id);
+        const headers = {
             'Content-Type': 'application/json'
         };
         return this.post(null, element, { block: block }, headers);
     }
 
     updateAll(blocks: noosfero.Block[]) {
-        let headers = {
+        const headers = {
             'Content-Type': 'application/json'
         };
         return this.patch({ blocks: blocks }, headers);
     }
 
     uploadImages(block: noosfero.Block, base64ImagesJson: any) {
-        let element = this.getElement(block.id);
-        let headers = { 'Content-Type': 'application/json' };
-        let attributesToUpdate: any = {
+        const element = this.getElement(block.id);
+        const headers = { 'Content-Type': 'application/json' };
+        const attributesToUpdate: any = {
             block: { images_builder: base64ImagesJson }
         };
         return this.post(null, element, attributesToUpdate, headers);

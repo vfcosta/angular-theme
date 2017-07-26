@@ -1,12 +1,13 @@
-import { Input, Inject, Component } from "@angular/core";
-
-declare var _: any;
+import { Input, Inject, Component, ViewEncapsulation, OnInit } from '@angular/core';
+import * as _ from "lodash";
 
 @Component({
-    selector: "noosfero-highlights-block",
-    template: require('app/layout/blocks/highlights/highlights-block.html'),
+    selector: 'noosfero-highlights-block',
+    templateUrl: './highlights-block.html',
+    styleUrls: ['./highlights-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class HighlightsBlockComponent {
+export class HighlightsBlockComponent implements OnInit {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
@@ -16,11 +17,16 @@ export class HighlightsBlockComponent {
 
     ngOnInit() {
         this.images = (<any>this.block.api_content || {}).slides || [];
-        if (!this.block.settings) this.block.settings = <any>{};
+        if (!this.block.settings) {
+            this.block.settings = <any>{};
+        }
         if ((<any>this.block.settings).shuffle) {
             this.images = _.shuffle(this.images);
         }
         this.block.hide = (<any>this.images == null || <any>this.images.length === 0);
+        if (!this.block['active']) {
+            this.block['active'] = 0;
+        }
     }
 
     getTarget(image: any) {
@@ -31,7 +37,9 @@ export class HighlightsBlockComponent {
     }
 
     getTransitionInterval() {
-        if (this.designMode) return 0;
+        if (this.designMode) {
+            return 0;
+        }
         return (<any>this.block.settings).interval * 1000;
     }
 

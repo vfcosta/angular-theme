@@ -2,14 +2,14 @@ import { MockBackend } from '@angular/http/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from "@angular/http";
-import { UserService } from "./user.service";
-import * as helpers from "../../../spec/helpers";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from '@angular/http';
+import { UserService } from './user.service';
+import * as helpers from '../../../spec/helpers';
 
 describe("Services", () => {
     describe("User Service", () => {
         let service: UserService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -24,7 +24,7 @@ describe("Services", () => {
         }));
 
         let data: any;
-        let profile = <noosfero.Profile> {id: 1, identifier: 'profile1'};
+        const profile = <noosfero.Profile> {id: 1, identifier: 'profile1'};
 
         describe("Succesfull request", () => {
             xit("should change user password", () => {

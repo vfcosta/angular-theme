@@ -1,8 +1,8 @@
 import {DesignModeService} from './design-mode.service';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 
 describe('DesignMode Service', () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let service: DesignModeService;
 
     beforeEach(() => {

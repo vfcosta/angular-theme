@@ -6,16 +6,16 @@ import { SessionService } from './../../login/session.service';
 import { HeaderService } from './../../shared/services/header.service';
 import { CollapseModule } from 'ngx-bootstrap';
 import { NavbarComponent } from './navbar.component';
-import * as helpers from "./../../../spec/helpers";
+import * as helpers from './../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Navbar Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<NavbarComponent>;
         let component: NavbarComponent;
-        let user: noosfero.User = <noosfero.User>{ id: 1, login: "user" };
+        const user: noosfero.User = <noosfero.User>{ id: 1, login: "user" };
         let authSubscribe: Function[];
 
         beforeEach(async(() => {

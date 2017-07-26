@@ -6,11 +6,11 @@ import { AuthService } from './auth.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../spec/helpers";
+import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
     describe("Forgot Password Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ForgotPasswordComponent>;
         let component: ForgotPasswordComponent;
 

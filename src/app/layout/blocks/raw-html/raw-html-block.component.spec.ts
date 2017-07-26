@@ -2,7 +2,7 @@ import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import {By} from '@angular/platform-browser';
 import {RawHTMLBlockComponent} from './raw-html-block.component';
 
-const htmlTemplate: string = '<noosfero-raw-htmlblock [block]="block" [owner]="owner"></noosfero-raw-htmlblock>';
+const htmlTemplate = '<noosfero-raw-htmlblock [block]="block" [owner]="owner"></noosfero-raw-htmlblock>';
 
 describe("Components", () => {
 

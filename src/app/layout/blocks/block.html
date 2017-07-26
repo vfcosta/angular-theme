@@ -1,4 +1,4 @@
-<div bootstrap-resizable [designMode]="designMode" [(bootstrapResizableColumns)]="block.settings.visualization.columns" 
+<div [hidden]="!canDisplay()" bootstrapResizable [designMode]="designMode" [(bootstrapResizableColumns)]="block.settings.visualization.columns" 
     [class.invisible-block]="!visible()" class="noosfero-block col-md-{{block.settings?.visualization?.columns || 12}}"
     [@animate]="animation">
     <div *ngIf="designMode" class="actions block-actions" [permission]="block.permissions" permissionAction="allow_edit">

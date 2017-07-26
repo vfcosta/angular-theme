@@ -3,10 +3,10 @@ import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environm
 import { EventEmitter } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import * as helpers from '../../../spec/helpers';
-import { HeaderService } from "./header.service";
+import { HeaderService } from './header.service';
 
 describe("Header Service", () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let service: HeaderService;
     let titleService;
 

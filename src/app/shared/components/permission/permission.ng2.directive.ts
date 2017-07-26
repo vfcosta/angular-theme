@@ -1,6 +1,5 @@
 import { Directive, ElementRef, Input, Inject, Renderer, OnChanges } from '@angular/core';
-
-declare var _: any;
+import * as _ from "lodash";
 
 @Directive({
     selector: '[permission]'

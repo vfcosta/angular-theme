@@ -15,21 +15,22 @@ describe("Components", () => {
     describe("Display Content Block Component", () => {
         let fixture: ComponentFixture<DisplayContentBlockComponent>;
         let component: DisplayContentBlockComponent;
+        const mocks = helpers.getMocks();
 
-        let sections: noosfero.Section[] = [
+        const sections: noosfero.Section[] = [
             { value: 'abstract', checked: 'abstract' },
             { value: 'title', checked: 'title' }
         ];
-        let settings: any = {
+        const settings: any = {
             limit: 6,
             sections: sections
         };
 
-        let articles = [
+        const articles = [
             {name: 'article 1', title: 'article 1', path: 'article-1', abstract: '', publish_date: '2016', body: '', author: '', created_at: '2016'},
             {name: 'article 2', title: 'article 1', path: 'article-2', abstract: '', publish_date: '2016', body: '', author: '', created_at: '2016'}
         ];
-        let articleService = jasmine.createSpyObj("ArticleService", ["getByProfile"]);
+        const articleService = jasmine.createSpyObj("ArticleService", ["getByProfile"]);
         articleService.getByProfile = jasmine.createSpy("getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: articles }));
 
         beforeEach(async(() => {
@@ -39,7 +40,7 @@ describe("Components", () => {
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ArticleService, useValue: articleService },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(DisplayContentBlockComponent);
@@ -49,19 +50,19 @@ describe("Components", () => {
         }));
 
         it("verify abstract is displayed", () => {
-            expect(all("div[innerHtml|='article.abstract']")[0]).not.toBeNull;
+            expect(all("div[innerHtml|='article.abstract']")[0]).not.toBeNull();
         });
 
         it("verify title is displayed", () => {
-            expect(all("div > h5")[0]).not.toBeNull;
+            expect(all("div > h5")[0]).not.toBeNull();
         });
 
         it("verify body is not displayed", () => {
-            expect(all("div[innerHtml|='article.body']")[0]).toBeNull;
+            expect(all("div[innerHtml|='article.body']")[0]).toBeUndefined();
         });
 
         function all(selector: string) {
-            let compiled = fixture.debugElement;
+            const compiled = fixture.debugElement;
             return compiled.queryAll(By.css(selector));
         }
     });

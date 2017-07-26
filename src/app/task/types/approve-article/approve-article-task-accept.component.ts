@@ -1,12 +1,14 @@
 import { TaskAcceptTypeComponent } from './../task-accept-type.component';
-import { Component, Injector, Inject } from "@angular/core";
-import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
+import { Component, Injector, Inject, ViewEncapsulation, OnInit } from '@angular/core';
+import { ArticleService } from '../../../../lib/ng-noosfero-api/http/article.service';
 
 @Component({
     selector: "approve-article-task-accept",
-    template: require("app/task/types/approve-article/approve-article-accept.html"),
+    templateUrl: './approve-article-accept.html',
+    styleUrls: ['./approve-article-accept.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class ApproveArticleTaskAcceptComponent extends TaskAcceptTypeComponent {
+export class ApproveArticleTaskAcceptComponent extends TaskAcceptTypeComponent implements OnInit {
 
     folders: Array<any>;
 
@@ -16,8 +18,8 @@ export class ApproveArticleTaskAcceptComponent extends TaskAcceptTypeComponent {
 
     ngOnInit() {
         super.ngOnInit();
-        let targetProfile = <noosfero.Profile>this.task.target;
-        let root = targetProfile.identifier;
+        const targetProfile = <noosfero.Profile>this.task.target;
+        const root = targetProfile.identifier;
         this.confirmationTask.data = { create_link: true, article_id: this.task.data.article_id, name: this.task.data.name };
 
         this.folders = [{ id: null, path: root }];

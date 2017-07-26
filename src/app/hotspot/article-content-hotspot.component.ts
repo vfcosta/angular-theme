@@ -1,6 +1,6 @@
 import { HotspotModule } from './hotspot.module';
-import { Component, Input, Inject, NgModuleFactory, Compiler } from "@angular/core";
-import { PluginHotspot } from "./plugin-hotspot";
+import { Component, Input, Inject, NgModuleFactory, Compiler } from '@angular/core';
+import { PluginHotspot } from './plugin-hotspot';
 
 @Component({
     selector: "noosfero-hotspot-article-content",

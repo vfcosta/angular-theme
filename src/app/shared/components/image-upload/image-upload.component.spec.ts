@@ -4,7 +4,7 @@ import { By } from '@angular/platform-browser';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ModalModule } from 'ngx-bootstrap';
-import { ImageUploadComponent } from "./image-upload.component";
+import { ImageUploadComponent } from './image-upload.component';
 
 describe("Components", () => {
 
@@ -13,10 +13,10 @@ describe("Components", () => {
         let fixture: ComponentFixture<ImageUploadComponent>;
         let component: ImageUploadComponent;
 
-        let expectedData = "iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAgAElEQ…Cm2OLHvfdNPte3zrH709Q0esN1LPQ0t7DL696ERpu+9/8BVPLIpElf7VYAAAAASUVORK5CYII=";
-        let testDataUrl = "data:image/png;base64," + expectedData;
+        const expectedData = "iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAYAAACtWK6eAAAgAElEQ…Cm2OLHvfdNPte3zrH709Q0esN1LPQ0t7DL696ERpu+9/8BVPLIpElf7VYAAAAASUVORK5CYII=";
+        const testDataUrl = "data:image/png;base64," + expectedData;
 
-        let translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
+        const translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -33,7 +33,7 @@ describe("Components", () => {
         }));
 
         it("get data", () => {
-            let result = component.getBase64ImageJson(testDataUrl, "test.png");
+            const result = component.getBase64ImageJson(testDataUrl, "test.png");
             expect(result.tempfile).toBe(expectedData);
         });
 

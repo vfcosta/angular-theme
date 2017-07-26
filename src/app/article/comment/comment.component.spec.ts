@@ -7,13 +7,13 @@ import { DateFormatPipe } from './../../shared/pipes/date-format.pipe';
 import { MomentModule } from 'angular2-moment';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { CommentComponent } from './comment.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Comment Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<CommentComponent>;
         let component: CommentComponent;
 

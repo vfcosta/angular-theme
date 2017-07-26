@@ -1,16 +1,16 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, HostListener } from '@angular/core';
 
 @Directive({
-  selector : '[href]',
-  host : {
-    '(click)' : 'preventDefault($event)'
-  }
+  selector : '[href]'
 })
-export class EmptyLink {
+export class EmptyLinkDirective {
 
     @Input() href;
 
+    @HostListener('click', ['$event'])
     preventDefault(event) {
-        if (this.href.length === 0 || this.href === "#") event.preventDefault();
+        if (this.href.length === 0 || this.href === "#") {
+            event.preventDefault();
+        }
     }
 }

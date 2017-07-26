@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: "profile-edition",
-    template: require('app/profile/configuration/profile-edition.html')
+    templateUrl: './profile-edition.html'
 })
 export class ProfileEditionComponent {
 

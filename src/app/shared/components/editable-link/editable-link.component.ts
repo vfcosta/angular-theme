@@ -1,10 +1,12 @@
-import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ElementRef, HostListener, ViewChild, Output, EventEmitter, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: "noosfero-editable-link",
-    template: require("app/shared/components/editable-link/editable-link.html")
+    templateUrl: './editable-link.html',
+    styleUrls: ['./editable-link.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class EditableLinkComponent {
+export class EditableLinkComponent implements OnInit {
 
     @Output() linkChange = new EventEmitter<any>();
     @Input() name: string;

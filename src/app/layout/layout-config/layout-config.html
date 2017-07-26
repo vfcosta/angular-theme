@@ -2,7 +2,7 @@
   <button id="layout-config-btn" dropdownToggle class="btn btn-default btn-sm">
     {{ 'layout-config.title' | translate }} <i class="fa fa-caret-down fa-fw"></i>
   </button>
-  <ul *dropdownMenu class="dropdown-menu layout-config" role="menu">
+  <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu">
     <li *ngFor="let layout of layouts() | keys" role="menuitem" class="layout-template-option layout-{{layout}}" [ngClass]="{'selected': isSelected(layout)}">
       <a href="#" (click)="changeLayout(layout)" class="dropdown-item">
         <img src="/assets/images/icons-app/layouts/{{layout}}.png">

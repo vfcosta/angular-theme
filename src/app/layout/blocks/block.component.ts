@@ -1,20 +1,22 @@
-import { Output, EventEmitter, ChangeDetectorRef } from '@angular/core';
+import { Output, EventEmitter, ChangeDetectorRef, ViewEncapsulation, OnInit } from '@angular/core';
 import { ProfileComponent } from './../../profile/profile.component';
 import { ActivitiesComponent } from './../../profile/activities/activities.component';
 import { NavigationEnd, Router, Event, ActivatedRoute } from '@angular/router';
 import { Input, Component } from '@angular/core';
 import { NotificationService } from '../../shared/services/notification.service';
-import { AuthService, SessionService, AuthEvents } from "../../login";
-import { TranslatorService } from "../../shared/services/translator.service";
-import { DesignModeService } from "../../shared/services/design-mode.service";
+import { AuthService, SessionService, AuthEvents } from '../../login';
+import { TranslatorService } from '../../shared/services/translator.service';
+import { DesignModeService } from '../../shared/services/design-mode.service';
 import { animateFactory } from 'ng2-animate';
 
 @Component({
     selector: 'noosfero-block',
-    template: require('app/layout/blocks/block.html'),
-    animations: [animateFactory(500, 0, 'ease-in')]
+    templateUrl: './block.html',
+    animations: [animateFactory(500, 0, 'ease-in')],
+    styleUrls: ['./block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class BlockComponent {
+export class BlockComponent implements OnInit {
 
     @Input() block: noosfero.Block;
     @Input() box: noosfero.Box;
@@ -64,8 +66,8 @@ export class BlockComponent {
     }
 
     canDisplay() {
-        if (this.block._destroy) return false;
         if (this.designMode) return true;
+        if (this.block._destroy) return false;
         return this.visible() && this.displayToUser() &&
             this.displayOnLanguage(this.translatorService.currentLanguage()) &&
             !this.block.hide;
@@ -77,25 +79,25 @@ export class BlockComponent {
     }
 
     protected visible() {
-        let display = this.block.settings ? (<any>this.block.settings)['display'] : null;
+        const display = this.block.settings ? (<any>this.block.settings)['display'] : null;
         return !display || ((this.isHomepage ? display !== "except_home_page" : display !== "home_page_only") && display !== "never");
     }
 
     protected displayToUser() {
-        let displayUser = this.block.settings ? (<any>this.block.settings)['display_user'] : null;
+        const displayUser = this.block.settings ? (<any>this.block.settings)['display_user'] : null;
         return !displayUser || displayUser === "all" ||
             (this.currentUser ? displayUser === "logged" : displayUser === "not_logged");
     }
 
     protected displayOnLanguage(language: string) {
-        let displayLanguage = this.block.settings ? (<any>this.block.settings)['language'] : null;
+        const displayLanguage = this.block.settings ? (<any>this.block.settings)['language'] : null;
         return !displayLanguage || displayLanguage === "all" ||
             language === displayLanguage;
     }
 
     protected verifyHomepage() {
         if (this.owner && this.owner.type !== "Environment") {
-            let profile = <noosfero.Profile>this.owner;
+            const profile = <noosfero.Profile>this.owner;
             if (profile.homepage) {
                 this.isHomepage = this.router.url === profile.homepage;
             } else {

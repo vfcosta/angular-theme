@@ -1,10 +1,12 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, Inject } from "@angular/core";
-import {ArticleService} from "./../../lib/ng-noosfero-api/http/article.service";
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import {ArticleService} from './../../lib/ng-noosfero-api/http/article.service';
 
 @Component({
     selector: 'search',
-    template: require('app/search/search.html'),
+    templateUrl: './search.html',
+    styleUrls: ['./search.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class SearchComponent {
 
@@ -12,7 +14,7 @@ export class SearchComponent {
     query: string;
     totalResults = 0;
     perPage = 10;
-    currentPage: number = 0;
+    currentPage = 0;
 
     constructor(protected articleService: ArticleService, private router: Router, private route: ActivatedRoute) {
         this.query = route.snapshot.queryParams['query'];
@@ -25,7 +27,7 @@ export class SearchComponent {
     }
 
     loadPage() {
-        let filters = {
+        const filters = {
             query: this.query,
             per_page: this.perPage,
             page: this.currentPage

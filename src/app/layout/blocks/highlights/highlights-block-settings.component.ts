@@ -1,10 +1,12 @@
-import { Input, Inject, Component, OnInit, forwardRef, Injector } from '@angular/core';
-import { BlockService } from "../../../../lib/ng-noosfero-api/http/block.service";
+import { Input, Inject, Component, OnInit, forwardRef, Injector, ViewEncapsulation } from '@angular/core';
+import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 import { BlockSettingsComponent } from '../block-settings.component';
 
 @Component({
     selector: "noosfero-highlights-block-settings",
-    template: require('app/layout/blocks/highlights/highlights-block-settings.html')
+    templateUrl: './highlights-block-settings.html',
+    styleUrls: ['./highlights-block-settings.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class HighlightsBlockSettingsComponent implements OnInit {
 
@@ -42,7 +44,7 @@ export class HighlightsBlockSettingsComponent implements OnInit {
         this.blockService.uploadImages(this.block, [data]).then((result: any) => {
             this.block.images = result.data.images;
             if (this.block.images.length > 0) {
-                let image = this.block.images[this.block.images.length - 1];
+                const image = this.block.images[this.block.images.length - 1];
                 slide.image_id = image.id;
                 slide.image_src = image.url;
             }

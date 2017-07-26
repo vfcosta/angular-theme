@@ -25,7 +25,7 @@ export function provideMockBackend() {
 export function mockBackendConnection(backend: MockBackend, url, body: any = {}, headers: any = {}, status: number = 200) {
     backend.connections.subscribe((connection: MockConnection) => {
         if (connection.request.url === url) {
-            let options = {
+            const options = {
                 // body: JSON.stringify(body),
                 body: body,
                 headers: new Headers(headers),
@@ -37,9 +37,9 @@ export function mockBackendConnection(backend: MockBackend, url, body: any = {},
     });
 }
 
-export {mocks, getMocks} from "./mocks";
+export {getMocks} from "./mocks";
 
-export var fixtures = {
+export let fixtures = {
     user: {
         id: 1,
         login: 'user',

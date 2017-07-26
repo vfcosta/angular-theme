@@ -1,14 +1,16 @@
 import { ActivatedRoute } from '@angular/router';
 import { PersonService } from './../../../../lib/ng-noosfero-api/http/person.service';
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, ViewEncapsulation, OnInit } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
 import { DisplayStyles } from '../../profile-list/profile-list.component';
 
 @Component({
     selector: "person-friends",
-    template: require('app/profile/configuration/friends/person-friends.html'),
+    templateUrl: './person-friends.html',
+    styleUrls: ['./person-friends.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class PersonFriendsComponent {
+export class PersonFriendsComponent implements OnInit {
 
     profile: noosfero.Profile;
     friends: noosfero.Person[];
@@ -33,7 +35,7 @@ export class PersonFriendsComponent {
     }
 
     loadPage($event: any) {
-        let filters = {
+        const filters = {
             per_page: this.perPage,
             page: $event.page,
             search: this.search,

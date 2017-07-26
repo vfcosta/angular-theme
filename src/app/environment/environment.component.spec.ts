@@ -7,13 +7,13 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { ThemeService } from './../shared/services/theme.service';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DesignModeService } from './../shared/services/design-mode.service';
-import { EnvironmentComponent } from "./environment.component";
-import * as helpers from "../../spec/helpers";
+import { EnvironmentComponent } from './environment.component';
+import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
     describe("Environment Component", () => {
-        let defaultEnvironment = <any>{ id: 1, name: 'Noosfero', boxes: [ Object({ id: 2 }) ] };
-        let mocks = helpers.getMocks();
+        const defaultEnvironment = <any>{ id: 1, name: 'Noosfero', boxes: [ Object({ id: 2 }) ] };
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<EnvironmentComponent>;
         let component: EnvironmentComponent;
 

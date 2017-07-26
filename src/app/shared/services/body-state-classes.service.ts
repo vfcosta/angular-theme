@@ -1,12 +1,11 @@
 import { Router, NavigationEnd, Event, ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'angular-2-local-storage';
-import { Directive, Inject, Injectable, EventEmitter } from "@angular/core";
+import { Directive, Inject, Injectable, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
-import { AuthEvents } from "../../login/auth-events";
-import { AuthService } from "./../../login/auth.service";
+import { AuthEvents } from '../../login/auth-events';
+import { AuthService } from './../../login/auth.service';
 import { DesignModeService } from './design-mode.service';
-
-declare var _: any;
+import * as _ from "lodash";
 
 export interface StartParams {
     skin?: string;
@@ -28,7 +27,7 @@ export interface StartParams {
 @Injectable()
 export class BodyStateClassesService {
 
-    private started: boolean = false;
+    private started = false;
     public skin: string;
     public bodyClasses: string[] = [];
     public changeClasses = new EventEmitter<string[]>();
@@ -73,7 +72,7 @@ export class BodyStateClassesService {
     }
 
     removeBodyClass(className: string) {
-        _.remove(this.bodyClasses, (cl: string) => { return cl === className; });
+        _.remove(this.bodyClasses, (cl: string) => cl === className);
         this.changeClasses.next(this.bodyClasses);
     }
 
@@ -104,7 +103,7 @@ export class BodyStateClassesService {
     }
 
     private getLastChildRoute(current: any) {
-        for (let child of current.children) {
+        for (const child of current.children) {
             if (child.children.length > 0) {
                 return this.getLastChildRoute(child);
             } else {
@@ -117,7 +116,7 @@ export class BodyStateClassesService {
     private setupStateClassToggle() {
         this.router.events.subscribe((event: Event) => {
             if (event instanceof NavigationEnd) {
-                let lastComponent = this.getLastChildRoute(this.router.routerState.root).component;
+                const lastComponent = this.getLastChildRoute(this.router.routerState.root).component;
                 let stateName = "";
                 if (lastComponent) stateName = lastComponent.name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
                 this.switchStateClasses(stateName);

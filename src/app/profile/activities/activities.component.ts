@@ -1,5 +1,5 @@
-import { Component, Input, Inject } from "@angular/core";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { Component, Input, Inject, ViewEncapsulation } from '@angular/core';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 
 /**
  * @ngdoc controller
@@ -10,14 +10,16 @@ import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.servic
 const LIMIT = 10;
 @Component({
     selector: "noosfero-activities",
-    template: require('app/profile/activities/activities.html')
+    templateUrl: './activities.html',
+    styleUrls: ['./activities.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ActivitiesComponent {
 
     activities: any;
-    page: number = 1;
+    page = 1;
     profile: noosfero.Profile;
-    hasActivities: boolean = false;
+    hasActivities = false;
 
     constructor(private profileService: ProfileService) {
         this.init();

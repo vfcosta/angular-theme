@@ -1,15 +1,17 @@
-import { ElementRef, ViewChild, HostListener, Component, Inject, Input } from "@angular/core";
-import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
-import { AuthService, AuthEvents } from "./../../login";
-import { EventsHubService } from "../../shared/services/events-hub.service";
-import { NoosferoKnownEvents } from "../../known-events";
+import { ElementRef, ViewChild, HostListener, Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
+import { TaskService } from '../../../lib/ng-noosfero-api/http/task.service';
+import { AuthService, AuthEvents } from './../../login';
+import { EventsHubService } from '../../shared/services/events-hub.service';
+import { NoosferoKnownEvents } from '../../known-events';
 import { SessionService } from '../../login/session.service';
 
 @Component({
     selector: "tasks-menu",
-    template: require("app/task/tasks-menu/tasks-menu.html")
+    templateUrl: './tasks-menu.html',
+    styleUrls: ['./tasks-menu.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class TasksMenuComponent {
+export class TasksMenuComponent implements OnInit {
 
     @Input() taskTypes = ['AddMember', 'ApproveComment', 'ApproveArticle', 'AbuseComplaint', 'SuggestArticle', 'CreateCommunity'];
     @ViewChild("taskPanel") taskPanel: any;

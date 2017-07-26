@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 
 @Component({
     selector: "add-friend-task",
-    template: require("app/task/types/approve-comment/approve-comment.html")
+    templateUrl: './approve-comment.html'
 })
 export class ApproveCommentTaskComponent extends TaskTypeComponent {
 

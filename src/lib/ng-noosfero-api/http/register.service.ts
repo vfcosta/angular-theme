@@ -1,5 +1,5 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class RegisterService {

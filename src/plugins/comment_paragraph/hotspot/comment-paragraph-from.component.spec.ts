@@ -1,17 +1,17 @@
 import { CommentFormHotspotComponent } from './../../../app/hotspot/comment-form-hotspot.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import { CommentParagraphFormHotspotComponent } from "./comment-paragraph-form.component";
+import { CommentParagraphFormHotspotComponent } from './comment-paragraph-form.component';
 import { Injector } from '@angular/core';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
     describe("Comment Paragraph Form Hotspot Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<CommentParagraphFormHotspotComponent>;
         let component: CommentParagraphFormHotspotComponent;
 
         beforeEach(async(() => {
-            let commentFormHotspotComponent = {comment: {}, parent: {}};
+            const commentFormHotspotComponent = {comment: {}, parent: {}};
             TestBed.configureTestingModule({
                 declarations: [CommentParagraphFormHotspotComponent],
                 providers: [

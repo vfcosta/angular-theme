@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 export const DisplayStyles = {
     avatar: 'avatar',
@@ -7,7 +7,9 @@ export const DisplayStyles = {
 
 @Component({
     selector: 'profile-list',
-    template: require("app/profile/profile-list/profile-list.component.html")
+    templateUrl: './profile-list.component.html',
+    styleUrls: ['./profile-list.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileListComponent {
     @Input() profiles: noosfero.Profile[];

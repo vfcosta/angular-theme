@@ -8,11 +8,11 @@ import { FormsModule } from '@angular/forms';
 import {DiscussionEditorComponent} from './discussion-editor.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "../../../../../spec/helpers";
+import * as helpers from '../../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Discussion Editor Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<DiscussionEditorComponent>;
         let component: DiscussionEditorComponent;
 
@@ -32,7 +32,7 @@ describe("Components", () => {
         }));
 
         it("set start_date when it was defined in article", () => {
-            let article = {start_date: new Date()};
+            const article = {start_date: new Date()};
             component.article = <any>article;
             fixture.detectChanges();
             expect(component.start_date.date.year).toEqual(article.start_date.getFullYear());
@@ -49,7 +49,7 @@ describe("Components", () => {
         });
 
         it("set end_date as article end_date when it was defined", () => {
-            let article = {end_date: new Date()};
+            const article = {end_date: new Date()};
             component.article = <any>article;
             fixture.detectChanges();
             expect(component.end_date.date.year).toEqual(article.end_date.getFullYear());

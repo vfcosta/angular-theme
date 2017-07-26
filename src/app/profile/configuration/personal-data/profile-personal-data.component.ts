@@ -1,8 +1,9 @@
+import { PersonalDataDictionary } from './personal-data-dictionary';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { ProfileService } from './../../../../lib/ng-noosfero-api/http/profile.service';
-import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, Input, Inject, Output, ViewChild, EventEmitter, ViewEncapsulation, OnInit } from '@angular/core';
 
 /**
  * @ngdoc controller
@@ -12,16 +13,18 @@ import { Component, Input, Inject, Output, ViewChild, EventEmitter } from '@angu
  */
 @Component({
     selector: "profile-personal-data",
-    template: require('app/profile/configuration/personal-data/profile-personal-data.html')
+    templateUrl: './profile-personal-data.html',
+    styleUrls: ['./profile-personal-data.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class ProfilePersonalDataComponent {
+export class ProfilePersonalDataComponent implements OnInit {
 
     @Input() profile: noosfero.Profile;
     @Output() finished = new EventEmitter<noosfero.Profile>();
 
     @ViewChild('identifierErrors') identifierErrors;
 
-    customFieldsDict: Dictionary;
+    customFieldsDict: PersonalDataDictionary;
 
     updatedProfile: noosfero.Profile;
 
@@ -38,7 +41,7 @@ export class ProfilePersonalDataComponent {
     save() {
         this.profileService.update(this.updatedProfile).then(() => {
             this.errors = null;
-            let identifierChanged = this.profile.identifier !== this.updatedProfile.identifier;
+            const identifierChanged = this.profile.identifier !== this.updatedProfile.identifier;
             this.profile = Object.assign(this.profile, this.updatedProfile);
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
             this.finished.emit(this.profile);
@@ -56,10 +59,10 @@ export class ProfilePersonalDataComponent {
         this.updatedProfile = <noosfero.Profile>['id', 'name', 'email'].reduce((object, key) => {
             object[key] = this.profile[key]; return object;
         }, {});
-        //this.updatedProfile = <noosfero.Profile>['id', 'name', 'email', 'additional_data'].reduce((object, key) => {
-            //object[key] = this.profile[key]; return object;
-        //}, {});
-        //this.customFieldsDict = this.updatedProfile.additional_data;
+        // this.updatedProfile = <noosfero.Profile>['id', 'name', 'email', 'additional_data'].reduce((object, key) => {
+            // object[key] = this.profile[key]; return object;
+        // }, {});
+        // this.customFieldsDict = this.updatedProfile.additional_data;
     }
 
     keys(): Array<string> {
@@ -67,15 +70,11 @@ export class ProfilePersonalDataComponent {
     }
 
     translateLabel(label) {
-        let translation = this.translatorService.translate('profile.edition.' + label);
+        const translation = this.translatorService.translate('profile.edition.' + label);
         return translation.indexOf('profile.edition.') >= 0 ? label : translation;
     }
 
     fieldType(label) {
         return label.indexOf('date') >= 0 ? 'date' : 'text';
     }
-}
-
-interface Dictionary {
-    [index: string]: string;
 }

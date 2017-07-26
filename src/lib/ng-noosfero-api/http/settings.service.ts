@@ -1,6 +1,6 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
-import { RestangularService } from "./restangular_service";
+import { Injectable, Inject } from '@angular/core';
+import { RestangularService } from './restangular_service';
 
 @Injectable()
 export class SettingsService extends RestangularService<noosfero.Block> {

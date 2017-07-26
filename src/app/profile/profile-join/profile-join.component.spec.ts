@@ -11,28 +11,25 @@ import { Pipe, Input, Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { MembershipStatus, FriendshipStatus } from '../../../lib/ng-noosfero-api/http/profile.service';
 import { ProfileJoinComponent } from './profile-join.component';
-import * as helpers from "./../../../spec/helpers";
+import * as helpers from './../../../spec/helpers';
 
 describe("Components", () => {
-
     describe("Profile Join Component", () => {
-
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         let fixture: ComponentFixture<ProfileJoinComponent>;
         let component: ProfileJoinComponent;
 
-        let retorno: any;
-        let translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
+        const translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
 
         beforeEach(async(() => {
             spyOn(mocks.sessionService, 'currentPerson').and.callThrough();
-            spyOn(mocks.personService, 'addFriend').and.callThrough();            
+            spyOn(mocks.personService, 'addFriend').and.callThrough();
             spyOn(mocks.personService, 'removeFriend').and.callThrough();
             spyOn(mocks.personService, 'getFriendshipState').and.callThrough();
             spyOn(mocks.profileService, 'addMember').and.callThrough();
             spyOn(mocks.profileService, 'removeMember').and.callThrough();
-            spyOn(mocks.communityService, 'getMembershipState').and.callThrough();            
+            spyOn(mocks.communityService, 'getMembershipState').and.callThrough();
 
             TestBed.configureTestingModule({
                 declarations: [ProfileJoinComponent],
@@ -41,7 +38,7 @@ describe("Components", () => {
                     { provide: ProfileService, useValue: mocks.profileService },
                     { provide: PersonService, useValue: mocks.personService },
                     { provide: SessionService, useValue: mocks.sessionService },
-                    { provide: NotificationService, useValue:mocks.notificationService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: EventsHubService, useValue: mocks.eventsHubService },
                     { provide: TranslatorService, useValue: translatorService },
                     { provide: CommunityService, useValue: mocks.communityService }
@@ -86,8 +83,7 @@ describe("Components", () => {
             component.isPerson = jasmine.createSpy("isPerson").and.returnValue(false);
             component['relationshipState'] = MembershipStatus.Member;
             fixture.detectChanges();
-            let compiled = fixture.debugElement;
-            expect(compiled.queryAll(By.css('.actions .profile-actions .remove-of-community')).length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css('.actions .profile-actions .remove-of-community')).length).toEqual(1);
         });
 
         it("display button to remove frienship for friends", () => {
@@ -95,24 +91,22 @@ describe("Components", () => {
             component.profileType = jasmine.createSpy("profileType").and.returnValue('person');
             component['relationshipState'] = FriendshipStatus.Friend;
             fixture.detectChanges();
-            let compiled = fixture.debugElement;
-            expect(compiled.queryAll(By.css('.actions .profile-actions .remove-of-person')).length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css('.actions .profile-actions .remove-of-person')).length).toEqual(1);
         });
 
         it("join community", () => {
-            let compiled = fixture.debugElement;
             component.addRelationship();
             expect(mocks.profileService.addMember).toHaveBeenCalled();
         });
 
-        it("add friend", () => {            
+        it("add friend", () => {
             component.isPerson = jasmine.createSpy("isPerson").and.returnValue(true);
             fixture.detectChanges();
             component.addRelationship();
             expect(mocks.personService.addFriend).toHaveBeenCalled();
         });
 
-        it("leave community", () => {            
+        it("leave community", () => {
             component.removeRelationship();
             expect(mocks.profileService.removeMember).toHaveBeenCalled();
         });
@@ -124,31 +118,29 @@ describe("Components", () => {
             expect(mocks.personService.removeFriend).toHaveBeenCalled();
         });
 
-        it("get membership state", () => {            
+        it("get membership state", () => {
             component.loadRelationship();
             expect(mocks.communityService.getMembershipState).toHaveBeenCalled();
         });
 
         it("get friendship state", () => {
             component.isPerson = jasmine.createSpy("isPerson").and.returnValue(true);
-            fixture.detectChanges();            
+            fixture.detectChanges();
             component.loadRelationship();
             expect(mocks.personService.getFriendshipState).toHaveBeenCalled();
         });
 
         it("display wait button when user is waiting membership approval", () => {
-            let compiled = fixture.debugElement;
             component['relationshipState'] = MembershipStatus.WaitingForApproval;
             fixture.detectChanges();
-            expect(compiled.queryAll(By.css('.actions .wait-community')).length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css('.actions .wait-community')).length).toEqual(1);
         });
 
         it("display wait button when user is waiting friendship approval", () => {
-            let compiled = fixture.debugElement;
             component['relationshipState'] = FriendshipStatus.WaitingForApproval;
             component.profileType = jasmine.createSpy("profileType").and.returnValue('person');
             fixture.detectChanges();
-            expect(compiled.queryAll(By.css('.actions .wait-person')).length).toEqual(1);
+            expect(fixture.debugElement.queryAll(By.css('.actions .wait-person')).length).toEqual(1);
         });
 
         it("should hasRelationship return true when member state is Member", () => {
@@ -197,10 +189,9 @@ describe("Components", () => {
         });
 
         it("not display add/remove button when view the current user profile", () => {
-            let compiled = fixture.debugElement;
             fixture.detectChanges();
-            expect(compiled.queryAll(By.css('.add-friend')).length).toEqual(0);
-            expect(compiled.queryAll(By.css('.remove-friend')).length).toEqual(0);
+            expect(fixture.debugElement.queryAll(By.css('.add-friend')).length).toEqual(0);
+            expect(fixture.debugElement.queryAll(By.css('.remove-friend')).length).toEqual(0);
         });
 
         it("should hasRelationship return false when member state is WaitingForApproval", () => {

@@ -1,7 +1,7 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
-import { RestangularService } from "./restangular_service";
-import { ProfileService } from "./profile.service";
+import { Injectable, Inject } from '@angular/core';
+import { RestangularService } from './restangular_service';
+import { ProfileService } from './profile.service';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -47,12 +47,12 @@ export class PersonService extends RestangularService<noosfero.Person> {
     }
 
     uploadImage(profile: noosfero.Profile, base64ImageJson: any) {
-        let headers = { 'Content-Type': 'application/json' };
+        const headers = { 'Content-Type': 'application/json' };
         // TODO dynamically copy the selected attributes to update
-        let attributesToUpdate: any = {
+        const attributesToUpdate: any = {
             person: { image_builder: base64ImageJson }
         };
-        let restRequest = this.getElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
+        const restRequest = this.getElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 

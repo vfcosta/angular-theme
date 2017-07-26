@@ -2,22 +2,22 @@ import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.servi
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { By } from '@angular/platform-browser';
 import {DiscussionBlockComponent} from './discussion-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
     describe("Discussion Block Component", () => {
-        let mocks = helpers.getMocks();
-        let settingsObj = {};
-        let article = <noosfero.Article>{ name: "article1" };
-        let profile = { name: 'profile-name' };
+        const mocks = helpers.getMocks();
+        const settingsObj = {};
+        const article = <noosfero.Article>{ name: "article1" };
+        const profile = { name: 'profile-name' };
         let fixture: ComponentFixture<DiscussionBlockComponent>;
         let component: DiscussionBlockComponent;
         let onRemove: Function;
 
         beforeEach(async(() => {
-            spyOn(mocks.blockService, "getApiContent").and.returnValue(Promise.resolve({ articles: [article], headers: (name: string) => { return name; } }));
+            spyOn(mocks.blockService, "getApiContent").and.returnValue(Promise.resolve({ articles: [article], headers: (name: string) => name }));
             mocks.articleService.subscribeToModelRemoved = (fn: Function) => { onRemove = fn; };
             TestBed.configureTestingModule({
                 declarations: [DiscussionBlockComponent],

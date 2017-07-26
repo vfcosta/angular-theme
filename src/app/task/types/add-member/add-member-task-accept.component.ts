@@ -1,12 +1,12 @@
 import { TaskAcceptTypeComponent } from './../task-accept-type.component';
-import { Component, Input, Inject, Injector } from "@angular/core";
-import { RoleService } from "../../../../lib/ng-noosfero-api/http/role.service";
+import { Component, Input, Inject, Injector, OnInit } from '@angular/core';
+import { RoleService } from '../../../../lib/ng-noosfero-api/http/role.service';
 
 @Component({
     selector: "add-member-task-accept",
-    template: require("app/task/types/add-member/add-member-accept.html"),
+    templateUrl: './add-member-accept.html',
 })
-export class AddMemberTaskAcceptComponent extends TaskAcceptTypeComponent {
+export class AddMemberTaskAcceptComponent extends TaskAcceptTypeComponent implements OnInit {
 
     roles: noosfero.Role[];
 
@@ -24,7 +24,7 @@ export class AddMemberTaskAcceptComponent extends TaskAcceptTypeComponent {
     }
 
     toggleSelection(role: noosfero.Role) {
-        let index = (<noosfero.AddMemberTask>this.confirmationTask).roles.indexOf(role.id);
+        const index = (<noosfero.AddMemberTask>this.confirmationTask).roles.indexOf(role.id);
         if (index >= 0) {
             (<noosfero.AddMemberTask>this.confirmationTask).roles.splice(index, 1);
         } else {

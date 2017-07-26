@@ -6,18 +6,18 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommunityMembersComponent } from './community-members.component';
 import { PaginationModule } from 'ngx-bootstrap';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
 
     describe("Community Members Component", () => {
         let fixture: ComponentFixture<CommunityMembersComponent>;
         let component: CommunityMembersComponent;
-        let state = jasmine.createSpyObj("$state", ["href"]);
-        let profileService = jasmine.createSpyObj("profileService", ["getCurrentProfile", "getMembers"]);
+        const state = jasmine.createSpyObj("$state", ["href"]);
+        const profileService = jasmine.createSpyObj("profileService", ["getCurrentProfile", "getMembers"]);
         profileService.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ people: [{ identifier: "person1" }] }));
-        let currentProfile = { id: 1 };
-        let members = [{ id: 1 }, { id: 2 }];
+        const currentProfile = { id: 1 };
+        const members = [{ id: 1 }, { id: 2 }];
 
         profileService.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(
             Promise.resolve({
@@ -33,7 +33,7 @@ describe("Components", () => {
             }));
 
 
-        let translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
+        const translatorService = jasmine.createSpyObj("translatorService", ["translate"]);
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

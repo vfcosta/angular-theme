@@ -4,15 +4,15 @@ import { ArticleBlogComponent } from './blog.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NgPipesModule } from 'ngx-pipes';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Blog Component", () => {
     let fixture: ComponentFixture<ArticleBlogComponent>;
     let component: ArticleBlogComponent;
-    let mocks = helpers.getMocks();
-    let article1 = <noosfero.Article>{ id: 1, title: 'The article test' };
-    let article2 = <noosfero.Article>{ id: 1, title: 'The article test' };
-    let articles = [ article1, article2 ];
+    const mocks = helpers.getMocks();
+    const article1 = <noosfero.Article>{ id: 1, title: 'The article test' };
+    const article2 = <noosfero.Article>{ id: 1, title: 'The article test' };
+    const articles = [ article1, article2 ];
 
     beforeEach(async(() => {
         spyOn(mocks.articleService, "getChildren").and.returnValue(Promise.resolve(null));

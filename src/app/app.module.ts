@@ -1,3 +1,4 @@
+import { NoosferoTranslateLoader } from './shared/noosfero-translate.loader';
 import { HighlightsBlockSettingsComponent } from './layout/blocks/highlights/highlights-block-settings.component';
 import { BlockSettingsComponent } from './layout/blocks/block-settings.component';
 import { CommunityMembersProfileComponent } from './profile/community-members/community-members-profile.component';
@@ -24,7 +25,7 @@ import { ForgotPasswordComponent } from './login/forgot-password.component';
 import { LoginComponent } from './login/login.component';
 import swal from 'sweetalert2';
 import { EventsHubService } from './shared/services/events-hub.service';
-import { CommentParagraphEventService } from './../plugins/comment_paragraph/events/comment-paragraph-event.service';
+import { CommentParagraphEventService } from '../plugins/comment_paragraph/events/comment-paragraph-event.service';
 import { ThemeService } from './shared/services/theme.service';
 import { BodyStateClassesService } from './shared/services/body-state-classes.service';
 import { DesignModeService } from './shared/services/design-mode.service';
@@ -41,7 +42,7 @@ import { RoleService } from './../lib/ng-noosfero-api/http/role.service';
 import { RegisterService } from './../lib/ng-noosfero-api/http/register.service';
 import { PasswordService } from './../lib/ng-noosfero-api/http/password.service';
 import { PermissionService } from './shared/services/permission.service';
-import { CommentParagraphService } from './../plugins/comment_paragraph/http/comment-paragraph.service';
+import { CommentParagraphService } from '../plugins/comment_paragraph/http/comment-paragraph.service';
 import { NotificationService } from './shared/services/notification.service';
 import { TranslatorService } from './shared/services/translator.service';
 import { EnvironmentService } from './../lib/ng-noosfero-api/http/environment.service';
@@ -56,7 +57,7 @@ import { ArticleEditorComponent } from './article/cms/article-editor/article-edi
 import { ActivityHeaderComponent } from './profile/activities/activity/header/activity-header.component';
 import { CustomContentComponent } from './profile/custom-content/custom-content.component';
 import { ValidationMessageComponent } from './shared/components/validation-message/validation-message.component';
-import { AllowCommentComponent } from './../plugins/comment_paragraph/allow-comment/allow-comment.component';
+import { AllowCommentComponent } from '../plugins/comment_paragraph/allow-comment/allow-comment.component';
 import { ArticleDefaultViewComponent } from './article/types/default/article-default.component';
 import { FolderComponent } from './article/types/folder/folder.component';
 import { ArticleBlogComponent } from './article/types/blog/blog.component';
@@ -65,7 +66,7 @@ import { ArticleContentHotspotComponent } from './hotspot/article-content-hotspo
 import { BasicOptionsComponent } from './article/cms/basic-options/basic-options.component';
 import { ArticleToolbarHotspotComponent } from './hotspot/article-toolbar-hotspot.component';
 import { ThemeFooterComponent } from './layout/theme-footer/theme-footer.component';
-import * as theme from '../../themes';
+import * as theme from '../theme';
 import { ThemeHeaderComponent } from './layout/theme-header/theme-header.component';
 import { RegisterComponent } from './account/register.component';
 import { SearchComponent } from './search/search.component';
@@ -84,7 +85,7 @@ import { ProfileHeaderComponent } from './profile/header/profile-header.componen
 import { AddBlockComponent } from './layout/boxes/add-block/add-block.component';
 import { TopProfileImageComponent } from './profile/top-image/top-profile-image.component';
 import { BlockEditionComponent } from './layout/blocks/block-edition/block-edition.component';
-import { BreadcrumbsBlockComponent } from './../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
+import { BreadcrumbsBlockComponent } from '../plugins/breadcrumbs/blocks/breadcrumbs-block/breadcrumbs-block.component';
 import { DisplayContentBlockComponent } from './layout/blocks/display-content/display-content-block.component';
 import { HighlightsBlockComponent } from './layout/blocks/highlights/highlights-block.component';
 import { TagCloudModule } from 'angular-tag-cloud-module';
@@ -119,7 +120,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { RawHTMLBlockComponent } from './layout/blocks/raw-html/raw-html-block.component';
-import { StatisticsBlockComponent } from "./layout/blocks/statistics/statistics-block.component";
+import { StatisticsBlockComponent } from './layout/blocks/statistics/statistics-block.component';
 import { ImageCropperModule } from 'ng2-img-cropper';
 import { PopoverModule, ModalModule, TypeaheadModule, BsDropdownModule, CarouselModule, CollapseModule } from 'ngx-bootstrap';
 import { ProfileListComponent } from './profile/profile-list/profile-list.component';
@@ -128,7 +129,7 @@ import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InviteComponent } from './profile/configuration/communities/invite.component';
 import { RecentDocumentsBlockComponent } from './layout/blocks/recent-documents/recent-documents-block.component';
-import * as plugins from "../plugins";
+import * as plugins from '../plugins';
 import { SharedModule } from './shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
 import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
@@ -137,13 +138,13 @@ import { LocalStorageModule } from 'angular-2-local-storage';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpModule, JsonpModule, Http } from '@angular/http';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { BootstrapResizableDirective } from './shared/components/bootstrap-resizable/bootstrap-resizable.directive';
 import { NgProgressModule, NgProgressBrowserXhr } from 'ngx-progressbar';
 import { BrowserXhr } from '@angular/http';
 import { AppRoutingModule } from './app-routing.module';
+import { environment } from '../environments/environment';
 
 export function RestangularConfigFactory (RestangularProvider, sessionService: SessionService, translatorService: TranslatorService, notificationService: NotificationService) {
     RestangularProvider.setBaseUrl("/api/v1");
@@ -161,8 +162,8 @@ export function RestangularConfigFactory (RestangularProvider, sessionService: S
     });
 }
 
-export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http, '/languages/', '.json');
+export function TranslateLoaderFactory() {
+    return new NoosferoTranslateLoader();
 }
 
 @NgModule({
@@ -196,7 +197,7 @@ export function HttpLoaderFactory(http: Http) {
         TranslateModule.forRoot({
             loader: {
                 provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
+                useFactory: TranslateLoaderFactory,
                 deps: [Http]
             }
         }),
@@ -389,14 +390,12 @@ export function HttpLoaderFactory(http: Http) {
         EventsHubService,
         TranslatorService,
         NotificationService,
-        { provide: "sweetAlert", useValue: swal },
+        { provide: 'sweetAlert', useValue: swal },
         { provide: 'Window',  useValue: window },
         { provide: BrowserXhr, useClass: NgProgressBrowserXhr },
+        { provide: 'environment', useValue: environment }
     ],
     bootstrap: [ AppComponent ]
 })
 
-export class AppModule {
-    ngDoBootstrap() {
-    }
-}
+export class AppModule { }

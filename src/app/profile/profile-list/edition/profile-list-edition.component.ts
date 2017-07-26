@@ -1,12 +1,13 @@
 import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service';
-import { Component, Input, Inject, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { Component, Input, Inject, ElementRef, ViewChild, HostListener, ViewEncapsulation } from '@angular/core';
 import { NotificationService } from '../../../shared/services/notification.service';
-
-declare var _: any;
+import * as _ from "lodash";
 
 @Component({
     selector: 'profile-list-edition',
-    template: require("app/profile/profile-list/edition/profile-list-edition.component.html")
+    templateUrl: './profile-list-edition.component.html',
+    styleUrls: ['./profile-list-edition.component.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileListEditionComponent {
 
@@ -20,10 +21,6 @@ export class ProfileListEditionComponent {
         private roleService: RoleService,
         private notificationService: NotificationService) { }
 
-    ngOnInit () {
-
-    }
-
     loadRoles() {
         this.roleService.getByProfile(this.owner.id, { person_id: this.profile.id }).then(
             (result: noosfero.RestResult<noosfero.Role[]>) => {
@@ -33,8 +30,8 @@ export class ProfileListEditionComponent {
     }
 
     save() {
-        let roleIds = _.map(_.filter(this.roles, 'assigned'), 'id');
-        let removeRoleIds = _.map(_.filter(this.roles, ['assigned', false]), 'id');
+        const roleIds = _.map(_.filter(this.roles, 'assigned'), 'id');
+        const removeRoleIds = _.map(_.filter(this.roles, ['assigned', false]), 'id');
         this.roleService.assign(this.owner.id, this.profile.id, roleIds, removeRoleIds).then((result: noosfero.RestResult<noosfero.Role[]>) => {
             this.notificationService.success({ title: "profile-list-edition.role.success.title", message: "profile-list-edition.role.success.message" });
             this.hidePopover();

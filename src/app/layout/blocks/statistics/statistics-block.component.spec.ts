@@ -4,13 +4,14 @@ import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.servi
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { StatisticsBlockComponent } from './statistics-block.component';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Statistics Block Component", () => {
-        let articleService = helpers.mocks.articleService;
-        let blockService = helpers.mocks.blockService;
-        let translatorService = helpers.mocks.translatorService;
+        const mocks = helpers.getMocks();
+        const articleService = mocks.articleService;
+        const blockService = mocks.blockService;
+        const translatorService = mocks.translatorService;
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -36,7 +37,7 @@ describe("Components", () => {
                 ]
             };
             fixture.detectChanges();
-            let compiled = fixture.debugElement.nativeElement;
+            const compiled = fixture.debugElement.nativeElement;
             expect(compiled.querySelectorAll('li.statistic').length).toEqual(2);
             expect(compiled.querySelector("span.users").innerHTML).toEqual("10");
             expect(compiled.querySelector("span.communities").innerHTML).toEqual("20");
@@ -48,7 +49,7 @@ describe("Components", () => {
                 statistics: [{ name: 'hits', display: false, quantity: null }]
             };
             fixture.detectChanges();
-            let compiled = fixture.debugElement.nativeElement;
+            const compiled = fixture.debugElement.nativeElement;
             expect(compiled.querySelectorAll("span.hits").length).toEqual(0);
         });
     });

@@ -11,15 +11,15 @@ import { NgPipesModule } from 'ngx-pipes';
 import { By } from '@angular/platform-browser';
 import { DateFormatPipe } from './../shared/pipes/date-format.pipe';
 import { ArticleService } from './../../lib/ng-noosfero-api/http/article.service';
-import {SearchComponent} from "./search.component";
-import * as helpers from "../../spec/helpers";
+import {SearchComponent} from './search.component';
+import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
     describe("Search Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<SearchComponent>;
         let component: SearchComponent;
-        let result = Promise.resolve({
+        const result = Promise.resolve({
             data: [{ id: 1,
                      identifier: 'article-1',
                      path: 'path',
@@ -27,7 +27,7 @@ describe("Components", () => {
                      body: '',
                      profile: { identifier: 'profile' } }],
             headers: {
-                get: (param: string) => { return 1; }
+                get: (param: string) => 1
             }
         });
 

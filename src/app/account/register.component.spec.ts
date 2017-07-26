@@ -7,8 +7,8 @@ import { RegisterService } from './../../lib/ng-noosfero-api/http/register.servi
 import { EnvironmentService } from './../../lib/ng-noosfero-api/http/environment.service';
 import { ValidationMessageComponent } from '../shared/components/validation-message/validation-message.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import * as helpers from "../../spec/helpers";
-import { RegisterComponent } from "./register.component";
+import * as helpers from '../../spec/helpers';
+import { RegisterComponent } from './register.component';
 import { By } from '@angular/platform-browser';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -18,13 +18,13 @@ describe("Register Component", () => {
     let fixture: ComponentFixture<RegisterComponent>;
     let component: RegisterComponent;
 
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let user_data: any;
-    let nameErrors = jasmine.createSpyObj('nameErrors', ['setBackendErrors']);
-    let userNameErrors = jasmine.createSpyObj('userNameErrors', ['setBackendErrors']);
-    let emailErrors = jasmine.createSpyObj('emailErrors', ['setBackendErrors']);
-    let passwordErrors = jasmine.createSpyObj('passwordErrors', ['setBackendErrors']);
-    let passwordConfirmErrors = jasmine.createSpyObj('passwordConfirmErrors', ['setBackendErrors']);
+    const nameErrors = jasmine.createSpyObj('nameErrors', ['setBackendErrors']);
+    const userNameErrors = jasmine.createSpyObj('userNameErrors', ['setBackendErrors']);
+    const emailErrors = jasmine.createSpyObj('emailErrors', ['setBackendErrors']);
+    const passwordErrors = jasmine.createSpyObj('passwordErrors', ['setBackendErrors']);
+    const passwordConfirmErrors = jasmine.createSpyObj('passwordConfirmErrors', ['setBackendErrors']);
     beforeEach(async(() => {
         spyOn(mocks.environmentService, 'get').and.returnValue(Promise.resolve({ data: { id: 1, name: 'Noosfero', terms_of_use: '' } }));
         spyOn(mocks.registerService, 'createAccount').and.returnValue(Promise.resolve({ status: 201, data: {} }));

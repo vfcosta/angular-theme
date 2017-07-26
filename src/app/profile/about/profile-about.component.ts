@@ -1,9 +1,11 @@
-import { Component, Inject } from '@angular/core';
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 
 @Component({
     selector: 'profile-about',
-    template: require("app/profile/about/profile-about.html"),
+    templateUrl: './profile-about.html',
+    styleUrls: ['./profile-about.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ProfileAboutComponent {
 
@@ -18,9 +20,9 @@ export class ProfileAboutComponent {
     }
 
     loadProfileFields() {
-        let fields = ['email', 'formation', 'schooling', 'nationality', 'country', 'state', 'city'];
+        const fields = ['email', 'formation', 'schooling', 'nationality', 'country', 'state', 'city'];
         this.profileFields = {};
-        for (let field of fields) {
+        for (const field of fields) {
             if (this.profile[field]) {
                 this.profileFields[field] = this.profile[field];
             }

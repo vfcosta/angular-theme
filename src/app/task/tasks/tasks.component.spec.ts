@@ -6,19 +6,19 @@ import { MomentModule } from 'angular2-moment';
 import { FormsModule } from '@angular/forms';
 import { TaskListComponent } from './../task-list/task-list.component';
 import { PaginationModule } from 'ngx-bootstrap';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { TasksComponent } from './tasks.component';
-import { AuthEvents } from "./../../login";
+import { AuthEvents } from './../../login';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Tasks Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<TasksComponent>;
         let component: TasksComponent;
 
-        let tasks = [{ id: 1 }, { id: 2 }];
+        const tasks = [{ id: 1 }, { id: 2 }];
 
         beforeEach(async(() => {
             spyOn(mocks.taskService, 'getAllPending').and.returnValue(Promise.resolve({ headers: { get: () => { } }, data: tasks }));

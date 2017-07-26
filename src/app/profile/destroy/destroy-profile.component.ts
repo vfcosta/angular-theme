@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../login';
-import { Component, Inject } from "@angular/core";
-import { NotificationService } from "../../shared/services/notification.service";
-import { ProfileService } from "../../../lib/ng-noosfero-api/http/profile.service";
+import { Component, Inject } from '@angular/core';
+import { NotificationService } from '../../shared/services/notification.service';
+import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
 
 @Component({
     selector: 'destroy-profile',
@@ -14,7 +14,7 @@ export class DestroyProfileComponent {
         private profileService: ProfileService, private router: Router,
         private authService: AuthService, route: ActivatedRoute) {
 
-        let profile = route.parent.snapshot.data['profile'];
+        const profile = route.parent.snapshot.data['profile'];
         notificationService.confirmation({ title: "profile.remove.confirmation.title", message: "profile.remove.confirmation.message" }, () => {
             profileService.remove(profile).then((response: noosfero.RestResult<any>) => {
                 if (response.data.success) {

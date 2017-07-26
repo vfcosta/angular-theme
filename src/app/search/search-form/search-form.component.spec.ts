@@ -3,14 +3,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { By } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { SearchFormComponent } from "./search-form.component";
-import * as helpers from "../../../spec/helpers";
+import { SearchFormComponent } from './search-form.component';
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Search Form Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<SearchFormComponent>;
         let component: SearchFormComponent;
 

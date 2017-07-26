@@ -5,13 +5,13 @@ import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.serv
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import {MockBackend, MockConnection} from '@angular/http/testing';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from "@angular/http";
-import * as helpers from "../../../spec/helpers";
-import {CommentParagraphService} from "./comment-paragraph.service";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from '@angular/http';
+import * as helpers from '../../../spec/helpers';
+import {CommentParagraphService} from './comment-paragraph.service';
 
 describe("Services", () => {
     describe("Comment Paragraph Service", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let service: CommentParagraphService;
 
         beforeEach(async(() => {
@@ -31,7 +31,7 @@ describe("Services", () => {
 
         describe("Succesfull requests", () => {
             xit("should return paragraph comments by article", () => {
-                let articleId = 1;
+                const articleId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/articles/${articleId}/comment_paragraph_plugin/comments?without_reply=true`,
                     { comments: [{ body: "comment1" }] }, {}, 200);
                 service.getByArticle(<noosfero.Article>{ id: articleId }).then((result: noosfero.RestResult<noosfero.Comment[]>) => {

@@ -1,9 +1,11 @@
-import { Component, Inject, Input, NgZone, OnInit } from "@angular/core";
+import { Component, Inject, Input, NgZone, OnInit, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
     selector: "noosfero-video-plugin-video-block",
-    template: require('plugins/video/blocks/video-block/video-block.html')
+    templateUrl: './video-block.html',
+    styleUrls: ['./video-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class VideoBlockComponent implements OnInit {
 

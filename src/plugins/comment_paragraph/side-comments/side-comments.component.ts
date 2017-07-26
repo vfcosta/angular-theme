@@ -1,13 +1,15 @@
-import { Component, Inject, Input, Output } from "@angular/core";
-import { CommentsComponent } from "../../../app/article/comment/comments.component";
-import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
-import { CommentParagraphService } from "../http/comment-paragraph.service";
+import { CommentsComponent } from './../../../app/article/comment/comments.component';
+import { Component, Inject, Input, Output, ViewEncapsulation, OnInit } from '@angular/core';
+import { CommentService } from '../../../lib/ng-noosfero-api/http/comment.service';
+import { CommentParagraphService } from '../http/comment-paragraph.service';
 
 @Component({
     selector: "comment-paragraph-side-comments",
-    template: require('app/article/comment/comments.html'),
+    templateUrl: './../../../app/article/comment/comments.html',
+    styleUrls: ['./side-comments.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class SideCommentsComponent extends CommentsComponent {
+export class SideCommentsComponent extends CommentsComponent implements OnInit {
 
     @Input() article: noosfero.Article;
     @Input() paragraphUuid: string;

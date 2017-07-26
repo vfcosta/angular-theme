@@ -4,15 +4,15 @@ import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { PeopleBlockComponent } from './people-block.component';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
 
     describe("People Block Component", () => {
         let fixture: ComponentFixture<PeopleBlockComponent>;
         let component: PeopleBlockComponent;
-        let state = jasmine.createSpyObj("$state", ["href"]);
-        let blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
+        const state = jasmine.createSpyObj("$state", ["href"]);
+        const blockService = jasmine.createSpyObj("blockService", ["getApiContent"]);
         blockService.getApiContent = jasmine.createSpy("getApiContent").and.returnValue(Promise.resolve({ people: [{ identifier: "person1" }] }));
 
         beforeEach(async(() => {

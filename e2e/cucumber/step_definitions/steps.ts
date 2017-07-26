@@ -4,12 +4,12 @@ import { browser, by, element } from 'protractor';
 import { protractor } from 'protractor/built';
 import * as utils from './utils';
 
-let path = require('path');
-let chai = require('chai');
-let chaiAsPromised = require('chai-as-promised');
+const path = require('path');
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
-let expect = chai.expect;
+const expect = chai.expect;
 
 defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     setDefaultTimeout(50000);
@@ -19,12 +19,12 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Then('I should be on the homepage', () => {
-        return expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:3001/');
+        return expect(browser.getCurrentUrl()).to.eventually.equal('http://localhost:49152/');
     });
 
     Then('I should be on {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
         browser.waitForAngular();
-        return expect(browser.getCurrentUrl()).to.eventually.equal(`http://localhost:3001${stringInDoubleQuotes}`);
+        return expect(browser.getCurrentUrl()).to.eventually.equal(`http://localhost:49152${stringInDoubleQuotes}`);
     });
 
     Given('I follow {stringInDoubleQuotes}', (stringInDoubleQuotes) => {
@@ -32,7 +32,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I fill in the following:', (table, callback) => {
-        for (let line of table.raw()) {
+        for (const line of table.raw()) {
             element(by.css(line[0])).sendKeys(line[1]);
         };
         callback();
@@ -66,12 +66,12 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
 
     Given('I go to {stringInDoubleQuotes} profile', (profile) => {
         browser.waitForAngular();
-        return browser.driver.get(`http://localhost:3001/${profile}`);
+        return browser.driver.get(`http://localhost:49152/${profile}`);
     });
 
     Given('I go to {stringInDoubleQuotes}', (page) => {
         browser.waitForAngular();
-        return browser.driver.get(`http://localhost:3001${page}`);
+        return browser.driver.get(`http://localhost:49152${page}`);
     });
 
     Given('I enter in edit mode', () => {
@@ -119,7 +119,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     });
 
     Given('I enter text {stringInDoubleQuotes} to {stringInDoubleQuotes} input', (text, field) => {
-        return element(by.css(field)).clear().then( () => { return element(by.css(field)).sendKeys(text); } );
+        return element(by.css(field)).clear().then( () => element(by.css(field)).sendKeys(text) );
     });
 
     When('I choose first element from typeahead', () => {
@@ -167,7 +167,7 @@ defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
         return browser.get(`/${profile}/${article}`).then(() => {
             return browser.getCurrentUrl();
         }).then((url) => {
-            if (url === `http://localhost:3001/${profile}/${article}`) {
+            if (url === `http://localhost:49152/${profile}/${article}`) {
                 browser.waitForAngular();
                 return utils.pressButton(".delete-article").then(() => {
                     return utils.pressButton(".swal2-confirm");

@@ -4,14 +4,14 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { PopoverModule } from 'ngx-bootstrap';
 import { BlockEditionComponent } from './block-edition.component';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
 
     describe("Block Edition Component", () => {
 
-        let scope = {};
-        let mocks = helpers.getMocks();
+        const scope = {};
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<BlockEditionComponent>;
         let component: BlockEditionComponent;
         let blocksSavedFn: Function;

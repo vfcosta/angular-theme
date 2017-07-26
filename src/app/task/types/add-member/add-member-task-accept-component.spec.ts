@@ -4,21 +4,21 @@ import { RoleService } from './../../../../lib/ng-noosfero-api/http/role.service
 import { ArticleService } from './../../../../lib/ng-noosfero-api/http/article.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { AddMemberTaskAcceptComponent } from './add-member-task-accept.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Add Member Task Accept Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<AddMemberTaskAcceptComponent>;
         let component: AddMemberTaskAcceptComponent;
-        let roles = [{ id: 1 }, { id: 2 }];
-        let task = <any>{ target: { id: 5 } };
+        const roles = [{ id: 1 }, { id: 2 }];
+        const task = <any>{ target: { id: 5 } };
         beforeEach(async(() => {
             spyOn(mocks.roleService, "getByProfile").and.returnValue(Promise.resolve({ headers: () => { }, data: roles }));
-            let taskAcceptComponent = {task: task, confirmationTask: {}};
+            const taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 declarations: [AddMemberTaskAcceptComponent],
                 providers: [
@@ -38,13 +38,13 @@ describe("Components", () => {
 
         it("insert role id in roles list when toggle selection", () => {
             fixture.detectChanges();
-            let role = { id: 1 };
+            const role = { id: 1 };
             component.toggleSelection(<any>role);
             expect(component.confirmationTask['roles']).toEqual([role.id]);
         });
 
         it("remove role id from roles list when toggle selection", () => {
-            let role = { id: 1 };
+            const role = { id: 1 };
             component.confirmationTask['roles'] = [role.id];
             component.toggleSelection(<any>role);
             expect(component.confirmationTask['roles']).toEqual([]);

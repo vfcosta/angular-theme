@@ -1,4 +1,4 @@
-import { EventEmitter, Inject } from "@angular/core";
+import { EventEmitter, Inject } from '@angular/core';
 import { Restangular } from 'ngx-restangular';
 
 /**
@@ -152,7 +152,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
 
     public listSubElements<C>(obj: T, subElement: string, queryParams?: any, headers?: any): Promise<noosfero.RestResult<C>> {
         let restRequest: any;
-        let objElement = this.getElement(obj.id);
+        const objElement = this.getElement(obj.id);
         objElement.id = obj.id;
         restRequest = objElement.customGET(subElement, queryParams, headers);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
@@ -205,7 +205,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
             data = obj;
         }
 
-        let subpath = path || this.getResourcePath();
+        const subpath = path || this.getResourcePath();
         if (rootElement) {
             restRequest = rootElement.all(subpath).post(data, queryParams, headers);
         } else {
@@ -215,7 +215,7 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
     }
 
     public patch(data?: any, headers?: any): Promise<noosfero.RestResult<T>> {
-        let restRequest = this.baseResource.patch(data, headers);
+        const restRequest = this.baseResource.patch(data, headers);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
@@ -247,8 +247,8 @@ export abstract class RestangularService<T extends noosfero.RestModel> {
          *
          * @param {any} response (description)
          */
-        let successFunction = (response: any) => {
-            let resultModel: noosfero.RestResult<T> = <any>this.extractData(response);
+        const successFunction = (response: any) => {
+            const resultModel: noosfero.RestResult<T> = <any>this.extractData(response);
             // emits the event if a successEmiter was provided in the successEmitter parameter
             if (successEmitter !== null) {
                 if (successEmitter !== this.modelRemovedEventEmitter) {

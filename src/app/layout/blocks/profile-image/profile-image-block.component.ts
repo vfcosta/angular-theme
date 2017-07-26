@@ -1,9 +1,11 @@
-import { ProfileImageComponent } from "./../../../profile/image/profile-image.component";
-import { Component, Inject, Input } from '@angular/core';
+import { ProfileImageComponent } from './../../../profile/image/profile-image.component';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: "noosfero-profile-image-block",
-    template: require('app/layout/blocks/profile-image/profile-image-block.html')
+    templateUrl: './profile-image-block.html',
+    styleUrls: ['./profile-image-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 
 })
 export class ProfileImageBlockComponent {

@@ -6,9 +6,9 @@ namespace noosfero {
      *  A representation of a AbuseReport in Noosfero.
      */
     export interface AbuseReport {
-        id : number;
+        id: number;
         reporter: Person;
-        reason : string;
+        reason: string;
         created_at: string;
     }
 }

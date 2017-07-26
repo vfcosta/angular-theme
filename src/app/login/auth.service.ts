@@ -1,7 +1,7 @@
 import { Restangular } from 'ngx-restangular';
 import { PersonService } from './../../lib/ng-noosfero-api/http/person.service';
-import { Injectable, Inject, EventEmitter } from "@angular/core";
-import { SessionService } from "./session.service";
+import { Injectable, Inject, EventEmitter } from '@angular/core';
+import { SessionService } from './session.service';
 import { Http, Jsonp, Response } from '@angular/http';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class AuthService {
 
     loginFromCookie() {
         if (this.sessionService.currentUser()) return;
-        let url: string = '/api/v1/login_from_cookie';
+        const url = '/api/v1/login_from_cookie';
         return this.http.post(url, null).toPromise().then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
     }
 
@@ -35,13 +35,13 @@ export class AuthService {
     }
 
     private loginSuccessCallback(response: any) {
-        let currentUser: noosfero.User = this.sessionService.create(response.data);
+        const currentUser: noosfero.User = this.sessionService.create(response.data);
         this.loginSuccess.next(currentUser);
         return currentUser;
     }
 
     login(credentials: noosfero.Credentials): Promise<noosfero.User> {
-        let data = new FormData();
+        const data = new FormData();
         data.append('login', credentials.username);
         data.append('password', credentials.password);
         return this.restangular.all("")
@@ -59,7 +59,7 @@ export class AuthService {
     }
 
     public logout() {
-        let user: noosfero.User = this.sessionService.currentUser();
+        const user: noosfero.User = this.sessionService.currentUser();
         this.sessionService.destroy();
 
         this.logoutSuccess.next(user);
@@ -83,7 +83,7 @@ export class AuthService {
 
     subscribe(eventName: string, fn: Function) {
 
-        let event: EventEmitter<any> = <EventEmitter<any>>(<any>this)[eventName];
+        const event: EventEmitter<any> = <EventEmitter<any>>(<any>this)[eventName];
         if (event) {
             event.subscribe(fn);
         } else {

@@ -3,7 +3,7 @@ import { NoosferoUrlPipe } from './../../../../app/shared/pipes/noosfero-url.pip
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import {EventPluginEventBlockComponent} from './event-plugin-event-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 
 const events = [
     {
@@ -17,14 +17,14 @@ const events = [
 describe("Components", () => {
     describe("Events Block Component", () => {
 
-        let mocks = helpers.getMocks();
-        let person = <noosfero.Person>{ name: "Person" };
+        const mocks = helpers.getMocks();
+        const person = <noosfero.Person>{ name: "Person" };
         let fixture: ComponentFixture<EventPluginEventBlockComponent>;
         let component: EventPluginEventBlockComponent;
 
         beforeEach(async(() => {
             spyOn(mocks.blockService, "getApiContent").and.returnValue(
-                Promise.resolve({ events: events, headers: (name: string) => { return name; } })
+                Promise.resolve({ events: events, headers: (name: string) => name })
             );
             TestBed.configureTestingModule({
                 declarations: [EventPluginEventBlockComponent, NoosferoUrlPipe],

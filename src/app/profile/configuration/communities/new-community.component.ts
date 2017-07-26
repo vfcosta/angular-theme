@@ -1,7 +1,7 @@
 import { SessionService } from './../../../login/session.service';
 import { NotificationService } from './../../../shared/services/notification.service';
 import { CommunityService } from './../../../../lib/ng-noosfero-api/http/community.service';
-import { Component, Input, Output, Inject, EventEmitter } from '@angular/core';
+import { Component, Input, Output, Inject, EventEmitter, OnInit } from '@angular/core';
 import { AbstractFormCommunity } from './abstract-form-community';
 
 /**
@@ -10,9 +10,9 @@ import { AbstractFormCommunity } from './abstract-form-community';
  */
 @Component({
     selector: "new-community",
-    template: require('app/profile/configuration/communities/form-community.html'),
+    templateUrl: './form-community.html',
 })
-export class NewCommunityComponent extends AbstractFormCommunity {
+export class NewCommunityComponent extends AbstractFormCommunity implements OnInit {
 
     ngOnInit() {
         this.sessionProfile = this.sessionService.currentUser().person;
@@ -31,7 +31,7 @@ export class NewCommunityComponent extends AbstractFormCommunity {
             this.notificationService.success({ title: "profile.edition.success.title", message: "profile.edition.success.message" });
             this.router.navigate(['/myprofile', this.profile.identifier, 'communities']);
         }).catch(response => {
-            let errors = response.data;
+            const errors = response.data;
             if (response.status === 422) {
                 this.nameErrors.setBackendErrors(errors);
             } else {

@@ -4,18 +4,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import {ContentViewerComponent} from './content-viewer.component';
 
 describe('Content Viewer Component', () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<ContentViewerComponent>;
     let component: ContentViewerComponent;
-    let article: any = {
+    const article: any = {
         id: 1,
         title: 'The article test'
     };
-    let profile: any = {
+    const profile: any = {
         id: 1,
         identifier: 'the-profile-test',
         type: 'Person'

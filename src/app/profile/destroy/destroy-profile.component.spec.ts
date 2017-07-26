@@ -4,16 +4,13 @@ import { AuthService } from './../../login/auth.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DestroyProfileComponent } from './destroy-profile.component';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
     describe("Destroy Profile Component", () => {
-        let profile = { id: 1, identifier: "profile" };
-
-        let mocks = helpers.getMocks();
-        let fixture: ComponentFixture<DestroyProfileComponent>;
-        let component: DestroyProfileComponent;
+        const profile = { id: 1, identifier: "profile" };
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             mocks.route.parent.snapshot.data = { profile: {} };
@@ -38,21 +35,21 @@ describe("Components", () => {
         }));
 
         it("display confirmation dialog", fakeAsync(() => {
-            let fixture = TestBed.createComponent(DestroyProfileComponent);
-            let component = fixture.componentInstance;
+            const fixture = TestBed.createComponent(DestroyProfileComponent);
+            const component = fixture.componentInstance;
             fixture.detectChanges();
             tick();
             expect(mocks.notificationService.confirmation).toHaveBeenCalled();
         }));
 
         it("call remove in profile service when confirm", fakeAsync(() => {
-            let pS = TestBed.get(ProfileService);
-            let nS = TestBed.get(NotificationService);
+            const pS = TestBed.get(ProfileService);
+            const nS = TestBed.get(NotificationService);
             nS.confirmation = (p1, p2) => { p2(); };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
 
-            let fixture = TestBed.createComponent(DestroyProfileComponent);
-            let component = fixture.componentInstance;
+            const fixture = TestBed.createComponent(DestroyProfileComponent);
+            const component = fixture.componentInstance;
 
             fixture.detectChanges();
             tick();
@@ -61,13 +58,13 @@ describe("Components", () => {
         }));
 
         it("not display confirmation dialog when profile doesn't exists", fakeAsync(() => {
-            let pS = TestBed.get(ProfileService);
-            let nS = TestBed.get(NotificationService);
+            const pS = TestBed.get(ProfileService);
+            const nS = TestBed.get(NotificationService);
             nS.confirmation = (p1, p2) => { p2(); };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve(null));
 
-            let fixture = TestBed.createComponent(DestroyProfileComponent);
-            let component = fixture.componentInstance;
+            const fixture = TestBed.createComponent(DestroyProfileComponent);
+            const component = fixture.componentInstance;
 
             fixture.detectChanges();
             tick();
@@ -75,14 +72,14 @@ describe("Components", () => {
         }));
 
         it("call notification success when remove is confirmed", fakeAsync(() => {
-            let pS = TestBed.get(ProfileService);
-            let nS = TestBed.get(NotificationService);
+            const pS = TestBed.get(ProfileService);
+            const nS = TestBed.get(NotificationService);
             nS.confirmation = (p1, p2) => { p2(); };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
             pS.remove = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ data: { success: true } }));
 
-            let fixture = TestBed.createComponent(DestroyProfileComponent);
-            let component = fixture.componentInstance;
+            const fixture = TestBed.createComponent(DestroyProfileComponent);
+            const component = fixture.componentInstance;
 
             fixture.detectChanges();
             tick();
@@ -92,16 +89,16 @@ describe("Components", () => {
         }));
 
         it("call notification error when remove is not confirmed", fakeAsync(() => {
-            let pS = TestBed.get(ProfileService);
-            let nS = TestBed.get(NotificationService);
-            let aS = TestBed.get(AuthService);
+            const pS = TestBed.get(ProfileService);
+            const nS = TestBed.get(NotificationService);
+            const aS = TestBed.get(AuthService);
             nS.confirmation = (p1, p2) => { p2(); };
             pS.getCurrentProfile = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ id: 5 }));
             pS.remove = jasmine.createSpy("getCurrentProfile").and.returnValue(Promise.resolve({ data: { success: false } }));
             aS.logout = jasmine.createSpy("logout").and.callThrough();
 
-            let fixture = TestBed.createComponent(DestroyProfileComponent);
-            let component = fixture.componentInstance;
+            const fixture = TestBed.createComponent(DestroyProfileComponent);
+            const component = fixture.componentInstance;
 
             fixture.detectChanges();
             tick();

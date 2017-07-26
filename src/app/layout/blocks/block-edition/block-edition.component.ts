@@ -1,14 +1,15 @@
-import { SimpleChanges, Inject, Input, Component, HostListener, ElementRef, ViewChild } from '@angular/core';
-import { EventsHubService } from "../../../shared/services/events-hub.service";
-import { NoosferoKnownEvents } from "../../../known-events";
-
-declare var _: any;
+import { SimpleChanges, Inject, Input, Component, HostListener, ElementRef, ViewChild, ViewEncapsulation, OnInit, DoCheck } from '@angular/core';
+import { EventsHubService } from '../../../shared/services/events-hub.service';
+import { NoosferoKnownEvents } from '../../../known-events';
+import * as _ from "lodash";
 
 @Component({
     selector: 'noosfero-block-edition',
-    template: require('app/layout/blocks/block-edition/block-edition.html')
+    templateUrl: './block-edition.html',
+    styleUrls: ['./block-edition.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class BlockEditionComponent {
+export class BlockEditionComponent implements OnInit, DoCheck {
 
     options: any;
 
@@ -49,13 +50,13 @@ export class BlockEditionComponent {
     }
 
     emitChanges() {
-        let blockDiff = <noosfero.Block>{ id: this.block.id, api_content: {} };
-        for (let k in this.block.settings) {
+        const blockDiff = <noosfero.Block>{ id: this.block.id, api_content: {} };
+        for (const k in this.block.settings) {
             if (!_.isEqual((<any>this.block.settings)[k], (<any>this.originalBlock.settings)[k])) {
                 (<any>blockDiff)[k] = (<any>this.block.settings)[k];
             }
         }
-        for (let k in this.block.api_content) {
+        for (const k in this.block.api_content) {
             if (this.originalBlock.api_content && !_.isEqual((<any>this.block.api_content)[k], (<any>this.originalBlock.api_content)[k])) {
                 (<any>blockDiff.api_content)[k] = (<any>this.block.api_content)[k];
             }
@@ -72,7 +73,7 @@ export class BlockEditionComponent {
         blockDiff.box = <noosfero.Box>{ id: this.box.id };
         if (!this.block.id) blockDiff.type = this.block.type;
 
-        if (this.lastBlockDiff && !_.isEqual(blockDiff, this.lastBlockDiff)) {
+        if ((!blockDiff.id && !this.lastBlockDiff) || (this.lastBlockDiff && !_.isEqual(blockDiff, this.lastBlockDiff))) {
             this.eventsHubService.emitEvent(this.eventsHubService.knownEvents.BLOCK_CHANGED, blockDiff);
         }
         this.lastBlockDiff = blockDiff;

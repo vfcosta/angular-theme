@@ -1,21 +1,14 @@
-import { Inject, Input, Component } from '@angular/core';
-import { DesignModeService } from "../../shared/services/design-mode.service";
-import { EventsHubService } from "../../shared/services/events-hub.service";
+import { Inject, Input, Component, ViewEncapsulation, OnChanges, OnInit } from '@angular/core';
+import { DesignModeService } from '../../shared/services/design-mode.service';
+import { EventsHubService } from '../../shared/services/events-hub.service';
 
 @Component({
     selector: "noosfero-boxes",
-    template: require("app/layout/boxes/boxes.html")
+    templateUrl: './boxes.html',
+    styleUrls: ['./boxes.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class BoxesComponent {
-
-    @Input() boxes: noosfero.Box[];
-    @Input() owner: noosfero.Profile | noosfero.Environment;
-    @Input() layout: string;
-    @Input() columns: any[];
-    @Input() startIndex: number = 0;
-    mainColumn: number = -1;
-    lastIndex: number;
-    designMode = false;
+export class BoxesComponent implements OnChanges, OnInit {
 
     /**
      * Mapping between noosfero layouts and bootstrap grid system
@@ -30,6 +23,16 @@ export class BoxesComponent {
         "leftbottom": [{ size: 3 }, { size: 9, main: true }, { size: 12 }],
         "nosidebars": [{ size: 12, main: true }]
     };
+
+    @Input() boxes: noosfero.Box[];
+    @Input() owner: noosfero.Profile | noosfero.Environment;
+    @Input() layout: string;
+    @Input() columns: any[];
+    @Input() startIndex = 0;
+    mainColumn: number = -1;
+    lastIndex: number;
+    designMode = false;
+
 
     constructor(private designModeService: DesignModeService, private eventsHubService: EventsHubService) {
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {

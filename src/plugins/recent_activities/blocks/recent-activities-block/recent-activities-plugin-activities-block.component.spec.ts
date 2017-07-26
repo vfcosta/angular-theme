@@ -2,22 +2,22 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import {RecentActivitiesPluginActivitiesBlockComponent} from './recent-activities-plugin-activities-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Recent Activities Block Component", () => {
 
-        let settingsObj = {};
-        let person = <noosfero.Person>{ name: "Person" };
+        const settingsObj = {};
+        const person = <noosfero.Person>{ name: "Person" };
         let fixture: ComponentFixture<RecentActivitiesPluginActivitiesBlockComponent>;
         let component: RecentActivitiesPluginActivitiesBlockComponent;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             spyOn(mocks.blockService, 'getApiContent').and.returnValue(
-                Promise.resolve({ activities: [{ verb: 'new_friendship' }], headers: (name: string) => { return name; } })
+                Promise.resolve({ activities: [{ verb: 'new_friendship' }], headers: (name: string) => name })
             );
 
             TestBed.configureTestingModule({

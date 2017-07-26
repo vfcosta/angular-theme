@@ -7,18 +7,18 @@ import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
-import * as helpers from "../../../../spec/helpers";
+import { PersonService } from '../../../../lib/ng-noosfero-api/http/person.service';
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
 
     describe("Person Friends Component", () => {
         let fixture: ComponentFixture<PersonFriendsComponent>;
         let component: PersonFriendsComponent;
-        let personService = jasmine.createSpyObj("PersonService", ["getFriends"]);
+        const personService = jasmine.createSpyObj("PersonService", ["getFriends"]);
         personService.getFriends = jasmine.createSpy("getFriends").and.returnValue(Promise.resolve({ headers: { get: () => {} }}));
-        let stateParams = {};
-        let mocks = helpers.getMocks();
+        const stateParams = {};
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

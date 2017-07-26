@@ -1,7 +1,7 @@
-import { Pipe, Inject } from '@angular/core';
+import { Pipe, Inject, PipeTransform } from '@angular/core';
 
 @Pipe({ name: 'noosferoUrl', pure: false })
-export class NoosferoUrlPipe {
+export class NoosferoUrlPipe implements PipeTransform {
 
     transform(viewObject: any) {
         let url = '//' + viewObject.host;

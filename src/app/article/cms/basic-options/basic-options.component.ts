@@ -1,8 +1,10 @@
-import {Component, Input} from "@angular/core";
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'article-basic-options',
-    template: require("app/article/cms/basic-options/basic-options.html")
+    templateUrl: './basic-options.html',
+    styleUrls: ['./basic-options.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class BasicOptionsComponent {
 

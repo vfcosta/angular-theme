@@ -4,14 +4,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as helpers from '../../../spec/helpers';
-import { BodyStateClassesService } from "./body-state-classes.service";
-import { AuthService } from "./../../login/auth.service";
-import { AuthEvents } from "./../../login/auth-events";
+import { BodyStateClassesService } from './body-state-classes.service';
+import { AuthService } from './../../login/auth.service';
+import { AuthEvents } from './../../login/auth-events';
 import { EventEmitter } from '@angular/core';
 import { DesignModeService } from './design-mode.service';
 
 describe("BodyStateClasses Service", () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let service: BodyStateClassesService;
 
     beforeEach(async(() => {
@@ -64,7 +64,7 @@ describe("BodyStateClasses Service", () => {
     });
 
     it("add a css class theme skin to body element", () => {
-        let skinClass: string = 'skin-test';
+        const skinClass = 'skin-test';
         service.start({
             skin: skinClass
         });

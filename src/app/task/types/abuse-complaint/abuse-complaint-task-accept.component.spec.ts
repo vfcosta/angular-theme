@@ -3,7 +3,7 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { TaskService } from './../../../../lib/ng-noosfero-api/http/task.service';
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { Provider, Component } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { DateFormatPipe } from './../../../shared/pipes/date-format.pipe';
@@ -11,23 +11,23 @@ import { AbuseComplaintTaskAcceptComponent } from './abuse-complaint-task-accept
 import { NgPipesModule } from 'ngx-pipes';
 import { MomentModule } from 'angular2-moment';
 
-const htmlTemplate: string = '<abuse-complaint-task-accept [task]="ctrl.task"></abuse-complaint-task-accept>';
+const htmlTemplate = '<abuse-complaint-task-accept [task]="ctrl.task"></abuse-complaint-task-accept>';
 
 describe("Components", () => {
 
     describe("Abuse Complaint Task Accept Component", () => {
 
-        let task = <noosfero.AbuseComplaint>{
+        const task = <noosfero.AbuseComplaint>{
                 abuse_reports: [{ reason: 'Testing reason message!', reporter: { name: 'User Tester 1', created_at: '2016-01-02 12:30:00' }},
                                 { reason: 'Another testing reason message!', reporter: { name: 'User Tester 2', created_at: '2016-02-01 13:00:00' }}
         ]};
         let fixture: ComponentFixture<AbuseComplaintTaskAcceptComponent>;
         let component: AbuseComplaintTaskAcceptComponent;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             spyOn(mocks.taskService, 'get').and.returnValue(Promise.resolve( { data: task } ));
-            let taskAcceptComponent = {task: task, confirmationTask: {}};
+            const taskAcceptComponent = {task: task, confirmationTask: {}};
             TestBed.configureTestingModule({
                 imports: [NgPipesModule, MomentModule, TranslateModule.forRoot()],
                 declarations: [AbuseComplaintTaskAcceptComponent, DateFormatPipe],
@@ -46,17 +46,17 @@ describe("Components", () => {
 
 
         it("should the abuse complaint have an abuse report with an reason message", () => {
-            let reason = 'Testing reason message!';
+            const reason = 'Testing reason message!';
             expect(component.task['abuse_reports'][0].reason).toEqual(reason);
         });
 
         it("should the abuse complaint have an abuse report with an reporter", () => {
-            let reporter_name = 'User Tester 1';
+            const reporter_name = 'User Tester 1';
             expect(component.task['abuse_reports'][0].reporter.name).toEqual(reporter_name);
         });
 
         it("should the abuse complaint have an abuse report with an create date", () => {
-            let created_at = '2016-01-02 12:30:00';
+            const created_at = '2016-01-02 12:30:00';
             expect(component.task['abuse_reports'][0].reporter.created_at).toEqual(created_at);
         });
 

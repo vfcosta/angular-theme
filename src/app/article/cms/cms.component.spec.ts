@@ -8,12 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { EventsHubService } from './../../shared/services/events-hub.service';
-import { CmsComponent } from "./cms.component";
-import * as helpers from "../../../spec/helpers";
+import { CmsComponent } from './cms.component';
+import * as helpers from '../../../spec/helpers';
 
 describe("Cms Component", () => {
-    let profile = { id: 1 };
-    let mocks = helpers.getMocks();
+    const profile = { id: 1 };
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<CmsComponent>;
     let component: CmsComponent;
 

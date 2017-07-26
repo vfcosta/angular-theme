@@ -1,3 +1,7 @@
+@import 'scss/variables';
+@import 'scss/bootstrap';
+@import 'bootstrap/buttons';
+
 config-bar {
 	display: inline-block;
 	#config-tool {
@@ -5,7 +9,7 @@ config-bar {
 		text-align: right;
 		.config-option {
 			display: inline-block;
-	    margin-left: 6px;
+		    margin-left: 6px;
 			&.layout-config {
 				.animate{
 					@extend .btn;

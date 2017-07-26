@@ -1,6 +1,8 @@
+@import 'scss/variables';
+
 .noosfero-block {
   position: relative;
-  padding: 0;
+  padding: 0 !important;
   &.invisible-block {
     .block {
       opacity: 0.4;

@@ -1,11 +1,13 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
 
 @Component({
     selector: "noosfero-communities-block",
-    template: require('app/layout/blocks/communities/communities-block.html')
+    templateUrl: './communities-block.html',
+    styleUrls: ['./communities-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class CommunitiesBlockComponent {
+export class CommunitiesBlockComponent implements OnInit {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
@@ -16,8 +18,8 @@ export class CommunitiesBlockComponent {
     constructor(private blockService: BlockService) { }
 
     ngOnInit() {
-        let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
-        if(this.block.api_content) {
+        const limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
+        if (this.block.api_content) {
           this.profiles =  this.block.api_content['communities'];
         } else {
             this.blockService.getApiContent(this.block).then((content: any) => {

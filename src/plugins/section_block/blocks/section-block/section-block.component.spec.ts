@@ -1,7 +1,7 @@
 import { TranslatorService } from './../../../../app/shared/services/translator.service';
 import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
 import { SectionBlockComponent } from './section-block.component';
-import * as helpers from "./../../../../spec/helpers";
+import * as helpers from './../../../../spec/helpers';
 import { PopoverModule } from 'ngx-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -12,12 +12,12 @@ import { TranslateModule } from '@ngx-translate/core';
 
 describe("Components", () => {
     describe("Section Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<SectionBlockComponent>;
         let component: SectionBlockComponent;
-        let person = mocks.person;
+        const person = mocks.person;
         let block: any;
-        let blockService = mocks.blockService;
+        const blockService = mocks.blockService;
 
         beforeEach(async(() => {
             blockService.uploadImages = jasmine.createSpy("uploadImages").and.returnValue(Promise.resolve({}));
@@ -159,7 +159,7 @@ describe("Components", () => {
         });
 
         it("cancel copy the old link present in block attribute", () => {
-            let newLink = { name: 'new name link', description: 'new description link' }
+            const newLink = { name: 'new name link', description: 'new description link' }
             component.modifiedLink = newLink;
             expect(component.modifiedLink).toEqual(newLink);
             component.block.settings = { name: 'another name', description: 'another description' };
@@ -178,7 +178,7 @@ describe("Components", () => {
         });
 
         it("save shoulld copy modifiedLink value to block attributes", () => {
-            let newLink = { name: 'new name link', description: 'new description link' }
+            const newLink = { name: 'new name link', description: 'new description link' }
             component.modifiedLink = newLink;
             expect(component.block.settings === component.modifiedLink).toBeFalsy();
             component.save();
@@ -186,13 +186,13 @@ describe("Components", () => {
         });
 
         it("should uploadImages service be called by upload method", () => {
-            let data = {};
+            const data = {};
             component.upload(data);
             expect(blockService.uploadImages).toHaveBeenCalledWith(component.block, [data]);
         });
 
         it("should upload set new information to block", fakeAsync(() => {
-            let data = { data: { id: 3 } };
+            const data = { data: { id: 3 } };
             component['blockService'].uploadImages = jasmine.createSpy("uploadImages").and.returnValue(Promise.resolve(data));
             component.upload(data);
             tick();
@@ -200,7 +200,7 @@ describe("Components", () => {
         }));
 
         it("should set background color in view", () => {
-            let color = 'ff0000'
+            const color = 'ff0000'
             component.backgroundColor = color;
             fixture.detectChanges();
 
@@ -208,7 +208,7 @@ describe("Components", () => {
         });
 
         it("should set color color in view", () => {
-            let color = 'ff00ff'
+            const color = 'ff00ff'
             component.fontColor = color;
             fixture.detectChanges();
 

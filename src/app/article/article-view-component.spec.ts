@@ -1,12 +1,12 @@
 import { By } from '@angular/platform-browser';
 import { ArticleViewComponent } from './article-view.component';
-import * as helpers from "../../spec/helpers";
+import * as helpers from '../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("ArticleView Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ArticleViewComponent>;
         let component: ArticleViewComponent;
 

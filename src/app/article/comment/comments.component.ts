@@ -1,13 +1,14 @@
-import { Inject, Input, Component, ChangeDetectorRef } from '@angular/core';
-import { CommentService } from "../../../lib/ng-noosfero-api/http/comment.service";
-import { CommentComponent } from "./comment.component";
+import { Inject, Input, Component, ChangeDetectorRef, ViewEncapsulation, OnInit, Output } from '@angular/core';
+import { CommentService } from '../../../lib/ng-noosfero-api/http/comment.service';
+import { CommentComponent } from './comment.component';
 
 @Component({
     selector: 'noosfero-comments',
-    template: require('app/article/comment/comments.html'),
-    outputs: ['commentAdded']
+    templateUrl: './comments.html',
+    styleUrls: ['./comments.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class CommentsComponent {
+export class CommentsComponent implements OnInit {
 
     comments: noosfero.CommentViewModel[] = [];
     @Input() showForm = true;
@@ -30,6 +31,7 @@ export class CommentsComponent {
         }
     }
 
+    @Output()
     commentAdded(comment: noosfero.CommentViewModel): void {
         comment.__show_reply = false;
         if (comment.reply_of) {
@@ -48,7 +50,7 @@ export class CommentsComponent {
     }
 
     commentRemoved(comment: noosfero.Comment): void {
-        let index = this.comments.indexOf(comment, 0);
+        const index = this.comments.indexOf(comment, 0);
         if (index >= 0) {
             this.comments.splice(index, 1);
         }

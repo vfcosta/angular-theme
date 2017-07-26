@@ -1,9 +1,11 @@
-import { Inject, Input, Output, Component, EventEmitter, OnInit } from '@angular/core';
+import { Inject, Input, Output, Component, EventEmitter, OnInit, ViewEncapsulation } from '@angular/core';
 import { CropperSettings } from 'ng2-img-cropper';
 
 @Component({
     selector: "image-upload-crop",
-    template: require('app/shared/components/image-upload/image-upload-crop.html')
+    templateUrl: './image-upload-crop.html',
+    styleUrls: ['./image-upload-crop.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class ImageUploadCropComponent implements OnInit {
 

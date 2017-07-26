@@ -7,11 +7,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LoginComponent } from './login.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../spec/helpers";
+import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
     describe("Login Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<LoginComponent>;
         let component: LoginComponent;
 
@@ -33,7 +33,7 @@ describe("Components", () => {
         }));
 
         it("calls login on AuthService when login called", () => {
-            let credentials = { username: "username", password: "password" };
+            const credentials = { username: "username", password: "password" };
             component.credentials = credentials;
             component.login();
             expect(mocks.authService.login).toHaveBeenCalledWith(credentials);

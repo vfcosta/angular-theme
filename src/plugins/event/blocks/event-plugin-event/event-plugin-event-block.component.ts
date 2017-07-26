@@ -1,12 +1,13 @@
-import {Component, Inject, Input} from "@angular/core";
-import {BlockService} from "./../../../../lib/ng-noosfero-api/http/block.service";
-import {Arrays} from "./../../../../lib/util/arrays";
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
+import { Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: "noosfero-event-plugin-event-block",
-    template: require('plugins/event/blocks/event-plugin-event/event-plugin-event-block.html')
+    templateUrl: './event-plugin-event-block.html',
+    styleUrls: ['./event-plugin-event-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class EventPluginEventBlockComponent {
+export class EventPluginEventBlockComponent implements OnInit {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
@@ -19,9 +20,9 @@ export class EventPluginEventBlockComponent {
     constructor(private blockService: BlockService) { }
 
     populateMonthEvents(month: number, year: number) {
-        let events: any = [];
+        const events: any = [];
         this.events.forEach((e: any) => {
-            let date: any = new Date(e.date);
+            const date: any = new Date(e.date);
             if (month === date.getMonth() && year === date.getFullYear()) {
                 e.label = (("0" + date.getDate()).slice(-2)) + '/' + ("0" + (date.getMonth() + 1)).slice(-2) + ' ' + date.getHours() + ':' + date.getMinutes() + ' ' + e.title;
                 events.push(e);

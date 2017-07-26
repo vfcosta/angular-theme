@@ -1,5 +1,5 @@
-import { Injectable, Inject } from "@angular/core";
-import { PersonService } from "../../lib/ng-noosfero-api/http/person.service";
+import { Injectable, Inject } from '@angular/core';
+import { PersonService } from '../../lib/ng-noosfero-api/http/person.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 
 @Injectable()

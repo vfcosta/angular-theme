@@ -4,12 +4,12 @@ import { browser, by, element } from 'protractor';
 import { protractor } from 'protractor/built';
 import * as utils from './utils';
 
-let path = require('path');
-let chai = require('chai');
-let chaiAsPromised = require('chai-as-promised');
+const path = require('path');
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
 
 chai.use(chaiAsPromised);
-let expect = chai.expect;
+const expect = chai.expect;
 
 defineSupportCode(function ({ Given, Then, When, setDefaultTimeout }) {
     Given('I choose to moderate members of the community before', () => {

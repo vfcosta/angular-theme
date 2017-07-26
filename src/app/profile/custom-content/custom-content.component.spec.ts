@@ -1,12 +1,12 @@
 import { By } from '@angular/platform-browser';
 import { CustomContentComponent } from './custom-content.component';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
     describe("Custom Content Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<CustomContentComponent>;
         let component: CustomContentComponent;
 

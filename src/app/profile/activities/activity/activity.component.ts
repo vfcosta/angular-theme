@@ -1,11 +1,13 @@
-import { Component, Input, Inject } from "@angular/core";
-import { EnvironmentService } from "../../../../lib/ng-noosfero-api/http/environment.service";
+import { Component, Input, Inject, ViewEncapsulation, OnInit } from '@angular/core';
+import { EnvironmentService } from '../../../../lib/ng-noosfero-api/http/environment.service';
 
 @Component({
     selector: "noosfero-activity",
-    template: require('app/profile/activities/activity/activity.html'),
+    templateUrl: './activity.html',
+    styleUrls: ['./activity.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class ActivityComponent {
+export class ActivityComponent implements OnInit {
 
     @Input() activity: noosfero.Activity;
 
@@ -49,9 +51,9 @@ export class ActivityComponent {
     * Create a list of Profiles based on activity name, image url and identifier
     */
     private profiles_list(type: string) {
-        let profiles_attribute = this.profile_attribute();
+        const profiles_attribute = this.profile_attribute();
         for (let i = 0; i < this.activity.params[profiles_attribute].length; i++) {
-            let profile = {
+            const profile = {
                 name: this.name(i),
                 identifier: this.url(i),
                 image: { url: '/api/v1/profiles/' + this.url(i) + '/thumb?key=identifier' }
@@ -65,7 +67,7 @@ export class ActivityComponent {
     }
 
     icon(index: any) {
-        let image_attribute = this.images[this.activity.verb];
+        const image_attribute = this.images[this.activity.verb];
         if (image_attribute) {
             return this.activity.params[image_attribute][index];
         }
@@ -73,7 +75,7 @@ export class ActivityComponent {
     }
 
     name(index: any) {
-        let name_attribute = this.profiles_attributes[this.activity.verb];
+        const name_attribute = this.profiles_attributes[this.activity.verb];
         if (name_attribute) {
             return this.activity.params[name_attribute][index];
         }
@@ -81,7 +83,7 @@ export class ActivityComponent {
     }
 
     url(index: any) {
-        let url_attribute = this.urls_attributes[this.activity.verb];
+        const url_attribute = this.urls_attributes[this.activity.verb];
         if (url_attribute) {
             return this.activity.params[url_attribute][index].profile;
         }

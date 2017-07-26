@@ -1,19 +1,19 @@
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../../../spec/helpers";
-import { ActivityHeaderComponent } from "./activity-header.component";
+import * as helpers from '../../../../../spec/helpers';
+import { ActivityHeaderComponent } from './activity-header.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 describe("Components", () => {
     describe("Noosfero Activity Header", () => {
-        let activity = <any>{ name: "activity1", verb: "create_article", params: {} };
-        let environmentService = {
+        const activity = <any>{ name: "activity1", verb: "create_article", params: {} };
+        const environmentService = {
             getCurrentEnvironment: (filters: any): any => {
                 return Promise.resolve({ id: 1, name: 'Nosofero' });
             }
         };
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<ActivityHeaderComponent>;
         let component: ActivityHeaderComponent;
 
@@ -41,12 +41,12 @@ describe("Components", () => {
             component.profiles = null;
             fixture.detectChanges();
             expect(component.getDesc()).not.toContain("plural");
-        });      
+        });
 
         it("verify if profiles count greater then zero", () => {
             component.profiles = null;
             fixture.detectChanges();
             expect(component.count()).toBeGreaterThan(0);
-        });                  
+        });
     });
 });

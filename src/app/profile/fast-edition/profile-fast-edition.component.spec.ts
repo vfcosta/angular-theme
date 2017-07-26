@@ -1,3 +1,4 @@
+import { ValidationMessageComponent } from './../../shared/components/validation-message/validation-message.component';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,25 +10,26 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ProfileFastEditionComponent } from './profile-fast-edition.component';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 
 describe("Components", () => {
 
     describe("Profile Fast Edition Component", () => {
         let fixture: ComponentFixture<ProfileFastEditionComponent>;
         let component: ProfileFastEditionComponent;
-        let profileService = jasmine.createSpyObj("profileService", ["update"]);
+        const profileService = jasmine.createSpyObj("profileService", ["update"]);
         profileService.update = jasmine.createSpy("update").and.returnValue(Promise.resolve({}));
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
                 imports: [RouterTestingModule, FormsModule, TranslateModule.forRoot()],
-                declarations: [ProfileFastEditionComponent],
+                declarations: [ProfileFastEditionComponent, ValidationMessageComponent],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [
                     { provide: ProfileService, useValue: profileService },
-                    { provide: NotificationService, useValue: helpers.mocks.notificationService },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService },
+                    { provide: NotificationService, useValue: mocks.notificationService },
+                    { provide: TranslatorService, useValue: mocks.translatorService },
                 ]
             });
             fixture = TestBed.createComponent(ProfileFastEditionComponent);

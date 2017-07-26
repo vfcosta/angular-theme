@@ -4,7 +4,7 @@ import { TranslatorService } from './../../../shared/services/translator.service
 import { SessionService } from './../../../login/session.service';
 import { CommentService } from './../../../../lib/ng-noosfero-api/http/comment.service';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { PostCommentComponent } from './post-comment.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 
 describe("Components", () => {
     describe("Post Comment Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<PostCommentComponent>;
         let component: PostCommentComponent;
 

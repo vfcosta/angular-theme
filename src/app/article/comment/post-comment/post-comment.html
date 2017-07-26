@@ -1,4 +1,4 @@
-<form class="clearfix post-comment" *ngIf="article.accept_comments" (ngSubmit)="save()">
+<form class="clearfix post-comment" *ngIf="article.accept_comments">
   <div class="form-group post-comment-logged-in" *ngIf="loggedIn()">
     <div class="comment media">
       <div class="media-left">
@@ -7,7 +7,7 @@
       <div class="media-body">
         <textarea class="form-control custom-control" rows="1" name="body" [(ngModel)]="comment.body" placeholder="{{'comment.post.placeholder' | translate}}"></textarea>
         <noosfero-hotspot-comment-form [comment]="comment" [parent]="parent"></noosfero-hotspot-comment-form>
-        <button [hidden]="!comment.body" type="submit" class="btn btn-default pull-right">{{"comment.post" | translate}}</button>
+        <button (click)="save()" [hidden]="!comment.body" type="submit" class="btn btn-default pull-right">{{"comment.post" | translate}}</button>
       </div>
     </div>
   </div>

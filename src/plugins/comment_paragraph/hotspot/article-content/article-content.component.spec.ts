@@ -8,16 +8,16 @@ import { ArticleContentHotspotComponent } from './../../../../app/hotspot/articl
 import { CommentParagraphArticleContentHotspotComponent } from './article-content.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Article Content Hotspot Component", () => {
         let fixture: ComponentFixture<CommentParagraphArticleContentHotspotComponent>;
         let component: CommentParagraphArticleContentHotspotComponent;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
-            let articleContentHotspotComponent = {};
+            const articleContentHotspotComponent = {};
             TestBed.configureTestingModule({
                 declarations: [CommentParagraphArticleContentHotspotComponent, DiscussionPeriodComponent, DateFormatPipe],
                 providers: [

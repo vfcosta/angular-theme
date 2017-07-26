@@ -1,11 +1,13 @@
-import { Component, Inject, Input } from '@angular/core';
-import { BlockService } from '../../../../lib/ng-noosfero-api/http/block.service';
+import { BlockService } from './../../../../lib/ng-noosfero-api/http/block.service';
+import { Component, Inject, Input, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: "noosfero-friends-block",
-    template: require('plugins/friends/blocks/friends-block/friends-block.html')
+    templateUrl: './friends-block.html',
+    styleUrls: ['./friends-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class FriendsBlockComponent {
+export class FriendsBlockComponent implements OnInit {
 
     @Input() block: noosfero.Block;
     @Input() owner: noosfero.Profile;
@@ -15,7 +17,7 @@ export class FriendsBlockComponent {
     constructor(private blockService: BlockService) { }
 
     ngOnInit() {
-        let limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;        
+        const limit: number = ((this.block && this.block.settings) ? this.block.settings.limit : null) || 4;
 
         if (this.block.api_content) {
             this.profiles = this.block.api_content['people'];

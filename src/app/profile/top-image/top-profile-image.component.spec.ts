@@ -1,13 +1,13 @@
 import { PermissionService } from './../../shared/services/permission.service';
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { TopProfileImageComponent } from './top-profile-image.component';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 
 describe("Components", () => {
     describe("Section Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<TopProfileImageComponent>;
         let component: TopProfileImageComponent;
 

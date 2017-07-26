@@ -1,8 +1,8 @@
-import {Component, Input, Inject} from "@angular/core";
+import {Component, Input, Inject} from '@angular/core';
 
 @Component({
     selector: "noosfero-activity-header",
-    template: require('app/profile/activities/activity/header/activity_header.html')
+    templateUrl: './activity_header.html'
 })
 export class ActivityHeaderComponent {
 
@@ -13,7 +13,7 @@ export class ActivityHeaderComponent {
     @Input() iconclass: any;
 
     getDesc() {
-        return (this.profiles && this.profiles > 1) ? this.desc + ".plural" : this.desc; 
+        return (this.profiles && this.profiles > 1) ? this.desc + ".plural" : this.desc;
     }
     count() {
         return this.profiles ? this.profiles : 1;

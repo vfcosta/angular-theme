@@ -3,20 +3,20 @@ import { TranslatorService } from './../../../app/shared/services/translator.ser
 import { CommentParagraphService } from './../http/comment-paragraph.service';
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { NgPipesModule } from 'ngx-pipes';
-import { SideCommentsComponent } from "./side-comments.component";
-import * as helpers from "../../../spec/helpers";
+import { SideCommentsComponent } from './side-comments.component';
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Side Comments Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<SideCommentsComponent>;
         let component: SideCommentsComponent;
-        let serviceMock = jasmine.createSpyObj("CommentParagraphService", ["getByArticle"]);
+        const serviceMock = jasmine.createSpyObj("CommentParagraphService", ["getByArticle"]);
         serviceMock.getByArticle = jasmine.createSpy("getByArticle").and.returnValue(Promise.resolve({ data: [] }));
 
-        let postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["emit", "subscribe"]);
+        const postCommentEventService = jasmine.createSpyObj("postCommentEventService", ["emit", "subscribe"]);
         postCommentEventService.subscribe = jasmine.createSpy("subscribe");
 
         beforeEach(async(() => {

@@ -5,12 +5,12 @@ import { DesignModeService } from './../../shared/services/design-mode.service';
 import { BoxComponent } from './box.component';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 
 describe("Box Component", () => {
     let fixture: ComponentFixture<BoxComponent>;
     let component: BoxComponent;
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({

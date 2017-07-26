@@ -1,6 +1,6 @@
 import { TaskModule } from './../task.module';
 import { TaskService } from './../../../lib/ng-noosfero-api/http/task.service';
-import { Component, Input, Inject, Compiler, NgModuleFactory } from "@angular/core";
+import { Component, Input, Inject, Compiler, NgModuleFactory, OnInit } from '@angular/core';
 import * as types from '../types';
 
 @Component({
@@ -9,7 +9,7 @@ import * as types from '../types';
                  <ng-container *ngComponentOutlet="taskComponent; ngModuleFactory: myModule;"></ng-container>
                </ng-container>`
 })
-export class TaskAcceptComponent {
+export class TaskAcceptComponent implements OnInit {
 
     @Input() task: noosfero.Task;
     @Input() confirmationTask: noosfero.Task;
@@ -23,7 +23,7 @@ export class TaskAcceptComponent {
     }
 
     ngOnInit() {
-        let taskType = `${this.task.type}TaskAcceptComponent`;
+        const taskType = `${this.task.type}TaskAcceptComponent`;
         if (types[taskType]) {
             this.taskComponent = types[taskType];
         }

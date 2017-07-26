@@ -1,13 +1,13 @@
 import { DesignModeService } from './../../shared/services/design-mode.service';
 import { Component } from '@angular/core';
 import { ConfigBarComponent } from './config-bar.component';
-import * as helpers from "../../../spec/helpers";
+import * as helpers from '../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 
 describe("ConfigBar Component", () => {
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<ConfigBarComponent>;
     let component: ConfigBarComponent;
 

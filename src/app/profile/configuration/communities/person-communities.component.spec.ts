@@ -1,22 +1,23 @@
 import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';                                                                                                                                       import { TranslateModule } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../../shared/services/translator.service';
 import { PersonCommunitiesComponent } from './person-communities.component';
 import { By } from '@angular/platform-browser';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { tick, fakeAsync, async, TestBed, ComponentFixture } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { PersonService } from "../../../../lib/ng-noosfero-api/http/person.service";
-import * as helpers from "../../../../spec/helpers";
+import { PersonService } from '../../../../lib/ng-noosfero-api/http/person.service';
+import * as helpers from '../../../../spec/helpers';
 
 describe("Components", () => {
     describe("Person Communities Component", () => {
         let fixture: ComponentFixture<PersonCommunitiesComponent>;
         let component: PersonCommunitiesComponent;
-        let personService = jasmine.createSpyObj("PersonService", ["getCommunities"]);
+        const personService = jasmine.createSpyObj("PersonService", ["getCommunities"]);
         personService.getCommunities = jasmine.createSpy("getCommunities").and.returnValue(Promise.resolve({ headers: { get: () => { } } }));
-        let stateParams = {};
-        let mocks = helpers.getMocks();
+        const stateParams = {};
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -26,7 +27,7 @@ describe("Components", () => {
                 providers: [
                     { provide: PersonService, useValue: personService },
                     { provide: ActivatedRoute, useValue: mocks.route },
-                    { provide: TranslatorService, useValue: helpers.mocks.translatorService }
+                    { provide: TranslatorService, useValue: mocks.translatorService }
                 ]
             });
             fixture = TestBed.createComponent(PersonCommunitiesComponent);

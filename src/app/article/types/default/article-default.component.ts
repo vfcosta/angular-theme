@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Input, Inject, Component, Directive } from '@angular/core';
-import {ArticleService} from "../../../../lib/ng-noosfero-api/http/article.service";
-import { NotificationService } from "../../../shared/services/notification.service";
+import {ArticleService} from '../../../../lib/ng-noosfero-api/http/article.service';
+import { NotificationService } from '../../../shared/services/notification.service';
 
 /**
  * @ngdoc controller
@@ -13,7 +13,7 @@ import { NotificationService } from "../../../shared/services/notification.servi
  */
 @Component({
     selector: 'noosfero-default-article',
-    template: require('app/article/types/default/article-default.html'),
+    templateUrl: './article-default.html',
 })
 export class ArticleDefaultViewComponent {
 

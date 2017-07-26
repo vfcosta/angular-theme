@@ -5,35 +5,35 @@ import { ArticleService } from './../../../lib/ng-noosfero-api/http/article.serv
 import { CommentService } from './../../../lib/ng-noosfero-api/http/comment.service';
 import { PopoverModule } from 'ngx-bootstrap';
 import { By } from '@angular/platform-browser';
-import {AllowCommentComponent} from "./allow-comment.component";
-import * as helpers from "../../../spec/helpers";
+import {AllowCommentComponent} from './allow-comment.component';
+import * as helpers from '../../../spec/helpers';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe("Components", () => {
     describe("Allow Comment Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
-        let serviceMock = {
+        const serviceMock = {
             commentParagraphCount: () => {
                 return Promise.resolve(5);
             }
         };
         let functionToggleCommentParagraph: Function;
-        let eventServiceMock = {
+        const eventServiceMock = {
             subscribeToggleCommentParagraph: (fn: Function) => {
                 functionToggleCommentParagraph = fn;
             }
         };
 
-        let permissionServiceMock = {
+        const permissionServiceMock = {
             isAllowed: () => {
               return true;
             }
         };
         let fixture: ComponentFixture<AllowCommentComponent>;
         let component: AllowCommentComponent;
-        let article = <any>{setting: {comment_paragraph_plugin_activate: true}, accept_comments: true};
+        const article = <any>{setting: {comment_paragraph_plugin_activate: true}, accept_comments: true};
 
         beforeEach(async(() => {
             spyOn(mocks.articleService, "getCurrent").and.returnValue(Promise.resolve(article));

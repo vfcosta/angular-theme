@@ -1,29 +1,30 @@
 import { AddFriendTaskComponent } from './../types/add-friend/add-friend-task.component';
 import { TaskModule } from './../task.module';
-import { NgModuleFactory } from '@angular/core';
+import { NgModuleFactory, ViewEncapsulation, OnInit, OnChanges } from '@angular/core';
 import { Compiler } from '@angular/core';
 import { components } from './../../../../themes/index';
 import { AppModule } from './../../app.module';
 import { Component, Input, Inject } from '@angular/core';
-import { NotificationService } from "../../shared/services/notification.service";
-import { TaskService } from "../../../lib/ng-noosfero-api/http/task.service";
-import { Arrays } from "../../../lib/util/arrays";
-import { EventsHubService } from "../../shared/services/events-hub.service";
-import { NoosferoKnownEvents } from "../../known-events";
-
-declare var _: any;
+import { NotificationService } from '../../shared/services/notification.service';
+import { TaskService } from '../../../lib/ng-noosfero-api/http/task.service';
+import { Arrays } from '../../../lib/util/arrays';
+import { EventsHubService } from '../../shared/services/events-hub.service';
+import { NoosferoKnownEvents } from '../../known-events';
+import * as _ from "lodash";
 
 @Component({
     selector: "task-list",
-    template: require("app/task/task-list/task-list.html")
+    templateUrl: './task-list.html',
+    styleUrls: ['./task-list.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class TaskListComponent {
+export class TaskListComponent implements OnInit, OnChanges {
 
     @Input() tasks: noosfero.Task[];
 
     currentTask: noosfero.Task;
     confirmationTask: noosfero.Task;
-    tasksGroups: noosfero.Task[];
+    tasksGroups: noosfero.Task[][];
     showAcceptModal = false;
     showRejectModal = false;
 

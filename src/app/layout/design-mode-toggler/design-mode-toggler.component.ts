@@ -1,14 +1,16 @@
-import {Component, Inject, Input} from '@angular/core';
+import { Component, Inject, Input, ViewEncapsulation } from '@angular/core';
 import {DesignModeService} from '../../shared/services/design-mode.service';
 import {AuthService, AuthEvents} from '../../login';
 
 @Component({
     selector: 'design-toggler',
-    template: require('app/layout/design-mode-toggler/design-mode-toggler.html')
+    templateUrl: './design-mode-toggler.html',
+    styleUrls: ['./design-mode-toggler.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DesignModeTogglerComponent {
 
-    private _inDesignMode: boolean = false;
+    private _inDesignMode = false;
 
     constructor(
         private designModeService: DesignModeService,
@@ -27,7 +29,7 @@ export class DesignModeTogglerComponent {
     };
 
     togleDesignMode() {
-        let value = this.designModeService.isInDesignMode();
+        const value = this.designModeService.isInDesignMode();
         this.designModeService.setInDesignMode(!value);
     }
 }

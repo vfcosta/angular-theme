@@ -1,6 +1,6 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
-import { RestangularService } from "./restangular_service";
+import { Injectable, Inject } from '@angular/core';
+import { RestangularService } from './restangular_service';
 
 export const MembershipStatus = {
     NotMember: 297,
@@ -58,7 +58,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
     }
 
     getByIdentifier(identifier: string): Promise<noosfero.Profile> {
-        let p = this.restangular.one('profiles', identifier).get({ key: "identifier" }).toPromise();
+        const p = this.restangular.one('profiles', identifier).get({ key: "identifier" }).toPromise();
         return p.then((response: any) => {
             if (response.status === 404) {
                 return Promise.reject(p);
@@ -88,12 +88,12 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
     }
 
     update(profile: noosfero.Profile) {
-        let headers = { 'Content-Type': 'application/json' };
+        const headers = { 'Content-Type': 'application/json' };
         return this.getProfileElement(profile.id).customPOST({ profile: profile }, null, null, headers).toPromise();
     }
 
     getMembers(profile: noosfero.Profile, params?: any) {
-        let p = this.getProfileElement(profile.id);
+        const p = this.getProfileElement(profile.id);
         return p.customGET('members', params).toPromise();
     }
 
@@ -116,7 +116,7 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
     }
 
     uploadImage(profile: noosfero.Profile, base64ImageJson: any, type: string) {
-        let headers = { 'Content-Type': 'application/json' };
+        const headers = { 'Content-Type': 'application/json' };
         // TODO dynamically copy the selected attributes to update
         let attributesToUpdate: any = {
             profile: { image_builder: base64ImageJson }
@@ -126,19 +126,19 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
                 profile: { top_image_builder: base64ImageJson }
             };
         }
-        let restRequest = this.getProfileElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
+        const restRequest = this.getProfileElement(profile.id).customPOST(attributesToUpdate, null, null, headers);
         return restRequest.toPromise().then(this.getHandleSuccessFunction());
     }
 
     getBlockTemplate(id: number, blockType: string) {
-        let params = { 'block_type': blockType };
-        let restRequest = this.getProfileElement(id).customGET("blocks/preview", params);
+        const params = { 'block_type': blockType };
+        const restRequest = this.getProfileElement(id).customGET("blocks/preview", params);
         return restRequest.toPromise().then(this.getHandleSuccessFunction<noosfero.RestResult<noosfero.Block>>());
     }
 
 
     getTags(profile: noosfero.Profile): Promise<noosfero.RestResult<any>> {
-        let p = this.getProfileElement(<number>profile.id).customGET('tags');
+        const p = this.getProfileElement(<number>profile.id).customGET('tags');
         return p.toPromise().then(this.getHandleSuccessFunction<noosfero.RestResult<any>>());
     }
 }

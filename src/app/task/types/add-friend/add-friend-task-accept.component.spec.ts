@@ -4,7 +4,7 @@ import { TaskService } from './../../../../lib/ng-noosfero-api/http/task.service
 import { TaskAcceptComponent } from './../../task-list/task-accept.component';
 import { FormsModule } from '@angular/forms';
 import { Provider, Component } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { AddFriendTaskAcceptComponent } from './add-friend-task-accept.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -12,17 +12,17 @@ import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core
 describe("Components", () => {
 
     describe("Add Friend Task Accept Component", () => {
-        let confirmationTaskData = {
+        const confirmationTaskData = {
                 group_for_friend: 'group1'
             };
-        let mocks = helpers.getMocks();
-        let peopleToInvite = [<noosfero.Person>{ "id": 1, "name": "Person 1" }, <noosfero.Person>{ "id": 3, "name": "Person 3" }];
+        const mocks = helpers.getMocks();
+        const peopleToInvite = [<noosfero.Person>{ "id": 1, "name": "Person 1" }, <noosfero.Person>{ "id": 3, "name": "Person 3" }];
         let fixture: ComponentFixture<AddFriendTaskAcceptComponent>;
         let component: AddFriendTaskAcceptComponent;
 
         beforeEach(async(() => {
             spyOn(mocks.taskService, 'get').and.callThrough();
-            let taskAcceptComponent = {task: {target: { id: 5 }} , confirmationTask: {}};
+            const taskAcceptComponent = {task: {target: { id: 5 }} , confirmationTask: {}};
 
             TestBed.configureTestingModule({
                 declarations: [AddFriendTaskAcceptComponent],
@@ -41,7 +41,7 @@ describe("Components", () => {
         }));
 
         it("should the add friend have a group named", () => {
-            let group = 'group1';
+            const group = 'group1';
             expect(component.confirmationTask['group_for_friend']).toEqual(group);
         });
 

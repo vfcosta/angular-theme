@@ -11,12 +11,12 @@ import { NewCommunityComponent } from './new-community.component';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { FormsModule, NG_VALIDATORS, AbstractControl, NgForm, FormControl } from '@angular/forms';
 
 describe("Components", () => {
     describe("New Community", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
         let fixture: ComponentFixture<NewCommunityComponent>;
         let component: NewCommunityComponent;
 
@@ -50,7 +50,7 @@ describe("Components", () => {
 
         it("verify if session profile is initialized with current user ", () => {
             component.sessionProfile = null;
-            let currentUser = { person: { identifier: 'profile1' } };
+            const currentUser = { person: { identifier: 'profile1' } };
             component['sessionService'].currentUser = jasmine.createSpy("currentUser").and.returnValue(currentUser);
             component.ngOnInit();
             expect(component.sessionProfile).toEqual(<noosfero.Profile>currentUser.person);
@@ -95,7 +95,7 @@ describe("Components", () => {
         }));
 
         it("verify if set name error when the save is rejected by the server ", fakeAsync(() => {
-            let response = { status: 422, data: { errors: { name: [{ error: 'blank', full_message: 'cant be blank' }] } } };
+            const response = { status: 422, data: { errors: { name: [{ error: 'blank', full_message: 'cant be blank' }] } } };
             component.communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
@@ -105,7 +105,7 @@ describe("Components", () => {
 
         it("verify if set identifier error when the save is rejected by the server ", fakeAsync(() => {
             spyOn(component.notificationService, 'error').and.callThrough();
-            let response = { status: 422, data: { message: 'Failed', errors: { identifier: [{ error: 'not_available' }] }, errors_messages: { identifier: [{ error: 'not_available' }] } } };
+            const response = { status: 422, data: { message: 'Failed', errors: { identifier: [{ error: 'not_available' }] }, errors_messages: { identifier: [{ error: 'not_available' }] } } };
             component.communityService.createNewCommunity = jasmine.createSpy("update").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();
@@ -115,7 +115,7 @@ describe("Components", () => {
 
         it("verify if the server could not save the community ", fakeAsync(() => {
             spyOn(component.notificationService, 'error').and.callThrough();
-            let response = { status: 400, message: 'Failed' };
+            const response = { status: 400, message: 'Failed' };
             component.communityService.createNewCommunity = jasmine.createSpy("createNewCommunity").and.returnValue(Promise.reject(response));
             fixture.detectChanges();
             component.save();

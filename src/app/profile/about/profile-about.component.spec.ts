@@ -5,17 +5,17 @@ import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.serv
 import { RouterTestingModule } from '@angular/router/testing';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import * as helpers from "./../../../spec/helpers";
-import {ProfileAboutComponent} from "./profile-about.component";
+import * as helpers from './../../../spec/helpers';
+import {ProfileAboutComponent} from './profile-about.component';
 
 describe('Profile about component', () => {
-    let profile = {
+    const profile = {
         id: 1,
         identifier: "profile-test",
         type: 'Person',
         additional_data: { 'Address': 'Street A, Number 102' }
     };
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<ProfileAboutComponent>;
     let component: ProfileAboutComponent;
 

@@ -1,5 +1,5 @@
-import { Component, Input, Inject } from "@angular/core";
-import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.service";
+import { Component, Input, Inject, ViewEncapsulation, OnInit } from '@angular/core';
+import { ArticleService } from '../../../../lib/ng-noosfero-api/http/article.service';
 
 /**
  * @ngdoc controller
@@ -9,17 +9,19 @@ import { ArticleService } from "../../../../lib/ng-noosfero-api/http/article.ser
  */
 @Component({
     selector: "noosfero-folder",
-    template: require("app/article/types/folder/folder.html")
+    templateUrl: './folder.html',
+    styleUrls: ['folder.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class FolderComponent {
+export class FolderComponent implements OnInit {
 
     @Input() article: noosfero.Article;
     @Input() profile: noosfero.Profile;
 
     private posts: noosfero.Article[];
-    private perPage: number = 5;
+    private perPage = 5;
     private currentPage: number;
-    private totalPosts: number = 0;
+    private totalPosts = 0;
 
     constructor(private articleService: ArticleService) { }
 
@@ -28,7 +30,7 @@ export class FolderComponent {
     }
 
     loadPage($event: any) {
-        let filters = {
+        const filters = {
             per_page: this.perPage,
             page: $event.page
         };

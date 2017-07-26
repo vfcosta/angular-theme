@@ -1,15 +1,15 @@
 import { MockBackend } from '@angular/http/testing';
 import { BrowserModule } from '@angular/platform-browser';
-import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from "@angular/http";
+import {Http, Headers, RequestOptions, URLSearchParams, Request, RequestMethod, HttpModule, BaseRequestOptions} from '@angular/http';
 import { RestangularModule, RestangularHttp, Restangular } from 'ngx-restangular';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
-import { RoleService } from "./role.service";
-import * as helpers from "../../../spec/helpers";
+import { RoleService } from './role.service';
+import * as helpers from '../../../spec/helpers';
 
 describe("Services", () => {
     describe("Role Service", () => {
         let service: RoleService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

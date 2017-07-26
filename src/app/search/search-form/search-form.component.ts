@@ -1,11 +1,13 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, Inject } from "@angular/core";
+import { Component, Inject, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: 'search-form',
-    template: require('app/search/search-form/search-form.html'),
+    templateUrl: './search-form.html',
+    styleUrls: ['./search-form.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class SearchFormComponent {
+export class SearchFormComponent implements OnInit {
 
     query: string;
 

@@ -3,13 +3,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { Restangular, RestangularModule } from 'ngx-restangular';
-import { SettingsService } from "./settings.service";
-import * as helpers from "../../../spec/helpers";
+import { SettingsService } from './settings.service';
+import * as helpers from '../../../spec/helpers';
 
 describe("Services", () => {
     describe("Settings Service", () => {
         let service: SettingsService;
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
@@ -25,7 +25,7 @@ describe("Services", () => {
 
         describe("Succesfull requests", () => {
             xit("should return available blocks", (done) => {
-                let profileId = 1;
+                const profileId = 1;
                 helpers.mockBackendConnection(TestBed.get(MockBackend), `/api/v1/profiles/${profileId}/settings/available_blocks`,
                     [{type: "RawHTMLBlock"}], {}, 200);
                 service.getAvailableBlocks(<noosfero.Profile>{ id: profileId }).then((content: any) => {

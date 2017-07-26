@@ -1,24 +1,24 @@
 import { EnvironmentService } from './../../../../lib/ng-noosfero-api/http/environment.service';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, TestBed, ComponentFixture } from '@angular/core/testing';
-import * as helpers from "../../../../spec/helpers";
+import * as helpers from '../../../../spec/helpers';
 import { TagsBlockComponent } from './tags-block.component';
 
 describe("Components", () => {
     describe("Tags Block Component", () => {
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         let fixture: ComponentFixture<TagsBlockComponent>;
         let component: TagsBlockComponent;
 
-        let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment", "getTags"]);
+        const environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment", "getTags"]);
 
         environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(
             Promise.resolve({ id: 1, name: 'Noosfero', host: "https://noosfero.org" })
         );
 
         environmentService.getTags = jasmine.createSpy("getTags").and.returnValue(
-            Promise.resolve({data:[{"name":"foo","count":10},{"name":"bar","count":20}]})
+            Promise.resolve({data: [{"name": "foo", "count": 10}, {"name": "bar", "count": 20}]})
         );
 
         beforeEach(async(() => {

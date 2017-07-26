@@ -7,27 +7,27 @@ import { PersonService } from './../../../lib/ng-noosfero-api/http/person.servic
 import { SessionService } from './../../login/session.service';
 import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import { PopoverModule } from 'ngx-bootstrap';
-import { EnvironmentService } from "../../../lib/ng-noosfero-api/http/environment.service";
+import { EnvironmentService } from '../../../lib/ng-noosfero-api/http/environment.service';
 import { By } from '@angular/platform-browser';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import * as helpers from "../../../spec/helpers";
-import { ProfileSummaryComponent } from "./profile-summary.component";
+import * as helpers from '../../../spec/helpers';
+import { ProfileSummaryComponent } from './profile-summary.component';
 
 describe("Components", () => {
     describe("Profile Summary Component", () => {
         let fixture: ComponentFixture<ProfileSummaryComponent>;
         let component: ProfileSummaryComponent;
-        let environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment"]);
+        const environmentService = jasmine.createSpyObj("environmentService", ["getCurrentEnvironment"]);
         environmentService.getCurrentEnvironment = jasmine.createSpy("getCurrentEnvironment").and.returnValue(
             Promise.resolve({ id: 1, name: 'Nosofero', host: "https://noosfero.org" })
         );
-        let personService = jasmine.createSpyObj("personService", ["upload", "isFriend"]);
+        const personService = jasmine.createSpyObj("personService", ["upload", "isFriend"]);
         personService.isFriend = jasmine.createSpy("isFriend").and.returnValue(Promise.resolve(false));
-        let sessionService = jasmine.createSpyObj("sessionService", ["currentUser"]);
+        const sessionService = jasmine.createSpyObj("sessionService", ["currentUser"]);
         sessionService.currentUser = jasmine.createSpy("currentUser").and.returnValue({ person: { id: 1, identifier: 'adminuser', type: "Person" } });
-        let mocks = helpers.getMocks();
+        const mocks = helpers.getMocks();
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({

@@ -4,11 +4,11 @@ import { Injectable, Output, EventEmitter, Inject } from '@angular/core';
 @Injectable()
 export class DesignModeService {
 
+    @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
+
     constructor(private localStorageService: LocalStorageService) {
         this.onToggle.next(this.isInDesignMode());
     }
-
-    @Output() onToggle: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     isInDesignMode(): boolean {
         return this.localStorageService.get<boolean>('designModeOn');

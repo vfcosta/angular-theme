@@ -1,10 +1,12 @@
-import { Component, Input, Inject, OnChanges } from "@angular/core";
+import { Component, Input, Inject, OnChanges, ViewEncapsulation, OnInit } from '@angular/core';
 
 @Component({
     selector: "noosfero-link-list-block",
-    template: require("app/layout/blocks/link-list/link-list-block.html")
+    templateUrl: './link-list-block.html',
+    styleUrls: ['./link-list-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
-export class LinkListBlockComponent implements OnChanges {
+export class LinkListBlockComponent implements OnChanges, OnInit {
 
     @Input() block: any;
     @Input() owner: any;

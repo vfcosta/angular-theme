@@ -1,16 +1,18 @@
-import { Input, Inject, Component } from "@angular/core";
-import { AuthService, AuthEvents } from "../../../login";
+import { Input, Inject, Component, ViewEncapsulation } from '@angular/core';
+import { AuthService, AuthEvents } from '../../../login';
 import { SessionService } from '../../../login/session.service';
 
 /**
  * @ngdoc controller
  * @name layout.blocks.LoginBlockComponent
  * @description
- *  The Noosfero block responible for presenting a login form and user status 
+ *  The Noosfero block responible for presenting a login form and user status
  */
 @Component({
     selector: "noosfero-login-block",
-    template: require('app/layout/blocks/login-block/login-block.html')
+    templateUrl: './login-block.html',
+    styleUrls: ['./login-block.scss'],
+    encapsulation: ViewEncapsulation.None,
 })
 export class LoginBlockComponent {
 

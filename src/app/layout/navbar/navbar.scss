@@ -1,3 +1,8 @@
+@import 'scss/variables';
+@import 'scss/bootstrap';
+@import 'scss/font-awesome';
+@import 'bootstrap/scaffolding';
+
 $navbar-font-color: #fff;
 
 .navbar-inverse .navbar-nav {
@@ -15,7 +20,7 @@ $navbar-font-color: #fff;
 }
 
 .navbar {
-
+  z-index: 1050;
   tasks-menu {
     &.friendship-menu {
       .tasks-icon {
@@ -28,7 +33,6 @@ $navbar-font-color: #fff;
     font-size: 19px;
     display: none;
   }
-  margin-bottom: 0px;
 
   .container {
     .navbar-header {
@@ -50,7 +54,7 @@ $navbar-font-color: #fff;
     }
     .navbar-brand {
       .noosfero-logo {
-        background: url("../assets/images/logo-noosfero.png") no-repeat;
+        background: url("../../../assets/images/logo-noosfero.png") no-repeat;
         padding: 20px 60px;
         background-position: 2px 16px;
       }

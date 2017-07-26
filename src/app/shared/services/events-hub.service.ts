@@ -1,5 +1,5 @@
+import { NoosferoKnownEvents } from './../../known-events';
 import { Injectable, Inject, OpaqueToken, EventEmitter } from '@angular/core';
-import { NoosferoKnownEvents } from "../../known-events";
 
 @Injectable()
 export class EventsHubService {
@@ -14,13 +14,13 @@ export class EventsHubService {
 
     emitEvent(eventType: string, payload?: any) {
         this.checkKnownEvent(eventType);
-        let event = this.emitters.get(eventType);
+        const event = this.emitters.get(eventType);
         if (event) this.emitters.get(eventType).next(payload);
     }
 
     subscribeToEvent<T>(eventType: string, generatorOrNext?: ((p?: T) => void), error?: any, complete?: any) {
         this.checkKnownEvent(eventType);
-        let event = this.emitters.get(eventType);
+        const event = this.emitters.get(eventType);
         if (event) event.subscribe(generatorOrNext, error, complete);
     }
 

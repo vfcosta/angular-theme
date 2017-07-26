@@ -1,3 +1,4 @@
+import { ValidationMessageComponent } from './../shared/components/validation-message/validation-message.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from './../shared/services/notification.service';
@@ -5,15 +6,15 @@ import { TranslatorService } from './../shared/services/translator.service';
 import { PasswordService } from './../../lib/ng-noosfero-api/http/password.service';
 import { FormsModule } from '@angular/forms';
 import { NgPipesModule } from 'ngx-pipes';
-import * as helpers from "../../spec/helpers";
-import { PasswordComponent } from "./new-password.component";
+import * as helpers from '../../spec/helpers';
+import { PasswordComponent } from './new-password.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-describe("Password Component", () => {
+describe("New Password Component", () => {
     let data: any;
-    let mocks = helpers.getMocks();
+    const mocks = helpers.getMocks();
     let fixture: ComponentFixture<PasswordComponent>;
     let component: PasswordComponent;
 
@@ -24,7 +25,7 @@ describe("Password Component", () => {
         spyOn(mocks.$state, 'transitionTo').and.callThrough();
 
         TestBed.configureTestingModule({
-            declarations: [PasswordComponent],
+            declarations: [PasswordComponent, ValidationMessageComponent],
             providers: [
                 { provide: PasswordService, useValue: mocks.passwordService },
                 { provide: NotificationService, useValue: mocks.notificationService },

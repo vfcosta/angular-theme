@@ -1,6 +1,6 @@
 import { Restangular } from 'ngx-restangular';
-import { Injectable, Inject } from "@angular/core";
-import { RestangularService } from "./restangular_service";
+import { Injectable, Inject } from '@angular/core';
+import { RestangularService } from './restangular_service';
 
 @Injectable()
 export class EnvironmentService extends RestangularService<noosfero.Environment> {
@@ -52,7 +52,7 @@ export class EnvironmentService extends RestangularService<noosfero.Environment>
     }
 
     update(environment: noosfero.Environment) {
-        let headers = { 'Content-Type': 'application/json' };
+        const headers = { 'Content-Type': 'application/json' };
         return this.getEnvironmentElement(environment.id).customPOST({ environment: environment }, null, null, headers).toPromise();
     }
 }
