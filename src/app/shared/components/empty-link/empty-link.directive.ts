@@ -7,8 +7,10 @@ export class EmptyLinkDirective {
 
     @Input() href;
 
-    @HostListener('document:click', ['$event'])
+    @HostListener('click', ['$event'])
     preventDefault(event) {
-        if (this.href.length === 0 || this.href === "#") event.preventDefault();
+        if (this.href.length === 0 || this.href === "#") {
+            event.preventDefault();
+        }
     }
 }
