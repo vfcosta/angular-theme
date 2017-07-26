@@ -270,6 +270,7 @@ export const translation = {
     "search.icon.description": "ícone de busca",
     "search.label": "Pesquisar",
     "search.results.query.label": "Termo da busca:",
+    "search.results.tag.label": "Tag da busca:",
     "search.results.summary.one": "um resultado",
     "search.results.summary.other": "{{results}} resultados",
     "statistics.categories": "Categorias",

@@ -1,6 +1,12 @@
 <form ngSubmit="search()">
-    <label for="query">{{'search.results.query.label' | translate}}</label>
-    <h3 id="query" class="search-box-title">{{query}}</h3>
+    <div *ngIf="query">
+        <label for="query">{{'search.results.query.label' | translate}}</label>
+        <h3 id="query" class="search-box-title">{{query}}</h3>
+    </div>
+    <div *ngIf="tag">
+        <label for="tag">{{'search.results.tag.label' | translate}}</label>
+        <h3 id="tag" class="search-box-title">{{tag}}</h3>
+    </div>
 </form>
 <div class="search-results">
     <div class="summary" [ngPlural]="totalResults">
