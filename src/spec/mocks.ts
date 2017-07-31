@@ -182,7 +182,8 @@ export function getMocks() {
             search: () => Observable.of([mocks.profile]),
             getFriendshipState: () => Promise.resolve({ }),
             addFriend: () => Promise.resolve({ data: {} }),
-            removeFriend: () => Promise.resolve({ data: {} })
+            removeFriend: () => Promise.resolve({ data: {} }),
+            getLoggedPerson: () => Promise.resolve({ data: {} })
         },
         communityService: {
             sendInvitations: (communityId: number, people: noosfero.Person[]) => Observable.of({ success: true }),
@@ -335,6 +336,9 @@ export function getMocks() {
         bodyStateClassesService: {
             start: () => {},
             changeClasses: new EventEmitter()
+        },
+        jsonp: {
+            get: () => Observable.of({})
         }
     };
     return mocks;

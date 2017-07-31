@@ -16,7 +16,9 @@ export class AuthService {
         private sessionService: SessionService,
         private restangular: Restangular,
         private personService: PersonService
-    ) { }
+    ) {
+        this.reloadUser();
+    }
 
     loginFromCookie() {
         if (this.sessionService.currentUser()) return;
@@ -25,13 +27,15 @@ export class AuthService {
     }
 
     reloadUser() {
-        if (this.currentUser() && this.currentUser().person) {
-            this.personService.getLoggedPerson().then((result: noosfero.RestResult<noosfero.Person>) => {
-                this.currentUser().person = result.data;
-            }).catch((error: any) => {
-                this.sessionService.destroy();
-            });
-        }
+        this.personService.getLoggedPerson().then((result: noosfero.RestResult<noosfero.Person>) => {
+            const person = result.data;
+            const user = person['user'];
+            user.person = person;
+            person['user'] = null;
+            this.loginSuccessCallback({data: user});
+        }).catch((error: any) => {
+            this.logout();
+        });
     }
 
     private loginSuccessCallback(response: any) {
@@ -61,9 +65,8 @@ export class AuthService {
     public logout() {
         const user: noosfero.User = this.sessionService.currentUser();
         this.sessionService.destroy();
-
         this.logoutSuccess.next(user);
-        this.jsonp.get('/account/logout'); // FIXME logout from noosfero to sync login state
+        this.jsonp.get('/account/logout').subscribe(); // logout from noosfero to sync login state
     }
 
     public isAuthenticated() {
