@@ -20,10 +20,10 @@
         <li>
           <search-form></search-form>
         </li>
-        <li>
+        <li *ngIf="currentUser">
           <tasks-menu [taskTypes]="['AddFriend']" class="friendship-menu navbar-nav pull-right"></tasks-menu>
         </li>
-        <li>
+        <li *ngIf="currentUser">
           <tasks-menu class="navbar-nav pull-right"></tasks-menu>
         </li>
         <li class="btn-nav" *ngIf="!currentUser">

@@ -1,3 +1,4 @@
+import { By } from '@angular/platform-browser';
 import { TranslateModule } from '@ngx-translate/core';
 import { TranslatorService } from './../../shared/services/translator.service';
 import { AuthService } from './../../login/auth.service';
@@ -15,7 +16,7 @@ describe("Components", () => {
         const mocks = helpers.getMocks();
         let fixture: ComponentFixture<NavbarComponent>;
         let component: NavbarComponent;
-        const user: noosfero.User = <noosfero.User>{ id: 1, login: "user" };
+        const user: noosfero.User = <noosfero.User>{ id: 1, login: "user", person: {} };
         let authSubscribe: Function[];
 
         beforeEach(async(() => {
@@ -71,6 +72,17 @@ describe("Components", () => {
         it('closes the modal after login', () => {
             authSubscribe[0]();
             expect(component.showLoginModal).toBeFalsy();
+        });
+
+        it('display tasks when logged in', () => {
+            fixture.detectChanges();
+            expect(fixture.debugElement.query(By.css('tasks-menu'))).toBeDefined();
+        });
+
+        it('not display tasks when not logged in', () => {
+            component['currentUser'] = null;
+            fixture.detectChanges();
+            expect(fixture.debugElement.query(By.css('tasks-menu'))).toBeNull();
         });
     });
 });
