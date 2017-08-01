@@ -21,7 +21,8 @@ export class AddBlockComponent {
                  'MembersBlock', 'MenuBlock', 'PeopleBlock', 'ProfileImageBlock', 'RecentDocumentsBlock', 'StatisticsBlock',
                  'BreadcrumbsPlugin::ContentBreadcrumbsBlock', 'CommentParagraphPlugin::DiscussionBlock',
                  'EventPlugin::EventBlock', 'FriendsBlock', 'InterestTagsBlock', 'ProfileImagesPlugin::ProfileImagesBlock',
-                 'RecentActivitiesPlugin::ActivitiesBlock', 'SectionBlockPlugin::SectionBlock', 'VideoPlugin::VideoBlock'];
+                 'RecentActivitiesPlugin::ActivitiesBlock', 'SectionBlockPlugin::SectionBlock', 'VideoPlugin::VideoBlock',
+                 'TagsCloudBlock'];
     blocks: noosfero.BlockDefinition[];
 
     constructor(private settingsService: SettingsService,

@@ -50,7 +50,7 @@ describe("Components", () => {
 
         it("load first page with search results", () => {
             fixture.detectChanges();
-            expect(mocks.articleService.search).toHaveBeenCalledWith({ query: 'query', per_page: 20, page: 0 });
+            expect(mocks.articleService.search).toHaveBeenCalledWith({ query: 'query', tag: undefined, per_page: 20, page: 0 });
         });
 
         it("display search results", () => {

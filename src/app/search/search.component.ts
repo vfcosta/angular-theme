@@ -12,12 +12,14 @@ export class SearchComponent {
 
     articles: noosfero.Article[] = [];
     query: string;
+    tag: string;
     totalResults = 0;
     perPage = 10;
     currentPage = 0;
 
     constructor(protected articleService: ArticleService, private router: Router, private route: ActivatedRoute) {
         this.query = route.snapshot.queryParams['query'];
+        this.tag = route.snapshot.queryParams['tag'];
         this.perPage = route.snapshot.queryParams['per_page'] || this.perPage;
         this.loadPage();
     }
@@ -30,7 +32,8 @@ export class SearchComponent {
         const filters = {
             query: this.query,
             per_page: this.perPage,
-            page: this.currentPage
+            page: this.currentPage,
+            tag: this.tag
         };
         this.articleService.search(filters).then((result: noosfero.RestResult<noosfero.Article[]>) => {
             this.totalResults = <number>(<any>result.headers).get("total");
