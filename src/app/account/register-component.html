@@ -49,8 +49,8 @@
           <div class="form-group col-md-6 register-field password-confirmation-field" [ngClass]="{'has-error': passwdConfirm.touched && passwdConfirm.invalid }">
             <div class="input-group">
               <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
-              <input type="password" class="form-control" id="passwordConfirm" name="passwordConfirm" match-password="password" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" 
-              [(ngModel)]="account.passwordConfirmation" #passwdConfirm='ngModel' required>
+              <input type="password" class="form-control" id="passwordConfirm" name="password_confirmation" match-password="password" placeholder="{{'account.register.passwordConfirmationLabel' | translate}}" 
+              [(ngModel)]="account.password_confirmation" #passwdConfirm='ngModel' required>
             </div>
             <validation-message #passwordConfirmErrors [field]="passwdConfirm" [prefix]="'profile.edition.passwordConfirm'"></validation-message>
           </div>
