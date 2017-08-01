@@ -1,0 +1,13 @@
+{
+  "name": "angular-palavra-aberta",
+  "version": "1.0.0",
+  "description": "The theme for 'Palavra Aberta' community specific colors and UI changes",
+  "config": {
+    "theme": "angular-palavra-aberta"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

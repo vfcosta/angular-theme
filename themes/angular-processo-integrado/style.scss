@@ -1,0 +1,26 @@
+.navbar {
+    .container {
+        .navbar-brand {
+            .noosfero-logo {
+                background: none !important;
+            }
+        }
+    }
+}
+
+noosfero-profile-summary {
+    noosfero-profile-image {
+        display: none !important;
+    }
+}
+
+noosfero-profile-header {
+    .profile-header  {
+        .bottom-bar {
+            margin-bottom: 0px !important;
+            margin-top: 0px !important;
+        }
+    }
+}
+
+
