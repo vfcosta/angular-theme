@@ -96,14 +96,33 @@ export class BlockComponent implements OnInit {
     }
 
     protected verifyHomepage() {
+        console.log('verificando homepage!!!');
         if (this.owner && this.owner.type !== "Environment") {
             const profile = <noosfero.Profile>this.owner;
             if (profile.homepage) {
+                console.log('aaaaaaaaaaaaaaaaaaa');
                 this.isHomepage = this.router.url === profile.homepage;
             } else {
-                this.isHomepage = [ActivitiesComponent, ProfileComponent].indexOf(<any>this.route.snapshot.component) >= 0;
+                console.log('bbbbbbbbbbbbbbbbb');
+                console.log(this.route);
+                console.log(this.route.snapshot.component);
+                if(this.route.snapshot.children){
+                    console.log('choioildddddddddddddddddd', this.route.snapshot.children);
+                    for (let entry of this.route.snapshot.children) {
+                        console.log('2222222222222222222222222222', entry); // 1, "string", false
+                        console.log(entry.component); // 1, "string", false
+                        this.isHomepage = [ActivitiesComponent, ProfileComponent].indexOf(<any>entry.component) >= 0;
+                    }
+                    
+                }else{
+                    this.isHomepage = [ActivitiesComponent, ProfileComponent].indexOf(<any>this.route.snapshot.component) >= 0;
+                }
+                
+                console.log(this.isHomepage);
+                
             }
         } else {
+            console.log('cccccccccccccccccccc');
             this.isHomepage = this.router.url === "/";
         }
     }
