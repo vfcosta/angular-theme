@@ -103,7 +103,7 @@ export class BlockComponent implements OnInit {
             if (profile.homepage) {
                 this.isHomepage = this.router.url === profile.homepage;
             } else {
-                let currentComponent = (_.isArray(this.route.snapshot.children)) ? this.route.snapshot.children[0].component : this.route.snapshot.component;
+                let currentComponent = (_.isEmpty(this.route.snapshot.children)) ? this.route.snapshot.children[0].component : this.route.snapshot.component;
                 this.isHomepage = [ActivitiesComponent, ProfileComponent, ProfileHomeComponent].indexOf(<any>currentComponent) >= 0;
             }
         } else {
