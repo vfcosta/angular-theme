@@ -5,6 +5,7 @@ import { SessionService } from './../../login/session.service';
 import { Inject, Input, Component, HostListener, ElementRef, ViewChild, ViewEncapsulation, OnInit } from '@angular/core';
 import { EnvironmentService } from '../../../lib/ng-noosfero-api/http/environment.service';
 import { ProfileJoinComponent } from './../../profile/profile-join/profile-join.component';
+import { AuthService, AuthEvents } from './../../login';
 
 
 @Component({
@@ -27,12 +28,21 @@ export class ProfileSummaryComponent implements OnInit {
         private environmentService: EnvironmentService,
         private session: SessionService,
         private notificationService: NotificationService,
+        public authService: AuthService,
         private designModeService: DesignModeService) {
 
         environmentService.getCurrentEnvironment().then((environment: noosfero.Environment) => {
             this.environment = environment;
         });
         this.currentUser = this.session.currentUser();
+
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
+            this.currentUser = this.session.currentUser();
+        });
+
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
+            this.currentUser = this.session.currentUser();
+        });
     }
 
     ngOnInit() {

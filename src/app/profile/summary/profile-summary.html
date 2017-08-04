@@ -19,15 +19,9 @@
         <br>
         <div class="actions">
             <div class="add-friend action">
-                <!--<div *ngIf="showAddFriend">
-                    <button class="btn btn-primary" (click)="addFriend()"><i class="fa fa-plus" aria-hidden="true"></i> {{"profile.actions.add_friend" | translate}} </button>
-                </div>
-                <div *ngIf="showRemoveFriend">
-                    <button class="btn btn-warning" (click)="removeFriend()"><i class="fa fa-minus" aria-hidden="true"></i> {{"profile.actions.remove_friend" | translate}} </button>
-                </div>-->
                 <profile-join *ngIf='currentUser' [profile]="profile"></profile-join>
             </div>
-            <div class="profile-setup action">
+            <div class="profile-setup action" *ngIf="profile.permissions" [permission]="profile.permissions" permissionAction="allow_edit">
                 <a href="#" class="open-setup btn btn-default btn-sm" [routerLink]="['/myprofile', profile.identifier]" *ngIf="showConfig">
                     <i class="fa fa-cog" aria-hidden="true"></i> {{"myprofile.configuration.title" | translate}}
                 </a>

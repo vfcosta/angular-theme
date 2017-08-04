@@ -1,4 +1,4 @@
-<div id="context-bar" class="container-fluid" [ngClass]="{'profile-context-bar': isProfile(), 'environment-context-bar': !isProfile()}">
+<div id="context-bar" class="container-fluid" [permission]="owner.permissions" [permissionAction]="permissionAction" [ngClass]="{'profile-context-bar': isProfile(), 'environment-context-bar': !isProfile()}">
   <div id="config-bar-position">
     <div class="alert alert-warning config-option apply" *ngIf="displayAlertBar()">
       <strong> {{"contextbar.edition.has_changes" | translate}}</strong>
@@ -10,6 +10,6 @@
       </button>
     </div>
     <profile-actions *ngIf="isProfile()" [profile]="owner"></profile-actions>
-    <config-bar *ngIf="owner" [owner]="owner" [permissionAction]="permissionAction"></config-bar>
+    <config-bar *ngIf="owner" [owner]="owner"></config-bar>
   </div>
 </div>

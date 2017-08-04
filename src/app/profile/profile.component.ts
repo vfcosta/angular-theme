@@ -41,15 +41,12 @@ export class ProfileComponent {
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             this.profileService.setCurrentProfileByIdentifier(this.profile.identifier, { optional_fields: ['boxes'] }).then((profile: noosfero.Profile) => {
                 Object.assign(this.profile, profile);
-                console.log('ProfileComponent: login',this.profile.permissions);
             });
         });
 
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.profileService.setCurrentProfileByIdentifier(this.profile.identifier, { optional_fields: ['boxes'] }).then((profile: noosfero.Profile) => {
                 Object.assign(this.profile, profile);
-
-                console.log('ProfileComponent: logout', this.profile.permissions);
             });
         });
     }
