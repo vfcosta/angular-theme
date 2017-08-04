@@ -22,7 +22,7 @@ export class AuthService {
 
     loginFromCookie() {
         if (this.sessionService.currentUser()) return;
-        
+
         const url = '/api/v1/login_from_cookie';
         return this.http.post(url, null).toPromise().then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
     }
@@ -30,7 +30,7 @@ export class AuthService {
     reloadUser() {
         this.personService.getLoggedPerson().then((result: noosfero.RestResult<noosfero.Person>) => {
             this.currentUser().person = result.data;
-            //FIXME remove this code
+            // FIXME remove this code
             // const person = result.data;
             // const user = person['user'];
             // user.person = person;

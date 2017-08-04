@@ -168,7 +168,7 @@ export function TranslateLoaderFactory() {
 }
 
 @NgModule({
-    imports: [        
+    imports: [
         FormsModule,
         BrowserModule,
         ModalModule.forRoot(),
@@ -189,7 +189,7 @@ export function TranslateLoaderFactory() {
         RestangularModule.forRoot([SessionService, TranslatorService, NotificationService], RestangularConfigFactory),
         Ng2Webstorage.forRoot({
             prefix: 'noosfero',
-            caseSensitive: true            
+            caseSensitive: true
         }),
         SweetAlert2Module,
         ToastrModule.forRoot(),
