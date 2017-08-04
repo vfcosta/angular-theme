@@ -14,6 +14,8 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import * as helpers from '../../../spec/helpers';
 import { ProfileSummaryComponent } from './profile-summary.component';
+import { AuthService} from './../../login';
+
 
 describe("Components", () => {
     describe("Profile Summary Component", () => {
@@ -39,6 +41,7 @@ describe("Components", () => {
                     { provide: PersonService, useValue: personService },
                     { provide: NotificationService, useValue: mocks.notificationService },
                     { provide: DesignModeService, useValue: mocks.designModeService },
+                    { provide: AuthService, useValue: mocks.authService },
                     { provide: TranslatorService, useValue: mocks.translatorService }
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]

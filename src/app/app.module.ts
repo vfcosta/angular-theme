@@ -134,7 +134,6 @@ import { SharedModule } from './shared.module';
 import { MyDatePickerModule } from 'mydatepicker';
 import { DynamicHTMLModule, DynamicComponentModule } from 'ng-dynamic';
 import { RestangularModule, Restangular } from 'ngx-restangular';
-// import { LocalStorageModule } from 'angular-2-local-storage';
 import {Ng2Webstorage} from 'ngx-webstorage';
 import { SweetAlert2Module } from '@toverux/ngsweetalert2';
 import { ToastrModule } from 'ngx-toastr';
@@ -168,7 +167,7 @@ export function TranslateLoaderFactory() {
 }
 
 @NgModule({
-    imports: [        
+    imports: [
         FormsModule,
         BrowserModule,
         ModalModule.forRoot(),
@@ -189,7 +188,7 @@ export function TranslateLoaderFactory() {
         RestangularModule.forRoot([SessionService, TranslatorService, NotificationService], RestangularConfigFactory),
         Ng2Webstorage.forRoot({
             prefix: 'noosfero',
-            caseSensitive: true            
+            caseSensitive: true
         }),
         SweetAlert2Module,
         ToastrModule.forRoot(),

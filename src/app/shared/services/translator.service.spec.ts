@@ -11,24 +11,24 @@ describe("Services", () => {
 
         it("change the language", () => {
             const component: TranslatorService = createComponent();
-            component["localStorageService"].set = jasmine.createSpy("set");
-            component["localStorageService"].get = jasmine.createSpy("get").and.returnValue("en");
+            component["localStorageService"].store = jasmine.createSpy("store");
+            component["localStorageService"].retrieve = jasmine.createSpy("retrieve").and.returnValue("en");
             component["translateService"].use = jasmine.createSpy("use");
 
             component.changeLanguage('pt');
 
-            expect(component["localStorageService"].set).toHaveBeenCalledWith("language", "pt");
+            expect(component["localStorageService"].store).toHaveBeenCalledWith("language", "pt");
             expect(component["translateService"].use).toHaveBeenCalledWith("pt");
         });
 
         it("do nothing when call change language with null", () => {
             const component: TranslatorService = createComponent();
-            component["localStorageService"].set = jasmine.createSpy("set");
+            component["localStorageService"].store = jasmine.createSpy("sstoreet");
             component["translateService"].use = jasmine.createSpy("use");
 
             component.changeLanguage(null);
 
-            expect(component["localStorageService"].set).not.toHaveBeenCalled();
+            expect(component["localStorageService"].store).not.toHaveBeenCalled();
             expect(component["translateService"].use).not.toHaveBeenCalled();
         });
 

@@ -8,6 +8,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ThemeService } from './../shared/services/theme.service';
 import { DesignModeService } from './../shared/services/design-mode.service';
 import { ProfileComponent } from './profile.component';
+import { AuthService} from './../login';
 import * as helpers from '../../spec/helpers';
 
 describe("Components", () => {
@@ -29,6 +30,7 @@ describe("Components", () => {
                     { provide: DesignModeService, useValue: mocks.designModeService },
                     { provide: ThemeService, useValue: mocks.themeService },
                     { provide: Router, useValue: mocks.router },
+                    { provide: AuthService, useValue: mocks.authService },
                     { provide: ActivatedRoute, useValue: mocks.route },
                 ],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA]

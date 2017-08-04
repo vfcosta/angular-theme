@@ -305,9 +305,9 @@ export function getMocks() {
         },
         localStorageService: {
             storage: {},
-            remove: (key: string) => { delete mocks.localStorageService.storage[key]; },
-            get: (key: string) => mocks.localStorageService.storage[key],
-            set: (key: string, value: any) => { mocks.localStorageService.storage[key] = value; }
+            clear: (key: string) => { delete mocks.localStorageService.storage[key]; },
+            retrieve: (key: string) => mocks.localStorageService.storage[key],
+            store: (key: string, value: any) => { mocks.localStorageService.storage[key] = value; }
         },
         themeService: {
             verifyTheme: (theme: string) => { }

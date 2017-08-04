@@ -17,13 +17,12 @@ export class ContentViewerComponent {
     profile: noosfero.Profile = null;
 
     constructor(private articleService: ArticleService, private profileService: ProfileService, private route: ActivatedRoute, public authService: AuthService) {
-        this.activate();        
+        this.activate();
 
-        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {            
-            this.activate();            
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
+            this.activate();
         });
-        
-        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {            
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.activate();
         });
     }
