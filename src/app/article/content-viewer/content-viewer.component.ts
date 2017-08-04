@@ -22,7 +22,6 @@ export class ContentViewerComponent {
         this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
             this.activate();
         });
-        
         this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
             this.activate();
         });
