@@ -22,17 +22,20 @@ export class AuthService {
 
     loginFromCookie() {
         if (this.sessionService.currentUser()) return;
+        
         const url = '/api/v1/login_from_cookie';
         return this.http.post(url, null).toPromise().then(this.loginSuccessCallback.bind(this), this.loginFailedCallback.bind(this));
     }
 
     reloadUser() {
         this.personService.getLoggedPerson().then((result: noosfero.RestResult<noosfero.Person>) => {
-            const person = result.data;
-            const user = person['user'];
-            user.person = person;
-            person['user'] = null;
-            this.loginSuccessCallback({data: user});
+            this.currentUser().person = result.data;
+            //FIXME remove this code
+            // const person = result.data;
+            // const user = person['user'];
+            // user.person = person;
+            // person['user'] = null;
+            this.loginSuccessCallback({data: this.currentUser()});
         }).catch((error: any) => {
             this.logout();
         });
@@ -66,7 +69,8 @@ export class AuthService {
         const user: noosfero.User = this.sessionService.currentUser();
         this.sessionService.destroy();
         this.logoutSuccess.next(user);
-        this.jsonp.get('/account/logout').subscribe(); // logout from noosfero to sync login state
+        // this.jsonp.get('/account/logout') // logout from noosfero to sync login state
+        // this.jsonp.get('/account/logout').subscribe(); // logout from noosfero to sync login state
     }
 
     public isAuthenticated() {

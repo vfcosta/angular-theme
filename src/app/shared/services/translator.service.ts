@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LocalStorageService } from 'angular-2-local-storage';
+import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import * as moment from 'moment';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class TranslatorService {
     };
 
     constructor(private translateService: TranslateService, private localStorageService: LocalStorageService) {
-        translateService.setDefaultLang(localStorageService.get<string>("language") || translateService.getBrowserLang() || 'en');
+        translateService.setDefaultLang(this.localStorageService.retrieve('language') || translateService.getBrowserLang() || 'en');
     }
 
     currentLanguage() {
@@ -32,7 +32,7 @@ export class TranslatorService {
             return;
         }
         moment.locale(language);
-        this.localStorageService.set("language", language);
+        this.localStorageService.store('language', language);
         return this.translateService.use(language);
     }
 

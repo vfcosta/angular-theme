@@ -8,14 +8,8 @@ export class ProfileResolver implements Resolve<noosfero.Profile> {
     constructor(private profileService: ProfileService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        let profileWithBoxes: noosfero.Profile;
-        return this.profileService.setCurrentProfileByIdentifier(route.params["profile"]).then((profile: noosfero.Profile) => {
-            profileWithBoxes = profile;
-            return this.profileService.getBoxes(<number>profile.id);
-        }).then((response: any) => {
-            profileWithBoxes.boxes = response.data;
-            this.profileService.setCurrentProfile(profileWithBoxes);
-            return profileWithBoxes;
+        return this.profileService.setCurrentProfileByIdentifier(route.params["profile"], { optional_fields: ['boxes'] }).then((profile: noosfero.Profile) => {
+            return profile;
         });
     }
 }

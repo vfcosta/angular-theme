@@ -1,6 +1,7 @@
 import { Restangular } from 'ngx-restangular';
 import { Injectable, Inject } from '@angular/core';
 import { RestangularService } from './restangular_service';
+import * as _ from "lodash";
 
 export const MembershipStatus = {
     NotMember: 297,
@@ -45,9 +46,9 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         this.setCurrent(profile);
     }
 
-    setCurrentProfileByIdentifier(identifier: string): Promise<noosfero.Profile> {
+    setCurrentProfileByIdentifier(identifier: string, params?: any): Promise<noosfero.Profile> {
         this.resetCurrentProfile();
-        return this.getByIdentifier(identifier).then((profile: noosfero.Profile) => {
+        return this.getByIdentifier(identifier, params).then((profile: noosfero.Profile) => {
             this.setCurrentProfile(profile);
             return this.getCurrentProfile();
         });
@@ -57,8 +58,11 @@ export class ProfileService extends RestangularService<noosfero.Profile> {
         return this.getProfileElement(profileId).customGET("home_page", params).toPromise();
     }
 
-    getByIdentifier(identifier: string): Promise<noosfero.Profile> {
-        const p = this.restangular.one('profiles', identifier).get({ key: "identifier" }).toPromise();
+    getByIdentifier(identifier: string, params?: any): Promise<noosfero.Profile> {
+        params = _.isObject(params) ? _.assign({ key: "identifier" }, params) : { key: "identifier" };
+
+        const p = this.restangular.one('profiles', identifier).get(params).toPromise();
+
         return p.then((response: any) => {
             if (response.status === 404) {
                 return Promise.reject(p);

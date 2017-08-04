@@ -1,5 +1,5 @@
 import { Router, NavigationEnd, Event, ActivatedRoute } from '@angular/router';
-import { LocalStorageService } from 'angular-2-local-storage';
+import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { Directive, Inject, Injectable, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { AuthEvents } from '../../login/auth-events';
@@ -49,7 +49,7 @@ export class BodyStateClassesService {
             this.setupStateClassToggle();
             this.setupDesignModeClassToggle();
             if (config) {
-                this.setThemeSkin(this.localStorageService.get<string>('skin') || config.skin);
+                this.setThemeSkin(this.localStorageService.retrieve('skin') || config.skin);
             }
             this.started = true;
         }
@@ -59,11 +59,11 @@ export class BodyStateClassesService {
         this.removeBodyClass(this.skin);
         this.skin = skin;
         this.addBodyClass(this.skin);
-        this.localStorageService.set('skin', skin);
+        this.localStorageService.store('skin', skin);
     }
 
     getThemeSkin() {
-        return this.localStorageService.get<string>('skin');
+        return this.localStorageService.retrieve('skin');
     }
 
     addBodyClass(className: string) {

@@ -2,6 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Input, Component } from '@angular/core';
 import { ArticleService } from '../../../lib/ng-noosfero-api/http/article.service';
 import { ProfileService } from '../../../lib/ng-noosfero-api/http/profile.service';
+import { AuthService, AuthEvents } from './../../login';
 
 @Component({
     selector: "content-viewer",
@@ -15,8 +16,16 @@ export class ContentViewerComponent {
     @Input()
     profile: noosfero.Profile = null;
 
-    constructor(private articleService: ArticleService, private profileService: ProfileService, private route: ActivatedRoute) {
-        this.activate();
+    constructor(private articleService: ArticleService, private profileService: ProfileService, private route: ActivatedRoute, public authService: AuthService) {
+        this.activate();        
+
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {            
+            this.activate();            
+        });
+        
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {            
+            this.activate();
+        });
     }
 
     activate() {

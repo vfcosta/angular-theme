@@ -12,6 +12,7 @@ import { NotificationService } from '../shared/services/notification.service';
 import { TasksComponent } from '../task/tasks/tasks.component';
 import { DestroyProfileComponent } from './destroy/destroy-profile.component';
 import { ProfileActionsComponent } from './actions/profile-actions.component';
+import { AuthService, AuthEvents } from './../login';
 
 /**
  * @ngdoc controller
@@ -31,10 +32,25 @@ export class ProfileComponent {
 
     constructor(private profileService: ProfileService, private route: ActivatedRoute,
         private notificationService: NotificationService, private designModeService: DesignModeService,
-        private router: Router, private themeService: ThemeService) {
+        public authService: AuthService, private router: Router, private themeService: ThemeService) {
 
         designModeService.setInDesignMode(false);
         this.profile = route.snapshot.data['profile'];
         this.themeService.verifyTheme(this.profile.theme);
+
+        this.authService.subscribe(AuthEvents[AuthEvents.loginSuccess], () => {
+            this.profileService.setCurrentProfileByIdentifier(this.profile.identifier, { optional_fields: ['boxes'] }).then((profile: noosfero.Profile) => {
+                Object.assign(this.profile, profile);
+                console.log('ProfileComponent: login',this.profile.permissions);
+            });
+        });
+
+        this.authService.subscribe(AuthEvents[AuthEvents.logoutSuccess], () => {
+            this.profileService.setCurrentProfileByIdentifier(this.profile.identifier, { optional_fields: ['boxes'] }).then((profile: noosfero.Profile) => {
+                Object.assign(this.profile, profile);
+
+                console.log('ProfileComponent: logout', this.profile.permissions);
+            });
+        });
     }
 }

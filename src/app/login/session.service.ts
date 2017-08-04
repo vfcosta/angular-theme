@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { PersonService } from '../../lib/ng-noosfero-api/http/person.service';
-import { LocalStorageService } from 'angular-2-local-storage';
+import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 
 @Injectable()
 export class SessionService {
@@ -8,17 +8,17 @@ export class SessionService {
     constructor(private localStorageService: LocalStorageService) { }
 
     create(user: noosfero.User): noosfero.User {
-        this.localStorageService.set('currentUser', user);
-        return this.localStorageService.get<noosfero.User>('currentUser');
+        this.localStorageService.store('currentUser', user);
+        return this.localStorageService.retrieve('currentUser');
     };
 
     destroy() {
-        this.localStorageService.remove('currentUser');
-        this.localStorageService.remove('settings');
+        this.localStorageService.clear('currentUser');
+        this.localStorageService.clear('settings');
     };
 
     currentUser(): noosfero.User {
-        return this.localStorageService.get<noosfero.User>('currentUser');
+        return this.localStorageService.retrieve('currentUser');
     };
 
     currentPerson(): noosfero.Person {
