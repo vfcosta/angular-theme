@@ -9,6 +9,7 @@ import { EnvironmentService } from './../../../lib/ng-noosfero-api/http/environm
 import { ProfileService } from './../../../lib/ng-noosfero-api/http/profile.service';
 import { Component } from '@angular/core';
 import { ContextBarComponent } from './context-bar.component';
+import { PermissionNg2Directive } from '../../shared/components/permission/permission.ng2.directive';
 import * as helpers from '../../../spec/helpers';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
@@ -28,7 +29,7 @@ describe("Context Bar Component", () => {
         spyOn(mocks.notificationService, 'success').and.callThrough();
 
         TestBed.configureTestingModule({
-            declarations: [ContextBarComponent],
+            declarations: [ContextBarComponent, PermissionNg2Directive],
             providers: [
                 { provide: EventsHubService, useValue: mocks.eventsHubService },
                 { provide: BlockService, useValue: mocks.blockService },
@@ -50,6 +51,7 @@ describe("Context Bar Component", () => {
                 identifier: 'profile-name',
                 type: 'Person',
                 layout_template: 'default',
+                permissions: ['allow_edit'],
                 boxes: [{ id: 6, blocks: [{ id: 5, box: { id: 6 } }] }]
             };
         fixture.detectChanges();

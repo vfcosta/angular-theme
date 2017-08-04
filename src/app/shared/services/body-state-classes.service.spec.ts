@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/platform-browser';
-import { LocalStorageService } from 'angular-2-local-storage';
+import { LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { RouterTestingModule } from '@angular/router/testing';
 import { async, fakeAsync, tick, TestBed, ComponentFixture, flushMicrotasks } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -87,11 +87,11 @@ describe("BodyStateClasses Service", () => {
 
     it("save skin into settings at local storage", () => {
         service.setThemeSkin('skin-test2');
-        expect(TestBed.get(LocalStorageService).get('skin')).toEqual('skin-test2');
+        expect(TestBed.get(LocalStorageService).retrieve('skin')).toEqual('skin-test2');
     });
 
     it("get theme skin from local storage", () => {
-        mocks.localStorageService.set('skin', 'skin-test3');
+        mocks.localStorageService.store('skin', 'skin-test3');
         expect(service.getThemeSkin()).toEqual('skin-test3');
     });
 });

@@ -6,6 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, fakeAsync, tick, TestBed, ComponentFixture } from '@angular/core/testing';
 import * as helpers from '../../../spec/helpers';
 import {ContentViewerComponent} from './content-viewer.component';
+import { AuthService } from './../../login';
 
 describe('Content Viewer Component', () => {
     const mocks = helpers.getMocks();
@@ -29,6 +30,7 @@ describe('Content Viewer Component', () => {
             declarations: [ContentViewerComponent],
             providers: [
                 { provide: ArticleService, useValue: mocks.articleService },
+                { provide: AuthService, useValue: mocks.authService },
                 { provide: ProfileService, useValue: mocks.profileService },
             ],
             schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -1,5 +1,5 @@
 import { Router, NavigationEnd, Event, ActivatedRoute } from '@angular/router';
-import {LocalStorageService, SessionStorageService} from 'ngx-webstorage';
+import { LocalStorageService, SessionStorageService} from 'ngx-webstorage';
 import { Directive, Inject, Injectable, EventEmitter } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 import { AuthEvents } from '../../login/auth-events';
