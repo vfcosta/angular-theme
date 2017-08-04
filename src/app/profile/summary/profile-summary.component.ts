@@ -20,7 +20,6 @@ export class ProfileSummaryComponent implements OnInit {
     environment: noosfero.Environment;
     currentUser: noosfero.User;
     editPopoverOpen = false;
-    showConfig = false;
     designMode = false;
     @ViewChild("popover") popover;
 
@@ -46,9 +45,6 @@ export class ProfileSummaryComponent implements OnInit {
     }
 
     ngOnInit() {
-        if (this.profile.permissions.indexOf('allow_edit') > -1) {
-            this.showConfig = true;
-        }
         this.designModeService.onToggle.subscribe((designModeOn: boolean) => {
             this.designMode = designModeOn;
         });
