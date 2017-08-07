@@ -21,8 +21,8 @@
             <div class="add-friend action">
                 <profile-join *ngIf='currentUser' [profile]="profile"></profile-join>
             </div>
-            <div class="profile-setup action" *ngIf="profile.permissions" [permission]="profile.permissions" permissionAction="allow_edit">
-                <a href="#" class="open-setup btn btn-default btn-sm" [routerLink]="['/myprofile', profile.identifier]" *ngIf="showConfig">
+            <div class="profile-setup action" [permission]="profile.permissions" permissionAction="allow_edit">
+                <a href="#" class="open-setup btn btn-default btn-sm" [routerLink]="['/myprofile', profile.identifier]">
                     <i class="fa fa-cog" aria-hidden="true"></i> {{"myprofile.configuration.title" | translate}}
                 </a>
             </div>
